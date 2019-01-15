@@ -24,6 +24,7 @@ bot.gateway.check_heartbeat_acks = false
 
 @adventurers=[]
 @dragons=[]
+
 @askilities=[]
 
 @aliases=[]
@@ -37,7 +38,7 @@ def all_commands(include_nil=false,permissions=-1)
   k=['reboot','adventurer','adv','addalias','checkaliases','aliases','seealiases','saliases','serveraliases','deletealias','removealias','channellist','long',
      'channelist','spamlist','spamchannels','bugreport','suggestion','feedback','donation','donate','shard','attribute','safe','spam','safetospam','safe2spam',
      'longreplies','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','find',
-     'search','dragon']
+     'search','dragon','help']
   k=['addalias','deletealias','removealias'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases'] if permissions==2
   k=k.uniq
@@ -178,6 +179,92 @@ bot.command(:reboot, from: 167657750971547648) do |event| # reboots Botan
   exec "cd C:/Users/Mini-Matt/Desktop/devkit && BotanBot.rb #{@shardizard}"
 end
 
+bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, command, subcommand|
+  return nil if overlap_prevent(event)
+  command='' if command.nil?
+  subcommand='' if subcommand.nil?
+  k=0
+  k=event.server.id unless event.server.nil?
+  if ['help','commands','command_list','commandlist'].include?(command.downcase)
+    event.respond "The `#{command.downcase}` command displays this message:"
+    command=''
+  end
+  if command.downcase=='reboot'
+    create_embed(event,'**reboot**',"Reboots this shard of the bot, installing any updates.\n\n**This command is only able to be used by Rot8er_ConeX**",0x008b8b)
+  elsif ['donation','donate'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}**",'Responds with information regarding potential donations to my developer.',0xCE456B)
+  elsif command.downcase=='sendmessage'
+    create_embed(event,'**sendmessage** __channel id__ __*message__',"Sends the message `message` to the channel with id `channel`\n\n**This command is only able to be used by Rot8er_ConeX**, and only in PM.",0x008b8b)
+  elsif command.downcase=='sendpm'
+    create_embed(event,'**sendpm** __user id__ __*message__',"Sends the message `message` to the user with id `user`\n\n**This command is only able to be used by Rot8er_ConeX**, and only in PM.",0x008b8b)
+  elsif command.downcase=='ignoreuser'
+    create_embed(event,'**ignoreuser** __user id__',"Causes me to ignore the user with id `user`\n\n**This command is only able to be used by Rot8er_ConeX**, and only in PM.",0x008b8b)
+  elsif command.downcase=='leaveserver'
+    create_embed(event,'**leaveserver** __server id number__',"Forces me to leave the server with the id `server id`.\n\n**This command is only able to be used by Rot8er_ConeX**, and only in PM.",0x008b8b)
+  elsif ['shard','attribute'].include?(command.downcase)
+    create_embed(event,'**shard**','Returns the shard that this server is served by.',0xCE456B)
+  elsif ['bugreport','suggestion','feedback'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __*message__",'PMs my developer with your username, the server, and the contents of the message `message`',0xCE456B)
+  elsif command.downcase=='addalias'
+    create_embed(event,'**addalias** __new alias__ __name__',"Adds `new alias` to `name`'s aliases.\nIf the arguments are listed in the opposite order, the command will auto-switch them.\n\n~~Aliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Auras\n- Abilities\n- CoAbilities\n- Facilities\n- Materials~~\n\nInforms you if the alias already belongs to someone/something.\nAlso informs you if the thing you wish to give the alias to does not exist.\n\n**This command is only able to be used by server mods**.",0xC31C19)
+  elsif ['deletealias','removealias'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __alias__","Removes `alias` from the list of aliases, regardless of who/what it was for.\n\n**This command is only able to be used by server mods**.",0xC31C19)
+  elsif ['backupaliases'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}**","Backs up the alias list.\n\n**This command is only able to be used by Rot8er_ConeX**.",0x008b8b)
+  elsif ['restorealiases'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}**","Restores the the alias, from last backup.\n\n**This command is only able to be used by Rot8er_ConeX**.",0x008b8b)
+  elsif ['safe','spam','safetospam','safe2spam','long','longreplies'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __toggle__","Responds with whether or not the channel the command is invoked in is one in which I can send extremely long replies.\n\nIf the channel does not fill one of the many molds for acceptable channels, server mods can toggle the ability with the words \"on\", \"semi\", and \"off\".",0xCE456B)
+  elsif ['status'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __\*message__","Sets my status to `message`.\n\n**This command is only able to be used by Rot8er_ConeX**.",0x008b8b)
+  elsif ['adventurer','adv','unit'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Shows `name`'s stats, skills, and abilities.\n\nIn PM, shows stats at all possible rarities, as well as skill descriptions.\nOtherwise, shows stats at default rarity, and skill names only.  Other rarities can be specified to be shown instead.",0xCE456B)
+  elsif ['dragon'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Shows `name`'s stats, skills, and abilities.",0xCE456B)
+  elsif ['embed','embeds'].include?(command.downcase)
+    event << '**embed**'
+    event << ''
+    event << 'Toggles whether I post as embeds or plaintext when the invoker triggers a response from me.  By default, I display embeds for everyone.'
+    event << 'This command is useful for people who, in an attempt to conserve phone data, disable the automatic loading of images, as this setting also affects their ability to see embeds.'
+    unless @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
+      event << ''
+      event << 'This help window is not in an embed so that people who need this command can see it.'
+    end
+    return nil
+  elsif ['find','search'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __\*filters__","Displays all adventurers that fit `filters`.\n\nYou can search by:\n- Rarity\n- Element\n- Weapon\n- Class\n- Availability\n\nIf too many adventurers are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+  elsif ['aliases','checkaliases','seealiases','alias'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s aliases.\nIf no name is listed, responds with a list of all aliases and who/what they are for.\n\n~~Aliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Auras\n- Abilities\n- CoAbilities\n- Facilities\n- Materials~~\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+  elsif ['saliases','serveraliases'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s server-specific aliases.\nIf no name is listed, responds with a list of all server-specific aliases and who/what they are for.\n\n~~Aliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Auras\n- Abilities\n- CoAbilities\n- Facilities\n- Materials~~\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+  elsif command.downcase=='snagstats'
+    subcommand='' if subcommand.nil?
+    if ['server','servers','member','members','shard','shards','users','user'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}**",'Returns the number of servers and unique members each shard reaches.',0xCE456B)
+    elsif ['alias','aliases','name','names','nickname','nicknames'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}**","Returns the number of aliases in each of the two categories - global single-servant, and server-specific single-servant.\nAlso returns specifics about the most frequent instances of each category",0xCE456B)
+    elsif ['code','lines','line','sloc'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}**","Returns the specifics about my code, including number of commands and functions, as well as - if in PM - loops, statements, and conditionals.",0xCE456B)
+    else
+      create_embed(event,"**#{command.downcase}**","Returns:\n- the number of servers I'm in\n- the numbers of servants in the game\n- the numbers of aliases I keep track of\n- how long of a file I am.\n\nYou can also include the following words to get more specialized data:\nServer(s), Member(s), Shard(s), User(s)\nAlias(es), Name(s), Nickname(s)\nCode, Line(s), SLOC#{"\n\nAs the bot developer, you can also include a server ID number to snag the shard number, owner, and my nickname in the specified server." if event.user.id==167657750971547648}",0xCE456B)
+    end
+  else
+    x=0
+    x=1 unless safe_to_spam?(event)
+    if command.downcase=='here'
+      x=0
+      command=''
+    end
+    event.respond "#{command.downcase} is not a command" if command!='' && command.downcase != 'devcommands'
+    create_embed([event,x],"Command Prefixes: #{@prefix.map{|q| q.upcase}.uniq.map{|q| "`#{q}`"}.join(', ')}\nYou can also use `DL!help CommandName` to learn more on a particular command.\n__**Botan Bot help**__","__**Game Data**__\n`adventurer` __name__ - for data on an adventurer (*also `adv`*)\n`dragon` __name__ - for data on a dragon\n\n`find` __\*filters__ - to find specific adventurers or dragons\n\n__**Meta Data**__\n`invite` - for a link to invite me to your server\n`snagstats` __type__ - to receive relevant bot stats\n`spam` - to determine if the current location is safe for me to send long replies to (*also `safetospam` or `safe2spam`*)\n\n__**Developer Information**__\n`bugreport` __\\*message__ - to send my developer a bug report\n`suggestion` __\\*message__ - to send my developer a feature suggestion\n`feedback` __\\*message__ - to send my developer other kinds of feedback\n~~the above three commands are actually identical, merely given unique entries to help people find them~~",0xCE456B)
+    create_embed([event,x],"__**Server Admin Commands**__","__**Unit Aliases**__\n`addalias` __new alias__ __unit__ - Adds a new server-specific alias\n~~`aliases` __unit__ (*also `checkaliases` or `seealiases`*)~~\n`deletealias` __alias__ (*also `removealias`*) - deletes a server-specific alias",0xC31C19) if is_mod?(event.user,event.server,event.channel)
+    create_embed([event,x],"__**Bot Developer Commands**__","__**Mjolnr, the Hammer**__\n`ignoreuser` __user id number__ - makes me ignore a user\n`leaveserver` __server id number__ - makes me leave a server\n\n__**Communication**__\n`status` __\\*message__ - sets my status\n`sendmessage` __channel id__ __\\*message__ - sends a message to a specific channel\n`sendpm` __user id number__ __\\*message__ - sends a PM to a user\n\n__**Server Info**__\n`snagstats` - snags relevant bot stats\n\n__**Shards**__\n`reboot` - reboots this shard\n\n__**Meta Data Storage**__\n`backupaliases` - backs up the alias list\n`restorealiases` - restores the alias list from last backup\n`sortaliases` - sorts the alias list by servant",0x008b8b) if (event.server.nil? || event.channel.id==283821884800499714 || @shardizard==4 || command.downcase=='devcommands') && event.user.id==167657750971547648
+    event.respond "If the you see the above message as only three lines long, please use the command `DL!embeds` to see my messages as plaintext instead of embeds.\n\nCommand Prefixes: #{@prefix.map{|q| q.upcase}.uniq.map{|q| "`#{q}`"}.join(', ')}\nYou can also use `DL!help CommandName` to learn more on a particular command.\n\nWhen looking up a character, you also have the option of @ mentioning me in a message that includes that character's name" unless x==1
+    event.user.pm("If the you see the above message as only three lines long, please use the command `DL!embeds` to see my messages as plaintext instead of embeds.\n\nCommand Prefixes: #{@prefix.map{|q| q.upcase}.uniq.map{|q| "`#{q}`"}.join(', ')}\nYou can also use `DL!help CommandName` to learn more on a particular command.\n\nWhen looking up a character, you also have the option of @ mentioning me in a message that includes that character's name") if x==1
+    event.respond "A PM has been sent to you.\nIf you would like to show the help list in this channel, please use the command `DL!help here`." if x==1
+  end
+end
+
 def overlap_prevent(event) # used to prevent servers with both Botan and her debug form from receiving two replies
   if event.server.nil? # failsafe code catching PMs as not a server
     return false
@@ -256,7 +343,7 @@ def find_data_ex(callback,name,event,fullname=false)
 end
 
 def generate_rarity_row(rar,include_blanks=false)
-  return "#{['','<:Icon_Rarity_1:532086056594440231>','<:Icon_Rarity_2:532086056254963713>','<:Icon_Rarity_3:532086056519204864>','<:Icon_Rarity_4:532086056301101067>','<:Icon_Rarity_5:532086056737177600>'][rar]*rar}#{['','<:Icon_Rarity_1_Blank:532104334423621632>','<:Icon_Rarity_2_Blank:532104120010539018>','<:Icon_Rarity_3_Blank:532104120052744192>','<:Icon_Rarity_4_Blank:532104120002150410>','<:Icon_Rarity_5_Blank:532104120014995466>'][rar]*(5-rar) if include_blanks}"
+  return "#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][rar]*rar}#{['','<:Rarity_1_Blank:532104334423621632>','<:Rarity_2_Blank:532104120010539018>','<:Rarity_3_Blank:532104120052744192>','<:Rarity_4_Blank:532104120002150410>','<:Rarity_5_Blank:532104120014995466>'][rar]*(5-rar) if include_blanks}"
 end
 
 def element_color(ele)
@@ -289,13 +376,13 @@ def disp_adventurer_stats(bot,event,args=nil)
   str=''
   unless s2s
     str="#{generate_rarity_row(rar,true)}"
-    str="#{str} (from #{k[1][0,1].to_i}#{['','<:Icon_Rarity_1:532086056594440231>','<:Icon_Rarity_2:532086056254963713>','<:Icon_Rarity_3:532086056519204864>','<:Icon_Rarity_4:532086056301101067>','<:Icon_Rarity_5:532086056737177600>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
+    str="#{str} (from #{k[1][0,1].to_i}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
   end
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Icon_Element_#{k[2][1]}"}
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
   str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][1]}"
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Icon_Weapon_#{k[2][2]}"}
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[2][2]}"}
   str="#{str}\n#{moji[0].mention unless moji.length<=0} **Weapon:** #{k[2][2]}"
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Icon_Type_#{k[2][0].gsub('Healer','Healing')}"}
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
   str="#{str}\n#{moji[0].mention unless moji.length<=0} **Class:** #{k[2][0]}"
   str="#{str}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
   str="#{str}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
@@ -313,7 +400,19 @@ def disp_adventurer_stats(bot,event,args=nil)
     for i in rar...6
       flds.push([generate_rarity_row(i,true),"**Level 1**  \u200B  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0][i-3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0][i-3])}  \u00B7\n**Level #{30+10*i}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][i-3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][i-3])}  \u00B7"])
     end
-    flds.push(['Skills',"__**#{skl1[0]}** (#{skl1[8]} sec invul#{', <:Energized:534451856286679040>Energizable' if skl1[7]=='Yes'})__\n*Tier 1 (F1):* #{skl1[3]}\n*Tier 2 (F3):* #{skl1[4]}\n*Tier 3 (F5):* #{skl1[5]}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{', <:Energized:534451856286679040>Energizable' if skl2[7]=='Yes'})__\n*Tier 1 (F1):* #{skl2[3]}\n*Tier 1 (F4):* #{skl2[4]}",1])
+    str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{', <:Energized:534451856286679040>Energizable' if skl1[7]=='Yes'})__"
+    if skl1[9].nil? || skl1[9].length<=0
+      str2="#{str2}\n*Tier 1 (F1):* #{skl1[3].gsub(';; ',"\n")}\n*Tier 2 (F3):* #{skl1[4].gsub(';; ',"\n")}\n*Tier 3 (F5):* #{skl1[5].gsub(';; ',"\n")}"
+    else
+      str2="#{str2}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}\n*Tier 1 (F1) \u2192 Tier 2 (F3) \u2192 Tier 3 (F5)*"
+    end
+    str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{', <:Energized:534451856286679040>Energizable' if skl2[7]=='Yes'})__"
+    if skl2[9].nil? || skl2[9].length<=0
+      str2="#{str2}\n*Tier 1 (F1):* #{skl2[3].gsub(';; ',"\n")}\n*Tier 2 (F4):* #{skl2[4].gsub(';; ',"\n")}"
+    else
+      str2="#{str2}\n*Effect:* #{skl2[9].gsub(';; ',"\n")}\n*Tier 1 (F1) \u2192 Tier 2 (F4)*"
+    end
+    flds.push(['Skills',str2,1])
     a3="#{k[8][2][0]} (F5)"
     a3="#{k[8][2][0]} (F3) \u2192 #{k[8][2][1]} (F5)" if k[1][0,1].to_i==5
     flds.push(['Abilities',"#{k[8][0][0]} (F1) \u2192 #{k[8][0][1]} (F3)\n#{k[8][1][0]} (F2) \u2192 #{k[8][1][1]} (F4)\n#{a3}\n\n*Co-Ability (F5):* #{k[7]}"])
@@ -328,14 +427,22 @@ def disp_adventurer_stats(bot,event,args=nil)
     lv=[1,1,1,1,0] if rar==2
     lv=[1,1,1,0,0] if rar==1
     str="#{str}\n\n**Skills:** #{k[6][0]}#{'<:Energized:534451856286679040>' if skl1[7]=='Yes'} [Lv.#{lv[0]}], #{k[6][1]}#{'<:Energized:534451856286679040>' if skl2[7]=='Yes'} [Lv.#{lv[1]}]"
-    str="#{str}\n**Co-Ability:** #{k[7]}" if rar>=5
     m=[]
     for i in 0...3
       m.push(k[8][i][lv[i+2]-1]) if lv[i+2]>0
     end
     str="#{str}\n**Abilities:** #{m.join(', ')}"
+    str="#{str}\n**Co-Ability:** #{k[7]}" if rar>=5
   end
-  create_embed(event,"__**#{k[0]}**__",str,element_color(k[2][1]),nil,xpic,flds)
+  if flds.nil?
+    create_embed(event,"__**#{k[0]}**__",str,element_color(k[2][1]),nil,xpic,flds)
+  elsif flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length>=1500
+    create_embed(event,"__**#{k[0]}**__",str,element_color(k[2][1]),nil,xpic,flds[0,flds.length-2])
+    create_embed(event,"__**#{flds[-2][0]}**__",flds[-2][1],element_color(k[2][1]))
+    create_embed(event,"__**#{flds[-1][0]}**__",flds[-1][1],element_color(k[2][1]))
+  else
+    create_embed(event,"__**#{k[0]}**__",str,element_color(k[2][1]),nil,xpic,flds)
+  end
 end  
 
 def disp_dragon_stats(bot,event,args=nil)
@@ -351,9 +458,8 @@ def disp_dragon_stats(bot,event,args=nil)
   s2s=true if safe_to_spam?(event)
   s2s=false if @shardizard==4 && event.message.text.downcase.split(' ').include?('smol')
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Dragons/#{k[0].gsub(' ','_')}.png"
-  flds=nil
   str=generate_rarity_row(k[1][0,1].to_i)
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Icon_Element_#{k[2]}"}
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2]}"}
   str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2]}"
   str="#{str}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
   str="#{str}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
@@ -371,14 +477,27 @@ def disp_dragon_stats(bot,event,args=nil)
   sklz=@askilities.map{|q| q}
   skl1=sklz[sklz.find_index{|q| q[2]=='Skill' && q[0]==k[5]}]
   if s2s
-    str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{', <:Energized:534451856286679040>Energizable' if skl1[7]=='Yes'})__\n*Tier 1:* #{skl1[3]}\n*Tier 2:* #{skl1[4]}"
+    str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{', <:Energized:534451856286679040>Energizable' if skl1[7]=='Yes'})__"
+    if skl1[9].nil? || skl1[9].length<=0
+      str="#{str}\n*Tier 1:* #{skl1[3].gsub(';; ',"\n")}\n*Tier 2:* #{skl1[4].gsub(';; ',"\n")}"
+    else
+      str="#{str}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}"
+    end
   else
     str="#{str}\n\n**Skill:** #{k[5]}#{'<:Energized:534451856286679040>' if skl1[7]=='Yes'}"
   end
   str="#{str}\n\n**Aura:**\n<:NonUnbound:534494090876682264><:NonUnbound:534494090876682264><:NonUnbound:534494090876682264><:NonUnbound:534494090876682264>#{k[6][0][0]}\n<:Unbind:534494090969088000><:Unbind:534494090969088000><:Unbind:534494090969088000><:Unbind:534494090969088000>#{k[6][0][1]}"
   str="#{str}\n\n**Ability:** #{k[6][1][0]} \u2192 #{k[6][1][1]}" if k[6].length>1
-  str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[7][0])}<:Icon_Resource_Rupies:532104504372363274> #{longFormattedNumber(k[7][1])}<:Icon_Resource_Eldwater:532104503777034270>"
-  create_embed(event,"__**#{k[0]}**__",str,element_color(k[2]),nil,xpic,flds)
+  str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[7][0])}<:Resource_Rupies:532104504372363274> #{longFormattedNumber(k[7][1])}<:Resource_Eldwater:532104503777034270>"
+  if str.length>1900 && safe_to_spam?(event)
+    str=str.split("\n\n__**")
+    str[1]="__**#{str[1]}".split("\n\n**Sells")
+    str[0]="#{str[0]}\n\n**Sells#{str[1][1]}"
+    create_embed(event,"__**#{k[0]}**__",str[0],element_color(k[2]),nil,xpic)
+    create_embed(event,'',str[1][0],element_color(k[2]))
+  else
+    create_embed(event,"__**#{k[0]}**__",str,element_color(k[2]),nil,xpic)
+  end
 end
 
 def disp_aliases(bot,event,args,mode=0) # empty
@@ -430,12 +549,12 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
   search=[]
   if rarity.length>0
     char=char.reject{|q| !rarity.include?(q[1][0,1].to_i)}.uniq
-    search.push("*Rarities*: #{rarity.map{|q| "#{q}#{['','<:Icon_Rarity_1:532086056594440231>','<:Icon_Rarity_2:532086056254963713>','<:Icon_Rarity_3:532086056519204864>','<:Icon_Rarity_4:532086056301101067>','<:Icon_Rarity_5:532086056737177600>'][q]}"}.join(', ')}")
+    search.push("*Rarities*: #{rarity.map{|q| "#{q}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][q]}"}.join(', ')}")
   end
   if elem.length>0
     char=char.reject{|q| !elem.include?(q[2][1])}.uniq
     for i in 0...elem.length
-      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Icon_Element_#{elem[i]}"}
+      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{elem[i]}"}
       elem[i]="#{moji[0].mention}#{elem[i]}" if moji.length>0
     end
     search.push("*Elements*: #{elem.join(', ')}")
@@ -443,7 +562,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
   if wpn.length>0
     char=char.reject{|q| !wpn.include?(q[2][2])}.uniq
     for i in 0...elem.length
-      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Icon_Weapon_#{wpn[i]}"}
+      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn[i]}"}
       wpn[i]="#{moji[0].mention}#{wpn[i]}" if moji.length>0
     end
     search.push("*Weapon*: #{wpn.join(', ')}")
@@ -451,7 +570,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
   if clzz.length>0
     char=char.reject{|q| !clzz.include?(q[2][0])}.uniq
     for i in 0...clzz.length
-      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Icon_Type_#{clzz[i]}"}
+      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{clzz[i]}"}
       clzz[i]="#{moji[0].mention}#{clzz[i]}" if moji.length>0
     end
     search.push("*Classes*: #{clzz.join(', ')}")
@@ -534,7 +653,7 @@ bot.command([:find,:search]) do |event, *args|
   find_adventurers(bot,event,args)
 end
 
-bot.command([:adventurer,:adv]) do |event, *args|
+bot.command([:adventurer,:adv,:unit]) do |event, *args|
   return nil if overlap_prevent(event)
   if ['find','search'].include?(args[0].downcase)
     args.shift
@@ -605,15 +724,15 @@ bot.command([:shard,:attribute]) do |event, i|
   if i.to_i.to_s==i && i.to_i.is_a?(Integer) && @shardizard != 4
     srv=(bot.server(i.to_i) rescue nil)
     if srv.nil? || bot.user(502288364838322176).on(srv.id).nil?
-      event.respond "I am not in that server, but it would be assigned the #{['<:Icon_Type_Defense:532107867264909314> Defense','<:Icon_Type_Attack:532107867520630784> Attack','<:Icon_Type_Healing:532107867348533249> Healing','<:Icon_Type_Support:532107867575156747> Support','<:Icon_Element_Null:532106087810334741> Null'][(i.to_i >> 22) % 4]} Class."
+      event.respond "I am not in that server, but it would be assigned the #{['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null'][(i.to_i >> 22) % 4]} Class."
     else
-      event.respond "#{srv.name} is assigned the #{['<:Icon_Type_Defense:532107867264909314> Defense','<:Icon_Type_Attack:532107867520630784> Attack','<:Icon_Type_Healing:532107867348533249> Healing','<:Icon_Type_Support:532107867575156747> Support','<:Icon_Element_Null:532106087810334741> Null'][(i.to_i >> 22) % 4]} Class."
+      event.respond "#{srv.name} is assigned the #{['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null'][(i.to_i >> 22) % 4]} Class."
     end
     return nil
   end
-  event.respond 'This is the debug mode, which is assigned the <:Icon_Element_Null:532106087810334741> Null Class.' if @shardizard==4
-  event.respond 'PMs always are assigned the <:Icon_Type_Defense:532107867264909314> Defense Class.' if event.server.nil?
-  event.respond "This server is assigned the #{['<:Icon_Type_Defense:532107867264909314> Defense','<:Icon_Type_Attack:532107867520630784> Attack','<:Icon_Type_Healing:532107867348533249> Healing','<:Icon_Type_Support:532107867575156747> Support','<:Icon_Element_Null:532106087810334741> Null'][(event.server.id >> 22) % 4]} Class." unless event.server.nil? || @shardizard==4
+  event.respond 'This is the debug mode, which is assigned the <:Element_Null:532106087810334741> Null Class.' if @shardizard==4
+  event.respond 'PMs always are assigned the <:Type_Defense:532107867264909314> Defense Class.' if event.server.nil?
+  event.respond "This server is assigned the #{['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null'][(event.server.id >> 22) % 4]} Class." unless event.server.nil? || @shardizard==4
 end
 
 bot.command([:safe,:spam,:safetospam,:safe2spam,:long,:longreplies]) do |event, f|
@@ -799,10 +918,10 @@ bot.command(:snagstats) do |event, f, f2|
   metadata_save()
   if ['servers','server','members','member','shard','shards','user','users'].include?(f.downcase)
     event << "**I am in #{longFormattedNumber(@server_data[0].inject(0){|sum,x| sum + x })} servers, reaching #{longFormattedNumber(@server_data[1].inject(0){|sum,x| sum + x })} unique members.**"
-    event << "#{longFormattedNumber(@server_data[0][0])} server#{"s are" if @server_data[0][0]!=1}#{" is" unless @server_data[0][0]!=1} assigned the <:Icon_Type_Defense:532107867264909314> Defense class, reaching #{longFormattedNumber(@server_data[1][0])} unique members."
-    event << "#{longFormattedNumber(@server_data[0][1])} server#{"s are" if @server_data[0][0]!=1}#{" is" unless @server_data[0][0]!=1} assigned the <:Icon_Type_Attack:532107867520630784> Attack class, reaching #{longFormattedNumber(@server_data[1][1])} unique members."
-    event << "#{longFormattedNumber(@server_data[0][2])} server#{"s are" if @server_data[0][0]!=1}#{" is" unless @server_data[0][0]!=1} assigned the <:Icon_Type_Healing:532107867348533249> Healing class, reaching #{longFormattedNumber(@server_data[1][2])} unique members."
-    event << "#{longFormattedNumber(@server_data[0][3])} server#{"s are" if @server_data[0][0]!=1}#{" is" unless @server_data[0][0]!=1} assigned the <:Icon_Type_Support:532107867575156747> Support class, reaching #{longFormattedNumber(@server_data[1][3])} unique members."
+    event << "#{longFormattedNumber(@server_data[0][0])} server#{"s are" if @server_data[0][0]!=1}#{" is" unless @server_data[0][0]!=1} assigned the <:Type_Defense:532107867264909314> Defense class, reaching #{longFormattedNumber(@server_data[1][0])} unique members."
+    event << "#{longFormattedNumber(@server_data[0][1])} server#{"s are" if @server_data[0][0]!=1}#{" is" unless @server_data[0][0]!=1} assigned the <:Type_Attack:532107867520630784> Attack class, reaching #{longFormattedNumber(@server_data[1][1])} unique members."
+    event << "#{longFormattedNumber(@server_data[0][2])} server#{"s are" if @server_data[0][0]!=1}#{" is" unless @server_data[0][0]!=1} assigned the <:Type_Healing:532107867348533249> Healing class, reaching #{longFormattedNumber(@server_data[1][2])} unique members."
+    event << "#{longFormattedNumber(@server_data[0][3])} server#{"s are" if @server_data[0][0]!=1}#{" is" unless @server_data[0][0]!=1} assigned the <:Type_Support:532107867575156747> Support class, reaching #{longFormattedNumber(@server_data[1][3])} unique members."
     return nil
   elsif ['code','lines','line','sloc'].include?(f.downcase)
     event.channel.send_temporary_message('Calculating data, please wait...',3)
