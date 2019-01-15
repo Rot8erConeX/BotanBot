@@ -1,0 +1,49 @@
+Agni\5\Flame\36, 369\12, 127\Devastation\(Flame) Strength +40%;; (Flame) Strength +60%\5000, 3000\1.8, 1\1\No\Yes\\
+Astral Imp\3\Light\18, 188\5, 59\Wisdom Dance\(Light) HP & Strength +5%;; (Light) HP & Strength +8%\300, 150\1.35, 3.5\4\Yes\No\\
+Brunhilda\4y\Flame\20, 203\7, 70\Muspelheim\(Flame) Strength +15%;; (Flame) Strength +20%\2000, 100\1.5, 1\3\No\No\Aya Endo\Kelly Marie
+Cerberus\5\Flame\36, 369\12, 127\Infernal Damnation\(Flame) Strength +40%;; (Flame) Strength +60%\5000, 3000\1.8, 1\3\No\Yes\Eri Kitamura\Mae Matchett
+Cinder Drake\3\Flame\19, 190\5, 57\Cinderball\(Flame) HP +10%;; (Flame) HP +15%\300, 150\1.35, 3.5\2\Yes\No\\
+Cupid\5\Light\37, 377\11, 119\Lovely Pose\(Light) Strength +40%;; (Light) Strength +60%\5000, 3000\1.8, 1\3\No\Yes\Mariya Ise\Mavis Ada
+Fubuki\3\Water\18, 185\6, 63\Freezing Breath\(Water) Strength +10%;; (Water) Strength +15%\300, 150\1.35, 3.5\4\Yes\No\\
+Garuda\5\Wind\38, 383\11, 114\Tempestuous Kiss\(Wind) HP +40%;; (Wind) HP +60%\5000, 3000\1.5, 1.5\4\No\Yes\Yuhko Kaida\Kathleen Hunter
+Gloom Drake\3\Shadow\19, 190\5, 58\Black Hole\(Shadow) HP +10%;; (Shadow) HP +15%\300, 150\1.35, 3.5\4\Yes\No\\
+Gust Drake\3\Wind\19, 191\5, 57\Gust Drop\(Wind) HP +10%;; (Wind) HP +15%\300, 150\1.35, 3.5\1\Yes\No\\
+High Brunhilda\5\Flame\35, 350\12, 120\Crimson Inferno\(Flame) HP & Strength +20%;; (Flame) HP & Strength +30%;;;; Dragon Time +15%;; Dragon Time +20%\5000, 300\1.5, 1\3\No\No\Aya Endo\Kelly Marie
+High Midgardsormr\5\Wind\35, 356\11, 114\Grand Tempest\(Wind) HP & Strength +20%;; (Wind) HP & Strength +30%;;;; Dragon Time +15%;; Dragon Time +20%\5000, 300\1.5, 1\4\No\No\Koichi Yamadera\Jeremy George
+Hikage\3\Shadow\18, 183\6, 64\Gloom Tackle\(Shadow) Strength +10%;; (Shadow) Strength +15%\300, 150\1.35, 3.5\2\Yes\No\\
+Hinata\3\Light\18, 185\6, 62\Shining Breath\(Light) Strength +10%;; (Light) Strength +15%\300, 150\1.35, 3.5\1\Yes\No\\
+Homura\3\Flame\18, 184\6, 63\Fire Breath\(Flame) Strength +10%;; (Flame) Strength +15%\300, 150\1.35, 3.5\5\Yes\No\\
+Ifrit\4\Flame\29, 295\10, 101\Lava Cascade\(Flame) Strength +30%;; (Flame) Strength +45%\2000, 1000\1.5, 1\5\No\No\\
+Jeanne d'Arc\5\Light\38, 384\11, 113\Saint's Banner\(Light) HP +40%;; (Light) HP +60%\5000, 3000\1.8, 1\3\No\Yes\Megumi Han\Lexi Klein
+Jeanne(Dragonyule)\5s\Water\37, 370\12, 125\Frost Beam\Dragonyule Blessing I;; Dragonyule Blessing II\5000, 3000\1.8, 1\3\No\Yes\Megumi Han\Lexi Klein
+Juggernaut (Dragon)\4\Shadow\29, 294\10, 102\Shadow Carnage\(Shadow) Strength +30%;; (Shadow) Strength +45%\2000, 1000\1.5, 1.5\1\No\No\\
+Jupiter\4y\Light\20, 207\6, 65\Lightning Rood\(Light) HP & Strength +8%;; (Light) HP & Strength +10%\2000, 100\1.5, 1.5\2\No\No\Minami Takayama\Sabrina Pitre
+Kindling Imp\3\Flame\18, 187\6, 60\Ember Toss\(Flame) HP & Strength +5%;; (Flame) HP & Strength +8%\300, 150\1.35, 3.5\3\Yes\No\\
+Leviathan\5\Water\37, 370\12, 125\Tidal Stream\(Water) Strength +40%;; (Water) Strength +60%\5000, 3000\1.8, 1\5\No\Yes\\
+Liger\5\Light\0, 377\0, 119\Lightning Blitz\(Light) HP & Strength +30%\5000, 3000\1.5, 1.5\0\No\No\\
+Lindworm\4\Light\29, 297\10, 100\Ethereal Gleam\(Light) Strength +30%;; (Light) Strength +45%\2000, 1000\1.5, 1\2\No\No\\
+Marishiten\5z\Shadow\37, 374\12, 121\Daybreak Flurry\(Shadow) Strength +40%;; (Shadow) Strength +60%\5000, 3000\1.8, 1\5\No\Yes\Yuki Kaida\Katherine Taylor
+Maritimus\5w\Shadow\22, 224\7, 73\Polar Roller\(Shadow) HP & Strength +10%;; (Shadow) HP & Strength +15%\5000, 300\1.65, 1\2\No\No\Etsuko Kozakura\
+Mercury\4y\Water\21, 211\6, 62\Hydrocannon\(Water) HP +15%;; (Water) HP +20%\2000, 100\1.5, 1\5\No\No\Kikuko Inoue\Ava Lindstrom
+Midgardsormr\4y\Wind\20, 206\6, 66\Tornado Tail\(Wind) HP & Strength +8%;; (Wind) HP & Strength +10%\2000, 100\1.5, 1\4\No\No\Koichi Yamadera\Jeremy George
+Moon Drake\3\Light\19, 192\5, 56\Moon Drop\(Light) HP +10%;; (Light) HP +15%\300, 150\1.35, 3.5\5\Yes\No\\
+Nidhogg\5\Shadow\37, 374\12, 121\Total Eclipse\(Shadow) HP & Strength +20%;; (Shadow) HP & Strength +30%\5000, 3000\1.8, 1\4\No\Yes\\
+Pallid Imp\3\Shadow\18, 186\6, 61\Grave Tidings\(Shadow) HP & Strength +5%;; (Shadow) HP & Strength +8%\300, 150\1.35, 3.5\5\Yes\No\\
+Pele\5w\Flame\22, 221\7, 76\Blazing Pillars\(Flame) Strength +20%;; (Flame) Strength +30%\5000, 300\1.8, 1.5\1\No\No\\
+Phoenix\4\Flame\29, 299\9, 97\Regeneration Flame\(Flame) HP +30%;; (Flame) HP +45%\2000, 1000\1.5, 1.5\4\No\Yes\Yumi Hara\Tabitha St. Germain
+Poli'ahu\4\Water\30, 301\9, 95\Lilinoe's Mist\(Water) HP & Strength +15%;; (Water) HP & Strength +20%\2000, 1000\1.5, 1.5\2\No\No\\
+Poseidon\5w\Water\37, 376\11, 119\Poseidon's Trident\(Water) HP & Strength +20%;; (Water) HP & Strength +30%\5000, 3000\1.8, 1\2\No\Yes\\
+Roc\4\Wind\29, 296\10, 101\Tactical Vortex\(Wind) Strength +30%;; (Wind) Strength +45%\2000, 1000\1.5, 1.5\5\No\No\\
+Shishimai\5\Light\22, 223\7, 75\Blessed Ritual\(Light) Critical Damage +50%;; (Light) Critical Damage +70%\5000, 300\1.65, 1\2\No\No\Miyako Ito\Paul Dobson
+Silke\4\Shadow\29, 299\9, 97\Terror Sphere\(Shadow) HP & Strength +15%;; (Shadow) HP & Strength +20%\2000, 1000\1.5, 1\3\No\No\Aoi Yuki\Raynn Eastwood
+Silke(Halloween)\4s\Light\30, 301\9, 95\Pumpkin Prank\(Light) HP & Strength +15%;; (Light) HP & Strength +20%\2000, 1000\1.5, 1\3\No\No\Aoi Yuki\Raynn Eastwood
+Snow Drake\3\Water\19, 191\5, 57\Snow Drop\(Water) HP +10%;; (Water) HP +15%\300, 150\1.35, 3.5\3\Yes\No\\
+Stribog\4\Wind\30, 306\9, 91\Test of Integrity\(Wind) HP +30%;; (Wind) HP +45%\2000, 1000\1.5, 1\4\No\No\\
+Sylvia\5w\Wind\22, 225\7, 72\Hurricane Drive\(Wind) HP +20%;; (Wind) HP +30%\5000, 300\1.5, 1.5\2\No\No\\
+Tsumuji\3\Wind\18, 184\6, 63\Air Tackle\(Wind) Strength +10%;; (Wind) Strength +15%\300, 150\1.35, 3.5\3\Yes\No\\
+Unicorn\4\Light\30, 301\9, 95\Immaculate Light\(Light) HP +30%;; (Light) HP +45%\2000, 1000\1.5, 1.5\3\No\No\\
+Vodyanoy\4\Water\29, 296\10, 100\Relentless Torrent\(Water) Strength +30%;; (Water) Strength +45%\2000, 1000\1.5, 3.5\1\No\No\\
+Wellspring Imp\3\Water\18, 187\6, 60\Noble Dance\(Water) HP & Strength +5%;; (Water) HP & Strength +8%\300, 150\1.35, 3.5\1\Yes\No\\
+Zephyr\5\Wind\36, 369\12, 126\Zephyr's Wrath\(Wind) Strength +40%;; (Wind) Strength +60%\5000, 3000\1.8, 1\5\No\Yes\\
+Zephyr Imp\3\Wind\18, 187\6, 60\Affinity Dance\(Wind) HP & Strength +5%;; (Wind) HP & Strength +8%\300, 150\1.35, 3.5\2\Yes\No\\
+Zodiark\4y\Shadow\20, 202\7, 70\Accursed Venom\(Shadow) Strength +15%;; (Shadow) Strength +20%\2000, 100\1.5, 1\1\No\No\Norio Wakamoto\Brian Davidson

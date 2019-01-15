@@ -42,7 +42,7 @@ Blazing Pillars\\Skill\Deals 2 hits of 198% flame damage to surrounding enemies,
 Blazing Rondel\\Skill\Deals 2 hits of 309% flame damage to surrounding enemies.\Deals 2 hits of 343% flame damage to surrounding enemies.\Deals 2 hits of 381% flame damage to surrounding enemies.\5112, 5112\Yes\1.2
 Blessed Ritual\\Skill\Applies one of the following at random to the entire team: Increases strength by 15% for 10 seconds, Increases defense by 15% for 10 seconds, Increases critical rate by 15% for 10 seconds.\Applies one of the following at random to the entire team: Increases strength by 20% for 10 seconds, Increases defense by 20% for 10 seconds, Increases critical rate by 20% for 10 seconds.\\30, 30\No\1.4
 Blessed Wall\\Skill\Increases the entire team's defense by 10% for 15 seconds.\Increases the entire team's defense by 15% for 15 seconds.\Increases the entire team's defense by 15% for 30 seconds.\7633, 7633\No\1.4
-Blessings of Destiny\\Skill\Restores HP to all allies with 31% Recovery Potency and applies Regen for 15 seconds, healing with 25% Regen Potencyevery 2.99 seconds.\Restores HP to all allies with 36% Recovery Potency, removes stun, and applies Regen for 15 seconds, healing with 29% Regen Potencyevery 2.99 seconds.\Restores HP to all allies with 44% Recovery Potency, removes stun, and applies Regen for 15 seconds, healing with 35% Regen Potencyevery 2.99 seconds.\5916, 5916\Yes\1.1
+Blessings of Destiny\\Skill\Restores HP to all allies with 31% Recovery Potency and applies Regen for 15 seconds, healing with 25% Regen Potency every 2.99 seconds.\Restores HP to all allies with 36% Recovery Potency, removes stun, and applies Regen for 15 seconds, healing with 29% Regen Potency every 2.99 seconds.\Restores HP to all allies with 44% Recovery Potency, removes stun, and applies Regen for 15 seconds, healing with 35% Regen Potency every 2.99 seconds.\5916, 5916\Yes\1.1
 Bloody Cleaver\\Skill\Deals 1 hit of 614% shadow damage to enemies directly ahead.\Deals 1 hit of 682% shadow damage to enemies directly ahead.\Deals shadow damage to enemies directly ahead.\7330, 7330\Yes\0.8
 Blooming Cradle\\Skill\Activates "Slumber Strike Stance." For the next three force strikes, the user will deal an additional 17% shadow damage and inflict sleep for 5 seconds with 80% base chance.\Activates "Slumber Strike Stance." For the next three force strikes, the user will deal an additional 38% shadow damage and inflict sleep for 5 seconds with 90% base chance.\\6400, 6400\No\1.1
 Blundering Bomber\\Skill\Deals 2 hits of 399% flame damage to the target and nearby enemies.\Deals 2 hits of 443% flame damage to the target and nearby enemies.\\5422, 5422\Yes\1
@@ -51,6 +51,7 @@ Bone Stinger\\Skill\Deals 3 hits of 206% shadow damage to enemies directly ahead
 Bonecrusher\\Skill\Deals 1 hit of 552% shadow damage to enemies in a line.\Deals 1 hit of 614% shadow damage to enemies in a line.\Deals 1 hit of 682% shadow damage to enemies in a line.\2613, 2613\Yes\0.7
 Bracing Spirit\\Skill\Increases the potency of the user's recovery skills by 15% for 5 seconds.\Increases the potency of the user's recovery skills by 20% for 5 seconds.\Increases the potency of the user's recovery skills by 30% for 30 seconds.\17748, 17748\No\1.4
 Brave Bastion\\Skill\Increases the entire team's strength by 10% for 15 seconds.\Increases the entire team's strength by 15% for 15 seconds.\Increases the entire team's strength by 20% for 15 seconds.\3817, 3817\No\1.4
+Brilliant Bolt\\Skill\Deals 1 shot of 769% flame damage to enemies directly ahead, and fires extra shots equal to the number of buffs the user has with 77% flame damage each. A maximum of seven additional shots can be fired.\Deals 1 shot of 854% flame damage to enemies directly ahead, and fires extra shots equal to the number of buffs the user has with 85% flame damage each. A maximum of seven additional shots can be fired.\Deals 1 shot of 949% flame damage to enemies directly ahead, and fires extra shots equal to the number of buffs the user has with 95% flame damage each. A maximum of seven additional shots can be fired.\2803, 2803\Yes\3.4
 Brilliant Inferno\\Skill\Activates "Inferno Mode" for 15 seconds. The user gains a strength increase of 10% , and their normal attacks have a 15% chance to reduce enemy defense by 5% for 5 seconds.\Activates "Inferno Mode" for 15 seconds. The user gains a strength increase of 15% , and their normal attacks have a 15% chance to reduce enemy defense by 5% for 5 seconds.\Activates "Inferno Mode" for 30seconds. The user gains a strength increase of 20% , and their normal attacks reduce enemy defense.\8940, 8940\No\0.6
 Broad Cleaver\\Skill\Deals 1 hit of 553% damage to enemies directly ahead.\Deals 1 hit of 614% damage to enemies directly ahead.\Deals non-elemental damage to enemies directly ahead.\7330, 7330\Yes\0.8
 Burning Arrow\\Skill\Deals 1 shot of 635% flame damage to enemies in a line.\Deals 1 shot of 667% flame damage to enemies in a line, and inflicts burn for 12 seconds - dealing 60% damage every 3.99 seconds - with 90% base chance.\Deals 1 shot of 701% flame damage to enemies in a line, and inflicts burn.\5051, 5051\Yes\0.9
@@ -64,6 +65,7 @@ Celestial Citadel\\Skill\Increases the entire team's defense by 15% for 15 secon
 Chanzelian Strike\\Skill\Deals 3 hits of 264% light damage to enemies directly ahead.\Deals 3 hits of 293% light damage to enemies directly ahead.\Deals light-based damage to enemies directly ahead.\7175, 7175\Yes\0.9
 Chaotic Healing\\Skill\Restores the user's HP with 72% Recovery Potency.\Restores the user's HP with 90% Recovery Potency.\Restores the user's HP.\12668, 12668\Yes\1.1
 Cheer up, chums!\\Skill\Increases the entire team's energy levels by 1.\Increases the entire team's energy levels by 1.\\4000, 3636\No\1.4
+Cheerful Assist\\Skill\Increases the entire team's strength by 15% for 10 seconds. If used again, the skill will increase the entire team's defense by 15% for 15 seconds instead, after which the skill will revert to its initial effect.\Increases the entire team's strength by 20% for 10 seconds. If used again, the skill will increase the entire team's defense by 20% for 15 seconds instead, after which the skill will revert to its initial effect.\\8534, 8534\No\1.4
 Chimera's Boost\\Skill\Increases the user's critical rate by 15% for 10 seconds.\Increases the user's critical rate by 20% for 10 seconds.\Increases the user's critical rate by 40% for 30 seconds.\7316, 7316\No\1.4
 Cimmerian Strength\\Skill\Increases the user's strength by 25% for 5 seconds.\Increases the user's strength by 30% for 5 seconds.\Increases the user's strength by 15% for 30 seconds.\6151, 6151\No\1.4
 Cinderball\\Skill\Deals 1 hit of 454% flame damage to enemies in a line.\Deals 1 hit of 504% flame damage to enemies in a line.\Deals flame damage to enemies in a line.\30, 30\Yes\1.6
@@ -195,6 +197,7 @@ Lachrymal Protection\\Skill\Increases the user's defense by 25% for 10 seconds.\
 Lava Cascade\\Skill\Deals 1 hit of 226.8% and 1 hit of 340.2% flame damage to enemies directly ahead and inflicts burn for 12 seconds - dealing 66% flame damage every 3.99 seconds - with 100% Base Chance\Deals 1 hit of 252% and 1 hit of 378% flame damage to enemies directly ahead and inflicts burn for 12 seconds - dealing 88.3% flame damage every 3.99 seconds - with 110% Base Chance\Deals flame damage to enemies directly ahead.\50, 50\Yes\2.6
 Legato Step\\Skill\Deals 4 hits of 151% water damage to surrounding enemies.\Deals 4 hits of 167% water damage to surrounding enemies.\Deals 4 hits of 186% water damage to surrounding enemies.\2343, 2343\Yes\1.1
 Lethal Edge\\Skill\Deals 2 hits of 275% shadow damage to enemies directly ahead.\Deals 2 hits of 288% shadow damage to enemies directly ahead, and inflicts sleep for 3-5 seconds with 90% base chance.\Deals 2 hits of 303% shadow damage to enemies directly ahead, and inflicts sleep for 3-5 seconds with 100% base chance.\4892, 4892\Yes\0.5
+Lightning Blitz\\Skill\\\\, \Yes\
 Lightning Rood\\Skill\Deals 2 hits of 207.9% light damage to surrounding enemies.\Deals 2 hits of 231% light damage to surrounding enemies.\Deals light damage to surrounding enemies.\30, 30\Yes\1.4
 Lightning's Protection\\Skill\Increases the user's defense by 20% for 10 seconds.\Increases the user's defense by 25% for 10 seconds.\Increases the user's defense by 30% for 30 seconds.\6678, 6678\No\1.4
 Lilinoe's Mist\\Skill\Deals 1 hit of 185.5% and 1 hit of 432.6% water damage to the target and nearby enemies and inflicts freeze for 3-6 seconds with 120% Base Chance\Deals 1 hit of 205.8% and 1 hit of 480.2% water damage to the target and nearby enemies and inflicts freeze for 3-6 seconds with 140% Base Chance\Deals water damage to the target and nearby enemies, and inflicts freeze with ? base chance.\30, 30\Yes\1.9
@@ -301,6 +304,7 @@ Shining Breath\\Skill\Deals 1 hit of 466% light damage to enemies directly ahead
 Shining Vanguard\\Skill\Deals 2 hits of 420% light damage to surrounding enemies and draws them toward the user for 0.5 seconds.\Deals 2 hits of 466% light damage to surrounding enemies and draws them toward the user for 0.5 seconds.\Deals 2 hits of 518% light-based damage to surrounding enemies and draws them toward the user for 0.5 seconds.\5735, 5735\Yes\0.9
 Skull Hunter\\Skill\Deals 1 hit of 617% shadow damage to the target and nearby enemies.\Deals 1 hit of 648% shadow damage to the target and nearby enemies, and inflicts blindness (applies 50% chance to miss on attacks) for 8 seconds with 90% base chance.\Deals 1 hit of 680% shadow damage to the target and nearby enemies, and inflicts blindness (applies 50% chance to miss on attacks) for 8 seconds with 100% base chance.\2352, 2352\Yes\2.2
 Smash Hit\\Skill\Deals 1 hit of 839% water damage to enemies directly ahead.\Deals 1 hit of 933% water damage to enemies directly ahead.\Deals 1 hit of 1036% water damage to enemies directly ahead.\2942, 2942\Yes\0.9
+Smiles on Display\\Skill\?\?\?\?, ?\Yes\?
 Snow Drop\\Skill\Deals 1 hit of 454% water damage to surrounding enemies.\Deals 1 hit of 504% water damage to surrounding enemies.\Deals water damage to surrounding enemies.\30, 30\Yes\1.6
 Sorcerer's Blast\\Skill\Deals 1 hit of 725% damage to surrounding enemies.\Deals 1 hit of 806% damage to surrounding enemies.\Deals non-elemental damage to enemies in a line.\8062, 8062\Yes\1.1
 Soul Ignition\\Skill\Increases the entire team's strength by 10% for 15 seconds.\Increases the entire team's strength by 15% for 15 seconds.\Increases the entire team's strength by 15% for 30 seconds.\6610, 6610\No\1.4
@@ -317,6 +321,7 @@ Storm Chain\\Skill\Deals 4 hits of 152% wind damage to enemies directly ahead.\D
 Storm Discharge\\Skill\Deals 1 hit of 806% wind damage to surrounding enemies.\Deals 1 hit of 895% wind damage to surrounding enemies.\Deals wind damage to enemies in a line.\8062, 8062\Yes\1.1
 Storm Spell\\Skill\Deals 1 shot of 725% wind damage to enemies in a line.\Deals 1 shot of 805% wind damage to enemies in a line, and inflicts stun for 2-4 seconds with 90% base chance.\Deals 1 shot of 895% wind damage to enemies in a line, and inflicts stun 2-4 seconds with 100% base chance.\5518, 5518\Yes\0.9
 Storm Wall\\Skill\Grants all teammates a one-hit shield that nullifies damage less than 20% of their maximum HP. This does not stack with any other shields.\Grants all teammates a one-hit shield that nullifies damage less than 30% of their maximum HP. Does not stack with any other shields.\Grants all teammates a one-hit shield that nullifies water damage less than 50% of their maximum HP. This does not stack with any other shields.\7288, 7288\No\1.1
+Stunning Display\\Skill\?\?\?\?, ?\Yes\?
 Subterfuge\\Skill\Deals 2 hits of 275% flame damage to enemies directly ahead.\Deals 2 hits of 288% flame damage to enemies directly ahead, and reduces their defense by 5% for 10 seconds with 30% base chance.\Deals 2 hits of 303% flame damage to enemies directly ahead, and reduces their defense by 10% for 10 seconds with 30% base chance.\4892, 4892\Yes\0.5
 Sugaar's Strength\\Skill\Increases the user's strength by 35% for 5 seconds.\Increases the user's strength by 40% for 5 seconds.\Increases the user's strength by 25% for 30 seconds.\7103, 7103\No\1.4
 Sunrise Blast\\Skill\Deals 1 hit of 806% flame damage to the target and nearby enemies.\Deals 1 hit of 895% flame damage to the target and nearby enemies.\Deals flame damage to the target and enemies near it.\8355, 8355\Yes\1
@@ -404,6 +409,7 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) Strength\40%\Aura\If the user is attuned to Flame: increases strength by 40%.\70
 (Flame) Strength\45%\Aura\If the user is attuned to Flame: increases strength by 45%.\80
 (Flame) Strength\60%\Aura\If the user is attuned to Flame: increases strength by 60%.\100
+(Lance) HP = Skill Damage\35%\Ability\if the user wields a Lance: increases attack skill damage by 35%\
 (Light) Critical Damage\50%\Aura\If the user is attuned to Light: adds 50% to the modifier applied to critical damage.\40
 (Light) Critical Damage\70%\Aura\If the user is attuned to Light: adds 70% to the modifier applied to critical damage.\60
 (Light) Critical Rate\5%\Aura\If the user is attuned to Light: Increases critical rate by 5%.\40
@@ -483,8 +489,6 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Wind) Strength\60%\Aura\If the user is attuned to Wind: increases strength by 60%.\100
 (Water) Flurry Devastation\8%\Ability\If the user is attuned to Water: increases critical rate by 8% when the combo count is 15 or higher.\40
 (Water) Flurry Devastation\10%\Ability\If the user is attuned to Water: increases critical rate by 10% when the combo count is 15 or higher.\60
-Hits = Energy Level Up\30\Ability\Increases the user's energy level by one stage for every 30-hit combo.\100
-Hits = Energy Level Up\35\Ability\Increases the user's energy level by one stage for every 35-hit combo.\70
 Astral Ornament\25%\Ability\Increases Astral Ornaments intake for clearing quests by 25%.\0
 Astral Ornament\50%\Ability\Increases Astral Ornaments intake for clearing quests by 50%.\0
 Astral Ornament\75%\Ability\Increases Astral Ornaments intake for clearing quests by 75%.\0
@@ -513,6 +517,7 @@ Buff Time\10%\Ability\Increases duration of buff skills by 10%.\20
 Buff Time\15%\Ability\Increases duration of buff skills by 15%.\40
 Buff Time\20%\Ability\Increases duration of buff skills by 20%.\60
 Buff Time\25%\Ability\Increases duration of buff skills by 25%.\80
+Buff Time\30%\Ability\Increases duration of buff skills by 30%.\100
 Burn Res\15%\Ability\Reduces susceptibility to burning by 15%.\10
 Burn Res\20%\Ability\Reduces susceptibility to burning by 20%.\20
 Burn Res\25%\Ability\Reduces susceptibility to burning by 25%.\40
@@ -616,6 +621,8 @@ High Brunhilda Res\20%\Ability\Reduces damage taken from High Brunhilda by 20%.\
 High Brunhilda Res\25%\Ability\Reduces damage taken from High Brunhilda by 25%.\100
 High Midgardsormr Res\20%\Ability\Reduces damage taken from High Midgardsormr by 20%.\60
 High Midgardsormr Res\25%\Ability\Reduces damage taken from High Midgardsormr by 25%.\100
+Hits = Energy Level Up\30\Ability\Increases the user's energy level by one stage for every 30-hit combo.\100
+Hits = Energy Level Up\35\Ability\Increases the user's energy level by one stage for every 35-hit combo.\70
 Holiday Cheer\100%\Ability\Increases Holiday Cheer intake for clearing quests by 100%.\0
 Holiday Cheer\150%\Ability\Increases Holiday Cheer intake for clearing quests by 150%.\0
 Holiday Cheer\25%\Ability\Increases Holiday Cheer intake for clearing quests by 25%.\0
@@ -691,6 +698,10 @@ Recovery Potency\2%\Ability\Increases the potency of recovery skills by 2%.\10
 Recovery Potency\3%\Ability\Increases the potency of recovery skills by 3%.\20
 Recovery Potency\5%\Ability\Increases the potency of recovery skills by 5%.\40
 Recovery Potency\8%\Ability\Increases the potency of recovery skills by 8%.\60
+Renown\100%\Ability\Increases renown intake for clearing quests by +100%\?
+Renown\150%\Ability\Increases renown intake for clearing quests by +150%\?
+Renown\25%\Ability\Increases renown intake for clearing quests by +25%\?
+Renown\50%\Ability\Increases renown intake for clearing quests by +50%\?
 Shadow Res\3%\Ability\Reduces shadow damage taken by 3%.\20
 Shadow Res\5%\Ability\Reduces shadow damage taken by 5%.\40
 Shadow Res\8%\Ability\Reduces shadow damage taken by 8%.\60
@@ -750,6 +761,8 @@ Stun Res\50%\Ability\Reduces susceptibility to stun by 50%.\60
 Stunned Punisher\20%\Ability\Increases damage to stunned enemies by 20%.\60
 Stunned Punisher\25%\Ability\Increases damage to stunned enemies by 25%.\80
 Stunned Punisher\30%\Ability\Increases damage to stunned enemies by 30%.\100
+Sylvan Strength\70\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 25-hit combo.\70
+Sylvan Strength\100\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 25-hit combo.\100
 Thaumian's Bane\20%\Ability\Increases damage to thaumians by 20%.\60
 Thaumian's Bane\25%\Ability\Increases damage to thaumians by 25%.\80
 Tricker Treats\100%\Ability\Increases Tricker Treat intake for clearing quests by 100%.\0
@@ -763,6 +776,8 @@ Wind Res\8%\Ability\Reduces wind damage taken by 8%.\60
 Windwhistle Grass\25%\Ability\Increases windwhistle grass intake for clearing quests by 25%.\0
 Windwhistle Grass\50%\Ability\Increases windwhistle grass intake for clearing quests by 50%.\0
 Windwhistle Grass\75%\Ability\Increases wind whistle grass intake for clearing quests by 75%.\0
+Woodland Blessing\50%\Ability\Reduces susceptibility to stun and sleep by 50%.\70
+Woodland Blessing\100%\Ability\Reduces susceptibility to stun and sleep by 100%.\100
 Zodiark Res\15%\Ability\Reduces damage taken from Zodiark by 15%.\30
 Zodiark Res\20%\Ability\Reduces damage taken from Zodiark by 20%.\60
 Critical Rate\1%\CoAbility\Increases critical rate by 1%.\50
