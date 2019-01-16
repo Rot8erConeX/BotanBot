@@ -623,6 +623,119 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
   end
 end
 
+def find_in_dragons(bot,event,args=nil,mode=0)
+  data_load()
+  args=normalize(event.message.text.downcase).split(' ') if args.nil?
+  args=args.map{|q| normalize(q.downcase)}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  rarity=[]
+  elem=[]
+  fltr=[]
+  turn=[]
+  ranged=[]
+  for i in 0...args.length
+    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<6
+    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<6
+    elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
+    elem.push('Water') if ['water','waters'].include?(args[i].downcase)
+    elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
+    elem.push('Wind') if ['earth','earths'].include?(args[i].downcase) && event.user.id==192821228468305920
+    elem.push('Light') if ['light','lights'].include?(args[i].downcase)
+    elem.push('Shadow') if ['shadow','dark','shadows','darks'].include?(args[i].downcase)
+    turn.push('Yes') if ['turn','damage'].include?(args[i].downcase)
+    turn.push('No') if ['noturn','anchor'].include?(args[i].downcase)
+    ranged.push('Yes') if ['long','longrange','ranged'].include?(args[i].downcase)
+    ranged.push('no') if ['short','shortrange','melee'].include?(args[i].downcase)
+    fltr.push('Welfare') if ['welfare','welfares','free','freebies','f2p'].include?(args[i].downcase)
+    fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
+    fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
+    fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons'].include?(args[i].downcase)
+    fltr.push('Summon') if ['summon','summons','summonable','summonables'].include?(args[i].downcase)
+  end
+  textra=''
+  rarity.uniq!
+  elem.uniq!
+  turn.uniq!
+  ranged.uniq!
+  fltr.uniq!
+  char=@dragons.map{|q| q}.uniq
+  search=[]
+  if rarity.length>0
+    char=char.reject{|q| !rarity.include?(q[1][0,1].to_i)}.uniq
+    search.push("*Rarities*: #{rarity.map{|q| "#{q}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][q]}"}.join(', ')}")
+  end
+  if elem.length>0
+    char=char.reject{|q| !elem.include?(q[2])}.uniq
+    for i in 0...elem.length
+      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{elem[i]}"}
+      elem[i]="#{moji[0].mention}#{elem[i]}" if moji.length>0
+    end
+    search.push("*Elements*: #{elem.join(', ')}")
+  end
+  if turn.length>0
+    char=char.reject{|q| !turn.include?(q[10])}.uniq
+    for i in 0...turn.length
+      turn[i]='Turned to damage direction' if turn[i]=='Yes'
+      turn[i]='Not turned to damage direction' if turn[i]=='No'
+    end
+    search.push("*Turn data*: #{turn.join(', ')}")
+  end
+  if ranged.length>0
+    char=char.reject{|q| !ranged.include?(q[11])}.uniq
+    for i in 0...ranged.length
+      ranged[i]='Long' if ranged[i]=='Yes'
+      ranged[i]='Short' if ranged[i]=='No'
+    end
+    search.push("*Range*: #{ranged.join(', ')}")
+  end
+  if fltr.length>0
+    m=[]
+    if fltr.include?('Welfare')
+      m.push('1w')
+      m.push('2w')
+      m.push('3w')
+      m.push('4w')
+      m.push('5w')
+    end
+    if fltr.include?('Seasonal')
+      m.push('1s')
+      m.push('2s')
+      m.push('3s')
+      m.push('4s')
+      m.push('5s')
+    end
+    if fltr.include?('Zodiac Seasonal')
+      m.push('1z')
+      m.push('2z')
+      m.push('3z')
+      m.push('4z')
+      m.push('5z')
+    end
+    if fltr.include?('Story')
+      m.push('1y')
+      m.push('2y')
+      m.push('3y')
+      m.push('4y')
+      m.push('5y')
+    end
+    if fltr.include?('Summon')
+      m.push('1')
+      m.push('2')
+      m.push('3')
+      m.push('4')
+      m.push('5')
+    end
+    char=char.reject{|q| !m.include?(q[1])}.uniq
+    search.push("*Filters*: #{fltr.join(', ')}")
+  end
+  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length>=1900) && !safe_to_spam?(event) && mode==0
+    event.respond "Too much data is trying to be displayed.  Please use this command in PM."
+    return nil
+  else
+    return [search,char]
+  end
+end
+
 def find_adventurers(bot,event,args=nil)
   args=normalize(event.message.text.downcase).split(' ') if args.nil?
   args=args.map{|q| normalize(q.downcase)}
@@ -633,7 +746,7 @@ def find_adventurers(bot,event,args=nil)
   char=k[1]
   char=char.sort{|a,b| a[0]<=>b[0]}.map{|q| q[0]}.uniq
   if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || char.join("\n").length+search.join("\n").length>=1900
-    str="__**Search**__\n#{search.join("\n")}\n\n__**Results**__"
+    str="__**Adventurer Search**__\n#{search.join("\n")}\n\n__**Results**__"
     for i in 0...char.length
       str=extend_message(str,char[i],event)
     end
@@ -644,13 +757,98 @@ def find_adventurers(bot,event,args=nil)
     flds=triple_finish(char) unless char.length<=0
     textra=''
     textra="**No adventurers match your search**" if char.length<=0
-    create_embed(event,"__**Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total",nil,flds)
+    create_embed(event,"__**Adventurer Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total",nil,flds)
+  end
+end
+
+def find_dragons(bot,event,args=nil)
+  args=normalize(event.message.text.downcase).split(' ') if args.nil?
+  args=args.map{|q| normalize(q.downcase)}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  k=find_in_dragons(bot,event,args)
+  return nil if k.nil?
+  search=k[0]
+  char=k[1]
+  char=char.sort{|a,b| a[0]<=>b[0]}.map{|q| q[0]}.uniq
+  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || char.join("\n").length+search.join("\n").length>=1900
+    str="__**Dragon Search**__\n#{search.join("\n")}\n\n__**Results**__"
+    for i in 0...char.length
+      str=extend_message(str,char[i],event)
+    end
+    str=extend_message(str,"#{char.length} total",event,2)
+    event.respond str
+  else
+    flds=nil
+    flds=triple_finish(char) unless char.length<=0
+    textra=''
+    textra="**No dragons match your search**" if char.length<=0
+    create_embed(event,"__**Dragon Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total",nil,flds)
+  end
+end
+
+def find_all(bot,event,args=nil)
+  args=normalize(event.message.text.downcase).split(' ') if args.nil?
+  args=args.map{|q| normalize(q.downcase)}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  adv=find_in_adventurers(bot,event,args)
+  drg=find_in_dragons(bot,event,args)
+  adv=nil if adv[1].length>=@adventurers.length
+  drg=nil if drg[1].length>=@dragons.length
+  return nil if adv.nil? && drg.nil?
+  if adv.nil?
+    find_dragons(bot,event,args)
+    return nil
+  elsif drg.nil?
+    find_adventurers(bot,event,args)
+    return nil
+  end
+  adv=[[],[]] if adv.nil?
+  drg=[[],[]] if drg.nil?
+  adv[1]=adv[1].sort{|a,b| a[0]<=>b[0]}.map{|q| q[0]}.uniq
+  drg[1]=drg[1].sort{|a,b| a[0]<=>b[0]}.map{|q| q[0]}.uniq
+  search="#{adv[0].join("\n")}\n#{drg[0].join("\n")}".split("\n")
+  search=search.reject{|q| count_in(search,q)<2}.uniq
+  adv[0]=adv[0].reject{|q| search.include?(q)}
+  drg[0]=drg[0].reject{|q| search.include?(q)}
+  str=''
+  str="__**Overall Search**__\n#{search.join("\n")}" if search.length>0
+  str="#{str}\n\n__**Adventurer Search**__\n#{adv[0].join("\n")}" if adv[0].length>0
+  str="#{str}\n\n__**Dragon Search**__\n#{drg[0].join("\n")}" if drg[0].length>0
+  str="#{str}\n\n__**Results**__"
+  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || adv[1].join("\n").length+adv[0].join("\n").length+drg[1].join("\n").length+drg[0].join("\n").length>=1800
+    str="#{str}\n*Adventurers:* #{adv[1][0]}"
+    for i in 1...adv[1].length
+      str=extend_message(str,adv[1][i],event,1,', ')
+    end
+    str=extend_message(str,"*Dragons:* #{drg[1][0]}",event)
+    for i in 1...drg[1].length
+      str=extend_message(str,drg[1][i],event,1,', ')
+    end
+    str=extend_message(str,"Totals: #{adv[1].length} adventurers, #{drg[1].length} dragons",event,2)
+    event.respond str
+  else
+    flds=nil
+    flds=[] unless adv[1].length<=0 && drg[1].length<=0
+    flds.push(['Adventurers',adv[1].join("\n")]) if adv[1].length>0
+    flds.push(['Dragons',drg[1].join("\n")]) if drg[1].length>0
+    textra=''
+    textra="**No data matches your search**" if adv[1].length<=0 && drg[1].length<=0
+    create_embed(event,str,textra,0xCE456B,"Totals: #{adv[1].length} adventurers, #{drg[1].length} dragons",nil,flds)
   end
 end
 
 bot.command([:find,:search]) do |event, *args|
   return nil if overlap_prevent(event)
-  find_adventurers(bot,event,args)
+  if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
+    args.shift
+    find_adventurers(bot,event,args)
+    return nil
+  elsif ['dragon','dragons'].include?(args[0].downcase)
+    args.shift
+    find_dragons(bot,event,args)
+    return nil
+  end
+  find_all(bot,event,args)
 end
 
 bot.command([:adventurer,:adv,:unit]) do |event, *args|
