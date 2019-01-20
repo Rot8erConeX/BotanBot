@@ -102,28 +102,6 @@ def data_load()
     b[i][8]=b[i][8].split(', ').map{|q| q.to_f}
   end
   @dragons=b.map{|q| q}
-  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkills.txt')
-    b=[]
-    File.open('C:/Users/Mini-Matt/Desktop/devkit/DLSkills.txt').each_line do |line|
-      b.push(line)
-    end
-  else
-    b=[]
-  end
-  for i in 0...b.length
-    b[i]=b[i].gsub("\n",'').split('\\'[0])
-    if b[i][2]=='Skill'
-      b[i][6]=b[i][6].split(', ').map{|q| q.to_i}
-      b[i][8]=b[i][8].to_f
-    elsif b[i][2]=='Aura'
-      b[i][4]=b[i][4].to_i
-    elsif b[i][2]=='Ability'
-      b[i][4]=b[i][4].to_i
-    elsif b[i][2]=='CoAbility'
-      b[i][4]=b[i][4].to_i
-    end
-  end
-  @askilities=b.map{|q| q}
   if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLWyrmprints.txt')
     b=[]
     File.open('C:/Users/Mini-Matt/Desktop/devkit/DLWyrmprints.txt').each_line do |line|
@@ -157,6 +135,28 @@ def data_load()
     b[i][12]=b[i][12].split(';; ').map{|q| q.split(', ')} unless b[i][12].nil?
   end
   @weapons=b.map{|q| q}
+  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkills.txt')
+    b=[]
+    File.open('C:/Users/Mini-Matt/Desktop/devkit/DLSkills.txt').each_line do |line|
+      b.push(line)
+    end
+  else
+    b=[]
+  end
+  for i in 0...b.length
+    b[i]=b[i].gsub("\n",'').split('\\'[0])
+    if b[i][2]=='Skill'
+      b[i][6]=b[i][6].split(', ').map{|q| q.to_i}
+      b[i][8]=b[i][8].to_f
+    elsif b[i][2]=='Aura'
+      b[i][4]=b[i][4].to_i
+    elsif b[i][2]=='Ability'
+      b[i][4]=b[i][4].to_i
+    elsif b[i][2]=='CoAbility'
+      b[i][4]=b[i][4].to_i
+    end
+  end
+  @askilities=b.map{|q| q}
 end
 
 def metadata_load()
@@ -241,7 +241,7 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
   elsif ['bugreport','suggestion','feedback'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __*message__",'PMs my developer with your username, the server, and the contents of the message `message`',0xCE456B)
   elsif command.downcase=='addalias'
-    create_embed(event,'**addalias** __new alias__ __name__',"Adds `new alias` to `name`'s aliases.\nIf the arguments are listed in the opposite order, the command will auto-switch them.\n\n~~Aliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Auras\n- Abilities\n- CoAbilities\n- Facilities\n- Materials~~\n\nInforms you if the alias already belongs to someone/something.\nAlso informs you if the thing you wish to give the alias to does not exist.\n\n**This command is only able to be used by server mods**.",0xC31C19)
+    create_embed(event,'**addalias** __new alias__ __name__',"Adds `new alias` to `name`'s aliases.\nIf the arguments are listed in the opposite order, the command will auto-switch them.\n\nAliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n~~- Skills\n- Auras\n- Abilities\n- CoAbilities\n- Facilities\n- Materials~~\n\nInforms you if the alias already belongs to someone/something.\nAlso informs you if the thing you wish to give the alias to does not exist.\n\n**This command is only able to be used by server mods**.",0xC31C19)
   elsif ['deletealias','removealias'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __alias__","Removes `alias` from the list of aliases, regardless of who/what it was for.\n\n**This command is only able to be used by server mods**.",0xC31C19)
   elsif ['backupaliases'].include?(command.downcase)
@@ -258,6 +258,8 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
     create_embed(event,"**#{command.downcase}** __name__","Shows `name`'s stats, skills, and abilities.",0xCE456B)
   elsif ['wyrmprint','wyrm','print'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows `name`'s stats and abilities.",0xCE456B)
+  elsif ['weapon','weap','wep','wpn'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Shows `name`'s stats and skills.",0xCE456B)
   elsif ['embed','embeds'].include?(command.downcase)
     event << '**embed**'
     event << ''
@@ -271,9 +273,9 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
   elsif ['find','search'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __\*filters__","Displays all adventurers that fit `filters`.\n\nYou can search by:\n- Rarity\n- Element\n- Weapon\n- Class\n- Availability\n\nIf too many adventurers are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
   elsif ['aliases','checkaliases','seealiases','alias'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s aliases.\nIf no name is listed, responds with a list of all aliases and who/what they are for.\n\n~~Aliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Auras\n- Abilities\n- CoAbilities\n- Facilities\n- Materials~~\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s aliases.\nIf no name is listed, responds with a list of all aliases and who/what they are for.\n\nAliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n~~- Skills\n- Auras\n- Abilities\n- CoAbilities\n- Facilities\n- Materials~~\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
   elsif ['saliases','serveraliases'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s server-specific aliases.\nIf no name is listed, responds with a list of all server-specific aliases and who/what they are for.\n\n~~Aliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Auras\n- Abilities\n- CoAbilities\n- Facilities\n- Materials~~\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s server-specific aliases.\nIf no name is listed, responds with a list of all server-specific aliases and who/what they are for.\n\nAliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n~~- Skills\n- Auras\n- Abilities\n- CoAbilities\n- Facilities\n- Materials~~\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
   elsif command.downcase=='snagstats'
     subcommand='' if subcommand.nil?
     if ['server','servers','member','members','shard','shards','users','user'].include?(subcommand.downcase)
@@ -293,7 +295,7 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
       command=''
     end
     event.respond "#{command.downcase} is not a command" if command!='' && command.downcase != 'devcommands'
-    create_embed([event,x],"Command Prefixes: #{@prefix.map{|q| q.upcase}.uniq.map{|q| "`#{q}`"}.join(', ')}\nYou can also use `DL!help CommandName` to learn more on a particular command.\n__**Botan Bot help**__","__**Game Data**__\n`adventurer` __name__ - for data on an adventurer (*also `adv`*)\n`dragon` __name__ - for data on a dragon\n`wyrmprint` __name__ - for data on a wyrmprint (*also `wyrm` or `print`*)\n\n`find` __\*filters__ - to find specific adventurers or dragons\n\n__**Meta Data**__\n`invite` - for a link to invite me to your server\n`snagstats` __type__ - to receive relevant bot stats\n`spam` - to determine if the current location is safe for me to send long replies to (*also `safetospam` or `safe2spam`*)\n\n__**Developer Information**__\n`bugreport` __\\*message__ - to send my developer a bug report\n`suggestion` __\\*message__ - to send my developer a feature suggestion\n`feedback` __\\*message__ - to send my developer other kinds of feedback\n~~the above three commands are actually identical, merely given unique entries to help people find them~~",0xCE456B)
+    create_embed([event,x],"Command Prefixes: #{@prefix.map{|q| q.upcase}.uniq.map{|q| "`#{q}`"}.join(', ')}\nYou can also use `DL!help CommandName` to learn more on a particular command.\n__**Botan Bot help**__","__**Game Data**__\n`adventurer` __name__ - for data on an adventurer (*also `adv`*)\n`dragon` __name__ - for data on a dragon\n`wyrmprint` __name__ - for data on a wyrmprint (*also `wyrm` or `print`*)\n`weapon` __name__ - for data on a weapon\n\n`find` __\*filters__ - to find specific adventurers or dragons\n\n__**Meta Data**__\n`invite` - for a link to invite me to your server\n`snagstats` __type__ - to receive relevant bot stats\n`spam` - to determine if the current location is safe for me to send long replies to (*also `safetospam` or `safe2spam`*)\n\n__**Developer Information**__\n`bugreport` __\\*message__ - to send my developer a bug report\n`suggestion` __\\*message__ - to send my developer a feature suggestion\n`feedback` __\\*message__ - to send my developer other kinds of feedback\n~~the above three commands are actually identical, merely given unique entries to help people find them~~",0xCE456B)
     create_embed([event,x],"__**Server Admin Commands**__","__**Unit Aliases**__\n`addalias` __new alias__ __unit__ - Adds a new server-specific alias\n~~`aliases` __unit__ (*also `checkaliases` or `seealiases`*)~~\n`deletealias` __alias__ (*also `removealias`*) - deletes a server-specific alias",0xC31C19) if is_mod?(event.user,event.server,event.channel)
     create_embed([event,x],"__**Bot Developer Commands**__","__**Mjolnr, the Hammer**__\n`ignoreuser` __user id number__ - makes me ignore a user\n`leaveserver` __server id number__ - makes me leave a server\n\n__**Communication**__\n`status` __\\*message__ - sets my status\n`sendmessage` __channel id__ __\\*message__ - sends a message to a specific channel\n`sendpm` __user id number__ __\\*message__ - sends a PM to a user\n\n__**Server Info**__\n`snagstats` - snags relevant bot stats\n\n__**Shards**__\n`reboot` - reboots this shard\n\n__**Meta Data Storage**__\n`backupaliases` - backs up the alias list\n`restorealiases` - restores the alias list from last backup\n`sortaliases` - sorts the alias list by servant",0x008b8b) if (event.server.nil? || event.channel.id==283821884800499714 || @shardizard==4 || command.downcase=='devcommands') && event.user.id==167657750971547648
     event.respond "If the you see the above message as only three lines long, please use the command `DL!embeds` to see my messages as plaintext instead of embeds.\n\nCommand Prefixes: #{@prefix.map{|q| q.upcase}.uniq.map{|q| "`#{q}`"}.join(', ')}\nYou can also use `DL!help CommandName` to learn more on a particular command.\n\nWhen looking up a character, you also have the option of @ mentioning me in a message that includes that character's name" unless x==1
@@ -1340,6 +1342,542 @@ def find_all(bot,event,args=nil)
   end
 end
 
+def spaceship_order(x)
+  return 1 if x=='Adventurer'
+  return 2 if x=='Dragon'
+  return 3 if x=='Wyrmprint'
+  return 4 if x=='Weapon'
+  return 500
+end
+
+def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode=0)
+  data_load()
+  nicknames_load()
+  err=false
+  str=''
+  if newname.nil? || unit.nil?
+    str="The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n\nYou must specify both:\n- one of the above\n- an alias you wish to give that item"
+    err=true
+  elsif event.user.id != 167657750971547648 && event.server.nil?
+    str='Only my developer is allowed to use this command in PM.'
+    err=true
+  elsif (!is_mod?(event.user,event.server,event.channel) && ![368976843883151362,195303206933233665].include?(event.user.id)) && event.channel.id != 502288368777035777
+    str='You are not a mod.'
+    err=true
+  elsif newname.include?('"') || newname.include?("\n")
+    str='Full stop.  " is not allowed in an alias.'
+    err=true
+  elsif !event.server.nil? && event.server.id==363917126978764801
+    err="You guys revoked your permission to add aliases when you refused to listen to me regarding the Erk alias for Serra.  Even if that was an alias for FEH instead of FGO."
+    str=true
+  end
+  if err
+    event.respond str if str.length>0 && mode==0
+    args=event.message.text.downcase.split(' ')
+    args.shift
+    disp_aliases(bot,event,args) if mode==1
+    return nil
+  end
+  type=['Alias','Alias']
+  if find_adventurer(newname,event,true).length>0
+    type[0]='Adventurer'
+  elsif find_dragon(newname,event,true).length>0
+    type[0]='Dragon'
+  elsif find_wyrmprint(newname,event,true).length>0
+    type[0]='Wyrmprint'
+  elsif find_weapon(newname,event,true).length>0
+    type[0]='Weapon'
+  elsif find_adventurer(newname,event).length>0
+    type[0]='Adventurer*'
+  elsif find_dragon(newname,event).length>0
+    type[0]='Dragon*'
+  elsif find_wyrmprint(newname,event).length>0
+    type[0]='Wyrmprint*'
+  elsif find_weapon(newname,event).length>0
+    type[0]='Weapon*'
+  end
+  if find_adventurer(unit,event,true).length>0
+    type[1]='Adventurer'
+  elsif find_dragon(unit,event,true).length>0
+    type[1]='Dragon'
+  elsif find_wyrmprint(unit,event,true).length>0
+    type[1]='Wyrmprint'
+  elsif find_weapon(unit,event,true).length>0
+    type[1]='Weapon'
+  elsif find_adventurer(unit,event).length>0
+    type[1]='Adventurer*'
+  elsif find_dragon(unit,event).length>0
+    type[1]='Dragon*'
+  elsif find_wyrmprint(unit,event).length>0
+    type[1]='Wyrmprint*'
+  elsif find_weapon(unit,event).length>0
+    type[1]='Weapon*'
+  end
+  checkstr=normalize(newname)
+  if type.reject{|q| q != 'Alias'}.length<=0
+    type[0]='Alias' if type[0].include?('*')
+    type[1]='Alias' if type[1].include?('*') && type[0]!='Alias'
+  end
+  if type.reject{|q| q == 'Alias'}.length<=0
+    str="The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n\nNeither #{newname} nor #{unit} fall into any of these categories."
+    err=true
+  elsif type.reject{|q| q != 'Alias'}.length<=0
+    event.respond "#{newname} is a #{type[0].downcase}\n#{unit} is a #{type[1].downcase}"
+    err=true
+  end
+  if err
+    str=["#{str}\nPlease try again.","#{str}\nTrying to list aliases instead."][mode]
+    event.respond str if str.length>0
+    args=event.message.text.downcase.split(' ')
+    args.shift
+    list_unit_aliases(event,args,bot) if mode==1
+    return nil
+  end
+  if type[1]=='Alias' && type[0]!='Alias'
+    f="#{newname}"
+    newname="#{unit}"
+    unit="#{f}"
+    type=type.reverse.map{|q| q.gsub('*','')}
+  end
+  if type[1]=='Adventurer'
+    unit=find_adventurer(unit,event)
+    dispstr=['Adventurer',unit[0],'Adventurer',unit[0]]
+  elsif type[1]=='Dragon'
+    unit=find_dragon(unit,event)
+    dispstr=['Dragon',unit[0],'Dragon',unit[0]]
+  elsif type[1]=='Wyrmprint'
+    unit=find_wyrmprint(unit,event)
+    dispstr=['Wyrmprint',unit[1],'Wyrmprint',unit[0]]
+  elsif type[1]=='Weapon'
+    unit=find_weapon(unit,event)
+    dispstr=['Weapon',unit[0],'Weapon',unit[0]]
+  end
+  logchn=536307117301170187
+  logchn=431862993194582036 if @shardizard==4
+  newname=newname.gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')
+  srv=0
+  srv=event.server.id unless event.server.nil?
+  srv=modifier.to_i if event.user.id==167657750971547648 && modifier.to_i.to_s==modifier
+  srvname='PM with dev'
+  srvname=bot.server(srv).name unless event.server.nil? && srv.zero?
+  checkstr=normalize(newname)
+  k=event.message.emoji
+  for i in 0...k.length
+    checkstr=checkstr.gsub("<:#{k[i].name}:#{k[i].id}>",k[i].name)
+  end
+  if checkstr.downcase =~ /(7|t)+?h+?(o|0)+?(7|t)+?/
+    event.respond "That name has __***NOT***__ been added to #{dispstr[1]}'s aliases."
+    bot.channel(logchn).send_message("~~**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** #{newname} for #{dispstr[1]}~~\n**Reason for rejection:** Begone, alias.")
+    return nil
+  elsif checkstr.downcase =~ /n+?((i|1)+?|(e|3)+?)(b|g|8)+?(a|4|(e|3)+?r+?)+?/
+    event.respond "That name has __***NOT***__ been added to #{dispstr[1]}'s aliases."
+    bot.channel(logchn).send_message("~~**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** >Censored< for #{dispstr[1]}~~\n**Reason for rejection:** Begone, alias.")
+    return nil
+  end
+  newname=normalize(newname)
+  m=nil
+  m=[event.server.id] unless event.server.nil?
+  srv=0
+  srv=event.server.id unless event.server.nil?
+  srv=modifier.to_i if event.user.id==167657750971547648 && modifier.to_i.to_s==modifier
+  srvname='PM with dev'
+  srvname=bot.server(srv).name unless event.server.nil? && srv.zero?
+  if event.user.id==167657750971547648 && modifier.to_i.to_s==modifier
+    m=[modifier.to_i]
+    modifier=nil
+  end
+  chn=event.channel.id
+  chn=modifier2.to_i if event.user.id==167657750971547648 && !modifier2.nil? && modifier2.to_i.to_s==modifier2
+  m=nil if [167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) && !modifier.nil?
+  m=nil if event.channel.id==502288368777035777 && !modifier.nil?
+  double=false
+  for i in 0...@aliases.length
+    if @aliases[i][3].nil?
+    elsif @aliases[i][1].downcase==newname.downcase && @aliases[i][2]==dispstr[3]
+      if ([167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) || event.channel.id==502288368777035777) && !modifier.nil?
+        @aliases[i][3]=nil
+        @aliases[i][4]=nil
+        @aliases[i].compact!
+        bot.channel(chn).send_message("The alias **#{newname}** for the #{dispstr[2].downcase} *#{dispstr[1]}* exists in a server already.  Making it global now.")
+        event.respond "The alias #{newname} for #{dispstr[1]} exists in a server already.  Making it global now.\nPlease test to be sure that the alias stuck." if event.user.id==167657750971547648 && !modifier2.nil? && modifier2.to_i.to_s==modifier2
+        bot.channel(logchn).send_message("**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** #{newname} for #{dispstr[1]} - gone global.")
+        double=true
+      else
+        @aliases[i][3].push(srv)
+        bot.channel(chn).send_message("The alias **#{newname}** for the #{dispstr[2].downcase} *#{dispstr[1]}* exists in another server already.  Adding this server to those that can use it.")
+        event.respond "The alias #{newname} for #{dispstr[1]} exists in another server already.  Adding this server to those that can use it.\nPlease test to be sure that the alias stuck." if event.user.id==167657750971547648 && !modifier2.nil? && modifier2.to_i.to_s==modifier2
+        metadata_load()
+        bot.user(167657750971547648).pm("The alias **#{@aliases[i][0]}** for the #{type[1]} **#{dispstr[1]}** is used in quite a few servers.  It might be time to make this global") if @aliases[i][3].length >= @server_data[0].inject(0){|sum,x| sum + x } / 20 && @aliases[i][3].length>=5 && @aliases[i][4].nil?
+        bot.channel(logchn).send_message("**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** #{newname} for #{dispstr[1]} - gained a new server that supports it.")
+        double=true
+      end
+    end
+  end
+  unless double
+    @aliases.push([dispstr[0],newname,dispstr[3],m].compact)
+    @aliases.sort! {|a,b| (spaceship_order(a[0]) <=> spaceship_order(b[0])) == 0 ? ((a[2].downcase <=> b[2].downcase) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2].downcase <=> b[2].downcase)) : (spaceship_order(a[0]) <=> spaceship_order(b[0]))}
+    bot.channel(chn).send_message("**#{newname}** has been#{" globally" if ([167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) || event.channel.id==502288368777035777) && !modifier.nil?} added to the aliases for the #{dispstr[2].downcase} *#{dispstr[1]}*.\nPlease test to be sure that the alias stuck.")
+    event.respond "#{newname} has been added to #{dispstr[1]}'s aliases#{" globally" if event.user.id==167657750971547648 && !modifier.nil?}." if event.user.id==167657750971547648 && !modifier2.nil? && modifier2.to_i.to_s==modifier2
+    bot.channel(logchn).send_message("**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** #{newname} for #{dispstr[1]}#{" - global alias" if ([167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) || event.channel.id==502288368777035777) && !modifier.nil?}")
+  end
+  @aliases.uniq!
+  nzzz=@aliases.map{|a| a}
+  open('C:/Users/Mini-Matt/Desktop/devkit/DLNames.txt', 'w') { |f|
+    for i in 0...nzzz.length
+      f.puts "#{nzzz[i].to_s}#{"\n" if i<nzzz.length-1}"
+    end
+  }
+  nicknames_load()
+  nzz=nicknames_load(2)
+  nzzz=@aliases.map{|a| a}
+  if nzzz[nzzz.length-1].length>1 && nzzz[nzzz.length-1][2]>=nzz[nzz.length-1][2]
+    bot.channel(logchn).send_message('Alias list saved.')
+    open('C:/Users/Mini-Matt/Desktop/devkit/DLNames2.txt', 'w') { |f|
+      for i in 0...nzzz.length
+        f.puts "#{nzzz[i].to_s}#{"\n" if i<nzzz.length-1}"
+      end
+    }
+    bot.channel(logchn).send_message('Alias list has been backed up.')
+  end
+end
+
+def disp_aliases(bot,event,args=nil,mode=0)
+  event.channel.send_temporary_message('Calculating data, please wait...',2)
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  data_load()
+  nicknames_load()
+  unless args.length.zero?
+    if find_data_ex(:find_adventurer,args.join(''),event).length>0
+    elsif find_data_ex(:find_dragon,args.join(''),event).length>0
+    elsif find_data_ex(:find_wyrmprint,args.join(''),event).length>0
+    elsif find_data_ex(:find_weapon,args.join(''),event).length>0
+    elsif has_any?(args,['adventurer','adventurers','adv','advs','unit','units','dragon','dragons','wyrmprint','wyrm','print','weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'])
+    else
+      event.respond "The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n\n#{args.join(' ')} does not fall into any of these categories."
+      return nil
+    end
+  end
+  adv=find_data_ex(:find_adventurer,args.join(''),event)
+  adv=nil if adv.length<=0 || args.length.zero?
+  drg=find_data_ex(:find_dragon,args.join(''),event)
+  drg=nil if drg.length<=0 || args.length.zero?
+  wrm=find_data_ex(:find_wyrmprint,args.join(''),event)
+  wrm=nil if wrm.length<=0 || args.length.zero?
+  wpn=find_data_ex(:find_weapon,args.join(''),event)
+  wpn=nil if wpn.length<=0 || args.length.zero?
+  f=[]
+  n=@aliases.reject{|q| q[0]!='Adventurer'}.map{|q| [q[1],q[2],q[3]]}
+  h=''
+  if adv.nil? && drg.nil? && wrm.nil? && wpn.nil?
+    if has_any?(args,['adventurer','adventurers','adv','advs','unit','units'])
+      n=n.reject{|q| q[2].nil?} if mode==1
+      f.push('__**Adventurer Aliases**__')
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+    elsif has_any?(args,['dragon','dragons'])
+      f.push('__**Dragon Aliases**__')
+      n=@aliases.reject{|q| q[0]!='Dragon'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+    elsif has_any?(args,['wyrmprint','wyrm','print'])
+      f.push('__**Wyrmprint Aliases**__')
+      n=@aliases.reject{|q| q[0]!='Wyrmprint'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+    elsif has_any?(args,['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'])
+      f.push('__**Weapon Aliases**__')
+      n=@aliases.reject{|q| q[0]!='Weapon'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+    elsif safe_to_spam?(event) || mode==1
+      n=n.reject{|q| q[2].nil?} if mode==1
+      unless event.server.nil?
+        n=n.reject{|q| !q[2].nil? && !q[2].include?(event.server.id)}
+        if n.length>25 && !safe_to_spam?(event)
+          event.respond "There are so many aliases that I don't want to spam the server.  Please use the command in PM."
+          return nil
+        end
+        msg='__**Adventurer Aliases**__'
+        for i in 0...n.length
+          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
+        end
+        msg=extend_message(msg,'__**Dragon Aliases**__',event,2)
+        n=@aliases.reject{|q| q[0]!='Dragon'}.map{|q| [q[1],q[2],q[3]]}
+        n=n.reject{|q| q[2].nil?} if mode==1
+        for i in 0...n.length
+          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
+        end
+        msg=extend_message(msg,'__**Wyrmprint Aliases**__',event,2)
+        n=@aliases.reject{|q| q[0]!='Wyrmprint'}.map{|q| [q[1],q[2],q[3]]}
+        n=n.reject{|q| q[2].nil?} if mode==1
+        for i in 0...n.length
+          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
+        end
+        msg=extend_message(msg,'__**Weapon Aliases**__',event,2)
+        n=@aliases.reject{|q| !['Weapon'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+        n=n.reject{|q| q[2].nil?} if mode==1
+        for i in 0...n.length
+          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
+        end
+        event.respond msg
+        return nil
+      end
+      f.push('__**Adventurer Aliases**__')
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+      f.push("\n__**Dragon Aliases**__")
+      n=@aliases.reject{|q| q[0]!='Dragon'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+      f.push("\n__**Wyrmprint Aliases**__")
+      n=@aliases.reject{|q| q[0]!='Wyrmprint'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+      f.push("\n__**Weapon Aliases**__")
+      n=@aliases.reject{|q| !['Weapon'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+    else
+      event.respond "The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n\nPlease either specify a member of one of these categories or use this command in PM."
+      return nil
+    end
+  elsif !adv.nil?
+    n=n.reject{|q| q[2].nil?} if mode==1
+    k=0
+    k=event.server.id unless event.server.nil?
+    f.push("__**#{adv[0]}**__#{"'s server-specific aliases" if mode==1}")
+    unless mode==1
+      f.push(adv[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if adv[0].include?('(') || adv[0].include?(')') || adv[0].include?(' ') || adv[0].include?('!') || adv[0].include?('_') || adv[0].include?('?') || adv[0].include?("'") || adv[0].include?('"')
+    end
+    for i in 0...n.length
+      if n[i][1]==adv[0]
+        if event.server.nil? && !n[i][2].nil?
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        elsif n[i][2].nil?
+          f.push(n[i][0].gsub('_','\\_')) unless mode==1
+        else
+          f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
+        end
+      end
+    end
+  elsif !drg.nil?
+    drg=drg[0] if drg[0].is_a?(Array)
+    n=@aliases.reject{|q| q[0]!='Dragon'}.map{|q| [q[1],q[2],q[3]]}
+    n=n.reject{|q| q[2].nil?} if mode==1
+    f.push("__**#{drg[0]}**__#{"'s server-specific aliases" if mode==1}")
+    unless mode==1
+      f.push(drg[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if drg[0].include?('(') || drg[0].include?(')') || drg[0].include?(' ') || drg[0].include?('!') || drg[0].include?('_') || drg[0].include?('?') || drg[0].include?("'") || drg[0].include?('"')
+    end
+    for i in 0...n.length
+      if n[i][1]==drg[0]
+        if event.server.nil? && !n[i][2].nil?
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        elsif n[i][2].nil?
+          f.push(n[i][0].gsub('_','\\_')) unless mode==1
+        else
+          f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
+        end
+      end
+    end
+  elsif !wrm.nil?
+    n=@aliases.reject{|q| q[0]!='Wyrmprint' || q[2]!=wrm[0]}.map{|q| [q[1],q[2],q[3]]}
+    n=n.reject{|q| q[2].nil?} if mode==1
+    f.push("__**#{wrm[0]}**__#{"'s server-specific aliases" if mode==1}")
+    unless mode==1
+      f.push(wrm[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if wrm[0].include?('(') || wrm[0].include?(')') || wrm[0].include?(' ') || wrm[0].include?('!') || wrm[0].include?('_') || wrm[0].include?('?') || wrm[0].include?("'") || wrm[0].include?('"')
+    end
+    for i in 0...n.length
+      if n[i][1]==wrm[0]
+        if event.server.nil? && !n[i][2].nil?
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        elsif n[i][2].nil?
+          f.push(n[i][0].gsub('_','\\_')) unless mode==1
+        else
+          f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
+        end
+      end
+    end
+  elsif !wpn.nil?
+    n=@aliases.reject{|q| !['Weapon'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+    n=n.reject{|q| q[2].nil?} if mode==1
+    f.push("__**#{wpn[0]}**__#{"'s server-specific aliases" if mode==1}")
+    unless mode==1
+      f.push(wpn[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if wpn[0].include?('(') || wpn[0].include?(')') || wpn[0].include?(' ') || wpn[0].include?('!') || wpn[0].include?('_') || wpn[0].include?('?') || wpn[0].include?("'") || wpn[0].include?('"')
+    end
+    for i in 0...n.length
+      if n[i][1]==wpn[0]
+        if event.server.nil? && !n[i][2].nil?
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        elsif n[i][2].nil?
+          f.push(n[i][0].gsub('_','\\_')) unless mode==1
+        else
+          f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
+        end
+      end
+    end
+  end
+  f.uniq!
+  if f.length>50 && !safe_to_spam?(event)
+    event.respond "There are so many aliases that I don't want to spam the server.  Please use the command in PM."
+    return nil
+  end
+  msg=''
+  for i in 0...f.length
+    msg=extend_message(msg,f[i],event)
+  end
+  event.respond msg
+  return nil
+end
+
 bot.command([:find,:search]) do |event, *args|
   return nil if overlap_prevent(event)
   if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
@@ -1402,8 +1940,16 @@ bot.command([:weapon,:wep,:weap,:wpn]) do |event, *args|
   disp_weapon_stats(bot,event,args)
 end
 
-bot.command(:addalias) do |event, name| # empty
+bot.command(:addalias) do |event, newname, unit, modifier, modifier2|
   return nil if overlap_prevent(event)
+  add_new_alias(bot,event,newname,unit,modifier,modifier2)
+  return nil
+end
+
+bot.command(:alias) do |event, newname, unit, modifier, modifier2|
+  return nil if overlap_prevent(event)
+  add_new_alias(bot,event,newname,unit,modifier,modifier2,1)
+  return nil
 end
 
 bot.command([:checkaliases,:aliases,:seealiases]) do |event, *args|
@@ -1416,8 +1962,93 @@ bot.command([:serveraliases,:saliases]) do |event, *args|
   disp_aliases(bot,event,args,1)
 end
 
-bot.command([:deletealias,:removealias]) do |event, name| # empty
+bot.command([:deletealias,:removealias]) do |event, name|
   return nil if overlap_prevent(event)
+  nicknames_load()
+  if name.nil?
+    event.respond "I can't delete nothing!" if name.nil?
+    return nil
+  elsif event.user.id != 167657750971547648 && event.server.nil?
+    event.respond 'Only my developer is allowed to use this command in PM.'
+    return nil
+  elsif !is_mod?(event.user,event.server,event.channel)
+    event.respond 'You are not a mod.'
+    return nil
+  elsif find_adventurer(name,event).length<=0 && find_dragon(name,event).length<=0 && find_wyrmprint(name,event).length<=0 && find_weapon(name,event).length<=0
+    event.respond "#{name} is not an alias!"
+    return nil
+  end
+  if find_adventurer(name,event,true).length>0
+    j=find_adventurer(name,event,true)
+    j=["Adventurer","#{j[0]}"]
+  elsif find_dragon(name,event,true).length>0
+    j=find_dragon(name,event,true)
+    j=["Dragon","#{j[0]}"]
+  elsif find_wyrmprint(name,event,true).length>0
+    j=find_wyrmprint(name,event,true)
+    j=["Wyrmprint","#{j[0]}"]
+  elsif find_weapon(name,event,true).length>0
+    j=find_weapon(name,event,true)
+    j=["Weapon","#{j[0]}"]
+  elsif find_adventurer(name,event).length>0
+    j=find_adventurer(name,event)
+    j=["Adventurer","#{j[0]}"]
+  elsif find_dragon(name,event).length>0
+    j=find_dragon(name,event)
+    j=["Dragon","#{j[0]}"]
+  elsif find_wyrmprint(name,event).length>0
+    j=find_wyrmprint(name,event)
+    j=["Wyrmprint","#{j[0]}"]
+  elsif find_weapon(name,event).length>0
+    j=find_weapon(name,event)
+    j=["Weapon","#{j[0]}"]
+  end
+  k=0
+  k=event.server.id unless event.server.nil?
+  for izzz in 0...@aliases.length
+    if @aliases[izzz][1].downcase==name.downcase
+      if @aliases[izzz][3].nil? && event.user.id != 167657750971547648
+        event.respond 'You cannot remove a global alias'
+        return nil
+      elsif @aliases[izzz][3].nil? || @aliases[izzz][3].include?(k)
+        unless @aliases[izzz][3].nil?
+          for izzz2 in 0...@aliases[izzz][3].length
+            @aliases[izzz][3][izzz2]=nil if @aliases[izzz][3][izzz2]==k
+          end
+          @aliases[izzz][3].compact!
+        end
+        @aliases[izzz]=nil if @aliases[izzz][3].nil? || @aliases[izzz][3].length<=0
+      end
+    end
+  end
+  @aliases.uniq!
+  @aliases.compact!
+  logchn=536307117301170187
+  logchn=431862993194582036 if @shardizard==4
+  srv=0
+  srv=event.server.id unless event.server.nil?
+  srvname='PM with dev'
+  srvname=bot.server(srv).name unless event.server.nil? && srv.zero?
+  bot.channel(logchn).send_message("**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n~~**#{j[0]} Alias:** #{name} for #{j[1]}~~ **DELETED**.")
+  open('C:/Users/Mini-Matt/Desktop/devkit/DLNames.txt', 'w') { |f|
+    for i in 0...@aliases.length
+      f.puts "#{@aliases[i].to_s}#{"\n" if i<@aliases.length-1}"
+    end
+  }
+  event.respond "#{name} has been removed from #{j[1]}'s aliases."
+  nicknames_load()
+  nzz=nicknames_load(2)
+  nzzz=@aliases.map{|a| a}
+  if nzzz[nzzz.length-1].length>2 && nzzz[nzzz.length-1][2]>=nzz[nzz.length-1][2]
+    bot.channel(logchn).send_message("Alias list saved.")
+    open('C:/Users/Mini-Matt/Desktop/devkit/DLNames.txt', 'w') { |f|
+      for i in 0...nzzz.length
+        f.puts "#{nzzz[i].to_s}#{"\n" if i<nzzz.length-1}"
+      end
+    }
+    bot.channel(logchn).send_message("Alias list has been backed up.")
+  end
+  return nil
 end
 
 bot.command([:channellist,:chanelist,:spamchannels,:spamlist]) do |event|
@@ -1515,7 +2146,7 @@ bot.command(:sortaliases, from: 167657750971547648) do |event, *args|
   data_load()
   nicknames_load()
   @aliases.uniq!
-  @aliases.sort! {|a,b| (a[0] <=> b[0]) == 0 ? ((a[2] <=> b[2]) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2] <=> b[2])) : (a[0] <=> b[0])}
+  @aliases.sort! {|a,b| (spaceship_order(a[0]) <=> spaceship_order(b[0])) == 0 ? ((a[2].downcase <=> b[2].downcase) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2].downcase <=> b[2].downcase)) : (spaceship_order(a[0]) <=> spaceship_order(b[0]))}
   open('C:/Users/Mini-Matt/Desktop/devkit/DLNames.txt', 'w') { |f|
     for i in 0...@aliases.length
       f.puts "#{@aliases[i].to_s}#{"\n" if i<@aliases.length-1}"
@@ -1723,9 +2354,9 @@ bot.command(:snagstats) do |event, f, f2|
     if event.server.nil? && @shardizard==4
       str2="#{str2}\nDue to being the debug version, I cannot show more information."
     elsif event.server.nil?
-      str2="#{str2}\nServers you and I share account for #{@aliases.reject{|q| q[0]!='Servant' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those."
+      str2="#{str2}\nServers you and I share account for #{@aliases.reject{|q| q[0]!='Adventurer' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those."
     else
-      str2="#{str2}\nThis server accounts for #{@aliases.reject{|q| q[0]!='Servant' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
+      str2="#{str2}\nThis server accounts for #{@aliases.reject{|q| q[0]!='Adventurer' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
     end
     k=all_units.reject{|q| q[3]!=all_units.map{|q2| q2[3]}.max}.map{|q| q[0]}
     k=all_units.reject{|q| q[3]!=all_units.map{|q2| q2[3]}.max}.map{|q| q[0]} if k.length>8 && !safe_to_spam?(event)
@@ -1967,6 +2598,14 @@ bot.mention do |event|
     m=false
     args.shift
     disp_weapon_stats(bot,event,args)
+  elsif ['serveraliases','saliases'].include?(args[0].downcase)
+    args.shift
+    disp_aliases(bot,event,args,1)
+    m=false
+  elsif ['checkaliases','seealiases','aliases'].include?(args[0].downcase)
+    args.shift
+    disp_aliases(bot,event,args)
+    m=false
   end
   if m
     if find_data_ex(:find_adventurer,name,event,true).length>0
