@@ -135,6 +135,7 @@
 ["Adventurer", "Skaterboy", "Orsem"]
 ["Adventurer", "CheerUp", "Pia"]
 ["Adventurer", "Chum", "Pia"]
+["Adventurer", "jvnrgfrnvnitfr", "Pia", [285663217261477889]]
 ["Adventurer", "Brawn", "Rawn"]
 ["Adventurer", "Prawn", "Rawn"]
 ["Adventurer", "Ric", "Ricardt"]

@@ -20,7 +20,7 @@ Juggernaut (Dragon)\4\Shadow\29, 294\10, 102\Shadow Carnage\(Shadow) Strength +3
 Jupiter\4y\Light\20, 207\6, 65\Lightning Rood\(Light) HP & Strength +8%;; (Light) HP & Strength +10%\2000, 100\1.5, 1.5\2\No\No\Minami Takayama\Sabrina Pitre
 Kindling Imp\3\Flame\18, 187\6, 60\Ember Toss\(Flame) HP & Strength +5%;; (Flame) HP & Strength +8%\300, 150\1.35, 3.5\3\Yes\No\\
 Leviathan\5\Water\37, 370\12, 125\Tidal Stream\(Water) Strength +40%;; (Water) Strength +60%\5000, 3000\1.8, 1\5\No\Yes\\
-Liger\5\Light\0, 377\0, 119\Lightning Blitz\(Light) HP & Strength +30%\5000, 3000\1.5, 1.5\0\No\No\\
+Liger\5\Light\37, 377\11, 119\Lightning Blitz\(Light) HP & Strength +20%;; (Light) HP & Strength +30%\5000, 3000\1.8, 1\1\No\No\\
 Lindworm\4\Light\29, 297\10, 100\Ethereal Gleam\(Light) Strength +30%;; (Light) Strength +45%\2000, 1000\1.5, 1\2\No\No\\
 Marishiten\5z\Shadow\37, 374\12, 121\Daybreak Flurry\(Shadow) Strength +40%;; (Shadow) Strength +60%\5000, 3000\1.8, 1\5\No\Yes\Yuki Kaida\Katherine Taylor
 Maritimus\5w\Shadow\22, 224\7, 73\Polar Roller\(Shadow) HP & Strength +10%;; (Shadow) HP & Strength +15%\5000, 300\1.65, 1\2\No\No\Etsuko Kozakura\
