@@ -40,7 +40,7 @@ def all_commands(include_nil=false,permissions=-1)
   k=['reboot','adventurer','adv','addalias','checkaliases','aliases','seealiases','saliases','serveraliases','deletealias','removealias','channellist','long',
      'channelist','spamlist','spamchannels','bugreport','suggestion','feedback','donation','donate','shard','attribute','safe','spam','safetospam','safe2spam',
      'longreplies','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','find',
-     'search','dragon','help','wyrmprint','wyrm','print','weapon','wep','weap','wpn']
+     'search','dragon','help','wyrmprint','wyrm','print','weapon','wep','weap','wpn','skill','skil']
   k=['addalias','deletealias','removealias'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases'] if permissions==2
   k=k.uniq
@@ -260,6 +260,8 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
     create_embed(event,"**#{command.downcase}** __name__","Shows `name`'s stats and abilities.",0xCE456B)
   elsif ['weapon','weap','wep','wpn'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows `name`'s stats and skills.",0xCE456B)
+  elsif ['skill','skil'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Shows everything that the skill named `name` does.  Also shows all adventurers and dragons that know the skill, and any weapons that have it imbued.",0xCE456B)
   elsif ['embed','embeds'].include?(command.downcase)
     event << '**embed**'
     event << ''
@@ -295,7 +297,7 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
       command=''
     end
     event.respond "#{command.downcase} is not a command" if command!='' && command.downcase != 'devcommands'
-    create_embed([event,x],"Command Prefixes: #{@prefix.map{|q| q.upcase}.uniq.map{|q| "`#{q}`"}.join(', ')}\nYou can also use `DL!help CommandName` to learn more on a particular command.\n__**Botan Bot help**__","__**Game Data**__\n`adventurer` __name__ - for data on an adventurer (*also `adv`*)\n`dragon` __name__ - for data on a dragon\n`wyrmprint` __name__ - for data on a wyrmprint (*also `wyrm` or `print`*)\n`weapon` __name__ - for data on a weapon\n\n`find` __\*filters__ - to find specific adventurers or dragons\n\n__**Meta Data**__\n`invite` - for a link to invite me to your server\n`snagstats` __type__ - to receive relevant bot stats\n`spam` - to determine if the current location is safe for me to send long replies to (*also `safetospam` or `safe2spam`*)\n\n__**Developer Information**__\n`bugreport` __\\*message__ - to send my developer a bug report\n`suggestion` __\\*message__ - to send my developer a feature suggestion\n`feedback` __\\*message__ - to send my developer other kinds of feedback\n~~the above three commands are actually identical, merely given unique entries to help people find them~~",0xCE456B)
+    create_embed([event,x],"Command Prefixes: #{@prefix.map{|q| q.upcase}.uniq.map{|q| "`#{q}`"}.join(', ')}\nYou can also use `DL!help CommandName` to learn more on a particular command.\n__**Botan Bot help**__","__**Game Data**__\n`adventurer` __name__ - for data on an adventurer (*also `adv`*)\n`dragon` __name__ - for data on a dragon\n`wyrmprint` __name__ - for data on a wyrmprint (*also `wyrm` or `print`*)\n`weapon` __name__ - for data on a weapon\n\n`skill` __name__ - for data on a particular skill\n\n`find` __\*filters__ - to find specific adventurers or dragons\n\n__**Meta Data**__\n`invite` - for a link to invite me to your server\n`snagstats` __type__ - to receive relevant bot stats\n`spam` - to determine if the current location is safe for me to send long replies to (*also `safetospam` or `safe2spam`*)\n`shard` (*also `alliance`*)\n\n__**Developer Information**__\n`bugreport` __\\*message__ - to send my developer a bug report\n`suggestion` __\\*message__ - to send my developer a feature suggestion\n`feedback` __\\*message__ - to send my developer other kinds of feedback\n~~the above three commands are actually identical, merely given unique entries to help people find them~~",0xCE456B)
     create_embed([event,x],"__**Server Admin Commands**__","__**Unit Aliases**__\n`addalias` __new alias__ __unit__ - Adds a new server-specific alias\n~~`aliases` __unit__ (*also `checkaliases` or `seealiases`*)~~\n`deletealias` __alias__ (*also `removealias`*) - deletes a server-specific alias",0xC31C19) if is_mod?(event.user,event.server,event.channel)
     create_embed([event,x],"__**Bot Developer Commands**__","__**Mjolnr, the Hammer**__\n`ignoreuser` __user id number__ - makes me ignore a user\n`leaveserver` __server id number__ - makes me leave a server\n\n__**Communication**__\n`status` __\\*message__ - sets my status\n`sendmessage` __channel id__ __\\*message__ - sends a message to a specific channel\n`sendpm` __user id number__ __\\*message__ - sends a PM to a user\n\n__**Server Info**__\n`snagstats` - snags relevant bot stats\n\n__**Shards**__\n`reboot` - reboots this shard\n\n__**Meta Data Storage**__\n`backupaliases` - backs up the alias list\n`restorealiases` - restores the alias list from last backup\n`sortaliases` - sorts the alias list by servant",0x008b8b) if (event.server.nil? || event.channel.id==283821884800499714 || @shardizard==4 || command.downcase=='devcommands') && event.user.id==167657750971547648
     event.respond "If the you see the above message as only three lines long, please use the command `DL!embeds` to see my messages as plaintext instead of embeds.\n\nCommand Prefixes: #{@prefix.map{|q| q.upcase}.uniq.map{|q| "`#{q}`"}.join(', ')}\nYou can also use `DL!help CommandName` to learn more on a particular command.\n\nWhen looking up a character, you also have the option of @ mentioning me in a message that includes that character's name" unless x==1
@@ -396,6 +398,28 @@ def find_weapon(name,event,fullname=false)
   return @weapons[k] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   return @weapons[@weapons.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return []
+end
+
+def find_skill(name,event,fullname=false)
+  data_load()
+  name=normalize(name)
+  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  return [] if name.length<2
+  sklz=@askilities.reject{|q| q[2]!='Skill'}
+  k=sklz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
+  return sklz[k] unless k.nil?
+  nicknames_load()
+  alz=@aliases.reject{|q| q[0]!='Skill'}.map{|q| [q[1],q[2],q[3]]}
+  g=0
+  g=event.server.id unless event.server.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return sklz[sklz.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return [] if fullname
+  k=sklz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
+  return sklz[k] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return sklz[sklz.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return []
 end
 
@@ -725,7 +749,96 @@ def disp_weapon_stats(bot,event,args=nil)
   create_embed(event,"__**#{k[0]}**__",str,element_color(k[3]),nil,xpic)
 end
 
-def disp_aliases(bot,event,args,mode=0) # empty
+def disp_skill_data(bot,event,args=nil)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_skill,args.join(' '),event)
+  if k.length.zero?
+    event.respond 'No matches found.'
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  evn=event.message.text.downcase.split(' ')
+  s2s=false if @shardizard==4 && evn.include?('smol')
+  xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Skills/#{k[0].gsub(' ','_')}.png"
+  xcolor=0x02010a
+  mx=k[3,3].reject{|q| q.nil? || q.length<=0}
+  str=''
+  str="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min
+  str="#{str}\n**Invulnerability duration:** #{k[8]} seconds"
+  str="#{str}\n<:Energized:534451856286679040> **Energizable**" if k[7]=='Yes'
+  str="#{str}\n~~Not energizable~~" if k[7]=='No'
+  str2=''
+  for i in 0...mx.length
+    str2="#{str2}\n\n__**Level #{i+1}**__"
+    str2="#{str2} - #{k[6][i]} SP" unless k[6][0,mx.length].max==k[6][0,mx.length].min
+    str2="#{str2}\n#{k[i+3].gsub(';; ',"\n")}"
+  end
+  flds=[]
+  m=[]
+  x=@adventurers.map{|q| q}
+  for i in 0...x.length
+    m.push("#{x[i][0]} - S1") if x[i][6][0]==k[0]
+    m.push("#{x[i][0]} - S1") if x[i][6][1]==k[0]
+  end
+  flds.push(['Adventurers',m.join("\n")]) if m.length>0
+  m=[]
+  x=@dragons.map{|q| q}
+  for i in 0...x.length
+    m.push("#{x[i][0]}") if x[i][5]==k[0]
+  end
+  flds.push(['Dragons',m.join("\n")]) if m.length>0
+  m=[]
+  x=@weapons.map{|q| q}
+  for i in 0...x.length
+    m.push("#{x[i][0]} - S3") if x[i][6]==k[0]
+  end
+  flds.push(['Weapons',m.join("\n")]) if m.length>0
+  flds=nil if flds.length<=0
+  m=0
+  m=flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length unless flds.nil?
+  if str.length+str2.length+m<1800 && (s2s || k[9].nil? || k[9].length<=0)
+    str="#{str}#{str2}"
+    create_embed(event,"__**#{k[0]}**__",str,xcolor,nil,xpic,flds)
+  elsif str2.length<1800 && (s2s || k[9].nil? || k[9].length<=0)
+    create_embed(event,"__**#{k[0]}**__",str,xcolor,nil,xpic)
+    create_embed(event,'',str2,xcolor)
+    create_embed(event,'','',xcolor,nil,nil,flds) unless flds.nil?
+  elsif k[9].nil? || k[9].length<=0
+    create_embed(event,"__**#{k[0]}**__",str,xcolor,nil,xpic)
+    m=str2.split("\n\n").reject{|q| q.nil? || q.length<=0}
+    s=''
+    for i in 0...m.length
+      s=extend_message(s,m[i],event,2)
+    end
+    event.respond s
+    create_embed(event,'','',xcolor,nil,nil,flds) unless flds.nil?
+  else
+    str2="\n\n#{k[9].gsub(';; ',"\n")}"
+    unless k[6][0,mx.length].max==k[6][0,mx.length].min
+      str2="#{str2}\n\nL1 = #{longFormattedNumber(k[6][0])} SP\nL2 = #{longFormattedNumber(k[6][1])} SP"
+      str2="#{str2}\nL3 = #{longFormattedNumber(k[6][2])} SP" if m.length>2
+    end
+    if str.length+str2.length+m<1800
+      str="#{str}#{str2}"
+      create_embed(event,"__**#{k[0]}**__",str,xcolor,nil,xpic,flds)
+    elsif str2.length<1800
+      create_embed(event,"__**#{k[0]}**__",str,xcolor,nil,xpic)
+      create_embed(event,'',str2,xcolor)
+      create_embed(event,'','',xcolor,nil,nil,flds) unless flds.nil?
+    else
+      create_embed(event,"__**#{k[0]}**__",str,xcolor,nil,xpic)
+      m=str2.split("\n").reject{|q| q.nil? || q.length<=0}
+      s=''
+      for i in 0...m.length
+        s=extend_message(s,m[i],event,2)
+      end
+      event.respond s
+      create_embed(event,'','',xcolor,nil,nil,flds) unless flds.nil?
+    end
+  end
 end
 
 def find_in_adventurers(bot,event,args=nil,mode=0)
@@ -1920,6 +2033,11 @@ bot.command([:dragon]) do |event, *args|
   disp_dragon_stats(bot,event,args)
 end
 
+bot.command([:skill,:skil]) do |event, *args|
+  return nil if overlap_prevent(event)
+  disp_skill_data(bot,event,args)
+end
+
 bot.command([:wyrmprint,:wyrm,:print]) do |event, *args|
   return nil if overlap_prevent(event)
   if ['find','search'].include?(args[0].downcase)
@@ -1943,13 +2061,11 @@ end
 bot.command(:addalias) do |event, newname, unit, modifier, modifier2|
   return nil if overlap_prevent(event)
   add_new_alias(bot,event,newname,unit,modifier,modifier2)
-  return nil
 end
 
 bot.command(:alias) do |event, newname, unit, modifier, modifier2|
   return nil if overlap_prevent(event)
   add_new_alias(bot,event,newname,unit,modifier,modifier2,1)
-  return nil
 end
 
 bot.command([:checkaliases,:aliases,:seealiases]) do |event, *args|
@@ -2437,7 +2553,9 @@ bot.command(:snagstats) do |event, f, f2|
   event << "This shard is in #{longFormattedNumber(@server_data[0][@shardizard])} server#{"s" unless @server_data[0][@shardizard]==1}, reaching #{longFormattedNumber(bot.users.size)} unique members."
   event << ''
   event << "**There are #{longFormattedNumber(@adventurers.length)} adventurers.**"
-  event << "**There are also #{longFormattedNumber(@dragons.length)} dragons.**"
+  event << "**There are #{longFormattedNumber(@dragons.length)} dragons.**"
+  event << "**There are #{longFormattedNumber(@wyrmprints.length)} wyrmprints.**"
+  event << "**There are #{longFormattedNumber(@weapons.length)} weapons.**"
   event << ''
   event << "There are #{longFormattedNumber(@askilities.reject{|q| q[2]!='Skill'}.length)} skills."
   event << "There are #{longFormattedNumber(@askilities.reject{|q| q[2]!='Aura'}.length)} dragon auras, split into #{longFormattedNumber(@askilities.reject{|q| q[2]!='Aura'}.map{|q| q[0]}.uniq.length)} families."
@@ -2536,6 +2654,8 @@ bot.message do |event|
       disp_wyrmprint_stats(bot,event,s.split(' '))
     elsif find_data_ex(:find_weapon,s,event,true).length>0
       disp_weapon_stats(bot,event,s.split(' '))
+    elsif find_data_ex(:find_skill,s,event,true).length>0
+      disp_skill_data(bot,event,s.split(' '))
     elsif find_data_ex(:find_adventurer,s,event).length>0
       disp_adventurer_stats(bot,event,s.split(' '))
     elsif find_data_ex(:find_dragon,s,event).length>0
@@ -2544,6 +2664,8 @@ bot.message do |event|
       disp_wyrmprint_stats(bot,event,s.split(' '))
     elsif find_data_ex(:find_weapon,s,event).length>0
       disp_weapon_stats(bot,event,s.split(' '))
+    elsif find_data_ex(:find_skill,s,event).length>0
+      disp_skill_data(bot,event,s.split(' '))
     end
   elsif event.message.text.include?('0x4') && !event.user.bot_account? && @shardizard==4
     s=event.message.text
@@ -2598,6 +2720,10 @@ bot.mention do |event|
     m=false
     args.shift
     disp_weapon_stats(bot,event,args)
+  elsif ['skill','skil'].include?(args[0].downcase)
+    m=false
+    args.shift
+    disp_skill_data(bot,event,args)
   elsif ['serveraliases','saliases'].include?(args[0].downcase)
     args.shift
     disp_aliases(bot,event,args,1)
@@ -2616,6 +2742,8 @@ bot.mention do |event|
       disp_wyrmprint_stats(bot,event,args)
     elsif find_data_ex(:find_weapon,name,event,true).length>0
       disp_weapon_stats(bot,event,args)
+    elsif find_data_ex(:find_skill,name,event,true).length>0
+      disp_skill_data(bot,event,args)
     elsif find_data_ex(:find_adventurer,name,event).length>0
       disp_adventurer_stats(bot,event,args)
     elsif find_data_ex(:find_dragon,name,event).length>0
@@ -2624,6 +2752,8 @@ bot.mention do |event|
       disp_wyrmprint_stats(bot,event,args)
     elsif find_data_ex(:find_weapon,name,event).length>0
       disp_weapon_stats(bot,event,args)
+    elsif find_data_ex(:find_skill,name,event).length>0
+      disp_skill_data(bot,event,args)
     end
   end
 end
