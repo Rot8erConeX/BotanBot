@@ -819,7 +819,7 @@ def disp_skill_data(bot,event,args=nil)
     str2="\n\n#{k[9].gsub(';; ',"\n")}"
     unless k[6][0,mx.length].max==k[6][0,mx.length].min
       str2="#{str2}\n\nL1 = #{longFormattedNumber(k[6][0])} SP\nL2 = #{longFormattedNumber(k[6][1])} SP"
-      str2="#{str2}\nL3 = #{longFormattedNumber(k[6][2])} SP" if m.length>2
+      str2="#{str2}\nL3 = #{longFormattedNumber(k[6][2])} SP" if mx.length>2
     end
     if str.length+str2.length+m<1800
       str="#{str}#{str2}"
