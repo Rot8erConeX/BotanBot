@@ -1811,7 +1811,7 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
   err=false
   str=''
   if newname.nil? || unit.nil?
-    str="The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n\nYou must specify both:\n- one of the above\n- an alias you wish to give that item"
+    str="The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Abilities\n- Auras\n- CoAbilities\n\nYou must specify both:\n- one of the above\n- an alias you wish to give that item"
     err=true
   elsif event.user.id != 167657750971547648 && event.server.nil?
     str='Only my developer is allowed to use this command in PM.'
@@ -1890,7 +1890,7 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     type[1]='Alias' if type[1].include?('*') && type[0]!='Alias'
   end
   if type.reject{|q| q == 'Alias'}.length<=0
-    str="The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n\nNeither #{newname} nor #{unit} fall into any of these categories."
+    str="The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Abilities\n- Auras\n- CoAbilities\n\nNeither #{newname} nor #{unit} fall into any of these categories."
     err=true
   elsif type.reject{|q| q != 'Alias'}.length<=0
     event.respond "#{newname} is a #{type[0].downcase}\n#{unit} is a #{type[1].downcase}"
