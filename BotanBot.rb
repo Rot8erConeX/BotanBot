@@ -3395,6 +3395,7 @@ bot.ready do |event|
   system("title #{['Defense','Attack','Healing','Support','Null'][@shardizard]} BotanBot")
   bot.game='Dragalia Lost'
   bot.user(bot.profile.id).on(285663217261477889).nickname='BotanBot (Debug)' if @shardizard==4
+  bot.profile.avatar=(File.open('C:/Users/Mini-Matt/Desktop/devkit/DebugBotan.png','r')) if @shardizard==4
 end
 
 bot.run
