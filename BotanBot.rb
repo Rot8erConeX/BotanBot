@@ -1248,22 +1248,26 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
   clzz.uniq!
   char=@adventurers.map{|q| q}.uniq
   search=[]
+  emo=[]
   if rarity.length>0
     char=char.reject{|q| !rarity.include?(q[1][0,1].to_i)}.uniq
     search.push("*Rarities*: #{rarity.map{|q| "#{q}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][q]}"}.join(', ')}")
+    emo.push(['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][rarity[0]]) if rarity.length<2
   end
   if elem.length>0
     char=char.reject{|q| !elem.include?(q[2][1])}.uniq
     for i in 0...elem.length
       moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{elem[i].gsub('None','Null')}"}
+      emo.push(moji[0].mention) if elem.length<2 && moji.length>0
       elem[i]="#{moji[0].mention}#{elem[i]}" if moji.length>0
     end
     search.push("*Elements*: #{elem.join(', ')}")
   end
   if wpn.length>0
     char=char.reject{|q| !wpn.include?(q[2][2])}.uniq
-    for i in 0...elem.length
+    for i in 0...wpn.length
       moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn[i]}"}
+      emo.push(moji[0].mention) if wpn.length<2 && moji.length>0
       wpn[i]="#{moji[0].mention}#{wpn[i]}" if moji.length>0
     end
     search.push("*Weapon*: #{wpn.join(', ')}")
@@ -1272,6 +1276,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
     char=char.reject{|q| !clzz.include?(q[2][0])}.uniq
     for i in 0...clzz.length
       moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{clzz[i]}"}
+      emo.push(moji[0].mention) if clzz.length<2 && moji.length>0
       clzz[i]="#{moji[0].mention}#{clzz[i]}" if moji.length>0
     end
     search.push("*Classes*: #{clzz.join(', ')}")
@@ -1284,6 +1289,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
       m.push('3w')
       m.push('4w')
       m.push('5w')
+      emo.push('(w)') if fltr.length<2
     end
     if fltr.include?('Seasonal')
       m.push('1s')
@@ -1291,6 +1297,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
       m.push('3s')
       m.push('4s')
       m.push('5s')
+      emo.push('(s)') if fltr.length<2
     end
     if fltr.include?('Zodiac Seasonal')
       m.push('1z')
@@ -1298,6 +1305,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
       m.push('3z')
       m.push('4z')
       m.push('5z')
+      emo.push('(z)') if fltr.length<2
     end
     if fltr.include?('Story')
       m.push('1y')
@@ -1305,6 +1313,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
       m.push('3y')
       m.push('4y')
       m.push('5y')
+      emo.push('(y)') if fltr.length<2
     end
     if fltr.include?('Summon')
       m.push('1')
@@ -1312,15 +1321,16 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
       m.push('3')
       m.push('4')
       m.push('5')
+      emo.push('(p)') if fltr.length<2
     end
     char=char.reject{|q| !m.include?(q[1])}.uniq
     search.push("*Filters*: #{fltr.join(', ')}")
   end
-  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length>=1900) && !safe_to_spam?(event) && mode==0
+  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode==0
     event.respond "Too much data is trying to be displayed.  Please use this command in PM."
     return nil
   else
-    return [search,char]
+    return [search,char,emo]
   end
 end
 
@@ -1368,14 +1378,17 @@ def find_in_dragons(bot,event,args=nil,mode=0)
   fltr.uniq!
   char=@dragons.map{|q| q}.uniq
   search=[]
+  emo=[]
   if rarity.length>0
     char=char.reject{|q| !rarity.include?(q[1][0,1].to_i)}.uniq
     search.push("*Rarities*: #{rarity.map{|q| "#{q}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][q]}"}.join(', ')}")
+    emo.push(['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][rarity[0]]) if rarity.length<2
   end
   if elem.length>0
     char=char.reject{|q| !elem.include?(q[2])}.uniq
     for i in 0...elem.length
       moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{elem[i].gsub('None','Null')}"}
+      emo.push(moji[0].mention) if elem.length<2 && moji.length>0
       elem[i]="#{moji[0].mention}#{elem[i]}" if moji.length>0
     end
     search.push("*Elements*: #{elem.join(', ')}")
@@ -1409,6 +1422,7 @@ def find_in_dragons(bot,event,args=nil,mode=0)
       m.push('3w')
       m.push('4w')
       m.push('5w')
+      emo.push('(w)') if fltr.length<2
     end
     if fltr.include?('Seasonal')
       m.push('1s')
@@ -1416,6 +1430,7 @@ def find_in_dragons(bot,event,args=nil,mode=0)
       m.push('3s')
       m.push('4s')
       m.push('5s')
+      emo.push('(s)') if fltr.length<2
     end
     if fltr.include?('Zodiac Seasonal')
       m.push('1z')
@@ -1423,6 +1438,7 @@ def find_in_dragons(bot,event,args=nil,mode=0)
       m.push('3z')
       m.push('4z')
       m.push('5z')
+      emo.push('(z)') if fltr.length<2
     end
     if fltr.include?('Story')
       m.push('1y')
@@ -1430,6 +1446,7 @@ def find_in_dragons(bot,event,args=nil,mode=0)
       m.push('3y')
       m.push('4y')
       m.push('5y')
+      emo.push('(y)') if fltr.length<2
     end
     if fltr.include?('Summon')
       m.push('1')
@@ -1437,15 +1454,16 @@ def find_in_dragons(bot,event,args=nil,mode=0)
       m.push('3')
       m.push('4')
       m.push('5')
+      emo.push('(p)') if fltr.length<2
     end
     char=char.reject{|q| !m.include?(q[1])}.uniq
     search.push("*Filters*: #{fltr.join(', ')}")
   end
-  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length>=1900) && !safe_to_spam?(event) && mode==0
+  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode==0
     event.respond "Too much data is trying to be displayed.  Please use this command in PM."
     return nil
   else
-    return [search,char]
+    return [search,char,emo]
   end
 end
 
@@ -1475,14 +1493,17 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0)
   clzz.uniq!
   char=@wyrmprints.map{|q| q}.uniq
   search=[]
+  emo=[]
   if rarity.length>0
     char=char.reject{|q| !rarity.include?(q[1][0,1].to_i)}.uniq
     search.push("*Rarities*: #{rarity.map{|q| "#{q}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][q]}"}.join(', ')}")
+    emo.push(['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][rarity[0]]) if rarity.length<2
   end
   if clzz.length>0
     char=char.reject{|q| !clzz.include?(q[2])}.uniq
     for i in 0...clzz.length
       moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{clzz[i]}"}
+      emo.push(moji[0].mention) if clzz.length<2 && moji.length>0
       clzz[i]="#{moji[0].mention}#{clzz[i]}" if moji.length>0
     end
     search.push("*Amulet Types*: #{clzz.join(', ')}")
@@ -1495,6 +1516,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0)
       m.push('3w')
       m.push('4w')
       m.push('5w')
+      emo.push('(w)') if fltr.length<2
     end
     if fltr.include?('Seasonal')
       m.push('1s')
@@ -1502,6 +1524,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0)
       m.push('3s')
       m.push('4s')
       m.push('5s')
+      emo.push('(s)') if fltr.length<2
     end
     if fltr.include?('Zodiac Seasonal')
       m.push('1z')
@@ -1509,6 +1532,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0)
       m.push('3z')
       m.push('4z')
       m.push('5z')
+      emo.push('(z)') if fltr.length<2
     end
     if fltr.include?('Story')
       m.push('1y')
@@ -1516,6 +1540,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0)
       m.push('3y')
       m.push('4y')
       m.push('5y')
+      emo.push('(y)') if fltr.length<2
     end
     if fltr.include?('Summon')
       m.push('1')
@@ -1523,15 +1548,16 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0)
       m.push('3')
       m.push('4')
       m.push('5')
+      emo.push('(p)') if fltr.length<2
     end
     char=char.reject{|q| !m.include?(q[1])}.uniq
     search.push("*Filters*: #{fltr.join(', ')}")
   end
-  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length>=1900) && !safe_to_spam?(event) && mode==0
+  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode==0
     event.respond "Too much data is trying to be displayed.  Please use this command in PM."
     return nil
   else
-    return [search,char]
+    return [search,char,emo]
   end
 end
 
@@ -1576,25 +1602,29 @@ def find_in_weapons(bot,event,args=nil,mode=0)
   fltr.uniq!
   char=@weapons.map{|q| q}.uniq
   search=[]
+  emo=[]
   if rarity.length>0
     char=char.reject{|q| !rarity.include?(q[2][0,1].to_i)}.uniq
     search.push("*Rarities*: #{rarity.map{|q| "#{q}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][q]}"}.join(', ')}")
+    emo.push(['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][rarity[0]]) if rarity.length<2
+  end
+  if wpn.length>0
+    char=char.reject{|q| !wpn.include?(q[1])}.uniq
+    for i in 0...wpn.length
+      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn[i]}"}
+      emo.push(moji[0].mention) if wpn.length<2 && moji.length>0
+      wpn[i]="#{moji[0].mention}#{wpn[i]}" if moji.length>0
+    end
+    search.push("*Weapon*: #{wpn.join(', ')}")
   end
   if elem.length>0
     char=char.reject{|q| !elem.include?(q[3])}.uniq
     for i in 0...elem.length
       moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{elem[i].gsub('None','Null')}"}
+      emo.push(moji[0].mention) if elem.length<2 && moji.length>0
       elem[i]="#{moji[0].mention}#{elem[i]}" if moji.length>0
     end
     search.push("*Elements*: #{elem.join(', ')}")
-  end
-  if wpn.length>0
-    char=char.reject{|q| !wpn.include?(q[1])}.uniq
-    for i in 0...elem.length
-      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn[i]}"}
-      wpn[i]="#{moji[0].mention}#{wpn[i]}" if moji.length>0
-    end
-    search.push("*Weapon*: #{wpn.join(', ')}")
   end
   if fltr.length>0
     m=[]
@@ -1604,6 +1634,7 @@ def find_in_weapons(bot,event,args=nil,mode=0)
       m.push('3w')
       m.push('4w')
       m.push('5w')
+      emo.push('(w)') if fltr.length<2
     end
     if fltr.include?('Seasonal')
       m.push('1s')
@@ -1611,6 +1642,7 @@ def find_in_weapons(bot,event,args=nil,mode=0)
       m.push('3s')
       m.push('4s')
       m.push('5s')
+      emo.push('(s)') if fltr.length<2
     end
     if fltr.include?('Zodiac Seasonal')
       m.push('1z')
@@ -1618,6 +1650,7 @@ def find_in_weapons(bot,event,args=nil,mode=0)
       m.push('3z')
       m.push('4z')
       m.push('5z')
+      emo.push('(z)') if fltr.length<2
     end
     if fltr.include?('Story')
       m.push('1y')
@@ -1625,6 +1658,7 @@ def find_in_weapons(bot,event,args=nil,mode=0)
       m.push('3y')
       m.push('4y')
       m.push('5y')
+      emo.push('(y)') if fltr.length<2
     end
     if fltr.include?('Enemy')
       m.push('1e')
@@ -1632,6 +1666,7 @@ def find_in_weapons(bot,event,args=nil,mode=0)
       m.push('3e')
       m.push('4e')
       m.push('5e')
+      emo.push('(e)') if fltr.length<2
     end
     if fltr.include?('Summon')
       m.push('1')
@@ -1639,15 +1674,16 @@ def find_in_weapons(bot,event,args=nil,mode=0)
       m.push('3')
       m.push('4')
       m.push('5')
+      emo.push('(p)') if fltr.length<2
     end
     char=char.reject{|q| !m.include?(q[2])}.uniq
     search.push("*Filters*: #{fltr.join(', ')}")
   end
-  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length>=1900) && !safe_to_spam?(event) && mode==0
+  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode==0
     event.respond "Too much data is trying to be displayed.  Please use this command in PM."
     return nil
   else
-    return [search,char]
+    return [search,char,emo]
   end
 end
 
@@ -1777,10 +1813,11 @@ def find_all(bot,event,args=nil)
     find_weapons(bot,event,args)
     return nil
   end
-  adv=[[],[]] if adv.nil?
-  drg=[[],[]] if drg.nil?
-  wrm=[[],[]] if wrm.nil?
-  wpn=[[],[]] if wpn.nil?
+  adv=[[],[],[]] if adv.nil?
+  drg=[[],[],[]] if drg.nil?
+  wrm=[[],[],[]] if wrm.nil?
+  wpn=[[],[],[]] if wpn.nil?
+  wrm[3]=wrm[1].length
   adv[1]=adv[1].sort{|a,b| a[0]<=>b[0]}.map{|q| q[0]}.uniq
   drg[1]=drg[1].sort{|a,b| a[0]<=>b[0]}.map{|q| q[0]}.uniq
   wrm[1]=wrm[1].sort{|a,b| a[0]<=>b[0]}.map{|q| q[0]}.uniq
@@ -1789,6 +1826,7 @@ def find_all(bot,event,args=nil)
   search=search.reject{|q| count_in(search,q)<2}.uniq
   adv[0]=adv[0].reject{|q| search.include?(q)}
   drg[0]=drg[0].reject{|q| search.include?(q)}
+  wrm[1]=[] if wrm[0].length==1 && wrm[0][0][0,11]=='*Rarities*:' && search.length>1
   wrm[0]=wrm[0].reject{|q| search.include?(q)}
   wpn[0]=wpn[0].reject{|q| search.include?(q)}
   str=''
@@ -1798,35 +1836,46 @@ def find_all(bot,event,args=nil)
   str="#{str}\n\n__**Wyrmprint Search**__\n#{wrm[0].join("\n")}" if wrm[0].length>0
   str="#{str}\n\n__**Weapon Search**__\n#{wpn[0].join("\n")}" if wpn[0].length>0
   str="#{str}\n\n__**Results**__"
-  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || str.length+adv[1].join("\n").length+drg[1].join("\n").length+wrm[1].join("\n").length+wpn[1].join("\n").length+"Totals: #{adv[1].length} adventurers, #{drg[1].length} dragons, #{wrm[1].length} wyrmprints, #{wpn[1].length} weapons".length>=1800
-    str="#{str}\n*Adventurers:* #{adv[1][0]}"
+  m=[adv[2].join(''),drg[2].join(''),wrm[2].join(''),wpn[2].join('')]
+  m[2]='' if wrm[3]>wrm[1].length
+  m=m.reject{|q| q.length<=0}.uniq
+  if m.length<2
+    adv[2]=[]
+    drg[2]=[]
+    wrm[2]=[]
+    wpn[2]=[]
+  end
+  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || str.length+adv[1].join("\n").length+drg[1].join("\n").length+wrm[1].join("\n").length+wpn[1].join("\n").length+"Totals: #{adv[1].length} adventurers, #{drg[1].length} dragons, #{wrm[3]} wyrmprints #{'(not shown)' if wrm[3]>wrm[1].length}, #{wpn[1].length} weapons".length>=1800
+    str="#{str}\n*Adventurers #{adv[2].join('')}:* #{adv[1][0]}"
     for i in 1...adv[1].length
       str=extend_message(str,adv[1][i],event,1,', ')
     end
-    str=extend_message(str,"*Dragons:* #{drg[1][0]}",event)
+    str=extend_message(str,"*Dragons #{drg[2].join('')}:* #{drg[1][0]}",event)
     for i in 1...drg[1].length
       str=extend_message(str,drg[1][i],event,1,', ')
     end
-    str=extend_message(str,"*Wyrmprints:* #{wrm[1][0]}",event)
+    str=extend_message(str,"*Wyrmprints #{wrm[2].join('')}:* #{wrm[1][0]}",event)
     for i in 1...wrm[1].length
       str=extend_message(str,wrm[1][i],event,1,', ')
     end
-    str=extend_message(str,"*Weapons:* #{wpn[1][0]}",event)
+    str=extend_message(str,"*Weapons #{wpn[2].join('')}:* #{wpn[1][0]}",event)
     for i in 1...wpn[1].length
       str=extend_message(str,wpn[1][i],event,1,', ')
     end
-    str=extend_message(str,"Totals: #{adv[1].length} adventurers, #{drg[1].length} dragons, #{wrm[1].length} wyrmprints, #{wpn[1].length} weapons",event,2)
+    str=extend_message(str,"Totals: #{adv[1].length} adventurers, #{drg[1].length} dragons, #{wrm[3]} wyrmprints #{'(not shown)' if wrm[3]>wrm[1].length}, #{wpn[1].length} weapons",event,2)
+    str=extend_message(str,"Wyrmprints have been removed from the displayed search results because only the rarity filter applies.",event,2) if wrm[3]>wrm[1].length
     event.respond str
   else
     flds=nil
     flds=[] unless adv[1].length<=0 && drg[1].length<=0 && wrm[1].length<=0
-    flds.push(['Adventurers',adv[1].join("\n")]) if adv[1].length>0
-    flds.push(['Dragons',drg[1].join("\n")]) if drg[1].length>0
-    flds.push(['Wyrmprints',wrm[1].join("\n")]) if wrm[1].length>0
-    flds.push(['Weapons',wpn[1].join("\n")]) if wpn[1].length>0
+    flds.push(["**Adventurers** #{adv[2].join('')}",adv[1].join("\n")]) if adv[1].length>0
+    flds.push(["**Dragons** #{drg[2].join('')}",drg[1].join("\n")]) if drg[1].length>0
+    flds.push(["**Wyrmprints** #{wrm[2].join('')}",wrm[1].join("\n")]) if wrm[1].length>0
+    flds.push(["**Weapons** #{wpn[2].join('')}",wpn[1].join("\n")]) if wpn[1].length>0
     textra=''
     textra="**No data matches your search**" if adv[1].length<=0 && drg[1].length<=0 && wrm[1].length<=0 && wpn[1].length<=0
-    create_embed(event,str,textra,0xCE456B,"Totals: #{adv[1].length} adventurers, #{drg[1].length} dragons, #{wrm[1].length} wyrmprints, #{wpn[1].length} weapons",nil,flds)
+    textra="Wyrmprints have been removed from the displayed search results because only the rarity filter applies." if wrm[3]>wrm[1].length
+    create_embed(event,str,textra,0xCE456B,"Totals: #{adv[1].length} adventurers, #{drg[1].length} dragons, #{wrm[3]} wyrmprints #{'(not shown)' if wrm[3]>wrm[1].length}, #{wpn[1].length} weapons",nil,flds)
   end
 end
 
