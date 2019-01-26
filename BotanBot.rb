@@ -40,7 +40,8 @@ def all_commands(include_nil=false,permissions=-1)
   k=['reboot','adventurer','adv','addalias','checkaliases','aliases','seealiases','saliases','serveraliases','deletealias','removealias','channellist','long',
      'channelist','spamlist','spamchannels','bugreport','suggestion','feedback','donation','donate','shard','attribute','safe','spam','safetospam','safe2spam',
      'longreplies','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','find',
-     'search','dragon','help','wyrmprint','wyrm','print','weapon','wep','weap','wpn','skill','skil','ability','abil','aura']
+     'search','dragon','help','wyrmprint','wyrm','print','weapon','wep','weap','wpn','skill','skil','ability','abil','aura','roost','today','ruin','ruins',
+     'daily','now','dailies','todayindl','today_in_dl','tomorrow','tommorrow','tomorow','tommorow']
   k=['addalias','deletealias','removealias','s2s'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases'] if permissions==2
   k=k.uniq
@@ -100,6 +101,7 @@ def data_load()
     b[i][6]=b[i][6].split(';;;; ').map{|q| q.split(';; ')}
     b[i][7]=b[i][7].split(', ').map{|q| q.to_i}
     b[i][8]=b[i][8].split(', ').map{|q| q.to_f}
+    b[i][9]=b[i][9].to_i
   end
   @dragons=b.map{|q| q}
   if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLWyrmprints.txt')
@@ -266,6 +268,14 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
     create_embed(event,"**#{command.downcase}** __name__","Shows everything that the ability named `name` does.  Also shows all adventurers and dragons that know the ability, and any wyrmprints that have it imbued.",0xCE456B)
   elsif ['aura'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows everything that the aura named `name` does.  Also shows all dragons that have the aura.",0xCE456B)
+  elsif ['roost'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\n\nYou can include the word \"tomorrow\" to instead show the data for tomorrow.\nYou can also include a day of the week to instead show data on that day of the week.",0xCE456B)
+  elsif ['ruin','ruins'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Elemental Ruins, what difficulties are available, and what orbs come out of those.\n\nYou can include the word \"tomorrow\" to instead show the data for tomorrow.\nYou can also include a day of the week to instead show data on that day of the week.",0xCE456B)
+  elsif ['today','now','daily','dailies','today_in_dl','todayindl'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\nAlso shows the current day's Elemental Ruins, what difficulties are available, and what orbs come out of those.",0xCE456B)
+  elsif ['tomorrow','tomorow','tommorrow','tommorow'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Shows the next day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\nAlso shows the next day's Elemental Ruins, what difficulties are available, and what orbs come out of those.",0xCE456B)
   elsif ['embed','embeds'].include?(command.downcase)
     event << '**embed**'
     event << ''
@@ -277,7 +287,18 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
     end
     return nil
   elsif ['find','search'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __\*filters__","Displays all adventurers that fit `filters`.\n\nYou can search by:\n- Rarity\n- Element\n- Weapon\n- Class\n- Availability\n\nIf too many adventurers are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+    subcommand='' if subcommand.nil?
+    if ['adventurer','adventurers','adv','advs','unit','units'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all adventurers that fit `filters`.\n\nYou can search by:\n- Rarity\n- Element\n- Weapon type\n- Class\n- Availability\n\nIf too many adventurers are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+    elsif ['dragon','dragons'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all dragons that fit `filters`.\n\nYou can search by:\n- Rarity\n- Element\n- Dragon Roost Bond Gift preference\n- Whether or not the dragon turns to face damage sources\n- Whether or not the dragon is a ranged attacker\n- Availability\n\nIf too many dragons are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+    elsif ['wyrmprint','wyrm','print'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all wyrmprints that fit `filters`.\n\nYou can search by:\n- Rarity\n- Amulet type\n- Availability\n\nIf too many wyrmprints are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+    elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all weapons that fit `filters`.\n\nYou can search by:\n- Rarity\n- Element\n- Weapon type\n- Availability\n\nIf too many weapons are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+    else
+      create_embed(event,"**#{command.downcase}** __\*filters__","Displays all adventurers, dragons, wyrmprints, and weapons that fit `filters`.\n\nYou can search by:\n- Rarity\n- Element\n- Weapon type\n- Class / Amulet type\n- Availability\n\nIn addition, dragons can be sorted by:\n- Dragon Roost Bond Gift preference\n- Whether or not the dragon turns to face damage sources\n- Whether or not the dragon is a ranged attacker\n\nIf too much data is trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+    end
   elsif ['aliases','checkaliases','seealiases','alias'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s aliases.\nIf no name is listed, responds with a list of all aliases and who/what they are for.\n\nAliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Auras\n- Abilities\n- CoAbilities\n~~- Facilities\n- Materials~~\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
   elsif ['saliases','serveraliases'].include?(command.downcase)
@@ -301,7 +322,7 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
       command=''
     end
     event.respond "#{command.downcase} is not a command" if command!='' && command.downcase != 'devcommands'
-    create_embed([event,x],"Command Prefixes: #{@prefix.map{|q| q.upcase}.uniq.map{|q| "`#{q}`"}.join(', ')}\nYou can also use `DL!help CommandName` to learn more on a particular command.\n__**Botan Bot help**__","__**Game Data**__\n`adventurer` __name__ - for data on an adventurer (*also `adv`*)\n`dragon` __name__ - for data on a dragon\n`wyrmprint` __name__ - for data on a wyrmprint (*also `wyrm` or `print`*)\n`weapon` __name__ - for data on a weapon\n\n`skill` __name__ - for data on a particular skill\n`ability` __name__ - for data on a particular ability\n`aura` __name__ - for data on a particular aura\n\n`find` __\*filters__ - to find specific adventurers or dragons\n\n__**Meta Data**__\n`invite` - for a link to invite me to your server\n`snagstats` __type__ - to receive relevant bot stats\n`spam` - to determine if the current location is safe for me to send long replies to (*also `safetospam` or `safe2spam`*)\n`shard` (*also `alliance`*)\n\n__**Developer Information**__\n`bugreport` __\\*message__ - to send my developer a bug report\n`suggestion` __\\*message__ - to send my developer a feature suggestion\n`feedback` __\\*message__ - to send my developer other kinds of feedback\n~~the above three commands are actually identical, merely given unique entries to help people find them~~",0xCE456B)
+    create_embed([event,x],"Command Prefixes: #{@prefix.map{|q| q.upcase}.uniq.map{|q| "`#{q}`"}.join(', ')}\nYou can also use `DL!help CommandName` to learn more on a particular command.\n__**Botan Bot help**__","__**Game Data**__\n`adventurer` __name__ - for data on an adventurer (*also `adv`*)\n`dragon` __name__ - for data on a dragon\n`wyrmprint` __name__ - for data on a wyrmprint (*also `wyrm` or `print`*)\n`weapon` __name__ - for data on a weapon\n\n`skill` __name__ - for data on a particular skill\n`ability` __name__ - for data on a particular ability\n`aura` __name__ - for data on a particular aura\n\n`find` __\*filters__ - to find specific adventurers or dragons\n`today` - to show data on current events (*also `daily` or `todayInDL`*)\n\n__**Meta Data**__\n`invite` - for a link to invite me to your server\n`snagstats` __type__ - to receive relevant bot stats\n`spam` - to determine if the current location is safe for me to send long replies to (*also `safetospam` or `safe2spam`*)\n`shard` (*also `alliance`*)\n\n__**Developer Information**__\n`bugreport` __\\*message__ - to send my developer a bug report\n`suggestion` __\\*message__ - to send my developer a feature suggestion\n`feedback` __\\*message__ - to send my developer other kinds of feedback\n~~the above three commands are actually identical, merely given unique entries to help people find them~~",0xCE456B)
     create_embed([event,x],"__**Server Admin Commands**__","__**Unit Aliases**__\n`addalias` __new alias__ __unit__ - Adds a new server-specific alias\n~~`aliases` __unit__ (*also `checkaliases` or `seealiases`*)~~\n`deletealias` __alias__ (*also `removealias`*) - deletes a server-specific alias",0xC31C19) if is_mod?(event.user,event.server,event.channel)
     create_embed([event,x],"__**Bot Developer Commands**__","__**Mjolnr, the Hammer**__\n`ignoreuser` __user id number__ - makes me ignore a user\n`leaveserver` __server id number__ - makes me leave a server\n\n__**Communication**__\n`status` __\\*message__ - sets my status\n`sendmessage` __channel id__ __\\*message__ - sends a message to a specific channel\n`sendpm` __user id number__ __\\*message__ - sends a PM to a user\n\n__**Server Info**__\n`snagstats` - snags relevant bot stats\n\n__**Shards**__\n`reboot` - reboots this shard\n\n__**Meta Data Storage**__\n`backupaliases` - backs up the alias list\n`restorealiases` - restores the alias list from last backup\n`sortaliases` - sorts the alias list by servant",0x008b8b) if (event.server.nil? || event.channel.id==283821884800499714 || @shardizard==4 || command.downcase=='devcommands') && event.user.id==167657750971547648
     event.respond "If the you see the above message as only three lines long, please use the command `DL!embeds` to see my messages as plaintext instead of embeds.\n\nCommand Prefixes: #{@prefix.map{|q| q.upcase}.uniq.map{|q| "`#{q}`"}.join(', ')}\nYou can also use `DL!help CommandName` to learn more on a particular command.\n\nWhen looking up a character, you also have the option of @ mentioning me in a message that includes that character's name" unless x==1
@@ -1311,6 +1332,7 @@ def find_in_dragons(bot,event,args=nil,mode=0)
   rarity=[]
   elem=[]
   fltr=[]
+  wday=[]
   turn=[]
   ranged=[]
   for i in 0...args.length
@@ -1322,6 +1344,11 @@ def find_in_dragons(bot,event,args=nil,mode=0)
     elem.push('Wind') if ['earth','earths'].include?(args[i].downcase) && event.user.id==192821228468305920
     elem.push('Light') if ['light','lights'].include?(args[i].downcase)
     elem.push('Shadow') if ['shadow','dark','shadows','darks'].include?(args[i].downcase)
+    wday.push(1) if ['mo','monday','mondae','mon','m','juicymeat','meat'].include?(args[i].downcase)
+    wday.push(2) if ['tu','tuesday','tuesdae','tues','tue','t','kaleidoscope','kscope','k-scope'].include?(args[i].downcase)
+    wday.push(3) if ['we','wednesday','wednesdae','wednes','wed','w','floralcirclet','flower','floral','circlet','circle'].include?(args[i].downcase)
+    wday.push(4) if ['th','thursday','thursdae','thurs','thu','thur','h','r','compellingbook','book'].include?(args[i].downcase)
+    wday.push(5) if ['fr','friday','fridae','fri','fryday','frydae','fry','f','manaessence','mana','essence'].include?(args[i].downcase)
     turn.push('Yes') if ['turn','damage'].include?(args[i].downcase)
     turn.push('No') if ['noturn','anchor'].include?(args[i].downcase)
     ranged.push('Yes') if ['long','longrange','ranged'].include?(args[i].downcase)
@@ -1335,6 +1362,7 @@ def find_in_dragons(bot,event,args=nil,mode=0)
   textra=''
   rarity.uniq!
   elem.uniq!
+  wday.uniq!
   turn.uniq!
   ranged.uniq!
   fltr.uniq!
@@ -1351,6 +1379,11 @@ def find_in_dragons(bot,event,args=nil,mode=0)
       elem[i]="#{moji[0].mention}#{elem[i]}" if moji.length>0
     end
     search.push("*Elements*: #{elem.join(', ')}")
+  end
+  if wday.length>0
+    char=char.reject{|q| !wday.include?(q[9])}.uniq
+    wday=wday.map{|q| ['Golden Chalice (Sunday)','Juicy Meat (Monday)','Kaleidoscope (Tuesday)','Floral Circlet (Wednesday)','Compelling Book (Thursday)','Mana Essence (Friday)','Golden Chalice (Saturday)'][q]}
+    search.push("*Bond gift preference*: #{wday.join(', ')}")
   end
   if turn.length>0
     char=char.reject{|q| !turn.include?(q[10])}.uniq
@@ -2567,6 +2600,85 @@ def disp_aliases(bot,event,args=nil,mode=0)
   return nil
 end
 
+def roost(event,bot,args=nil,ignoreinputs=false)
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  args=args.map{|q| q.downcase}
+  t=Time.now
+  timeshift=7
+  timeshift-=1 unless t.dst?
+  t-=60*60*timeshift
+  sftday=-2
+  for i in 0...args.length
+    stfday=t.wday if ['today','now'].include?(args[i]) && sftday<-1
+    sftday=-1 if ['tomorrow','tommorrow','tomorow','tommorow','next'].include?(args[i]) && sftday<-1
+    sftday=0 if ['sunday','sundae','sun','su','sonday','sondae','son','u'].include?(args[i]) && sftday<-1
+    sftday=1 if ['mo','monday','mondae','mon','m'].include?(args[i]) && sftday<-1
+    sftday=2 if ['tu','tuesday','tuesdae','tues','tue','t'].include?(args[i]) && sftday<-1
+    sftday=3 if ['we','wednesday','wednesdae','wednes','wed','w'].include?(args[i]) && sftday<-1
+    sftday=4 if ['th','thursday','thursdae','thurs','thu','thur','h','r'].include?(args[i]) && sftday<-1
+    sftday=5 if ['fr','friday','fridae','fri','fryday','frydae','fry','f'].include?(args[i]) && sftday<-1
+    sftday=6 if ['sa','saturday','saturdae','sat','saturnday','saturndae','saturn','satur'].include?(args[i]) && sftday<-1
+  end
+  sftday=t.wday if sftday<-1 || ignoreinputs
+  sftday=ignoreinputs*1 if ignoreinputs.is_a?(Numeric)
+  str="Time elapsed since #{"today's " if sftday==t.wday}reset: #{"#{t.hour} hours, " if t.hour>0}#{"#{'0' if t.min<10}#{t.min} minutes, " if t.hour>0 || t.min>0}#{'0' if t.sec<10}#{t.sec} seconds"
+  str="#{str}\nTime until #{"tomorrow's " if sftday==t.wday}reset: #{"#{23-t.hour} hours, " if 23-t.hour>0}#{"#{'0' if 59-t.min<10}#{59-t.min} minutes, " if 23-t.hour>0 || 59-t.min>0}#{'0' if 60-t.sec<10}#{60-t.sec} seconds"
+  t2=Time.new(2018,9,27)-60*60
+  t2=t-t2
+  date=(((t2.to_i/60)/60)/24)
+  str="#{str}\n"
+  str="#{str}\n#{'~~' unless sftday==t.wday}Date assuming reset is at midnight: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]})"
+  str="#{str}\nDays since game release: #{longFormattedNumber(date)}#{'~~' unless sftday==t.wday}"
+  str3=''
+  if sftday<0
+    t+=24*60*60
+    t2=Time.new(2018,9,27)-60*60
+    t2=t-t2
+    date=(((t2.to_i/60)/60)/24)
+    str="#{str}\n\nTomorrow's date: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]})"
+    str="#{str}\nDays since game release, come tomorrow: #{longFormattedNumber(date)}"
+    str3='Tomorrow'
+  elsif sftday != t.wday
+    tmw=(sftday==t.wday+1)
+    tmw=true if sftday==0 && t.wday==6
+    t+=7*24*60*60 if sftday<t.wday
+    t+=(sftday-t.wday)*24*60*60
+    t2=Time.new(2018,9,27)-60*60
+    t2=t-t2
+    date=(((t2.to_i/60)/60)/24)
+    str3="Next #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}"
+    str="#{str}\n\n#{str3}'s date: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} #{'(Tomorrow)' if tmw}"
+    str="#{str}\nDays since game release, come next #{str3.split(' ')[1]}: #{longFormattedNumber(date)}"
+  end
+  str="#{str}\n\n__**#{"#{str3}'s " if str3.length>0}Elemental Ruins:**__"
+  str="#{str}\n*Open:* #{['<:Element_Null:532106087810334741>All','<:Element_Null:532106087810334741>All','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep'][t.wday]}"
+  str="#{str}\n*Difficulties:* Beginner, Standard#{', Expert' if t.wday>1}"
+  str="#{str}\n*Available Orbs:* #{['','','Flame, Blaze, Inferno','Water, Stream, Deluge','Wind, Storm, Maelstorm','Light, Radiance, Refulgence','Shadow, Nightfull, Nether'][t.wday]}" if t.wday>1
+  str="#{str}\n\n**#{"#{str3}'s " if str3.length>0}Bond Gift:** #{['Golden Chalice','Juicy Meat','Kaleidoscope','Floral Circlet','Compelling Book','Mana Essence','Golden Chalice'][t.wday]}"
+  if t.wday>0 && t.wday<6
+    drg=@dragons.reject{|q| q[9]!=t.wday}.map{|q| q[0]}
+    create_embed(event,str,'',0xCE456B,nil,nil,triple_finish(drg))
+  else
+    event.respond str
+  end
+end
+
+bot.command([:roost,:ruin,:ruins]) do |event, *args|
+  return nil if overlap_prevent(event)
+  roost(event,bot,args)
+end
+
+bot.command([:today,:daily,:dailies,:now,:todayindl,:todayinDL,:todayInDL,:today_in_dl,:today_In_DL,:today_in_DL,:today_In_dl]) do |event, *args|
+  return nil if overlap_prevent(event)
+  roost(event,bot,args,true)
+end
+
+bot.command([:tomorrow,:tommorrow,:tomorow,:tommorow]) do |event, *args|
+  return nil if overlap_prevent(event)
+  roost(event,bot,args,-1)
+end
+
 bot.command([:find,:search]) do |event, *args|
   return nil if overlap_prevent(event)
   if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
@@ -3340,6 +3452,13 @@ bot.mention do |event|
   elsif ['checkaliases','seealiases','aliases'].include?(args[0].downcase)
     args.shift
     disp_aliases(bot,event,args)
+    m=false
+  elsif ['roost','ruin','ruins','daily','dailies'].include?(args[0].downcase)
+    args.shift
+    roost(event,bot,args)
+    m=false
+  elsif ['today','now','tomorrow','tommorrow','tomorow','tommorow','sunday','sundae','sun','su','sonday','sondae','son','u','mo','monday','mondae','mon','m','mo','monday','mondae','mon','m','tu','tuesday','tuesdae','tues','tue','t','we','wednesday','wednesdae','wednes','wed','w','th','thursday','thursdae','thurs','thu','thur','h','r','fr','friday','fridae','fri','fryday','frydae','fry','f','sa','saturday','saturdae','sat','saturnday','saturndae','saturn','satur'].include?(args[0].downcase)
+    roost(event,bot,args)
     m=false
   end
   if m
