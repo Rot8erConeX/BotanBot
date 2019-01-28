@@ -38,6 +38,7 @@ bot.gateway.check_heartbeat_acks = false
 @server_data=[[],[]]
 @ignored=[]
 @embedless=[]
+@avvie_info=['Botan','*Dragalia Lost*','N/A']
 
 def all_commands(include_nil=false,permissions=-1)
   return all_commands(include_nil)-all_commands(false,1)-all_commands(false,2) if permissions==0
@@ -45,7 +46,10 @@ def all_commands(include_nil=false,permissions=-1)
      'channelist','spamlist','spamchannels','bugreport','suggestion','feedback','donation','donate','shard','attribute','safe','spam','safetospam','safe2spam',
      'longreplies','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','find',
      'search','dragon','help','wyrmprint','wyrm','print','weapon','wep','weap','wpn','skill','skil','ability','abil','aura','roost','today','ruin','ruins',
-     'daily','now','dailies','todayindl','today_in_dl','tomorrow','tommorrow','tomorow','tommorow']
+     'daily','now','dailies','todayindl','today_in_dl','tomorrow','tommorrow','tomorow','tommorow','shop','store','exp','level','xp','plxp','plexp','pllevel',
+     'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','dbxp',
+     'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
+     'weaponlevel','wxp','wexp','wlevel','victory']
   k=['addalias','deletealias','removealias','s2s'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases'] if permissions==2
   k=k.uniq
@@ -232,6 +236,24 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
   end
   if command.downcase=='reboot'
     create_embed(event,'**reboot**',"Reboots this shard of the bot, installing any updates.\n\n**This command is only able to be used by Rot8er_ConeX**",0x008b8b)
+  elsif ['exp','level','xp'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __start__ __end__","Shows how much EXP to get from level `start` to level `end`.\nIf the levels are in the wrong order, will auto-switch them.\n\nIf only one level is listed, will show *both* EXP to get from level 1 to specified level, and EXP to get from specified level to max level.\nIf no level is listed, will show EXP required to get from level 1 to max level.\n\nIn PM, shows everything unless you specify a particular type of EXP.\nOtherwise, only works if you specify a particular type of EXP:\n- Player\n- Adventurer\n- Dragon\n- Dragon Bond\n- Wyrmprint\n- Weapon",0xCE456B)
+  elsif ['plxp','plexp','pllevel','plevel','pxp','pexp'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __start__ __end__","Shows how much EXP to get a player from level `start` to level `end`.\nIf the levels are in the wrong order, will auto-switch them.\n\nIf only one level is listed, will show *both* EXP to get from level 1 to specified level, and EXP to get from specified level to max level.\nIf no level is listed, will show EXP required to get from level 1 to max level.",0xCE456B)
+  elsif ['advxp','advexp','advlevel','alevel','axp','aexp'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __start__ __end__","Shows how much EXP to get an adventurer from level `start` to level `end`.\nIf the levels are in the wrong order, will auto-switch them.\n\nIf only one level is listed, will show *both* EXP to get from level 1 to specified level, and EXP to get from specified level to max level.\nIf no level is listed, will show EXP required to get from level 1 to max level.",0xCE456B)
+  elsif ['drgxp','drgexp','drglevel','dlevel','dxp','dexp'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __start__ __end__","Shows how much EXP to get a dragon from level `start` to level `end`.\nIf the levels are in the wrong order, will auto-switch them.\n\nIf only one level is listed, will show *both* EXP to get from level 1 to specified level, and EXP to get from specified level to max level.\nIf no level is listed, will show EXP required to get from level 1 to max level.",0xCE456B)
+  elsif ['bxp','bexp','blevel','dbxp','dbexp','dblevel','bondlevel','bondxp','bondexp'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __start__ __end__","Shows how much EXP to get a dragon from bond level `start` to bond level `end`.\nIf the levels are in the wrong order, will auto-switch them.\n\nIf only one level is listed, will show *both* EXP to get from bond level 1 to specified bond level, and EXP to get from specified bond level to max bond level.\nIf no level is listed, will show EXP required to get from level 1 to max level.",0xCE456B)
+  elsif ['wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __start__ __end__","Shows how much EXP to get a wyrmprint from level `start` to level `end`.\nIf the levels are in the wrong order, will auto-switch them.\n\nIf only one level is listed, will show *both* EXP to get from level 1 to specified level, and EXP to get from specified level to max level.\nIf no level is listed, will show EXP required to get from level 1 to max level.",0xCE456B)
+  elsif ['wpxp','wpexp','wplevel','weaponxp','weaponexp','weaponlevel'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __start__ __end__","Shows how much EXP to get a weapon from level `start` to level `end`.\nIf the levels are in the wrong order, will auto-switch them.\n\nIf only one level is listed, will show *both* EXP to get from level 1 to specified level, and EXP to get from specified level to max level.\nIf no level is listed, will show EXP required to get from level 1 to max level.",0xCE456B)
+  elsif ['wxp','wexp','wlevel'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __start__ __end__","Acts simultaneously as the `wyrmprintexp` and `weaponexp`.",0xCE456B)
+  elsif ['victory'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}**","Shows a victorious emote.",0xCE456B)
   elsif ['donation','donate'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}**",'Responds with information regarding potential donations to my developer.',0xCE456B)
   elsif command.downcase=='sendmessage'
@@ -274,12 +296,14 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
     create_embed(event,"**#{command.downcase}** __name__","Shows everything that the aura named `name` does.  Also shows all dragons that have the aura.",0xCE456B)
   elsif ['roost'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\n\nYou can include the word \"tomorrow\" to instead show the data for tomorrow.\nYou can also include a day of the week to instead show data on that day of the week.",0xCE456B)
+  elsif ['shop','store'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Shows the current day's shop mats.\n\nYou can include the word \"tomorrow\" to instead show the data for tomorrow.\nYou can also include a day of the week to instead show data on that day of the week.",0xCE456B)
   elsif ['ruin','ruins'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Elemental Ruins, what difficulties are available, and what orbs come out of those.\n\nYou can include the word \"tomorrow\" to instead show the data for tomorrow.\nYou can also include a day of the week to instead show data on that day of the week.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Elemental Ruins, what difficulties are available, and what orbs and other mats come out of those.\n\nYou can include the word \"tomorrow\" to instead show the data for tomorrow.\nYou can also include a day of the week to instead show data on that day of the week.",0xCE456B)
   elsif ['today','now','daily','dailies','today_in_dl','todayindl'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\nAlso shows the current day's Elemental Ruins, what difficulties are available, and what orbs come out of those.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\nAlso shows the current day's Elemental Ruins, what difficulties are available, and what orbs and other mats come out of those.\nAlso shows the current day's shop mats.",0xCE456B)
   elsif ['tomorrow','tomorow','tommorrow','tommorow'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","Shows the next day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\nAlso shows the next day's Elemental Ruins, what difficulties are available, and what orbs come out of those.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __name__","Shows the next day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\nAlso shows the next day's Elemental Ruins, what difficulties are available, and what orbs and other mats come out of those.\nAlso shows the current day's shop mats.",0xCE456B)
   elsif ['embed','embeds'].include?(command.downcase)
     event << '**embed**'
     event << ''
@@ -1219,8 +1243,8 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
   clzz=[]
   fltr=[]
   for i in 0...args.length
-    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<6
-    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<6
+    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6
+    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
     elem.push('Water') if ['water','waters'].include?(args[i].downcase)
     elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
@@ -1350,8 +1374,8 @@ def find_in_dragons(bot,event,args=nil,mode=0)
   turn=[]
   ranged=[]
   for i in 0...args.length
-    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<6
-    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<6
+    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6
+    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
     elem.push('Water') if ['water','waters'].include?(args[i].downcase)
     elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
@@ -1480,8 +1504,8 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0)
   clzz=[]
   fltr=[]
   for i in 0...args.length
-    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<6
-    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<6
+    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6
+    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6
     clzz.push('Attack') if ['attack','atk','att','attacking'].include?(args[i].downcase)
     clzz.push('Defense') if ['defense','defence','def','defending','defensive','defencive'].include?(args[i].downcase)
     clzz.push('Support') if ['support','supports','supportive','supporting'].include?(args[i].downcase)
@@ -1575,8 +1599,8 @@ def find_in_weapons(bot,event,args=nil,mode=0)
   wpn=[]
   fltr=[]
   for i in 0...args.length
-    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<6
-    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<6
+    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6
+    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
     elem.push('Water') if ['water','waters'].include?(args[i].downcase)
     elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
@@ -1871,7 +1895,7 @@ def find_all(bot,event,args=nil)
     event.respond str
   else
     flds=nil
-    flds=[] unless adv[1].length<=0 && drg[1].length<=0 && wrm[1].length<=0
+    flds=[] unless adv[1].length<=0 && drg[1].length<=0 && wrm[1].length<=0 && wpn[1].length<=0
     flds.push(["**Adventurers** #{adv[2].join('')}",adv[1].join("\n")]) if adv[1].length>0
     flds.push(["**Dragons** #{drg[2].join('')}",drg[1].join("\n")]) if drg[1].length>0
     flds.push(["**Wyrmprints** #{wrm[2].join('')}",wrm[1].join("\n")]) if wrm[1].length>0
@@ -2708,6 +2732,8 @@ def roost(event,bot,args=nil,ignoreinputs=false)
   str="#{str}\n*Open:* #{['<:Element_Null:532106087810334741>All','<:Element_Null:532106087810334741>All','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep'][t.wday]}"
   str="#{str}\n*Difficulties:* Beginner, Standard#{', Expert' if t.wday>1}"
   str="#{str}\n*Available Orbs:* #{['','','Flame, Blaze, Inferno','Water, Stream, Deluge','Wind, Storm, Maelstorm','Light, Radiance, Refulgence','Shadow, Nightfull, Nether'][t.wday]}" if t.wday>1
+  str="#{str}\n*Other Available Mats:* #{['','','Fiend Horns, Fiend Eyes',"Ancient Bird's Feathers, Bewitching Wings",'Granite and Meteorite','Fiend Claws',"Ancient Bird's Feathers, Bewitching Wings"][t.wday]}" if t.wday>1
+  str="#{str}\n\n**Shop Mats:** #{['Light Metal, Abyss Stone','Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather",'Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather"][t.wday]}" if t.wday>1
   str="#{str}\n\n**#{"#{str3}'s " if str3.length>0}Bond Gift:** #{['Golden Chalice','Juicy Meat','Kaleidoscope','Floral Circlet','Compelling Book','Mana Essence','Golden Chalice'][t.wday]}"
   if t.wday>0 && t.wday<6
     drg=@dragons.reject{|q| q[9]!=t.wday}.map{|q| q[0]}
@@ -2717,7 +2743,395 @@ def roost(event,bot,args=nil,ignoreinputs=false)
   end
 end
 
-bot.command([:roost,:ruin,:ruins]) do |event, *args|
+def exp_shift(m,mode=0)
+  if mode==2
+    if m==0
+      return '-'
+    elsif m%3500==0
+      return "#{longFormattedNumber(m/3500)} Gold Crystal#{'s' unless m/3500==1}"
+    elsif m>3500
+      return "#{longFormattedNumber(m/3500)} Gold Crystal#{'s' unless m/3500==1}, #{exp_shift(m-(m/3500)*3500,2)}"
+    elsif m%1000==0
+      return "#{longFormattedNumber(m/1000)} Silver Crystal#{'s' unless m/1000==1}"
+    elsif m>1000
+      return "#{longFormattedNumber(m/1000)} Silver Crystal#{'s' unless m/1000==1}, #{exp_shift(m-(m/1000)*1000,2)}"
+    elsif m%150==0
+      return "#{longFormattedNumber(m/150)} Bronze Crystal#{'s' unless m/150==1}"
+    else
+      return "#{longFormattedNumber(m/150+1)} Bronze Crystal#{'s' unless m/150==0}"
+    end
+  elsif mode==3
+    if m==0
+      return '-'
+    elsif m%3500==0
+      return "#{longFormattedNumber(m/3500)} Succulent Dragonfruit#{'s' unless m/3500==1}"
+    elsif m>3500
+      return "#{longFormattedNumber(m/3500)} Succulent Dragonfruit#{'s' unless m/3500==1}, #{exp_shift(m-(m/3500)*3500,3)}"
+    elsif m%1000==0
+      return "#{longFormattedNumber(m/1000)} Ripe Dragonfruit#{'s' unless m/1000==1}"
+    elsif m>1000
+      return "#{longFormattedNumber(m/1000)} Ripe Dragonfruit#{'s' unless m/1000==1}, #{exp_shift(m-(m/1000)*1000,3)}"
+    elsif m%150==0
+      return "#{longFormattedNumber(m/150)} Dragonfruit#{'s' unless m/150==1}"
+    else
+      return "#{longFormattedNumber(m/150+1)} Dragonfruit#{'s' unless m/150==0}"
+    end
+  elsif mode==4
+    if m==0
+      return '-'
+    elsif m%3000==0
+      return "#{longFormattedNumber(m/3000)} Favored Bondfood"
+    elsif m>3000
+      return "#{longFormattedNumber(m/3000)} Favored Bondfood, #{exp_shift(m-(m/3000)*3000,4)}"
+    elsif m%1200==0
+      return "#{longFormattedNumber(m/1200)} Unfavored Bondfood"
+    elsif m>1200
+      return "#{longFormattedNumber(m/1200)} Unfavored Bondfood, #{exp_shift(m-(m/1200)*1200,4)}"
+    elsif m%1000==0
+      return "#{longFormattedNumber(m/1000)} Four-Leaf Clover#{'s' unless m/1000==1}"
+    elsif m>1000
+      return "#{longFormattedNumber(m/1000)} Four-Leaf Clover#{'s' unless m/1000==1}, #{exp_shift(m-(m/1000)*1000,4)}"
+    elsif m%300==0
+      return "#{longFormattedNumber(m/300)} bottle#{'s' unless m/300==1} of Tasty Milk"
+    else
+      return "#{longFormattedNumber(m/300+1)} bottle#{'s' unless m/300==0} of Tasty Milk"
+    end
+  elsif mode==5
+    if m==0
+      return '-'
+    elsif m%3500==0
+      return "#{longFormattedNumber(m/3500)} Consecrated Water"
+    elsif m>3500
+      return "#{longFormattedNumber(m/3500)} Consecrated Water, #{exp_shift(m-(m/3500)*3500,5)}"
+    elsif m%1000==0
+      return "#{longFormattedNumber(m/1000)} Blessed Water"
+    elsif m>1000
+      return "#{longFormattedNumber(m/1000)} Blessed Water, #{exp_shift(m-(m/1000)*1000,5)}"
+    elsif m%500==0
+      return "#{longFormattedNumber(m/500)} Holy Water"
+    else
+      return "#{longFormattedNumber(m/500+1)} Holy Water"
+    end
+  elsif mode==6
+    if m==0
+      return '-'
+    elsif m%3500==0
+      return "#{longFormattedNumber(m/3500)} Gold Whetstone#{'s' unless m/3500==1}"
+    elsif m>3500
+      return "#{longFormattedNumber(m/3500)} Gold Whetstone#{'s' unless m/3500==1}, #{exp_shift(m-(m/3500)*3500,3)}"
+    elsif m%1000==0
+      return "#{longFormattedNumber(m/1000)} Silver Whetstone#{'s' unless m/1000==1}"
+    elsif m>1000
+      return "#{longFormattedNumber(m/1000)} Silver Whetstone#{'s' unless m/1000==1}, #{exp_shift(m-(m/1000)*1000,3)}"
+    elsif m%500==0
+      return "#{longFormattedNumber(m/150)} Bronze Whetstone#{'s' unless m/500==1}"
+    else
+      return "#{longFormattedNumber(m/150+1)} Bronze Whetstone#{'s' unless m/500==0}"
+    end
+  end
+end
+
+def level(event,bot,args=nil,mode=0)
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  args=args.map{|q| q.downcase}
+  nums=[]
+  for i in 0...args.length
+    nums.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0
+    mode=1 if mode==0 && ['player','pxp','pexp','plxp','plexp','plevel','pllevel'].include?(args[i])
+    mode=2 if mode==0 && ['adventurer','adventurers','adv','axp','aexp','advxp','advexp','alevel','advlevel'].include?(args[i])
+    mode=3 if mode==0 && ['dragon','dragons','drg','dxp','dexp','drgxp','drgexp','dlevel','drglevel'].include?(args[i])
+    mode=4 if mode==0 && ['bond','dragonbond','dbxp','dbexp','bxp','bexp','bondxp','bondexp','blevel','dblevel','bondlevel'].include?(args[i])
+    mode=5 if mode==0 && ['wyrmprint','wyrmprints','wyrm','wyrms','wrxp','wrexp','wrxp','wrlevel','wyrmxp','wyrmexp','wyrmxp','wyrmlevel'].include?(args[i])
+    mode=6 if mode==0 && ['weapon','weapons','wpxp','wpexp','wplevel','weaponxp','weaponexp','weaponlevel'].include?(args[i])
+    mode=7 if mode==0 && ['wxp','wexp','wlevel'].include?(args[i])
+  end
+  if mode==0 && !safe_to_spam?(event)
+    event.respond "Please either specify an EXP type or use this command in PM.\n\nAvailable EXP types include:\n- Player\n- Adventurer\n- Dragon\n- Dragon Bond\n- Wyrmprint\n- Weapon"
+    return nil
+  end
+  nums.uniq!
+  str=''
+  if [1,0].include?(mode)
+    pxp=[[12,18,25],[15,20,26],[24,22,26],[27,24,27],[30,25,27],[33,26,28],[36,27,28],[39,28,29],[42,29,29],[45,30,30],[57,31,30],[60,32,31],[63,33,31],
+         [66,34,32],[69,35,32],[72,36,33],[75,37,33],[78,38,34],[81,39,34],[84,40,35],[87,41,35],[90,42,36],[93,43,36],[96,44,37],[99,45,37],[102,46,38],
+         [105,47,38],[108,48,39],[111,49,39],[114,50,40],[117,51,40],[120,52,41],[123,53,41],[126,54,42],[129,55,42],[132,56,43],[135,57,43],[138,58,44],
+         [141,59,44],[144,60,45],[147,61,45],[150,62,46],[153,63,46],[156,64,47],[159,65,47],[162,66,48],[165,67,48],[168,68,49],[171,69,49],[180,70,50],
+         [190,71,50],[200,72,51],[210,73,51],[220,74,52],[230,75,52],[240,76,53],[250,77,53],[260,78,54],[270,79,54],[280,80,55],[300,80,55],[320,81,56],
+         [340,81,56],[360,82,57],[380,82,57],[400,83,58],[420,83,58],[440,84,59],[460,84,59],[480,85,60],[510,85,60],[540,86,61],[570,86,61],[600,87,62],
+         [630,87,62],[660,88,63],[690,88,63],[720,89,64],[750,89,64],[800,90,65],[850,90,65],[900,91,66],[950,91,66],[1000,92,67],[1050,92,67],[1100,93,68],
+         [1150,93,68],[1200,94,69],[1250,94,69],[1300,95,70],[1350,95,70],[1400,96,71],[1450,96,71],[1500,97,72],[1550,97,72],[1600,98,73],[1650,98,73],
+         [1700,99,74],[1750,99,74],[1800,100,75],[1900,100,75],[2000,101,76],[2100,101,76],[2200,102,77],[2300,102,77],[2400,103,78],[2500,103,78],
+         [2600,104,79],[2700,104,79],[2800,105,80],[2900,105,80],[3000,106,81],[3100,106,81],[3200,107,82],[3300,107,82],[3400,108,83],[3500,108,83],
+         [3600,109,84],[3700,109,84],[3900,110,85],[4100,110,85],[4300,111,86],[4500,111,86],[4700,112,87],[4900,112,87],[5100,113,88],[5300,113,88],
+         [5500,114,89],[5700,114,89],[5900,115,90],[6100,115,90],[6300,115,91],[6500,116,91],[6700,116,92],[6900,116,92],[7100,117,93],[7300,117,93],
+         [7500,117,94],[7700,118,94],[7900,118,95],[8100,118,95],[8300,119,96],[8500,119,96],[8700,119,97],[8900,120,97],[9100,120,98],[9300,120,98],
+         [9500,121,99],[9700,121,99],[0,121,100]]
+    str2="__**Player EXP**__"
+    if nums.length<=0
+      str2="#{str2}\n*To get from level 1 to level #{pxp.length}:*  \u200B  \u200B  #{longFormattedNumber(pxp.map{|q| q[0]*10}.inject(0){|sum,x| sum + x })} EXP required"
+      str2="#{str2}\n*Resulting stamina increase:*  \u200B  \u200B  #{pxp[pxp.length-1][1]-pxp[0][1]} points of increase ~~(from #{pxp[0][1]} to #{pxp[pxp.length-1][1]})~~"
+      str2="#{str2}\n*Resulting friends list increase:*  \u200B  \u200B  #{pxp[pxp.length-1][2]-pxp[0][2]} more friends ~~(from #{pxp[0][2]} to #{pxp[pxp.length-1][2]})~~"
+    elsif nums.length==1
+      n=[nums[0],pxp.length].min
+      unless n==1
+        str2="#{str2}#{"\n" unless n==pxp.length}\n*To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(pxp[0,n-1].map{|q| q[0]*10}.inject(0){|sum,x| sum + x })} EXP required"
+        str2="#{str2}\n*Resulting stamina increase:*  \u200B  \u200B  #{pxp[n-1][1]-pxp[0][1]} points of increase ~~(from #{pxp[0][1]} to #{pxp[n-1][1]})~~"
+        str2="#{str2}\n*Resulting friends list increase:*  \u200B  \u200B  #{pxp[n-1][2]-pxp[0][2]} more friends ~~(from #{pxp[0][2]} to #{pxp[n-1][2]})~~"
+      end
+      unless n==pxp.length
+        str2="#{str2}#{"\n" unless n==1}\n*To get from level #{n} to level #{pxp.length}:*  \u200B  \u200B  #{longFormattedNumber(pxp[n-1,pxp.length-n].map{|q| q[0]*10}.inject(0){|sum,x| sum + x })} EXP required"
+        str2="#{str2}\n*Resulting stamina increase:*  \u200B  \u200B  #{pxp[pxp.length-1][1]-pxp[n-1][1]} points of increase ~~(from #{pxp[n-1][1]} to #{pxp[pxp.length-1][1]})~~"
+        str2="#{str2}\n*Resulting friends list increase:*  \u200B  \u200B  #{pxp[pxp.length-1][2]-pxp[n-1][2]} more friends ~~(from #{pxp[n-1][2]} to #{pxp[pxp.length-1][2]})~~"
+      end
+    else
+      n=[nums[0,2].min,1].max
+      m=[nums[0,2].max,pxp.length].min
+      str2="#{str2}\n*To get from level #{n} to level #{m}:*  \u200B  \u200B  #{longFormattedNumber(pxp[n-1,m-n].map{|q| q[0]*10}.inject(0){|sum,x| sum + x })} EXP required"
+      str2="#{str2}\n*Resulting stamina increase:*  \u200B  \u200B  #{pxp[m-1][1]-pxp[n-1][1]} points of increase ~~(from #{pxp[n-1][1]} to #{pxp[m-1][1]})~~"
+      str2="#{str2}\n*Resulting friends list increase:*  \u200B  \u200B  #{pxp[m-1][2]-pxp[n-1][2]} more friends ~~(from #{pxp[n-1][2]} to #{pxp[m-1][2]})~~"
+    end
+    str=extend_message(str,str2,event,2)
+  end
+  if [2,0].include?(mode)
+    axp=[3,5,7,9,11,15,19,23,27,31,38,45,52,59,66,78,90,102,114,126,151,176,201,226,251,301,351,401,451,501,576,651,726,801,876,951,1026,1101,1176,1251,1326,
+         1401,1476,1551,1626,1701,1776,1851,1926,2001,2076,2151,2226,2301,2376,2451,2526,2601,2676,2751,3260,3280,3300,3320,3340,3360,3380,3400,3420,3440,3460,
+         3480,3500,3520,3540,3560,3580,3600,3620,0]
+    str2="__**Adventurer EXP**__"
+    if nums.length<=0
+      m=axp[0,60].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level 1 to level 60:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      m=axp[0,70].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level 1 to level 70:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      m=axp[0,80].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level 1 to level 80:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+    elsif nums.length==1
+      n=[nums[0],axp.length].min
+      m=axp[0,n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_1_Blank:532104334423621632> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      if n<60
+        m=axp[n-1,60-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level #{n} to level 60:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      end
+      if n<70
+        m=axp[n-1,70-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level #{n} to level 70:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      end
+      if n<80
+        m=axp[n-1,80-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level #{n} to level 80:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      end
+    else
+      n=[nums[0,2].min,1].max
+      n2=[nums[0,2].max,axp.length].min
+      m=axp[n-1,n2-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+    end
+    str=extend_message(str,str2,event,2)
+  end
+  if [3,0].include?(mode)
+    dxp=[24,30,36,42,48,54,60,66,72,78,90,102,114,126,138,150,162,174,186,198,216,234,252,270,288,306,324,342,360,378,402,426,450,474,498,522,546,570,594,618,
+         648,678,708,738,768,798,828,858,888,918,954,990,1026,1062,1098,1134,1170,1206,1242,1278,1323,1368,1413,1458,1503,1548,1593,1638,1683,1728,1788,1848,
+         1908,1968,2028,2088,2148,2208,2268,2328,2403,2478,2553,2628,2703,2778,2853,2928,3003,3078,3168,3258,3348,3438,3528,3618,3708,3798,3888,0]
+    str2="__**Dragon EXP**__"
+    if nums.length<=0
+      m=dxp[0,60].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level 1 to level 60:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+      m=dxp[0,80].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level 1 to level 80:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+      m=dxp[0,100].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level 1 to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+    elsif nums.length==1
+      n=[nums[0],dxp.length].min
+      m=dxp[0,n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_1_Blank:532104334423621632> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+      if n<60
+        m=dxp[n-1,60-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level #{n} to level 60:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+      end
+      if n<80
+        m=dxp[n-1,80-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level #{n} to level 80:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+      end
+      if n<100
+        m=dxp[n-1,100-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level #{n} to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+      end
+    else
+      n=[nums[0,2].min,1].max
+      n2=[nums[0,2].max,dxp.length].min
+      m=dxp[n-1,n2-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+    end
+    str=extend_message(str,str2,event,2)
+    mode=4 if mode==3
+  end
+  if [4,0].include?(mode)
+    bxp=[[8,7.1],[16,7.2],[18,7.3],[20,7.4],[22,7.5],[26,7.6],[30,7.7],[40,7.8],[50,7.9],[60,8.0],[70,8.1],[80,8.2],[90,8.3],[100,8.4],[110,8.5],[120,8.6],
+         [130,8.7],[140,8.8],[150,8.9],[160,9.0],[175,9.1],[190,9.2],[205,9.3],[220,9.4],[240,9.5],[260,9.6],[280,9.7],[300,9.8],[320,9.9],[0,10.0]]
+    str2="__**Dragon Bond**__"
+    if nums.length<=0
+      m=bxp.map{|q| q[0]*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n*To get from level 1 to level #{bxp.length}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP required"
+      str2="#{str2}\n*Optimal feeding:*  \u200B  \u200B  #{exp_shift(m,4)}"
+      str2="#{str2}\n*Resulting shapeshift time increase:*  \u200B  \u200B  #{'%.1f' % (bxp[bxp.length-1][1]-bxp[0][1])} additional seconds ~~(from #{bxp[0][1]} sec to #{bxp[bxp.length-1][1]} sec)~~"
+    elsif nums.length==1
+      n=[nums[0],bxp.length].min
+      unless n==1
+        m=bxp[0,n-1].map{|q| q[0]*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}#{"\n" unless n==bxp.length}\n*To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP required"
+        str2="#{str2}\n*Optimal feeding:*  \u200B  \u200B  #{exp_shift(m,4)}"
+        str2="#{str2}\n*Resulting shapeshift time increase:*  \u200B  \u200B  #{'%.1f' % (bxp[n-1][1]-bxp[0][1])} additional seconds ~~(from #{bxp[0][1]} sec to #{bxp[n-1][1]} sec)~~"
+      end
+      unless n==bxp.length
+        m=bxp[n-1,bxp.length-n].map{|q| q[0]*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}#{"\n" unless n==1}\n*To get from level #{n} to level #{bxp.length}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP required"
+        str2="#{str2}\n*Optimal feeding:*  \u200B  \u200B  #{exp_shift(m,4)}"
+        str2="#{str2}\n*Resulting shapeshift time increase:*  \u200B  \u200B  #{'%.1f' % (bxp[bxp.length-1][1]-bxp[n-1][1])} additional seconds ~~(from #{bxp[n-1][1]} sec to #{bxp[bxp.length-1][1]} sec)~~"
+      end
+    else
+      n=[nums[0,2].min,1].max
+      n2=[nums[0,2].max,bxp.length].min
+      m=bxp[n-1,n2-n].map{|q| q[0]*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n*To get from level #{n} to level #{m}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP required"
+      str2="#{str2}\n*Optimal feeding:*  \u200B  \u200B  #{exp_shift(m,4)}"
+      str2="#{str2}\n*Resulting shapeshift time increase:*  \u200B  \u200B  #{'%.1f' % (bxp[n2-1][1]-bxp[n-1][1])} additional seconds ~~(from #{bxp[n-1][1]} sec to #{bxp[n2-1][1]} sec)~~"
+    end
+    str=extend_message(str,str2,event,2)
+  end
+  if [5,7,0].include?(mode)
+    wrxp=[15,20,25,30,35,40,45,50,55,60,69,78,87,96,105,114,123,132,141,150,164,178,192,206,220,234,248,262,276,290,308,326,344,362,380,398,416,434,452,470,493,
+          516,539,562,585,608,631,654,677,700,727,754,781,808,835,862,889,916,943,970,1004,1038,1072,1106,1140,1174,1208,1242,1276,1310,1355,1400,1445,1490,
+          1535,1580,1625,1670,1715,1760,1816,1872,1928,1984,2040,2096,2152,2208,2264,2320,2388,2456,2524,2592,2660,2728,2796,2864,2932,0]
+    str2="__**Wyrmprint EXP**__"
+    if nums.length<=0
+      m=wrxp[0,30].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_2:532086056254963713> *To get from level 1 to level 30:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
+      m=wrxp[0,60].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level 1 to level 60:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
+      m=wrxp[0,80].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level 1 to level 80:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
+      m=wrxp[0,100].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level 1 to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
+    elsif nums.length==1
+      n=[nums[0],wrxp.length].min
+      m=wrxp[0,n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_1_Blank:532104334423621632> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
+      if n<30
+        m=wrxp[n-1,30-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_2:532086056254963713> *To get from level #{n} to level 30:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
+      end
+      if n<60
+        m=wrxp[n-1,60-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level #{n} to level 60:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
+      end
+      if n<80
+        m=wrxp[n-1,80-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level #{n} to level 80:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
+      end
+      if n<100
+        m=wrxp[n-1,100-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level #{n} to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
+      end
+    else
+      n=[nums[0,2].min,1].max
+      n2=[nums[0,2].max,wrxp.length].min
+      m=wrxp[n-1,n2-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
+    end
+    str=extend_message(str,str2,event,2)
+  end
+  if [6,7,0].include?(mode)
+    wrxp=[50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,155,165,175,185,195,205,215,225,235,245,260,275,290,305,320,335,350,365,380,
+          395,425,455,485,515,545,575,605,635,665,695,730,765,800,835,870,905,940,975,1010,1045,1090,1135,1180,1225,1270,1315,1360,1405,1450,1495,1575,1655,
+          1735,1815,1895,1975,2055,2135,2215,2295,2395,2495,2595,2695,2795,2895,2995,3095,3195,3295,3415,3535,3655,3775,3895,4015,4135,4255,4375,0]
+    str2="__**Weapon EXP**__"
+    if nums.length<=0
+      m=wrxp[0,30].inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_2:532086056254963713> *To get from level 1 to level 30:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      m=wrxp[0,40].inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level 1 to level 40:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      m=wrxp[0,70].inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level 1 to level 70:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      m=wrxp[0,100].inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level 1 to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+    elsif nums.length==1
+      n=[nums[0],wrxp.length].min
+      m=wrxp[0,n].inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_1_Blank:532104334423621632> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      if n<30
+        m=wrxp[n-1,30-n].inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_2:532086056254963713> *To get from level #{n} to level 30:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      end
+      if n<40
+        m=wrxp[n-1,40-n].inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level #{n} to level 40:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      end
+      if n<70
+        m=wrxp[n-1,70-n].inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level #{n} to level 70:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      end
+      if n<100
+        m=wrxp[n-1,100-n].inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level #{n} to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      end
+    else
+      n=[nums[0,2].min,1].max
+      n2=[nums[0,2].max,wrxp.length].min
+      m=wrxp[n-1,n2-n].inject(0){|sum,x| sum + x }
+      str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
+    end
+    str=extend_message(str,str2,event,2)
+  end
+  event.respond str
+end
+
+bot.command([:victory]) do |event, *args|
+  return nil if overlap_prevent(event)
+  create_embed(event,'','',0xCE456B,nil,[nil,'https://cdn.discordapp.com/attachments/532352926270881792/538860577498464256/emote.png'])
+end
+
+bot.command([:xp,:exp,:level]) do |event, *args|
+  return nil if overlap_prevent(event)
+  level(event,bot,args)
+end
+
+bot.command([:plxp,:plexp,:pllevel,:plevel,:pxp,:pexp]) do |event, *args|
+  return nil if overlap_prevent(event)
+  level(event,bot,args,1)
+end
+
+bot.command([:advxp,:advexp,:advlevel,:alevel,:axp,:aexp]) do |event, *args|
+  return nil if overlap_prevent(event)
+  level(event,bot,args,2)
+end
+
+bot.command([:drgxp,:drgexp,:drglevel,:dlevel,:dxp,:dexp]) do |event, *args|
+  return nil if overlap_prevent(event)
+  level(event,bot,args,3)
+end
+
+bot.command([:bxp,:bexp,:blevel,:dbxp,:dbexp,:dblevel,:bondlevel,:bondxp,:bondexp]) do |event, *args|
+  return nil if overlap_prevent(event)
+  level(event,bot,args,4)
+end
+
+bot.command([:wrxp,:wrexp,:wrlevel,:wyrmxp,:wyrmexp,:wyrmxp,:wyrmlevel]) do |event, *args|
+  return nil if overlap_prevent(event)
+  level(event,bot,args,5)
+end
+
+bot.command([:wpxp,:wpexp,:wplevel,:weaponxp,:weaponexp,:weaponlevel]) do |event, *args|
+  return nil if overlap_prevent(event)
+  level(event,bot,args,6)
+end
+
+bot.command([:wxp,:wexp,:wlevel]) do |event, *args|
+  return nil if overlap_prevent(event)
+  level(event,bot,args,7)
+end
+
+bot.command([:roost,:ruin,:ruins,:shop,:store]) do |event, *args|
   return nil if overlap_prevent(event)
   roost(event,bot,args)
 end
@@ -2760,6 +3174,10 @@ bot.command([:adventurer,:adv,:unit]) do |event, *args|
     args.shift
     find_adventurers(bot,event,args)
     return nil
+  elsif ['level','xp','exp'].include?(args[0].downcase)
+    args.shift
+    level(event,bot,args,2)
+    return nil
   end
   disp_adventurer_stats(bot,event,args)
 end
@@ -2769,6 +3187,10 @@ bot.command([:dragon]) do |event, *args|
   if ['find','search'].include?(args[0].downcase)
     args.shift
     find_dragons(bot,event,args)
+    return nil
+  elsif ['level','xp','exp'].include?(args[0].downcase)
+    args.shift
+    level(event,bot,args,3)
     return nil
   end
   disp_dragon_stats(bot,event,args)
@@ -2780,6 +3202,10 @@ bot.command([:wyrmprint,:wyrm,:print]) do |event, *args|
     args.shift
     find_wyrmprints(bot,event,args)
     return nil
+  elsif ['level','xp','exp'].include?(args[0].downcase)
+    args.shift
+    level(event,bot,args,5)
+    return nil
   end
   disp_wyrmprint_stats(bot,event,args)
 end
@@ -2789,6 +3215,10 @@ bot.command([:weapon,:wep,:weap,:wpn]) do |event, *args|
   if ['find','search'].include?(args[0].downcase)
     args.shift
     find_weapons(bot,event,args)
+    return nil
+  elsif ['level','xp','exp'].include?(args[0].downcase)
+    args.shift
+    level(event,bot,args,6)
     return nil
   end
   disp_weapon_stats(bot,event,args)
@@ -3506,12 +3936,22 @@ bot.mention do |event|
     args.shift
     disp_aliases(bot,event,args)
     m=false
-  elsif ['roost','ruin','ruins','daily','dailies'].include?(args[0].downcase)
+  elsif ['xp','exp','level'].include?(args[0].downcase)
+    args.shift
+    level(event,bot,args)
+    m=false
+  elsif ['pxp','pexp','plxp','plexp','plevel','pllevel','adv','axp','aexp','advxp','advexp','alevel','advlevel','dxp','dexp','drgxp','drgexp','dlevel','drglevel','bond','dragonbond','bxp','bexp','dbxp','dbexp','bondxp','bondexp','blevel','dblevel','bondlevel','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp','weaponlevel','wxp','wexp','wlevel'].include?(args[0].downcase)
+    level(event,bot,args)
+    m=false
+  elsif ['roost','ruin','ruins','daily','dailies','shop','store'].include?(args[0].downcase)
     args.shift
     roost(event,bot,args)
     m=false
   elsif ['today','now','tomorrow','tommorrow','tomorow','tommorow','sunday','sundae','sun','su','sonday','sondae','son','u','mo','monday','mondae','mon','m','mo','monday','mondae','mon','m','tu','tuesday','tuesdae','tues','tue','t','we','wednesday','wednesdae','wednes','wed','w','th','thursday','thursdae','thurs','thu','thur','h','r','fr','friday','fridae','fri','fryday','frydae','fry','f','sa','saturday','saturdae','sat','saturnday','saturndae','saturn','satur'].include?(args[0].downcase)
     roost(event,bot,args)
+    m=false
+  elsif ['victory'].include?(args[0].downcase)
+    create_embed(event,'','',0xCE456B,nil,[nil,'https://cdn.discordapp.com/attachments/532352926270881792/538860577498464256/emote.png'])
     m=false
   end
   if m
@@ -3543,6 +3983,145 @@ bot.mention do |event|
   end
 end
 
+def next_holiday(bot,mode=0)
+  t=Time.now
+  t-=60*60*6
+  holidays=[]
+  d=get_donor_list()
+  d=d.reject{|q| q[2]<2}
+  for i in 0...d.length
+    if d[i][4][2]!='-'
+      holidays.push([0,d[i][3][0],d[i][3][1],d[i][4][2],"in recognition of #{bot.user(d[i][0]).distinct}","Donator's birthday"])
+      holidays[-1][5]="Donator's Day" if d[i][0]==189235935563481088
+    end
+  end
+  for i in 0...holidays.length
+    if t.month>holidays[i][1] || (t.month==holidays[i][1] && t.day>holidays[i][2])
+      holidays[i][0]=t.year+1
+    else
+      holidays[i][0]=t.year
+    end
+  end
+  e=calc_easter()
+ # holidays.push([e[0],e[1],e[2],'','','Easter'])
+  t=Time.now
+  t-=60*60*6
+  y8=t.year
+  j8=Time.new(y8,6,8)
+  fsij=8-j8.wday
+  fsij-=7 if j8.sunday?
+  fd=fsij+14
+  if (t.month==6 && t.day>fd) || t.month>6
+    y8+=1
+    j8=Time.new(y8,6,8)
+    fsij=8-j8.wday
+    fsij-=7 if j8.sunday?
+    fd=fsij+14
+  end
+ # holidays.push([y8,6,fd,'','',"Father's Day"])
+  t=Time.now
+  t-=60*60*6
+  y8=t.year
+  m8=Time.new(y8,5,8)
+  fsim=8-m8.wday
+  fsim-=7 if m8.sunday?
+  md=fsim+7
+  if (t.month==5 && t.day>md) || t.month>5
+    y8+=1
+    m8=Time.new(y8,5,8)
+    fsim=8-m8.wday
+    fsim-=7 if m8.sunday?
+    md=fsim+14
+  end
+ # holidays.push([y8,5,md,'','',"Mother's Day"])
+  holidays.sort! {|a,b| supersort(a,b,0) == 0 ? (supersort(a,b,1) == 0 ? (supersort(a,b,2) == 0 ? (supersort(a,b,6) == 0 ? supersort(a,b,4) : supersort(a,b,6)) : supersort(a,b,2)) : supersort(a,b,1)) : supersort(a,b,0)}
+  k=[]
+  for i in 0...holidays.length
+    k.push(holidays[i]) if holidays[i][0]==holidays[0][0] && holidays[i][1]==holidays[0][1] && holidays[i][2]==holidays[0][2]
+  end
+  div=[[],
+       [[0,0]],
+       [[0,0],[12,0]],
+       [[0,0],[8,0],[16,0]],
+       [[0,0],[6,0],[12,0],[18,0]],
+       [[0,0],[4,48],[9,36],[14,24],[19,12]],
+       [[0,0],[4,0],[8,0],[12,0],[16,0],[20,0]],
+       [[0,0],[3,26],[6,52],[10,17],[13,43],[17,8],[18,34]],
+       [[0,0],[3,0],[6,0],[9,0],[12,0],[15,0],[18,0],[21,0]]]
+  t=Time.now
+  t-=60*60*6
+  if k.length<=0
+    t=Time.now
+    t-=60*60*6
+    bot.game='Dragalia Lost'
+    bot.profile.avatar=(File.open('C:/Users/Mini-Matt/Desktop/devkit/BotanBot.png','r')) rescue nil if @shardizard.zero?
+    @avvie_info=['Botan','*Dragalia Lost*','']
+    t+=24*60*60
+    @scheduler.at "#{t.year}/#{t.month}/#{t.day} 0000" do
+      next_holiday(bot,1)
+    end
+  elsif t.year==k[0][0] && t.month==k[0][1] && t.day==k[0][2]
+    if k.length==1
+      # Only one holiday is today.  Display new avatar, and set another check for midnight
+      bot.game=k[0][4]
+      if @shardizard.zero?
+        bot.profile.avatar=(File.open("C:/Users/Mini-Matt/Desktop/devkit/EliseImages/#{k[0][3]}.png",'r')) rescue nil
+      end
+      @avvie_info=[k[0][3],k[0][4],k[0][5]]
+      t2= Time.now + 18*60*60
+      t=Time.now
+      @scheduler.at "#{t2.year}/#{t2.month}/#{t2.day} 0000" do
+        next_holiday(bot,1)
+      end
+    else
+      # multiple holidays are today.  Change avatar based on time of day, using div as a reference
+      fcod=div[k.length][k.length-1]
+      if t.hour>fcod[0] || (t.hour==fcod[0] && t.min>=fcod[1])
+        # in last area of day.  Set avatar to the last one for the day, then set a check for tomorrow at midnight
+        bot.game=k[k.length-1][4]
+        if @shardizard.zero?
+          bot.profile.avatar=(File.open("C:/Users/Mini-Matt/Desktop/devkit/BotanImages/#{k[k.length-1][3]}.png",'r')) rescue nil
+        end
+        @avvie_info=[k[k.length-1][3],k[k.length-1][4],k[k.length-1][5]]
+        t2= Time.now + 18*60*60
+        t=Time.now
+        @scheduler.at "#{t2.year}/#{t2.month}/#{t2.day} 0000" do
+          next_holiday(bot,1)
+        end
+      else
+        # find when in the day it is and...
+        j=0
+        t=Time.now
+        t-=60*60*6
+        for i in 0...div[k.length].length-1
+          j=i if t.hour<div[k.length][i+1][0] || (t.hour==div[k.length][i+1][0] && t.min<div[k.length][i+1][1])
+        end
+        # ...set avatar properly and set check for the beginning of the next chunk of the day
+        bot.game=k[j][4]
+        if @shardizard.zero?
+          bot.profile.avatar=(File.open("C:/Users/Mini-Matt/Desktop/devkit/BotanImages/#{k[j][3]}.png",'r')) rescue nil
+        end
+        @avvie_info=[k[j][3],k[j][4],k[j][5]]
+        t=Time.now
+        t-=60*60*6
+        @scheduler.at "#{t.year}/#{t.month}/#{t.day} #{div[k.length][j+1][0].to_s.rjust(2, '0')}#{div[k.length][j+1][1].to_s.rjust(2, '0')}" do
+          next_holiday(bot,1)
+        end
+      end
+    end
+  else
+    t=Time.now
+    t-=60*60*6
+    bot.game='Dragalia Lost'
+    bot.profile.avatar=(File.open('C:/Users/Mini-Matt/Desktop/devkit/BotanBot.png','r')) rescue nil if @shardizard.zero?
+    @avvie_info=['Botan','*Dragalia Lost*','']
+    t+=24*60*60
+    @scheduler.at "#{t.year}/#{t.month}/#{t.day} 0000" do
+      next_holiday(bot,1)
+    end
+  end
+end
+
 bot.ready do |event|
   if @shardizard==4
     for i in 0...bot.servers.values.length
@@ -3566,8 +4145,13 @@ bot.ready do |event|
   system("color 1#{"BCADF"[@shardizard,1]}")
   system("title #{['Defense','Attack','Healing','Support','Null'][@shardizard]} BotanBot")
   bot.game='Dragalia Lost'
-  bot.user(bot.profile.id).on(285663217261477889).nickname='BotanBot (Debug)' if @shardizard==4
-  bot.profile.avatar=(File.open('C:/Users/Mini-Matt/Desktop/devkit/DebugBotan.png','r')) if @shardizard==4
+  if @shardizard==4
+    next_holiday(bot)
+    bot.user(bot.profile.id).on(285663217261477889).nickname='BotanBot (Debug)' if @shardizard==4
+    bot.profile.avatar=(File.open('C:/Users/Mini-Matt/Desktop/devkit/DebugBotan.png','r')) if @shardizard==4
+  else
+    next_holiday(bot)
+  end
 end
 
 bot.run
