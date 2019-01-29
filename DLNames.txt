@@ -16,6 +16,7 @@
 ["Adventurer", "Sheep", "Annelie"]
 ["Adventurer", "Sheepelie", "Annelie"]
 ["Adventurer", "Button", "Botan"]
+["Adventurer", "You", "Botan"]
 ["Adventurer", "Celery", "Celliera"]
 ["Adventurer", "Bella", "Cibella"]
 ["Adventurer", "ChristmasCleo", "Cleo(Dragonyule)"]
