@@ -33,6 +33,8 @@ bot.gateway.check_heartbeat_acks = false
 
 @askilities=[]
 
+@facilities=[]
+
 @aliases=[]
 @spam_channels=[]
 @server_data=[[],[]]
@@ -49,7 +51,7 @@ def all_commands(include_nil=false,permissions=-1)
      'daily','now','dailies','todayindl','today_in_dl','tomorrow','tommorrow','tomorow','tommorow','shop','store','exp','level','xp','plxp','plexp','pllevel',
      'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','dbxp',
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
-     'weaponlevel','wxp','wexp','wlevel','victory']
+     'weaponlevel','wxp','wexp','wlevel','victory','facility','faculty','fac']
   k=['addalias','deletealias','removealias','s2s'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases'] if permissions==2
   k=k.uniq
@@ -167,6 +169,19 @@ def data_load()
     end
   end
   @askilities=b.map{|q| q}
+  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLFacilities.txt')
+    b=[]
+    File.open('C:/Users/Mini-Matt/Desktop/devkit/DLFacilities.txt').each_line do |line|
+      b.push(line)
+    end
+  else
+    b=[]
+  end
+  for i in 0...b.length
+    b[i]=b[i].gsub("\n",'').split('\\'[0])
+    b[i][2]=b[i][2].split(', ')
+  end
+  @facilities=b.map{|q| q}
 end
 
 def metadata_load()
@@ -417,20 +432,20 @@ end
 def find_adventurer(name,event,fullname=false)
   data_load()
   name=normalize(name)
-  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   return [] if name.length<2
-  k=@adventurers.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
+  k=@adventurers.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
   return @adventurers[k] unless k.nil?
   nicknames_load()
   alz=@aliases.reject{|q| q[0]!='Adventurer'}.map{|q| [q[1],q[2],q[3]]}
   g=0
   g=event.server.id unless event.server.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
   return @adventurers[@adventurers.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return [] if fullname
-  k=@adventurers.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
+  k=@adventurers.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return @adventurers[k] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   return @adventurers[@adventurers.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return []
 end
@@ -438,20 +453,20 @@ end
 def find_dragon(name,event,fullname=false)
   data_load()
   name=normalize(name)
-  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   return [] if name.length<2
-  k=@dragons.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
+  k=@dragons.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
   return @dragons[k] unless k.nil?
   nicknames_load()
   alz=@aliases.reject{|q| q[0]!='Dragon'}.map{|q| [q[1],q[2],q[3]]}
   g=0
   g=event.server.id unless event.server.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
   return @dragons[@dragons.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return [] if fullname
-  k=@dragons.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
+  k=@dragons.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return @dragons[k] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   return @dragons[@dragons.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return []
 end
@@ -459,20 +474,20 @@ end
 def find_wyrmprint(name,event,fullname=false)
   data_load()
   name=normalize(name)
-  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   return [] if name.length<2
-  k=@wyrmprints.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
+  k=@wyrmprints.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
   return @wyrmprints[k] unless k.nil?
   nicknames_load()
   alz=@aliases.reject{|q| q[0]!='Wyrmprint'}.map{|q| [q[1],q[2],q[3]]}
   g=0
   g=event.server.id unless event.server.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
   return @wyrmprints[@wyrmprints.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return [] if fullname
-  k=@wyrmprints.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
+  k=@wyrmprints.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return @wyrmprints[k] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   return @wyrmprints[@wyrmprints.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return []
 end
@@ -480,20 +495,20 @@ end
 def find_weapon(name,event,fullname=false)
   data_load()
   name=normalize(name)
-  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   return [] if name.length<2
-  k=@weapons.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
+  k=@weapons.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
   return @weapons[k] unless k.nil?
   nicknames_load()
   alz=@aliases.reject{|q| q[0]!='Weapon'}.map{|q| [q[1],q[2],q[3]]}
   g=0
   g=event.server.id unless event.server.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
   return @weapons[@weapons.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return [] if fullname
-  k=@weapons.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
+  k=@weapons.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return @weapons[k] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   return @weapons[@weapons.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return []
 end
@@ -501,21 +516,21 @@ end
 def find_skill(name,event,fullname=false)
   data_load()
   name=normalize(name)
-  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   return [] if name.length<2
   sklz=@askilities.reject{|q| q[2]!='Skill'}
-  k=sklz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
+  k=sklz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
   return sklz[k] unless k.nil?
   nicknames_load()
   alz=@aliases.reject{|q| q[0]!='Skill'}.map{|q| [q[1],q[2],q[3]]}
   g=0
   g=event.server.id unless event.server.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
   return sklz[sklz.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return [] if fullname
-  k=sklz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
+  k=sklz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return sklz[k] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   return sklz[sklz.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return []
 end
@@ -523,38 +538,59 @@ end
 def find_ability(name,event,fullname=false)
   data_load()
   name=normalize(name)
-  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   sklz=@askilities.reject{|q| q[2]=='Skill'}
   return [] if name.length<2
-  k=sklz.reject{|q| "#{q[0]} #{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name}
+  k=sklz.reject{|q| "#{q[0]} #{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name}
   return k unless k.nil? || k.length<=0
-  k=sklz.reject{|q| "#{q[0]} +#{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name}
+  k=sklz.reject{|q| "#{q[0]} +#{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name}
   return k unless k.nil? || k.length<=0
-  k=sklz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
+  k=sklz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
   return sklz.reject{|q| q[0]!=sklz[k][0]} unless k.nil?
   nicknames_load()
   alz=@aliases.reject{|q| !['Aura','Ability'].include?(q[0])}.map{|q| [q[1],q[2],q[3],q[0]]}
   g=0
   g=event.server.id unless event.server.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
   unless k.nil?
     m=sklz.find_index{|q| "#{q[0]} #{q[1]}"==alz[k][1]}
     return sklz[m] unless m.nil?
     return sklz.reject{|q| q[0]!=alz[k][1]}
   end
   return [] if fullname
-  k=sklz.reject{|q| "#{q[0]} #{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]!=name}
+  k=sklz.reject{|q| "#{q[0]} #{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]!=name}
   return k unless k.nil? || k.length<=0
-  k=sklz.reject{|q| "#{q[0]} +#{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]!=name}
+  k=sklz.reject{|q| "#{q[0]} +#{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]!=name}
   return k unless k.nil? || k.length<=0
-  k=sklz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
+  k=sklz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return sklz.reject{|q| q[0]!=sklz[k][0]} unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   unless k.nil?
     m=sklz.find_index{|q| "#{q[0]} #{q[1]}"==alz[k][1]}
     return sklz[m] unless m.nil?
     return sklz.reject{|q| q[0]!=alz[k][1]}
   end
+  return []
+end
+
+def find_facility(name,event,fullname=false)
+  data_load()
+  name=normalize(name)
+  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  return [] if name.length<2
+  k=@facilities.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
+  return @facilities[k] unless k.nil?
+  nicknames_load()
+  alz=@aliases.reject{|q| q[0]!='Facility'}.map{|q| [q[1],q[2],q[3]]}
+  g=0
+  g=event.server.id unless event.server.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return @facilities[@facilities.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return [] if fullname
+  k=@facilities.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
+  return @facilities[k] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return @facilities[@facilities.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return []
 end
 
@@ -1276,6 +1312,205 @@ def disp_ability_data(bot,event,args=nil)
   end
 end
 
+def disp_facility_data(bot,event,args=nil)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_facility,args.join(' '),event)
+  if k.length.zero?
+    event.respond 'No matches found.'
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  evn=event.message.text.downcase.split(' ')
+  s2s=false if @shardizard==4 && evn.include?('smol')
+  str=''
+  str="**Type:** #{k[2][0]} #{"(#{k[2][1]})" if k[2].length>1}"
+  str="#{str}\n**Size:** #{k[3]}"
+  str="#{str}\n**Quantity available:** #{k[4]}"
+  str="#{str}\n\n**Description:** #{k[1]}"
+  m='t'
+  m='Amber' if ['Staff Dojo'].include?(k[0])
+  m='Azure' if ['Blade Dojo','Lance Dojo'].include?(k[0])
+  m='Jade' if ['Axe Dojo','Wand Dojo'].include?(k[0])
+  m='Vermillion' if ['Sword Dojo','Bow Dojo'].include?(k[0])
+  m='Violet' if ['Dagger Dojo'].include?(k[0])
+  str="#{str}\n\n**First Dojo cost:** Dyrenell Aes x15\n**Second Dojo cost:** Dyrenell Aes x30, Dyrenell Argenteus x15, #{k[0].split(' ')[0]} Tablet x2" if k[2]==['Adventurer', 'Dojo']
+  if k[2]==['Adventurer', 'Altar']
+    if k[0]=='Flame Altar'
+      str="#{str}\n\n**First Altar becomes available at:** Player Level#{' (PL)' if s2s} 1\n**Second Altar becomes available at:** Player Level 40"
+      str="#{str}\n\nBy default can only go to Level 10\nCan reach Level 15 at PL 12\nCan reach Level 20 at PL 24\nCan reach Level 25 at PL 37\nCan reach Level 30 at PL 67" if s2s
+    elsif k[0]=='Wind Altar'
+      str="#{str}\n\n**First Altar becomes available at:** Player Level#{' (PL)' if s2s} 4\n**Second Altar becomes available at:** Player Level 45"
+      str="#{str}\n\nBy default can only go to Level 10\nCan reach Level 15 at PL 14\nCan reach Level 20 at PL 26\nCan reach Level 25 at PL 40\nCan reach Level 30 at PL 70" if s2s
+    elsif k[0]=='Water Altar'
+      str="#{str}\n\n**First Altar becomes available at:** Player Level#{' (PL)' if s2s} 6\n**Second Altar becomes available at:** Player Level 50"
+      str="#{str}\n\nBy default can only go to Level 10\nCan reach Level 15 at PL 16\nCan reach Level 20 at PL 28\nCan reach Level 25 at PL 43\nCan reach Level 30 at PL 73" if s2s
+    elsif k[0]=='Shadow Altar'
+      str="#{str}\n\n**First Altar becomes available at:** Player Level#{' (PL)' if s2s} 8\n**Second Altar becomes available at:** Player Level 55"
+      str="#{str}\n\nBy default can only go to Level 10\nCan reach Level 15 at PL 18\nCan reach Level 20 at PL 30\nCan reach Level 25 at PL 46\nCan reach Level 30 at PL 76" if s2s
+    elsif k[0]=='Light Altar'
+      str="#{str}\n\n**First Altar becomes available at:** Player Level#{' (PL)' if s2s} 10\n**Second Altar becomes available at:** Player Level 60"
+      str="#{str}\n\nBy default can only go to Level 10\nCan reach Level 15 at PL 20\nCan reach Level 20 at PL 32\nCan reach Level 25 at PL 49\nCan reach Level 30 at PL 79" if s2s
+    end
+  elsif k[0]=='Fafnir Statue (Flame)'
+    str="#{str}\n\n**Unlocked by:** Completing <:Element_Flame:532106087952810005>High Brunhilda's Trial\n**Cost:** Flamewyrm's Greatsphere x30, Talonstone x10"
+  elsif k[0]=='Fafnir Statue (Wind)'
+    str="#{str}\n\n**Unlocked by:** Completing <:Element_Wind:532106087948746763>High Midgardsormr's Trial\n**Cost:** Windwyrm's Greatsphere x30, Talonstone x10"
+  elsif k[0]=='Smithy' && !s2s
+    str="#{str}\n\nLevel 1-3 Smithies can craft #{generate_rarity_row(3)} weapons"
+    str="#{str}\nLevel 4-6 Smithies can craft #{generate_rarity_row(4)} weapons"
+    str="#{str}\nLevel 7-9 Smithies can craft #{generate_rarity_row(5)} weapons"
+    str="#{str}\nEach new level of smithy allows you to craft higher-tier weapons within the newest-allowed rarity bracket."
+  end
+  ftr=nil
+  ftr='Use this command in PM to see the costs to upgrade this facility.' unless s2s
+  create_embed(event,"__**#{k[0]}**__",str,0x8BE3F7,ftr)
+  if s2s
+    str=''
+    ftr=nil
+    if k[2][0]=='Adventurer'
+      if k[2][1]=='Dojo'
+        m='t'
+        m='Amber' if ['Staff Dojo'].include?(k[0])
+        m='Azure' if ['Blade Dojo','Lance Dojo'].include?(k[0])
+        m='Jade' if ['Axe Dojo','Wand Dojo'].include?(k[0])
+        m='Vermillion' if ['Sword Dojo','Bow Dojo'].include?(k[0])
+        m='Violet' if ['Dagger Dojo'].include?(k[0])
+        str="*Level 1 \u2192 5 (per level):* Dyrenell Aes x10"
+        str="#{str}\n\n*Level 5 \u2192 10 (per level):* Dyrenell Aes x20"
+        str="#{str}\n\n*Level 10 \u2192 13 (per level):* Dyrenell Aes x30, Dyrenell Argenteus x5, #{m} Insignia x10"
+        str="#{str}\n\n*Level 13 \u2192 15 (per level):* Dyrenell Aes x30, Dyrenell Argenteus x10, #{m} Insignia x20"
+        str="#{str}\n\n*Level 15 \u2192 18 (per level):* Dyrenell Aes x50, Dyrenell Argenteus x20, #{m} Insignia x40"
+        str="#{str}\n\n*Level 18 \u2192 20 (per level):* Dyrenell Aes x70, Dyrenell Argenteus x30, #{m} Insignia x60"
+        str="#{str}\n\n*Level 20 \u2192 21:* Dyrenell Aes x100, Dyrenell Argenteus x40, Dyrenell Aureus x20, #{m} Insignia x80"
+        str="#{str}\n\n*Level 21 \u2192 22:* Dyrenell Aes x100, Dyrenell Argenteus x40, Dyrenell Aureus x30, #{m} Insignia x80"
+        str="#{str}\n\n*Level 22 \u2192 23:* Dyrenell Aes x100, Dyrenell Argenteus x40, Dyrenell Aureus x40, #{m} Insignia x80"
+        str="#{str}\n\n*Level 23 \u2192 24:* Dyrenell Aes x150, Dyrenell Argenteus x50, Dyrenell Aureus x50, #{m} Insignia x100"
+        str="#{str}\n\n*Level 24 \u2192 25:* Dyrenell Aes x150, Dyrenell Argenteus x50, Dyrenell Aureus x60, #{m} Insignia x100"
+        str="#{str}\n\n*Level 25 \u2192 26:* Dyrenell Aes x200, Dyrenell Argenteus x60, Dyrenell Aureus x70, #{m} Insignia x120, Royal #{m} Insignia x20"
+        str="#{str}\n\n*Level 26 \u2192 27:* Dyrenell Aes x200, Dyrenell Argenteus x60, Dyrenell Aureus x80, #{m} Insignia x120, Royal #{m} Insignia x30"
+        str="#{str}\n\n*Level 27 \u2192 28:* Dyrenell Aes x200, Dyrenell Argenteus x60, Dyrenell Aureus x90, #{m} Insignia x120, Royal #{m} Insignia x40"
+        str="#{str}\n\n*Level 28 \u2192 29:* Dyrenell Aes x300, Dyrenell Argenteus x80, Dyrenell Aureus x100, #{m} Insignia x160, Royal #{m} Insignia x50"
+        str="#{str}\n\n*Level 29 \u2192 30:* Dyrenell Aes x300, Dyrenell Argenteus x80, Dyrenell Aureus x110, #{m} Insignia x160, Royal #{m} Insignia x60"
+      elsif k[2][1]=='Altar'
+        m=['1','2','3']
+        m=['Flame','Blaze','Inferno'] if k[0]=='Flame Altar'
+        m=['Water','Stream','Deluge'] if k[0]=='Water Altar'
+        m=['Wind','Storm','Maelstorm'] if k[0]=='Wind Altar'
+        m=['Light','Radiance','Refulgence'] if k[0]=='Light Altar'
+        m=['Shadow','Nightfull','Nether'] if k[0]=='Shadow Altar'
+        str="*Level 1 \u2192 3 (per level):* ~~no mats~~"
+        str="#{str}\n*Level 3 \u2192 4:* #{m[0]} Orb x1"
+        str="#{str}\n*Level 4 \u2192 5:* #{m[0]} Orb x3"
+        str="#{str}\n*Level 5 \u2192 8 (per level):* #{m[0]} Orb x5"
+        str="#{str}\n*Level 8 \u2192 10 (per level):* #{m[0]} Orb x7"
+        str="#{str}\n*Level 10 \u2192 13 (per level):* #{m[0]} Orb x10, #{m[1]} Orb x1"
+        str="#{str}\n*Level 13 \u2192 15 (per level):* #{m[0]} Orb x15, #{m[1]} Orb x2"
+        str="#{str}\n*Level 15 \u2192 18 (per level):* #{m[0]} Orb x20, #{m[1]} Orb x3"
+        str="#{str}\n*Level 18 \u2192 20 (per level):* #{m[0]} Orb x30, #{m[1]} Orb x4"
+        str="#{str}\n*Level 20 \u2192 23 (per level):* #{m[0]} Orb x50, #{m[1]} Orb x6, #{m[2]} Orb x1"
+        str="#{str}\n*Level 23 \u2192 25 (per level):* #{m[0]} Orb x70, #{m[1]} Orb x8, #{m[2]} Orb x1"
+        str="#{str}\n*Level 25 \u2192 28 (per level):* #{m[0]} Orb x100, #{m[1]} Orb x10, #{m[2]} Orb x2"
+        str="#{str}\n*Level 28 \u2192 30 (per level):* #{m[0]} Orb x150, #{m[1]} Orb x12, #{m[2]} Orb x3"
+      elsif k[2][1]=='Event Altar' && !k[5].nil? && k[5].length>0
+        m=[3,5,7,10,12,15,18,21,25,30,50,70,90,120,150,180,210,250,300,350,400,450,500,550,600,700,800,900,1000]
+        for i in 0...m.length
+          str="#{str}\n*Level #{i+1} \u2192 #{i+2}:* #{k[5]} x#{m[i]}"
+        end
+      end
+    elsif k[2][0]=='Dragon'
+      if k[2][1]=='Fafnir'
+        m=k[0].gsub('Fafnir Statue (','').gsub(')','')
+        m2='x'
+        m2='Scald' if m=='Flame'
+        m2='Squall' if m=='Wind'
+        str="*Level 1 \u2192 3 (per level):* #{m}wyrm's Greatsphere x3"
+        str="#{str}\n*Level 3 \u2192 5 (per level):* #{m}wyrm's Greatsphere x5"
+        str="#{str}\n*Level 5 \u2192 8 (per level):* #{m}wyrm's Greatsphere x7, #{m}wyrm's #{m2}scale x5, Talonstone x10"
+        str="#{str}\n*Level 8 \u2192 10 (per level):* #{m}wyrm's Greatsphere x10, #{m}wyrm's #{m2}scale x5, Talonstone x10"
+        str="#{str}\n*Level 10 \u2192 13 (per level):* #{m}wyrm's Greatsphere x12, #{m}wyrm's #{m2}scale x10, Talonstone x20"
+        str="#{str}\n*Level 13 \u2192 15 (per level):* #{m}wyrm's Greatsphere x15, #{m}wyrm's #{m2}scale x10, Talonstone x20"
+        str="#{str}\n*Level 15 \u2192 18 (per level):* #{m}wyrm's Greatsphere x20, #{m}wyrm's #{m2}scale x20, Talonstone x30"
+        str="#{str}\n*Level 18 \u2192 20 (per level):* #{m}wyrm's Greatsphere x30, #{m}wyrm's #{m2}scale x20, Talonstone x30"
+        str="#{str}\n*Level 20 \u2192 23 (per level):* #{m}wyrm's Greatsphere x40, #{m}wyrm's #{m2}scale x30, Talonstone x40"
+        str="#{str}\n*Level 23 \u2192 25 (per level):* #{m}wyrm's Greatsphere x50, #{m}wyrm's #{m2}scale x30, Talonstone x40"
+        str="#{str}\n*Level 25 \u2192 28 (per level):* #{m}wyrm's Greatsphere x60, #{m}wyrm's #{m2}scale x50, Talonstone x60"
+        str="#{str}\n*Level 28 \u2192 30 (per level):* #{m}wyrm's Greatsphere x70, #{m}wyrm's #{m2}scale x50, Talonstone x60"
+      elsif k[2][1]=='Dracolith'
+        str="*Level 1 \u2192 3 (per level):* ~~no mats~~"
+        m=[[5,3,1],[10,4,1],[15,5,1],[20,6,3],[25,7,3],[30,8,3],[35,10,3],[40,15,5],[50,20,5],[60,25,5],[90,30,8],[120,40,8],[150,60,8],[200,80,10],
+           [250,100,10],[300,120,10],[350,140,10]]
+        m2=k[0].split(' ')[0]
+        for i in 0...m.length
+          str="#{str}\n*Level #{i+3} \u2192 #{i+4}:* #{m2}wyrm's Sphere x#{m[i][0]}, #{m2}wyrm's Scale x#{m[i][1]}, Talonstone x#{m[i][2]}"
+        end
+      end
+    elsif k[0]=='Smithy'
+      str="__**Can craft #{generate_rarity_row(3)} weapons**__"
+      str="#{str}\n*Level 1 \u2192 2:* ~~no mats~~"
+      str="#{str}\n*Level 2 \u2192 3:* Light Metal x3"
+      str="#{str}\n\n__**Can craft #{generate_rarity_row(4)} weapons**__"
+      str="#{str}\n*Level 3 \u2192 4:* Iron Ore x10, Fiend's Claw x10, Bat's Wing x10"
+      str="#{str}\n*Level 4 \u2192 5:* Iron Ore x15, Fiend's Claw x15, Bat's Wing x15, Light Metal x15"
+      str="#{str}\n*Level 5 \u2192 6:* Granite x10, Fiend's Horn x10, Ancient Bird's Feather x10"
+      str="#{str}\n\n__**Can craft #{generate_rarity_row(5)} weapons**__"
+      str="#{str}\n*Level 6 \u2192 7:* Granite x15, Fiend's Horn x15, Ancient Bird's Feather x15, Abyss Stone x15"
+      str="#{str}\n*Level 7 \u2192 8:* Meteorite x10, Fiend's Eye x10, Bewitching Wings x10"
+      str="#{str}\n*Level 8 \u2192 9:* Meteorite x15, Fiend's Eye x15, Bewitching Wings x15, Crimson Core x15"
+      ftr='Each new level of smithy allows you to craft higher-tier weapons within the newest-allowed rarity bracket.'
+    elsif k[0]=='Halidom'
+      str="__*Level 1 \u2192 2*__\nRequires Facility level of 5"
+      str="#{str}\n\n__*Level 2 \u2192 3*__\nRequires Facility level of 40\n<:Element_Wind:532106087948746763>Wind Orb x10, Storm Orb x1, Talonstone x3"
+      str="#{str}\n\n__*Level 3 \u2192 4*__\nRequires Facility level of 100\n<:Element_Water:532106088221376522>Water Orb x20, Stream Orb x3, Deluge Orb x1, Talonstone x5"
+      str="#{str}\n\n__*Level 4 \u2192 5*__\nRequires Facility level of 200\n<:Element_Flame:532106087952810005>Flame Orb x50, Blaze Orb x7, Inferno Orb x2, Talonstone x10"
+      str="#{str}\n\n__*Level 5 \u2192 6*__\nRequires Facility level of 300\n<:Element_Light:532106088129101834>Light Orb x100, Radiance Orb x15, Refulgence Orb x3, Talonstone x15"
+      str="#{str}\n\n__*Level 6 \u2192 7*__\nRequires Facility level of 400\n<:Element_Shadow:532106088154267658>Shadow Orb x150, Nightfall Orb x20, Nether Orb x4, Talonstone x20"
+      str="#{str}\n\n__*Level 7 \u2192 8*__\nRequires Facility level of 550\n<:Element_Wind:532106087948746763>Wind Orb x200, Storm Orb x25, Maelstrom Orb x6, Talonstone x25"
+      str="#{str}\n\n__*Level 8 \u2192 9*__\nRequires Facility level of 700\n<:Element_Water:532106088221376522>Water Orb x300, Stream Orb x40, Deluge Orb x9, Talonstone x30"
+    elsif k[0]=='Dragontree'
+      str="*Level 1 \u2192 3 (per level):* ~~no mats~~"
+      str="#{str}\n*Level 3 \u2192 5 (per level):* Talonstone x1"
+      str="#{str}\n*Level 5 \u2192 7 (per level):* Talonstone x2"
+      str="#{str}\n*Level 7 \u2192 9 (per level):* Talonstone x3"
+      str="#{str}\n*Level 9 \u2192 10:* Talonstone x4"
+      str="#{str}\n*Level 10 \u2192 11:* Talonstone x5"
+      str="#{str}\n*Level 11 \u2192 12:* Talonstone x6"
+      str="#{str}\n*Level 12 \u2192 13:* Talonstone x8"
+      str="#{str}\n*Level 13 \u2192 14:* Talonstone x9"
+      str="#{str}\n*Level 14 \u2192 15:* Talonstone x10"
+      str="#{str}\n*Level 15 \u2192 16:* Talonstone x12"
+      str="#{str}\n*Level 16 \u2192 17:* Talonstone x13"
+      str="#{str}\n*Level 17 \u2192 18:* Talonstone x14"
+      str="#{str}\n*Level 18 \u2192 19:* Talonstone x16"
+      str="#{str}\n*Level 19 \u2192 20:* Talonstone x17"
+      str="#{str}\n*Level 20 \u2192 21:* Talonstone x18"
+      str="#{str}\n*Level 21 \u2192 22:* Talonstone x20"
+      str="#{str}\n*Level 22 \u2192 23:* Talonstone x21"
+      str="#{str}\n*Level 23 \u2192 24:* Talonstone x22"
+      str="#{str}\n*Level 24 \u2192 25:* Talonstone x24"
+      str="#{str}\n*Level 25 \u2192 26:* Talonstone x25"
+      str="#{str}\n*Level 26 \u2192 27:* Talonstone x26"
+    elsif k[0]=='Rupie Mine'
+      str="*Level 1 \u2192 5 (per level):* ~~no mats~~"
+      str="#{str}\n*Level 5 \u2192 8 (per level):* Light Orb x1"
+      str="#{str}\n*Level 8 \u2192 10 (per level):* Light Orb x2"
+      str="#{str}\n*Level 10 \u2192 13 (per level):* Light Orb x3"
+      str="#{str}\n*Level 13 \u2192 15 (per level):* Light Orb x5"
+      str="#{str}\n*Level 15 \u2192 18 (per level):* Light Orb x8, Radiance Orb x1"
+      str="#{str}\n*Level 18 \u2192 20 (per level):* Light Orb x10, Radiance Orb x1"
+      str="#{str}\n*Level 20 \u2192 23 (per level):* Light Orb x15, Radiance Orb x2"
+      str="#{str}\n*Level 23 \u2192 25 (per level):* Light Orb x20, Radiance Orb x2"
+      str="#{str}\n*Level 25 \u2192 28 (per level):* Light Orb x30, Radiance Orb x3, Refulgence Orb x1"
+      str="#{str}\n*Level 28 \u2192 30 (per level):* Light Orb x40, Radiance Orb x3, Refulgence Orb x1"
+    elsif !k[5].nil? && k[5].length>0
+      str=k[5].gsub('/n',"\n").gsub('/>'," \u2192 ").gsub('/a'," \u2192 ").gsub('/u'," \u2192 ")
+    end
+    create_embed(event,'',str,0x8BE3F7,ftr) if str.length>0
+  end
+end
+
 def find_in_adventurers(bot,event,args=nil,mode=0)
   data_load()
   args=normalize(event.message.text.downcase).split(' ') if args.nil?
@@ -1956,6 +2191,10 @@ def spaceship_order(x)
   return 2 if x=='Dragon'
   return 3 if x=='Wyrmprint'
   return 4 if x=='Weapon'
+  return 5 if x=='Skill'
+  return 6 if x=='Ability'
+  return 7 if x=='Facility'
+  return 8 if x=='Material'
   return 500
 end
 
@@ -2000,6 +2239,8 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     type[0]='Skill'
   elsif find_ability(newname,event,true).length>0
     type[0]='Ability'
+  elsif find_facility(newname,event,true).length>0
+    type[0]='Facility'
   elsif find_adventurer(newname,event).length>0
     type[0]='Adventurer*'
   elsif find_dragon(newname,event).length>0
@@ -2012,6 +2253,8 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     type[0]='Skill*'
   elsif find_ability(newname,event).length>0
     type[0]='Ability*'
+  elsif find_facility(newname,event).length>0
+    type[0]='Facility*'
   end
   if find_adventurer(unit,event,true).length>0
     type[1]='Adventurer'
@@ -2025,6 +2268,8 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     type[1]='Skill'
   elsif find_ability(unit,event,true).length>0
     type[1]='Ability'
+  elsif find_facility(unit,event,true).length>0
+    type[1]='Facility'
   elsif find_adventurer(unit,event).length>0
     type[1]='Adventurer*'
   elsif find_dragon(unit,event).length>0
@@ -2037,6 +2282,8 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     type[1]='Skill*'
   elsif find_ability(unit,event).length>0
     type[1]='Ability*'
+  elsif find_facility(unit,event).length>0
+    type[1]='Facility*'
   end
   checkstr=normalize(newname)
   if type.reject{|q| q != 'Alias'}.length<=0
@@ -2088,6 +2335,9 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     else
       dispstr=['Ability',"#{unit[0]} #{unit[1]}",'Ability',"#{unit[0]} #{unit[1]}"]
     end
+  elsif type[1]=='Facility'
+    unit=find_facility(unit,event)
+    dispstr=['Facility',unit[0],'Facility',unit[0]]
   end
   logchn=536307117301170187
   logchn=431862993194582036 if @shardizard==4
@@ -2191,7 +2441,8 @@ def disp_aliases(bot,event,args=nil,mode=0)
     elsif find_data_ex(:find_weapon,args.join(''),event).length>0
     elsif find_data_ex(:find_skill,args.join(''),event).length>0
     elsif find_data_ex(:find_ability,args.join(''),event).length>0
-    elsif has_any?(args,['adventurer','adventurers','adv','advs','unit','units','dragon','dragons','wyrmprint','wyrm','print','weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap','skill','skil','skills','skils','ability','abilitys','abilities','abil','abils','able','ables'])
+    elsif find_data_ex(:find_facility,args.join(''),event).length>0
+    elsif has_any?(args,['adventurer','adventurers','adv','advs','unit','units','dragon','dragons','wyrmprint','wyrm','print','weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap','skill','skil','skills','skils','ability','abilitys','abilities','abil','abils','able','ables','facility','facilitys','facilities','faculty','facultys','faculties'])
     else
       event.respond "The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Abilities\n\n#{args.join(' ')} does not fall into any of these categories."
       return nil
@@ -2209,10 +2460,12 @@ def disp_aliases(bot,event,args=nil,mode=0)
   skl=nil if skl.length<=0 || args.length.zero?
   abl=find_data_ex(:find_ability,args.join(''),event)
   abl=nil if abl.length<=0 || args.length.zero?
+  fac=find_data_ex(:find_fac,args.join(''),event)
+  fac=nil if fac.length<=0 || args.length.zero?
   f=[]
   n=@aliases.reject{|q| q[0]!='Adventurer'}.map{|q| [q[1],q[2],q[3]]}
   h=''
-  if adv.nil? && drg.nil? && wrm.nil? && wpn.nil? && abl.nil? && abl.nil?
+  if adv.nil? && drg.nil? && wrm.nil? && wpn.nil? && abl.nil? && abl.nil? && fac.nil?
     if has_any?(args,['adventurer','adventurers','adv','advs','unit','units'])
       n=n.reject{|q| q[2].nil?} if mode==1
       f.push('__**Adventurer Aliases**__')
@@ -2333,6 +2586,26 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
         end
       end
+    elsif has_any?(args,['facility','facilitys','facilities','faculty','facultys','faculties'])
+      f.push('__**Facility Aliases**__')
+      n=@aliases.reject{|q| q[0]!='Facility'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
     elsif safe_to_spam?(event) || mode==1
       n=n.reject{|q| q[2].nil?} if mode==1
       unless event.server.nil?
@@ -2371,6 +2644,12 @@ def disp_aliases(bot,event,args=nil,mode=0)
         end
         msg=extend_message(msg,'__**Ability Aliases**__',event,2)
         n=@aliases.reject{|q| !['Ability'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+        n=n.reject{|q| q[2].nil?} if mode==1
+        for i in 0...n.length
+          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
+        end
+        msg=extend_message(msg,'__**Facility Aliases**__',event,2)
+        n=@aliases.reject{|q| !['Facility'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
         n=n.reject{|q| q[2].nil?} if mode==1
         for i in 0...n.length
           msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
@@ -2474,6 +2753,25 @@ def disp_aliases(bot,event,args=nil,mode=0)
       end
       f.push("\n__**Ability Aliases**__")
       n=@aliases.reject{|q| !['Ability'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+      f.push("\n__**Facility Aliases**__")
+      n=@aliases.reject{|q| !['Facility'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
       n=n.reject{|q| q[2].nil?} if mode==1
       for i in 0...n.length
         if n[i][2].nil?
@@ -2704,6 +3002,31 @@ def disp_aliases(bot,event,args=nil,mode=0)
           else
             f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
           end
+        end
+      end
+    end
+  elsif !fac.nil?
+    n=@aliases.reject{|q| !['Faculty'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+    n=n.reject{|q| q[2].nil?} if mode==1
+    f.push("__**#{fac[0]}**__#{"'s server-specific aliases" if mode==1}")
+    unless mode==1
+      f.push(fac[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if fac[0].include?('(') || fac[0].include?(')') || fac[0].include?(' ') || fac[0].include?('!') || fac[0].include?('_') || fac[0].include?('?') || fac[0].include?("'") || fac[0].include?('"')
+    end
+    for i in 0...n.length
+      if n[i][1]==fac[0]
+        if event.server.nil? && !n[i][2].nil?
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        elsif n[i][2].nil?
+          f.push(n[i][0].gsub('_','\\_')) unless mode==1
+        else
+          f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
         end
       end
     end
@@ -3130,88 +3453,6 @@ def level(event,bot,args=nil,mode=0)
   event.respond str
 end
 
-bot.command([:victory]) do |event, *args|
-  return nil if overlap_prevent(event)
-  create_embed(event,'','',0xCE456B,nil,[nil,'https://cdn.discordapp.com/attachments/532352926270881792/538860577498464256/emote.png'])
-end
-
-bot.command([:xp,:exp,:level]) do |event, *args|
-  return nil if overlap_prevent(event)
-  level(event,bot,args)
-end
-
-bot.command([:plxp,:plexp,:pllevel,:plevel,:pxp,:pexp]) do |event, *args|
-  return nil if overlap_prevent(event)
-  level(event,bot,args,1)
-end
-
-bot.command([:advxp,:advexp,:advlevel,:alevel,:axp,:aexp]) do |event, *args|
-  return nil if overlap_prevent(event)
-  level(event,bot,args,2)
-end
-
-bot.command([:drgxp,:drgexp,:drglevel,:dlevel,:dxp,:dexp]) do |event, *args|
-  return nil if overlap_prevent(event)
-  level(event,bot,args,3)
-end
-
-bot.command([:bxp,:bexp,:blevel,:dbxp,:dbexp,:dblevel,:bondlevel,:bondxp,:bondexp]) do |event, *args|
-  return nil if overlap_prevent(event)
-  level(event,bot,args,4)
-end
-
-bot.command([:wrxp,:wrexp,:wrlevel,:wyrmxp,:wyrmexp,:wyrmxp,:wyrmlevel]) do |event, *args|
-  return nil if overlap_prevent(event)
-  level(event,bot,args,5)
-end
-
-bot.command([:wpxp,:wpexp,:wplevel,:weaponxp,:weaponexp,:weaponlevel]) do |event, *args|
-  return nil if overlap_prevent(event)
-  level(event,bot,args,6)
-end
-
-bot.command([:wxp,:wexp,:wlevel]) do |event, *args|
-  return nil if overlap_prevent(event)
-  level(event,bot,args,7)
-end
-
-bot.command([:roost,:ruin,:ruins,:shop,:store]) do |event, *args|
-  return nil if overlap_prevent(event)
-  roost(event,bot,args)
-end
-
-bot.command([:today,:daily,:dailies,:now,:todayindl,:todayinDL,:todayInDL,:today_in_dl,:today_In_DL,:today_in_DL,:today_In_dl]) do |event, *args|
-  return nil if overlap_prevent(event)
-  roost(event,bot,args,true)
-end
-
-bot.command([:tomorrow,:tommorrow,:tomorow,:tommorow]) do |event, *args|
-  return nil if overlap_prevent(event)
-  roost(event,bot,args,-1)
-end
-
-bot.command([:find,:search]) do |event, *args|
-  return nil if overlap_prevent(event)
-  if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
-    args.shift
-    find_adventurers(bot,event,args)
-    return nil
-  elsif ['dragon','dragons'].include?(args[0].downcase)
-    args.shift
-    find_dragons(bot,event,args)
-    return nil
-  elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
-    args.shift
-    find_wyrmprints(bot,event,args)
-    return nil
-  elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase)
-    args.shift
-    find_weapons(bot,event,args)
-    return nil
-  end
-  find_all(bot,event,args)
-end
-
 bot.command([:adventurer,:adv,:unit]) do |event, *args|
   return nil if overlap_prevent(event)
   if ['find','search'].include?(args[0].downcase)
@@ -3276,6 +3517,93 @@ end
 bot.command([:ability,:abil,:aura]) do |event, *args|
   return nil if overlap_prevent(event)
   disp_ability_data(bot,event,args)
+end
+
+bot.command([:facility,:faculty,:fac]) do |event, *args|
+  return nil if overlap_prevent(event)
+  disp_facility_data(bot,event,args)
+end
+
+bot.command([:find,:search]) do |event, *args|
+  return nil if overlap_prevent(event)
+  if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
+    args.shift
+    find_adventurers(bot,event,args)
+    return nil
+  elsif ['dragon','dragons'].include?(args[0].downcase)
+    args.shift
+    find_dragons(bot,event,args)
+    return nil
+  elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
+    args.shift
+    find_wyrmprints(bot,event,args)
+    return nil
+  elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase)
+    args.shift
+    find_weapons(bot,event,args)
+    return nil
+  end
+  find_all(bot,event,args)
+end
+
+bot.command([:victory]) do |event, *args|
+  return nil if overlap_prevent(event)
+  create_embed(event,'','',0xCE456B,nil,[nil,'https://cdn.discordapp.com/attachments/532352926270881792/538860577498464256/emote.png'])
+end
+
+bot.command([:xp,:exp,:level]) do |event, *args|
+  return nil if overlap_prevent(event)
+  level(event,bot,args)
+end
+
+bot.command([:plxp,:plexp,:pllevel,:plevel,:pxp,:pexp]) do |event, *args|
+  return nil if overlap_prevent(event)
+  level(event,bot,args,1)
+end
+
+bot.command([:advxp,:advexp,:advlevel,:alevel,:axp,:aexp]) do |event, *args|
+  return nil if overlap_prevent(event)
+  level(event,bot,args,2)
+end
+
+bot.command([:drgxp,:drgexp,:drglevel,:dlevel,:dxp,:dexp]) do |event, *args|
+  return nil if overlap_prevent(event)
+  level(event,bot,args,3)
+end
+
+bot.command([:bxp,:bexp,:blevel,:dbxp,:dbexp,:dblevel,:bondlevel,:bondxp,:bondexp]) do |event, *args|
+  return nil if overlap_prevent(event)
+  level(event,bot,args,4)
+end
+
+bot.command([:wrxp,:wrexp,:wrlevel,:wyrmxp,:wyrmexp,:wyrmxp,:wyrmlevel]) do |event, *args|
+  return nil if overlap_prevent(event)
+  level(event,bot,args,5)
+end
+
+bot.command([:wpxp,:wpexp,:wplevel,:weaponxp,:weaponexp,:weaponlevel]) do |event, *args|
+  return nil if overlap_prevent(event)
+  level(event,bot,args,6)
+end
+
+bot.command([:wxp,:wexp,:wlevel]) do |event, *args|
+  return nil if overlap_prevent(event)
+  level(event,bot,args,7)
+end
+
+bot.command([:roost,:ruin,:ruins,:shop,:store]) do |event, *args|
+  return nil if overlap_prevent(event)
+  roost(event,bot,args)
+end
+
+bot.command([:today,:daily,:dailies,:now,:todayindl,:todayinDL,:todayInDL,:today_in_dl,:today_In_DL,:today_in_DL,:today_In_dl]) do |event, *args|
+  return nil if overlap_prevent(event)
+  roost(event,bot,args,true)
+end
+
+bot.command([:tomorrow,:tommorrow,:tomorow,:tommorow]) do |event, *args|
+  return nil if overlap_prevent(event)
+  roost(event,bot,args,-1)
 end
 
 bot.command(:addalias) do |event, newname, unit, modifier, modifier2|
@@ -3770,6 +4098,26 @@ bot.command(:snagstats) do |event, f, f2|
       str2="#{str2} - This server accounts for #{@aliases.reject{|q| q[0]!='Ability' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
     end
     str=extend_message(str,str2,event,2)
+    glbl=@aliases.reject{|q| q[0]!='Facility' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    srv_spec=@aliases.reject{|q| q[0]!='Facility' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    str2="**There are #{longFormattedNumber(glbl.length)} global facility aliases.**\n**There are #{longFormattedNumber(srv_spec.length)} server-specific facility aliases.**"
+    if event.server.nil? && @shardizard==4
+    elsif event.server.nil?
+      str2="#{str2} - Servers you and I share account for #{@aliases.reject{|q| q[0]!='Facility' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
+    else
+      str2="#{str2} - This server accounts for #{@aliases.reject{|q| q[0]!='Facility' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
+    end
+    str=extend_message(str,str2,event,2)
+    glbl=@aliases.reject{|q| q[0]!='Material' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    srv_spec=@aliases.reject{|q| q[0]!='Material' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    str2="**There are #{longFormattedNumber(glbl.length)} global material aliases.**\n**There are #{longFormattedNumber(srv_spec.length)} server-specific material aliases.**"
+    if event.server.nil? && @shardizard==4
+    elsif event.server.nil?
+      str2="#{str2} - Servers you and I share account for #{@aliases.reject{|q| q[0]!='Material' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
+    else
+      str2="#{str2} - This server accounts for #{@aliases.reject{|q| q[0]!='Material' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
+    end
+    str=extend_message(str,str2,event,2)
     event.respond str
     return nil
   elsif event.user.id==167657750971547648 && !f.nil? && f.to_i.to_s==f
@@ -3801,6 +4149,8 @@ bot.command(:snagstats) do |event, f, f2|
   event << "There are #{longFormattedNumber(@askilities.reject{|q| q[2]!='Aura'}.length)} dragon auras, split into #{longFormattedNumber(@askilities.reject{|q| q[2]!='Aura'}.map{|q| q[0]}.uniq.length)} families."
   event << "There are #{longFormattedNumber(@askilities.reject{|q| q[2]!='Ability'}.length)} abilities, split into #{longFormattedNumber(@askilities.reject{|q| q[2]!='Ability'}.map{|q| q[0]}.uniq.length)} families."
   event << "There are #{longFormattedNumber(@askilities.reject{|q| q[2]!='CoAbility'}.length)} co-abilities, split into #{longFormattedNumber(@askilities.reject{|q| q[2]!='CoAbility'}.map{|q| q[0]}.uniq.length)} families."
+  event << ''
+  event << "There are #{longFormattedNumber(@facilities.length)} facilities."
   event << ''
   event << "**There are #{longFormattedNumber(glbl.length)} global and #{longFormattedNumber(srv_spec.length)} server-specific *aliases*.**"
   event << ''
@@ -3898,6 +4248,8 @@ bot.message do |event|
       disp_skill_data(bot,event,s.split(' '))
     elsif find_data_ex(:find_ability,s,event,true).length>0
       disp_ability_data(bot,event,s.split(' '))
+    elsif find_data_ex(:find_facility,s,event,true).length>0
+      disp_facility_data(bot,event,s.split(' '))
     elsif find_data_ex(:find_adventurer,s,event).length>0
       disp_adventurer_stats(bot,event,s.split(' '))
     elsif find_data_ex(:find_dragon,s,event).length>0
@@ -3910,6 +4262,8 @@ bot.message do |event|
       disp_skill_data(bot,event,s.split(' '))
     elsif find_data_ex(:find_ability,s,event).length>0
       disp_ability_data(bot,event,s.split(' '))
+    elsif find_data_ex(:find_facility,s,event).length>0
+      disp_facility_data(bot,event,s.split(' '))
     end
   elsif event.message.text.include?('0x4') && !event.user.bot_account? && @shardizard==4
     s=event.message.text
@@ -3972,6 +4326,10 @@ bot.mention do |event|
     m=false
     args.shift
     disp_ability_data(bot,event,args)
+  elsif ['facility','faculty','fac'].include?(args[0].downcase)
+    m=false
+    args.shift
+    disp_facility_data(bot,event,args)
   elsif ['serveraliases','saliases'].include?(args[0].downcase)
     args.shift
     disp_aliases(bot,event,args,1)
@@ -4011,6 +4369,8 @@ bot.mention do |event|
       disp_skill_data(bot,event,args)
     elsif find_data_ex(:find_ability,name,event,true).length>0
       disp_ability_data(bot,event,args)
+    elsif find_data_ex(:find_facility,name,event,true).length>0
+      disp_facility_data(bot,event,args)
     elsif find_data_ex(:find_adventurer,name,event).length>0
       disp_adventurer_stats(bot,event,args)
     elsif find_data_ex(:find_dragon,name,event).length>0
@@ -4023,6 +4383,8 @@ bot.mention do |event|
       disp_skill_data(bot,event,args)
     elsif find_data_ex(:find_ability,name,event).length>0
       disp_ability_data(bot,event,args)
+    elsif find_data_ex(:find_facility,name,event).length>0
+      disp_facility_data(bot,event,args)
     end
   end
 end
