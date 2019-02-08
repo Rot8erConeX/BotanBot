@@ -1455,7 +1455,8 @@ def disp_facility_data(bot,event,args=nil)
   end
   ftr=nil
   ftr='Use this command in PM to see the costs to upgrade this facility.' unless s2s
-  create_embed(event,"__**#{k[0]}**__",str,0x8BE3F7,ftr)
+  xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Facilities/#{k[0].gsub(' ','_')}.png"
+  create_embed(event,"__**#{k[0]}**__",str,0x8BE3F7,ftr,xpic)
   if s2s
     str=''
     ftr=nil
@@ -2472,6 +2473,8 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     newname="#{unit}"
     unit="#{f}"
     type=type.reverse.map{|q| q.gsub('*','')}
+  else
+    type=type.map{|q| q.gsub('*','')}
   end
   if type[1]=='Adventurer'
     unit=find_adventurer(unit,event)
@@ -2504,6 +2507,7 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     unit=find_mat(unit,event)
     dispstr=['Material',unit[0],'Item',unit[0]]
   end
+  puts type.to_s
   logchn=536307117301170187
   logchn=431862993194582036 if @shardizard==4
   newname=newname.gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')
@@ -2566,6 +2570,7 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     end
   end
   unless double
+    puts dispstr.to_s
     @aliases.push([dispstr[0],newname,dispstr[3],m].compact)
     @aliases.sort! {|a,b| (spaceship_order(a[0]) <=> spaceship_order(b[0])) == 0 ? ((a[2].downcase <=> b[2].downcase) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2].downcase <=> b[2].downcase)) : (spaceship_order(a[0]) <=> spaceship_order(b[0]))}
     bot.channel(chn).send_message("**#{newname}** has been#{" globally" if ([167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) || event.channel.id==532083509083373583) && !modifier.nil?} added to the aliases for the #{dispstr[2].downcase} *#{dispstr[1]}*.\nPlease test to be sure that the alias stuck.")
@@ -3957,7 +3962,7 @@ bot.command([:facility,:faculty,:fac]) do |event, *args|
   disp_facility_data(bot,event,args)
 end
 
-bot.command([:mat,:material]) do |event, *args|
+bot.command([:mat,:material,:item]) do |event, *args|
   return nil if overlap_prevent(event)
   disp_mat_data(bot,event,args)
 end
@@ -4198,7 +4203,7 @@ end
 
 bot.command([:bugreport, :suggestion, :feedback]) do |event, *args|
   return nil if overlap_prevent(event)
-  bug_report(bot,event,args,4,['Defense','Attack','Healing','Support','Null'],'Class',@prefix,141260274144509952)
+  bug_report(bot,event,args,4,['Defense','Attack','Healing','Support','Null'],'Class',@prefix,532083509083373583)
 end
 
 bot.command([:donation, :donate]) do |event, uid|
