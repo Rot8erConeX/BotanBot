@@ -775,18 +775,29 @@ def disp_adventurer_stats(bot,event,args=nil)
     lv[4]=1 if k[1][0,1].to_i==5
     lv=[1,1,1,1,0] if rar==2
     lv=[1,1,1,0,0] if rar==1
-    str="#{str}\n\n**Skills:**\n#{k[6][0]}#{'<:Energized:534451856286679040>' if skl1[7]=='Yes'} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP\n#{k[6][1]}#{'<:Energized:534451856286679040>' if skl2[7]=='Yes'} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP"
+    x=[skl1[3,3].reject{|q| q.nil? || q.length<=0}[lv[0]-1].gsub(';; ',"\n"),skl2[3,3].reject{|q| q.nil? || q.length<=0}[lv[1]-1].gsub(';; ',"\n")]
+    strx="__**Skills:**__"
+    strx="#{strx}\n*#{k[6][0]}#{'<:Energized:534451856286679040>' if skl1[7]=='Yes'} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP*\n#{x[0]}"
+    strx="#{strx}\n\n*#{k[6][1]}#{'<:Energized:534451856286679040>' if skl2[7]=='Yes'} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP*\n#{x[1]}"
+    strx2="**Skills:**"
+    strx2="#{strx2}\n#{k[6][0]}#{'<:Energized:534451856286679040>' if skl1[7]=='Yes'} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP"
+    strx2="#{strx2}\n#{k[6][1]}#{'<:Energized:534451856286679040>' if skl2[7]=='Yes'} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP"
     m=[]
     for i in 0...3
       m.push(k[8][i][lv[i+2]-1]) if lv[i+2]>0
     end
-    str="#{str}\n\n**Abilities:** #{m.join(', ')}"
+    str="#{str}\n\n;;;;;\n\n**Abilities:** #{m.join(', ')}"
     if rar<5
       str="#{str}\n**Co-Ability:** #{k[7].split('/')[0]}"
     else
       m=k[7].split(' ')
       m[-1]=m[-1].split('/')
       str="#{str}\n**Co-Ability:** #{m[0,m.length-1].join(' ')} #{m[-1][-1]}"
+    end
+    if str.gsub(';;;;;',strx).length>=1800
+      str=str.gsub(';;;;;',"#{strx2}\n~~Skill descriptions make this data too long.  Please try again in PM.~~")
+    else
+      str=str.gsub(';;;;;',strx)
     end
   end
   if flds.nil?
@@ -839,12 +850,20 @@ def disp_dragon_stats(bot,event,args=nil)
       str="#{str}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}"
     end
   else
-    str="#{str}\n\n**Skill:** #{k[5]}#{'<:Energized:534451856286679040>' if skl1[7]=='Yes'}"
+    str="#{str}\n\n**Skill:** *#{k[5]}#{'<:Energized:534451856286679040>' if skl1[7]=='Yes'} - #{longFormattedNumber(skl1[6][1])} SP*;;;;;"
+    strx=skl1[4].gsub(';; ',"\n")
   end
   str="#{str}\n\n**Aura:**\n<:NonUnbound:534494090876682264><:NonUnbound:534494090876682264><:NonUnbound:534494090876682264><:NonUnbound:534494090876682264>#{k[6][0][0]}\n<:Unbind:534494090969088000><:Unbind:534494090969088000><:Unbind:534494090969088000><:Unbind:534494090969088000>#{k[6][0][1]}"
   str="#{str}\n\n**Ability:** #{k[6][1][0]} \u2192 #{k[6][1][1]}" if k[6].length>1
   str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[7][0])}<:Resource_Rupies:532104504372363274> #{longFormattedNumber(k[7][1])}<:Resource_Eldwater:532104503777034270>"
   str="#{str}\n**Bond gift preference:** #{['Golden Chalice (Sunday)','Juicy Meat (Monday)','Kaleidoscope (Tuesday)','Floral Circlet (Wednesday)','Compelling Book (Thursday)','Mana Essence (Friday)','Golden Chalice (Saturday)'][k[9]]}"
+  unless s2s
+    if str.gsub(';;;;;',"\n#{strx}").length>=1900
+      str=str.gsub(';;;;;',"\n~~The description makes this data too long.  Please try again in PM.~~")
+    else
+      str=str.gsub(';;;;;',"\n#{strx}")
+    end
+  end
   if str.length>1900 && safe_to_spam?(event)
     str=str.split("\n\n__**")
     str[1]="__**#{str[1]}".split("\n\n**Sells")
@@ -1012,7 +1031,7 @@ def disp_skill_data(bot,event,args=nil)
   x=@adventurers.map{|q| q}
   for i in 0...x.length
     m.push("#{x[i][0]} - S1") if x[i][6][0]==k[0]
-    m.push("#{x[i][0]} - S1") if x[i][6][1]==k[0]
+    m.push("#{x[i][0]} - S2") if x[i][6][1]==k[0]
   end
   flds.push(['Adventurers',m.join("\n")]) if m.length>0
   m=[]
@@ -1605,7 +1624,7 @@ def disp_mat_data(bot,event,args=nil)
     str="#{str}\n**Type:** Misc."
   end
   str="#{str}\n**Drop bag:** #{['<:Rarity_3:532086056519204864> Common','<:Rarity_5:532086056737177600> Rare'][k[6]]}" unless k[2]==0
-  str="#{str}\n\n**Description:** #{k[3]}"
+  str="#{str}\n\n**Description:** #{k[3].gsub(';; ',"\n")}"
   str="#{str}\n**EXP:** #{longFormattedNumber(k[7])}" unless k[7]<=0
   str="#{str}\n\n**Ways to obtain:**\n#{k[4].join("\n")}"
   str="#{str}\n\n**Uses:**\n#{k[5].join("\n")}" if s2s
@@ -2539,7 +2558,7 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
   unless double
     @aliases.push([dispstr[0],newname,dispstr[3],m].compact)
     @aliases.sort! {|a,b| (spaceship_order(a[0]) <=> spaceship_order(b[0])) == 0 ? ((a[2].downcase <=> b[2].downcase) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2].downcase <=> b[2].downcase)) : (spaceship_order(a[0]) <=> spaceship_order(b[0]))}
-    bot.channel(chn).send_message("**#{newname}** has been#{" globally" if ([167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) || event.channel.id==502288368777035777) && !modifier.nil?} added to the aliases for the #{dispstr[2].downcase} *#{dispstr[1]}*.\nPlease test to be sure that the alias stuck.")
+    bot.channel(chn).send_message("**#{newname}** has been#{" globally" if ([167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) || event.channel.id==532083509083373583) && !modifier.nil?} added to the aliases for the #{dispstr[2].downcase} *#{dispstr[1]}*.\nPlease test to be sure that the alias stuck.")
     event.respond "#{newname} has been added to #{dispstr[1]}'s aliases#{" globally" if event.user.id==167657750971547648 && !modifier.nil?}." if event.user.id==167657750971547648 && !modifier2.nil? && modifier2.to_i.to_s==modifier2
     bot.channel(logchn).send_message("**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** #{newname} for #{dispstr[1]}#{" - global alias" if ([167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) || event.channel.id==502288368777035777) && !modifier.nil?}")
   end
@@ -3190,7 +3209,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
       end
     end
   elsif !fac.nil?
-    n=@aliases.reject{|q| !['Faculty'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+    n=@aliases.reject{|q| !['Facility'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
     n=n.reject{|q| q[2].nil?} if mode==1
     f.push("__**#{fac[0]}**__#{"'s server-specific aliases" if mode==1}")
     unless mode==1
@@ -4238,6 +4257,26 @@ bot.command([:safe,:spam,:safetospam,:safe2spam,:long,:longreplies]) do |event, 
   end
 end
 
+bot.command(:invite) do |event, user|
+  return nil if overlap_prevent(event)
+  usr=event.user
+  txt="**You can invite me to your server with this link: <https://goo.gl/mp77kQ>**\nTo look at my source code: <https://github.com/Rot8erConeX/LizBot/blob/master/BotanBot.rb>\nTo follow my coder's development Twitter and learn of updates: <https://twitter.com/EliseBotDev>\nIf you suggested me to server mods and they ask what I do, show them this image: https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/MarketingBotan.png"
+  user_to_name="you"
+  unless user.nil?
+    if /<@!?(?:\d+)>/ =~ user
+      usr=event.message.mentions[0]
+      txt="This message was sent to you at the request of #{event.user.distinct}.\n\n#{txt}"
+      user_to_name=usr.distinct
+    else
+      usr=bot.user(user.to_i)
+      txt="This message was sent to you at the request of #{event.user.distinct}.\n\n#{txt}"
+      user_to_name=usr.distinct
+    end
+  end
+  usr.pm(txt)
+  event.respond "A PM was sent to #{user_to_name}." unless event.server.nil? && user_to_name=="you"
+end
+
 bot.command(:sortaliases, from: 167657750971547648) do |event, *args|
   return nil if overlap_prevent(event)
   return nil unless event.user.id==167657750971547648
@@ -4377,9 +4416,10 @@ bot.command(:snagstats) do |event, f, f2|
   if ['servers','server','members','member','shard','shards','user','users'].include?(f.downcase)
     event << "**I am in #{longFormattedNumber(@server_data[0].inject(0){|sum,x| sum + x })} servers, reaching #{longFormattedNumber(@server_data[1].inject(0){|sum,x| sum + x })} unique members.**"
     event << "#{longFormattedNumber(@server_data[0][0])} server#{"s are" if @server_data[0][0]!=1}#{" is" unless @server_data[0][0]!=1} assigned the <:Type_Defense:532107867264909314> Defense class, reaching #{longFormattedNumber(@server_data[1][0])} unique members."
-    event << "#{longFormattedNumber(@server_data[0][1])} server#{"s are" if @server_data[0][0]!=1}#{" is" unless @server_data[0][0]!=1} assigned the <:Type_Attack:532107867520630784> Attack class, reaching #{longFormattedNumber(@server_data[1][1])} unique members."
-    event << "#{longFormattedNumber(@server_data[0][2])} server#{"s are" if @server_data[0][0]!=1}#{" is" unless @server_data[0][0]!=1} assigned the <:Type_Healing:532107867348533249> Healing class, reaching #{longFormattedNumber(@server_data[1][2])} unique members."
-    event << "#{longFormattedNumber(@server_data[0][3])} server#{"s are" if @server_data[0][0]!=1}#{" is" unless @server_data[0][0]!=1} assigned the <:Type_Support:532107867575156747> Support class, reaching #{longFormattedNumber(@server_data[1][3])} unique members."
+    event << "#{longFormattedNumber(@server_data[0][1])} server#{"s are" if @server_data[0][1]!=1}#{" is" unless @server_data[1][0]!=1} assigned the <:Type_Attack:532107867520630784> Attack class, reaching #{longFormattedNumber(@server_data[1][1])} unique members."
+    event << "#{longFormattedNumber(@server_data[0][2])} server#{"s are" if @server_data[0][2]!=1}#{" is" unless @server_data[2][0]!=1} assigned the <:Type_Healing:532107867348533249> Healing class, reaching #{longFormattedNumber(@server_data[1][2])} unique members."
+    event << "#{longFormattedNumber(@server_data[0][3])} server#{"s are" if @server_data[0][3]!=1}#{" is" unless @server_data[3][0]!=1} assigned the <:Type_Support:532107867575156747> Support class, reaching #{longFormattedNumber(@server_data[1][3])} unique members."
+    event << "#{longFormattedNumber(@server_data[0][4])} server#{"s are" if @server_data[0][4]!=1}#{" is" unless @server_data[4][0]!=1} assigned <:Element_Null:532106087810334741> no class, reaching #{longFormattedNumber(@server_data[1][4])} unique members."
     return nil
   elsif ['code','lines','line','sloc'].include?(f.downcase)
     event.channel.send_temporary_message('Calculating data, please wait...',3)
@@ -4587,8 +4627,8 @@ bot.server_create do |event|
     (chn.send_message(get_debug_leave_message()) rescue nil)
     event.server.leave
   else
-    bot.user(167657750971547648).pm("Joined server **#{event.server.name}** (#{event.server.id})\nOwner: #{event.server.owner.distinct} (#{event.server.owner.id})\nAssigned the #{['Defense','Attack','Healing','Support','Null'][(event.server.id >> 22) % 4]} class")
-    bot.user(239973891626237952).pm("Joined server **#{event.server.name}** (#{event.server.id})\nOwner: #{event.server.owner.distinct} (#{event.server.owner.id})\nAssigned the #{['Defense','Attack','Healing','Support','Null'][(event.server.id >> 22) % 4]} class")
+    bot.user(167657750971547648).pm("Joined server **#{event.server.name}** (#{event.server.id})\nOwner: #{event.server.owner.distinct} (#{event.server.owner.id})\nAssigned the #{['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null'][(event.server.id >> 22) % 4]} class")
+    bot.user(239973891626237952).pm("Joined server **#{event.server.name}** (#{event.server.id})\nOwner: #{event.server.owner.distinct} (#{event.server.owner.id})\nAssigned the #{['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null'][(event.server.id >> 22) % 4]} class")
     metadata_load()
     @server_data[0][((event.server.id >> 22) % 4)] += 1
     metadata_save()
