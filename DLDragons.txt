@@ -22,6 +22,7 @@ Kindling Imp\3\Flame\18, 187\6, 60\Ember Toss\(Flame) HP & Strength +5%;; (Flame
 Leviathan\5\Water\37, 370\12, 125\Tidal Stream\(Water) Strength +40%;; (Water) Strength +60%\5000, 3000\1.8, 1\5\No\Yes\\
 Liger\5\Light\37, 377\11, 119\Lightning Blitz\(Light) HP & Strength +20%;; (Light) HP & Strength +30%\5000, 3000\1.8, 1\1\No\No\\
 Lindworm\4\Light\29, 297\10, 100\Ethereal Gleam\(Light) Strength +30%;; (Light) Strength +45%\2000, 1000\1.5, 1\2\No\No\\
+Long Long\5\Wind\36, 369\12, 126\Howling Burst\(Wind) Strength +30% Critical Damage +50%;; (Wind) Strength +45% Critical Damage +55%\5000, 3000\1.8, 1\4\No\Yes\Cho\Brick Stone
 Marishiten\5z\Shadow\37, 374\12, 121\Daybreak Flurry\(Shadow) Strength +40%;; (Shadow) Strength +60%\5000, 3000\1.8, 1\5\No\Yes\Yuki Kaida\Katherine Taylor
 Maritimus\5w\Shadow\22, 224\7, 73\Polar Roller\(Shadow) HP & Strength +10%;; (Shadow) HP & Strength +15%\5000, 300\1.65, 1\2\No\No\Etsuko Kozakura\
 Mercury\4y\Water\21, 211\6, 62\Hydrocannon\(Water) HP +15%;; (Water) HP +20%\2000, 100\1.5, 1\5\No\No\Kikuko Inoue\Ava Lindstrom
@@ -30,6 +31,7 @@ Moon Drake\3\Light\19, 192\5, 56\Moon Drop\(Light) HP +10%;; (Light) HP +15%\300
 Nidhogg\5\Shadow\37, 374\12, 121\Total Eclipse\(Shadow) HP & Strength +20%;; (Shadow) HP & Strength +30%\5000, 3000\1.8, 1\4\No\Yes\\
 Pallid Imp\3\Shadow\18, 186\6, 61\Grave Tidings\(Shadow) HP & Strength +5%;; (Shadow) HP & Strength +8%\300, 150\1.35, 3.5\5\Yes\No\\
 Pele\5w\Flame\22, 221\7, 76\Blazing Pillars\(Flame) Strength +20%;; (Flame) Strength +30%\5000, 300\1.8, 1.5\1\No\No\\
+Peng Lai\5w\Water\22, 222\7, 75\Swift Stream\(Water) HP +20%;; (Water) HP +30%\5000, 300\1.8, 1\5\No\Yes\Kenichi Ogata\
 Phoenix\4\Flame\29, 299\9, 97\Regeneration Flame\(Flame) HP +30%;; (Flame) HP +45%\2000, 1000\1.5, 1.5\4\No\Yes\Yumi Hara\Tabitha St. Germain
 Poli'ahu\4\Water\30, 301\9, 95\Lilinoe's Mist\(Water) HP & Strength +15%;; (Water) HP & Strength +20%\2000, 1000\1.5, 1.5\2\No\No\\
 Poseidon\5w\Water\37, 376\11, 119\Poseidon's Trident\(Water) HP & Strength +20%;; (Water) HP & Strength +30%\5000, 3000\1.8, 1\2\No\Yes\\

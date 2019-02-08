@@ -8,6 +8,7 @@ Astounding Trick\5w\Attack\22, 151\8, 54\HP 70 = Strength +8%;; HP 70 = Strength
 Auspex's Prayer\5\Healing\28, 187\7, 53\Full HP = Healing +13%;; Full HP = Healing +15%;;;; Curse Res +20%;; Curse Res +25%\5000, 3000\hsn
 Bellathorna\3\Support\10, 71\3, 25\Buff Time +10%;; Buff Time +15%\300, 150\Chiaki Negishi
 Better Together\4w\Defense\18, 122\5, 34\Sleep Res +15%;; Sleep Res +20%;;;; HP 70% = Strength +3%;; HP 70% = Strength +5%;;;; Hypnos's Bane +30%;; Hypnos's Bane +35%\2000, 100\Oyume
+Blossoms Ablaze\3\Attack\10, 70\3, 25\(Wind) Broken Punisher +15%;; (Wind) Broken Punisher +20%\300, 150\Meso
 Braving the Unknown\4\Defense\23, 156\5, 37\Poison Res +20%;; Poison Res +25%;;;; Water Res +3%;; Water Res +5%\2000, 1000\77gl
 Castaway's Journal\4\Defense\23, 156\5, 37\Paralysis Res +20%;; Paralysis Res +25%;;;; Light Res +3%;; Light Res +5%\2000, 1000\Torotaro
 Cleo's Ruse\5\Support\28, 187\7, 53\HP 70% = Healing +10%;; HP 70% = Healing +13%;;;; Last Defense +30%;; Last Defense +40%\5000, 3000\LM7
@@ -18,6 +19,7 @@ Destiny's Hand\4\Healing\21, 145\7, 47\Recovery Potency +5%;; Recovery Potency +
 Dragon and Tamer\5\Attack\27, 183\8, 57\(Lance) Skill Damage +30%;; (Lance) Skill Damage +35%;;;; Shadow Res +5%;; Shadow Res +8%;;;; Renown +100%;; Renown +150%\5000, 3000\Mikeboshi
 Dragon Arcanum\2\Support\5, 36\1, 12\Shapeshift Prep +5%;; Shapeshift Prep +8%\50, 0\Akira Miyazaki
 Dragon Brethren\5\Support\27, 184\8, 56\Dragon Time +10%;; Dragon Time +15%;;;; Flame Res +5%;; Flame Res +8%\5000, 3000\ufotable
+Dragon Dance\4w\Defense\18, 123\4, 33\Bog Res +40%;; Bog Res +50%\2000, 100\Kometani Hisanobu (米谷尚展)
 Dragon's Nest\3\Support\10, 71\3, 25\Shapeshift Prep +8%;; Shapeshift Prep +10%\300, 150\Joshua Hutchinson
 Dueling Dancers\4\Attack\22, 147\6, 45\Flurry Devastation +5%;; Flurry Devastation +8%;;;; Light Res +3%;; Light Res +5%\2000, 1000\N.A
 Eight-Leaf Clover\3\Attack\10, 71\3, 25\Critical Damage +8%;; Critical Damage +10%\300, 150\mochuhiro
@@ -51,6 +53,7 @@ Ironside Shield\3\Defense\11, 76\3, 20\Last Defense +30%;; Last Defense +40%\300
 Jewels of the Sun\5\Healing\26, 176\9, 64\Skill Haste +5%;; Skill Haste +6%;;;; HP 70% = Strength +5%;; HP 70% = Strength +8%\5000, 3000\ell
 Kicking Back\4\Attack\22, 147\6, 45\(Light) Critical Rate +5%;; (Light) Critical Rate +6%;;;; Shadow Res +3%;; Shadow Res +5%\2000, 1000\u-u-zan
 King's Countenance\4\Support\22, 151\6, 41\Curse Res +20%;; Curse Res +25%;;;; Shapeshift Prep +8%;; Shapeshift Prep +10%\2000, 1000\Attall Nambo
+Kung Fu Masters\5\Attack\26, 176\9, 64\(Axe) Critical Rate +10%;; (Axe) Critical Rate +12%;;;; Skill Damage +10%;; Skill Damage +15%\5000, 3000\u-u-zan
 Lakeside Euphony\3\Defense\11, 76\3, 20\Bog Res +15%;; Bog Res +20%\300, 150\Joshua Hutchinson
 Levin's Champion\5\Attack\26, 176\9, 64\HP 70% = Critical Rate +6%;; HP 70% = Critical Rate +8%;;;; Critical Damage +10%;; Critical Damage +13%\5000, 3000\ufotable
 Liber Grimortis\3\Attack\10, 71\3, 25\Skill Damage +10%;; Skill Damage +15%\300, 150\ALOMA
@@ -58,6 +61,7 @@ Lord of the Skies\4\Support\21, 146\6, 46\Overdrive Punisher +5%;; Overdrive Pun
 Louise's Hobbies\5w\Support\23, 155\7, 49\Recovery Potency +8%;; Recovery Potency +10%;;;; Windwhistle Grass +25%;; Windwhistle Grass +50%;;;; Divine Gales +25%;; Divine Gales +50%\5000, 300\irua
 Luca's Prank\5\Attack\27, 183\8, 57\Skill Damage +20%;; Skill Damage +25%;;;; Light Res +5%;; Light Res +8%\5000, 3000\Nijihara
 Luck of the Draw\4w\Defense\18, 122\4, 33\Paralysis Res +15%;; Paralysis Res +20%;;;; (Shadow) Buff Time +15%;; (Shadow) Buff Time +20%\2000, 100\Oyume
+Lunar Festivities\4\Attack\21, 141\7, 51\Force Strike +20%;; Force Strike +30%;;;; Striking Haste +6%;; Striking Haste +8%\2000, 1000\Dragalia Designer Team (ドラガリデザイナーチーム)
 Mana Fount\2\Attack\5, 35\1, 13\Skill Damage +5%;; Skill Damage +10%\50, 0\Nadare
 Nevermelt Ice\3\Defense\11, 76\3, 20\Freeze Res +15%;; Freeze Res +20%\300, 150\Akira Miyazaki
 Night Harbinger\3\Attack\10, 71\3, 25\Full HP = Strength +5%;; Full HP = Strength +8%\300, 150\Kazashino
@@ -99,6 +103,7 @@ Valiant Crown\5\Attack\26, 176\9, 65\Skill Damage +20%;; Skill Damage +25%;;;; S
 Vio Rhyse Alberia!\3\Attack\10, 71\3, 25\Slayer's Strength +2%;; Slayer's Strength +3%\300, 150\png
 Volcanic Queen\5\Defense\24, 165\5, 39\High Brunhilda Res +20%;; High Brunhilda Res +25%;;;; Brunhilda Res +15%;; Brunhilda Res +20%;;;; Flame Res +3%;; Flame Res +5%\5000, 300\Nejita
 Warlust\4\Attack\21, 140\7, 52\Last Offense +20%;; Last Offense +30%;;;; Skill Damage +10%;; Skill Damage +15%\2000, 1000\ICHIGO
+Warrior Maiden\5\Support\27, 180\9, 60\Recovery Potency +8%;; Recovery Potency +10%;;;; Slayer's Strength +3%;; Slayer's Strength +4%\5000, 3000\Tsune-kun (ツネくん)
 Welcome, One and All\3\Healing\10, 71\3, 25\Skill Prep +10%;; Skill Prep +15%;;;; Tent Canvas +50%;; Tent Canvas +75%\300, 150\ShuLa
 What a Handful!\4\Healing\22, 150\6, 42\Recovery Potency +5%;; Recovery Potency +8%;;;; Poison Res +15%;; Poison Res +20%\2000, 1000\Mayoko
 Winds of Saint Lotier\3\Healing\10, 73\3, 23\Recovery Potency +3%;; Recovery Potency +5%\300, 150\STAR BEARS

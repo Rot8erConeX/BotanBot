@@ -74,6 +74,7 @@ Cobalt Strength\\Skill\Increases the user's strength by 35% for 5 seconds.\Incre
 Commander's Blitz\\Skill\Deals 3 hits of 264% wind damage to enemies directly ahead.\Deals 3 hits of 293% wind damage to enemies directly ahead.\\7175, 7175, 7175\Yes\0.9\
 Conchoidal Blast\\Skill\Deals 1 hit of 725% damage to the target and enemies near it.\Deals 1 hit of 806% damage to the target and enemies near it.\\8355, 8355, 8355\Yes\1\
 Conductive Protection\\Skill\Increases the user's defense by 25% for 10 seconds.\Increases the user's defense by 30% for 10 seconds.\Increases the user's defense by 30% for 30 seconds.\7316, 7316, 7316\No\1.1\
+Crackling Pyroblossom\\Skill\Increases the user's strength by 20% for 10 seconds. While this skill is active, Gale Slice may inflict stun.\Increases the user's strength by 25% for 10 seconds. While this skill is active, Gale Slice may inflict stun.\\4877, 4877, 4877\No\0.9\
 Crescendo Chorus\\Skill\Increases the user's strength by 10% for 10 seconds, and increases their energy level by onestage.\Increases the user's strength by 10% for 10 seconds, and increases their energy level by twostages.\\4553, 4553, 4553\No\1.4\
 Crimson Impact\\Skill\Deals 2 hits of 462% flame damage to enemies directly ahead.\Deals 2 hits of 485% flame damage to enemies directly ahead, and reduces their defense by 5% for 10 seconds with 100% base chance.\Deals 2 hits of 509% flame damage to enemies directly ahead, and reduces their defense by 10% with 100% base chance.\6016, 6016, 6016\Yes\1.4\
 Crimson Inferno\\Skill\Deals ? hits of 851% flame damage to enemies directly ahead, and inflicts burn.\Deals ? hits of 894% flame damage to enemies in a line, and inflicts burn.\\30, 30, 30\Yes\2\
@@ -128,6 +129,7 @@ Flame Circle\\Skill\Deals 1 hit of 562% flame damage to surrounding enemies.\Dea
 Flame's Protection\\Skill\Increases the user's defense by 20% for 10 seconds.\Increases the user's defense by 25% for 10 seconds.\Increases the user's defense by 30% for 30 seconds.\6678, 6678, 6678\No\1.1\
 Flamewhorl\\Skill\Deals 3 hits of 183% flame damage to surrounding enemies.\Deals 3 hits of 203% flame damage to surrounding enemies.\Deals 3 hits of 226% flame damage to surrounding enemies.\2318, 2318, 2318\Yes\0.8\
 Flare Volley\\Skill\Deals 3 shots of 235% flame damage to enemies in a line.\Deals 3 shots of 261% flame damage to enemies in a line.\Deals flame damage to enemies in a line.\7185, 7185, 7185\Yes\1.6\
+Flash Strike\\Skill\Deals 1 hit of 725% light damage to the target and nearby enemies.\Deals 1 hit of 805% light damage to the target and nearby enemies.\Deals 1 hit of 895% light damage to the target and nearby enemies.\2785, 2785, 2785\Yes\1\
 Flash Swing\\Skill\Deals 2 hits of 466% light damage to surrounding enemies and draws them toward the user for 0.5 seconds.\Deals 2 hits of 518% light damage to surrounding enemies and draws them toward the user for 0.5 seconds.\\8603, 8603, 8603\Yes\0.9\
 Flurry Edge\\Skill\Deals 6 hits of 101% water damage to enemies directly ahead.\Deals 6 hits of 112% water damage to enemies directly ahead.\Deals 6 hits of 124% water damage to enemies directly ahead.\2311, 2311, 2311\Yes\1.4\
 Foliage Flare\\Skill\Deals 1 hit of 711% flame damage to enemies in a line.\Deals 1 hit of 790% flame damage to enemies in a line.\Deals 1 hit of 878% flame damage to enemies in a line.\5280, 5280, 5280\Yes\0.4\
@@ -141,6 +143,7 @@ Frost Smash\\Skill\Deals 1 shot of 777% water damage to enemies in a line.\Deals
 Frozen Gale\\Skill\Deals 1 hit of 877% water damage to surrounding enemies.\Deals 1 hit of 974% water damage to surrounding enemies.\Deals 1 hit of 1082% water damage to surrounding enemies.\5909, 5909, 5909\Yes\2.2\
 Full Woodcutter\\Skill\Deals 1 hit of 839% water damage to enemies directly ahead.\Deals 1 hit of 933% water damage to enemies directly ahead.\Deals 1 hit of 1036% water damage to enemies directly ahead.\5807, 5807, 5807\Yes\0.4\
 Fusion Wave\\Skill\Deals 1 hit of 710% damage to enemies in a line.\Deals 1 hit of 790% damage to enemies in a line.\\7920, 7920, 7920\Yes\0.4\
+Gale Slice\\Skill\Deals 2 hits of 151%, 1 hit of 45%, and 1 hit of 105% wind damage to enemies directly ahead.;; When Crackling Pyroblossom is active, Gale Slice inflicts stun for 2-4 seconds with 90% base chance.\Deals 2 hits of 167%, 1 hit of 50%, and 1 hit of 117% wind damage to enemies directly ahead.;; When Crackling Pyroblossom is active, Gale Slice inflicts stun for 2-4 seconds with 100% base chance.\Deals 2 hits of 186%, 1 hit of 56%, and 1 hit of 130% wind damage to enemies directly ahead.;; When Crackling Pyroblossom is active, Gale Slice inflicts stun for 2-4 seconds with 110% base chance.\2462, 2462, 2462\Yes\2.7\Deals 2 hits of 151%/167%/186%, 1 hit of 45%/50%/56%, and 1 hit of 105%/117%/130% wind damage to enemies directly ahead.;; When Crackling Pyroblossom is active, Gale Slice inflicts stun for 2-4 seconds with `80 + (10 * level)`% base chance.
 Gale Smash\\Skill\Deals 1 shot of 777% wind damage to enemies in a line.\Deals 1 shot of 863% wind damage to enemies in a line.\\7673, 7673, 7673\Yes\1.6\
 Gale's Descent\\Skill\Deals 1 hit of 685% wind damage to the target and enemies near it.\Deals 1 hit of 761% wind damage to the target and enemies near it.\\7054, 7054, 7054\Yes\1\
 Galvanic Volley\\Skill\Deals 3 shots of 235% light damage to enemies in a line.\Deals 3 shots of 261% light damage to enemies in a line.\\7185, 7185, 7185\Yes\1.6\
@@ -166,6 +169,7 @@ Healing Faith\\Skill\Restores HP to the team member most in need with 225% Recov
 Healing Hand\\Skill\Restores HP to all allies with 72% Recovery Potency.\Restores HP to all allies with 90% Recovery Potency.\Restores HP to all allies with 108% Recovery Potency.\5916, 5916, 5916\Yes\1.1\
 Healing Wave\\Skill\Restores HP to all allies with 72% Recovery Potency.\Restores HP to all allies with 90% Recovery Potency and removes burning.\Restores HP to all allies with 108% Recovery Potency and removes burning.\5916, 5916, 5916\Yes\1.1\
 Heat Impulse\\Skill\Deals 6 hits of 101% flame damage to enemies directly ahead.\Deals 6 hits of 112% flame damage to enemies directly ahead.\Deals 6 hits of 124% flame damage to enemies directly ahead.\2311, 2311, 2311\Yes\1.4\
+Heaven's Breath\\Skill\Restores the user's HP with 31% Recovery Potency, and activates "Heaven's Breath" for 10 seconds. During Heaven's Breath, the user's attack rate is increased by 15% , and the skill Typhoon Fist is powered up.\Restores the user's HP with 36% Recovery Potency, and activates "Heaven's Breath" for 10 seconds. During Heaven's Breath, the user's attack rate is increased by 20% , and the skill Typhoon Fist is powered up.\\8014, 8014, 8014\No\1.4\
 Heaven's Flames\\Skill\Deals 3 hits of 319% flame damage to enemies in a line.\Deals 3 hits of 354% flame damage to enemies in a line.\\8030, 8030, 8030\Yes\1.2\
 Heaven's Mistletoe\\Skill\Deals 2 hits of 415% shadow damage to the target and nearby enemies.\Deals 2 hits of 461% shadow damage to the target and nearby enemies.\Deals shadow damage to the target and enemies near it.\8111, 8111, 8111\Yes\1\
 Hedgehog's Strength\\Skill\Increases the user's strength by 30% for 5 seconds.\Increases the user's strength by 35% for 5 seconds.\Increases the user's strength by 25% for 30 seconds.\7103, 7103, 7103\No\1.4\
@@ -176,6 +180,7 @@ Heroic Epic\\Skill\Increases the user's defense by 25% for 10 seconds.\Increases
 Holy Energy\\Skill\Increases max HP by 15% for the remainder of the quest. Once HP buffs reach the limit, an HP recovery effect is granted instead.\Increases max HP by 20% for the remainder of the quest. Once HP buffs reach the limit, an HP recovery effect is granted instead.\Increases the user's HP by 25% for 30 seconds.\11213, 11213, 11213\No\1.4\
 Holy Water (Skill)\\Skill\Restores HP to all allies with 31% Recovery Potency and applies Regen for 15 seconds, healing with 25% Regen Potencyevery 2.99 seconds.\Restores HP to all allies with 34% Recovery Potency and applies Regen for 15 seconds, healing with 29% Regen Potencyevery 2.99 seconds.\Restores HP to all allies with 36% Recovery Potency and applies Regen for 15 seconds, healing with 35% Regen Potencyevery 2.99 seconds.\11832, 11832, 11832\Yes\1.1\
 Holy Wreath\\Skill\Deals 2 hits of 309% water damage to surrounding enemies.\Deals 2 hits of 343% water damage to surrounding enemies.\Deals 2 hits of 381% water damage to surrounding enemies.\5000, 5000, 5000\Yes\1.4\
+Howling Burst\\Skill\Deals 6 hits of 84% wind damage to enemies in a line.\Deals 6 hits of 93% wind damage to enemies in a line.\\30, 30, 30\Yes\1.4\
 Horned Circle\\Skill\Deals 1 hit of 506% damage to surrounding enemies.\Deals 1 hit of 562% damage to surrounding enemies.\\13822, 13822, 13822\Yes\1.1\
 Howling Meteor\\Skill\Deals 10 hits of 46% and 1 hit of 203% flame damage to enemies directly ahead. Movement is possible during the attack.\Deals 10 hits of 51% and 1 hit of 225% flame damage to enemies directly ahead. Movement is possible during the attack.\Deals 10 hits of 57% and 1 hit of 250% flame damage to enemies directly ahead. Movement is possible during the attack.\2400, 2400, 2400\Yes\3.4\
 Hungry Fang\\Skill\Deals 2 hits of 275% light damage to enemies directly ahead.\Deals 2 hits of 288% light damage to enemies directly ahead, and reduces their strength by 5% for 10 seconds with 80% base chance.\Deals 2 hits of 303% light-based damage to enemies directly ahead, and reduces their strength by 10% for 10 seconds with 90% base chance.\4892, 4892, 4892\Yes\0.5\
@@ -195,6 +200,7 @@ Ivyblaze\\Skill\Deals 1 shot of 725% flame damage to enemies in a line.\Deals 1 
 Judgment Circle\\Skill\Deals 1 hit of 680% light damage to surrounding enemies.\Deals 1 hit of 755% light damage to surrounding enemies.\\15205, 15205, 15205\Yes\1.1\
 Juggernaut's Swing\\Skill\Deals 2 hits of 419% damage to surrounding enemies and draws them toward the user for 0.5 seconds.\Deals 2 hits of 466% damage to surrounding enemies and draws them toward the user for 0.5 seconds.\\8603, 8603, 8603\Yes\0.9\
 Ka-boom!\\Skill\Deals 1 hit of 679% wind damage to the target and enemies near it.\Deals 1 hit of 754% wind damage to the target and enemies near it.\Deals 1 hit of 838% wind damage to the target and enemies near it.\2579, 2579, 2579\Yes\1\
+Keen Blade\\Skill\Activates "Apsaras Formation" for 10 seconds. During Apsaras Formation, the user's critical rate is increased by 8%, and their force strike will deal 3 hits of 68% (75%) wind damage for Force Strike level 1 (level 2). Bonus OD Bar damage is reduced to 3.7x for all hits of Keen Blade, from 8x. SP Gain is reduced to 330 from 345.\Activates "Apsaras Formation" for 10 seconds. During Apsaras Formation, the user's critical rate is increased by 10%, and their force strike will deal 3 hits of 75% (83%) wind damage for Force Strike level 1 (level 2). Bonus OD Bar damage is reduced to 3.7x for all hits of Keen Blade, from 8x. SP Gain is reduced to 330 from 345.\\2913, 2913, 2913\No\1.4\Activates "Apsaras Formation" for 10 seconds. During Apsaras Formation, the user's critical rate is increased by 8%/10%, and their level 1 Force Strike will deal 3 hits of 75% wind damage, while their level 2 Force Strike will deal 83% wind damage.;; Bonus OD Bar damage is reduced to 3.7x for all hits of Keen Blade, from 8x. SP Gain is reduced to 330 from 345.
 Kindled Heart\\Skill\Increases the user's attack rate by 15% for 10 seconds.\Increases the user's attack rate by 20% for 10 seconds.\Increases the user's attack rate by 25% for 10 seconds.\4500, 4500, 4500\No\1.4\
 Lachrymal Protection\\Skill\Increases the user's defense by 25% for 10 seconds.\Increases the user's defense by 30% for 10 seconds.\Increases the user's defense by 30% for 30 seconds.\7316, 7316, 7316\No\1.1\
 Lava Cascade\\Skill\Deals 1 hit of 226.8% and 1 hit of 340.2% flame damage to enemies directly ahead and inflicts burn for 12 seconds - dealing 66% flame damage every 3.99 seconds - with 100% Base Chance\Deals 1 hit of 252% and 1 hit of 378% flame damage to enemies directly ahead and inflicts burn for 12 seconds - dealing 88.3% flame damage every 3.99 seconds - with 110% Base Chance\\50, 50, 50\Yes\2.6\
@@ -310,6 +316,7 @@ Skull Hunter\\Skill\Deals 1 hit of 617% shadow damage to the target and nearby e
 Smash Hit\\Skill\Deals 1 hit of 839% water damage to enemies directly ahead.\Deals 1 hit of 933% water damage to enemies directly ahead.\Deals 1 hit of 1036% water damage to enemies directly ahead.\2942, 2942, 2942\Yes\0.9\
 Smiles on Parade\\Skill\Deals 10 hits of 74.6658% light damage to enemies directly ahead, and increases the entire team's energy levels by two stages.\Deals 10 hits of 82.962% light damage to enemies directly ahead, and increases the entire team's energy levels by two stages.\\10206, 10206, 10206\Yes\3.2\
 Snow Drop\\Skill\Deals 1 hit of 454% water damage to surrounding enemies.\Deals 1 hit of 504% water damage to surrounding enemies.\\30, 30, 30\Yes\1.6\
+Soaring Flicker\\Skill\Deals 4 hits of 152% wind damage to enemies directly ahead.\Deals 4 hits of 169% wind damage to enemies directly ahead.\Deals 4 hits of 188% wind damage to enemies directly ahead.\2296, 2296, 2296\Yes\1.6\
 Sorcerer's Blast\\Skill\Deals 1 hit of 725% damage to surrounding enemies.\Deals 1 hit of 806% damage to surrounding enemies.\\8062, 8062, 8062\Yes\1.1\
 Soul Ignition\\Skill\Increases the entire team's strength by 10% for 15 seconds.\Increases the entire team's strength by 15% for 15 seconds.\Increases the entire team's strength by 15% for 30 seconds.\6610, 6610, 6610\No\1.4\
 Souleater's Feast\\Skill\Deals 5 hits of 173% damage to enemies directly ahead.\Deals 5 hits of 192% damage to enemies directly ahead.\\7695, 7695, 7695\Yes\1.4\
@@ -331,7 +338,9 @@ Subterfuge\\Skill\Deals 2 hits of 275% flame damage to enemies directly ahead.\D
 Sugaar's Strength\\Skill\Increases the user's strength by 35% for 5 seconds.\Increases the user's strength by 40% for 5 seconds.\Increases the user's strength by 25% for 30 seconds.\7103, 7103, 7103\No\1.4\
 Sunrise Blast\\Skill\Deals 1 hit of 806% flame damage to the target and nearby enemies.\Deals 1 hit of 895% flame damage to the target and nearby enemies.\\8355, 8355, 8355\Yes\1\
 Sweet Treat\\Skill\Restores HP to all allies with 72 Recovery Potency.\Restores HP to all allies 90 Recovery Potency.\Restores HP to all allies 108 Recovery Potency.\5916, 5916, 5916\Yes\1.1\
+Swift Stream\\Skill\Deals 1 hit of 630% water damage to enemies directly ahead, and inflicts bog for 8 seconds with 160% base chance.\Deals 1 hit of 662% water damage to enemies directly ahead, and inflicts bog for 8 seconds with 180% base chance.\\30, 30, 30\Yes\1.4\
 Swordsmith's Recovery\\Skill\Restores the user's HP with 72 Recovery Potency.\Restores the user's HP with 90 Recovery Potency.\\12841, 12841, 12841\Yes\1.1\
+Tactical Analysis\\Skill\Increases the entire team's critical rate by 5% and adds 30% to the modifier applied to critical damage for 10 seconds.\Increases the entire team's critical rate by 8% and adds 40% to the modifier applied to critical damage for 10 seconds.\\3909, 4648, 4648\No\1.4\
 Tactical Vortex\\Skill\Deals 1 hit of 524.3% wind damage to surrounding enemies and inflicts stun for 2-4 seconds with 120% Base Chance\Deals 1 hit of 550.2% wind damage to surrounding enemies and inflicts stun for 2-4 seconds with 140% Base Chance\Deals wind damage to surrounding enemies, and inflicts stun with ? base chance.\50, 50, 50\Yes\1.3\
 Tempest Barrage\\Skill\Deals 5 hits of 151% wind damage to enemies directly ahead.\Deals 5 hits of 168% wind damage to enemies directly ahead.\Deals wind damage to enemies directly ahead.\7282, 7282, 7282\Yes\2.2\
 Tempest's Protection\\Skill\Increases the user's defense by 20% for 10 seconds.\Increases the user's defense by 25% for 10 seconds.\Increases the user's defense by 30% for 30 seconds.\6678, 6678, 6678\No\1.1\
@@ -359,6 +368,7 @@ Triple Salchow\\Skill\Deals 4 hits of 151% water damage to surrounding enemies.\
 Twilight Blast\\Skill\Deals 4 hits of 244% light damage to the target and nearby enemies.\Deals 4 hits of 271% light damage to the target and nearby enemies.\\8757, 8757, 8757\Yes\1\
 Twilight Oblivion\\Skill\Activates "Twilight Arrows." For the next three force strikes, each force strike will deal an additional 3% shadow damage per hit for Force Strike level 1 and 2, and inflict blindness (applies 50% chance to miss on attacks) for 8 seconds with 100% base chance.\Activates "Twilight Arrows." For the next three force strikes, each force strike will deal an additional 5% (6% ) shadow damage per hit for Force Strike level 1 (level 2), and inflict blindness (applies 50% chance to miss on attacks) for 8 seconds with 110% base chance.\Activates "Twilight Arrows." For the next three force strikes, the user will shoot special arrows that deal extra damage and inflict blindness for 8 seconds without fail.\5599, 5599, 5599\No\1.4\Activates "Twilight Arrows." For the next three force strikes, each force strike will deal an additional `Tier*2+1`% shadow damage per hit for Force Strike level 1, or `Tier*3`% for Force Strike level 2. Also inflict blindness for 8 seconds with `Tier*10+90`% base chance.
 Twilight Tryst\\Skill\Deals 4 hits of 151% shadow damage to enemies directly ahead.\Deals 4 hits of 167% shadow damage to enemies directly ahead.\Deals 4 hits of 186% shadow damage to enemies directly ahead.\4904, 4904, 4904\Yes\0.9\
+Typhoon Fist\\Skill\Deals 6 hits and 1 delayed hit of 169% wind damage to enemies directly ahead.;; When Heaven's Breath is active, this skill deals 9 hits of 169% wind damage to enemies directly ahead.\Deals 6 hits and 1 delayed hit of 177% wind damage to enemies directly ahead, and inflicts sleep for 3-5 seconds with 100% base chance.;; When Heaven's Breath is active, this skill deals 9 hits of 177% wind damage to enemies directly ahead, and inflicts sleep for 3-5 seconds with 100% base chance.\Deals 6 hits and 1 delayed hit of 186% wind damage to enemies directly ahead, and inflicts sleep for 3-5 seconds with 110% base chance.;; When Heaven's Breath is active, this skill deals 9 hits of 186% wind damage to enemies directly ahead, and inflicts sleep for 3-5 seconds with 110% base chance.\2969, 2969, 2969\Yes\1.6\Deals 6 hits and 1 delayed hit of 169%/177%/186% wind damage to enemies directly ahead.;; When Heaven's Breath is active, this skill deals 9 hits of 169%/177%/186% wind damage to enemies directly ahead.;; Levels 2-3 also inflict sleep for 3-5 seconds with ~~0%~~/100%/110% base chance.
 Tyrant Swing\\Skill\Deals 2 hits of 462% damage to enemies directly ahead.\Deals 2 hits of 513% damage to enemies directly ahead.\\9025, 9025, 9025\Yes\1.4\
 Tyro's Gyre\\Skill\Deals 3 hits of 238% wind damage to enemies directly ahead.\Deals 3 hits of 264% wind damage to enemies directly ahead.\Deals 3 hits of 293% wind damage to enemies directly ahead.\4784, 4784, 4784\Yes\0.9\
 Ultramarine Spin\\Skill\Deals 4 hits of 167% water damage to enemies directly ahead.\Deals 4 hits of 186% water damage to enemies directly ahead.\\7028, 7028, 7028\Yes\1.1\
@@ -399,101 +409,110 @@ Zardin Blade\\Skill\Deals one hit of 552% water damage to enemies directly ahead
 Zardin's Wrath\\Skill\Deals one hit of 552% water damage to enemies in a line.\Deals one hit of 614% water damage to enemies in a line.\Deals one hit of 682% water damage to enemies in a line.\5225, 5225, 5225\Yes\0.7\
 Zephyr's Wrath\\Skill\Deals 3 hits of 254.1% wind damage to surrounding enemies, and inflicts stun for 2-4 seconds with 160% base chance.\Deals 3 hits of 267.4% wind damage to surrounding enemies, and inflicts stun for 2-4 seconds with 180% base chance.\\50, 50, 50\Yes\1.7\
 Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\Deals 5 hits of 165% light damage to enemies directly ahead.\\6847, 6847, 6847\Yes\1.4\
-(Flame) HP & Strength\5%\Aura\If the user is attuned to Flame: increases strength and HP by 5%.\20\n
-(Flame) HP & Strength\8%\Aura\If the user is attuned to Flame: increases strength and HP by 8%.\30\n
-(Flame) HP & Strength\20%\Aura\If the user is attuned to Flame: increases strength and HP by 20%.\70\n
-(Flame) HP & Strength\30%\Aura\If the user is attuned to Flame: increases strength and HP by 30%.\100\n
-(Flame) HP\10%\Aura\If the user is attuned to Flame: increases HP by 10%.\20\n
-(Flame) HP\15%\Aura\If the user is attuned to Flame: increases HP by 15%.\30\n
-(Flame) HP\30%\Aura\If the user is attuned to Flame: increases HP by 30%.\60\n
-(Flame) HP\45%\Aura\If the user is attuned to Flame: increases HP by 45%.\80\n
-(Flame) Strength\10%\Aura\If the user is attuned to Flame: increases strength by 10%.\20\n
-(Flame) Strength\15%\Aura\If the user is attuned to Flame: increases strength by 15%.\30\n
-(Flame) Strength\20%\Aura\If the user is attuned to Flame: increases strength by 20%.\40\n
-(Flame) Strength\30%\Aura\If the user is attuned to Flame: increases strength by 30%.\60\n
-(Flame) Strength\40%\Aura\If the user is attuned to Flame: increases strength by 40%.\70\n
-(Flame) Strength\45%\Aura\If the user is attuned to Flame: increases strength by 45%.\80\n
-(Flame) Strength\60%\Aura\If the user is attuned to Flame: increases strength by 60%.\100\n
-(Lance) Skill Damage\30%\Aura\if the user wields a Lance: increases attack skill damage by 30%\60\n
-(Lance) Skill Damage\35%\Aura\if the user wields a Lance: increases attack skill damage by 35%\80\n
-(Light) Critical Damage\50%\Aura\If the user is attuned to Light: adds 50% to the modifier applied to critical damage.\40\n
-(Light) Critical Damage\70%\Aura\If the user is attuned to Light: adds 70% to the modifier applied to critical damage.\60\n
-(Light) Critical Rate\5%\Aura\If the user is attuned to Light: Increases critical rate by 5%.\40\n
-(Light) Critical Rate\6%\Aura\If the user is attuned to Light: Increases critical rate by 6%.\40\n
-(Light) Curse Res\25%\Aura\If the user is attuned to Light: Reduces susceptibility to curses by 25%.\40\n
-(Light) Curse Res\40%\Aura\If the user is attuned to Light: Reduces susceptibility to curses by 40%.\50\n
-(Light) HP & Strength\5%\Aura\If the user is attuned to Light: increases strength and HP by 5%.\20\n
-(Light) HP & Strength\8%\Aura\If the user is attuned to Light: increases strength and HP by 8%.\30\n
-(Light) HP & Strength\10%\Aura\If the user is attuned to Light: increases strength and HP by 10%.\50\n
-(Light) HP & Strength\15%\Aura\If the user is attuned to Light: increases strength and HP by 15%.\60\n
-(Light) HP & Strength\20%\Aura\If the user is attuned to Light: increases strength and HP by 20%.\70\n
-(Light) HP & Strength\30%\Aura\If the user is attuned to Light: increases strength and HP by 30%.\100\n
-(Light) HP\10%\Aura\If the user is attuned to Light: increases HP by 10%.\20\n
-(Light) HP\15%\Aura\If the user is attuned to Light: increases HP by 15%.\30\n
-(Light) HP\30%\Aura\If the user is attuned to Light: increases HP by 30%.\60\n
-(Light) HP\40%\Aura\If the user is attuned to Light: increases HP by 40%.\70\n
-(Light) HP\45%\Aura\If the user is attuned to Light: increases HP by 45%.\80\n
-(Light) HP\60%\Aura\If the user is attuned to Light: increases HP by 60%.\100\n
-(Light) Skill Haste\4%\Aura\If the user is attuned to Light: Increases skill gauge fill rate by 4%.\30\n
-(Light) Skill Haste\5%\Aura\If the user is attuned to Light: Increases skill gauge fill rate by 5%.\50\n
-(Light) Strength\10%\Aura\If the user is attuned to Light: increases strength by 10%.\20\n
-(Light) Strength\15%\Aura\If the user is attuned to Light: increases strength by 15%.\30\n
-(Light) Strength\30%\Aura\If the user is attuned to Light: increases strength by 30%.\60\n
-(Light) Strength\40%\Aura\If the user is attuned to Light: increases strength by 40%.\70\n
-(Light) Strength\45%\Aura\If the user is attuned to Light: increases strength by 45%.\80\n
-(Light) Strength\60%\Aura\If the user is attuned to Light: increases strength by 60%.\100\n
-(Shadow) Buff Time\15%\Aura\If the user is attuned to Shadow: increases duration of buff skills by 15%.\20\n
-(Shadow) Buff Time\20%\Aura\If the user is attuned to Shadow: increases duration of buff skills by 20%.\40\n
-(Shadow) HP & Strength\5%\Aura\If the user is attuned to Shadow: increases strength and HP by 5%.\20\n
-(Shadow) HP & Strength\8%\Aura\If the user is attuned to Shadow: increases strength and HP by 8%.\30\n
-(Shadow) HP & Strength\10%\Aura\If the user is attuned to Shadow: increases strength and HP by 10%.\50\n
-(Shadow) HP & Strength\15%\Aura\If the user is attuned to Shadow: increases strength and HP by 15%.\60\n
-(Shadow) HP & Strength\20%\Aura\If the user is attuned to Shadow: increases strength and HP by 20%.\70\n
-(Shadow) HP & Strength\30%\Aura\If the user is attuned to Shadow: increases strength and HP by 30%.\100\n
-(Shadow) HP\10%\Aura\If the user is attuned to Shadow: increases HP by 10%.\20\n
-(Shadow) HP\15%\Aura\If the user is attuned to Shadow: increases HP by 15%.\30\n
-(Shadow) Paralysis Res\25%\Aura\If the user is attuned to Shadow: reduces susceptibility to paralysis by 25%.\80\n
-(Shadow) Paralysis Res\40%\Aura\If the user is attuned to Shadow: reduces susceptibility to paralysis by 40%.\100\n
-(Shadow) Strength\10%\Aura\If the user is attuned to Shadow: increases strength by 10%.\20\n
-(Shadow) Strength\15%\Aura\If the user is attuned to Shadow: increases strength by 15%.\30\n
-(Shadow) Strength\20%\Aura\If the user is attuned to Shadow: increases strength by 20%.\40\n
-(Shadow) Strength\30%\Aura\If the user is attuned to Shadow: increases strength by 30%.\60\n
-(Shadow) Strength\40%\Aura\If the user is attuned to Shadow: increases strength by 40%.\70\n
-(Shadow) Strength\45%\Aura\If the user is attuned to Shadow: increases strength by 45%.\80\n
-(Shadow) Strength\60%\Aura\If the user is attuned to Shadow: increases strength by 60%.\100\n
-(Water) HP & Strength\5%\Aura\If the user is attuned to Water: increases strength and HP by 5%.\20\n
-(Water) HP & Strength\8%\Aura\If the user is attuned to Water: increases strength and HP by 8%.\30\n
-(Water) HP & Strength\15%\Aura\If the user is attuned to Water: increases strength and HP by 15%.\60\n
-(Water) HP & Strength\20%\Aura\If the user is attuned to Water: increases strength and HP by 20%.\70\n
-(Water) HP & Strength\30%\Aura\If the user is attuned to Water: increases strength and HP by 30%.\100\n
-(Water) HP\10%\Aura\If the user is attuned to Water: increases HP by 10%.\20\n
-(Water) HP\15%\Aura\If the user is attuned to Water: increases HP by 15%.\30\n
-(Water) HP\20%\Aura\If the user is attuned to Water: increases HP by 20%.\40\n
-(Water) Strength\10%\Aura\If the user is attuned to Water: increases strength by 10%.\20\n
-(Water) Strength\15%\Aura\If the user is attuned to Water: increases strength by 15%.\30\n
-(Water) Strength\30%\Aura\If the user is attuned to Water: increases strength by 30%.\60\n
-(Water) Strength\40%\Aura\If the user is attuned to Water: increases strength by 40%.\70\n
-(Water) Strength\45%\Aura\If the user is attuned to Water: increases strength by 45%.\80\n
-(Water) Strength\60%\Aura\If the user is attuned to Water: increases strength by 60%.\100\n
-(Wind) HP & Strength\5%\Aura\If the user is attuned to Wind: increases strength and HP by 5%.\20\n
-(Wind) HP & Strength\8%\Aura\If the user is attuned to Wind: increases strength and HP by 8%.\30\n
-(Wind) HP & Strength\10%\Aura\If the user is attuned to Wind: increases strength and HP by 10%.\50\n
-(Wind) HP & Strength\20%\Aura\If the user is attuned to Wind: increases strength and HP by 20%.\70\n
-(Wind) HP & Strength\30%\Aura\If the user is attuned to Wind: increases strength and HP by 30%.\100\n
-(Wind) HP\10%\Aura\If the user is attuned to Wind: increases HP by 10%.\20\n
-(Wind) HP\15%\Aura\If the user is attuned to Wind: increases HP by 15%.\30\n
-(Wind) HP\20%\Aura\If the user is attuned to Wind: increases HP by 20%.\40\n
-(Wind) HP\30%\Aura\If the user is attuned to Wind: increases HP by 30%.\60\n
-(Wind) HP\40%\Aura\If the user is attuned to Wind: increases HP by 40%.\70\n
-(Wind) HP\45%\Aura\If the user is attuned to Wind: increases HP by 45%.\80\n
-(Wind) HP\60%\Aura\If the user is attuned to Wind: increases HP by 60%.\100\n
-(Wind) Strength\10%\Aura\If the user is attuned to Wind: increases strength by 10%.\20\n
-(Wind) Strength\15%\Aura\If the user is attuned to Wind: increases strength by 15%.\30\n
-(Wind) Strength\20%\Aura\If the user is attuned to Wind: increases strength by 20%.\40\n
-(Wind) Strength\30%\Aura\If the user is attuned to Wind: increases strength by 30%.\60\n
-(Wind) Strength\40%\Aura\If the user is attuned to Wind: increases strength by 40%.\70\n
-(Wind) Strength\45%\Aura\If the user is attuned to Wind: increases strength by 45%.\80\n
-(Wind) Strength\60%\Aura\If the user is attuned to Wind: increases strength by 60%.\100\n
+(Axe) Critical Rate\10%\Aura\If the user wields an Axe: increases critical rate by 10%.\80\y
+(Axe) Critical Rate\12%\Aura\If the user wields an Axe: increases critical rate by 12%.\100\y
+(Flame) HP & Strength\5%\Aura\If the user is attuned to Flame: increases strength and HP by 5%.\20\y
+(Flame) HP & Strength\8%\Aura\If the user is attuned to Flame: increases strength and HP by 8%.\30\y
+(Flame) HP & Strength\20%\Aura\If the user is attuned to Flame: increases strength and HP by 20%.\70\y
+(Flame) HP & Strength\30%\Aura\If the user is attuned to Flame: increases strength and HP by 30%.\100\y
+(Flame) HP\10%\Aura\If the user is attuned to Flame: increases HP by 10%.\20\y
+(Flame) HP\15%\Aura\If the user is attuned to Flame: increases HP by 15%.\30\y
+(Flame) HP\30%\Aura\If the user is attuned to Flame: increases HP by 30%.\60\y
+(Flame) HP\45%\Aura\If the user is attuned to Flame: increases HP by 45%.\80\y
+(Flame) Strength\10%\Aura\If the user is attuned to Flame: increases strength by 10%.\20\y
+(Flame) Strength\15%\Aura\If the user is attuned to Flame: increases strength by 15%.\30\y
+(Flame) Strength\20%\Aura\If the user is attuned to Flame: increases strength by 20%.\40\y
+(Flame) Strength\30%\Aura\If the user is attuned to Flame: increases strength by 30%.\60\y
+(Flame) Strength\40%\Aura\If the user is attuned to Flame: increases strength by 40%.\70\y
+(Flame) Strength\45%\Aura\If the user is attuned to Flame: increases strength by 45%.\80\y
+(Flame) Strength\60%\Aura\If the user is attuned to Flame: increases strength by 60%.\100\y
+(Lance) Skill Damage\30%\Aura\if the user wields a Lance: increases attack skill damage by 30%\60\y
+(Lance) Skill Damage\35%\Aura\if the user wields a Lance: increases attack skill damage by 35%\80\y
+(Light) Critical Damage\50%\Aura\If the user is attuned to Light: adds 50% to the modifier applied to critical damage.\40\y
+(Light) Critical Damage\70%\Aura\If the user is attuned to Light: adds 70% to the modifier applied to critical damage.\60\y
+(Light) Critical Rate\5%\Aura\If the user is attuned to Light: Increases critical rate by 5%.\40\y
+(Light) Critical Rate\6%\Aura\If the user is attuned to Light: Increases critical rate by 6%.\40\y
+(Light) Curse Res\25%\Aura\If the user is attuned to Light: Reduces susceptibility to curses by 25%.\40\y
+(Light) Curse Res\40%\Aura\If the user is attuned to Light: Reduces susceptibility to curses by 40%.\50\y
+(Light) HP & Strength\5%\Aura\If the user is attuned to Light: increases strength and HP by 5%.\20\y
+(Light) HP & Strength\8%\Aura\If the user is attuned to Light: increases strength and HP by 8%.\30\y
+(Light) HP & Strength\10%\Aura\If the user is attuned to Light: increases strength and HP by 10%.\50\y
+(Light) HP & Strength\15%\Aura\If the user is attuned to Light: increases strength and HP by 15%.\60\y
+(Light) HP & Strength\20%\Aura\If the user is attuned to Light: increases strength and HP by 20%.\70\y
+(Light) HP & Strength\30%\Aura\If the user is attuned to Light: increases strength and HP by 30%.\100\y
+(Light) HP\10%\Aura\If the user is attuned to Light: increases HP by 10%.\20\y
+(Light) HP\15%\Aura\If the user is attuned to Light: increases HP by 15%.\30\y
+(Light) HP\30%\Aura\If the user is attuned to Light: increases HP by 30%.\60\y
+(Light) HP\40%\Aura\If the user is attuned to Light: increases HP by 40%.\70\y
+(Light) HP\45%\Aura\If the user is attuned to Light: increases HP by 45%.\80\y
+(Light) HP\60%\Aura\If the user is attuned to Light: increases HP by 60%.\100\y
+(Light) Skill Haste\4%\Aura\If the user is attuned to Light: Increases skill gauge fill rate by 4%.\30\y
+(Light) Skill Haste\5%\Aura\If the user is attuned to Light: Increases skill gauge fill rate by 5%.\50\y
+(Light) Strength\10%\Aura\If the user is attuned to Light: increases strength by 10%.\20\y
+(Light) Strength\15%\Aura\If the user is attuned to Light: increases strength by 15%.\30\y
+(Light) Strength\30%\Aura\If the user is attuned to Light: increases strength by 30%.\60\y
+(Light) Strength\40%\Aura\If the user is attuned to Light: increases strength by 40%.\70\y
+(Light) Strength\45%\Aura\If the user is attuned to Light: increases strength by 45%.\80\y
+(Light) Strength\60%\Aura\If the user is attuned to Light: increases strength by 60%.\100\y
+(Shadow) Buff Time\15%\Aura\If the user is attuned to Shadow: increases duration of buff skills by 15%.\20\y
+(Shadow) Buff Time\20%\Aura\If the user is attuned to Shadow: increases duration of buff skills by 20%.\40\y
+(Shadow) HP & Strength\5%\Aura\If the user is attuned to Shadow: increases strength and HP by 5%.\20\y
+(Shadow) HP & Strength\8%\Aura\If the user is attuned to Shadow: increases strength and HP by 8%.\30\y
+(Shadow) HP & Strength\10%\Aura\If the user is attuned to Shadow: increases strength and HP by 10%.\50\y
+(Shadow) HP & Strength\15%\Aura\If the user is attuned to Shadow: increases strength and HP by 15%.\60\y
+(Shadow) HP & Strength\20%\Aura\If the user is attuned to Shadow: increases strength and HP by 20%.\70\y
+(Shadow) HP & Strength\30%\Aura\If the user is attuned to Shadow: increases strength and HP by 30%.\100\y
+(Shadow) HP\10%\Aura\If the user is attuned to Shadow: increases HP by 10%.\20\y
+(Shadow) HP\15%\Aura\If the user is attuned to Shadow: increases HP by 15%.\30\y
+(Shadow) Paralysis Res\25%\Aura\If the user is attuned to Shadow: reduces susceptibility to paralysis by 25%.\80\y
+(Shadow) Paralysis Res\40%\Aura\If the user is attuned to Shadow: reduces susceptibility to paralysis by 40%.\100\y
+(Shadow) Strength\10%\Aura\If the user is attuned to Shadow: increases strength by 10%.\20\y
+(Shadow) Strength\15%\Aura\If the user is attuned to Shadow: increases strength by 15%.\30\y
+(Shadow) Strength\20%\Aura\If the user is attuned to Shadow: increases strength by 20%.\40\y
+(Shadow) Strength\30%\Aura\If the user is attuned to Shadow: increases strength by 30%.\60\y
+(Shadow) Strength\40%\Aura\If the user is attuned to Shadow: increases strength by 40%.\70\y
+(Shadow) Strength\45%\Aura\If the user is attuned to Shadow: increases strength by 45%.\80\y
+(Shadow) Strength\60%\Aura\If the user is attuned to Shadow: increases strength by 60%.\100\y
+(Water) HP & Strength\5%\Aura\If the user is attuned to Water: increases strength and HP by 5%.\20\y
+(Water) HP & Strength\8%\Aura\If the user is attuned to Water: increases strength and HP by 8%.\30\y
+(Water) HP & Strength\15%\Aura\If the user is attuned to Water: increases strength and HP by 15%.\60\y
+(Water) HP & Strength\20%\Aura\If the user is attuned to Water: increases strength and HP by 20%.\70\y
+(Water) HP & Strength\30%\Aura\If the user is attuned to Water: increases strength and HP by 30%.\100\y
+(Water) HP\10%\Aura\If the user is attuned to Water: increases HP by 10%.\20\y
+(Water) HP\15%\Aura\If the user is attuned to Water: increases HP by 15%.\30\y
+(Water) HP\20%\Aura\If the user is attuned to Water: increases HP by 20%.\40\y
+(Water) HP\30%\Aura\If the user is attuned to Water: increases HP by 30%.\60\y
+(Water) Strength\10%\Aura\If the user is attuned to Water: increases strength by 10%.\20\y
+(Water) Strength\15%\Aura\If the user is attuned to Water: increases strength by 15%.\30\y
+(Water) Strength\30%\Aura\If the user is attuned to Water: increases strength by 30%.\60\y
+(Water) Strength\40%\Aura\If the user is attuned to Water: increases strength by 40%.\70\y
+(Water) Strength\45%\Aura\If the user is attuned to Water: increases strength by 45%.\80\y
+(Water) Strength\60%\Aura\If the user is attuned to Water: increases strength by 60%.\100\y
+(Wind) Broken Punisher\15%\Aura\If the user is attuned to Wind: increases damage to enemies in break state by 15%.\20\y
+(Wind) Broken Punisher\20%\Aura\If the user is attuned to Wind: increases damage to enemies in break state by 20%.\40\y
+(Wind) HP & Strength\5%\Aura\If the user is attuned to Wind: increases strength and HP by 5%.\20\y
+(Wind) HP & Strength\8%\Aura\If the user is attuned to Wind: increases strength and HP by 8%.\30\y
+(Wind) HP & Strength\10%\Aura\If the user is attuned to Wind: increases strength and HP by 10%.\50\y
+(Wind) HP & Strength\20%\Aura\If the user is attuned to Wind: increases strength and HP by 20%.\70\y
+(Wind) HP & Strength\30%\Aura\If the user is attuned to Wind: increases strength and HP by 30%.\100\y
+(Wind) HP\10%\Aura\If the user is attuned to Wind: increases HP by 10%.\20\y
+(Wind) HP\15%\Aura\If the user is attuned to Wind: increases HP by 15%.\30\y
+(Wind) HP\20%\Aura\If the user is attuned to Wind: increases HP by 20%.\40\y
+(Wind) HP\30%\Aura\If the user is attuned to Wind: increases HP by 30%.\60\y
+(Wind) HP\40%\Aura\If the user is attuned to Wind: increases HP by 40%.\70\y
+(Wind) HP\45%\Aura\If the user is attuned to Wind: increases HP by 45%.\80\y
+(Wind) HP\60%\Aura\If the user is attuned to Wind: increases HP by 60%.\100\y
+(Wind) Strength\10%\Aura\If the user is attuned to Wind: increases strength by 10%.\20\y
+(Wind) Strength\15%\Aura\If the user is attuned to Wind: increases strength by 15%.\30\y
+(Wind) Strength\20%\Aura\If the user is attuned to Wind: increases strength by 20%.\40\y
+(Wind) Strength\30%\Aura\If the user is attuned to Wind: increases strength by 30%.\60\y
+(Wind) Strength\40%\Aura\If the user is attuned to Wind: increases strength by 40%.\70\y
+(Wind) Strength\45%\Aura\If the user is attuned to Wind: increases strength by 45%.\80\y
+(Wind) Strength\60%\Aura\If the user is attuned to Wind: increases strength by 60%.\100\y
+(Wind) Strength & Critical Damage\30/50%\Aura\If the user is attuned to Wind: increases strength by 30% and adds 50% to the modifier applied to critical damage.\70\y
+(Wind) Strength & Critical Damage\45/55%\Aura\If the user is attuned to Wind: increases strength by 45% and adds 55% to the modifier applied to critical damage.\100\y
+Dragonyule Blessing\I\Aura\If the user is attuned to Water: increases strength by 30% and critical rate by 15%.\70\y
+Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength by 45% and critical rate by 20%.\100\y
 (Water) Flurry Devastation\8%\Ability\If the user is attuned to Water: increases critical rate by 8% when the combo count is 15 or higher.\40\y
 (Water) Flurry Devastation\10%\Ability\If the user is attuned to Water: increases critical rate by 10% when the combo count is 15 or higher.\60\y
 Astral Ornament\25%\Ability\Increases Astral Ornaments intake for clearing quests by 25%.\0\y
@@ -560,8 +579,6 @@ Dragon Time\20%\Ability\Extends shapeshift time by 20%.\100\n
 Dragon's Claws\I\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 4% in total. On second shapeshift strength is increased by 10% in total. On third shapeshift strength is increased by 20% in total.\60\y
 Dragon's Claws\II\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 5% in total. On second shapeshift strength is increased by 13% in total. On third shapeshift strength is increased by 25% in total.\80\y
 Dragon's Claws\III\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 6% in total. On second shapeshift strength is increased by 15% in total. On third shapeshift strength is increased by 30% in total.\100\y
-Dragonyule Blessing\I\Ability\If the user is attuned to Water: increases strength by 30% and critical rate by 15%.\70\y
-Dragonyule Blessing\II\Ability\If the user is attuned to Water: increases strength by 45% and critical rate by 20%.\100\y
 Energized: Strength\15%\Ability\Increases strength by 15% for 15 seconds each time the user is energized.\80\y
 Energized: Strength\20%\Ability\Increases strength by 20% for 15 seconds each time the user is energized.\100\y
 Energy Doublebuff\-\Ability\Increases energy level by one stage each time a defense up buff is received.\60\y
@@ -635,6 +652,7 @@ Holiday Cheer\150%\Ability\Increases Holiday Cheer intake for clearing quests by
 Holiday Cheer\25%\Ability\Increases Holiday Cheer intake for clearing quests by 25%.\0\y
 Holiday Cheer\50%\Ability\Increases Holiday Cheer intake for clearing quests by 50%.\0\y
 HP 70 = Critical Rate\10%\Ability\Increases critical rate by 10% when HP is 70% or above.\100\y
+HP 70 = Critical Rate\15%\Ability\Adds 15% to the modifier applied to critical damage when HP is 70% or above.\60\y
 HP 70 = Critical Rate\5%\Ability\Increases critical rate by 5% when HP is 70% or above.\40\y
 HP 70 = Critical Rate\6%\Ability\Increases critical rate by 6% when HP is 70% or above.\60\y
 HP 70 = Critical Rate\8%\Ability\Increases critical rate by 8% when HP is 70% or above.\80\y
@@ -730,6 +748,7 @@ Skill Haste\3%\Ability\Increases skill gauge fill rate by 3%.\30\y
 Skill Haste\4%\Ability\Increases skill gauge fill rate by 4%.\50\y
 Skill Haste\5%\Ability\Increases skill gauge fill rate by 5%.\60\y
 Skill Haste\6%\Ability\Increases skill gauge fill rate by 6%.\80\y
+Skill Haste\8%\Ability\Increases skill gauge fill rate by 8%.\100\y
 Skill Prep\8%\Ability\Fills 8% of skill gauges at the start of quests.\5\y
 Skill Prep\10%\Ability\Fills 10% of skill gauges at the start of quests.\10\y
 Skill Prep\15%\Ability\Fills 15% of skill gauges at the start of quests.\20\y
@@ -764,6 +783,8 @@ Striker's Strength\3%\Ability\Increases strength by 3% for every three enemies d
 Striker's Strength\4%\Ability\Increases strength by 4% for every three enemies defeated with force strikes (up to five times per quest).\60\y
 Striker's Strength\5%\Ability\Increases strength by 5% for every three enemies defeated with force strikes (up to five times per quest).\80\y
 Striker's Strength\6%\Ability\Increases strength by 6% for every three enemies defeated with force strikes (up to five times per quest).\100\y
+Striking Haste\6%\Ability\Increases skill gauge fill rate by 6% when the user's force strikes connect.\60\y
+Striking Haste\8%\Ability\Increases skill gauge fill rate by 8% when the user's force strikes connect.\80\y
 Stun Res\100%\Ability\Reduces susceptibility to stun by 100%.\100\y
 Stun Res\15%\Ability\Reduces susceptibility to stun by 15%.\10\y
 Stun Res\20%\Ability\Reduces susceptibility to stun by 20%.\20\y
@@ -779,6 +800,8 @@ Tent Canvas\50%\Ability\Increases canvas tent intake for clearing quests by 50%\
 Tent Canvas\75%\Ability\Increases canvas tent intake for clearing quests by 75%\0\y
 Thaumian's Bane\20%\Ability\Increases damage to thaumians by 20%.\60\y
 Thaumian's Bane\25%\Ability\Increases damage to thaumians by 25%.\80\y
+Therion's Bane\20%\Ability\Increases damage to therions by 20%.\60\y
+Therion's Bane\25%\Ability\Increases damage to therions by 25%.\80\y
 Tricker Treats\100%\Ability\Increases Tricker Treat intake for clearing quests by 100%.\0\y
 Tricker Treats\25%\Ability\Increases Tricker Treat intake for clearing quests by 25%.\0\y
 Tricker Treats\50%\Ability\Increases Tricker Treat intake for clearing quests by 50%.\0\y
