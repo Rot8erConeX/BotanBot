@@ -52,7 +52,7 @@ def all_commands(include_nil=false,permissions=-1)
      'daily','now','dailies','todayindl','today_in_dl','tomorrow','tommorrow','tomorow','tommorow','shop','store','exp','level','xp','plxp','plexp','pllevel',
      'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','dbxp',
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
-     'weaponlevel','wxp','wexp','wlevel','victory','facility','faculty','fac','mat','material','item']
+     'weaponlevel','wxp','wexp','wlevel','victory','facility','faculty','fac','mat','material','item','list','lookup']
   k=['addalias','deletealias','removealias','s2s'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases'] if permissions==2
   k=k.uniq
@@ -352,7 +352,7 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
       event << 'This help window is not in an embed so that people who need this command can see it.'
     end
     return nil
-  elsif ['find','search'].include?(command.downcase)
+  elsif ['find','search','lookup'].include?(command.downcase)
     subcommand='' if subcommand.nil?
     if ['adventurer','adventurers','adv','advs','unit','units'].include?(subcommand.downcase)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all adventurers that fit `filters`.\n\nYou can search by:\n- Rarity\n- Element\n- Weapon type\n- Class\n- Availability\n\nIf too many adventurers are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
@@ -711,6 +711,7 @@ def disp_adventurer_stats(bot,event,args=nil)
   rar=0
   for i in 0...args.length
     rar=args[i].to_i if rar.zero? && args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<6
+    rar=args[i].to_i if rar.zero? && args[i][1,1]=='*' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<6
   end
   rar=k[1][0,1].to_i if rar.zero?
   rar=k[1][0,1].to_i if rar>k[1][0,1].to_i && s2s
@@ -968,13 +969,15 @@ def disp_weapon_stats(bot,event,args=nil)
     str="#{str}\n\n**#{'<:NonUnbound:534494090876682264>'*4} Level 1**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
     str="#{str}\n**#{'<:NonUnbound:534494090876682264>'*4} Level 80**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}" if k[2][0,1].to_i>=5 && k[3]!='None'
     str="#{str}\n**#{'<:Unbind:534494090969088000>'*4} Level #{f}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
+    strx=''
     unless skl.nil?
       str="#{str}\n\n**Skill:** *#{skl[0]}*"
       if skl[6][0]==skl[6][1]
-        str="#{str} - #{longFormattedNumber(skl[6][0])} SP"
+        str="#{str} - #{longFormattedNumber(skl[6][0])} SP;;;;;"
       else
-        str="#{str} - #{longFormattedNumber(skl[6][0])} \u2192 #{longFormattedNumber(skl[6][1])} SP"
+        str="#{str} - #{longFormattedNumber(skl[6][0])} \u2192 #{longFormattedNumber(skl[6][1])} SP;;;;;"
       end
+      strx=skl[4].gsub(';; ',"\n")
     end
   end
   str2=''
@@ -996,6 +999,13 @@ def disp_weapon_stats(bot,event,args=nil)
   str="#{str}#{"\n" unless s2s}#{str2}" if str2.length>0
   str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[7][0])}<:Resource_Rupies:532104504372363274>#{" #{longFormattedNumber(k[7][1])}<:Resource_Eldwater:532104503777034270>" if k[7][1]>0}"
   str="#{str}\n**Disassembles for:** #{longFormattedNumber(k[11][1])}<:Resource_Rupies:532104504372363274>"
+  unless s2s
+    if str.gsub(';;;;;',"\n#{strx}").length>=1900
+      str=str.gsub(';;;;;',"\n~~The description makes this data too long.  Please try again in PM.~~")
+    else
+      str=str.gsub(';;;;;',"\n#{strx}")
+    end
+  end
   create_embed(event,"__**#{k[0]}**__",str,element_color(k[3]),nil,xpic)
 end
 
@@ -2492,7 +2502,7 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     dispstr=['Facility',unit[0],'Facility',unit[0]]
   elsif type[1]=='Material'
     unit=find_mat(unit,event)
-    dispstr=['Material',unit[0],'Material',unit[0]]
+    dispstr=['Material',unit[0],'Item',unit[0]]
   end
   logchn=536307117301170187
   logchn=431862993194582036 if @shardizard==4
@@ -2531,7 +2541,7 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
   chn=event.channel.id
   chn=modifier2.to_i if event.user.id==167657750971547648 && !modifier2.nil? && modifier2.to_i.to_s==modifier2
   m=nil if [167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) && !modifier.nil?
-  m=nil if event.channel.id==502288368777035777 && !modifier.nil?
+  m=nil if event.channel.id==532083509083373583 && !modifier.nil?
   double=false
   for i in 0...@aliases.length
     if @aliases[i][3].nil?
@@ -2560,7 +2570,7 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     @aliases.sort! {|a,b| (spaceship_order(a[0]) <=> spaceship_order(b[0])) == 0 ? ((a[2].downcase <=> b[2].downcase) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2].downcase <=> b[2].downcase)) : (spaceship_order(a[0]) <=> spaceship_order(b[0]))}
     bot.channel(chn).send_message("**#{newname}** has been#{" globally" if ([167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) || event.channel.id==532083509083373583) && !modifier.nil?} added to the aliases for the #{dispstr[2].downcase} *#{dispstr[1]}*.\nPlease test to be sure that the alias stuck.")
     event.respond "#{newname} has been added to #{dispstr[1]}'s aliases#{" globally" if event.user.id==167657750971547648 && !modifier.nil?}." if event.user.id==167657750971547648 && !modifier2.nil? && modifier2.to_i.to_s==modifier2
-    bot.channel(logchn).send_message("**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** #{newname} for #{dispstr[1]}#{" - global alias" if ([167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) || event.channel.id==502288368777035777) && !modifier.nil?}")
+    bot.channel(logchn).send_message("**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** #{newname} for #{dispstr[1]}#{" - global alias" if ([167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) || event.channel.id==532083509083373583) && !modifier.nil?}")
   end
   @aliases.uniq!
   nzzz=@aliases.map{|a| a}
@@ -3952,7 +3962,7 @@ bot.command([:mat,:material]) do |event, *args|
   disp_mat_data(bot,event,args)
 end
 
-bot.command([:find,:search]) do |event, *args|
+bot.command([:find,:search,:list,:lookup]) do |event, *args|
   return nil if overlap_prevent(event)
   if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
     args.shift
@@ -4416,10 +4426,10 @@ bot.command(:snagstats) do |event, f, f2|
   if ['servers','server','members','member','shard','shards','user','users'].include?(f.downcase)
     event << "**I am in #{longFormattedNumber(@server_data[0].inject(0){|sum,x| sum + x })} servers, reaching #{longFormattedNumber(@server_data[1].inject(0){|sum,x| sum + x })} unique members.**"
     event << "#{longFormattedNumber(@server_data[0][0])} server#{"s are" if @server_data[0][0]!=1}#{" is" unless @server_data[0][0]!=1} assigned the <:Type_Defense:532107867264909314> Defense class, reaching #{longFormattedNumber(@server_data[1][0])} unique members."
-    event << "#{longFormattedNumber(@server_data[0][1])} server#{"s are" if @server_data[0][1]!=1}#{" is" unless @server_data[1][0]!=1} assigned the <:Type_Attack:532107867520630784> Attack class, reaching #{longFormattedNumber(@server_data[1][1])} unique members."
-    event << "#{longFormattedNumber(@server_data[0][2])} server#{"s are" if @server_data[0][2]!=1}#{" is" unless @server_data[2][0]!=1} assigned the <:Type_Healing:532107867348533249> Healing class, reaching #{longFormattedNumber(@server_data[1][2])} unique members."
-    event << "#{longFormattedNumber(@server_data[0][3])} server#{"s are" if @server_data[0][3]!=1}#{" is" unless @server_data[3][0]!=1} assigned the <:Type_Support:532107867575156747> Support class, reaching #{longFormattedNumber(@server_data[1][3])} unique members."
-    event << "#{longFormattedNumber(@server_data[0][4])} server#{"s are" if @server_data[0][4]!=1}#{" is" unless @server_data[4][0]!=1} assigned <:Element_Null:532106087810334741> no class, reaching #{longFormattedNumber(@server_data[1][4])} unique members."
+    event << "#{longFormattedNumber(@server_data[0][1])} server#{"s are" if @server_data[0][1]!=1}#{" is" unless @server_data[0][1]!=1} assigned the <:Type_Attack:532107867520630784> Attack class, reaching #{longFormattedNumber(@server_data[1][1])} unique members."
+    event << "#{longFormattedNumber(@server_data[0][2])} server#{"s are" if @server_data[0][2]!=1}#{" is" unless @server_data[0][2]!=1} assigned the <:Type_Healing:532107867348533249> Healing class, reaching #{longFormattedNumber(@server_data[1][2])} unique members."
+    event << "#{longFormattedNumber(@server_data[0][3])} server#{"s are" if @server_data[0][3]!=1}#{" is" unless @server_data[0][3]!=1} assigned the <:Type_Support:532107867575156747> Support class, reaching #{longFormattedNumber(@server_data[1][3])} unique members."
+    event << "#{longFormattedNumber(@server_data[0][4])} server#{"s are" if @server_data[0][4]!=1}#{" is" unless @server_data[0][4]!=1} assigned <:Element_Null:532106087810334741> no class, reaching #{longFormattedNumber(@server_data[1][4])} unique members."
     return nil
   elsif ['code','lines','line','sloc'].include?(f.downcase)
     event.channel.send_temporary_message('Calculating data, please wait...',3)
@@ -4628,7 +4638,7 @@ bot.server_create do |event|
     event.server.leave
   else
     bot.user(167657750971547648).pm("Joined server **#{event.server.name}** (#{event.server.id})\nOwner: #{event.server.owner.distinct} (#{event.server.owner.id})\nAssigned the #{['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null'][(event.server.id >> 22) % 4]} class")
-    bot.user(239973891626237952).pm("Joined server **#{event.server.name}** (#{event.server.id})\nOwner: #{event.server.owner.distinct} (#{event.server.owner.id})\nAssigned the #{['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null'][(event.server.id >> 22) % 4]} class")
+    bot.user(141260274144509952).pm("Joined server **#{event.server.name}** (#{event.server.id})\nOwner: #{event.server.owner.distinct} (#{event.server.owner.id})\nAssigned the #{['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null'][(event.server.id >> 22) % 4]} class")
     metadata_load()
     @server_data[0][((event.server.id >> 22) % 4)] += 1
     metadata_save()
@@ -4639,7 +4649,7 @@ end
 bot.server_delete do |event|
   unless @shardizard==4
     bot.user(167657750971547648).pm("Left server **#{event.server.name}**")
-    bot.user(239973891626237952).pm("Left server **#{event.server.name}**")
+    bot.user(141260274144509952).pm("Left server **#{event.server.name}**")
     metadata_load()
     @server_data[0][((event.server.id >> 22) % 4)] -= 1
     metadata_save()
