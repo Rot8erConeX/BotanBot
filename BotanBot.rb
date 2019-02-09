@@ -52,7 +52,7 @@ def all_commands(include_nil=false,permissions=-1)
      'daily','now','dailies','todayindl','today_in_dl','tomorrow','tommorrow','tomorow','tommorow','shop','store','exp','level','xp','plxp','plexp','pllevel',
      'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','dbxp',
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
-     'weaponlevel','wxp','wexp','wlevel','victory','facility','faculty','fac','mat','material','item','list','lookup']
+     'weaponlevel','wxp','wexp','wlevel','victory','facility','faculty','fac','mat','material','item','list','lookup','invite']
   k=['addalias','deletealias','removealias','s2s'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases'] if permissions==2
   k=k.uniq
@@ -322,6 +322,8 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
     create_embed(event,"**#{command.downcase}** __name__","Shows `name`'s stats and abilities.",0xCE456B)
   elsif ['weapon','weap','wep','wpn'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows `name`'s stats and skills.",0xCE456B)
+  elsif command.downcase=='invite'
+    create_embed(event,'**invite**','PMs the invoker with a link to invite me to their server.',0xCE456B)
   elsif ['skill','skil'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows everything that the skill named `name` does.  Also shows all adventurers and dragons that know the skill, and any weapons that have it imbued.",0xCE456B)
   elsif ['ability','abil'].include?(command.downcase)
@@ -3798,7 +3800,7 @@ def level(event,bot,args=nil,mode=0)
       n=[nums[0,2].min,1].max
       n2=[nums[0,2].max,bxp.length].min
       m=bxp[n-1,n2-n].map{|q| q[0]*10}.inject(0){|sum,x| sum + x }
-      str2="#{str2}\n*To get from level #{n} to level #{m}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP required"
+      str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP required"
       str2="#{str2}\n*Optimal feeding:*  \u200B  \u200B  #{exp_shift(m,4)}"
       str2="#{str2}\n*Resulting shapeshift time increase:*  \u200B  \u200B  #{'%.1f' % (bxp[n2-1][1]-bxp[n-1][1])} additional seconds ~~(from #{bxp[n-1][1]} sec to #{bxp[n2-1][1]} sec)~~"
     end
@@ -3884,7 +3886,7 @@ def level(event,bot,args=nil,mode=0)
       n=[nums[0,2].min,1].max
       n2=[nums[0,2].max,wrxp.length].min
       m=wrxp[n-1,n2-n].inject(0){|sum,x| sum + x }
-      str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
+      str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
     end
     str=extend_message(str,str2,event,2)
   end
@@ -4647,7 +4649,7 @@ bot.server_create do |event|
     metadata_load()
     @server_data[0][((event.server.id >> 22) % 4)] += 1
     metadata_save()
-    chn.send_message("Hello, my name is Botan.  Folks around town call me the \"naginata cutie.\" ...Hey, don't you **dare** laugh at that, jerk!\nYou want data on *Dragalia Lost*?  Leave this to me!") rescue nil
+    chn.send_message("Hello, my name is Botan.  Folks around town call me the \"naginata cutie.\" ...Hey, don't you **dare** laugh at that, jerk!\nWant data on *Dragalia Lost*?  Use commands that with the prefix `DL!`, and leave this to me!") rescue nil
   end
 end
 
