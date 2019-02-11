@@ -823,7 +823,7 @@ def disp_adventurer_stats(bot,event,args=nil)
     lv=[3,2,2,2,k[8][2].length]
     lv=[2,2,2,2,0] if rar==4
     lv=[2,1,2,1,0] if rar==3
-    lv[4]=1 if k[1][0,1].to_i==5
+    lv[4]=1 if k[1][0,1].to_i==5 && rar<5
     lv=[1,1,1,1,0] if rar==2
     lv=[1,1,1,0,0] if rar==1
     x=[skl1[3,3].reject{|q| q.nil? || q.length<=0}[lv[0]-1].gsub(';; ',"\n"),skl2[3,3].reject{|q| q.nil? || q.length<=0}[lv[1]-1].gsub(';; ',"\n")]
@@ -4237,6 +4237,7 @@ bot.command([:mat,:material,:item]) do |event, *args|
 end
 
 bot.command([:alts,:alt]) do |event, *args|
+  return nil if overlap_prevent(event)
   if find_data_ex(:find_adventurer,args.join(' '),event,true).length>0
     find_adv_alts(event,args,bot)
   elsif find_data_ex(:find_dragon,args.join(' '),event,true).length>0
@@ -5182,7 +5183,7 @@ bot.mention do |event|
     args.shift
     level(event,bot,args)
     m=false
-  elsif ['pxp','pexp','plxp','plexp','plevel','pllevel','adv','axp','aexp','advxp','advexp','alevel','advlevel','dxp','dexp','drgxp','drgexp','dlevel','drglevel','bond','dragonbond','bxp','bexp','dbxp','dbexp','bondxp','bondexp','blevel','dblevel','bondlevel','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp','weaponlevel','wxp','wexp','wlevel'].include?(args[0].downcase)
+  elsif ['pxp','pexp','plxp','plexp','plevel','pllevel','axp','aexp','advxp','advexp','alevel','advlevel','dxp','dexp','drgxp','drgexp','dlevel','drglevel','bond','dragonbond','bxp','bexp','dbxp','dbexp','bondxp','bondexp','blevel','dblevel','bondlevel','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp','weaponlevel','wxp','wexp','wlevel'].include?(args[0].downcase)
     level(event,bot,args)
     m=false
   elsif ['next','schedule'].include?(args[0].downcase)
