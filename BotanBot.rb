@@ -52,9 +52,9 @@ def all_commands(include_nil=false,permissions=-1)
      'daily','now','dailies','todayindl','today_in_dl','tomorrow','tommorrow','tomorow','tommorow','shop','store','exp','level','xp','plxp','plexp','pllevel',
      'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','dbxp',
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
-     'weaponlevel','wxp','wexp','wlevel','victory','facility','faculty','fac','mat','material','item','list','lookup','invite']
+     'weaponlevel','wxp','wexp','wlevel','victory','facility','faculty','fac','mat','material','item','list','lookup','invite','boop']
   k=['addalias','deletealias','removealias','s2s'] if permissions==1
-  k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases'] if permissions==2
+  k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop'] if permissions==2
   k=k.uniq
   k.push(nil) if include_nil
   return k
@@ -199,6 +199,7 @@ def data_load()
     b[i][5]=b[i][5].split(';; ')
     b[i][6]=b[i][6].to_i
     b[i][7]=b[i][7].to_i
+    b[i][8]=b[i][8].split(', ')
   end
   @mats=b.map{|q| q}
 end
@@ -364,6 +365,17 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all wyrmprints that fit `filters`.\n\nYou can search by:\n- Rarity\n- Amulet type\n- Availability\n\nIf too many wyrmprints are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
     elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(subcommand.downcase)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all weapons that fit `filters`.\n\nYou can search by:\n- Rarity\n- Element\n- Weapon type\n- Availability\n\nIf too many weapons are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+    elsif ['mat','mats','material','materials','item','items'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all materials and items that fit `filters`.\n\nYou can search by:\n- Rarity\n- Pouch Rarity\n- Tags\n\nIf too many materials and items are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+      lookout=[]
+      if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt')
+        lookout=[]
+        File.open('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt').each_line do |line|
+          lookout.push(eval line)
+        end
+      end
+      w=lookout.reject{|q| q[2]!='Mat'}.map{|q| q[0]}.sort
+      create_embed(event,'Tags','',0x40C0F0,nil,nil,triple_finish(w)) if safe_to_spam?(event)
     else
       create_embed(event,"**#{command.downcase}** __\*filters__","Displays all adventurers, dragons, wyrmprints, and weapons that fit `filters`.\n\nYou can search by:\n- Rarity\n- Element\n- Weapon type\n- Class / Amulet type\n- Availability\n\nIn addition, dragons can be sorted by:\n- Dragon Roost Bond Gift preference\n- Whether or not the dragon turns to face damage sources\n- Whether or not the dragon is a ranged attacker\n\nIf too much data is trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
     end
@@ -1642,7 +1654,12 @@ def disp_mat_data(bot,event,args=nil)
   str="#{str}\n\n**Ways to obtain:**\n#{k[4].join("\n")}"
   str="#{str}\n\n**Uses:**\n#{k[5].join("\n")}" if s2s
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Mats/#{k[0].gsub(' ','_')}.png"
-  if str.length>=1800
+  flds=nil
+  flds=triple_finish(k[8].sort,true) if args.include?('tag') || args.include?('tags')
+  flds=nil unless s2s
+  f=0
+  f=flds.map{|q| q[1]}.join("\n").length+"\n\n**searching tags:**" unless flds.nil?
+  if str.length+f>=1800
     str=str.split("\n\n")
     str[0]="#{str[0]}\n\n#{str[1]}"
     str[1]=nil
@@ -1655,11 +1672,12 @@ def disp_mat_data(bot,event,args=nil)
         create_embed(event,'',str[1],0xE3F78B)
         create_embed(event,'',str[2],0xE3F78B) if str.length>=3
       end
+      create_embed(event,'','Searching tags',0xE3F78B,nil,nil,flds) unless flds.nil?
     else
-      create_embed(event,"__**#{k[0]}**__",str[0],0xE3F78B,'For obtainment methods, please use this command in PM.  Including them made this reply too long.',xpic)
+      create_embed(event,"__**#{k[0]}**__","#{str[0]}#{"\n\n**Searching Tags:**" unless flds.nil?}",0xE3F78B,'For obtainment methods, please use this command in PM.  Including them made this reply too long.',xpic,flds)
     end
   else
-    create_embed(event,"__**#{k[0]}**__",str,0xE3F78B,nil,xpic)
+    create_embed(event,"__**#{k[0]}**__","#{str}#{"\n\n**Searching Tags:**" unless flds.nil?}",0xE3F78B,nil,xpic,flds)
   end
 end  
 
@@ -2151,6 +2169,67 @@ def find_in_weapons(bot,event,args=nil,mode=0)
   end
 end
 
+def find_in_mats(bot,event,args=nil,mode=0)
+  data_load()
+  args=normalize(event.message.text.downcase).split(' ') if args.nil?
+  args=args.map{|q| normalize(q.downcase)}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  rarity=[]
+  pouch=[]
+  tags=[]
+  lookout=[]
+  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt')
+    lookout=[]
+    File.open('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt').each_line do |line|
+      lookout.push(eval line)
+    end
+  end
+  for i in 0...args.length
+    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>1 && args[i].to_i<6
+    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>1 && args[i][0,1].to_i<6
+    pouch.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>=0 && args[i].to_i<2
+    pouch.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>=0 && args[i][0,1].to_i<2
+    pouch.push(0) if ['common','commons'].include?(args[i])
+    pouch.push(1) if ['rare','rares'].include?(args[i])
+    for i2 in 0...lookout.length
+      tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
+    end
+  end
+  rarity.uniq!
+  pouch.uniq!
+  tags.uniq!
+  char=@mats.map{|q| q}
+  textra=''
+  search=[]
+  if rarity.length>0
+    char=char.reject{|q| !rarity.include?(q[1].to_i)}.uniq
+    search.push("*Rarities*: #{rarity.map{|q| "#{q}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][q]}"}.join(', ')}")
+  end
+  if pouch.length>0
+    char=char.reject{|q| !pouch.include?(q[6].to_i)}.uniq
+    search.push("*Pouch Rarities*: #{pouch.map{|q| "#{['<:Rarity_3:532086056519204864> Common','<:Rarity_5:532086056737177600> Rare'][q]}"}.join(', ')}")
+  end
+  if tags.length>0
+    search.push("*Tags*: #{tags.join(', ')}")
+    if args.include?('any')
+      search[-1]="#{search[-1]}\n(searching for materials or items with any listed tag)" if tags.length>1
+      char=char.reject{|q| !has_any?(tags,q[8])}.uniq
+    else
+      search[-1]="#{search[-1]}\n(searching for materials or items with all listed tags)" if tags.length>1
+      textra="#{textra}\n\nTags searching defaults to searching for materials and items with all listed tags.\nTo search for materials or items with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
+      for i in 0...tags.length
+        char=char.reject{|q| !q[8].include?(tags[i])}.uniq
+      end
+    end
+  end
+  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+textra.length>=1900) && !safe_to_spam?(event) && mode==0
+    event.respond "Too much data is trying to be displayed.  Please use this command in PM."
+    return nil
+  else
+    return [search,textra,char]
+  end
+end
+
 def find_adventurers(bot,event,args=nil)
   args=normalize(event.message.text.downcase).split(' ') if args.nil?
   args=args.map{|q| normalize(q.downcase)}
@@ -2248,6 +2327,31 @@ def find_weapons(bot,event,args=nil)
     textra=''
     textra="**No weapons match your search**" if char.length<=0
     create_embed(event,"__**Weapons Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total",nil,flds)
+  end
+end
+
+def find_mats(bot,event,args=nil)
+  args=normalize(event.message.text.downcase).split(' ') if args.nil?
+  args=args.map{|q| normalize(q.downcase)}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  k=find_in_mats(bot,event,args)
+  return nil if k.nil?
+  search=k[0]
+  textra=k[1]
+  char=k[2]
+  char=char.sort{|a,b| a[0]<=>b[0]}.map{|q| q[0]}.uniq
+  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || char.join("\n").length+search.join("\n").length>=1900
+    str="__**Material/Item Search**__\n#{search.join("\n")}#{"\n\n__**Notes**__\n#{textra}" if textra.length>0}\n\n__**Results**__"
+    for i in 0...char.length
+      str=extend_message(str,char[i],event)
+    end
+    str=extend_message(str,"#{char.length} total",event,2)
+    event.respond str
+  else
+    flds=nil
+    flds=triple_finish(char) unless char.length<=0
+    textra="#{textra}\n\n**No materials/items match your search**" if char.length<=0
+    create_embed(event,"__**Material/Item Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total",nil,flds)
   end
 end
 
@@ -2509,7 +2613,6 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     unit=find_mat(unit,event)
     dispstr=['Material',unit[0],'Item',unit[0]]
   end
-  puts type.to_s
   logchn=536307117301170187
   logchn=431862993194582036 if @shardizard==4
   newname=newname.gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')
@@ -3966,6 +4069,11 @@ end
 
 bot.command([:mat,:material,:item]) do |event, *args|
   return nil if overlap_prevent(event)
+  if ['find','search'].include?(args[0].downcase)
+    args.shift
+    find_mats(bot,event,args)
+    return nil
+  end
   disp_mat_data(bot,event,args)
 end
 
@@ -3986,6 +4094,10 @@ bot.command([:find,:search,:list,:lookup]) do |event, *args|
   elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase)
     args.shift
     find_weapons(bot,event,args)
+    return nil
+  elsif ['mat','mats','materials','material','item','items'].include?(args[0].downcase)
+    args.shift
+    find_mats(bot,event,args)
     return nil
   end
   find_all(bot,event,args)
@@ -4388,8 +4500,8 @@ end
 
 bot.command(:cleanupaliases, from: 167657750971547648) do |event|
   return nil if overlap_prevent(event)
-  event.channel.send_temporary_message('Please wait...',10)
   return nil unless event.user.id==167657750971547648 # only work when used by the developer
+  event.channel.send_temporary_message('Please wait...',10)
   nicknames_load()
   nmz=@aliases.map{|q| q}
   k=0
@@ -4629,6 +4741,19 @@ bot.command(:snagstats) do |event, f, f2|
   event << "**I am #{longFormattedNumber(File.foreach("C:/Users/Mini-Matt/Desktop/devkit/BotanBot.rb").inject(0) {|c, line| c+1})} lines of *code* long.**"
   event << "Of those, #{longFormattedNumber(b.length)} are SLOC (non-empty)."
   return nil
+end
+
+bot.command(:boop) do |event|
+  return nil if overlap_prevent(event)
+  return nil unless event.channel.id==532083509083373583 # only work when used by the developer
+  event.channel.send_temporary_message('Please wait...',10)
+  data_load()
+  m=@mats.reject{|q| q[1]==0}.map{|q| q[1]}.uniq
+  str=''
+  for i in 0...m.length
+    str=extend_message(str,m[i],event)
+  end
+  event.respond str
 end
 
 bot.server_create do |event|
