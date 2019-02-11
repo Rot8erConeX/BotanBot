@@ -7,7 +7,7 @@ Broadleaf Tree\An iconic tree with broad leaves. A standard of any garden, its p
 Circus Tent\Use it to boost the stats of light-attuned adventurers.\Adventurer, Event Altar\3x3\1\Tent Canvas
 Conifer Tree\A tree with needle-thin foliage that stays green throughout the winter and can endure harsh environments.\Decorative\1x1\5\
 Dagger Dojo\A training area built to hone one's skills with a dagger. Use it to boosts the stats of dagger-wielding adventures.\Adventurer, Dojo\3x3\2\
-Dragontree\A tree that produces three varieties of dragonfruit—the preferred snack of dragons the world over.\Production\3x3\1\
+Dragontree\A tree that produces three varieties of dragonfruit, the preferred snack of dragons the world over.\Production\3x3\1\
 Fafnir Statue (Flame)\Proof of overcoming the Flamewyrm's trial. A flame-imbued statue that boosts the HP and strength of flame dragons.\Dragon, Fafnir\3x3\1\
 Fafnir Statue (Wind)\Proof of overcoming the Windwyrm's trial. A wind-imbued statue that boosts the HP and strength of wind dragons.\Dragon, Fafnir\3x3\1\
 Flame Altar\An altar to honor flame. The mana housed within instills a fighting spirit, boosting the stats of flame-attuned adventurers.\Adventurer, Altar\3x3\2\
