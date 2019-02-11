@@ -52,7 +52,7 @@ def all_commands(include_nil=false,permissions=-1)
      'daily','now','dailies','todayindl','today_in_dl','tomorrow','tommorrow','tomorow','tommorow','shop','store','exp','level','xp','plxp','plexp','pllevel',
      'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','dbxp',
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
-     'weaponlevel','wxp','wexp','wlevel','victory','facility','faculty','fac','mat','material','item','list','lookup','invite','boop']
+     'weaponlevel','wxp','wexp','wlevel','victory','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt']
   k=['addalias','deletealias','removealias','s2s'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop'] if permissions==2
   k=k.uniq
@@ -95,6 +95,7 @@ def data_load()
     b[i][5]=b[i][5].to_i
     b[i][6]=b[i][6].split(';; ')
     b[i][8]=b[i][8].split(';;;; ').map{|q| q.split(';; ')}
+    b[i][9]=b[i][9].split(', ')
   end
   @adventurers=b.map{|q| q}
   if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLDragons.txt')
@@ -113,6 +114,7 @@ def data_load()
     b[i][7]=b[i][7].split(', ').map{|q| q.to_i}
     b[i][8]=b[i][8].split(', ').map{|q| q.to_f}
     b[i][9]=b[i][9].to_i
+    b[i][12]=b[i][12].split(', ')
   end
   @dragons=b.map{|q| q}
   if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLWyrmprints.txt')
@@ -708,6 +710,40 @@ def element_emote(ele,bot)
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{ele.gsub('None','Null')}"}
   return moji[0].mention if moji.length>0
   return ''
+end
+
+def adv_emoji(k,bot)
+  str=['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
+  str="#{str}#{moji[0].mention unless moji.length<=0}"
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[2][2]}"}
+  str="#{str}#{moji[0].mention unless moji.length<=0}"
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
+  str="#{str}#{moji[0].mention unless moji.length<=0}"
+  return str
+end
+
+def dragon_emoji(k,bot)
+  str=['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2]}"}
+  str="#{str}#{moji[0].mention unless moji.length<=0}"
+  return str
+end
+
+def print_emoji(k,bot)
+  str=['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2]}"}
+  str="#{str}#{moji[0].mention unless moji.length<=0}"
+  return str
+end
+
+def weapon_emoji(k,bot)
+  str=['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[2][0,1].to_i]
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
+  str="#{str}#{moji[0].mention unless moji.length<=0}"
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
+  str="#{str}#{moji[0].mention unless moji.length<=0}"
+  return str
 end
 
 def disp_adventurer_stats(bot,event,args=nil)
@@ -2675,7 +2711,6 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     end
   end
   unless double
-    puts dispstr.to_s
     @aliases.push([dispstr[0],newname,dispstr[3],m].compact)
     @aliases.sort! {|a,b| (spaceship_order(a[0]) <=> spaceship_order(b[0])) == 0 ? ((a[2].downcase <=> b[2].downcase) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2].downcase <=> b[2].downcase)) : (spaceship_order(a[0]) <=> spaceship_order(b[0]))}
     bot.channel(chn).send_message("**#{newname}** has been#{" globally" if ([167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) || event.channel.id==532083509083373583) && !modifier.nil?} added to the aliases for the #{dispstr[2].downcase} *#{dispstr[1]}*.\nPlease test to be sure that the alias stuck.")
@@ -3120,7 +3155,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
     n=n.reject{|q| q[2].nil?} if mode==1
     k=0
     k=event.server.id unless event.server.nil?
-    f.push("__**#{adv[0]}**__#{"'s server-specific aliases" if mode==1}")
+    f.push("__**#{adv[0]}#{adv_emoji(adv,bot)}**__#{"'s server-specific aliases" if mode==1}")
     unless mode==1
       f.push(adv[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if adv[0].include?('(') || adv[0].include?(')') || adv[0].include?(' ') || adv[0].include?('!') || adv[0].include?('_') || adv[0].include?('?') || adv[0].include?("'") || adv[0].include?('"')
     end
@@ -3146,7 +3181,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
     drg=drg[0] if drg[0].is_a?(Array)
     n=@aliases.reject{|q| q[0]!='Dragon'}.map{|q| [q[1],q[2],q[3]]}
     n=n.reject{|q| q[2].nil?} if mode==1
-    f.push("__**#{drg[0]}**__#{"'s server-specific aliases" if mode==1}")
+    f.push("__**#{drg[0]}#{dragon_emoji(drg,bot)}**__#{"'s server-specific aliases" if mode==1}")
     unless mode==1
       f.push(drg[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if drg[0].include?('(') || drg[0].include?(')') || drg[0].include?(' ') || drg[0].include?('!') || drg[0].include?('_') || drg[0].include?('?') || drg[0].include?("'") || drg[0].include?('"')
     end
@@ -3171,7 +3206,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
   elsif !wrm.nil?
     n=@aliases.reject{|q| q[0]!='Wyrmprint' || q[2]!=wrm[0]}.map{|q| [q[1],q[2],q[3]]}
     n=n.reject{|q| q[2].nil?} if mode==1
-    f.push("__**#{wrm[0]}**__#{"'s server-specific aliases" if mode==1}")
+    f.push("__**#{wrm[0]}#{print_emoji(wrm,bot)}**__#{"'s server-specific aliases" if mode==1}")
     unless mode==1
       f.push(wrm[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if wrm[0].include?('(') || wrm[0].include?(')') || wrm[0].include?(' ') || wrm[0].include?('!') || wrm[0].include?('_') || wrm[0].include?('?') || wrm[0].include?("'") || wrm[0].include?('"')
     end
@@ -3196,7 +3231,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
   elsif !wpn.nil?
     n=@aliases.reject{|q| !['Weapon'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
     n=n.reject{|q| q[2].nil?} if mode==1
-    f.push("__**#{wpn[0]}**__#{"'s server-specific aliases" if mode==1}")
+    f.push("__**#{wpn[0]}#{weapon_emoji(wpn,bot)}**__#{"'s server-specific aliases" if mode==1}")
     unless mode==1
       f.push(wpn[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if wpn[0].include?('(') || wpn[0].include?(')') || wpn[0].include?(' ') || wpn[0].include?('!') || wpn[0].include?('_') || wpn[0].include?('?') || wpn[0].include?("'") || wpn[0].include?('"')
     end
@@ -3996,6 +4031,122 @@ def level(event,bot,args=nil,mode=0)
   event.respond str
 end
 
+def find_adv_alts(event,args,bot)
+  data_load()
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_adventurer,args.join(' '),event)
+  if k.length.zero?
+    event.respond 'No matches found.'
+    return nil
+  end
+  name=k[9][0].gsub('*','')
+  k=@adventurers.reject{|q| q[9][0].gsub('*','')!=name}.uniq
+  untz2=[]
+  color=[]
+  for i in 0...k.length
+    color.push(element_color(k[i][2][1]))
+    m=[]
+    m.push('default') if k[i][0]==k[i][9][0] || k[i][9][0][k[i][9][0].length-1,1]=='*'
+    m.push('default') if k[i][9][0][0,1]=='*' && k[i][9].length>1
+    m.push('sensible') if k[i][9][0][0,1]=='*' && k[i][9].length<2
+    m.push('seasonal') if k[i][1][1,1]=='s'
+    m.push('out-of-left-field') if m.length<=0
+    n=''
+    unless k[i][0]==k[i][9] || k[i][9][k[i][9].length-1,1]=='*'
+      k2=k.reject{|q| q[9][0].gsub('*','')!=k[i][9][0].gsub('*','') || q[0]==k[i][0] || !(q[0]==q[9][0] || q[9][0].include?('*'))}
+      n='x' if k2.length<=0
+    end
+    untz2.push(["#{k[i][0]}#{adv_emoji(k[i],bot)} - #{m.uniq.join(', ')}",k[i][9].map{|q| q.gsub('*','')}])
+  end
+  if color.length.zero?
+    color=0xFFD800
+  else
+    color=avg_color(color)
+  end
+  k2=k.map{|q| q[9].length}
+  puts untz2.map{|q| q.to_s}
+  puts k2.to_s
+  if k2.max>1
+    k2=k.map{|q| q[9][1]}.uniq.map{|q| ["#{name}(#{q})",[],q]}
+    for i in 0...untz2.length
+      for j in 0...k2.length
+        k2[j][1].push(untz2[i][0]) if k2[j][2]==untz2[i][1][1]
+      end
+    end
+    for i in 0...k2.length
+      k2[i][0]="**Facet #{i+1}: #{k2[i][0]}**"
+      k2[i][1]=k2[i][1].join("\n")
+      k2[i][2]=nil
+      k2[i].compact!
+      k2[i]=nil if k2[i][1].length<=0
+    end
+    k2.compact!
+  else
+    k2=[[".",untz2.map{|q| q[0]}.join("\n")]]
+  end
+  create_embed(event,"__**#{name}**__",'',color,nil,nil,k2,2)
+  return nil
+end
+
+def find_dragon_alts(event,args,bot)
+  data_load()
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_dragon,args.join(' '),event)
+  if k.length.zero?
+    event.respond 'No matches found.'
+    return nil
+  end
+  name=k[12][0].gsub('*','')
+  k=@dragons.reject{|q| q[12][0].gsub('*','')!=name}.uniq
+  untz2=[]
+  color=[]
+  for i in 0...k.length
+    color.push(element_color(k[i][2]))
+    m=[]
+    m.push('default') if k[i][0]==k[i][12][0] || k[i][12][0][k[i][12][0].length-1,1]=='*'
+    m.push('default') if k[i][12][0][0,1]=='*' && k[i][12].length>1
+    m.push('sensible') if k[i][12][0][0,1]=='*' && k[i][12].length<2
+    m.push('seasonal') if k[i][1][1,1]=='s'
+    m.push('out-of-left-field') if m.length<=0
+    n=''
+    unless k[i][0]==k[i][12] || k[i][12][k[i][12].length-1,1]=='*'
+      k2=k.reject{|q| q[12][0].gsub('*','')!=k[i][12][0].gsub('*','') || q[0]==k[i][0] || !(q[0]==q[12][0] || q[12][0].include?('*'))}
+      n='x' if k2.length<=0
+    end
+    untz2.push(["#{k[i][0]}#{dragon_emoji(k[i],bot)} - #{m.uniq.join(', ')}",k[i][12].map{|q| q.gsub('*','')}])
+  end
+  if color.length.zero?
+    color=0xFFD800
+  else
+    color=avg_color(color)
+  end
+  k2=k.map{|q| q[12].length}
+  puts untz2.map{|q| q.to_s}
+  puts k2.to_s
+  if k2.max>1
+    k2=k.map{|q| q[12][1]}.uniq.map{|q| ["#{name}(#{q})",[],q]}
+    for i in 0...untz2.length
+      for j in 0...k2.length
+        k2[j][1].push(untz2[i][0]) if k2[j][2]==untz2[i][1][1]
+      end
+    end
+    for i in 0...k2.length
+      k2[i][0]="**Facet #{i+1}: #{k2[i][0]}**"
+      k2[i][1]=k2[i][1].join("\n")
+      k2[i][2]=1
+      k2[i].compact!
+      k2[i]=nil if k2[i][1].length<=0
+    end
+    k2.compact!
+  else
+    k2=[[".",untz2.map{|q| q[0]}.join("\n")]]
+  end
+  create_embed(event,"__**#{name}**__",'',color,nil,nil,k2,2)
+  return nil
+end
+
 bot.command([:adventurer,:adv,:unit]) do |event, *args|
   return nil if overlap_prevent(event)
   if ['find','search'].include?(args[0].downcase)
@@ -4005,6 +4156,10 @@ bot.command([:adventurer,:adv,:unit]) do |event, *args|
   elsif ['level','xp','exp'].include?(args[0].downcase)
     args.shift
     level(event,bot,args,2)
+    return nil
+  elsif ['alt','alts'].include?(args[0].downcase)
+    args.shift
+    find_adv_alts(event,args,bot)
     return nil
   end
   disp_adventurer_stats(bot,event,args)
@@ -4019,6 +4174,10 @@ bot.command([:dragon]) do |event, *args|
   elsif ['level','xp','exp'].include?(args[0].downcase)
     args.shift
     level(event,bot,args,3)
+    return nil
+  elsif ['alt','alts'].include?(args[0].downcase)
+    args.shift
+    find_dragon_alts(event,args,bot)
     return nil
   end
   disp_dragon_stats(bot,event,args)
@@ -4075,6 +4234,21 @@ bot.command([:mat,:material,:item]) do |event, *args|
     return nil
   end
   disp_mat_data(bot,event,args)
+end
+
+bot.command([:alts,:alt]) do |event, *args|
+  if find_data_ex(:find_adventurer,args.join(' '),event,true).length>0
+    find_adv_alts(event,args,bot)
+  elsif find_data_ex(:find_dragon,args.join(' '),event,true).length>0
+    find_dragon_alts(event,args,bot)
+  elsif find_data_ex(:find_adventurer,args.join(' '),event).length>0
+    find_adv_alts(event,args,bot)
+  elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
+    find_dragon_alts(event,args,bot)
+  else
+    event.respond 'No matches found.'
+  end
+  return nil
 end
 
 bot.command([:find,:search,:list,:lookup]) do |event, *args|
@@ -4901,25 +5075,80 @@ bot.mention do |event|
     elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase)
       args.shift
       find_weapons(bot,event,args)
+    elsif ['mat','mats','materials','material','item','items'].include?(args[0].downcase)
+      args.shift
+      find_mats(bot,event,args)
     else
       find_all(bot,event,args)
+    end
+  elsif ['alts','alt'].include?(args[0].downcase)
+    m=false
+    args.shift
+    if find_data_ex(:find_adventurer,args.join(' '),event,true).length>0
+      find_adv_alts(event,args,bot)
+    elsif find_data_ex(:find_dragon,args.join(' '),event,true).length>0
+      find_dragon_alts(event,args,bot)
+    elsif find_data_ex(:find_adventurer,args.join(' '),event).length>0
+      find_adv_alts(event,args,bot)
+    elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
+      find_dragon_alts(event,args,bot)
+    else
+      event.respond 'No matches found.'
     end
   elsif ['adventurer','adv'].include?(args[0].downcase)
     m=false
     args.shift
-    disp_adventurer_stats(bot,event,args)
+    if ['find','search'].include?(args[0].downcase)
+      args.shift
+      find_adventurers(bot,event,args)
+    elsif ['level','xp','exp'].include?(args[0].downcase)
+      args.shift
+      level(event,bot,args,2)
+    elsif ['alt','alts'].include?(args[0].downcase)
+      args.shift
+      find_adv_alts(event,args,bot)
+    else
+      disp_adventurer_stats(bot,event,args)
+    end
   elsif ['dragon'].include?(args[0].downcase)
     m=false
     args.shift
-    disp_dragon_stats(bot,event,args)
+    if ['find','search'].include?(args[0].downcase)
+      args.shift
+      find_dragons(bot,event,args)
+    elsif ['level','xp','exp'].include?(args[0].downcase)
+      args.shift
+      level(event,bot,args,3)
+    elsif ['alt','alts'].include?(args[0].downcase)
+      args.shift
+      find_dragon_alts(event,args,bot)
+    else
+      disp_dragon_stats(bot,event,args)
+    end
   elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
     m=false
     args.shift
-    disp_wyrmprint_stats(bot,event,args)
+    if ['find','search'].include?(args[0].downcase)
+      args.shift
+      find_wyrmprints(bot,event,args)
+    elsif ['level','xp','exp'].include?(args[0].downcase)
+      args.shift
+      level(event,bot,args,5)
+    else
+      disp_wyrmprint_stats(bot,event,args)
+    end
   elsif ['weapon','weap','wep','wpn'].include?(args[0].downcase)
     m=false
     args.shift
-    disp_weapon_stats(bot,event,args)
+    if ['find','search'].include?(args[0].downcase)
+      args.shift
+      find_weapons(bot,event,args)
+    elsif ['level','xp','exp'].include?(args[0].downcase)
+      args.shift
+      level(event,bot,args,6)
+    else
+      disp_weapon_stats(bot,event,args)
+    end
   elsif ['skill','skil'].include?(args[0].downcase)
     m=false
     args.shift
@@ -4935,7 +5164,12 @@ bot.mention do |event|
   elsif ['mat','material','item'].include?(args[0].downcase)
     m=false
     args.shift
-    disp_mat_data(bot,event,args)
+    if ['find','search'].include?(args[0].downcase)
+      args.shift
+      find_mats(bot,event,args)
+    else
+      disp_mat_data(bot,event,args)
+    end
   elsif ['serveraliases','saliases'].include?(args[0].downcase)
     args.shift
     disp_aliases(bot,event,args,1)
