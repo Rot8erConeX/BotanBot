@@ -1124,33 +1124,41 @@ def disp_weapon_lineage(bot,event,args=nil)
   val=1
   val=5 if mub
   ftr=nil
-  str="#{str}\n\n**This weapon**\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(val*k[11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{val*q[1].to_i}"}.join(', ')}"
+  str="#{str}\n\n**This weapon**\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(val*k[11][0])}<:Resource_Rupies:532104504372363274>#{"\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{val*q[1].to_i}"}.join(', ')}" unless k[12].nil?}"
   m2=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
   cost=0
   cost+=val*k[11][0]
   mtz=[]
-  for i in 0...k[12].length
-    mtz.push([k[12][i][0],k[12][i][1].to_i*val])
+  unless k[12].nil?
+    for i in 0...k[12].length
+      mtz.push([k[12][i][0],k[12][i][1].to_i*val])
+    end
   end
   unless m2.nil?
-    str2="#{str2}\n\n**Promotes from: #{element_emote(wpnz[m2][3],bot)}*#{wpnz[m2][0]}* **\n*Assembly cost:* #{longFormattedNumber(val*5*wpnz[m2][11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{wpnz[m2][12].map{|q| "#{q[0]} x#{val*5*q[1].to_i}"}.join(', ')}"
+    str2="#{str2}\n\n**Promotes from: #{element_emote(wpnz[m2][3],bot)}*#{wpnz[m2][0]}* **\n*Assembly cost:* #{longFormattedNumber(val*5*wpnz[m2][11][0])}<:Resource_Rupies:532104504372363274>\n#{"*Required mats:* #{wpnz[m2][12].map{|q| "#{q[0]} x#{val*5*q[1].to_i}"}.join(', ')}" unless wpnz[m2][12].nil?}"
     cost+=val*5*wpnz[m2][11][0]
-    for i in 0...wpnz[m2][12].length
-      mtz.push([wpnz[m2][12][i][0],wpnz[m2][12][i][1].to_i*5*val])
+    unless wpnz[m2][12].nil?
+      for i in 0...wpnz[m2][12].length
+        mtz.push([wpnz[m2][12][i][0],wpnz[m2][12][i][1].to_i*5*val])
+      end
     end
     m22=wpnz.find_index{|q| q[1]==wpnz[m2][1] && q[2]==wpnz[m2][2] && q[8]==wpnz[m2][9] && !['','0',0].include?(q[8])}
     unless m22.nil?
-      str2="#{str2}\n\n**Which promotes from: #{element_emote(wpnz[m22][3],bot)}*#{wpnz[m22][0]}* **\n*Assembly cost:* #{longFormattedNumber(val*25*wpnz[m22][11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{wpnz[m22][12].map{|q| "#{q[0]} x#{val*25*q[1].to_i}"}.join(', ')}"
+      str2="#{str2}\n\n**Which promotes from: #{element_emote(wpnz[m22][3],bot)}*#{wpnz[m22][0]}* **\n*Assembly cost:* #{longFormattedNumber(val*25*wpnz[m22][11][0])}<:Resource_Rupies:532104504372363274>\n*#{"Required mats:* #{wpnz[m22][12].map{|q| "#{q[0]} x#{val*25*q[1].to_i}"}.join(', ')}" unless wpnz[m22][12].nil?}"
       cost+=val*25*wpnz[m22][11][0]
-      for i in 0...wpnz[m22][12].length
-        mtz.push([wpnz[m22][12][i][0],wpnz[m22][12][i][1].to_i*25*val])
+      unless wpnz[m22][12].nil?
+        for i in 0...wpnz[m22][12].length
+          mtz.push([wpnz[m22][12][i][0],wpnz[m22][12][i][1].to_i*25*val])
+        end
       end
       m222=wpnz.find_index{|q| q[1]==wpnz[m22][1] && q[2]==wpnz[m22][2] && q[8]==wpnz[m22][9] && !['','0',0].include?(q[8])}
       unless m222.nil?
-        str2="#{str2}\n\n**Which promotes from: #{element_emote(wpnz[m222][3],bot)}*#{wpnz[m222][0]}* **\n*Assembly cost:* #{longFormattedNumber(val*125*wpnz[m222][11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{wpnz[m222][12].map{|q| "#{q[0]} x#{val*125*q[1].to_i}"}.join(', ')}"
+        str2="#{str2}\n\n**Which promotes from: #{element_emote(wpnz[m222][3],bot)}*#{wpnz[m222][0]}* **\n*Assembly cost:* #{longFormattedNumber(val*125*wpnz[m222][11][0])}<:Resource_Rupies:532104504372363274>\n#{"*Required mats:* #{wpnz[m222][12].map{|q| "#{q[0]} x#{val*125*q[1].to_i}"}.join(', ')}" unless wpnz[m222][12].nil?}"
         cost+=val*125*wpnz[m222][11][0]
-        for i in 0...wpnz[m222][12].length
-          mtz.push([wpnz[m222][12][i][0],wpnz[m222][12][i][1].to_i*125*val])
+        unless wpnz[m222][12].nil?
+          for i in 0...wpnz[m222][12].length
+            mtz.push([wpnz[m222][12][i][0],wpnz[m222][12][i][1].to_i*125*val])
+          end
         end
       end
     end
@@ -1170,9 +1178,10 @@ def disp_weapon_lineage(bot,event,args=nil)
       end
     end
   end
+  str3=''
   unless m2.nil?
     str3="**TOTALS**\n*Assembly cost:* #{longFormattedNumber(cost)}<:Resource_Rupies:532104504372363274>\n*Required Mats:* "
-    mtzz=mtz.map{|q| q[0]}.uniq.sort
+    mtzz=mtz.map{|q| q[0]}.uniq
     for i in 0...mtzz.length
       str3="#{str3}#{', ' unless i==0}#{mtzz[i]} x#{mtz.reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i}.inject(0){|sum,x| sum + x }}"
     end
