@@ -52,7 +52,8 @@ def all_commands(include_nil=false,permissions=-1)
      'daily','now','dailies','todayindl','today_in_dl','tomorrow','tommorrow','tomorow','tommorow','shop','store','exp','level','xp','plxp','plexp','pllevel',
      'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','dbxp',
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
-     'weaponlevel','wxp','wexp','wlevel','victory','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt']
+     'weaponlevel','wxp','wexp','wlevel','victory','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage',
+     'craft','crafting']
   k=['addalias','deletealias','removealias','s2s'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop'] if permissions==2
   k=k.uniq
@@ -325,6 +326,8 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
     create_embed(event,"**#{command.downcase}** __name__","Shows `name`'s stats and abilities.",0xCE456B)
   elsif ['weapon','weap','wep','wpn'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows `name`'s stats and skills.",0xCE456B)
+  elsif ['lineage','craft','crafting'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Shows the weapons that `name` directly promotes from.",0xCE456B)
   elsif command.downcase=='invite'
     create_embed(event,'**invite**','PMs the invoker with a link to invite me to their server.',0xCE456B)
   elsif ['skill','skil'].include?(command.downcase)
@@ -1059,6 +1062,137 @@ def disp_weapon_stats(bot,event,args=nil)
   create_embed(event,"__**#{k[0]}**__",str,element_color(k[3]),nil,xpic)
 end
 
+def disp_weapon_lineage(bot,event,args=nil)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_weapon,args.join(' '),event)
+  if k.length.zero?
+    event.respond 'No matches found.'
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  evn=event.message.text.downcase.split(' ')
+  s2s=false if @shardizard==4 && evn.include?('smol')
+  xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Weapons/#{k[0].gsub(' ','_')}.png"
+  mub=false
+  mub=true if has_any?(['mub','unbind','unbound','refined'],evn)
+  str=generate_rarity_row(k[2][0,1].to_i)
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
+  str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
+  str="#{str}\n#{moji[0].mention unless moji.length<=0} **Weapon Type:** #{k[1]}"
+  str="#{str}\n**Welfare**" if k[2].length>1 && k[2][1,1].downcase=='w'
+  str="#{str}\n**Story**" if k[2].length>1 && k[2][1,1].downcase=='y'
+  str="#{str}\n**Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='s'
+  str="#{str}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
+  str="#{str}\n**Enemy exclusive**" if k[2].length>1 && k[2][1,1].downcase=='e'
+  f=30*k[2][0,1].to_i-50
+  f+=20 if k[2][0,1].to_i<3
+  wpnz=@weapons.map{|q| q}
+  sklz=@askilities.map{|q| q}
+  skl=nil
+  skl=sklz.find_index{|q| q[2]=='Skill' && q[0]==k[6]} if !k[6].nil? && k[6].length>0
+  skl=sklz[skl] unless skl.nil?
+  if mub
+    str="#{str}\n**#{'<:Unbind:534494090969088000>'*4} Level #{f}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
+  else
+    str="#{str}\n**#{'<:NonUnbound:534494090876682264>'*4} Level 1**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
+    str="#{str}\n**#{'<:NonUnbound:534494090876682264>'*4} Level 80**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}" if k[2][0,1].to_i>=5 && k[3]!='None'
+  end
+  if s2s && !skl.nil?
+    if mub
+      str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][1])} SP\n#{skl[4].gsub(';; ',"\n")}"
+    else
+      str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
+    end
+  else
+    strx=''
+    unless skl.nil?
+      str="#{str}\n**Skill:** *#{skl[0]}*"
+      if skl[6][0]==skl[6][1]
+        str="#{str} - #{longFormattedNumber(skl[6][0])} SP;;;;;"
+      else
+        str="#{str} - #{longFormattedNumber(skl[6][0])} \u2192 #{longFormattedNumber(skl[6][1])} SP;;;;;"
+      end
+      strx=skl[3].gsub(';; ',"\n")
+      strx=skl[4].gsub(';; ',"\n") if mub
+    end
+  end
+  str2=''
+  val=1
+  val=5 if mub
+  ftr=nil
+  str="#{str}\n\n**This weapon**\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(val*k[11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{val*q[1].to_i}"}.join(', ')}"
+  m2=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
+  cost=0
+  cost+=val*k[11][0]
+  mtz=[]
+  for i in 0...k[12].length
+    mtz.push([k[12][i][0],k[12][i][1].to_i*val])
+  end
+  unless m2.nil?
+    str2="#{str2}\n\n**Promotes from: #{element_emote(wpnz[m2][3],bot)}*#{wpnz[m2][0]}* **\n*Assembly cost:* #{longFormattedNumber(val*5*wpnz[m2][11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{wpnz[m2][12].map{|q| "#{q[0]} x#{val*5*q[1].to_i}"}.join(', ')}"
+    cost+=val*5*wpnz[m2][11][0]
+    for i in 0...wpnz[m2][12].length
+      mtz.push([wpnz[m2][12][i][0],wpnz[m2][12][i][1].to_i*5*val])
+    end
+    m22=wpnz.find_index{|q| q[1]==wpnz[m2][1] && q[2]==wpnz[m2][2] && q[8]==wpnz[m2][9] && !['','0',0].include?(q[8])}
+    unless m22.nil?
+      str2="#{str2}\n\n**Which promotes from: #{element_emote(wpnz[m22][3],bot)}*#{wpnz[m22][0]}* **\n*Assembly cost:* #{longFormattedNumber(val*25*wpnz[m22][11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{wpnz[m22][12].map{|q| "#{q[0]} x#{val*25*q[1].to_i}"}.join(', ')}"
+      cost+=val*25*wpnz[m22][11][0]
+      for i in 0...wpnz[m22][12].length
+        mtz.push([wpnz[m22][12][i][0],wpnz[m22][12][i][1].to_i*25*val])
+      end
+      m222=wpnz.find_index{|q| q[1]==wpnz[m22][1] && q[2]==wpnz[m22][2] && q[8]==wpnz[m22][9] && !['','0',0].include?(q[8])}
+      unless m222.nil?
+        str2="#{str2}\n\n**Which promotes from: #{element_emote(wpnz[m222][3],bot)}*#{wpnz[m222][0]}* **\n*Assembly cost:* #{longFormattedNumber(val*125*wpnz[m222][11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{wpnz[m222][12].map{|q| "#{q[0]} x#{val*125*q[1].to_i}"}.join(', ')}"
+        cost+=val*125*wpnz[m222][11][0]
+        for i in 0...wpnz[m222][12].length
+          mtz.push([wpnz[m222][12][i][0],wpnz[m222][12][i][1].to_i*125*val])
+        end
+      end
+    end
+  end
+  if s2s
+    ftr='Include the word "Unbound" to show the data for MUB versions of these weapons.' unless mub
+  else
+    m=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
+    str2=''
+    unless m.nil?
+      str2="#{str2}\n\n**Promotes from:** #{wpnz[m][0]}"
+      m2=wpnz.find_index{|q| q[1]==wpnz[m][1] && q[2]==wpnz[m][2] && q[8]==wpnz[m][9] && !['','0',0].include?(q[8])}
+      unless m2.nil?
+        str2="#{str2}\n**Which promotes from:** #{wpnz[m2][0]}"
+        m22=wpnz.find_index{|q| q[1]==wpnz[m2][1] && q[2]==wpnz[m2][2] && q[8]==wpnz[m2][9] && !['','0',0].include?(q[8])}
+        str2="#{str2}\n**Which promotes from:** #{wpnz[m22][0]}" unless m22.nil?
+      end
+    end
+  end
+  unless m2.nil?
+    str3="**TOTALS**\n*Assembly cost:* #{longFormattedNumber(cost)}<:Resource_Rupies:532104504372363274>\n*Required Mats:* "
+    mtzz=mtz.map{|q| q[0]}.uniq.sort
+    for i in 0...mtzz.length
+      str3="#{str3}#{', ' unless i==0}#{mtzz[i]} x#{mtz.reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i}.inject(0){|sum,x| sum + x }}"
+    end
+  end
+  str="#{str}#{str2}" if str2.length>0
+  unless s2s
+    if str.gsub(';;;;;',"\n#{strx}").length>=1900
+      str=str.gsub(';;;;;',"\n~~The description makes this data too long.  Please try again in PM.~~")
+    else
+      str=str.gsub(';;;;;',"\n#{strx}")
+    end
+  end
+  if str.length+str3.length>=1900
+    create_embed(event,"__**#{k[0]}**__",str,element_color(k[3]),nil,xpic)
+    create_embed(event,'',str3,element_color(k[3]),ftr)
+  else
+    create_embed(event,"__**#{k[0]}**__","#{str}\n\n#{str3}",element_color(k[3]),ftr,xpic)
+  end
+end
+
 def disp_skill_data(bot,event,args=nil)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
@@ -1694,7 +1828,7 @@ def disp_mat_data(bot,event,args=nil)
   flds=triple_finish(k[8].sort,true) if args.include?('tag') || args.include?('tags')
   flds=nil unless s2s
   f=0
-  f=flds.map{|q| q[1]}.join("\n").length+"\n\n**searching tags:**" unless flds.nil?
+  f=flds.map{|q| q[1]}.join("\n").length+"\n\n**searching tags:**".length unless flds.nil?
   if str.length+f>=1800
     str=str.split("\n\n")
     str[0]="#{str[0]}\n\n#{str[1]}"
@@ -4207,6 +4341,10 @@ bot.command([:weapon,:wep,:weap,:wpn]) do |event, *args|
     args.shift
     level(event,bot,args,6)
     return nil
+  elsif ['lineage','craft','crafting'].include?(args[0].downcase)
+    args.shift
+    disp_weapon_lineage(bot,event,args)
+    return nil
   end
   disp_weapon_stats(bot,event,args)
 end
@@ -4234,6 +4372,11 @@ bot.command([:mat,:material,:item]) do |event, *args|
     return nil
   end
   disp_mat_data(bot,event,args)
+end
+
+bot.command([:lineage,:craft,:crafting]) do |event, *args|
+  return nil if overlap_prevent(event)
+  disp_weapon_lineage(bot,event,args)
 end
 
 bot.command([:alts,:alt]) do |event, *args|
@@ -5147,6 +5290,9 @@ bot.mention do |event|
     elsif ['level','xp','exp'].include?(args[0].downcase)
       args.shift
       level(event,bot,args,6)
+    elsif ['lineage','craft','crafting'].include?(args[0].downcase)
+      args.shift
+      disp_weapon_lineage(bot,event,args)
     else
       disp_weapon_stats(bot,event,args)
     end
@@ -5171,6 +5317,10 @@ bot.mention do |event|
     else
       disp_mat_data(bot,event,args)
     end
+  elsif ['lineage','craft','crafting'].include?(args[0].downcase)
+    m=false
+    args.shift
+    disp_weapon_lineage(bot,event,args)
   elsif ['serveraliases','saliases'].include?(args[0].downcase)
     args.shift
     disp_aliases(bot,event,args,1)
