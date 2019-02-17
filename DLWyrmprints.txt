@@ -1,10 +1,12 @@
+A Heartfelt Gift\5w\Support\1, 10\1, 10\Loving Heart;; Loving Heart\5000, 300\bukurote
+An Indelible Date\5w\Attack\1, 115\1, 41\Broken Punisher +25%;; Broken Punisher +25%\5000, 300\
 A Slice of Dragonyule\5w\Healing\22, 151\7, 53\Skill Prep +20%;; Skill Prep +25%;;;; Astral Ornament +25%;; Astral Ornament +50%;;;; Holiday Cheer +25%;; Holiday Cheer +50%\5000, 300\ni02
 A Wish Upon the Yuletree\5s\Defense\28, 189\7, 51\HP 70% = Defense +8%;; HP 70% = Defense +10%;;;; Healing Doublebuff I;; Healing Doublebuff II;;;; Holiday Cheer +100%;; Holiday Cheer +150%\5000, 3000\ameya
 Alberian Banner\3\Attack\10, 71\3, 25\Force Strike +10%;; Force Strike +20%\300, 150\ovr
 Armorer's Aspirations\4\Defense\23, 156\5, 37\Full HP = Defense +15%;; Full HP = Defense +20%;;;; Poison Res +15%;; Poison Res +20%\2000, 1000\Masorosuke
 Aromatherapy\3\Defense\11, 76\3, 20\Burn Res +15%;; Burn Res +20%\300, 150\ShuLa
 As the Snow Falls\4w\Defense\18, 123\4, 33\Curse Res +15%;; Curse Res +20%;;;; Last Recovery I;; Last Recovery II\2000, 100\onineko
-Astounding Trick\5w\Attack\22, 151\8, 54\HP 70 = Strength +8%;; HP 70 = Strength +10%;;;; Tent Canvas +25%;; Tent Canvas +50%;;;; Renown +25%;; Renown +50%\5000, 300\
+Astounding Trick\5w\Attack\22, 151\8, 54\HP 70 = Strength +8%;; HP 70 = Strength +10%;;;; Tent Canvas +25%;; Tent Canvas +50%;;;; Renown +25%;; Renown +50%\5000, 300\u-u-zan
 Auspex's Prayer\5\Healing\28, 187\7, 53\Full HP = Healing +13%;; Full HP = Healing +15%;;;; Curse Res +20%;; Curse Res +25%\5000, 3000\hsn
 Bellathorna\3\Support\10, 71\3, 25\Buff Time +10%;; Buff Time +15%\300, 150\Chiaki Negishi
 Better Together\4w\Defense\18, 122\5, 34\Sleep Res +15%;; Sleep Res +20%;;;; HP 70% = Strength +3%;; HP 70% = Strength +5%;;;; Hypnos's Bane +30%;; Hypnos's Bane +35%\2000, 100\Oyume
@@ -13,7 +15,7 @@ Braving the Unknown\4\Defense\23, 156\5, 37\Poison Res +20%;; Poison Res +25%;;;
 Castaway's Journal\4\Defense\23, 156\5, 37\Paralysis Res +20%;; Paralysis Res +25%;;;; Light Res +3%;; Light Res +5%\2000, 1000\Torotaro
 Cleo's Ruse\5\Support\28, 187\7, 53\HP 70% = Healing +10%;; HP 70% = Healing +13%;;;; Last Defense +30%;; Last Defense +40%\5000, 3000\LM7
 Crown of Yore\3\Support\10, 71\3, 25\Skill Prep +10%;; Skill Prep +15%\300, 150\ALOMA
-Cry of the Horn\3\Attack\10, 71\3, 25\Critical Damage +8%;; Critical Damage +10%\300, 150\
+Cry of the Horn\3\Attack\10, 71\3, 25\Critical Damage +8%;; Critical Damage +10%\300, 150\Dragalia Lost Art Team
 Crystalian Envoy\5\Attack\27, 183\8, 57\HP 70% = Strength +8%;; HP 70% = Strength +10%;;;; Flame Res +5%;; Flame Res +8%\5000, 3000\Soji Hisakata
 Destiny's Hand\4\Healing\21, 145\7, 47\Recovery Potency +5%;; Recovery Potency +8%;;;; Skill Prep +10%;; Skill Prep +15%\2000, 1000\benitama
 Dragon and Tamer\5\Attack\27, 183\8, 57\(Lance) Skill Damage +30%;; (Lance) Skill Damage +35%;;;; Shadow Res +5%;; Shadow Res +8%;;;; Renown +100%;; Renown +150%\5000, 3000\Mikeboshi
@@ -23,7 +25,9 @@ Dragon Dance\4w\Defense\18, 123\4, 33\Bog Res +40%;; Bog Res +50%\2000, 100\Kome
 Dragon's Nest\3\Support\10, 71\3, 25\Shapeshift Prep +8%;; Shapeshift Prep +10%\300, 150\Joshua Hutchinson
 Dueling Dancers\4\Attack\22, 147\6, 45\Flurry Devastation +5%;; Flurry Devastation +8%;;;; Light Res +3%;; Light Res +5%\2000, 1000\N.A
 Eight-Leaf Clover\3\Attack\10, 71\3, 25\Critical Damage +8%;; Critical Damage +10%\300, 150\mochuhiro
+Elegant Escort\5w\Attack\1, 115\1, 41\Burning Punisher +25%;; Burning Punisher +25%\3000, 300\
 Enchiridion\3\Support\10, 71\3, 25\Skill Haste +3%;; Skill Haste +4%\300, 150\ni02
+Entwined Flames\4\Attack\21, 142\7, 50\Dragon Damage +6%;; Dragon Damage +10%\2000, 1000\ALOMA
 Evening of Luxury\5\Attack\26, 176\9, 65\Full HP = Strength +10%;; Full HP = Strength +13%;;;; Critical Damage +10%;; Critical Damage +13%\5000, 3000\ovr
 Fireside Gathering\4\Defense\23, 156\5, 37\Burn Res +20%;; Burn Res +25%;;;; Flame Res +3%;; Flame Res +5%\2000, 1000\Manabi Okada
 Flash of Genius\5\Attack\27, 183\8, 57\Flurry Strength +13%;; Flurry Strength +15%;;;; Wind Res +5%;; Wind Res +8%\5000, 3000\Mikeboshi
@@ -47,6 +51,7 @@ Happier Times\4\Attack\21, 141\7, 51\Full HP = Skill Damage +25%;; Full HP = Ski
 Happy New Year!\5s\Defense\29, 195\6, 46\Light Res +8%;; Light Res +10%;;;; (Shadow) Paralysis Res +25%;; (Shadow) Paralysis Res +40%\5000, 3000\Naoki Saito
 Heavenly Holiday\5\Defense\29, 195\6, 46\Curse Res +50%;; Curse Res +60%;;;; (Light) Curse Res +25%;; (Light) Curse Res +40%\5000, 3000\ezusuke
 Heralds of Hinomoto\5s\Attack\26, 177\9, 64\Skill Damage +20%;; Skill Damage +25%;;;; Skill Haste +4%;; Skill Haste +5%\5000, 3000\bukurote
+Honest Repose\5w\Support\1, 116\1, 40\(Flame) Skill Haste +8%;; (Flame) Skill Haste +8%\3000, 300\
 How to Flee Properly\4\Defense\22, 151\6, 41\Last Defense +40%;; Last Defense +50%;;;; Recovery Potency +3%;; Recovery Potency +5%\2000, 1000\Naoki Saito
 Howling Predator\3\Attack\10, 71\3, 25\Critical Rate +3%;; Critical Rate +4%\300, 150\Kouta Nagamori
 Ironside Shield\3\Defense\11, 76\3, 20\Last Defense +30%;; Last Defense +40%\300, 150\Tricky Agura
@@ -61,7 +66,7 @@ Lord of the Skies\4\Support\21, 146\6, 46\Overdrive Punisher +5%;; Overdrive Pun
 Louise's Hobbies\5w\Support\23, 155\7, 49\Recovery Potency +8%;; Recovery Potency +10%;;;; Windwhistle Grass +25%;; Windwhistle Grass +50%;;;; Divine Gales +25%;; Divine Gales +50%\5000, 300\irua
 Luca's Prank\5\Attack\27, 183\8, 57\Skill Damage +20%;; Skill Damage +25%;;;; Light Res +5%;; Light Res +8%\5000, 3000\Nijihara
 Luck of the Draw\4w\Defense\18, 122\4, 33\Paralysis Res +15%;; Paralysis Res +20%;;;; (Shadow) Buff Time +15%;; (Shadow) Buff Time +20%\2000, 100\Oyume
-Lunar Festivities\4\Attack\21, 141\7, 51\Force Strike +20%;; Force Strike +30%;;;; Striking Haste +6%;; Striking Haste +8%\2000, 1000\Dragalia Designer Team (ドラガリデザイナーチーム)
+Lunar Festivities\4\Attack\21, 141\7, 51\Force Strike +20%;; Force Strike +30%;;;; Striking Haste +6%;; Striking Haste +8%\2000, 1000\Dragalia Designer Team
 Mana Fount\2\Attack\5, 35\1, 13\Skill Damage +5%;; Skill Damage +10%\50, 0\Nadare
 Nevermelt Ice\3\Defense\11, 76\3, 20\Freeze Res +15%;; Freeze Res +20%\300, 150\Akira Miyazaki
 Night Harbinger\3\Attack\10, 71\3, 25\Full HP = Strength +5%;; Full HP = Strength +8%\300, 150\Kazashino
@@ -89,21 +94,27 @@ Slow and Steady\4\Defense\23, 156\5, 37\Poison Res +20%;; Poison Res +25%;;;; Sh
 Sniper's Allure\4\Attack\21, 141\7, 51\Broken Punisher +15%;; Broken Punisher +20%;;;; Skill Prep +10%;; Skill Prep +15%\2000, 1000\Tsune-kun
 Stellar Show\5\Attack\26, 176\9, 65\Force Strike +30%;; Force Strike +40%;;;; Critical Damage +10%;; Critical Damage +13%;;;; Renown +100%;; Renown +150%\5000, 3000\Rino
 Syndicate Mask\3\Defense\11, 76\3, 20\Blindness Res +15%;; Blindness Res +20%\300, 150\Akira Miyazaki
+Take My Hand\5w\Healing\1, 118\1, 38\Recovery Potency +10%;; Recovery Potency +10%\5000, 300\
 Teatime\3\Support\10, 71\3, 25\Skill Prep +10%;; Skill Prep +15%\300, 150\ShuLa
-The Greatest Gift\5w\Support\1, 10\1, 10\Happy Dragonyule!;; Happy Dragonyule!\5000, 300\?
+The Chocolatiers\5\Support\26, 178\9, 62\Skill Prep +75%;; Skill Prep +100%\5000, 3000\oyume
+The Greatest Gift\5w\Support\1, 10\1, 10\Happy Dragonyule!;; Happy Dragonyule!\5000, 300\Dragalia Lost Art Team
 The Halidom's Picnic\3\Defense\11, 76\3, 20\Sleep Res +15%;; Sleep Res +20%\300, 150\R-ko A-yama
+The Petal Queen\5w\Support\22, 151\7, 53\Energy Prep;; Energized Prep\5000, 300\Eri Yanagawa
 The Prince of Dragonyule\5s\Attack\26, 177\9, 63\Critical Damage +13%;; Critical Damage +15%;;;; (Water) Flurry Devastation +8%;; (Water) Flurry Devastation +10%;;;; Holiday Cheer +100%;; Holiday Cheer +150%\5000, 3000\Naoki Saito
+The Rose Prince\5\Support\29, 195\6, 46\(Flame) Affliction Guard I;; (Flame) Affliction Guard II;;;; Shield Prep I;; Shield Prep II\5000, 3000\sosuke miyana
 The Warrioresses\4\Attack\21, 140\7, 52\Force Strike +20%;; Force Strike +30%;;;; Critical Damage +8%;; Critical Damage +10%\2000, 1000\Maki
 Together We Stand\4\Attack\21, 140\7, 52\Striker's Strength +3%;; Striker's Strength +4%;;;; Skill Damage +10%;; Skill Damage +15%\2000, 1000\Rino
+To My Beloved\3\Support\10, 71\3, 25\Skill Haste +10%;; Skill Haste +15%\300, 150\touhudashi
 Tough Love\5\Attack\26, 176\9, 65\Last Offense +30%;; Last Offense +40%;;;; Skill Damage +15%;; Skill Damage +20%\5000, 3000\N.A
 Tracks of Hope\3\Defense\11, 76\3, 20\Stun Res +15%;; Stun Res +20%\300, 150\Meso
 Trove of Knowledge\4\Defense\23, 156\5, 37\Stun Res +20%;; Stun Res +25%;;;; Wind Res +3%;; Wind Res +5%\2000, 1000\Nijihara
 Unfulfilled Visions\3\Attack\10, 71\3, 25\Slayer's Strength +2%;; Slayer's Strength +3%\300, 150\Joshua Hutchinson
-Valiant Crown\5\Attack\26, 176\9, 65\Skill Damage +20%;; Skill Damage +25%;;;; Strength Doublebuff +5%;; Strength Doublebuff +8%\5000, 3000\Akihiko Yoshida
+Valentine's Venture\5\Attack\1, 115\1, 41\Last Offense +40%;; Last Offense +40%\5000, 300\ezusuke
+Valiant Crown\5w\Attack\26, 176\9, 65\Skill Damage +20%;; Skill Damage +25%;;;; Strength Doublebuff +5%;; Strength Doublebuff +8%\5000, 3000\Akihiko Yoshida
 Vio Rhyse Alberia!\3\Attack\10, 71\3, 25\Slayer's Strength +2%;; Slayer's Strength +3%\300, 150\png
 Volcanic Queen\5\Defense\24, 165\5, 39\High Brunhilda Res +20%;; High Brunhilda Res +25%;;;; Brunhilda Res +15%;; Brunhilda Res +20%;;;; Flame Res +3%;; Flame Res +5%\5000, 300\Nejita
 Warlust\4\Attack\21, 140\7, 52\Last Offense +20%;; Last Offense +30%;;;; Skill Damage +10%;; Skill Damage +15%\2000, 1000\ICHIGO
-Warrior Maiden\5\Support\27, 180\9, 60\Recovery Potency +8%;; Recovery Potency +10%;;;; Slayer's Strength +3%;; Slayer's Strength +4%\5000, 3000\Tsune-kun (ツネくん)
+Warrior Maiden\5\Support\27, 180\9, 60\Recovery Potency +8%;; Recovery Potency +10%;;;; Slayer's Strength +3%;; Slayer's Strength +4%\5000, 3000\Tsune-kun
 Welcome, One and All\3\Healing\10, 71\3, 25\Skill Prep +10%;; Skill Prep +15%;;;; Tent Canvas +50%;; Tent Canvas +75%\300, 150\ShuLa
 What a Handful!\4\Healing\22, 150\6, 42\Recovery Potency +5%;; Recovery Potency +8%;;;; Poison Res +15%;; Poison Res +20%\2000, 1000\Mayoko
 Winds of Saint Lotier\3\Healing\10, 73\3, 23\Recovery Potency +3%;; Recovery Potency +5%\300, 150\STAR BEARS

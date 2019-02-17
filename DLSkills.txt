@@ -46,6 +46,7 @@ Blessed Wall\\Skill\Increases the entire team's defense by 10% for 15 seconds.\I
 Blessings of Destiny\\Skill\Restores HP to all allies with 31% Recovery Potency and applies Regen for 15 seconds, healing with 25% Regen Potency every 2.99 seconds.\Restores HP to all allies with 36% Recovery Potency, removes stun, and applies Regen for 15 seconds, healing with 29% Regen Potency every 2.99 seconds.\Restores HP to all allies with 44% Recovery Potency, removes stun, and applies Regen for 15 seconds, healing with 35% Regen Potency every 2.99 seconds.\5916, 5916, 5916\Yes\1.1\
 Bloody Cleaver\\Skill\Deals 1 hit of 614% shadow damage to enemies directly ahead.\Deals 1 hit of 682% shadow damage to enemies directly ahead.\Deals shadow damage to enemies directly ahead.\7330, 7330, 7330\Yes\0.8\
 Blooming Cradle\\Skill\Activates "Slumber Strike Stance." For the next three force strikes, the user will deal an additional 17% shadow damage and inflict sleep for 5 seconds with 80% base chance.\Activates "Slumber Strike Stance." For the next three force strikes, the user will deal an additional 38% shadow damage and inflict sleep for 5 seconds with 90% base chance.\\6400, 6400, 6400\No\1.1\
+Blooming Love\\Skill\Restores HP to all allies with 31% Recovery Potency., increases the entire team's energy levels by one stage, and applies Regen for 15 seconds, healing with 25% Regen Potency every 2.99 seconds.\Restores HP to all allies with 36% Recovery Potency., increases the entire team's energy levels by one stage, and applies Regen for 15 seconds, healing with 29% Regen Potency every 2.99 seconds.\Restores HP to all allies with 44% Recovery Potency., increases the entire team's energy levels by one stage, and applies Regen for 15 seconds, healing with 35% Regen Potency every 2.99 seconds.\7734, 7734, 7734\Yes\1.6\
 Blundering Bomber\\Skill\Deals 2 hits of 399% flame damage to the target and nearby enemies.\Deals 2 hits of 443% flame damage to the target and nearby enemies.\\5422, 5422, 5422\Yes\1\
 Bolt of Light\\Skill\Deals 1 shot of 699% light damage to enemies in a line.\Deals 1 shot of 777% light damage to enemies in a line.\Deals 1 shot of 863% light-based damage to enemies in a line.\5115, 5115, 5115\Yes\1.6\
 Bone Stinger\\Skill\Deals 3 hits of 206% shadow damage to enemies directly ahead.\Deals 3 hits of 229% shadow damage to enemies directly ahead.\Deals 3 hits of 254% shadow damage to enemies directly ahead.\5161, 5161, 5161\Yes\2.2\
@@ -131,6 +132,7 @@ Flamewhorl\\Skill\Deals 3 hits of 183% flame damage to surrounding enemies.\Deal
 Flare Volley\\Skill\Deals 3 shots of 235% flame damage to enemies in a line.\Deals 3 shots of 261% flame damage to enemies in a line.\Deals flame damage to enemies in a line.\7185, 7185, 7185\Yes\1.6\
 Flash Strike\\Skill\Deals 1 hit of 725% light damage to the target and nearby enemies.\Deals 1 hit of 805% light damage to the target and nearby enemies.\Deals 1 hit of 895% light damage to the target and nearby enemies.\2785, 2785, 2785\Yes\1\
 Flash Swing\\Skill\Deals 2 hits of 466% light damage to surrounding enemies and draws them toward the user for 0.5 seconds.\Deals 2 hits of 518% light damage to surrounding enemies and draws them toward the user for 0.5 seconds.\\8603, 8603, 8603\Yes\0.9\
+Floral Explosion\\Skill\Deals 8 hits of 87% flame damage to the target and nearby enemies.\Deals 8 hits of 91% flame damage to the target and nearby enemies, and inflicts burn for 12 seconds - dealing 66% flame damage every 3.99 seconds - with 100% base chance.\Deals 8 hits of 96% flame damage to the target and nearby enemies, and inflicts burn for 12 seconds - dealing 88.3% flame damage every 3.99 seconds - with 110% base chance.\2708, 2708, 2708\Yes\1.7\
 Flurry Edge\\Skill\Deals 6 hits of 101% water damage to enemies directly ahead.\Deals 6 hits of 112% water damage to enemies directly ahead.\Deals 6 hits of 124% water damage to enemies directly ahead.\2311, 2311, 2311\Yes\1.4\
 Foliage Flare\\Skill\Deals 1 hit of 711% flame damage to enemies in a line.\Deals 1 hit of 790% flame damage to enemies in a line.\Deals 1 hit of 878% flame damage to enemies in a line.\5280, 5280, 5280\Yes\0.4\
 Forbidden Sphere\\Skill\Deals 2 hits of 399% shadow damage to the target and nearby enemies.\Deals 2 hits of 419% shadow damage to the target and nearby enemies, and inflicts sleep for 3-5 seconds with 100% base chance.\Deals 2 hits of 440% shadow damage to the target and enemies near it, and inflicts sleep for 3-5 seconds with 110% base chance.\7090, 7090, 7090\Yes\1.4\
@@ -178,10 +180,11 @@ Herald's Circle\\Skill\Deals 1 hit of 680% shadow damage to surrounding enemies.
 Hero's Descent\\Skill\Deals 1 hit of 685% flame damage to the target and nearby enemies.\Deals 1 hit of 761% flame damage to the target and nearby enemies.\\7054, 7054, 7054\Yes\1\
 Heroic Epic\\Skill\Increases the user's defense by 25% for 10 seconds.\Increases the user's defense by 30% for 10 seconds.\Increases the user's defense by 40% for 30 seconds.\7316, 7316, 7316\No\1.4\
 Holy Energy\\Skill\Increases max HP by 15% for the remainder of the quest. Once HP buffs reach the limit, an HP recovery effect is granted instead.\Increases max HP by 20% for the remainder of the quest. Once HP buffs reach the limit, an HP recovery effect is granted instead.\Increases the user's HP by 25% for 30 seconds.\11213, 11213, 11213\No\1.4\
+Holy Protection\\Skill\Grants all teammates a one-use shield that nullifies damage less than 20% of their maximum HP (but does not stack with any other shields), and increases their energy levels by one stage.\Grants all teammates a one-use shield that nullifies damage less than 30% of their maximum HP (but does not stack with any other shields), and increases their energy levels by two stages.\\13188, 13188, 13188\No\1.4\
 Holy Water (Skill)\\Skill\Restores HP to all allies with 31% Recovery Potency and applies Regen for 15 seconds, healing with 25% Regen Potencyevery 2.99 seconds.\Restores HP to all allies with 34% Recovery Potency and applies Regen for 15 seconds, healing with 29% Regen Potencyevery 2.99 seconds.\Restores HP to all allies with 36% Recovery Potency and applies Regen for 15 seconds, healing with 35% Regen Potencyevery 2.99 seconds.\11832, 11832, 11832\Yes\1.1\
 Holy Wreath\\Skill\Deals 2 hits of 309% water damage to surrounding enemies.\Deals 2 hits of 343% water damage to surrounding enemies.\Deals 2 hits of 381% water damage to surrounding enemies.\5000, 5000, 5000\Yes\1.4\
-Howling Burst\\Skill\Deals 6 hits of 84% wind damage to enemies in a line.\Deals 6 hits of 93% wind damage to enemies in a line.\\30, 30, 30\Yes\1.4\
 Horned Circle\\Skill\Deals 1 hit of 506% damage to surrounding enemies.\Deals 1 hit of 562% damage to surrounding enemies.\\13822, 13822, 13822\Yes\1.1\
+Howling Burst\\Skill\Deals 6 hits of 84% wind damage to enemies in a line.\Deals 6 hits of 93% wind damage to enemies in a line.\\30, 30, 30\Yes\1.4\
 Howling Meteor\\Skill\Deals 10 hits of 46% and 1 hit of 203% flame damage to enemies directly ahead. Movement is possible during the attack.\Deals 10 hits of 51% and 1 hit of 225% flame damage to enemies directly ahead. Movement is possible during the attack.\Deals 10 hits of 57% and 1 hit of 250% flame damage to enemies directly ahead. Movement is possible during the attack.\2400, 2400, 2400\Yes\3.4\
 Hungry Fang\\Skill\Deals 2 hits of 275% light damage to enemies directly ahead.\Deals 2 hits of 288% light damage to enemies directly ahead, and reduces their strength by 5% for 10 seconds with 80% base chance.\Deals 2 hits of 303% light-based damage to enemies directly ahead, and reduces their strength by 10% for 10 seconds with 90% base chance.\4892, 4892, 4892\Yes\0.5\
 Hunter's Creed\\Skill\Activates "Shackling Arrows." For the next three force strikes, each force strike will deal an additional 3% wind damage per hit for Force Strikelevel 1 and 2, and inflict stun for 2-4 seconds with 100% base chance.\Activates "Shackling Arrows." For the next three force strikes, each force strike will deal an additional 5% (6% ) wind damage per hit for Force Strike level 1 (level 2), and inflict stun for 2-4 seconds with 110% base chance.\Activates "Shackling Arrows." For the next three force strikes, each force strike will shoot 7 shots of special arrows that deal extra damage and inflict stun for 2-4 seconds.\5315, 5315, 5315\No\1.4\
@@ -240,7 +243,7 @@ Moonlight's Protection\\Skill\Increases the user's defense by 20% for 10 seconds
 Morning Glow\\Skill\Deals 3 shots of 212% light damage to enemies in a line.\Deals 3 shots of 235% light damage to enemies in a line.\Deals 3 shots of 262% light damage to enemies in a line.\2395, 2395, 2395\Yes\1.6\
 Muspelheim\\Skill\Deals 7 hits of 116.2% flame damage to enemies directly ahead. Movement is possible during the attack.\Deals 7 hits of 129.5% flame damage to enemies directly ahead. Movement is possible during the attack.\\30, 30, 30\Yes\1.7\
 Necro Volley\\Skill\Deals 3 shots of 284% shadow damage to enemies in a line.\Deals 3 shots of 316% shadow damage to enemies in a line.\\7501, 7501, 7501\Yes\1.4\
-Night of Antiquity\\Skill\Deals 7 hits of 96% shadow damage to the target and nearby enemies.\Deals 7 hits of 101% shadow damage to the target and nearby enemies. Against blinded foes, the first hit will deal 654.48% shadow damage instead, but their blindness is removed.\Deals 7 hits of 106% shadow damage to the target and nearby enemies. Against blinded foes, the first hit will deal 733.52% shadow damage instead, but their blindness is removed.\2713, 2713, 2713\Yes\2.7\Deals 7 hits of `Tier*5+91`% shadow damage to the target and nearby enemies.  Against blinded foes, the first hit of Tiers 2 and 3 will deal ~~0%/~~654.48%/733.52% shadow damage instead, but their blindness is removed.
+Night of Antiquity\\Skill\Deals 8 hits of 96% shadow damage to the target and nearby enemies.\Deals 8 hits of 101% shadow damage to the target and nearby enemies. Against blinded foes, the first hit will deal 654.48% shadow damage instead, but their blindness is removed.\Deals 8 hits of 106% shadow damage to the target and nearby enemies. Against blinded foes, the first hit will deal 733.52% shadow damage instead, but their blindness is removed.\2713, 2713, 2713\Yes\2.7\Deals 8 hits of `Tier*5+91`% shadow damage to the target and nearby enemies.  Against blinded foes, the first hit of Tiers 2 and 3 will deal ~~0%/~~654.48%/733.52% shadow damage instead, but their blindness is removed.
 Night Spiral\\Skill\Deals 4 hits of 167% light damage to enemies directly ahead.\Deals 4 hits of 186% light damage to enemies directly ahead.\\7028, 7028, 7028\Yes\1.1\
 Nightmare Waltz\\Skill\Deals 1 hit of 711% light damage to surrounding enemies, and restores the user's HP by 1% of damage inflicted.\Deals 1 hit of 747% light damage to surrounding enemies, and restores the user's HP by 2% of damage inflicted.\Deals 1 hit of 784% light-based damage to surrounding enemies, and restores the user's HP.\5346, 5346, 5346\Yes\1.4\
 Noble Dance\\Skill\Increases the entire team's defense by 20% for 15 seconds.\Increases the entire team's defense by 25% for 15 seconds.\Increases the entire team's defense by 20% for 30 seconds.\30, 30, 30\No\1.9\
@@ -258,11 +261,13 @@ Perennial Grace\\Skill\Increases the entire team's strength by 10% for 15 second
 Persephone's Healing\\Skill\Restores the user's HP with 72% Recovery Potency.\Restores the user's HP with 90% Recovery Potency.\\12668, 12668, 12668\Yes\1.1\
 Petal Piercer\\Skill\Deals 5 hits of 136% shadow damage to enemies directly ahead, and inflicts bleeding for 30 seconds - dealing 71% damage every 4.99 seconds - with 80% base chance.\Deals 5 hits of 142% shadow damage to enemies directly ahead, and inflicts bleeding for 30 seconds - dealing 99% damage every 4.99 seconds - with 80% base chance.\Deals 5 hits of 150% shadow damage to enemies directly ahead, and inflicts bleeding for 30 seconds - dealing 132% damage every 4.99 seconds - with 80% base chance.\2427, 2427, 2427\Yes\2.2\
 Phytalmios's Healing\\Skill\Restores the user's HP with 72% Recovery Potency.\Restores the user's HP with 90% Recovery Potency.\\12668, 12668, 12668\Yes\1.1\
+Piercing Rose\\Skill\Deals 1 hit of 699% flame damage to enemies in a line.\Deals 1 hit of 716% flame damage to enemies in a line, and reduces their defense by 10% for 10 seconds with 90% base chance.\\5115, 5115, 5115\\1.6\
 Piercing Wind\\Skill\Deals 4 shots of 192% wind damage to the target, and inflicts poison for 15 seconds - dealing 30.8% damage every 2.99 seconds - with 100% base chance.\Deals 4 shots of 202% wind damage to the target, and inflicts poison for 15 seconds - dealing 43.6% damage every 2.99 seconds - with 110% base chance.\Deals 4 shots of 212% wind damage to the target, and inflicts poison for 15 seconds - dealing 58.2% damage every 2.99 seconds - with 120% base chance.\2896, 2896, 2896\Yes\1.9\
 Polar Roller\\Skill\Deals 7 hits of 120% shadow damage to enemies directly ahead, and inflicts freeze for 3-6 seconds with 110% base chance. Movement is possible during the attack.\Deals 7 hits of 126% shadow damage to enemies directly ahead, and inflicts freeze for 3-6 seconds with 120% base chance. Movement is possible during the attack.\\30, 30, 30\Yes\3.4\
 Poseidon's Trident\\Skill\Deals 2 hits of 166.6% and 1 hit of 387.8% water damage to the target and nearby enemies.\Deals 2 hits of 184.8% and 1 hit of 431.2% water damage to the target and nearby enemies.\\50, 50, 50\Yes\1.7\
 Pride of the Forge\\Skill\Increases the entire team's strength by 8% for 15 seconds.\Increases the entire team's strength by 10% for 15 seconds.\Increases the entire team's strength by 15% for 30 seconds.\6610, 6610, 6610\No\1.4\
 Primordial Boost\\Skill\Increases the user's critical damage by 40% for 20 seconds.\Increases the user's critical damage by 50% for 20 seconds.\Increases the user's critical damage by 50% for 30 seconds.\4711, 4711, 4711\No\1.4\
+Promethean Flame\\Skill\Deals 1 hit of 504% flame damage to the target and nearby enemies.\Deals 1 hit of 560% flame damage to the target and nearby enemies.\\30, 30, 30\Yes\2.6\
 Provocative Shot\\Skill\Deals 1 shot of 635% light damage to enemies in a line.\Deals 1 shot of 667% light damage to enemies in a line, and reduces their defense by 5% with 80% base chance.\Deals 1 shot of 701% light-based damage to enemies in a line, and reduces their defense by 10% with 90% base chance.\5051, 5051, 5051\Yes\0.9\
 Pumpkin Barrage\\Skill\Deals 3 hits of 229% light damage to enemies directly ahead.\Deals 3 hits of 254% light damage to enemies directly ahead.\\7668, 7668, 7668\Yes\2.2\
 Pumpkin Prank\\Skill\Deals 1 hit of 580% light damage to surrounding enemies, and reduces their strength by 10% for 10 seconds with 100% Base Chance.\Deals 1 hit of 644% light damage to surrounding enemies, and reduces their strength by 15% for 10 seconds with 100% Base Chance.\\50, 50, 50\Yes\1.7\
@@ -322,6 +327,7 @@ Soul Ignition\\Skill\Increases the entire team's strength by 10% for 15 seconds.
 Souleater's Feast\\Skill\Deals 5 hits of 173% damage to enemies directly ahead.\Deals 5 hits of 192% damage to enemies directly ahead.\\7695, 7695, 7695\Yes\1.4\
 Southern Impact\\Skill\Deals 3 hits of 376% wind damage to enemies directly ahead.\Deals 3 hits of 418% wind damage to enemies directly ahead.\\9025, 9025, 9025\Yes\1.4\
 Special Delivery\\Skill\Activates "Gifts Ready", preparing two gifts. While this skill is active, the user can distribute gifts by using their force strike. These gifts grant nearby allies a one-use shield that nullifies damage less than 10% of their maximum HP, and increase their energy levels by onestage.\Activates "Gifts Ready", preparing two gifts. While this skill is active, the user can distribute gifts by using their force strike. These gifts grant nearby allies a one-use shield that nullifies damage less than 15% of their maximum HP, and increase their energy levels by onestage.\\9476, 9476, 9476\No\1.4\
+Spinning Brulee\\Skill\Deals 2 hits of 276% flame damage to surrounding enemies.\Deals 2 hits of 290% flame damage to surrounding enemies, and inflicts burn for 15 seconds - dealing 3% Max HP every 2.99 seconds - with 80% base chance.\Deals 2 hits of 304% flame damage to surrounding enemies, and inflicts burn for 15 seconds - dealing 3% Max HP every 2.99 seconds - with 90% base chance.\2409, 2409, 2409\Yes\2.2\
 Spiral Hunter\\Skill\Deals 2 hits of 304% flame damage to surrounding enemies.\Deals 2 hits of 338% flame damage to surrounding enemies.\Deals 2 hits of 375% flame damage to surrounding enemies.\2409, 2409, 2409\Yes\2.2\
 Spiralling Descent\\Skill\Deals 1 hit of 617% damage to the target and enemies near it.\Deals 1 hit of 685% damage to the target and enemies near it.\\7054, 7054, 7054\Yes\1\
 Spirited Song\\Skill\Restores HP to all allies with 31% Recovery Potency and applies Regen for 15 seconds, healing with 25% Regen Potencyevery 2.99 seconds.\Restores HP to all allies with 36% Recovery Potency and applies Regen for 15 seconds, healing with 29% Regen Potencyevery 2.99 seconds.\Restores HP to all allies with 44% Recovery Potency and applies Regen for 15 seconds, healing with 35% Regen Potencyevery 2.99 seconds.\5916, 5916, 5916\Yes\1.1\
@@ -337,6 +343,7 @@ Stunning Display\\Skill\Phase I deals 1 hit of 10% and 1 hit of 738% light damag
 Subterfuge\\Skill\Deals 2 hits of 275% flame damage to enemies directly ahead.\Deals 2 hits of 288% flame damage to enemies directly ahead, and reduces their defense by 5% for 10 seconds with 30% base chance.\Deals 2 hits of 303% flame damage to enemies directly ahead, and reduces their defense by 10% for 10 seconds with 30% base chance.\4892, 4892, 4892\Yes\0.5\
 Sugaar's Strength\\Skill\Increases the user's strength by 35% for 5 seconds.\Increases the user's strength by 40% for 5 seconds.\Increases the user's strength by 25% for 30 seconds.\7103, 7103, 7103\No\1.4\
 Sunrise Blast\\Skill\Deals 1 hit of 806% flame damage to the target and nearby enemies.\Deals 1 hit of 895% flame damage to the target and nearby enemies.\\8355, 8355, 8355\Yes\1\
+Sweet Protection\\Skill\Increases the entire team's defense by 10% for 15 seconds.\Increases the entire team's defense by 15% for 15 seconds.\\7633, 7633, 7633\No\1.4\
 Sweet Treat\\Skill\Restores HP to all allies with 72 Recovery Potency.\Restores HP to all allies 90 Recovery Potency.\Restores HP to all allies 108 Recovery Potency.\5916, 5916, 5916\Yes\1.1\
 Swift Stream\\Skill\Deals 1 hit of 630% water damage to enemies directly ahead, and inflicts bog for 8 seconds with 160% base chance.\Deals 1 hit of 662% water damage to enemies directly ahead, and inflicts bog for 8 seconds with 180% base chance.\\30, 30, 30\Yes\1.4\
 Swordsmith's Recovery\\Skill\Restores the user's HP with 72 Recovery Potency.\Restores the user's HP with 90 Recovery Potency.\\12841, 12841, 12841\Yes\1.1\
@@ -411,6 +418,8 @@ Zephyr's Wrath\\Skill\Deals 3 hits of 254.1% wind damage to surrounding enemies,
 Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\Deals 5 hits of 165% light damage to enemies directly ahead.\\6847, 6847, 6847\Yes\1.4\
 (Axe) Critical Rate\10%\Aura\If the user wields an Axe: increases critical rate by 10%.\80\y
 (Axe) Critical Rate\12%\Aura\If the user wields an Axe: increases critical rate by 12%.\100\y
+(Flame) Affliction Guard\I\Aura\If the user is attuned to Flame: resists afflictions once per quest\80\y
+(Flame) Affliction Guard\II\Aura\If the user is attuned to Flame: resists afflictions three times per quest\100\y
 (Flame) HP & Strength\5%\Aura\If the user is attuned to Flame: increases strength and HP by 5%.\20\y
 (Flame) HP & Strength\8%\Aura\If the user is attuned to Flame: increases strength and HP by 8%.\30\y
 (Flame) HP & Strength\20%\Aura\If the user is attuned to Flame: increases strength and HP by 20%.\70\y
@@ -419,13 +428,16 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) HP\15%\Aura\If the user is attuned to Flame: increases HP by 15%.\30\y
 (Flame) HP\30%\Aura\If the user is attuned to Flame: increases HP by 30%.\60\y
 (Flame) HP\45%\Aura\If the user is attuned to Flame: increases HP by 45%.\80\y
+(Flame) Skill Haste \8%%\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by 8%.\80\y
 (Flame) Strength\10%\Aura\If the user is attuned to Flame: increases strength by 10%.\20\y
 (Flame) Strength\15%\Aura\If the user is attuned to Flame: increases strength by 15%.\30\y
 (Flame) Strength\20%\Aura\If the user is attuned to Flame: increases strength by 20%.\40\y
 (Flame) Strength\30%\Aura\If the user is attuned to Flame: increases strength by 30%.\60\y
-(Flame) Strength\40%\Aura\If the user is attuned to Flame: increases strength by 40%.\70\y
 (Flame) Strength\45%\Aura\If the user is attuned to Flame: increases strength by 45%.\80\y
 (Flame) Strength\60%\Aura\If the user is attuned to Flame: increases strength by 60%.\100\y
+(Flame) Strength\60%\Aura\If the user is attuned to Flame: increases strength by 60%.\100\y
+(Flame) Strength & Wind Res\35/15%\Aura\If the user is attuned to Flame: increases strength by 35% and grants 15% Wind resistance.\70\y
+(Flame) Strength & Wind Res\50/15%\Aura\If the user is attuned to Flame: increases strength by 50% and grants 15% Wind resistance.\100\y
 (Lance) Skill Damage\30%\Aura\if the user wields a Lance: increases attack skill damage by 30%\60\y
 (Lance) Skill Damage\35%\Aura\if the user wields a Lance: increases attack skill damage by 35%\80\y
 (Light) Critical Damage\50%\Aura\If the user is attuned to Light: adds 50% to the modifier applied to critical damage.\40\y
@@ -549,6 +561,7 @@ Burn Res\20%\Ability\Reduces susceptibility to burning by 20%.\20\n
 Burn Res\25%\Ability\Reduces susceptibility to burning by 25%.\40\n
 Burn Res\50%\Ability\Reduces susceptibility to burning by 50%.\60\n
 Burn Res\100%\Ability\Reduces susceptibility to burning by 100%.\100\n
+Burning Punisher\25%\Ability\Increases damage to burning enemies by 25%\80\y
 Critical Damage\8%\Ability\Increases the damage critical attacks inflict by 8%.\20\n
 Critical Damage\10%\Ability\Increases the damage critical attacks inflict by 10%.\40\n
 Critical Damage\13%\Ability\Increases the damage critical attacks inflict by 13%.\60\n
@@ -570,8 +583,10 @@ Demon's Bane\20%\Ability\Increases damage to demons by 20%.\60\y
 Demon's Bane\25%\Ability\Increases damage to demons by 25%.\80\y
 Divine Gales\25%\Ability\Increases divine gale intake for clearing quests by 25%.\0\y
 Divine Gales\50%\Ability\Increases divine gale intake for clearing quests by 50%.\0\y
-Divine Gales\100%\Ability\Increases divine gale intake for clearing quests by 100%.\0\y
+Dragon Damage\6%\Ability\Adds 6% to the modifier applied to damage when in dragon form\80\y
 Divine Gales\150%\Ability\Increases divine gale intake for clearing quests by 150%.\0\y
+Dragon Damage\6%\Ability\Adds 6% to the modifier applied to damage when in dragon form\80\y
+Dragon Damage\10%\Ability\Adds 10% to the modifier applied to damage when in dragon form\100\y
 Dragon Time\8%\Ability\Extends shapeshift time by 8%.\50\n
 Dragon Time\10%\Ability\Extends shapeshift time by 10%.\60\n
 Dragon Time\15%\Ability\Extends shapeshift time by 15%.\80\n
@@ -580,8 +595,10 @@ Dragon's Claws\I\Ability\Each shapeshift increases strength for the remainder of
 Dragon's Claws\II\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 5% in total. On second shapeshift strength is increased by 13% in total. On third shapeshift strength is increased by 25% in total.\80\y
 Dragon's Claws\III\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 6% in total. On second shapeshift strength is increased by 15% in total. On third shapeshift strength is increased by 30% in total.\100\y
 Energized: Strength\15%\Ability\Increases strength by 15% for 15 seconds each time the user is energized.\80\y
-Energized: Strength\20%\Ability\Increases strength by 20% for 15 seconds each time the user is energized.\100\y
-Energy Doublebuff\-\Ability\Increases energy level by one stage each time a defense up buff is received.\60\y
+Energy Prep\-\Ability\Increases the user's energy level by one stage at the start of quests.\60\y
+Energized Prep\-\Ability\Energizes the user at the start of quests. When an adventurer is energized, their next attack or recovery skill will be upgraded. At this point, using any applicable skill will reset that adventurer's energy level to zero.\80\y
+Energy Prep\-\Ability\Increases the user's energy level by one stage at the start of quests.\60\y
+Energized Prep\-\Ability\Energizes the user at the start of quests. When an adventurer is energized, their next attack or recovery skill will be upgraded. At this point, using any applicable skill will reset that adventurer's energy level to zero.\80\y
 Flame Res\3%\Ability\Reduces flame damage taken by 3%.\20\y
 Flame Res\5%\Ability\Reduces flame damage taken by 5%.\40\y
 Flame Res\8%\Ability\Reduces flame damage taken by 8%.\60\y
@@ -643,10 +660,11 @@ Healing Doublebuff\II\Ability\Grants an HP regen buff healing you for 2% Max HP 
 Healing Doublebuff\III\Ability\Grants an HP regen buff healing you for 3% Max HP every 3.9 seconds for 20 seconds each time a defense up buff is received.\80\y
 High Brunhilda Res\20%\Ability\Reduces damage taken from High Brunhilda by 20%.\60\y
 High Brunhilda Res\25%\Ability\Reduces damage taken from High Brunhilda by 25%.\100\y
-High Midgardsormr Res\20%\Ability\Reduces damage taken from High Midgardsormr by 20%.\60\y
+Hits = Energy Level Up\30\Ability\Increases the user's energy level by one stage for every 30-hit combo.\100\y
 High Midgardsormr Res\25%\Ability\Reduces damage taken from High Midgardsormr by 25%.\100\y
 Hits = Energy Level Up\30\Ability\Increases the user's energy level by one stage for every 30-hit combo.\100\y
 Hits = Energy Level Up\35\Ability\Increases the user's energy level by one stage for every 35-hit combo.\70\y
+Hits = Energy Level Up\40\Ability\Increases the user's energy level by one stage for every 40-hit combo.\50\y
 Holiday Cheer\100%\Ability\Increases Holiday Cheer intake for clearing quests by 100%.\0\y
 Holiday Cheer\150%\Ability\Increases Holiday Cheer intake for clearing quests by 150%.\0\y
 Holiday Cheer\25%\Ability\Increases Holiday Cheer intake for clearing quests by 25%.\0\y
@@ -682,13 +700,14 @@ Last Offense\20%\Ability\Buffs strength by 20% for 15 seconds when HP drops to 3
 Last Offense\30%\Ability\Buffs strength by 30% for 15 seconds when HP drops to 30% (once per quest).\60\y
 Last Offense\40%\Ability\Buffs strength by 40% for 15 seconds when HP drops to 30% (once per quest).\80\y
 Last Recovery\I\Ability\Grants an HP regen buff healing you for 8% Max HP every 3.9 seconds for 20 seconds when HP drops to 30% (once per quest).\40\y
-Last Recovery\II\Ability\Grants an HP regen buff healing you for 10% Max HP every 3.9 seconds for 20 seconds when HP drops to 30% (once per quest).\60\y
+Last Recovery\II\Ability\Grants an HP regen buff healing you for 10% Max HP every 3.9 seconds for 20 seconds when HP drops to 30% (once per quest).\100\y
 Last Recovery\III\Ability\Grants an HP regen buff healing you for 12% Max HP every 3.9 seconds for 20 seconds when HP drops to 30% (once per quest).\80\y
 Last Recovery\IV\Ability\Grants an HP regen buff healing you for 14% Max HP every 3.9 seconds for 20 seconds when HP drops to 30% (once per quest).\100\y
 Light Res\10%\Ability\Reduces light damage taken by 10%.\80\y
 Light Res\3%\Ability\Reduces light damage taken by 3%.\20\y
 Light Res\5%\Ability\Reduces light damage taken by 5%.\40\y
 Light Res\8%\Ability\Reduces light damage taken by 8%.\60\y
+Loving Heart\-\Ability\Increases player EXP intake for clearing quests by 10%.\100\y
 Mana\3%\Ability\Increases mana intake for clearing quests by 3%.\10\y
 Mana\5%\Ability\Increases mana intake for clearing quests by 5%.\20\y
 Mercury Res\15%\Ability\Reduces damage taken from Mercury by 15%.\30\y
@@ -730,14 +749,16 @@ Renown\125%\Ability\Increases renown intake for clearing quests by +125%\0\y
 Renown\150%\Ability\Increases renown intake for clearing quests by +150%\0\y
 Renown\25%\Ability\Increases renown intake for clearing quests by +25%\0\y
 Renown\50%\Ability\Increases renown intake for clearing quests by +50%\0\y
-Renown\75%\Ability\Increases renown intake for clearing quests by +75%\0\y
-Shadow Res\3%\Ability\Reduces shadow damage taken by 3%.\20\y
+Shadow Res\5%\Ability\Reduces shadow damage taken by 5%.\40\y
+Shadow Res\8%\Ability\Reduces shadow damage taken by 8%.\60\y
 Shadow Res\5%\Ability\Reduces shadow damage taken by 5%.\40\y
 Shadow Res\8%\Ability\Reduces shadow damage taken by 8%.\60\y
 Shapeshift Prep\5%\Ability\Fills 5% of the dragon gauge at the start of quests.\10\y
 Shapeshift Prep\8%\Ability\Fills 8% of the dragon gauge at the start of quests.\20\y
 Shapeshift Prep\10%\Ability\Fills 10% of the dragon gauge at the start of quests.\40\y
 Shapeshift Prep\13%\Ability\Fills 13% of the dragon gauge at the start of quests.\60\y
+Shield Prep\I\Ability\Grants the user a one-use shield that nullifies damage less than 10% of their maximum HP at the start of quests. This does not stack with any other shield.\80\y
+Shield Prep\II\Ability\Grants the user a one-use shield that nullifies damage less than 20% of their maximum HP at the start of quests. This does not stack with any other shield.\100\y
 Skill Damage\10%\Ability\Increases attack skill damage by 10%.\20\y
 Skill Damage\15%\Ability\Increases attack skill damage by 15%.\40\y
 Skill Damage\20%\Ability\Increases attack skill damage by 20%.\60\y
@@ -773,8 +794,8 @@ Snack-o'-Lanterns\25%\Ability\Increases Snack-o'-Lantern intake for clearing que
 Snack-o'-Lanterns\50%\Ability\Increases Snack-o'-Lantern intake for clearing quests by 50%.\0\y
 Strength Doublebuff\10%\Ability\Increases strength by 10% for 15 seconds each time a defense up buff is received.\80\y
 Strength Doublebuff\13%\Ability\Increases strength by 13% for 15 seconds each time a defense up buff is received.\100\y
-Strength Doublebuff\5%\Ability\Increases strength by 5% for 15 seconds each time a defense up buff is received.\40\y
-Strength Doublebuff\8%\Ability\Increases strength by 8% for 15 seconds each time a defense up buff is received.\60\y
+Striker's Energy\I\Ability\Increases energy level by one stage for every three enemies defeated with force strikes (up to five times per quest).\80\y
+Striker's Energy\II\Ability\Increases energy level by two stages for every three enemies defeated with force strikes (up to five times per quest).\100\y
 Striker's Energy\I\Ability\Increases energy level by one stage for every three enemies defeated with force strikes (up to five times per quest).\80\y
 Striker's Energy\II\Ability\Increases energy level by two stages for every three enemies defeated with force strikes (up to five times per quest).\100\y
 Striker's Skill\6%\Ability\Increases skill damage by 6% for every three enemies defeated with force strikes (up to five times per quest).\60\y
@@ -785,6 +806,8 @@ Striker's Strength\5%\Ability\Increases strength by 5% for every three enemies d
 Striker's Strength\6%\Ability\Increases strength by 6% for every three enemies defeated with force strikes (up to five times per quest).\100\y
 Striking Haste\6%\Ability\Increases skill gauge fill rate by 6% when the user's force strikes connect.\60\y
 Striking Haste\8%\Ability\Increases skill gauge fill rate by 8% when the user's force strikes connect.\80\y
+Striking Strength Debilitator \I\Ability\Grants the user's force strikes a 50% chance to reduce enemy strength by 3% for 10 seconds.\80\y
+Striking Strength Debilitator \II\Ability\Grants the user's force strikes a 70% chance to reduce enemy strength by 3% for 10 seconds.\100\y
 Stun Res\100%\Ability\Reduces susceptibility to stun by 100%.\100\y
 Stun Res\15%\Ability\Reduces susceptibility to stun by 15%.\10\y
 Stun Res\20%\Ability\Reduces susceptibility to stun by 20%.\20\y
@@ -794,8 +817,6 @@ Stunned Punisher\20%\Ability\Increases damage to stunned enemies by 20%.\60\y
 Stunned Punisher\25%\Ability\Increases damage to stunned enemies by 25%.\80\y
 Stunned Punisher\30%\Ability\Increases damage to stunned enemies by 30%.\100\y
 Sylvan Strength\70\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 25-hit combo.\70\y
-Sylvan Strength\100\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 25-hit combo.\100\y
-Tent Canvas\25%\Ability\Increases canvas tent intake for clearing quests by 25%\0\y
 Tent Canvas\50%\Ability\Increases canvas tent intake for clearing quests by 50%\0\y
 Tent Canvas\75%\Ability\Increases canvas tent intake for clearing quests by 75%\0\y
 Thaumian's Bane\20%\Ability\Increases damage to thaumians by 20%.\60\y
@@ -815,6 +836,8 @@ Windwhistle Grass\50%\Ability\Increases windwhistle grass intake for clearing qu
 Windwhistle Grass\75%\Ability\Increases wind whistle grass intake for clearing quests by 75%.\0\y
 Woodland Blessing\50%\Ability\Reduces susceptibility to stun and sleep by 50%.\70\y
 Woodland Blessing\100%\Ability\Reduces susceptibility to stun and sleep by 100%.\100\y
+Zodiark Res\15%\Ability\Reduces damage taken from Zodiark by 15%.\30\y
+Zodiark Res\20%\Ability\Reduces damage taken from Zodiark by 20%.\60\y
 Zodiark Res\15%\Ability\Reduces damage taken from Zodiark by 15%.\30\y
 Zodiark Res\20%\Ability\Reduces damage taken from Zodiark by 20%.\60\y
 Critical Rate\1%\CoAbility\Increases critical rate by 1%.\50\n
