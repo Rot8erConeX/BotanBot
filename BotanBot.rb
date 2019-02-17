@@ -1021,7 +1021,8 @@ def disp_weapon_stats(bot,event,args=nil)
   str="#{str}\n**Story**" if k[2].length>1 && k[2][1,1].downcase=='y'
   str="#{str}\n**Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='s'
   str="#{str}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
-  str="#{str}\n**Enemy exclusive**" if k[2].length>1 && k[2][1,1].downcase=='e'
+  str="#{str}\n**Starter**" if k[2].length>1 && k[2][1,1].downcase=='e'
+  str="#{str}\n**Paid**" if k[2].length>1 && k[2][1,1].downcase=='p'
   f=30*k[2][0,1].to_i-50
   f+=20 if k[2][0,1].to_i<3
   wpnz=@weapons.map{|q| q}
@@ -1127,7 +1128,8 @@ def disp_weapon_lineage(bot,event,args=nil)
   str="#{str}\n**Story**" if k[2].length>1 && k[2][1,1].downcase=='y'
   str="#{str}\n**Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='s'
   str="#{str}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
-  str="#{str}\n**Enemy exclusive**" if k[2].length>1 && k[2][1,1].downcase=='e'
+  str="#{str}\n**Starter**" if k[2].length>1 && k[2][1,1].downcase=='e'
+  str="#{str}\n**Paid**" if k[2].length>1 && k[2][1,1].downcase=='p'
   f=30*k[2][0,1].to_i-50
   f+=20 if k[2][0,1].to_i<3
   wpnz=@weapons.map{|q| q}
@@ -2339,11 +2341,12 @@ def find_in_weapons(bot,event,args=nil,mode=0)
     wpn.push('Wand') if ['wand','wands'].include?(args[i].downcase)
     wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
     fltr.push('Welfare') if ['welfare','welfares','free','freebies','f2p'].include?(args[i].downcase)
-    fltr.push('Enemy') if ['enemy','enemys','enemies'].include?(args[i].downcase)
+    fltr.push('Starter') if ['starter','starters','start','starting'].include?(args[i].downcase)
     fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
     fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
     fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons'].include?(args[i].downcase)
     fltr.push('Summon') if ['summon','summons','summonable','summonables'].include?(args[i].downcase)
+    fltr.push('Paid') if ['payment','paid','paying','whale'].include?(args[i].downcase)
   end
   textra=''
   rarity.uniq!
@@ -2410,13 +2413,21 @@ def find_in_weapons(bot,event,args=nil,mode=0)
       m.push('5y')
       emo.push('(y)') if fltr.length<2
     end
-    if fltr.include?('Enemy')
+    if fltr.include?('Starter')
       m.push('1e')
       m.push('2e')
       m.push('3e')
       m.push('4e')
       m.push('5e')
       emo.push('(e)') if fltr.length<2
+    end
+    if fltr.include?('Paid')
+      m.push('1p')
+      m.push('2p')
+      m.push('3p')
+      m.push('4p')
+      m.push('5p')
+      emo.push('(p)') if fltr.length<2
     end
     if fltr.include?('Summon')
       m.push('1')
@@ -5195,7 +5206,9 @@ bot.command(:snagstats) do |event, f, f2|
       m=adv.reject{|q| q[2][1,1]!='z'}
       str2="#{str2}\n#{m.length} Zodiac weapon#{'s' unless m.length==1}"
       m=adv.reject{|q| q[2][1,1]!='e'}
-      str2="#{str2}\n#{m.length} enemy-exclusive weapon#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} starter weapon#{'s' unless m.length==1}"
+      m=adv.reject{|q| q[2][1,1]!='p'}
+      str2="#{str2}\n#{m.length} paid weapon#{'s' unless m.length==1}"
       str=extend_message(str,str2,event,2)
     end
     event.respond str
