@@ -53,7 +53,7 @@ def all_commands(include_nil=false,permissions=-1)
      'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','dbxp',
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
      'weaponlevel','wxp','wexp','wlevel','victory','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage',
-     'craft','crafting']
+     'craft','crafting','tools','tool','links','link','resources','resource']
   k=['addalias','deletealias','removealias','s2s'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop'] if permissions==2
   k=k.uniq
@@ -149,6 +149,7 @@ def data_load()
     b[i][7]=b[i][7].split(', ').map{|q| q.to_i}
     b[i][11]=b[i][11].split(', ').map{|q| q.to_i}
     b[i][12]=b[i][12].split(';; ').map{|q| q.split(', ')} unless b[i][12].nil?
+    b[i][13]=b[i][13].split(';; ') unless b[i][13].nil?
   end
   @weapons=b.map{|q| q}
   if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkills.txt')
@@ -345,11 +346,13 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
   elsif ['shop','store'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows the current day's shop mats.\n\nYou can include the word \"tomorrow\" to instead show the data for tomorrow.\nYou can also include a day of the week to instead show data on that day of the week.",0xCE456B)
   elsif ['ruin','ruins'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Elemental Ruins, what difficulties are available, and what orbs and other mats come out of those.\n\nYou can include the word \"tomorrow\" to instead show the data for tomorrow.\nYou can also include a day of the week to instead show data on that day of the week.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Expert Ruins, what difficulties are available, and what orbs and other mats come out of those.\n\nYou can include the word \"tomorrow\" to instead show the data for tomorrow.\nYou can also include a day of the week to instead show data on that day of the week.",0xCE456B)
   elsif ['today','now','daily','dailies','today_in_dl','todayindl'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\nAlso shows the current day's Elemental Ruins, what difficulties are available, and what orbs and other mats come out of those.\nAlso shows the current day's shop mats.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\nAlso shows the current day's Expert Ruins, what difficulties are available, and what orbs and other mats come out of those.\nAlso shows the current day's shop mats.",0xCE456B)
   elsif ['tomorrow','tomorow','tommorrow','tommorow'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","Shows the next day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\nAlso shows the next day's Elemental Ruins, what difficulties are available, and what orbs and other mats come out of those.\nAlso shows the current day's shop mats.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __name__","Shows the next day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\nAlso shows the next day's Expert Ruins, what difficulties are available, and what orbs and other mats come out of those.\nAlso shows the current day's shop mats.",0xCE456B)
+  elsif ['next','schedule'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __type__","Shows the next time in-game daily events of the type `type` will happen.\nIf in PM and `type` is unspecified, shows the entire schedule.\n\n__*Accepted Inputs*__\nRuin(s)\nMat(s)\nShop, Store\nBond(s), Dragon(s)",0xCE456B)
   elsif ['embed','embeds'].include?(command.downcase)
     event << '**embed**'
     event << ''
@@ -392,12 +395,22 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
     subcommand='' if subcommand.nil?
     if ['server','servers','member','members','shard','shards','users','user'].include?(subcommand.downcase)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}**",'Returns the number of servers and unique members each shard reaches.',0xCE456B)
+    elsif ['adventurer','adventurers','adv','advs','unit','units'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}**","Returns the number of adventurers sorted in each of the following ways:\n- Rarity\n- Element\n- Weapon type\n- Class\n- Obtainability (in PM)",0xCE456B)
+    elsif ['dragon','dragons','drag','drags','drg','drgs'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}**","Returns the number of dragons sorted in each of the following ways:\n- Rarity\n- Element\n- Bondfood preference\n- damage reaction\n- Range\n- Obtainability (in PM)",0xCE456B)
+    elsif ['wyrmprint','wyrm','print','wyrmprints','wyrms','prints'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}**","Returns the number of wyrmprints sorted in each of the following ways:\n- Rarity\n- Amulet\n- Obtainability (in PM)",0xCE456B)
+    elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}**","Returns the number of weapons sorted in each of the following ways:\n- Weapon type\n- Rarity\n- Element\n- Obtainability (in PM)",0xCE456B)
+    elsif ['alts','alt','alternate','alternates','alternative','alternatives'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}**",'Returns the number of adventurers and dragons within each type of alt, as well as specifics about adventurers and dragons with the most alts.',0xCE456B)
     elsif ['alias','aliases','name','names','nickname','nicknames'].include?(subcommand.downcase)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}**","Returns the number of aliases in each of the two categories - global single-servant, and server-specific single-servant.\nAlso returns specifics about the most frequent instances of each category",0xCE456B)
     elsif ['code','lines','line','sloc'].include?(subcommand.downcase)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}**","Returns the specifics about my code, including number of commands and functions, as well as - if in PM - loops, statements, and conditionals.",0xCE456B)
     else
-      create_embed(event,"**#{command.downcase}**","Returns:\n- the number of servers I'm in\n- the numbers of servants in the game\n- the numbers of aliases I keep track of\n- how long of a file I am.\n\nYou can also include the following words to get more specialized data:\nServer(s), Member(s), Shard(s), User(s)\nAlias(es), Name(s), Nickname(s)\nCode, Line(s), SLOC#{"\n\nAs the bot developer, you can also include a server ID number to snag the shard number, owner, and my nickname in the specified server." if event.user.id==167657750971547648}",0xCE456B)
+      create_embed(event,"**#{command.downcase}**","Returns:\n- the number of servers I'm in\n- the numbers of servants in the game\n- the numbers of aliases I keep track of\n- how long of a file I am.\n\nYou can also include the following words to get more specialized data:\nServer(s), Member(s), Shard(s), User(s)\nAdventurer(s), Unit(s)\nDragon(s)\nWyrmprint(s), Print(s)\nWeapon(s)\nAlt(s)\nAlias(es), Name(s), Nickname(s)\nCode, Line(s), SLOC#{"\n\nAs the bot developer, you can also include a server ID number to snag the shard number, owner, and my nickname in the specified server." if event.user.id==167657750971547648}",0xCE456B)
     end
   else
     x=0
@@ -412,6 +425,7 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
     str="#{str}\n`dragon` __name__ - for data on a dragon"
     str="#{str}\n`wyrmprint` __name__ - for data on a wyrmprint (*also `wyrm` or `print`*)"
     str="#{str}\n`weapon` __name__ - for data on a weapon"
+    str="#{str}\n`craft` __name__ - for data on a weapon's crafting materials"
     str="#{str}\n\n`skill` __name__ - for data on a particular skill"
     str="#{str}\n`ability` __name__ - for data on a particular ability or co-ability"
     str="#{str}\n`aura` __name__ - for data on a particular aura"
@@ -421,6 +435,7 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
     str="#{str}\n`serveraliases` __target__- to show all server-specific aliases of a particular entity (*also `saliases`*)"
     str="#{str}\n\n`find` __\*filters__ - to find specific adventurers, dragons, wyrmprints, or weapons"
     str="#{str}\n`today` - to show data on current events (*also `daily` or `todayInDL`*)"
+    str="#{str}\n`next` - to show data on cyclical events (*also `schedule`*)"
     str="#{str}\n\n__**Meta Data**__"
     str="#{str}\n`invite` - for a link to invite me to your server"
     str="#{str}\n`snagstats` __type__ - to receive relevant bot stats"
@@ -604,7 +619,6 @@ def find_ability(name,event,fullname=false)
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name[0,q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','').length] && (q[2].nil? || q[2].include?(g))}
   unless k.nil?
     sklz2=sklz.reject{|q| q[0]!=alz[k][1]}
-    puts sklz2.map{|q| "#{q[0]} #{q[1]} - #{alz[k][0]} #{q[1]} - #{name}"}
     m=sklz2.find_index{|q| "#{alz[k][0]}#{q[1]}".downcase==name}
     return sklz2[m] unless m.nil?
     m=sklz2.find_index{|q| "#{alz[k][0]}+#{q[1]}".downcase==name}
@@ -968,7 +982,16 @@ def disp_wyrmprint_stats(bot,event,args=nil)
   else
     str="#{str}\n\n**#{'<:NonUnbound:534494090876682264>'*4} Level 1**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}"
     str="#{str}\n**#{'<:Unbind:534494090969088000>'*4} Level #{f}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}"
-    str="#{str}\n\n__**Abilities**__\n#{k[5].map{|q| "#{q[0]}/#{q[1].split(' ')[-1]}"}.join("\n")}"
+    for i in 0...k[5].length
+      if k[5][i][0]==k[5][i][1]
+        k[5][i]=k[5][i][0]
+      elsif k[5][i][0].split(' ')[0,k[5][i][0].split(' ').length-1].join(' ')==k[5][i][1].split(' ')[0,k[5][i][1].split(' ').length-1].join(' ')
+        k[5][i]="#{k[5][i][0]}/#{k[5][i][1].split(' ')[-1]}"
+      else
+        k[5][i]=k[5][i][0,2].join(" \u2192 ")
+      end
+    end
+    str="#{str}\n\n__**Abilities**__\n#{k[5].join("\n")}"
   end
   str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[6][0])}<:Resource_Rupies:532104504372363274> #{longFormattedNumber(k[6][1])}<:Resource_Eldwater:532104503777034270>"
   ftr="Artist: #{k[7]}" unless k[7].nil? || k[7].length<=0
@@ -1006,18 +1029,30 @@ def disp_weapon_stats(bot,event,args=nil)
   skl=nil
   skl=sklz.find_index{|q| q[2]=='Skill' && q[0]==k[6]} if !k[6].nil? && k[6].length>0
   skl=sklz[skl] unless skl.nil?
+  abl=nil
+  abl2=nil
+  unless k[13].nil? || k[13].length<=0
+    abl=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][0]} if !k[13][0].nil? && k[13][0].length>0
+    abl=sklz[abl] unless abl.nil?
+    abl2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][1]} if !k[13][1].nil? && k[13][1].length>0
+    abl2=sklz[abl2] unless abl2.nil?
+  end
   if s2s && !skl.nil?
     str="#{str}\n\n__**#{'<:NonUnbound:534494090876682264>'*4} Level 1**__"
     str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
     str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
+    str="#{str}\n*#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*" unless abl.nil?
     if k[2][0,1].to_i>=5 && k[3]!='None'
       str="#{str}\n\n__**#{'<:NonUnbound:534494090876682264>'*4} Level 80**__"
       str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}"
       str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
+      str="#{str}\n*#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*" unless abl.nil?
     end
     str="#{str}\n\n__**#{'<:Unbind:534494090969088000>'*4} Level #{f}**__"
     str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
     str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][1])} SP\n#{skl[4].gsub(';; ',"\n")}"
+    str="#{str}\n*#{abl2[0]} #{'+' if abl2[1].include?('%')}#{abl2[1]}*" unless abl2.nil?
+    str="#{str}\n*#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*" if abl2.nil? && !abl.nil?
   else
     str="#{str}\n\n**#{'<:NonUnbound:534494090876682264>'*4} Level 1**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
     str="#{str}\n**#{'<:NonUnbound:534494090876682264>'*4} Level 80**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}" if k[2][0,1].to_i>=5 && k[3]!='None'
@@ -1032,12 +1067,17 @@ def disp_weapon_stats(bot,event,args=nil)
       end
       strx=skl[4].gsub(';; ',"\n")
     end
+    if !abl2.nil?
+      str="#{str}\n\n**Ability:** *#{abl2[0]} #{'+' if abl2[1].include?('%')}#{abl2[1]}*"
+    elsif !abl.nil?
+      str="#{str}\n\n**Ability:** *#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*"
+    end
   end
   str2=''
   if s2s
     m2=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
     m=wpnz.reject{|q| q[1]!=k[1] || q[2]!=k[2] || q[9]!=k[8] || ['','0',0].include?(q[9])}
-    str2="#{str2}#{"\n" if m.length>1}\n\n**Promotes from: #{element_emote(wpnz[m2][3],bot)}*#{wpnz[m2][0]}* **\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(k[11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}" unless m2.nil?
+    str2="#{str2}#{"\n" unless m.length==1}\n\n**Promotes from: #{element_emote(wpnz[m2][3],bot)}*#{wpnz[m2][0]}* **\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(k[11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}" unless m2.nil?
     if m.length>0
       for i in 0...m.length
         str2="#{str2}#{"\n" if i==0 && m.length>1}\n\n**#{"Promotion #{i+1}" if m.length>1}#{'Promotes into' if m.length==1}: #{element_emote(m[i][3],bot)}*#{m[i][0]}* **\n*Smithy level required:* #{m[i][10]}\n*Assembly cost:* #{longFormattedNumber(m[i][11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{m[i][12].map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}"
@@ -1095,6 +1135,14 @@ def disp_weapon_lineage(bot,event,args=nil)
   skl=nil
   skl=sklz.find_index{|q| q[2]=='Skill' && q[0]==k[6]} if !k[6].nil? && k[6].length>0
   skl=sklz[skl] unless skl.nil?
+  abl=nil
+  abl2=nil
+  unless k[13].nil? || k[13].length<=0
+    abl=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][0]} if !k[13][0].nil? && k[13][0].length>0
+    abl=sklz[abl] unless abl.nil?
+    abl2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][1]} if !k[13][1].nil? && k[13][1].length>0
+    abl2=sklz[abl2] unless abl2.nil?
+  end
   if mub
     str="#{str}\n**#{'<:Unbind:534494090969088000>'*4} Level #{f}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
   else
@@ -1103,9 +1151,12 @@ def disp_weapon_lineage(bot,event,args=nil)
   end
   if s2s && !skl.nil?
     if mub
-      str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][1])} SP\n#{skl[4].gsub(';; ',"\n")}"
+      str="#{str}\n**Skill:** *#{skl[0]}* - #{longFormattedNumber(skl[6][1])} SP\n#{skl[4].gsub(';; ',"\n")}"
+      str="#{str}\n**Ability:** *#{abl2[0]} #{'+' if abl2[1].include?('%')}#{abl2[1]}*" unless abl2.nil?
+      str="#{str}\n**Ability:** *#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*" if abl2.nil? && !abl.nil?
     else
-      str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
+      str="#{str}\n**Skill:** *#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
+      str="#{str}\n**Ability:** *#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*" unless abl.nil?
     end
   else
     strx=''
@@ -1118,6 +1169,11 @@ def disp_weapon_lineage(bot,event,args=nil)
       end
       strx=skl[3].gsub(';; ',"\n")
       strx=skl[4].gsub(';; ',"\n") if mub
+    end
+    if !abl2.nil? && mub
+      str="#{str}\n**Ability:** *#{abl2[0]} #{'+' if abl2[1].include?('%')}#{abl2[1]}*"
+    elsif !abl.nil?
+      str="#{str}\n**Ability:** *#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*"
     end
   end
   str2=''
@@ -1315,6 +1371,7 @@ def disp_ability_data(bot,event,args=nil)
   adv=@adventurers.map{|q| q}
   drg=@dragons.map{|q| q}
   wrm=@wyrmprints.map{|q| q}
+  wep=@weapons.map{|q| q}
   ftr=nil
   flds=nil
   if k[0].is_a?(Array)
@@ -1328,6 +1385,7 @@ def disp_ability_data(bot,event,args=nil)
     if k2.length>0 && k3.length>0
       if k.map{|q| q[1]}.uniq.length<=1
         hdr="__**#{k[0][0]} #{'+' if k[0][1].include?('%')}#{k[0][1]}**__ [Ability family]"
+        hdr="__**#{k[0][1]} #{k[0][0]}**__ [Ability family]" if k[0][0][0,5]=='Hits '
         m=k2[0]
         str="__**Ability**__"
         str="#{str}\n*Effect:* #{m[3]}" if m[5]=='y'
@@ -1363,6 +1421,14 @@ def disp_ability_data(bot,event,args=nil)
           m2.push("#{wrm[i][0]} (A3\u2082)") if wrm[i][5].length>2 && wrm[i][5][2][1]==checkstr
         end
         str="#{str}\n*Wyrmprints:* #{m2.join(', ')}" if m2.length>0
+        m2=[]
+        for i in 0...wep.length
+          unless wep[i][13].nil? || wep[i][13].length<=0
+            m2.push("#{wep[i][0]} (A\u2081)") if wep[i][13][0]==checkstr
+            m2.push("#{wep[i][0]} (A\u2082)") if wep[i][13][1]==checkstr
+          end
+        end
+        str="#{str}\n*Weapons:* #{m2.join(', ')}" if m2.length>0
         m=k3[0]
         str="#{str}\n\n__**Co-Ability**__"
         str="#{str}\n*Effect:* #{m[3]}" if m[5]=='y'
@@ -1432,6 +1498,14 @@ def disp_ability_data(bot,event,args=nil)
               m2.push("#{wrm[i][0]} (A3\u2082)") if wrm[i][5].length>2 && wrm[i][5][2][1]==checkstr
             end
             str="#{str}\n*Wyrmprints:* #{m2.join(', ')}" if m2.length>0
+            m2=[]
+            for i in 0...wep.length
+              unless wep[i][13].nil? || wep[i][13].length<=0
+                m2.push("#{wep[i][0]} (A\u2081)") if wep[i][13][0]==checkstr
+                m2.push("#{wep[i][0]} (A\u2082)") if wep[i][13][1]==checkstr
+              end
+            end
+            str="#{str}\n*Weapons:* #{m2.join(', ')}" if m2.length>0
           elsif k[i2][2]=='CoAbility'
             for i in 0...adv.length
               mx=adv[i][7].split(' ')
@@ -1453,6 +1527,7 @@ def disp_ability_data(bot,event,args=nil)
     end
   else
     hdr="__**#{k[0]} #{'+' if k[1].include?('%')}#{k[1]}**__ [#{k[2]}]"
+    hdr="__**#{k[1]} #{k[0]}**__ [#{k[2]}]" if k[0][0,5]=='Hits '
     xcolor=0x555058
     xcolor=0x87817C if k[2]=='Aura'
     xcolor=0x242035 if k[2]=='CoAbility'
@@ -1508,6 +1583,20 @@ def disp_ability_data(bot,event,args=nil)
           str2="#{str2}\n**Wyrmprints:** #{m2.join(', ')}"
         else
           flds.push(['Wyrmprints',m2.join("\n")])
+        end
+      end
+      m2=[]
+      for i in 0...wep.length
+        unless wep[i][13].nil? || wep[i][13].length<=0
+          m2.push("#{wep[i][0]} (A\u2081)") if wep[i][13][0]==checkstr
+          m2.push("#{wep[i][0]} (A\u2082)") if wep[i][13][1]==checkstr
+        end
+      end
+      if m2.length>0
+        if !s2s || was_embedless_mentioned?(event)
+          str2="#{str2}\n**Weapons:** #{m2.join(', ')}"
+        else
+          flds.push(['Weapons',m2.join("\n")])
         end
       end
     elsif k[2]=='CoAbility'
@@ -3627,11 +3716,12 @@ def roost(event,bot,args=nil,ignoreinputs=false)
     str="#{str}\n\n#{str3}'s date: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} #{'(Tomorrow)' if tmw}"
     str="#{str}\nDays since game release, come next #{str3.split(' ')[1]}: #{longFormattedNumber(date)}"
   end
-  str="#{str}\n\n__**#{"#{str3}'s " if str3.length>0}Elemental Ruins:**__"
-  str="#{str}\n*Open:* #{['<:Element_Null:532106087810334741>All','<:Element_Null:532106087810334741>All','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep'][t.wday]}"
-  str="#{str}\n*Difficulties:* Beginner, Standard#{', Expert' if t.wday>1}"
-  str="#{str}\n*Available Orbs:* #{['','','Flame, Blaze, Inferno','Water, Stream, Deluge','Wind, Storm, Maelstorm','Light, Radiance, Refulgence','Shadow, Nightfull, Nether'][t.wday]}" if t.wday>1
-  str="#{str}\n*Other Available Mats:* #{['','',"Fiend's Horn, Fiend's Eye","Ancient Bird's Feather, Bewitching Wing",'Granite, Meteorite',"Fiend's Claw","Ancient Bird's Feathers Bewitching Wing"][t.wday]}" if t.wday>1
+  str="#{str}\n\n__**#{"#{str3}'s " if str3.length>0}Expert Ruins:**__"
+  str="#{str}\n*Open:* #{['<:Element_Null:532106087810334741>None','<:Element_Null:532106087810334741>None','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep'][t.wday]}"
+  if t.wday>2
+    str="#{str}\n*Available Orbs:* #{['','','Flame, Blaze, Inferno','Water, Stream, Deluge','Wind, Storm, Maelstorm','Light, Radiance, Refulgence','Shadow, Nightfull, Nether'][t.wday]}" if t.wday>1
+    str="#{str}\n*Other Available Mats:* #{['','',"Fiend's Horn, Fiend's Eye","Ancient Bird's Feather, Bewitching Wing",'Granite, Meteorite',"Fiend's Claw","Ancient Bird's Feathers Bewitching Wing"][t.wday]}" if t.wday>1
+  end
   str="#{str}\n\n**Shop Mats:** #{['Light Metal, Abyss Stone','Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather",'Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather"][t.wday]}" if t.wday>-1
   str="#{str}\n\n**#{"#{str3}'s " if str3.length>0}Bond Gift:** #{['Golden Chalice','Juicy Meat','Kaleidoscope','Floral Circlet','Compelling Book','Mana Essence','Golden Chalice'][t.wday]}"
   if t.wday>0 && t.wday<6
@@ -3680,17 +3770,16 @@ def next_events(event,bot,args=nil)
     return nil
   end
   if [1,0].include?(mode)
-    ruin=['<:Element_Null:532106087810334741>All','<:Element_Null:532106087810334741>All','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep']
+    ruin=['<:Element_Null:532106087810334741>None','<:Element_Null:532106087810334741>None','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep']
     ruin=ruin.rotate(t.wday)
-    matz=["Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye, Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing, Wind/Storm/Maelstorm Orbs, Granite, Meteorite, Light/Radiance/Refulgence Orbs, Fiend's Claw, Shadow/Nightfull/Nether Orbs",
-          "Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye, Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing, Wind/Storm/Maelstorm Orbs, Granite, Meteorite, Light/Radiance/Refulgence Orbs, Fiend's Claw, Shadow/Nightfull/Nether Orbs",
-          "Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye","Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing",
+    matz=["","","Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye","Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing",
           "Wind/Storm/Maelstorm Orbs, Granite, Meteorite","Light/Radiance/Refulgence Orbs, Fiend's Claw",
           "Shadow/Nightfull/Nether Orbs, Ancient Bird's Feather, Bewitching Wing"]
     matz=matz.rotate(t.wday)
-    str2='__**Elemental Ruins**__'
+    str2='__**Expert Ruins**__'
     for i in 0...ruin.length
-      if i==0
+      if ruin[i]=='<:Element_Null:532106087810334741>None'
+      elsif i==0
         t2=t+24*60*60*(i+1)
         str2="#{str2}#{"\n" if mode==1 && safe_to_spam?(event)}\n#{ruin[i]} - Today#{" - Next available tomorrow (#{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t2.wday]}, #{t2.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t2.month]} #{t2.year})" if ruin[0]==ruin[1]}"
         str2="#{str2}\n~~Available mats: #{matz[i]}~~" if mode==1 && safe_to_spam?(event)
@@ -3710,9 +3799,7 @@ def next_events(event,bot,args=nil)
   end
   f=[0,2]
   if f.include?(mode)
-    matz=["Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye, Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing, Wind/Storm/Maelstorm Orbs, Granite, Meteorite, Light/Radiance/Refulgence Orbs, Fiend's Claw, Shadow/Nightfull/Nether Orbs",
-          "Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye, Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing, Wind/Storm/Maelstorm Orbs, Granite, Meteorite, Light/Radiance/Refulgence Orbs, Fiend's Claw, Shadow/Nightfull/Nether Orbs",
-          "Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye","Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing",
+    matz=["","","Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye","Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing",
           "Wind/Storm/Maelstorm Orbs, Granite, Meteorite","Light/Radiance/Refulgence Orbs, Fiend's Claw",
           "Shadow/Nightfull/Nether Orbs, Ancient Bird's Feather, Bewitching Wing"]
     matz=matz.rotate(t.wday)
@@ -4208,8 +4295,6 @@ def find_adv_alts(event,args,bot)
     color=avg_color(color)
   end
   k2=k.map{|q| q[9].length}
-  puts untz2.map{|q| q.to_s}
-  puts k2.to_s
   if k2.max>1
     k2=k.map{|q| q[9][1]}.uniq.map{|q| ["#{name}(#{q})",[],q]}
     for i in 0...untz2.length
@@ -4266,8 +4351,6 @@ def find_dragon_alts(event,args,bot)
     color=avg_color(color)
   end
   k2=k.map{|q| q[12].length}
-  puts untz2.map{|q| q.to_s}
-  puts k2.to_s
   if k2.max>1
     k2=k.map{|q| q[12][1]}.uniq.map{|q| ["#{name}(#{q})",[],q]}
     for i in 0...untz2.length
@@ -4748,6 +4831,24 @@ bot.command(:sortaliases, from: 167657750971547648) do |event, *args|
   event.respond 'The alias list has been sorted alphabetically'
 end
 
+bot.command([:tools,:links,:tool,:link,:resources,:resources]) do |event|
+  return nil if overlap_prevent(event)
+  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || event.message.text.downcase.include?('mobile') || event.message.text.downcase.include?('phone')
+    event << '**Useful tools for players of** ***Dragalia Lost***'
+    event << '__Download the game__'
+    event << 'Google Play: <https://play.google.com/store/apps/details?id=com.aniplex.fategrandorder.en&hl=en_US>'
+    event << 'Apple App Store: <https://itunes.apple.com/us/app/fate-grand-order-english/id1183802626?mt=8>'
+    event << ''
+    event << 'Stats Calculator: <https://docs.google.com/spreadsheets/d/1uyx9MRDeE4SnupOtQm2wm2rB2i2aXtMSHdGC908vpGg/edit#gid=1600382551>'
+    event << 'Weapon Material Calculator: <https://yujinred.github.io/Dragalia-Weapon-Material-Calculator/>'
+  else
+    xpic='https://lh3.googleusercontent.com/SIHM5RPpoLy3Xso8wxqzCzBggkNq6dYhLt8THToag6FW_peH43_k1YdKh23Xmu5i_6c=s180-rw'
+    create_embed(event,'**Useful tools for players of** ***Dragalia Lost***',"__Download the game__\n[Google Play](https://play.google.com/store/apps/details?id=com.nintendo.zaga&hl=en_US)\n[Apple App Store](https://itunes.apple.com/us/app/dragalia-lost/id1352230941?mt=8)\n\n__Calculators__\n[Stats Calculator](https://docs.google.com/spreadsheets/d/1uyx9MRDeE4SnupOtQm2wm2rB2i2aXtMSHdGC908vpGg/edit#gid=1600382551)\n[Weapon Material Calculator](https://yujinred.github.io/Dragalia-Weapon-Material-Calculator/)",0xED619A,nil,xpic)
+    event.respond 'If you are on a mobile device and cannot click the links in the embed above, type `FGO!tools mobile` to receive this message as plaintext.'
+  end
+  event << ''
+end
+
 bot.command(:status, from: 167657750971547648) do |event, *args|
   return nil if overlap_prevent(event)
   return nil unless event.user.id==167657750971547648
@@ -4876,6 +4977,341 @@ bot.command(:snagstats) do |event, f, f2|
     event << "#{longFormattedNumber(@server_data[0][2])} server#{"s are" if @server_data[0][2]!=1}#{" is" unless @server_data[0][2]!=1} assigned the <:Type_Healing:532107867348533249> Healing class, reaching #{longFormattedNumber(@server_data[1][2])} unique members."
     event << "#{longFormattedNumber(@server_data[0][3])} server#{"s are" if @server_data[0][3]!=1}#{" is" unless @server_data[0][3]!=1} assigned the <:Type_Support:532107867575156747> Support class, reaching #{longFormattedNumber(@server_data[1][3])} unique members."
     event << "#{longFormattedNumber(@server_data[0][4])} server#{"s are" if @server_data[0][4]!=1}#{" is" unless @server_data[0][4]!=1} assigned <:Element_Null:532106087810334741> no class, reaching #{longFormattedNumber(@server_data[1][4])} unique members."
+    return nil
+  elsif ['adventurer','adventurers','adv','advs','unit','units'].include?(f.downcase)
+    adv=@adventurers.map{|q| q}
+    str="**There are #{adv.length} adventurers, including:**"
+    str2=''
+    m=adv.reject{|q| q[1][0,1].to_i != 1}
+    str2="#{str2}\n<:Rarity_1:532086056594440231> #{m.length} one-star adventurer#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[1][0,1].to_i != 2}
+    str2="#{str2}\n<:Rarity_2:532086056254963713> #{m.length} two-star adventurer#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[1][0,1].to_i != 3}
+    str2="#{str2}\n<:Rarity_3:532086056519204864> #{m.length} three-star adventurer#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[1][0,1].to_i != 4}
+    str2="#{str2}\n<:Rarity_4:532086056301101067> #{m.length} four-star adventurer#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[1][0,1].to_i != 5}
+    str2="#{str2}\n<:Rarity_5:532086056737177600> #{m.length} five-star adventurer#{'s' unless m.length==1}" if m.length>0
+    str=extend_message(str,str2,event)
+    m=adv.reject{|q| q[2][1]!='Flame'}
+    str2="<:Element_Flame:532106087952810005> #{m.length} Flame-element adventurer#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2][1]!='Water'}
+    str2="#{str2}\n<:Element_Water:532106088221376522> #{m.length} Water-element adventurer#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2][1]!='Wind'}
+    str2="#{str2}\n<:Element_Wind:532106087948746763> #{m.length} Wind-element adventurer#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2][1]!='Light'}
+    str2="#{str2}\n<:Element_Light:532106088129101834> #{m.length} Light-element adventurer#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2][1]!='Shadow'}
+    str2="#{str2}\n<:Element_Shadow:532106088154267658> #{m.length} Shadow-element adventurer#{'s' unless m.length==1}"
+    str=extend_message(str,str2,event,2)
+    m=adv.reject{|q| q[2][2]!='Sword'}
+    str2="<:Weapon_Sword:532106114540634113> #{m.length} Sword-using adventurer#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2][2]!='Blade'}
+    str2="#{str2}\n<:Weapon_Blade:532106114628714496> #{m.length} Blade-using adventurer#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2][2]!='Dagger'}
+    str2="#{str2}\n<:Weapon_Dagger:532106116025286656> #{m.length} Dagger-using adventurer#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2][2]!='Axe'}
+    str2="#{str2}\n<:Weapon_Axe:532106114188443659> #{m.length} Axe-using adventurer#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2][2]!='Bow'}
+    str2="#{str2}\n<:Weapon_Bow:532106114909732864> #{m.length} Bow-using adventurer#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2][2]!='Lance'}
+    str2="#{str2}\n<:Weapon_Lance:532106114792423448> #{m.length} Lance-using adventurer#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2][2]!='Wand'}
+    str2="#{str2}\n<:Weapon_Wand:532106114985099264> #{m.length} Wand-using adventurer#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2][2]!='Staff'}
+    str2="#{str2}\n<:Weapon_Staff:532106114733441024> #{m.length} Staff-using adventurer#{'s' unless m.length==1}"
+    str=extend_message(str,str2,event,2)
+    m=adv.reject{|q| q[2][0]!='Attack'}
+    str2="<:Type_Attack:532107867520630784> #{m.length} Attack-class adventurer#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2][0]!='Defense'}
+    str2="#{str2}\n<:Type_Defense:532107867264909314> #{m.length} Defense-class adventurer#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2][0]!='Support'}
+    str2="#{str2}\n<:Type_Support:532107867575156747> #{m.length} Support-class adventurer#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2][0]!='Healer'}
+    str2="#{str2}\n<:Type_Healing:532107867348533249> #{m.length} Healing-class adventurer#{'s' unless m.length==1}"
+    str=extend_message(str,str2,event,2)
+    if safe_to_spam?(event)
+      m=adv.reject{|q| q[1][1,1]!='y'}
+      str2="#{m.length} story adventurer#{'s' unless m.length==1}"
+      m=adv.reject{|q| q[1].length>1}
+      str2="#{str2}\n#{m.length} summonable adventurer#{'s' unless m.length==1}"
+      m=adv.reject{|q| q[1][1,1]!='w'}
+      str2="#{str2}\n#{m.length} welfare adventurer#{'s' unless m.length==1}"
+      m=adv.reject{|q| q[1][1,1]!='s'}
+      str2="#{str2}\n#{m.length} seasonal adventurer#{'s' unless m.length==1}"
+      m=adv.reject{|q| q[1][1,1]!='z'}
+      str2="#{str2}\n#{m.length} Zodiac adventurer#{'s' unless m.length==1}"
+      str=extend_message(str,str2,event,2)
+    end
+    event.respond str
+    return nil
+  elsif ['dragon','dragons','drag','drags','drg','drgs'].include?(f.downcase)
+    adv=@dragons.map{|q| q}
+    str="**There are #{adv.length} dragons, including:**"
+    str2=''
+    m=adv.reject{|q| q[1][0,1].to_i != 1}
+    str2="#{str2}\n<:Rarity_1:532086056594440231> #{m.length} one-star dragon#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[1][0,1].to_i != 2}
+    str2="#{str2}\n<:Rarity_2:532086056254963713> #{m.length} two-star dragon#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[1][0,1].to_i != 3}
+    str2="#{str2}\n<:Rarity_3:532086056519204864> #{m.length} three-star dragon#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[1][0,1].to_i != 4}
+    str2="#{str2}\n<:Rarity_4:532086056301101067> #{m.length} four-star dragon#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[1][0,1].to_i != 5}
+    str2="#{str2}\n<:Rarity_5:532086056737177600> #{m.length} five-star dragon#{'s' unless m.length==1}" if m.length>0
+    str=extend_message(str,str2,event)
+    m=adv.reject{|q| q[2]!='Flame'}
+    str2="<:Element_Flame:532106087952810005> #{m.length} Flame-element dragon#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2]!='Water'}
+    str2="#{str2}\n<:Element_Water:532106088221376522> #{m.length} Water-element dragon#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2]!='Wind'}
+    str2="#{str2}\n<:Element_Wind:532106087948746763> #{m.length} Wind-element dragon#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2]!='Light'}
+    str2="#{str2}\n<:Element_Light:532106088129101834> #{m.length} Light-element dragon#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2]!='Shadow'}
+    str2="#{str2}\n<:Element_Shadow:532106088154267658> #{m.length} Shadow-element dragon#{'s' unless m.length==1}"
+    str=extend_message(str,str2,event,2)
+    str2=''
+    x=['','Juicy Meat/Monday','Kaleidoscope/Tuesday','Floral Circlet/Wednesday','Compelling Book/Thursday','Mana Essence/Friday','']
+    for i in 1...6
+      m=adv.reject{|q| q[9]!=i}
+      str2="#{str2}\n#{m.length} dragon#{'s' unless m.length==1} that prefer #{x[i].split('/')[0]}s, which are available on #{x[i].split('/')[1]}"
+    end
+    str=extend_message(str,str2,event)
+    m=adv.reject{|q| q[10]!='Yes'}
+    str2="#{m.length} dragon#{'s' unless m.length==1} that turn towards the source of damage they receive"
+    m=adv.reject{|q| q[10]!='No'}
+    str2="#{str2}\n#{m.length} dragon#{'s' unless m.length==1} that remain in position when damaged"
+    str=extend_message(str,str2,event,2)
+    m=adv.reject{|q| q[11]!='Yes'}
+    str2="#{m.length} long-range dragon#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[11]!='No'}
+    str2="#{str2}\n#{m.length} short-range dragon#{'s' unless m.length==1}"
+    str=extend_message(str,str2,event,2)
+    if safe_to_spam?(event)
+      m=adv.reject{|q| q[1][1,1]!='y'}
+      str2="#{m.length} story dragon#{'s' unless m.length==1}"
+      m=adv.reject{|q| q[1].length>1}
+      str2="#{str2}\n#{m.length} summonable dragon#{'s' unless m.length==1}"
+      m=adv.reject{|q| q[1][1,1]!='w'}
+      str2="#{str2}\n#{m.length} welfare dragon#{'s' unless m.length==1}"
+      m=adv.reject{|q| q[1][1,1]!='s'}
+      str2="#{str2}\n#{m.length} seasonal dragon#{'s' unless m.length==1}"
+      m=adv.reject{|q| q[1][1,1]!='z'}
+      str2="#{str2}\n#{m.length} Zodiac dragon#{'s' unless m.length==1}"
+      str=extend_message(str,str2,event,2)
+    end
+    event.respond str
+    return nil
+  elsif ['wyrmprint','wyrm','print','wyrmprints','wyrms','prints'].include?(f.downcase)
+    adv=@wyrmprints.map{|q| q}
+    str="**There are #{adv.length} Wyrmprints, including:**"
+    str2=''
+    m=adv.reject{|q| q[1][0,1].to_i != 1}
+    str2="#{str2}\n<:Rarity_1:532086056594440231> #{m.length} one-star print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[1][0,1].to_i != 2}
+    str2="#{str2}\n<:Rarity_2:532086056254963713> #{m.length} two-star print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[1][0,1].to_i != 3}
+    str2="#{str2}\n<:Rarity_3:532086056519204864> #{m.length} three-star print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[1][0,1].to_i != 4}
+    str2="#{str2}\n<:Rarity_4:532086056301101067> #{m.length} four-star print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[1][0,1].to_i != 5}
+    str2="#{str2}\n<:Rarity_5:532086056737177600> #{m.length} five-star print#{'s' unless m.length==1}" if m.length>0
+    str=extend_message(str,str2,event)
+    m=adv.reject{|q| q[2]!='Attack'}
+    str2="<:Type_Attack:532107867520630784> #{m.length} Attack-amulet print#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2]!='Defense'}
+    str2="#{str2}\n<:Type_Defense:532107867264909314> #{m.length} Defense-amulet print#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2]!='Support'}
+    str2="#{str2}\n<:Type_Support:532107867575156747> #{m.length} Support-amulet print#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[2]!='Healing'}
+    str2="#{str2}\n<:Type_Healing:532107867348533249> #{m.length} Healing-amulet print#{'s' unless m.length==1}"
+    str=extend_message(str,str2,event,2)
+    if safe_to_spam?(event)
+      m=adv.reject{|q| q[1].length>1}
+      str2="#{m.length} summonable print#{'s' unless m.length==1}"
+      m=adv.reject{|q| q[1][1,1]!='w'}
+      str2="#{str2}\n#{m.length} welfare print#{'s' unless m.length==1}"
+      m=adv.reject{|q| q[1][1,1]!='s'}
+      str2="#{str2}\n#{m.length} seasonal print#{'s' unless m.length==1}"
+      m=adv.reject{|q| q[1][1,1]!='z'}
+      str2="#{str2}\n#{m.length} Zodiac print#{'s' unless m.length==1}"
+      str=extend_message(str,str2,event,2)
+    end
+    event.respond str
+    return nil
+  elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(f.downcase)
+    adv=@weapons.map{|q| q}
+    str="**There are #{adv.length} weapons, including:**"
+    m=adv.reject{|q| q[1]!='Sword'}
+    str2="<:Weapon_Sword:532106114540634113> #{m.length} Sword#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[1]!='Blade'}
+    str2="#{str2}\n<:Weapon_Blade:532106114628714496> #{m.length} Blade#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[1]!='Dagger'}
+    str2="#{str2}\n<:Weapon_Dagger:532106116025286656> #{m.length} Dagger#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[1]!='Axe'}
+    str2="#{str2}\n<:Weapon_Axe:532106114188443659> #{m.length} Axe#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[1]!='Bow'}
+    str2="#{str2}\n<:Weapon_Bow:532106114909732864> #{m.length} Bow#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[1]!='Lance'}
+    str2="#{str2}\n<:Weapon_Lance:532106114792423448> #{m.length} Lance#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[1]!='Wand'}
+    str2="#{str2}\n<:Weapon_Wand:532106114985099264> #{m.length} Wand#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[1]!='Staff'}
+    str2="#{str2}\n<:Weapon_Staff:532106114733441024> #{m.length} #{'Staff' if m.length==1}#{'Staves' unless m.length==1}"
+    str=extend_message(str,str2,event,2)
+    str2=''
+    m=adv.reject{|q| q[2][0,1].to_i != 1}
+    str2="#{str2}\n<:Rarity_1:532086056594440231> #{m.length} one-star weapon#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][0,1].to_i != 2}
+    str2="#{str2}\n<:Rarity_2:532086056254963713> #{m.length} two-star weapon#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][0,1].to_i != 3}
+    str2="#{str2}\n<:Rarity_3:532086056519204864> #{m.length} three-star weapon#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][0,1].to_i != 4}
+    str2="#{str2}\n<:Rarity_4:532086056301101067> #{m.length} four-star weapon#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][0,1].to_i != 5}
+    str2="#{str2}\n<:Rarity_5:532086056737177600> #{m.length} five-star weapon#{'s' unless m.length==1}" if m.length>0
+    str=extend_message(str,str2,event)
+    m=adv.reject{|q| q[3]!='None'}
+    str2="<:Element_Null:532106087810334741> #{m.length} weapon#{'s' unless m.length==1} without an element"
+    m=adv.reject{|q| q[3]!='Flame'}
+    str2="#{str2}\n<:Element_Flame:532106087952810005> #{m.length} Flame-element weapon#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[3]!='Water'}
+    str2="#{str2}\n<:Element_Water:532106088221376522> #{m.length} Water-element weapon#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[3]!='Wind'}
+    str2="#{str2}\n<:Element_Wind:532106087948746763> #{m.length} Wind-element weapon#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[3]!='Light'}
+    str2="#{str2}\n<:Element_Light:532106088129101834> #{m.length} Light-element weapon#{'s' unless m.length==1}"
+    m=adv.reject{|q| q[3]!='Shadow'}
+    str2="#{str2}\n<:Element_Shadow:532106088154267658> #{m.length} Shadow-element weapon#{'s' unless m.length==1}"
+    str=extend_message(str,str2,event,2)
+    if safe_to_spam?(event)
+      m=adv.reject{|q| q[2].length>1}
+      str2="#{m.length} craftable weapon#{'s' unless m.length==1}"
+      m=adv.reject{|q| q[2][1,1]!='w'}
+      str2="#{str2}\n#{m.length} welfare weapon#{'s' unless m.length==1}"
+      m=adv.reject{|q| q[2][1,1]!='s'}
+      str2="#{str2}\n#{m.length} seasonal weapon#{'s' unless m.length==1}"
+      m=adv.reject{|q| q[2][1,1]!='z'}
+      str2="#{str2}\n#{m.length} Zodiac weapon#{'s' unless m.length==1}"
+      m=adv.reject{|q| q[2][1,1]!='e'}
+      str2="#{str2}\n#{m.length} enemy-exclusive weapon#{'s' unless m.length==1}"
+      str=extend_message(str,str2,event,2)
+    end
+    event.respond str
+    return nil
+  elsif ['alts','alt','alternate','alternates','alternative','alternatives'].include?(f.downcase)
+    event.channel.send_temporary_message('Calculating data, please wait...',3)
+    data_load()
+    nicknames_load()
+    untz=@adventurers.map{|q| q}
+    untz2=[]
+    for i in 0...untz.length
+      m=[]
+      m.push('default') if untz[i][0]==untz[i][9][0] || untz[i][9][0][untz[i][9][0].length-1,1]=='*'
+      m.push('faceted') if untz[i][9][0][0,1]=='*' && untz[i][9].length>1
+      m.push('sensible') if untz[i][9][0][0,1]=='*' && untz[i][9].length<2
+      m.push('seasonal') if untz[i][1][1,1]=='s'
+      m.push('out-of-left-field') if m.length<=0
+      n=''
+      unless untz[i][0]==untz[i][9][0] || untz[i][9][0][untz[i][9][0].length-1,1]=='*'
+        k=untz.reject{|q| q[9][0].gsub('*','')[0]!=untz[i][9][0].gsub('*','')[0] || q[0]==untz[i][0] || !(q[0]==q[9][0] || q[9][0].include?('*'))}
+        n="x" if k.length<=0
+      end
+      untz2.push([untz[i][0],untz[i][9].map{|q| q.gsub('*','')},m,n,untz[i][13]])
+    end
+    untz2.uniq!
+    all_units=untz2.map{|q| q}
+    legal_units=untz2.map{|q| q}
+    a2=all_units.reject{|q| q[1][1].nil?}.map{|q| q[1][0]}.uniq
+    l2=legal_units.reject{|q| q[1][1].nil?}.map{|q| q[1][0]}.uniq
+    str="There are #{untz2.reject{|q| !q[2].include?('default')}.length} adventurers in their default form"
+    str="#{str}\nThere are #{untz2.reject{|q| !q[2].include?('sensible')}.length} sensible alts of adventurers"
+    str="#{str}\nThere are #{untz2.reject{|q| !q[2].include?('seasonal')}.length} seasonal alts of adventurers"
+    str="#{str}\nThere are #{untz2.reject{|q| !q[2].include?('out-of-left-field')}.length} out-of-left-field alts of adventurers"
+    k=[]
+    for i in 0...all_units.length
+      k.push("#{all_units[i][1][0]}") if all_units[i][3].length>0
+    end
+    k.uniq!
+    str2=''
+    str2="#{str2}\nThe following adventurers have alts but not default versions in DL: #{list_lift(k.map{|q| "*#{q}*"},"and")}." if k.length>0
+    k=legal_units.map{|q| [q[1][0],0]}.uniq
+    for i in 0...k.length
+      k[i][1]=legal_units.reject{|q| q[1][0]!=k[i][0]}.uniq.length
+    end
+    k=k.sort{|b,a| supersort(a,b,1).zero? ? supersort(a,b,0) : supersort(a,b,1)}
+    k=k.reject{|q| q[1]!=k[0][1]}
+    str2="#{str2}\n#{list_lift(k.map{|q| "*#{q[0]}*"},'and')} #{"is" if k.length==1}#{"are" unless k.length==1} the adventurer#{"s" unless k.length==1} with the most alts, with #{k[0][1]} alts (including the default)#{" each" unless k.length==1}."
+    k2=k.map{|q| q}
+    k=legal_units.map{|q| [q[1],0]}.uniq
+    for i in 0...k.length
+      k[i][1]=legal_units.reject{|q| q[1]!=k[i][0]}.uniq.length
+      if k[i][0].length>1
+        k[i][0]="#{k[i][0][0]}(#{k[i][0][1]})"
+      else
+        k[i][0]=k[i][0][0]
+      end
+    end
+    k=k.sort{|b,a| supersort(a,b,1).zero? ? supersort(a,b,0) : supersort(a,b,1)}
+    k=k.reject{|q| q[1]!=k[0][1]}
+    str2="#{str2}\n#{list_lift(k.map{|q| "*#{q[0]}*"},'and')} #{"is" if k.length==1}#{"are" unless k.length==1} the adventurer facet#{"s" unless k.length==1} with the most alts, with #{k[0][1]} alts (including the default)#{" each" unless k.length==1}." if k.length>0 && k != k2
+    str="#{str}#{str2}"
+    untz=@dragons.map{|q| q}
+    untz2=[]
+    for i in 0...untz.length
+      m=[]
+      m.push('default') if untz[i][0]==untz[i][12][0] || untz[i][12][0][untz[i][12][0].length-1,1]=='*'
+      m.push('faceted') if untz[i][12][0][0,1]=='*' && untz[i][12].length>1
+      m.push('sensible') if untz[i][12][0][0,1]=='*' && untz[i][12].length<2
+      m.push('seasonal') if untz[i][1][1,1]=='s'
+      m.push('out-of-left-field') if m.length<=0
+      n=''
+      unless untz[i][0]==untz[i][12][0] || untz[i][12][0][untz[i][12][0].length-1,1]=='*'
+        k=untz.reject{|q| q[12][0].gsub('*','')[0]!=untz[i][12][0].gsub('*','')[0] || q[0]==untz[i][0] || !(q[0]==q[12][0] || q[12][0].include?('*'))}
+        n="x" if k.length<=0
+      end
+      untz2.push([untz[i][0],untz[i][12].map{|q| q.gsub('*','')},m,n,untz[i][13]])
+    end
+    untz2.uniq!
+    all_units=untz2.map{|q| q}
+    legal_units=untz2.map{|q| q}
+    a2=all_units.reject{|q| q[1][1].nil?}.map{|q| q[1][0]}.uniq
+    l2=legal_units.reject{|q| q[1][1].nil?}.map{|q| q[1][0]}.uniq
+    str3="There are #{untz2.reject{|q| !q[2].include?('default')}.length} dragons in their default form, alongside #{l2.length} sets of dragon facets (High Dragons)"
+    str3="#{str3}\nThere are #{untz2.reject{|q| !q[2].include?('sensible')}.length} sensible alts of dragons"
+    str3="#{str3}\nThere are #{untz2.reject{|q| !q[2].include?('seasonal')}.length} seasonal alts of dragons"
+    str3="#{str3}\nThere are #{untz2.reject{|q| !q[2].include?('out-of-left-field')}.length} out-of-left-field alts of dragons"
+    k=[]
+    for i in 0...all_units.length
+      k.push("#{all_units[i][1][0]}") if all_units[i][3].length>0
+    end
+    k.uniq!
+    str2=''
+    str2="#{str2}\nThe following dragons have alts but not default versions in DL: #{list_lift(k.map{|q| "*#{q}*"},"and")}." if k.length>0
+    k=legal_units.map{|q| [q[1][0],0]}.uniq
+    for i in 0...k.length
+      k[i][1]=legal_units.reject{|q| q[1][0]!=k[i][0]}.uniq.length
+    end
+    k=k.sort{|b,a| supersort(a,b,1).zero? ? supersort(a,b,0) : supersort(a,b,1)}
+    k=k.reject{|q| q[1]!=k[0][1]}
+    str2="#{str2}\n#{list_lift(k.map{|q| "*#{q[0]}*"},'and')} #{"is" if k.length==1}#{"are" unless k.length==1} the dragon#{"s" unless k.length==1} with the most alts, with #{k[0][1]} alts (including the default)#{" each" unless k.length==1}."
+    k2=k.map{|q| q}
+    k=legal_units.map{|q| [q[1],0]}.uniq
+    for i in 0...k.length
+      k[i][1]=legal_units.reject{|q| q[1]!=k[i][0]}.uniq.length
+      if k[i][0].length>1
+        k[i][0]="#{k[i][0][0]}(#{k[i][0][1]})"
+      else
+        k[i][0]=k[i][0][0]
+      end
+    end
+    k=k.sort{|b,a| supersort(a,b,1).zero? ? supersort(a,b,0) : supersort(a,b,1)}
+    k=k.reject{|q| q[1]!=k[0][1]}
+    str2="#{str2}\n#{list_lift(k.map{|q| "*#{q[0]}*"},'and')} #{"is" if k.length==1}#{"are" unless k.length==1} the dragon facet#{"s" unless k.length==1} with the most alts, with #{k[0][1]} alts (including the default)#{" each" unless k.length==1}." if k.length>0 && k != k2
+    str3="#{str3}#{str2}"
+    str=extend_message(str,str3,event,2)
+    event.respond str
     return nil
   elsif ['code','lines','line','sloc'].include?(f.downcase)
     event.channel.send_temporary_message('Calculating data, please wait...',3)
@@ -5219,10 +5655,10 @@ bot.mention do |event|
     if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
       args.shift
       find_adventurers(bot,event,args)
-    elsif ['dragon','dragons'].include?(args[0].downcase)
+    elsif ['dragon','dragons','drag','drags','drg','drgs'].include?(args[0].downcase)
       args.shift
       find_dragons(bot,event,args)
-    elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
+    elsif ['wyrmprint','wyrm','print','wyrmprints','wyrms','prints'].include?(args[0].downcase)
       args.shift
       find_wyrmprints(bot,event,args)
     elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase)
