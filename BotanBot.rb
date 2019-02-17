@@ -4004,11 +4004,11 @@ def exp_shift(m,mode=0)
     elsif m%3500==0
       return "#{longFormattedNumber(m/3500)} Gold Whetstone#{'s' unless m/3500==1}"
     elsif m>3500
-      return "#{longFormattedNumber(m/3500)} Gold Whetstone#{'s' unless m/3500==1}, #{exp_shift(m-(m/3500)*3500,3)}"
+      return "#{longFormattedNumber(m/3500)} Gold Whetstone#{'s' unless m/3500==1}, #{exp_shift(m-(m/3500)*3500,6)}"
     elsif m%1000==0
       return "#{longFormattedNumber(m/1000)} Silver Whetstone#{'s' unless m/1000==1}"
     elsif m>1000
-      return "#{longFormattedNumber(m/1000)} Silver Whetstone#{'s' unless m/1000==1}, #{exp_shift(m-(m/1000)*1000,3)}"
+      return "#{longFormattedNumber(m/1000)} Silver Whetstone#{'s' unless m/1000==1}, #{exp_shift(m-(m/1000)*1000,6)}"
     elsif m%500==0
       return "#{longFormattedNumber(m/150)} Bronze Whetstone#{'s' unless m/500==1}"
     else
@@ -4072,6 +4072,7 @@ def level(event,bot,args=nil,mode=0)
       end
     else
       n=[nums[0,2].min,1].max
+      n=1 if n>pxp.length
       m=[nums[0,2].max,pxp.length].min
       str2="#{str2}\n*To get from level #{n} to level #{m}:*  \u200B  \u200B  #{longFormattedNumber(pxp[n-1,m-n].map{|q| q[0]*10}.inject(0){|sum,x| sum + x })} EXP required"
       str2="#{str2}\n*Resulting stamina increase:*  \u200B  \u200B  #{pxp[m-1][1]-pxp[n-1][1]} points of increase ~~(from #{pxp[n-1][1]} to #{pxp[m-1][1]})~~"
@@ -4109,6 +4110,7 @@ def level(event,bot,args=nil,mode=0)
       end
     else
       n=[nums[0,2].min,1].max
+      n=1 if n>axp.length
       n2=[nums[0,2].max,axp.length].min
       m=axp[n-1,n2-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
       str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
@@ -4145,6 +4147,7 @@ def level(event,bot,args=nil,mode=0)
       end
     else
       n=[nums[0,2].min,1].max
+      n=1 if n>dxp.length
       n2=[nums[0,2].max,dxp.length].min
       m=dxp[n-1,n2-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
       str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
@@ -4177,6 +4180,7 @@ def level(event,bot,args=nil,mode=0)
       end
     else
       n=[nums[0,2].min,1].max
+      n=1 if n>bxp.length
       n2=[nums[0,2].max,bxp.length].min
       m=bxp[n-1,n2-n].map{|q| q[0]*10}.inject(0){|sum,x| sum + x }
       str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP required"
@@ -4221,6 +4225,7 @@ def level(event,bot,args=nil,mode=0)
       end
     else
       n=[nums[0,2].min,1].max
+      n=1 if n>bxp.length
       n2=[nums[0,2].max,wrxp.length].min
       m=wrxp[n-1,n2-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
       str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
@@ -4263,6 +4268,7 @@ def level(event,bot,args=nil,mode=0)
       end
     else
       n=[nums[0,2].min,1].max
+      n=1 if n>wrxp.length
       n2=[nums[0,2].max,wrxp.length].min
       m=wrxp[n-1,n2-n].inject(0){|sum,x| sum + x }
       str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
