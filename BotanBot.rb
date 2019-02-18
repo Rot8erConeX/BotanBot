@@ -4090,10 +4090,10 @@ def exp_shift(m,mode=0)
   elsif mode==4
     if m==0
       return '-'
-    elsif m%3000==0
-      return "#{longFormattedNumber(m/3000)} Favored Bondfood"
-    elsif m>3000
-      return "#{longFormattedNumber(m/3000)} Favored Bondfood, #{exp_shift(m-(m/3000)*3000,4)}"
+    elsif m%1800==0
+      return "#{longFormattedNumber(m/1800)} Favored Bondfood"
+    elsif m>1800
+      return "#{longFormattedNumber(m/1800)} Favored Bondfood, #{exp_shift(m-(m/1800)*1800,4)}"
     elsif m%1200==0
       return "#{longFormattedNumber(m/1200)} Unfavored Bondfood"
     elsif m>1200
@@ -4140,6 +4140,27 @@ def exp_shift(m,mode=0)
       return "#{longFormattedNumber(m/150+1)} Bronze Whetstone#{'s' unless m/500==0}"
     end
   end
+end
+
+def focus_feed(favor,exp_target)
+  t=Time.now
+  timeshift=7
+  timeshift-=1 unless t.dst?
+  t-=60*60*timeshift
+  exp=0
+  days=0
+  while exp<exp_target
+    days+=1
+    if t.wday==0 || t.wday==6
+      exp+=2000
+    elsif t.wday==favor
+      exp+=1800
+    else
+      exp+=1200
+    end
+    t+=24*60*60
+  end
+  return days
 end
 
 def level(event,bot,args=nil,mode=0)
@@ -4284,10 +4305,13 @@ def level(event,bot,args=nil,mode=0)
     bxp=[[8,7.1],[16,7.2],[18,7.3],[20,7.4],[22,7.5],[26,7.6],[30,7.7],[40,7.8],[50,7.9],[60,8.0],[70,8.1],[80,8.2],[90,8.3],[100,8.4],[110,8.5],[120,8.6],
          [130,8.7],[140,8.8],[150,8.9],[160,9.0],[175,9.1],[190,9.2],[205,9.3],[220,9.4],[240,9.5],[260,9.6],[280,9.7],[300,9.8],[320,9.9],[0,10.0]]
     str2="__**Dragon Bond**__"
+    k=find_data_ex(:find_dragon,args.reject{|q| q.to_i.to_s==q}.join(' '),event)
+    str2="#{str2}\nFocused feeding time shown for #{k[0]}, whose favored bondfood is #{['Golden Chalice (Sunday)','Juicy Meat (Monday)','Kaleidoscope (Tuesday)','Floral Circlet (Wednesday)','Compelling Book (Thursday)','Mana Essence (Friday)','Golden Chalice (Saturday)'][k[9]]}" if k.length>0
     if nums.length<=0
       m=bxp.map{|q| q[0]*10}.inject(0){|sum,x| sum + x }
       str2="#{str2}\n*To get from level 1 to level #{bxp.length}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP required"
       str2="#{str2}\n*Optimal feeding:*  \u200B  \u200B  #{exp_shift(m,4)}"
+      str2="#{str2}\n*Focused feeding time:*  #{focus_feed(k[9],m)} days starting from today" if k.length>0
       str2="#{str2}\n*Resulting shapeshift time increase:*  \u200B  \u200B  #{'%.1f' % (bxp[bxp.length-1][1]-bxp[0][1])} additional seconds ~~(from #{bxp[0][1]} sec to #{bxp[bxp.length-1][1]} sec)~~"
     elsif nums.length==1
       n=[nums[0],bxp.length].min
@@ -4295,12 +4319,14 @@ def level(event,bot,args=nil,mode=0)
         m=bxp[0,n-1].map{|q| q[0]*10}.inject(0){|sum,x| sum + x }
         str2="#{str2}#{"\n" unless n==bxp.length}\n*To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP required"
         str2="#{str2}\n*Optimal feeding:*  \u200B  \u200B  #{exp_shift(m,4)}"
+        str2="#{str2}\n*Focused feeding time:*  #{focus_feed(k[9],m)} days starting from today" if k.length>0
         str2="#{str2}\n*Resulting shapeshift time increase:*  \u200B  \u200B  #{'%.1f' % (bxp[n-1][1]-bxp[0][1])} additional seconds ~~(from #{bxp[0][1]} sec to #{bxp[n-1][1]} sec)~~"
       end
       unless n==bxp.length
         m=bxp[n-1,bxp.length-n].map{|q| q[0]*10}.inject(0){|sum,x| sum + x }
         str2="#{str2}#{"\n" unless n==1}\n*To get from level #{n} to level #{bxp.length}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP required"
         str2="#{str2}\n*Optimal feeding:*  \u200B  \u200B  #{exp_shift(m,4)}"
+        str2="#{str2}\n*Focused feeding time:*  #{focus_feed(k[9],m)} days starting from today" if k.length>0
         str2="#{str2}\n*Resulting shapeshift time increase:*  \u200B  \u200B  #{'%.1f' % (bxp[bxp.length-1][1]-bxp[n-1][1])} additional seconds ~~(from #{bxp[n-1][1]} sec to #{bxp[bxp.length-1][1]} sec)~~"
       end
     else
@@ -4310,8 +4336,10 @@ def level(event,bot,args=nil,mode=0)
       m=bxp[n-1,n2-n].map{|q| q[0]*10}.inject(0){|sum,x| sum + x }
       str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP required"
       str2="#{str2}\n*Optimal feeding:*  \u200B  \u200B  #{exp_shift(m,4)}"
+      str2="#{str2}\n*Focused feeding time:*  #{focus_feed(k[9],m)} days starting from today" if k.length>0
       str2="#{str2}\n*Resulting shapeshift time increase:*  \u200B  \u200B  #{'%.1f' % (bxp[n2-1][1]-bxp[n-1][1])} additional seconds ~~(from #{bxp[n-1][1]} sec to #{bxp[n2-1][1]} sec)~~"
     end
+    str2="#{str2}\n\nInclude a dragon's name to show focused feeding times." if k.length<=0
     str=extend_message(str,str2,event,2)
   end
   if [5,7,0].include?(mode)
