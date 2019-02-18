@@ -2094,6 +2094,11 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
       skl1=sklz[sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6][0]}]
       skl2=sklz[sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6][1]}]
       char[i][20]="#{skl1[10].join("\n")}\n#{skl2[10].join("\n")}".split("\n")
+      if args.include?('any') || tags.length<=1
+        char[i][0]="#{char[i][0]} *[S1]*" if has_any?(tags,skl1[10]) && !has_any?(tags,skl2[10])
+        char[i][0]="#{char[i][0]} *[S2]*" if !has_any?(tags,skl1[10]) && has_any?(tags,skl2[10])
+        char[i][0]="#{char[i][0]} *[S1/2]*" if has_any?(tags,skl1[10]) && has_any?(tags,skl2[10])
+      end
     end
     if args.include?('any')
       search[-1]="#{search[-1]}\n(searching for adventurers with any listed tag in their skills)" if tags.length>1
@@ -2536,6 +2541,11 @@ def find_in_weapons(bot,event,args=nil,mode=0)
       textra="#{textra}\n\nTags searching defaults to searching for weapons with all listed tags.\nTo search for weapons with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
       for i in 0...tags.length
         char=char.reject{|q| !q[20].include?(tags[i])}.uniq
+      end
+    end
+    if args.include?('any') || tags.length<=1
+      for i in 0...char.length
+        char[i][0]="#{char[i][0]} *[S3]*"
       end
     end
   end
