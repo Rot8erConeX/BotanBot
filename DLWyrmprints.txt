@@ -96,7 +96,7 @@ Stellar Show\5\Attack\26, 176\9, 65\Force Strike +30%;; Force Strike +40%;;;; Cr
 Syndicate Mask\3\Defense\11, 76\3, 20\Blindness Res +15%;; Blindness Res +20%\300, 150\Akira Miyazaki
 Take My Hand\5w\Healing\1, 118\1, 38\Recovery Potency +10%;; Recovery Potency +10%\5000, 300\
 Teatime\3\Support\10, 71\3, 25\Skill Prep +10%;; Skill Prep +15%\300, 150\ShuLa
-The Chocolatiers\5\Support\26, 178\9, 62\Skill Prep +75%;; Skill Prep +100%\5000, 3000\oyume
+The Chocolatiers\5\Support\26, 178\9, 62\Skill Prep +50%;; Skill Prep +100%\5000, 3000\oyume
 The Greatest Gift\5w\Support\1, 10\1, 10\Happy Dragonyule!;; Happy Dragonyule!\5000, 300\Dragalia Lost Art Team
 The Halidom's Picnic\3\Defense\11, 76\3, 20\Sleep Res +15%;; Sleep Res +20%\300, 150\R-ko A-yama
 The Petal Queen\5w\Support\22, 151\7, 53\Energy Prep;; Energized Prep\5000, 300\Eri Yanagawa

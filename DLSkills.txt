@@ -56,6 +56,7 @@ Brave Bastion\\Skill\Increases the entire team's strength by 10% for 15 seconds.
 Brilliant Bolt\\Skill\Deals 1 shot of 769% flame damage to enemies directly ahead, and fires extra shots equal to the number of buffs the user has with 77% flame damage each. A maximum of seven additional shots can be fired.\Deals 1 shot of 854% flame damage to enemies directly ahead, and fires extra shots equal to the number of buffs the user has with 85% flame damage each. A maximum of seven additional shots can be fired.\Deals 1 shot of 949% flame damage to enemies directly ahead, and fires extra shots equal to the number of buffs the user has with 95% flame damage each. A maximum of seven additional shots can be fired.\2803, 2803, 2803\Yes\3.4\\Damage, Stacking
 Brilliant Inferno\\Skill\Activates "Inferno Mode" for 15 seconds. The user gains a strength increase of 10% , and their normal attacks have a 15% chance to reduce enemy defense by 5% for 5 seconds.\Activates "Inferno Mode" for 15 seconds. The user gains a strength increase of 15% , and their normal attacks have a 15% chance to reduce enemy defense by 5% for 5 seconds.\Activates "Inferno Mode" for 30seconds. The user gains a strength increase of 20% , and their normal attacks reduce enemy defense.\8940, 8940, 8940\No\0.6\\Stance, Debuff, DefDown
 Broad Cleaver\\Skill\Deals 1 hit of 553% damage to enemies directly ahead.\Deals 1 hit of 614% damage to enemies directly ahead.\Deals non-elemental damage to enemies directly ahead.\7330, 7330, 7330\Yes\0.8\\Damage
+Bronze Strength\\Skill\Increases the entire team's strength by 25% for 15 seconds.\Increases the entire team's strength by 30% for 15 seconds.\\50, 50, 50\No\1.6\\Buff, Strength, Team
 Burning Arrow\\Skill\Deals 1 shot of 635% flame damage to enemies in a line.\Deals 1 shot of 667% flame damage to enemies in a line, and inflicts burn for 12 seconds - dealing 60% damage every 3.99 seconds - with 90% base chance.\Deals 1 shot of 701% flame damage to enemies in a line, and inflicts burn.\5051, 5051, 5051\Yes\0.9\\Damage, Burn
 Butler's Guard\\Skill\Grants all teammates a shield that nullifies damage less than 15% of their maximum HP once. This does not stack with any other shields.\Grants all teammates a shield that nullifies damage less than 20% of their maximum HP once. This does not stack with any other shields.\Grants all teammates a shield that nullifies damage less than 60% of their maximum HP once. This does not stack with any other shields.\5840, 5840, 5840\No\1.4\\Shield, Team
 Butterfly Strike\\Skill\Deals 1 hit of 790% water damage to enemies in a line.\Deals 1 hit of 878% water damage to enemies in a line.\Deals water damage to enemies directly ahead.\7920, 7920, 7920\Yes\0.4\\Damage
@@ -84,7 +85,7 @@ Crimson Wave\\Skill\Deals 2 hits of 338% flame damage to enemies in a line.\Deal
 Critter Slayer\\Skill\Deals 1 shot of 699% light damage to the target.\Deals 1 shot of 734% light damage to the target, and inflicts stun for 2-4 seconds with 100% base chance.\Deals 1 shot of 771% light-based damage to the target and enemies near it, and inflicts stun for 2-4 seconds with 110% base chance.\5008, 5008, 5008\Yes\1.8\\Damage, Stun
 Cruel Assault\\Skill\Deals 2 hits of 305% flame damage to enemies directly ahead.\Deals 2 hits of 339% flame damage to enemies directly ahead.\\7339, 7339, 7339\Yes\1.4\\Damage
 Crystalline Blades\\Skill\Deals 4 hits of 138% flame damage to enemies directly ahead, and shoots 3 additional flame blades each dealing 23% flame damage for each time "Radiant Bauble" has been used, to a maximum of 15 additional blades.\Deals 4 hits of 153% flame damage to enemies directly ahead, and shoots 3 additional flame blades each dealing 25% flame damage for each time "Radiant Bauble" has been used, to a maximum of 15 additional blades.\Deals 4 hits of 170% flame damage to enemies directly ahead, and shoots 3 additional flame blades each dealing 28% flame damage for each time "Radiant Bauble" has been used, to a maximum of 15 additional blades.\2590, 2590, 2590\Yes\2\\Damage, Stacking, Conditional
-Cunning Edge\\Skill\Activates "Blinding Knives." For the next three force strikes, each force strike will deal an additional 13.7% (15% ) shadow damage per hit for Force Strike level 1 (level 2), and inflict blindness (50% chance to miss) for 8 seconds with 80% base chance. Bonus OD Bar damage is reduced to 4.2x for all hits of Blinding Knives, from 8.4x on the first two hits.\Activates "Blinding Knives." For the next three force strikes, each force strike will deal an additional 19.7% (21% ) shadow damage per hit for Force Strike level 1 (level 2), and inflict blindness (50% chance to miss) for 8 seconds with 90% base chance. Bonus OD Bar damage is reduced to 4.2x for all hits of Blinding Knives, from 8.4x on the first two hits.\\5315, 5315, 5315\No\1.4\Activates "Blinding Knives." For the next three force strikes, each force strike will deal an additional 13.7%/19.7% shadow damage per hit for Force Strike level 1, or 15%/21% shadow damage per hit for Force Strike level 2, and inflict blindness (50% chance to miss) for 8 seconds with 80%/90% base chance. Bonus OD Bar damage is reduced to 4.2x for all hits of Blinding Knives, from 8.4x on the first two hits.\Stance, Blind
+Scheming Slice\\Skill\Activates "Blinding Knives." For the next three force strikes, each force strike will deal an additional 13.7% (15% ) shadow damage per hit for Force Strike level 1 (level 2), and inflict blindness (50% chance to miss) for 8 seconds with 80% base chance. Bonus OD Bar damage is reduced to 4.2x for all hits of Blinding Knives, from 8.4x on the first two hits.\Activates "Blinding Knives." For the next three force strikes, each force strike will deal an additional 19.7% (21% ) shadow damage per hit for Force Strike level 1 (level 2), and inflict blindness (50% chance to miss) for 8 seconds with 90% base chance. Bonus OD Bar damage is reduced to 4.2x for all hits of Blinding Knives, from 8.4x on the first two hits.\\5315, 5315, 5315\No\1.4\Activates "Blinding Knives." For the next three force strikes, each force strike will deal an additional 13.7%/19.7% shadow damage per hit for Force Strike level 1, or 15%/21% shadow damage per hit for Force Strike level 2, and inflict blindness (50% chance to miss) for 8 seconds with 80%/90% base chance. Bonus OD Bar damage is reduced to 4.2x for all hits of Blinding Knives, from 8.4x on the first two hits.\Stance, Blind
 Custom Concoction\\Skill\Applies one of the following at random to the entire team:;; Increases strength by 15% for 15 seconds;; Increases defense by 15% for 15 seconds;; Increases critical rate by 15% for 10 seconds;; Increases max HP by 5% for the remainder of the quest.\Applies one of the following at random to the entire team:;; Increases strength by 20% for 15 seconds;; Increases defense by 20% for 15 seconds;; Increases critical rate by 20% for 10 seconds;; Increases max HP by 10% for the remainder of the quest.\Applies one of the following at random to the entire team:;; Increases strength by 25% for 15 seconds;; Increases defense by 25% for 15 seconds;; Increases critical rate by 25% for 10 seconds;; Increases max HP by 15% for the remainder of the quest.\3817, 3817, 3817\No\1.4\Applies one of the following at random to the entire team:;; Increases strength by `Tier*5+10`% for 15 seconds;; Increases defense by `Tier*5+10`% for 15 seconds;; Increases critical rate by `Tier*5+10`% for 10 seconds;; Increases max HP by `Tier*5`% for the remainder of the quest.\Buff, Random, Strength, DefenseSkill, CritRate, HealthSkill, Team
 Cyclone Axe\\Skill\Deals 2 hits of 420% wind damage to surrounding enemies and draws them toward the user for 0.5 seconds.\Deals 2 hits of 466% wind damage to surrounding enemies and draws them toward the user for 0.5 seconds.\Deals 2 hits of 518% wind damage to surrounding enemies and draws them toward the user for 0.5 seconds.\5735, 5735, 5735\Yes\0.9\\Damage
 Cyclonic Swing\\Skill\Deals 2 hits of 466% wind damage to surrounding enemies and draws them toward the user for 0.5 seconds.\Deals 2 hits of 518% wind damage to surrounding enemies and draws them toward the user for 0.5 seconds.\\8603, 8603, 8603\Yes\0.9\\Damage
@@ -406,7 +407,7 @@ Windeater's Strength\\Skill\Increases the user's strength by 30% for 5 seconds.\
 Winds, Heal Us!\\Skill\Restores HP to all allies with 72% Recovery Potency.\Restores HP to all allies with 90% Recovery Potency and removes bog.\Restores HP to all allies with 108% Recovery Potency and removes bog.\5916, 5916, 5916\Yes\1.1\\HealSkill, Burst, Team
 Winds, Protect Us!\\Skill\Increases the entire team's defense by 15% for 15 seconds, and increases each adventurer's max HP by 5% for the remainder of the quest. Once HP buffs reach the limit, an HP recovery effect is granted instead.\Increases the entire team's defense by 20% for 15 seconds, and increases each adventurer's max HP by 10% for the remainder of the quest. Once HP buffs reach the limit, an HP recovery effect is granted instead.\Increases the entire team's defense by 15% for 30 seconds.\11449, 11449, 11449\No\1.4\\Buff, DefenseSkill, HealthSkill, Team
 Windwhistler\\Skill\Deals 2 hits of 275% wind damage to enemies directly ahead.\Deals 2 hits of 288% wind damage to enemies directly ahead, and reduces their defense by 5% for 10 seconds with 30% base chance.\Deals 2 hits of 303% wind damage to enemies directly ahead, and reduces their defense by 10% for 10 seconds with 30% base chance.\4892, 4892, 4892\Yes\0.5\\Damage, Debuff, DefDown
-Winged Blessing\\Skill\Restores the user's HP with 72Recovery Potency.\Restores the user's HP with 90Recovery Potency.\\12841, 12841, 12841\Yes\1.1\\HealSkill, Burst, User
+Winged Blessing\\Skill\Restores the user's HP with 72 Recovery Potency.\Restores the user's HP with 90 Recovery Potency.\\12841, 12841, 12841\Yes\1.1\\HealSkill, Burst, User
 Winged Protection\\Skill\Increases the user's defense by 20% for 10 seconds.\Increases the user's defense by 25% for 10 seconds.\Increases the user's defense by 30% for 30 seconds.\6678, 6678, 6678\No\1.4\\Buff, DefenseSkill, User
 Winged Recovery\\Skill\Restores the user's HP with 15% Recovery Potency and applies Regen for 15 seconds, healing with 12% Regen Potencyevery 2.99 seconds.\Restores the user's HP with 18% Recovery Potency and applies Regen for 15 seconds, healing with 15% Regen Potencyevery 2.99 seconds.\\14950, 14950, 14950\Yes\1.4\\Buff, HealSkill, Regen, User
 Winter's Blade\\Skill\Increases the user's strength by 20% , and upgrades the Ardent Stream skill with chance to inflict freeze for 10 seconds.\Increases the user's strength by 25% , and upgrades the Ardent Stream skill with chance to inflict freeze for 10 seconds.\\4877, 4877, 4877\No\1.4\\Buff, Strength, Stance
@@ -416,10 +417,6 @@ Zardin Blade\\Skill\Deals one hit of 552% water damage to enemies directly ahead
 Zardin's Wrath\\Skill\Deals one hit of 552% water damage to enemies in a line.\Deals one hit of 614% water damage to enemies in a line.\Deals one hit of 682% water damage to enemies in a line.\5225, 5225, 5225\Yes\0.7\\Damage
 Zephyr's Wrath\\Skill\Deals 3 hits of 254.1% wind damage to surrounding enemies, and inflicts stun for 2-4 seconds with 160% base chance.\Deals 3 hits of 267.4% wind damage to surrounding enemies, and inflicts stun for 2-4 seconds with 180% base chance.\\50, 50, 50\Yes\1.7\\Damage, Stun
 Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\Deals 5 hits of 165% light damage to enemies directly ahead.\\6847, 6847, 6847\Yes\1.4\\Damage
-(Axe) Critical Rate\10%\Aura\If the user wields an Axe: increases critical rate by 10%.\80\y
-(Axe) Critical Rate\12%\Aura\If the user wields an Axe: increases critical rate by 12%.\100\y
-(Flame) Affliction Guard\I\Aura\If the user is attuned to Flame: resists afflictions once per quest\80\y
-(Flame) Affliction Guard\II\Aura\If the user is attuned to Flame: resists afflictions three times per quest\100\y
 (Flame) HP & Strength\5%\Aura\If the user is attuned to Flame: increases strength and HP by 5%.\20\y
 (Flame) HP & Strength\8%\Aura\If the user is attuned to Flame: increases strength and HP by 8%.\30\y
 (Flame) HP & Strength\20%\Aura\If the user is attuned to Flame: increases strength and HP by 20%.\70\y
@@ -428,7 +425,6 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) HP\15%\Aura\If the user is attuned to Flame: increases HP by 15%.\30\y
 (Flame) HP\30%\Aura\If the user is attuned to Flame: increases HP by 30%.\60\y
 (Flame) HP\45%\Aura\If the user is attuned to Flame: increases HP by 45%.\80\y
-(Flame) Skill Haste \8%%\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by 8%.\80\y
 (Flame) Strength\10%\Aura\If the user is attuned to Flame: increases strength by 10%.\20\y
 (Flame) Strength\15%\Aura\If the user is attuned to Flame: increases strength by 15%.\30\y
 (Flame) Strength\20%\Aura\If the user is attuned to Flame: increases strength by 20%.\40\y
@@ -436,16 +432,10 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) Strength\40%\Aura\If the user is attuned to Flame: increases strength by 40%.\70\y
 (Flame) Strength\45%\Aura\If the user is attuned to Flame: increases strength by 45%.\80\y
 (Flame) Strength\60%\Aura\If the user is attuned to Flame: increases strength by 60%.\100\y
-(Flame) Strength & Wind Res\35/15%\Aura\If the user is attuned to Flame: increases strength by 35% and grants 15% Wind resistance.\70\y
-(Flame) Strength & Wind Res\50/15%\Aura\If the user is attuned to Flame: increases strength by 50% and grants 15% Wind resistance.\100\y
-(Lance) Skill Damage\30%\Aura\if the user wields a Lance: increases attack skill damage by 30%\60\y
-(Lance) Skill Damage\35%\Aura\if the user wields a Lance: increases attack skill damage by 35%\80\y
 (Light) Critical Damage\50%\Aura\If the user is attuned to Light: adds 50% to the modifier applied to critical damage.\40\y
 (Light) Critical Damage\70%\Aura\If the user is attuned to Light: adds 70% to the modifier applied to critical damage.\60\y
 (Light) Critical Rate\5%\Aura\If the user is attuned to Light: Increases critical rate by 5%.\40\y
 (Light) Critical Rate\6%\Aura\If the user is attuned to Light: Increases critical rate by 6%.\40\y
-(Light) Curse Res\25%\Aura\If the user is attuned to Light: Reduces susceptibility to curses by 25%.\40\y
-(Light) Curse Res\40%\Aura\If the user is attuned to Light: Reduces susceptibility to curses by 40%.\50\y
 (Light) HP & Strength\5%\Aura\If the user is attuned to Light: increases strength and HP by 5%.\20\y
 (Light) HP & Strength\8%\Aura\If the user is attuned to Light: increases strength and HP by 8%.\30\y
 (Light) HP & Strength\10%\Aura\If the user is attuned to Light: increases strength and HP by 10%.\50\y
@@ -458,16 +448,12 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Light) HP\40%\Aura\If the user is attuned to Light: increases HP by 40%.\70\y
 (Light) HP\45%\Aura\If the user is attuned to Light: increases HP by 45%.\80\y
 (Light) HP\60%\Aura\If the user is attuned to Light: increases HP by 60%.\100\y
-(Light) Skill Haste\4%\Aura\If the user is attuned to Light: Increases skill gauge fill rate by 4%.\30\y
-(Light) Skill Haste\5%\Aura\If the user is attuned to Light: Increases skill gauge fill rate by 5%.\50\y
 (Light) Strength\10%\Aura\If the user is attuned to Light: increases strength by 10%.\20\y
 (Light) Strength\15%\Aura\If the user is attuned to Light: increases strength by 15%.\30\y
 (Light) Strength\30%\Aura\If the user is attuned to Light: increases strength by 30%.\60\y
 (Light) Strength\40%\Aura\If the user is attuned to Light: increases strength by 40%.\70\y
 (Light) Strength\45%\Aura\If the user is attuned to Light: increases strength by 45%.\80\y
 (Light) Strength\60%\Aura\If the user is attuned to Light: increases strength by 60%.\100\y
-(Shadow) Buff Time\15%\Aura\If the user is attuned to Shadow: increases duration of buff skills by 15%.\20\y
-(Shadow) Buff Time\20%\Aura\If the user is attuned to Shadow: increases duration of buff skills by 20%.\40\y
 (Shadow) HP & Strength\5%\Aura\If the user is attuned to Shadow: increases strength and HP by 5%.\20\y
 (Shadow) HP & Strength\8%\Aura\If the user is attuned to Shadow: increases strength and HP by 8%.\30\y
 (Shadow) HP & Strength\10%\Aura\If the user is attuned to Shadow: increases strength and HP by 10%.\50\y
@@ -476,8 +462,6 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Shadow) HP & Strength\30%\Aura\If the user is attuned to Shadow: increases strength and HP by 30%.\100\y
 (Shadow) HP\10%\Aura\If the user is attuned to Shadow: increases HP by 10%.\20\y
 (Shadow) HP\15%\Aura\If the user is attuned to Shadow: increases HP by 15%.\30\y
-(Shadow) Paralysis Res\25%\Aura\If the user is attuned to Shadow: reduces susceptibility to paralysis by 25%.\80\y
-(Shadow) Paralysis Res\40%\Aura\If the user is attuned to Shadow: reduces susceptibility to paralysis by 40%.\100\y
 (Shadow) Strength\10%\Aura\If the user is attuned to Shadow: increases strength by 10%.\20\y
 (Shadow) Strength\15%\Aura\If the user is attuned to Shadow: increases strength by 15%.\30\y
 (Shadow) Strength\20%\Aura\If the user is attuned to Shadow: increases strength by 20%.\40\y
@@ -500,8 +484,6 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Water) Strength\40%\Aura\If the user is attuned to Water: increases strength by 40%.\70\y
 (Water) Strength\45%\Aura\If the user is attuned to Water: increases strength by 45%.\80\y
 (Water) Strength\60%\Aura\If the user is attuned to Water: increases strength by 60%.\100\y
-(Wind) Broken Punisher\15%\Aura\If the user is attuned to Wind: increases damage to enemies in break state by 15%.\20\y
-(Wind) Broken Punisher\20%\Aura\If the user is attuned to Wind: increases damage to enemies in break state by 20%.\40\y
 (Wind) HP & Strength\5%\Aura\If the user is attuned to Wind: increases strength and HP by 5%.\20\y
 (Wind) HP & Strength\8%\Aura\If the user is attuned to Wind: increases strength and HP by 8%.\30\y
 (Wind) HP & Strength\10%\Aura\If the user is attuned to Wind: increases strength and HP by 10%.\50\y
@@ -525,8 +507,45 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Wind) Strength & Critical Damage\45/55%\Aura\If the user is attuned to Wind: increases strength by 45% and adds 55% to the modifier applied to critical damage.\100\y
 Dragonyule Blessing\I\Aura\If the user is attuned to Water: increases strength by 30% and critical rate by 15%.\70\y
 Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength by 45% and critical rate by 20%.\100\y
+(Axe) Critical Rate\0.1\Ability\If the user wields an Axe: increases critical rate by 10%.\80\y
+(Axe) Critical Rate\12%\Ability\If the user wields an Axe: increases critical rate by 12%.\100\y
+(Flame) Affliction Guard\I\Ability\If the user is attuned to Flame: resists afflictions once per quest\80\y
+(Flame) Affliction Guard\II\Ability\If the user is attuned to Flame: resists afflictions three times per quest\100\y
+(Flame) Dragon Delay Res\-\Ability\If the user is attuned to Flame: completely prevents dragon delaying.\50\y
+(Flame) Dull Res\-\Ability\If the user is attuned to Flame: completely prevents dulling.\50\y
+(Flame) High Midgardsormr's Bane\20%\Ability\If the user is attuned to Flame: increases damage to High Midgardsormr by 20%.\100\y
+(Flame) Physian's Bane\10%\Ability\If the user is attuned to Flame: increases damage to physians by 10%.\20\y
+(Flame) Physian's Bane\15%\Ability\If the user is attuned to Flame: increases damage to physians by 15%.\40\y
+(Flame) Skill Haste \4%\Ability\If the user is attuned to Flame: Increases skill gauge fill rate by 4%.\40\y
+(Flame) Skill Haste \8%\Ability\If the user is attuned to Flame: Increases skill gauge fill rate by 8%.\80\y
+(Flame) Skill Prep\25%\Ability\If the user is attuned to Flame: fills 25% of skill gauges at the start of quests.\40\y
+(Flame) Skill Prep\50%\Ability\If the user is attuned to Flame: fills 50% of skill gauges at the start of quests.\50\y
+(Flame) Strength & Wind Res\35/15%\Ability\If the user is attuned to Flame: increases strength by 35% and grants 15% Wind resistance.\70\y
+(Flame) Strength & Wind Res\50/15%\Ability\If the user is attuned to Flame: increases strength by 50% and grants 15% Wind resistance.\100\y
+(Flame) Thaumian's Bane\10%\Ability\If the user is attuned to Flame: increases damage to thaumians by 10%.\20\y
+(Flame) Thaumian's Bane\15%\Ability\If the user is attuned to Flame: increases damage to thaumians by 15%.\40\y
+(Lance) Skill Damage\30%\Ability\If the user wields a Lance: increases attack skill damage by 30%\60\y
+(Lance) Skill Damage\35%\Ability\If the user wields a Lance: increases attack skill damage by 35%\80\y
+(Light) Curse Res\25%\Ability\If the user is attuned to Light: Reduces susceptibility to curses by 25%.\40\y
+(Light) Curse Res\40%\Ability\If the user is attuned to Light: Reduces susceptibility to curses by 40%.\50\y
+(Light) Skill Haste\4%\Ability\If the user is attuned to Light: Increases skill gauge fill rate by 4%.\30\y
+(Light) Skill Haste\5%\Ability\If the user is attuned to Light: Increases skill gauge fill rate by 5%.\50\y
+(Shadow) Buff Time\15%\Ability\If the user is attuned to Shadow: increases duration of buff skills by 15%.\20\y
+(Shadow) Buff Time\20%\Ability\If the user is attuned to Shadow: increases duration of buff skills by 20%.\40\y
+(Shadow) Paralysis Res\25%\Ability\If the user is attuned to Shadow: reduces susceptibility to paralysis by 25%.\80\y
+(Shadow) Paralysis Res\40%\Ability\If the user is attuned to Shadow: reduces susceptibility to paralysis by 40%.\100\y
+(Water) Dull Res\-\Ability\If the user is attuned to Water: completely prevents dulling.\50\y
 (Water) Flurry Devastation\8%\Ability\If the user is attuned to Water: increases critical rate by 8% when the combo count is 15 or higher.\40\y
 (Water) Flurry Devastation\10%\Ability\If the user is attuned to Water: increases critical rate by 10% when the combo count is 15 or higher.\60\y
+(Water) HP 70 = Strength\5%\Ability\If the user is attuned to Water: increases strength by 5% when HP is 70% or above.\40\y
+(Water) Slayer's Strength\3%\Ability\If the user is attuned to Water: increases strength by 3% for every five enemies defeated (up to five times per quest).\40\y
+(Water) Slayer's Strength\4%\Ability\If the user is attuned to Water: increases strength by 4% for every five enemies defeated (up to five times per quest).\60\y
+(Water) Thaumian's Bane\10%\Ability\If the user is attuned to Water: increases damage to thaumians by 10%\20\y
+(Water) Thaumian's Bane\15%\Ability\If the user is attuned to Water: increases damage to thaumians by 15%\40\y
+(Wind) Broken Punisher\15%\Ability\If the user is attuned to Wind: increases damage to enemies in break state by 15%.\20\y
+(Wind) Broken Punisher\20%\Ability\If the user is attuned to Wind: increases damage to enemies in break state by 20%.\40\y
+Adventurer EXP\100%\Ability\Increases adventurer EXP intake for clearing quests by 100%\0\y
+Adventurer EXP\150%\Ability\Increases adventurer EXP intake for clearing quests by 150%\0\y
 Astral Ornament\25%\Ability\Increases Astral Ornaments intake for clearing quests by 25%.\0\y
 Astral Ornament\50%\Ability\Increases Astral Ornaments intake for clearing quests by 50%.\0\y
 Astral Ornament\75%\Ability\Increases Astral Ornaments intake for clearing quests by 75%.\0\y
@@ -675,6 +694,7 @@ HP 70 = Critical Rate\5%\Ability\Increases critical rate by 5% when HP is 70% or
 HP 70 = Critical Rate\6%\Ability\Increases critical rate by 6% when HP is 70% or above.\60\y
 HP 70 = Critical Rate\8%\Ability\Increases critical rate by 8% when HP is 70% or above.\80\y
 HP 70 = Defense\10%\Ability\Increases defense by 10% when HP is 70% or above.\80\y
+HP 70 = Defense\3%\Ability\Increases defense by 3% when HP is 70% or above.\20\y
 HP 70 = Defense\5%\Ability\Increases defense by 5% when HP is 70% or above.\40\y
 HP 70 = Defense\8%\Ability\Increases defense by 8% when HP is 70% or above.\60\y
 HP 70 = Healing\10%\Ability\Increases the potency of recovery skills by 10% when HP is 70% or above.\60\y
@@ -727,6 +747,8 @@ Paralysis Res\50%\Ability\Reduces susceptibility to paralysis by 50%.\60\y
 Phraeganoth's Bane\15%\Ability\Increases damage to Phraeganoth by 15%.\0\y
 Phraeganoth's Bane\20%\Ability\Increases damage to Phraeganoth by 20%.\0\y
 Phraeganoth's Bane\25%\Ability\Increases damage to Phraeganoth by 25%.\0\y
+Physian's Bane\10%\Ability\Increases damage to physians by 10%.\20\y
+Physian's Bane\15%\Ability\Increases damage to physians by 15%.\40\y
 Physian's Bane\20%\Ability\Increases damage to physians by 20%.\60\y
 Physian's Bane\25%\Ability\Increases damage to physians by 25%.\80\y
 Physian's Bane\30%\Ability\Increases damage to physians by 30%.\100\y
