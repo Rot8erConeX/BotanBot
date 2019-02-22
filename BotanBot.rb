@@ -53,7 +53,7 @@ def all_commands(include_nil=false,permissions=-1)
      'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','dbxp',
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
      'weaponlevel','wxp','wexp','wlevel','victory','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage',
-     'craft','crafting','tools','tool','links','link','resources','resource']
+     'craft','crafting','tools','tool','links','link','resources','resource','next']
   k=['addalias','deletealias','removealias','s2s'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop'] if permissions==2
   k=k.uniq
@@ -149,7 +149,7 @@ def data_load()
     b[i][7]=b[i][7].split(', ').map{|q| q.to_i}
     b[i][11]=b[i][11].split(', ').map{|q| q.to_i}
     b[i][12]=b[i][12].split(';; ').map{|q| q.split(', ')} unless b[i][12].nil?
-    b[i][13]=b[i][13].split(';; ') unless b[i][13].nil?
+    b[i][13]=b[i][13].split(';;;; ').map{|q| q.split(';; ')} unless b[i][13].nil?
   end
   @weapons=b.map{|q| q}
   if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkills.txt')
@@ -1024,6 +1024,7 @@ def disp_weapon_stats(bot,event,args=nil)
   str="#{str}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
   str="#{str}\n**Starter**" if k[2].length>1 && k[2][1,1].downcase=='e'
   str="#{str}\n**Paid**" if k[2].length>1 && k[2][1,1].downcase=='p'
+  str="#{str}\n**Void**" if k[2].length>1 && k[2][1,1].downcase=='v'
   f=30*k[2][0,1].to_i-50
   f+=20 if k[2][0,1].to_i<3
   wpnz=@weapons.map{|q| q}
@@ -1033,28 +1034,40 @@ def disp_weapon_stats(bot,event,args=nil)
   skl=sklz[skl] unless skl.nil?
   abl=nil
   abl2=nil
+  ablx=nil
+  ablx2=nil
   unless k[13].nil? || k[13].length<=0
-    abl=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][0]} if !k[13][0].nil? && k[13][0].length>0
+    abl=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][0][0]} if !k[13][0][0].nil? && k[13][0][0].length>0
     abl=sklz[abl] unless abl.nil?
-    abl2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][1]} if !k[13][1].nil? && k[13][1].length>0
+    abl2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][0][1]} if !k[13][0][1].nil? && k[13][0][1].length>0
     abl2=sklz[abl2] unless abl2.nil?
+    unless k[13][1].nil? || k[13][1].length<=0
+      ablx=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][1][0]} if !k[13][1][0].nil? && k[13][1][0].length>0
+      ablx=sklz[ablx] unless ablx.nil?
+      ablx2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][1][1]} if !k[13][1][1].nil? && k[13][1][1].length>0
+      ablx2=sklz[ablx2] unless ablx2.nil?
+    end
   end
   if s2s && !skl.nil?
     str="#{str}\n\n__**#{'<:NonUnbound:534494090876682264>'*4} Level 1**__"
     str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
     str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
     str="#{str}\n*#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*" unless abl.nil?
+    str="#{str}\n*#{ablx[0]} #{'+' if ablx[1].include?('%')}#{ablx[1]}*" unless ablx.nil?
     if k[2][0,1].to_i>=5 && k[3]!='None'
       str="#{str}\n\n__**#{'<:NonUnbound:534494090876682264>'*4} Level 80**__"
       str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}"
       str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
       str="#{str}\n*#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*" unless abl.nil?
+      str="#{str}\n*#{ablx[0]} #{'+' if ablx[1].include?('%')}#{ablx[1]}*" unless ablx.nil?
     end
     str="#{str}\n\n__**#{'<:Unbind:534494090969088000>'*4} Level #{f}**__"
     str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
     str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][1])} SP\n#{skl[4].gsub(';; ',"\n")}"
     str="#{str}\n*#{abl2[0]} #{'+' if abl2[1].include?('%')}#{abl2[1]}*" unless abl2.nil?
     str="#{str}\n*#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*" if abl2.nil? && !abl.nil?
+    str="#{str}\n*#{ablx2[0]} #{'+' if ablx2[1].include?('%')}#{ablx2[1]}*" unless ablx2.nil?
+    str="#{str}\n*#{ablx[0]} #{'+' if ablx[1].include?('%')}#{ablx[1]}*" if ablx2.nil? && !ablx.nil?
   else
     str="#{str}\n\n**#{'<:NonUnbound:534494090876682264>'*4} Level 1**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
     str="#{str}\n**#{'<:NonUnbound:534494090876682264>'*4} Level 80**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}" if k[2][0,1].to_i>=5 && k[3]!='None'
@@ -1070,15 +1083,29 @@ def disp_weapon_stats(bot,event,args=nil)
       strx=skl[4].gsub(';; ',"\n")
     end
     if !abl2.nil?
-      str="#{str}\n\n**Ability:** *#{abl2[0]} #{'+' if abl2[1].include?('%')}#{abl2[1]}*"
+      str="#{str}\n\n**Abilities:** *#{abl2[0]} #{'+' if abl2[1].include?('%')}#{abl2[1]}*"
     elsif !abl.nil?
-      str="#{str}\n\n**Ability:** *#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*"
+      str="#{str}\n\n**Abilities:** *#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*"
+    elsif !ablx2.nil?
+      str="#{str}\n\n**Abilities:** *#{ablx2[0]} #{'+' if ablx2[1].include?('%')}#{ablx2[1]}*"
+      ablx2=nil
+      ablx=nil
+    elsif !ablx.nil?
+      str="#{str}\n\n**Abilities:** *#{ablx[0]} #{'+' if ablx[1].include?('%')}#{ablx[1]}*"
+      ablx=nil
+    end
+    if !ablx2.nil?
+      str="#{str}, *#{ablx2[0]} #{'+' if ablx2[1].include?('%')}#{ablx2[1]}*"
+    elsif !ablx.nil?
+      str="#{str}, *#{ablx[0]} #{'+' if ablx[1].include?('%')}#{ablx[1]}*"
     end
   end
   str2=''
   if s2s
     m2=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
+    m2=wpnz.find_index{|q| q[1]==k[1] && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300
     m=wpnz.reject{|q| q[1]!=k[1] || q[2]!=k[2] || q[9]!=k[8] || ['','0',0].include?(q[9])}
+    m=wpnz.reject{|q| q[1]!=k[1] || q[2][1,1]!='v' || q[2][0,1].to_i-1!=k[2][0,1].to_i || q[9]!=k[8] || ['','0',0].include?(q[9])} if k[2][1,1]=='v' && k[8].to_i>=200 && k[8].to_i<300
     str2="#{str2}#{"\n" unless m.length==1}\n\n**Promotes from: #{element_emote(wpnz[m2][3],bot)}*#{wpnz[m2][0]}* **\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(k[11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}" unless m2.nil?
     if m.length>0
       for i in 0...m.length
@@ -1131,6 +1158,7 @@ def disp_weapon_lineage(bot,event,args=nil)
   str="#{str}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
   str="#{str}\n**Starter**" if k[2].length>1 && k[2][1,1].downcase=='e'
   str="#{str}\n**Paid**" if k[2].length>1 && k[2][1,1].downcase=='p'
+  str="#{str}\n**Void**" if k[2].length>1 && k[2][1,1].downcase=='v'
   f=30*k[2][0,1].to_i-50
   f+=20 if k[2][0,1].to_i<3
   wpnz=@weapons.map{|q| q}
@@ -1140,6 +1168,20 @@ def disp_weapon_lineage(bot,event,args=nil)
   skl=sklz[skl] unless skl.nil?
   abl=nil
   abl2=nil
+  ablx=nil
+  ablx2=nil
+  unless k[13].nil? || k[13].length<=0
+    abl=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][0][0]} if !k[13][0][0].nil? && k[13][0][0].length>0
+    abl=sklz[abl] unless abl.nil?
+    abl2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][0][1]} if !k[13][0][1].nil? && k[13][0][1].length>0
+    abl2=sklz[abl2] unless abl2.nil?
+    unless k[13][1].nil? || k[13][1].length<=0
+      ablx=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][1][0]} if !k[13][1][0].nil? && k[13][1][0].length>0
+      ablx=sklz[ablx] unless ablx.nil?
+      ablx2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][1][1]} if !k[13][1][1].nil? && k[13][1][1].length>0
+      ablx2=sklz[ablx2] unless ablx2.nil?
+    end
+  end
   unless k[13].nil? || k[13].length<=0
     abl=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][0]} if !k[13][0].nil? && k[13][0].length>0
     abl=sklz[abl] unless abl.nil?
@@ -1174,17 +1216,30 @@ def disp_weapon_lineage(bot,event,args=nil)
       strx=skl[4].gsub(';; ',"\n") if mub
     end
     if !abl2.nil? && mub
-      str="#{str}\n**Ability:** *#{abl2[0]} #{'+' if abl2[1].include?('%')}#{abl2[1]}*"
+      str="#{str}\n**Abilities:** *#{abl2[0]} #{'+' if abl2[1].include?('%')}#{abl2[1]}*"
     elsif !abl.nil?
-      str="#{str}\n**Ability:** *#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*"
+      str="#{str}\n**Abilities:** *#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*"
+    elsif !ablx2.nil? && mub
+      str="#{str}\n**Ability:** *#{ablx2[0]} #{'+' if ablx2[1].include?('%')}#{ablx2[1]}*"
+      ablx2=nil
+      ablx=nil
+    elsif !ablx.nil?
+      str="#{str}\n**Ability:** *#{ablx[0]} #{'+' if ablx[1].include?('%')}#{ablx[1]}*"
+      ablx=nil
+    end
+    if !ablx2.nil? && mub
+      str="#{str}, *#{ablx2[0]} #{'+' if ablx2[1].include?('%')}#{ablx2[1]}*"
+    elsif !ablx.nil?
+      str="#{str}, *#{ablx[0]} #{'+' if ablx[1].include?('%')}#{ablx[1]}*"
     end
   end
   str2=''
   val=1
   val=5 if mub
   ftr=nil
-  str="#{str}\n\n**This weapon**\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(val*k[11][0])}<:Resource_Rupies:532104504372363274>#{"\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{val*q[1].to_i}"}.join(', ')}" unless k[12].nil?}"
+  str="#{str}\n\n**This weapon#{" (x#{val})" unless val==1}**\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(val*k[11][0])}<:Resource_Rupies:532104504372363274>#{"\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{val*q[1].to_i}"}.join(', ')}" unless k[12].nil?}"
   m2=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
+  m2=wpnz.find_index{|q| q[1]==k[1] && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300
   cost=0
   cost+=val*k[11][0]
   mtz=[]
@@ -1194,7 +1249,7 @@ def disp_weapon_lineage(bot,event,args=nil)
     end
   end
   unless m2.nil?
-    str2="#{str2}\n\n**Promotes from: #{element_emote(wpnz[m2][3],bot)}*#{wpnz[m2][0]}* **\n*Assembly cost:* #{longFormattedNumber(val*5*wpnz[m2][11][0])}<:Resource_Rupies:532104504372363274>\n#{"*Required mats:* #{wpnz[m2][12].map{|q| "#{q[0]} x#{val*5*q[1].to_i}"}.join(', ')}" unless wpnz[m2][12].nil?}"
+    str2="#{str2}\n\n**Promotes from: #{element_emote(wpnz[m2][3],bot)}*#{wpnz[m2][0]}* (x#{5*val})**\n*Assembly cost:* #{longFormattedNumber(val*5*wpnz[m2][11][0])}<:Resource_Rupies:532104504372363274>\n#{"*Required mats:* #{wpnz[m2][12].map{|q| "#{q[0]} x#{val*5*q[1].to_i}"}.join(', ')}" unless wpnz[m2][12].nil?}"
     cost+=val*5*wpnz[m2][11][0]
     unless wpnz[m2][12].nil?
       for i in 0...wpnz[m2][12].length
@@ -1202,8 +1257,9 @@ def disp_weapon_lineage(bot,event,args=nil)
       end
     end
     m22=wpnz.find_index{|q| q[1]==wpnz[m2][1] && q[2]==wpnz[m2][2] && q[8]==wpnz[m2][9] && !['','0',0].include?(q[8])}
+    m22=wpnz.find_index{|q| q[1]==wpnz[m2][1] && q[2][0,1].to_i==wpnz[m2][2][0,1].to_i-1 && q[8]==wpnz[m2][9] && !['','0',0].include?(q[8])} if wpnz[m2][2][1,1]=='v' && wpnz[m2][8].to_i>=300
     unless m22.nil?
-      str2="#{str2}\n\n**Which promotes from: #{element_emote(wpnz[m22][3],bot)}*#{wpnz[m22][0]}* **\n*Assembly cost:* #{longFormattedNumber(val*25*wpnz[m22][11][0])}<:Resource_Rupies:532104504372363274>\n*#{"Required mats:* #{wpnz[m22][12].map{|q| "#{q[0]} x#{val*25*q[1].to_i}"}.join(', ')}" unless wpnz[m22][12].nil?}"
+      str2="#{str2}\n\n**Which promotes from: #{element_emote(wpnz[m22][3],bot)}*#{wpnz[m22][0]}* (x#{25*val})**\n*Assembly cost:* #{longFormattedNumber(val*25*wpnz[m22][11][0])}<:Resource_Rupies:532104504372363274>\n*#{"Required mats:* #{wpnz[m22][12].map{|q| "#{q[0]} x#{val*25*q[1].to_i}"}.join(', ')}" unless wpnz[m22][12].nil?}"
       cost+=val*25*wpnz[m22][11][0]
       unless wpnz[m22][12].nil?
         for i in 0...wpnz[m22][12].length
@@ -1211,8 +1267,9 @@ def disp_weapon_lineage(bot,event,args=nil)
         end
       end
       m222=wpnz.find_index{|q| q[1]==wpnz[m22][1] && q[2]==wpnz[m22][2] && q[8]==wpnz[m22][9] && !['','0',0].include?(q[8])}
+      m222=wpnz.find_index{|q| q[1]==wpnz[m22][1] && q[2][0,1].to_i==wpnz[m22][2][0,1].to_i-1 && q[8]==wpnz[m22][9] && !['','0',0].include?(q[8])} if wpnz[m22][2][1,1]=='v' && wpnz[m22][8].to_i>=300
       unless m222.nil?
-        str2="#{str2}\n\n**Which promotes from: #{element_emote(wpnz[m222][3],bot)}*#{wpnz[m222][0]}* **\n*Assembly cost:* #{longFormattedNumber(val*125*wpnz[m222][11][0])}<:Resource_Rupies:532104504372363274>\n#{"*Required mats:* #{wpnz[m222][12].map{|q| "#{q[0]} x#{val*125*q[1].to_i}"}.join(', ')}" unless wpnz[m222][12].nil?}"
+        str2="#{str2}\n\n**Which promotes from: #{element_emote(wpnz[m222][3],bot)}*#{wpnz[m222][0]}* (x#{125*val})**\n*Assembly cost:* #{longFormattedNumber(val*125*wpnz[m222][11][0])}<:Resource_Rupies:532104504372363274>\n#{"*Required mats:* #{wpnz[m222][12].map{|q| "#{q[0]} x#{val*125*q[1].to_i}"}.join(', ')}" unless wpnz[m222][12].nil?}"
         cost+=val*125*wpnz[m222][11][0]
         unless wpnz[m222][12].nil?
           for i in 0...wpnz[m222][12].length
@@ -1427,8 +1484,10 @@ def disp_ability_data(bot,event,args=nil)
         m2=[]
         for i in 0...wep.length
           unless wep[i][13].nil? || wep[i][13].length<=0
-            m2.push("#{wep[i][0]} (A\u2081)") if wep[i][13][0]==checkstr
-            m2.push("#{wep[i][0]} (A\u2082)") if wep[i][13][1]==checkstr
+            m2.push("#{wep[i][0]} (A1\u2081)") if wep[i][13][0][0]==checkstr
+            m2.push("#{wep[i][0]} (A1\u2082)") if wep[i][13][0][1]==checkstr
+            m2.push("#{wep[i][0]} (A2\u2081)") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][0]==checkstr
+            m2.push("#{wep[i][0]} (A2\u2082)") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
           end
         end
         str="#{str}\n*Weapons:* #{m2.join(', ')}" if m2.length>0
@@ -1504,8 +1563,10 @@ def disp_ability_data(bot,event,args=nil)
             m2=[]
             for i in 0...wep.length
               unless wep[i][13].nil? || wep[i][13].length<=0
-                m2.push("#{wep[i][0]} (A\u2081)") if wep[i][13][0]==checkstr
-                m2.push("#{wep[i][0]} (A\u2082)") if wep[i][13][1]==checkstr
+                m2.push("#{wep[i][0]} (A1\u2081)") if wep[i][13][0][0]==checkstr
+                m2.push("#{wep[i][0]} (A1\u2082)") if wep[i][13][0][1]==checkstr
+                m2.push("#{wep[i][0]} (A2\u2081)") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][0]==checkstr
+                m2.push("#{wep[i][0]} (A2\u2082)") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
               end
             end
             str="#{str}\n*Weapons:* #{m2.join(', ')}" if m2.length>0
@@ -1591,8 +1652,10 @@ def disp_ability_data(bot,event,args=nil)
       m2=[]
       for i in 0...wep.length
         unless wep[i][13].nil? || wep[i][13].length<=0
-          m2.push("#{wep[i][0]} (A\u2081)") if wep[i][13][0]==checkstr
-          m2.push("#{wep[i][0]} (A\u2082)") if wep[i][13][1]==checkstr
+          m2.push("#{wep[i][0]} (A1\u2081)") if wep[i][13][0][0]==checkstr
+          m2.push("#{wep[i][0]} (A1\u2082)") if wep[i][13][0][1]==checkstr
+          m2.push("#{wep[i][0]} (A2\u2081)") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][0]==checkstr
+          m2.push("#{wep[i][0]} (A2\u2082)") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
         end
       end
       if m2.length>0
@@ -2425,6 +2488,7 @@ def find_in_weapons(bot,event,args=nil,mode=0)
     fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons'].include?(args[i].downcase)
     fltr.push('Summon') if ['summon','summons','summonable','summonables'].include?(args[i].downcase)
     fltr.push('Paid') if ['payment','paid','paying','whale'].include?(args[i].downcase)
+    fltr.push('Void') if ['void'].include?(args[i].downcase)
     for i2 in 0...lookout.length
       tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
     end
@@ -2510,6 +2574,14 @@ def find_in_weapons(bot,event,args=nil,mode=0)
       m.push('4p')
       m.push('5p')
       emo.push('(p)') if fltr.length<2
+    end
+    if fltr.include?('Void')
+      m.push('1v')
+      m.push('2v')
+      m.push('3v')
+      m.push('4v')
+      m.push('5v')
+      emo.push('(v)') if fltr.length<2
     end
     if fltr.include?('Summon')
       m.push('1')
@@ -3857,6 +3929,14 @@ def roost(event,bot,args=nil,ignoreinputs=false)
     str="#{str}\n*Available Orbs:* #{['All','All','Flame, Blaze, Inferno','Water, Stream, Deluge','Wind, Storm, Maelstorm','Light, Radiance, Refulgence','Shadow, Nightfull, Nether'][t.wday]}" if t.wday>1
     str="#{str}\n*Other Available Mats:* #{["Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye","Ancient Bird's Feather, Bewitching Wing",'Granite, Meteorite',"Fiend's Claw","Ancient Bird's Feather, Bewitching Wing"][t.wday]}" if t.wday>1
   end
+  str="#{str}\n\n__**<:Element_Void:548467446734913536> #{"#{str3}'s " if str3.length>0}Void Strikes:**__"
+  # <:Element_Flame:532106087952810005>Steel Golem
+  # <:Element_Water:532106088221376522>
+  # <:Element_Wind:532106087948746763>Void Zephyr
+  # <:Element_Light:532106088129101834>Wandering Shroom
+  # <:Element_Shadow:532106088154267658>Raging Manticore
+  str="#{str}\n*Open:* #{['<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Raging Manticore','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Raging Manticore','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr'][t.wday]}"
+  str="#{str}\n*Available Mats:* #{["Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core, Great Feather, Zephyr Rune","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Raging Fang, Raging Tail, Fiend's Claw, Fiend's Horn","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core, Great Feather, Zephyr Rune","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Raging Fang, Raging Tail, Fiend's Claw, Fiend's Horn","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Raging Fang, Raging Tail, Fiend's Claw, Fiend's Horn, Great Feather, Zephyr Rune"][t.wday]}"
   str="#{str}\n\n**Shop Mats:** #{['Light Metal, Abyss Stone','Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather",'Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather"][t.wday]}" if t.wday>-1
   str="#{str}\n\n**#{"#{str3}'s " if str3.length>0}Bond Gift:** #{['Golden Chalice','Juicy Meat','Kaleidoscope','Floral Circlet','Compelling Book','Mana Essence','Golden Chalice'][t.wday]}"
   if t.wday>0 && t.wday<6
@@ -3899,6 +3979,10 @@ def next_events(event,bot,args=nil)
     mode=2 if mode<1 && ['mats','mat','material','materials'].include?(args[i])
     mode=3 if mode<1 && ['shop','store'].include?(args[i])
     mode=4 if mode<1 && ['bond','dragon','bonds','dragons'].include?(args[i])
+    mode=5 if mode<1 && ['void','strike','voidstrike','voidstrikes','strikes'].include?(args[i])
+    mode=6 if mode<1 && ['voidmat','strikemat','voidstrikemat','voidmats','strikemats','voidstrikemats','voidmaterial','strikematerial','voidstrikematerial','voidmaterials','strikematerials','voidstrikematerials'].include?(args[i])
+    mode=6 if mode==2 && ['void','strike','voidstrike','voidstrikes','strikes'].include?(args[i]) && !safe_to_spam?(event)
+    mode=6 if mode==5 && ['mats','mat','material','materials'].include?(args[i]) && !safe_to_spam?(event)
   end
   if mode==0 && !safe_to_spam?(event)
     event.respond "Please either specify an event type or use this command in PM.\n\nAvailable event types include:\n- Ruins\n- Mats\n- Shop\n- Bond items"
@@ -3907,9 +3991,7 @@ def next_events(event,bot,args=nil)
   if [1,0].include?(mode)
     ruin=['<:Element_Null:532106087810334741>All','<:Element_Null:532106087810334741>All','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep']
     ruin=ruin.rotate(t.wday)
-    matz=["Flame/Blaze/Inferno Orbs, Water/Stream/Deluge Orbs, Wind/Storm/Maelstorm Orbs, Light/Radiance/Refulgence Orbs, Shadow/Nightfull/Nether Orbs, Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite",
-          "Flame/Blaze/Inferno Orbs, Water/Stream/Deluge Orbs, Wind/Storm/Maelstorm Orbs, Light/Radiance/Refulgence Orbs, Shadow/Nightfull/Nether Orbs, Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite",
-          "Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye","Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing",
+    matz=["","","Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye","Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing",
           "Wind/Storm/Maelstorm Orbs, Granite, Meteorite","Light/Radiance/Refulgence Orbs, Fiend's Claw",
           "Shadow/Nightfull/Nether Orbs, Ancient Bird's Feather, Bewitching Wing"]
     matz=matz.rotate(t.wday)
@@ -3933,9 +4015,71 @@ def next_events(event,bot,args=nil)
     end
     str=extend_message(str,str2,event,2)
   end
+  if [0,5].include?(mode)
+    void=['<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Raging Manticore','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Raging Manticore','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr']
+    void=void.rotate(t.wday)
+    mmzz=[]
+    for i in 0...void.length
+      m=void[i].split(', ')
+      pos=0
+      for i2 in 0...m.length
+        pos=1 if m[i2]=='<:Element_Flame:532106087952810005>Steel Golem'
+        pos=2 if m[i2]=='<:Element_Water:532106088221376522>Water Void'
+        pos=3 if m[i2]=='<:Element_Wind:532106087948746763>Void Zephyr'
+        pos=4 if m[i2]=='<:Element_Light:532106088129101834>Wandering Shroom'
+        pos=5 if m[i2]=='<:Element_Shadow:532106088154267658>Raging Manticore'
+        mmzz.push([m[i2],i,pos])
+        mmzz.push([m[i2],7,pos]) if i==0
+      end
+    end
+    mmzz.sort!{|a,b| (a[2]<=>b[2])==0 ? (a[1]<=>b[1]) : (a[2]<=>b[2])}
+    mmzz.reverse!
+    for i in 0...mmzz.length-1
+      if mmzz[i][0]==mmzz[i+1][0]
+        mmzz[i+1][3]=mmzz[i][1]*1 unless mmzz[i+1][1]>0
+        mmzz[i]=nil
+      end
+    end
+    mmzz.compact!
+    mmzz.reverse!
+    str2="__**<:Element_Void:548467446734913536> Void Strikes**__"
+    strpost=false
+    matz=['',"Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core","","Great Feather, Void Leaf, Void Seed, Zephyr Rune",
+          "Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore",
+          "Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn"]
+    for i in 0...mmzz.length
+      str2="#{str2}#{"\n" if mode==5 && safe_to_spam?(event)}\n*#{mmzz[i][0]}* -"
+      if mmzz[i][1]==0
+        str2="#{str2} **Today**#{' - Next available' unless mmzz[i][3].nil? || mmzz[i][3]<=0}"
+        if mmzz[i][3].nil? || mmzz[i][3]<=0
+        else
+          t_d=t+mmzz[i][2]*24*60*60
+          if mmzz[i][3]==1
+            str2="#{str2} tomorrow (#{disp_date(t_d,1)})"
+          else
+            str2="#{str2} #{mmzz[i][3]} days from now (#{disp_date(t_d,1)})"
+          end
+        end
+      else
+        t_d=t+mmzz[i][1]*24*60*60
+        if mmzz[i][1]==1
+          str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
+        else
+          str2="#{str2} #{mmzz[i][1]} days from now (#{disp_date(t_d,1)})"
+        end
+      end
+      str2="#{str2}\n~~Available mats: #{matz[mmzz[i][2]]}~~" if mode==5 && safe_to_spam?(event)
+      if mmzz[i][2]==1 && mmzz.find_index{|q| q[2]==2}.nil?
+        str2="#{str2}#{"\n" if mode==5 && safe_to_spam?(event)}\n<:Element_Water:532106088221376522>*Water Void* - ~~never~~"
+      end
+    end
+    str=extend_message(str,str2,event,2)
+  end
   f=[0,2]
   if f.include?(mode)
-    matz=["","","Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye","Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing",
+    matz=["Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye, Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing, Wind/Storm/Maelstorm Orbs, Granite, Meteorite, Light/Radiance/Refulgence Orbs, Fiend's Claw, Shadow/Nightfull/Nether Orbs",
+          "Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye, Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing, Wind/Storm/Maelstorm Orbs, Granite, Meteorite, Light/Radiance/Refulgence Orbs, Fiend's Claw, Shadow/Nightfull/Nether Orbs",
+          "Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye","Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing",
           "Wind/Storm/Maelstorm Orbs, Granite, Meteorite","Light/Radiance/Refulgence Orbs, Fiend's Claw",
           "Shadow/Nightfull/Nether Orbs, Ancient Bird's Feather, Bewitching Wing"]
     matz=matz.rotate(t.wday)
@@ -3958,6 +4102,60 @@ def next_events(event,bot,args=nil)
     mmzz.compact!
     mmzz.reverse!
     str2="__**Materials** found in the Elemental Ruins__"
+    strpost=false
+    for i in 0...mmzz.length
+      str2="#{str2}\n*#{mmzz[i][0]}* -"
+      if mmzz[i][1]==0
+        str2="#{str2} **Today**#{' - Next available' unless mmzz[i][2].nil? || mmzz[i][2]<=0}"
+        if mmzz[i][2].nil? || mmzz[i][2]<=0
+        else
+          t_d=t+mmzz[i][2]*24*60*60
+          if mmzz[i][2]==1
+            str2="#{str2} tomorrow (#{disp_date(t_d,1)})"
+          else
+            str2="#{str2} #{mmzz[i][2]} days from now (#{disp_date(t_d,1)})"
+          end
+        end
+      else
+        t_d=t+mmzz[i][1]*24*60*60
+        if mmzz[i][1]==1
+          str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
+        else
+          str2="#{str2} #{mmzz[i][1]} days from now (#{disp_date(t_d,1)})"
+        end
+      end
+    end
+    str=extend_message(str,str2,event,2)
+  end
+  f.push(6)
+  if f.include?(mode)
+    matz=["Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core, Great Feather, Zephyr Rune",
+          "Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core",
+          "Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Raging Fang, Raging Tail, Fiend's Claw, Fiend's Horn",
+          "Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core, Great Feather, Zephyr Rune",
+          "Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Raging Fang, Raging Tail, Fiend's Claw, Fiend's Horn",
+          "Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core",
+          "Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Raging Fang, Raging Tail, Fiend's Claw, Fiend's Horn, Great Feather, Zephyr Rune"]
+    matz=matz.rotate(t.wday)
+    mmzz=[]
+    for i in 0...matz.length
+      m=matz[i].split(', ')
+      for i2 in 0...m.length
+        mmzz.push([m[i2],i])
+        mmzz.push([m[i2],7]) if i==0
+      end
+    end
+    mmzz.sort!{|a,b| (a[0]<=>b[0])==0 ? (a[1]<=>b[1]) : (a[0]<=>b[0])}
+    mmzz.reverse!
+    for i in 0...mmzz.length-1
+      if mmzz[i][0]==mmzz[i+1][0]
+        mmzz[i+1][2]=mmzz[i][1]*1 unless mmzz[i+1][1]>0
+        mmzz[i]=nil
+      end
+    end
+    mmzz.compact!
+    mmzz.reverse!
+    str2="__**Materials** found in the Void Strikes__"
     strpost=false
     for i in 0...mmzz.length
       str2="#{str2}\n*#{mmzz[i][0]}* -"
@@ -5009,12 +5207,15 @@ bot.command([:tools,:links,:tool,:link,:resources,:resources]) do |event|
     event << 'Google Play: <https://play.google.com/store/apps/details?id=com.aniplex.fategrandorder.en&hl=en_US>'
     event << 'Apple App Store: <https://itunes.apple.com/us/app/fate-grand-order-english/id1183802626?mt=8>'
     event << ''
+    event << '__News__'
+    event << 'In-game news: <https://dragalialost.com/en/news/>'
+    event << ''
     event << 'Stats Calculator: <https://docs.google.com/spreadsheets/d/1uyx9MRDeE4SnupOtQm2wm2rB2i2aXtMSHdGC908vpGg/edit#gid=1600382551>'
     event << 'Weapon Material Calculator: <https://yujinred.github.io/Dragalia-Weapon-Material-Calculator/>'
   else
     xpic='https://lh3.googleusercontent.com/SIHM5RPpoLy3Xso8wxqzCzBggkNq6dYhLt8THToag6FW_peH43_k1YdKh23Xmu5i_6c=s180-rw'
-    create_embed(event,'**Useful tools for players of** ***Dragalia Lost***',"__Download the game__\n[Google Play](https://play.google.com/store/apps/details?id=com.nintendo.zaga&hl=en_US)\n[Apple App Store](https://itunes.apple.com/us/app/dragalia-lost/id1352230941?mt=8)\n\n__Calculators__\n[Stats Calculator](https://docs.google.com/spreadsheets/d/1uyx9MRDeE4SnupOtQm2wm2rB2i2aXtMSHdGC908vpGg/edit#gid=1600382551)\n[Weapon Material Calculator](https://yujinred.github.io/Dragalia-Weapon-Material-Calculator/)",0xED619A,nil,xpic)
-    event.respond 'If you are on a mobile device and cannot click the links in the embed above, type `FGO!tools mobile` to receive this message as plaintext.'
+    create_embed(event,'**Useful tools for players of** ***Dragalia Lost***',"__Download the game__\n[Google Play](https://play.google.com/store/apps/details?id=com.nintendo.zaga&hl=en_US)\n[Apple App Store](https://itunes.apple.com/us/app/dragalia-lost/id1352230941?mt=8)\n\n__News__\n[In-game news](https://dragalialost.com/en/news/)\n\n__Calculators__\n[Stats Calculator](https://docs.google.com/spreadsheets/d/1uyx9MRDeE4SnupOtQm2wm2rB2i2aXtMSHdGC908vpGg/edit#gid=1600382551)\n[Weapon Material Calculator](https://yujinred.github.io/Dragalia-Weapon-Material-Calculator/)",0xED619A,nil,xpic)
+    event.respond 'If you are on a mobile device and cannot click the links in the embed above, type `DL!tools mobile` to receive this message as plaintext.'
   end
   event << ''
 end
