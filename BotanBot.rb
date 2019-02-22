@@ -1103,7 +1103,7 @@ def disp_weapon_stats(bot,event,args=nil)
   str2=''
   if s2s
     m2=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
-    m2=wpnz.find_index{|q| q[1]==k[1] && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300
+    m2=wpnz.find_index{|q| q[1]==k[1] && q[2][1,1]=='v' && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300 && k[8].to_i<400
     m=wpnz.reject{|q| q[1]!=k[1] || q[2]!=k[2] || q[9]!=k[8] || ['','0',0].include?(q[9])}
     m=wpnz.reject{|q| q[1]!=k[1] || q[2][1,1]!='v' || q[2][0,1].to_i-1!=k[2][0,1].to_i || q[9]!=k[8] || ['','0',0].include?(q[9])} if k[2][1,1]=='v' && k[8].to_i>=200 && k[8].to_i<300
     str2="#{str2}#{"\n" unless m.length==1}\n\n**Promotes from: #{element_emote(wpnz[m2][3],bot)}*#{wpnz[m2][0]}* **\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(k[11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}" unless m2.nil?
@@ -1114,8 +1114,10 @@ def disp_weapon_stats(bot,event,args=nil)
     end
   else
     m=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
-    str2="#{str2}\n**Promotes from:** #{wpnz[m][0]}" unless m.nil?
+    m=wpnz.find_index{|q| q[1]==k[1] && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300 && k[8].to_i<400
+    str2="#{str2}\n**Promotes from:** #{element_emote(wpnz[m][3],bot)}#{wpnz[m][0]}" unless m.nil?
     m=wpnz.reject{|q| q[1]!=k[1] || q[2]!=k[2] || q[9]!=k[8] || ['','0',0].include?(q[9])}
+    m=wpnz.reject{|q| q[1]!=k[1] || q[2][1,1]!='v' || q[2][0,1].to_i-1!=k[2][0,1].to_i || q[9]!=k[8] || ['','0',0].include?(q[9])} if k[2][1,1]=='v' && k[8].to_i>=200 && k[8].to_i<300
     str2="#{str2}\n**Promotes into:** #{m.map{|q| "#{element_emote(q[3],bot)}#{q[0]}"}.join(', ')}" unless m.length<=0
   end
   str="#{str}#{"\n" unless s2s}#{str2}" if str2.length>0
@@ -1239,7 +1241,7 @@ def disp_weapon_lineage(bot,event,args=nil)
   ftr=nil
   str="#{str}\n\n**This weapon#{" (x#{val})" unless val==1}**\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(val*k[11][0])}<:Resource_Rupies:532104504372363274>#{"\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{val*q[1].to_i}"}.join(', ')}" unless k[12].nil?}"
   m2=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
-  m2=wpnz.find_index{|q| q[1]==k[1] && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300
+  m2=wpnz.find_index{|q| q[1]==k[1] && q[2][1,1]=='v' && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300
   cost=0
   cost+=val*k[11][0]
   mtz=[]
@@ -1257,7 +1259,7 @@ def disp_weapon_lineage(bot,event,args=nil)
       end
     end
     m22=wpnz.find_index{|q| q[1]==wpnz[m2][1] && q[2]==wpnz[m2][2] && q[8]==wpnz[m2][9] && !['','0',0].include?(q[8])}
-    m22=wpnz.find_index{|q| q[1]==wpnz[m2][1] && q[2][0,1].to_i==wpnz[m2][2][0,1].to_i-1 && q[8]==wpnz[m2][9] && !['','0',0].include?(q[8])} if wpnz[m2][2][1,1]=='v' && wpnz[m2][8].to_i>=300
+    m22=wpnz.find_index{|q| q[1]==wpnz[m2][1] && q[2][1,1]=='v' && q[2][0,1].to_i==wpnz[m2][2][0,1].to_i-1 && q[8]==wpnz[m2][9] && !['','0',0].include?(q[8])} if wpnz[m2][2][1,1]=='v' && wpnz[m2][8].to_i>=300
     unless m22.nil?
       str2="#{str2}\n\n**Which promotes from: #{element_emote(wpnz[m22][3],bot)}*#{wpnz[m22][0]}* (x#{25*val})**\n*Assembly cost:* #{longFormattedNumber(val*25*wpnz[m22][11][0])}<:Resource_Rupies:532104504372363274>\n*#{"Required mats:* #{wpnz[m22][12].map{|q| "#{q[0]} x#{val*25*q[1].to_i}"}.join(', ')}" unless wpnz[m22][12].nil?}"
       cost+=val*25*wpnz[m22][11][0]
@@ -1267,7 +1269,7 @@ def disp_weapon_lineage(bot,event,args=nil)
         end
       end
       m222=wpnz.find_index{|q| q[1]==wpnz[m22][1] && q[2]==wpnz[m22][2] && q[8]==wpnz[m22][9] && !['','0',0].include?(q[8])}
-      m222=wpnz.find_index{|q| q[1]==wpnz[m22][1] && q[2][0,1].to_i==wpnz[m22][2][0,1].to_i-1 && q[8]==wpnz[m22][9] && !['','0',0].include?(q[8])} if wpnz[m22][2][1,1]=='v' && wpnz[m22][8].to_i>=300
+      m222=wpnz.find_index{|q| q[1]==wpnz[m22][1] && q[2][1,1]=='v' && q[2][0,1].to_i==wpnz[m22][2][0,1].to_i-1 && q[8]==wpnz[m22][9] && !['','0',0].include?(q[8])} if wpnz[m22][2][1,1]=='v' && wpnz[m22][8].to_i>=300
       unless m222.nil?
         str2="#{str2}\n\n**Which promotes from: #{element_emote(wpnz[m222][3],bot)}*#{wpnz[m222][0]}* (x#{125*val})**\n*Assembly cost:* #{longFormattedNumber(val*125*wpnz[m222][11][0])}<:Resource_Rupies:532104504372363274>\n#{"*Required mats:* #{wpnz[m222][12].map{|q| "#{q[0]} x#{val*125*q[1].to_i}"}.join(', ')}" unless wpnz[m222][12].nil?}"
         cost+=val*125*wpnz[m222][11][0]
@@ -3192,7 +3194,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
     elsif find_data_ex(:find_ability,args.join(''),event).length>0
     elsif find_data_ex(:find_facility,args.join(''),event).length>0
     elsif find_data_ex(:find_mat,args.join(''),event).length>0
-    elsif has_any?(args,['adventurer','adventurers','adv','advs','unit','units','dragon','dragons','wyrmprint','wyrm','print','weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap','skill','skil','skills','skils','ability','abilitys','abilities','abil','abils','able','ables','facility','facilitys','facilities','faculty','facultys','faculties','mat','mats','material','materials','item','items'])
+    elsif has_any?(args,['adventurer','adventurers','adv','advs','unit','units','dragon','dragons','wyrmprint','wyrm','print','wyrmprints','wyrms','prints','weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap','skill','skil','skills','skils','ability','abilitys','abilities','abil','abils','able','ables','facility','facilitys','facilities','faculty','facultys','faculties','mat','mats','material','materials','item','items'])
     else
       event.respond "The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Abilities\n- Auras\n- CoAbilities\n- Facilities\n- Materials\n\n#{args.join(' ')} does not fall into any of these categories."
       return nil
@@ -3258,7 +3260,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
         end
       end
-    elsif has_any?(args,['wyrmprint','wyrm','print'])
+    elsif has_any?(args,['wyrmprint','wyrm','print','wyrmprints','wyrms','prints'])
       f.push('__**Wyrmprint Aliases**__')
       n=@aliases.reject{|q| q[0]!='Wyrmprint'}.map{|q| [q[1],q[2],q[3]]}
       n=n.reject{|q| q[2].nil?} if mode==1
