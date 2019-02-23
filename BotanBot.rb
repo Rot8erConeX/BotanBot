@@ -1037,14 +1037,14 @@ def disp_weapon_stats(bot,event,args=nil)
   ablx=nil
   ablx2=nil
   unless k[13].nil? || k[13].length<=0
-    abl=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][0][0]} if !k[13][0][0].nil? && k[13][0][0].length>0
+    abl=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==k[13][0][0]} if !k[13][0][0].nil? && k[13][0][0].length>0
     abl=sklz[abl] unless abl.nil?
-    abl2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][0][1]} if !k[13][0][1].nil? && k[13][0][1].length>0
+    abl2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==k[13][0][1]} if !k[13][0][1].nil? && k[13][0][1].length>0
     abl2=sklz[abl2] unless abl2.nil?
     unless k[13][1].nil? || k[13][1].length<=0
-      ablx=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][1][0]} if !k[13][1][0].nil? && k[13][1][0].length>0
+      ablx=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==k[13][1][0]} if !k[13][1][0].nil? && k[13][1][0].length>0
       ablx=sklz[ablx] unless ablx.nil?
-      ablx2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][1][1]} if !k[13][1][1].nil? && k[13][1][1].length>0
+      ablx2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==k[13][1][1]} if !k[13][1][1].nil? && k[13][1][1].length>0
       ablx2=sklz[ablx2] unless ablx2.nil?
     end
   end
@@ -1052,22 +1052,22 @@ def disp_weapon_stats(bot,event,args=nil)
     str="#{str}\n\n__**#{'<:NonUnbound:534494090876682264>'*4} Level 1**__"
     str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
     str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
-    str="#{str}\n*#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*" unless abl.nil?
-    str="#{str}\n*#{ablx[0]} #{'+' if ablx[1].include?('%')}#{ablx[1]}*" unless ablx.nil?
+    str="#{str}\n*#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}*" unless abl.nil?
+    str="#{str}\n*#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*" unless ablx.nil?
     if k[2][0,1].to_i>=5 && k[3]!='None'
       str="#{str}\n\n__**#{'<:NonUnbound:534494090876682264>'*4} Level 80**__"
       str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}"
       str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
-      str="#{str}\n*#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*" unless abl.nil?
-      str="#{str}\n*#{ablx[0]} #{'+' if ablx[1].include?('%')}#{ablx[1]}*" unless ablx.nil?
+      str="#{str}\n*#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}*" unless abl.nil?
+      str="#{str}\n*#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*" unless ablx.nil?
     end
     str="#{str}\n\n__**#{'<:Unbind:534494090969088000>'*4} Level #{f}**__"
     str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
     str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][1])} SP\n#{skl[4].gsub(';; ',"\n")}"
-    str="#{str}\n*#{abl2[0]} #{'+' if abl2[1].include?('%')}#{abl2[1]}*" unless abl2.nil?
-    str="#{str}\n*#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*" if abl2.nil? && !abl.nil?
-    str="#{str}\n*#{ablx2[0]} #{'+' if ablx2[1].include?('%')}#{ablx2[1]}*" unless ablx2.nil?
-    str="#{str}\n*#{ablx[0]} #{'+' if ablx[1].include?('%')}#{ablx[1]}*" if ablx2.nil? && !ablx.nil?
+    str="#{str}\n*#{abl2[0]}#{" #{'+' if abl2[1].include?('%')}#{abl2[1]}" unless abl2[1]=='-'}*" unless abl2.nil?
+    str="#{str}\n*#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}*" if abl2.nil? && !abl.nil?
+    str="#{str}\n*#{ablx2[0]}#{" #{'+' if ablx2[1].include?('%')}#{ablx2[1]}" unless ablx2[1]=='-'}*" unless ablx2.nil?
+    str="#{str}\n*#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*" if ablx2.nil? && !ablx.nil?
   else
     str="#{str}\n\n**#{'<:NonUnbound:534494090876682264>'*4} Level 1**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
     str="#{str}\n**#{'<:NonUnbound:534494090876682264>'*4} Level 80**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}" if k[2][0,1].to_i>=5 && k[3]!='None'
@@ -1083,21 +1083,21 @@ def disp_weapon_stats(bot,event,args=nil)
       strx=skl[4].gsub(';; ',"\n")
     end
     if !abl2.nil?
-      str="#{str}\n\n**Abilities:** *#{abl2[0]} #{'+' if abl2[1].include?('%')}#{abl2[1]}*"
+      str="#{str}\n\n**Abilities:** *#{abl2[0]}#{" #{'+' if abl2[1].include?('%')}#{abl2[1]}" unless abl2[1]=='-'}*"
     elsif !abl.nil?
-      str="#{str}\n\n**Abilities:** *#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*"
+      str="#{str}\n\n**Abilities:** *#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}*"
     elsif !ablx2.nil?
-      str="#{str}\n\n**Abilities:** *#{ablx2[0]} #{'+' if ablx2[1].include?('%')}#{ablx2[1]}*"
+      str="#{str}\n\n**Abilities:** *#{ablx2[0]}#{" #{'+' if ablx2[1].include?('%')}#{ablx2[1]}" unless ablx2[1]=='-'}*"
       ablx2=nil
       ablx=nil
     elsif !ablx.nil?
-      str="#{str}\n\n**Abilities:** *#{ablx[0]} #{'+' if ablx[1].include?('%')}#{ablx[1]}*"
+      str="#{str}\n\n**Abilities:** *#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*"
       ablx=nil
     end
     if !ablx2.nil?
-      str="#{str}, *#{ablx2[0]} #{'+' if ablx2[1].include?('%')}#{ablx2[1]}*"
+      str="#{str}, *#{ablx2[0]}#{" #{'+' if ablx2[1].include?('%')}#{ablx2[1]}" unless ablx2[1]=='-'}*"
     elsif !ablx.nil?
-      str="#{str}, *#{ablx[0]} #{'+' if ablx[1].include?('%')}#{ablx[1]}*"
+      str="#{str}, *#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*"
     end
   end
   str2=''
@@ -1122,6 +1122,7 @@ def disp_weapon_stats(bot,event,args=nil)
   end
   str="#{str}#{"\n" unless s2s}#{str2}" if str2.length>0
   str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[7][0])}<:Resource_Rupies:532104504372363274>#{" #{longFormattedNumber(k[7][1])}<:Resource_Eldwater:532104503777034270>" if k[7][1]>0}"
+  str="#{str}\n**Assembles for:** #{longFormattedNumber(k[11][0])}<:Resource_Rupies:532104504372363274>"
   str="#{str}\n**Disassembles for:** #{longFormattedNumber(k[11][1])}<:Resource_Rupies:532104504372363274>"
   unless s2s
     if str.gsub(';;;;;',"\n#{strx}").length>=1900
@@ -1173,22 +1174,16 @@ def disp_weapon_lineage(bot,event,args=nil)
   ablx=nil
   ablx2=nil
   unless k[13].nil? || k[13].length<=0
-    abl=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][0][0]} if !k[13][0][0].nil? && k[13][0][0].length>0
+    abl=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==k[13][0][0]} if !k[13][0][0].nil? && k[13][0][0].length>0
     abl=sklz[abl] unless abl.nil?
-    abl2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][0][1]} if !k[13][0][1].nil? && k[13][0][1].length>0
+    abl2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==k[13][0][1]} if !k[13][0][1].nil? && k[13][0][1].length>0
     abl2=sklz[abl2] unless abl2.nil?
     unless k[13][1].nil? || k[13][1].length<=0
-      ablx=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][1][0]} if !k[13][1][0].nil? && k[13][1][0].length>0
+      ablx=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==k[13][1][0]} if !k[13][1][0].nil? && k[13][1][0].length>0
       ablx=sklz[ablx] unless ablx.nil?
-      ablx2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][1][1]} if !k[13][1][1].nil? && k[13][1][1].length>0
+      ablx2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==k[13][1][1]} if !k[13][1][1].nil? && k[13][1][1].length>0
       ablx2=sklz[ablx2] unless ablx2.nil?
     end
-  end
-  unless k[13].nil? || k[13].length<=0
-    abl=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][0]} if !k[13][0].nil? && k[13][0].length>0
-    abl=sklz[abl] unless abl.nil?
-    abl2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==k[13][1]} if !k[13][1].nil? && k[13][1].length>0
-    abl2=sklz[abl2] unless abl2.nil?
   end
   if mub
     str="#{str}\n**#{'<:Unbind:534494090969088000>'*4} Level #{f}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
@@ -1199,11 +1194,8 @@ def disp_weapon_lineage(bot,event,args=nil)
   if s2s && !skl.nil?
     if mub
       str="#{str}\n**Skill:** *#{skl[0]}* - #{longFormattedNumber(skl[6][1])} SP\n#{skl[4].gsub(';; ',"\n")}"
-      str="#{str}\n**Ability:** *#{abl2[0]} #{'+' if abl2[1].include?('%')}#{abl2[1]}*" unless abl2.nil?
-      str="#{str}\n**Ability:** *#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*" if abl2.nil? && !abl.nil?
     else
       str="#{str}\n**Skill:** *#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
-      str="#{str}\n**Ability:** *#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*" unless abl.nil?
     end
   else
     strx=''
@@ -1217,23 +1209,23 @@ def disp_weapon_lineage(bot,event,args=nil)
       strx=skl[3].gsub(';; ',"\n")
       strx=skl[4].gsub(';; ',"\n") if mub
     end
-    if !abl2.nil? && mub
-      str="#{str}\n**Abilities:** *#{abl2[0]} #{'+' if abl2[1].include?('%')}#{abl2[1]}*"
-    elsif !abl.nil?
-      str="#{str}\n**Abilities:** *#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}*"
-    elsif !ablx2.nil? && mub
-      str="#{str}\n**Ability:** *#{ablx2[0]} #{'+' if ablx2[1].include?('%')}#{ablx2[1]}*"
-      ablx2=nil
-      ablx=nil
-    elsif !ablx.nil?
-      str="#{str}\n**Ability:** *#{ablx[0]} #{'+' if ablx[1].include?('%')}#{ablx[1]}*"
-      ablx=nil
-    end
-    if !ablx2.nil? && mub
-      str="#{str}, *#{ablx2[0]} #{'+' if ablx2[1].include?('%')}#{ablx2[1]}*"
-    elsif !ablx.nil?
-      str="#{str}, *#{ablx[0]} #{'+' if ablx[1].include?('%')}#{ablx[1]}*"
-    end
+  end
+  if !abl2.nil?
+    str="#{str}\n**Abilities:** *#{abl2[0]}#{" #{'+' if abl2[1].include?('%')}#{abl2[1]}" unless abl2[1]=='-'}*"
+  elsif !abl.nil?
+    str="#{str}\n**Abilities:** *#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}*"
+  elsif !ablx2.nil?
+    str="#{str}\n**Abilities:** *#{ablx2[0]}#{" #{'+' if ablx2[1].include?('%')}#{ablx2[1]}" unless ablx2[1]=='-'}*"
+    ablx2=nil
+    ablx=nil
+  elsif !ablx.nil?
+    str="#{str}\n**Abilities:** *#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*"
+    ablx=nil
+  end
+  if !ablx2.nil?
+    str="#{str}, *#{ablx2[0]}#{" #{'+' if ablx2[1].include?('%')}#{ablx2[1]}" unless ablx2[1]=='-'}*"
+  elsif !ablx.nil?
+    str="#{str}, *#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*"
   end
   str2=''
   val=1
@@ -1594,6 +1586,7 @@ def disp_ability_data(bot,event,args=nil)
   else
     hdr="__**#{k[0]} #{'+' if k[1].include?('%')}#{k[1]}**__ [#{k[2]}]"
     hdr="__**#{k[1]} #{k[0]}**__ [#{k[2]}]" if k[0][0,5]=='Hits '
+    hdr="__**#{k[0]}**__ [#{k[2]}]" if k[1]=='-'
     xcolor=0x555058
     xcolor=0x87817C if k[2]=='Aura'
     xcolor=0x242035 if k[2]=='CoAbility'
@@ -1854,6 +1847,21 @@ def disp_facility_data(bot,event,args=nil)
         str="#{str}\n*Level 23 \u2192 25 (per level):* #{m[0]} Orb x70, #{m[1]} Orb x8, #{m[2]} Orb x1"
         str="#{str}\n*Level 25 \u2192 28 (per level):* #{m[0]} Orb x100, #{m[1]} Orb x10, #{m[2]} Orb x2"
         str="#{str}\n*Level 28 \u2192 30 (per level):* #{m[0]} Orb x150, #{m[1]} Orb x12, #{m[2]} Orb x3"
+      elsif k[2][1]=='Void Alter'
+        str="*Level 1 \u2192 2:* Bat's Wing x10"
+        str="#{str}\n*Level 2 \u2192 3:* Bat's Wing x15, Solid Fungus x2"
+        str="#{str}\n*Level 3 \u2192 4:* Bat's Wing x20"
+        str="#{str}\n*Level 4 \u2192 5:* Bat's Wing x25, Solid Fungus x5"
+        str="#{str}\n*Level 5 \u2192 6:* Bat's Wing x30, Ancient Bird's Feather x5"
+        str="#{str}\n*Level 6 \u2192 7:* Bat's Wing x35, Ancient Bird's Feather x10, Steel Slab x2"
+        str="#{str}\n*Level 7 \u2192 8:* Bat's Wing x40, Ancient Bird's Feather x15"
+        str="#{str}\n*Level 8 \u2192 9:* Bat's Wing x45, Ancient Bird's Feather x20, Steel Slab x5"
+        str="#{str}\n*Level 9 \u2192 10:* Bat's Wing x50, Ancient Bird's Feather x25"
+        str="#{str}\n*Level 10 \u2192 11:* Bat's Wing x55, Ancient Bird's Feather x30, Bewitching Wings x5, Great Feather x2"
+        str="#{str}\n*Level 11 \u2192 12:* Bat's Wing x60, Ancient Bird's Feather x35, Bewitching Wings x10"
+        str="#{str}\n*Level 12 \u2192 13:* Bat's Wing x65, Ancient Bird's Feather x40, Bewitching Wings x15, Great Feather x5"
+        str="#{str}\n*Level 13 \u2192 14:* Bat's Wing x70, Ancient Bird's Feather x45, Bewitching Wings x20"
+        str="#{str}\n*Level 14 \u2192 15:* Bat's Wing x75, Ancient Bird's Feather x50, Bewitching Wings x30, Great Feather x8"
       elsif k[2][1]=='Event Altar' && !k[5].nil? && k[5].length>0
         m=[3,5,7,10,12,15,18,21,25,30,50,70,90,120,150,180,210,250,300,350,400,450,500,550,600,700,800,900,1000]
         for i in 0...m.length
@@ -5886,7 +5894,15 @@ bot.command(:boop) do |event|
   return nil unless event.channel.id==532083509083373583 # only work when used by the developer
   event.channel.send_temporary_message('Please wait...',10)
   data_load()
-  m=@askilities.reject{|q| q[2]!='Skill' || q[10].nil? || q[10].length<=0}.map{|q| q[10]}.join(', ').split(', ').uniq.sort
+  lookout=[]
+  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt')
+    lookout=[]
+    File.open('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt').each_line do |line|
+      lookout.push(eval line)
+    end
+  end
+  lookout=lookout.reject{|q| q[2]!='Mat'}.map{|q| q[0]}
+  m=@mats.map{|q| q[8]}.join(', ').split(', ').reject{|q| lookout.include?(q)}.uniq.sort
   str=''
   for i in 0...m.length
     str=extend_message(str,m[i],event)
