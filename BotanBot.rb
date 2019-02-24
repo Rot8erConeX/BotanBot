@@ -1359,6 +1359,14 @@ def disp_skill_data(bot,event,args=nil)
     m.push("#{x[i][0]} - S3") if x[i][6]==k[0]
   end
   flds.push(['Weapons',m.join("\n")]) if m.length>0
+  if args.include?('tags')
+    if flds.length<=0
+      flds=triple_finish(k[10])
+      str="#{str}\n\n__**Tags**__"
+    else
+      flds.push(['Tags',k[10].join("\n")])
+    end
+  end
   flds=nil if flds.length<=0
   m=0
   m=flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length unless flds.nil?
