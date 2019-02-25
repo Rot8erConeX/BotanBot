@@ -1434,8 +1434,26 @@ def disp_ability_data(bot,event,args=nil)
   drg=@dragons.map{|q| q}
   wrm=@wyrmprints.map{|q| q}
   wep=@weapons.map{|q| q}
+  unless evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
+    for i in 0...adv.length
+      m=[adv[i][8][0][1].split(' '),adv[i][8][1][1].split(' '),adv[i][8][2][-1].split(' ')]
+      adv[i][8][3]=['x','x']
+      if adv[i][8][2].length>1
+      elsif m[0][-1].include?('%') && m[2][-1].include?('%') && m[0][0,m[0].length-1].join(' ')==m[2][0,m[2].length-1].join(' ')
+        adv[i][8][0][1]='x'
+        adv[i][8][2][-1]='x'
+        adv[i][8][3]=["#{m[0][0,m[0].length-1].join(' ')} +#{m[0][-1].gsub('+','').gsub('%','').to_i+m[2][-1].gsub('+','').gsub('%','').to_i}%",'x']
+      elsif m[1][-1].include?('%') && m[2][-1].include?('%') && m[1][0,m[1].length-1].join(' ')==m[2][0,m[2].length-1].join(' ')
+        adv[i][8][1][1]='x'
+        adv[i][8][2][-1]='x'
+        adv[i][8][3]=['x',"#{m[1][0,m[1].length-1].join(' ')} +#{m[1][-1].gsub('+','').gsub('%','').to_i+m[2][-1].gsub('+','').gsub('%','').to_i}%"]
+      end
+    end
+  end
   ftr=nil
   flds=nil
+  dispslots=false
+  dispslots=true if evn.include?('slots') || evn.include?('slot')
   if k[0].is_a?(Array)
     hdr="__**#{k[0][0]}**__ [#{k[0][2].gsub('Co','')} family]"
     xpic=k[0][0]
@@ -1456,40 +1474,64 @@ def disp_ability_data(bot,event,args=nil)
         checkstr="#{k[0][0]} #{'+' if k[0][1].include?('%')}#{k[0][1]}"
         checkstr="#{k[0][0]}" if k[0][1]=='-'
         for i in 0...adv.length
-          m2.push("#{adv[i][0]} (A1\u2081)") if adv[i][8][0][0]==checkstr
-          m2.push("#{adv[i][0]} (A1\u2082)") if adv[i][8][0][1]==checkstr
-          m2.push("#{adv[i][0]} (A2\u2081)") if adv[i][8][1][0]==checkstr
-          m2.push("#{adv[i][0]} (A2\u2082)") if adv[i][8][1][1]==checkstr
-          m2.push("#{adv[i][0]} (A3)") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
-          m2.push("#{adv[i][0]} (A3\u2081)") if adv[i][8][2][0]==checkstr && adv[i][8][2].length>1
-          m2.push("#{adv[i][0]} (A3\u2082)") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+          if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
+            m2.push("#{adv[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][0][0]==checkstr
+            m2.push("#{adv[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][0][1]==checkstr
+            m2.push("#{adv[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][1][0]==checkstr
+            m2.push("#{adv[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][1][1]==checkstr
+            m2.push("#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
+            m2.push("#{adv[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length>1
+            m2.push("#{adv[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+          else
+            m2.push("#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0][1]==checkstr
+            m2.push("#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1][1]==checkstr
+            m2.push("#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
+            m2.push("#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+            m2.push("#{adv[i][0]}#{" (A1+3)" if dispslots}") if adv[i][8][3][0]==checkstr
+            m2.push("#{adv[i][0]}#{" (A2+3)" if dispslots}") if adv[i][8][3][1]==checkstr
+          end
         end
         str="#{str}\n*Adventurers:* #{m2.join(', ')}" if m2.length>0
         m2=[]
         for i in 0...drg.length
           if drg[i][6].length>1
-            m2.push("#{drg[i][0]} (A\u2081)") if drg[i][6][1][0]==checkstr
-            m2.push("#{drg[i][0]} (A\u2082)") if drg[i][6][1][1]==checkstr
+            if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
+              m2.push("#{drg[i][0]}#{" (A\u2081)" if dispslots}#{' [Min]' unless dispslots}") if drg[i][6][1][0]==checkstr
+              m2.push("#{drg[i][0]}#{" (A\u2082)" if dispslots}#{' [Max]' unless dispslots}") if drg[i][6][1][1]==checkstr
+            else
+              m2.push("#{drg[i][0]}") if drg[i][6][1][1]==checkstr
+            end
           end
         end
         str="#{str}\n*Dragons:* #{m2.join(', ')}" if m2.length>0
         m2=[]
         for i in 0...wrm.length
-          m2.push("#{wrm[i][0]} (A1\u2081)") if wrm[i][5][0][0]==checkstr
-          m2.push("#{wrm[i][0]} (A1\u2082)") if wrm[i][5][0][1]==checkstr
-          m2.push("#{wrm[i][0]} (A2\u2081)") if wrm[i][5].length>1 && wrm[i][5][1][0]==checkstr
-          m2.push("#{wrm[i][0]} (A2\u2082)") if wrm[i][5].length>1 && wrm[i][5][1][1]==checkstr
-          m2.push("#{wrm[i][0]} (A3\u2081)") if wrm[i][5].length>2 && wrm[i][5][2][0]==checkstr
-          m2.push("#{wrm[i][0]} (A3\u2082)") if wrm[i][5].length>2 && wrm[i][5][2][1]==checkstr
+          if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
+            m2.push("#{wrm[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if wrm[i][5][0][0]==checkstr
+            m2.push("#{wrm[i][0]}#{" (A1\u2082)" if dispslots}#{' [Mix]' unless dispslots}") if wrm[i][5][0][1]==checkstr
+            m2.push("#{wrm[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if wrm[i][5].length>1 && wrm[i][5][1][0]==checkstr
+            m2.push("#{wrm[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if wrm[i][5].length>1 && wrm[i][5][1][1]==checkstr
+            m2.push("#{wrm[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if wrm[i][5].length>2 && wrm[i][5][2][0]==checkstr
+            m2.push("#{wrm[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if wrm[i][5].length>2 && wrm[i][5][2][1]==checkstr
+          else
+            m2.push("#{wrm[i][0]}#{" (A1)" if dispslots}") if wrm[i][5][0][1]==checkstr
+            m2.push("#{wrm[i][0]}#{" (A2)" if dispslots}") if wrm[i][5].length>1 && wrm[i][5][1][1]==checkstr
+            m2.push("#{wrm[i][0]}#{" (A3)" if dispslots}") if wrm[i][5].length>2 && wrm[i][5][2][1]==checkstr
+          end
         end
         str="#{str}\n*Wyrmprints:* #{m2.join(', ')}" if m2.length>0
         m2=[]
         for i in 0...wep.length
           unless wep[i][13].nil? || wep[i][13].length<=0
-            m2.push("#{wep[i][0]} (A1\u2081)") if wep[i][13][0][0]==checkstr
-            m2.push("#{wep[i][0]} (A1\u2082)") if wep[i][13][0][1]==checkstr
-            m2.push("#{wep[i][0]} (A2\u2081)") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][0]==checkstr
-            m2.push("#{wep[i][0]} (A2\u2082)") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
+            if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
+              m2.push("#{wep[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if wep[i][13][0][0]==checkstr
+              m2.push("#{wep[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if wep[i][13][0][1]==checkstr
+              m2.push("#{wep[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][0]==checkstr
+              m2.push("#{wep[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
+            else
+              m2.push("#{wep[i][0]}#{" (A1)" if dispslots}") if wep[i][13][0][1]==checkstr
+              m2.push("#{wep[i][0]}#{" (A2)" if dispslots}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
+            end
           end
         end
         str="#{str}\n*Weapons:* #{m2.join(', ')}" if m2.length>0
@@ -1535,40 +1577,64 @@ def disp_ability_data(bot,event,args=nil)
           m2=[]
           if k[i2][2]=='Ability'
             for i in 0...adv.length
-              m2.push("#{adv[i][0]} (A1\u2081)") if adv[i][8][0][0]==checkstr
-              m2.push("#{adv[i][0]} (A1\u2082)") if adv[i][8][0][1]==checkstr
-              m2.push("#{adv[i][0]} (A2\u2081)") if adv[i][8][1][0]==checkstr
-              m2.push("#{adv[i][0]} (A2\u2082)") if adv[i][8][1][1]==checkstr
-              m2.push("#{adv[i][0]} (A3)") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
-              m2.push("#{adv[i][0]} (A3\u2081)") if adv[i][8][2][0]==checkstr && adv[i][8][2].length>1
-              m2.push("#{adv[i][0]} (A3\u2082)") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+              if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
+                m2.push("#{adv[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][0][0]==checkstr
+                m2.push("#{adv[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][0][1]==checkstr
+                m2.push("#{adv[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][1][0]==checkstr
+                m2.push("#{adv[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][1][1]==checkstr
+                m2.push("#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
+                m2.push("#{adv[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length>1
+                m2.push("#{adv[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+              else
+                m2.push("#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0][1]==checkstr
+                m2.push("#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1][1]==checkstr
+                m2.push("#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
+                m2.push("#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+                m2.push("#{adv[i][0]}#{" (A1+3)" if dispslots}") if adv[i][8][3][0]==checkstr
+                m2.push("#{adv[i][0]}#{" (A2+3)" if dispslots}") if adv[i][8][3][1]==checkstr
+              end
             end
             str="#{str}\n*Adventurers:* #{m2.join(', ')}" if m2.length>0
             m2=[]
             for i in 0...drg.length
               if drg[i][6].length>1
-                m2.push("#{drg[i][0]} (A\u2081)") if drg[i][6][1][0]==checkstr
-                m2.push("#{drg[i][0]} (A\u2082)") if drg[i][6][1][1]==checkstr
+                if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
+                  m2.push("#{drg[i][0]}#{" (A\u2081)" if dispslots}#{' [Min]' unless dispslots}") if drg[i][6][1][0]==checkstr
+                  m2.push("#{drg[i][0]}#{" (A\u2082)" if dispslots}#{' [Max]' unless dispslots}") if drg[i][6][1][1]==checkstr
+                else
+                  m2.push("#{drg[i][0]}") if drg[i][6][1][1]==checkstr
+                end
               end
             end
             str="#{str}\n*Dragons:* #{m2.join(', ')}" if m2.length>0
             m2=[]
             for i in 0...wrm.length
-              m2.push("#{wrm[i][0]} (A1\u2081)") if wrm[i][5][0][0]==checkstr
-              m2.push("#{wrm[i][0]} (A1\u2082)") if wrm[i][5][0][1]==checkstr
-              m2.push("#{wrm[i][0]} (A2\u2081)") if wrm[i][5].length>1 && wrm[i][5][1][0]==checkstr
-              m2.push("#{wrm[i][0]} (A2\u2082)") if wrm[i][5].length>1 && wrm[i][5][1][1]==checkstr
-              m2.push("#{wrm[i][0]} (A3\u2081)") if wrm[i][5].length>2 && wrm[i][5][2][0]==checkstr
-              m2.push("#{wrm[i][0]} (A3\u2082)") if wrm[i][5].length>2 && wrm[i][5][2][1]==checkstr
+              if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
+                m2.push("#{wrm[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if wrm[i][5][0][0]==checkstr
+                m2.push("#{wrm[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if wrm[i][5][0][1]==checkstr
+                m2.push("#{wrm[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if wrm[i][5].length>1 && wrm[i][5][1][0]==checkstr
+                m2.push("#{wrm[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if wrm[i][5].length>1 && wrm[i][5][1][1]==checkstr
+                m2.push("#{wrm[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if wrm[i][5].length>2 && wrm[i][5][2][0]==checkstr
+                m2.push("#{wrm[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if wrm[i][5].length>2 && wrm[i][5][2][1]==checkstr
+              else
+                m2.push("#{wrm[i][0]}#{" (A1)" if dispslots}") if wrm[i][5][0][1]==checkstr
+                m2.push("#{wrm[i][0]}#{" (A2)" if dispslots}") if wrm[i][5].length>1 && wrm[i][5][1][1]==checkstr
+                m2.push("#{wrm[i][0]}#{" (A3)" if dispslots}") if wrm[i][5].length>2 && wrm[i][5][2][1]==checkstr
+              end
             end
             str="#{str}\n*Wyrmprints:* #{m2.join(', ')}" if m2.length>0
             m2=[]
             for i in 0...wep.length
               unless wep[i][13].nil? || wep[i][13].length<=0
-                m2.push("#{wep[i][0]} (A1\u2081)") if wep[i][13][0][0]==checkstr
-                m2.push("#{wep[i][0]} (A1\u2082)") if wep[i][13][0][1]==checkstr
-                m2.push("#{wep[i][0]} (A2\u2081)") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][0]==checkstr
-                m2.push("#{wep[i][0]} (A2\u2082)") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
+                if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
+                  m2.push("#{wep[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if wep[i][13][0][0]==checkstr
+                  m2.push("#{wep[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if wep[i][13][0][1]==checkstr
+                  m2.push("#{wep[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][0]==checkstr
+                  m2.push("#{wep[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
+                else
+                  m2.push("#{wep[i][0]}#{" (A1)" if dispslots}") if wep[i][13][0][1]==checkstr
+                  m2.push("#{wep[i][0]}#{" (A2)" if dispslots}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
+                end
               end
             end
             str="#{str}\n*Weapons:* #{m2.join(', ')}" if m2.length>0
@@ -1591,6 +1657,7 @@ def disp_ability_data(bot,event,args=nil)
         end
       end
     end
+    ftr='To include base abilities, include the word "subabilities" in your message.' unless !ftr.nil? || evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
   else
     hdr="__**#{k[0]} #{'+' if k[1].include?('%')}#{k[1]}**__ [#{k[2]}]"
     hdr="__**#{k[1]} #{k[0]}**__ [#{k[2]}]" if k[0][0,5]=='Hits '
@@ -1607,13 +1674,22 @@ def disp_ability_data(bot,event,args=nil)
       checkstr="#{k[0]} #{'+' if k[1].include?('%')}#{k[1]}"
       checkstr="#{k[0]}" if k[1]=='-'
       for i in 0...adv.length
-        m2.push("#{adv[i][0]} (A1\u2081)") if adv[i][8][0][0]==checkstr
-        m2.push("#{adv[i][0]} (A1\u2082)") if adv[i][8][0][1]==checkstr
-        m2.push("#{adv[i][0]} (A2\u2081)") if adv[i][8][1][0]==checkstr
-        m2.push("#{adv[i][0]} (A2\u2082)") if adv[i][8][1][1]==checkstr
-        m2.push("#{adv[i][0]} (A3)") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
-        m2.push("#{adv[i][0]} (A3\u2081)") if adv[i][8][2][0]==checkstr && adv[i][8][2].length>1
-        m2.push("#{adv[i][0]} (A3\u2082)") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+        if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
+          m2.push("#{adv[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][0][0]==checkstr
+          m2.push("#{adv[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][0][1]==checkstr
+          m2.push("#{adv[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][1][0]==checkstr
+          m2.push("#{adv[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][1][1]==checkstr
+          m2.push("#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
+          m2.push("#{adv[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length>1
+          m2.push("#{adv[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+        else
+          m2.push("#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0][1]==checkstr
+          m2.push("#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1][1]==checkstr
+          m2.push("#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
+          m2.push("#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+          m2.push("#{adv[i][0]}#{" (A1+3)" if dispslots}") if adv[i][8][3][0]==checkstr
+          m2.push("#{adv[i][0]}#{" (A2+3)" if dispslots}") if adv[i][8][3][1]==checkstr
+        end
       end
       if m2.length>0
         if !s2s || was_embedless_mentioned?(event)
@@ -1625,8 +1701,12 @@ def disp_ability_data(bot,event,args=nil)
       m2=[]
       for i in 0...drg.length
         if drg[i][6].length>1
-          m2.push("#{drg[i][0]} (A\u2081)") if drg[i][6][1][0]==checkstr
-          m2.push("#{drg[i][0]} (A\u2082)") if drg[i][6][1][1]==checkstr
+          if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
+            m2.push("#{drg[i][0]}#{" (A\u2081)" if dispslots}#{' [Min]' unless dispslots}") if drg[i][6][1][0]==checkstr
+            m2.push("#{drg[i][0]}#{" (A\u2082)" if dispslots}#{' [Max]' unless dispslots}") if drg[i][6][1][1]==checkstr
+          else
+            m2.push("#{drg[i][0]}") if drg[i][6][1][1]==checkstr
+          end
         end
       end
       if m2.length>0
@@ -1638,12 +1718,18 @@ def disp_ability_data(bot,event,args=nil)
       end
       m2=[]
       for i in 0...wrm.length
-        m2.push("#{wrm[i][0]} (A1\u2081)") if wrm[i][5][0][0]==checkstr
-        m2.push("#{wrm[i][0]} (A1\u2082)") if wrm[i][5][0][1]==checkstr
-        m2.push("#{wrm[i][0]} (A2\u2081)") if wrm[i][5].length>1 && wrm[i][5][1][0]==checkstr
-        m2.push("#{wrm[i][0]} (A2\u2082)") if wrm[i][5].length>1 && wrm[i][5][1][1]==checkstr
-        m2.push("#{wrm[i][0]} (A3\u2081)") if wrm[i][5].length>2 && wrm[i][5][2][0]==checkstr
-        m2.push("#{wrm[i][0]} (A3\u2082)") if wrm[i][5].length>2 && wrm[i][5][2][1]==checkstr
+        if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
+          m2.push("#{wrm[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if wrm[i][5][0][0]==checkstr
+          m2.push("#{wrm[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if wrm[i][5][0][1]==checkstr
+          m2.push("#{wrm[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if wrm[i][5].length>1 && wrm[i][5][1][0]==checkstr
+          m2.push("#{wrm[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if wrm[i][5].length>1 && wrm[i][5][1][1]==checkstr
+          m2.push("#{wrm[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if wrm[i][5].length>2 && wrm[i][5][2][0]==checkstr
+          m2.push("#{wrm[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if wrm[i][5].length>2 && wrm[i][5][2][1]==checkstr
+        else
+          m2.push("#{wrm[i][0]}#{" (A1)" if dispslots}") if wrm[i][5][0][1]==checkstr
+          m2.push("#{wrm[i][0]}#{" (A2)" if dispslots}") if wrm[i][5].length>1 && wrm[i][5][1][1]==checkstr
+          m2.push("#{wrm[i][0]}#{" (A3)" if dispslots}") if wrm[i][5].length>2 && wrm[i][5][2][1]==checkstr
+        end
       end
       if m2.length>0
         if !s2s || was_embedless_mentioned?(event)
@@ -1655,10 +1741,15 @@ def disp_ability_data(bot,event,args=nil)
       m2=[]
       for i in 0...wep.length
         unless wep[i][13].nil? || wep[i][13].length<=0
-          m2.push("#{wep[i][0]} (A1\u2081)") if wep[i][13][0][0]==checkstr
-          m2.push("#{wep[i][0]} (A1\u2082)") if wep[i][13][0][1]==checkstr
-          m2.push("#{wep[i][0]} (A2\u2081)") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][0]==checkstr
-          m2.push("#{wep[i][0]} (A2\u2082)") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
+          if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
+            m2.push("#{wep[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if wep[i][13][0][0]==checkstr
+            m2.push("#{wep[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if wep[i][13][0][1]==checkstr
+            m2.push("#{wep[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][0]==checkstr
+            m2.push("#{wep[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
+          else
+            m2.push("#{wep[i][0]}#{" (A1)" if dispslots}") if wep[i][13][0][1]==checkstr
+            m2.push("#{wep[i][0]}#{" (A2)" if dispslots}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
+          end
         end
       end
       if m2.length>0
@@ -4594,7 +4685,7 @@ def level(event,bot,args=nil,mode=0)
       end
     else
       n=[nums[0,2].min,1].max
-      n=1 if n>bxp.length
+      n=1 if n>wrxp.length
       n2=[nums[0,2].max,wrxp.length].min
       m=wrxp[n-1,n2-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
       str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
