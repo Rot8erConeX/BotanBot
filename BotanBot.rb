@@ -54,7 +54,7 @@ def all_commands(include_nil=false,permissions=-1)
      'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','dbxp',
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
      'weaponlevel','wxp','wexp','wlevel','victory','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage',
-     'craft','crafting','tools','tool','links','link','resources','resource','next']
+     'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss']
   k=['addalias','deletealias','removealias','s2s'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop'] if permissions==2
   k=k.uniq
@@ -208,6 +208,22 @@ def data_load()
     b[i][8]=b[i][8].split(', ')
   end
   @mats=b.map{|q| q}
+  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLEnemies.txt')
+    b=[]
+    File.open('C:/Users/Mini-Matt/Desktop/devkit/DLEnemies.txt').each_line do |line|
+      b.push(line)
+    end
+  else
+    b=[]
+  end
+  for i in 0...b.length
+    b[i]=b[i].gsub("\n",'').split('\\'[0])
+    b[i][1]=b[i][1].to_i
+    b[i][3]=b[i][3].split(', ')
+    b[i][4]=b[i][4].split(', ')
+    b[i][5]=b[i][5].split(';; ') unless b[i][5].nil?
+  end
+  @enemies=b.map{|q| q}
 end
 
 def metadata_load()
@@ -740,6 +756,31 @@ def find_mat(name,event,fullname=false)
   return []
 end
 
+def find_enemy(name,event,fullname=false)
+  data_load()
+  name=normalize(name)
+  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  return [] if name.length<2
+  k=@enemies.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
+  return @enemies[k] unless k.nil?
+  nicknames_load()
+  alz=@aliases.reject{|q| q[0]!='Enemy'}.map{|q| [q[1],q[2],q[3]]}
+  g=0
+  g=event.server.id unless event.server.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return @enemies[@enemies.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return @enemies[@enemies.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return [] if fullname
+  k=@enemies.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
+  return @enemies[k] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return @enemies[@enemies.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return @enemies[@enemies.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return []
+end
+
 def find_data_ex(callback,name,event,fullname=false)
   k=method(callback).call(name,event,true)
   return k if k.length>0
@@ -813,6 +854,13 @@ def weapon_emoji(k,bot)
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
   str="#{str}#{moji[0].mention unless moji.length<=0}"
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
+  str="#{str}#{moji[0].mention unless moji.length<=0}"
+  return str
+end
+
+def enemy_emoji(k,bot)
+  str=''
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Tribe_#{k[2]}"}
   str="#{str}#{moji[0].mention unless moji.length<=0}"
   return str
 end
@@ -1365,6 +1413,64 @@ def disp_weapon_lineage(bot,event,args=nil)
   end
 end
 
+def disp_enemy_data(bot,event,args=nil)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_enemy,args.join(' '),event)
+  if k.length.zero?
+    event.respond 'No matches found.'
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  evn=event.message.text.downcase.split(' ')
+  s2s=false if @shardizard==4 && evn.include?('smol')
+  sklz=@askilities.map{|q| q}
+  str="#{enemy_emoji(k,bot)} **Tribe:** #{k[2]}\n**Maximum HP:** #{longFormattedNumber(k[1])}"
+  flds=nil
+  if s2s
+    flds=[]
+    flds.push(['Weaknesses',"#{k[3].join("\n")}#{"\n\n~~Bold indicates strong weaknesses~~" if k[3].reject{|q| !q.include?('**')}.length>0}"])
+    flds.push(['Afflictions',"#{k[4].join("\n")}"])
+  else
+    str="#{str}\n\n**Weaknesses:** #{k[3].join(', ').gsub('**','*')}#{"\n~~Italic indicates strong weaknesses~~" if k[3].reject{|q| !q.include?('**')}.length>0}"
+    str="#{str}\n\n**Afflictions:** #{k[4].join(', ')}"
+  end
+  unless k[5].nil? || k[5].length<=0
+    str2=''
+    for i in 0...k[5].length
+      abl=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==k[5][i]}
+      unless abl.nil?
+        abl=sklz[abl]
+        str2="#{str2}\n\n**#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}**#{"\n#{abl[3]}" if abl[5]=='y'}"
+      end
+    end
+    unless str2.length<=0
+      if s2s
+        flds.push(['Abilities',str2,1])
+      else
+        str="#{str}#{str2}"
+      end
+    end
+  end
+  xcolor=0xE3F78B
+  xcolor=0xEF8663 if k[2]=='Thaumian'
+  xcolor=0x5AD363 if k[2]=='Physian'
+  xcolor=0xAD9087 if k[2]=='Therion'
+  xcolor=0x271B2F if k[2]=='Dragon'
+  xcolor=0x3B4DBB if k[2]=='Demon'
+  xpic="#{k[0].gsub(' ','_')}"
+  if k[0].split(' ').include?('(Enemy)')
+    xpic="#{xpic.gsub('_(Enemy)','')}'s_Trial"
+  else
+    xpic="#{xpic}_Strike"
+  end
+  xpic=[nil,"https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/FightBanners/Banner_#{xpic}.png"]
+  xpic='https://github.com/Rot8erConeX/BotanBot/blob/master/FightBanners/Matilda_5.png?raw=true' if k[0]=='Matilda'
+  create_embed(event,"__**#{k[0]}**__","#{str}",xcolor,nil,xpic,flds)
+end
+
 def disp_skill_data(bot,event,args=nil)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
@@ -1487,6 +1593,7 @@ def disp_ability_data(bot,event,args=nil)
   drg=@dragons.map{|q| q}
   wrm=@wyrmprints.map{|q| q}
   wep=@weapons.map{|q| q}
+  enm=@enemies.map{|q| q}
   unless evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
     for i in 0...adv.length
       m=[adv[i][8][0][1].split(' '),adv[i][8][1][1].split(' '),adv[i][8][2][-1].split(' ')]
@@ -1522,7 +1629,7 @@ def disp_ability_data(bot,event,args=nil)
         m=k2[0]
         str="__**Ability**__"
         str="#{str}\n*Effect:* #{m[3]}" if m[5]=='y'
-        str="#{str}\n*Might:* #{m[4]}"
+        str="#{str}\n*Might:* #{m[4]}" unless m[4]<0
         m2=[]
         checkstr="#{k[0][0]} #{'+' if k[0][1].include?('%')}#{k[0][1]}"
         checkstr="#{k[0][0]}" if k[0][1]=='-'
@@ -1588,6 +1695,15 @@ def disp_ability_data(bot,event,args=nil)
           end
         end
         str="#{str}\n*Weapons:* #{m2.join(', ')}" if m2.length>0
+        m2=[]
+        for i in 0...enm.length
+          unless enm[i][5].nil? || enm.length<=0
+            for i2 in 0...enm[i][5].length
+              m2.push("#{enm[i][0]}#{" (A#{i2+1})" if dispslots}") if enm[i][5][i2]==checkstr
+            end
+          end
+        end
+        str="#{str}\n*Enemies:* #{m2.join(', ')}" if m2.length>0
         m=k3[0]
         str="#{str}\n\n__**Co-Ability**__"
         str="#{str}\n*Effect:* #{m[3]}" if m[5]=='y'
@@ -1623,7 +1739,7 @@ def disp_ability_data(bot,event,args=nil)
       for i2 in 0...k.length
         str="#{str}\n#{"\n__" if s2s || lng}**#{k[i2][0]} #{'+' if k[i2][1].include?('%')}#{k[i2][1]}**#{'__' if s2s || lng}#{" - #{k[i2][4]} MT" unless s2s ||lng}"
         str="#{str}\n*Effect:* #{k[i2][3]}" if lng
-        str="#{str}\n*Might:* #{k[i2][4]}" if s2s || lng
+        str="#{str}\n*Might:* #{k[i2][4]}" if (s2s || lng) && k[i2][4]>=0
         if s2s
           checkstr="#{k[i2][0]} #{'+' if k[i2][1].include?('%')}#{k[i2][1]}"
           checkstr="#{k[i2][0]}" if k[i2][1]=='-'
@@ -1691,6 +1807,15 @@ def disp_ability_data(bot,event,args=nil)
               end
             end
             str="#{str}\n*Weapons:* #{m2.join(', ')}" if m2.length>0
+            m2=[]
+            for i in 0...enm.length
+              unless enm[i][5].nil? || enm.length<=0
+                for i2 in 0...enm[i][5].length
+                  m2.push("#{enm[i][0]}#{" (A#{i2+1})" if dispslots}") if enm[i][5][i2]==checkstr
+                end
+              end
+            end
+            str="#{str}\n*Enemies:* #{m2.join(', ')}" if m2.length>0
           elsif k[i2][2]=='CoAbility'
             for i in 0...adv.length
               mx=adv[i][7].split(' ')
@@ -1719,7 +1844,7 @@ def disp_ability_data(bot,event,args=nil)
     xcolor=0x87817C if k[2]=='Aura'
     xcolor=0x242035 if k[2]=='CoAbility'
     str="**Effect:** #{k[3]}" if k[5]=='y' || k[2]=='Aura'
-    str="#{str}\n\n**Might:** #{k[4]}"
+    str="#{str}\n\n**Might:** #{k[4]}" unless k[4]<0
     str2=''
     flds=[]
     if k[2]=='Ability'
@@ -1810,6 +1935,21 @@ def disp_ability_data(bot,event,args=nil)
           str2="#{str2}\n**Weapons:** #{m2.join(', ')}"
         else
           flds.push(['Weapons',m2.join("\n")])
+        end
+      end
+      m2=[]
+      for i in 0...enm.length
+        unless enm[i][5].nil? || enm.length<=0
+          for i2 in 0...enm[i][5].length
+            m2.push("#{enm[i][0]}#{" (A#{i2+1})" if dispslots}") if enm[i][5][i2]==checkstr
+          end
+        end
+      end
+      if m2.length>0
+        if !s2s || was_embedless_mentioned?(event)
+          str2="#{str2}\n**Enemies:** #{m2.join(', ')}"
+        else
+          flds.push(['Enemies',m2.join("\n")])
         end
       end
     elsif k[2]=='CoAbility'
@@ -2176,7 +2316,7 @@ def disp_mat_data(bot,event,args=nil)
     create_embed(event,"__**#{k[0]}**__","#{str}#{"\n\n**Searching Tags:**" unless flds.nil?}",0xE3F78B,nil,xpic,flds)
   end
 end  
-
+ 
 def find_in_adventurers(bot,event,args=nil,mode=0)
   data_load()
   args=normalize(event.message.text.downcase).split(' ') if args.nil?
@@ -3089,11 +3229,12 @@ def spaceship_order(x)
   return 2 if x=='Dragon'
   return 3 if x=='Wyrmprint'
   return 4 if x=='Weapon'
-  return 5 if x=='Skill'
-  return 6 if x=='Ability'
-  return 7 if x=='Facility'
-  return 8 if x=='Material'
-  return 500
+  return 5 if x=='Enemy'
+  return 6 if x=='Skill'
+  return 7 if x=='Ability'
+  return 8 if x=='Facility'
+  return 9 if x=='Material'
+  return 1000
 end
 
 def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode=0)
@@ -3133,6 +3274,8 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     type[0]='Wyrmprint'
   elsif find_weapon(newname,event,true).length>0
     type[0]='Weapon'
+  elsif find_enemy(newname,event,true).length>0
+    type[0]='Enemy'
   elsif find_skill(newname,event,true).length>0
     type[0]='Skill'
   elsif find_ability(newname,event,true).length>0
@@ -3149,6 +3292,8 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     type[0]='Wyrmprint*'
   elsif find_weapon(newname,event).length>0
     type[0]='Weapon*'
+  elsif find_enemy(newname,event).length>0
+    type[0]='Enemy*'
   elsif find_skill(newname,event).length>0
     type[0]='Skill*'
   elsif find_ability(newname,event).length>0
@@ -3166,6 +3311,8 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     type[1]='Wyrmprint'
   elsif find_weapon(unit,event,true).length>0
     type[1]='Weapon'
+  elsif find_enemy(unit,event,true).length>0
+    type[1]='Enemy'
   elsif find_skill(unit,event,true).length>0
     type[1]='Skill'
   elsif find_ability(unit,event,true).length>0
@@ -3182,6 +3329,8 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     type[1]='Wyrmprint*'
   elsif find_weapon(unit,event).length>0
     type[1]='Weapon*'
+  elsif find_enemy(unit,event).length>0
+    type[1]='Enemy*'
   elsif find_skill(unit,event).length>0
     type[1]='Skill*'
   elsif find_ability(unit,event).length>0
@@ -3231,6 +3380,9 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
   elsif type[1]=='Weapon'
     unit=find_weapon(unit,event)
     dispstr=['Weapon',unit[0],'Weapon',unit[0]]
+  elsif type[1]=='Enemy'
+    unit=find_enemy(unit,event)
+    dispstr=['Enemy',unit[0],'Enemy',unit[0]]
   elsif type[1]=='Skill'
     unit=find_skill(unit,event)
     dispstr=['Skill',unit[0],'Skill',unit[0]]
@@ -3350,11 +3502,12 @@ def disp_aliases(bot,event,args=nil,mode=0)
     elsif find_data_ex(:find_dragon,args.join(''),event).length>0
     elsif find_data_ex(:find_wyrmprint,args.join(''),event).length>0
     elsif find_data_ex(:find_weapon,args.join(''),event).length>0
+    elsif find_data_ex(:find_enemy,args.join(''),event).length>0
     elsif find_data_ex(:find_skill,args.join(''),event).length>0
     elsif find_data_ex(:find_ability,args.join(''),event).length>0
     elsif find_data_ex(:find_facility,args.join(''),event).length>0
     elsif find_data_ex(:find_mat,args.join(''),event).length>0
-    elsif has_any?(args,['adventurer','adventurers','adv','advs','unit','units','dragon','dragons','wyrmprint','wyrm','print','wyrmprints','wyrms','prints','weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap','skill','skil','skills','skils','ability','abilitys','abilities','abil','abils','able','ables','facility','facilitys','facilities','faculty','facultys','faculties','mat','mats','material','materials','item','items'])
+    elsif has_any?(args,['adventurer','adventurers','adv','advs','unit','units','dragon','dragons','wyrmprint','wyrm','print','wyrmprints','wyrms','prints','weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap','skill','skil','skills','skils','ability','abilitys','abilities','abil','abils','able','ables','facility','facilitys','facilities','faculty','facultys','faculties','mat','mats','material','materials','item','items','enemy','enemies','boss','bosss','bosses'])
     else
       event.respond "The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Abilities\n- Auras\n- CoAbilities\n- Facilities\n- Materials\n\n#{args.join(' ')} does not fall into any of these categories."
       return nil
@@ -3368,6 +3521,8 @@ def disp_aliases(bot,event,args=nil,mode=0)
   wrm=nil if wrm.length<=0 || args.length.zero?
   wpn=find_data_ex(:find_weapon,args.join(''),event)
   wpn=nil if wpn.length<=0 || args.length.zero?
+  enm=find_data_ex(:find_enemy,args.join(''),event)
+  enm=nil if enm.length<=0 || args.length.zero?
   skl=find_data_ex(:find_skill,args.join(''),event)
   skl=nil if skl.length<=0 || args.length.zero?
   abl=find_data_ex(:find_ability,args.join(''),event)
@@ -3379,7 +3534,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
   f=[]
   n=@aliases.reject{|q| q[0]!='Adventurer'}.map{|q| [q[1],q[2],q[3]]}
   h=''
-  if adv.nil? && drg.nil? && wrm.nil? && wpn.nil? && abl.nil? && abl.nil? && fac.nil? && mat.nil?
+  if adv.nil? && drg.nil? && wrm.nil? && wpn.nil? && enm.nil? && abl.nil? && abl.nil? && fac.nil? && mat.nil?
     if has_any?(args,['adventurer','adventurers','adv','advs','unit','units'])
       n=n.reject{|q| q[2].nil?} if mode==1
       f.push('__**Adventurer Aliases**__')
@@ -3443,6 +3598,26 @@ def disp_aliases(bot,event,args=nil,mode=0)
     elsif has_any?(args,['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'])
       f.push('__**Weapon Aliases**__')
       n=@aliases.reject{|q| q[0]!='Weapon'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+    elsif has_any?(args,['enemy','enemies','boss','bosss','bosses'])
+      f.push('__**Enemy Aliases**__')
+      n=@aliases.reject{|q| q[0]!='Enemy'}.map{|q| [q[1],q[2],q[3]]}
       n=n.reject{|q| q[2].nil?} if mode==1
       for i in 0...n.length
         if n[i][2].nil?
@@ -3570,6 +3745,12 @@ def disp_aliases(bot,event,args=nil,mode=0)
         for i in 0...n.length
           msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
         end
+        msg=extend_message(msg,'__**Enemy Aliases**__',event,2)
+        n=@aliases.reject{|q| !['Enemy'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+        n=n.reject{|q| q[2].nil?} if mode==1
+        for i in 0...n.length
+          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
+        end
         msg=extend_message(msg,'__**Skill Aliases**__',event,2)
         n=@aliases.reject{|q| !['Skill'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
         n=n.reject{|q| q[2].nil?} if mode==1
@@ -3655,6 +3836,25 @@ def disp_aliases(bot,event,args=nil,mode=0)
       end
       f.push("\n__**Weapon Aliases**__")
       n=@aliases.reject{|q| !['Weapon'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+      f.push("\n__**Enemy Aliases**__")
+      n=@aliases.reject{|q| !['Enemy'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
       n=n.reject{|q| q[2].nil?} if mode==1
       for i in 0...n.length
         if n[i][2].nil?
@@ -3838,6 +4038,31 @@ def disp_aliases(bot,event,args=nil,mode=0)
     end
     for i in 0...n.length
       if n[i][1]==wpn[0]
+        if event.server.nil? && !n[i][2].nil?
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        elsif n[i][2].nil?
+          f.push(n[i][0].gsub('_','\\_')) unless mode==1
+        else
+          f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
+        end
+      end
+    end
+  elsif !enm.nil?
+    n=@aliases.reject{|q| !['Enemy'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+    n=n.reject{|q| q[2].nil?} if mode==1
+    f.push("__**#{enm[0]}#{enemy_emoji(enm,bot)}**__#{"'s server-specific aliases" if mode==1}")
+    unless mode==1
+      f.push(enm[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if enm[0].include?('(') || enm[0].include?(')') || enm[0].include?(' ') || enm[0].include?('!') || enm[0].include?('_') || enm[0].include?('?') || enm[0].include?("'") || enm[0].include?('"')
+    end
+    for i in 0...n.length
+      if n[i][1]==enm[0]
         if event.server.nil? && !n[i][2].nil?
           a=[]
           for j in 0...n[i][2].length
@@ -4996,6 +5221,11 @@ bot.command([:mat,:material,:item]) do |event, *args|
   disp_mat_data(bot,event,args)
 end
 
+bot.command([:enemy,:boss]) do |event, *args|
+  return nil if overlap_prevent(event)
+  disp_enemy_data(bot,event,args)
+end
+
 bot.command([:lineage,:craft,:crafting]) do |event, *args|
   return nil if overlap_prevent(event)
   disp_weapon_lineage(bot,event,args)
@@ -5156,6 +5386,9 @@ bot.command([:deletealias,:removealias]) do |event, name|
   elsif find_weapon(name,event,true).length>0
     j=find_weapon(name,event,true)
     j=["Weapon","#{j[0]}"]
+  elsif find_enemy(name,event,true).length>0
+    j=find_enemy(name,event,true)
+    j=["Enemy","#{j[0]}"]
   elsif find_skill(name,event,true).length>0
     j=find_skill(name,event,true)
     j=["Skill","#{j[0]}"]
@@ -5166,6 +5399,15 @@ bot.command([:deletealias,:removealias]) do |event, name|
     else
       j=["Ability","#{j[0]} #{j[1]}"]
     end
+  elsif find_facility(name,event,true).length>0
+    j=find_facility(name,event,true)
+    j=["Facility","#{j[0]}"]
+  elsif find_mat(name,event,true).length>0
+    j=find_mat(name,event,true)
+    j=["Material","#{j[0]}"]
+  elsif find_skill(name,event,true).length>0
+    j=find_skill(name,event,true)
+    j=["Skill","#{j[0]}"]
   elsif find_adventurer(name,event).length>0
     j=find_adventurer(name,event)
     j=["Adventurer","#{j[0]}"]
@@ -5178,6 +5420,9 @@ bot.command([:deletealias,:removealias]) do |event, name|
   elsif find_weapon(name,event).length>0
     j=find_weapon(name,event)
     j=["Weapon","#{j[0]}"]
+  elsif find_enemy(name,event).length>0
+    j=find_enemy(name,event)
+    j=["Enemy","#{j[0]}"]
   elsif find_skill(name,event).length>0
     j=find_skill(name,event)
     j=["Skill","#{j[0]}"]
@@ -5188,6 +5433,12 @@ bot.command([:deletealias,:removealias]) do |event, name|
     else
       j=["Ability","#{j[0]} #{j[1]}"]
     end
+  elsif find_facility(name,event).length>0
+    j=find_facility(name,event)
+    j=["Facility","#{j[0]}"]
+  elsif find_mat(name,event).length>0
+    j=find_mat(name,event)
+    j=["Material","#{j[0]}"]
   end
   k=0
   k=event.server.id unless event.server.nil?
@@ -5959,6 +6210,16 @@ bot.command(:snagstats) do |event, f, f2|
       str2="#{str2} - This server accounts for #{@aliases.reject{|q| q[0]!='Weapon' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
     end
     str=extend_message(str,str2,event,2)
+    glbl=@aliases.reject{|q| q[0]!='Enemy' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    srv_spec=@aliases.reject{|q| q[0]!='Enemy' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    str2="**There are #{longFormattedNumber(glbl.length)} global enemy aliases.**\n**There are #{longFormattedNumber(srv_spec.length)} server-specific enemy aliases.**"
+    if event.server.nil? && @shardizard==4
+    elsif event.server.nil?
+      str2="#{str2} - Servers you and I share account for #{@aliases.reject{|q| q[0]!='Weapon' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
+    else
+      str2="#{str2} - This server accounts for #{@aliases.reject{|q| q[0]!='Weapon' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
+    end
+    str=extend_message(str,str2,event,2)
     glbl=@aliases.reject{|q| q[0]!='Skill' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
     srv_spec=@aliases.reject{|q| q[0]!='Skill' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
     str2="**There are #{longFormattedNumber(glbl.length)} global skill aliases.**\n**There are #{longFormattedNumber(srv_spec.length)} server-specific skill aliases.**"
@@ -6153,6 +6414,8 @@ bot.message do |event|
       disp_wyrmprint_stats(bot,event,s.split(' '))
     elsif find_data_ex(:find_weapon,s,event,true).length>0
       disp_weapon_stats(bot,event,s.split(' '))
+    elsif find_data_ex(:find_enemy,s,event,true).length>0
+      disp_enemy_data(bot,event,s.split(' '))
     elsif find_data_ex(:find_skill,s,event,true).length>0
       disp_skill_data(bot,event,s.split(' '))
     elsif find_data_ex(:find_ability,s,event,true).length>0
@@ -6169,6 +6432,8 @@ bot.message do |event|
       disp_wyrmprint_stats(bot,event,s.split(' '))
     elsif find_data_ex(:find_weapon,s,event).length>0
       disp_weapon_stats(bot,event,s.split(' '))
+    elsif find_data_ex(:find_enemy,s,event).length>0
+      disp_enemy_data(bot,event,s.split(' '))
     elsif find_data_ex(:find_skill,s,event).length>0
       disp_skill_data(bot,event,s.split(' '))
     elsif find_data_ex(:find_ability,s,event).length>0
@@ -6290,6 +6555,10 @@ bot.mention do |event|
     else
       disp_weapon_stats(bot,event,args)
     end
+  elsif ['enemy','boss'].include?(args[0].downcase)
+    m=false
+    args.shift
+    disp_enemy_data(bot,event,args)
   elsif ['skill','skil'].include?(args[0].downcase)
     m=false
     args.shift
@@ -6354,6 +6623,8 @@ bot.mention do |event|
       disp_wyrmprint_stats(bot,event,args)
     elsif find_data_ex(:find_weapon,name,event,true).length>0
       disp_weapon_stats(bot,event,args)
+    elsif find_data_ex(:find_enemy,name,event,true).length>0
+      disp_enemy_data(bot,event,args.split(' '))
     elsif find_data_ex(:find_skill,name,event,true).length>0
       disp_skill_data(bot,event,args)
     elsif find_data_ex(:find_ability,name,event,true).length>0
@@ -6370,6 +6641,8 @@ bot.mention do |event|
       disp_wyrmprint_stats(bot,event,args)
     elsif find_data_ex(:find_weapon,name,event).length>0
       disp_weapon_stats(bot,event,args)
+    elsif find_data_ex(:find_enemy,name,event).length>0
+      disp_enemy_data(bot,event,args.split(' '))
     elsif find_data_ex(:find_skill,name,event).length>0
       disp_skill_data(bot,event,args)
     elsif find_data_ex(:find_ability,name,event).length>0
