@@ -30,6 +30,7 @@ bot.gateway.check_heartbeat_acks = false
 @dragons=[]
 @wyrmprints=[]
 @weapons=[]
+@enemies=[]
 
 @askilities=[]
 
@@ -502,10 +503,14 @@ def find_adventurer(name,event,fullname=false)
   g=event.server.id unless event.server.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
   return @adventurers[@adventurers.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return @adventurers[@adventurers.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return [] if fullname
   k=@adventurers.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return @adventurers[k] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return @adventurers[@adventurers.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   return @adventurers[@adventurers.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return []
 end
@@ -523,10 +528,14 @@ def find_dragon(name,event,fullname=false)
   g=event.server.id unless event.server.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
   return @dragons[@dragons.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return @dragons[@dragons.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return [] if fullname
   k=@dragons.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return @dragons[k] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return @dragons[@dragons.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   return @dragons[@dragons.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return []
 end
@@ -544,10 +553,14 @@ def find_wyrmprint(name,event,fullname=false)
   g=event.server.id unless event.server.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
   return @wyrmprints[@wyrmprints.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return @wyrmprints[@wyrmprints.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return [] if fullname
   k=@wyrmprints.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return @wyrmprints[k] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return @wyrmprints[@wyrmprints.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   return @wyrmprints[@wyrmprints.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return []
 end
@@ -565,10 +578,14 @@ def find_weapon(name,event,fullname=false)
   g=event.server.id unless event.server.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
   return @weapons[@weapons.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return @weapons[@weapons.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return [] if fullname
   k=@weapons.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return @weapons[k] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return @weapons[@weapons.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   return @weapons[@weapons.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return []
 end
@@ -587,10 +604,14 @@ def find_skill(name,event,fullname=false)
   g=event.server.id unless event.server.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
   return sklz[sklz.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return sklz[sklz.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return [] if fullname
   k=sklz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return sklz[k] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return sklz[sklz.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   return sklz[sklz.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return []
 end
@@ -617,7 +638,25 @@ def find_ability(name,event,fullname=false)
     return sklz[m] unless m.nil?
     return sklz.reject{|q| q[0]!=alz[k][1]}
   end
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  unless k.nil?
+    m=sklz.find_index{|q| "#{q[0]} #{q[1]}"==alz[k][1]}
+    return sklz[m] unless m.nil?
+    return sklz.reject{|q| q[0]!=alz[k][1]}
+  end
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name[0,q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','').length] && (q[2].nil? || q[2].include?(g))}
+  unless k.nil?
+    sklz2=sklz.reject{|q| q[0]!=alz[k][1]}
+    m=sklz2.find_index{|q| "#{alz[k][0]}#{q[1]}".downcase==name}
+    return sklz2[m] unless m.nil?
+    m=sklz2.find_index{|q| "#{alz[k][0]}+#{q[1]}".downcase==name}
+    return sklz2[m] unless m.nil?
+    m=sklz2.find_index{|q| "#{alz[k][0]}#{q[1].gsub('%','')}".downcase==name}
+    return sklz2[m] unless m.nil?
+    m=sklz2.find_index{|q| "#{alz[k][0]}+#{q[1].gsub('%','')}".downcase==name}
+    return sklz2[m] unless m.nil?
+  end
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name[0,q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','').length] && (q[2].nil? || q[2].include?(g))}
   unless k.nil?
     sklz2=sklz.reject{|q| q[0]!=alz[k][1]}
     m=sklz2.find_index{|q| "#{alz[k][0]}#{q[1]}".downcase==name}
@@ -642,6 +681,12 @@ def find_ability(name,event,fullname=false)
     return sklz[m] unless m.nil?
     return sklz.reject{|q| q[0]!=alz[k][1]}
   end
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  unless k.nil?
+    m=sklz.find_index{|q| "#{q[0]} #{q[1]}"==alz[k][1]}
+    return sklz[m] unless m.nil?
+    return sklz.reject{|q| q[0]!=alz[k][1]}
+  end
   return []
 end
 
@@ -658,10 +703,14 @@ def find_facility(name,event,fullname=false)
   g=event.server.id unless event.server.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
   return @facilities[@facilities.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return @facilities[@facilities.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return [] if fullname
   k=@facilities.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return @facilities[k] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return @facilities[@facilities.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   return @facilities[@facilities.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return []
 end
@@ -679,10 +728,14 @@ def find_mat(name,event,fullname=false)
   g=event.server.id unless event.server.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
   return @mats[@mats.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return @mats[@mats.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return [] if fullname
   k=@mats.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return @mats[k] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return @mats[@mats.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   return @mats[@mats.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return []
 end
