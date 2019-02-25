@@ -666,6 +666,7 @@
 ["Wyrmprint", "ThePrinceOfXMas", "The Prince of Dragonyule"]
 ["Wyrmprint", "TheXMasPrince", "The Prince of Dragonyule"]
 ["Wyrmprint", "XMasPrince", "The Prince of Dragonyule"]
+["Wyrmprint", "RosePrince", "The Rose Prince"]
 ["Wyrmprint", "TheWarriorWomen", "The Warrioresses"]
 ["Wyrmprint", "Warrioresses", "The Warrioresses"]
 ["Wyrmprint", "WarriorWomen", "The Warrioresses"]

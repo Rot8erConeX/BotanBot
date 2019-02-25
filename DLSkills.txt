@@ -514,6 +514,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Flame) Dragon Delay Res\-\Ability\If the user is attuned to Flame: completely prevents dragon delaying.\50\y
 (Flame) Dull Res\-\Ability\If the user is attuned to Flame: completely prevents dulling.\50\y
 (Flame) High Midgardsormr's Bane\20%\Ability\If the user is attuned to Flame: increases damage to High Midgardsormr by 20%.\100\y
+(Flame) HP 70% = Defense\5%\Ability\If the user is attuned to Flame: increases defense by 5% when HP is 70% or above.\40\y
 (Flame) Physian's Bane\10%\Ability\If the user is attuned to Flame: increases damage to physians by 10%.\20\y
 (Flame) Physian's Bane\15%\Ability\If the user is attuned to Flame: increases damage to physians by 15%.\40\y
 (Flame) Skill Haste \4%\Ability\If the user is attuned to Flame: Increases skill gauge fill rate by 4%.\40\y
@@ -528,8 +529,12 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Lance) Skill Damage\35%\Ability\If the user wields a Lance: increases attack skill damage by 35%\80\y
 (Light) Curse Res\25%\Ability\If the user is attuned to Light: Reduces susceptibility to curses by 25%.\40\y
 (Light) Curse Res\40%\Ability\If the user is attuned to Light: Reduces susceptibility to curses by 40%.\50\y
+(Light) Recovery Potency\5%\Ability\If the user is attuned to Light: increases the potency of recovery skills by 5%.\40\y
 (Light) Skill Haste\4%\Ability\If the user is attuned to Light: Increases skill gauge fill rate by 4%.\30\y
 (Light) Skill Haste\5%\Ability\If the user is attuned to Light: Increases skill gauge fill rate by 5%.\50\y
+(Light) Skill Prep\25%\Ability\If the user is attuned to Light: fills 50% of skill gauges at the start of quests.\40\y
+(Light) Skill Prep\50%\Ability\If the user is attuned to Light: fills 50% of skill gauges at the start of quests.\60\y
+(Light) Stunned Punisher\15%\Ability\If the user is attuned to Light: increases damage to stunned enemies by 15%.\40\y
 (Shadow) Buff Time\15%\Ability\If the user is attuned to Shadow: increases duration of buff skills by 15%.\20\y
 (Shadow) Buff Time\20%\Ability\If the user is attuned to Shadow: increases duration of buff skills by 20%.\40\y
 (Shadow) Paralysis Res\25%\Ability\If the user is attuned to Shadow: reduces susceptibility to paralysis by 25%.\80\y
@@ -537,7 +542,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Water) Dull Res\-\Ability\If the user is attuned to Water: completely prevents dulling.\50\y
 (Water) Flurry Devastation\8%\Ability\If the user is attuned to Water: increases critical rate by 8% when the combo count is 15 or higher.\40\y
 (Water) Flurry Devastation\10%\Ability\If the user is attuned to Water: increases critical rate by 10% when the combo count is 15 or higher.\60\y
-(Water) HP 70 = Strength\5%\Ability\If the user is attuned to Water: increases strength by 5% when HP is 70% or above.\40\y
+(Water) HP 70% = Strength\5%\Ability\If the user is attuned to Water: increases strength by 5% when HP is 70% or above.\40\y
 (Water) Slayer's Strength\3%\Ability\If the user is attuned to Water: increases strength by 3% for every five enemies defeated (up to five times per quest).\40\y
 (Water) Slayer's Strength\4%\Ability\If the user is attuned to Water: increases strength by 4% for every five enemies defeated (up to five times per quest).\60\y
 (Water) Thaumian's Bane\10%\Ability\If the user is attuned to Water: increases damage to thaumians by 10%\20\y
@@ -557,11 +562,13 @@ Blindness Res\15%\Ability\Reduces susceptibility to blindness by 15%.\10\y
 Blindness Res\20%\Ability\Reduces susceptibility to blindness by 20%.\20\y
 Blindness Res\25%\Ability\Reduces susceptibility to blindness by 25%.\40\y
 Blindness Res\50%\Ability\Reduces susceptibility to blindness by 50%.\60\y
+Blindness Res\75%\Ability\Reduces susceptibility to blindness by 75%.\100\y
 Blindness Res\100%\Ability\Reduces susceptibility to blindness by 100%.\100\y
 Bog Res\15%\Ability\Reduces susceptibility to bog by 15%.\10\y
 Bog Res\20%\Ability\Reduces susceptibility to bog by 20%.\20\y
 Bog Res\25%\Ability\Reduces susceptibility to bog by 25%.\40\y
 Bog Res\50%\Ability\Reduces susceptibility to bog by 50%.\60\y
+Bog Res\75%\Ability\Reduces susceptibility to bog by 75%.\100\y
 Bog Res\100%\Ability\Reduces susceptibility to bog by 100%.\100\y
 Broken Punisher\10%\Ability\Increases damage to enemies in break state by 10%.\20\y
 Broken Punisher\15%\Ability\Increases damage to enemies in break state by 15%.\40\y
@@ -579,6 +586,7 @@ Burn Res\15%\Ability\Reduces susceptibility to burning by 15%.\10\n
 Burn Res\20%\Ability\Reduces susceptibility to burning by 20%.\20\n
 Burn Res\25%\Ability\Reduces susceptibility to burning by 25%.\40\n
 Burn Res\50%\Ability\Reduces susceptibility to burning by 50%.\60\n
+Burn Res\75%\Ability\Reduces susceptibility to burning by 75%.\100\n
 Burn Res\100%\Ability\Reduces susceptibility to burning by 100%.\100\n
 Burning Punisher\25%\Ability\Increases damage to burning enemies by 25%\80\y
 Critical Damage\8%\Ability\Increases the damage critical attacks inflict by 8%.\20\n
@@ -597,6 +605,7 @@ Curse Res\20%\Ability\Reduces susceptibility to curses by 20%.\20\y
 Curse Res\25%\Ability\Reduces susceptibility to curses by 25%.\40\y
 Curse Res\50%\Ability\Reduces susceptibility to curses by 50%.\60\y
 Curse Res\60%\Ability\Reduces susceptibility to curses by 60%.\70\y
+Curse Res\75%\Ability\Reduces susceptibility to curses by 75%.\100\y
 Curse Res\100%\Ability\Reduces susceptibility to curses by 100%.\100\y
 Demon's Bane\20%\Ability\Increases damage to demons by 20%.\60\y
 Demon's Bane\25%\Ability\Increases damage to demons by 25%.\80\y
@@ -639,6 +648,7 @@ Freeze Res\15%\Ability\Reduces susceptibility to freezing by 15%.\10\y
 Freeze Res\20%\Ability\Reduces susceptibility to freezing by 20%.\20\y
 Freeze Res\25%\Ability\Reduces susceptibility to freezing by 25%.\40\y
 Freeze Res\50%\Ability\Reduces susceptibility to freezing by 50%.\60\y
+Freeze Res\75%\Ability\Reduces susceptibility to freezing by 75%.\100\y
 Full HP = Blindness\50%\Ability\Increases the chances of inflicting blindness by 50% when HP is full.\80\y
 Full HP = Blindness\60%\Ability\Increases the chances of inflicting blindness by 60% when HP is full.\100\y
 Full HP = Bog\30%\Ability\Increases the chances of inflicting bog by 30% when HP is full.\50\y
@@ -688,27 +698,27 @@ Holiday Cheer\100%\Ability\Increases Holiday Cheer intake for clearing quests by
 Holiday Cheer\150%\Ability\Increases Holiday Cheer intake for clearing quests by 150%.\0\y
 Holiday Cheer\25%\Ability\Increases Holiday Cheer intake for clearing quests by 25%.\0\y
 Holiday Cheer\50%\Ability\Increases Holiday Cheer intake for clearing quests by 50%.\0\y
-HP 70 = Critical Rate\10%\Ability\Increases critical rate by 10% when HP is 70% or above.\100\y
-HP 70 = Critical Rate\15%\Ability\Adds 15% to the modifier applied to critical damage when HP is 70% or above.\60\y
-HP 70 = Critical Rate\5%\Ability\Increases critical rate by 5% when HP is 70% or above.\40\y
-HP 70 = Critical Rate\6%\Ability\Increases critical rate by 6% when HP is 70% or above.\60\y
-HP 70 = Critical Rate\8%\Ability\Increases critical rate by 8% when HP is 70% or above.\80\y
-HP 70 = Defense\10%\Ability\Increases defense by 10% when HP is 70% or above.\80\y
-HP 70 = Defense\3%\Ability\Increases defense by 3% when HP is 70% or above.\20\y
-HP 70 = Defense\5%\Ability\Increases defense by 5% when HP is 70% or above.\40\y
-HP 70 = Defense\8%\Ability\Increases defense by 8% when HP is 70% or above.\60\y
-HP 70 = Healing\10%\Ability\Increases the potency of recovery skills by 10% when HP is 70% or above.\60\y
-HP 70 = Healing\13%\Ability\Increases the potency of recovery skills by 13% when HP is 70% or above.\80\y
-HP 70 = Healing\15%\Ability\Increases the potency of recovery skills by 15% when HP is 70% or above.\100\y
-HP 70 = Skill Damage\20%\Ability\Increases attack skill damage by 20% when HP is 70% or above.\40\y
-HP 70 = Skill Damage\25%\Ability\Increases attack skill damage by 25% when HP is 70% or above.\60\y
-HP 70 = Skill Damage\30%\Ability\Increases attack skill damage by 30% when HP is 70% or above.\80\y
-HP 70 = Skill Damage\35%\Ability\Increases attack skill damage by 35% when HP is 70% or above.\100\y
-HP 70 = Strength\10%\Ability\Increases strength by 10% when HP is 70% or above.\80\y
-HP 70 = Strength\13%\Ability\Increases strength by 13% when HP is 70% or above.\100\y
-HP 70 = Strength\3%\Ability\Increases strength by 3% when HP is 70% or above.\20\y
-HP 70 = Strength\5%\Ability\Increases strength by 5% when HP is 70% or above.\40\y
-HP 70 = Strength\8%\Ability\Increases strength by 8% when HP is 70% or above.\60\y
+HP 70% = Critical Rate\5%\Ability\Increases critical rate by 5% when HP is 70% or above.\40\y
+HP 70% = Critical Rate\6%\Ability\Increases critical rate by 6% when HP is 70% or above.\60\y
+HP 70% = Critical Rate\8%\Ability\Increases critical rate by 8% when HP is 70% or above.\80\y
+HP 70% = Critical Rate\10%\Ability\Increases critical rate by 10% when HP is 70% or above.\100\y
+HP 70% = Critical Rate\15%\Ability\Adds 15% to the modifier applied to critical damage when HP is 70% or above.\60\y
+HP 70% = Defense\3%\Ability\Increases defense by 3% when HP is 70% or above.\20\y
+HP 70% = Defense\5%\Ability\Increases defense by 5% when HP is 70% or above.\40\y
+HP 70% = Defense\8%\Ability\Increases defense by 8% when HP is 70% or above.\60\y
+HP 70% = Defense\10%\Ability\Increases defense by 10% when HP is 70% or above.\80\y
+HP 70% = Healing\10%\Ability\Increases the potency of recovery skills by 10% when HP is 70% or above.\60\y
+HP 70% = Healing\13%\Ability\Increases the potency of recovery skills by 13% when HP is 70% or above.\80\y
+HP 70% = Healing\15%\Ability\Increases the potency of recovery skills by 15% when HP is 70% or above.\100\y
+HP 70% = Skill Damage\20%\Ability\Increases attack skill damage by 20% when HP is 70% or above.\40\y
+HP 70% = Skill Damage\25%\Ability\Increases attack skill damage by 25% when HP is 70% or above.\60\y
+HP 70% = Skill Damage\30%\Ability\Increases attack skill damage by 30% when HP is 70% or above.\80\y
+HP 70% = Skill Damage\35%\Ability\Increases attack skill damage by 35% when HP is 70% or above.\100\y
+HP 70% = Strength\3%\Ability\Increases strength by 3% when HP is 70% or above.\20\y
+HP 70% = Strength\5%\Ability\Increases strength by 5% when HP is 70% or above.\40\y
+HP 70% = Strength\8%\Ability\Increases strength by 8% when HP is 70% or above.\60\y
+HP 70% = Strength\10%\Ability\Increases strength by 10% when HP is 70% or above.\80\y
+HP 70% = Strength\13%\Ability\Increases strength by 13% when HP is 70% or above.\100\y
 Hypnos's Bane\30%\Ability\Increases damage to Hypnos by 30%.\0\y
 Hypnos's Bane\35%\Ability\Increases damage to Hypnos by 35%.\0\y
 Jupiter Res\15%\Ability\Reduces damage taken from Jupiter by 15%.\30\y
@@ -723,10 +733,10 @@ Last Recovery\I\Ability\Grants an HP regen buff healing you for 8% Max HP every 
 Last Recovery\II\Ability\Grants an HP regen buff healing you for 10% Max HP every 3.9 seconds for 20 seconds when HP drops to 30% (once per quest).\60\y
 Last Recovery\III\Ability\Grants an HP regen buff healing you for 12% Max HP every 3.9 seconds for 20 seconds when HP drops to 30% (once per quest).\80\y
 Last Recovery\IV\Ability\Grants an HP regen buff healing you for 14% Max HP every 3.9 seconds for 20 seconds when HP drops to 30% (once per quest).\100\y
-Light Res\10%\Ability\Reduces light damage taken by 10%.\80\y
 Light Res\3%\Ability\Reduces light damage taken by 3%.\20\y
 Light Res\5%\Ability\Reduces light damage taken by 5%.\40\y
 Light Res\8%\Ability\Reduces light damage taken by 8%.\60\y
+Light Res\10%\Ability\Reduces light damage taken by 10%.\80\y
 Loving Heart\-\Ability\Increases player EXP intake for clearing quests by 10%.\100\y
 Mana\3%\Ability\Increases mana intake for clearing quests by 3%.\10\y
 Mana\5%\Ability\Increases mana intake for clearing quests by 5%.\20\y
@@ -744,6 +754,7 @@ Paralysis Res\15%\Ability\Reduces susceptibility to paralysis by 15%.\10\y
 Paralysis Res\20%\Ability\Reduces susceptibility to paralysis by 20%.\20\y
 Paralysis Res\25%\Ability\Reduces susceptibility to paralysis by 25%.\40\y
 Paralysis Res\50%\Ability\Reduces susceptibility to paralysis by 50%.\60\y
+Paralysis Res\75%\Ability\Reduces susceptibility to paralysis by 75%.\100\y
 Phraeganoth's Bane\15%\Ability\Increases damage to Phraeganoth by 15%.\0\y
 Phraeganoth's Bane\20%\Ability\Increases damage to Phraeganoth by 20%.\0\y
 Phraeganoth's Bane\25%\Ability\Increases damage to Phraeganoth by 25%.\0\y
@@ -759,6 +770,7 @@ Poison Res\15%\Ability\Reduces susceptibility to poison by 15%.\10\y
 Poison Res\20%\Ability\Reduces susceptibility to poison by 20%.\20\y
 Poison Res\25%\Ability\Reduces susceptibility to poison by 25%.\40\y
 Poison Res\50%\Ability\Reduces susceptibility to poison by 50%.\60\y
+Poison Res\75%\Ability\Reduces susceptibility to poison by 75%.\100\y
 Poisoned Punisher\20%\Ability\Increases damage to poisoned enemies by 20%.\60\y
 Poisoned Punisher\25%\Ability\Increases damage to poisoned enemies by 25%.\80\y
 Recovery Potency\10%\Ability\Increases the potency of recovery skills by 10%.\80\n
@@ -811,6 +823,7 @@ Sleep Res\20%\Ability\Reduces susceptibility to sleep by 20%.\20\y
 Sleep Res\25%\Ability\Reduces susceptibility to sleep by 25%.\40\y
 Sleep Res\40%\Ability\Reduces susceptibility to sleep by 40%.\50\y
 Sleep Res\50%\Ability\Reduces susceptibility to sleep by 50%.\60\y
+Sleep Res\75%\Ability\Reduces susceptibility to sleep by 75%.\100\y
 Sleeping Punisher\20%\Ability\Increases damage to sleeping enemies by 20%.\60\y
 Snack-o'-Lanterns\25%\Ability\Increases Snack-o'-Lantern intake for clearing quests by 25%.\0\y
 Snack-o'-Lanterns\50%\Ability\Increases Snack-o'-Lantern intake for clearing quests by 50%.\0\y
@@ -835,6 +848,7 @@ Stun Res\15%\Ability\Reduces susceptibility to stun by 15%.\10\y
 Stun Res\20%\Ability\Reduces susceptibility to stun by 20%.\20\y
 Stun Res\25%\Ability\Reduces susceptibility to stun by 25%.\40\y
 Stun Res\50%\Ability\Reduces susceptibility to stun by 50%.\60\y
+Stun Res\75%\Ability\Reduces susceptibility to stun by 75%.\100\y
 Stunned Punisher\20%\Ability\Increases damage to stunned enemies by 20%.\60\y
 Stunned Punisher\25%\Ability\Increases damage to stunned enemies by 25%.\80\y
 Stunned Punisher\30%\Ability\Increases damage to stunned enemies by 30%.\100\y

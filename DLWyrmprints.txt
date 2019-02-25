@@ -6,7 +6,7 @@ Alberian Banner\3\Attack\10, 71\3, 25\Force Strike +10%;; Force Strike +20%\300,
 Armorer's Aspirations\4\Defense\23, 156\5, 37\Full HP = Defense +15%;; Full HP = Defense +20%;;;; Poison Res +15%;; Poison Res +20%\2000, 1000\Masorosuke
 Aromatherapy\3\Defense\11, 76\3, 20\Burn Res +15%;; Burn Res +20%\300, 150\ShuLa
 As the Snow Falls\4w\Defense\18, 123\4, 33\Curse Res +15%;; Curse Res +20%;;;; Last Recovery I;; Last Recovery II\2000, 100\onineko
-Astounding Trick\5w\Attack\22, 151\8, 54\HP 70 = Strength +8%;; HP 70 = Strength +10%;;;; Tent Canvas +25%;; Tent Canvas +50%;;;; Renown +25%;; Renown +50%\5000, 300\u-u-zan
+Astounding Trick\5w\Attack\22, 151\8, 54\HP 70% = Strength +8%;; HP 70% = Strength +10%;;;; Tent Canvas +25%;; Tent Canvas +50%;;;; Renown +25%;; Renown +50%\5000, 300\u-u-zan
 Auspex's Prayer\5\Healing\28, 187\7, 53\Full HP = Healing +13%;; Full HP = Healing +15%;;;; Curse Res +20%;; Curse Res +25%\5000, 3000\hsn
 Bellathorna\3\Support\10, 71\3, 25\Buff Time +10%;; Buff Time +15%\300, 150\Chiaki Negishi
 Better Together\4w\Defense\18, 122\5, 34\Sleep Res +15%;; Sleep Res +20%;;;; HP 70% = Strength +3%;; HP 70% = Strength +5%;;;; Hypnos's Bane +30%;; Hypnos's Bane +35%\2000, 100\Oyume
@@ -96,15 +96,15 @@ Stellar Show\5\Attack\26, 176\9, 65\Force Strike +30%;; Force Strike +40%;;;; Cr
 Syndicate Mask\3\Defense\11, 76\3, 20\Blindness Res +15%;; Blindness Res +20%\300, 150\Akira Miyazaki
 Take My Hand\5w\Healing\1, 118\1, 38\Recovery Potency +10%;; Recovery Potency +10%\5000, 300\
 Teatime\3\Support\10, 71\3, 25\Skill Prep +10%;; Skill Prep +15%\300, 150\ShuLa
-The Chocolatiers\5\Support\26, 178\9, 62\Skill Prep +50%;; Skill Prep +100%\5000, 3000\oyume
+The Chocolatiers\5s\Support\26, 178\9, 62\Skill Prep +50%;; Skill Prep +100%\5000, 3000\oyume
 The Greatest Gift\5w\Support\1, 10\1, 10\Happy Dragonyule!;; Happy Dragonyule!\5000, 300\Dragalia Lost Art Team
 The Halidom's Picnic\3\Defense\11, 76\3, 20\Sleep Res +15%;; Sleep Res +20%\300, 150\R-ko A-yama
 The Petal Queen\5w\Support\22, 151\7, 53\Energy Prep;; Energized Prep\5000, 300\Eri Yanagawa
 The Prince of Dragonyule\5s\Attack\26, 177\9, 63\Critical Damage +13%;; Critical Damage +15%;;;; (Water) Flurry Devastation +8%;; (Water) Flurry Devastation +10%;;;; Holiday Cheer +100%;; Holiday Cheer +150%\5000, 3000\Naoki Saito
-The Rose Prince\5\Support\29, 195\6, 46\(Flame) Affliction Guard I;; (Flame) Affliction Guard II;;;; Shield Prep I;; Shield Prep II\5000, 3000\sosuke miyana
+The Rose Prince\5s\Support\29, 195\6, 46\(Flame) Affliction Guard I;; (Flame) Affliction Guard II;;;; Shield Prep I;; Shield Prep II\5000, 3000\sosuke miyana
 The Warrioresses\4\Attack\21, 140\7, 52\Force Strike +20%;; Force Strike +30%;;;; Critical Damage +8%;; Critical Damage +10%\2000, 1000\Maki
 Together We Stand\4\Attack\21, 140\7, 52\Striker's Strength +3%;; Striker's Strength +4%;;;; Skill Damage +10%;; Skill Damage +15%\2000, 1000\Rino
-To My Beloved\3\Support\10, 71\3, 25\Skill Haste +10%;; Skill Haste +15%\300, 150\touhudashi
+To My Beloved\3s\Support\10, 71\3, 25\Skill Haste +10%;; Skill Haste +15%\300, 150\touhudashi
 Tough Love\5\Attack\26, 176\9, 65\Last Offense +30%;; Last Offense +40%;;;; Skill Damage +15%;; Skill Damage +20%\5000, 3000\N.A
 Tracks of Hope\3\Defense\11, 76\3, 20\Stun Res +15%;; Stun Res +20%\300, 150\Meso
 Trove of Knowledge\4\Defense\23, 156\5, 37\Stun Res +20%;; Stun Res +25%;;;; Wind Res +3%;; Wind Res +5%\2000, 1000\Nijihara
