@@ -219,6 +219,7 @@ def data_load()
   for i in 0...b.length
     b[i]=b[i].gsub("\n",'').split('\\'[0])
     b[i][1]=b[i][1].to_i
+    b[i][2]=b[i][2].split(', ')
     b[i][3]=b[i][3].split(', ')
     b[i][4]=b[i][4].split(', ')
     b[i][5]=b[i][5].split(';; ') unless b[i][5].nil?
@@ -860,7 +861,9 @@ end
 
 def enemy_emoji(k,bot)
   str=''
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Tribe_#{k[2]}"}
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][0]}"}
+  str="#{str}#{moji[0].mention unless moji.length<=0}"
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Tribe_#{k[2][1]}"}
   str="#{str}#{moji[0].mention unless moji.length<=0}"
   return str
 end
@@ -1427,7 +1430,12 @@ def disp_enemy_data(bot,event,args=nil)
   evn=event.message.text.downcase.split(' ')
   s2s=false if @shardizard==4 && evn.include?('smol')
   sklz=@askilities.map{|q| q}
-  str="#{enemy_emoji(k,bot)} **Tribe:** #{k[2]}\n**Maximum HP:** #{longFormattedNumber(k[1])}"
+  str=''
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][0].gsub('None','Null')}"}
+  str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][0]}" unless ['High Dragon','Void'].include?(k[2][2])
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Tribe_#{k[2][1]}"}
+  str="#{str}\n#{moji[0].mention unless moji.length<=0} **Tribe:** #{k[2][1]}"
+  str="#{str}\n**Maximum HP:** #{longFormattedNumber(k[1])}"
   flds=nil
   if s2s
     flds=[]
@@ -1455,11 +1463,11 @@ def disp_enemy_data(bot,event,args=nil)
     end
   end
   xcolor=0xE3F78B
-  xcolor=0xEF8663 if k[2]=='Thaumian'
-  xcolor=0x5AD363 if k[2]=='Physian'
-  xcolor=0xAD9087 if k[2]=='Therion'
-  xcolor=0x271B2F if k[2]=='Dragon'
-  xcolor=0x3B4DBB if k[2]=='Demon'
+  xcolor=0xEF8663 if k[2][1]=='Thaumian'
+  xcolor=0x5AD363 if k[2][1]=='Physian'
+  xcolor=0xAD9087 if k[2][1]=='Therion'
+  xcolor=0x271B2F if k[2][1]=='Dragon'
+  xcolor=0x3B4DBB if k[2][1]=='Demon'
   xpic="#{k[0].gsub(' ','_')}"
   if k[0].split(' ').include?('(Enemy)')
     xpic="#{xpic.gsub('_(Enemy)','')}'s_Trial"
@@ -1468,7 +1476,21 @@ def disp_enemy_data(bot,event,args=nil)
   end
   xpic=[nil,"https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/FightBanners/Banner_#{xpic}.png"]
   xpic='https://github.com/Rot8erConeX/BotanBot/blob/master/FightBanners/Matilda_5.png?raw=true' if k[0]=='Matilda'
-  create_embed(event,"__**#{k[0]}**__","#{str}",xcolor,nil,xpic,flds)
+  ftr=nil
+  ftr='For information about the enemies that spawn during the fight, try adding "Clone Wave 1" or "Clone Wave 2" to your message.' if k[0]=="Wandering Shroom" && !s2s
+  hdr="__**#{k[0]}**__"
+  if k[2][2]=='Void'
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][0].gsub('None','Null')}"}
+    hdr="#{moji[0].mention}<:Element_Void:548467446734913536> #{hdr}" if moji.length>0
+  elsif k[2][2]=='High Dragon'
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][0].gsub('None','Null')}"}
+    hdr="#{moji[0].mention} #{hdr}" if moji.length>0
+  end
+  create_embed(event,hdr,str,xcolor,ftr,xpic,flds)
+  if k[0]=="Wandering Shroom" && s2s
+    disp_enemy_data(bot,event,"Wandering Shroom, Clone Wave 1".split(' '))
+    disp_enemy_data(bot,event,"Wandering Shroom, Clone Wave 2".split(' '))
+  end
 end
 
 def disp_skill_data(bot,event,args=nil)
