@@ -1,0 +1,9 @@
+Wandering Shroom\246120\Light, Physian, Void\**Poison**, **Burn**, Freeze, **Blind**, **Stun**, **Curse**, **Bog**, **Sleep**\Paralysis\Disperse
+Wandering Shroom, Clone Wave 1\4000\Shadow, Physian\**Poison**, **Burn**, Freeze, **Paralysis**, **Blind**, **Stun**, **Bog**, **Sleep**\Poison\
+Wandering Shroom, Clone Wave 2\4000\Shadow, Physian\**Poison**, **Burn**, Freeze, **Paralysis**, **Blind**, **Stun**, **Bog**, **Sleep**\Poison\
+Steel Golem\265650\Flame, Thaumian, Void\**Freeze**, **Bog**\Burn\Dull
+Raging Manticore\264856\Shadow, Therion, Void\**Poison**, **Burn**, Freeze, **Paralysis**, **Blind**, **Stun**, **Curse**, **Bog**, **Sleep**\Curse, Poison\Fury
+Void Zephyr\407680\Wind, Dragon, Void\Burn\Sleep\Dragon Delay;; Dull
+High Midgardsormr (Enemy)\863164\Wind, Dragon, High Dragon\Burn\Stun\
+High Brunhilda (Enemy)\1039797\Flame, Dragon, High Dragon\~~None~~\Burn\
+Matilda\1\Flame, Demon, Meme\~~None~~\Poison, Burn, Freeze, Paralysis, Blind, Stun, Bog, Sleep, Curse\Wonder Guard

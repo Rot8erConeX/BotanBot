@@ -609,12 +609,14 @@ Curse Res\75%\Ability\Reduces susceptibility to curses by 75%.\100\y
 Curse Res\100%\Ability\Reduces susceptibility to curses by 100%.\100\y
 Demon's Bane\20%\Ability\Increases damage to demons by 20%.\60\y
 Demon's Bane\25%\Ability\Increases damage to demons by 25%.\80\y
+Disperse\-\Ability\Once the enemy's HP falls below a certain threshold, it will consume some of it's own HP to spawn a larger number of other shrooms.\-1\y
 Divine Gales\25%\Ability\Increases divine gale intake for clearing quests by 25%.\0\y
 Divine Gales\50%\Ability\Increases divine gale intake for clearing quests by 50%.\0\y
 Divine Gales\100%\Ability\Increases divine gale intake for clearing quests by 100%.\0\y
 Divine Gales\150%\Ability\Increases divine gale intake for clearing quests by 150%.\0\y
 Dragon Damage\6%\Ability\Adds 6% to the modifier applied to damage when in dragon form\80\y
 Dragon Damage\10%\Ability\Adds 10% to the modifier applied to damage when in dragon form\100\y
+Dragon Delay\-\Ability\Sets back the Dragon Gauge by 150%.\-1\y
 Dragon Time\8%\Ability\Extends shapeshift time by 8%.\50\n
 Dragon Time\10%\Ability\Extends shapeshift time by 10%.\60\n
 Dragon Time\15%\Ability\Extends shapeshift time by 15%.\80\n
@@ -622,6 +624,7 @@ Dragon Time\20%\Ability\Extends shapeshift time by 20%.\100\n
 Dragon's Claws\I\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 4% in total. On second shapeshift strength is increased by 10% in total. On third shapeshift strength is increased by 20% in total.\60\y
 Dragon's Claws\II\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 5% in total. On second shapeshift strength is increased by 13% in total. On third shapeshift strength is increased by 25% in total.\80\y
 Dragon's Claws\III\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 6% in total. On second shapeshift strength is increased by 15% in total. On third shapeshift strength is increased by 30% in total.\100\y
+Dull\-\Ability\The afflicted adventurer's weapon will be dulled, lowering their strength by 90%.\-1\y
 Energized: Strength\15%\Ability\Increases strength by 15% for 15 seconds each time the user is energized.\80\y
 Energized: Strength\20%\Ability\Increases strength by 20% for 15 seconds each time the user is energized.\100\y
 Energy Doublebuff\-\Ability\Increases energy level by one stage each time a defense up buff is received.\60\y
@@ -649,6 +652,7 @@ Freeze Res\20%\Ability\Reduces susceptibility to freezing by 20%.\20\y
 Freeze Res\25%\Ability\Reduces susceptibility to freezing by 25%.\40\y
 Freeze Res\50%\Ability\Reduces susceptibility to freezing by 50%.\60\y
 Freeze Res\75%\Ability\Reduces susceptibility to freezing by 75%.\100\y
+Fury\-\Ability\very angery boi\-1\y
 Full HP = Blindness\50%\Ability\Increases the chances of inflicting blindness by 50% when HP is full.\80\y
 Full HP = Blindness\60%\Ability\Increases the chances of inflicting blindness by 60% when HP is full.\100\y
 Full HP = Bog\30%\Ability\Increases the chances of inflicting bog by 30% when HP is full.\50\y
@@ -872,6 +876,7 @@ Wind Res\8%\Ability\Reduces wind damage taken by 8%.\60\y
 Windwhistle Grass\25%\Ability\Increases windwhistle grass intake for clearing quests by 25%.\0\y
 Windwhistle Grass\50%\Ability\Increases windwhistle grass intake for clearing quests by 50%.\0\y
 Windwhistle Grass\75%\Ability\Increases wind whistle grass intake for clearing quests by 75%.\0\y
+Wonder Guard\-\Ability\Only adventurers with the proper bane skill can damage this enemy\-1\y
 Woodland Blessing\50%\Ability\Reduces susceptibility to stun and sleep by 50%.\70\y
 Woodland Blessing\100%\Ability\Reduces susceptibility to stun and sleep by 100%.\100\y
 Zodiark Res\15%\Ability\Reduces damage taken from Zodiark by 15%.\30\y
