@@ -1507,7 +1507,7 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
   xcolor=0x3B4DBB if k[2][1]=='Demon'
   xcolor=0x495218 if k[2][1]=='Demihuman'
   xcolor=0x495218 if k[2][1]=='Human'
-  xcolor=0xD3C38D if k[2][1]=='Undead'
+  xcolor=0xAD82DE if k[2][1]=='Undead'
   xpic="#{k[0].gsub(' ','_')}"
   ftr=nil
   ftr='For information about the enemies that spawn during the fight, try adding "Clone Wave 1" or "Clone Wave 2" to your message.' if k[0]=="Wandering Shroom" && !s2s
@@ -2384,7 +2384,7 @@ def disp_mat_data(bot,event,args=nil)
     create_embed(event,"__**#{k[0]}**__","#{str}#{"\n\n**Searching Tags:**" unless flds.nil?}",0xE3F78B,nil,xpic,flds)
   end
 end  
- 
+
 def disp_banner(bot,event,args=nil)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
@@ -4456,7 +4456,25 @@ def roost(event,bot,args=nil,ignoreinputs=false)
   date=(((t2.to_i/60)/60)/24)
   str="#{str}\n"
   str="#{str}\n#{'~~' unless sftday==t.wday}Date assuming reset is at midnight: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]})"
-  str="#{str}\nDays since game release: #{longFormattedNumber(date)}#{'~~' unless sftday==t.wday}"
+  str="#{str}\nDays since game release: #{longFormattedNumber(date)}"
+  if t.month==12
+    t3=Time.new(t.year+1,1,1)
+  else
+    t3=Time.new(t.year,t.month+1,1)
+  end
+  t3=(t3-t).to_i
+  t4=[]
+  k=t3/86400
+  t4.push("#{longFormattedNumber(k)} days") if k>0
+  t3-=k*86400
+  k=t3/3600
+  t4.push("#{k} hours") if k>0
+  t3-=k*3600
+  k=t3/60
+  t4.push("#{k} minutes") if k>0
+  t3-=k*60
+  t4.push("#{t3} seconds") if t3>0
+  str="#{str}\nTime until Void Treasure Trade reset: #{t4.join(', ')}#{'~~' unless sftday==t.wday}"
   str3=''
   if sftday<0
     t+=24*60*60
@@ -4465,6 +4483,24 @@ def roost(event,bot,args=nil,ignoreinputs=false)
     date=(((t2.to_i/60)/60)/24)
     str="#{str}\n\nTomorrow's date: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]})"
     str="#{str}\nDays since game release, come tomorrow: #{longFormattedNumber(date)}"
+    if t.month==12
+      t3=Time.new(t.year+1,1,1)
+    else
+      t3=Time.new(t.year,t.month+1,1)
+    end
+    t3=(t3-t).to_i
+    t4=[]
+    k=t3/86400
+    t4.push("#{longFormattedNumber(k)} days") if k>0
+    t3-=k*86400
+    k=t3/3600
+    t4.push("#{k} hours") if k>0
+    t3-=k*3600
+    k=t3/60
+    t4.push("#{k} minutes") if k>0
+    t3-=k*60
+    t4.push("#{t3} seconds") if t3>0
+    str="#{str}\nTime until Void Treasure Trade reset, come tomorrow: #{t4.join(', ')}"
     str3='Tomorrow'
   elsif sftday != t.wday
     tmw=(sftday==t.wday+1)
@@ -4477,6 +4513,24 @@ def roost(event,bot,args=nil,ignoreinputs=false)
     str3="Next #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}"
     str="#{str}\n\n#{str3}'s date: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} #{'(Tomorrow)' if tmw}"
     str="#{str}\nDays since game release, come next #{str3.split(' ')[1]}: #{longFormattedNumber(date)}"
+    if t.month==12
+      t3=Time.new(t.year+1,1,1)
+    else
+      t3=Time.new(t.year,t.month+1,1)
+    end
+    t3=(t3-t).to_i
+    t4=[]
+    k=t3/86400
+    t4.push("#{longFormattedNumber(k)} days") if k>0
+    t3-=k*86400
+    k=t3/3600
+    t4.push("#{k} hours") if k>0
+    t3-=k*3600
+    k=t3/60
+    t4.push("#{k} minutes") if k>0
+    t3-=k*60
+    t4.push("#{t3} seconds") if t3>0
+    str="#{str}\nTime until Void Treasure Trade reset, come next #{str3.split(' ')[1]}: #{t4.join(', ')}"
   end
   str="#{str}\n\n__**#{"#{str3}'s " if str3.length>0}Expert Ruins:**__"
   str="#{str}\n*Open:* #{['<:Element_Null:532106087810334741>All','<:Element_Null:532106087810334741>All','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep'][t.wday]}"
@@ -4528,6 +4582,24 @@ def next_events(event,bot,args=nil)
   str="#{str}\n"
   str="#{str}\nDate assuming reset is at midnight: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]})"
   str="#{str}\nDays since game release: #{longFormattedNumber(date)}"
+  if t.month==12
+    t3=Time.new(t.year+1,1,1)
+  else
+    t3=Time.new(t.year,t.month+1,1)
+  end
+  t3=(t3-t).to_i
+  t4=[]
+  k=t3/86400
+  t4.push("#{longFormattedNumber(k)} days") if k>0
+  t3-=k*86400
+  k=t3/3600
+  t4.push("#{k} hours") if k>0
+  t3-=k*3600
+  k=t3/60
+  t4.push("#{k} minutes") if k>0
+  t3-=k*60
+  t4.push("#{t3} seconds") if t3>0
+  str="#{str}\nTime until Void Treasure Trade reset: #{t4.join(', ')}"
   mode=0
   for i in 0...args.length
     mode=1 if mode<1 && ['ruin','ruins'].include?(args[i])
