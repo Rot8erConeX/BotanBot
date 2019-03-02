@@ -4457,11 +4457,35 @@ def roost(event,bot,args=nil,ignoreinputs=false)
   str="#{str}\n"
   str="#{str}\n#{'~~' unless sftday==t.wday}Date assuming reset is at midnight: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]})"
   str="#{str}\nDays since game release: #{longFormattedNumber(date)}"
+  if t.wday==1
+    m=0
+  else
+    m=8-t.wday
+  end
+  t3=t+m*24*60*60
+  t3=Time.new(t3.year,t3.month,t3.day)
+  t3+=60*60 if t3.dst? && !t.dst?
+  t3=(t3-t).to_i
+  t4=[]
+  k=t3/86400
+  kx=k*1
+  kx+=7 if kx<0
+  t4.push("#{longFormattedNumber(kx)} days") if k%7>0
+  t3-=k*86400
+  k=t3/3600
+  t4.push("#{k} hours") if k>0
+  t3-=k*3600
+  k=t3/60
+  t4.push("#{k} minutes") if k>0
+  t3-=k*60
+  t4.push("#{t3} seconds") if t3>0
+  str="#{str}\nTime until High Dragon bonus chest reset: #{t4.join(', ')}"
   if t.month==12
     t3=Time.new(t.year+1,1,1)
   else
     t3=Time.new(t.year,t.month+1,1)
   end
+  t3+=60*60 if t3.dst? && !t.dst?
   t3=(t3-t).to_i
   t4=[]
   k=t3/86400
@@ -4483,11 +4507,35 @@ def roost(event,bot,args=nil,ignoreinputs=false)
     date=(((t2.to_i/60)/60)/24)
     str="#{str}\n\nTomorrow's date: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]})"
     str="#{str}\nDays since game release, come tomorrow: #{longFormattedNumber(date)}"
+    if t.wday==1
+      m=0
+    else
+      m=8-t.wday
+    end
+    t3=t+m*24*60*60
+    t3=Time.new(t3.year,t3.month,t3.day)
+    t3+=60*60 if t3.dst? && !t.dst?
+    t3=(t3-t).to_i
+    t4=[]
+    k=t3/86400
+    kx=k*1
+    kx+=7 if kx<0
+    t4.push("#{longFormattedNumber(kx)} days") if k%7>0
+    t3-=k*86400
+    k=t3/3600
+    t4.push("#{k} hours") if k>0
+    t3-=k*3600
+    k=t3/60
+    t4.push("#{k} minutes") if k>0
+    t3-=k*60
+    t4.push("#{t3} seconds") if t3>0
+    str="#{str}\nTime until High Dragon bonus chest reset, come tomorrow: #{t4.join(', ')}"
     if t.month==12
       t3=Time.new(t.year+1,1,1)
     else
       t3=Time.new(t.year,t.month+1,1)
     end
+    t3+=60*60 if t3.dst? && !t.dst?
     t3=(t3-t).to_i
     t4=[]
     k=t3/86400
@@ -4513,11 +4561,35 @@ def roost(event,bot,args=nil,ignoreinputs=false)
     str3="Next #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}"
     str="#{str}\n\n#{str3}'s date: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} #{'(Tomorrow)' if tmw}"
     str="#{str}\nDays since game release, come next #{str3.split(' ')[1]}: #{longFormattedNumber(date)}"
+    if t.wday==1
+      m=0
+    else
+      m=8-t.wday
+    end
+    t3=t+m*24*60*60
+    t3=Time.new(t3.year,t3.month,t3.day)
+    t3+=60*60 if t3.dst? && !t.dst?
+    t3=(t3-t).to_i
+    t4=[]
+    k=t3/86400
+    kx=k*1
+    kx+=7 if kx<0
+    t4.push("#{longFormattedNumber(kx)} days") if k%7>0
+    t3-=k*86400
+    k=t3/3600
+    t4.push("#{k} hours") if k>0
+    t3-=k*3600
+    k=t3/60
+    t4.push("#{k} minutes") if k>0
+    t3-=k*60
+    t4.push("#{t3} seconds") if t3>0
+    str="#{str}\nTime until High Dragon bonus chest reset, come next #{str3.split(' ')[1]}: #{t4.join(', ')}"
     if t.month==12
       t3=Time.new(t.year+1,1,1)
     else
       t3=Time.new(t.year,t.month+1,1)
     end
+    t3+=60*60 if t3.dst? && !t.dst?
     t3=(t3-t).to_i
     t4=[]
     k=t3/86400
