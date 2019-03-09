@@ -66,7 +66,7 @@ def all_commands(include_nil=false,permissions=-1)
      'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','dbxp',
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
      'weaponlevel','wxp','wexp','wlevel','victory','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage',
-     'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix']
+     'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop'] if permissions==2
   k=k.uniq
@@ -410,6 +410,8 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
     create_embed(event,"**#{command.downcase}** __name__","Shows the next day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\nAlso shows the next day's Expert Ruins, what difficulties are available, and what orbs and other mats come out of those.\nAlso shows the current day's shop mats.",0xCE456B)
   elsif ['next','schedule'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __type__","Shows the next time in-game daily events of the type `type` will happen.\nIf in PM and `type` is unspecified, shows the entire schedule.\n\n__*Accepted Inputs*__\nRuin(s)\nMat(s)\nShop, Store\nBond(s), Dragon(s)",0xCE456B)
+  elsif ['art'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __target__","Shows `target`'s art.  Target can be:\n- Adventurers\n- Dragons\n- Wyrmprints",0xCE456B)
   elsif ['embed','embeds'].include?(command.downcase)
     event << '**embed**'
     event << ''
@@ -444,6 +446,15 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
     else
       create_embed(event,"**#{command.downcase}** __\*filters__","Displays all adventurers, dragons, wyrmprints, and weapons that fit `filters`.\n\nYou can search by:\n- Rarity\n- Element\n- Weapon type\n- Class / Amulet type\n- Availability\n\nIn addition, dragons can be sorted by:\n- Dragon Roost Bond Gift preference\n- Whether or not the dragon turns to face damage sources\n- Whether or not the dragon is a ranged attacker\n\nIf too much data is trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
     end
+    lookout=[]
+    if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt')
+      lookout=[]
+      File.open('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt').each_line do |line|
+        lookout.push(eval line)
+      end
+    end
+    w=lookout.reject{|q| q[2]!='Skill'}.map{|q| q[0]}.sort
+    create_embed(event,'Tags','',0x40C0F0,nil,nil,triple_finish(w)) if safe_to_spam?(event) && !['mat','mats','material','materials','item','items'].include?(subcommand.downcase)
   elsif ['aliases','checkaliases','seealiases','alias'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s aliases.\nIf no name is listed, responds with a list of all aliases and who/what they are for.\n\nAliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Auras\n- Abilities\n- CoAbilities\n- Facilities\n- Materials\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
   elsif ['saliases','serveraliases'].include?(command.downcase)
@@ -493,6 +504,7 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
     str="#{str}\n\n`find` __\*filters__ - to find specific adventurers, dragons, wyrmprints, or weapons"
     str="#{str}\n`today` - to show data on current events (*also `daily` or `todayInDL`*)"
     str="#{str}\n`next` - to show data on cyclical events (*also `schedule`*)"
+    str="#{str}\n`art` __target__ - to show an adventurer's, dragon's, or wyrmprint's art"
     str="#{str}\n\n__**Meta Data**__"
     str="#{str}\n`invite` - for a link to invite me to your server"
     str="#{str}\n`snagstats` __type__ - to receive relevant bot stats"
@@ -1062,6 +1074,7 @@ def disp_adventurer_stats(bot,event,args=nil)
   str="#{str}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
   str="#{str}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
   str="#{str}\n**Zodiac Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='z'
+  str="#{str}\n**Unavailable**" if k[1].length>1 && k[1][1,1].downcase=='-'
   flds=nil
   xpic=nil
   sklz=@askilities.map{|q| q}
@@ -2536,6 +2549,597 @@ def disp_mat_data(bot,event,args=nil)
   end
 end  
 
+def disp_adventurer_art(bot,event,args=nil)
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_adventurer,args.join(' '),event)
+  if k.length.zero?
+    event.respond 'No matches found.'
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  s2s=false if @shardizard==4 && event.message.text.downcase.split(' ').include?('smol')
+  rar=0
+  lookout=[]
+  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt')
+    lookout=[]
+    File.open('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt').each_line do |line|
+      lookout.push(eval line)
+    end
+  end
+  lookout=lookout.reject{|q| q[2]!='Art' && q[2]!='Art/Adventurer'}
+  for i in 0...args.length
+    rar=args[i].to_i if rar==0 && args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<6
+    rar=args[i].to_i if rar==0 && args[i][1,1]=='*' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<6
+    for j in 0...lookout.length
+      rar=lookout[j][0] if [0,1,2,3,4,5].include?(rar) && lookout[j][1].include?(args[i].downcase)
+    end
+  end
+  if rar.is_a?(String)
+    art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Adventurers/#{k[0].gsub(' ','_')}_#{rar}.png"
+    IO.copy_stream(open(art), "C:/Users/Mini-Matt/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
+    if File.size("C:/Users/Mini-Matt/Desktop/devkit/FGOTemp#{@shardizard}.png")<=100 || m
+      rar=k[1][0,1].to_i
+      disp="#{generate_rarity_row(rar,true)}"
+    else
+      disp="#{rar} design"
+    end
+  else
+    rar=k[1][0,1].to_i if rar<k[1][0,1].to_i || rar>5
+    disp="#{generate_rarity_row(rar,true)}"
+  end
+  art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Adventurers/#{k[0].gsub(' ','_')}_#{rar}.png"
+  if args.include?('just') || args.include?('justart') || args.include?('blank') || args.include?('noinfo')
+    charsx=[[],[],[]]
+  else
+    nammes=['','','']
+    unless k[11].nil? || k[11].length<=0
+      m=k[11].split(' as ')
+      nammes[1]=m[0]
+      disp="#{disp}\n**VA (English):** #{m[m.length-1]}"
+    end
+    unless k[10].nil? || k[10].length<=0
+      m=k[10].split(' as ')
+      nammes[2]=m[0]
+      disp="#{disp}\n**VA (Japanese):** #{m[m.length-1]}"
+    end
+    charsx=[[],[],[]]
+    chars=@adventurers.reject{|q| q[0]==k[0] || ((q[10].nil? || q[10].length<=0) && (q[11].nil? || q[11].length<=0))}
+    for i in 0...chars.length
+      x=chars[i]
+      unless x[10].nil? || x[10].length<=0 || x[11].nil? || x[11].length<=0
+        m=x[10].split(' as ')
+        m2=x[11].split(' as ')
+        charsx[1].push("#{x[0]} *[Both]*") if m[0]==nammes[2] && m2[0]==nammes[1]
+      end
+      unless x[11].nil? || x[11].length<=0
+        m=x[11].split(' as ')
+        charsx[1].push("#{x[0]} *[English]*") if m[0]==nammes[1] && !charsx[1].include?("#{x[0]} *[Both]*")
+      end
+      unless x[10].nil? || x[10].length<=0
+        m=x[10].split(' as ')
+        charsx[1].push("#{x[0]} *[Japanese]*") if m[0]==nammes[2] && !charsx[1].include?("#{x[0]} *[Both]*")
+      end
+    end
+    chars=@dragons.reject{|q| q[0]==k[0] || ((q[13].nil? || q[13].length<=0) && (q[14].nil? || q[14].length<=0))}
+    for i in 0...chars.length
+      x=chars[i]
+      unless x[13].nil? || x[13].length<=0 || x[14].nil? || x[14].length<=0
+        m=x[13].split(' as ')
+        m2=x[14].split(' as ')
+        charsx[1].push("#{x[0]} *[Both]*") if m[0]==nammes[2] && m2[0]==nammes[1]
+      end
+      unless x[14].nil? || x[14].length<=0
+        m=x[14].split(' as ')
+        charsx[1].push("#{x[0]} *[English]*") if m[0]==nammes[1] && !charsx[1].include?("#{x[0]} *[Both]*")
+      end
+      unless x[13].nil? || x[13].length<=0
+        m=x[13].split(' as ')
+        charsx[1].push("#{x[0]} *[Japanese]*") if m[0]==nammes[2] && !charsx[1].include?("#{x[0]} *[Both]*")
+      end
+    end
+    if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/FEHUnits.txt')
+      b=[]
+      File.open('C:/Users/Mini-Matt/Desktop/devkit/FEHUnits.txt').each_line do |line|
+        b.push(line)
+      end
+    else
+      b=[]
+    end
+    for i in 0...b.length
+      b[i]=b[i].gsub("\n",'').split('\\'[0])
+      if !b[i][7].nil? && b[i][7].length>0 && !b[i][8].nil? && b[i][8].length>0
+        charsx[1].push("*[FEH]* #{b[i][0]} *[English]*") if b[i][7].split(' as ')[0]==k[11] && b[i][8].split(' as ')[0]!=k[10]
+        charsx[1].push("*[FEH]* #{b[i][0]} *[Japanese]*") if b[i][8].split(' as ')[0]==k[10] && b[i][7].split(' as ')[0]!=k[11]
+        charsx[1].push("*[FEH]* #{b[i][0]} *[Both]*") if b[i][8].split(' as ')[0]==k[10] && b[i][7].split(' as ')[0]==k[11]
+      elsif !b[i][7].nil? && b[i][7].length>0
+        charsx[1].push("*[FEH]* #{b[i][0]} *[English]*") if b[i][7].split(' as ')[0]==k[11]
+      elsif !b[i][8].nil? && b[i][8].length>0
+        charsx[1].push("*[FEH]* #{b[i][0]} *[Japanese]*") if b[i][8].split(' as ')[0]==k[10]
+      end
+    end
+    if event.server.nil? || !bot.user(502288364838322176).on(event.server.id).nil? || @shardizard==4
+      if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/FGOServants.txt')
+        b=[]
+        File.open('C:/Users/Mini-Matt/Desktop/devkit/FGOServants.txt').each_line do |line|
+          b.push(line)
+        end
+      else
+        b=[]
+      end
+      for i in 0...b.length
+        b[i]=b[i].gsub("\n",'').split('\\'[0])
+        unless nammes[2].nil? || nammes[2].length<=0 || b[i][25].nil? || b[i][25].length<=0
+          charsx[1].push("*[FGO]* Srv-#{b[i][0]}#{"#{'.' if b[i][0].to_i>=2}) #{b[i][1]}" unless @embedless.include?(event.user.id) || was_embedless_mentioned?(event)} *[Japanese]*") if b[i][25].split(' & ').include?(nammes[2])
+        end
+      end
+    end
+    disp='>No information<' if disp.length<=0
+  end
+  dispx="#{disp}"
+  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
+    disp="#{disp}\n" if charsx.map{|q| q.length}.max>0
+    disp="#{disp}\n**Same artist:** #{charsx[0].join(', ')}" if charsx[0].length>0
+    if charsx[1].length>0
+      disp="#{disp}\n**Same VA:**"
+      disp2=""
+      c=charsx[1].reject{|q| !q.include?('*[English]*')}.map{|q| q.gsub(' *[English]*','')}
+      disp2="#{disp2}\n*English only:* #{c.join(', ')}" if c.length>0
+      c=charsx[1].reject{|q| !q.include?('*[Japanese]*')}.map{|q| q.gsub(' *[Japanese]*','')}
+      disp2="#{disp2}\n*Japanese only:* #{c.join(', ')}" if c.length>0
+      c=charsx[1].reject{|q| !q.include?('*[Both]*')}.map{|q| q.gsub(' *[Both]*','')}
+      disp2="#{disp2}\n*Both languages:* #{c.join(', ')}" if c.length>0
+      disp2=disp2[1,disp2.length-1]
+      if disp2.include?("\n")
+        disp="#{disp}\n#{disp2}"
+      else
+        disp="#{disp} #{disp2}"
+      end
+    end
+    disp="#{disp}\n**Same __everything__:** #{charsx[2].join(', ')}" if charsx[2].length>0
+    disp=dispx if disp.length>=1900
+    event.respond "#{disp}\n\n#{art}"
+  else
+    flds=[]
+    flds.push(['Same Artist',charsx[0].join("\n")]) if charsx[0].length>0
+    if charsx[1].length>0
+      if charsx[1].length==charsx[1].reject{|q| !q.include?('*[English]*')}.length
+        flds.push(['Same VA (English)',charsx[1].map{|q| q.gsub(' *[English]*','')}.join("\n")])
+      elsif charsx[1].length==charsx[1].reject{|q| !q.include?('*[Japanese]*')}.length
+        flds.push(['Same VA (Japanese)',charsx[1].map{|q| q.gsub(' *[Japanese]*','')}.join("\n")])
+      elsif charsx[1].length==charsx[1].reject{|q| !q.include?('*[Both]*')}.length
+        flds.push(['Same VA (Both)',charsx[1].map{|q| q.gsub(' *[Both]*','')}.join("\n")])
+      else
+        flds.push(['Same VA',charsx[1].join("\n")])
+      end
+    end
+    flds.push(['Same everything',charsx[2].join("\n"),1]) if charsx[2].length>0
+    if flds.length.zero?
+      flds=nil
+    elsif flds.map{|q| q.join("\n")}.join("\n\n").length>=1500 && safe_to_spam?(event)
+      event.channel.send_embed("__**#{k[0]}**__#{adv_emoji(k,bot)}") do |embed|
+        embed.description=disp
+        embed.color=element_color(k[2][1])
+        embed.image = Discordrb::Webhooks::EmbedImage.new(url: art)
+      end
+      if flds.map{|q| q.join("\n")}.join("\n\n").length>=1900
+        for i in 0...flds.length
+          event.channel.send_embed('') do |embed|
+            embed.color=element_color(k[2][1])
+            embed.add_field(name: flds[i][0], value: flds[i][1], inline: true)
+          end
+        end
+      else
+        event.channel.send_embed('') do |embed|
+          embed.color=element_color(k[2][1])
+          unless flds.nil?
+            for i in 0...flds.length
+              embed.add_field(name: flds[i][0], value: flds[i][1], inline: true)
+            end
+          end
+        end
+      end
+      return nil
+    elsif flds.map{|q| q.join("\n")}.join("\n\n").length>=1800
+      disp="#{disp}\nThe list of units with the same VA is so long that I cannot fit it into a single embed. Please use this command in PM."
+      flds=nil
+    else
+      flds[-1][2]=nil if flds.length<3
+      flds[-1].compact!
+    end
+    event.channel.send_embed("__**#{k[0]}**#{adv_emoji(k,bot)}__") do |embed|
+      embed.description=disp
+      embed.color=element_color(k[2][1])
+      unless flds.nil?
+        for i in 0...flds.length
+          embed.add_field(name: flds[i][0], value: flds[i][1], inline: flds[i][2].nil?)
+        end
+      end
+      embed.image = Discordrb::Webhooks::EmbedImage.new(url: art)
+    end
+  end
+end
+
+def disp_dragon_art(bot,event,args=nil)
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_dragon,args.join(' '),event)
+  if k.length.zero?
+    event.respond 'No matches found.'
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  s2s=false if @shardizard==4 && event.message.text.downcase.split(' ').include?('smol')
+  disp=''
+  lookout=[]
+  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt')
+    lookout=[]
+    File.open('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt').each_line do |line|
+      lookout.push(eval line)
+    end
+  end
+  lookout=lookout.reject{|q| q[2]!='Art' && q[2]!='Art/Adventurer'}
+  for i in 0...args.length
+    for j in 0...lookout.length
+      rar=lookout[j][0] if rar.nil? && lookout[j][1].include?(args[i].downcase)
+    end
+  end
+  rar='Human' if rar.nil? && k[0]=='Brunhilda' && args[i].include?('mym')
+  if !rar.nil? && rar.is_a?(String)
+    art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Dragons/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
+    IO.copy_stream(open(art), "C:/Users/Mini-Matt/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
+    if File.size("C:/Users/Mini-Matt/Desktop/devkit/FGOTemp#{@shardizard}.png")<=100 || m
+      rar=nil
+    else
+      disp="#{rar} design"
+    end
+  end
+  if args.include?('just') || args.include?('justart') || args.include?('blank') || args.include?('noinfo')
+    charsx=[[],[],[]]
+  else
+    nammes=['','','']
+    unless k[14].nil? || k[14].length<=0
+      m=k[14].split(' as ')
+      nammes[1]=m[0]
+      disp="#{disp}\n**VA (English):** #{m[m.length-1]}"
+    end
+    unless k[13].nil? || k[13].length<=0
+      m=k[13].split(' as ')
+      nammes[2]=m[0]
+      disp="#{disp}\n**VA (Japanese):** #{m[m.length-1]}"
+    end
+    charsx=[[],[],[]]
+    chars=@adventurers.reject{|q| q[0]==k[0] || ((q[10].nil? || q[10].length<=0) && (q[11].nil? || q[11].length<=0))}
+    for i in 0...chars.length
+      x=chars[i]
+      unless x[10].nil? || x[10].length<=0 || x[11].nil? || x[11].length<=0
+        m=x[10].split(' as ')
+        m2=x[11].split(' as ')
+        charsx[1].push("#{x[0]} *[Both]*") if m[0]==nammes[2] && m2[0]==nammes[1]
+      end
+      unless x[11].nil? || x[11].length<=0
+        m=x[11].split(' as ')
+        charsx[1].push("#{x[0]} *[English]*") if m[0]==nammes[1] && !charsx[1].include?("#{x[0]} *[Both]*")
+      end
+      unless x[10].nil? || x[10].length<=0
+        m=x[10].split(' as ')
+        charsx[1].push("#{x[0]} *[Japanese]*") if m[0]==nammes[2] && !charsx[1].include?("#{x[0]} *[Both]*")
+      end
+    end
+    chars=@dragons.reject{|q| q[0]==k[0] || ((q[13].nil? || q[13].length<=0) && (q[14].nil? || q[14].length<=0))}
+    for i in 0...chars.length
+      x=chars[i]
+      unless x[13].nil? || x[13].length<=0 || x[14].nil? || x[14].length<=0
+        m=x[13].split(' as ')
+        m2=x[14].split(' as ')
+        charsx[1].push("#{x[0]} *[Both]*") if m[0]==nammes[2] && m2[0]==nammes[1]
+      end
+      unless x[14].nil? || x[14].length<=0
+        m=x[14].split(' as ')
+        charsx[1].push("#{x[0]} *[English]*") if m[0]==nammes[1] && !charsx[1].include?("#{x[0]} *[Both]*")
+      end
+      unless x[13].nil? || x[13].length<=0
+        m=x[13].split(' as ')
+        charsx[1].push("#{x[0]} *[Japanese]*") if m[0]==nammes[2] && !charsx[1].include?("#{x[0]} *[Both]*")
+      end
+    end
+    if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/FEHUnits.txt')
+      b=[]
+      File.open('C:/Users/Mini-Matt/Desktop/devkit/FEHUnits.txt').each_line do |line|
+        b.push(line)
+      end
+    else
+      b=[]
+    end
+    for i in 0...b.length
+      b[i]=b[i].gsub("\n",'').split('\\'[0])
+      if !b[i][7].nil? && b[i][7].length>0 && !b[i][8].nil? && b[i][8].length>0
+        charsx[1].push("*[FEH]* #{b[i][0]} *[English]*") if b[i][7].split(' as ')[0]==k[14] && b[i][8].split(' as ')[0]!=k[13]
+        charsx[1].push("*[FEH]* #{b[i][0]} *[Japanese]*") if b[i][8].split(' as ')[0]==k[13] && b[i][7].split(' as ')[0]!=k[14]
+        charsx[1].push("*[FEH]* #{b[i][0]} *[Both]*") if b[i][8].split(' as ')[0]==k[13] && b[i][7].split(' as ')[0]==k[14]
+      elsif !b[i][7].nil? && b[i][7].length>0
+        charsx[1].push("*[FEH]* #{b[i][0]} *[English]*") if b[i][7].split(' as ')[0]==k[14]
+      elsif !b[i][8].nil? && b[i][8].length>0
+        charsx[1].push("*[FEH]* #{b[i][0]} *[Japanese]*") if b[i][8].split(' as ')[0]==k[13]
+      end
+    end
+    if event.server.nil? || !bot.user(502288364838322176).on(event.server.id).nil? || @shardizard==4
+      if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/FGOServants.txt')
+        b=[]
+        File.open('C:/Users/Mini-Matt/Desktop/devkit/FGOServants.txt').each_line do |line|
+          b.push(line)
+        end
+      else
+        b=[]
+      end
+      for i in 0...b.length
+        b[i]=b[i].gsub("\n",'').split('\\'[0])
+        unless nammes[2].nil? || nammes[2].length<=0 || b[i][25].nil? || b[i][25].length<=0
+          charsx[1].push("*[FGO]* Srv-#{b[i][0]}#{"#{'.' if b[i][0].to_i>=2}) #{b[i][1]}" unless @embedless.include?(event.user.id) || was_embedless_mentioned?(event)} *[Japanese]*") if b[i][25].split(' & ').include?(nammes[2])
+        end
+      end
+    end
+    disp='>No information<' if disp.length<=0
+  end
+  art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Dragons/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
+  dispx="#{disp}"
+  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
+    disp="#{disp}\n" if charsx.map{|q| q.length}.max>0
+    disp="#{disp}\n**Same artist:** #{charsx[0].join(', ')}" if charsx[0].length>0
+    if charsx[1].length>0
+      disp="#{disp}\n**Same VA:**"
+      disp2=""
+      c=charsx[1].reject{|q| !q.include?('*[English]*')}.map{|q| q.gsub(' *[English]*','')}
+      disp2="#{disp2}\n*English only:* #{c.join(', ')}" if c.length>0
+      c=charsx[1].reject{|q| !q.include?('*[Japanese]*')}.map{|q| q.gsub(' *[Japanese]*','')}
+      disp2="#{disp2}\n*Japanese only:* #{c.join(', ')}" if c.length>0
+      c=charsx[1].reject{|q| !q.include?('*[Both]*')}.map{|q| q.gsub(' *[Both]*','')}
+      disp2="#{disp2}\n*Both languages:* #{c.join(', ')}" if c.length>0
+      disp2=disp2[1,disp2.length-1]
+      if disp2.include?("\n")
+        disp="#{disp}\n#{disp2}"
+      else
+        disp="#{disp} #{disp2}"
+      end
+    end
+    disp="#{disp}\n**Same __everything__:** #{charsx[2].join(', ')}" if charsx[2].length>0
+    disp=dispx if disp.length>=1900
+    event.respond "#{disp}\n\n#{art}"
+  else
+    flds=[]
+    flds.push(['Same Artist',charsx[0].join("\n")]) if charsx[0].length>0
+    if charsx[1].length>0
+      if charsx[1].length==charsx[1].reject{|q| !q.include?('*[English]*')}.length
+        flds.push(['Same VA (English)',charsx[1].map{|q| q.gsub(' *[English]*','')}.join("\n")])
+      elsif charsx[1].length==charsx[1].reject{|q| !q.include?('*[Japanese]*')}.length
+        flds.push(['Same VA (Japanese)',charsx[1].map{|q| q.gsub(' *[Japanese]*','')}.join("\n")])
+      elsif charsx[1].length==charsx[1].reject{|q| !q.include?('*[Both]*')}.length
+        flds.push(['Same VA (Both)',charsx[1].map{|q| q.gsub(' *[Both]*','')}.join("\n")])
+      else
+        flds.push(['Same VA',charsx[1].join("\n")])
+      end
+    end
+    flds.push(['Same everything',charsx[2].join("\n"),1]) if charsx[2].length>0
+    if flds.length.zero?
+      flds=nil
+    elsif flds.map{|q| q.join("\n")}.join("\n\n").length>=1500 && safe_to_spam?(event)
+      event.channel.send_embed("__**#{k[0]}**__#{dragon_emoji(k,bot)}") do |embed|
+        embed.description=disp
+        embed.color=element_color(k[2])
+        embed.image = Discordrb::Webhooks::EmbedImage.new(url: art)
+      end
+      if flds.map{|q| q.join("\n")}.join("\n\n").length>=1900
+        for i in 0...flds.length
+          event.channel.send_embed('') do |embed|
+            embed.color=element_color(k[2])
+            embed.add_field(name: flds[i][0], value: flds[i][1], inline: true)
+          end
+        end
+      else
+        event.channel.send_embed('') do |embed|
+          embed.color=element_color(k[2])
+          unless flds.nil?
+            for i in 0...flds.length
+              embed.add_field(name: flds[i][0], value: flds[i][1], inline: true)
+            end
+          end
+        end
+      end
+      return nil
+    elsif flds.map{|q| q.join("\n")}.join("\n\n").length>=1800
+      disp="#{disp}\nThe list of units with the same VA is so long that I cannot fit it into a single embed. Please use this command in PM."
+      flds=nil
+    else
+      flds[-1][2]=nil if flds.length<3
+      flds[-1].compact!
+    end
+    event.channel.send_embed("__**#{k[0]}**#{dragon_emoji(k,bot)}__") do |embed|
+      embed.description=disp
+      embed.color=element_color(k[2])
+      unless flds.nil?
+        for i in 0...flds.length
+          embed.add_field(name: flds[i][0], value: flds[i][1], inline: flds[i][2].nil?)
+        end
+      end
+      embed.image = Discordrb::Webhooks::EmbedImage.new(url: art)
+    end
+  end
+end
+
+def disp_wyrmprint_art(bot,event,args=nil)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_wyrmprint,args.join(' '),event)
+  if k.length.zero?
+    event.respond 'No matches found.'
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  evn=event.message.text.downcase.split(' ')
+  s2s=false if @shardizard==4 && evn.include?('smol')
+  xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Wyrmprints/#{k[0].gsub(' ','_')}_1.png"
+  xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Wyrmprints/#{k[0].gsub(' ','_')}_2.png" if has_any?(['mub','unbind','unbound','refined'],evn)
+  str=generate_rarity_row(k[1][0,1].to_i)
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2]}"}
+  str="#{str}\n#{moji[0].mention unless moji.length<=0} **Amulet Type:** #{k[2]}"
+  xcolor=0x313439
+  xcolor=0x5A0408 if k[2]=='Attack'
+  xcolor=0x00205A if k[2]=='Defense'
+  xcolor=0x39045A if k[2]=='Support'
+  xcolor=0x005918 if k[2]=='Healing'
+  disp=''
+  if args.include?('just') || args.include?('justart') || args.include?('blank') || args.include?('noinfo')
+    charsx=[[],[],[]]
+  else
+    nammes=['','','']
+    unless k[7].nil? || k[7].length<=0
+      m=k[7].split(' as ')
+      nammes[0]=m[0]
+      disp="#{disp}\n**Artist:** #{m[m.length-1]}"
+    end
+    charsx=[[],[],[]]
+    chars=@wyrmprints.reject{|q| q[0]==k[0] || ((q[7].nil? || q[7].length<=0))}
+    for i in 0...chars.length
+      x=chars[i]
+      unless x[7].nil? || x[7].length<=0
+        m=x[7].split(' as ')
+        charsx[0].push("#{x[0]}") if m[0]==nammes[0]
+      end
+    end
+    if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/FEHUnits.txt')
+      b=[]
+      File.open('C:/Users/Mini-Matt/Desktop/devkit/FEHUnits.txt').each_line do |line|
+        b.push(line)
+      end
+    else
+      b=[]
+    end
+    for i in 0...b.length
+      b[i]=b[i].gsub("\n",'').split('\\'[0])
+      if !b[i][6].nil? && b[i][6].length>0
+        charsx[0].push("*[FEH]* #{b[i][0]}") if b[i][6].split(' as ')[0]==nammes[0]
+      end
+    end
+    if event.server.nil? || !bot.user(502288364838322176).on(event.server.id).nil? || @shardizard==4
+      if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/FGOServants.txt')
+        b=[]
+        File.open('C:/Users/Mini-Matt/Desktop/devkit/FGOServants.txt').each_line do |line|
+          b.push(line)
+        end
+      else
+        b=[]
+      end
+      for i in 0...b.length
+        b[i]=b[i].gsub("\n",'').split('\\'[0])
+        unless nammes[0].nil? || nammes[0].length<=0 || b[i][24].nil? || b[i][24].length<=0
+          charsx[0].push("*[FGO]* Srv-#{b[i][0]}#{"#{'.' if b[i][0].to_i>=2}) #{b[i][1]}" unless @embedless.include?(event.user.id) || was_embedless_mentioned?(event)}") if b[i][24]==nammes[0]
+        end
+      end
+      if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/FGOCraftEssances.txt')
+        b=[]
+        File.open('C:/Users/Mini-Matt/Desktop/devkit/FGOCraftEssances.txt').each_line do |line|
+          b.push(line)
+        end
+      else
+        b=[]
+      end
+      for i in 0...b.length
+        b[i]=b[i].gsub("\n",'').split('\\'[0])
+        unless nammes[0].nil? || nammes[0].length<=0 || b[i][9].nil? || b[i][9].length<=0
+          charsx[0].push("*[FGO]* CE-#{b[i][0]}#{".) #{b[i][1]}" unless @embedless.include?(event.user.id) || was_embedless_mentioned?(event)}") if b[i][9]==nammes[0]
+        end
+      end
+    end
+    disp='>No information<' if disp.length<=0
+  end
+  dispx="#{disp}"
+  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
+    disp="#{disp}\n" if charsx.map{|q| q.length}.max>0
+    disp="#{disp}\n**Same artist:** #{charsx[0].join(', ')}" if charsx[0].length>0
+    if charsx[1].length>0
+      disp="#{disp}\n**Same VA:**"
+      disp2=""
+      c=charsx[1].reject{|q| !q.include?('*[English]*')}.map{|q| q.gsub(' *[English]*','')}
+      disp2="#{disp2}\n*English only:* #{c.join(', ')}" if c.length>0
+      c=charsx[1].reject{|q| !q.include?('*[Japanese]*')}.map{|q| q.gsub(' *[Japanese]*','')}
+      disp2="#{disp2}\n*Japanese only:* #{c.join(', ')}" if c.length>0
+      c=charsx[1].reject{|q| !q.include?('*[Both]*')}.map{|q| q.gsub(' *[Both]*','')}
+      disp2="#{disp2}\n*Both languages:* #{c.join(', ')}" if c.length>0
+      disp2=disp2[1,disp2.length-1]
+      if disp2.include?("\n")
+        disp="#{disp}\n#{disp2}"
+      else
+        disp="#{disp} #{disp2}"
+      end
+    end
+    disp="#{disp}\n**Same __everything__:** #{charsx[2].join(', ')}" if charsx[2].length>0
+    disp=dispx if disp.length>=1900
+    event.respond "#{disp}\n\n#{xpic}"
+  else
+    flds=[]
+    flds.push(['Same Artist',charsx[0].join("\n")]) if charsx[0].length>0
+    if charsx[1].length>0
+      if charsx[1].length==charsx[1].reject{|q| !q.include?('*[English]*')}.length
+        flds.push(['Same VA (English)',charsx[1].map{|q| q.gsub(' *[English]*','')}.join("\n")])
+      elsif charsx[1].length==charsx[1].reject{|q| !q.include?('*[Japanese]*')}.length
+        flds.push(['Same VA (Japanese)',charsx[1].map{|q| q.gsub(' *[Japanese]*','')}.join("\n")])
+      elsif charsx[1].length==charsx[1].reject{|q| !q.include?('*[Both]*')}.length
+        flds.push(['Same VA (Both)',charsx[1].map{|q| q.gsub(' *[Both]*','')}.join("\n")])
+      else
+        flds.push(['Same VA',charsx[1].join("\n")])
+      end
+    end
+    flds.push(['Same everything',charsx[2].join("\n"),1]) if charsx[2].length>0
+    if flds.length.zero?
+      flds=nil
+    elsif flds.map{|q| q.join("\n")}.join("\n\n").length>=1500 && safe_to_spam?(event)
+      event.channel.send_embed("__**#{k[0]}**__#{print_emoji(k,bot)}") do |embed|
+        embed.description=disp
+        embed.color=xcolor
+        embed.image = Discordrb::Webhooks::EmbedImage.new(url: xpic)
+      end
+      if flds.map{|q| q.join("\n")}.join("\n\n").length>=1900
+        for i in 0...flds.length
+          event.channel.send_embed('') do |embed|
+            embed.color=xcolor
+            embed.add_field(name: flds[i][0], value: flds[i][1], inline: true)
+          end
+        end
+      else
+        event.channel.send_embed('') do |embed|
+          embed.color=xcolor
+          unless flds.nil?
+            for i in 0...flds.length
+              embed.add_field(name: flds[i][0], value: flds[i][1], inline: true)
+            end
+          end
+        end
+      end
+      return nil
+    elsif flds.map{|q| q.join("\n")}.join("\n\n").length>=1800
+      disp="#{disp}\nThe list of units with the same VA is so long that I cannot fit it into a single embed. Please use this command in PM."
+      flds=nil
+    else
+      flds[-1][2]=nil if flds.length<3
+      flds[-1].compact!
+    end
+    event.channel.send_embed("__**#{k[0]}**#{print_emoji(k,bot)}__") do |embed|
+      embed.description=disp
+      embed.color=xcolor
+      unless flds.nil?
+        for i in 0...flds.length
+          embed.add_field(name: flds[i][0], value: flds[i][1], inline: flds[i][2].nil?)
+        end
+      end
+      embed.image = Discordrb::Webhooks::EmbedImage.new(url: xpic)
+    end
+  end
+end
+  
 def disp_banner(bot,event,args=nil)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
@@ -2794,6 +3398,9 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
         char=char.reject{|q| !q[20].include?(tags[i])}.uniq
       end
     end
+  end
+  for i in 0...char.length
+    char[i][0]="*#{char[i][0]}*" if char[i][1].length>1 && char[i][1][1,1]=='-'
   end
   if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event)
     event.respond "Too much data is trying to be displayed.  Please use this command in PM." if mode==0
@@ -3320,7 +3927,7 @@ def find_adventurers(bot,event,args=nil)
   return nil if k.nil?
   search=k[0]
   char=k[1]
-  char=char.sort{|a,b| a[0]<=>b[0]}.map{|q| q[0]}.uniq
+  char=char.sort{|a,b| a[0].gsub('*','')<=>b[0].gsub('*','')}.map{|q| q[0]}.uniq
   textra=k[3]
   if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || char.join("\n").length+search.join("\n").length>=1900
     str="__**Adventurer Search**__\n#{search.join("\n")}\n\n__**Results**__"
@@ -3470,7 +4077,7 @@ def find_all(bot,event,args=nil)
   wrm=[[],[],[],''] if wrm.nil?
   wpn=[[],[],[],''] if wpn.nil?
   wrm[4]=wrm[1].length
-  adv[1]=adv[1].sort{|a,b| a[0]<=>b[0]}.map{|q| q[0]}.uniq
+  adv[1]=adv[1].sort{|a,b| a[0].gsub('*','')<=>b[0].gsub('*','')}.map{|q| q[0]}.uniq
   drg[1]=drg[1].sort{|a,b| a[0]<=>b[0]}.map{|q| q[0]}.uniq
   wrm[1]=wrm[1].sort{|a,b| a[0]<=>b[0]}.map{|q| q[0]}.uniq
   wpn[1]=wpn[1].sort{|a,b| a[0]<=>b[0]}.map{|q| q[0]}.uniq
@@ -5645,6 +6252,10 @@ bot.command([:adventurer,:adv,:unit]) do |event, *args|
     args.shift
     level(event,bot,args,2)
     return nil
+  elsif ['art'].include?(args[0].downcase)
+    args.shift
+    disp_adventurer_art(bot,event,args)
+    return nil
   elsif ['alt','alts'].include?(args[0].downcase)
     args.shift
     find_adv_alts(event,args,bot)
@@ -5667,6 +6278,10 @@ bot.command([:dragon,:drg]) do |event, *args|
     args.shift
     find_dragon_alts(event,args,bot)
     return nil
+  elsif ['art'].include?(args[0].downcase)
+    args.shift
+    disp_dragon_art(bot,event,args)
+    return nil
   end
   disp_dragon_stats(bot,event,args)
 end
@@ -5680,6 +6295,10 @@ bot.command([:wyrmprint,:wyrm,:print]) do |event, *args|
   elsif ['level','xp','exp'].include?(args[0].downcase)
     args.shift
     level(event,bot,args,5)
+    return nil
+  elsif ['art'].include?(args[0].downcase)
+    args.shift
+    disp_wyrmprint_art(bot,event,args)
     return nil
   end
   disp_wyrmprint_stats(bot,event,args)
@@ -5728,6 +6347,32 @@ bot.command([:mat,:material,:item]) do |event, *args|
   disp_mat_data(bot,event,args)
 end
 
+bot.command([:art]) do |event, *args|
+  return nil if overlap_prevent(event)
+  if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
+    disp_adventurer_art(bot,event,args)
+  elsif ['dragon','dragons','drg'].include?(args[0].downcase)
+    disp_dragon_art(bot,event,args)
+  elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
+    disp_wyrmprint_art(bot,event,args)
+  elsif find_data_ex(:find_adventurer,args.join(' '),event,true).length>0
+    disp_adventurer_art(bot,event,args)
+  elsif find_data_ex(:find_dragon,args.join(' '),event,true).length>0
+    disp_dragon_art(bot,event,args)
+  elsif find_data_ex(:find_wyrmprint,args.join(' '),event,true).length>0
+    disp_wyrmprint_art(bot,event,args)
+  elsif find_data_ex(:find_adventurer,args.join(' '),event).length>0
+    disp_adventurer_art(bot,event,args)
+  elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
+    disp_dragon_art(bot,event,args)
+  elsif find_data_ex(:find_wyrmprint,args.join(' '),event).length>0
+    disp_wyrmprint_art(bot,event,args)
+  else
+    event.respond 'No matches found'
+  end
+  return nil
+end
+
 bot.command([:enemy,:boss]) do |event, *args|
   return nil if overlap_prevent(event)
   disp_enemy_data(bot,event,args)
@@ -5765,7 +6410,7 @@ bot.command([:find,:search,:list,:lookup]) do |event, *args|
     args.shift
     find_adventurers(bot,event,args)
     return nil
-  elsif ['dragon','dragons'].include?(args[0].downcase)
+  elsif ['dragon','dragons','drg'].include?(args[0].downcase)
     args.shift
     find_dragons(bot,event,args)
     return nil
@@ -7023,6 +7668,7 @@ bot.mention do |event|
     else
       find_all(bot,event,args)
     end
+  elsif ['art'].include?(args[0].downcase)
   elsif ['alts','alt'].include?(args[0].downcase)
     m=false
     args.shift
@@ -7049,6 +7695,9 @@ bot.mention do |event|
     elsif ['alt','alts'].include?(args[0].downcase)
       args.shift
       find_adv_alts(event,args,bot)
+    elsif ['art'].include?(args[0].downcase)
+      args.shift
+      disp_adventurer_art(bot,event,args)
     else
       disp_adventurer_stats(bot,event,args)
     end
@@ -7064,6 +7713,9 @@ bot.mention do |event|
     elsif ['alt','alts'].include?(args[0].downcase)
       args.shift
       find_dragon_alts(event,args,bot)
+    elsif ['art'].include?(args[0].downcase)
+      args.shift
+      disp_dragon_art(bot,event,args)
     else
       disp_dragon_stats(bot,event,args)
     end
@@ -7076,6 +7728,9 @@ bot.mention do |event|
     elsif ['level','xp','exp'].include?(args[0].downcase)
       args.shift
       level(event,bot,args,5)
+    elsif ['art'].include?(args[0].downcase)
+      args.shift
+      disp_wyrmprint_art(bot,event,args)
     else
       disp_wyrmprint_stats(bot,event,args)
     end
