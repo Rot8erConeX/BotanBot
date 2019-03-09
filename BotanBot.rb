@@ -2763,6 +2763,7 @@ end
 
 def disp_dragon_art(bot,event,args=nil)
   args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.map{|q| q.downcase}
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
   k=find_data_ex(:find_dragon,args.join(' '),event)
   if k.length.zero?
@@ -2780,13 +2781,14 @@ def disp_dragon_art(bot,event,args=nil)
       lookout.push(eval line)
     end
   end
-  lookout=lookout.reject{|q| q[2]!='Art' && q[2]!='Art/Adventurer'}
+  lookout=lookout.reject{|q| q[2]!='Art' && q[2]!='Art/Dragon'}
   for i in 0...args.length
     for j in 0...lookout.length
       rar=lookout[j][0] if rar.nil? && lookout[j][1].include?(args[i].downcase)
     end
   end
-  rar='Human' if rar.nil? && k[0]=='Brunhilda' && args[i].include?('mym')
+  puts rar
+  rar='Human' if rar.nil? && k[0]=='Brunhilda' && args.include?('mym')
   if !rar.nil? && rar.is_a?(String)
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Dragons/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
     IO.copy_stream(open(art), "C:/Users/Mini-Matt/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
@@ -3139,7 +3141,42 @@ def disp_wyrmprint_art(bot,event,args=nil)
     end
   end
 end
-  
+
+def disp_boss_art(bot,event,args=nil)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_enemy,args.join(' '),event)
+  if k.length.zero?
+    event.respond 'No matches found.'
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  evn=event.message.text.downcase.split(' ')
+  s2s=false if @shardizard==4 && evn.include?('smol')
+  xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Bosses/#{k[0].gsub(' ','_')}.png"
+  xcolor=0xE3F78B
+  xcolor=0xEF8663 if k[2][1]=='Thaumian'
+  xcolor=0x5AD363 if k[2][1]=='Physian'
+  xcolor=0xAD9087 if k[2][1]=='Therion'
+  xcolor=0x271B2F if k[2][1]=='Dragon'
+  xcolor=0x3B4DBB if k[2][1]=='Demon'
+  xcolor=0x495218 if k[2][1]=='Demihuman'
+  xcolor=0x495218 if k[2][1]=='Human'
+  xcolor=0xAD82DE if k[2][1]=='Undead'
+  str="__**#{k[0]}**__"
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][0].gsub('None','Null')}"}
+  str="#{str}#{moji[0].mention unless moji.length<=0}"
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Tribe_#{k[2][1]}"}
+  str="#{str}#{moji[0].mention unless moji.length<=0}"
+  str2=''
+  m=false
+  IO.copy_stream(open(art), "C:/Users/Mini-Matt/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
+  str2='No art found' if File.size("C:/Users/Mini-Matt/Desktop/devkit/FGOTemp#{@shardizard}.png")<=100 || m
+  create_embed(event,str,str2,xcolor,nil,[nil,xpic])
+end
+
 def disp_banner(bot,event,args=nil)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
@@ -6355,10 +6392,14 @@ bot.command([:art]) do |event, *args|
     disp_dragon_art(bot,event,args)
   elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
     disp_wyrmprint_art(bot,event,args)
+  elsif ['enemy','boss'].include?(args[0].downcase)
+    disp_wyrmprint_art(bot,event,args)
   elsif find_data_ex(:find_adventurer,args.join(' '),event,true).length>0
     disp_adventurer_art(bot,event,args)
   elsif find_data_ex(:find_dragon,args.join(' '),event,true).length>0
     disp_dragon_art(bot,event,args)
+  elsif find_data_ex(:find_enemy,args.join(' '),event,true).length>0
+    disp_boss_art(bot,event,args)
   elsif find_data_ex(:find_wyrmprint,args.join(' '),event,true).length>0
     disp_wyrmprint_art(bot,event,args)
   elsif find_data_ex(:find_adventurer,args.join(' '),event).length>0
@@ -6367,6 +6408,8 @@ bot.command([:art]) do |event, *args|
     disp_dragon_art(bot,event,args)
   elsif find_data_ex(:find_wyrmprint,args.join(' '),event).length>0
     disp_wyrmprint_art(bot,event,args)
+  elsif find_data_ex(:find_enemy,args.join(' '),event).length>0
+    disp_boss_art(bot,event,args)
   else
     event.respond 'No matches found'
   end
@@ -7669,6 +7712,33 @@ bot.mention do |event|
       find_all(bot,event,args)
     end
   elsif ['art'].include?(args[0].downcase)
+    if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
+      disp_adventurer_art(bot,event,args)
+    elsif ['dragon','dragons','drg'].include?(args[0].downcase)
+      disp_dragon_art(bot,event,args)
+    elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
+      disp_wyrmprint_art(bot,event,args)
+    elsif ['enemy','boss'].include?(args[0].downcase)
+      disp_wyrmprint_art(bot,event,args)
+    elsif find_data_ex(:find_adventurer,args.join(' '),event,true).length>0
+      disp_adventurer_art(bot,event,args)
+    elsif find_data_ex(:find_dragon,args.join(' '),event,true).length>0
+      disp_dragon_art(bot,event,args)
+    elsif find_data_ex(:find_enemy,args.join(' '),event,true).length>0
+      disp_boss_art(bot,event,args)
+    elsif find_data_ex(:find_wyrmprint,args.join(' '),event,true).length>0
+      disp_wyrmprint_art(bot,event,args)
+    elsif find_data_ex(:find_adventurer,args.join(' '),event).length>0
+      disp_adventurer_art(bot,event,args)
+    elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
+      disp_dragon_art(bot,event,args)
+    elsif find_data_ex(:find_wyrmprint,args.join(' '),event).length>0
+      disp_wyrmprint_art(bot,event,args)
+    elsif find_data_ex(:find_enemy,args.join(' '),event).length>0
+      disp_boss_art(bot,event,args)
+    else
+      event.respond 'No matches found'
+    end
   elsif ['alts','alt'].include?(args[0].downcase)
     m=false
     args.shift
