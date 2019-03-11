@@ -37,6 +37,69 @@ else
 end
 bot.gateway.check_heartbeat_acks = false
 
+def shard_data(mode=0,ignoredebug=false,s=nil)
+  s=@shards*1 if s.nil?
+  if mode==0 # shard icons + names
+    k=['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null'] if s<=4
+    k=['<:Element_Shadow:532106088154267658> Shadow','<:Element_Flame:532106087952810005> Fire','<:Element_Water:532106088221376522> Water','<:Element_Wind:532106087948746763> Wind','<:Element_Null:532106087810334741> Null','<:Element_Light:532106088129101834> Light','<:Element_Void:548467446734913536> Void'] if s>4 && s<7
+    k=['<:Weapon_Lance:532106114792423448> Lance','<:Weapon_Sword:532106114540634113> Sword','<:Weapon_Blade:532106114628714496> Blade','<:Weapon_Dagger:532106116025286656> Dagger','<:Element_Null:532106087810334741> Null','<:Weapon_Axe:532106114188443659> Axe','<:Weapon_Bow:532106114909732864> Bow','<:Weapon_Wand:532106114985099264> Wand','<:Weapon_Staff:532106114733441024> Staff'] if s>6
+    if s>8
+      k2=['<:Weapon_Sword:532106114540634113> Sword','<:Weapon_Blade:532106114628714496> Blade','<:Weapon_Dagger:532106116025286656> Dagger','<:Weapon_Axe:532106114188443659> Axe','<:Weapon_Bow:532106114909732864> Bow','<:Weapon_Lance:532106114792423448> Lance','<:Weapon_Wand:532106114985099264> Wand','<:Weapon_Staff:532106114733441024> Staff']
+      i=2
+      while k.length<s+1
+        k3=k2.map{|q| "#{q}#{i}"}
+        for j in 0...k3.length
+          k.push(k3[j])
+        end
+        i+=1
+      end
+    end
+  elsif mode==1 # shard icons without names
+    k=['<:Type_Defense:532107867264909314>','<:Type_Attack:532107867520630784>','<:Type_Healing:532107867348533249>','<:Type_Support:532107867575156747>','<:Element_Null:532106087810334741>'] if s<=4
+    k=['<:Element_Shadow:532106088154267658>','<:Element_Flame:532106087952810005>','<:Element_Water:532106088221376522>','<:Element_Wind:532106087948746763>','<:Element_Null:532106087810334741>','<:Element_Light:532106088129101834>','<:Element_Void:548467446734913536>'] if s>4 && s<7
+    k=['<:Weapon_Lance:532106114792423448>','<:Weapon_Sword:532106114540634113>','<:Weapon_Blade:532106114628714496>','<:Weapon_Dagger:532106116025286656>','<:Element_Null:532106087810334741>','<:Weapon_Axe:532106114188443659>','<:Weapon_Bow:532106114909732864>','<:Weapon_Wand:532106114985099264>','<:Weapon_Staff:532106114733441024>'] if s>6
+    if s>8
+      k2=['<:Weapon_Sword:532106114540634113>','<:Weapon_Blade:532106114628714496>','<:Weapon_Dagger:532106116025286656>','<:Weapon_Axe:532106114188443659>','<:Weapon_Bow:532106114909732864>','<:Weapon_Lance:532106114792423448>','<:Weapon_Wand:532106114985099264>','<:Weapon_Staff:532106114733441024>']
+      i=2
+      while k.length<s+1
+        k3=k2.map{|q| "#{q}*#{i}*"}
+        for j in 0...k3.length
+          k.push(k3[j])
+        end
+        i+=1
+      end
+    end
+  elsif mode==2 # shard names without icons
+    k=['Defense','Attack','Healing','Support','Null'] if s<=4
+    k=['Shadow','Fire','Water','Wind','Null','Light','Void'] if s>4 && s<7
+    k=['Lance','Sword','Blade','Dagger','Null','Axe','Bow','Wand','Staff'] if s>6
+    if s>8
+      k2=['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff']
+      i=2
+      while k.length<s+1
+        k3=k2.map{|q| "#{q}#{i}"}
+        for j in 0...k3.length
+          k.push(k3[j])
+        end
+        i+=1
+      end
+    end
+  elsif mode==3 # bright command prompt text color
+    k=['B','C','A','D','F'] if s<=4
+    k=['C','B','A','9','F','E','7'] if s>4 && s<7
+    return 'F'*(s+1) if s>6
+  end
+  if ignoredebug
+    k[4]=nil
+    k.compact!
+  end
+  return k.join('') if mode>2
+  return k
+end
+
+system("color 0#{shard_data(3)[@shardizard,1]}")
+system("title loading #{shard_data(2)[@shardizard]} BotanBot")
+
 @adventurers=[]
 @dragons=[]
 @wyrmprints=[]
@@ -76,7 +139,7 @@ end
 
 def safe_to_spam?(event,chn=nil) # determines whether or not it is safe to send extremely long messages
   return true if event.server.nil? # it is safe to spam in PM
-  return true if [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,523821178670940170,523830882453422120,523824424437415946,523825319916994564,523822789308841985,532083509083373579].include?(event.server.id) # it is safe to spam in the emoji servers
+  return true if [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,523824424437415946,523825319916994564,523822789308841985,532083509083373579].include?(event.server.id) # it is safe to spam in the emoji servers
   chn=event.channel if chn.nil?
   return true if ['bots','bot'].include?(chn.name.downcase) # channels named "bots" are safe to spam in
   return true if chn.name.downcase.include?('bot') && chn.name.downcase.include?('spam') # it is safe to spam in any bot spam channel
@@ -278,11 +341,31 @@ def metadata_load()
   @ignored=[] if @ignored.nil?
   @server_data=b[2]
   @server_data=[[0,0,0,0,0],[0,0,0,0,0]] if @server_data.nil? || @server_data.length<=0
+  if @server_data[0].length<@shards+1
+    for i in 0...@shards+1
+      @server_data[0][i]=0 if @server_data[0][i].nil?
+    end
+  end
+  if @server_data[1].length<@shards+1
+    for i in 0...@shards+1
+      @server_data[1][i]=0 if @server_data[1][i].nil?
+    end
+  end
   @spam_channels=b[3]
   @spam_channels=[] if @spam_channels.nil?
 end
 
 def metadata_save()
+  if @server_data[0].length<@shards+1
+    for i in 0...@shards+1
+      @server_data[0][i]=0 if @server_data[0][i].nil?
+    end
+  end
+  if @server_data[1].length<@shards+1
+    for i in 0...@shards+1
+      @server_data[1][i]=0 if @server_data[1][i].nil?
+    end
+  end
   x=[@embedless.map{|q| q}, @ignored.map{|q| q}, @server_data.map{|q| q}, @spam_channels.map{|q| q}]
   open('C:/Users/Mini-Matt/Desktop/devkit/DLSave.txt', 'w') { |f|
     f.puts x[0].to_s
@@ -458,7 +541,8 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
   elsif ['aliases','checkaliases','seealiases','alias'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s aliases.\nIf no name is listed, responds with a list of all aliases and who/what they are for.\n\nAliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Auras\n- Abilities\n- CoAbilities\n- Facilities\n- Materials\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
   elsif ['saliases','serveraliases'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s server-specific aliases.\nIf no name is listed, responds with a list of all server-specific aliases and who/what they are for.\n\nAliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Auras\n- Abilities\n- CoAbilities\n- Facilities\n- Materials\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+  elsif ['tools','links','resources','tool','link','resource'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}**","Responds with a list of links useful to players of *Dragalia Lost*.",0xCE456B)
   elsif command.downcase=='snagstats'
     subcommand='' if subcommand.nil?
     if ['server','servers','member','members','shard','shards','users','user'].include?(subcommand.downcase)
@@ -506,6 +590,7 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
     str="#{str}\n`next` - to show data on cyclical events (*also `schedule`*)"
     str="#{str}\n`art` __target__ - to show an adventurer's, dragon's, or wyrmprint's art"
     str="#{str}\n\n__**Meta Data**__"
+    str="#{str}\n`tools` - for a list of tools other than me that can help you"
     str="#{str}\n`invite` - for a link to invite me to your server"
     str="#{str}\n`snagstats` __type__ - to receive relevant bot stats"
     str="#{str}\n`spam` - to determine if the current location is safe for me to send long replies to (*also `safetospam` or `safe2spam`*)"
@@ -551,9 +636,9 @@ end
 def overlap_prevent(event) # used to prevent servers with both Botan and her debug form from receiving two replies
   if event.server.nil? # failsafe code catching PMs as not a server
     return false
-  elsif event.message.text.downcase.split(' ').include?('debug') && [443172595580534784,443704357335203840,443181099494146068,449988713330769920,497429938471829504,523821178670940170,523830882453422120,523824424437415946,523825319916994564,523822789308841985,532083509083373579].include?(event.server.id)
+  elsif event.message.text.downcase.split(' ').include?('debug') && [443172595580534784,443704357335203840,443181099494146068,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,523824424437415946,523825319916994564,523822789308841985,532083509083373579].include?(event.server.id)
     return @shardizard != 4 # the debug bot can be forced to be used in the emoji servers by including the word "debug" in your message
-  elsif [443172595580534784,443704357335203840,443181099494146068,449988713330769920,497429938471829504,523821178670940170,523830882453422120,523824424437415946,523825319916994564,523822789308841985,532083509083373579].include?(event.server.id) # emoji servers will use default Elise otherwise
+  elsif [443172595580534784,443704357335203840,443181099494146068,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,523824424437415946,523825319916994564,523822789308841985,532083509083373579].include?(event.server.id) # emoji servers will use default Elise otherwise
     return @shardizard == 4
   end
   return false
@@ -3437,9 +3522,10 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
     end
   end
   for i in 0...char.length
-    char[i][0]="*#{char[i][0]}*" if char[i][1].length>1 && char[i][1][1,1]=='-'
+    char[i][0]="~~#{char[i][0]}~~" if char[i][1].length>1 && char[i][1][1,1]=='-' && char[i][0].include?('*')
+    char[i][0]="*#{char[i][0]}*" if char[i][1].length>1 && char[i][1][1,1]=='-' && !char[i][0].include?('*')
   end
-  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event)
+  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
     event.respond "Too much data is trying to be displayed.  Please use this command in PM." if mode==0
     return nil
   else
@@ -3608,7 +3694,7 @@ def find_in_dragons(bot,event,args=nil,mode=0)
       end
     end
   end
-  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event)
+  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
     event.respond "Too much data is trying to be displayed.  Please use this command in PM." if mode==0
     return nil
   else
@@ -3702,7 +3788,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0)
     char=char.reject{|q| !m.include?(q[1])}.uniq
     search.push("*Filters*: #{fltr.join(', ')}")
   end
-  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event)
+  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
     event.respond "Too much data is trying to be displayed.  Please use this command in PM." if mode==0
     return nil
   else
@@ -3751,7 +3837,7 @@ def find_in_weapons(bot,event,args=nil,mode=0)
     fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
     fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
     fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons'].include?(args[i].downcase)
-    fltr.push('Summon') if ['summon','summons','summonable','summonables'].include?(args[i].downcase)
+   # fltr.push('PseudoSummon') if ['summon','summons','summonable','summonables'].include?(args[i].downcase)
     fltr.push('Paid') if ['payment','paid','paying','whale'].include?(args[i].downcase)
     fltr.push('Void') if ['void'].include?(args[i].downcase)
     for i2 in 0...lookout.length
@@ -3886,7 +3972,7 @@ def find_in_weapons(bot,event,args=nil,mode=0)
       end
     end
   end
-  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event)
+  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
     event.respond "Too much data is trying to be displayed.  Please use this command in PM." if mode==0
     return nil
   else
@@ -3948,7 +4034,7 @@ def find_in_mats(bot,event,args=nil,mode=0)
       end
     end
   end
-  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+textra.length>=1900) && !safe_to_spam?(event)
+  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+textra.length>=1900) && !safe_to_spam?(event) && mode<2
     event.respond "Too much data is trying to be displayed.  Please use this command in PM." if mode==0
     return nil
   else
@@ -5272,7 +5358,7 @@ def roost(event,bot,args=nil,ignoreinputs=false)
   args=args.map{|q| q.downcase}
   t=Time.now
   timeshift=7
-  timeshift-=1 unless t.dst?
+  timeshift-=1 unless (t-24*60*60).dst?
   t-=60*60*timeshift
   sftday=-2
   for i in 0...args.length
@@ -5483,7 +5569,7 @@ def next_events(event,bot,args=nil)
   args=args.map{|q| q.downcase}
   t=Time.now
   timeshift=7
-  timeshift-=1 unless t.dst?
+  timeshift-=1 unless (t-24*60*60).dst?
   t-=60*60*timeshift
   str="Time elapsed since today's reset: #{"#{t.hour} hours, " if t.hour>0}#{"#{'0' if t.min<10}#{t.min} minutes, " if t.hour>0 || t.min>0}#{'0' if t.sec<10}#{t.sec} seconds"
   str="#{str}\nTime until tomorrow's reset: #{"#{23-t.hour} hours, " if 23-t.hour>0}#{"#{'0' if 59-t.min<10}#{59-t.min} minutes, " if 23-t.hour>0 || 59-t.min>0}#{'0' if 60-t.sec<10}#{60-t.sec} seconds"
@@ -6728,7 +6814,7 @@ end
 
 bot.command([:bugreport, :suggestion, :feedback]) do |event, *args|
   return nil if overlap_prevent(event)
-  bug_report(bot,event,args,4,['Defense','Attack','Healing','Support','Null'],'Class',@prefix,532083509083373583)
+  bug_report(bot,event,args,@shards,shard_data(0),'Shard',['dl!','dl?'],532083509083373583)
 end
 
 bot.command([:donation, :donate]) do |event, uid|
@@ -6738,18 +6824,38 @@ end
 
 bot.command([:shard,:attribute]) do |event, i|
   return nil if overlap_prevent(event)
-  if i.to_i.to_s==i && i.to_i.is_a?(Integer) && @shardizard != 4
+  if j.to_i.to_s==j
+    j=j.to_i
+    if j>256*256 && i.to_i.to_s==i && i.to_i<=256*256
+      k=j*1
+      j=i.to_i
+      i=k*1
+    end
+  else
+    j=@shards*1
+  end
+  if (i.to_i.to_s==i || i.to_i==i) && i.to_i>256*256
     srv=(bot.server(i.to_i) rescue nil)
-    if srv.nil? || bot.user(502288364838322176).on(srv.id).nil?
-      event.respond "I am not in that server, but it would be assigned the #{['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null'][(i.to_i >> 22) % 4]} Class."
+    if @shardizard ==4 && j != @shards
+      event.respond "In a system of #{j} shards, that server would use #{shard_data(0,true,j)[(i.to_i >> 22) % j]} Shards."
+    elsif @shardizard ==4
+      event.respond "That server uses/would use #{shard_data(0,true,j)[(i.to_i >> 22) % j]} Shards."
+    elsif srv.nil? || bot.user(312451658908958721).on(srv.id).nil?
+      event.respond "I am not in that server, but it would use #{shard_data(0,true,j)[(i.to_i >> 22) % j]} Shards #{"(in a system of #{j} shards)" if j != @shards}."
+    elsif j != @shards
+      event.respond "In a system of #{j} shards, *#{srv.name}* would use #{shard_data(0,true,j)[(i.to_i >> 22) % j]} Shards."
     else
-      event.respond "#{srv.name} is assigned the #{['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null'][(i.to_i >> 22) % 4]} Class."
+      event.respond "*#{srv.name}* uses #{shard_data(0,true,j)[(i.to_i >> 22) % j]} Shards."
     end
     return nil
+  elsif i.to_i.to_s==i
+    j=i.to_i*1
+    i=0
   end
-  event.respond 'This is the debug mode, which is assigned the <:Element_Null:532106087810334741> Null Class.' if @shardizard==4
-  event.respond 'PMs always are assigned the <:Type_Defense:532107867264909314> Defense Class.' if event.server.nil?
-  event.respond "This server is assigned the #{['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null'][(event.server.id >> 22) % 4]} Class." unless event.server.nil? || @shardizard==4
+  event.respond "This is the debug mode, which uses #{shard_data(0,false,j)[4]} Shards." if @shardizard==4
+  event.respond "PMs always use #{shard_data(0,true,j)[0]} Shards." if event.server.nil? && @shardizard != 4
+  event.respond "In a system of #{j} shards, this server would #{shard_data(0,true,j)[(event.server.id >> 22) % j]} Shards." unless event.server.nil? || @shardizard==4 || j == @shards
+  event.respond "This server uses #{shard_data(0,true,j)[(event.server.id >> 22) % j]} Shards." unless event.server.nil? || @shardizard==4 || j != @shards
 end
 
 bot.command([:safe,:spam,:safetospam,:safe2spam,:long,:longreplies]) do |event, f|
@@ -6758,7 +6864,7 @@ bot.command([:safe,:spam,:safetospam,:safe2spam,:long,:longreplies]) do |event, 
   metadata_load()
   if event.server.nil?
     event.respond 'It is safe for me to send long replies here because this is my PMs with you.'
-  elsif [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,523821178670940170,523830882453422120,523824424437415946,523825319916994564,523822789308841985,532083509083373579].include?(event.server.id)
+  elsif [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,523824424437415946,523825319916994564,523822789308841985,532083509083373579].include?(event.server.id)
     event.respond 'It is safe for me to send long replies here because this is one of my emoji servers.'
   elsif @shardizard==4
     event.respond 'It is safe for me to send long replies here because this is my debug mode.'
@@ -6975,15 +7081,18 @@ bot.command(:snagstats) do |event, f, f2|
   @server_data[1][@shardizard]=bot.users.size
   metadata_save()
   if ['servers','server','members','member','shard','shards','user','users'].include?(f.downcase)
-    event << "**I am in #{longFormattedNumber(@server_data[0].inject(0){|sum,x| sum + x })} servers, reaching #{longFormattedNumber(@server_data[1].inject(0){|sum,x| sum + x })} unique members.**"
-    event << "#{longFormattedNumber(@server_data[0][0])} server#{"s are" if @server_data[0][0]!=1}#{" is" unless @server_data[0][0]!=1} assigned the <:Type_Defense:532107867264909314> Defense class, reaching #{longFormattedNumber(@server_data[1][0])} unique members."
-    event << "#{longFormattedNumber(@server_data[0][1])} server#{"s are" if @server_data[0][1]!=1}#{" is" unless @server_data[0][1]!=1} assigned the <:Type_Attack:532107867520630784> Attack class, reaching #{longFormattedNumber(@server_data[1][1])} unique members."
-    event << "#{longFormattedNumber(@server_data[0][2])} server#{"s are" if @server_data[0][2]!=1}#{" is" unless @server_data[0][2]!=1} assigned the <:Type_Healing:532107867348533249> Healing class, reaching #{longFormattedNumber(@server_data[1][2])} unique members."
-    event << "#{longFormattedNumber(@server_data[0][3])} server#{"s are" if @server_data[0][3]!=1}#{" is" unless @server_data[0][3]!=1} assigned the <:Type_Support:532107867575156747> Support class, reaching #{longFormattedNumber(@server_data[1][3])} unique members."
-    event << "#{longFormattedNumber(@server_data[0][4])} server#{"s are" if @server_data[0][4]!=1}#{" is" unless @server_data[0][4]!=1} assigned <:Element_Null:532106087810334741> no class, reaching #{longFormattedNumber(@server_data[1][4])} unique members."
+    str="**I am in #{longFormattedNumber(@server_data[0].inject(0){|sum,x| sum + x })} servers, reaching #{longFormattedNumber(@server_data[1].inject(0){|sum,x| sum + x })} unique members.**"
+    for i in 0...@shards
+      m=i
+      m=i+1 if i>3
+      str=extend_message(str,"The #{shard_data(0,true)[i]} Shard is in #{longFormattedNumber(@server_data[0][m])} server#{"s" if @server_data[0][m]!=1}, reaching #{longFormattedNumber(@server_data[1][m])} unique members.",event)
+    end
+    str=extend_message(str,"The #{shard_data(0)[4]} Shard is in #{longFormattedNumber(@server_data[0][4])} server#{"s" if @server_data[0][4]!=1}, reaching #{longFormattedNumber(@server_data[1][4])} unique members.",event,2) if event.user.id==167657750971547648
+    event.respond str
     return nil
   elsif ['adventurer','adventurers','adv','advs','unit','units'].include?(f.downcase)
     adv=@adventurers.map{|q| q}
+    adv=find_in_adventurers(bot,event,[f2],2)[1] unless f2.nil?
     str="**There are #{adv.length} adventurers, including:**"
     str2=''
     m=adv.reject{|q| q[1][0,1].to_i != 1}
@@ -6996,61 +7105,78 @@ bot.command(:snagstats) do |event, f, f2|
     str2="#{str2}\n<:Rarity_4:532086056301101067> #{m.length} four-star adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[1][0,1].to_i != 5}
     str2="#{str2}\n<:Rarity_5:532086056737177600> #{m.length} five-star adventurer#{'s' unless m.length==1}" if m.length>0
-    str=extend_message(str,str2,event)
+    str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+    str2=str2[2,str2.length-2] if str2[0,2]=="\n"
+    str=extend_message(str,str2,event,2)
+    str2=''
     m=adv.reject{|q| q[2][1]!='Flame'}
-    str2="<:Element_Flame:532106087952810005> #{m.length} Flame-element adventurer#{'s' unless m.length==1}"
+    str2="<:Element_Flame:532106087952810005> #{m.length} Flame-element adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2][1]!='Water'}
-    str2="#{str2}\n<:Element_Water:532106088221376522> #{m.length} Water-element adventurer#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Element_Water:532106088221376522> #{m.length} Water-element adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2][1]!='Wind'}
-    str2="#{str2}\n<:Element_Wind:532106087948746763> #{m.length} Wind-element adventurer#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Element_Wind:532106087948746763> #{m.length} Wind-element adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2][1]!='Light'}
-    str2="#{str2}\n<:Element_Light:532106088129101834> #{m.length} Light-element adventurer#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Element_Light:532106088129101834> #{m.length} Light-element adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2][1]!='Shadow'}
-    str2="#{str2}\n<:Element_Shadow:532106088154267658> #{m.length} Shadow-element adventurer#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Element_Shadow:532106088154267658> #{m.length} Shadow-element adventurer#{'s' unless m.length==1}" if m.length>0
+    str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+    str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
+    str2=''
     m=adv.reject{|q| q[2][2]!='Sword'}
-    str2="<:Weapon_Sword:532106114540634113> #{m.length} Sword-using adventurer#{'s' unless m.length==1}"
+    str2="<:Weapon_Sword:532106114540634113> #{m.length} Sword-using adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2][2]!='Blade'}
-    str2="#{str2}\n<:Weapon_Blade:532106114628714496> #{m.length} Blade-using adventurer#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Weapon_Blade:532106114628714496> #{m.length} Blade-using adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2][2]!='Dagger'}
-    str2="#{str2}\n<:Weapon_Dagger:532106116025286656> #{m.length} Dagger-using adventurer#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Weapon_Dagger:532106116025286656> #{m.length} Dagger-using adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2][2]!='Axe'}
-    str2="#{str2}\n<:Weapon_Axe:532106114188443659> #{m.length} Axe-using adventurer#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Weapon_Axe:532106114188443659> #{m.length} Axe-using adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2][2]!='Bow'}
-    str2="#{str2}\n<:Weapon_Bow:532106114909732864> #{m.length} Bow-using adventurer#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Weapon_Bow:532106114909732864> #{m.length} Bow-using adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2][2]!='Lance'}
-    str2="#{str2}\n<:Weapon_Lance:532106114792423448> #{m.length} Lance-using adventurer#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Weapon_Lance:532106114792423448> #{m.length} Lance-using adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2][2]!='Wand'}
-    str2="#{str2}\n<:Weapon_Wand:532106114985099264> #{m.length} Wand-using adventurer#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Weapon_Wand:532106114985099264> #{m.length} Wand-using adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2][2]!='Staff'}
-    str2="#{str2}\n<:Weapon_Staff:532106114733441024> #{m.length} Staff-using adventurer#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Weapon_Staff:532106114733441024> #{m.length} Staff-using adventurer#{'s' unless m.length==1}" if m.length>0
+    str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+    str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
+    str2=''
     m=adv.reject{|q| q[2][0]!='Attack'}
-    str2="<:Type_Attack:532107867520630784> #{m.length} Attack-class adventurer#{'s' unless m.length==1}"
+    str2="<:Type_Attack:532107867520630784> #{m.length} Attack-class adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2][0]!='Defense'}
-    str2="#{str2}\n<:Type_Defense:532107867264909314> #{m.length} Defense-class adventurer#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Type_Defense:532107867264909314> #{m.length} Defense-class adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2][0]!='Support'}
-    str2="#{str2}\n<:Type_Support:532107867575156747> #{m.length} Support-class adventurer#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Type_Support:532107867575156747> #{m.length} Support-class adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2][0]!='Healer'}
-    str2="#{str2}\n<:Type_Healing:532107867348533249> #{m.length} Healing-class adventurer#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Type_Healing:532107867348533249> #{m.length} Healing-class adventurer#{'s' unless m.length==1}" if m.length>0
+    str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+    str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     if safe_to_spam?(event)
+      str2=''
       m=adv.reject{|q| q[1][1,1]!='y'}
-      str2="#{m.length} story adventurer#{'s' unless m.length==1}"
+      str2="#{m.length} story adventurer#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1].length>1}
-      str2="#{str2}\n#{m.length} summonable adventurer#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} summonable adventurer#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='w'}
-      str2="#{str2}\n#{m.length} welfare adventurer#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} welfare adventurer#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='s'}
-      str2="#{str2}\n#{m.length} seasonal adventurer#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} seasonal adventurer#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='z'}
-      str2="#{str2}\n#{m.length} Zodiac adventurer#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} Zodiac adventurer#{'s' unless m.length==1}" if m.length>0
+      m=adv.reject{|q| q[1][1,1]!='-'}
+      str2="#{str2}\n#{m.length} unavailable adventurer#{'s' unless m.length==1}" if m.length>0
+      str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+      str2=str2[2,str2.length-2] if str2[0,2]=="\n"
       str=extend_message(str,str2,event,2)
     end
     event.respond str
     return nil
   elsif ['dragon','dragons','drag','drags','drg','drgs'].include?(f.downcase)
     adv=@dragons.map{|q| q}
+    adv=find_in_dragons(bot,event,[f2],2)[1] unless f2.nil?
     str="**There are #{adv.length} dragons, including:**"
     str2=''
     m=adv.reject{|q| q[1][0,1].to_i != 1}
@@ -7063,106 +7189,129 @@ bot.command(:snagstats) do |event, f, f2|
     str2="#{str2}\n<:Rarity_4:532086056301101067> #{m.length} four-star dragon#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[1][0,1].to_i != 5}
     str2="#{str2}\n<:Rarity_5:532086056737177600> #{m.length} five-star dragon#{'s' unless m.length==1}" if m.length>0
-    str=extend_message(str,str2,event)
+    str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+    str2=str2[2,str2.length-2] if str2[0,2]=="\n"
+    str=extend_message(str,str2,event,2)
+    str2=''
     m=adv.reject{|q| q[2]!='Flame'}
-    str2="<:Element_Flame:532106087952810005> #{m.length} Flame-element dragon#{'s' unless m.length==1}"
+    str2="<:Element_Flame:532106087952810005> #{m.length} Flame-element dragon#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2]!='Water'}
-    str2="#{str2}\n<:Element_Water:532106088221376522> #{m.length} Water-element dragon#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Element_Water:532106088221376522> #{m.length} Water-element dragon#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2]!='Wind'}
-    str2="#{str2}\n<:Element_Wind:532106087948746763> #{m.length} Wind-element dragon#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Element_Wind:532106087948746763> #{m.length} Wind-element dragon#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2]!='Light'}
-    str2="#{str2}\n<:Element_Light:532106088129101834> #{m.length} Light-element dragon#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Element_Light:532106088129101834> #{m.length} Light-element dragon#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2]!='Shadow'}
-    str2="#{str2}\n<:Element_Shadow:532106088154267658> #{m.length} Shadow-element dragon#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Element_Shadow:532106088154267658> #{m.length} Shadow-element dragon#{'s' unless m.length==1}" if m.length>0
+    str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+    str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     str2=''
     x=['','Juicy Meat/Monday','Kaleidoscope/Tuesday','Floral Circlet/Wednesday','Compelling Book/Thursday','Mana Essence/Friday','']
     for i in 1...6
       m=adv.reject{|q| q[9]!=i}
-      str2="#{str2}\n#{m.length} dragon#{'s' unless m.length==1} that prefer #{x[i].split('/')[0]}s, which are available on #{x[i].split('/')[1]}"
+      str2="#{str2}\n#{m.length} dragon#{'s' unless m.length==1} that prefer #{x[i].split('/')[0]}s, which are available on #{x[i].split('/')[1]}" if m.length>0
     end
-    str=extend_message(str,str2,event)
+    str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+    str2=str2[2,str2.length-2] if str2[0,2]=="\n"
+    str=extend_message(str,str2,event,2)
     m=adv.reject{|q| q[10]!='Yes'}
-    str2="#{m.length} dragon#{'s' unless m.length==1} that turn towards the source of damage they receive"
+    str2=''
+    str2="#{m.length} dragon#{'s' unless m.length==1} that turn towards the source of damage they receive" if m.length>0
     m=adv.reject{|q| q[10]!='No'}
-    str2="#{str2}\n#{m.length} dragon#{'s' unless m.length==1} that remain in position when damaged"
+    str2="#{str2}\n#{m.length} dragon#{'s' unless m.length==1} that remain in position when damaged" if m.length>0
     str=extend_message(str,str2,event,2)
     m=adv.reject{|q| q[11]!='Yes'}
-    str2="#{m.length} long-range dragon#{'s' unless m.length==1}"
+    str2="#{m.length} long-range dragon#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[11]!='No'}
-    str2="#{str2}\n#{m.length} short-range dragon#{'s' unless m.length==1}"
+    str2="#{str2}\n#{m.length} short-range dragon#{'s' unless m.length==1}" if m.length>0
+    str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+    str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     if safe_to_spam?(event)
+      str2=''
       m=adv.reject{|q| q[1][1,1]!='y'}
-      str2="#{m.length} story dragon#{'s' unless m.length==1}"
+      str2="#{m.length} story dragon#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1].length>1}
-      str2="#{str2}\n#{m.length} summonable dragon#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} summonable dragon#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='w'}
-      str2="#{str2}\n#{m.length} welfare dragon#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} welfare dragon#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='s'}
-      str2="#{str2}\n#{m.length} seasonal dragon#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} seasonal dragon#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='z'}
-      str2="#{str2}\n#{m.length} Zodiac dragon#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} Zodiac dragon#{'s' unless m.length==1}" if m.length>0
+      str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+      str2=str2[2,str2.length-2] if str2[0,2]=="\n"
       str=extend_message(str,str2,event,2)
     end
     event.respond str
     return nil
   elsif ['wyrmprint','wyrm','print','wyrmprints','wyrms','prints'].include?(f.downcase)
     adv=@wyrmprints.map{|q| q}
+    adv=find_in_wyrmprints(bot,event,[f2],2)[1] unless f2.nil?
     str="**There are #{adv.length} Wyrmprints, including:**"
     str2=''
     m=adv.reject{|q| q[1][0,1].to_i != 1}
-    str2="#{str2}\n<:Rarity_1:532086056594440231> #{m.length} one-star print#{'s' unless m.length==1}" if m.length>0
+    str2="#{str2}\n<:Rarity_1:532086056594440231> #{m.length} one-star print#{'s' unless m.length==1}" if m.length>0 if m.length>0
     m=adv.reject{|q| q[1][0,1].to_i != 2}
-    str2="#{str2}\n<:Rarity_2:532086056254963713> #{m.length} two-star print#{'s' unless m.length==1}" if m.length>0
+    str2="#{str2}\n<:Rarity_2:532086056254963713> #{m.length} two-star print#{'s' unless m.length==1}" if m.length>0 if m.length>0
     m=adv.reject{|q| q[1][0,1].to_i != 3}
-    str2="#{str2}\n<:Rarity_3:532086056519204864> #{m.length} three-star print#{'s' unless m.length==1}" if m.length>0
+    str2="#{str2}\n<:Rarity_3:532086056519204864> #{m.length} three-star print#{'s' unless m.length==1}" if m.length>0 if m.length>0
     m=adv.reject{|q| q[1][0,1].to_i != 4}
-    str2="#{str2}\n<:Rarity_4:532086056301101067> #{m.length} four-star print#{'s' unless m.length==1}" if m.length>0
+    str2="#{str2}\n<:Rarity_4:532086056301101067> #{m.length} four-star print#{'s' unless m.length==1}" if m.length>0 if m.length>0
     m=adv.reject{|q| q[1][0,1].to_i != 5}
-    str2="#{str2}\n<:Rarity_5:532086056737177600> #{m.length} five-star print#{'s' unless m.length==1}" if m.length>0
-    str=extend_message(str,str2,event)
+    str2="#{str2}\n<:Rarity_5:532086056737177600> #{m.length} five-star print#{'s' unless m.length==1}" if m.length>0 if m.length>0
+    str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+    str2=str2[2,str2.length-2] if str2[0,2]=="\n"
+    str=extend_message(str,str2,event,2)
+    str2=''
     m=adv.reject{|q| q[2]!='Attack'}
-    str2="<:Type_Attack:532107867520630784> #{m.length} Attack-amulet print#{'s' unless m.length==1}"
+    str2="<:Type_Attack:532107867520630784> #{m.length} Attack-amulet print#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2]!='Defense'}
-    str2="#{str2}\n<:Type_Defense:532107867264909314> #{m.length} Defense-amulet print#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Type_Defense:532107867264909314> #{m.length} Defense-amulet print#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2]!='Support'}
-    str2="#{str2}\n<:Type_Support:532107867575156747> #{m.length} Support-amulet print#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Type_Support:532107867575156747> #{m.length} Support-amulet print#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2]!='Healing'}
-    str2="#{str2}\n<:Type_Healing:532107867348533249> #{m.length} Healing-amulet print#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Type_Healing:532107867348533249> #{m.length} Healing-amulet print#{'s' unless m.length==1}" if m.length>0
+    str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+    str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     if safe_to_spam?(event)
+      str2=''
       m=adv.reject{|q| q[1].length>1}
-      str2="#{m.length} summonable print#{'s' unless m.length==1}"
+      str2="#{m.length} summonable print#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='w'}
-      str2="#{str2}\n#{m.length} welfare print#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} welfare print#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='s'}
-      str2="#{str2}\n#{m.length} seasonal print#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} seasonal print#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='z'}
-      str2="#{str2}\n#{m.length} Zodiac print#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} Zodiac print#{'s' unless m.length==1}" if m.length>0
       str=extend_message(str,str2,event,2)
     end
     event.respond str
     return nil
   elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(f.downcase)
     adv=@weapons.map{|q| q}
+    adv=find_in_weapons(bot,event,[f2],2)[1] unless f2.nil?
     str="**There are #{adv.length} weapons, including:**"
     m=adv.reject{|q| q[1]!='Sword'}
-    str2="<:Weapon_Sword:532106114540634113> #{m.length} Sword#{'s' unless m.length==1}"
+    str2="<:Weapon_Sword:532106114540634113> #{m.length} Sword#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[1]!='Blade'}
-    str2="#{str2}\n<:Weapon_Blade:532106114628714496> #{m.length} Blade#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Weapon_Blade:532106114628714496> #{m.length} Blade#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[1]!='Dagger'}
-    str2="#{str2}\n<:Weapon_Dagger:532106116025286656> #{m.length} Dagger#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Weapon_Dagger:532106116025286656> #{m.length} Dagger#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[1]!='Axe'}
-    str2="#{str2}\n<:Weapon_Axe:532106114188443659> #{m.length} Axe#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Weapon_Axe:532106114188443659> #{m.length} Axe#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[1]!='Bow'}
-    str2="#{str2}\n<:Weapon_Bow:532106114909732864> #{m.length} Bow#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Weapon_Bow:532106114909732864> #{m.length} Bow#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[1]!='Lance'}
-    str2="#{str2}\n<:Weapon_Lance:532106114792423448> #{m.length} Lance#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Weapon_Lance:532106114792423448> #{m.length} Lance#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[1]!='Wand'}
-    str2="#{str2}\n<:Weapon_Wand:532106114985099264> #{m.length} Wand#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Weapon_Wand:532106114985099264> #{m.length} Wand#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[1]!='Staff'}
-    str2="#{str2}\n<:Weapon_Staff:532106114733441024> #{m.length} #{'Staff' if m.length==1}#{'Staves' unless m.length==1}"
+    str2="#{str2}\n<:Weapon_Staff:532106114733441024> #{m.length} #{'Staff' if m.length==1}#{'Staves' unless m.length==1}" if m.length>0
+    str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+    str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     str2=''
     m=adv.reject{|q| q[2][0,1].to_i != 1}
@@ -7175,33 +7324,41 @@ bot.command(:snagstats) do |event, f, f2|
     str2="#{str2}\n<:Rarity_4:532086056301101067> #{m.length} four-star weapon#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2][0,1].to_i != 5}
     str2="#{str2}\n<:Rarity_5:532086056737177600> #{m.length} five-star weapon#{'s' unless m.length==1}" if m.length>0
-    str=extend_message(str,str2,event)
+    str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+    str2=str2[2,str2.length-2] if str2[0,2]=="\n"
+    str=extend_message(str,str2,event,2)
+    str2=''
     m=adv.reject{|q| q[3]!='None'}
-    str2="<:Element_Null:532106087810334741> #{m.length} weapon#{'s' unless m.length==1} without an element"
+    str2="<:Element_Null:532106087810334741> #{m.length} weapon#{'s' unless m.length==1} without an element" if m.length>0
     m=adv.reject{|q| q[3]!='Flame'}
-    str2="#{str2}\n<:Element_Flame:532106087952810005> #{m.length} Flame-element weapon#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Element_Flame:532106087952810005> #{m.length} Flame-element weapon#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[3]!='Water'}
-    str2="#{str2}\n<:Element_Water:532106088221376522> #{m.length} Water-element weapon#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Element_Water:532106088221376522> #{m.length} Water-element weapon#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[3]!='Wind'}
-    str2="#{str2}\n<:Element_Wind:532106087948746763> #{m.length} Wind-element weapon#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Element_Wind:532106087948746763> #{m.length} Wind-element weapon#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[3]!='Light'}
-    str2="#{str2}\n<:Element_Light:532106088129101834> #{m.length} Light-element weapon#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Element_Light:532106088129101834> #{m.length} Light-element weapon#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[3]!='Shadow'}
-    str2="#{str2}\n<:Element_Shadow:532106088154267658> #{m.length} Shadow-element weapon#{'s' unless m.length==1}"
+    str2="#{str2}\n<:Element_Shadow:532106088154267658> #{m.length} Shadow-element weapon#{'s' unless m.length==1}" if m.length>0
+    str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+    str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     if safe_to_spam?(event)
+      str2=''
       m=adv.reject{|q| q[2].length>1}
-      str2="#{m.length} craftable weapon#{'s' unless m.length==1}"
+      str2="#{m.length} craftable weapon#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[2][1,1]!='w'}
-      str2="#{str2}\n#{m.length} welfare weapon#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} welfare weapon#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[2][1,1]!='s'}
-      str2="#{str2}\n#{m.length} seasonal weapon#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} seasonal weapon#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[2][1,1]!='z'}
-      str2="#{str2}\n#{m.length} Zodiac weapon#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} Zodiac weapon#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[2][1,1]!='e'}
-      str2="#{str2}\n#{m.length} starter weapon#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} starter weapon#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[2][1,1]!='p'}
-      str2="#{str2}\n#{m.length} paid weapon#{'s' unless m.length==1}"
+      str2="#{str2}\n#{m.length} paid weapon#{'s' unless m.length==1}" if m.length>0
+      str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+      str2=str2[2,str2.length-2] if str2[0,2]=="\n"
       str=extend_message(str,str2,event,2)
     end
     event.respond str
@@ -7349,8 +7506,6 @@ bot.command(:snagstats) do |event, f, f2|
     event << "#{longFormattedNumber(b[0].reject{|q| q[0,12]!='bot.command(' || q.include?('from: 167657750971547648')}.length-b[0].reject{|q| q.gsub('  ','')!="event.respond 'You are not a mod.'" && q.gsub('  ','')!="str='You are not a mod.'"}.length)} global commands, invoked with #{longFormattedNumber(all_commands(false,0).length)} different phrases."
     event << "#{longFormattedNumber(b[0].reject{|q| q.gsub('  ','')!="event.respond 'You are not a mod.'" && q.gsub('  ','')!="str='You are not a mod.'"}.length)} mod-only commands, invoked with #{longFormattedNumber(all_commands(false,1).length)} different phrases."
     event << "#{longFormattedNumber(b[0].reject{|q| q[0,12]!='bot.command(' || !q.include?('from: 167657750971547648')}.length)} dev-only commands, invoked with #{longFormattedNumber(all_commands(false,2).length)} different phrases."
-    event << ''
-    event << "**There are #{longFormattedNumber(@prefix.map{|q| q.downcase}.reject{|q| q.include?('0') || q.include?('ii')}.uniq.length)} command prefixes**, but because I am faking case-insensitivity it's actually #{longFormattedNumber(@prefix.length)} prefixes."
     event << ''
     event << "**There are #{longFormattedNumber(b[0].reject{|q| q[0,4]!='def '}.length)} functions the commands use.**"
     if safe_to_spam?(event) || " #{event.message.text.downcase} ".include?(" all ")
@@ -7552,14 +7707,14 @@ bot.server_create do |event|
     end
     chn=chnn[0] if chnn.length>0
   end
-  if ![285663217261477889,443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,523821178670940170,523830882453422120,523824424437415946,523825319916994564,523822789308841985,532083509083373579].include?(event.server.id) && @shardizard==4
+  if ![285663217261477889,443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,523824424437415946,523825319916994564,523822789308841985,532083509083373579].include?(event.server.id) && @shardizard==4
     (chn.send_message(get_debug_leave_message()) rescue nil)
     event.server.leave
   else
-    bot.user(167657750971547648).pm("Joined server **#{event.server.name}** (#{event.server.id})\nOwner: #{event.server.owner.distinct} (#{event.server.owner.id})\nAssigned the #{['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null'][(event.server.id >> 22) % 4]} class")
-    bot.user(141260274144509952).pm("Joined server **#{event.server.name}** (#{event.server.id})\nOwner: #{event.server.owner.distinct} (#{event.server.owner.id})\nAssigned the #{['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null'][(event.server.id >> 22) % 4]} class")
+    bot.user(167657750971547648).pm("Joined server **#{event.server.name}** (#{event.server.id})\nOwner: #{event.server.owner.distinct} (#{event.server.owner.id})\nAssigned the #{shard_data(0)[(event.server.id >> 22) % @shards]} Shard")
+    bot.user(141260274144509952).pm("Joined server **#{event.server.name}** (#{event.server.id})\nOwner: #{event.server.owner.distinct} (#{event.server.owner.id})\nAssigned the #{shard_data(0)[(event.server.id >> 22) % @shards]} Shard")
     metadata_load()
-    @server_data[0][((event.server.id >> 22) % 4)] += 1
+    @server_data[0][((event.server.id >> 22) % @shards)] += 1
     metadata_save()
     chn.send_message("Hello, my name is Botan.  Folks around town call me the \"naginata cutie.\" ...Hey, don't you **dare** laugh at that, jerk!\nWant data on *Dragalia Lost*?  Use commands that with the prefix `DL!`, and leave this to me!") rescue nil
   end
@@ -7570,7 +7725,7 @@ bot.server_delete do |event|
     bot.user(167657750971547648).pm("Left server **#{event.server.name}**")
     bot.user(141260274144509952).pm("Left server **#{event.server.name}**")
     metadata_load()
-    @server_data[0][((event.server.id >> 22) % 4)] -= 1
+    @server_data[0][((event.server.id >> 22) % @shards)] -= 1
     metadata_save()
   end
 end
@@ -8061,13 +8216,13 @@ end
 bot.ready do |event|
   if @shardizard==4
     for i in 0...bot.servers.values.length
-      if ![285663217261477889,443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,523821178670940170,523830882453422120,523824424437415946,523825319916994564,523822789308841985,532083509083373579].include?(bot.servers.values[i].id)
+      if ![285663217261477889,443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,523824424437415946,523825319916994564,523822789308841985,532083509083373579].include?(bot.servers.values[i].id)
         bot.servers.values[i].general_channel.send_message(get_debug_leave_message()) rescue nil
         bot.servers.values[i].leave
       end
     end
   end
-  system("color 3#{"BCADF"[@shardizard,1]}")
+  system("color 3#{shard_data(3)[@shardizard,1]}")
   bot.game='loading, please wait...'
   metadata_load()
   if @ignored.length>0
@@ -8078,8 +8233,8 @@ bot.ready do |event|
   metadata_save()
   metadata_load()
   data_load()
-  system("color 1#{"BCADF"[@shardizard,1]}")
-  system("title #{['Defense','Attack','Healing','Support','Null'][@shardizard]} BotanBot")
+  system("color 1#{shard_data(3)[@shardizard,1]}")
+  system("title #{shard_data(2)[@shardizard]} BotanBot")
   bot.game='Dragalia Lost (DL!help for info)'
   if @shardizard==4
     next_holiday(bot)
