@@ -462,7 +462,7 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
   elsif ['status'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __\*message__","Sets my status to `message`.\n\n**This command is only able to be used by Rot8er_ConeX**.",0x008b8b)
   elsif ['stats','stat'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","If `name` is an adventurer, shows `name`'s stats at all possible rarities.\nIf `name` is a dragon, wyrmprint, or weapon, shows default data.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __name__","If `name` is an adventurer or a weapon, shows `name`'s stats at all possible rarities.\nIf `name` is a dragon or wyrmprint, shows default data.",0xCE456B)
   elsif ['adventurer','adv','unit'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows `name`'s stats, skills, and abilities.\n\nIn PM, shows stats at all possible rarities, as well as skill descriptions.\nOtherwise, shows stats at default rarity, and skill names only.  Other rarities can be specified to be shown instead.",0xCE456B)
   elsif ['dragon','drg'].include?(command.downcase)
@@ -588,7 +588,7 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
     str="#{str}\n`aura` __name__ - for data on a particular aura"
     str="#{str}\n\n`facility` __name__ - for data on a particular facility"
     str="#{str}\n`material` __name__ - for data on a particular material (*also `mat`*)"
-    str="#{str}\n\n`stats` __target__ - for only an adventurer's stats"
+    str="#{str}\n\n`stats` __target__ - for only an entity's stats"
     str="#{str}\n`aliases` __target__ - to show all aliases of a particular entity (*also `checkaliases` or `seealiases`*)"
     str="#{str}\n`serveraliases` __target__- to show all server-specific aliases of a particular entity (*also `saliases`*)"
     str="#{str}\n\n`find` __\*filters__ - to find specific adventurers, dragons, wyrmprints, or weapons"
@@ -1294,7 +1294,7 @@ def disp_dragon_stats(bot,event,args=nil)
     str="#{str}\n\n**Skill:** *#{k[5]}#{'<:Energized:534451856286679040>' if skl1[7]=='Yes'} - #{longFormattedNumber(skl1[6][1])} SP*;;;;;"
     strx=skl1[4].gsub(';; ',"\n")
   end
-  str="#{str}\n\n**Aura:**\n#{'<:NonUnbound:534494090876682264>'*4}#{k[6][0].map{|q| q[0]}.join(', ')}\n#{'<:Unbind:534494090969088000>'*4}#{k[6][0].map{|q| q[0]}.join(', ')}"
+  str="#{str}\n\n**Aura:**\n#{'<:NonUnbound:534494090876682264>'*4}#{k[6][0].map{|q| q[0]}.join(', ')}\n#{'<:Unbind:534494090969088000>'*4}#{k[6][0].map{|q| q[1]}.join(', ')}"
   str="#{str}\n\n**Ability:** #{k[6][1][0]} \u2192 #{k[6][1][1]}" if k[6].length>1
   str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[7][0])}<:Resource_Rupies:532104504372363274> #{longFormattedNumber(k[7][1])}<:Resource_Eldwater:532104503777034270>"
   str="#{str}\n**Bond gift preference:** #{['Golden Chalice (Sunday)','Juicy Meat (Monday)','Kaleidoscope (Tuesday)','Floral Circlet (Wednesday)','Compelling Book (Thursday)','Mana Essence (Friday)','Golden Chalice (Saturday)'][k[9]]}"
@@ -1371,7 +1371,7 @@ def disp_wyrmprint_stats(bot,event,args=nil)
   create_embed(event,"__**#{k[0]}**__",str,xcolor,ftr,xpic)
 end
 
-def disp_weapon_stats(bot,event,args=nil)
+def disp_weapon_stats(bot,event,args=nil,juststats=false)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
@@ -1389,6 +1389,7 @@ def disp_weapon_stats(bot,event,args=nil)
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
   s2s=false if @shardizard==4 && evn.include?('smol')
+  juststats=true if @shardizard != 4 && evn.include?('smol')
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Weapons/#{k[0].gsub(' ','_')}.png"
   str=generate_rarity_row(k[2][0,1].to_i)
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
@@ -1425,7 +1426,7 @@ def disp_weapon_stats(bot,event,args=nil)
       ablx2=sklz[ablx2] unless ablx2.nil?
     end
   end
-  if s2s && !skl.nil?
+  if s2s && !skl.nil? && !juststats
     str="#{str}\n\n__**#{'<:NonUnbound:534494090876682264>'*4} Level 1**__"
     str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
     str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
@@ -1450,57 +1451,61 @@ def disp_weapon_stats(bot,event,args=nil)
     str="#{str}\n**#{'<:NonUnbound:534494090876682264>'*4} Level 80**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}" if k[2][0,1].to_i>=5 && k[3]!='None'
     str="#{str}\n**#{'<:Unbind:534494090969088000>'*4} Level #{f}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
     strx=''
-    unless skl.nil?
-      str="#{str}\n\n**Skill:** *#{skl[0]}*"
-      if skl[6][0]==skl[6][1]
-        str="#{str} - #{longFormattedNumber(skl[6][0])} SP;;;;;"
-      else
-        str="#{str} - #{longFormattedNumber(skl[6][0])} \u2192 #{longFormattedNumber(skl[6][1])} SP;;;;;"
+    unless juststats
+      unless skl.nil?
+        str="#{str}\n\n**Skill:** *#{skl[0]}*"
+        if skl[6][0]==skl[6][1]
+          str="#{str} - #{longFormattedNumber(skl[6][0])} SP;;;;;"
+        else
+          str="#{str} - #{longFormattedNumber(skl[6][0])} \u2192 #{longFormattedNumber(skl[6][1])} SP;;;;;"
+        end
+        strx=skl[4].gsub(';; ',"\n")
       end
-      strx=skl[4].gsub(';; ',"\n")
-    end
-    if !abl2.nil?
-      str="#{str}\n\n**Abilities:** *#{abl2[0]}#{" #{'+' if abl2[1].include?('%')}#{abl2[1]}" unless abl2[1]=='-'}*"
-    elsif !abl.nil?
-      str="#{str}\n\n**Abilities:** *#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}*"
-    elsif !ablx2.nil?
-      str="#{str}\n\n**Abilities:** *#{ablx2[0]}#{" #{'+' if ablx2[1].include?('%')}#{ablx2[1]}" unless ablx2[1]=='-'}*"
-      ablx2=nil
-      ablx=nil
-    elsif !ablx.nil?
-      str="#{str}\n\n**Abilities:** *#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*"
-      ablx=nil
-    end
-    if !ablx2.nil?
-      str="#{str}, *#{ablx2[0]}#{" #{'+' if ablx2[1].include?('%')}#{ablx2[1]}" unless ablx2[1]=='-'}*"
-    elsif !ablx.nil?
-      str="#{str}, *#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*"
+      if !abl2.nil?
+        str="#{str}\n\n**Abilities:** *#{abl2[0]}#{" #{'+' if abl2[1].include?('%')}#{abl2[1]}" unless abl2[1]=='-'}*"
+      elsif !abl.nil?
+        str="#{str}\n\n**Abilities:** *#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}*"
+      elsif !ablx2.nil?
+        str="#{str}\n\n**Abilities:** *#{ablx2[0]}#{" #{'+' if ablx2[1].include?('%')}#{ablx2[1]}" unless ablx2[1]=='-'}*"
+        ablx2=nil
+        ablx=nil
+      elsif !ablx.nil?
+        str="#{str}\n\n**Abilities:** *#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*"
+        ablx=nil
+      end
+      if !ablx2.nil?
+        str="#{str}, *#{ablx2[0]}#{" #{'+' if ablx2[1].include?('%')}#{ablx2[1]}" unless ablx2[1]=='-'}*"
+      elsif !ablx.nil?
+        str="#{str}, *#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*"
+      end
     end
   end
   str2=''
-  if s2s
-    m2=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
-    m2=wpnz.find_index{|q| q[1]==k[1] && q[2][1,1]=='v' && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300 && k[8].to_i<400
-    m=wpnz.reject{|q| q[1]!=k[1] || q[2]!=k[2] || q[9]!=k[8] || ['','0',0].include?(q[9])}
-    m=wpnz.reject{|q| q[1]!=k[1] || q[2][1,1]!='v' || q[2][0,1].to_i-1!=k[2][0,1].to_i || q[9]!=k[8] || ['','0',0].include?(q[9])} if k[2][1,1]=='v' && k[8].to_i>=200 && k[8].to_i<300
-    str2="#{str2}#{"\n" unless m.length==1}\n\n**Promotes from: #{element_emote(wpnz[m2][3],bot)}*#{wpnz[m2][0]}* **\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(k[11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}" unless m2.nil?
-    if m.length>0
-      for i in 0...m.length
-        str2="#{str2}#{"\n" if i==0 && m.length>1}\n\n**#{"Promotion #{i+1}" if m.length>1}#{'Promotes into' if m.length==1}: #{element_emote(m[i][3],bot)}*#{m[i][0]}* **\n*Smithy level required:* #{m[i][10]}\n*Assembly cost:* #{longFormattedNumber(m[i][11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{m[i][12].map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}"
+  unless juststats
+    if s2s
+      m2=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
+      m2=wpnz.find_index{|q| q[1]==k[1] && q[2][1,1]=='v' && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300 && k[8].to_i<400
+      m=wpnz.reject{|q| q[1]!=k[1] || q[2]!=k[2] || q[9]!=k[8] || ['','0',0].include?(q[9])}
+      m=wpnz.reject{|q| q[1]!=k[1] || q[2][1,1]!='v' || q[2][0,1].to_i-1!=k[2][0,1].to_i || q[9]!=k[8] || ['','0',0].include?(q[9])} if k[2][1,1]=='v' && k[8].to_i>=200 && k[8].to_i<300
+      str2="#{str2}#{"\n" unless m.length==1}\n\n**Promotes from: #{element_emote(wpnz[m2][3],bot)}*#{wpnz[m2][0]}* **\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(k[11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}" unless m2.nil?
+      if m.length>0
+        for i in 0...m.length
+          str2="#{str2}#{"\n" if i==0 && m.length>1}\n\n**#{"Promotion #{i+1}" if m.length>1}#{'Promotes into' if m.length==1}: #{element_emote(m[i][3],bot)}*#{m[i][0]}* **\n*Smithy level required:* #{m[i][10]}\n*Assembly cost:* #{longFormattedNumber(m[i][11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{m[i][12].map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}"
+        end
       end
+    else
+      m=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
+      m=wpnz.find_index{|q| q[1]==k[1] && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300 && k[8].to_i<400
+      str2="#{str2}\n**Promotes from:** #{element_emote(wpnz[m][3],bot)}#{wpnz[m][0]}" unless m.nil?
+      m=wpnz.reject{|q| q[1]!=k[1] || q[2]!=k[2] || q[9]!=k[8] || ['','0',0].include?(q[9])}
+      m=wpnz.reject{|q| q[1]!=k[1] || q[2][1,1]!='v' || q[2][0,1].to_i-1!=k[2][0,1].to_i || q[9]!=k[8] || ['','0',0].include?(q[9])} if k[2][1,1]=='v' && k[8].to_i>=200 && k[8].to_i<300
+      str2="#{str2}\n**Promotes into:** #{m.map{|q| "#{element_emote(q[3],bot)}#{q[0]}"}.join(', ')}" unless m.length<=0
     end
-  else
-    m=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
-    m=wpnz.find_index{|q| q[1]==k[1] && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300 && k[8].to_i<400
-    str2="#{str2}\n**Promotes from:** #{element_emote(wpnz[m][3],bot)}#{wpnz[m][0]}" unless m.nil?
-    m=wpnz.reject{|q| q[1]!=k[1] || q[2]!=k[2] || q[9]!=k[8] || ['','0',0].include?(q[9])}
-    m=wpnz.reject{|q| q[1]!=k[1] || q[2][1,1]!='v' || q[2][0,1].to_i-1!=k[2][0,1].to_i || q[9]!=k[8] || ['','0',0].include?(q[9])} if k[2][1,1]=='v' && k[8].to_i>=200 && k[8].to_i<300
-    str2="#{str2}\n**Promotes into:** #{m.map{|q| "#{element_emote(q[3],bot)}#{q[0]}"}.join(', ')}" unless m.length<=0
+    str="#{str}#{"\n" unless s2s}#{str2}" if str2.length>0
+    str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[7][0])}<:Resource_Rupies:532104504372363274>#{" #{longFormattedNumber(k[7][1])}<:Resource_Eldwater:532104503777034270>" if k[7][1]>0}"
+    str="#{str}\n**Assembles for:** #{longFormattedNumber(k[11][0])}<:Resource_Rupies:532104504372363274>"
+    str="#{str}\n**Disassembles for:** #{longFormattedNumber(k[11][1])}<:Resource_Rupies:532104504372363274>"
   end
-  str="#{str}#{"\n" unless s2s}#{str2}" if str2.length>0
-  str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[7][0])}<:Resource_Rupies:532104504372363274>#{" #{longFormattedNumber(k[7][1])}<:Resource_Eldwater:532104503777034270>" if k[7][1]>0}"
-  str="#{str}\n**Assembles for:** #{longFormattedNumber(k[11][0])}<:Resource_Rupies:532104504372363274>"
-  str="#{str}\n**Disassembles for:** #{longFormattedNumber(k[11][1])}<:Resource_Rupies:532104504372363274>"
   unless s2s
     if str.gsub(';;;;;',"\n#{strx}").length>=1900
       str=str.gsub(';;;;;',"\n~~The description makes this data too long.  Please try again in PM.~~")
@@ -6502,8 +6507,8 @@ bot.command([:stats,:stat]) do |event, *args|
     disp_dragon_stats(bot,event,args)
   elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
     disp_wyrmprint_stats(bot,event,args)
-  elsif ['enemy','boss'].include?(args[0].downcase)
-    disp_wyrmprint_stats(bot,event,args)
+  elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase)
+    disp_weapon_stats(bot,event,args,true)
   elsif find_data_ex(:find_adventurer,args.join(' '),event,true).length>0
     disp_adventurer_stats(bot,event,args,true)
   elsif find_data_ex(:find_dragon,args.join(' '),event,true).length>0
@@ -6511,7 +6516,7 @@ bot.command([:stats,:stat]) do |event, *args|
   elsif find_data_ex(:find_wyrmprint,args.join(' '),event,true).length>0
     disp_wyrmprint_stats(bot,event,args)
   elsif find_data_ex(:find_weapon,args.join(' '),event,true).length>0
-    disp_weapon_stats(bot,event,args)
+    disp_weapon_stats(bot,event,args,true)
   elsif find_data_ex(:find_adventurer,args.join(' '),event).length>0
     disp_adventurer_stats(bot,event,args,true)
   elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
@@ -6519,7 +6524,7 @@ bot.command([:stats,:stat]) do |event, *args|
   elsif find_data_ex(:find_wyrmprint,args.join(' '),event).length>0
     disp_wyrmprint_stats(bot,event,args)
   elsif find_data_ex(:find_weapon,args.join(' '),event).length>0
-    disp_weapon_stats(bot,event,args)
+    disp_weapon_stats(bot,event,args,true)
   else
     event.respond 'No matches found'
   end
@@ -6537,17 +6542,21 @@ bot.command([:art]) do |event, *args|
   elsif ['enemy','boss'].include?(args[0].downcase)
     disp_boss_art(bot,event,args)
   elsif find_data_ex(:find_adventurer,args.join(' '),event,true).length>0
-    disp_adventurer_stats(bot,event,args,true)
+    disp_adventurer_art(bot,event,args)
   elsif find_data_ex(:find_dragon,args.join(' '),event,true).length>0
-    disp_dragon_stats(bot,event,args,true)
+    disp_dragon_art(bot,event,args)
   elsif find_data_ex(:find_wyrmprint,args.join(' '),event,true).length>0
-    disp_wyrmprint_stats(bot,event,args)
+    disp_wyrmprint_art(bot,event,args)
+  elsif find_data_ex(:find_enemy,args.join(' '),event,true).length>0
+    disp_boss_art(bot,event,args)
   elsif find_data_ex(:find_adventurer,args.join(' '),event).length>0
-    disp_adventurer_stats(bot,event,args,true)
+    disp_adventurer_art(bot,event,args)
   elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
-    disp_dragon_stats(bot,event,args,true)
+    disp_dragon_art(bot,event,args)
   elsif find_data_ex(:find_wyrmprint,args.join(' '),event).length>0
-    disp_wyrmprint_stats(bot,event,args)
+    disp_wyrmprint_art(bot,event,args)
+  elsif find_data_ex(:find_enemy,args.join(' '),event).length>0
+    disp_boss_art(bot,event,args)
   else
     event.respond 'No matches found'
   end
