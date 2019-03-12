@@ -6,4 +6,27 @@ Raging Manticore\264856\Shadow, Therion, Void\**Poison**, **Burn**, Freeze, **Pa
 Void Zephyr\407680\Wind, Dragon, Void\Burn\Sleep\Dragon Delay;; Dull
 High Midgardsormr (Enemy)\863164\Wind, Dragon, High Dragon\Burn\Stun\
 High Brunhilda (Enemy)\1039797\Flame, Dragon, High Dragon\~~None~~\Burn\
-Matilda\1\Flame, Demon, Meme\~~None~~\Poison, Burn, Freeze, Paralysis, Blind, Stun, Bog, Sleep, Curse\Wonder Guard
+Matilda\-1, 1, -1, 100\Flame, Demon, Meme\~~None~~\Poison, Burn, Freeze, Paralysis, Blind, Stun, Bog, Sleep, Curse\Wonder Guard
+Elite Swordsman (Flame)\21500, 50000, 102600, 152618\Flame, Human, Imperial Onslaught\Poison, Burn, **Freeze**, Blind, Stun, Curse, **Bog**, Sleep\Burn\
+Elite Axeman (Water)\22000, 50000, 103500, 132525\Water, Human, Imperial Onslaught\Poison, Burn, Freeze,  Paralysis, Blind, **Stun**, Curse, Bog, **Sleep**\Freeze\
+Elite Lancer (Wind)\22000, 50000, 102600, 136800\Wind, Human, Imperial Onslaught\Poison, **Burn**, Freeze, Paralysis, **Blind**, Stun, Curse, Bog, Sleep\Sleep\
+Elite Soldier (Light)\22000, 54000, 101250, 134663\Light, Human, Imperial Onslaught\Poison, Burn, Freeze, Paralysis, Blind, Stun, **Curse**, Bog, **Sleep**\Blind\
+Elite Archer (Shadow)\20000, 30000, 92340, 130500\Shadow, Human, Imperial Onslaught\Poison, Burn, Freeze, **Paralysis**, Blind, **Stun**, Curse, Bog, Sleep\Poison\
+Phraeganoth\81472, 305520, 487948, -1, 424299\Flame, Thaumian, Raid, Loyalty's Requiem\~~None~~\Burn\
+King Archeole\2880, 8800, 15520\Flame, Demihuman, Boss, Loyalty's Requiem\**Poison**, Burn, **Freeze**, **Paralysis**, **Blind**, **Stun**, **Curse**, **Bog**, **Sleep**\Stun\
+Pumpking\17325, 29757, 55440, -1, 79057, 122984\Shadow, Demihuman, Facility, Trick or Treasure!\Paralysis, Blind\Curse\
+Hypnos\30712, 139011, 512346, -1, 441271\Wind, Physian, Raid, Kindness and Captivity\~~None~~\Sleep\
+Storm Sentinel\2268, 6930, 16296\Wind, Thaumian, Boss, Kindness and Captivity\Poison, Burn, Freeze, Paralysis, Blind, Stun, Curse, Bog, Sleep\~~None~~\
+Water Troll King\23310, 36225, 53974, -1, 90144, 123900\Water, Demihuman, Facility, A Wish to the Winds\**Poison**, Burn, Freeze, Paralysis, Blind, Stun, Curse, Bog, **Sleep**\Bog\
+Sabnock\67878, 170360, 565720, -1, 634880\Shadow, Demon, Raid, Resplendent Refrain\~~None~~\Curse\
+Manticore\18270, 29925, 41475, 218673, 52605, 67200\Shadow, Therion, Boss, Refrain Under the Big Top\Poison, Burn, Freeze, Paralysis, Blind, **Stun**, Curse, Bog, Sleep\Poison\
+Manticore(Refrain)\3780, 11550, 20370\Shadow, Therion, Boss, Resplendent Refrain\Poison, Burn, Freeze, Paralysis, Blind, **Stun**, Curse, Bog, Sleep\Poison\
+Festive Treant\19980, 31050, 60345, -1, 169087, 170982\Flame, Physian, Facility, The Miracle of Dragonyule\Freeze, Bog\Burn\
+Shishimai\67200, 181600, 685146, -1, 624206\Light, Thaumian, Raid, Fortune from Afar\~~None~~\Curse\
+Gift Basket\10080, 27240, 137029, -1, 124841\Light, Thaumian, Raid, Fortune from Afar\~~None~~\~~None~~\
+Ieyasu\2000, 4200, 12000\Shadow, Human, Boss, Fortune from Afar\Poison, Burn, Freeze, Blind, Stun, Curse, Bog, Sleep\Curse\
+Manticore(BigTop)\32760, 48300, 62580, 437346, 105210, 134400\Shadow, Therion, Facility, Dream Big Under the Big Top\Poison, Burn, Freeze, Paralysis, Blind, **Stun**, Curse, Bog, Sleep\Poison\
+Valfarre\76357, 191655, 714180, -1, 735436\Water, Therion, Raid, Skyborne Spectacle\~~None~~\Bog\
+Aquatic Cyclops\3570, 10710, 18690\Water, Demihuman, Boss, Skyborne Spectacle\Poison, Burn, Freeze, Paralysis, Blind, Stun, Curse, Bog, Sleep\Bog\
+Thanatos\76357, 191655, 673905, -1, 654427\Shadow, Undead, Raid, A Waltz with Fate\~~None~~\Poison\
+Guardian Sentinel\4410, 10500, 20580\Shadow, Thaumian, Boss, A Waltz with Fate\Poison, Burn, Freeze, Paralysis, Blind, Stun, Curse, Bog, Sleep\Poison\

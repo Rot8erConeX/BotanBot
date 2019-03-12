@@ -15,7 +15,7 @@ Assassin's Knife\Dagger\3\Shadow\18, 0, 61\63, 0, 212\Assassin Strike\100, 0\305
 Astral Edge\Sword\4\Light\31, 0, 105\99, 0, 333\Astral Radiance\500, 0\305\202\6\120000, 240000\Meteorite, 30;; Abyss Stone, 10;; Amber Insignia, 50\
 Astrolabe\Staff\3\Light\20, 0, 69\59, 0, 199\Astro Protection\100, 0\304\202\3\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Light Orb, 5\
 Aurachant\Staff\3v\None\7, 0, 26\24, 0, 81\\100, 0\101\0\1\3000, 6000\Bat's Wing, 3;; Ancient Bird's Feather, 1;; Steel Slab, 1\HP 70% = Defense +3%
-Aureole Apogee\Sword\5v\Light\27, 0, 92\108, 0, 362\\1500, 0\303\203\5\30000, 1500000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Refulgence Orb, 3\(Light) Skill Prep +50%;;;; (Light) Stunned Punisher +15%
+Aureole Apogee\Sword\5v\Light\27, 0, 92\108, 0, 362\\1500, 0\303\203\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Refulgence Orb, 3\(Light) Skill Prep +50%;;;; (Light) Stunned Punisher +15%
 Axe of the Blazing King\Axe\5\Flame\46, 133, 155\170, 487, 567\Blazing Boost\1500, 0\301\201\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Axe Tablet, 100;; Twinkling Sand, 2;; Royal Vermilion Insignia, 200\
 Axe of the Southern Cross\Axe\5\Wind\44, 127, 147\175, 502, 584\Southern Impact\1500, 0\305\202\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Axe Tablet, 100;; Twinkling Sand, 2;; Royal Jade Insignia, 200\
 Axe of the Waves\Axe\3\Water\17, 0, 59\70, 0, 234\Torrential Impact\100, 0\302\201\3\15000, 30000\Granite, 10;; Light Metal, 5;; Water Orb, 5\
@@ -85,7 +85,7 @@ Faerie Bow\Bow\4\None\21, 0, 70\80, 0, 267\Faerie Smash\500, 0\201\101\5\20000, 
 Featherblade\Sword\3\Light\17, 0, 57\66, 0, 222\Merciless Cleaver\100, 0\302\201\3\15000, 30000\Granite, 10;; Light Metal, 5;; Light Orb, 5\
 Firefiend's Howl\Wand\4\Flame\26, 0, 87\111, 0, 372\Firefiend's Discharge\500, 0\301\201\6\120000, 240000\Bewitching Wings, 30;; Abyss Stone, 10;; Vermilion Insignia, 50\
 Firefungus\Bow\3v\Flame\11, 0, 37\39, 0, 131\\100, 0\201\101\1\5000, 10000\Fiend's Horn, 3;; Fiend's Eye, 1;; Solid Fungus, 2;; Blaze Orb, 1\(Flame) Thaumian's Bane +10%;;;; (Flame) Dragon Delay Res
-Flame Apogee\Sword\4v\Flame\21, 0, 83\71, 0, 278\\500, 0\201\101\4\50000, 250000\Granite, 7;; Meteorite, 3;; Great Feather, 5;; Inferno Orb, 1\(Flame) Skill Prep +25%;;;; (Flame) High Midgardsormr's Bane +20%
+Flame Apogee\Sword\4v\Flame\21, 0, 83\71, 0, 278\\500, 0\201\102\4\50000, 250000\Granite, 7;; Meteorite, 3;; Great Feather, 5;; Inferno Orb, 1\(Flame) Skill Prep +25%;;;; (Flame) High Midgardsormr's Bane +20%
 Flamechant\Staff\3v\Flame\12, 0, 42\38, 0, 129\\100, 0\201\101\1\15000, 30000\Ancient Bird's Feather, 5;; Bewitching Wings, 2;; Steel Slab, 3;; Blaze Orb, 2\HP 70% = Defense +3%;;;; (Flame) Dull Res
 Flameserpent\Lance\4\Flame\29, 0, 99\107, 0, 358\Way of the Serpent\500, 0\301\201\6\120000, 240000\Fiend's Eye, 30;; Abyss Stone, 10;; Vermilion Insignia, 50\
 Flametongue\Blade\4\Flame\27, 0, 90\108, 0, 361\Flame's Protection\500, 0\301\201\6\120000, 240000\Meteorite, 30;; Abyss Stone, 10;; Vermilion Insignia, 50\
@@ -148,7 +148,7 @@ Lover's Ally\Dagger\3\None\12, 0, 40\38, 0, 129\Lover's Strike\100, 0\202\101\2\
 Lucky Hanetsuki Paddle\Sword\5p\None\31, 0, 106\105, 0, 351\Happiness Spike\1500, 0\0\0\0\0, 0\\
 Lumenspore Lance\Lance\3v\Flame\11, 0, 39\41, 0, 139\\100, 0\201\101\1\5000, 10000\Fiend's Horn, 3;; Fiend's Eye, 1;; Solid Fungus, 2;; Blaze Orb, 1\(Flame) Thaumian's Bane +10%;;;; (Flame) Dragon Delay Res
 Lupis Solis\Bow\5\Flame\44, 127, 147\155, 445, 518\Lupine Vision\1500, 0\301\201\9\900000, 4500000\Fiend's Eye, 150;; Crimson Core, 30;; Bow Tablet, 100;; Twinkling Sand, 2;; Royal Vermilion Insignia, 200\
-Luster Apogee\Sword\4v\Light\21, 0, 71\83, 0, 278\\500, 0\203\101\4\50000, 250000\Granite, 7;; Meteorite, 3;; Great Feather, 5;; Refulgence Orb, 1\(Light) Skill Prep +25%;;;; (Light) Stunned Punisher +15%
+Luster Apogee\Sword\4v\Light\21, 0, 71\83, 0, 278\\500, 0\203\102\4\50000, 250000\Granite, 7;; Meteorite, 3;; Great Feather, 5;; Refulgence Orb, 1\(Light) Skill Prep +25%;;;; (Light) Stunned Punisher +15%
 Lux Lamina\Dagger\5\Water\45, 131, 152\158, 455, 529\Cobalt Strength\1500, 0\304\202\9\900000, 4500000\Fiend's Eye, 150;; Crimson Core, 30;; Dagger Tablet, 100;; Twinkling Sand, 2;; Royal Azure Insignia, 200\
 Maar Oasis\Blade\5\Water\42, 123, 143\163, 468, 544\Maar's Recovery\1500, 0\303\202\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Blade Tablet, 100;; Twinkling Sand, 2;; Royal Azure Insignia, 200\
 Macabre Malediction\Bow\4\Shadow\30, 0, 103\96, 0, 320\Macabre Energy\500, 0\305\202\6\120000, 240000\Fiend's Eye, 30;; Abyss Stone, 10;; Violet Insignia, 50\
