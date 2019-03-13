@@ -433,6 +433,10 @@ end
 
 bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, command, subcommand|
   return nil if overlap_prevent(event)
+  help_text(event,bot,command,subcommand)
+end
+
+def help_text(event,bot,command=nil,subcommand=nil)
   command='' if command.nil?
   subcommand='' if subcommand.nil?
   k=0
@@ -526,7 +530,7 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
   elsif ['next','schedule'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __type__","Shows the next time in-game daily events of the type `type` will happen.\nIf in PM and `type` is unspecified, shows the entire schedule.\n\n__*Accepted Inputs*__\nRuin(s)\nMat(s)\nShop, Store\nBond(s), Dragon(s)",0xCE456B)
   elsif ['art'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __target__","Shows `target`'s art.  Target can be:\n- Adventurers\n- Dragons\n- Wyrmprints",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __target__","Shows `target`'s art.  Target can be:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Enemies\n- Stickers\n- NPCs",0xCE456B)
   elsif ['embed','embeds'].include?(command.downcase)
     event << '**embed**'
     event << ''
@@ -1150,7 +1154,7 @@ def find_data_ex(callback,name,event,fullname=false,ext=false)
 end
 
 def generate_rarity_row(rar,include_blanks=false)
-  return "#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][rar]*rar}#{['','<:Rarity_1_Blank:532104334423621632>','<:Rarity_2_Blank:532104120010539018>','<:Rarity_3_Blank:532104120052744192>','<:Rarity_4_Blank:532104120002150410>','<:Rarity_5_Blank:532104120014995466>'][rar]*(5-rar) if include_blanks}"
+  return "#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][rar]*rar}#{['','<:Rarity_1_Blank:555459856476274691>','<:Rarity_2_Blank:555459856400908299>','<:Rarity_3_Blank:555459856568418314>','<:Rarity_4_Blank:555459856497246218>','<:Rarity_5_Blank:555459856190930955>'][rar]*(5-rar) if include_blanks}"
 end
 
 def element_color(ele)
@@ -3423,9 +3427,6 @@ def disp_npc_art(bot,event,args=nil)
   k=find_data_ex(:find_npc,args.join(' '),event)
   if k.length.zero?
     event.respond 'No matches found.'
-    return nil
-  elsif k[0]=='Notte' && !event.server.nil? && event.server.id==402419072085655564
-    event.respond "Notte doesn't have any art because she's a bot who likes text a little too much.  It's why I exist; because her formatting left something to be desired."
     return nil
   end
   rar=nil
@@ -6264,7 +6265,7 @@ def level(event,bot,args=nil,mode=0)
     elsif nums.length==1
       n=[nums[0],axp.length].min
       m=axp[0,n].map{|q| q*10}.inject(0){|sum,x| sum + x }
-      str2="#{str2}\n<:Rarity_1_Blank:532104334423621632> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      str2="#{str2}\n<:Rarity_1_Blank:555459856476274691> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
       if n<60
         m=axp[n-1,60-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
         str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level #{n} to level 60:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
@@ -6301,7 +6302,7 @@ def level(event,bot,args=nil,mode=0)
     elsif nums.length==1
       n=[nums[0],dxp.length].min
       m=dxp[0,n].map{|q| q*10}.inject(0){|sum,x| sum + x }
-      str2="#{str2}\n<:Rarity_1_Blank:532104334423621632> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+      str2="#{str2}\n<:Rarity_1_Blank:555459856476274691> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
       if n<60
         m=dxp[n-1,60-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
         str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level #{n} to level 60:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
@@ -6382,7 +6383,7 @@ def level(event,bot,args=nil,mode=0)
     elsif nums.length==1
       n=[nums[0],wrxp.length].min
       m=wrxp[0,n].map{|q| q*10}.inject(0){|sum,x| sum + x }
-      str2="#{str2}\n<:Rarity_1_Blank:532104334423621632> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
+      str2="#{str2}\n<:Rarity_1_Blank:555459856476274691> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
       if n<30
         m=wrxp[n-1,30-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
         str2="#{str2}\n<:Rarity_2:532086056254963713> *To get from level #{n} to level 30:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,5)}"
@@ -6425,7 +6426,7 @@ def level(event,bot,args=nil,mode=0)
     elsif nums.length==1
       n=[nums[0],wrxp.length].min
       m=wrxp[0,n].inject(0){|sum,x| sum + x }
-      str2="#{str2}\n<:Rarity_1_Blank:532104334423621632> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      str2="#{str2}\n<:Rarity_1_Blank:555459856476274691> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
       if n<30
         m=wrxp[n-1,30-n].inject(0){|sum,x| sum + x }
         str2="#{str2}\n<:Rarity_2:532086056254963713> *To get from level #{n} to level 30:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
@@ -8072,6 +8073,10 @@ bot.mention do |event|
   m=true
   m=false if event.user.bot_account?
   if !m
+  elsif ['help','commands','command_list','commandlist'].include?(args[0].downcase)
+    args.shift
+    help_text(event,bot,args[0],args[1])
+    m=false
   elsif ['find','search'].include?(args[0].downcase)
     m=false
     args.shift
