@@ -112,6 +112,9 @@ system("title loading #{shard_data(2)[@shardizard]} BotanBot")
 @mats=[]
 @banners=[]
 
+@emotes=[]
+@npcs=[]
+
 @aliases=[]
 @spam_channels=[]
 @server_data=[[],[]]
@@ -128,7 +131,7 @@ def all_commands(include_nil=false,permissions=-1)
      'daily','now','dailies','todayindl','today_in_dl','tomorrow','tommorrow','tomorow','tommorow','shop','store','exp','level','xp','plxp','plexp','pllevel',
      'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','dbxp',
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
-     'weaponlevel','wxp','wexp','wlevel','victory','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage',
+     'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage',
      'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop'] if permissions==2
@@ -282,7 +285,7 @@ def data_load()
     b[i][5]=b[i][5].split(';; ')
     b[i][6]=b[i][6].to_i
     b[i][7]=b[i][7].to_i
-    b[i][8]=b[i][8].split(', ')
+    b[i][8]=b[i][8].split(', ') unless b[i][8].nil?
   end
   @mats=b.map{|q| q}
   if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLEnemies.txt')
@@ -319,6 +322,31 @@ def data_load()
     b[i][5]=b[i][5].split(', ')
   end
   @banners=b.map{|q| q}
+  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLEmotes.txt')
+    b=[]
+    File.open('C:/Users/Mini-Matt/Desktop/devkit/DLEmotes.txt').each_line do |line|
+      b.push(line)
+    end
+  else
+    b=[]
+  end
+  for i in 0...b.length
+    b[i]=b[i].gsub("\n",'').split('\\'[0])
+  end
+  @emotes=b.map{|q| q}
+  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DL_NPCs.txt')
+    b=[]
+    File.open('C:/Users/Mini-Matt/Desktop/devkit/DL_NPCs.txt').each_line do |line|
+      b.push(line)
+    end
+  else
+    b=[]
+  end
+  for i in 0...b.length
+    b[i]=b[i].gsub("\n",'').split('\\'[0])
+    b[i][1]=b[i][1].to_i
+  end
+  @npcs=b.map{|q| q}
 end
 
 def prefixes_save()
@@ -650,11 +678,12 @@ def overlap_prevent(event) # used to prevent servers with both Botan and her deb
   return false
 end
 
-def find_adventurer(name,event,fullname=false)
+def find_adventurer(name,event,fullname=false,skipnpcs=false)
   data_load()
   name=normalize(name)
   name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   return [] if name.length<2
+  return [] if find_npc(name,event,true).length>0 && skipnpcs
   k=@adventurers.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
   return @adventurers[k] unless k.nil?
   nicknames_load()
@@ -666,6 +695,7 @@ def find_adventurer(name,event,fullname=false)
   k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
   return @adventurers[@adventurers.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return [] if fullname
+  return [] if find_npc(name,event).length>0 && skipnpcs
   k=@adventurers.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return @adventurers[k] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
@@ -675,7 +705,7 @@ def find_adventurer(name,event,fullname=false)
   return []
 end
 
-def find_dragon(name,event,fullname=false)
+def find_dragon(name,event,fullname=false,ext=false)
   data_load()
   name=normalize(name)
   name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
@@ -700,7 +730,7 @@ def find_dragon(name,event,fullname=false)
   return []
 end
 
-def find_wyrmprint(name,event,fullname=false)
+def find_wyrmprint(name,event,fullname=false,ext=false)
   data_load()
   name=normalize(name)
   name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
@@ -725,7 +755,7 @@ def find_wyrmprint(name,event,fullname=false)
   return []
 end
 
-def find_weapon(name,event,fullname=false)
+def find_weapon(name,event,fullname=false,ext=false)
   data_load()
   name=normalize(name)
   name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
@@ -870,7 +900,7 @@ def find_weapon(name,event,fullname=false)
   return []
 end
 
-def find_skill(name,event,fullname=false)
+def find_skill(name,event,fullname=false,ext=false)
   data_load()
   name=normalize(name)
   name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
@@ -896,7 +926,7 @@ def find_skill(name,event,fullname=false)
   return []
 end
 
-def find_ability(name,event,fullname=false)
+def find_ability(name,event,fullname=false,ext=false)
   data_load()
   name=normalize(name)
   name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
@@ -970,7 +1000,7 @@ def find_ability(name,event,fullname=false)
   return []
 end
 
-def find_facility(name,event,fullname=false)
+def find_facility(name,event,fullname=false,ext=false)
   data_load()
   name=normalize(name)
   name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
@@ -995,7 +1025,7 @@ def find_facility(name,event,fullname=false)
   return []
 end
 
-def find_mat(name,event,fullname=false)
+def find_mat(name,event,fullname=false,ext=false)
   data_load()
   name=normalize(name)
   name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
@@ -1020,7 +1050,7 @@ def find_mat(name,event,fullname=false)
   return []
 end
 
-def find_enemy(name,event,fullname=false)
+def find_enemy(name,event,fullname=false,ext=false)
   data_load()
   name=normalize(name)
   name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
@@ -1045,24 +1075,74 @@ def find_enemy(name,event,fullname=false)
   return []
 end
 
-def find_data_ex(callback,name,event,fullname=false)
-  k=method(callback).call(name,event,true)
+def find_emote(name,event,fullname=false,ext=false)
+  data_load()
+  name=normalize(name)
+  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  return [] if name.length<2
+  k=@emotes.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
+  return @emotes[k] unless k.nil?
+  nicknames_load()
+  alz=@aliases.reject{|q| q[0]!='Sticker'}.map{|q| [q[1],q[2],q[3]]}
+  g=0
+  g=event.server.id unless event.server.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return @emotes[@emotes.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return @emotes[@emotes.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return [] if fullname
+  k=@emotes.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
+  return @emotes[k] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return @emotes[@emotes.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return @emotes[@emotes.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return []
+end
+
+def find_npc(name,event,fullname=false,ext=false)
+  data_load()
+  name=normalize(name)
+  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  return [] if name.length<2
+  k=@npcs.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
+  return @npcs[k] unless k.nil?
+  nicknames_load()
+  alz=@aliases.reject{|q| q[0]!='NPC'}.map{|q| [q[1],q[2],q[3]]}
+  g=0
+  g=event.server.id unless event.server.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return @npcs[@npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return @npcs[@npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return [] if fullname
+  k=@emotes.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
+  return @npcs[k] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return @npcs[@npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return @npcs[@npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return []
+end
+
+def find_data_ex(callback,name,event,fullname=false,ext=false)
+  k=method(callback).call(name,event,true,ext)
   return k if k.length>0
   blank=[]
   args=name.split(' ')
   for i in 0...args.length
     for i2 in 0...args.length-i
-      k=method(callback).call(args[i,args.length-i-i2].join(' '),event,true)
+      k=method(callback).call(args[i,args.length-i-i2].join(' '),event,true,ext)
       return k if k.length>0 && args[i,args.length-i-i2].length>0
     end
   end
   return blank if fullname
-  k=method(callback).call(name,event)
+  k=method(callback).call(name,event,false,ext)
   return k if k.length>0
   args=name.split(' ')
   for i in 0...args.length
     for i2 in 0...args.length-i
-      k=method(callback).call(args[i,args.length-i-i2].join(' '),event)
+      k=method(callback).call(args[i,args.length-i-i2].join(' '),event,false,ext)
       return k if k.length>0 && args[i,args.length-i-i2].length>0
     end
   end
@@ -2753,6 +2833,20 @@ def disp_adventurer_art(bot,event,args=nil)
         charsx[1].push("#{x[0]} *[Japanese]*") if m[0]==nammes[2] && !charsx[1].include?("#{x[0]} *[Both]*")
       end
     end
+    if !k[11].nil? && k[11].include?(' & ')
+      m=k[11].split(' & ')
+      for i in 0...m.length
+        charsx[1].push(@adventurers.reject{|q| q[11]!=m[i]}.map{|q| "#{q[0]} *[English voice #{i+1}]*"}.join("\n"))
+        charsx[1].push(@dragons.reject{|q| q[14]!=m[i]}.map{|q| "#{q[0]} *[English voice #{i+1}]*"}.join("\n"))
+      end
+    end
+    if !k[10].nil? && k[10].include?(' & ')
+      m=k[10].split(' & ')
+      for i in 0...m.length
+        charsx[1].push(@adventurers.reject{|q| q[10]!=m[i]}.map{|q| "#{q[0]}#{'.' if q[0]>=2}) #{q[1]} *[Japanese voice #{i+1}]*"}.join("\n"))
+        charsx[1].push(@dragons.reject{|q| q[13]!=m[i]}.map{|q| "#{q[0]}#{'.' if q[0]>=2}) #{q[1]} *[Japanese voice #{i+1}]*"}.join("\n"))
+      end
+    end
     if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/FEHUnits.txt')
       b=[]
       File.open('C:/Users/Mini-Matt/Desktop/devkit/FEHUnits.txt').each_line do |line|
@@ -2888,6 +2982,7 @@ def disp_dragon_art(bot,event,args=nil)
   s2s=true if safe_to_spam?(event)
   s2s=false if @shardizard==4 && event.message.text.downcase.split(' ').include?('smol')
   disp=''
+  disp="#{generate_rarity_row(k[1][0,1].to_i)}"
   lookout=[]
   if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt')
     lookout=[]
@@ -2901,7 +2996,6 @@ def disp_dragon_art(bot,event,args=nil)
       rar=lookout[j][0] if rar.nil? && lookout[j][1].include?(args[i].downcase)
     end
   end
-  puts rar
   rar='Human' if rar.nil? && k[0]=='Brunhilda' && args.include?('mym')
   if !rar.nil? && rar.is_a?(String)
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Dragons/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
@@ -2909,7 +3003,7 @@ def disp_dragon_art(bot,event,args=nil)
     if File.size("C:/Users/Mini-Matt/Desktop/devkit/FGOTemp#{@shardizard}.png")<=100 || m
       rar=nil
     else
-      disp="#{rar} design"
+      disp="#{disp}\n#{rar} design\n"
     end
   end
   if args.include?('just') || args.include?('justart') || args.include?('blank') || args.include?('noinfo')
@@ -2959,6 +3053,20 @@ def disp_dragon_art(bot,event,args=nil)
       unless x[13].nil? || x[13].length<=0
         m=x[13].split(' as ')
         charsx[1].push("#{x[0]} *[Japanese]*") if m[0]==nammes[2] && !charsx[1].include?("#{x[0]} *[Both]*")
+      end
+    end
+    if !k[14].nil? && k[14].include?(' & ')
+      m=k[14].split(' & ')
+      for i in 0...m.length
+        charsx[1].push(@adventurers.reject{|q| q[11]!=m[i]}.map{|q| "#{q[0]} *[English voice #{i+1}]*"}.join("\n"))
+        charsx[1].push(@dragons.reject{|q| q[14]!=m[i]}.map{|q| "#{q[0]} *[English voice #{i+1}]*"}.join("\n"))
+      end
+    end
+    if !k[13].nil? && k[13].include?(' & ')
+      m=k[13].split(' & ')
+      for i in 0...m.length
+        charsx[1].push(@adventurers.reject{|q| q[10]!=m[i]}.map{|q| "#{q[0]} *[Japanese voice #{i+1}]*"}.join("\n"))
+        charsx[1].push(@dragons.reject{|q| q[13]!=m[i]}.map{|q| "#{q[0]} *[Japanese voice #{i+1}]*"}.join("\n"))
       end
     end
     if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/FEHUnits.txt')
@@ -3289,6 +3397,68 @@ def disp_boss_art(bot,event,args=nil)
   IO.copy_stream(open(art), "C:/Users/Mini-Matt/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
   str2='No art found' if File.size("C:/Users/Mini-Matt/Desktop/devkit/FGOTemp#{@shardizard}.png")<=100 || m
   create_embed(event,str,str2,xcolor,nil,[nil,xpic])
+end
+
+def disp_emote_art(bot,event,args=nil)
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.map{|q| q.downcase}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_emote,args.join(' '),event)
+  if k.length.zero?
+    event.respond 'No matches found.'
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  s2s=false if @shardizard==4 && event.message.text.downcase.split(' ').include?('smol')
+  disp=''
+  art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Stickers/#{k[0].gsub(' ','_')}#{"(JP)" if has_any?(event.message.text.downcase.split(' '),['jp','japan'])}.png"
+  create_embed(event,"__**#{k[0]}**__","**Character in image:** #{k[1]}",0xCE456B,nil,[nil,art])
+end
+
+def disp_npc_art(bot,event,args=nil)
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.map{|q| q.downcase}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_npc,args.join(' '),event)
+  if k.length.zero?
+    event.respond 'No matches found.'
+    return nil
+  elsif k[0]=='Notte' && !event.server.nil? && event.server.id==402419072085655564
+    event.respond "Notte doesn't have any art because she's a bot who likes text a little too much.  It's why I exist; because her formatting left something to be desired."
+    return nil
+  end
+  rar=nil
+  disp="#{generate_rarity_row(k[1])}"
+  disp="#{generate_rarity_row(k[1],true)}" if k[2]=='n'
+  lookout=[]
+  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt')
+    lookout=[]
+    File.open('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt').each_line do |line|
+      lookout.push(eval line)
+    end
+  end
+  lookout=lookout.reject{|q| q[2]!='Art' && q[2]!='Art/NPC'}
+  for i in 0...args.length
+    for j in 0...lookout.length
+      rar=lookout[j][0] if rar.nil? && lookout[j][1].include?(args[i].downcase)
+    end
+  end
+  if !rar.nil? && rar.is_a?(String)
+    art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Misc/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
+    m=false
+    IO.copy_stream(open(art), "C:/Users/Mini-Matt/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
+    if File.size("C:/Users/Mini-Matt/Desktop/devkit/FGOTemp#{@shardizard}.png")<=100 || m
+      rar=nil
+    else
+      disp="#{disp}\n#{rar} design\n"
+    end
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  s2s=false if @shardizard==4 && event.message.text.downcase.split(' ').include?('smol')
+  art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Misc/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
+  create_embed(event,"__**#{k[0]}**__",disp,0xCE456B,nil,[nil,art])
 end
 
 def disp_banner(bot,event,args=nil)
@@ -4312,7 +4482,9 @@ def spaceship_order(x)
   return 7 if x=='Ability'
   return 8 if x=='Facility'
   return 9 if x=='Material'
-  return 1000
+  return 10 if x=='Sticker'
+  return 11 if x=='NPC'
+  return 1200
 end
 
 def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode=0)
@@ -4493,7 +4665,7 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
   for i in 0...k.length
     checkstr=checkstr.gsub("<:#{k[i].name}:#{k[i].id}>",k[i].name)
   end
-  if checkstr.downcase =~ /(7|t)+?h+?(o|0)+?(7|t)+?/
+  if checkstr.downcase =~ /(7|t)+?h+?(o|0)+?(7|t)+?/ && !(dispstr[1].include?('thot') && event.channel.id==532083509083373583)
     event.respond "That name has __***NOT***__ been added to #{dispstr[1]}'s aliases."
     bot.channel(logchn).send_message("~~**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** #{newname} for #{dispstr[1]}~~\n**Reason for rejection:** Begone, alias.")
     return nil
@@ -6541,7 +6713,11 @@ bot.command([:art]) do |event, *args|
     disp_wyrmprint_art(bot,event,args)
   elsif ['enemy','boss'].include?(args[0].downcase)
     disp_boss_art(bot,event,args)
-  elsif find_data_ex(:find_adventurer,args.join(' '),event,true).length>0
+  elsif ['emote','emoji','sticker'].include?(args[0].downcase)
+    disp_emote_art(bot,event,args)
+  elsif ['npc'].include?(args[0].downcase)
+    disp_npc_art(bot,event,args)
+  elsif find_data_ex(:find_adventurer,args.join(' '),event,true,true).length>0
     disp_adventurer_art(bot,event,args)
   elsif find_data_ex(:find_dragon,args.join(' '),event,true).length>0
     disp_dragon_art(bot,event,args)
@@ -6549,7 +6725,11 @@ bot.command([:art]) do |event, *args|
     disp_wyrmprint_art(bot,event,args)
   elsif find_data_ex(:find_enemy,args.join(' '),event,true).length>0
     disp_boss_art(bot,event,args)
-  elsif find_data_ex(:find_adventurer,args.join(' '),event).length>0
+  elsif find_data_ex(:find_emote,args.join(' '),event,true).length>0
+    disp_emote_art(bot,event,args)
+  elsif find_data_ex(:find_npc,args.join(' '),event,true).length>0
+    disp_npc_art(bot,event,args)
+  elsif find_data_ex(:find_adventurer,args.join(' '),event,false,true).length>0
     disp_adventurer_art(bot,event,args)
   elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
     disp_dragon_art(bot,event,args)
@@ -6557,6 +6737,10 @@ bot.command([:art]) do |event, *args|
     disp_wyrmprint_art(bot,event,args)
   elsif find_data_ex(:find_enemy,args.join(' '),event).length>0
     disp_boss_art(bot,event,args)
+  elsif find_data_ex(:find_emote,args.join(' '),event).length>0
+    disp_emote_art(bot,event,args)
+  elsif find_data_ex(:find_npc,args.join(' '),event).length>0
+    disp_npc_art(bot,event,args)
   else
     event.respond 'No matches found'
   end
@@ -6618,11 +6802,6 @@ bot.command([:find,:search,:list,:lookup]) do |event, *args|
     return nil
   end
   find_all(bot,event,args)
-end
-
-bot.command([:victory]) do |event, *args|
-  return nil if overlap_prevent(event)
-  create_embed(event,'','',0xCE456B,nil,[nil,'https://cdn.discordapp.com/attachments/532352926270881792/538860577498464256/emote.png'])
 end
 
 bot.command([:xp,:exp,:level]) do |event, *args|
@@ -7738,27 +7917,6 @@ bot.command(:snagstats) do |event, f, f2|
   return nil
 end
 
-bot.command(:boop) do |event|
-  return nil if overlap_prevent(event)
-  return nil unless event.channel.id==532083509083373583 # only work when used by the developer
-  event.channel.send_temporary_message('Please wait...',10)
-  data_load()
-  lookout=[]
-  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt')
-    lookout=[]
-    File.open('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt').each_line do |line|
-      lookout.push(eval line)
-    end
-  end
-  lookout=lookout.reject{|q| q[2]!='Mat'}.map{|q| q[0]}
-  m=@mats.map{|q| q[8]}.join(', ').split(', ').reject{|q| lookout.include?(q)}.uniq.sort
-  str=''
-  for i in 0...m.length
-    str=extend_message(str,m[i],event)
-  end
-  event.respond str
-end
-
 bot.server_create do |event|
   chn=event.server.general_channel
   if chn.nil?
@@ -7867,6 +8025,10 @@ bot.message do |event|
       disp_facility_data(bot,event,s.split(' '))
     elsif find_data_ex(:find_mat,s,event,true).length>0
       disp_mat_data(bot,event,s.split(' '))
+    elsif find_data_ex(:find_emote,s,event,true).length>0
+      disp_emote_art(bot,event,s.split(' '))
+    elsif find_data_ex(:find_npc,s,event,true).length>0
+      disp_npc_art(bot,event,s.split(' '))
     elsif find_data_ex(:find_adventurer,s,event).length>0
       disp_adventurer_stats(bot,event,s.split(' '))
     elsif find_data_ex(:find_dragon,s,event).length>0
@@ -7885,6 +8047,10 @@ bot.message do |event|
       disp_facility_data(bot,event,s.split(' '))
     elsif find_data_ex(:find_mat,s,event).length>0
       disp_mat_data(bot,event,s.split(' '))
+    elsif find_data_ex(:find_emote,s,event).length>0
+      disp_emote_art(bot,event,s.split(' '))
+    elsif find_data_ex(:find_npc,s,event).length>0
+      disp_npc_art(bot,event,s.split(' '))
     end
   elsif event.message.text.include?('0x4') && !event.user.bot_account? && @shardizard==4
     s=event.message.text
@@ -7928,6 +8094,7 @@ bot.mention do |event|
       find_all(bot,event,args)
     end
   elsif ['art'].include?(args[0].downcase)
+    args.shift
     if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
       disp_adventurer_art(bot,event,args)
     elsif ['dragon','dragons','drg'].include?(args[0].downcase)
@@ -7935,16 +8102,24 @@ bot.mention do |event|
     elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
       disp_wyrmprint_art(bot,event,args)
     elsif ['enemy','boss'].include?(args[0].downcase)
-      disp_wyrmprint_art(bot,event,args)
-    elsif find_data_ex(:find_adventurer,args.join(' '),event,true).length>0
+      disp_boss_art(bot,event,args)
+    elsif ['emote','emoji','sticker'].include?(args[0].downcase)
+      disp_emote_art(bot,event,args)
+    elsif ['npc'].include?(args[0].downcase)
+      disp_npc_art(bot,event,args)
+    elsif find_data_ex(:find_adventurer,args.join(' '),event,true,true).length>0
       disp_adventurer_art(bot,event,args)
     elsif find_data_ex(:find_dragon,args.join(' '),event,true).length>0
       disp_dragon_art(bot,event,args)
-    elsif find_data_ex(:find_enemy,args.join(' '),event,true).length>0
-      disp_boss_art(bot,event,args)
     elsif find_data_ex(:find_wyrmprint,args.join(' '),event,true).length>0
       disp_wyrmprint_art(bot,event,args)
-    elsif find_data_ex(:find_adventurer,args.join(' '),event).length>0
+    elsif find_data_ex(:find_enemy,args.join(' '),event,true).length>0
+      disp_boss_art(bot,event,args)
+    elsif find_data_ex(:find_emote,args.join(' '),event,true).length>0
+      disp_emote_art(bot,event,args)
+    elsif find_data_ex(:find_npc,args.join(' '),event,true).length>0
+      disp_npc_art(bot,event,args)
+    elsif find_data_ex(:find_adventurer,args.join(' '),event,false,true).length>0
       disp_adventurer_art(bot,event,args)
     elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
       disp_dragon_art(bot,event,args)
@@ -7952,6 +8127,10 @@ bot.mention do |event|
       disp_wyrmprint_art(bot,event,args)
     elsif find_data_ex(:find_enemy,args.join(' '),event).length>0
       disp_boss_art(bot,event,args)
+    elsif find_data_ex(:find_emote,args.join(' '),event).length>0
+      disp_emote_art(bot,event,args)
+    elsif find_data_ex(:find_npc,args.join(' '),event).length>0
+      disp_npc_art(bot,event,args)
     else
       event.respond 'No matches found'
     end
@@ -8090,9 +8269,6 @@ bot.mention do |event|
   elsif ['today','now','tomorrow','tommorrow','tomorow','tommorow','sunday','sundae','sun','sonday','sondae','son','monday','mondae','mon','monday','mondae','tuesday','tuesdae','tues','tue','wednesday','wednesdae','wednes','wed','thursday','thursdae','thurs','thu','thur','friday','fridae','fri','fryday','frydae','fry','saturday','saturdae','sat','saturnday','saturndae','saturn','satur'].include?(args[0].downcase)
     roost(event,bot,args)
     m=false
-  elsif ['victory'].include?(args[0].downcase)
-    create_embed(event,'','',0xCE456B,nil,[nil,'https://cdn.discordapp.com/attachments/532352926270881792/538860577498464256/emote.png'])
-    m=false
   end
   if m
     if find_data_ex(:find_adventurer,name,event,true).length>0
@@ -8113,6 +8289,8 @@ bot.mention do |event|
       disp_facility_data(bot,event,args)
     elsif find_data_ex(:find_mat,name,event,true).length>0
       disp_mat_data(bot,event,args)
+    elsif find_data_ex(:find_emote,name,event,true).length>0
+      disp_emote_art(bot,event,args)
     elsif find_data_ex(:find_adventurer,name,event).length>0
       disp_adventurer_stats(bot,event,args)
     elsif find_data_ex(:find_dragon,name,event).length>0
@@ -8131,6 +8309,8 @@ bot.mention do |event|
       disp_facility_data(bot,event,args)
     elsif find_data_ex(:find_mat,name,event).length>0
       disp_mat_data(bot,event,args)
+    elsif find_data_ex(:find_emote,name,event).length>0
+      disp_emote_art(bot,event,args)
     end
   end
 end
