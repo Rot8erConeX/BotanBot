@@ -1,0 +1,30 @@
+Ahoo\Fafnir
+Argh\Euden
+For Real\Ranzal
+Good Job\Notte
+Grr\Notte
+Heal\Cleo
+Heh\Cleo
+Help\Zethia
+Here Goes\Euden
+I Got This\Luca
+I Need Healing\Luca
+I'll Lead The Charge\Euden
+I'm On Defense\Ranzal
+Look Out\Elisanne
+Nice\Ranzal
+No Worries\Elisanne
+Nope\Cleo
+Now\Cleo
+Offense Please\Cleo
+Okay\Euden
+OMG\>Unknown<
+On My Way\Ranzal
+Really\Elisanne
+Sorry\Elisanne
+Take Defense\Euden
+Thanks\Notte
+Victory Will Be Ours\Midgardsormr
+Wait\Slime
+Whew\Notte
+Yes\Luca

@@ -14,6 +14,8 @@ Flame Altar\An altar to honor flame. The mana housed within instills a fighting 
 Halidom\Euden's home base. Raise its level to expand the area in which you can build castle facilities.\General\4x4\1\
 Jack-o'-Lantern\A lantern made by a sylvan who carved the insides out of a pumpkin, all the while insisting it represented his love of pranks. At least everyone enjoyed eating the filling.\Decorative\1x1\4\
 Lance Dojo\A training area built to hone one's skills with a lance. Use it to boosts the stats of lance-wielding adventures.\Adventurer, Dojo\3x3\2\
+Lectern\A stand designed for reading heavy books. Useful when you want to have a good, long read.\Decorative\1x1\4\
+Library Obscura\Use it to boost the stats of shadow-attuned adventurers.\Adventurer, Event Altar\3x3\1\Arcane Tome
 Light Altar\An altar to honor light. The mana housed within illuminates the soul, boosting the stats of light-attuned adventurers.\Adventurer, Altar\3x3\2\
 Magma Slime Statue\A statue of a magma slime granted to those who are victorious in void battles. The burning flame mana grants vitality. Use it to boost the stats of flame-attuned adventurers.\Adventurer, Void Altar\2x2\1\
 Red Flowers\A bed of blooming red flowers. Perennial symbols of love and passion, they're often given as gifts.\Decorative\1x1\5\

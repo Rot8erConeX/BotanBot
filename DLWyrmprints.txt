@@ -32,6 +32,7 @@ Enchiridion\3\Support\10, 71\3, 25\Skill Haste +3%;; Skill Haste +4%\300, 150\ni
 Entwined Flames\4\Attack\21, 142\7, 50\Dragon Damage +6%;; Dragon Damage +10%\2000, 1000\ALOMA
 Evening of Luxury\5\Attack\26, 176\9, 65\Full HP = Strength +10%;; Full HP = Strength +13%;;;; Critical Damage +10%;; Critical Damage +13%\5000, 3000\ovr
 Fireside Gathering\4\Defense\23, 156\5, 37\Burn Res +20%;; Burn Res +25%;;;; Flame Res +3%;; Flame Res +5%\2000, 1000\Manabi Okada
+First-Rate Hospitality\4\Attack\21, 142\7, 50\Strength Doublebuff +5%;; Strength Doublebuff +8%;;;; HP 70% = Strength +3%;; HP 70% = Strength +5%\2000, 1000\ell
 Flash of Genius\5\Attack\27, 183\8, 57\Flurry Strength +13%;; Flurry Strength +15%;;;; Wind Res +5%;; Wind Res +8%\5000, 3000\Mikeboshi
 Flower in the Fray\4\Attack\21, 140\7, 52\Critical Damage +10%;; Critical Damage +13%;;;; Skill Damage +10%;; Skill Damage +15%\2000, 1000\ni02
 Forbidden Relic\3\Support\10, 71\3, 25\Gauge Inhibitor +15%;; Gauge Inhibitor +20%\300, 150\SEAL
@@ -53,6 +54,7 @@ Happier Times\4\Attack\21, 141\7, 51\Full HP = Skill Damage +25%;; Full HP = Ski
 Happy New Year!\5s\Defense\29, 195\6, 46\Light Res +8%;; Light Res +10%;;;; (Shadow) Paralysis Res +25%;; (Shadow) Paralysis Res +40%\5000, 3000\Naoki Saito
 Heavenly Holiday\5\Defense\29, 195\6, 46\Curse Res +50%;; Curse Res +60%;;;; (Light) Curse Res +25%;; (Light) Curse Res +40%\5000, 3000\ezusuke
 Heralds of Hinomoto\5s\Attack\26, 177\9, 64\Skill Damage +20%;; Skill Damage +25%;;;; Skill Haste +4%;; Skill Haste +5%\5000, 3000\bukurote
+Hitting the Books\5w\Attack\22, 151\8, 54\Skill Damage +20%;; Skill Damage +25%;;;; Forbidden Knowledge +25%;; Forbidden Knowledge +50%;;;; Arcane Tomes +25%;; Arcane Tomes +50%\3000, 300\hajime
 Honest Repose\5w\Support\1, 116\1, 40\(Flame) Skill Haste +8%;; (Flame) Skill Haste +8%\3000, 300\ICHIGO
 How to Flee Properly\4\Defense\22, 151\6, 41\Last Defense +40%;; Last Defense +50%;;;; Recovery Potency +3%;; Recovery Potency +5%\2000, 1000\Naoki Saito
 Howling Predator\3\Attack\10, 71\3, 25\Critical Rate +3%;; Critical Rate +4%\300, 150\Kouta Nagamori
@@ -101,8 +103,10 @@ Take My Hand\5w\Healing\1, 118\1, 38\Recovery Potency +10%;; Recovery Potency +1
 Teatime\3\Support\10, 71\3, 25\Skill Prep +10%;; Skill Prep +15%\300, 150\ShuLa
 The Chocolatiers\5s\Support\26, 178\9, 62\Skill Prep +50%;; Skill Prep +100%\5000, 3000\oyume
 The Davian Wetlands\3\Defense\11, 76\3, 20\Bog Res +15%;; Bog Res +20%\300, 150\misuke
+The Fleeting Girl\5\Support\28, 187\7, 53\Last Recovery II; Last Recovery III;;;; Shield Prep I;; Shield Prep II;;;; Forbidden Knowledge +100%;; Forbidden Knowledge +150%\5000, 3000\u-u-zan
 The Greatest Gift\5w\Support\1, 10\1, 10\Happy Dragonyule!;; Happy Dragonyule!\5000, 300\Dragalia Lost Art Team
 The Halidom's Picnic\3\Defense\11, 76\3, 20\Sleep Res +15%;; Sleep Res +20%\300, 150\R-ko A-yama
+The Heretic's Laboratory\3\Support\10, 71\3, 25\(Shadow) Skill Haste +4%;; (Shadow) Skill Haste +5%;;;; Arcane Tomes +50%;; Arcane Tomes +75%\300, 150\Sora Ono
 The Petal Queen\5w\Support\22, 151\7, 53\Energy Prep;; Energized Prep\5000, 300\Eri Yanagawa
 The Prince of Dragonyule\5s\Attack\26, 177\9, 63\Critical Damage +13%;; Critical Damage +15%;;;; (Water) Flurry Devastation +8%;; (Water) Flurry Devastation +10%;;;; Holiday Cheer +100%;; Holiday Cheer +150%\5000, 3000\Naoki Saito
 The Rose Prince\5s\Support\29, 195\6, 46\(Flame) Affliction Guard I;; (Flame) Affliction Guard II;;;; Shield Prep I;; Shield Prep II\5000, 3000\sosuke miyana
@@ -124,4 +128,4 @@ Welcome, One and All\3\Healing\10, 71\3, 25\Skill Prep +10%;; Skill Prep +15%;;;
 What a Handful!\4\Healing\22, 150\6, 42\Recovery Potency +5%;; Recovery Potency +8%;;;; Poison Res +15%;; Poison Res +20%\2000, 1000\Mayoko
 Winds of Saint Lotier\3\Healing\10, 73\3, 23\Recovery Potency +3%;; Recovery Potency +5%\300, 150\STAR BEARS
 Witch's Kitchen\5s\Attack\27, 183\8, 57\Full HP = Skill Damage +30%;; Full HP = Skill Damage +35%;;;; Blindness Res +20%;; Blindness Res +25%;;;; Tricker Treats +50%;; Tricker Treats +100%\5000, 3000\Mushimaro
-Worthy Rivals\5\Attack\26, 177\9, 64\Broken Punisher +20%;; Broken Punisher +25%;;;; Skill Prep +15%;; Skill Prep +20%\5000, 3000\ufotable
+Worthy Rivals\5\Attack\26, 177\9, 64\Broken Punisher +20%;; Broken Punisher +25%;;;; Skill Prep +15%;; Skill Prep +20%\5000, 3000\AKIRA

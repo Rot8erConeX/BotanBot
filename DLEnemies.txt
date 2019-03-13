@@ -5,6 +5,7 @@ Steel Golem\265650\Flame, Thaumian, Void\**Freeze**, **Bog**\Burn\Dull
 Raging Manticore\264856\Shadow, Therion, Void\**Poison**, **Burn**, Freeze, **Paralysis**, **Blind**, **Stun**, **Curse**, **Bog**, **Sleep**\Curse, Poison\Fury
 Void Zephyr\407680\Wind, Dragon, Void\Burn\Sleep\Dragon Delay;; Dull
 High Midgardsormr (Enemy)\863164\Wind, Dragon, High Dragon\Burn\Stun\
+High Midgardsormr (Prelude)\496319\Wind, Dragon, High Dragon\Burn\Stun\
 High Brunhilda (Enemy)\1039797\Flame, Dragon, High Dragon\~~None~~\Burn\
 Matilda\-1, 1, -1, 100\Flame, Demon, Meme\~~None~~\Poison, Burn, Freeze, Paralysis, Blind, Stun, Bog, Sleep, Curse\Wonder Guard
 Elite Swordsman (Flame)\21500, 50000, 102600, 152618\Flame, Human, Imperial Onslaught\Poison, Burn, **Freeze**, Blind, Stun, Curse, **Bog**, Sleep\Burn\
@@ -30,3 +31,4 @@ Valfarre\76357, 191655, 714180, -1, 735436\Water, Therion, Raid, Skyborne Specta
 Aquatic Cyclops\3570, 10710, 18690\Water, Demihuman, Boss, Skyborne Spectacle\Poison, Burn, Freeze, Paralysis, Blind, Stun, Curse, Bog, Sleep\Bog\
 Thanatos\76357, 191655, 673905, -1, 654427\Shadow, Undead, Raid, A Waltz with Fate\~~None~~\Poison\
 Guardian Sentinel\4410, 10500, 20580\Shadow, Thaumian, Boss, A Waltz with Fate\Poison, Burn, Freeze, Paralysis, Blind, Stun, Curse, Bog, Sleep\Poison\
+Hefty Runic Treant\1, 1, 1\Light, Physian, Facility, The Accursed Archives\?\?\

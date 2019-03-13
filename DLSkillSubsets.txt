@@ -111,3 +111,4 @@
 ["Animal", ["animal", "pet"], "Art/Adventurer"]
 ["NPC", ["npc"], "Art/Adventurer"]
 ["Human", ["human", "humanoid", "npc"], "Art/Dragon"]
+["Fat", ["fat", "chubby", "large"], "Art/NPC"]

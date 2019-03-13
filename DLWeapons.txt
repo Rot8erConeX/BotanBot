@@ -15,7 +15,7 @@ Assassin's Knife\Dagger\3\Shadow\18, 0, 61\63, 0, 212\Assassin Strike\100, 0\305
 Astral Edge\Sword\4\Light\31, 0, 105\99, 0, 333\Astral Radiance\500, 0\305\202\6\120000, 240000\Meteorite, 30;; Abyss Stone, 10;; Amber Insignia, 50\
 Astrolabe\Staff\3\Light\20, 0, 69\59, 0, 199\Astro Protection\100, 0\304\202\3\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Light Orb, 5\
 Aurachant\Staff\3v\None\7, 0, 26\24, 0, 81\\100, 0\101\0\1\3000, 6000\Bat's Wing, 3;; Ancient Bird's Feather, 1;; Steel Slab, 1\HP 70% = Defense +3%
-Aureole Apogee\Sword\5v\Light\27, 0, 92\108, 0, 362\\1500, 0\303\203\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Refulgence Orb, 3\(Light) Skill Prep +50%;;;; (Light) Stunned Punisher +15%
+Aureole Apogee\Sword\5v\Light\27, 79, 92\108, 311, 362\\1500, 0\303\203\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Refulgence Orb, 3\(Light) Skill Prep +50%;;;; (Light) Stunned Punisher +15%
 Axe of the Blazing King\Axe\5\Flame\46, 133, 155\170, 487, 567\Blazing Boost\1500, 0\301\201\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Axe Tablet, 100;; Twinkling Sand, 2;; Royal Vermilion Insignia, 200\
 Axe of the Southern Cross\Axe\5\Wind\44, 127, 147\175, 502, 584\Southern Impact\1500, 0\305\202\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Axe Tablet, 100;; Twinkling Sand, 2;; Royal Jade Insignia, 200\
 Axe of the Waves\Axe\3\Water\17, 0, 59\70, 0, 234\Torrential Impact\100, 0\302\201\3\15000, 30000\Granite, 10;; Light Metal, 5;; Water Orb, 5\
@@ -74,7 +74,7 @@ Drill Lance\Lance\3\None\11, 0, 37\42, 0, 143\Spiralling Descent\100, 0\201\101\
 Durandal\Sword\5\Wind\47, 136, 158\157, 450, 524\Heroic Epic\1500, 0\304\202\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Sword Tablet, 100;; Twinkling Sand, 2;; Royal Jade Insignia, 200\
 Duskhawk\Bow\4\None\23, 0, 79\73, 0, 246\Duskhawk's Energy\500, 0\202\101\5\20000, 40000\Fiend's Horn, 20;; Fiend's Eye, 5;; Abyss Stone, 2\
 Enchanted Wand\Wand\2\None\3, 0, 13\17, 0, 57\\50, 0\0\0\0\0, 0\\
-Endless Demise\Staff\5v\Flame\34, 0, 115\95, 0, 317\\1500, 0\301\201\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Zephyr Rune, 2;; Inferno Orb, 3\(Flame) Skill Prep +50%;;;; (Flame) Skill Haste +4%
+Endless Demise\Staff\5v\Flame\34, 99, 115\95, 273, 317\\1500, 0\301\201\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Zephyr Rune, 2;; Inferno Orb, 3\(Flame) Skill Prep +50%;;;; (Flame) Skill Haste +4%
 Ennobled Axe\Axe\3\None\11, 0, 37\44, 0, 147\Ennobled Impact\100, 0\201\101\2\2500, 5000\Iron Ore, 5;; Light Metal, 2\
 Ensorcelled Sword\Sword\3\None\10, 0, 36\42, 0, 140\Ensorcelled Slash\100, 0\202\101\2\2500, 5000\Iron Ore, 5;; Light Metal, 2\
 Eoantide\Sword\5\Water\42, 123, 143\166, 478, 556\Eoantide Cleaver\1500, 0\302\201\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Sword Tablet, 100;; Twinkling Sand, 2;; Royal Azure Insignia, 200\
@@ -103,12 +103,12 @@ Gae Bolg\Lance\5\None\40, 0, 135\128, 0, 429\Accursed Healing\1500, 0\202\101\8\
 Gale Spear\Lance\3\Wind\17, 0, 58\68, 0, 227\Gale's Descent\100, 0\302\201\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Wind Orb, 5\
 Galvanic Bow\Bow\3\Light\16, 0, 56\64, 0, 214\Galvanic Volley\100, 0\303\201\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Light Orb, 5\
 Gear Knife\Dagger\3\None\11, 0, 38\39, 0, 133\Ancient Assault\100, 0\201\101\2\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\
-Genesis Bringer\Staff\5v\Light\34, 0, 115\95, 0, 317\\1500, 0\303\203\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Zephyr Rune, 2;; Refulgence Orb, 3\(Light) Skill Prep +50%;;;; (Light) Recovery Potency +5%
+Genesis Bringer\Staff\5v\Light\34, 99, 115\95, 273, 317\\1500, 0\303\203\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Zephyr Rune, 2;; Refulgence Orb, 3\(Light) Skill Prep +50%;;;; (Light) Recovery Potency +5%
 Ghizlam's Darkblade\Blade\4\Shadow\27, 0, 90\108, 0, 361\Darkness's Protection\500, 0\303\201\6\120000, 240000\Meteorite, 30;; Abyss Stone, 10;; Violet Insignia, 50\
 Gilda Sword\Sword\4\None\24, 0, 81\77, 0, 257\Gildan Recovery\500, 0\202\101\5\20000, 40000\Granite, 20;; Meteorite, 5;; Abyss Stone, 2\
 Glacial Fungus\Bow\4v\Water\16, 0, 56\64, 0, 214\\500, 0\302\202\2\30000, 60000\Fiend's Horn, 6;; Fiend's Eye, 2;; Shiny Spore, 1;; Deluge Orb, 1\(Water) Thaumian's Bane +15%;;;; (Water) Dull Res
 Goliath Splitter\Blade\3v\None\6, 0, 21\27, 0, 91\\100, 0\101\0\1\3000, 6000\Iron Ore, 3;; Granite, 1;; Steel Slab, 1\Physian's Bane +10%
-Gorelust\Dagger\5v\Water\29, 0, 98\103, 0, 344\\1500, 0\301\201\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Raging Tail, 2;; Deluge Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) HP 70% = Strength +5%
+Gorelust\Dagger\5v\Water\29, 85, 98\103, 296, 344\\1500, 0\301\201\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Raging Tail, 2;; Deluge Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) HP 70% = Strength +5%
 Gram\Sword\5\None\38, 0, 129\129, 0, 430\Rage and Retribution\1500, 0\202\101\8\150000, 750000\Granite, 150;; Meteorite, 50;; Crimson Core, 20;; Sword Tablet, 20;; Twinkling Sand, 1\
 Grand Seadragon\Axe\5\Water\44, 127, 147\175, 502, 584\Seadragon's Impact\1500, 0\304\202\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Axe Tablet, 100;; Twinkling Sand, 2;; Royal Azure Insignia, 200\
 Grassrunner\Sword\3\Wind\17, 0, 57\66, 0, 222\Grass Slash\100, 0\305\202\3\15000, 30000\Granite, 10;; Light Metal, 5;; Wind Orb, 5\
@@ -119,7 +119,7 @@ Hauteclaire\Sword\5\None\35, 0, 117\136, 0, 456\Noble Flash\1500, 0\201\101\8\15
 Heaven's Acuity\Blade\5\Flame\39, 114, 132\171, 491, 572\Heaven's Flames\1500, 0\301\201\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Blade Tablet, 100;; Twinkling Sand, 2;; Royal Vermilion Insignia, 200\
 Heavenfire Gaze\Axe\4v\Flame\21, 0, 73\87, 0, 292\\500, 0\201\101\4\50000, 250000\Granite, 7;; Meteorite, 3;; Great Feather, 5;; Inferno Orb, 1\(Flame) Skill Prep +25%;;;; (Flame) High Midgardsormr's Bane +20%
 Heavenwing\Blade\5\Light\42, 123, 143\163, 468, 544\Winged Blessing\1500, 0\304\202\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Blade Tablet, 100;; Twinkling Sand, 2;; Royal Amber Insignia, 200\
-Heavenwrath Gaze\Axe\5v\Flame\28, 0, 95\114, 0, 380\\1500, 0\301\201\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Inferno Orb, 3\(Flame) Skill Prep +50%;;;; (Flame) High Midgardsormr's Bane +20%
+Heavenwrath Gaze\Axe\5v\Flame\28, 82, 95\114, 327, 380\\1500, 0\301\201\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Inferno Orb, 3\(Flame) Skill Prep +50%;;;; (Flame) High Midgardsormr's Bane +20%
 Hedgehog\Dagger\5\None\37, 0, 124\130, 0, 434\Hedgehog's Strength\1500, 0\202\101\8\150000, 750000\Fiend's Horn, 150;; Fiend's Eye, 50;; Crimson Core, 20;; Dagger Tablet, 20;; Twinkling Sand, 1\
 Hefty Ingot\Sword\3v\None\6, 15, 23\26, 57, 88\\100, 0\101\0\1\3000, 6000\Iron Ore, 3;; Granite, 1;; Steel Slab, 1\Physian's Bane +10%
 Hellish Lance\Lance\4\Shadow\29, 0, 99\107, 0, 358\Hellish Focus\500, 0\303\201\6\120000, 240000\Fiend's Eye, 30;; Abyss Stone, 10;; Violet Insignia, 50\
@@ -128,7 +128,7 @@ High Shamshir\Blade\3\None\9, 0, 32\44, 0, 149\Shamshir Strike\100, 0\202\101\2\
 Holy Bow\Bow\4\Light\30, 0, 103\96, 0, 320\Holy Energy\500, 0\304\202\6\120000, 240000\Fiend's Eye, 30;; Abyss Stone, 10;; Amber Insignia, 50\
 Honor Edge\Dagger\5\Shadow\43, 124, 144\163, 468, 545\Unwavering Assault\1500, 0\303\201\9\900000, 4500000\Fiend's Eye, 150;; Crimson Core, 30;; Dagger Tablet, 100;; Twinkling Sand, 2;; Royal Violet Insignia, 200\
 Hunter's Bow\Bow\3\None\11, 0, 37\39, 0, 131\Hunter's Strength\100, 0\202\101\2\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\
-Inferno Apogee\Sword\5v\Flame\27, 0, 108\92, 0, 362\\1500, 0\301\201\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Inferno Orb, 3\(Flame) Skill Prep +50%;;;; (Flame) High Midgardsormr's Bane +20%
+Inferno Apogee\Sword\5v\Flame\27, 79, 108\92, 311, 362\\1500, 0\301\201\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Inferno Orb, 3\(Flame) Skill Prep +50%;;;; (Flame) High Midgardsormr's Bane +20%
 Iron Blade\Blade\4\None\20, 0, 69\83, 0, 278\Iron's Protection\500, 0\201\101\5\20000, 40000\Granite, 20;; Meteorite, 5;; Abyss Stone, 2\
 Ironside Lance\Lance\4\None\21, 0, 72\85, 0, 284\Ironsides's Barrage\500, 0\202\101\5\20000, 40000\Fiend's Horn, 20;; Fiend's Eye, 5;; Abyss Stone, 2\
 Jack-o'-Lance\Lance\3s\Light\16, 0, 55\59, 0, 198\Pumpkin Barrage\100, 0\0\0\0\0, 0\\
@@ -145,7 +145,7 @@ Levatein\Sword\5\Flame\42, 123, 143\166, 478, 556\Calamitous Cleaver\1500, 0\301
 Light of Judgment\Staff\5\Light\49, 142, 165\153, 441, 513\Judgment Circle\1500, 0\305\202\9\900000, 4500000\Bewitching Wings, 150;; Crimson Core, 30;; Staff Tablet, 100;; Twinkling Sand, 2;; Royal Amber Insignia, 200\
 Long Ankh\Staff\3\None\13, 0, 44\37, 0, 125\Ankh's Protection\100, 0\202\101\2\2500, 5000\Bat's Wing, 5;; Light Metal, 2\
 Lover's Ally\Dagger\3\None\12, 0, 40\38, 0, 129\Lover's Strike\100, 0\202\101\2\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\
-Lucky Hanetsuki Paddle\Sword\5p\None\31, 0, 106\105, 0, 351\Happiness Spike\1500, 0\0\0\0\0, 0\\
+Lucky Hanetsuki Paddle\Sword\5p\None\31, 91, 106\105, 302, 351\Happiness Spike\1500, 0\0\0\0\0, 0\\
 Lumenspore Lance\Lance\3v\Flame\11, 0, 39\41, 0, 139\\100, 0\201\101\1\5000, 10000\Fiend's Horn, 3;; Fiend's Eye, 1;; Solid Fungus, 2;; Blaze Orb, 1\(Flame) Thaumian's Bane +10%;;;; (Flame) Dragon Delay Res
 Lupis Solis\Bow\5\Flame\44, 127, 147\155, 445, 518\Lupine Vision\1500, 0\301\201\9\900000, 4500000\Fiend's Eye, 150;; Crimson Core, 30;; Bow Tablet, 100;; Twinkling Sand, 2;; Royal Vermilion Insignia, 200\
 Luster Apogee\Sword\4v\Light\21, 0, 71\83, 0, 278\\500, 0\203\102\4\50000, 250000\Granite, 7;; Meteorite, 3;; Great Feather, 5;; Refulgence Orb, 1\(Light) Skill Prep +25%;;;; (Light) Stunned Punisher +15%
@@ -153,7 +153,7 @@ Lux Lamina\Dagger\5\Water\45, 131, 152\158, 455, 529\Cobalt Strength\1500, 0\304
 Maar Oasis\Blade\5\Water\42, 123, 143\163, 468, 544\Maar's Recovery\1500, 0\303\202\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Blade Tablet, 100;; Twinkling Sand, 2;; Royal Azure Insignia, 200\
 Macabre Malediction\Bow\4\Shadow\30, 0, 103\96, 0, 320\Macabre Energy\500, 0\305\202\6\120000, 240000\Fiend's Eye, 30;; Abyss Stone, 10;; Violet Insignia, 50\
 Machine Bow\Bow\3\None\10, 0, 35\40, 0, 135\Mechanical Volley\100, 0\201\101\2\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\
-Maelstrom Crux\Axe\5v\Water\28, 0, 95\114, 0, 380\\1500, 0\304\204\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Raging Tail, 2;; Deluge Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) HP 70% = Strength +5%
+Maelstrom Crux\Axe\5v\Water\28, 82, 95\114, 327, 380\\1500, 0\304\204\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Raging Tail, 2;; Deluge Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) HP 70% = Strength +5%
 Mailbreaker\Lance\3\None\11, 0, 39\41, 0, 139\Shattering Whirlwind\100, 0\202\101\2\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\
 Marine Staff\Staff\4\Water\34, 0, 115\95, 0, 317\Marine Healing\500, 0\302\201\6\120000, 240000\Bewitching Wings, 30;; Abyss Stone, 10;; Azure Insignia, 50\
 Masamura's Pride\Blade\4\None\18, 0, 62\88, 0, 295\Masamura's Slash\500, 0\202\101\5\20000, 40000\Granite, 20;; Meteorite, 5;; Abyss Stone, 2\
@@ -178,7 +178,7 @@ Peacock's Whorl\Bow\5\Water\44, 127, 147\155, 445, 518\Peacock Shot\1500, 0\302\
 Phytalmios\Wand\5\Wind\45, 131, 152\158, 454, 528\Phytalmios's Healing\1500, 0\302\201\9\900000, 4500000\Bewitching Wings, 150;; Crimson Core, 30;; Wand Tablet, 100;; Twinkling Sand, 2;; Royal Jade Insignia, 200\
 Piercing Beast\Lance\4v\None\16, 0, 56\65, 0, 219\\500, 0\101\0\4\8000, 40000\Fiend's Claw, 5;; Fiend's Horn, 2;; Raging Fang, 2\Slayer's Strength +3%
 Plain Axe\Axe\4\None\18, 0, 62\63, 0, 212\\500, 0\101\0\4\4000, 8000\Iron Ore, 3;; Granite, 2\
-Primal Thunder\Blade\5v\Light\27, 0, 92\105, 0, 353\\1500, 0\303\203\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Refulgence Orb, 3\(Light) Skill Prep +50%;;;; (Light) Stunned Punisher +15%
+Primal Thunder\Blade\5v\Light\27, 79, 92\105, 303, 353\\1500, 0\303\203\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Refulgence Orb, 3\(Light) Skill Prep +50%;;;; (Light) Stunned Punisher +15%
 Primordial Titan\Axe\5\Shadow\46, 133, 155\170, 487, 567\Primordial Boost\1500, 0\303\201\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Axe Tablet, 100;; Twinkling Sand, 2;; Royal Violet Insignia, 200\
 Proof of the Wind\Bow\3\Wind\16, 0, 56\64, 0, 214\Wind Volley\100, 0\302\201\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Wind Orb, 5\
 Queensflight\Dagger\4\Wind\31, 0, 106\98, 0, 327\Queen's Recovery\500, 0\304\202\6\120000, 240000\Fiend's Eye, 30;; Abyss Stone, 10;; Jade Insignia, 50\
@@ -196,7 +196,7 @@ Shining Axe\Axe\4\Light\31, 0, 105\107, 0, 357\Lightning's Protection\500, 0\305
 Singing Cyclone\Axe\3\Wind\19, 0, 65\66, 0, 220\Cyclonic Swing\100, 0\303\202\3\15000, 30000\Granite, 10;; Light Metal, 5;; Wind Orb, 5\
 Sizzling Enoki Dagger\Dagger\4v\Flame\17, 0, 58\65, 0, 218\\500, 0\301\201\2\30000, 60000\Fiend's Horn, 6;; Fiend's Eye, 2;; Shiny Spore, 1;; Inferno Orb, 1\(Flame) Thaumian's Bane +15%;;;; (Flame) Dragon Delay Res
 Shatterspore Lance\Lance\4v\Water\17, 0, 58\68, 0, 227\\500, 0\302\202\2\30000, 60000\Fiend's Horn, 6;; Fiend's Eye, 2;; Shiny Spore, 1;; Deluge Orb, 1\(Water) Thaumian's Bane +15%;;;; (Water) Dull Res
-Skyrender\Blade\5v\Flame\27, 0, 92\105, 0, 353\\1500, 0\301\201\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Inferno Orb, 3\(Flame) Skill Prep +50%;;;; (Flame) High Midgardsormr's Bane +20%
+Skyrender\Blade\5v\Flame\27, 79, 92\105, 303, 353\\1500, 0\301\201\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Inferno Orb, 3\(Flame) Skill Prep +50%;;;; (Flame) High Midgardsormr's Bane +20%
 Slaughterlust\Dagger\4v\None\16, 0, 55\63, 0, 210\\500, 0\101\0\4\8000, 40000\Fiend's Claw, 5;; Fiend's Horn, 2;; Raging Fang, 2\Slayer's Strength +3%
 Soldier's Axe\Axe\2\None\4, 0, 16\16, 0, 55\\50, 0\0\0\0\0, 0\\
 Soldier's Bow\Bow\2\None\4, 0, 15\15, 0, 52\\50, 0\0\0\0\0, 0\\
@@ -216,7 +216,7 @@ Staff of the Horned Snake\Staff\3\None\12, 0, 42\38, 0, 129\Horned Circle\100, 0
 Staff of the Red Emperor\Staff\5\Flame\53, 153, 178\146, 419, 487\Red Emperor's Spirit\1500, 0\301\201\9\900000, 4500000\Bewitching Wings, 150;; Crimson Core, 30;; Staff Tablet, 100;; Twinkling Sand, 2;; Royal Vermilion Insignia, 200\
 Starchaser\Bow\5\None\34, 0, 115\131, 0, 438\Star Volley\1500, 0\203\101\8\150000, 750000\Fiend's Horn, 150;; Fiend's Eye, 50;; Crimson Core, 20;; Bow Tablet, 20;; Twinkling Sand, 1\
 Starlight Gaze\Axe\4v\Light\21, 0, 73\87, 0, 292\\1500, 0\203\101\4\50000, 250000\Granite, 7;; Meteorite, 3;; Great Feather, 5;; Refulgence Orb, 1\(Light) Skill Prep +25%;;;; (Light) Stunned Punisher +15%
-Starwrath Gaze\Axe\5v\Light\28, 0, 95\114, 0, 380\\1500, 0\303\203\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Refulgence Orb, 3\(Light) Skill Prep +50%;;;; (Light) Stunned Punisher +15%
+Starwrath Gaze\Axe\5v\Light\28, 82, 95\114, 327, 380\\1500, 0\303\203\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Refulgence Orb, 3\(Light) Skill Prep +50%;;;; (Light) Stunned Punisher +15%
 Stellar Pegasus\Bow\5\Wind\44, 127, 147\155, 445, 518\Pegasus Shot\1500, 0\303\201\9\900000, 4500000\Fiend's Eye, 150;; Crimson Core, 30;; Bow Tablet, 100;; Twinkling Sand, 2;; Royal Jade Insignia, 200\
 Stormspawn\Dagger\3\Wind\18, 0, 61\63, 0, 212\Storm Chain\100, 0\304\202\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Wind Orb, 5\
 Striker\Blade\2\None\3, 0, 13\17, 0, 59\\50, 0\0\0\0\0, 0\\
@@ -249,7 +249,7 @@ Traitor's Despair\Axe\4\Shadow\28, 0, 95\114, 0, 380\Traitor Smiter\500, 0\302\2
 Treasure of the Iron Rose\Dagger\5\None\35, 0, 118\134, 0, 447\Thorned Assault\1500, 0\201\101\8\150000, 750000\Fiend's Horn, 150;; Fiend's Eye, 50;; Crimson Core, 20;; Dagger Tablet, 20;; Twinkling Sand, 1\
 Trident\Lance\3\None\7, 0, 24\26, 0, 87\\100, 0\101\0\1\500, 1000\Fiend's Claw, 1\
 Triggerspore Lance\Lance\4v\Flame\17, 0, 58\68, 0, 227\\500, 0\302\202\2\30000, 60000\Fiend's Horn, 6;; Fiend's Eye, 2;; Shiny Spore, 1;; Deluge Orb, 1\(Flame) Thaumian's Bane +15%;;;; (Flame) Dragon Delay Res
-Tsunamiwing\Wand\5v\Water\26, 0, 87\111, 0, 372\\1500, 0\301\201\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Raging Tail, 2;; Deluge Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) HP 70% = Strength +5%
+Tsunamiwing\Wand\5v\Water\26, 75, 87\111, 320, 372\\1500, 0\301\201\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Raging Tail, 2;; Deluge Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) HP 70% = Strength +5%
 Twilight Harbinger\Staff\4v\Flame\26, 0, 89\73, 0, 244\\500, 0\201\101\4\50000, 250000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Great Feather, 5;; Inferno Orb, 1\(Flame) Skill Prep +25%;;;; (Flame) Skill Haste +4%
 Twilight Shimmer\Wand\5\Light\40, 116, 134\171, 492, 573\Twilight Blast\1500, 0\305\202\9\900000, 4500000\Bewitching Wings, 150;; Crimson Core, 30;; Wand Tablet, 100;; Twinkling Sand, 2;; Royal Amber Insignia, 200\
 Ultramarine Knife\Dagger\4\Water\27, 0, 93\106, 0, 354\Ultramarine Spin\500, 0\302\201\6\120000, 240000\Fiend's Eye, 30;; Abyss Stone, 10;; Azure Insignia, 50\
@@ -260,7 +260,7 @@ Valkaheim Blade\Blade\3\Flame\15, 0, 53\68, 0, 229\Valkan Wave\100, 0\301\201\3\
 Vampire's Lantern\Staff\3s\Light\17, 0, 59\55, 0, 185\Vampire's Treat\100, 0\0\0\0\0, 0\\
 Victory Axe\Axe\5\None\32, 0, 109\110, 0, 368\\1500, 0\101\0\7\25000, 125000\Granite, 15;; Meteorite, 3;; Crimson Core, 1;; Axe Tablet, 1\
 Villagelight\Blade\5\None\35, 0, 117\133, 0, 446\Swordsmith's Recovery\1500, 0\202\101\8\150000, 750000\Granite, 150;; Meteorite, 50;; Crimson Core, 20;; Blade Tablet, 20;; Twinkling Sand, 1\
-Vortex Beast\Lance\5v\Water\32, 0, 107\102, 0, 340\\1500, 0\301\201\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Raging Tail, 2;; Deluge Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) HP 70% = Strength +5%
+Vortex Beast\Lance\5v\Water\32, 92, 107\102, 292, 340\\1500, 0\301\201\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Raging Tail, 2;; Deluge Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) HP 70% = Strength +5%
 Wand of the Torrent\Wand\5\None\27, 0, 90\115, 0, 384\\1500, 0\101\0\7\25000, 125000\Ancient Bird's Feather, 15;; Bewitching Wings, 3;; Crimson Core, 1;; Wand Tablet, 1\
 Warrior's Axe\Axe\3\None\7, 0, 26\26, 0, 87\\100, 0\101\0\1\500, 1000\Iron Ore, 1\
 Water Dagger\Dagger\3\Water\18, 0, 61\63, 0, 212\Water Chain\100, 0\303\202\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Water Orb, 5\
