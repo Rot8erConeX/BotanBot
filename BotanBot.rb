@@ -131,7 +131,7 @@ def all_commands(include_nil=false,permissions=-1)
      'daily','now','dailies','todayindl','today_in_dl','tomorrow','tommorrow','tomorow','tommorow','shop','store','exp','level','xp','plxp','plexp','pllevel',
      'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','dbxp','sp',
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
-     'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage',
+     'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias',
      'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop'] if permissions==2
@@ -213,7 +213,7 @@ def data_load()
     b[i][4]=b[i][4].split(', ').map{|q| q.to_i}
     b[i][5]=b[i][5].split(';;;; ').map{|q| q.split(';; ')}
     b[i][6]=b[i][6].split(', ').map{|q| q.to_i}
-    b[i][8]=b[i][8].split(', ') unless b[i][8].nil?
+    b[i][8]=b[i][8].split(';; ').map{|q| q.split(', ')} unless b[i][8].nil?
   end
   @wyrmprints=b.map{|q| q}
   if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLWeapons.txt')
@@ -467,7 +467,7 @@ def help_text(event,bot,command=nil,subcommand=nil)
   elsif ['wxp','wexp','wlevel'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __start__ __end__","Acts simultaneously as the `wyrmprintexp` and `weaponexp`.",0xCE456B)
   elsif ['sp'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __type__","Shows SP gains for adventurers with the weapon type `type`.\nIf an adventurer's name is listed, shows their SP gains.\nIf no type or adventurer is specified, and in PM, shows the entire SP gains table.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __type__","Shows SP gains for adventurers with the weapon type `type`.\nIf an adventurer's name is listed, shows their SP gains.\nIf a weapon's name is listed, shows SP gains for that weapon's type.\nIf no type, adventurer, or weapon is specified, and in PM, shows the entire SP gains table.",0xCE456B)
   elsif ['donation','donate'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}**",'Responds with information regarding potential donations to my developer.',0xCE456B)
   elsif command.downcase=='sendmessage'
@@ -478,6 +478,8 @@ def help_text(event,bot,command=nil,subcommand=nil)
     create_embed(event,'**ignoreuser** __user id__',"Causes me to ignore the user with id `user`\n\n**This command is only able to be used by Rot8er_ConeX**, and only in PM.",0x008b8b)
   elsif command.downcase=='leaveserver'
     create_embed(event,'**leaveserver** __server id number__',"Forces me to leave the server with the id `server id`.\n\n**This command is only able to be used by Rot8er_ConeX**, and only in PM.",0x008b8b)
+  elsif ['banner','banners'].include?(command.downcase)
+    create_embed(event,"**#{command}** \\*args","If an adventurer's, dragon's, or wyrmprint's name is included, shows all banners that they have been on.\nIn PM, also shows all other entities that were rate-up on those banners.\n\nIf a banner's name is specified, shows all rate-ups on that banner, and any associated event's facilities.\n\nIf neither of the above is true, shows rate-ups and event facilities associated with the current banner.",0xCE456B)
   elsif ['shard','attribute'].include?(command.downcase)
     create_embed(event,'**shard**','Returns the shard that this server is served by.',0xCE456B)
   elsif ['bugreport','suggestion','feedback'].include?(command.downcase)
@@ -1131,6 +1133,31 @@ def find_npc(name,event,fullname=false,ext=false)
   return []
 end
 
+def find_banner(name,event,fullname=false,ext=false)
+  data_load()
+  name=normalize(name)
+  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  return [] if name.length<2
+  k=@banners.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
+  return @banners[k] unless k.nil?
+  k=@banners.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')=="the#{name}" && q[0][0,4].downcase=='the '}
+  return @banners[k] unless k.nil?
+  k=@banners.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')=="a#{name}" && q[0][0,2].downcase=='a '}
+  return @banners[k] unless k.nil?
+  k=@banners.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')=="an#{name}" && q[0][0,3].downcase=='an '}
+  return @banners[k] unless k.nil?
+  return [] if fullname
+  k=@banners.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
+  return @banners[k] unless k.nil?
+  k=@banners.find_index{|q| q[0].downcase.gsub('the ','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && q[0][0,4].downcase=='the '}
+  return @banners[k] unless k.nil?
+  k=@banners.find_index{|q| q[0].downcase.gsub('a ','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && q[0][0,2].downcase=='a '}
+  return @banners[k] unless k.nil?
+  k=@banners.find_index{|q| q[0].downcase.gsub('an ','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && q[0][0,3].downcase=='an '}
+  return @banners[k] unless k.nil?
+  return []
+end
+
 def find_data_ex(callback,name,event,fullname=false,ext=false)
   k=method(callback).call(name,event,true,ext)
   return k if k.length>0
@@ -1416,7 +1443,7 @@ def disp_wyrmprint_stats(bot,event,args=nil)
   evn=event.message.text.downcase.split(' ')
   s2s=false if @shardizard==4 && evn.include?('smol')
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Wyrmprints/#{k[0].gsub(' ','_')}_1.png"
-  xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Wyrmprints/#{k[0].gsub(' ','_')}_2.png" if has_any?(['mub','unbind','unbound','refined'],evn)
+  xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Wyrmprints/#{k[0].gsub(' ','_')}_2.png" if has_any?(['mub','unbind','unbound','refined','refine','refinement'],evn)
   str=generate_rarity_row(k[1][0,1].to_i)
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2]}"}
   str="#{str}\n#{moji[0].mention unless moji.length<=0} **Amulet Type:** #{k[2]}"
@@ -1622,7 +1649,7 @@ def disp_weapon_lineage(bot,event,args=nil)
   s2s=false if @shardizard==4 && evn.include?('smol')
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Weapons/#{k[0].gsub(' ','_')}.png"
   mub=false
-  mub=true if has_any?(['mub','unbind','unbound','refined'],evn)
+  mub=true if has_any?(['mub','unbind','unbound','refined','refine','refinement'],evn)
   str=generate_rarity_row(k[2][0,1].to_i)
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
   str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
@@ -3062,6 +3089,14 @@ def disp_adventurer_art(bot,event,args=nil)
     end
     disp='>No information<' if disp.length<=0
   end
+  wrm=@wyrmprints.reject{|q| q[8].nil? || q[8].length<=0}
+  wrmz=[]
+  for i in 0...wrm.length
+    wrmz.push("#{wrm[i][0]}") if wrm[i][8][0].include?(k[0]) && !wrm[i][8][1].nil? && wrm[i][8][1].include?(k[0])
+    wrmz.push("#{wrm[i][0]}") if wrm[i][8][0].include?(k[0]) && wrm[i][8][1].nil?
+    wrmz.push("#{wrm[i][0]} *[Base]*") if wrm[i][8][0].include?(k[0]) && !wrm[i][8][1].nil? && !wrm[i][8][1].include?(k[0])
+    wrmz.push("#{wrm[i][0]} *[Refined]*") if !wrm[i][8][0].include?(k[0]) && !wrm[i][8][1].nil? && wrm[i][8][1].include?(k[0])
+  end
   dispx="#{disp}"
   if @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
     disp="#{disp}\n" if charsx.map{|q| q.length}.max>0
@@ -3083,6 +3118,7 @@ def disp_adventurer_art(bot,event,args=nil)
       end
     end
     disp="#{disp}\n**Same __everything__:** #{charsx[2].join(', ')}" if charsx[2].length>0
+    disp="#{disp}\n**Found in these wyrmprints:** #{wrmz.join(', ')}" if wrmz.length>0
     disp=dispx if disp.length>=1900
     event.respond "#{disp}\n\n#{art}"
   else
@@ -3100,6 +3136,7 @@ def disp_adventurer_art(bot,event,args=nil)
       end
     end
     flds.push(['Same everything',charsx[2].join("\n"),1]) if charsx[2].length>0
+    flds.push(['Found in these wyrmprints',wrmz.join("\n")]) if wrmz.length>0
     if flds.length.zero?
       flds=nil
     elsif flds.map{|q| q.join("\n")}.join("\n\n").length>=1500 && safe_to_spam?(event)
@@ -3284,6 +3321,16 @@ def disp_dragon_art(bot,event,args=nil)
     end
     disp='>No information<' if disp.length<=0
   end
+  wrm=@wyrmprints.reject{|q| q[8].nil? || q[8].length<=0}
+  wrmz=[]
+  nnn="#{k[0]}"
+  nnn="Mym" if k[0]=='Brunhilda' && ['Human','Kimono'].include?(rar)
+  for i in 0...wrm.length
+    wrmz.push("#{wrm[i][0]}") if wrm[i][8][0].include?(nnn) && !wrm[i][8][1].nil? && wrm[i][8][1].include?(nnn)
+    wrmz.push("#{wrm[i][0]}") if wrm[i][8][0].include?(nnn) && wrm[i][8][1].nil?
+    wrmz.push("#{wrm[i][0]} *[Base]*") if wrm[i][8][0].include?(nnn) && !wrm[i][8][1].nil? && !wrm[i][8][1].include?(nnn)
+    wrmz.push("#{wrm[i][0]} *[Refined]*") if !wrm[i][8][0].include?(nnn) && !wrm[i][8][1].nil? && wrm[i][8][1].include?(nnn)
+  end
   art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Dragons/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
   dispx="#{disp}"
   if @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
@@ -3306,6 +3353,7 @@ def disp_dragon_art(bot,event,args=nil)
       end
     end
     disp="#{disp}\n**Same __everything__:** #{charsx[2].join(', ')}" if charsx[2].length>0
+    disp="#{disp}\n**Found in these wyrmprints:** #{wrmz.join(', ')}" if wrmz.length>0
     disp=dispx if disp.length>=1900
     event.respond "#{disp}\n\n#{art}"
   else
@@ -3323,6 +3371,7 @@ def disp_dragon_art(bot,event,args=nil)
       end
     end
     flds.push(['Same everything',charsx[2].join("\n"),1]) if charsx[2].length>0
+    flds.push(['Found in these wyrmprints',wrmz.join("\n")]) if wrmz.length>0
     if flds.length.zero?
       flds=nil
     elsif flds.map{|q| q.join("\n")}.join("\n\n").length>=1500 && safe_to_spam?(event)
@@ -3383,7 +3432,12 @@ def disp_wyrmprint_art(bot,event,args=nil)
   evn=event.message.text.downcase.split(' ')
   s2s=false if @shardizard==4 && evn.include?('smol')
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Wyrmprints/#{k[0].gsub(' ','_')}_1.png"
-  xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Wyrmprints/#{k[0].gsub(' ','_')}_2.png" if has_any?(['mub','unbind','unbound','refined'],evn)
+  if has_any?(['mub','unbind','unbound','refined','refine','refinement'],evn)
+    xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Wyrmprints/#{k[0].gsub(' ','_')}_2.png"
+    k[8]=k[8][-1] unless k[8].nil?
+  else
+    k[8]=k[8][0] unless k[8].nil?
+  end
   str=generate_rarity_row(k[1][0,1].to_i)
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2]}"}
   str="#{str}\n#{moji[0].mention unless moji.length<=0} **Amulet Type:** #{k[2]}"
@@ -3591,6 +3645,16 @@ def disp_npc_art(bot,event,args=nil)
       rar=lookout[j][0] if rar.nil? && lookout[j][1].include?(args[i].downcase)
     end
   end
+  wrm=@wyrmprints.reject{|q| q[8].nil? || q[8].length<=0}
+  wrmz=[]
+  for i in 0...wrm.length
+    wrmz.push("#{wrm[i][0]}") if wrm[i][8][0].include?(k[0]) && !wrm[i][8][1].nil? && wrm[i][8][1].include?(k[0])
+    wrmz.push("#{wrm[i][0]}") if wrm[i][8][0].include?(k[0]) && wrm[i][8][1].nil?
+    wrmz.push("#{wrm[i][0]} *[Base]*") if wrm[i][8][0].include?(k[0]) && !wrm[i][8][1].nil? && !wrm[i][8][1].include?(k[0])
+    wrmz.push("#{wrm[i][0]} *[Refined]*") if !wrm[i][8][0].include?(k[0]) && !wrm[i][8][1].nil? && wrm[i][8][1].include?(k[0])
+  end
+  flds=nil
+  flds=[['Wyrmprints with this character',wrmz.join("\n")]] if wrmz.length>0
   if !rar.nil? && rar.is_a?(String)
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Misc/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
     m=false
@@ -3605,7 +3669,145 @@ def disp_npc_art(bot,event,args=nil)
   s2s=true if safe_to_spam?(event)
   s2s=false if @shardizard==4 && event.message.text.downcase.split(' ').include?('smol')
   art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Misc/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
-  create_embed(event,"__**#{k[0]}**__",disp,0xCE456B,nil,[nil,art])
+  create_embed(event,"__**#{k[0]}**__",disp,0xCE456B,nil,[nil,art],flds)
+end
+
+def current_banner(bot,event,args=nil,msg='',showerr=true)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  data_load()
+  t=Time.now
+  timeshift=7
+  timeshift-=1 unless (t-24*60*60).dst?
+  t-=60*60*timeshift
+  tm="#{t.year}#{'0' if t.month<10}#{t.month}#{'0' if t.day<10}#{t.day}".to_i
+  bbb=@banners.reject{|q| q[4].nil? || q[4].length<=0 || q[4][0]=='-'}
+  b=bbb.find_index{|q| q[4][0].split('/').reverse.join('').to_i<=tm && (q[4].length==1 || q[4][1].split('/').reverse.join('').to_i>=tm)}
+  if b.nil?
+    event.respond "No matches found." if showerr
+  else
+    b=bbb[b]
+    adv=@adventurers.map{|q| q}
+    drg=@dragons.map{|q| q}
+    wrm=@wyrmprints.map{|q| q}
+    unless b[1]=='-' || b[1][0]=='-'
+      for i in 0...b[1].length
+        a=adv.find_index{|q| q[0]==b[1][i].gsub('*','')}
+        if safe_to_spam?(event)
+          b[1][i]="#{b[1][i]}#{adv_emoji(adv[a],bot)}" unless a.nil?
+        elsif a.nil?
+          b[1][i]="~~#{b[1][i]}~~"
+        end
+      end
+    end
+    unless b[2]=='-' || b[2][0]=='-'
+      for i in 0...b[2].length
+        a=drg.find_index{|q| q[0]==b[2][i].gsub('*','')}
+        if safe_to_spam?(event)
+          b[2][i]="#{b[2][i]}#{dragon_emoji(drg[a],bot)}" unless a.nil?
+        elsif a.nil?
+          b[2][i]="~~#{b[2][i]}~~"
+        end
+      end
+    end
+    unless b[3]=='-' || b[3][0]=='-'
+      for i in 0...b[3].length
+        a=wrm.find_index{|q| q[0]==b[3][i].gsub('*','')}
+        if safe_to_spam?(event)
+          b[3][i]="#{b[3][i]}#{print_emoji(wrm[a],bot)}" unless a.nil?
+        elsif a.nil?
+          b[3][i]="~~#{b[3][i]}~~"
+        end
+      end
+    end
+    f=[]
+    f.push(['Adventurers',b[1].join("\n")]) unless b[1]=='-' || b[1][0]=='-'
+    f.push(['Dragons',b[2].join("\n")]) unless b[2]=='-' || b[2][0]=='-'
+    f.push(['Wyrmprints',b[3].join("\n")]) unless b[3]=='-' || b[3][0]=='-'
+    f=nil if f.length<=0
+    if b[4].length>1 && !b[4][1].nil?
+      t2=b[4][1].split('/').map{|q| q.to_i}
+      t2=Time.new(t2[2],t2[1],t2[0])+24*60*60
+      t2-=60*60*timeshift
+      t2=t2-t
+      if t2/(24*60*60)>1
+        str2=" - #{(t2/(24*60*60)).floor} days left"
+      elsif t2/(60*60)>1
+        str2=" - #{(t2/(60*60)).floor} hours left"
+      elsif t2/60>1
+        str2=" - #{(t2/60).floor} minutes left"
+      elsif t2>1
+        str2=" - #{(t2).floor} seconds left"
+      end
+    else
+      str2=''
+    end
+    ftr=nil
+    ftr="Associated Facility: #{b[6]}" unless b[6].nil? || b[6].length<=0
+    xcolor=0xCE456B
+    xcolor=element_color(b[5][0]) if ['Flame','Water','Wind','Light','Shadow'].include?(b[5][0])
+    xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/SummonBanners/#{b[0].gsub(' ','_')}.png"
+    create_embed(event,"#{msg}__**#{b[0]}**__#{str2}",'',xcolor,ftr,[nil,xpic],f)
+  end
+end
+
+def old_banner(bot,event,args=nil)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  data_load()
+  b=find_data_ex(:find_banner,args.join(' '),event)
+  if b.length<=0
+    event.respond "No matches found."
+  else
+    adv=@adventurers.map{|q| q}
+    drg=@dragons.map{|q| q}
+    wrm=@wyrmprints.map{|q| q}
+    unless b[1]=='-' || b[1][0]=='-'
+      for i in 0...b[1].length
+        a=adv.find_index{|q| q[0]==b[1][i].gsub('*','')}
+        if safe_to_spam?(event)
+          b[1][i]="#{b[1][i]}#{adv_emoji(adv[a],bot)}" unless a.nil?
+        elsif a.nil?
+          b[1][i]="~~#{b[1][i]}~~"
+        end
+      end
+    end
+    unless b[2]=='-' || b[2][0]=='-'
+      for i in 0...b[2].length
+        a=drg.find_index{|q| q[0]==b[2][i].gsub('*','')}
+        if safe_to_spam?(event)
+          b[2][i]="#{b[2][i]}#{dragon_emoji(drg[a],bot)}" unless a.nil?
+        elsif a.nil?
+          b[2][i]="~~#{b[2][i]}~~"
+        end
+      end
+    end
+    unless b[3]=='-' || b[3][0]=='-'
+      for i in 0...b[3].length
+        a=wrm.find_index{|q| q[0]==b[3][i].gsub('*','')}
+        if safe_to_spam?(event)
+          b[3][i]="#{b[3][i]}#{print_emoji(wrm[a],bot)}" unless a.nil?
+        elsif a.nil?
+          b[3][i]="~~#{b[3][i]}~~"
+        end
+      end
+    end
+    f=[]
+    f.push(['Adventurers',b[1].join("\n")]) unless b[1]=='-' || b[1][0]=='-'
+    f.push(['Dragons',b[2].join("\n")]) unless b[2]=='-' || b[2][0]=='-'
+    f.push(['Wyrmprints',b[3].join("\n")]) unless b[3]=='-' || b[3][0]=='-'
+    ftr=nil
+    ftr="Associated Facility: #{b[6]}" unless b[6].nil? || b[6].length<=0
+    xcolor=0xCE456B
+    xcolor=element_color(b[5][0]) if ['Flame','Water','Wind','Light','Shadow'].include?(b[5][0])
+    kk=b[4].map{|q| q.split('/')}.map{|q| "#{q[0]} #{['','Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'][q[1].to_i]} #{q[2]}"}
+    disp=''
+    disp="**Real-world date:** #{kk[0]} - #{kk[1]}" if disp
+    xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/SummonBanners/#{b[0].gsub(' ','_')}.png"
+    create_embed(event,"__**#{b[0]}**__",disp,xcolor,ftr,[nil,xpic],f)
+  end
 end
 
 def disp_banner(bot,event,args=nil)
@@ -3623,32 +3825,43 @@ def disp_banner(bot,event,args=nil)
     if k.length.zero?
       k=find_data_ex(:find_wyrmprint,args.join(' '),event,true)
       if k.length.zero?
-        k=find_data_ex(:find_adventurer,args.join(' '),event)
+        k=find_data_ex(:find_banner,args.join(' '),event,true)
         if k.length.zero?
-          k=find_data_ex(:find_dragon,args.join(' '),event)
+          k=find_data_ex(:find_adventurer,args.join(' '),event)
           if k.length.zero?
-            k=find_data_ex(:find_wyrmprint,args.join(' '),event)
+            k=find_data_ex(:find_dragon,args.join(' '),event)
             if k.length.zero?
-              event.respond "No matches found.\n\nThis command can cover:\n- Adventurers\n- Dragons\n- Wyrmprints"
-              return nil
+              k=find_data_ex(:find_wyrmprint,args.join(' '),event)
+              if k.length.zero?
+                k=find_data_ex(:find_banner,args.join(' '),event)
+                if k.length.zero?
+                  current_banner(bot,event,args,"No matches found.  Showing current banner instead.\n\n")
+                else
+                  old_banner(bot,event)
+                end
+                return nil
+              else
+                p=[3,'Wyrmprint']
+                xcolor=0x5A0408 if k[2]=='Attack'
+                xcolor=0x00205A if k[2]=='Defense'
+                xcolor=0x39045A if k[2]=='Support'
+                xcolor=0x005918 if k[2]=='Healing'
+                xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Wyrmprints/#{k[0].gsub(' ','_')}_1.png"
+                xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Wyrmprints/#{k[0].gsub(' ','_')}_2.png" if has_any?(['mub','unbind','unbound','refined'],evn)
+              end
             else
-              p=[3,'Wyrmprint']
-              xcolor=0x5A0408 if k[2]=='Attack'
-              xcolor=0x00205A if k[2]=='Defense'
-              xcolor=0x39045A if k[2]=='Support'
-              xcolor=0x005918 if k[2]=='Healing'
-              xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Wyrmprints/#{k[0].gsub(' ','_')}_1.png"
-              xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Wyrmprints/#{k[0].gsub(' ','_')}_2.png" if has_any?(['mub','unbind','unbound','refined'],evn)
+              p=[2,'Dragon']
+              xcolor=element_color(k[2])
+              xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Dragons/#{k[0].gsub(' ','_')}.png"
             end
           else
-            p=[2,'Dragon']
-            xcolor=element_color(k[2])
-            xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Dragons/#{k[0].gsub(' ','_')}.png"
+            p=[1,'Adventurer']
+            xcolor=element_color(k[2][1])
+            xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Adventurers/#{k[0].gsub(' ','_')}_#{k[1][0,1]}.png"
           end
         else
-          p=[1,'Adventurer']
-          xcolor=element_color(k[2][1])
-          xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Adventurers/#{k[0].gsub(' ','_')}_#{k[1][0,1]}.png"
+          old_banner(bot,event)
+          return nil
         end
       else
         p=[3,'Wyrmprint']
@@ -3684,6 +3897,7 @@ def disp_banner(bot,event,args=nil)
         str="#{str}\n*Focus Adventurers:* #{bbb[i][1].reject{|q| q==k[0]}.sort.join(', ')}" unless bbb[i][1]==['-'] || bbb[i][1].reject{|q| q==k[0]}.length<=0
         str="#{str}\n*Focus Dragons:* #{bbb[i][2].reject{|q| q==k[0]}.sort.join(', ')}" unless bbb[i][2]==['-'] || bbb[i][2].reject{|q| q==k[0]}.length<=0
         str="#{str}\n*Focus Wyrmprints:* #{bbb[i][3].reject{|q| q==k[0]}.sort.join(', ')}" unless bbb[i][3]==['-'] || bbb[i][3].reject{|q| q==k[0]}.length<=0
+        str="#{str}\n*Associated Facility:* #{bbb[i][6]}" unless bbb[i][6].nil? || bbb[i][6].length<=0
       else
         str="*#{str}*  (#{kk[0]}-#{kk[1]})"
       end
@@ -3724,7 +3938,13 @@ def disp_sp_table(bot,event,args=nil)
   end
   if wpn.length<=0
     k=find_data_ex(:find_adventurer,args.join(' '),event)
-    unless k.nil? || k.length<=0
+    if k.nil? || k.length<=0
+      k=find_data_ex(:find_weapon,args.join(' '),event)
+      unless k.nil? || k.length<=0
+        wpn.push(k[1])
+        k=nil
+      end
+    else
       wpn.push(k[2][2])
       k=nil
     end
@@ -3732,9 +3952,10 @@ def disp_sp_table(bot,event,args=nil)
   if wpn.length<=0 && !safe_to_spam?(event)
     event.respond "The complete table is too large.  Please either specify a weapon type or use this command in PM."
   elsif wpn.length<=0
-    k=[[150,150,196,265,391,143,345],[130,130,220,360,'660 uncharged, 900 charged',104,200],[144,144,264,288,288,132,288],[200,240,360,380,420,160,300],
-       [120,240,120,480,600,111,400],[184,92,276,414,529,208,460],[130,200,240,430,600,156,400],[232,232,348,464,696,300,580]]
-    k=k.map{|q| "__**Combo:**__\n*First Hit:* #{q[0]}\n*Second Hit:* #{q[1]}\n*Third Hit:* #{q[2]}\n*Fourth Hit:* #{q[3]}\n*Fifth Hit:* #{q[4]}\n\n**Dash Attack:** #{q[5]}\n**Force Strike** #{q[6]}"}
+    kx=[[150,150,196,265,391,143,345,1152],[130,130,220,360,'660 uncharged, 900 charged',104,200,'1500 uncharged, 1740 charged'],
+        [144,144,264,288,288,132,288,1128],[200,240,360,380,420,160,300,1600],[120,240,120,480,600,111,400,1560],[184,92,276,414,529,208,460,1495],
+        [130,200,240,430,600,156,400,1600],[232,232,348,464,696,300,580,1972]]
+    k=kx.map{|q| "__**Combo:**__\n*First Hit:* #{q[0]}\n*Second Hit:* #{q[1]}\n*Third Hit:* #{q[2]}\n*Fourth Hit:* #{q[3]}\n*Fifth Hit:* #{q[4]}\n~~*Total:* #{q[7]}~~\n\n**Dash Attack:** #{q[5]}\n**Force Strike** #{q[6]}"}
     k2=['<:Weapon_Sword:532106114540634113>Swords','<:Weapon_Blade:532106114628714496>Blades','<:Weapon_Dagger:532106116025286656>Daggers',
         '<:Weapon_Axe:532106114188443659>Axes','<:Weapon_Lance:532106114792423448>Lances','<:Weapon_Bow:532106114909732864>Bows',
         '<:Weapon_Wand:532106114985099264>Wands','<:Weapon_Staff:532106114733441024>Staves']
@@ -3745,18 +3966,18 @@ def disp_sp_table(bot,event,args=nil)
     create_embed(event,"__**SP gains**__",'',0xCE456B,nil,nil,f)
   else
     k=[1,2,3,4,5,6,7]
-    k=[150,150,196,265,391,143,345] if wpn[0]=='Sword'
-    k=[130,130,220,360,'660 uncharged, 900 charged',104,200] if wpn[0]=='Blade'
-    k=[144,144,264,288,288,132,288] if wpn[0]=='Dagger'
-    k=[200,240,360,380,420,160,300] if wpn[0]=='Axe'
-    k=[120,240,120,480,600,111,400] if wpn[0]=='Lance'
-    k=[184,92,276,414,529,208,460] if wpn[0]=='Bow'
-    k=[130,200,240,430,600,156,400] if wpn[0]=='Wand'
-    k=[232,232,348,464,696,300,580] if wpn[0]=='Staff'
+    k=[150,150,196,265,391,143,345,1152] if wpn[0]=='Sword'
+    k=[130,130,220,360,'660 uncharged, 900 charged',104,200,'1500 uncharged, 1740 charged'] if wpn[0]=='Blade'
+    k=[144,144,264,288,288,132,288,1128] if wpn[0]=='Dagger'
+    k=[200,240,360,380,420,160,300,1600] if wpn[0]=='Axe'
+    k=[120,240,120,480,600,111,400,1560] if wpn[0]=='Lance'
+    k=[184,92,276,414,529,208,460,1495] if wpn[0]=='Bow'
+    k=[130,200,240,430,600,156,400,1600] if wpn[0]=='Wand'
+    k=[232,232,348,464,696,300,580,1972] if wpn[0]=='Staff'
     m=''
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn[0]}"}
     m=moji[0].mention unless moji.length<=0
-    disp="__**Combo:**__\n*First Hit:* #{k[0]}\n*Second Hit:* #{k[1]}\n*Third Hit:* #{k[2]}\n*Fourth Hit:* #{k[3]}\n*Fifth Hit:* #{k[4]}\n\n**Dash Attack:** #{k[5]}\n\n**Force Strike** #{k[6]}"
+    disp="__**Combo:**__\n*First Hit:* #{k[0]}\n*Second Hit:* #{k[1]}\n*Third Hit:* #{k[2]}\n*Fourth Hit:* #{k[3]}\n*Fifth Hit:* #{k[4]}\n~~*Total:* #{k[7]}~~\n\n**Dash Attack:** #{k[5]}\n\n**Force Strike** #{k[6]}"
     create_embed(event,"__SP gains for **#{m}#{wpn[0]}** users__",disp,0xCE456B)
   end
 end
@@ -5937,11 +6158,6 @@ def roost(event,bot,args=nil,ignoreinputs=false)
     str="#{str}\n*Other Available Mats:* #{["Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye","Ancient Bird's Feather, Bewitching Wing",'Granite, Meteorite',"Fiend's Claw","Ancient Bird's Feather, Bewitching Wing"][t.wday]}" if t.wday>1
   end
   str="#{str}\n\n__**<:Element_Void:548467446734913536> #{"#{str3}'s " if str3.length>0}Void Strikes:**__"
-  # <:Element_Flame:532106087952810005>Steel Golem
-  # <:Element_Water:532106088221376522>
-  # <:Element_Wind:532106087948746763>Void Zephyr
-  # <:Element_Light:532106088129101834>Wandering Shroom
-  # <:Element_Shadow:532106088154267658>Raging Manticore
   str="#{str}\n*Open:* #{['<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Raging Manticore','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Raging Manticore','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr'][t.wday]}"
   str="#{str}\n*Available Mats:* #{["Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core, Great Feather, Zephyr Rune","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Raging Fang, Raging Tail, Fiend's Claw, Fiend's Horn","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core, Great Feather, Zephyr Rune","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Raging Fang, Raging Tail, Fiend's Claw, Fiend's Horn","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Raging Fang, Raging Tail, Fiend's Claw, Fiend's Horn, Great Feather, Zephyr Rune"][t.wday]}"
   str="#{str}\n\n**Shop Mats:** #{['Light Metal, Abyss Stone','Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather",'Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather"][t.wday]}" if t.wday>-1
@@ -5962,6 +6178,7 @@ def roost(event,bot,args=nil,ignoreinputs=false)
   else
     event.respond str
   end
+  current_banner(bot,event,args,'__Current banner:__ ',false) if (safe_to_spam?(event) || has_any?(event.message.text.downcase.split(' '),['banner','banners'])) && str3.length<=0
 end
 
 def next_events(event,bot,args=nil)
@@ -8212,7 +8429,9 @@ bot.message do |event|
     end
   elsif overlap_prevent(event)
   elsif m && !all_commands().include?(s.split(' ')[0])
-    if find_data_ex(:find_adventurer,s,event,true).length>0
+    if event.message.text.downcase.gsub(' ','').gsub("'",'').include?("werenostrangerstolove")
+      event.respond "You know the rules and so do I"
+    elsif find_data_ex(:find_adventurer,s,event,true).length>0
       disp_adventurer_stats(bot,event,s.split(' '))
     elsif find_data_ex(:find_dragon,s,event,true).length>0
       disp_dragon_stats(bot,event,s.split(' '))
@@ -8480,7 +8699,9 @@ bot.mention do |event|
     m=false
   end
   if m
-    if find_data_ex(:find_adventurer,name,event,true).length>0
+    if event.message.text.downcase.gsub(' ','').gsub("'",'').include?("werenostrangerstolove")
+      event.respond "You know the rules and so do I"
+    elsif find_data_ex(:find_adventurer,name,event,true).length>0
       disp_adventurer_stats(bot,event,args)
     elsif find_data_ex(:find_dragon,name,event,true).length>0
       disp_dragon_stats(bot,event,args)
@@ -8500,6 +8721,8 @@ bot.mention do |event|
       disp_mat_data(bot,event,args)
     elsif find_data_ex(:find_emote,name,event,true).length>0
       disp_emote_art(bot,event,args)
+    elsif find_data_ex(:find_npc,name,event,true).length>0
+      disp_npc_art(bot,event,args)
     elsif find_data_ex(:find_adventurer,name,event).length>0
       disp_adventurer_stats(bot,event,args)
     elsif find_data_ex(:find_dragon,name,event).length>0
@@ -8520,6 +8743,8 @@ bot.mention do |event|
       disp_mat_data(bot,event,args)
     elsif find_data_ex(:find_emote,name,event).length>0
       disp_emote_art(bot,event,args)
+    elsif find_data_ex(:find_npc,name,event).length>0
+      disp_npc_art(bot,event,args)
     end
   end
 end
