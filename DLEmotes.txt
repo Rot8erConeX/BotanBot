@@ -6,6 +6,7 @@ Grr\Notte
 Heal\Cleo
 Heh\Cleo
 Help\Zethia
+Hey\Euden
 Here Goes\Euden
 I Got This\Luca
 I Need Healing\Luca

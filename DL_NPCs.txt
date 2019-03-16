@@ -4,6 +4,7 @@ Elysium\1\y
 Emile\1\y
 Harle\1\y
 Leif\1\y
+Lathna\2\y
 Leonidas\1\y
 Nina\2\y
 Notte\2\y
