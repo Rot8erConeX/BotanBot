@@ -2252,7 +2252,7 @@ def disp_ability_data(bot,event,args=nil)
               m2.push("#{elemo[i2][1]}#{adv[i3][0]}") if advabils.include?(checkstr2)
             end
           end
-          if m2.length>3 
+          if m2.length>3 && !s2s
             str="#{str} - #{m2.length} adventurers"
           elsif m2.length>0
             str="#{str} - #{m2.join(', ')}"
@@ -2267,7 +2267,7 @@ def disp_ability_data(bot,event,args=nil)
               end
             end
           end
-          if m2.length>3 
+          if m2.length>3 && !s2s
             str="#{str} - #{m2.length} dragons"
           elsif m2.length>0
             str="#{str} - #{m2.join(', ')}"
@@ -2280,7 +2280,7 @@ def disp_ability_data(bot,event,args=nil)
               m2.push("#{elemo[i2][1]}#{wrm[i3][0]}") if wrm[i3][5].map{|q| q[1]}.include?(checkstr2)
             end
           end
-          if m2.length>3 
+          if m2.length>3 && !s2s
             str="#{str} - #{m2.length} wyrmprints"
             c=' - '
           elsif m2.length>0
@@ -2303,7 +2303,7 @@ def disp_ability_data(bot,event,args=nil)
             end
           end
           m2.uniq!
-          if m2.length>3 
+          if m2.length>3 && !s2s
             str="#{str} - #{m2.length} weapons"
           elsif m2.length>0
             str="#{str} - #{m2.join(', ')}"
@@ -2488,12 +2488,12 @@ def disp_ability_data(bot,event,args=nil)
             str="#{str}\n*Dragons:* #{m2.join(', ')}" if m2.length>0
           end
         else
-          if k[i2][2]=='Ability'
+          if k[ii2][2]=='Ability'
             c=' - '
             c="\n" if lng
             brk=false
             m2=[]
-            for i in 0...adv.length
+            for i3 in 0...adv.length
               advabils=[adv[i3][8][0][1],adv[i3][8][1][1],adv[i3][8][2][-1]]
               advabils.push(adv[i3][8][3][0]) if adv[i3][8].length>3
               advabils.push(adv[i3][8][3][1]) if adv[i3][8].length>3
@@ -2565,7 +2565,7 @@ def disp_ability_data(bot,event,args=nil)
               str="#{str}#{c}#{m2.join(', ')}"
               c=' - '
             end
-          elsif k[i2][2]=='CoAbility'
+          elsif k[ii2][2]=='CoAbility'
             for i in 0...adv.length
               mx=adv[i][7].split(' ')
               mxx=mx[0,mx.length-1].join(' ')
@@ -2573,7 +2573,7 @@ def disp_ability_data(bot,event,args=nil)
               m2.push("#{emo}#{adv[i][0]}") if checkstr==mx[4]
             end
             str="#{str} - #{m2.join(', ')}" if m2.length>0
-          elsif k[i2][2]=='Aura'
+          elsif k[ii2][2]=='Aura'
             for i in 0...drg.length
               m2.push("#{emo}#{drg[i][0]}") if drg[i][6][0][0][1]==checkstr
             end
