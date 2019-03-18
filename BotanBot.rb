@@ -7456,7 +7456,8 @@ end
 
 bot.command([:banners,:banner]) do |event, *args|
   return nil if overlap_prevent(event)
-  if ['find','search'].include?(args[0].downcase)
+  if args.nil? || args.length<=0
+  elsif ['find','search'].include?(args[0].downcase)
     args.shift
     find_banners(bot,event,args)
     return nil
@@ -8894,7 +8895,7 @@ bot.mention do |event|
   elsif ['banner','banners'].include?(args[0].downcase)
     m=false
     args.shift
-    if ['find','search'].include?(args[0].downcase)
+    if args.length>0 && ['find','search'].include?(args[0].downcase)
       args.shift
       find_banners(bot,event,args)
     else
