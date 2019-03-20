@@ -1290,6 +1290,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   sklz=@askilities.map{|q| q}
   skl1=sklz[sklz.find_index{|q| q[2]=='Skill' && q[0]==k[6][0]}]
   skl2=sklz[sklz.find_index{|q| q[2]=='Skill' && q[0]==k[6][1]}]
+  ftr=nil
   if s2s || juststats
     xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Adventurers/#{k[0].gsub(' ','_')}_#{k[1][0,1]}.png"
     str="#{str}\n\n**Defense:** #{k[5]}"
@@ -1358,15 +1359,16 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     else
       str=str.gsub(';;;;;',strx)
     end
+    ftr="Data shown is for a #{rar}-star adventurer.  To show all data, use this command in PM or include 5* in your message." unless rar>=5
   end
   if flds.nil?
-    create_embed(event,"__**#{k[0]}**__",str,element_color(k[2][1]),nil,xpic,flds)
+    create_embed(event,"__**#{k[0]}**__",str,element_color(k[2][1]),ftr,xpic,flds)
   elsif flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length>=1500
-    create_embed(event,"__**#{k[0]}**__",str,element_color(k[2][1]),nil,xpic,flds[0,flds.length-2])
+    create_embed(event,"__**#{k[0]}**__",str,element_color(k[2][1]),ftr,xpic,flds[0,flds.length-2])
     create_embed(event,"__**#{flds[-2][0]}**__",flds[-2][1],element_color(k[2][1]))
     create_embed(event,"__**#{flds[-1][0]}**__",flds[-1][1],element_color(k[2][1]))
   else
-    create_embed(event,"__**#{k[0]}**__",str,element_color(k[2][1]),nil,xpic,flds)
+    create_embed(event,"__**#{k[0]}**__",str,element_color(k[2][1]),ftr,xpic,flds)
   end
 end  
 
@@ -1613,7 +1615,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
       end
     else
       m=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
-      m=wpnz.find_index{|q| q[1]==k[1] && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300 && k[8].to_i<400
+      m=wpnz.find_index{|q| q[1]==k[1] && q[2][1,1]=='v' && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300 && k[8].to_i<400
       str2="#{str2}\n**Promotes from:** #{element_emote(wpnz[m][3],bot)}#{wpnz[m][0]}" unless m.nil?
       m=wpnz.reject{|q| q[1]!=k[1] || q[2]!=k[2] || q[9]!=k[8] || ['','0',0].include?(q[9])}
       m=wpnz.reject{|q| q[1]!=k[1] || q[2][1,1]!='v' || q[2][0,1].to_i-1!=k[2][0,1].to_i || q[9]!=k[8] || ['','0',0].include?(q[9])} if k[2][1,1]=='v' && k[8].to_i>=200 && k[8].to_i<300
@@ -2187,13 +2189,13 @@ def disp_ability_data(bot,event,args=nil)
             moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wep[i][1]}"}
             wemo=moji[0].mention if moji.length>0
             if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-              m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots || wep[i][13][0].length<2}") if wep[i][13][0][0]==checkstr
-              m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots || wep[i][13][0].length<2}") if wep[i][13][0][1]==checkstr
-              m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots || wep[i][13][1].length<2}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][0]==checkstr
-              m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots || wep[i][13][1].length<2}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
+              m2.push("#{wemo}#{wep[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots || wep[i][13][0].length<2}") if wep[i][13][0][0]==checkstr
+              m2.push("#{wemo}#{wep[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots || wep[i][13][0].length<2}") if wep[i][13][0][1]==checkstr
+              m2.push("#{wemo}#{wep[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots || wep[i][13][1].length<2}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][0]==checkstr
+              m2.push("#{wemo}#{wep[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots || wep[i][13][1].length<2}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
             else
-              m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A1)" if dispslots}") if wep[i][13][0][-1]==checkstr
-              m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A2)" if dispslots}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][-1]==checkstr
+              m2.push("#{wemo}#{wep[i][0]}#{" (A1)" if dispslots}") if wep[i][13][0][-1]==checkstr
+              m2.push("#{wemo}#{wep[i][0]}#{" (A2)" if dispslots}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][-1]==checkstr
             end
             for i2 in 0...elemo.length
               checkstr2="(#{elemo[i2][0]}) #{checkstr}"
@@ -2293,8 +2295,8 @@ def disp_ability_data(bot,event,args=nil)
               wemo=''
               moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wep[i3][1]}"}
               wemo=moji[0].mention if moji.length>0
-              m2.push("#{wemo}#{emo}#{wep[i3][0]}") if wep[i3][13][0][-1]==checkstr
-              m2.push("#{wemo}#{emo}#{wep[i3][0]}") if !wep[i3][13][1].nil? && wep[i3][13][1].length>0 && wep[i3][13][1][-1]==checkstr
+              m2.push("#{wemo}#{wep[i3][0]}") if wep[i3][13][0][-1]==checkstr
+              m2.push("#{wemo}#{wep[i3][0]}") if !wep[i3][13][1].nil? && wep[i3][13][1].length>0 && wep[i3][13][1][-1]==checkstr
               for i2 in 0...elemo.length
                 checkstr2="(#{elemo[i2][0]}) #{checkstr}"
                 m2.push("#{wemo}#{elemo[i2][1]}#{wep[i3][0]}") if wep[i3][13][0][-1]==checkstr2
@@ -2432,13 +2434,13 @@ def disp_ability_data(bot,event,args=nil)
                 moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wep[i][1]}"}
                 wemo=moji[0].mention if moji.length>0
                 if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-                  m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots || wep[i][13][0].length<2}") if wep[i][13][0][0]==checkstr
-                  m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots || wep[i][13][0].length<2}") if wep[i][13][0][1]==checkstr
-                  m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots || wep[i][13][1].length<2}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][0]==checkstr
-                  m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots || wep[i][13][1].length<2}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
+                  m2.push("#{wemo}#{wep[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots || wep[i][13][0].length<2}") if wep[i][13][0][0]==checkstr
+                  m2.push("#{wemo}#{wep[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots || wep[i][13][0].length<2}") if wep[i][13][0][1]==checkstr
+                  m2.push("#{wemo}#{wep[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots || wep[i][13][1].length<2}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][0]==checkstr
+                  m2.push("#{wemo}#{wep[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots || wep[i][13][1].length<2}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
                 else
-                  m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A1)" if dispslots}") if wep[i][13][0][-1]==checkstr
-                  m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A2)" if dispslots}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][-1]==checkstr
+                  m2.push("#{wemo}#{wep[i][0]}#{" (A1)" if dispslots}") if wep[i][13][0][-1]==checkstr
+                  m2.push("#{wemo}#{wep[i][0]}#{" (A2)" if dispslots}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][-1]==checkstr
                 end
                 for i2 in 0...elemo.length
                   checkstr2="(#{elemo[i2][0]}) #{checkstr}"
@@ -2548,8 +2550,8 @@ def disp_ability_data(bot,event,args=nil)
                 wemo=''
                 moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wep[i][1]}"}
                 wemo=moji[0].mention if moji.length>0
-                m2.push("#{wemo}#{emo}#{wep[i][0]}") if wep[i][13][0][-1]==checkstr
-                m2.push("#{wemo}#{emo}#{wep[i][0]}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][-1]==checkstr
+                m2.push("#{wemo}#{wep[i][0]}") if wep[i][13][0][-1]==checkstr
+                m2.push("#{wemo}#{wep[i][0]}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][-1]==checkstr
                 for i2 in 0...elemo.length
                   checkstr2="(#{elemo[i2][0]}) #{checkstr}"
                   m2.push("#{wemo}#{elemo[i2][1]}#{wep[i][0]}") if wep[i][13][0][-1]==checkstr2
@@ -2715,13 +2717,13 @@ def disp_ability_data(bot,event,args=nil)
           moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wep[i][1]}"}
           wemo=moji[0].mention if moji.length>0
           if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-            m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots || wep[i][13][0].length<2}") if wep[i][13][0][0]==checkstr
-            m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots || wep[i][13][0].length<2}") if wep[i][13][0][1]==checkstr
-            m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots || wep[i][13][1].length<2}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][0]==checkstr
-            m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots || wep[i][13][1].length<2}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
+            m2.push("#{wemo}#{wep[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots || wep[i][13][0].length<2}") if wep[i][13][0][0]==checkstr
+            m2.push("#{wemo}#{wep[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots || wep[i][13][0].length<2}") if wep[i][13][0][1]==checkstr
+            m2.push("#{wemo}#{wep[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots || wep[i][13][1].length<2}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][0]==checkstr
+            m2.push("#{wemo}#{wep[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots || wep[i][13][1].length<2}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr
           else
-            m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A1)" if dispslots}") if wep[i][13][0][-1]==checkstr
-            m2.push("#{wemo}#{emo}#{wep[i][0]}#{" (A2)" if dispslots}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][-1]==checkstr
+            m2.push("#{wemo}#{wep[i][0]}#{" (A1)" if dispslots}") if wep[i][13][0][-1]==checkstr
+            m2.push("#{wemo}#{wep[i][0]}#{" (A2)" if dispslots}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][-1]==checkstr
           end
           for i2 in 0...elemo.length
             checkstr2="(#{elemo[i2][0]}) #{checkstr}"
@@ -2847,6 +2849,13 @@ def disp_ability_data(bot,event,args=nil)
     end
     event.respond ftr unless ftr.nil?
   else
+    ftr=nil unless ftr.nil? || ftr.length>0
+    if !flds.nil? && flds.length==1
+      x=flds[0][0]
+      y=flds[0][1].split("\n")
+      flds=triple_finish(y,true).map{|q| [x,q[1]]}
+    end
+    puts flds.map{|q| q.to_s}
     create_embed(event,hdr,str,xcolor,ftr,xpic,flds)
   end
 end
@@ -3883,7 +3892,7 @@ def current_banner(bot,event,args=nil,msg='',showerr=true)
     unless b[1]=='-' || b[1][0]=='-'
       for i in 0...b[1].length
         a=adv.find_index{|q| q[0]==b[1][i].gsub('*','')}
-        if safe_to_spam?(event)
+        if safe_to_spam?(event) && b[1].length+b[2].length+b[3].length<=12
           b[1][i]="#{b[1][i]}#{adv_emoji(adv[a],bot)}" unless a.nil?
         elsif a.nil?
           b[1][i]="~~#{b[1][i]}~~"
@@ -3893,7 +3902,7 @@ def current_banner(bot,event,args=nil,msg='',showerr=true)
     unless b[2]=='-' || b[2][0]=='-'
       for i in 0...b[2].length
         a=drg.find_index{|q| q[0]==b[2][i].gsub('*','')}
-        if safe_to_spam?(event)
+        if safe_to_spam?(event) && b[1].length+b[2].length+b[3].length<=12
           b[2][i]="#{b[2][i]}#{dragon_emoji(drg[a],bot)}" unless a.nil?
         elsif a.nil?
           b[2][i]="~~#{b[2][i]}~~"
@@ -3903,7 +3912,7 @@ def current_banner(bot,event,args=nil,msg='',showerr=true)
     unless b[3]=='-' || b[3][0]=='-'
       for i in 0...b[3].length
         a=wrm.find_index{|q| q[0]==b[3][i].gsub('*','')}
-        if safe_to_spam?(event)
+        if safe_to_spam?(event) && b[1].length+b[2].length+b[3].length<=12
           b[3][i]="#{b[3][i]}#{print_emoji(wrm[a],bot)}" unless a.nil?
         elsif a.nil?
           b[3][i]="~~#{b[3][i]}~~"
@@ -3918,7 +3927,6 @@ def current_banner(bot,event,args=nil,msg='',showerr=true)
     if b[4].length>1 && !b[4][1].nil?
       t2=b[4][1].split('/').map{|q| q.to_i}
       t2=Time.new(t2[2],t2[1],t2[0])+24*60*60
-      t2-=60*60*timeshift
       t2=t2-t
       if t2/(24*60*60)>1
         str2=" - #{(t2/(24*60*60)).floor} days left"
@@ -3956,7 +3964,7 @@ def old_banner(bot,event,args=nil)
     unless b[1]=='-' || b[1][0]=='-'
       for i in 0...b[1].length
         a=adv.find_index{|q| q[0]==b[1][i].gsub('*','')}
-        if safe_to_spam?(event)
+        if safe_to_spam?(event) && b[1].length+b[2].length+b[3].length<=12
           b[1][i]="#{b[1][i]}#{adv_emoji(adv[a],bot)}" unless a.nil?
         elsif a.nil?
           b[1][i]="~~#{b[1][i]}~~"
@@ -3966,7 +3974,7 @@ def old_banner(bot,event,args=nil)
     unless b[2]=='-' || b[2][0]=='-'
       for i in 0...b[2].length
         a=drg.find_index{|q| q[0]==b[2][i].gsub('*','')}
-        if safe_to_spam?(event)
+        if safe_to_spam?(event) && b[1].length+b[2].length+b[3].length<=12
           b[2][i]="#{b[2][i]}#{dragon_emoji(drg[a],bot)}" unless a.nil?
         elsif a.nil?
           b[2][i]="~~#{b[2][i]}~~"
@@ -3976,7 +3984,7 @@ def old_banner(bot,event,args=nil)
     unless b[3]=='-' || b[3][0]=='-'
       for i in 0...b[3].length
         a=wrm.find_index{|q| q[0]==b[3][i].gsub('*','')}
-        if safe_to_spam?(event)
+        if safe_to_spam?(event) && b[1].length+b[2].length+b[3].length<=12
           b[3][i]="#{b[3][i]}#{print_emoji(wrm[a],bot)}" unless a.nil?
         elsif a.nil?
           b[3][i]="~~#{b[3][i]}~~"
@@ -4078,14 +4086,14 @@ def disp_banner(bot,event,args=nil)
   bbb=@banners.map{|q| q}
   bnr.push("*Launch #{p[1]}*") if bbb[0][p[0]].include?(k[0])
   for i in 1...bbb.length
-    if bbb[i][p[0]].include?(k[0])
+    if bbb[i][p[0]].map{|q| q.gsub('*','')}.include?(k[0])
       str="#{'*Banner Name:* ' if s2s}#{bbb[i][0]}"
       kk=bbb[i][4].map{|q| q.split('/')}.map{|q| "#{q[0]}#{['','Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'][q[1].to_i]}#{q[2]}"}
       if s2s
         str="#{str}\n*Real-world date:* #{kk[0]} - #{kk[1]}"
-        str="#{str}\n*Focus Adventurers:* #{bbb[i][1].reject{|q| q==k[0]}.map{|q| q.gsub('*','')}.sort.join(', ')}" unless bbb[i][1]==['-'] || bbb[i][1].reject{|q| q==k[0]}.length<=0
-        str="#{str}\n*Focus Dragons:* #{bbb[i][2].reject{|q| q==k[0]}.map{|q| q.gsub('*','')}.sort.join(', ')}" unless bbb[i][2]==['-'] || bbb[i][2].reject{|q| q==k[0]}.length<=0
-        str="#{str}\n*Focus Wyrmprints:* #{bbb[i][3].reject{|q| q==k[0]}.map{|q| q.gsub('*','')}.sort.join(', ')}" unless bbb[i][3]==['-'] || bbb[i][3].reject{|q| q==k[0]}.length<=0
+        str="#{str}\n*Focus Adventurers:* #{bbb[i][1].reject{|q| q.gsub('*','')==k[0]}.map{|q| q.gsub('*','')}.sort.join(', ')}" unless bbb[i][1]==['-'] || bbb[i][1].reject{|q| q==k[0]}.length<=0
+        str="#{str}\n*Focus Dragons:* #{bbb[i][2].reject{|q| q.gsub('*','')==k[0]}.map{|q| q.gsub('*','')}.sort.join(', ')}" unless bbb[i][2]==['-'] || bbb[i][2].reject{|q| q==k[0]}.length<=0
+        str="#{str}\n*Focus Wyrmprints:* #{bbb[i][3].reject{|q| q.gsub('*','')==k[0]}.map{|q| q.gsub('*','')}.sort.join(', ')}" unless bbb[i][3]==['-'] || bbb[i][3].reject{|q| q==k[0]}.length<=0
         str="#{str}\n*Associated Facility:* #{bbb[i][6]}" unless bbb[i][6].nil? || bbb[i][6].length<=0
       else
         str="*#{str}*  (#{kk[0]}-#{kk[1]})"
@@ -6438,8 +6446,27 @@ def roost(event,bot,args=nil,ignoreinputs=false)
     str="#{str}\n*Other Available Mats:* #{["Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye","Ancient Bird's Feather, Bewitching Wing",'Granite, Meteorite',"Fiend's Claw","Ancient Bird's Feather, Bewitching Wing"][t.wday]}" if t.wday>1
   end
   str="#{str}\n\n__**<:Element_Void:548467446734913536> #{"#{str3}'s " if str3.length>0}Void Strikes:**__"
-  str="#{str}\n*Open:* #{['<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Raging Manticore','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Raging Manticore','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr'][t.wday]}"
-  str="#{str}\n*Available Mats:* #{["Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core, Great Feather, Zephyr Rune","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Raging Fang, Raging Tail, Fiend's Claw, Fiend's Horn","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core, Great Feather, Zephyr Rune","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Raging Fang, Raging Tail, Fiend's Claw, Fiend's Horn","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Raging Fang, Raging Tail, Fiend's Claw, Fiend's Horn, Great Feather, Zephyr Rune"][t.wday]}"
+  if t.year>2019 || t.month>3 || t.day>30
+    void=['<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr', # sunday
+          '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem', # monday
+          '<:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore', # tuesday
+          '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem', # wednesday
+          '<:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # thursday
+          '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem', # friday
+          '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr'] # Saturday
+  else
+    void=['<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # sunday
+          '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem', # monday
+          '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Raging Manticore', # tuesday
+          '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # wednesday
+          '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore', # thursday
+          '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem', # friday
+          '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr'] # Saturday
+  end
+  void=void.map{|q| "<:Element_Light:532106088129101834>Wandering Shroom, #{q}"}
+  str="#{str}\n*Open:* #{void[t.wday]}"
+  voidmats=void[t.wday].gsub('<:Element_Flame:532106087952810005>Steel Golem',"Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core").gsub('<:Element_Flame:532106087952810005>Blazing Ghost',"Old Cloth, Floating Red Cloth, Otherworldly Lantern").gsub('<:Element_Water:532106088221376522>Frost Hermit',"Goblin Thread, Aromatic Wood").gsub('<:Element_Wind:532106087948746763>Void Zephyr',"Great Feather, Void Leaf, Void Seed, Zephyr Rune").gsub('<:Element_Light:532106088129101834>Wandering Shroom',"Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore").gsub('<:Element_Shadow:532106088154267658>Raging Manticore',"Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn").gsub('<:Element_Shadow:532106088154267658>Obsidian Golem',"Obsidian Slab, Dark Core").split(', ').uniq.sort.join(', ')
+  str="#{str}\n*Available Mats:* #{voidmats}"
   str="#{str}\n\n**Shop Mats:** #{['Light Metal, Abyss Stone','Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather",'Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather"][t.wday]}" if t.wday>-1
   str="#{str}\n\n**#{"#{str3}'s " if str3.length>0}Bond Gift:** #{['Golden Chalice','Juicy Meat','Kaleidoscope','Floral Circlet','Compelling Book','Mana Essence','Golden Chalice'][t.wday]}"
   if t.wday>0 && t.wday<6
@@ -6537,21 +6564,52 @@ def next_events(event,bot,args=nil)
     end
     str=extend_message(str,str2,event,2)
   end
+  voidx=['<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr', # sunday
+        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem', # monday
+        '<:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore', # tuesday
+        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem', # wednesday
+        '<:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # thursday
+        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem', # friday
+        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr'] # Saturday
+  voidxc=['<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # sunday
+        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem', # monday
+        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Raging Manticore', # tuesday
+        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # wednesday
+        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore', # thursday
+        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem', # friday
+        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr'] # Saturday
+  voidx=voidx.rotate(t.wday)
+  voidxc=voidxc.rotate(t.wday)
+  void=[]
+  for i in 0...voidx.length
+    t2=t+24*60*60*(i+1)
+    if t2.year>2019 || t2.month>3 || t2.day>30
+      void.push(voidx[i])
+    else
+      void.push(voidxc[i])
+    end
+  end
+  t2=t+24*60*60*7
+  if t2.year>2019 || t2.month>3 || t2.day>30
+    void.push(voidx[i])
+  else
+    void.push(voidxc[i])
+  end
+  void=void.map{|q| "<:Element_Light:532106088129101834>Wandering Shroom, #{q}"}
   if [0,5].include?(mode)
-    void=['<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Raging Manticore','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Raging Manticore','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Flame:532106087952810005>Steel Golem','<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr']
-    void=void.rotate(t.wday)
     mmzz=[]
     for i in 0...void.length
       m=void[i].split(', ')
       pos=0
       for i2 in 0...m.length
         pos=1 if m[i2]=='<:Element_Flame:532106087952810005>Steel Golem'
-        pos=2 if m[i2]=='<:Element_Water:532106088221376522>Water Void'
-        pos=3 if m[i2]=='<:Element_Wind:532106087948746763>Void Zephyr'
-        pos=4 if m[i2]=='<:Element_Light:532106088129101834>Wandering Shroom'
-        pos=5 if m[i2]=='<:Element_Shadow:532106088154267658>Raging Manticore'
+        pos=2 if m[i2]=='<:Element_Flame:532106087952810005>Blazing Ghost'
+        pos=3 if m[i2]=='<:Element_Water:532106088221376522>Frost Hermit'
+        pos=4 if m[i2]=='<:Element_Wind:532106087948746763>Void Zephyr'
+        pos=5 if m[i2]=='<:Element_Light:532106088129101834>Wandering Shroom'
+        pos=6 if m[i2]=='<:Element_Shadow:532106088154267658>Raging Manticore'
+        pos=7 if m[i2]=='<:Element_Shadow:532106088154267658>Obsidian Golem'
         mmzz.push([m[i2],i,pos])
-        mmzz.push([m[i2],7,pos]) if i==0
       end
     end
     mmzz.sort!{|a,b| (a[2]<=>b[2])==0 ? (a[1]<=>b[1]) : (a[2]<=>b[2])}
@@ -6566,16 +6624,17 @@ def next_events(event,bot,args=nil)
     mmzz.reverse!
     str2="__**<:Element_Void:548467446734913536> Void Strikes**__"
     strpost=false
-    matz=['',"Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core","","Great Feather, Void Leaf, Void Seed, Zephyr Rune",
+    matz=['',"Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core","Old Cloth, Floating Red Cloth, Otherworldly Lantern",
+          "Goblin Thread, Aromatic Wood","Great Feather, Void Leaf, Void Seed, Zephyr Rune",
           "Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore",
-          "Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn"]
+          "Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn","Obsidian Slab, Dark Core"]
     for i in 0...mmzz.length
       str2="#{str2}#{"\n" if mode==5 && safe_to_spam?(event)}\n*#{mmzz[i][0]}* -"
       if mmzz[i][1]==0
         str2="#{str2} **Today**#{' - Next available' unless mmzz[i][3].nil? || mmzz[i][3]<=0}"
         if mmzz[i][3].nil? || mmzz[i][3]<=0
         else
-          t_d=t+mmzz[i][2]*24*60*60
+          t_d=t+mmzz[i][3]*24*60*60
           if mmzz[i][3]==1
             str2="#{str2} tomorrow (#{disp_date(t_d,1)})"
           else
@@ -6651,17 +6710,10 @@ def next_events(event,bot,args=nil)
   end
   f.push(6)
   if f.include?(mode)
-    matz=["Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core, Great Feather, Zephyr Rune",
-          "Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core",
-          "Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Raging Fang, Raging Tail, Fiend's Claw, Fiend's Horn",
-          "Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core, Great Feather, Zephyr Rune",
-          "Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Raging Fang, Raging Tail, Fiend's Claw, Fiend's Horn",
-          "Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Iron Ore, Steel Slab, Granite, Golem Core",
-          "Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore, Raging Fang, Raging Tail, Fiend's Claw, Fiend's Horn, Great Feather, Zephyr Rune"]
-    matz=matz.rotate(t.wday)
+    matz=void.map{|q| q.gsub('<:Element_Flame:532106087952810005>Steel Golem',"Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core").gsub('<:Element_Flame:532106087952810005>Blazing Ghost',"Old Cloth, Floating Red Cloth, Otherworldly Lantern").gsub('<:Element_Water:532106088221376522>Frost Hermit',"Goblin Thread, Aromatic Wood").gsub('<:Element_Wind:532106087948746763>Void Zephyr',"Great Feather, Void Leaf, Void Seed, Zephyr Rune").gsub('<:Element_Light:532106088129101834>Wandering Shroom',"Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore").gsub('<:Element_Shadow:532106088154267658>Raging Manticore',"Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn").gsub('<:Element_Shadow:532106088154267658>Obsidian Golem',"Obsidian Slab, Dark Core").split(', ').uniq.sort}
     mmzz=[]
     for i in 0...matz.length
-      m=matz[i].split(', ')
+      m=matz[i]
       for i2 in 0...m.length
         mmzz.push([m[i2],i])
         mmzz.push([m[i2],7]) if i==0
@@ -8649,6 +8701,27 @@ bot.command(:snagstats) do |event, f, f2|
   event << "**I am #{longFormattedNumber(File.foreach("C:/Users/Mini-Matt/Desktop/devkit/BotanBot.rb").inject(0) {|c, line| c+1})} lines of *code* long.**"
   event << "Of those, #{longFormattedNumber(b.length)} are SLOC (non-empty)."
   return nil
+end
+
+bot.command(:boop) do |event|
+  return nil if overlap_prevent(event)
+  return nil unless event.channel.id==532083509083373583 # only work when used by the developer
+  event.channel.send_temporary_message('Please wait...',10)
+  data_load()
+  lookout=[]
+  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt')
+    lookout=[]
+    File.open('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt').each_line do |line|
+      lookout.push(eval line)
+    end
+  end
+  lookout=lookout.reject{|q| q[2]!='Mat'}.map{|q| q[0]}
+  m=@mats.map{|q| q[8]}.join(', ').split(', ').reject{|q| lookout.include?(q)}.uniq.sort
+  str=''
+  for i in 0...m.length
+    str=extend_message(str,m[i],event)
+  end
+  event.respond str
 end
 
 bot.server_create do |event|
