@@ -1525,6 +1525,8 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   str="#{str}\n**Void**" if k[2].length>1 && k[2][1,1].downcase=='v'
   f=30*k[2][0,1].to_i-50
   f+=20 if k[2][0,1].to_i<3
+  f0=30*k[2][0,1].to_i-70
+  f0=5*k[2][0,1].to_i if k[2][0,1].to_i<3
   wpnz=@weapons.map{|q| q}
   sklz=@askilities.map{|q| q}
   skl=nil
@@ -1552,8 +1554,8 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
     str="#{str}\n*#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}*" unless abl.nil?
     str="#{str}\n*#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*" unless ablx.nil?
-    if k[2][0,1].to_i>=5 && k[3]!='None'
-      str="#{str}\n\n__**#{'<:NonUnbound:534494090876682264>'*4} Level 80**__"
+    if (k[4][1]>0 || k[5][1]>0)
+      str="#{str}\n\n__**#{'<:NonUnbound:534494090876682264>'*4} Level #{f0}**__"
       str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}"
       str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
       str="#{str}\n*#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}*" unless abl.nil?
@@ -1568,7 +1570,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     str="#{str}\n*#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*" if ablx2.nil? && !ablx.nil?
   else
     str="#{str}\n\n**#{'<:NonUnbound:534494090876682264>'*4} Level 1**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
-    str="#{str}\n**#{'<:NonUnbound:534494090876682264>'*4} Level 80**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}" if k[2][0,1].to_i>=5 && k[3]!='None'
+    str="#{str}\n**#{'<:NonUnbound:534494090876682264>'*4} Level #{f0}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}" if (k[4][1]>0 || k[5][1]>0)
     str="#{str}\n**#{'<:Unbind:534494090969088000>'*4} Level #{f}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
     strx=''
     unless juststats
@@ -1633,7 +1635,13 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
       str=str.gsub(';;;;;',"\n#{strx}")
     end
   end
-  create_embed(event,"__**#{k[0]}**__",str,element_color(k[3]),nil,xpic)
+  if str.length>=1900
+    str=str.split("\n\n\n")
+    create_embed(event,"__**#{k[0]}**__",str[0],element_color(k[3]),nil,xpic)
+    create_embed(event,'',str[1,str.length-1].join("\n\n\n"),element_color(k[3]))
+  else
+    create_embed(event,"__**#{k[0]}**__",str,element_color(k[3]),nil,xpic)
+  end
 end
 
 def disp_weapon_lineage(bot,event,args=nil)
@@ -1671,6 +1679,8 @@ def disp_weapon_lineage(bot,event,args=nil)
   str="#{str}\n**Void**" if k[2].length>1 && k[2][1,1].downcase=='v'
   f=30*k[2][0,1].to_i-50
   f+=20 if k[2][0,1].to_i<3
+  f0=30*k[2][0,1].to_i-70
+  f0=5*k[2][0,1].to_i if k[2][0,1].to_i<3
   wpnz=@weapons.map{|q| q}
   sklz=@askilities.map{|q| q}
   skl=nil
@@ -1696,7 +1706,7 @@ def disp_weapon_lineage(bot,event,args=nil)
     str="#{str}\n**#{'<:Unbind:534494090969088000>'*4} Level #{f}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
   else
     str="#{str}\n**#{'<:NonUnbound:534494090876682264>'*4} Level 1**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
-    str="#{str}\n**#{'<:NonUnbound:534494090876682264>'*4} Level 80**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}" if k[2][0,1].to_i>=5 && k[3]!='None'
+    str="#{str}\n**#{'<:NonUnbound:534494090876682264>'*4} Level 80**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}" if (k[4][1]>0 || k[5][1]>0)
   end
   if s2s && !skl.nil?
     if mub
@@ -1784,13 +1794,16 @@ def disp_weapon_lineage(bot,event,args=nil)
     ftr='Include the word "Unbound" to show the data for MUB versions of these weapons.' unless mub
   else
     m=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
+    m=wpnz.find_index{|q| q[1]==k[1] && q[2][1,1]=='v' && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300
     str2=''
     unless m.nil?
       str2="#{str2}\n\n**Promotes from:** #{wpnz[m][0]}"
       m2=wpnz.find_index{|q| q[1]==wpnz[m][1] && q[2]==wpnz[m][2] && q[8]==wpnz[m][9] && !['','0',0].include?(q[8])}
+      m2=wpnz.find_index{|q| q[1]==wpnz[m][1] && q[2][1,1]=='v' && q[2][0,1].to_i==wpnz[m][2][0,1].to_i-1 && q[8]==wpnz[m][9] && !['','0',0].include?(q[8])} if wpnz[m][2][1,1]=='v' && wpnz[m][8].to_i>=300
       unless m2.nil?
         str2="#{str2}\n**Which promotes from:** #{wpnz[m2][0]}"
         m22=wpnz.find_index{|q| q[1]==wpnz[m2][1] && q[2]==wpnz[m2][2] && q[8]==wpnz[m2][9] && !['','0',0].include?(q[8])}
+        m22=wpnz.find_index{|q| q[1]==wpnz[m2][1] && q[2][1,1]=='v' && q[2][0,1].to_i==wpnz[m2][2][0,1].to_i-1 && q[8]==wpnz[m2][9] && !['','0',0].include?(q[8])} if wpnz[m2][2][1,1]=='v' && wpnz[m2][8].to_i>=300
         str2="#{str2}\n**Which promotes from:** #{wpnz[m22][0]}" unless m22.nil?
       end
     end
@@ -2855,7 +2868,6 @@ def disp_ability_data(bot,event,args=nil)
       y=flds[0][1].split("\n")
       flds=triple_finish(y,true).map{|q| [x,q[1]]}
     end
-    puts flds.map{|q| q.to_s}
     create_embed(event,hdr,str,xcolor,ftr,xpic,flds)
   end
 end
