@@ -1793,18 +1793,12 @@ def disp_weapon_lineage(bot,event,args=nil)
   if s2s
     ftr='Include the word "Unbound" to show the data for MUB versions of these weapons.' unless mub
   else
-    m=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
-    m=wpnz.find_index{|q| q[1]==k[1] && q[2][1,1]=='v' && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300
     str2=''
-    unless m.nil?
-      str2="#{str2}\n\n**Promotes from:** #{wpnz[m][0]}"
-      m2=wpnz.find_index{|q| q[1]==wpnz[m][1] && q[2]==wpnz[m][2] && q[8]==wpnz[m][9] && !['','0',0].include?(q[8])}
-      m2=wpnz.find_index{|q| q[1]==wpnz[m][1] && q[2][1,1]=='v' && q[2][0,1].to_i==wpnz[m][2][0,1].to_i-1 && q[8]==wpnz[m][9] && !['','0',0].include?(q[8])} if wpnz[m][2][1,1]=='v' && wpnz[m][8].to_i>=300
-      unless m2.nil?
-        str2="#{str2}\n**Which promotes from:** #{wpnz[m2][0]}"
-        m22=wpnz.find_index{|q| q[1]==wpnz[m2][1] && q[2]==wpnz[m2][2] && q[8]==wpnz[m2][9] && !['','0',0].include?(q[8])}
-        m22=wpnz.find_index{|q| q[1]==wpnz[m2][1] && q[2][1,1]=='v' && q[2][0,1].to_i==wpnz[m2][2][0,1].to_i-1 && q[8]==wpnz[m2][9] && !['','0',0].include?(q[8])} if wpnz[m2][2][1,1]=='v' && wpnz[m2][8].to_i>=300
-        str2="#{str2}\n**Which promotes from:** #{wpnz[m22][0]}" unless m22.nil?
+    unless m2.nil?
+      str2="#{str2}\n\n**Promotes from:** #{wpnz[m2][0]}"
+      unless m22.nil?
+        str2="#{str2}\n**Which promotes from:** #{wpnz[m22][0]}"
+        str2="#{str2}\n**Which promotes from:** #{wpnz[m222][0]}" unless m222.nil?
       end
     end
   end
