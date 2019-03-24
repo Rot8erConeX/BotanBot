@@ -1,6 +1,6 @@
-@shardizard=ARGV.first.to_i              # taking a single variable from the command prompt to get the shard value
-system("color 0#{"BCADF"[@shardizard,1]}")
-system("title loading #{['Defense','Attack','Healing','Support','Null'][@shardizard]} BotanBot")
+@shardizard=ARGV.first.to_i # taking a single variable from the command prompt to get the shard value
+system('color 0F')
+@shards = 4                 # total number of shards
 
 require 'discordrb'                    # Download link: https://github.com/meew0/discordrb
 require 'open-uri'                     # pre-installed with Ruby in Windows
@@ -20,13 +20,16 @@ ENV['TZ'] = 'America/Chicago'
 load 'C:/Users/Mini-Matt/Desktop/devkit/DLPrefix.rb'
 
 prefix_proc = proc do |message|
+  next message.text.downcase[4..-1] if message.text.downcase.start_with?('dl! ')
+  next message.text.downcase[4..-1] if message.text.downcase.start_with?('dl? ')
+  next message.text.downcase[3..-1] if message.text.downcase.start_with?('dl!')
+  next message.text.downcase[3..-1] if message.text.downcase.start_with?('dl?')
   load 'C:/Users/Mini-Matt/Desktop/devkit/DLPrefix.rb'
-  next message.content[3..-1] if message.text.downcase.start_with?('dl!')
-  next message.content[3..-1] if message.text.downcase.start_with?('dl?')
   next if message.channel.server.nil? || @prefixes[message.channel.server.id].nil? || @prefixes[message.channel.server.id].length<=0
   prefix = @prefixes[message.channel.server.id]
   # We use [prefix.size..-1] so we can handle prefixes of any length
-  next message.content[prefix.size..-1] if message.text.downcase.start_with?(prefix.downcase)
+  next message.text.downcase[prefix.size+1..-1] if message.text.downcase.start_with?("#{prefix.downcase} ")
+  next message.text.downcase[prefix.size..-1] if message.text.downcase.start_with?(prefix.downcase)
 end
 
 # The bot's token is basically their password, so is censored for obvious reasons
