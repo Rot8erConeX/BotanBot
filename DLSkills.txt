@@ -1,5 +1,5 @@
 Abyssal Barrage\\Skill\Deals 5 hits of 151% water damage to enemies directly ahead.\Deals 5 hits of 168% water damage to enemies directly ahead.\\7282, 7282, 7282\Yes\2.2\\Damage
-Abyssal Connection\\Skill\Activates "Abyssal Connection" for 10 seconds. During Abyssal Connection, the user's strength is increased by 15%, and the Call of Chaos skill is powered up. Also increases the strength of nearby allies by 5% for 10 seconds.\Activates "Abyssal Connection" for 10 seconds. During Abyssal Connection, the user's strength is increased by 20%, and the Call of Chaos skill is powered up. Also increases the strength of nearby allies by 10% for 10 seconds.\\4202, 4202, 4202\No\0\\Buff, Strength, Team, Stance
+Abyssal Connection\\Skill\Activates "Abyssal Connection" for 10 seconds. During Abyssal Connection, the user's strength is increased by 15%, and the Call of Chaos skill is powered up. Also increases the strength of nearby allies by 5% for 10 seconds.\Activates "Abyssal Connection" for 10 seconds. During Abyssal Connection, the user's strength is increased by 20%, and the Call of Chaos skill is powered up. Also increases the strength of nearby allies by 10% for 10 seconds.\\4202, 4202, 4202\No\0\\Buff, Strength, Team, Stance, Nearby
 Accursed Discharge\\Skill\Deals 1 hit of 886% shadow damage to surrounding enemies.\Deals 1 hit of 984% shadow damage to surrounding enemies.\\8453, 8453, 8453\Yes\1.1\\Damage
 Accursed Healing\\Skill\Restores HP to surrounding teammates with 54% Recovery Potency.\Restores HP to surrounding teammates with 72% Recovery Potency.\\14410, 14410, 14410\Yes\1.1\\HealSkill, Burst
 Accursed Venom\\Skill\Deals 1 hit of 529.2% shadow damage to enemies directly ahead.\Deals 1 hit of 588% shadow damage to enemies directly ahead.\\30, 30, 30\Yes\1.4\\Damage
@@ -48,7 +48,7 @@ Blessed Wall\\Skill\Increases the entire team's defense by 10% for 15 seconds.\I
 Blessings of Destiny\\Skill\Restores HP to all allies with 31% Recovery Potency and applies Regen for 15 seconds, healing with 25% Regen Potency every 2.99 seconds.\Restores HP to all allies with 36% Recovery Potency, removes stun, and applies Regen for 15 seconds, healing with 29% Regen Potency every 2.99 seconds.\Restores HP to all allies with 44% Recovery Potency, removes stun, and applies Regen for 15 seconds, healing with 35% Regen Potency every 2.99 seconds.\5916, 5916, 5916\Yes\1.1\\Buff, HealSkill, Cleanse, Regen, Team
 Bloody Cleaver\\Skill\Deals 1 hit of 614% shadow damage to enemies directly ahead.\Deals 1 hit of 682% shadow damage to enemies directly ahead.\Deals shadow damage to enemies directly ahead.\7330, 7330, 7330\Yes\0.8\\Damage
 Blooming Cradle\\Skill\Activates "Slumber Strike Stance." For the next three force strikes, each force strike will deal an additional 17% shadow damage per hit for Force Strike level 1 and 2, and inflict sleep for 3-4 seconds with 90% base chance.\Activates "Slumber Strike Stance." For the next three force strikes, each force strike will deal an additional 36% (38%) shadow damage per hit for Force Strike level 1 (level 2), and inflict sleep for 4-5 seconds with 100% base chance.\\6400, 6400, 6400\No\1.1\\Stance, Sleep
-Blooming Love\\Skill\Restores HP to all allies with 31% Recovery Potency., increases the entire team's energy levels by one stage, and applies Regen for 15 seconds, healing with 25% Regen Potency every 2.99 seconds.\Restores HP to all allies with 36% Recovery Potency., increases the entire team's energy levels by one stage, and applies Regen for 15 seconds, healing with 29% Regen Potency every 2.99 seconds.\Restores HP to all allies with 44% Recovery Potency., increases the entire team's energy levels by one stage, and applies Regen for 15 seconds, healing with 35% Regen Potency every 2.99 seconds.\7734, 7734, 7734\Yes\1.6\\HealSkill, Regen, Energy, Team
+Blooming Love\\Skill\Restores HP to all allies with 31% Recovery Potency, increases the entire team's energy levels by one stage, and applies Regen for 15 seconds, healing with 25% Regen Potency every 2.99 seconds.\Restores HP to all allies with 36% Recovery Potency, increases the entire team's energy levels by one stage, and applies Regen for 15 seconds, healing with 29% Regen Potency every 2.99 seconds.\Restores HP to all allies with 44% Recovery Potency, increases the entire team's energy levels by one stage, and applies Regen for 15 seconds, healing with 35% Regen Potency every 2.99 seconds.\7734, 7734, 7734\Yes\1.6\\HealSkill, Regen, Energy, Team
 Blundering Bomber\\Skill\Deals 2 hits of 399% flame damage to the target and nearby enemies.\Deals 2 hits of 443% flame damage to the target and nearby enemies.\\5422, 5422, 5422\Yes\1\\Damage
 Bolt of Light\\Skill\Deals 1 shot of 699% light damage to enemies in a line.\Deals 1 shot of 777% light damage to enemies in a line.\Deals 1 shot of 863% light-based damage to enemies in a line.\5115, 5115, 5115\Yes\1.6\\Damage
 Bone Stinger\\Skill\Deals 3 hits of 206% shadow damage to enemies directly ahead.\Deals 3 hits of 229% shadow damage to enemies directly ahead.\Deals 3 hits of 254% shadow damage to enemies directly ahead.\5161, 5161, 5161\Yes\2.2\\Damage
@@ -146,7 +146,7 @@ Forbidden Sphere\\Skill\Deals 2 hits of 399% shadow damage to the target and nea
 Force of Insanity\\Skill\Increases the user's strength by 30% for 5 seconds.\Increases the user's strength by 35% for 5 seconds.\Increases the user's strength by 25% for 30 seconds.\6645, 6645, 6645\No\1.4\\Buff, Strength, User
 Force of the Wind\\Skill\Increases the user's strength by 25% for 5 seconds.\Increases the user's strength by 30% for 5 seconds.\Increases the user's strength by 35% for 5 seconds.\4430, 4430, 4430\No\1.4\\Buff, Strength, User
 Fortuitous Strength\\Skill\Increases the user's strength by 25% for 5 seconds.\Increases the user's strength by 30% for 5 seconds.\Increases the user's strength by 25% for 30 seconds.\6645, 6645, 6645\No\1.4\\Buff, Strength, User
-Freedom Ring\\Skill\Restores HP to the user and nearby allies with 52 Recovery Potency, and increases their strength by 10% for 15 seconds.\Restores HP to the user and nearby allies with 60 Recovery Potency, and increases their strength by 15% for 15 seconds.\\6424, 6424, 6424\Yes\1.4\\Buff, Strength, Team, Healskill, Burst
+Freedom Ring\\Skill\Restores HP to the user and nearby allies with 52 Recovery Potency, and increases their strength by 10% for 15 seconds.\Restores HP to the user and nearby allies with 60 Recovery Potency, and increases their strength by 15% for 15 seconds.\\6424, 6424, 6424\Yes\1.4\\Buff, Strength, Team, Healskill, Burst, Nearby
 Freezing Breath\\Skill\Deals 1 hit of 466% water damage to enemies directly ahead.\Deals 1 hit of 518% water damage to enemies directly ahead.\\50, 50, 50\Yes\1.4\\Damage
 Frost Beam\\Skill\Deals 4 hits of 194% water damage to enemies directly ahead, and inflicts freeze for 3-6 seconds with 160% base chance.\Deals 4 hits of 204% water damage to enemies directly ahead, and inflicts freeze for 3-6 seconds with 180% base chance.\\30, 30, 30\Yes\1.9\\Damage, Freeze
 Frost Smash\\Skill\Deals 1 shot of 777% water damage to enemies in a line.\Deals 1 shot of 863% water damage to enemies in a line.\\7673, 7673, 7673\Yes\1.6\\Damage
@@ -330,6 +330,7 @@ Sharp Focus\\Skill\Increases the user's critical rate by 10% for 10 seconds.\Inc
 Shattering Whirlwind\\Skill\Deals 2 hits of 309% damage to surrounding enemies.\Deals 2 hits of 343% damage to surrounding enemies.\\7668, 7668, 7668\Yes\1.2\\Damage
 Shining Breath\\Skill\Deals 1 hit of 466% light damage to enemies directly ahead.\Deals 1 hit of 518% light damage to enemies directly ahead.\\50, 50, 50\Yes\1.4\\Damage
 Shining Vanguard\\Skill\Deals 2 hits of 420% light damage to surrounding enemies and draws them toward the user for 0.5 seconds.\Deals 2 hits of 466% light damage to surrounding enemies and draws them toward the user for 0.5 seconds.\Deals 2 hits of 518% light-based damage to surrounding enemies and draws them toward the user for 0.5 seconds.\5735, 5735, 5735\Yes\0.9\\Damage
+Silver Defense\\Skill\Increases the entire team's defense by 25% for 15 seconds.\Increases the entire team's defense by 30% for 15 seconds.\\50, 50, 50\No\1.6\\Buff, Defense, Team
 Skull Hunter\\Skill\Deals 1 hit of 617% shadow damage to the target and nearby enemies.\Deals 1 hit of 648% shadow damage to the target and nearby enemies, and inflicts blindness (applies 50% chance to miss on attacks) for 8 seconds with 90% base chance.\Deals 1 hit of 680% shadow damage to the target and nearby enemies, and inflicts blindness (applies 50% chance to miss on attacks) for 8 seconds with 100% base chance.\2352, 2352, 2352\Yes\2.2\\Damage, Blind
 Smash Hit\\Skill\Deals 1 hit of 839% water damage to enemies directly ahead.\Deals 1 hit of 933% water damage to enemies directly ahead.\Deals 1 hit of 1036% water damage to enemies directly ahead.\2942, 2942, 2942\Yes\0.9\\Damage
 Smiles on Parade\\Skill\Deals 10 hits of 74.6658% light damage to enemies directly ahead, and increases the entire team's energy levels by two stages.\Deals 10 hits of 82.962% light damage to enemies directly ahead, and increases the entire team's energy levels by two stages.\\10206, 10206, 10206\Yes\3.2\\Damage, Buff, Energy, Team
@@ -432,14 +433,17 @@ Zardin Blade\\Skill\Deals one hit of 552% water damage to enemies directly ahead
 Zardin's Wrath\\Skill\Deals one hit of 552% water damage to enemies in a line.\Deals one hit of 614% water damage to enemies in a line.\Deals one hit of 682% water damage to enemies in a line.\5225, 5225, 5225\Yes\0.7\\Damage
 Zephyr's Wrath\\Skill\Deals 3 hits of 254.1% wind damage to surrounding enemies, and inflicts stun for 5-6 seconds with 160% base chance.\Deals 3 hits of 267.4% wind damage to surrounding enemies, and inflicts stun for 6-7 seconds with 180% base chance.\\50, 50, 50\Yes\1.7\\Damage, Stun
 Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\Deals 5 hits of 165% light damage to enemies directly ahead.\\6847, 6847, 6847\Yes\1.4\\Damage
+(Flame) HP & Strength\example\Aura\If the user is attuned to Flame: increases strength and HP by `x`%.\0\y
 (Flame) HP & Strength\5%\Aura\If the user is attuned to Flame: increases strength and HP by 5%.\20\y
 (Flame) HP & Strength\8%\Aura\If the user is attuned to Flame: increases strength and HP by 8%.\30\y
 (Flame) HP & Strength\20%\Aura\If the user is attuned to Flame: increases strength and HP by 20%.\70\y
 (Flame) HP & Strength\30%\Aura\If the user is attuned to Flame: increases strength and HP by 30%.\100\y
+(Flame) HP\example\Aura\If the user is attuned to Flame: increases HP by `x`%.\0\y
 (Flame) HP\10%\Aura\If the user is attuned to Flame: increases HP by 10%.\20\y
 (Flame) HP\15%\Aura\If the user is attuned to Flame: increases HP by 15%.\30\y
 (Flame) HP\30%\Aura\If the user is attuned to Flame: increases HP by 30%.\60\y
 (Flame) HP\45%\Aura\If the user is attuned to Flame: increases HP by 45%.\80\y
+(Flame) Strength\example\Aura\If the user is attuned to Flame: increases strength by `x`%.\0\y
 (Flame) Strength\10%\Aura\If the user is attuned to Flame: increases strength by 10%.\20\y
 (Flame) Strength\15%\Aura\If the user is attuned to Flame: increases strength by 15%.\30\y
 (Flame) Strength\20%\Aura\If the user is attuned to Flame: increases strength by 20%.\40\y
@@ -447,44 +451,55 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) Strength\40%\Aura\If the user is attuned to Flame: increases strength by 40%.\70\y
 (Flame) Strength\45%\Aura\If the user is attuned to Flame: increases strength by 45%.\80\y
 (Flame) Strength\60%\Aura\If the user is attuned to Flame: increases strength by 60%.\100\y
+(Flame) Strength & Wind Res\example\Aura\If the user is attuned to Flame: increases strength by `x`% and grants `y`% Wind resistance.\0\y
 (Flame) Strength & Wind Res\35/15%\Aura\If the user is attuned to Flame: increases strength by 35% and grants 15% Wind resistance.\70\y
 (Flame) Strength & Wind Res\50/15%\Aura\If the user is attuned to Flame: increases strength by 50% and grants 15% Wind resistance.\100\y
+(Light) Critical Damage\example\Aura\If the user is attuned to Light: adds `x`% to the modifier applied to critical damage.\0\y
 (Light) Critical Damage\50%\Aura\If the user is attuned to Light: adds 50% to the modifier applied to critical damage.\40\y
 (Light) Critical Damage\70%\Aura\If the user is attuned to Light: adds 70% to the modifier applied to critical damage.\60\y
+(Light) Critical Rate\example\Aura\If the user is attuned to Light: Increases critical rate by `x`%.\0\y
 (Light) Critical Rate\5%\Aura\If the user is attuned to Light: Increases critical rate by 5%.\40\y
 (Light) Critical Rate\6%\Aura\If the user is attuned to Light: Increases critical rate by 6%.\40\y
+(Light) HP & Strength\example\Aura\If the user is attuned to Light: increases strength and HP by `x`%.\0\y
 (Light) HP & Strength\5%\Aura\If the user is attuned to Light: increases strength and HP by 5%.\20\y
 (Light) HP & Strength\8%\Aura\If the user is attuned to Light: increases strength and HP by 8%.\30\y
 (Light) HP & Strength\10%\Aura\If the user is attuned to Light: increases strength and HP by 10%.\50\y
 (Light) HP & Strength\15%\Aura\If the user is attuned to Light: increases strength and HP by 15%.\60\y
 (Light) HP & Strength\20%\Aura\If the user is attuned to Light: increases strength and HP by 20%.\70\y
 (Light) HP & Strength\30%\Aura\If the user is attuned to Light: increases strength and HP by 30%.\100\y
+(Light) HP\example\Aura\If the user is attuned to Light: increases HP by `x`%.\0\y
 (Light) HP\10%\Aura\If the user is attuned to Light: increases HP by 10%.\20\y
 (Light) HP\15%\Aura\If the user is attuned to Light: increases HP by 15%.\30\y
 (Light) HP\30%\Aura\If the user is attuned to Light: increases HP by 30%.\60\y
 (Light) HP\40%\Aura\If the user is attuned to Light: increases HP by 40%.\70\y
 (Light) HP\45%\Aura\If the user is attuned to Light: increases HP by 45%.\80\y
 (Light) HP\60%\Aura\If the user is attuned to Light: increases HP by 60%.\100\y
+(Light) Strength\example\Aura\If the user is attuned to Light: increases strength by `x`%.\0\y
 (Light) Strength\10%\Aura\If the user is attuned to Light: increases strength by 10%.\20\y
 (Light) Strength\15%\Aura\If the user is attuned to Light: increases strength by 15%.\30\y
 (Light) Strength\30%\Aura\If the user is attuned to Light: increases strength by 30%.\60\y
 (Light) Strength\40%\Aura\If the user is attuned to Light: increases strength by 40%.\70\y
 (Light) Strength\45%\Aura\If the user is attuned to Light: increases strength by 45%.\80\y
 (Light) Strength\60%\Aura\If the user is attuned to Light: increases strength by 60%.\100\y
+(Light) Strength & Shadow Res\example\Aura\If the user is attuned to Light: increases strength by `x`% and grants `y`% Shadow resistance.\0\y
 (Light) Strength & Shadow Res\35/15%\Aura\If the user is attuned to Light: increases strength by 35% and grants 15% Shadow resistance.\70\y
 (Light) Strength & Shadow Res\50/15%\Aura\If the user is attuned to Light: increases strength by 50% and grants 15% Shadow resistance.\100\y
-(Shadow) HP 30 = Strength\35%\Aura\If the user is attuned to Shadow: increases strength by 35% when HP is 30% or above.\0\y
-(Shadow) HP 30 = Strength\50%\Aura\If the user is attuned to Shadow: increases strength by 50% when HP is 30% or above.\0\y
+(Shadow) HP 30% = Strength\example\Aura\If the user is attuned to Shadow: increases strength by `x`% when HP is 30% or above.\0\y
+(Shadow) HP 30% = Strength\35%\Aura\If the user is attuned to Shadow: increases strength by 35% when HP is 30% or above.\35\y
+(Shadow) HP 30% = Strength\50%\Aura\If the user is attuned to Shadow: increases strength by 50% when HP is 30% or above.\50\y
+(Shadow) HP & Strength\example\Aura\If the user is attuned to Shadow: increases strength and HP by `x`%.\20\y
 (Shadow) HP & Strength\5%\Aura\If the user is attuned to Shadow: increases strength and HP by 5%.\20\y
 (Shadow) HP & Strength\8%\Aura\If the user is attuned to Shadow: increases strength and HP by 8%.\30\y
 (Shadow) HP & Strength\10%\Aura\If the user is attuned to Shadow: increases strength and HP by 10%.\50\y
 (Shadow) HP & Strength\15%\Aura\If the user is attuned to Shadow: increases strength and HP by 15%.\60\y
 (Shadow) HP & Strength\20%\Aura\If the user is attuned to Shadow: increases strength and HP by 20%.\70\y
 (Shadow) HP & Strength\30%\Aura\If the user is attuned to Shadow: increases strength and HP by 30%.\100\y
+(Shadow) HP\example\Aura\If the user is attuned to Shadow: increases HP by `x`%.\0\y
 (Shadow) HP\10%\Aura\If the user is attuned to Shadow: increases HP by 10%.\20\y
 (Shadow) HP\15%\Aura\If the user is attuned to Shadow: increases HP by 15%.\30\y
-(Shadow) Last Bulwark\I\Aura\if the user is attuned to Shadow: grants the user a one-use shield that nullifies damage less than 45% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\0\y
-(Shadow) Last Bulwark\II\Aura\if the user is attuned to Shadow: grants the user a one-use shield that nullifies damage less than 60% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\0\y
+(Shadow) Last Bulwark\I\Aura\if the user is attuned to Shadow: grants the user a one-use shield that nullifies damage less than 45% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\35\y
+(Shadow) Last Bulwark\II\Aura\if the user is attuned to Shadow: grants the user a one-use shield that nullifies damage less than 60% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\50\y
+(Shadow) Strength\example\Aura\If the user is attuned to Shadow: increases strength by `x`%.\0\y
 (Shadow) Strength\10%\Aura\If the user is attuned to Shadow: increases strength by 10%.\20\y
 (Shadow) Strength\15%\Aura\If the user is attuned to Shadow: increases strength by 15%.\30\y
 (Shadow) Strength\20%\Aura\If the user is attuned to Shadow: increases strength by 20%.\40\y
@@ -492,26 +507,31 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Shadow) Strength\40%\Aura\If the user is attuned to Shadow: increases strength by 40%.\70\y
 (Shadow) Strength\45%\Aura\If the user is attuned to Shadow: increases strength by 45%.\80\y
 (Shadow) Strength\60%\Aura\If the user is attuned to Shadow: increases strength by 60%.\100\y
+(Water) HP & Strength\example\Aura\If the user is attuned to Water: increases strength and HP by `x`%.\0\y
 (Water) HP & Strength\5%\Aura\If the user is attuned to Water: increases strength and HP by 5%.\20\y
 (Water) HP & Strength\8%\Aura\If the user is attuned to Water: increases strength and HP by 8%.\30\y
 (Water) HP & Strength\15%\Aura\If the user is attuned to Water: increases strength and HP by 15%.\60\y
 (Water) HP & Strength\20%\Aura\If the user is attuned to Water: increases strength and HP by 20%.\70\y
 (Water) HP & Strength\30%\Aura\If the user is attuned to Water: increases strength and HP by 30%.\100\y
+(Water) HP\example\Aura\If the user is attuned to Water: increases HP by `x`%.\0\y
 (Water) HP\10%\Aura\If the user is attuned to Water: increases HP by 10%.\20\y
 (Water) HP\15%\Aura\If the user is attuned to Water: increases HP by 15%.\30\y
 (Water) HP\20%\Aura\If the user is attuned to Water: increases HP by 20%.\40\y
 (Water) HP\30%\Aura\If the user is attuned to Water: increases HP by 30%.\60\y
+(Water) Strength\example\Aura\If the user is attuned to Water: increases strength by `x`%.\0\y
 (Water) Strength\10%\Aura\If the user is attuned to Water: increases strength by 10%.\20\y
 (Water) Strength\15%\Aura\If the user is attuned to Water: increases strength by 15%.\30\y
 (Water) Strength\30%\Aura\If the user is attuned to Water: increases strength by 30%.\60\y
 (Water) Strength\40%\Aura\If the user is attuned to Water: increases strength by 40%.\70\y
 (Water) Strength\45%\Aura\If the user is attuned to Water: increases strength by 45%.\80\y
 (Water) Strength\60%\Aura\If the user is attuned to Water: increases strength by 60%.\100\y
+(Wind) HP & Strength\example\Aura\If the user is attuned to Wind: increases strength and HP by `x`%.\0\y
 (Wind) HP & Strength\5%\Aura\If the user is attuned to Wind: increases strength and HP by 5%.\20\y
 (Wind) HP & Strength\8%\Aura\If the user is attuned to Wind: increases strength and HP by 8%.\30\y
 (Wind) HP & Strength\10%\Aura\If the user is attuned to Wind: increases strength and HP by 10%.\50\y
 (Wind) HP & Strength\20%\Aura\If the user is attuned to Wind: increases strength and HP by 20%.\70\y
 (Wind) HP & Strength\30%\Aura\If the user is attuned to Wind: increases strength and HP by 30%.\100\y
+(Wind) HP\example\Aura\If the user is attuned to Wind: increases HP by `x`%.\0\y
 (Wind) HP\10%\Aura\If the user is attuned to Wind: increases HP by 10%.\20\y
 (Wind) HP\15%\Aura\If the user is attuned to Wind: increases HP by 15%.\30\y
 (Wind) HP\20%\Aura\If the user is attuned to Wind: increases HP by 20%.\40\y
@@ -519,6 +539,7 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Wind) HP\40%\Aura\If the user is attuned to Wind: increases HP by 40%.\70\y
 (Wind) HP\45%\Aura\If the user is attuned to Wind: increases HP by 45%.\80\y
 (Wind) HP\60%\Aura\If the user is attuned to Wind: increases HP by 60%.\100\y
+(Wind) Strength\example\Aura\If the user is attuned to Wind: increases strength by `x`%.\0\y
 (Wind) Strength\10%\Aura\If the user is attuned to Wind: increases strength by 10%.\20\y
 (Wind) Strength\15%\Aura\If the user is attuned to Wind: increases strength by 15%.\30\y
 (Wind) Strength\20%\Aura\If the user is attuned to Wind: increases strength by 20%.\40\y
@@ -526,10 +547,12 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Wind) Strength\40%\Aura\If the user is attuned to Wind: increases strength by 40%.\70\y
 (Wind) Strength\45%\Aura\If the user is attuned to Wind: increases strength by 45%.\80\y
 (Wind) Strength\60%\Aura\If the user is attuned to Wind: increases strength by 60%.\100\y
+(Wind) Strength & Critical Damage\example\Aura\If the user is attuned to Wind: increases strength by `x`% and adds `y`% to the modifier applied to critical damage.\70\y
 (Wind) Strength & Critical Damage\30/50%\Aura\If the user is attuned to Wind: increases strength by 30% and adds 50% to the modifier applied to critical damage.\70\y
 (Wind) Strength & Critical Damage\45/55%\Aura\If the user is attuned to Wind: increases strength by 45% and adds 55% to the modifier applied to critical damage.\100\y
 Dragonyule Blessing\I\Aura\If the user is attuned to Water: increases strength by 30% and critical rate by 15%.\70\y
 Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength by 45% and critical rate by 20%.\100\y
+(Axe) Critical Rate\example\Ability\If the user wields an Axe: increases critical rate by `x`%.\0\y
 (Axe) Critical Rate\10%\Ability\If the user wields an Axe: increases critical rate by 10%.\80\y
 (Axe) Critical Rate\12%\Ability\If the user wields an Axe: increases critical rate by 12%.\100\y
 (Flame) Affliction Guard\I\Ability\If the user is attuned to Flame: resists afflictions once per quest\80\y
@@ -537,84 +560,140 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Flame) Dragon Delay Res\-\Ability\If the user is attuned to Flame: completely prevents dragon delaying.\50\y
 (Flame) Dull Res\-\Ability\If the user is attuned to Flame: completely prevents dulling.\50\y
 (Flame) High Midgardsormr's Bane\20%\Ability\If the user is attuned to Flame: increases damage to High Midgardsormr by 20%.\100\y
+(Flame) HP 70% = Defense\example\Ability\If the user is attuned to Flame: increases defense by `x`% when HP is 70% or above.\0\y
+(Flame) HP 70% = Defense\3%\Ability\If the user is attuned to Flame: increases defense by 3% when HP is 70% or above.\20\y
 (Flame) HP 70% = Defense\5%\Ability\If the user is attuned to Flame: increases defense by 5% when HP is 70% or above.\40\y
+(Flame) Physian's Bane\example\Ability\If the user is attuned to Flame: increases damage to physians by `x`%.\0\y
 (Flame) Physian's Bane\10%\Ability\If the user is attuned to Flame: increases damage to physians by 10%.\20\y
 (Flame) Physian's Bane\15%\Ability\If the user is attuned to Flame: increases damage to physians by 15%.\40\y
+(Flame) Skill Haste\example\Ability\If the user is attuned to Flame: Increases skill gauge fill rate by `x`%.\0\y
 (Flame) Skill Haste\4%\Ability\If the user is attuned to Flame: Increases skill gauge fill rate by 4%.\40\y
 (Flame) Skill Haste\8%\Ability\If the user is attuned to Flame: Increases skill gauge fill rate by 8%.\80\y
+(Flame) Skill Prep\example\Ability\If the user is attuned to Flame: fills `x`% of skill gauges at the start of quests.\0\y
 (Flame) Skill Prep\25%\Ability\If the user is attuned to Flame: fills 25% of skill gauges at the start of quests.\40\y
 (Flame) Skill Prep\50%\Ability\If the user is attuned to Flame: fills 50% of skill gauges at the start of quests.\50\y
+(Flame) Thaumian's Bane\example\Ability\If the user is attuned to Flame: increases damage to thaumians by `x`%.\0\y
 (Flame) Thaumian's Bane\10%\Ability\If the user is attuned to Flame: increases damage to thaumians by 10%.\20\y
 (Flame) Thaumian's Bane\15%\Ability\If the user is attuned to Flame: increases damage to thaumians by 15%.\40\y
+(Lance) Skill Damage\example\Ability\If the user wields a Lance: increases attack skill damage by `x`%\0\y
 (Lance) Skill Damage\30%\Ability\If the user wields a Lance: increases attack skill damage by 30%\60\y
 (Lance) Skill Damage\35%\Ability\If the user wields a Lance: increases attack skill damage by 35%\80\y
 (Light) Affliction Guard\I\Ability\If the user is attuned to Light: resists afflictions once per quest\80\y
 (Light) Affliction Guard\II\Ability\If the user is attuned to Light: resists afflictions up to three times per quest\100\y
-(Light) Curse Res\25%\Ability\If the user is attuned to Light: Reduces susceptibility to curses by 25%.\40\y
-(Light) Curse Res\40%\Ability\If the user is attuned to Light: Reduces susceptibility to curses by 40%.\50\y
+(Light) Curse Res\example\Ability\If the user is attuned to Light: reduces susceptibility to curses by `x`%.\0\y
+(Light) Curse Res\25%\Ability\If the user is attuned to Light: reduces susceptibility to curses by 25%.\40\y
+(Light) Curse Res\40%\Ability\If the user is attuned to Light: reduces susceptibility to curses by 40%.\50\y
+(Light) Dull Res\-\Ability\If the user is attuned to Light: completely prevents dulling.\50\y
+(Light) Fury Penetrator\-\Ability\If the user is attuned to Light: ignores the effects of fury when attacking enemies.\50\y
+(Light) HP 70% = Defense\example\Ability\If the user is attuned to Light: increases defense by `x`% when HP is 70% or above.\0\y
+(Light) HP 70% = Defense\3%\Ability\If the user is attuned to Light: increases defense by 3% when HP is 70% or above.\20\y
+(Light) HP 70% = Defense\5%\Ability\If the user is attuned to Light: increases defense by 5% when HP is 70% or above.\40\y
+(Light) Physian's Bane\example\Ability\If the user is attuned to Light: increases damage to physians by `x`%.\0\y
+(Light) Physian's Bane\10%\Ability\If the user is attuned to Light: increases damage to physians by 10%.\20\y
+(Light) Physian's Bane\15%\Ability\If the user is attuned to Light: increases damage to physians by 15%.\40\y
 (Light) Recovery Potency\5%\Ability\If the user is attuned to Light: increases the potency of recovery skills by 5%.\40\y
+(Light) Skill Haste\example\Ability\If the user is attuned to Light: Increases skill gauge fill rate by `x`%.\0\y
 (Light) Skill Haste\4%\Ability\If the user is attuned to Light: Increases skill gauge fill rate by 4%.\30\y
 (Light) Skill Haste\5%\Ability\If the user is attuned to Light: Increases skill gauge fill rate by 5%.\50\y
+(Light) Skill Prep\example\Ability\If the user is attuned to Light: fills `x`% of skill gauges at the start of quests.\0\y
 (Light) Skill Prep\25%\Ability\If the user is attuned to Light: fills 50% of skill gauges at the start of quests.\40\y
 (Light) Skill Prep\50%\Ability\If the user is attuned to Light: fills 50% of skill gauges at the start of quests.\60\y
 (Light) Stunned Punisher\15%\Ability\If the user is attuned to Light: increases damage to stunned enemies by 15%.\40\y
+(Light) Undead's Bane\example\Ability\If the user is attuned to Light: increases damage to undead by `x`%.\0\y
+(Light) Undead's Bane\10%\Ability\If the user is attuned to Light: increases damage to undead by 10%.\20\y
+(Light) Undead's Bane\15%\Ability\If the user is attuned to Light: increases damage to undead by 15%.\40\y
+(Shadow) Blinded Punisher\example\Ability\If the user is attuned to Light: Increases damage to blinded enemies by `x`%.\0\y
+(Shadow) Blinded Punisher\10%\Ability\If the user is attuned to Light: Increases damage to blinded enemies by 10%.\20\y
+(Shadow) Blinded Punisher\15%\Ability\If the user is attuned to Light: Increases damage to blinded enemies by 15%.\40\y
+(Shadow) Buff Time\example\Ability\If the user is attuned to Shadow: increases duration of buff skills by `x`%.\0\y
 (Shadow) Buff Time\15%\Ability\If the user is attuned to Shadow: increases duration of buff skills by 15%.\20\y
 (Shadow) Buff Time\20%\Ability\If the user is attuned to Shadow: increases duration of buff skills by 20%.\40\y
+(Shadow) Dull Res\-\Ability\If the user is attuned to Shadow: completely prevents dulling.\50\y
+(Shadow) Paralysis Res\example\Ability\If the user is attuned to Shadow: reduces susceptibility to paralysis by `x`%.\0\y
 (Shadow) Paralysis Res\25%\Ability\If the user is attuned to Shadow: reduces susceptibility to paralysis by 25%.\80\y
 (Shadow) Paralysis Res\40%\Ability\If the user is attuned to Shadow: reduces susceptibility to paralysis by 40%.\100\y
-(Shadow) Skill Prep\4%\Ability\If the user is attuned to Shadow: fills 4% of skill gauges at the start of quests.\0\y
-(Shadow) Skill Prep\5%\Ability\If the user is attuned to Shadow: fills 5% of skill gauges at the start of quests.\0\y
+(Shadow) Skill Haste\example\Ability\If the user is attuned to Light: Increases skill gauge fill rate by `x`%.\0\y
+(Shadow) Skill Haste\4%\Ability\If the user is attuned to Light: Increases skill gauge fill rate by 4%.\30\y
+(Shadow) Skill Haste\5%\Ability\If the user is attuned to Light: Increases skill gauge fill rate by 5%.\50\y
+(Sword) Skill Damage\example\Ability\If the user wields a Sword: increases attack skill damage by `x`%\0\y
 (Sword) Skill Damage\30%\Ability\If the user wields a Sword: increases attack skill damage by 30%\60\y
 (Sword) Skill Damage\35%\Ability\If the user wields a Sword: increases attack skill damage by 35%\80\y
 (Water) Dull Res\-\Ability\If the user is attuned to Water: completely prevents dulling.\50\y
+(Water) Flurry Devastation\example\Ability\If the user is attuned to Water: increases critical rate by `x`% when the combo count is 15 or higher.\0\y
 (Water) Flurry Devastation\8%\Ability\If the user is attuned to Water: increases critical rate by 8% when the combo count is 15 or higher.\40\y
 (Water) Flurry Devastation\10%\Ability\If the user is attuned to Water: increases critical rate by 10% when the combo count is 15 or higher.\60\y
 (Water) HP 70% = Strength\5%\Ability\If the user is attuned to Water: increases strength by 5% when HP is 70% or above.\40\y
+(Water) Slayer's Strength\example\Ability\If the user is attuned to Water: increases strength by `x`% for every five enemies defeated (up to five times per quest).\0\y
 (Water) Slayer's Strength\3%\Ability\If the user is attuned to Water: increases strength by 3% for every five enemies defeated (up to five times per quest).\40\y
 (Water) Slayer's Strength\4%\Ability\If the user is attuned to Water: increases strength by 4% for every five enemies defeated (up to five times per quest).\60\y
+(Water) Thaumian's Bane\example\Ability\If the user is attuned to Water: increases damage to thaumians by `x`%\0\y
 (Water) Thaumian's Bane\10%\Ability\If the user is attuned to Water: increases damage to thaumians by 10%\20\y
 (Water) Thaumian's Bane\15%\Ability\If the user is attuned to Water: increases damage to thaumians by 15%\40\y
+(Wind) Copy Punisher\-\Ability\If the user is attuned to Wind: increases damage to copies created by Propagation.\50\y
+(Wind) HP 70% = Healing\8%\Ability\if the user is attuned to Wind: increases the potency of recovery skills by 8% when HP is 70% or above.\40\y
+(Wind) Skill Prep\example\Ability\If the user is attuned to Wind: fills `x`% of skill gauges at the start of quests.\0\y
+(Wind) Skill Prep\25%\Ability\If the user is attuned to Wind: fills 25% of skill gauges at the start of quests.\40\y
+(Wind) Skill Prep\50%\Ability\If the user is attuned to Wind: fills 50% of skill gauges at the start of quests.\60\y
+(Wind) Thaumian's Bane\example\Ability\If the user is attuned to Wind: increases damage to thaumians by `x`%.\0\y
+(Wind) Thaumian's Bane\10%\Ability\If the user is attuned to Wind: increases damage to thaumians by 10%.\20\y
+(Wind) Thaumian's Bane\15%\Ability\If the user is attuned to Wind: increases damage to thaumians by 15%.\40\y
+(Wind) Broken Punisher\example\Ability\If the user is attuned to Wind: increases damage to enemies in break state by `x`%.\0\y
 (Wind) Broken Punisher\15%\Ability\If the user is attuned to Wind: increases damage to enemies in break state by 15%.\20\y
 (Wind) Broken Punisher\20%\Ability\If the user is attuned to Wind: increases damage to enemies in break state by 20%.\40\y
+Adventurer EXP\example\Ability\Increases adventurer EXP intake for clearing quests by `x`%\0\y
 Adventurer EXP\100%\Ability\Increases adventurer EXP intake for clearing quests by 100%\0\y
 Adventurer EXP\150%\Ability\Increases adventurer EXP intake for clearing quests by 150%\0\y
+Affliction Guard\I\Ability\resists afflictions once per quest\80\y
+Affliction Guard\II\Ability\resists afflictions three times per quest\100\y
+Arcane Tomes\example\Ability\Increases Arcane Tomes intake for clearing quests by `x`%\0\y
 Arcane Tomes\25%\Ability\Increases Arcane Tomes intake for clearing quests by 25%\0\y
 Arcane Tomes\50%\Ability\Increases Arcane Tomes intake for clearing quests by 50%\0\y
 Arcane Tomes\75%\Ability\Increases Arcane Tomes intake for clearing quests by 75%\0\y
 Arcane Tomes\100%\Ability\Increases Arcane Tomes intake for clearing quests by 100%\0\y
 Arcane Tomes\125%\Ability\Increases Arcane Tomes intake for clearing quests by 125%\0\y
 Arcane Tomes\150%\Ability\Increases Arcane Tomes intake for clearing quests by 150%\0\y
+Astral Ornament\example\Ability\Increases Astral Ornaments intake for clearing quests by `x`%.\0\y
 Astral Ornament\25%\Ability\Increases Astral Ornaments intake for clearing quests by 25%.\0\y
 Astral Ornament\50%\Ability\Increases Astral Ornaments intake for clearing quests by 50%.\0\y
 Astral Ornament\75%\Ability\Increases Astral Ornaments intake for clearing quests by 75%.\0\y
+Bleeding Punisher\example\Ability\Increases damage to bleeding enemies by `x`%.\0\y
 Bleeding Punisher\5%\Ability\Increases damage to bleeding enemies by 5%.\60\y
 Bleeding Punisher\8%\Ability\Increases damage to bleeding enemies by 8%.\80\y
+Blinded Punisher\example\Ability\Increases damage to blinded enemies by `x`%.\0\y
+Blinded Punisher\10%\Ability\Increases damage to blinded enemies by 10%.\20\y
+Blinded Punisher\15%\Ability\Increases damage to blinded enemies by 15%.\60\y
 Blinded Punisher\25%\Ability\Increases damage to blinded enemies by 25%.\80\y
 Blinded Punisher\30%\Ability\Increases damage to blinded enemies by 30%.\100\y
+Blindness Res\example\Ability\Reduces susceptibility to blindness by `x`%.\0\y
 Blindness Res\15%\Ability\Reduces susceptibility to blindness by 15%.\10\y
 Blindness Res\20%\Ability\Reduces susceptibility to blindness by 20%.\20\y
 Blindness Res\25%\Ability\Reduces susceptibility to blindness by 25%.\40\y
 Blindness Res\50%\Ability\Reduces susceptibility to blindness by 50%.\60\y
 Blindness Res\75%\Ability\Reduces susceptibility to blindness by 75%.\100\y
 Blindness Res\100%\Ability\Reduces susceptibility to blindness by 100%.\100\y
+Bog Res\example\Ability\Reduces susceptibility to bog by `x`%.\0\y
 Bog Res\15%\Ability\Reduces susceptibility to bog by 15%.\10\y
 Bog Res\20%\Ability\Reduces susceptibility to bog by 20%.\20\y
 Bog Res\25%\Ability\Reduces susceptibility to bog by 25%.\40\y
 Bog Res\50%\Ability\Reduces susceptibility to bog by 50%.\60\y
 Bog Res\75%\Ability\Reduces susceptibility to bog by 75%.\100\y
 Bog Res\100%\Ability\Reduces susceptibility to bog by 100%.\100\y
+Broken Punisher\example\Ability\Increases damage to enemies in break state by `x`%.\0\y
 Broken Punisher\10%\Ability\Increases damage to enemies in break state by 10%.\20\y
 Broken Punisher\15%\Ability\Increases damage to enemies in break state by 15%.\40\y
 Broken Punisher\20%\Ability\Increases damage to enemies in break state by 20%.\60\y
 Broken Punisher\25%\Ability\Increases damage to enemies in break state by 25%.\80\y
 Broken Punisher\30%\Ability\Increases damage to enemies in break state by 30%.\100\y
+Brunhilda Res\example\Ability\Reduces damage taken from Brunhilda by `x`%.\0\y
 Brunhilda Res\15%\Ability\Reduces damage taken from Brunhilda by 15%.\30\y
 Brunhilda Res\20%\Ability\Reduces damage taken from Brunhilda by 20%.\60\y
+Buff Time\example\Ability\Increases duration of buff skills by `x`%.\0\y
 Buff Time\10%\Ability\Increases duration of buff skills by 10%.\20\y
 Buff Time\15%\Ability\Increases duration of buff skills by 15%.\40\y
 Buff Time\20%\Ability\Increases duration of buff skills by 20%.\60\y
 Buff Time\25%\Ability\Increases duration of buff skills by 25%.\80\y
 Buff Time\30%\Ability\Increases duration of buff skills by 30%.\100\y
+Burn Res\example\Ability\Reduces susceptibility to burning by `x`%.\0\n
 Burn Res\15%\Ability\Reduces susceptibility to burning by 15%.\10\n
 Burn Res\20%\Ability\Reduces susceptibility to burning by 20%.\20\n
 Burn Res\25%\Ability\Reduces susceptibility to burning by 25%.\40\n
@@ -622,34 +701,46 @@ Burn Res\50%\Ability\Reduces susceptibility to burning by 50%.\60\n
 Burn Res\75%\Ability\Reduces susceptibility to burning by 75%.\100\n
 Burn Res\100%\Ability\Reduces susceptibility to burning by 100%.\100\n
 Burning Punisher\25%\Ability\Increases damage to burning enemies by 25%\80\y
+Copy Punisher\-\Ability\Increases damage to copies created by Propagation.\50\y
+Critical Damage\example\Ability\Increases the damage critical attacks inflict by `x`%.\0\n
 Critical Damage\8%\Ability\Increases the damage critical attacks inflict by 8%.\20\n
 Critical Damage\10%\Ability\Increases the damage critical attacks inflict by 10%.\40\n
 Critical Damage\13%\Ability\Increases the damage critical attacks inflict by 13%.\60\n
 Critical Damage\15%\Ability\Increases the damage critical attacks inflict by 15%.\80\n
 Critical Damage\20%\Ability\Increases the damage critical attacks inflict by 20%.\100\n
+Critical Rate\example\Ability\Increases critical rate by `x`%.\0\n
 Critical Rate\2%\Ability\Increases critical rate by 2%.\10\n
 Critical Rate\3%\Ability\Increases critical rate by 3%.\20\n
 Critical Rate\4%\Ability\Increases critical rate by 4%.\40\n
 Critical Rate\5%\Ability\Increases critical rate by 5%.\60\n
 Critical Rate\6%\Ability\Increases critical rate by 6%.\80\n
 Critical Rate\8%\Ability\Increases critical rate by 8%.\100\n
+Critical Rate\10%\Ability\Increases critical rate by 10%.\100\n
+Critical Rate\12%\Ability\Increases critical rate by 12%.\100\n
+Curse Res\example\Ability\Reduces susceptibility to curses by `x`%.\0\y
 Curse Res\15%\Ability\Reduces susceptibility to curses by 15%.\10\y
 Curse Res\20%\Ability\Reduces susceptibility to curses by 20%.\20\y
 Curse Res\25%\Ability\Reduces susceptibility to curses by 25%.\40\y
+Curse Res\40%\Ability\Reduces susceptibility to curses by 40%.\55\y
 Curse Res\50%\Ability\Reduces susceptibility to curses by 50%.\60\y
 Curse Res\60%\Ability\Reduces susceptibility to curses by 60%.\70\y
 Curse Res\75%\Ability\Reduces susceptibility to curses by 75%.\100\y
 Curse Res\100%\Ability\Reduces susceptibility to curses by 100%.\100\y
+Demon's Bane\example\Ability\Increases damage to demons by `x`%.\0\y
 Demon's Bane\20%\Ability\Increases damage to demons by 20%.\60\y
 Demon's Bane\25%\Ability\Increases damage to demons by 25%.\80\y
 Disperse\-\Ability\Once the enemy's HP falls below a certain threshold, it will consume some of it's own HP to spawn a larger number of other shrooms.\-1\y
+Divine Gales\example\Ability\Increases divine gale intake for clearing quests by `x`%.\0\y
 Divine Gales\25%\Ability\Increases divine gale intake for clearing quests by 25%.\0\y
 Divine Gales\50%\Ability\Increases divine gale intake for clearing quests by 50%.\0\y
 Divine Gales\100%\Ability\Increases divine gale intake for clearing quests by 100%.\0\y
 Divine Gales\150%\Ability\Increases divine gale intake for clearing quests by 150%.\0\y
+Dragon Damage\example\Ability\Adds `x`% to the modifier applied to damage when in dragon form\0\y
 Dragon Damage\6%\Ability\Adds 6% to the modifier applied to damage when in dragon form\80\y
 Dragon Damage\10%\Ability\Adds 10% to the modifier applied to damage when in dragon form\100\y
 Dragon Delay\-\Ability\Sets back the Dragon Gauge by 150%.\-1\y
+Dragon Delay Res\-\Ability\completely prevents dragon delaying.\50\y
+Dragon Time\example\Ability\Extends shapeshift time by `x`%.\50\n
 Dragon Time\8%\Ability\Extends shapeshift time by 8%.\50\n
 Dragon Time\10%\Ability\Extends shapeshift time by 10%.\60\n
 Dragon Time\15%\Ability\Extends shapeshift time by 15%.\80\n
@@ -658,70 +749,92 @@ Dragon's Claws\I\Ability\Each shapeshift increases strength for the remainder of
 Dragon's Claws\II\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 5% in total. On second shapeshift strength is increased by 13% in total. On third shapeshift strength is increased by 25% in total.\80\y
 Dragon's Claws\III\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 6% in total. On second shapeshift strength is increased by 15% in total. On third shapeshift strength is increased by 30% in total.\100\y
 Dull\-\Ability\The afflicted adventurer's weapon will be dulled, lowering their strength by 90%.\-1\y
+Dull Res\-\Ability\completely prevents dulling.\50\y
 Electrically Charged\I\Ability\Increases strength by 15% when electrified.\60\y
 Electrically Charged\II\Ability\Increases strength by 25% when electrified.\80\y
+Energized: Strength\example\Ability\Increases strength by `x`% for 15 seconds each time the user is energized.\0\y
 Energized: Strength\15%\Ability\Increases strength by 15% for 15 seconds each time the user is energized.\80\y
 Energized: Strength\20%\Ability\Increases strength by 20% for 15 seconds each time the user is energized.\100\y
 Energy Doublebuff\-\Ability\Increases energy level by one stage each time a defense up buff is received.\60\y
 Energy Prep\-\Ability\Increases the user's energy level by one stage at the start of quests.\60\y
 Energized Prep\-\Ability\Energizes the user at the start of quests. When an adventurer is energized, their next attack or recovery skill will be upgraded. At this point, using any applicable skill will reset that adventurer's energy level to zero.\80\y
+Flame Res\example\Ability\Reduces flame damage taken by `x`%.\0\y
 Flame Res\3%\Ability\Reduces flame damage taken by 3%.\20\y
 Flame Res\5%\Ability\Reduces flame damage taken by 5%.\40\y
 Flame Res\8%\Ability\Reduces flame damage taken by 8%.\60\y
+Flurry Debilitator\example\Ability\Increases the chances of inflicting debuffs by `x`% when the combo count is 15 or higher.\0\y
 Flurry Debilitator\15%\Ability\Increases the chances of inflicting debuffs by 15% when the combo count is 15 or higher.\80\y
 Flurry Debilitator\20%\Ability\Increases the chances of inflicting debuffs by 20% when the combo count is 15 or higher.\100\y
-Flurry Devastation\10%\Ability\Increases critical rate by 10% when the combo count is 15 or higher.\80\y
+Flurry Devastation\example\Ability\Increases critical rate by `x`% when the combo count is 15 or higher.\0\y
 Flurry Devastation\5%\Ability\Increases critical rate by 5% when the combo count is 15 or higher.\40\y
 Flurry Devastation\8%\Ability\Increases critical rate by 8% when the combo count is 15 or higher.\60\y
+Flurry Devastation\10%\Ability\Increases critical rate by 10% when the combo count is 15 or higher.\80\y
 Flurry Freezer\-\Ability\When the combo count is 15 or higher, grants a 6-second buff that gives standard attacks a 10% chance of inflicting freeze.\40\y
+Flurry Strength\example\Ability\Increases strength by `x`% when the combo count is 15 or higher.\0\y
 Flurry Strength\13%\Ability\Increases strength by 13% when the combo count is 15 or higher.\60\y
 Flurry Strength\15%\Ability\Increases strength by 15% when the combo count is 15 or higher.\80\y
+Forbidden Knowledge\example\Ability\Increases forbidden knowledge intake by `x`%\0\y
 Forbidden Knowledge\25%\Ability\Increases forbidden knowledge intake by 25%\0\y
 Forbidden Knowledge\50%\Ability\Increases forbidden knowledge intake by 50%\0\y
 Forbidden Knowledge\100%\Ability\Increases forbidden knowledge intake by 100%\0\y
 Forbidden Knowledge\150%\Ability\Increases forbidden knowledge intake by 150%\0\y
+Force Strike\example\Ability\Increases force strike damage by `x`%.\0\n
 Force Strike\10%\Ability\Increases force strike damage by 10%.\20\n
 Force Strike\20%\Ability\Increases force strike damage by 20%.\40\n
 Force Strike\30%\Ability\Increases force strike damage by 30%.\60\n
 Force Strike\40%\Ability\Increases force strike damage by 40%.\80\n
 Force Strike\50%\Ability\Increases force strike damage by 50%.\100\n
-Freeze Res\100%\Ability\Reduces susceptibility to freezing by 100%.\100\y
+Freeze Res\example\Ability\Reduces susceptibility to freezing by `x`%.\0\y
 Freeze Res\15%\Ability\Reduces susceptibility to freezing by 15%.\10\y
 Freeze Res\20%\Ability\Reduces susceptibility to freezing by 20%.\20\y
 Freeze Res\25%\Ability\Reduces susceptibility to freezing by 25%.\40\y
 Freeze Res\50%\Ability\Reduces susceptibility to freezing by 50%.\60\y
 Freeze Res\75%\Ability\Reduces susceptibility to freezing by 75%.\100\y
+Freeze Res\100%\Ability\Reduces susceptibility to freezing by 100%.\100\y
 Fury\-\Ability\The overdrive guage will stop decreasing\-1\y
+Fury Penetrator\-\Ability\ignores the effects of fury when attacking enemies.\50\y
+Full HP = Blindness\example\Ability\Increases the chances of inflicting blindness by `x`% when HP is full.\0\y
 Full HP = Blindness\50%\Ability\Increases the chances of inflicting blindness by 50% when HP is full.\80\y
 Full HP = Blindness\60%\Ability\Increases the chances of inflicting blindness by 60% when HP is full.\100\y
+Full HP = Bog\example\Ability\Increases the chances of inflicting bog by `x`% when HP is full.\0\y
 Full HP = Bog\30%\Ability\Increases the chances of inflicting bog by 30% when HP is full.\50\y
 Full HP = Bog\40%\Ability\Increases the chances of inflicting bog by 40% when HP is full.\60\y
+Full HP = Burn\example\Ability\Increases the chances of inflicting burn by `x`% when HP is full.\0\y
 Full HP = Burn\30%\Ability\Increases the chances of inflicting burn by 30% when HP is full.\50\y
 Full HP = Burn\40%\Ability\Increases the chances of inflicting burn by 40% when HP is full.\60\y
+Full HP = Critical Rate\example\Ability\Increases critical rate by `x`% when HP is full.\0\y
 Full HP = Critical Rate\6%\Ability\Increases critical rate by 6% when HP is full.\40\y
 Full HP = Critical Rate\8%\Ability\Increases critical rate by 8% when HP is full.\60\y
+Full HP = Defense\example\Ability\Increases defense by `x`% when HP is full.\0\y
 Full HP = Defense\13%\Ability\Increases defense by 13% when HP is full.\20\y
 Full HP = Defense\15%\Ability\Increases defense by 15% when HP is full.\40\y
 Full HP = Defense\20%\Ability\Increases defense by 20% when HP is full.\60\y
+Full HP = Healing\example\Ability\Increases the potency of recovery skills by `x`% when HP is full.\40\y
 Full HP = Healing\10%\Ability\Increases the potency of recovery skills by 10% when HP is full.\40\y
 Full HP = Healing\13%\Ability\Increases the potency of recovery skills by 13% when HP is full.\60\y
 Full HP = Healing\15%\Ability\Increases the potency of recovery skills by 15% when HP is full.\80\y
+Full HP = Poison\example\Ability\Increases the chances of inflicting poison by `x`% when HP is full.\60\y
 Full HP = Poison\40%\Ability\Increases the chances of inflicting poison by 40% when HP is full.\60\y
 Full HP = Poison\50%\Ability\Increases the chances of inflicting poison by 50% when HP is full.\80\y
+Full HP = Skill Damage\example\Ability\Increases attack skill damage by `x`% when HP is full.\0\y
 Full HP = Skill Damage\25%\Ability\Increases attack skill damage by 25% when HP is full.\40\y
 Full HP = Skill Damage\30%\Ability\Increases attack skill damage by 30% when HP is full.\60\y
 Full HP = Skill Damage\35%\Ability\Increases attack skill damage by 35% when HP is full.\80\y
 Full HP = Skill Damage\40%\Ability\Increases attack skill damage by 40% when HP is full.\100\y
+Full HP = Strength\example\Ability\Increases strength by `x`% when HP is full.\0\y
 Full HP = Strength\10%\Ability\Increases strength by 10% when HP is full.\60\y
 Full HP = Strength\13%\Ability\Increases strength by 13% when HP is full.\80\y
 Full HP = Strength\15%\Ability\Increases strength by 15% when HP is full.\100\y
 Full HP = Strength\5%\Ability\Increases strength by 5% when HP is full.\20\y
 Full HP = Strength\8%\Ability\Increases strength by 8% when HP is full.\40\y
+Full HP = Stun\example\Ability\Increases the chances of inflicting stun by `x`% when HP is full.\0\y
 Full HP = Stun\50%\Ability\Increases the chances of inflicting stun by 50% when HP is full.\70\y
 Full HP = Stun\60%\Ability\Increases the chances of inflicting stun by 60% when HP is full.\100\y
+Gauge Accelerator\example\Ability\Speeds the rate the mode gauge decreases by `x`%.\0\y
 Gauge Accelerator\25%\Ability\Speeds the rate the mode gauge decreases by 25%.\60\y
 Gauge Accelerator\30%\Ability\Speeds the rate the mode gauge decreases by 30%.\80\y
 Gauge Accelerator\35%\Ability\Speeds the rate the mode gauge decreases by 35%.\100\y
+Gauge Inhibitor\example\Ability\Slows the rate the mode gauge increases by `x`%.\0\y
 Gauge Inhibitor\15%\Ability\Slows the rate the mode gauge increases by 15%.\20\y
 Gauge Inhibitor\20%\Ability\Slows the rate the mode gauge increases by 20%.\40\y
 Gauge Inhibitor\25%\Ability\Slows the rate the mode gauge increases by 25%.\60\y
@@ -730,121 +843,160 @@ Happy Dragonyule!\-\Ability\Increases player EXP intake for clearing quests by 1
 Healing Doublebuff\I\Ability\Grants an HP regen buff healing you for 1% Max HP every 3.9 seconds for 20 seconds each time a defense up buff is received.\40\y
 Healing Doublebuff\II\Ability\Grants an HP regen buff healing you for 2% Max HP every 3.9 seconds for 20 seconds each time a defense up buff is received.\60\y
 Healing Doublebuff\III\Ability\Grants an HP regen buff healing you for 3% Max HP every 3.9 seconds for 20 seconds each time a defense up buff is received.\80\y
+High Brunhilda Res\example\Ability\Reduces damage taken from High Brunhilda by `x`%.\0\y
 High Brunhilda Res\20%\Ability\Reduces damage taken from High Brunhilda by 20%.\60\y
 High Brunhilda Res\25%\Ability\Reduces damage taken from High Brunhilda by 25%.\100\y
+High Midgardsormr Res\example\Ability\Reduces damage taken from High Midgardsormr by `x`%.\0\y
 High Midgardsormr Res\20%\Ability\Reduces damage taken from High Midgardsormr by 20%.\60\y
 High Midgardsormr Res\25%\Ability\Reduces damage taken from High Midgardsormr by 25%.\100\y
+High Midgardsormr's Bane\20%\Ability\increases damage to High Midgardsormr by 20%.\100\y
+Hits = Energy Level Up\example\Ability\Increases the user's energy level by one stage for every `X`-hit combo.\0\y
 Hits = Energy Level Up\30\Ability\Increases the user's energy level by one stage for every 30-hit combo.\100\y
 Hits = Energy Level Up\35\Ability\Increases the user's energy level by one stage for every 35-hit combo.\70\y
 Hits = Energy Level Up\40\Ability\Increases the user's energy level by one stage for every 40-hit combo.\50\y
+Holiday Cheer\example\Ability\Increases Holiday Cheer intake for clearing quests by `x`%.\0\y
 Holiday Cheer\25%\Ability\Increases Holiday Cheer intake for clearing quests by 25%.\0\y
 Holiday Cheer\50%\Ability\Increases Holiday Cheer intake for clearing quests by 50%.\0\y
 Holiday Cheer\100%\Ability\Increases Holiday Cheer intake for clearing quests by 100%.\0\y
 Holiday Cheer\150%\Ability\Increases Holiday Cheer intake for clearing quests by 150%.\0\y
+HP 70% = Critical Rate\example\Ability\Increases critical rate by 5% when HP is `example`% or above.\0\y
 HP 70% = Critical Rate\5%\Ability\Increases critical rate by 5% when HP is 70% or above.\40\y
 HP 70% = Critical Rate\6%\Ability\Increases critical rate by 6% when HP is 70% or above.\60\y
 HP 70% = Critical Rate\8%\Ability\Increases critical rate by 8% when HP is 70% or above.\80\y
 HP 70% = Critical Rate\10%\Ability\Increases critical rate by 10% when HP is 70% or above.\100\y
 HP 70% = Critical Rate\15%\Ability\Adds 15% to the modifier applied to critical damage when HP is 70% or above.\60\y
+HP 70% = Defense\example\Ability\Increases defense by `x`% when HP is 70% or above.\20\y
 HP 70% = Defense\3%\Ability\Increases defense by 3% when HP is 70% or above.\20\y
 HP 70% = Defense\5%\Ability\Increases defense by 5% when HP is 70% or above.\40\y
 HP 70% = Defense\8%\Ability\Increases defense by 8% when HP is 70% or above.\60\y
 HP 70% = Defense\10%\Ability\Increases defense by 10% when HP is 70% or above.\80\y
+HP 70% = Healing\example\Ability\Increases the potency of recovery skills by `x`% when HP is 70% or above.\60\y
 HP 70% = Healing\10%\Ability\Increases the potency of recovery skills by 10% when HP is 70% or above.\60\y
 HP 70% = Healing\13%\Ability\Increases the potency of recovery skills by 13% when HP is 70% or above.\80\y
 HP 70% = Healing\15%\Ability\Increases the potency of recovery skills by 15% when HP is 70% or above.\100\y
+HP 70% = Skill Damage\example\Ability\Increases attack skill damage by `x`% when HP is 70% or above.\40\y
 HP 70% = Skill Damage\20%\Ability\Increases attack skill damage by 20% when HP is 70% or above.\40\y
 HP 70% = Skill Damage\25%\Ability\Increases attack skill damage by 25% when HP is 70% or above.\60\y
 HP 70% = Skill Damage\30%\Ability\Increases attack skill damage by 30% when HP is 70% or above.\80\y
 HP 70% = Skill Damage\35%\Ability\Increases attack skill damage by 35% when HP is 70% or above.\100\y
+HP 70% = Strength\example\Ability\Increases strength by `x`% when HP is 70% or above.\20\y
 HP 70% = Strength\3%\Ability\Increases strength by 3% when HP is 70% or above.\20\y
 HP 70% = Strength\5%\Ability\Increases strength by 5% when HP is 70% or above.\40\y
 HP 70% = Strength\8%\Ability\Increases strength by 8% when HP is 70% or above.\60\y
 HP 70% = Strength\10%\Ability\Increases strength by 10% when HP is 70% or above.\80\y
 HP 70% = Strength\13%\Ability\Increases strength by 13% when HP is 70% or above.\100\y
+Hypnos's Bane\example\Ability\Increases damage to Hypnos by `x`%.\0\y
 Hypnos's Bane\30%\Ability\Increases damage to Hypnos by 30%.\0\y
 Hypnos's Bane\35%\Ability\Increases damage to Hypnos by 35%.\0\y
+Jupiter Res\example\Ability\Reduces damage taken from Jupiter by `x`%.\30\y
 Jupiter Res\15%\Ability\Reduces damage taken from Jupiter by 15%.\30\y
 Jupiter Res\20%\Ability\Reduces damage taken from Jupiter by 20%.\60\y
+Last Defense\example\Ability\Buffs defense by `x`% for 15 seconds when HP drops to 30% (once per quest).\0\y
 Last Defense\30%\Ability\Buffs defense by 30% for 15 seconds when HP drops to 30% (once per quest).\20\y
 Last Defense\40%\Ability\Buffs defense by 40% for 15 seconds when HP drops to 30% (once per quest).\40\y
 Last Defense\50%\Ability\Buffs defense by 50% for 15 seconds when HP drops to 30% (once per quest).\60\y
+Last Offense\example\Ability\Buffs strength by `x`% for 15 seconds when HP drops to 30% (once per quest).\0\y
 Last Offense\20%\Ability\Buffs strength by 20% for 15 seconds when HP drops to 30% (once per quest).\40\y
 Last Offense\30%\Ability\Buffs strength by 30% for 15 seconds when HP drops to 30% (once per quest).\60\y
 Last Offense\40%\Ability\Buffs strength by 40% for 15 seconds when HP drops to 30% (once per quest).\80\y
+Last Offense\50%\Ability\Buffs strength by 50% for 15 seconds when HP drops to 30% (once per quest).\100\y
 Last Recovery\I\Ability\Grants an HP regen buff healing you for 8% Max HP every 3.9 seconds for 20 seconds when HP drops to 30% (once per quest).\40\y
 Last Recovery\II\Ability\Grants an HP regen buff healing you for 10% Max HP every 3.9 seconds for 20 seconds when HP drops to 30% (once per quest).\60\y
 Last Recovery\III\Ability\Grants an HP regen buff healing you for 12% Max HP every 3.9 seconds for 20 seconds when HP drops to 30% (once per quest).\80\y
 Last Recovery\IV\Ability\Grants an HP regen buff healing you for 14% Max HP every 3.9 seconds for 20 seconds when HP drops to 30% (once per quest).\100\y
+Light Res\example\Ability\Reduces light damage taken by `x`%.\0\y
 Light Res\3%\Ability\Reduces light damage taken by 3%.\20\y
 Light Res\5%\Ability\Reduces light damage taken by 5%.\40\y
 Light Res\8%\Ability\Reduces light damage taken by 8%.\60\y
 Light Res\10%\Ability\Reduces light damage taken by 10%.\80\y
 Loving Heart\-\Ability\Increases player EXP intake for clearing quests by 10%.\100\y
+Mana\example\Ability\Increases mana intake for clearing quests by `x`%.\0\y
 Mana\3%\Ability\Increases mana intake for clearing quests by 3%.\10\y
 Mana\5%\Ability\Increases mana intake for clearing quests by 5%.\20\y
+Mana\25%\Ability\Increases mana intake for clearing quests by 25%.\0\y
+Mana\50%\Ability\Increases mana intake for clearing quests by 50%.\0\y
+Mercury Res\example\Ability\Reduces damage taken from Mercury by `x`%.\0\y
 Mercury Res\15%\Ability\Reduces damage taken from Mercury by 15%.\30\y
 Mercury Res\20%\Ability\Reduces damage taken from Mercury by 20%.\60\y
+Midgardsormr Res\example\Ability\Reduces damage taken from Midgardsormr by `x`%.\0\y
 Midgardsormr Res\15%\Ability\Reduces damage taken from Midgardsormr by 15%.\30\y
 Midgardsormr Res\20%\Ability\Reduces damage taken from Midgardsormr by 20%.\60\y
 Midgardsormr Res\25%\Ability\Reduces damage taken from Midgardsormr by 25%.\100\y
+Overdrive Punisher\example\Ability\Increases damage to enemies in overdrive state by `x`%.\0\y
 Overdrive Punisher\10%\Ability\Increases damage to enemies in overdrive state by 10%.\80\y
 Overdrive Punisher\13%\Ability\Increases damage to enemies in overdrive state by 13%.\100\y
 Overdrive Punisher\5%\Ability\Increases damage to enemies in overdrive state by 5%.\40\y
 Overdrive Punisher\8%\Ability\Increases damage to enemies in overdrive state by 8%.\60\y
+Paralysis Res\example\Ability\Reduces susceptibility to paralysis by `x`%.\0\y
 Paralysis Res\15%\Ability\Reduces susceptibility to paralysis by 15%.\10\y
 Paralysis Res\20%\Ability\Reduces susceptibility to paralysis by 20%.\20\y
 Paralysis Res\25%\Ability\Reduces susceptibility to paralysis by 25%.\40\y
+Paralysis Res\40%\Ability\Reduces susceptibility to paralysis by 40%.\55\y
 Paralysis Res\50%\Ability\Reduces susceptibility to paralysis by 50%.\60\y
 Paralysis Res\75%\Ability\Reduces susceptibility to paralysis by 75%.\100\y
 Paralysis Res\100%\Ability\Reduces susceptibility to paralysis by 100%.\100\y
+Phraeganoth's Bane\example\Ability\Increases damage to Phraeganoth by `x`%.\0\y
 Phraeganoth's Bane\15%\Ability\Increases damage to Phraeganoth by 15%.\0\y
 Phraeganoth's Bane\20%\Ability\Increases damage to Phraeganoth by 20%.\0\y
 Phraeganoth's Bane\25%\Ability\Increases damage to Phraeganoth by 25%.\0\y
+Physian's Bane\example\Ability\Increases damage to physians by `x`%.\0\y
 Physian's Bane\10%\Ability\Increases damage to physians by 10%.\20\y
 Physian's Bane\15%\Ability\Increases damage to physians by 15%.\40\y
 Physian's Bane\20%\Ability\Increases damage to physians by 20%.\60\y
 Physian's Bane\25%\Ability\Increases damage to physians by 25%.\80\y
 Physian's Bane\30%\Ability\Increases damage to physians by 30%.\100\y
+Player EXP\example\Ability\Increases player EXP intake for clearing quests by `x`%.\0\n
 Player EXP\10%\Ability\Increases player EXP intake for clearing quests by 10%.\60\n
 Player EXP\15%\Ability\Increases player EXP intake for clearing quests by 15%.\80\n
+Poison Res\example\Ability\Reduces susceptibility to poison by `x`%.\0\y
 Poison Res\15%\Ability\Reduces susceptibility to poison by 15%.\10\y
 Poison Res\20%\Ability\Reduces susceptibility to poison by 20%.\20\y
 Poison Res\25%\Ability\Reduces susceptibility to poison by 25%.\40\y
 Poison Res\50%\Ability\Reduces susceptibility to poison by 50%.\60\y
 Poison Res\75%\Ability\Reduces susceptibility to poison by 75%.\100\y
 Poison Res\100%\Ability\Reduces susceptibility to poison by 100%.\100\y
+Poisoned Punisher\example\Ability\Increases damage to poisoned enemies by `x`%.\0\y
 Poisoned Punisher\20%\Ability\Increases damage to poisoned enemies by 20%.\60\y
 Poisoned Punisher\25%\Ability\Increases damage to poisoned enemies by 25%.\80\y
+Propagation\-\Ability\The enemy creates copies of itself.\-1\y
+Ranged Resistance\-\Ability\Significantly reduces the damage received from bow, staff, and wand attacks and skills. These weapon types still deal reduced shapeshift damage.\-1\y
+Recovery Potency\example\Ability\Increases the potency of recovery skills by `x`%.\0\n
 Recovery Potency\2%\Ability\Increases the potency of recovery skills by 2%.\10\n
 Recovery Potency\3%\Ability\Increases the potency of recovery skills by 3%.\20\n
 Recovery Potency\5%\Ability\Increases the potency of recovery skills by 5%.\40\n
 Recovery Potency\8%\Ability\Increases the potency of recovery skills by 8%.\60\n
 Recovery Potency\10%\Ability\Increases the potency of recovery skills by 10%.\80\n
+Renown\example\Ability\Increases renown intake for clearing quests by +`x`%\0\y
 Renown\25%\Ability\Increases renown intake for clearing quests by +25%\0\y
 Renown\50%\Ability\Increases renown intake for clearing quests by +50%\0\y
 Renown\100%\Ability\Increases renown intake for clearing quests by +100%\0\y
 Renown\150%\Ability\Increases renown intake for clearing quests by +150%\0\y
+Shadow Res\example\Ability\Reduces shadow damage taken by `x`%.\0\y
 Shadow Res\3%\Ability\Reduces shadow damage taken by 3%.\20\y
 Shadow Res\5%\Ability\Reduces shadow damage taken by 5%.\40\y
 Shadow Res\8%\Ability\Reduces shadow damage taken by 8%.\60\y
+Shapeshift Prep\example\Ability\Fills `x`% of the dragon gauge at the start of quests.\0\y
 Shapeshift Prep\5%\Ability\Fills 5% of the dragon gauge at the start of quests.\10\y
 Shapeshift Prep\8%\Ability\Fills 8% of the dragon gauge at the start of quests.\20\y
 Shapeshift Prep\10%\Ability\Fills 10% of the dragon gauge at the start of quests.\40\y
 Shapeshift Prep\13%\Ability\Fills 13% of the dragon gauge at the start of quests.\60\y
 Shield Prep\I\Ability\Grants the user a one-use shield that nullifies damage less than 10% of their maximum HP at the start of quests. This does not stack with any other shield.\80\y
 Shield Prep\II\Ability\Grants the user a one-use shield that nullifies damage less than 20% of their maximum HP at the start of quests. This does not stack with any other shield.\100\y
+Skill Damage\example\Ability\Increases attack skill damage by `x`%.\0\y
 Skill Damage\5%\Ability\Increases attack skill damage by 5%.\10\y
 Skill Damage\10%\Ability\Increases attack skill damage by 10%.\20\y
 Skill Damage\15%\Ability\Increases attack skill damage by 15%.\40\y
 Skill Damage\20%\Ability\Increases attack skill damage by 20%.\60\y
 Skill Damage\25%\Ability\Increases attack skill damage by 25%.\80\y
 Skill Damage\30%\Ability\Increases attack skill damage by 30%.\100\y
+Skill Damage\35%\Ability\Increases attack skill damage by 35%.\120\y
+Skill Haste\example\Ability\Increases skill gauge fill rate by `x`%.\0\y
 Skill Haste\3%\Ability\Increases skill gauge fill rate by 3%.\30\y
 Skill Haste\4%\Ability\Increases skill gauge fill rate by 4%.\50\y
 Skill Haste\5%\Ability\Increases skill gauge fill rate by 5%.\60\y
 Skill Haste\6%\Ability\Increases skill gauge fill rate by 6%.\80\y
 Skill Haste\8%\Ability\Increases skill gauge fill rate by 8%.\100\y
+Skill Prep\example\Ability\Fills `x`% of skill gauges at the start of quests.\0\y
 Skill Prep\8%\Ability\Fills 8% of skill gauges at the start of quests.\5\y
 Skill Prep\10%\Ability\Fills 10% of skill gauges at the start of quests.\10\y
 Skill Prep\15%\Ability\Fills 15% of skill gauges at the start of quests.\20\y
@@ -853,11 +1005,13 @@ Skill Prep\25%\Ability\Fills 25% of skill gauges at the start of quests.\40\y
 Skill Prep\50%\Ability\Fills 50% of skill gauges at the start of quests.\60\y
 Skill Prep\75%\Ability\Fills 75% of skill gauges at the start of quests.\80\y
 Skill Prep\100%\Ability\Fills 100% of skill gauges at the start of quests.\100\y
+Slayer's Strength\example\Ability\Increases strength by `x`% for every five enemies defeated (up to five times per quest).\0\y
 Slayer's Strength\2%\Ability\Increases strength by 2% for every five enemies defeated (up to five times per quest).\20\y
 Slayer's Strength\3%\Ability\Increases strength by 3% for every five enemies defeated (up to five times per quest).\40\y
 Slayer's Strength\4%\Ability\Increases strength by 4% for every five enemies defeated (up to five times per quest).\60\y
 Slayer's Strength\5%\Ability\Increases strength by 5% for every five enemies defeated (up to five times per quest).\80\y
 Slayer's Strength\6%\Ability\Increases strength by 6% for every five enemies defeated (up to five times per quest).\100\y
+Sleep Res\example\Ability\Reduces susceptibility to sleep by `x`%.\0\y
 Sleep Res\15%\Ability\Reduces susceptibility to sleep by 15%.\10\y
 Sleep Res\20%\Ability\Reduces susceptibility to sleep by 20%.\20\y
 Sleep Res\25%\Ability\Reduces susceptibility to sleep by 25%.\40\y
@@ -866,56 +1020,78 @@ Sleep Res\50%\Ability\Reduces susceptibility to sleep by 50%.\60\y
 Sleep Res\75%\Ability\Reduces susceptibility to sleep by 75%.\100\y
 Sleep Res\100%\Ability\Reduces susceptibility to sleep by 100%.\100\y
 Sleeping Punisher\20%\Ability\Increases damage to sleeping enemies by 20%.\60\y
+Snack-o'-Lanterns\example\Ability\Increases Snack-o'-Lantern intake for clearing quests by `x`%.\0\y
 Snack-o'-Lanterns\25%\Ability\Increases Snack-o'-Lantern intake for clearing quests by 25%.\0\y
 Snack-o'-Lanterns\50%\Ability\Increases Snack-o'-Lantern intake for clearing quests by 50%.\0\y
+Strength Doublebuff\example\Ability\Increases strength by `x`% for 15 seconds each time a defense up buff is received.\0\y
 Strength Doublebuff\10%\Ability\Increases strength by 10% for 15 seconds each time a defense up buff is received.\80\y
 Strength Doublebuff\13%\Ability\Increases strength by 13% for 15 seconds each time a defense up buff is received.\100\y
 Strength Doublebuff\5%\Ability\Increases strength by 5% for 15 seconds each time a defense up buff is received.\40\y
 Strength Doublebuff\8%\Ability\Increases strength by 8% for 15 seconds each time a defense up buff is received.\60\y
 Striker's Energy\I\Ability\Increases energy level by one stage for every three enemies defeated with force strikes (up to five times per quest).\80\y
 Striker's Energy\II\Ability\Increases energy level by two stages for every three enemies defeated with force strikes (up to five times per quest).\100\y
+Striker's Skill\example\Ability\Increases skill damage by `x`% for every three enemies defeated with force strikes (up to five times per quest).\0\y
 Striker's Skill\6%\Ability\Increases skill damage by 6% for every three enemies defeated with force strikes (up to five times per quest).\60\y
 Striker's Skill\8%\Ability\Increases skill damage by 8% for every three enemies defeated with force strikes (up to five times per quest).\80\y
+Striker's Strength\example\Ability\Increases strength by `x`% for every three enemies defeated with force strikes (up to five times per quest).\0\y
 Striker's Strength\3%\Ability\Increases strength by 3% for every three enemies defeated with force strikes (up to five times per quest).\40\y
 Striker's Strength\4%\Ability\Increases strength by 4% for every three enemies defeated with force strikes (up to five times per quest).\60\y
 Striker's Strength\5%\Ability\Increases strength by 5% for every three enemies defeated with force strikes (up to five times per quest).\80\y
 Striker's Strength\6%\Ability\Increases strength by 6% for every three enemies defeated with force strikes (up to five times per quest).\100\y
+Striking Haste\example\Ability\Increases skill gauge fill rate by `x`% when the user's force strikes connect.\0\y
 Striking Haste\6%\Ability\Increases skill gauge fill rate by 6% when the user's force strikes connect.\60\y
 Striking Haste\8%\Ability\Increases skill gauge fill rate by 8% when the user's force strikes connect.\80\y
 Striking Strength Debilitator \I\Ability\Grants the user's force strikes a 50% chance to reduce enemy strength by 3% for 10 seconds.\80\y
 Striking Strength Debilitator \II\Ability\Grants the user's force strikes a 70% chance to reduce enemy strength by 3% for 10 seconds.\100\y
+Stun Res\example\Ability\Reduces susceptibility to stun by `x`%.\0\y
 Stun Res\15%\Ability\Reduces susceptibility to stun by 15%.\10\y
 Stun Res\20%\Ability\Reduces susceptibility to stun by 20%.\20\y
 Stun Res\25%\Ability\Reduces susceptibility to stun by 25%.\40\y
 Stun Res\50%\Ability\Reduces susceptibility to stun by 50%.\60\y
 Stun Res\75%\Ability\Reduces susceptibility to stun by 75%.\100\y
 Stun Res\100%\Ability\Reduces susceptibility to stun by 100%.\100\y
+Stunned Punisher\example\Ability\Increases damage to stunned enemies by `x`%.\0\y
+Stunned Punisher\15%\Ability\Increases damage to stunned enemies by 15%.\40\y
 Stunned Punisher\20%\Ability\Increases damage to stunned enemies by 20%.\60\y
 Stunned Punisher\25%\Ability\Increases damage to stunned enemies by 25%.\80\y
 Stunned Punisher\30%\Ability\Increases damage to stunned enemies by 30%.\100\y
 Sylvan Strength\I\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 25-hit combo.\70\y
 Sylvan Strength\II\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 20-hit combo.\100\y
+Tent Canvas\example\Ability\Increases canvas tent intake for clearing quests by `x`%\0\y
 Tent Canvas\25%\Ability\Increases canvas tent intake for clearing quests by 25%\0\y
 Tent Canvas\50%\Ability\Increases canvas tent intake for clearing quests by 50%\0\y
 Tent Canvas\75%\Ability\Increases canvas tent intake for clearing quests by 75%\0\y
+Thaumian's Bane\example\Ability\Increases damage to thaumians by `x`%.\0\y
+Thaumian's Bane\10%\Ability\Increases damage to thaumians by 10%.\20\y
+Thaumian's Bane\15%\Ability\Increases damage to thaumians by 15%.\40\y
 Thaumian's Bane\20%\Ability\Increases damage to thaumians by 20%.\60\y
 Thaumian's Bane\25%\Ability\Increases damage to thaumians by 25%.\80\y
+Therion's Bane\example\Ability\Increases damage to therions by `x`%.\0\y
 Therion's Bane\20%\Ability\Increases damage to therions by 20%.\60\y
 Therion's Bane\25%\Ability\Increases damage to therions by 25%.\80\y
+Tricker Treats\example\Ability\Increases Tricker Treat intake for clearing quests by `x`%.\0\y
 Tricker Treats\25%\Ability\Increases Tricker Treat intake for clearing quests by 25%.\0\y
 Tricker Treats\50%\Ability\Increases Tricker Treat intake for clearing quests by 50%.\0\y
 Tricker Treats\100%\Ability\Increases Tricker Treat intake for clearing quests by 100%.\0\y
+Undead's Bane\example\Ability\Increases damage to undead by `x`%\0\y
+Undead's Bane\10%\Ability\Increases damage to undead by 10%.\20\y
+Undead's Bane\15%\Ability\Increases damage to undead by 15%.\40\y
+Water Res\example\Ability\Reduces water damage taken by `x`%.\0\y
 Water Res\3%\Ability\Reduces water damage taken by 3%.\20\y
 Water Res\5%\Ability\Reduces water damage taken by 5%.\40\y
+Wind Res\example\Ability\Reduces wind damage taken by `x`%.\0\y
 Wind Res\3%\Ability\Reduces wind damage taken by 3%.\20\y
 Wind Res\5%\Ability\Reduces wind damage taken by 5%.\40\y
 Wind Res\8%\Ability\Reduces wind damage taken by 8%.\60\y
+Windwhistle Grass\example\Ability\Increases windwhistle grass intake for clearing quests by `x`%.\0\y
 Windwhistle Grass\25%\Ability\Increases windwhistle grass intake for clearing quests by 25%.\0\y
 Windwhistle Grass\50%\Ability\Increases windwhistle grass intake for clearing quests by 50%.\0\y
 Windwhistle Grass\75%\Ability\Increases wind whistle grass intake for clearing quests by 75%.\0\y
 Wonder Guard\-\Ability\Only adventurers with the proper bane skill can damage this enemy\-1\y
+Woodland Blessing\example\Ability\Reduces susceptibility to stun and sleep by `x`%.\0\y
 Woodland Blessing\50%\Ability\Reduces susceptibility to stun and sleep by 50%.\70\y
 Woodland Blessing\100%\Ability\Reduces susceptibility to stun and sleep by 100%.\100\y
+Zodiark Res\example\Ability\Reduces damage taken from Zodiark by `x`%.\0\y
 Zodiark Res\15%\Ability\Reduces damage taken from Zodiark by 15%.\30\y
 Zodiark Res\20%\Ability\Reduces damage taken from Zodiark by 20%.\60\y
 Critical Rate\1%\CoAbility\Increases critical rate by 1%.\50\n
