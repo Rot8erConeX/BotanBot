@@ -535,6 +535,20 @@ def help_text(event,bot,command=nil,subcommand=nil)
     create_embed(event,"**#{command.downcase}** __type__","Shows the next time in-game daily events of the type `type` will happen.\nIf in PM and `type` is unspecified, shows the entire schedule.\n\n__*Accepted Inputs*__\nRuin(s)\nMat(s)\nShop, Store\nBond(s), Dragon(s)",0xCE456B)
   elsif ['art'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __target__","Shows `target`'s art.  Target can be:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Enemies\n- Stickers\n- NPCs",0xCE456B)
+    if safe_to_spam?(event)
+      lookout=[]
+      if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt')
+        lookout=[]
+        File.open('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt').each_line do |line|
+          lookout.push(eval line)
+        end
+      end
+      w=lookout.reject{|q| !q[2].include?('Art')}
+      w2=w.reject{|q| q[2]!='Art' && q[2]!='Art/Adventurer'}.map{|q| q[0]}.sort.uniq.join("\n")
+      w3=w.reject{|q| q[2]!='Art' && q[2]!='Art/Dragon'}.map{|q| q[0]}.sort.uniq.join("\n")
+      w4=w.reject{|q| q[2]!='Art' && q[2]!='Art/NPC'}.map{|q| q[0]}.sort.uniq.join("\n")
+      create_embed(event,'Available modifiers','',0x40C0F0,nil,nil,[['Adventurer-exclusive',w2],['Dragon-exclusive',w3],['NPC-exclusive',w4]]) if safe_to_spam?(event)
+    end
   elsif ['embed','embeds'].include?(command.downcase)
     event << '**embed**'
     event << ''
@@ -3344,27 +3358,13 @@ def disp_adventurer_art(bot,event,args=nil)
     if flds.length.zero?
       flds=nil
     elsif flds.map{|q| q.join("\n")}.join("\n\n").length>=1500 && safe_to_spam?(event)
-      event.channel.send_embed("__**#{k[0]}**__#{adv_emoji(k,bot)}") do |embed|
-        embed.description=disp
-        embed.color=element_color(k[2][1])
-        embed.image = Discordrb::Webhooks::EmbedImage.new(url: art)
-      end
+      create_embed(event,"__**#{k[0]}**__#{adv_emoji(k,bot)}",disp,element_color(k[2][1]),nil,[nil,art])
       if flds.map{|q| q.join("\n")}.join("\n\n").length>=1900
         for i in 0...flds.length
-          event.channel.send_embed('') do |embed|
-            embed.color=element_color(k[2][1])
-            embed.add_field(name: flds[i][0], value: flds[i][1], inline: true)
-          end
+          create_embed(event,'','',element_color(k[2][1]),nil,nil,[flds[i]])
         end
       else
-        event.channel.send_embed('') do |embed|
-          embed.color=element_color(k[2][1])
-          unless flds.nil?
-            for i in 0...flds.length
-              embed.add_field(name: flds[i][0], value: flds[i][1], inline: true)
-            end
-          end
-        end
+        create_embed(event,'','',element_color(k[2][1]),nil,nil,flds)
       end
       return nil
     elsif flds.map{|q| q.join("\n")}.join("\n\n").length>=1800
@@ -3374,16 +3374,7 @@ def disp_adventurer_art(bot,event,args=nil)
       flds[-1][2]=nil if flds.length<3
       flds[-1].compact!
     end
-    event.channel.send_embed("__**#{k[0]}**#{adv_emoji(k,bot)}__") do |embed|
-      embed.description=disp
-      embed.color=element_color(k[2][1])
-      unless flds.nil?
-        for i in 0...flds.length
-          embed.add_field(name: flds[i][0], value: flds[i][1], inline: flds[i][2].nil?)
-        end
-      end
-      embed.image = Discordrb::Webhooks::EmbedImage.new(url: art)
-    end
+    create_embed(event,"__**#{k[0]}**#{adv_emoji(k,bot)}__",disp,element_color(k[2][1]),nil,[nil,art],flds)
   end
 end
 
@@ -3579,27 +3570,13 @@ def disp_dragon_art(bot,event,args=nil)
     if flds.length.zero?
       flds=nil
     elsif flds.map{|q| q.join("\n")}.join("\n\n").length>=1500 && safe_to_spam?(event)
-      event.channel.send_embed("__**#{k[0]}**__#{dragon_emoji(k,bot)}") do |embed|
-        embed.description=disp
-        embed.color=element_color(k[2])
-        embed.image = Discordrb::Webhooks::EmbedImage.new(url: art)
-      end
+      create_embed(event,"__**#{k[0]}**__#{dragon_emoji(k,bot)}",disp,element_color(k[2]),nil,[nil,art])
       if flds.map{|q| q.join("\n")}.join("\n\n").length>=1900
         for i in 0...flds.length
-          event.channel.send_embed('') do |embed|
-            embed.color=element_color(k[2])
-            embed.add_field(name: flds[i][0], value: flds[i][1], inline: true)
-          end
+          create_embed(event,'','',element_color(k[2]),nil,nil,[flds[i]])
         end
       else
-        event.channel.send_embed('') do |embed|
-          embed.color=element_color(k[2])
-          unless flds.nil?
-            for i in 0...flds.length
-              embed.add_field(name: flds[i][0], value: flds[i][1], inline: true)
-            end
-          end
-        end
+        create_embed(event,'','',element_color(k[2]),nil,nil,flds)
       end
       return nil
     elsif flds.map{|q| q.join("\n")}.join("\n\n").length>=1800
@@ -3609,16 +3586,7 @@ def disp_dragon_art(bot,event,args=nil)
       flds[-1][2]=nil if flds.length<3
       flds[-1].compact!
     end
-    event.channel.send_embed("__**#{k[0]}**#{dragon_emoji(k,bot)}__") do |embed|
-      embed.description=disp
-      embed.color=element_color(k[2])
-      unless flds.nil?
-        for i in 0...flds.length
-          embed.add_field(name: flds[i][0], value: flds[i][1], inline: flds[i][2].nil?)
-        end
-      end
-      embed.image = Discordrb::Webhooks::EmbedImage.new(url: art)
-    end
+    create_embed(event,"__**#{k[0]}**#{dragon_emoji(k,bot)}__",disp,element_color(k[2]),nil,[nil,art],flds)
   end
 end
 
@@ -3635,10 +3603,12 @@ def disp_wyrmprint_art(bot,event,args=nil)
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
   s2s=false if @shardizard==4 && evn.include?('smol')
+  ftr='Include the word "refined" for MUB art.'
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Wyrmprints/#{k[0].gsub(' ','_')}_1.png"
   if has_any?(['mub','unbind','unbound','refined','refine','refinement'],evn)
     xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Wyrmprints/#{k[0].gsub(' ','_')}_2.png"
     k[8]=k[8][-1] unless k[8].nil?
+    ftr=nil
   else
     k[8]=k[8][0] unless k[8].nil?
   end
@@ -3650,7 +3620,7 @@ def disp_wyrmprint_art(bot,event,args=nil)
   xcolor=0x00205A if k[2]=='Defense'
   xcolor=0x39045A if k[2]=='Support'
   xcolor=0x005918 if k[2]=='Healing'
-  disp=''
+  disp=generate_rarity_row(k[1][0,1].to_i)
   if args.include?('just') || args.include?('justart') || args.include?('blank') || args.include?('noinfo')
     charsx=[[],[],[]]
   else
@@ -3719,38 +3689,27 @@ def disp_wyrmprint_art(bot,event,args=nil)
   if @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
     disp="#{disp}\n" if charsx.map{|q| q.length}.max>0
     disp="#{disp}\n**Same artist:** #{charsx[0].join(', ')}" if charsx[0].length>0
-    disp="#{disp}\n**Characters in art:** #{k[8].join(', ')}" if !k[8].nil? && k[8].length>0
+    disp="#{disp}\n**Characters in art:** #{k[8].join(', ')}" if !k[8].nil? && k[8].length>0 && !(args.include?('just') || args.include?('justart') || args.include?('blank') || args.include?('noinfo'))
     disp=dispx if disp.length>=1900
     event.respond "#{disp}\n\n#{xpic}"
   else
     flds=[]
-    flds.push(['Same Artist',charsx[0].join("\n")]) if charsx[0].length>0
-    flds.push(['Characters in art',k[8].join("\n")]) if !k[8].nil? && k[8].length>0
+    unless args.include?('just') || args.include?('justart') || args.include?('blank') || args.include?('noinfo')
+      flds.push(['Same Artist',charsx[0].join("\n")]) if charsx[0].length>0
+      flds.push(['Characters in art',k[8].join("\n")]) if !k[8].nil? && k[8].length>0
+    end
     if flds.length.zero?
       flds=nil
     elsif flds.map{|q| q.join("\n")}.join("\n\n").length>=1500 && safe_to_spam?(event)
-      event.channel.send_embed("__**#{k[0]}**__#{print_emoji(k,bot)}") do |embed|
-        embed.description=disp
-        embed.color=xcolor
-        embed.image = Discordrb::Webhooks::EmbedImage.new(url: xpic)
-      end
+      create_embed(event,"__**#{k[0]}**__#{print_emoji(k,bot)}",disp,xcolor,nil,[nil,xpic])
       if flds.map{|q| q.join("\n")}.join("\n\n").length>=1900
         for i in 0...flds.length
-          event.channel.send_embed('') do |embed|
-            embed.color=xcolor
-            embed.add_field(name: flds[i][0], value: flds[i][1], inline: true)
-          end
+          create_embed(event,'','',xcolor,nil,nil,[flds[i]])
         end
       else
-        event.channel.send_embed('') do |embed|
-          embed.color=xcolor
-          unless flds.nil?
-            for i in 0...flds.length
-              embed.add_field(name: flds[i][0], value: flds[i][1], inline: true)
-            end
-          end
-        end
+        create_embed(event,'','',xcolor,nil,nil,flds)
       end
+      event.respond ftr unless ftr.nil?
       return nil
     elsif flds.map{|q| q.join("\n")}.join("\n\n").length>=1800
       disp="#{disp}\nThe list of units with the same VA is so long that I cannot fit it into a single embed. Please use this command in PM."
@@ -3759,16 +3718,7 @@ def disp_wyrmprint_art(bot,event,args=nil)
       flds[-1][2]=nil if flds.length<3
       flds[-1].compact!
     end
-    event.channel.send_embed("__**#{k[0]}**#{print_emoji(k,bot)}__") do |embed|
-      embed.description=disp
-      embed.color=xcolor
-      unless flds.nil?
-        for i in 0...flds.length
-          embed.add_field(name: flds[i][0], value: flds[i][1], inline: flds[i][2].nil?)
-        end
-      end
-      embed.image = Discordrb::Webhooks::EmbedImage.new(url: xpic)
-    end
+    create_embed(event,"__**#{k[0]}**#{print_emoji(k,bot)}__",disp,xcolor,ftr,[nil,xpic],flds)
   end
 end
 
@@ -3821,7 +3771,9 @@ def disp_emote_art(bot,event,args=nil)
   s2s=false if @shardizard==4 && event.message.text.downcase.split(' ').include?('smol')
   disp=''
   art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Stickers/#{k[0].gsub(' ','_')}#{"(JP)" if has_any?(event.message.text.downcase.split(' '),['jp','japan'])}.png"
-  create_embed(event,"__**#{k[0]}**__","**Character in image:** #{k[1]}",0xCE456B,nil,[nil,art])
+  ftr='Include the word "JP" for the Japanese version.'
+  ftr=nil if has_any?(event.message.text.downcase.split(' '),['jp','japan'])
+  create_embed(event,"__**#{k[0]}**__","**Character in image:** #{k[1]}",0xCE456B,ftr,[nil,art])
 end
 
 def disp_npc_art(bot,event,args=nil)
