@@ -3605,10 +3605,12 @@ def disp_wyrmprint_art(bot,event,args=nil)
   s2s=false if @shardizard==4 && evn.include?('smol')
   ftr='Include the word "refined" for MUB art.'
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Wyrmprints/#{k[0].gsub(' ','_')}_1.png"
+  emote='<:NonUnbound:534494090876682264>'
   if has_any?(['mub','unbind','unbound','refined','refine','refinement'],evn)
     xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Wyrmprints/#{k[0].gsub(' ','_')}_2.png"
     k[8]=k[8][-1] unless k[8].nil?
     ftr=nil
+    emote='<:Unbind:534494090969088000>'
   else
     k[8]=k[8][0] unless k[8].nil?
   end
@@ -3620,7 +3622,8 @@ def disp_wyrmprint_art(bot,event,args=nil)
   xcolor=0x00205A if k[2]=='Defense'
   xcolor=0x39045A if k[2]=='Support'
   xcolor=0x005918 if k[2]=='Healing'
-  disp=generate_rarity_row(k[1][0,1].to_i)
+  halfemote="\u200B  \u200B  \u200B  \u200B"
+  disp="#{halfemote*(4-k[1][0,1].to_i) if k[1][0,1].to_i<4}#{" \u200B" if k[1][0,1].to_i<3}#{generate_rarity_row(k[1][0,1].to_i)}\n#{"#{halfemote} \u200B" if k[1][0,1].to_i==5}#{emote*4}"
   if args.include?('just') || args.include?('justart') || args.include?('blank') || args.include?('noinfo')
     charsx=[[],[],[]]
   else
