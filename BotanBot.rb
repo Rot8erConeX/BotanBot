@@ -132,7 +132,7 @@ def all_commands(include_nil=false,permissions=-1)
      'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','dbxp','sp',
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
      'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias',
-     'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats']
+     'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop'] if permissions==2
   k=k.uniq
@@ -527,6 +527,8 @@ def help_text(event,bot,command=nil,subcommand=nil)
     create_embed(event,"**#{command.downcase}** __name__","Shows the current day's shop mats.\n\nYou can include the word \"tomorrow\" to instead show the data for tomorrow.\nYou can also include a day of the week to instead show data on that day of the week.",0xCE456B)
   elsif ['ruin','ruins'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Expert Ruins, what difficulties are available, and what orbs and other mats come out of those.\n\nYou can include the word \"tomorrow\" to instead show the data for tomorrow.\nYou can also include a day of the week to instead show data on that day of the week.",0xCE456B)
+  elsif ['reset'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Shows the time until the next High Dragon and Void Treasure Trade resets.\n\nYou can include the word \"tomorrow\" to instead show the data for tomorrow.\nYou can also include a day of the week to instead show data on that day of the week.",0xCE456B)
   elsif ['today','now','daily','dailies','today_in_dl','todayindl'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\nAlso shows the current day's Expert Ruins, what difficulties are available, and what orbs and other mats come out of those.\nAlso shows the current day's shop mats.",0xCE456B)
   elsif ['tomorrow','tomorow','tommorrow','tommorow'].include?(command.downcase)
@@ -6233,7 +6235,7 @@ def disp_date(t,mode=0)
   return "#{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]})"
 end
 
-def roost(event,bot,args=nil,ignoreinputs=false)
+def roost(event,bot,args=nil,ignoreinputs=false,mode=0)
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
   args=args.map{|q| q.downcase}
@@ -6335,7 +6337,7 @@ def roost(event,bot,args=nil,ignoreinputs=false)
     t4.push("#{k} minutes") if k>0
     t3-=k*60
     t4.push("#{t3} seconds") if t3>0
-    str="#{str}\nTime until High Dragon bonus chest reset, come tomorrow: #{t4.join(', ')}"
+    str="#{str}\nTime until High Dragon bonus chest reset, come tomorrow: #{t4.join(', ')}" if [4,0].include?(mode)
     if t.month==12
       t3=Time.new(t.year+1,1,1)
     else
@@ -6354,7 +6356,7 @@ def roost(event,bot,args=nil,ignoreinputs=false)
     t4.push("#{k} minutes") if k>0
     t3-=k*60
     t4.push("#{t3} seconds") if t3>0
-    str="#{str}\nTime until Void Treasure Trade reset, come tomorrow: #{t4.join(', ')}"
+    str="#{str}\nTime until Void Treasure Trade reset, come tomorrow: #{t4.join(', ')}" if [4,0].include?(mode)
     str3='Tomorrow'
   elsif sftday != t.wday
     tmw=(sftday==t.wday+1)
@@ -6389,7 +6391,7 @@ def roost(event,bot,args=nil,ignoreinputs=false)
     t4.push("#{k} minutes") if k>0
     t3-=k*60
     t4.push("#{t3} seconds") if t3>0
-    str="#{str}\nTime until High Dragon bonus chest reset, come next #{str3.split(' ')[1]}: #{t4.join(', ')}"
+    str="#{str}\nTime until High Dragon bonus chest reset, come next #{str3.split(' ')[1]}: #{t4.join(', ')}" if [4,0].include?(mode)
     if t.month==12
       t3=Time.new(t.year+1,1,1)
     else
@@ -6408,55 +6410,61 @@ def roost(event,bot,args=nil,ignoreinputs=false)
     t4.push("#{k} minutes") if k>0
     t3-=k*60
     t4.push("#{t3} seconds") if t3>0
-    str="#{str}\nTime until Void Treasure Trade reset, come next #{str3.split(' ')[1]}: #{t4.join(', ')}"
+    str="#{str}\nTime until Void Treasure Trade reset, come next #{str3.split(' ')[1]}: #{t4.join(', ')}" if [4,0].include?(mode)
   end
-  str="#{str}\n\n__**#{"#{str3}'s " if str3.length>0}Expert Ruins:**__"
-  str="#{str}\n*Open:* #{['<:Element_Null:532106087810334741>All','<:Element_Null:532106087810334741>All','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep'][t.wday]}"
-  if t.wday>2
-    str="#{str}\n*Available Orbs:* #{['All','All','Flame, Blaze, Inferno','Water, Stream, Deluge','Wind, Storm, Maelstorm','Light, Radiance, Refulgence','Shadow, Nightfull, Nether'][t.wday]}" if t.wday>1
-    str="#{str}\n*Other Available Mats:* #{["Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye","Ancient Bird's Feather, Bewitching Wing",'Granite, Meteorite',"Fiend's Claw","Ancient Bird's Feather, Bewitching Wing"][t.wday]}" if t.wday>1
-  end
-  str="#{str}\n\n__**<:Element_Void:548467446734913536> #{"#{str3}'s " if str3.length>0}Void Strikes:**__"
-  if t.year>2019 || t.month>3 || t.day>30
-    void=['<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr', # sunday
-          '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem', # monday
-          '<:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore', # tuesday
-          '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem', # wednesday
-          '<:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # thursday
-          '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem', # friday
-          '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr'] # Saturday
-  else
-    void=['<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # sunday
-          '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem', # monday
-          '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Raging Manticore', # tuesday
-          '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # wednesday
-          '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore', # thursday
-          '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem', # friday
-          '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr'] # Saturday
-  end
-  void=void.map{|q| "<:Element_Light:532106088129101834>Wandering Shroom, #{q}"}
-  str="#{str}\n*Open:* #{void[t.wday]}"
-  voidmats=void[t.wday].gsub('<:Element_Flame:532106087952810005>Steel Golem',"Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core").gsub('<:Element_Flame:532106087952810005>Blazing Ghost',"Old Cloth, Floating Red Cloth, Otherworldly Lantern").gsub('<:Element_Water:532106088221376522>Frost Hermit',"Goblin Thread, Aromatic Wood").gsub('<:Element_Wind:532106087948746763>Void Zephyr',"Great Feather, Void Leaf, Void Seed, Zephyr Rune").gsub('<:Element_Light:532106088129101834>Wandering Shroom',"Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore").gsub('<:Element_Shadow:532106088154267658>Raging Manticore',"Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn").gsub('<:Element_Shadow:532106088154267658>Obsidian Golem',"Obsidian Slab, Dark Core").split(', ').uniq.sort.join(', ')
-  str="#{str}\n*Available Mats:* #{voidmats}"
-  str="#{str}\n\n**Shop Mats:** #{['Light Metal, Abyss Stone','Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather",'Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather"][t.wday]}" if t.wday>-1
-  str="#{str}\n\n**#{"#{str3}'s " if str3.length>0}Bond Gift:** #{['Golden Chalice','Juicy Meat','Kaleidoscope','Floral Circlet','Compelling Book','Mana Essence','Golden Chalice'][t.wday]}"
-  if t.wday>0 && t.wday<6
-    drg=@dragons.reject{|q| q[9]!=t.wday}
-    m=[[generate_rarity_row(1),[]],[generate_rarity_row(2),[]],[generate_rarity_row(3),[]],[generate_rarity_row(4),[]],[generate_rarity_row(5),[]]]
-    for i in 0...drg.length
-      f="#{drg[i][0]}#{element_emote(drg[i][2],bot)}"
-      m[0][1].push(f) if drg[i][1][0,1].to_i==1
-      m[1][1].push(f) if drg[i][1][0,1].to_i==2
-      m[2][1].push(f) if drg[i][1][0,1].to_i==3
-      m[3][1].push(f) if drg[i][1][0,1].to_i==4
-      m[4][1].push(f) if drg[i][1][0,1].to_i==5
+  if [2,0].include?(mode)
+    str="#{str}\n\n__**#{"#{str3}'s " if str3.length>0}Expert Ruins:**__"
+    str="#{str}\n*Open:* #{['<:Element_Null:532106087810334741>All','<:Element_Null:532106087810334741>All','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep'][t.wday]}"
+    if t.wday>2
+      str="#{str}\n*Available Orbs:* #{['All','All','Flame, Blaze, Inferno','Water, Stream, Deluge','Wind, Storm, Maelstorm','Light, Radiance, Refulgence','Shadow, Nightfull, Nether'][t.wday]}" if t.wday>1
+      str="#{str}\n*Other Available Mats:* #{["Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye","Ancient Bird's Feather, Bewitching Wing",'Granite, Meteorite',"Fiend's Claw","Ancient Bird's Feather, Bewitching Wing"][t.wday]}" if t.wday>1
     end
-    m=m.reject{|q| q[1].length<=0}
-    create_embed(event,str,'',0xCE456B,nil,nil,m.map{|q| [q[0],q[1].join("\n")]})
+    str="#{str}\n\n__**<:Element_Void:548467446734913536> #{"#{str3}'s " if str3.length>0}Void Strikes:**__"
+    if t.year>2019 || t.month>3 || t.day>30
+      void=['<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr', # sunday
+            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem', # monday
+            '<:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore', # tuesday
+            '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem', # wednesday
+            '<:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # thursday
+            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem', # friday
+            '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr'] # Saturday
+    else
+      void=['<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # sunday
+            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem', # monday
+            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Raging Manticore', # tuesday
+            '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # wednesday
+            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore', # thursday
+            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem', # friday
+            '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr'] # Saturday
+    end
+    void=void.map{|q| "<:Element_Light:532106088129101834>Wandering Shroom, #{q}"}
+    str="#{str}\n*Open:* #{void[t.wday]}"
+    voidmats=void[t.wday].gsub('<:Element_Flame:532106087952810005>Steel Golem',"Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core").gsub('<:Element_Flame:532106087952810005>Blazing Ghost',"Old Cloth, Floating Red Cloth, Otherworldly Lantern").gsub('<:Element_Water:532106088221376522>Frost Hermit',"Goblin Thread, Aromatic Wood").gsub('<:Element_Wind:532106087948746763>Void Zephyr',"Great Feather, Void Leaf, Void Seed, Zephyr Rune").gsub('<:Element_Light:532106088129101834>Wandering Shroom',"Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore").gsub('<:Element_Shadow:532106088154267658>Raging Manticore',"Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn").gsub('<:Element_Shadow:532106088154267658>Obsidian Golem',"Obsidian Slab, Dark Core").split(', ').uniq.sort.join(', ')
+    str="#{str}\n*Available Mats:* #{voidmats}"
+  end
+  str="#{str}\n\n**Shop Mats:** #{['Light Metal, Abyss Stone','Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather",'Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather"][t.wday]}" if t.wday>-1 && [3,0].include?(mode)
+  if [1,0].include?(mode)
+    str="#{str}\n\n**#{"#{str3}'s " if str3.length>0}Bond Gift:** #{['Golden Chalice','Juicy Meat','Kaleidoscope','Floral Circlet','Compelling Book','Mana Essence','Golden Chalice'][t.wday]}"
+    if t.wday>0 && t.wday<6
+      drg=@dragons.reject{|q| q[9]!=t.wday}
+      m=[[generate_rarity_row(1),[]],[generate_rarity_row(2),[]],[generate_rarity_row(3),[]],[generate_rarity_row(4),[]],[generate_rarity_row(5),[]]]
+      for i in 0...drg.length
+        f="#{drg[i][0]}#{element_emote(drg[i][2],bot)}"
+        m[0][1].push(f) if drg[i][1][0,1].to_i==1
+        m[1][1].push(f) if drg[i][1][0,1].to_i==2
+        m[2][1].push(f) if drg[i][1][0,1].to_i==3
+        m[3][1].push(f) if drg[i][1][0,1].to_i==4
+        m[4][1].push(f) if drg[i][1][0,1].to_i==5
+      end
+      m=m.reject{|q| q[1].length<=0}
+      create_embed(event,str,'',0xCE456B,nil,nil,m.map{|q| [q[0],q[1].join("\n")]})
+    else
+      event.respond str
+    end
   else
     event.respond str
   end
-  current_banner(bot,event,args,'__Current banner:__ ',false) if (safe_to_spam?(event) || has_any?(event.message.text.downcase.split(' '),['banner','banners'])) && str3.length<=0
+  current_banner(bot,event,args,'__Current banner:__ ',false) if (safe_to_spam?(event) || has_any?(event.message.text.downcase.split(' '),['banner','banners'])) && str3.length<=0 && mode==0
 end
 
 def next_events(event,bot,args=nil)
@@ -7584,7 +7592,27 @@ bot.command([:next,:schedule]) do |event, *args|
   next_events(event,bot,args)
 end
 
-bot.command([:roost,:ruin,:ruins,:shop,:store,:daily,:dailies]) do |event, *args|
+bot.command([:roost]) do |event, *args|
+  return nil if overlap_prevent(event)
+  roost(event,bot,args,false,1)
+end
+
+bot.command([:ruin,:ruins]) do |event, *args|
+  return nil if overlap_prevent(event)
+  roost(event,bot,args,false,2)
+end
+
+bot.command([:shop,:store]) do |event, *args|
+  return nil if overlap_prevent(event)
+  roost(event,bot,args,false,3)
+end
+
+bot.command([:reset]) do |event, *args|
+  return nil if overlap_prevent(event)
+  roost(event,bot,args,false,4)
+end
+
+bot.command([:daily,:dailies]) do |event, *args|
   return nil if overlap_prevent(event)
   roost(event,bot,args)
 end
