@@ -1263,6 +1263,16 @@ def enemy_emoji(k,bot)
   return str
 end
 
+def energy_emoji(k,pad=false)
+  e=0
+  for i in 0...k.length
+    e+=k[i][1,k[i].length-1].to_i if k[i][0,1]=='E' && k[i][1,k[i].length-1].to_i.to_s==k[i][1,k[i].length-1]
+  end
+  return ", <:Energy:534451856286679040>#{micronumber(e)} Energy increase" if e>0 && pad
+  return "<:Energy:534451856286679040>#{micronumber(e)}" if e>0
+  return ''
+end
+
 def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
@@ -1313,7 +1323,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       flds.push([generate_rarity_row(i,true),"**Level 1**  \u200B  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0][i-3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0][i-3])}  \u00B7\n**Level #{30+10*i}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][i-3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][i-3])}  \u00B7#{"\n**Max Stats**  \u200B  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][3])}  \u00B7" if i==5 && (!k[3][1][3].nil? || !k[4][1][3].nil?)}"])
     end
     unless juststats
-      str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{', <:Energized:534451856286679040>Energizable' if skl1[7]=='Yes'})__#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min}"
+      str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{', <:Energize:559629242137051155>Energizable' if skl1[7]=='Yes'}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min}"
       if (skl1[9].nil? || skl1[9].length<=0) && skl1[6].max != skl1[6].min
         str2="#{str2}\n*Lv.1 (F1, #{skl1[6][0]} SP):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (F3, #{skl1[6][1]} SP):* #{skl1[4].gsub(';; ',"\n")}\n*Lv.3 (F5, #{skl1[6][2]} SP):* #{skl1[5].gsub(';; ',"\n")}"
       elsif skl1[9].nil? || skl1[9].length<=0
@@ -1323,7 +1333,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       else
         str2="#{str2}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}\n*Lv.1 (F1) \u2192 Lv.2 (F3) \u2192 Lv.3 (F5)*"
       end
-      str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{', <:Energized:534451856286679040>Energizable' if skl2[7]=='Yes'})__#{" - #{longFormattedNumber(skl2[6][0])} SP" if skl2[6][0]===skl2[6][1]}"
+      str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{', <:Energize:559629242137051155>Energizable' if skl2[7]=='Yes'}#{energy_emoji(skl2[10],true)})__#{" - #{longFormattedNumber(skl2[6][0])} SP" if skl2[6][0]===skl2[6][1]}"
       if (skl2[9].nil? || skl2[9].length<=0) && skl2[6][0]!=skl2[6][1]
         str2="#{str2}\n*Lv.1 (F1, #{skl2[6][0]} SP):* #{skl2[3].gsub(';; ',"\n")}\n*Lv.2 (F4, #{skl2[6][1]} SP):* #{skl2[4].gsub(';; ',"\n")}"
       elsif skl2[9].nil? || skl2[9].length<=0
@@ -1351,11 +1361,11 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     lv=[1,1,1,0,0] if rar==1
     x=[skl1[3,3].reject{|q| q.nil? || q.length<=0}[lv[0]-1].gsub(';; ',"\n"),skl2[3,3].reject{|q| q.nil? || q.length<=0}[lv[1]-1].gsub(';; ',"\n")]
     strx="__**Skills:**__"
-    strx="#{strx}\n*#{k[6][0]}#{'<:Energized:534451856286679040>' if skl1[7]=='Yes'} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP*\n#{x[0]}"
-    strx="#{strx}\n\n*#{k[6][1]}#{'<:Energized:534451856286679040>' if skl2[7]=='Yes'} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP*\n#{x[1]}"
+    strx="#{strx}\n*#{k[6][0]}#{'<:Energize:559629242137051155>' if skl1[7]=='Yes'}#{energy_emoji(skl1[10])} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP*\n#{x[0]}"
+    strx="#{strx}\n\n*#{k[6][1]}#{'<:Energize:559629242137051155>' if skl2[7]=='Yes'}#{energy_emoji(skl2[10])} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP*\n#{x[1]}"
     strx2="**Skills:**"
-    strx2="#{strx2}\n#{k[6][0]}#{'<:Energized:534451856286679040>' if skl1[7]=='Yes'} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP"
-    strx2="#{strx2}\n#{k[6][1]}#{'<:Energized:534451856286679040>' if skl2[7]=='Yes'} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP"
+    strx2="#{strx2}\n#{k[6][0]}#{'<:Energize:559629242137051155>' if skl1[7]=='Yes'}#{energy_emoji(skl1[10])} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP"
+    strx2="#{strx2}\n#{k[6][1]}#{'<:Energize:559629242137051155>' if skl2[7]=='Yes'}#{energy_emoji(skl2[10])} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP"
     m=[]
     for i in 0...3
       m.push(k[8][i][lv[i+2]-1]) if lv[i+2]>0
@@ -1418,14 +1428,14 @@ def disp_dragon_stats(bot,event,args=nil)
   sklz=@askilities.map{|q| q}
   skl1=sklz[sklz.find_index{|q| q[2]=='Skill' && q[0]==k[5]}]
   if s2s
-    str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{', <:Energized:534451856286679040>Energizable' if skl1[7]=='Yes'})__"
+    str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{', <:Energize:559629242137051155>Energizable' if skl1[7]=='Yes'}#{energy_emoji(skl1[10],true)})__"
     if skl1[9].nil? || skl1[9].length<=0
       str="#{str}\n*Lv.1:* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2:* #{skl1[4].gsub(';; ',"\n")}"
     else
       str="#{str}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}"
     end
   else
-    str="#{str}\n\n**Skill:** *#{k[5]}#{'<:Energized:534451856286679040>' if skl1[7]=='Yes'} - #{longFormattedNumber(skl1[6][1])} SP*;;;;;"
+    str="#{str}\n\n**Skill:** *#{k[5]}#{'<:Energize:559629242137051155>' if skl1[7]=='Yes'}#{energy_emoji(skl1[10])} - #{longFormattedNumber(skl1[6][1])} SP*;;;;;"
     strx=skl1[4].gsub(';; ',"\n")
   end
   str="#{str}\n\n**Aura:**\n#{'<:NonUnbound:534494090876682264>'*4}#{k[6][0].map{|q| q[0]}.join(', ')}\n#{'<:Unbind:534494090969088000>'*4}#{k[6][0].map{|q| q[1]}.join(', ')}"
@@ -1964,7 +1974,7 @@ def disp_skill_data(bot,event,args=nil)
   str=''
   str="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min
   str="#{str}\n**Invulnerability duration:** #{k[8]} seconds"
-  str="#{str}\n<:Energized:534451856286679040> **Energizable**" if k[7]=='Yes'
+  str="#{str}\n<:Energize:559629242137051155> **Energizable**" if k[7]=='Yes'
   str="#{str}\n~~Not energizable~~" if k[7]=='No'
   str2=''
   for i in 0...mx.length
@@ -1994,10 +2004,10 @@ def disp_skill_data(bot,event,args=nil)
   flds.push(['Weapons',m.join("\n")]) if m.length>0
   if args.include?('tags')
     if flds.length<=0
-      flds=triple_finish(k[10])
+      flds=triple_finish(k[10].reject{|q| q[0,1]=='E' && q[1,1].to_i.to_s==q[1,1]})
       str="#{str}\n\n__**Tags**__"
     else
-      flds.push(['Tags',k[10].join("\n")])
+      flds.push(['Tags',k[10].reject{|q| q[0,1]=='E' && q[1,1].to_i.to_s==q[1,1]}.join("\n")])
     end
   end
   flds=nil if flds.length<=0
