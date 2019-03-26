@@ -40,7 +40,7 @@ Fresh Perspective\4\Attack\21, 140\7, 52\Force Strike +20%;; Force Strike +30%;;
 Gale of Beauty\5\Attack\26, 177\9, 64\Broken Punisher +20%;; Broken Punisher +25%;;;; Dragon Time +8%;; Dragon Time +10%;;;; Divine Gales +100%;; Divine Gales +150%\5000, 3000\hsn\Garuda;; Garuda
 Garuda's Feathers\3\Defense\11, 76\3, 20\Full HP = Defense +13%;; Full HP = Defense +15%;;;; Windwhistle Grass +50%;; Windwhistle Grass +75%\300, 150\Mayoko\
 Gentle Winds\5\Healing\26, 176\9, 64\Skill Prep +20%;; Skill Prep +25%;;;; Full HP = Strength +8%;; Full HP = Strength +10%;;;; Divine Gales +100%;; Divine Gales +150%\5000, 3000\Mikeboshi\Louise, Lowen;; Louise, Lowen
-Give Me Your Wounded\5\Healing\28, 187\7, 53\Recovery Potency +8%;; Recovery Potency +10%;;;; Full HP = Defense +15%;; Full HP = Defense +20%\5000, 3000\Taro Kagawa\CLeo, Unknown;; Cleo, Unknown
+Give Me Your Wounded\5\Healing\28, 187\7, 53\Recovery Potency +8%;; Recovery Potency +10%;;;; Full HP = Defense +15%;; Full HP = Defense +20%\5000, 3000\Taro Kagawa\Cleo, Unknown;; Cleo, Unknown
 Glorious Tempest\5\Defense\24, 165\5, 39\High Midgardsormr Res +20%;; High Midgardsormr Res +25%;;;; Midgardsormr Res +15%;; Midgardsormr Res +20%;;;; Wind Res +3%;; Wind Res +5%\5000, 300\Eri Yanagawa\High Midgardsormr;; High Midgardsormr
 Greatwyrm Brunhilda\4\Defense\19, 127\4, 30\Brunhilda Res +15%;; Brunhilda Res +20%;;;; Flame Res +3%;; Flame Res +5%\2000, 100\Nejita\Brunhilda;; Brunhilda
 Greatwyrm Jupiter\4\Defense\19, 127\4, 30\Jupiter Res +15%;; Jupiter Res +20%;;;; Light Res +3%;; Light Res +5%\2000, 100\Nejita\Jupiter;; Jupiter

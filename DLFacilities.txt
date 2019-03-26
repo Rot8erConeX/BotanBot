@@ -1,36 +1,723 @@
-Axe Dojo\A training area built to hone one's skills with an axe. Use it to boosts the stats of axe-wielding adventures.\Adventurer, Dojo\3x3\2\
-Battle Standard\A large flag with intricate embroidery. Soldiers have long rallied under this symbol to fight for what they believe in.\Decorative\1x1\5\
-Blade Dojo\A training area built to hone one's skills with a blade. Use it to boosts the stats of blade-wielding adventures.\Adventurer, Dojo\3x3\2\
-Blue Flowers\A bed of blooming blue flowers. Once thought to be a myth, these beauties are now symbolic of hope and miracles.\Decorative\1x1\5\
-Bow Dojo\A training area built to hone one's skills with a bow. Use it to boosts the stats of bow-wielding adventures.\Adventurer, Dojo\3x3\2\
-Broadleaf Tree\An iconic tree with broad leaves. A standard of any garden, its placement and health are indicative of its gardener's skills.\Decorative\1x1\5\
-Circus Tent\Use it to boost the stats of light-attuned adventurers.\Adventurer, Event Altar\3x3\1\Tent Canvas
-Conifer Tree\A tree with needle-thin foliage that stays green throughout the winter and can endure harsh environments.\Decorative\1x1\5\
-Dagger Dojo\A training area built to hone one's skills with a dagger. Use it to boosts the stats of dagger-wielding adventures.\Adventurer, Dojo\3x3\2\
-Dragontree\A tree that produces three varieties of dragonfruit, the preferred snack of dragons the world over.\Production\3x3\1\
-Fafnir Statue (Flame)\Proof of overcoming the Flamewyrm's trial. A flame-imbued statue that boosts the HP and strength of flame dragons.\Dragon, Fafnir\3x3\1\
-Fafnir Statue (Wind)\Proof of overcoming the Windwyrm's trial. A wind-imbued statue that boosts the HP and strength of wind dragons.\Dragon, Fafnir\3x3\1\
-Flame Altar\An altar to honor flame. The mana housed within instills a fighting spirit, boosting the stats of flame-attuned adventurers.\Adventurer, Altar\3x3\2\
-Halidom\Euden's home base. Raise its level to expand the area in which you can build castle facilities.\General\4x4\1\
-Jack-o'-Lantern\A lantern made by a sylvan who carved the insides out of a pumpkin, all the while insisting it represented his love of pranks. At least everyone enjoyed eating the filling.\Decorative\1x1\4\
-Lance Dojo\A training area built to hone one's skills with a lance. Use it to boosts the stats of lance-wielding adventures.\Adventurer, Dojo\3x3\2\
-Lectern\A stand designed for reading heavy books. Useful when you want to have a good, long read.\Decorative\1x1\4\
-Library Obscura\Use it to boost the stats of shadow-attuned adventurers.\Adventurer, Event Altar\3x3\1\Arcane Tome
-Light Altar\An altar to honor light. The mana housed within illuminates the soul, boosting the stats of light-attuned adventurers.\Adventurer, Altar\3x3\2\
-Magma Slime Statue\A statue of a magma slime granted to those who are victorious in void battles. The burning flame mana grants vitality. Use it to boost the stats of flame-attuned adventurers.\Adventurer, Void Altar\2x2\1\
-Red Flowers\A bed of blooming red flowers. Perennial symbols of love and passion, they're often given as gifts.\Decorative\1x1\5\
-Rupie Mine\A facility for mining rupies from the earth. Shipments arrive in regular intervals, providing a great source of easy income!\Production\3x3\4\
-Shadow Altar\An altar to honor shadow. The mana housed within reveals hidden strengths, boosting the stats of shadow-attuned adventurers.\Adventurer, Altar\3x3\2\
-Smithy\The smithy run by Ramona. Raise its level to expand the selection of weapons you can craft or enhance.\General\3x3\1\
-Snowdrake\An adorable drake made from snow. It's so cute, in fact, that someone cast a spell on it to make sure it doesn't melt.\Decorative\1x1\4\
-Staff Dojo\A training area built to hone one's skills with a staff. Use it to boosts the stats of staff-wielding adventures.\Adventurer, Dojo\3x3\2\
-Sweet Retreat\A candy house made to be the centerpiece of the Halidom's Halloween party, and bound to liven up the event. Use it to boost the stats of light-attuned adventurers.\Adventurer, Event Altar\3x3\1\Snack-o'-Lantern
-Sword Dojo\A training area built to hone one's skills with a sword. Use it to boosts the stats of sword-wielding adventures.\Adventurer, Dojo\3x3\2\
-Wand Dojo\A training area built to hone one's skills with a wand. Use it to boosts the stats of wand-wielding adventures.\Adventurer, Dojo\3x3\2\
-Water Altar\An altar to honor water. The mana housed within sharpens the mind, boosting the stats of water-attuned adventurers.\Adventurer, Altar\3x3\2\
-Water Dracolith\A monument made in the likeness of a water dragon. Increases damage dealt when shapeshifting as a water-attuned dragon.\Dragon, Dracolith\2x2\1\
-Wind Altar\An altar to honor wind. The mana housed within inspires great wisdom, boosting the stats of wind-attuned adventurers.\Adventurer, Altar\3x3\2\
-Wind Dracolith\A monument made in the likeness of a wind dragon. Increases damage dealt when shapeshifting as a wind-attuned dragon.\Dragon, Dracolith\2x2\1\
-Wind Shrine\A shrine made using ore that generates wind mana. It gives the wind's blessings to those who need it. Use it to boost the stats of wind-attuned adventurers.\Adventurer, Event Altar\3x3\1\Windwhistle Grass
-Wishmill\A giant toy windmill. The wind that powers it might contain someone's wishes, too.\Decorative\1x1\4\
-Yuletree\A festive tree erected to serve as the centerpiece of the Dragonyule party, and to bring warmth to everyone's hearts. Use it to boost the stats of water-attuned adventurers.\Adventurer, Event Altar\3x3\1\Astral Ornament
+Axe Dojo\1\A training area built to hone one's skills with an axe. Use it to boosts the stats of axe-wielding adventures.\Adventurer, Dojo\3x3\2\0
+Axe Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10
+Axe Dojo\3\-\Adventurer, Dojo\3x3\2\3500\Dyrenell Aes, 10
+Axe Dojo\4\-\Adventurer, Dojo\3x3\2\4000\Dyrenell Aes, 10
+Axe Dojo\5\-\Adventurer, Dojo\3x3\2\4500\Dyrenell Aes, 10
+Axe Dojo\6\-\Adventurer, Dojo\3x3\2\5000\Dyrenell Aes, 20
+Axe Dojo\7\-\Adventurer, Dojo\3x3\2\6000\Dyrenell Aes, 20
+Axe Dojo\8\-\Adventurer, Dojo\3x3\2\7000\Dyrenell Aes, 20
+Axe Dojo\9\-\Adventurer, Dojo\3x3\2\8000\Dyrenell Aes, 20
+Axe Dojo\10\-\Adventurer, Dojo\3x3\2\9000\Dyrenell Aes, 20
+Axe Dojo\11\-\Adventurer, Dojo\3x3\2\10000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Jade Insignia, 10
+Axe Dojo\12\-\Adventurer, Dojo\3x3\2\12000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Jade Insignia, 10
+Axe Dojo\13\-\Adventurer, Dojo\3x3\2\14000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Jade Insignia, 10
+Axe Dojo\14\-\Adventurer, Dojo\3x3\2\16000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Jade Insignia, 20
+Axe Dojo\15\-\Adventurer, Dojo\3x3\2\18000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Jade Insignia, 20
+Axe Dojo\16\-\Adventurer, Dojo\3x3\2\20000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Jade Insignia, 40
+Axe Dojo\17\-\Adventurer, Dojo\3x3\2\25000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Jade Insignia, 40
+Axe Dojo\18\-\Adventurer, Dojo\3x3\2\30000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Jade Insignia, 40
+Axe Dojo\19\-\Adventurer, Dojo\3x3\2\35000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Jade Insignia, 60
+Axe Dojo\20\-\Adventurer, Dojo\3x3\2\40000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Jade Insignia, 60
+Axe Dojo\21\-\Adventurer, Dojo\3x3\2\50000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Jade Insignia, 80;; Dyrenell Aureus, 20
+Axe Dojo\22\-\Adventurer, Dojo\3x3\2\60000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Jade Insignia, 80;; Dyrenell Aureus, 30
+Axe Dojo\23\-\Adventurer, Dojo\3x3\2\70000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Jade Insignia, 80;; Dyrenell Aureus, 40
+Axe Dojo\24\-\Adventurer, Dojo\3x3\2\80000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Jade Insignia, 100;; Dyrenell Aureus, 50
+Axe Dojo\25\-\Adventurer, Dojo\3x3\2\90000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Jade Insignia, 100;; Dyrenell Aureus, 60
+Axe Dojo\26\-\Adventurer, Dojo\3x3\2\100000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Jade Insignia, 120;; Dyrenell Aureus, 70;; Royal Jade Insignia, 20
+Axe Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Jade Insignia, 120;; Dyrenell Aureus, 80;; Royal Jade Insignia, 30
+Axe Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Jade Insignia, 120;; Dyrenell Aureus, 90;; Royal Jade Insignia, 40
+Axe Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Jade Insignia, 160;; Dyrenell Aureus, 100;; Royal Jade Insignia, 50
+Axe Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Jade Insignia, 160;; Dyrenell Aureus, 110;; Royal Jade Insignia, 60
+Battle Standard\-\A large flag with intricate embroidery. Soldiers have long rallied under this symbol to fight for what they believe in.\Decorative\1x1\5\0
+Blade Dojo\1\A training area built to hone one's skills with a blade. Use it to boosts the stats of blade-wielding adventures.\Adventurer, Dojo\3x3\2\0
+Blade Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10
+Blade Dojo\3\-\Adventurer, Dojo\3x3\2\3500\Dyrenell Aes, 10
+Blade Dojo\4\-\Adventurer, Dojo\3x3\2\4000\Dyrenell Aes, 10
+Blade Dojo\5\-\Adventurer, Dojo\3x3\2\4500\Dyrenell Aes, 10
+Blade Dojo\6\-\Adventurer, Dojo\3x3\2\5000\Dyrenell Aes, 20
+Blade Dojo\7\-\Adventurer, Dojo\3x3\2\6000\Dyrenell Aes, 20
+Blade Dojo\8\-\Adventurer, Dojo\3x3\2\7000\Dyrenell Aes, 20
+Blade Dojo\9\-\Adventurer, Dojo\3x3\2\8000\Dyrenell Aes, 20
+Blade Dojo\10\-\Adventurer, Dojo\3x3\2\9000\Dyrenell Aes, 20
+Blade Dojo\11\-\Adventurer, Dojo\3x3\2\10000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Azure Insignia, 10
+Blade Dojo\12\-\Adventurer, Dojo\3x3\2\12000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Azure Insignia, 10
+Blade Dojo\13\-\Adventurer, Dojo\3x3\2\14000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Azure Insignia, 10
+Blade Dojo\14\-\Adventurer, Dojo\3x3\2\16000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Azure Insignia, 20
+Blade Dojo\15\-\Adventurer, Dojo\3x3\2\18000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Azure Insignia, 20
+Blade Dojo\16\-\Adventurer, Dojo\3x3\2\20000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Azure Insignia, 40
+Blade Dojo\17\-\Adventurer, Dojo\3x3\2\25000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Azure Insignia, 40
+Blade Dojo\18\-\Adventurer, Dojo\3x3\2\30000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Azure Insignia, 40
+Blade Dojo\19\-\Adventurer, Dojo\3x3\2\35000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Azure Insignia, 60
+Blade Dojo\20\-\Adventurer, Dojo\3x3\2\40000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Azure Insignia, 60
+Blade Dojo\21\-\Adventurer, Dojo\3x3\2\50000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Azure Insignia, 80;; Dyrenell Aureus, 20
+Blade Dojo\22\-\Adventurer, Dojo\3x3\2\60000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Azure Insignia, 80;; Dyrenell Aureus, 30
+Blade Dojo\23\-\Adventurer, Dojo\3x3\2\70000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Azure Insignia, 80;; Dyrenell Aureus, 40
+Blade Dojo\24\-\Adventurer, Dojo\3x3\2\80000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Azure Insignia, 100;; Dyrenell Aureus, 50
+Blade Dojo\25\-\Adventurer, Dojo\3x3\2\90000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Azure Insignia, 100;; Dyrenell Aureus, 60
+Blade Dojo\26\-\Adventurer, Dojo\3x3\2\100000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Azure Insignia, 120;; Dyrenell Aureus, 70;; Royal Azure Insignia, 20
+Blade Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Azure Insignia, 120;; Dyrenell Aureus, 80;; Royal Azure Insignia, 30
+Blade Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Azure Insignia, 120;; Dyrenell Aureus, 90;; Royal Azure Insignia, 40
+Blade Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Azure Insignia, 160;; Dyrenell Aureus, 100;; Royal Azure Insignia, 50
+Blade Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Azure Insignia, 160;; Dyrenell Aureus, 110;; Royal Azure Insignia, 60
+Blue Flowers\-\A bed of blooming blue flowers. Once thought to be a myth, these beauties are now symbolic of hope and miracles.\Decorative\1x1\5\0
+Bow Dojo\1\A training area built to hone one's skills with a bow. Use it to boosts the stats of bow-wielding adventures.\Adventurer, Dojo\3x3\2\0
+Bow Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10
+Bow Dojo\3\-\Adventurer, Dojo\3x3\2\3500\Dyrenell Aes, 10
+Bow Dojo\4\-\Adventurer, Dojo\3x3\2\4000\Dyrenell Aes, 10
+Bow Dojo\5\-\Adventurer, Dojo\3x3\2\4500\Dyrenell Aes, 10
+Bow Dojo\6\-\Adventurer, Dojo\3x3\2\5000\Dyrenell Aes, 20
+Bow Dojo\7\-\Adventurer, Dojo\3x3\2\6000\Dyrenell Aes, 20
+Bow Dojo\8\-\Adventurer, Dojo\3x3\2\7000\Dyrenell Aes, 20
+Bow Dojo\9\-\Adventurer, Dojo\3x3\2\8000\Dyrenell Aes, 20
+Bow Dojo\10\-\Adventurer, Dojo\3x3\2\9000\Dyrenell Aes, 20
+Bow Dojo\11\-\Adventurer, Dojo\3x3\2\10000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Vermilion Insignia, 10
+Bow Dojo\12\-\Adventurer, Dojo\3x3\2\12000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Vermilion Insignia, 10
+Bow Dojo\13\-\Adventurer, Dojo\3x3\2\14000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Vermilion Insignia, 10
+Bow Dojo\14\-\Adventurer, Dojo\3x3\2\16000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Vermilion Insignia, 20
+Bow Dojo\15\-\Adventurer, Dojo\3x3\2\18000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Vermilion Insignia, 20
+Bow Dojo\16\-\Adventurer, Dojo\3x3\2\20000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Vermilion Insignia, 40
+Bow Dojo\17\-\Adventurer, Dojo\3x3\2\25000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Vermilion Insignia, 40
+Bow Dojo\18\-\Adventurer, Dojo\3x3\2\30000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Vermilion Insignia, 40
+Bow Dojo\19\-\Adventurer, Dojo\3x3\2\35000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Vermilion Insignia, 60
+Bow Dojo\20\-\Adventurer, Dojo\3x3\2\40000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Vermilion Insignia, 60
+Bow Dojo\21\-\Adventurer, Dojo\3x3\2\50000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Vermilion Insignia, 80;; Dyrenell Aureus, 20
+Bow Dojo\22\-\Adventurer, Dojo\3x3\2\60000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Vermilion Insignia, 80;; Dyrenell Aureus, 30
+Bow Dojo\23\-\Adventurer, Dojo\3x3\2\70000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Vermilion Insignia, 80;; Dyrenell Aureus, 40
+Bow Dojo\24\-\Adventurer, Dojo\3x3\2\80000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Vermilion Insignia, 100;; Dyrenell Aureus, 50
+Bow Dojo\25\-\Adventurer, Dojo\3x3\2\90000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Vermilion Insignia, 100;; Dyrenell Aureus, 60
+Bow Dojo\26\-\Adventurer, Dojo\3x3\2\100000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Vermilion Insignia, 120;; Dyrenell Aureus, 70;; Royal Vermilion Insignia, 20
+Bow Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Vermilion Insignia, 120;; Dyrenell Aureus, 80;; Royal Vermilion Insignia, 30
+Bow Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Vermilion Insignia, 120;; Dyrenell Aureus, 90;; Royal Vermilion Insignia, 40
+Bow Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Vermilion Insignia, 160;; Dyrenell Aureus, 100;; Royal Vermilion Insignia, 50
+Bow Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Vermilion Insignia, 160;; Dyrenell Aureus, 110;; Royal Vermilion Insignia, 60
+Broadleaf Tree\-\An iconic tree with broad leaves. A standard of any garden, its placement and health are indicative of its gardener's skills.\Decorative\1x1\5\0
+Circus Tent\1\Use it to boost the stats of light-attuned adventurers.\Adventurer, Event Altar\3x3\1\0
+Circus Tent\2\-\Adventurer, Event Altar\3x3\1\100\Tent Canvas, 3
+Circus Tent\3\-\Adventurer, Event Altar\3x3\1\200\Tent Canvas, 5
+Circus Tent\4\-\Adventurer, Event Altar\3x3\1\300\Tent Canvas, 7
+Circus Tent\5\-\Adventurer, Event Altar\3x3\1\400\Tent Canvas, 10
+Circus Tent\6\-\Adventurer, Event Altar\3x3\1\500\Tent Canvas, 12
+Circus Tent\7\-\Adventurer, Event Altar\3x3\1\600\Tent Canvas, 15
+Circus Tent\8\-\Adventurer, Event Altar\3x3\1\700\Tent Canvas, 18
+Circus Tent\9\-\Adventurer, Event Altar\3x3\1\800\Tent Canvas, 21
+Circus Tent\10\-\Adventurer, Event Altar\3x3\1\1000\Tent Canvas, 25
+Circus Tent\11\-\Adventurer, Event Altar\3x3\1\1200\Tent Canvas, 30
+Circus Tent\12\-\Adventurer, Event Altar\3x3\1\1400\Tent Canvas, 50
+Circus Tent\13\-\Adventurer, Event Altar\3x3\1\1600\Tent Canvas, 70
+Circus Tent\14\-\Adventurer, Event Altar\3x3\1\1800\Tent Canvas, 90
+Circus Tent\15\-\Adventurer, Event Altar\3x3\1\2000\Tent Canvas, 120
+Circus Tent\16\-\Adventurer, Event Altar\3x3\1\2200\Tent Canvas, 150
+Circus Tent\17\-\Adventurer, Event Altar\3x3\1\2400\Tent Canvas, 180
+Circus Tent\18\-\Adventurer, Event Altar\3x3\1\2600\Tent Canvas, 210
+Circus Tent\19\-\Adventurer, Event Altar\3x3\1\2800\Tent Canvas, 250
+Circus Tent\20\-\Adventurer, Event Altar\3x3\1\3000\Tent Canvas, 300
+Circus Tent\21\-\Adventurer, Event Altar\3x3\1\3200\Tent Canvas, 350
+Circus Tent\22\-\Adventurer, Event Altar\3x3\1\3400\Tent Canvas, 400
+Circus Tent\23\-\Adventurer, Event Altar\3x3\1\3600\Tent Canvas, 450
+Circus Tent\24\-\Adventurer, Event Altar\3x3\1\3800\Tent Canvas, 500
+Circus Tent\25\-\Adventurer, Event Altar\3x3\1\4000\Tent Canvas, 550
+Circus Tent\26\-\Adventurer, Event Altar\3x3\1\4200\Tent Canvas, 600
+Circus Tent\27\-\Adventurer, Event Altar\3x3\1\4400\Tent Canvas, 700
+Circus Tent\28\-\Adventurer, Event Altar\3x3\1\4600\Tent Canvas, 800
+Circus Tent\29\-\Adventurer, Event Altar\3x3\1\4800\Tent Canvas, 900
+Circus Tent\30\-\Adventurer, Event Altar\3x3\1\5000\Tent Canvas, 1000
+Conifer Tree\-\A tree with needle-thin foliage that stays green throughout the winter and can endure harsh environments.\Decorative\1x1\5\0
+Dagger Dojo\1\A training area built to hone one's skills with a dagger. Use it to boosts the stats of dagger-wielding adventures.\Adventurer, Dojo\3x3\2\0
+Dagger Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10
+Dagger Dojo\3\-\Adventurer, Dojo\3x3\2\3500\Dyrenell Aes, 10
+Dagger Dojo\4\-\Adventurer, Dojo\3x3\2\4000\Dyrenell Aes, 10
+Dagger Dojo\5\-\Adventurer, Dojo\3x3\2\4500\Dyrenell Aes, 10
+Dagger Dojo\6\-\Adventurer, Dojo\3x3\2\5000\Dyrenell Aes, 20
+Dagger Dojo\7\-\Adventurer, Dojo\3x3\2\6000\Dyrenell Aes, 20
+Dagger Dojo\8\-\Adventurer, Dojo\3x3\2\7000\Dyrenell Aes, 20
+Dagger Dojo\9\-\Adventurer, Dojo\3x3\2\8000\Dyrenell Aes, 20
+Dagger Dojo\10\-\Adventurer, Dojo\3x3\2\9000\Dyrenell Aes, 20
+Dagger Dojo\11\-\Adventurer, Dojo\3x3\2\10000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Violet Insignia, 10
+Dagger Dojo\12\-\Adventurer, Dojo\3x3\2\12000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Violet Insignia, 10
+Dagger Dojo\13\-\Adventurer, Dojo\3x3\2\14000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Violet Insignia, 10
+Dagger Dojo\14\-\Adventurer, Dojo\3x3\2\16000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Violet Insignia, 20
+Dagger Dojo\15\-\Adventurer, Dojo\3x3\2\18000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Violet Insignia, 20
+Dagger Dojo\16\-\Adventurer, Dojo\3x3\2\20000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Violet Insignia, 40
+Dagger Dojo\17\-\Adventurer, Dojo\3x3\2\25000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Violet Insignia, 40
+Dagger Dojo\18\-\Adventurer, Dojo\3x3\2\30000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Violet Insignia, 40
+Dagger Dojo\19\-\Adventurer, Dojo\3x3\2\35000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Violet Insignia, 60
+Dagger Dojo\20\-\Adventurer, Dojo\3x3\2\40000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Violet Insignia, 60
+Dagger Dojo\21\-\Adventurer, Dojo\3x3\2\50000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Violet Insignia, 80;; Dyrenell Aureus, 20
+Dagger Dojo\22\-\Adventurer, Dojo\3x3\2\60000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Violet Insignia, 80;; Dyrenell Aureus, 30
+Dagger Dojo\23\-\Adventurer, Dojo\3x3\2\70000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Violet Insignia, 80;; Dyrenell Aureus, 40
+Dagger Dojo\24\-\Adventurer, Dojo\3x3\2\80000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Violet Insignia, 100;; Dyrenell Aureus, 50
+Dagger Dojo\25\-\Adventurer, Dojo\3x3\2\90000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Violet Insignia, 100;; Dyrenell Aureus, 60
+Dagger Dojo\26\-\Adventurer, Dojo\3x3\2\100000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Violet Insignia, 120;; Dyrenell Aureus, 70;; Royal Violet Insignia, 20
+Dagger Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Violet Insignia, 120;; Dyrenell Aureus, 80;; Royal Violet Insignia, 30
+Dagger Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Violet Insignia, 120;; Dyrenell Aureus, 90;; Royal Violet Insignia, 40
+Dagger Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Violet Insignia, 160;; Dyrenell Aureus, 100;; Royal Violet Insignia, 50
+Dagger Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Violet Insignia, 160;; Dyrenell Aureus, 110;; Royal Violet Insignia, 60
+Dragontree\1\A tree that produces three varieties of dragonfruit, the preferred snack of dragons the world over.\Production\3x3\1\0
+Dragontree\2\-\Production\3x3\1\100
+Dragontree\3\-\Production\3x3\1\300
+Dragontree\4\-\Production\3x3\1\500\Talonstone, 1
+Dragontree\5\-\Production\3x3\1\1000\Talonstone, 1
+Dragontree\6\-\Production\3x3\1\2000\Talonstone, 2
+Dragontree\7\-\Production\3x3\1\3000\Talonstone, 2
+Dragontree\8\-\Production\3x3\1\5000\Talonstone, 3
+Dragontree\9\-\Production\3x3\1\7000\Talonstone, 3
+Dragontree\10\-\Production\3x3\1\9000\Talonstone, 4
+Dragontree\11\-\Production\3x3\1\12000\Talonstone, 5
+Dragontree\12\-\Production\3x3\1\15000\Talonstone, 6
+Dragontree\13\-\Production\3x3\1\18000\Talonstone, 7
+Dragontree\14\-\Production\3x3\1\21000\Talonstone, 8
+Dragontree\15\-\Production\3x3\1\24000\Talonstone, 10
+Dragontree\16\-\Production\3x3\1\27000\Talonstone, 12
+Dragontree\17\-\Production\3x3\1\30000\Talonstone, 13
+Dragontree\18\-\Production\3x3\1\35000\Talonstone, 14
+Dragontree\19\-\Production\3x3\1\40000\Talonstone, 16
+Dragontree\20\-\Production\3x3\1\50000\Talonstone, 17
+Dragontree\21\-\Production\3x3\1\60000\Talonstone, 18
+Dragontree\22\-\Production\3x3\1\80000\Talonstone, 20
+Dragontree\23\-\Production\3x3\1\100000\Talonstone, 21
+Dragontree\24\-\Production\3x3\1\120000\Talonstone, 22
+Dragontree\25\-\Production\3x3\1\140000\Talonstone, 24
+Dragontree\26\-\Production\3x3\1\160000\Talonstone, 25
+Dragontree\27\-\Production\3x3\1\180000\Talonstone, 26
+Fafnir Statue (Flame)\1\Proof of overcoming the Flamewyrm's trial. A flame-imbued statue that boosts the HP and strength of flame dragons.\Dragon, Fafnir\3x3\1\0
+Fafnir Statue (Flame)\2\-\Dragon, Fafnir\3x3\1\10000\Flamewyrm's Greatsphere, 3
+Fafnir Statue (Flame)\3\-\Dragon, Fafnir\3x3\1\20000\Flamewyrm's Greatsphere, 3
+Fafnir Statue (Flame)\4\-\Dragon, Fafnir\3x3\1\30000\Flamewyrm's Greatsphere, 5
+Fafnir Statue (Flame)\5\-\Dragon, Fafnir\3x3\1\40000\Flamewyrm's Greatsphere, 5
+Fafnir Statue (Flame)\6\-\Dragon, Fafnir\3x3\1\50000\Flamewyrm's Greatsphere, 7;; Flamewyrm's Scaldscale, 5;; Talonstone, 10
+Fafnir Statue (Flame)\7\-\Dragon, Fafnir\3x3\1\60000\Flamewyrm's Greatsphere, 7;; Flamewyrm's Scaldscale, 5;; Talonstone, 10
+Fafnir Statue (Flame)\8\-\Dragon, Fafnir\3x3\1\70000\Flamewyrm's Greatsphere, 7;; Flamewyrm's Scaldscale, 5;; Talonstone, 10
+Fafnir Statue (Flame)\9\-\Dragon, Fafnir\3x3\1\80000\Flamewyrm's Greatsphere, 10;; Flamewyrm's Scaldscale, 5;; Talonstone, 10
+Fafnir Statue (Flame)\10\-\Dragon, Fafnir\3x3\1\90000\Flamewyrm's Greatsphere, 10;; Flamewyrm's Scaldscale, 5;; Talonstone, 10
+Fafnir Statue (Flame)\11\-\Dragon, Fafnir\3x3\1\100000\Flamewyrm's Greatsphere, 12;; Flamewyrm's Scaldscale, 10;; Talonstone, 20
+Fafnir Statue (Flame)\12\-\Dragon, Fafnir\3x3\1\110000\Flamewyrm's Greatsphere, 12;; Flamewyrm's Scaldscale, 10;; Talonstone, 20
+Fafnir Statue (Flame)\13\-\Dragon, Fafnir\3x3\1\120000\Flamewyrm's Greatsphere, 15;; Flamewyrm's Scaldscale, 10;; Talonstone, 20
+Fafnir Statue (Flame)\14\-\Dragon, Fafnir\3x3\1\130000\Flamewyrm's Greatsphere, 15;; Flamewyrm's Scaldscale, 10;; Talonstone, 20
+Fafnir Statue (Flame)\15\-\Dragon, Fafnir\3x3\1\140000\Flamewyrm's Greatsphere, 15;; Flamewyrm's Scaldscale, 10;; Talonstone, 20
+Fafnir Statue (Flame)\16\-\Dragon, Fafnir\3x3\1\160000\Flamewyrm's Greatsphere, 20;; Flamewyrm's Scaldscale, 20;; Talonstone, 30
+Fafnir Statue (Flame)\17\-\Dragon, Fafnir\3x3\1\180000\Flamewyrm's Greatsphere, 20;; Flamewyrm's Scaldscale, 20;; Talonstone, 30
+Fafnir Statue (Flame)\18\-\Dragon, Fafnir\3x3\1\200000\Flamewyrm's Greatsphere, 20;; Flamewyrm's Scaldscale, 20;; Talonstone, 30
+Fafnir Statue (Flame)\19\-\Dragon, Fafnir\3x3\1\220000\Flamewyrm's Greatsphere, 30;; Flamewyrm's Scaldscale, 20;; Talonstone, 30
+Fafnir Statue (Flame)\20\-\Dragon, Fafnir\3x3\1\240000\Flamewyrm's Greatsphere, 30;; Flamewyrm's Scaldscale, 20;; Talonstone, 30
+Fafnir Statue (Flame)\21\-\Dragon, Fafnir\3x3\1\260000\Flamewyrm's Greatsphere, 40;; Flamewyrm's Scaldscale, 30;; Talonstone, 40
+Fafnir Statue (Flame)\22\-\Dragon, Fafnir\3x3\1\280000\Flamewyrm's Greatsphere, 40;; Flamewyrm's Scaldscale, 30;; Talonstone, 40
+Fafnir Statue (Flame)\23\-\Dragon, Fafnir\3x3\1\300000\Flamewyrm's Greatsphere, 40;; Flamewyrm's Scaldscale, 30;; Talonstone, 40
+Fafnir Statue (Flame)\24\-\Dragon, Fafnir\3x3\1\320000\Flamewyrm's Greatsphere, 50;; Flamewyrm's Scaldscale, 30;; Talonstone, 40
+Fafnir Statue (Flame)\25\-\Dragon, Fafnir\3x3\1\340000\Flamewyrm's Greatsphere, 50;; Flamewyrm's Scaldscale, 30;; Talonstone, 40
+Fafnir Statue (Flame)\26\-\Dragon, Fafnir\3x3\1\360000\Flamewyrm's Greatsphere, 60;; Flamewyrm's Scaldscale, 50;; Talonstone, 60
+Fafnir Statue (Flame)\27\-\Dragon, Fafnir\3x3\1\380000\Flamewyrm's Greatsphere, 60;; Flamewyrm's Scaldscale, 50;; Talonstone, 60
+Fafnir Statue (Flame)\28\-\Dragon, Fafnir\3x3\1\400000\Flamewyrm's Greatsphere, 60;; Flamewyrm's Scaldscale, 50;; Talonstone, 60
+Fafnir Statue (Flame)\29\-\Dragon, Fafnir\3x3\1\420000\Flamewyrm's Greatsphere, 70;; Flamewyrm's Scaldscale, 50;; Talonstone, 60
+Fafnir Statue (Flame)\30\-\Dragon, Fafnir\3x3\1\440000\Flamewyrm's Greatsphere, 70;; Flamewyrm's Scaldscale, 50;; Talonstone, 60
+Fafnir Statue (Wind)\1\Proof of overcoming the Windwyrm's trial. A wind-imbued statue that boosts the HP and strength of wind dragons.\Dragon, Fafnir\3x3\1\0
+Fafnir Statue (Wind)\2\-\Dragon, Fafnir\3x3\1\10000\Windwyrm's Greatsphere, 3
+Fafnir Statue (Wind)\3\-\Dragon, Fafnir\3x3\1\20000\Windwyrm's Greatsphere, 3
+Fafnir Statue (Wind)\4\-\Dragon, Fafnir\3x3\1\30000\Windwyrm's Greatsphere, 5
+Fafnir Statue (Wind)\5\-\Dragon, Fafnir\3x3\1\40000\Windwyrm's Greatsphere, 5
+Fafnir Statue (Wind)\6\-\Dragon, Fafnir\3x3\1\50000\Windwyrm's Greatsphere, 7;; Windwyrm's Squallscale, 5;; Talonstone, 10
+Fafnir Statue (Wind)\7\-\Dragon, Fafnir\3x3\1\60000\Windwyrm's Greatsphere, 7;; Windwyrm's Squallscale, 5;; Talonstone, 10
+Fafnir Statue (Wind)\8\-\Dragon, Fafnir\3x3\1\70000\Windwyrm's Greatsphere, 7;; Windwyrm's Squallscale, 5;; Talonstone, 10
+Fafnir Statue (Wind)\9\-\Dragon, Fafnir\3x3\1\80000\Windwyrm's Greatsphere, 10;; Windwyrm's Squallscale, 5;; Talonstone, 10
+Fafnir Statue (Wind)\10\-\Dragon, Fafnir\3x3\1\90000\Windwyrm's Greatsphere, 10;; Windwyrm's Squallscale, 5;; Talonstone, 10
+Fafnir Statue (Wind)\11\-\Dragon, Fafnir\3x3\1\100000\Windwyrm's Greatsphere, 12;; Windwyrm's Squallscale, 10;; Talonstone, 20
+Fafnir Statue (Wind)\12\-\Dragon, Fafnir\3x3\1\110000\Windwyrm's Greatsphere, 12;; Windwyrm's Squallscale, 10;; Talonstone, 20
+Fafnir Statue (Wind)\13\-\Dragon, Fafnir\3x3\1\120000\Windwyrm's Greatsphere, 15;; Windwyrm's Squallscale, 10;; Talonstone, 20
+Fafnir Statue (Wind)\14\-\Dragon, Fafnir\3x3\1\130000\Windwyrm's Greatsphere, 15;; Windwyrm's Squallscale, 10;; Talonstone, 20
+Fafnir Statue (Wind)\15\-\Dragon, Fafnir\3x3\1\140000\Windwyrm's Greatsphere, 15;; Windwyrm's Squallscale, 10;; Talonstone, 20
+Fafnir Statue (Wind)\16\-\Dragon, Fafnir\3x3\1\160000\Windwyrm's Greatsphere, 20;; Windwyrm's Squallscale, 20;; Talonstone, 30
+Fafnir Statue (Wind)\17\-\Dragon, Fafnir\3x3\1\180000\Windwyrm's Greatsphere, 20;; Windwyrm's Squallscale, 20;; Talonstone, 30
+Fafnir Statue (Wind)\18\-\Dragon, Fafnir\3x3\1\200000\Windwyrm's Greatsphere, 20;; Windwyrm's Squallscale, 20;; Talonstone, 30
+Fafnir Statue (Wind)\19\-\Dragon, Fafnir\3x3\1\220000\Windwyrm's Greatsphere, 30;; Windwyrm's Squallscale, 20;; Talonstone, 30
+Fafnir Statue (Wind)\20\-\Dragon, Fafnir\3x3\1\240000\Windwyrm's Greatsphere, 30;; Windwyrm's Squallscale, 20;; Talonstone, 30
+Fafnir Statue (Wind)\21\-\Dragon, Fafnir\3x3\1\260000\Windwyrm's Greatsphere, 40;; Windwyrm's Squallscale, 30;; Talonstone, 40
+Fafnir Statue (Wind)\22\-\Dragon, Fafnir\3x3\1\280000\Windwyrm's Greatsphere, 40;; Windwyrm's Squallscale, 30;; Talonstone, 40
+Fafnir Statue (Wind)\23\-\Dragon, Fafnir\3x3\1\300000\Windwyrm's Greatsphere, 40;; Windwyrm's Squallscale, 30;; Talonstone, 40
+Fafnir Statue (Wind)\24\-\Dragon, Fafnir\3x3\1\320000\Windwyrm's Greatsphere, 50;; Windwyrm's Squallscale, 30;; Talonstone, 40
+Fafnir Statue (Wind)\25\-\Dragon, Fafnir\3x3\1\340000\Windwyrm's Greatsphere, 50;; Windwyrm's Squallscale, 30;; Talonstone, 40
+Fafnir Statue (Wind)\26\-\Dragon, Fafnir\3x3\1\360000\Windwyrm's Greatsphere, 60;; Windwyrm's Squallscale, 50;; Talonstone, 60
+Fafnir Statue (Wind)\27\-\Dragon, Fafnir\3x3\1\380000\Windwyrm's Greatsphere, 60;; Windwyrm's Squallscale, 50;; Talonstone, 60
+Fafnir Statue (Wind)\28\-\Dragon, Fafnir\3x3\1\400000\Windwyrm's Greatsphere, 60;; Windwyrm's Squallscale, 50;; Talonstone, 60
+Fafnir Statue (Wind)\29\-\Dragon, Fafnir\3x3\1\420000\Windwyrm's Greatsphere, 70;; Windwyrm's Squallscale, 50;; Talonstone, 60
+Fafnir Statue (Wind)\30\-\Dragon, Fafnir\3x3\1\440000\Windwyrm's Greatsphere, 70;; Windwyrm's Squallscale, 50;; Talonstone, 60
+Flame Altar\1\An altar to honor flame. The mana housed within instills a fighting spirit, boosting the stats of flame-attuned adventurers.\Adventurer, Altar\3x3\2\200
+Flame Altar\2\-\Adventurer, Altar\3x3\2\400
+Flame Altar\3\-\Adventurer, Altar\3x3\2\600
+Flame Altar\4\-\Adventurer, Altar\3x3\2\800\Flame Orb, 1
+Flame Altar\5\-\Adventurer, Altar\3x3\2\1000\Flame Orb, 3
+Flame Altar\6\-\Adventurer, Altar\3x3\2\1200\Flame Orb, 5
+Flame Altar\7\-\Adventurer, Altar\3x3\2\1500\Flame Orb, 5
+Flame Altar\8\-\Adventurer, Altar\3x3\2\2000\Flame Orb, 5
+Flame Altar\9\-\Adventurer, Altar\3x3\2\2500\Flame Orb, 7
+Flame Altar\10\-\Adventurer, Altar\3x3\2\3000\Flame Orb, 7
+Flame Altar\11\-\Adventurer, Altar\3x3\2\4000\Flame Orb, 10;; Blaze Orb, 1
+Flame Altar\12\-\Adventurer, Altar\3x3\2\5000\Flame Orb, 10;; Blaze Orb, 1
+Flame Altar\13\-\Adventurer, Altar\3x3\2\6000\Flame Orb, 10;; Blaze Orb, 1
+Flame Altar\14\-\Adventurer, Altar\3x3\2\7000\Flame Orb, 15;; Blaze Orb, 2
+Flame Altar\15\-\Adventurer, Altar\3x3\2\8000\Flame Orb, 15;; Blaze Orb, 2
+Flame Altar\16\-\Adventurer, Altar\3x3\2\10000\Flame Orb, 20;; Blaze Orb, 3
+Flame Altar\17\-\Adventurer, Altar\3x3\2\12000\Flame Orb, 20;; Blaze Orb, 3
+Flame Altar\18\-\Adventurer, Altar\3x3\2\14000\Flame Orb, 20;; Blaze Orb, 3
+Flame Altar\19\-\Adventurer, Altar\3x3\2\16000\Flame Orb, 30;; Blaze Orb, 4
+Flame Altar\20\-\Adventurer, Altar\3x3\2\18000\Flame Orb, 30;; Blaze Orb, 4
+Flame Altar\21\-\Adventurer, Altar\3x3\2\20000\Flame Orb, 50;; Blaze Orb, 6;; Inferno Orb, 1
+Flame Altar\22\-\Adventurer, Altar\3x3\2\22000\Flame Orb, 50;; Blaze Orb, 6;; Inferno Orb, 1
+Flame Altar\23\-\Adventurer, Altar\3x3\2\24000\Flame Orb, 50;; Blaze Orb, 6;; Inferno Orb, 1
+Flame Altar\24\-\Adventurer, Altar\3x3\2\26000\Flame Orb, 70;; Blaze Orb, 7;; Inferno Orb, 1
+Flame Altar\25\-\Adventurer, Altar\3x3\2\28000\Flame Orb, 70;; Blaze Orb, 7;; Inferno Orb, 1
+Flame Altar\26\-\Adventurer, Altar\3x3\2\30000\Flame Orb, 100;; Blaze Orb, 10;; Inferno Orb, 2
+Flame Altar\27\-\Adventurer, Altar\3x3\2\32000\Flame Orb, 100;; Blaze Orb, 10;; Inferno Orb, 2
+Flame Altar\28\-\Adventurer, Altar\3x3\2\34000\Flame Orb, 100;; Blaze Orb, 10;; Inferno Orb, 2
+Flame Altar\29\-\Adventurer, Altar\3x3\2\36000\Flame Orb, 150;; Blaze Orb, 12;; Inferno Orb, 3
+Flame Altar\30\-\Adventurer, Altar\3x3\2\38000\Flame Orb, 150;; Blaze Orb, 12;; Inferno Orb, 3
+Halidom\H\Euden's home base. Raise its level to expand the area in which you can build castle facilities.\General\4x4\1\0
+Jack-o'-Lantern\-\A lantern made by a sylvan who carved the insides out of a pumpkin, all the while insisting it represented his love of pranks. At least everyone enjoyed eating the filling.\Decorative\1x1\4\0
+Lance Dojo\1\A training area built to hone one's skills with a lance. Use it to boosts the stats of lance-wielding adventures.\Adventurer, Dojo\3x3\2\0
+Lance Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10
+Lance Dojo\3\-\Adventurer, Dojo\3x3\2\3500\Dyrenell Aes, 10
+Lance Dojo\4\-\Adventurer, Dojo\3x3\2\4000\Dyrenell Aes, 10
+Lance Dojo\5\-\Adventurer, Dojo\3x3\2\4500\Dyrenell Aes, 10
+Lance Dojo\6\-\Adventurer, Dojo\3x3\2\5000\Dyrenell Aes, 20
+Lance Dojo\7\-\Adventurer, Dojo\3x3\2\6000\Dyrenell Aes, 20
+Lance Dojo\8\-\Adventurer, Dojo\3x3\2\7000\Dyrenell Aes, 20
+Lance Dojo\9\-\Adventurer, Dojo\3x3\2\8000\Dyrenell Aes, 20
+Lance Dojo\10\-\Adventurer, Dojo\3x3\2\9000\Dyrenell Aes, 20
+Lance Dojo\11\-\Adventurer, Dojo\3x3\2\10000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Azure Insignia, 10
+Lance Dojo\12\-\Adventurer, Dojo\3x3\2\12000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Azure Insignia, 10
+Lance Dojo\13\-\Adventurer, Dojo\3x3\2\14000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Azure Insignia, 10
+Lance Dojo\14\-\Adventurer, Dojo\3x3\2\16000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Azure Insignia, 20
+Lance Dojo\15\-\Adventurer, Dojo\3x3\2\18000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Azure Insignia, 20
+Lance Dojo\16\-\Adventurer, Dojo\3x3\2\20000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Azure Insignia, 40
+Lance Dojo\17\-\Adventurer, Dojo\3x3\2\25000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Azure Insignia, 40
+Lance Dojo\18\-\Adventurer, Dojo\3x3\2\30000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Azure Insignia, 40
+Lance Dojo\19\-\Adventurer, Dojo\3x3\2\35000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Azure Insignia, 60
+Lance Dojo\20\-\Adventurer, Dojo\3x3\2\40000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Azure Insignia, 60
+Lance Dojo\21\-\Adventurer, Dojo\3x3\2\50000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Azure Insignia, 80;; Dyrenell Aureus, 20
+Lance Dojo\22\-\Adventurer, Dojo\3x3\2\60000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Azure Insignia, 80;; Dyrenell Aureus, 30
+Lance Dojo\23\-\Adventurer, Dojo\3x3\2\70000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Azure Insignia, 80;; Dyrenell Aureus, 40
+Lance Dojo\24\-\Adventurer, Dojo\3x3\2\80000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Azure Insignia, 100;; Dyrenell Aureus, 50
+Lance Dojo\25\-\Adventurer, Dojo\3x3\2\90000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Azure Insignia, 100;; Dyrenell Aureus, 60
+Lance Dojo\26\-\Adventurer, Dojo\3x3\2\100000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Azure Insignia, 120;; Dyrenell Aureus, 70;; Royal Azure Insignia, 20
+Lance Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Azure Insignia, 120;; Dyrenell Aureus, 80;; Royal Azure Insignia, 30
+Lance Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Azure Insignia, 120;; Dyrenell Aureus, 90;; Royal Azure Insignia, 40
+Lance Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Azure Insignia, 160;; Dyrenell Aureus, 100;; Royal Azure Insignia, 50
+Lance Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Azure Insignia, 160;; Dyrenell Aureus, 110;; Royal Azure Insignia, 60
+Lectern\-\A stand designed for reading heavy books. Useful when you want to have a good, long read.\Decorative\1x1\4\0
+Library Obscura\1\Use it to boost the stats of shadow-attuned adventurers.\Adventurer, Event Altar\3x3\1\0
+Library Obscura\2\-\Adventurer, Event Altar\3x3\1\100\Arcane Tome, 3
+Library Obscura\3\-\Adventurer, Event Altar\3x3\1\200\Arcane Tome, 5
+Library Obscura\4\-\Adventurer, Event Altar\3x3\1\300\Arcane Tome, 7
+Library Obscura\5\-\Adventurer, Event Altar\3x3\1\400\Arcane Tome, 10
+Library Obscura\6\-\Adventurer, Event Altar\3x3\1\500\Arcane Tome, 12
+Library Obscura\7\-\Adventurer, Event Altar\3x3\1\600\Arcane Tome, 15
+Library Obscura\8\-\Adventurer, Event Altar\3x3\1\700\Arcane Tome, 18
+Library Obscura\9\-\Adventurer, Event Altar\3x3\1\800\Arcane Tome, 21
+Library Obscura\10\-\Adventurer, Event Altar\3x3\1\1000\Arcane Tome, 25
+Library Obscura\11\-\Adventurer, Event Altar\3x3\1\1200\Arcane Tome, 30
+Library Obscura\12\-\Adventurer, Event Altar\3x3\1\1400\Arcane Tome, 50
+Library Obscura\13\-\Adventurer, Event Altar\3x3\1\1600\Arcane Tome, 70
+Library Obscura\14\-\Adventurer, Event Altar\3x3\1\1800\Arcane Tome, 90
+Library Obscura\15\-\Adventurer, Event Altar\3x3\1\2000\Arcane Tome, 120
+Library Obscura\16\-\Adventurer, Event Altar\3x3\1\2200\Arcane Tome, 150
+Library Obscura\17\-\Adventurer, Event Altar\3x3\1\2400\Arcane Tome, 180
+Library Obscura\18\-\Adventurer, Event Altar\3x3\1\2600\Arcane Tome, 210
+Library Obscura\19\-\Adventurer, Event Altar\3x3\1\2800\Arcane Tome, 250
+Library Obscura\20\-\Adventurer, Event Altar\3x3\1\3000\Arcane Tome, 300
+Library Obscura\21\-\Adventurer, Event Altar\3x3\1\3200\Arcane Tome, 350
+Library Obscura\22\-\Adventurer, Event Altar\3x3\1\3400\Arcane Tome, 400
+Library Obscura\23\-\Adventurer, Event Altar\3x3\1\3600\Arcane Tome, 450
+Library Obscura\24\-\Adventurer, Event Altar\3x3\1\3800\Arcane Tome, 500
+Library Obscura\25\-\Adventurer, Event Altar\3x3\1\4000\Arcane Tome, 550
+Library Obscura\26\-\Adventurer, Event Altar\3x3\1\4200\Arcane Tome, 600
+Library Obscura\27\-\Adventurer, Event Altar\3x3\1\4400\Arcane Tome, 700
+Library Obscura\28\-\Adventurer, Event Altar\3x3\1\4600\Arcane Tome, 800
+Library Obscura\29\-\Adventurer, Event Altar\3x3\1\4800\Arcane Tome, 900
+Library Obscura\30\-\Adventurer, Event Altar\3x3\1\5000\Arcane Tome, 1000
+Light Altar\1\An altar to honor light. The mana housed within illuminates the soul, boosting the stats of light-attuned adventurers.\Adventurer, Altar\3x3\2\200
+Light Altar\2\-\Adventurer, Altar\3x3\2\400
+Light Altar\3\-\Adventurer, Altar\3x3\2\600
+Light Altar\4\-\Adventurer, Altar\3x3\2\800\Light Orb, 1
+Light Altar\5\-\Adventurer, Altar\3x3\2\1000\Light Orb, 3
+Light Altar\6\-\Adventurer, Altar\3x3\2\1200\Light Orb, 5
+Light Altar\7\-\Adventurer, Altar\3x3\2\1500\Light Orb, 5
+Light Altar\8\-\Adventurer, Altar\3x3\2\2000\Light Orb, 5
+Light Altar\9\-\Adventurer, Altar\3x3\2\2500\Light Orb, 7
+Light Altar\10\-\Adventurer, Altar\3x3\2\3000\Light Orb, 7
+Light Altar\11\-\Adventurer, Altar\3x3\2\4000\Light Orb, 10;; Radiance Orb, 1
+Light Altar\12\-\Adventurer, Altar\3x3\2\5000\Light Orb, 10;; Radiance Orb, 1
+Light Altar\13\-\Adventurer, Altar\3x3\2\6000\Light Orb, 10;; Radiance Orb, 1
+Light Altar\14\-\Adventurer, Altar\3x3\2\7000\Light Orb, 15;; Radiance Orb, 2
+Light Altar\15\-\Adventurer, Altar\3x3\2\8000\Light Orb, 15;; Radiance Orb, 2
+Light Altar\16\-\Adventurer, Altar\3x3\2\10000\Light Orb, 20;; Radiance Orb, 3
+Light Altar\17\-\Adventurer, Altar\3x3\2\12000\Light Orb, 20;; Radiance Orb, 3
+Light Altar\18\-\Adventurer, Altar\3x3\2\14000\Light Orb, 20;; Radiance Orb, 3
+Light Altar\19\-\Adventurer, Altar\3x3\2\16000\Light Orb, 30;; Radiance Orb, 4
+Light Altar\20\-\Adventurer, Altar\3x3\2\18000\Light Orb, 30;; Radiance Orb, 4
+Light Altar\21\-\Adventurer, Altar\3x3\2\20000\Light Orb, 50;; Radiance Orb, 6;; Refulgence Orb, 1
+Light Altar\22\-\Adventurer, Altar\3x3\2\22000\Light Orb, 50;; Radiance Orb, 6;; Refulgence Orb, 1
+Light Altar\23\-\Adventurer, Altar\3x3\2\24000\Light Orb, 50;; Radiance Orb, 6;; Refulgence Orb, 1
+Light Altar\24\-\Adventurer, Altar\3x3\2\26000\Light Orb, 70;; Radiance Orb, 7;; Refulgence Orb, 1
+Light Altar\25\-\Adventurer, Altar\3x3\2\28000\Light Orb, 70;; Radiance Orb, 7;; Refulgence Orb, 1
+Light Altar\26\-\Adventurer, Altar\3x3\2\30000\Light Orb, 100;; Radiance Orb, 10;; Refulgence Orb, 2
+Light Altar\27\-\Adventurer, Altar\3x3\2\32000\Light Orb, 100;; Radiance Orb, 10;; Refulgence Orb, 2
+Light Altar\28\-\Adventurer, Altar\3x3\2\34000\Light Orb, 100;; Radiance Orb, 10;; Refulgence Orb, 2
+Light Altar\29\-\Adventurer, Altar\3x3\2\36000\Light Orb, 150;; Radiance Orb, 12;; Refulgence Orb, 3
+Light Altar\30\-\Adventurer, Altar\3x3\2\38000\Light Orb, 150;; Radiance Orb, 12;; Refulgence Orb, 3
+Magma Slime Statue\1\A statue of a magma slime granted to those who are victorious in void battles. The burning flame mana grants vitality. Use it to boost the stats of flame-attuned adventurers.\Adventurer, Void Altar\2x2\1\0
+Magma Slime Statue\2\-\Adventurer, Void Altar\2x2\1\5000\Bat's Wing, 10;; Solid Fungus, 2
+Magma Slime Statue\3\-\Adventurer, Void Altar\2x2\1\10000\Bat's Wing, 15
+Magma Slime Statue\4\-\Adventurer, Void Altar\2x2\1\15000\Bat's Wing, 20
+Magma Slime Statue\5\-\Adventurer, Void Altar\2x2\1\20000\Bat's Wing, 25;; Solid Fungus, 5
+Magma Slime Statue\6\-\Adventurer, Void Altar\2x2\1\25000\Bat's Wing, 30;; Ancient Bird's Feather, 5
+Magma Slime Statue\7\-\Adventurer, Void Altar\2x2\1\30000\Bat's Wing, 35;; Ancient Bird's Feather, 10;; Steel Slab, 2
+Magma Slime Statue\8\-\Adventurer, Void Altar\2x2\1\35000\Bat's Wing, 40;; Ancient Bird's Feather, 15
+Magma Slime Statue\9\-\Adventurer, Void Altar\2x2\1\40000\Bat's Wing, 45;; Ancient Bird's Feather, 20;; Steel Slab, 5
+Magma Slime Statue\10\-\Adventurer, Void Altar\2x2\1\50000\Bat's Wing, 50;; Ancient Bird's Feather, 25
+Magma Slime Statue\11\-\Adventurer, Void Altar\2x2\1\60000\Bat's Wing, 55;; Ancient Bird's Feather, 30;; Bewitching Wings, 5;; Great Feather, 2
+Magma Slime Statue\12\-\Adventurer, Void Altar\2x2\1\70000\Bat's Wing, 60;; Ancient Bird's Feather, 35;; Bewitching Wings, 10
+Magma Slime Statue\13\-\Adventurer, Void Altar\2x2\1\80000\Bat's Wing, 65;; Ancient Bird's Feather, 40;; Bewitching Wings, 15;; Great Feather, 5
+Magma Slime Statue\14\-\Adventurer, Void Altar\2x2\1\90000\Bat's Wing, 70;; Ancient Bird's Feather, 45;; Bewitching Wings, 20
+Magma Slime Statue\15\-\Adventurer, Void Altar\2x2\1\100000\Bat's Wing, 75;; Ancient Bird's Feather, 50;; Bewitching Wings, 30;; Great Feather, 8
+Red Flowers\-\A bed of blooming red flowers. Perennial symbols of love and passion, they're often given as gifts.\Decorative\1x1\5\0
+Rupie Mine\1\A facility for mining rupies from the earth. Shipments arrive in regular intervals, providing a great source of easy income!\Production\3x3\4\50
+Rupie Mine\2\-\Production\3x3\4\100
+Rupie Mine\3\-\Production\3x3\4\150
+Rupie Mine\4\-\Production\3x3\4\200
+Rupie Mine\5\-\Production\3x3\4\250
+Rupie Mine\6\-\Production\3x3\4\300\Light Orb, 1
+Rupie Mine\7\-\Production\3x3\4\350\Light Orb, 1
+Rupie Mine\8\-\Production\3x3\4\400\Light Orb, 1
+Rupie Mine\9\-\Production\3x3\4\500\Light Orb, 2
+Rupie Mine\10\-\Production\3x3\4\600\Light Orb, 2
+Rupie Mine\11\-\Production\3x3\4\700\Light Orb, 3
+Rupie Mine\12\-\Production\3x3\4\800\Light Orb, 3
+Rupie Mine\13\-\Production\3x3\4\900\Light Orb, 3
+Rupie Mine\14\-\Production\3x3\4\1000\Light Orb, 5
+Rupie Mine\15\-\Production\3x3\4\1100\Light Orb, 5
+Rupie Mine\16\-\Production\3x3\4\1200\Light Orb, 8;; Radiance Orb, 1
+Rupie Mine\17\-\Production\3x3\4\1400\Light Orb, 8;; Radiance Orb, 1
+Rupie Mine\18\-\Production\3x3\4\1600\Light Orb, 8;; Radiance Orb, 1
+Rupie Mine\19\-\Production\3x3\4\1800\Light Orb, 10;; Radiance Orb, 1
+Rupie Mine\20\-\Production\3x3\4\2000\Light Orb, 10;; Radiance Orb, 1
+Rupie Mine\21\-\Production\3x3\4\2200\Light Orb, 15;; Radiance Orb, 2
+Rupie Mine\22\-\Production\3x3\4\2400\Light Orb, 15;; Radiance Orb, 2
+Rupie Mine\23\-\Production\3x3\4\2600\Light Orb, 15;; Radiance Orb, 2
+Rupie Mine\24\-\Production\3x3\4\2800\Light Orb, 20;; Radiance Orb, 2
+Rupie Mine\25\-\Production\3x3\4\3000\Light Orb, 20;; Radiance Orb, 2
+Rupie Mine\26\-\Production\3x3\4\3200\Light Orb, 30;; Radiance Orb, 3;; Refulgence Orb, 1
+Rupie Mine\27\-\Production\3x3\4\3400\Light Orb, 30;; Radiance Orb, 3;; Refulgence Orb, 1
+Rupie Mine\28\-\Production\3x3\4\3600\Light Orb, 30;; Radiance Orb, 3;; Refulgence Orb, 1
+Rupie Mine\29\-\Production\3x3\4\3800\Light Orb, 40;; Radiance Orb, 3;; Refulgence Orb, 1
+Rupie Mine\30\-\Production\3x3\4\4000\Light Orb, 40;; Radiance Orb, 3;; Refulgence Orb, 1
+Shadow Altar\1\An altar to honor shadow. The mana housed within reveals hidden strengths, boosting the stats of shadow-attuned adventurers.\Adventurer, Altar\3x3\2\200
+Shadow Altar\2\-\Adventurer, Altar\3x3\2\400
+Shadow Altar\3\-\Adventurer, Altar\3x3\2\600
+Shadow Altar\4\-\Adventurer, Altar\3x3\2\800\Shadow Orb, 1
+Shadow Altar\5\-\Adventurer, Altar\3x3\2\1000\Shadow Orb, 3
+Shadow Altar\6\-\Adventurer, Altar\3x3\2\1200\Shadow Orb, 5
+Shadow Altar\7\-\Adventurer, Altar\3x3\2\1500\Shadow Orb, 5
+Shadow Altar\8\-\Adventurer, Altar\3x3\2\2000\Shadow Orb, 5
+Shadow Altar\9\-\Adventurer, Altar\3x3\2\2500\Shadow Orb, 7
+Shadow Altar\10\-\Adventurer, Altar\3x3\2\3000\Shadow Orb, 7
+Shadow Altar\11\-\Adventurer, Altar\3x3\2\4000\Shadow Orb, 10;; Nightfall Orb, 1
+Shadow Altar\12\-\Adventurer, Altar\3x3\2\5000\Shadow Orb, 10;; Nightfall Orb, 1
+Shadow Altar\13\-\Adventurer, Altar\3x3\2\6000\Shadow Orb, 10;; Nightfall Orb, 1
+Shadow Altar\14\-\Adventurer, Altar\3x3\2\7000\Shadow Orb, 15;; Nightfall Orb, 2
+Shadow Altar\15\-\Adventurer, Altar\3x3\2\8000\Shadow Orb, 15;; Nightfall Orb, 2
+Shadow Altar\16\-\Adventurer, Altar\3x3\2\10000\Shadow Orb, 20;; Nightfall Orb, 3
+Shadow Altar\17\-\Adventurer, Altar\3x3\2\12000\Shadow Orb, 20;; Nightfall Orb, 3
+Shadow Altar\18\-\Adventurer, Altar\3x3\2\14000\Shadow Orb, 20;; Nightfall Orb, 3
+Shadow Altar\19\-\Adventurer, Altar\3x3\2\16000\Shadow Orb, 30;; Nightfall Orb, 4
+Shadow Altar\20\-\Adventurer, Altar\3x3\2\18000\Shadow Orb, 30;; Nightfall Orb, 4
+Shadow Altar\21\-\Adventurer, Altar\3x3\2\20000\Shadow Orb, 50;; Nightfall Orb, 6;; Nether Orb, 1
+Shadow Altar\22\-\Adventurer, Altar\3x3\2\22000\Shadow Orb, 50;; Nightfall Orb, 6;; Nether Orb, 1
+Shadow Altar\23\-\Adventurer, Altar\3x3\2\24000\Shadow Orb, 50;; Nightfall Orb, 6;; Nether Orb, 1
+Shadow Altar\24\-\Adventurer, Altar\3x3\2\26000\Shadow Orb, 70;; Nightfall Orb, 7;; Nether Orb, 1
+Shadow Altar\25\-\Adventurer, Altar\3x3\2\28000\Shadow Orb, 70;; Nightfall Orb, 7;; Nether Orb, 1
+Shadow Altar\26\-\Adventurer, Altar\3x3\2\30000\Shadow Orb, 100;; Nightfall Orb, 10;; Nether Orb, 2
+Shadow Altar\27\-\Adventurer, Altar\3x3\2\32000\Shadow Orb, 100;; Nightfall Orb, 10;; Nether Orb, 2
+Shadow Altar\28\-\Adventurer, Altar\3x3\2\34000\Shadow Orb, 100;; Nightfall Orb, 10;; Nether Orb, 2
+Shadow Altar\29\-\Adventurer, Altar\3x3\2\36000\Shadow Orb, 150;; Nightfall Orb, 12;; Nether Orb, 3
+Shadow Altar\30\-\Adventurer, Altar\3x3\2\38000\Shadow Orb, 150;; Nightfall Orb, 12;; Nether Orb, 3
+Smithy\H\The smithy run by Ramona. Raise its level to expand the selection of weapons you can craft or enhance.\General\3x3\1\0
+Snowdrake\-\An adorable drake made from snow. It's so cute, in fact, that someone cast a spell on it to make sure it doesn't melt.\Decorative\1x1\4\0
+Staff Dojo\1\A training area built to hone one's skills with a staff. Use it to boosts the stats of staff-wielding adventures.\Adventurer, Dojo\3x3\2\0
+Staff Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10
+Staff Dojo\3\-\Adventurer, Dojo\3x3\2\3500\Dyrenell Aes, 10
+Staff Dojo\4\-\Adventurer, Dojo\3x3\2\4000\Dyrenell Aes, 10
+Staff Dojo\5\-\Adventurer, Dojo\3x3\2\4500\Dyrenell Aes, 10
+Staff Dojo\6\-\Adventurer, Dojo\3x3\2\5000\Dyrenell Aes, 20
+Staff Dojo\7\-\Adventurer, Dojo\3x3\2\6000\Dyrenell Aes, 20
+Staff Dojo\8\-\Adventurer, Dojo\3x3\2\7000\Dyrenell Aes, 20
+Staff Dojo\9\-\Adventurer, Dojo\3x3\2\8000\Dyrenell Aes, 20
+Staff Dojo\10\-\Adventurer, Dojo\3x3\2\9000\Dyrenell Aes, 20
+Staff Dojo\11\-\Adventurer, Dojo\3x3\2\10000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Amber Insignia, 10
+Staff Dojo\12\-\Adventurer, Dojo\3x3\2\12000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Amber Insignia, 10
+Staff Dojo\13\-\Adventurer, Dojo\3x3\2\14000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Amber Insignia, 10
+Staff Dojo\14\-\Adventurer, Dojo\3x3\2\16000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Amber Insignia, 20
+Staff Dojo\15\-\Adventurer, Dojo\3x3\2\18000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Amber Insignia, 20
+Staff Dojo\16\-\Adventurer, Dojo\3x3\2\20000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Amber Insignia, 40
+Staff Dojo\17\-\Adventurer, Dojo\3x3\2\25000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Amber Insignia, 40
+Staff Dojo\18\-\Adventurer, Dojo\3x3\2\30000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Amber Insignia, 40
+Staff Dojo\19\-\Adventurer, Dojo\3x3\2\35000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Amber Insignia, 60
+Staff Dojo\20\-\Adventurer, Dojo\3x3\2\40000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Amber Insignia, 60
+Staff Dojo\21\-\Adventurer, Dojo\3x3\2\50000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Amber Insignia, 80;; Dyrenell Aureus, 20
+Staff Dojo\22\-\Adventurer, Dojo\3x3\2\60000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Amber Insignia, 80;; Dyrenell Aureus, 30
+Staff Dojo\23\-\Adventurer, Dojo\3x3\2\70000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Amber Insignia, 80;; Dyrenell Aureus, 40
+Staff Dojo\24\-\Adventurer, Dojo\3x3\2\80000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Amber Insignia, 100;; Dyrenell Aureus, 50
+Staff Dojo\25\-\Adventurer, Dojo\3x3\2\90000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Amber Insignia, 100;; Dyrenell Aureus, 60
+Staff Dojo\26\-\Adventurer, Dojo\3x3\2\100000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Amber Insignia, 120;; Dyrenell Aureus, 70;; Royal Amber Insignia, 20
+Staff Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Amber Insignia, 120;; Dyrenell Aureus, 80;; Royal Amber Insignia, 30
+Staff Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Amber Insignia, 120;; Dyrenell Aureus, 90;; Royal Amber Insignia, 40
+Staff Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Amber Insignia, 160;; Dyrenell Aureus, 100;; Royal Amber Insignia, 50
+Staff Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Amber Insignia, 160;; Dyrenell Aureus, 110;; Royal Amber Insignia, 60
+Sweet Retreat\1\A candy house made to be the centerpiece of the Halidom's Halloween party, and bound to liven up the event. Use it to boost the stats of light-attuned adventurers.\Adventurer, Event Altar\3x3\1\0
+Sweet Retreat\2\-\Adventurer, Event Altar\3x3\1\100\Snack-o'-Lantern, 3
+Sweet Retreat\3\-\Adventurer, Event Altar\3x3\1\200\Snack-o'-Lantern, 5
+Sweet Retreat\4\-\Adventurer, Event Altar\3x3\1\300\Snack-o'-Lantern, 7
+Sweet Retreat\5\-\Adventurer, Event Altar\3x3\1\400\Snack-o'-Lantern, 10
+Sweet Retreat\6\-\Adventurer, Event Altar\3x3\1\500\Snack-o'-Lantern, 12
+Sweet Retreat\7\-\Adventurer, Event Altar\3x3\1\600\Snack-o'-Lantern, 15
+Sweet Retreat\8\-\Adventurer, Event Altar\3x3\1\700\Snack-o'-Lantern, 18
+Sweet Retreat\9\-\Adventurer, Event Altar\3x3\1\800\Snack-o'-Lantern, 21
+Sweet Retreat\10\-\Adventurer, Event Altar\3x3\1\1000\Snack-o'-Lantern, 25
+Sweet Retreat\11\-\Adventurer, Event Altar\3x3\1\1200\Snack-o'-Lantern, 30
+Sweet Retreat\12\-\Adventurer, Event Altar\3x3\1\1400\Snack-o'-Lantern, 50
+Sweet Retreat\13\-\Adventurer, Event Altar\3x3\1\1600\Snack-o'-Lantern, 70
+Sweet Retreat\14\-\Adventurer, Event Altar\3x3\1\1800\Snack-o'-Lantern, 90
+Sweet Retreat\15\-\Adventurer, Event Altar\3x3\1\2000\Snack-o'-Lantern, 120
+Sweet Retreat\16\-\Adventurer, Event Altar\3x3\1\2200\Snack-o'-Lantern, 150
+Sweet Retreat\17\-\Adventurer, Event Altar\3x3\1\2400\Snack-o'-Lantern, 180
+Sweet Retreat\18\-\Adventurer, Event Altar\3x3\1\2600\Snack-o'-Lantern, 210
+Sweet Retreat\19\-\Adventurer, Event Altar\3x3\1\2800\Snack-o'-Lantern, 250
+Sweet Retreat\20\-\Adventurer, Event Altar\3x3\1\3000\Snack-o'-Lantern, 300
+Sweet Retreat\21\-\Adventurer, Event Altar\3x3\1\3200\Snack-o'-Lantern, 350
+Sweet Retreat\22\-\Adventurer, Event Altar\3x3\1\3400\Snack-o'-Lantern, 400
+Sweet Retreat\23\-\Adventurer, Event Altar\3x3\1\3600\Snack-o'-Lantern, 450
+Sweet Retreat\24\-\Adventurer, Event Altar\3x3\1\3800\Snack-o'-Lantern, 500
+Sweet Retreat\25\-\Adventurer, Event Altar\3x3\1\4000\Snack-o'-Lantern, 550
+Sweet Retreat\26\-\Adventurer, Event Altar\3x3\1\4200\Snack-o'-Lantern, 600
+Sweet Retreat\27\-\Adventurer, Event Altar\3x3\1\4400\Snack-o'-Lantern, 700
+Sweet Retreat\28\-\Adventurer, Event Altar\3x3\1\4600\Snack-o'-Lantern, 800
+Sweet Retreat\29\-\Adventurer, Event Altar\3x3\1\4800\Snack-o'-Lantern, 900
+Sweet Retreat\30\-\Adventurer, Event Altar\3x3\1\5000\Snack-o'-Lantern, 1000
+Sword Dojo\1\A training area built to hone one's skills with a sword. Use it to boosts the stats of sword-wielding adventures.\Adventurer, Dojo\3x3\2\0
+Sword Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10
+Sword Dojo\3\-\Adventurer, Dojo\3x3\2\3500\Dyrenell Aes, 10
+Sword Dojo\4\-\Adventurer, Dojo\3x3\2\4000\Dyrenell Aes, 10
+Sword Dojo\5\-\Adventurer, Dojo\3x3\2\4500\Dyrenell Aes, 10
+Sword Dojo\6\-\Adventurer, Dojo\3x3\2\5000\Dyrenell Aes, 20
+Sword Dojo\7\-\Adventurer, Dojo\3x3\2\6000\Dyrenell Aes, 20
+Sword Dojo\8\-\Adventurer, Dojo\3x3\2\7000\Dyrenell Aes, 20
+Sword Dojo\9\-\Adventurer, Dojo\3x3\2\8000\Dyrenell Aes, 20
+Sword Dojo\10\-\Adventurer, Dojo\3x3\2\9000\Dyrenell Aes, 20
+Sword Dojo\11\-\Adventurer, Dojo\3x3\2\10000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Vermilion Insignia, 10
+Sword Dojo\12\-\Adventurer, Dojo\3x3\2\12000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Vermilion Insignia, 10
+Sword Dojo\13\-\Adventurer, Dojo\3x3\2\14000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Vermilion Insignia, 10
+Sword Dojo\14\-\Adventurer, Dojo\3x3\2\16000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Vermilion Insignia, 20
+Sword Dojo\15\-\Adventurer, Dojo\3x3\2\18000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Vermilion Insignia, 20
+Sword Dojo\16\-\Adventurer, Dojo\3x3\2\20000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Vermilion Insignia, 40
+Sword Dojo\17\-\Adventurer, Dojo\3x3\2\25000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Vermilion Insignia, 40
+Sword Dojo\18\-\Adventurer, Dojo\3x3\2\30000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Vermilion Insignia, 40
+Sword Dojo\19\-\Adventurer, Dojo\3x3\2\35000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Vermilion Insignia, 60
+Sword Dojo\20\-\Adventurer, Dojo\3x3\2\40000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Vermilion Insignia, 60
+Sword Dojo\21\-\Adventurer, Dojo\3x3\2\50000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Vermilion Insignia, 80;; Dyrenell Aureus, 20
+Sword Dojo\22\-\Adventurer, Dojo\3x3\2\60000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Vermilion Insignia, 80;; Dyrenell Aureus, 30
+Sword Dojo\23\-\Adventurer, Dojo\3x3\2\70000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Vermilion Insignia, 80;; Dyrenell Aureus, 40
+Sword Dojo\24\-\Adventurer, Dojo\3x3\2\80000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Vermilion Insignia, 100;; Dyrenell Aureus, 50
+Sword Dojo\25\-\Adventurer, Dojo\3x3\2\90000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Vermilion Insignia, 100;; Dyrenell Aureus, 60
+Sword Dojo\26\-\Adventurer, Dojo\3x3\2\100000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Vermilion Insignia, 120;; Dyrenell Aureus, 70;; Royal Vermilion Insignia, 20
+Sword Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Vermilion Insignia, 120;; Dyrenell Aureus, 80;; Royal Vermilion Insignia, 30
+Sword Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Vermilion Insignia, 120;; Dyrenell Aureus, 90;; Royal Vermilion Insignia, 40
+Sword Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Vermilion Insignia, 160;; Dyrenell Aureus, 100;; Royal Vermilion Insignia, 50
+Sword Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Vermilion Insignia, 160;; Dyrenell Aureus, 110;; Royal Vermilion Insignia, 60
+Wand Dojo\1\A training area built to hone one's skills with a wand. Use it to boosts the stats of wand-wielding adventures.\Adventurer, Dojo\3x3\2\0
+Wand Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10
+Wand Dojo\3\-\Adventurer, Dojo\3x3\2\3500\Dyrenell Aes, 10
+Wand Dojo\4\-\Adventurer, Dojo\3x3\2\4000\Dyrenell Aes, 10
+Wand Dojo\5\-\Adventurer, Dojo\3x3\2\4500\Dyrenell Aes, 10
+Wand Dojo\6\-\Adventurer, Dojo\3x3\2\5000\Dyrenell Aes, 20
+Wand Dojo\7\-\Adventurer, Dojo\3x3\2\6000\Dyrenell Aes, 20
+Wand Dojo\8\-\Adventurer, Dojo\3x3\2\7000\Dyrenell Aes, 20
+Wand Dojo\9\-\Adventurer, Dojo\3x3\2\8000\Dyrenell Aes, 20
+Wand Dojo\10\-\Adventurer, Dojo\3x3\2\9000\Dyrenell Aes, 20
+Wand Dojo\11\-\Adventurer, Dojo\3x3\2\10000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Jade Insignia, 10
+Wand Dojo\12\-\Adventurer, Dojo\3x3\2\12000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Jade Insignia, 10
+Wand Dojo\13\-\Adventurer, Dojo\3x3\2\14000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Jade Insignia, 10
+Wand Dojo\14\-\Adventurer, Dojo\3x3\2\16000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Jade Insignia, 20
+Wand Dojo\15\-\Adventurer, Dojo\3x3\2\18000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Jade Insignia, 20
+Wand Dojo\16\-\Adventurer, Dojo\3x3\2\20000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Jade Insignia, 40
+Wand Dojo\17\-\Adventurer, Dojo\3x3\2\25000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Jade Insignia, 40
+Wand Dojo\18\-\Adventurer, Dojo\3x3\2\30000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Jade Insignia, 40
+Wand Dojo\19\-\Adventurer, Dojo\3x3\2\35000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Jade Insignia, 60
+Wand Dojo\20\-\Adventurer, Dojo\3x3\2\40000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Jade Insignia, 60
+Wand Dojo\21\-\Adventurer, Dojo\3x3\2\50000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Jade Insignia, 80;; Dyrenell Aureus, 20
+Wand Dojo\22\-\Adventurer, Dojo\3x3\2\60000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Jade Insignia, 80;; Dyrenell Aureus, 30
+Wand Dojo\23\-\Adventurer, Dojo\3x3\2\70000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Jade Insignia, 80;; Dyrenell Aureus, 40
+Wand Dojo\24\-\Adventurer, Dojo\3x3\2\80000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Jade Insignia, 100;; Dyrenell Aureus, 50
+Wand Dojo\25\-\Adventurer, Dojo\3x3\2\90000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Jade Insignia, 100;; Dyrenell Aureus, 60
+Wand Dojo\26\-\Adventurer, Dojo\3x3\2\100000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Jade Insignia, 120;; Dyrenell Aureus, 70;; Royal Jade Insignia, 20
+Wand Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Jade Insignia, 120;; Dyrenell Aureus, 80;; Royal Jade Insignia, 30
+Wand Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Jade Insignia, 120;; Dyrenell Aureus, 90;; Royal Jade Insignia, 40
+Wand Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Jade Insignia, 160;; Dyrenell Aureus, 100;; Royal Jade Insignia, 50
+Wand Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Jade Insignia, 160;; Dyrenell Aureus, 110;; Royal Jade Insignia, 60
+Water Altar\1\An altar to honor water. The mana housed within sharpens the mind, boosting the stats of water-attuned adventurers.\Adventurer, Altar\3x3\2\200
+Water Altar\2\-\Adventurer, Altar\3x3\2\400
+Water Altar\3\-\Adventurer, Altar\3x3\2\600
+Water Altar\4\-\Adventurer, Altar\3x3\2\800\Water Orb, 1
+Water Altar\5\-\Adventurer, Altar\3x3\2\1000\Water Orb, 3
+Water Altar\6\-\Adventurer, Altar\3x3\2\1200\Water Orb, 5
+Water Altar\7\-\Adventurer, Altar\3x3\2\1500\Water Orb, 5
+Water Altar\8\-\Adventurer, Altar\3x3\2\2000\Water Orb, 5
+Water Altar\9\-\Adventurer, Altar\3x3\2\2500\Water Orb, 7
+Water Altar\10\-\Adventurer, Altar\3x3\2\3000\Water Orb, 7
+Water Altar\11\-\Adventurer, Altar\3x3\2\4000\Water Orb, 10;; Stream Orb, 1
+Water Altar\12\-\Adventurer, Altar\3x3\2\5000\Water Orb, 10;; Stream Orb, 1
+Water Altar\13\-\Adventurer, Altar\3x3\2\6000\Water Orb, 10;; Stream Orb, 1
+Water Altar\14\-\Adventurer, Altar\3x3\2\7000\Water Orb, 15;; Stream Orb, 2
+Water Altar\15\-\Adventurer, Altar\3x3\2\8000\Water Orb, 15;; Stream Orb, 2
+Water Altar\16\-\Adventurer, Altar\3x3\2\10000\Water Orb, 20;; Stream Orb, 3
+Water Altar\17\-\Adventurer, Altar\3x3\2\12000\Water Orb, 20;; Stream Orb, 3
+Water Altar\18\-\Adventurer, Altar\3x3\2\14000\Water Orb, 20;; Stream Orb, 3
+Water Altar\19\-\Adventurer, Altar\3x3\2\16000\Water Orb, 30;; Stream Orb, 4
+Water Altar\20\-\Adventurer, Altar\3x3\2\18000\Water Orb, 30;; Stream Orb, 4
+Water Altar\21\-\Adventurer, Altar\3x3\2\20000\Water Orb, 50;; Stream Orb, 6;; Deluge Orb, 1
+Water Altar\22\-\Adventurer, Altar\3x3\2\22000\Water Orb, 50;; Stream Orb, 6;; Deluge Orb, 1
+Water Altar\23\-\Adventurer, Altar\3x3\2\24000\Water Orb, 50;; Stream Orb, 6;; Deluge Orb, 1
+Water Altar\24\-\Adventurer, Altar\3x3\2\26000\Water Orb, 70;; Stream Orb, 7;; Deluge Orb, 1
+Water Altar\25\-\Adventurer, Altar\3x3\2\28000\Water Orb, 70;; Stream Orb, 7;; Deluge Orb, 1
+Water Altar\26\-\Adventurer, Altar\3x3\2\30000\Water Orb, 100;; Stream Orb, 10;; Deluge Orb, 2
+Water Altar\27\-\Adventurer, Altar\3x3\2\32000\Water Orb, 100;; Stream Orb, 10;; Deluge Orb, 2
+Water Altar\28\-\Adventurer, Altar\3x3\2\34000\Water Orb, 100;; Stream Orb, 10;; Deluge Orb, 2
+Water Altar\29\-\Adventurer, Altar\3x3\2\36000\Water Orb, 150;; Stream Orb, 12;; Deluge Orb, 3
+Water Altar\30\-\Adventurer, Altar\3x3\2\38000\Water Orb, 150;; Stream Orb, 12;; Deluge Orb, 3
+Water Dracolith\1\A monument made in the likeness of a water dragon. Increases damage dealt when shapeshifting as a water-attuned dragon.\Dragon, Dracolith\2x2\1\0
+Water Dracolith\2\-\Dragon, Dracolith\2x2\1\3000
+Water Dracolith\3\-\Dragon, Dracolith\2x2\1\4000
+Water Dracolith\4\-\Dragon, Dracolith\2x2\1\5000\Waterwyrm's Sphere, 5;; Waterwyrm's Scale, 3;; Talonstone, 1
+Water Dracolith\5\-\Dragon, Dracolith\2x2\1\6000\Waterwyrm's Sphere, 10;; Waterwyrm's Scale, 4;; Talonstone, 1
+Water Dracolith\6\-\Dragon, Dracolith\2x2\1\7000\Waterwyrm's Sphere, 15;; Waterwyrm's Scale, 5;; Talonstone, 1
+Water Dracolith\7\-\Dragon, Dracolith\2x2\1\8000\Waterwyrm's Sphere, 20;; Waterwyrm's Scale, 6;; Talonstone, 3
+Water Dracolith\8\-\Dragon, Dracolith\2x2\1\10000\Waterwyrm's Sphere, 25;; Waterwyrm's Scale, 7;; Talonstone, 3
+Water Dracolith\9\-\Dragon, Dracolith\2x2\1\12000\Waterwyrm's Sphere, 30;; Waterwyrm's Scale, 8;; Talonstone, 3
+Water Dracolith\10\-\Dragon, Dracolith\2x2\1\14000\Waterwyrm's Sphere, 35;; Waterwyrm's Scale, 10;; Talonstone, 3
+Water Dracolith\11\-\Dragon, Dracolith\2x2\1\16000\Waterwyrm's Sphere, 40;; Waterwyrm's Scale, 15;; Talonstone, 5
+Water Dracolith\12\-\Dragon, Dracolith\2x2\1\18000\Waterwyrm's Sphere, 50;; Waterwyrm's Scale, 20;; Talonstone, 5
+Water Dracolith\13\-\Dragon, Dracolith\2x2\1\20000\Waterwyrm's Sphere, 60;; Waterwyrm's Scale, 25;; Talonstone, 5
+Water Dracolith\14\-\Dragon, Dracolith\2x2\1\22000\Waterwyrm's Sphere, 90;; Waterwyrm's Scale, 30;; Talonstone, 8
+Water Dracolith\15\-\Dragon, Dracolith\2x2\1\24000\Waterwyrm's Sphere, 120;; Waterwyrm's Scale, 40;; Talonstone, 8
+Water Dracolith\16\-\Dragon, Dracolith\2x2\1\26000\Waterwyrm's Sphere, 150;; Waterwyrm's Scale, 60;; Talonstone, 8
+Water Dracolith\17\-\Dragon, Dracolith\2x2\1\28000\Waterwyrm's Sphere, 200;; Waterwyrm's Scale, 80;; Talonstone, 10
+Water Dracolith\18\-\Dragon, Dracolith\2x2\1\30000\Waterwyrm's Sphere, 250;; Waterwyrm's Scale, 100;; Talonstone, 10
+Water Dracolith\19\-\Dragon, Dracolith\2x2\1\32000\Waterwyrm's Sphere, 300;; Waterwyrm's Scale, 120;; Talonstone, 10
+Water Dracolith\20\-\Dragon, Dracolith\2x2\1\34000\Waterwyrm's Sphere, 350;; Waterwyrm's Scale, 140;; Talonstone, 10
+Wind Altar\1\An altar to honor wind. The mana housed within inspires great wisdom, boosting the stats of wind-attuned adventurers.\Adventurer, Altar\3x3\2\200
+Wind Altar\2\-\Adventurer, Altar\3x3\2\400
+Wind Altar\3\-\Adventurer, Altar\3x3\2\600
+Wind Altar\4\-\Adventurer, Altar\3x3\2\800\Wind Orb, 1
+Wind Altar\5\-\Adventurer, Altar\3x3\2\1000\Wind Orb, 3
+Wind Altar\6\-\Adventurer, Altar\3x3\2\1200\Wind Orb, 5
+Wind Altar\7\-\Adventurer, Altar\3x3\2\1500\Wind Orb, 5
+Wind Altar\8\-\Adventurer, Altar\3x3\2\2000\Wind Orb, 5
+Wind Altar\9\-\Adventurer, Altar\3x3\2\2500\Wind Orb, 7
+Wind Altar\10\-\Adventurer, Altar\3x3\2\3000\Wind Orb, 7
+Wind Altar\11\-\Adventurer, Altar\3x3\2\4000\Wind Orb, 10;; Storm Orb, 1
+Wind Altar\12\-\Adventurer, Altar\3x3\2\5000\Wind Orb, 10;; Storm Orb, 1
+Wind Altar\13\-\Adventurer, Altar\3x3\2\6000\Wind Orb, 10;; Storm Orb, 1
+Wind Altar\14\-\Adventurer, Altar\3x3\2\7000\Wind Orb, 15;; Storm Orb, 2
+Wind Altar\15\-\Adventurer, Altar\3x3\2\8000\Wind Orb, 15;; Storm Orb, 2
+Wind Altar\16\-\Adventurer, Altar\3x3\2\10000\Wind Orb, 20;; Storm Orb, 3
+Wind Altar\17\-\Adventurer, Altar\3x3\2\12000\Wind Orb, 20;; Storm Orb, 3
+Wind Altar\18\-\Adventurer, Altar\3x3\2\14000\Wind Orb, 20;; Storm Orb, 3
+Wind Altar\19\-\Adventurer, Altar\3x3\2\16000\Wind Orb, 30;; Storm Orb, 4
+Wind Altar\20\-\Adventurer, Altar\3x3\2\18000\Wind Orb, 30;; Storm Orb, 4
+Wind Altar\21\-\Adventurer, Altar\3x3\2\20000\Wind Orb, 50;; Storm Orb, 6;; Maelstrom Orb, 1
+Wind Altar\22\-\Adventurer, Altar\3x3\2\22000\Wind Orb, 50;; Storm Orb, 6;; Maelstrom Orb, 1
+Wind Altar\23\-\Adventurer, Altar\3x3\2\24000\Wind Orb, 50;; Storm Orb, 6;; Maelstrom Orb, 1
+Wind Altar\24\-\Adventurer, Altar\3x3\2\26000\Wind Orb, 70;; Storm Orb, 7;; Maelstrom Orb, 1
+Wind Altar\25\-\Adventurer, Altar\3x3\2\28000\Wind Orb, 70;; Storm Orb, 7;; Maelstrom Orb, 1
+Wind Altar\26\-\Adventurer, Altar\3x3\2\30000\Wind Orb, 100;; Storm Orb, 10;; Maelstrom Orb, 2
+Wind Altar\27\-\Adventurer, Altar\3x3\2\32000\Wind Orb, 100;; Storm Orb, 10;; Maelstrom Orb, 2
+Wind Altar\28\-\Adventurer, Altar\3x3\2\34000\Wind Orb, 100;; Storm Orb, 10;; Maelstrom Orb, 2
+Wind Altar\29\-\Adventurer, Altar\3x3\2\36000\Wind Orb, 150;; Storm Orb, 12;; Maelstrom Orb, 3
+Wind Altar\30\-\Adventurer, Altar\3x3\2\38000\Wind Orb, 150;; Storm Orb, 12;; Maelstrom Orb, 3
+Wind Dracolith\1\A monument made in the likeness of a wind dragon. Increases damage dealt when shapeshifting as a wind-attuned dragon.\Dragon, Dracolith\2x2\1\0
+Wind Dracolith\2\-\Dragon, Dracolith\2x2\1\3000
+Wind Dracolith\3\-\Dragon, Dracolith\2x2\1\4000
+Wind Dracolith\4\-\Dragon, Dracolith\2x2\1\5000\Windwyrm's Sphere, 5;; Windwyrm's Scale, 3;; Talonstone, 1
+Wind Dracolith\5\-\Dragon, Dracolith\2x2\1\6000\Windwyrm's Sphere, 10;; Windwyrm's Scale, 4;; Talonstone, 1
+Wind Dracolith\6\-\Dragon, Dracolith\2x2\1\7000\Windwyrm's Sphere, 15;; Windwyrm's Scale, 5;; Talonstone, 1
+Wind Dracolith\7\-\Dragon, Dracolith\2x2\1\8000\Windwyrm's Sphere, 20;; Windwyrm's Scale, 6;; Talonstone, 3
+Wind Dracolith\8\-\Dragon, Dracolith\2x2\1\10000\Windwyrm's Sphere, 25;; Windwyrm's Scale, 7;; Talonstone, 3
+Wind Dracolith\9\-\Dragon, Dracolith\2x2\1\12000\Windwyrm's Sphere, 30;; Windwyrm's Scale, 8;; Talonstone, 3
+Wind Dracolith\10\-\Dragon, Dracolith\2x2\1\14000\Windwyrm's Sphere, 35;; Windwyrm's Scale, 10;; Talonstone, 3
+Wind Dracolith\11\-\Dragon, Dracolith\2x2\1\16000\Windwyrm's Sphere, 40;; Windwyrm's Scale, 15;; Talonstone, 5
+Wind Dracolith\12\-\Dragon, Dracolith\2x2\1\18000\Windwyrm's Sphere, 50;; Windwyrm's Scale, 20;; Talonstone, 5
+Wind Dracolith\13\-\Dragon, Dracolith\2x2\1\20000\Windwyrm's Sphere, 60;; Windwyrm's Scale, 25;; Talonstone, 5
+Wind Dracolith\14\-\Dragon, Dracolith\2x2\1\22000\Windwyrm's Sphere, 90;; Windwyrm's Scale, 30;; Talonstone, 8
+Wind Dracolith\15\-\Dragon, Dracolith\2x2\1\24000\Windwyrm's Sphere, 120;; Windwyrm's Scale, 40;; Talonstone, 8
+Wind Dracolith\16\-\Dragon, Dracolith\2x2\1\26000\Windwyrm's Sphere, 150;; Windwyrm's Scale, 60;; Talonstone, 8
+Wind Dracolith\17\-\Dragon, Dracolith\2x2\1\28000\Windwyrm's Sphere, 200;; Windwyrm's Scale, 80;; Talonstone, 10
+Wind Dracolith\18\-\Dragon, Dracolith\2x2\1\30000\Windwyrm's Sphere, 250;; Windwyrm's Scale, 100;; Talonstone, 10
+Wind Dracolith\19\-\Dragon, Dracolith\2x2\1\32000\Windwyrm's Sphere, 300;; Windwyrm's Scale, 120;; Talonstone, 10
+Wind Dracolith\20\-\Dragon, Dracolith\2x2\1\34000\Windwyrm's Sphere, 350;; Windwyrm's Scale, 140;; Talonstone, 10
+Wind Shrine\1\A shrine made using ore that generates wind mana. It gives the wind's blessings to those who need it. Use it to boost the stats of wind-attuned adventurers.\Adventurer, Event Altar\3x3\1\0
+Wind Shrine\2\-\Adventurer, Event Altar\3x3\1\100\Windwhistle Grass, 3
+Wind Shrine\3\-\Adventurer, Event Altar\3x3\1\200\Windwhistle Grass, 5
+Wind Shrine\4\-\Adventurer, Event Altar\3x3\1\300\Windwhistle Grass, 7
+Wind Shrine\5\-\Adventurer, Event Altar\3x3\1\400\Windwhistle Grass, 10
+Wind Shrine\6\-\Adventurer, Event Altar\3x3\1\500\Windwhistle Grass, 12
+Wind Shrine\7\-\Adventurer, Event Altar\3x3\1\600\Windwhistle Grass, 15
+Wind Shrine\8\-\Adventurer, Event Altar\3x3\1\700\Windwhistle Grass, 18
+Wind Shrine\9\-\Adventurer, Event Altar\3x3\1\800\Windwhistle Grass, 21
+Wind Shrine\10\-\Adventurer, Event Altar\3x3\1\1000\Windwhistle Grass, 25
+Wind Shrine\11\-\Adventurer, Event Altar\3x3\1\1200\Windwhistle Grass, 30
+Wind Shrine\12\-\Adventurer, Event Altar\3x3\1\1400\Windwhistle Grass, 50
+Wind Shrine\13\-\Adventurer, Event Altar\3x3\1\1600\Windwhistle Grass, 70
+Wind Shrine\14\-\Adventurer, Event Altar\3x3\1\1800\Windwhistle Grass, 90
+Wind Shrine\15\-\Adventurer, Event Altar\3x3\1\2000\Windwhistle Grass, 120
+Wind Shrine\16\-\Adventurer, Event Altar\3x3\1\2200\Windwhistle Grass, 150
+Wind Shrine\17\-\Adventurer, Event Altar\3x3\1\2400\Windwhistle Grass, 180
+Wind Shrine\18\-\Adventurer, Event Altar\3x3\1\2600\Windwhistle Grass, 210
+Wind Shrine\19\-\Adventurer, Event Altar\3x3\1\2800\Windwhistle Grass, 250
+Wind Shrine\20\-\Adventurer, Event Altar\3x3\1\3000\Windwhistle Grass, 300
+Wind Shrine\21\-\Adventurer, Event Altar\3x3\1\3200\Windwhistle Grass, 350
+Wind Shrine\22\-\Adventurer, Event Altar\3x3\1\3400\Windwhistle Grass, 400
+Wind Shrine\23\-\Adventurer, Event Altar\3x3\1\3600\Windwhistle Grass, 450
+Wind Shrine\24\-\Adventurer, Event Altar\3x3\1\3800\Windwhistle Grass, 500
+Wind Shrine\25\-\Adventurer, Event Altar\3x3\1\4000\Windwhistle Grass, 550
+Wind Shrine\26\-\Adventurer, Event Altar\3x3\1\4200\Windwhistle Grass, 600
+Wind Shrine\27\-\Adventurer, Event Altar\3x3\1\4400\Windwhistle Grass, 700
+Wind Shrine\28\-\Adventurer, Event Altar\3x3\1\4600\Windwhistle Grass, 800
+Wind Shrine\29\-\Adventurer, Event Altar\3x3\1\4800\Windwhistle Grass, 900
+Wind Shrine\30\-\Adventurer, Event Altar\3x3\1\5000\Windwhistle Grass, 1000
+Wishmill\-\A giant toy windmill. The wind that powers it might contain someone's wishes, too.\Decorative\1x1\4\0
+Yuletree\1\A festive tree erected to serve as the centerpiece of the Dragonyule party, and to bring warmth to everyone's hearts. Use it to boost the stats of water-attuned adventurers.\Adventurer, Event Altar\3x3\1\0
+Yuletree\2\-\Adventurer, Event Altar\3x3\1\100\Astral Ornament, 3
+Yuletree\3\-\Adventurer, Event Altar\3x3\1\200\Astral Ornament, 5
+Yuletree\4\-\Adventurer, Event Altar\3x3\1\300\Astral Ornament, 7
+Yuletree\5\-\Adventurer, Event Altar\3x3\1\400\Astral Ornament, 10
+Yuletree\6\-\Adventurer, Event Altar\3x3\1\500\Astral Ornament, 12
+Yuletree\7\-\Adventurer, Event Altar\3x3\1\600\Astral Ornament, 15
+Yuletree\8\-\Adventurer, Event Altar\3x3\1\700\Astral Ornament, 18
+Yuletree\9\-\Adventurer, Event Altar\3x3\1\800\Astral Ornament, 21
+Yuletree\10\-\Adventurer, Event Altar\3x3\1\1000\Astral Ornament, 25
+Yuletree\11\-\Adventurer, Event Altar\3x3\1\1200\Astral Ornament, 30
+Yuletree\12\-\Adventurer, Event Altar\3x3\1\1400\Astral Ornament, 50
+Yuletree\13\-\Adventurer, Event Altar\3x3\1\1600\Astral Ornament, 70
+Yuletree\14\-\Adventurer, Event Altar\3x3\1\1800\Astral Ornament, 90
+Yuletree\15\-\Adventurer, Event Altar\3x3\1\2000\Astral Ornament, 120
+Yuletree\16\-\Adventurer, Event Altar\3x3\1\2200\Astral Ornament, 150
+Yuletree\17\-\Adventurer, Event Altar\3x3\1\2400\Astral Ornament, 180
+Yuletree\18\-\Adventurer, Event Altar\3x3\1\2600\Astral Ornament, 210
+Yuletree\19\-\Adventurer, Event Altar\3x3\1\2800\Astral Ornament, 250
+Yuletree\20\-\Adventurer, Event Altar\3x3\1\3000\Astral Ornament, 300
+Yuletree\21\-\Adventurer, Event Altar\3x3\1\3200\Astral Ornament, 350
+Yuletree\22\-\Adventurer, Event Altar\3x3\1\3400\Astral Ornament, 400
+Yuletree\23\-\Adventurer, Event Altar\3x3\1\3600\Astral Ornament, 450
+Yuletree\24\-\Adventurer, Event Altar\3x3\1\3800\Astral Ornament, 500
+Yuletree\25\-\Adventurer, Event Altar\3x3\1\4000\Astral Ornament, 550
+Yuletree\26\-\Adventurer, Event Altar\3x3\1\4200\Astral Ornament, 600
+Yuletree\27\-\Adventurer, Event Altar\3x3\1\4400\Astral Ornament, 700
+Yuletree\28\-\Adventurer, Event Altar\3x3\1\4600\Astral Ornament, 800
+Yuletree\29\-\Adventurer, Event Altar\3x3\1\4800\Astral Ornament, 900
+Yuletree\30\-\Adventurer, Event Altar\3x3\1\5000\Astral Ornament, 1000
