@@ -132,7 +132,8 @@ def all_commands(include_nil=false,permissions=-1)
      'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','dbxp','sp',
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
      'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias',
-     'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset']
+     'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','limit',
+     'limits','stack','stacks']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop'] if permissions==2
   k=k.uniq
@@ -267,7 +268,15 @@ def data_load()
   end
   for i in 0...b.length
     b[i]=b[i].gsub("\n",'').split('\\'[0])
-    b[i][2]=b[i][2].split(', ')
+    b[i][3]=b[i][3].split(', ')
+    b[i][5]=b[i][5].to_i
+    b[i][6]=b[i][6].to_i
+    unless b[i][7].nil?
+      b[i][7]=b[i][7].split(';; ').map{|q| q.split(', ')}
+      for i2 in 0...b[i][7].length
+        b[i][7][i2][1]=b[i][7][i2][1].to_i
+      end
+    end
   end
   @facilities=b.map{|q| q}
   if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLMaterials.txt')
@@ -533,6 +542,8 @@ def help_text(event,bot,command=nil,subcommand=nil)
     create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\nAlso shows the current day's Expert Ruins, what difficulties are available, and what orbs and other mats come out of those.\nAlso shows the current day's shop mats.",0xCE456B)
   elsif ['tomorrow','tomorow','tommorrow','tommorow'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows the next day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\nAlso shows the next day's Expert Ruins, what difficulties are available, and what orbs and other mats come out of those.\nAlso shows the current day's shop mats.",0xCE456B)
+  elsif ['limit','limits','stack','stacks'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}**","Shows the limits for ability stacking of all abilities.",0xCE456B)
   elsif ['next','schedule'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __type__","Shows the next time in-game daily events of the type `type` will happen.\nIf in PM and `type` is unspecified, shows the entire schedule.\n\n__*Accepted Inputs*__\nRuin(s)\nMat(s)\nShop, Store\nBond(s), Dragon(s)",0xCE456B)
   elsif ['art'].include?(command.downcase)
@@ -638,6 +649,7 @@ def help_text(event,bot,command=nil,subcommand=nil)
     str="#{str}\n\n`skill` __name__ - for data on a particular skill"
     str="#{str}\n`ability` __name__ - for data on a particular ability or co-ability"
     str="#{str}\n`aura` __name__ - for data on a particular aura"
+    str="#{str}\n`limits` - for ability stacking limits (*also `stack`*)"
     str="#{str}\n\n`facility` __name__ - for data on a particular facility"
     str="#{str}\n`material` __name__ - for data on a particular material (*also `mat`*)"
     str="#{str}\n\n`stats` __target__ - for only an entity's stats"
@@ -1031,22 +1043,22 @@ def find_facility(name,event,fullname=false,ext=false)
   name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   return [] if name.length<2
   k=@facilities.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
-  return @facilities[k] unless k.nil?
+  return @facilities.reject{|q| q[0]!=@facilities[k][0]} unless k.nil?
   nicknames_load()
   alz=@aliases.reject{|q| q[0]!='Facility'}.map{|q| [q[1],q[2],q[3]]}
   g=0
   g=event.server.id unless event.server.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
-  return @facilities[@facilities.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return @facilities.reject{|q| q[0]!=alz[k][1]} unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
-  return @facilities[@facilities.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return @facilities.reject{|q| q[0]!=alz[k][1]} unless k.nil?
   return [] if fullname
   k=@facilities.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
-  return @facilities[k] unless k.nil?
+  return @facilities.reject{|q| q[0]!=@facilities[k][0]} unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
-  return @facilities[@facilities.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return @facilities.reject{|q| q[0]!=alz[k][1]} unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
-  return @facilities[@facilities.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return @facilities.reject{|q| q[0]!=alz[k][1]} unless k.nil?
   return []
 end
 
@@ -2896,28 +2908,30 @@ def disp_facility_data(bot,event,args=nil)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
-  k=find_data_ex(:find_facility,args.join(' '),event)
-  if k.length.zero?
+  kxx=find_data_ex(:find_facility,args.join(' '),event)
+  if kxx.length.zero?
     event.respond 'No matches found.'
     return nil
   end
+  puts kxx.map{|q| q.to_s}
+  k=kxx[0]
   s2s=false
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
   s2s=false if @shardizard==4 && evn.include?('smol')
   str=''
-  str="**Type:** #{k[2][0]} #{"(#{k[2][1]})" if k[2].length>1}"
-  str="#{str}\n**Size:** #{k[3]}"
-  str="#{str}\n**Quantity available:** #{k[4]}"
-  str="#{str}\n\n**Description:** #{k[1]}"
+  str="**Type:** #{k[3][0]} #{"(#{k[3][1]})" if k[3].length>1}"
+  str="#{str}\n**Size:** #{k[4]}"
+  str="#{str}\n**Quantity available:** #{k[5]}"
+  str="#{str}\n\n**Description:** #{k[2]}"
   m='t'
   m='Amber' if ['Staff Dojo'].include?(k[0])
   m='Azure' if ['Blade Dojo','Lance Dojo'].include?(k[0])
   m='Jade' if ['Axe Dojo','Wand Dojo'].include?(k[0])
   m='Vermillion' if ['Sword Dojo','Bow Dojo'].include?(k[0])
   m='Violet' if ['Dagger Dojo'].include?(k[0])
-  str="#{str}\n\n**First Dojo cost:** Dyrenell Aes x10\n**Second Dojo cost:** Dyrenell Aes x30, Dyrenell Argenteus x10, #{k[0].split(' ')[0]} Tablet x2" if k[2]==['Adventurer', 'Dojo']
-  if k[2]==['Adventurer', 'Altar']
+  str="#{str}\n\n**First Dojo cost:** Dyrenell Aes x10\n**Second Dojo cost:** Dyrenell Aes x30, Dyrenell Argenteus x10, #{k[0].split(' ')[0]} Tablet x2" if k[3]==['Adventurer', 'Dojo']
+  if k[3]==['Adventurer', 'Altar']
     if k[0]=='Flame Altar'
       str="#{str}\n\n**First Altar becomes available at:** Player Level#{' (PL)' if s2s} 1\n**Second Altar becomes available at:** Player Level 40"
       str="#{str}\n\nBy default can only go to Level 10\nCan reach Level 15 at PL 12\nCan reach Level 20 at PL 24\nCan reach Level 25 at PL 37\nCan reach Level 30 at PL 67" if s2s
@@ -2948,161 +2962,122 @@ def disp_facility_data(bot,event,args=nil)
   ftr='Use this command in PM to see the costs to upgrade this facility.' unless s2s
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Facilities/#{k[0].gsub(' ','_')}.png"
   create_embed(event,"__**#{k[0]}**__",str,0x8BE3F7,ftr,xpic)
-  if s2s
-    str=''
-    ftr=nil
-    if k[2][0]=='Adventurer'
-      if k[2][1]=='Dojo'
-        m='t'
-        m='Amber' if ['Staff Dojo'].include?(k[0])
-        m='Azure' if ['Blade Dojo','Lance Dojo'].include?(k[0])
-        m='Jade' if ['Axe Dojo','Wand Dojo'].include?(k[0])
-        m='Vermillion' if ['Sword Dojo','Bow Dojo'].include?(k[0])
-        m='Violet' if ['Dagger Dojo'].include?(k[0])
-        str="*Level 1 \u2192 5 (per level):* Dyrenell Aes x10"
-        str="#{str}\n\n*Level 5 \u2192 10 (per level):* Dyrenell Aes x20"
-        str="#{str}\n\n*Level 10 \u2192 13 (per level):* Dyrenell Aes x30, Dyrenell Argenteus x5, #{m} Insignia x10"
-        str="#{str}\n\n*Level 13 \u2192 15 (per level):* Dyrenell Aes x30, Dyrenell Argenteus x10, #{m} Insignia x20"
-        str="#{str}\n\n*Level 15 \u2192 18 (per level):* Dyrenell Aes x50, Dyrenell Argenteus x20, #{m} Insignia x40"
-        str="#{str}\n\n*Level 18 \u2192 20 (per level):* Dyrenell Aes x70, Dyrenell Argenteus x30, #{m} Insignia x60"
-        str="#{str}\n\n*Level 20 \u2192 21:* Dyrenell Aes x100, Dyrenell Argenteus x40, Dyrenell Aureus x20, #{m} Insignia x80"
-        str="#{str}\n\n*Level 21 \u2192 22:* Dyrenell Aes x100, Dyrenell Argenteus x40, Dyrenell Aureus x30, #{m} Insignia x80"
-        str="#{str}\n\n*Level 22 \u2192 23:* Dyrenell Aes x100, Dyrenell Argenteus x40, Dyrenell Aureus x40, #{m} Insignia x80"
-        str="#{str}\n\n*Level 23 \u2192 24:* Dyrenell Aes x150, Dyrenell Argenteus x50, Dyrenell Aureus x50, #{m} Insignia x100"
-        str="#{str}\n\n*Level 24 \u2192 25:* Dyrenell Aes x150, Dyrenell Argenteus x50, Dyrenell Aureus x60, #{m} Insignia x100"
-        str="#{str}\n\n*Level 25 \u2192 26:* Dyrenell Aes x200, Dyrenell Argenteus x60, Dyrenell Aureus x70, #{m} Insignia x120, Royal #{m} Insignia x20"
-        str="#{str}\n\n*Level 26 \u2192 27:* Dyrenell Aes x200, Dyrenell Argenteus x60, Dyrenell Aureus x80, #{m} Insignia x120, Royal #{m} Insignia x30"
-        str="#{str}\n\n*Level 27 \u2192 28:* Dyrenell Aes x200, Dyrenell Argenteus x60, Dyrenell Aureus x90, #{m} Insignia x120, Royal #{m} Insignia x40"
-        str="#{str}\n\n*Level 28 \u2192 29:* Dyrenell Aes x300, Dyrenell Argenteus x80, Dyrenell Aureus x100, #{m} Insignia x160, Royal #{m} Insignia x50"
-        str="#{str}\n\n*Level 29 \u2192 30:* Dyrenell Aes x300, Dyrenell Argenteus x80, Dyrenell Aureus x110, #{m} Insignia x160, Royal #{m} Insignia x60"
-      elsif k[2][1]=='Altar'
-        m=['1','2','3']
-        m=['Flame','Blaze','Inferno'] if k[0]=='Flame Altar'
-        m=['Water','Stream','Deluge'] if k[0]=='Water Altar'
-        m=['Wind','Storm','Maelstorm'] if k[0]=='Wind Altar'
-        m=['Light','Radiance','Refulgence'] if k[0]=='Light Altar'
-        m=['Shadow','Nightfull','Nether'] if k[0]=='Shadow Altar'
-        str="*Level 1 \u2192 3 (per level):* ~~no mats~~"
-        str="#{str}\n*Level 3 \u2192 4:* #{m[0]} Orb x1"
-        str="#{str}\n*Level 4 \u2192 5:* #{m[0]} Orb x3"
-        str="#{str}\n*Level 5 \u2192 8 (per level):* #{m[0]} Orb x5"
-        str="#{str}\n*Level 8 \u2192 10 (per level):* #{m[0]} Orb x7"
-        str="#{str}\n*Level 10 \u2192 13 (per level):* #{m[0]} Orb x10, #{m[1]} Orb x1"
-        str="#{str}\n*Level 13 \u2192 15 (per level):* #{m[0]} Orb x15, #{m[1]} Orb x2"
-        str="#{str}\n*Level 15 \u2192 18 (per level):* #{m[0]} Orb x20, #{m[1]} Orb x3"
-        str="#{str}\n*Level 18 \u2192 20 (per level):* #{m[0]} Orb x30, #{m[1]} Orb x4"
-        str="#{str}\n*Level 20 \u2192 23 (per level):* #{m[0]} Orb x50, #{m[1]} Orb x6, #{m[2]} Orb x1"
-        str="#{str}\n*Level 23 \u2192 25 (per level):* #{m[0]} Orb x70, #{m[1]} Orb x8, #{m[2]} Orb x1"
-        str="#{str}\n*Level 25 \u2192 28 (per level):* #{m[0]} Orb x100, #{m[1]} Orb x10, #{m[2]} Orb x2"
-        str="#{str}\n*Level 28 \u2192 30 (per level):* #{m[0]} Orb x150, #{m[1]} Orb x12, #{m[2]} Orb x3"
-      elsif k[2][1]=='Void Altar'
-        str="*Level 1 \u2192 2:* Bat's Wing x10"
-        str="#{str}\n*Level 2 \u2192 3:* Bat's Wing x15, Solid Fungus x2"
-        str="#{str}\n*Level 3 \u2192 4:* Bat's Wing x20"
-        str="#{str}\n*Level 4 \u2192 5:* Bat's Wing x25, Solid Fungus x5"
-        str="#{str}\n*Level 5 \u2192 6:* Bat's Wing x30, Ancient Bird's Feather x5"
-        str="#{str}\n*Level 6 \u2192 7:* Bat's Wing x35, Ancient Bird's Feather x10, Steel Slab x2"
-        str="#{str}\n*Level 7 \u2192 8:* Bat's Wing x40, Ancient Bird's Feather x15"
-        str="#{str}\n*Level 8 \u2192 9:* Bat's Wing x45, Ancient Bird's Feather x20, Steel Slab x5"
-        str="#{str}\n*Level 9 \u2192 10:* Bat's Wing x50, Ancient Bird's Feather x25"
-        str="#{str}\n*Level 10 \u2192 11:* Bat's Wing x55, Ancient Bird's Feather x30, Bewitching Wings x5, Great Feather x2"
-        str="#{str}\n*Level 11 \u2192 12:* Bat's Wing x60, Ancient Bird's Feather x35, Bewitching Wings x10"
-        str="#{str}\n*Level 12 \u2192 13:* Bat's Wing x65, Ancient Bird's Feather x40, Bewitching Wings x15, Great Feather x5"
-        str="#{str}\n*Level 13 \u2192 14:* Bat's Wing x70, Ancient Bird's Feather x45, Bewitching Wings x20"
-        str="#{str}\n*Level 14 \u2192 15:* Bat's Wing x75, Ancient Bird's Feather x50, Bewitching Wings x30, Great Feather x8"
-      elsif k[2][1]=='Event Altar' && !k[5].nil? && k[5].length>0
-        m=[3,5,7,10,12,15,18,21,25,30,50,70,90,120,150,180,210,250,300,350,400,450,500,550,600,700,800,900,1000]
-        for i in 0...m.length
-          str="#{str}\n*Level #{i+1} \u2192 #{i+2}:* #{k[5]} x#{m[i]}"
-        end
-      end
-    elsif k[2][0]=='Dragon'
-      if k[2][1]=='Fafnir'
-        m=k[0].gsub('Fafnir Statue (','').gsub(')','')
-        m2='x'
-        m2='Scald' if m=='Flame'
-        m2='Squall' if m=='Wind'
-        str="*Level 1 \u2192 3 (per level):* #{m}wyrm's Greatsphere x3"
-        str="#{str}\n*Level 3 \u2192 5 (per level):* #{m}wyrm's Greatsphere x5"
-        str="#{str}\n*Level 5 \u2192 8 (per level):* #{m}wyrm's Greatsphere x7, #{m}wyrm's #{m2}scale x5, Talonstone x10"
-        str="#{str}\n*Level 8 \u2192 10 (per level):* #{m}wyrm's Greatsphere x10, #{m}wyrm's #{m2}scale x5, Talonstone x10"
-        str="#{str}\n*Level 10 \u2192 13 (per level):* #{m}wyrm's Greatsphere x12, #{m}wyrm's #{m2}scale x10, Talonstone x20"
-        str="#{str}\n*Level 13 \u2192 15 (per level):* #{m}wyrm's Greatsphere x15, #{m}wyrm's #{m2}scale x10, Talonstone x20"
-        str="#{str}\n*Level 15 \u2192 18 (per level):* #{m}wyrm's Greatsphere x20, #{m}wyrm's #{m2}scale x20, Talonstone x30"
-        str="#{str}\n*Level 18 \u2192 20 (per level):* #{m}wyrm's Greatsphere x30, #{m}wyrm's #{m2}scale x20, Talonstone x30"
-        str="#{str}\n*Level 20 \u2192 23 (per level):* #{m}wyrm's Greatsphere x40, #{m}wyrm's #{m2}scale x30, Talonstone x40"
-        str="#{str}\n*Level 23 \u2192 25 (per level):* #{m}wyrm's Greatsphere x50, #{m}wyrm's #{m2}scale x30, Talonstone x40"
-        str="#{str}\n*Level 25 \u2192 28 (per level):* #{m}wyrm's Greatsphere x60, #{m}wyrm's #{m2}scale x50, Talonstone x60"
-        str="#{str}\n*Level 28 \u2192 30 (per level):* #{m}wyrm's Greatsphere x70, #{m}wyrm's #{m2}scale x50, Talonstone x60"
-      elsif k[2][1]=='Dracolith'
-        str="*Level 1 \u2192 3 (per level):* ~~no mats~~"
-        m=[[5,3,1],[10,4,1],[15,5,1],[20,6,3],[25,7,3],[30,8,3],[35,10,3],[40,15,5],[50,20,5],[60,25,5],[90,30,8],[120,40,8],[150,60,8],[200,80,10],
-           [250,100,10],[300,120,10],[350,140,10]]
-        m2=k[0].split(' ')[0]
-        for i in 0...m.length
-          str="#{str}\n*Level #{i+3} \u2192 #{i+4}:* #{m2}wyrm's Sphere x#{m[i][0]}, #{m2}wyrm's Scale x#{m[i][1]}, Talonstone x#{m[i][2]}"
-        end
-      end
-    elsif k[0]=='Smithy'
-      str="__**Can craft #{generate_rarity_row(3)} weapons**__"
-      str="#{str}\n*Level 1 \u2192 2:* ~~no mats~~"
-      str="#{str}\n*Level 2 \u2192 3:* Light Metal x3"
-      str="#{str}\n\n__**Can craft #{generate_rarity_row(4)} weapons**__"
-      str="#{str}\n*Level 3 \u2192 4:* Iron Ore x10, Fiend's Claw x10, Bat's Wing x10"
-      str="#{str}\n*Level 4 \u2192 5:* Iron Ore x15, Fiend's Claw x15, Bat's Wing x15, Light Metal x15"
-      str="#{str}\n*Level 5 \u2192 6:* Granite x10, Fiend's Horn x10, Ancient Bird's Feather x10"
-      str="#{str}\n\n__**Can craft #{generate_rarity_row(5)} weapons**__"
-      str="#{str}\n*Level 6 \u2192 7:* Granite x15, Fiend's Horn x15, Ancient Bird's Feather x15, Abyss Stone x15"
-      str="#{str}\n*Level 7 \u2192 8:* Meteorite x10, Fiend's Eye x10, Bewitching Wings x10"
-      str="#{str}\n*Level 8 \u2192 9:* Meteorite x15, Fiend's Eye x15, Bewitching Wings x15, Crimson Core x15"
-      ftr='Each new level of smithy allows you to craft higher-tier weapons within the newest-allowed rarity bracket.'
-    elsif k[0]=='Halidom'
-      str="__*Level 1 \u2192 2*__\nRequires Facility level of 5"
-      str="#{str}\n\n__*Level 2 \u2192 3*__\nRequires Facility level of 40\n<:Element_Wind:532106087948746763>Wind Orb x10, Storm Orb x1, Talonstone x3"
-      str="#{str}\n\n__*Level 3 \u2192 4*__\nRequires Facility level of 100\n<:Element_Water:532106088221376522>Water Orb x20, Stream Orb x3, Deluge Orb x1, Talonstone x5"
-      str="#{str}\n\n__*Level 4 \u2192 5*__\nRequires Facility level of 200\n<:Element_Flame:532106087952810005>Flame Orb x50, Blaze Orb x7, Inferno Orb x2, Talonstone x10"
-      str="#{str}\n\n__*Level 5 \u2192 6*__\nRequires Facility level of 300\n<:Element_Light:532106088129101834>Light Orb x100, Radiance Orb x15, Refulgence Orb x3, Talonstone x15"
-      str="#{str}\n\n__*Level 6 \u2192 7*__\nRequires Facility level of 400\n<:Element_Shadow:532106088154267658>Shadow Orb x150, Nightfall Orb x20, Nether Orb x4, Talonstone x20"
-      str="#{str}\n\n__*Level 7 \u2192 8*__\nRequires Facility level of 550\n<:Element_Wind:532106087948746763>Wind Orb x200, Storm Orb x25, Maelstrom Orb x6, Talonstone x25"
-      str="#{str}\n\n__*Level 8 \u2192 9*__\nRequires Facility level of 700\n<:Element_Water:532106088221376522>Water Orb x300, Stream Orb x40, Deluge Orb x9, Talonstone x30"
-    elsif k[0]=='Dragontree'
-      str="*Level 1 \u2192 3 (per level):* ~~no mats~~"
-      str="#{str}\n*Level 3 \u2192 5 (per level):* Talonstone x1"
-      str="#{str}\n*Level 5 \u2192 7 (per level):* Talonstone x2"
-      str="#{str}\n*Level 7 \u2192 9 (per level):* Talonstone x3"
-      str="#{str}\n*Level 9 \u2192 10:* Talonstone x4"
-      str="#{str}\n*Level 10 \u2192 11:* Talonstone x5"
-      str="#{str}\n*Level 11 \u2192 12:* Talonstone x6"
-      str="#{str}\n*Level 12 \u2192 13:* Talonstone x8"
-      str="#{str}\n*Level 13 \u2192 14:* Talonstone x9"
-      str="#{str}\n*Level 14 \u2192 15:* Talonstone x10"
-      str="#{str}\n*Level 15 \u2192 16:* Talonstone x12"
-      str="#{str}\n*Level 16 \u2192 17:* Talonstone x13"
-      str="#{str}\n*Level 17 \u2192 18:* Talonstone x14"
-      str="#{str}\n*Level 18 \u2192 19:* Talonstone x16"
-      str="#{str}\n*Level 19 \u2192 20:* Talonstone x17"
-      str="#{str}\n*Level 20 \u2192 21:* Talonstone x18"
-      str="#{str}\n*Level 21 \u2192 22:* Talonstone x20"
-      str="#{str}\n*Level 22 \u2192 23:* Talonstone x21"
-      str="#{str}\n*Level 23 \u2192 24:* Talonstone x22"
-      str="#{str}\n*Level 24 \u2192 25:* Talonstone x24"
-      str="#{str}\n*Level 25 \u2192 26:* Talonstone x25"
-      str="#{str}\n*Level 26 \u2192 27:* Talonstone x26"
-    elsif k[0]=='Rupie Mine'
-      str="*Level 1 \u2192 5 (per level):* ~~no mats~~"
-      str="#{str}\n*Level 5 \u2192 8 (per level):* Light Orb x1"
-      str="#{str}\n*Level 8 \u2192 10 (per level):* Light Orb x2"
-      str="#{str}\n*Level 10 \u2192 13 (per level):* Light Orb x3"
-      str="#{str}\n*Level 13 \u2192 15 (per level):* Light Orb x5"
-      str="#{str}\n*Level 15 \u2192 18 (per level):* Light Orb x8, Radiance Orb x1"
-      str="#{str}\n*Level 18 \u2192 20 (per level):* Light Orb x10, Radiance Orb x1"
-      str="#{str}\n*Level 20 \u2192 23 (per level):* Light Orb x15, Radiance Orb x2"
-      str="#{str}\n*Level 23 \u2192 25 (per level):* Light Orb x20, Radiance Orb x2"
-      str="#{str}\n*Level 25 \u2192 28 (per level):* Light Orb x30, Radiance Orb x3, Refulgence Orb x1"
-      str="#{str}\n*Level 28 \u2192 30 (per level):* Light Orb x40, Radiance Orb x3, Refulgence Orb x1"
-    elsif !k[5].nil? && k[5].length>0
-      str=k[5].gsub('/n',"\n").gsub('/>'," \u2192 ").gsub('/a'," \u2192 ").gsub('/u'," \u2192 ")
+  str=''
+  ftr=nil
+  return nil if ['Smithy','Halidom'].include?(k[0]) && !safe_to_spam?(event)
+  if k[0]=='Smithy'
+    str="__**Can craft #{generate_rarity_row(3)} weapons**__"
+    str="#{str}\n*Level 1 \u2192 2:* ~~no mats~~"
+    str="#{str}\n*Level 2 \u2192 3:* Light Metal x3"
+    str="#{str}\n\n__**Can craft #{generate_rarity_row(4)} weapons**__"
+    str="#{str}\n*Level 3 \u2192 4:* Iron Ore x10, Fiend's Claw x10, Bat's Wing x10"
+    str="#{str}\n*Level 4 \u2192 5:* Iron Ore x15, Fiend's Claw x15, Bat's Wing x15, Light Metal x15"
+    str="#{str}\n*Level 5 \u2192 6:* Granite x10, Fiend's Horn x10, Ancient Bird's Feather x10"
+    str="#{str}\n\n__**Can craft #{generate_rarity_row(5)} weapons**__"
+    str="#{str}\n*Level 6 \u2192 7:* Granite x15, Fiend's Horn x15, Ancient Bird's Feather x15, Abyss Stone x15"
+    str="#{str}\n*Level 7 \u2192 8:* Meteorite x10, Fiend's Eye x10, Bewitching Wings x10"
+    str="#{str}\n*Level 8 \u2192 9:* Meteorite x15, Fiend's Eye x15, Bewitching Wings x15, Crimson Core x15"
+    ftr='Each new level of smithy allows you to craft higher-tier weapons within the newest-allowed rarity bracket.'
+  elsif k[0]=='Halidom'
+    str="__*Level 1 \u2192 2*__\nRequires Facility level of 5"
+    str="#{str}\n\n__*Level 2 \u2192 3*__\nRequires Facility level of 40\n<:Element_Wind:532106087948746763>Wind Orb x10, Storm Orb x1, Talonstone x3"
+    str="#{str}\n\n__*Level 3 \u2192 4*__\nRequires Facility level of 100\n<:Element_Water:532106088221376522>Water Orb x20, Stream Orb x3, Deluge Orb x1, Talonstone x5"
+    str="#{str}\n\n__*Level 4 \u2192 5*__\nRequires Facility level of 200\n<:Element_Flame:532106087952810005>Flame Orb x50, Blaze Orb x7, Inferno Orb x2, Talonstone x10"
+    str="#{str}\n\n__*Level 5 \u2192 6*__\nRequires Facility level of 300\n<:Element_Light:532106088129101834>Light Orb x100, Radiance Orb x15, Refulgence Orb x3, Talonstone x15"
+    str="#{str}\n\n__*Level 6 \u2192 7*__\nRequires Facility level of 400\n<:Element_Shadow:532106088154267658>Shadow Orb x150, Nightfall Orb x20, Nether Orb x4, Talonstone x20"
+    str="#{str}\n\n__*Level 7 \u2192 8*__\nRequires Facility level of 550\n<:Element_Wind:532106087948746763>Wind Orb x200, Storm Orb x25, Maelstrom Orb x6, Talonstone x25"
+    str="#{str}\n\n__*Level 8 \u2192 9*__\nRequires Facility level of 700\n<:Element_Water:532106088221376522>Water Orb x300, Stream Orb x40, Deluge Orb x9, Talonstone x30"
+  else
+    nums=[]
+    for i in 0...args.length
+      nums.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0
     end
+    if nums.length<=0
+      mtz=[]
+      cost=0
+      for i in 0...kxx.length
+        cost+=kxx[i][6]
+        if s2s
+          str="#{str}\nCreation: #{longFormattedNumber(kxx[i][6])}<:Resource_Rupies:532104504372363274>" if i==0
+          str="#{str}\nLevel #{i} \u2192 #{i+1}: #{longFormattedNumber(kxx[i][6])}<:Resource_Rupies:532104504372363274>" unless i==0
+        end
+        unless kxx[i][7].nil?
+          for i2 in 0...kxx[i][7].length
+            mtz.push(kxx[i][7][i2])
+          end
+          str="#{str} - #{kxx[i][7].map{|q| "#{q[0]} x#{q[1]}"}.sort.join(', ')}" if s2s
+        end
+      end
+      mtzz=mtz.map{|q| q[0]}.uniq.sort
+      str3="TOTAL: #{longFormattedNumber(cost)}<:Resource_Rupies:532104504372363274> - "
+      for i in 0...mtzz.length
+        str3="#{str3}#{', ' unless i==0}#{mtzz[i]} x#{mtz.reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i}.inject(0){|sum,x| sum + x }}"
+      end
+      str="#{str}\n\n**#{str3}**"
+    elsif nums.length==1
+      n=[nums[0],kxx.length].min
+      mtz=[[],[]]
+      cost=[0,0]
+      for i in 0...kxx.length
+        cost[0]+=kxx[i][6] if i<n
+        cost[1]+=kxx[i][6] unless i<n
+        unless kxx[i][7].nil?
+          for i2 in 0...kxx[i][7].length
+            mtz[0].push(kxx[i][7][i2]) if i<n
+            mtz[1].push(kxx[i][7][i2]) unless i<n
+          end
+        end
+      end
+      str3="**Total from level 1 to #{n}:** #{longFormattedNumber(cost[0])}<:Resource_Rupies:532104504372363274>"
+      mtzz=mtz[0].map{|q| q[0]}.uniq.sort
+      for i in 0...mtzz.length
+        str3="#{str3}#{' - ' if i==0}#{', ' unless i==0}#{mtzz[i]} x#{mtz[0].reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i}.inject(0){|sum,x| sum + x }}"
+      end
+      str="#{str}\n\n#{str3}" unless n==1
+      str3="**Total from level #{n} to #{kxx.length}:** #{longFormattedNumber(cost[1])}<:Resource_Rupies:532104504372363274>"
+      mtzz=mtz[1].map{|q| q[0]}.uniq.sort
+      for i in 0...mtzz.length
+        str3="#{str3}#{' - ' if i==0}#{', ' unless i==0}#{mtzz[i]} x#{mtz[1].reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i}.inject(0){|sum,x| sum + x }}"
+      end
+      str="#{str}\n\n#{str3}" unless n==kxx.length
+    else
+      n=[nums[0,2].min,1].max
+      n=1 if n>kxx.length
+      n2=[nums[0,2].max,kxx.length].min
+      mtz=[]
+      cost=0
+      kxx=kxx[n-1,n2-n]
+      for i in 0...kxx.length
+        cost+=kxx[i][6]
+        str="#{str}\nLevel #{n+i} \u2192 #{n+i+1}: #{longFormattedNumber(kxx[i][6])}<:Resource_Rupies:532104504372363274>" if s2s
+        unless kxx[i][7].nil?
+          for i2 in 0...kxx[i][7].length
+            mtz.push(kxx[i][7][i2])
+          end
+          str="#{str} - #{kxx[i][7].map{|q| "#{q[0]} x#{q[1]}"}.sort.join(', ')}" if s2s
+        end
+      end
+      mtzz=mtz.map{|q| q[0]}.uniq.sort
+      str3="TOTAL from level #{n} to #{n2}: #{longFormattedNumber(cost)}<:Resource_Rupies:532104504372363274> - "
+      for i in 0...mtzz.length
+        str3="#{str3}#{', ' unless i==0}#{mtzz[i]} x#{mtz.reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i}.inject(0){|sum,x| sum + x }}"
+      end
+      str="#{str}\n\n**#{str3}**"
+    end
+  end
+  if str.length>=1900
+    str=str.split("\n")
+    str2=''
+    for i in 0...str.length
+      if "#{str2}\n#{str[i]}".length>=1900
+        create_embed(event,'',str2,0x8BE3F7,ftr)
+        str2=str[i]
+      else
+        str2="#{str2}\n#{str[i]}"
+      end
+    end
+    create_embed(event,'',str2,0x8BE3F7,ftr)
+  else
     create_embed(event,'',str,0x8BE3F7,ftr) if str.length>0
   end
 end
@@ -5329,7 +5304,7 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
     end
   elsif type[1]=='Facility'
     unit=find_facility(unit,event)
-    dispstr=['Facility',unit[0],'Facility',unit[0]]
+    dispstr=['Facility',unit[0][0],'Facility',unit[0][0]]
   elsif type[1]=='Material'
     unit=find_mat(unit,event)
     dispstr=['Material',unit[0],'Item',unit[0]]
@@ -6166,6 +6141,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
       end
     end
   elsif !fac.nil?
+    fac=fac[0] if fac[0].is_a?(Array)
     n=@aliases.reject{|q| !['Facility'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
     n=n.reject{|q| q[2].nil?} if mode==1
     f.push("__**#{fac[0]}**__#{"'s server-specific aliases" if mode==1}")
@@ -6287,7 +6263,7 @@ def roost(event,bot,args=nil,ignoreinputs=false,mode=0)
   t4.push("#{k} minutes") if k>0
   t3-=k*60
   t4.push("#{t3} seconds") if t3>0
-  str="#{str}\nTime until High Dragon bonus chest reset: #{t4.join(', ')}"
+  str="#{str}\nTime until High Dragon bonus chest reset: #{t4.join(', ')}" if [4,0].include?(mode)
   if t.month==12
     t3=Time.new(t.year+1,1,1)
   else
@@ -6306,7 +6282,7 @@ def roost(event,bot,args=nil,ignoreinputs=false,mode=0)
   t4.push("#{k} minutes") if k>0
   t3-=k*60
   t4.push("#{t3} seconds") if t3>0
-  str="#{str}\nTime until Void Treasure Trade reset: #{t4.join(', ')}#{'~~' unless sftday==t.wday}"
+  str="#{str}\nTime until Void Treasure Trade reset: #{t4.join(', ')}#{'~~' unless sftday==t.wday}" if [4,0].include?(mode)
   str3=''
   if sftday<0
     t+=24*60*60
@@ -7182,6 +7158,15 @@ def level(event,bot,args=nil,mode=0)
   event.respond str
 end
 
+def show_abil_limits(event,bot)
+  k=["Affliction Guard \u2192 III","Blindness Res \u2192 100%","Bog Res \u2192 100%","Broken Punisher \u2192 25%","Buff Time \u2192 30%","Burn Res \u2192 100%",
+     "Crit Damage \u2192 25%","Crit Rate \u2192 15%","Curse Res \u2192 100%","Dragon Time \u2192 15%","Element Res \u2192 15%","Energy Prep \u2192 V",
+     "Force Strike \u2192 40%","Freeze Res \u2192 100%","Healing Doublebuff \u2192 III","HP% for Def% \u2192 20%","Last Offence \u2192 60%",
+     "Paralysis Res \u2192 100%","Player XP \u2192 10%","Poison Res \u2192 100%","Recovery Potency \u2192 20%","Shapeshift \u2192 10%","Shield Prep \u2192 II",
+     "Skill Damage \u2192 35%","Skill Prep \u2192 100%","Slayer's Strength \u2192 5%","Sleep Res \u2192 100%","Strength +% \u2192 15%","Stun Res \u2192 100%"]
+  create_embed(event,'__**Ability stacking limits**__','',0xCE456B,nil,nil,triple_finish(k,true))
+end
+
 def find_adv_alts(event,args,bot)
   data_load()
   args=event.message.text.downcase.split(' ') if args.nil?
@@ -7381,6 +7366,11 @@ end
 
 bot.command([:ability,:abil,:aura]) do |event, *args|
   return nil if overlap_prevent(event)
+  if args.nil? || args.length<=0
+  elsif ['limit','limits','stack','stacks'].include?(args[0].downcase)
+    show_abil_limits(event,bot)
+    return nil
+  end
   disp_ability_data(bot,event,args)
 end
 
@@ -7547,6 +7537,11 @@ bot.command([:find,:search,:list,:lookup]) do |event, *args|
   find_all(bot,event,args)
 end
 
+bot.command([:limit,:limits,:stack,:stacks]) do |event|
+  return nil if overlap_prevent(event)
+  show_abil_limits(event,bot)
+end
+
 bot.command([:xp,:exp,:level]) do |event, *args|
   return nil if overlap_prevent(event)
   level(event,bot,args)
@@ -7710,7 +7705,7 @@ bot.command([:deletealias,:removealias]) do |event, name|
     end
   elsif find_facility(name,event,true).length>0
     j=find_facility(name,event,true)
-    j=["Facility","#{j[0]}"]
+    j=["Facility","#{j[0][0]}"]
   elsif find_mat(name,event,true).length>0
     j=find_mat(name,event,true)
     j=["Material","#{j[0]}"]
@@ -7744,7 +7739,7 @@ bot.command([:deletealias,:removealias]) do |event, name|
     end
   elsif find_facility(name,event).length>0
     j=find_facility(name,event)
-    j=["Facility","#{j[0]}"]
+    j=["Facility","#{j[0][0]}"]
   elsif find_mat(name,event).length>0
     j=find_mat(name,event)
     j=["Material","#{j[0]}"]
@@ -8399,6 +8394,7 @@ bot.command(:snagstats) do |event, f, f2|
       m.push('default') if untz[i][0]==untz[i][9][0] || untz[i][9][0][untz[i][9][0].length-1,1]=='*'
       m.push('faceted') if untz[i][9][0][0,1]=='*' && untz[i][9].length>1
       m.push('sensible') if untz[i][9][0][0,1]=='*' && untz[i][9].length<2
+      m.push('Gala') if untz[i][0]=="Gala #{untz[i][9][0]}"
       m.push('seasonal') if untz[i][1][1,1]=='s'
       m.push('out-of-left-field') if m.length<=0
       n=''
@@ -8415,6 +8411,7 @@ bot.command(:snagstats) do |event, f, f2|
     l2=legal_units.reject{|q| q[1][1].nil?}.map{|q| q[1][0]}.uniq
     str="There are #{untz2.reject{|q| !q[2].include?('default')}.length} adventurers in their default form"
     str="#{str}\nThere are #{untz2.reject{|q| !q[2].include?('sensible')}.length} sensible alts of adventurers"
+    str="#{str}\nThere are #{untz2.reject{|q| !q[2].include?('Gala')}.length} Gala alts of adventurers"
     str="#{str}\nThere are #{untz2.reject{|q| !q[2].include?('seasonal')}.length} seasonal alts of adventurers"
     str="#{str}\nThere are #{untz2.reject{|q| !q[2].include?('out-of-left-field')}.length} out-of-left-field alts of adventurers"
     k=[]
@@ -8692,7 +8689,7 @@ bot.command(:snagstats) do |event, f, f2|
   event << "There are #{longFormattedNumber(@askilities.reject{|q| q[2]!='Ability'}.length)} abilities, split into #{longFormattedNumber(@askilities.reject{|q| q[2]!='Ability'}.map{|q| q[0].split(') ')[-1]}.uniq.length)} families."
   event << "There are #{longFormattedNumber(@askilities.reject{|q| q[2]!='CoAbility'}.length)} co-abilities, split into #{longFormattedNumber(@askilities.reject{|q| q[2]!='CoAbility'}.map{|q| q[0]}.uniq.length)} families."
   event << ''
-  event << "There are #{longFormattedNumber(@facilities.length)} facilities."
+  event << "There are #{longFormattedNumber(@facilities.map{|q| q[0]}.uniq.length)} facilities with #{@facilities.length} total levels between them."
   event << "There are #{longFormattedNumber(@mats.length)} materials."
   event << ''
   event << "**There are #{longFormattedNumber(glbl.length)} global and #{longFormattedNumber(srv_spec.length)} server-specific *aliases*.**"
@@ -9047,10 +9044,17 @@ bot.mention do |event|
     m=false
     args.shift
     disp_skill_data(bot,event,args)
+  elsif ['limit','limits','stack','stacks'].include?(args[0].downcase)
+    m=false
+    show_abil_limits(event,bot)
   elsif ['ability','abil'].include?(args[0].downcase)
     m=false
     args.shift
-    disp_ability_data(bot,event,args)
+    if ['limit','limits','stack','stacks'].include?(args[0].downcase)
+      show_abil_limits(event,bot)
+    else
+      disp_ability_data(bot,event,args)
+    end
   elsif ['facility','faculty','fac'].include?(args[0].downcase)
     m=false
     args.shift
