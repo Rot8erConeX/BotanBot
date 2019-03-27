@@ -2913,7 +2913,6 @@ def disp_facility_data(bot,event,args=nil)
     event.respond 'No matches found.'
     return nil
   end
-  puts kxx.map{|q| q.to_s}
   k=kxx[0]
   s2s=false
   s2s=true if safe_to_spam?(event)
@@ -3046,7 +3045,7 @@ def disp_facility_data(bot,event,args=nil)
       n2=[nums[0,2].max,kxx.length].min
       mtz=[]
       cost=0
-      kxx=kxx[n-1,n2-n]
+      kxx=kxx[n,n2-n]
       for i in 0...kxx.length
         cost+=kxx[i][6]
         str="#{str}\nLevel #{n+i} \u2192 #{n+i+1}: #{longFormattedNumber(kxx[i][6])}<:Resource_Rupies:532104504372363274>" if s2s
@@ -3949,7 +3948,7 @@ def old_banner(bot,event,args=nil)
     xcolor=element_color(b[5][0]) if ['Flame','Water','Wind','Light','Shadow'].include?(b[5][0])
     kk=b[4].map{|q| q.split('/')}.map{|q| "#{q[0]} #{['','Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'][q[1].to_i]} #{q[2]}"}
     disp=''
-    disp="**Real-world date:** #{kk[0]} - #{kk[1]}" if disp
+    disp="**Real-world date:** #{kk[0]} - #{kk[1]}\n(assuming reset is at midnight)" if disp
     xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/SummonBanners/#{b[0].gsub(' ','_')}.png"
     create_embed(event,"__**#{b[0]}**__",disp,xcolor,ftr,[nil,xpic],f)
   end
@@ -4063,7 +4062,7 @@ def disp_banner(bot,event,args=nil)
     end
     event.respond str
   else
-    create_embed(event,"__**#{k[0]}**'s Banners__",bnr.join("#{"\n" if s2s}\n"),xcolor,nil,xpic)
+    create_embed(event,"__**#{k[0]}**'s Banners__",bnr.join("#{"\n" if s2s}\n"),xcolor,'All banners display dates as if reset is at midnight.',xpic)
   end
 end
 
@@ -7160,10 +7159,11 @@ end
 
 def show_abil_limits(event,bot)
   k=["Affliction Guard \u2192 III","Blindness Res \u2192 100%","Bog Res \u2192 100%","Broken Punisher \u2192 25%","Buff Time \u2192 30%","Burn Res \u2192 100%",
-     "Crit Damage \u2192 25%","Crit Rate \u2192 15%","Curse Res \u2192 100%","Dragon Time \u2192 15%","Element Res \u2192 15%","Energy Prep \u2192 V",
-     "Force Strike \u2192 40%","Freeze Res \u2192 100%","Healing Doublebuff \u2192 III","HP% for Def% \u2192 20%","Last Offence \u2192 60%",
+     "Crit Damage \u2192 25%","Crit Rate \u2192 15%","Curse Res \u2192 100%","Defense +% \u2192 20%","Dragon Time \u2192 15%","Element Res \u2192 15%",
+     "Energy Prep \u2192 V","Force Strike \u2192 40%","Freeze Res \u2192 100%","Healing Doublebuff \u2192 III","Last Offense \u2192 60%",
      "Paralysis Res \u2192 100%","Player XP \u2192 10%","Poison Res \u2192 100%","Recovery Potency \u2192 20%","Shapeshift \u2192 10%","Shield Prep \u2192 II",
-     "Skill Damage \u2192 35%","Skill Prep \u2192 100%","Slayer's Strength \u2192 5%","Sleep Res \u2192 100%","Strength +% \u2192 15%","Stun Res \u2192 100%"]
+     "Skill Damage \u2192 35%","Skill Haste \u2192 15%","Skill Prep \u2192 100%","Slayer's Strength \u2192 5%","Sleep Res \u2192 100%",
+     "Strength +% \u2192 15%","Stun Res \u2192 100%"]
   create_embed(event,'__**Ability stacking limits**__','',0xCE456B,nil,nil,triple_finish(k,true))
 end
 
