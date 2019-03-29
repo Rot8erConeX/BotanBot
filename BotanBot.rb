@@ -1424,6 +1424,9 @@ def disp_dragon_stats(bot,event,args=nil)
   s2s=false if @shardizard==4 && event.message.text.downcase.split(' ').include?('smol')
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Dragons/#{k[0].gsub(' ','_')}.png"
   str=generate_rarity_row(k[1][0,1].to_i)
+  str='<:Rarity_3:532086056519204864>'*k[1][0,1].to_i if k[0]=='Bronze Fafnir'
+  str='<:Rarity_4:532086056301101067>'*k[1][0,1].to_i if k[0]=='Silver Fafnir'
+  str='<:Rarity_5:532086056737177600>'*k[1][0,1].to_i if k[0]=='Gold Fafnir'
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2]}"}
   str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2]}"
   str="#{str}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
@@ -3380,6 +3383,9 @@ def disp_dragon_art(bot,event,args=nil)
   s2s=false if @shardizard==4 && event.message.text.downcase.split(' ').include?('smol')
   disp=''
   disp="#{generate_rarity_row(k[1][0,1].to_i)}"
+  disp='<:Rarity_3:532086056519204864>'*k[1][0,1].to_i if k[0]=='Bronze Fafnir'
+  disp='<:Rarity_4:532086056301101067>'*k[1][0,1].to_i if k[0]=='Silver Fafnir'
+  disp='<:Rarity_5:532086056737177600>'*k[1][0,1].to_i if k[0]=='Gold Fafnir'
   lookout=[]
   if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt')
     lookout=[]
@@ -5000,7 +5006,7 @@ def find_banners(bot,event,args=nil)
   for i in 0...char.length
     char[i][4]=char[i][4].map{|q| q.split('/')}.map{|q| "#{q[0]}#{['','Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'][q[1].to_i]}#{q[2]}"} unless char[i][4].nil?
   end
-  char=char.sort{|a,b| a[0]<=>b[0]}.map{|q| "#{q[0]}#{" (#{q[4].join(' - ')})" unless q[4].nil? || q[4].length<=0}"}.uniq
+  char=char.map{|q| "#{q[0]}#{" (#{q[4].join(' - ')})" unless q[4].nil? || q[4].length<=0}"}.uniq
   if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || char.join("\n").length+search.join("\n").length>=1900
     str="__**Banner Search**__\n#{search.join("\n")}#{"\n\n__**Notes**__\n#{textra}" if textra.length>0}\n\n__**Results**__"
     for i in 0...char.length
