@@ -1255,7 +1255,7 @@ end
 def print_emoji(k,bot)
   str=['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2]}"}
-  str="#{str}#{moji[0].mention unless moji.length<=0}"
+  str="<:Wyrmprint:560542319636381725>#{str}#{moji[0].mention unless moji.length<=0}"
   return str
 end
 
@@ -2918,6 +2918,8 @@ def disp_facility_data(bot,event,args=nil)
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
   s2s=false if @shardizard==4 && evn.include?('smol')
+  s2s=false if evn.include?('totals')
+  s2s=false if evn.include?('total')
   str=''
   str="**Type:** #{k[3][0]} #{"(#{k[3][1]})" if k[3].length>1}"
   str="#{str}\n**Size:** #{k[4]}"
@@ -9091,7 +9093,23 @@ bot.mention do |event|
     args.shift
     next_events(event,bot,args)
     m=false
-  elsif ['roost','ruin','ruins','daily','dailies','shop','store'].include?(args[0].downcase)
+  elsif ['roost'].include?(args[0].downcase)
+    args.shift
+    roost(event,bot,args,false,1)
+    m=false
+  elsif ['ruin','ruins'].include?(args[0].downcase)
+    args.shift
+    roost(event,bot,args,false,2)
+    m=false
+  elsif ['shop','store'].include?(args[0].downcase)
+    args.shift
+    roost(event,bot,args,false,3)
+    m=false
+  elsif ['reset'].include?(args[0].downcase)
+    args.shift
+    roost(event,bot,args,false,4)
+    m=false
+  elsif ['daily','dailies'].include?(args[0].downcase)
     args.shift
     roost(event,bot,args)
     m=false
