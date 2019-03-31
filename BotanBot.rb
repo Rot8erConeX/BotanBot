@@ -580,7 +580,7 @@ def help_text(event,bot,command=nil,subcommand=nil)
     elsif ['dragon','dragons'].include?(subcommand.downcase)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Finds all dragons that fit `filters`, and sorts by specified stats.\n\nYou can search by:\n- Rarity\n- Element\n- Dragon Roost Bond Gift preference\n- Whether or not the dragon turns to face damage sources\n- Whether or not the dragon is a ranged attacker\n- Availability\n\nYou can sort by:\n- HP\n- Strength\n\nIf too many dragons are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.  I will instead show only the top ten results.",0xCE456B)
     elsif ['wyrmprint','wyrm','print'].include?(subcommand.downcase)
-      create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","~~not yet available~~",0xCE456B)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Finds all wyrmprints that fit `filters`, and sorts by specified stats.\n\nYou can search by:\n- Rarity\n- Amulet type\n- Availability\n\nYou can sort by:\n- HP\n- Strength\n\nIf too many wyrmprints are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
     elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(subcommand.downcase)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Finds all weapons that fit `filters`, and sorts by specified stats..\n\nYou can search by:\n- Rarity\n- Element\n- Weapon type\n- Availability\n\nYou can sort by:\n- HP\n- Strength\n\nYou can sort at the following unbind marks:\n- 0 Unbind\n- Max Unbind\n\nIf too many weapons are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.  I will instead show only the top ten results.",0xCE456B)
     else
@@ -1317,7 +1317,6 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   end
   s2s=false
   s2s=true if safe_to_spam?(event)
-  s2s=false if @shardizard==4 && event.message.text.downcase.split(' ').include?('smol')
   juststats=true if @shardizard != 4 && event.message.text.downcase.split(' ').include?('smol')
   rar=0
   for i in 0...args.length
@@ -1440,7 +1439,6 @@ def disp_dragon_stats(bot,event,args=nil)
   end
   s2s=false
   s2s=true if safe_to_spam?(event)
-  s2s=false if @shardizard==4 && event.message.text.downcase.split(' ').include?('smol')
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Dragons/#{k[0].gsub(' ','_')}.png"
   str=generate_rarity_row(k[1][0,1].to_i)
   str='<:Rarity_3:532086056519204864>'*k[1][0,1].to_i if k[0]=='Bronze Fafnir'
@@ -1508,7 +1506,6 @@ def disp_wyrmprint_stats(bot,event,args=nil)
   s2s=false
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
-  s2s=false if @shardizard==4 && evn.include?('smol')
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Wyrmprints/#{k[0].gsub(' ','_')}_1.png"
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Wyrmprints/#{k[0].gsub(' ','_')}_2.png" if has_any?(['mub','unbind','unbound','refined','refine','refinement'],evn)
   str=generate_rarity_row(k[1][0,1].to_i)
@@ -1568,7 +1565,6 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   s2s=false
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
-  s2s=false if @shardizard==4 && evn.include?('smol')
   juststats=true if @shardizard != 4 && evn.include?('smol')
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Weapons/#{k[0].gsub(' ','_')}.png"
   str=generate_rarity_row(k[2][0,1].to_i)
@@ -1721,7 +1717,6 @@ def disp_weapon_lineage(bot,event,args=nil)
   s2s=false
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
-  s2s=false if @shardizard==4 && evn.include?('smol')
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Weapons/#{k[0].gsub(' ','_')}.png"
   mub=false
   mub=true if has_any?(['mub','unbind','unbound','refined','refine','refinement'],evn)
@@ -1902,7 +1897,6 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
   s2s=false
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
-  s2s=false if @shardizard==4 && evn.include?('smol')
   sklz=@askilities.map{|q| q}
   str=''
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][0].gsub('None','Null')}"}
@@ -2003,7 +1997,6 @@ def disp_skill_data(bot,event,args=nil)
   s2s=false
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
-  s2s=false if @shardizard==4 && evn.include?('smol')
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Skills/#{k[0].gsub(' ','_')}.png"
   xcolor=0x02010a
   mx=k[3,3].reject{|q| q.nil? || q.length<=0}
@@ -2103,7 +2096,6 @@ def disp_ability_data(bot,event,args=nil)
   s2s=false
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
-  s2s=false if @shardizard==4 && evn.include?('smol')
   k=k.reject{|q| q[2]=='Aura'} if k.is_a?(Array) && k.map{|q| q[2]}.uniq.length>1
   k=k[0] if k[0].is_a?(Array) && k.length<=1
   str=''
@@ -2851,7 +2843,6 @@ def disp_facility_data(bot,event,args=nil)
   s2s=false
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
-  s2s=false if @shardizard==4 && evn.include?('smol')
   s2s=false if evn.include?('totals')
   s2s=false if evn.include?('total')
   str=''
@@ -3029,7 +3020,6 @@ def disp_mat_data(bot,event,args=nil)
   s2s=false
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
-  s2s=false if @shardizard==4 && evn.include?('smol')
   str=generate_rarity_row(k[1])
   if k[2]==101
     str="#{str}\n**Type:** Upgrade\n**Subtype:** Adventurer"
@@ -3097,7 +3087,6 @@ def disp_adventurer_art(bot,event,args=nil)
   end
   s2s=false
   s2s=true if safe_to_spam?(event)
-  s2s=false if @shardizard==4 && event.message.text.downcase.split(' ').include?('smol')
   rar=0
   lookout=[]
   if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt')
@@ -3311,7 +3300,6 @@ def disp_dragon_art(bot,event,args=nil)
   end
   s2s=false
   s2s=true if safe_to_spam?(event)
-  s2s=false if @shardizard==4 && event.message.text.downcase.split(' ').include?('smol')
   disp=''
   disp="#{generate_rarity_row(k[1][0,1].to_i)}"
   disp='<:Rarity_3:532086056519204864>'*k[1][0,1].to_i if k[0]=='Bronze Fafnir'
@@ -3527,7 +3515,6 @@ def disp_wyrmprint_art(bot,event,args=nil)
   s2s=false
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
-  s2s=false if @shardizard==4 && evn.include?('smol')
   ftr='Include the word "refined" for MUB art.'
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Wyrmprints/#{k[0].gsub(' ','_')}_1.png"
   emote='<:NonUnbound:534494090876682264>'
@@ -3662,7 +3649,6 @@ def disp_boss_art(bot,event,args=nil)
   s2s=false
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
-  s2s=false if @shardizard==4 && evn.include?('smol')
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Bosses/#{k[0].gsub(' ','_')}.png"
   xcolor=0xE3F78B
   xcolor=0xEF8663 if k[2][1]=='Thaumian'
@@ -3694,9 +3680,6 @@ def disp_emote_art(bot,event,args=nil)
     event.respond 'No matches found.'
     return nil
   end
-  s2s=false
-  s2s=true if safe_to_spam?(event)
-  s2s=false if @shardizard==4 && event.message.text.downcase.split(' ').include?('smol')
   disp=''
   art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Stickers/#{k[0].gsub(' ','_')}#{"(JP)" if has_any?(event.message.text.downcase.split(' '),['jp','japan'])}.png"
   ftr='Include the word "JP" for the Japanese version.'
@@ -3749,9 +3732,6 @@ def disp_npc_art(bot,event,args=nil)
       disp="#{disp}\n#{rar} design\n"
     end
   end
-  s2s=false
-  s2s=true if safe_to_spam?(event)
-  s2s=false if @shardizard==4 && event.message.text.downcase.split(' ').include?('smol')
   art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Misc/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
   create_embed(event,"__**#{k[0]}**__",disp,0xCE456B,nil,[nil,art],flds)
 end
@@ -3967,7 +3947,6 @@ def disp_banner(bot,event,args=nil)
   end
   s2s=false
   s2s=true if safe_to_spam?(event)
-  s2s=false if @shardizard==4 && evn.include?('smol')
   bnr=[]
   bbb=@banners.map{|q| q}
   bnr.push("*Launch #{p[1]}*") if bbb[0][p[0]].include?(k[0])
@@ -5062,7 +5041,7 @@ def find_all(bot,event,args=nil)
   end
 end
 
-def sort_adventurers(bot,event,args=nil)
+def sort_adventurers(bot,event,args=nil,mode=0)
   args=normalize(event.message.text.downcase).split(' ') if args.nil?
   args=args.map{|q| normalize(q.downcase)}
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
@@ -5143,6 +5122,7 @@ def sort_adventurers(bot,event,args=nil)
   for i in 0...char.length
     disp=extend_message(disp,char[i][6],event)
   end
+  disp=extend_message(disp,"No subcommand was specified.  Defaulted to adventurer sorting.\nDragons, Wyrmprints, and Weapons are also available as subcommands.",event,2) if mode==1
   event.respond disp
 end
 
@@ -5186,6 +5166,54 @@ def sort_dragons(bot,event,args=nil)
     char=char[0,10]
   end
   disp="__**Dragon Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}"
+  disp=extend_message(disp,"__**Notes**__\n#{textra}",event,2) if textra.length>0
+  disp=extend_message(disp,"__**Results**__",event,2) if char.length>0
+  for i in 0...char.length
+    disp=extend_message(disp,char[i][6],event)
+  end
+  event.respond disp
+end
+
+def sort_wyrmprints(bot,event,args=nil)
+  args=normalize(event.message.text.downcase).split(' ') if args.nil?
+  args=args.map{|q| normalize(q.downcase)}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  k=find_in_wyrmprints(bot,event,args,2,false)
+  return nil if k.nil?
+  search=k[0]
+  char=k[1]
+  char=char.sort{|a,b| a[0].gsub('*','')<=>b[0].gsub('*','')}.uniq
+  textra=k[3]
+  srt=[1,1,1,1]
+  srtt=0
+  for i in 0...args.length
+    if ['hp','health'].include?(args[i].downcase) && !srt.include?(3)
+      srt[srtt]=3
+      srtt+=1
+    elsif ['strength','str','atkstat','attstat','attackstat','statatk','statatt','statattack','statk','statt','stattack','statstr','attack','att','atk'].include?(args[i].downcase) && !srt.include?(4)
+      srt[srtt]=4
+      srtt+=1
+    end
+  end
+  textra="**No wyrmprints match your search**" if char.length<=0
+  srt[srtt]=0
+  char=char.reject{|q| q[0][0,1]=='*'}
+  stats=['Name','','','HP','Strength']
+  for i in 0...char.length
+    char[i][3]=char[i][3][1]
+    char[i][4]=char[i][4][1]
+    m2=[]
+    for i2 in 0...srt.length
+      m2.push("#{char[i][srt[i2]]} #{stats[srt[i2]]}") unless srt[i2]<3
+    end
+    char[i][6]="**#{char[i][0]}**#{print_emoji(char[i],bot)} - #{m2.join(', ')}"
+  end
+  char.sort!{|b,a| (supersort(a,b,srt[0])==0 ? (supersort(a,b,srt[1])==0 ? (supersort(a,b,srt[2])==0 ? supersort(a,b,srt[3]) : supersort(a,b,srt[2])) : supersort(a,b,srt[1])) : supersort(a,b,srt[0]))}
+  if !safe_to_spam?(event) && char.length>10
+    textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results."
+    char=char[0,10]
+  end
+  disp="__**Wyrmprint Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}"
   disp=extend_message(disp,"__**Notes**__\n#{textra}",event,2) if textra.length>0
   disp=extend_message(disp,"__**Results**__",event,2) if char.length>0
   for i in 0...char.length
@@ -7670,20 +7698,24 @@ end
 bot.command([:sort,:list]) do |event, *args|
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
+  elsif ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
+    args.shift
+    sort_adventurers(bot,event,args)
+    return nil
   elsif ['dragon','dragons','drg'].include?(args[0].downcase)
     args.shift
     sort_dragons(bot,event,args)
     return nil
-  elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase) && @shardizard==4
+  elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
     args.shift
     sort_wyrmprints(bot,event,args)
     return nil
-  elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase) && @shardizard==4
+  elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase)
     args.shift
     sort_weapons(bot,event,args)
     return nil
   end
-  sort_adventurers(bot,event,args)
+  sort_adventurers(bot,event,args,1)
 end
 
 bot.command([:limit,:limits,:stack,:stacks]) do |event|
@@ -9059,20 +9091,20 @@ bot.mention do |event|
   elsif ['sort','list']
     m=false
     if args.length<=0
-    elsif ['dragon','dragons','drg'].include?(args[0].downcase) && @shardizard==4
+    elsif ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
+      args.shift
+      sort_adventurers(bot,event,args)
+    elsif ['dragon','dragons','drg'].include?(args[0].downcase)
       args.shift
       sort_dragons(bot,event,args)
-      return nil
-    elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase) && @shardizard==4
+    elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
       args.shift
       sort_wyrmprints(bot,event,args)
-      return nil
-    elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase) && @shardizard==4
+    elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase)
       args.shift
       sort_weapons(bot,event,args)
-      return nil
     else
-      sort_adventurers(bot,event,args)
+      sort_adventurers(bot,event,args,1)
     end
   elsif ['art'].include?(args[0].downcase)
     m=false
