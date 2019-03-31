@@ -133,7 +133,7 @@ def all_commands(include_nil=false,permissions=-1)
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
      'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias',
      'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','limit',
-     'limits','stack','stacks']
+     'limits','stack','stacks','sort','list']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop'] if permissions==2
   k=k.uniq
@@ -143,6 +143,7 @@ end
 
 def safe_to_spam?(event,chn=nil) # determines whether or not it is safe to send extremely long messages
   return true if event.server.nil? # it is safe to spam in PM
+  return false if event.message.text.downcase.split(' ').include?('smol') && @shardizard==4
   return true if [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,523824424437415946,523825319916994564,523822789308841985,532083509083373579].include?(event.server.id) # it is safe to spam in the emoji servers
   chn=event.channel if chn.nil?
   return true if ['bots','bot'].include?(chn.name.downcase) # channels named "bots" are safe to spam in
@@ -572,6 +573,19 @@ def help_text(event,bot,command=nil,subcommand=nil)
       event << 'This help window is not in an embed so that people who need this command can see it.'
     end
     return nil
+  elsif ['sort','list'].include?(command.downcase)
+    subcommand='' if subcommand.nil?
+    if ['adventurer','adventurers','adv','advs','unit','units'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Finds all adventurers that fit `filters`, and sorts by specified stats.\n\nYou can search by:\n- Element\n- Weapon type\n- Class\n- Availability\n\nYou can sort by:\n- HP\n- Strength\n- Defense\n\nYou can adjust the stats being sorted by using the following modifiers:\n- Rarity\n- Absolute max stats (using the word \"max\")\n\nIf too many adventurers are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.  I will instead show only the top ten results.",0xCE456B)
+    elsif ['dragon','dragons'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Finds all dragons that fit `filters`, and sorts by specified stats.\n\nYou can search by:\n- Rarity\n- Element\n- Dragon Roost Bond Gift preference\n- Whether or not the dragon turns to face damage sources\n- Whether or not the dragon is a ranged attacker\n- Availability\n\nYou can sort by:\n- HP\n- Strength\n\nIf too many dragons are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.  I will instead show only the top ten results.",0xCE456B)
+    elsif ['wyrmprint','wyrm','print'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","~~not yet available~~",0xCE456B)
+    elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Finds all weapons that fit `filters`, and sorts by specified stats..\n\nYou can search by:\n- Rarity\n- Element\n- Weapon type\n- Availability\n\nYou can sort by:\n- HP\n- Strength\n\nYou can sort at the following unbind marks:\n- 0 Unbind\n- Max Unbind\n\nIf too many weapons are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.  I will instead show only the top ten results.",0xCE456B)
+    else
+      create_embed(event,"**#{command.downcase}** __\*filters__","Finds all adventurers that fit `filters`, and sorts by specified stats.\n\nYou can search by:\n- Element\n- Weapon type\n- Class\n- Availability\n\nYou can sort by:\n- HP\n- Strength\n- Defense\n\nYou can adjust the stats being sorted by using the following modifiers:\n- Rarity\n- Absolute max stats (using the word \"max\")\n\nIf too many adventurers are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.  I will instead show only the top ten results.",0xCE456B,"Sorting is also available for dragons, wyrmprints, and weapons.")
+    end
   elsif ['find','search','lookup'].include?(command.downcase)
     subcommand='' if subcommand.nil?
     if ['adventurer','adventurers','adv','advs','unit','units'].include?(subcommand.downcase)
@@ -655,7 +669,8 @@ def help_text(event,bot,command=nil,subcommand=nil)
     str="#{str}\n\n`stats` __target__ - for only an entity's stats"
     str="#{str}\n`aliases` __target__ - to show all aliases of a particular entity (*also `checkaliases` or `seealiases`*)"
     str="#{str}\n`serveraliases` __target__- to show all server-specific aliases of a particular entity (*also `saliases`*)"
-    str="#{str}\n\n`find` __\*filters__ - to find specific adventurers, dragons, wyrmprints, or weapons"
+    str="#{str}\n\n`find` __\*filters__ - to find specific adventurers, dragons, wyrmprints, or weapons (*also `search`*)"
+    str="#{str}\n`sort` __\*filters__ - to sort adventurers by specified stats (*also `list`*)"
     str="#{str}\n`today` - to show data on current events (*also `daily` or `todayInDL`*)"
     str="#{str}\n`next` - to show data on cyclical events (*also `schedule`*)"
     str="#{str}\n`art` __target__ - to show an adventurer's, dragon's, or wyrmprint's art"
@@ -970,11 +985,13 @@ def find_ability(name,event,fullname=false,ext=false)
   sklz=@askilities.reject{|q| q[2]=='Skill'}
   return [] if name.length<2
   k=sklz.reject{|q| "#{q[0]} #{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name || q[1].downcase=='example'}
-  return k unless k.nil? || k.length<=0
+  return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   k=sklz.reject{|q| "#{q[0]} +#{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name || q[1].downcase=='example'}
-  return k unless k.nil? || k.length<=0
+  return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   k=sklz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
   return sklz.reject{|q| q[0]!=sklz[k][0]} unless k.nil?
+  k=sklz.reject{|q| q[0].length<7 || q[0][0,7]!='Hits = ' || "#{q[1]} #{q[0]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name || q[1].downcase=='example'}
+  return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   nicknames_load()
   alz=@aliases.reject{|q| !['Aura','Ability'].include?(q[0])}.map{|q| [q[1],q[2],q[3],q[0]]}
   g=0
@@ -1017,11 +1034,13 @@ def find_ability(name,event,fullname=false,ext=false)
   end
   return [] if fullname
   k=sklz.reject{|q| "#{q[0]} #{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]!=name || q[1].downcase=='example'}
-  return k unless k.nil? || k.length<=0
+  return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   k=sklz.reject{|q| "#{q[0]} +#{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]!=name || q[1].downcase=='example'}
-  return k unless k.nil? || k.length<=0
+  return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   k=sklz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return sklz.reject{|q| q[0]!=sklz[k][0]} unless k.nil?
+  k=sklz.reject{|q| q[0].length<7 || q[0][0,7]!='Hits = ' || "#{q[1]} #{q[0]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]!=name || q[1].downcase=='example'}
+  return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   unless k.nil?
     m=sklz.find_index{|q| "#{q[0]} #{q[1]}"==alz[k][1]}
@@ -2139,42 +2158,24 @@ def disp_ability_data(bot,event,args=nil)
         str="#{str}\n*Effect:* #{m[3]}" unless m[5]=='n'
         m2=[]
         checkstr="#{k[0][0]} #{'+' if k[0][1].include?('%')}#{k[0][1]}"
+        checkstr="#{k[0][1]} #{k[0][0]}" if k[0][0][0,7]=='Hits = '
         checkstr="#{k[0][0]}" if k[0][1]=='-'
         for i in 0...adv.length
           if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-            m2.push("#{emo}#{adv[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][0][0]==checkstr
-            m2.push("#{emo}#{adv[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][0][1]==checkstr
-            m2.push("#{emo}#{adv[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][1][0]==checkstr
-            m2.push("#{emo}#{adv[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][1][1]==checkstr
-            m2.push("#{emo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
-            m2.push("#{emo}#{adv[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length>1
-            m2.push("#{emo}#{adv[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+            m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][0][0]==checkstr
+            m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][0][1]==checkstr
+            m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][1][0]==checkstr
+            m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][1][1]==checkstr
+            m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
+            m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length>1
+            m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
           else
-            m2.push("#{emo}#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0][1]==checkstr
-            m2.push("#{emo}#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1][1]==checkstr
-            m2.push("#{emo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
-            m2.push("#{emo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
-            m2.push("#{emo}#{adv[i][0]}#{" (A1+3)" if dispslots}") if adv[i][8][3][0]==checkstr
-            m2.push("#{emo}#{adv[i][0]}#{" (A2+3)" if dispslots}") if adv[i][8][3][1]==checkstr
-          end
-          for i2 in 0...elemo.length
-            checkstr2="(#{elemo[i2][0]}) #{checkstr}"
-            if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-              m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][0][0]==checkstr2
-              m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][0][1]==checkstr2
-              m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][1][0]==checkstr2
-              m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][1][1]==checkstr2
-              m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr2 && adv[i][8][2].length<=1
-              m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][2][0]==checkstr2 && adv[i][8][2].length>1
-              m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][2][1]==checkstr2 && adv[i][8][2].length>1
-            else
-              m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0][1]==checkstr2
-              m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1][1]==checkstr2
-              m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr2 && adv[i][8][2].length<=1
-              m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][1]==checkstr2 && adv[i][8][2].length>1
-              m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A1+3)" if dispslots}") if adv[i][8][3][0]==checkstr2
-              m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A2+3)" if dispslots}") if adv[i][8][3][1]==checkstr2
-            end
+            m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0][1]==checkstr
+            m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1][1]==checkstr
+            m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
+            m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+            m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A1+3)" if dispslots}") if adv[i][8][3][0]==checkstr
+            m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A2+3)" if dispslots}") if adv[i][8][3][1]==checkstr
           end
         end
         str="#{str}\n*Adventurers:* #{m2.join(', ')}" if m2.length>0
@@ -2182,19 +2183,10 @@ def disp_ability_data(bot,event,args=nil)
         for i in 0...drg.length
           if drg[i][6].length>1
             if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-              m2.push("#{emo}#{drg[i][0]}#{" (A\u2081)" if dispslots}#{' [Min]' unless dispslots}") if drg[i][6][1][0]==checkstr
-              m2.push("#{emo}#{drg[i][0]}#{" (A\u2082)" if dispslots}#{' [Max]' unless dispslots}") if drg[i][6][1][1]==checkstr
+              m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]}#{" (A\u2081)" if dispslots}#{' [Min]' unless dispslots}") if drg[i][6][1][0]==checkstr
+              m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]}#{" (A\u2082)" if dispslots}#{' [Max]' unless dispslots}") if drg[i][6][1][1]==checkstr
             else
-              m2.push("#{emo}#{drg[i][0]}") if drg[i][6][1][1]==checkstr
-            end
-            for i2 in 0...elemo.length
-              checkstr2="(#{elemo[i2][0]}) #{checkstr}"
-              if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-                m2.push("#{elemo[i2][1]}#{drg[i][0]}#{" (A\u2081)" if dispslots}#{' [Min]' unless dispslots}") if drg[i][6][1][0]==checkstr2
-                m2.push("#{elemo[i2][1]}#{drg[i][0]}#{" (A\u2082)" if dispslots}#{' [Max]' unless dispslots}") if drg[i][6][1][1]==checkstr2
-              else
-                m2.push("#{elemo[i2][1]}#{drg[i][0]}") if drg[i][6][1][1]==checkstr2
-              end
+              m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]}") if drg[i][6][1][1]==checkstr
             end
           end
         end
@@ -2278,7 +2270,7 @@ def disp_ability_data(bot,event,args=nil)
           mxx=mx[0,mx.length-1].join(' ')
           mx=mx[-1].split('/').map{|q| "#{mxx} #{q}"}
           for i2 in 0...mx.length
-            m2.push("#{adv[i][0]} (C#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
+            m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]} (C#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
           end
         end
         str="#{str}\n*Adventurers:* #{m2.join(', ')}" if m2.length>0
@@ -2287,6 +2279,7 @@ def disp_ability_data(bot,event,args=nil)
         str=""
         for i in 0...k2.length
           checkstr="#{k2[i][0]} #{'+' if k2[i][1].include?('%')}#{k2[i][1]}"
+          checkstr="#{k2[i][1]} #{k2[i][0]}" if k2[i][0][0,7]=='Hits = '
           checkstr="#{k2[i][0]}" if k2[i][1]=='-'
           str="#{str}\n**Example effect:** #{k2[i][3]}\n" if k2[i][1].downcase=='example'
           str="#{str}\n**#{k2[i][1]}**" unless k2[i][1].downcase=='example'
@@ -2297,10 +2290,6 @@ def disp_ability_data(bot,event,args=nil)
             advabils.push(adv[i3][8][3][0]) if adv[i3][8].length>3
             advabils.push(adv[i3][8][3][1]) if adv[i3][8].length>3
             m2.push("#{emo}*#{adv[i3][0]}*") if advabils.include?(checkstr)
-            for i2 in 0...elemo.length
-              checkstr2="(#{elemo[i2][0]}) #{checkstr}"
-              m2.push("#{elemo[i2][1]}#{adv[i3][0]}") if advabils.include?(checkstr2)
-            end
           end
           if m2.length>3 && !s2s
             str="#{str} - #{m2.length} adventurers"
@@ -2309,13 +2298,7 @@ def disp_ability_data(bot,event,args=nil)
           end
           m2=[]
           for i3 in 0...drg.length
-            if drg[i3][6].length>1
-              m2.push("#{emo}*#{drg[i3][0]}*") if drg[i3][6][1][1]==checkstr
-              for i2 in 0...elemo.length
-                checkstr2="(#{elemo[i2][0]}) #{checkstr}"
-                m2.push("#{elemo[i2][1]}*#{drg[i3][0]}*") if drg[i3][6][1][1]==checkstr2
-              end
-            end
+            m2.push("#{element_emote(drg[i][2],bot)}*#{drg[i3][0]}*") if drg[i3][6].length>1 && drg[i3][6][1][1]==checkstr
           end
           if m2.length>3 && !s2s
             str="#{str} - #{m2.length} dragons"
@@ -2374,52 +2357,38 @@ def disp_ability_data(bot,event,args=nil)
         if k[ii2][1]=='example'
           str="#{str}\n__**Example Effect**__\n#{k[ii2][3]}\n"
         elsif s2s
-          str="#{str}\n\n#{'__' if lng}**#{k[ii2][0]} #{'+' if k[ii2][1].include?('%')}#{k[ii2][1]}**#{'__' if lng}"
+          if k[ii2][0][0,7]=='Hits = '
+            str="#{str}\n\n#{'__' if lng}**#{k[ii2][1]} #{k[ii2][0]}**#{'__' if lng}"
+          else
+            str="#{str}\n\n#{'__' if lng}**#{k[ii2][0]} #{'+' if k[ii2][1].include?('%')}#{k[ii2][1]}**#{'__' if lng}"
+          end
           str="#{str}\n*Effect:* #{k[ii2][3]}" if lng
         else
           str="#{str}\n#{"\n__" if lng}**#{'+' if k[ii2][1].include?('%')}#{k[ii2][1]}**#{'__' if lng}"
           str="#{str} - #{k[ii2][3]}" if lng
         end
         checkstr="#{k[ii2][0]} #{'+' if k[ii2][1].include?('%')}#{k[ii2][1]}"
+        checkstr="#{k[ii2][1]} #{k[ii2][0]}" if k[ii2][0][0,7]=='Hits = '
         checkstr="#{k[ii2][0]}" if k[ii2][1]=='-'
         if s2s
           m2=[]
           if k[ii2][2]=='Ability'
             for i in 0...adv.length
               if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-                m2.push("#{emo}#{adv[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][0][0]==checkstr
-                m2.push("#{emo}#{adv[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][0][1]==checkstr
-                m2.push("#{emo}#{adv[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][1][0]==checkstr
-                m2.push("#{emo}#{adv[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][1][1]==checkstr
-                m2.push("#{emo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
-                m2.push("#{emo}#{adv[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length>1
-                m2.push("#{emo}#{adv[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+                m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][0][0]==checkstr
+                m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][0][1]==checkstr
+                m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][1][0]==checkstr
+                m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][1][1]==checkstr
+                m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
+                m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length>1
+                m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
               else
-                m2.push("#{emo}#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0][1]==checkstr
-                m2.push("#{emo}#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1][1]==checkstr
-                m2.push("#{emo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
-                m2.push("#{emo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
-                m2.push("#{emo}#{adv[i][0]}#{" (A1+3)" if dispslots}") if adv[i][8][3][0]==checkstr
-                m2.push("#{emo}#{adv[i][0]}#{" (A2+3)" if dispslots}") if adv[i][8][3][1]==checkstr
-              end
-              for i2 in 0...elemo.length
-                checkstr2="(#{elemo[i2][0]}) #{checkstr}"
-                if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-                  m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][0][0]==checkstr2
-                  m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][0][1]==checkstr2
-                  m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][1][0]==checkstr2
-                  m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][1][1]==checkstr2
-                  m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr2 && adv[i][8][2].length<=1
-                  m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][2][0]==checkstr2 && adv[i][8][2].length>1
-                  m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][2][1]==checkstr2 && adv[i][8][2].length>1
-                else
-                  m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0][1]==checkstr2
-                  m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1][1]==checkstr2
-                  m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr2 && adv[i][8][2].length<=1
-                  m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][1]==checkstr2 && adv[i][8][2].length>1
-                  m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A1+3)" if dispslots}") if adv[i][8][3][0]==checkstr2
-                  m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A2+3)" if dispslots}") if adv[i][8][3][1]==checkstr2
-                end
+                m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0][1]==checkstr
+                m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1][1]==checkstr
+                m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
+                m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+                m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A1+3)" if dispslots}") if adv[i][8][3][0]==checkstr
+                m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A2+3)" if dispslots}") if adv[i][8][3][1]==checkstr
               end
             end
             str="#{str}\n*Adventurers:* #{m2.join(', ')}" if m2.length>0
@@ -2427,19 +2396,10 @@ def disp_ability_data(bot,event,args=nil)
             for i in 0...drg.length
               if drg[i][6].length>1
                 if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-                  m2.push("#{emo}#{drg[i][0]}#{" (A\u2081)" if dispslots}#{' [Min]' unless dispslots}") if drg[i][6][1][0]==checkstr
-                  m2.push("#{emo}#{drg[i][0]}#{" (A\u2082)" if dispslots}#{' [Max]' unless dispslots}") if drg[i][6][1][1]==checkstr
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]}#{" (A\u2081)" if dispslots}#{' [Min]' unless dispslots}") if drg[i][6][1][0]==checkstr
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]}#{" (A\u2082)" if dispslots}#{' [Max]' unless dispslots}") if drg[i][6][1][1]==checkstr
                 else
-                  m2.push("#{emo}#{drg[i][0]}") if drg[i][6][1][1]==checkstr
-                end
-                for i2 in 0...elemo.length
-                  checkstr2="(#{elemo[i2][0]}) #{checkstr}"
-                  if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-                    m2.push("#{elemo[i2][1]}#{drg[i][0]}#{" (A\u2081)" if dispslots}#{' [Min]' unless dispslots}") if drg[i][6][1][0]==checkstr2
-                    m2.push("#{elemo[i2][1]}#{drg[i][0]}#{" (A\u2082)" if dispslots}#{' [Max]' unless dispslots}") if drg[i][6][1][1]==checkstr2
-                  else
-                    m2.push("#{elemo[i2][1]}#{drg[i][0]}") if drg[i][6][1][1]==checkstr2
-                  end
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]}") if drg[i][6][1][1]==checkstr
                 end
               end
             end
@@ -2514,16 +2474,16 @@ def disp_ability_data(bot,event,args=nil)
               end
             end
             str="#{str}\n*Enemies:* #{m2.join(', ')}" if m2.length>0
-          elsif k[i2][2]=='CoAbility'
+          elsif k[ii2][2]=='CoAbility'
             for i in 0...adv.length
               mx=adv[i][7].split(' ')
               mxx=mx[0,mx.length-1].join(' ')
               mx=mx[-1].split('/').map{|q| "#{mxx} #{q}"}
-              m2.push("#{emo}#{adv[i][0]} [Min]") if checkstr==mx[0]
-              m2.push("#{emo}#{adv[i][0]} [Max]") if checkstr==mx[4]
+              m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]} [Min]") if checkstr==mx[0]
+              m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]} [Max]") if checkstr==mx[4]
             end
             str="#{str}\n*Adventurers:* #{m2.join(', ')}" if m2.length>0
-          elsif k[i2][2]=='Aura'
+          elsif k[ii2][2]=='Aura'
             for i in 0...drg.length
               if drg[i][6][0].length>1
                 m2.push("#{emo}#{drg[i][0]} (A1\u2081)") if drg[i][6][0][0][0]==checkstr
@@ -2547,7 +2507,7 @@ def disp_ability_data(bot,event,args=nil)
               advabils=[adv[i3][8][0][1],adv[i3][8][1][1],adv[i3][8][2][-1]]
               advabils.push(adv[i3][8][3][0]) if adv[i3][8].length>3
               advabils.push(adv[i3][8][3][1]) if adv[i3][8].length>3
-              m2.push("#{emo}*#{adv[i3][0]}*") if advabils.include?(checkstr)
+              m2.push("#{element_emote(adv[i][2][1],bot)}*#{adv[i3][0]}*") if advabils.include?(checkstr)
               for i2 in 0...elemo.length
                 checkstr2="(#{elemo[i2][0]}) #{checkstr}"
                 m2.push("#{elemo[i2][1]}#{adv[i3][0]}") if advabils.include?(checkstr2)
@@ -2562,13 +2522,7 @@ def disp_ability_data(bot,event,args=nil)
             end
             m2=[]
             for i in 0...drg.length
-              if drg[i][6].length>1
-                m2.push("#{emo}*#{drg[i][0]}*") if drg[i][6][1][1]==checkstr
-                for i2 in 0...elemo.length
-                  checkstr2="(#{elemo[i2][0]}) #{checkstr}"
-                  m2.push("#{elemo[i2][1]}*#{drg[i][0]}*") if drg[i][6][1][1]==checkstr2
-                end
-              end
+              m2.push("#{element_emote(drg[i][2],bot)}*#{drg[i][0]}*") if drg[i][6].length>1 && drg[i][6][1][1]==checkstr
             end
             if m2.length>3 
               str="#{str}#{c}#{m2.length} dragons"
@@ -2616,16 +2570,18 @@ def disp_ability_data(bot,event,args=nil)
               c=' - '
             end
           elsif k[ii2][2]=='CoAbility'
+            m2=[]
             for i in 0...adv.length
               mx=adv[i][7].split(' ')
               mxx=mx[0,mx.length-1].join(' ')
               mx=mx[-1].split('/').map{|q| "#{mxx} #{q}"}
-              m2.push("#{emo}#{adv[i][0]}") if checkstr==mx[4]
+              m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}") if checkstr==mx[4]
             end
             str="#{str} - #{m2.join(', ')}" if m2.length>0
           elsif k[ii2][2]=='Aura'
+            m2=[]
             for i in 0...drg.length
-              m2.push("#{emo}#{drg[i][0]}") if drg[i][6][0][0][1]==checkstr
+              m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]}") if drg[i][6][0][0][1]==checkstr
             end
             str="#{str} - #{m2.join(', ')}" if m2.length>0
           end
@@ -2638,7 +2594,7 @@ def disp_ability_data(bot,event,args=nil)
     emo=''
     emo='<:Element_Null:532106087810334741>' unless @askilities.find_index{|q| q[2]==k[2] && "#{q[0]}#{" #{q[1]}" unless q[1]=='-'}".include?(") #{k[0]}#{" #{k[1]}" unless k[1]=='-'}")}.nil?
     hdr="__**#{k[0]} #{'+' if k[1].include?('%')}#{k[1]}**__ [#{k[2]}]"
-    hdr="__**#{k[1]} #{k[0]}**__ [#{k[2]}]" if k[0][0,5]=='Hits '
+    hdr="__**#{k[1]} #{k[0]}**__ [#{k[2]}]" if k[0][0,7]=='Hits = '
     hdr="__**#{k[0]}**__ [#{k[2]}]" if k[1]=='-'
     xcolor=0x555058
     xcolor=0x87817C if k[2]=='Aura'
@@ -2649,42 +2605,24 @@ def disp_ability_data(bot,event,args=nil)
     if k[2]=='Ability'
       m2=[]
       checkstr="#{k[0]} #{'+' if k[1].include?('%')}#{k[1]}"
+      checkstr="#{k[1]} #{k[0]}" if k[0][0,7]=='Hits = '
       checkstr="#{k[0]}" if k[1]=='-'
       for i in 0...adv.length
         if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-          m2.push("#{emo}#{adv[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][0][0]==checkstr
-          m2.push("#{emo}#{adv[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][0][1]==checkstr
-          m2.push("#{emo}#{adv[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][1][0]==checkstr
-          m2.push("#{emo}#{adv[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][1][1]==checkstr
-          m2.push("#{emo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
-          m2.push("#{emo}#{adv[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length>1
-          m2.push("#{emo}#{adv[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+          m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][0][0]==checkstr
+          m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][0][1]==checkstr
+          m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][1][0]==checkstr
+          m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][1][1]==checkstr
+          m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
+          m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length>1
+          m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
         else
-          m2.push("#{emo}#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0][1]==checkstr
-          m2.push("#{emo}#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1][1]==checkstr
-          m2.push("#{emo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
-          m2.push("#{emo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
-          m2.push("#{emo}#{adv[i][0]}#{" (A1+3)" if dispslots}") if adv[i][8][3][0]==checkstr
-          m2.push("#{emo}#{adv[i][0]}#{" (A2+3)" if dispslots}") if adv[i][8][3][1]==checkstr
-        end
-        for i2 in 0...elemo.length
-          checkstr2="(#{elemo[i2][0]}) #{checkstr}"
-          if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-            m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][0][0]==checkstr2
-            m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][0][1]==checkstr2
-            m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][1][0]==checkstr2
-            m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][1][1]==checkstr2
-            m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr2 && adv[i][8][2].length<=1
-            m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][2][0]==checkstr2 && adv[i][8][2].length>1
-            m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][2][1]==checkstr2 && adv[i][8][2].length>1
-          else
-            m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0][1]==checkstr2
-            m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1][1]==checkstr2
-            m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr2 && adv[i][8][2].length<=1
-            m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][1]==checkstr2 && adv[i][8][2].length>1
-            m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A1+3)" if dispslots}") if adv[i][8][3][0]==checkstr2
-            m2.push("#{elemo[i2][1]}#{adv[i][0]}#{" (A2+3)" if dispslots}") if adv[i][8][3][1]==checkstr2
-          end
+          m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0][1]==checkstr
+          m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1][1]==checkstr
+          m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
+          m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+          m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A1+3)" if dispslots}") if adv[i][8][3][0]==checkstr
+          m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]}#{" (A2+3)" if dispslots}") if adv[i][8][3][1]==checkstr
         end
       end
       if m2.length>0
@@ -2698,19 +2636,10 @@ def disp_ability_data(bot,event,args=nil)
       for i in 0...drg.length
         if drg[i][6].length>1
           if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-            m2.push("#{emo}#{drg[i][0]}#{" (A\u2081)" if dispslots}#{' [Min]' unless dispslots}") if drg[i][6][1][0]==checkstr
-            m2.push("#{emo}#{drg[i][0]}#{" (A\u2082)" if dispslots}#{' [Max]' unless dispslots}") if drg[i][6][1][1]==checkstr
+            m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]}#{" (A\u2081)" if dispslots}#{' [Min]' unless dispslots}") if drg[i][6][1][0]==checkstr
+            m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]}#{" (A\u2082)" if dispslots}#{' [Max]' unless dispslots}") if drg[i][6][1][1]==checkstr
           else
-            m2.push("#{emo}#{drg[i][0]}") if drg[i][6][1][1]==checkstr
-          end
-          for i2 in 0...elemo.length
-            checkstr2="(#{elemo[i2][0]}) #{checkstr}"
-            if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-              m2.push("#{elemo[i2][1]}#{drg[i][0]}#{" (A\u2081)" if dispslots}#{' [Min]' unless dispslots}") if drg[i][6][1][0]==checkstr2
-              m2.push("#{elemo[i2][1]}#{drg[i][0]}#{" (A\u2082)" if dispslots}#{' [Max]' unless dispslots}") if drg[i][6][1][1]==checkstr2
-            else
-              m2.push("#{elemo[i2][1]}#{drg[i][0]}") if drg[i][6][1][1]==checkstr2
-            end
+            m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]}") if drg[i][6][1][1]==checkstr
           end
         end
       end
@@ -2812,13 +2741,14 @@ def disp_ability_data(bot,event,args=nil)
     elsif k[2]=='CoAbility'
       m2=[]
       checkstr="#{k[0]} #{'+' if k[1].include?('%')}#{k[1]}"
+      checkstr="#{k[1]} #{k[0]}" if k[0][0,7]=='Hits = '
       checkstr="#{k[0]}" if k[1]=='-'
       for i in 0...adv.length
         mx=adv[i][7].split(' ')
         mxx=mx[0,mx.length-1].join(' ')
         mx=mx[-1].split('/').map{|q| "#{mxx} #{q}"}
         for i2 in 0...mx.length
-          m2.push("#{adv[i][0]} (C#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
+          m2.push("#{element_emote(adv[i][2][1],bot)}#{adv[i][0]} (C#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
         end
       end
       if m2.length>0
@@ -2832,16 +2762,17 @@ def disp_ability_data(bot,event,args=nil)
     elsif k[2]=='Aura'
       m2=[]
       checkstr="#{k[0]} #{'+' if k[1].include?('%')}#{k[1]}"
+      checkstr="#{k[1]} #{k[0]}" if k[0][0,7]=='Hits = '
       checkstr="#{k[0]}" if k[1]=='-'
       for i in 0...drg.length
         if drg[i][6][0].length>1
-          m2.push("#{drg[i][0]} (A1\u2081)") if drg[i][6][0][0][0]==checkstr
-          m2.push("#{drg[i][0]} (A1\u2082)") if drg[i][6][0][0][1]==checkstr
-          m2.push("#{drg[i][0]} (A2\u2081)") if drg[i][6][0][1][0]==checkstr
-          m2.push("#{drg[i][0]} (A2\u2082)") if drg[i][6][0][1][1]==checkstr
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A1\u2081)") if drg[i][6][0][0][0]==checkstr
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A1\u2082)") if drg[i][6][0][0][1]==checkstr
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A2\u2081)") if drg[i][6][0][1][0]==checkstr
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A2\u2082)") if drg[i][6][0][1][1]==checkstr
         else
-          m2.push("#{drg[i][0]} (A\u2081)") if drg[i][6][0][0][0]==checkstr
-          m2.push("#{drg[i][0]} (A\u2082)") if drg[i][6][0][0][1]==checkstr
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A\u2081)") if drg[i][6][0][0][0]==checkstr
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A\u2082)") if drg[i][6][0][0][1]==checkstr
         end
       end
       if m2.length>0
@@ -3197,20 +3128,20 @@ def disp_adventurer_art(bot,event,args=nil)
     disp="#{generate_rarity_row(rar,true)}"
   end
   art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Adventurers/#{k[0].gsub(' ','_')}_#{rar}.png"
+  nammes=['','','']
+  unless k[11].nil? || k[11].length<=0
+    m=k[11].split(' as ')
+    nammes[1]=m[0]
+    disp="#{disp}\n**VA (English):** #{m[m.length-1]}"
+  end
+  unless k[10].nil? || k[10].length<=0
+    m=k[10].split(' as ')
+    nammes[2]=m[0]
+    disp="#{disp}\n**VA (Japanese):** #{m[m.length-1]}"
+  end
   if args.include?('just') || args.include?('justart') || args.include?('blank') || args.include?('noinfo')
     charsx=[[],[],[]]
   else
-    nammes=['','','']
-    unless k[11].nil? || k[11].length<=0
-      m=k[11].split(' as ')
-      nammes[1]=m[0]
-      disp="#{disp}\n**VA (English):** #{m[m.length-1]}"
-    end
-    unless k[10].nil? || k[10].length<=0
-      m=k[10].split(' as ')
-      nammes[2]=m[0]
-      disp="#{disp}\n**VA (Japanese):** #{m[m.length-1]}"
-    end
     charsx=[[],[],[]]
     chars=@adventurers.reject{|q| q[0]==k[0] || ((q[10].nil? || q[10].length<=0) && (q[11].nil? || q[11].length<=0))}
     for i in 0...chars.length
@@ -3409,20 +3340,20 @@ def disp_dragon_art(bot,event,args=nil)
       disp="#{disp}\n#{rar} design\n"
     end
   end
+  nammes=['','','']
+  unless k[14].nil? || k[14].length<=0
+    m=k[14].split(' as ')
+    nammes[1]=m[0]
+    disp="#{disp}\n**VA (English):** #{m[m.length-1]}"
+  end
+  unless k[13].nil? || k[13].length<=0
+    m=k[13].split(' as ')
+    nammes[2]=m[0]
+    disp="#{disp}\n**VA (Japanese):** #{m[m.length-1]}"
+  end
   if args.include?('just') || args.include?('justart') || args.include?('blank') || args.include?('noinfo')
     charsx=[[],[],[]]
   else
-    nammes=['','','']
-    unless k[14].nil? || k[14].length<=0
-      m=k[14].split(' as ')
-      nammes[1]=m[0]
-      disp="#{disp}\n**VA (English):** #{m[m.length-1]}"
-    end
-    unless k[13].nil? || k[13].length<=0
-      m=k[13].split(' as ')
-      nammes[2]=m[0]
-      disp="#{disp}\n**VA (Japanese):** #{m[m.length-1]}"
-    end
     charsx=[[],[],[]]
     chars=@adventurers.reject{|q| q[0]==k[0] || ((q[10].nil? || q[10].length<=0) && (q[11].nil? || q[11].length<=0))}
     for i in 0...chars.length
@@ -3618,15 +3549,15 @@ def disp_wyrmprint_art(bot,event,args=nil)
   xcolor=0x005918 if k[2]=='Healing'
   halfemote="\u200B  \u200B  \u200B  \u200B"
   disp="#{halfemote*(4-k[1][0,1].to_i) if k[1][0,1].to_i<4}#{" \u200B" if k[1][0,1].to_i<3}#{generate_rarity_row(k[1][0,1].to_i)}\n#{"#{halfemote} \u200B" if k[1][0,1].to_i==5}#{emote*4}"
+  nammes=['','','']
+  unless k[7].nil? || k[7].length<=0
+    m=k[7].split(' as ')
+    nammes[0]=m[0]
+    disp="#{disp}\n**Artist:** #{m[m.length-1]}"
+  end
   if args.include?('just') || args.include?('justart') || args.include?('blank') || args.include?('noinfo')
     charsx=[[],[],[]]
   else
-    nammes=['','','']
-    unless k[7].nil? || k[7].length<=0
-      m=k[7].split(' as ')
-      nammes[0]=m[0]
-      disp="#{disp}\n**Artist:** #{m[m.length-1]}"
-    end
     charsx=[[],[],[]]
     chars=@wyrmprints.reject{|q| q[0]==k[0] || ((q[7].nil? || q[7].length<=0))}
     for i in 0...chars.length
@@ -4134,7 +4065,7 @@ def disp_sp_table(bot,event,args=nil)
   end
 end
 
-def find_in_adventurers(bot,event,args=nil,mode=0)
+def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   data_load()
   args=normalize(event.message.text.downcase).gsub(',','').split(' ') if args.nil?
   args=args.map{|q| normalize(q.downcase)}
@@ -4154,8 +4085,8 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
   end
   lookout=lookout.reject{|q| q[2]!='Skill'}
   for i in 0...args.length
-    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6
-    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6
+    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6 && allowstr
+    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6 && allowstr
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
     elem.push('Water') if ['water','waters'].include?(args[i].downcase)
     elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
@@ -4182,6 +4113,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
     for i2 in 0...lookout.length
       tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
     end
+    tags.push('StrengthSkill') if ['strength','str'].include?(args[i].downcase) && allowstr
   end
   textra=''
   rarity.uniq!
@@ -4305,7 +4237,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0)
   end
 end
 
-def find_in_dragons(bot,event,args=nil,mode=0)
+def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   data_load()
   args=normalize(event.message.text.downcase).gsub(',','').split(' ') if args.nil?
   args=args.map{|q| normalize(q.downcase)}
@@ -4356,6 +4288,7 @@ def find_in_dragons(bot,event,args=nil,mode=0)
     for i2 in 0...lookout.length
       tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
     end
+    tags.push('StrengthSkill') if ['strength','str'].include?(args[i].downcase) && allowstr
   end
   textra=''
   rarity.uniq!
@@ -4474,7 +4407,7 @@ def find_in_dragons(bot,event,args=nil,mode=0)
   end
 end
 
-def find_in_wyrmprints(bot,event,args=nil,mode=0)
+def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
   data_load()
   args=normalize(event.message.text.downcase).gsub(',','').split(' ') if args.nil?
   args=args.map{|q| normalize(q.downcase)}
@@ -4568,7 +4501,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0)
   end
 end
 
-def find_in_weapons(bot,event,args=nil,mode=0)
+def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true)
   data_load()
   args=normalize(event.message.text.downcase).gsub(',','').split(' ') if args.nil?
   args=args.map{|q| normalize(q.downcase)}
@@ -4615,6 +4548,7 @@ def find_in_weapons(bot,event,args=nil,mode=0)
     for i2 in 0...lookout.length
       tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
     end
+    tags.push('StrengthSkill') if ['strength','str'].include?(args[i].downcase) && allowstr
   end
   textra=''
   rarity.uniq!
@@ -5126,6 +5060,193 @@ def find_all(bot,event,args=nil)
     textra="#{textra}\n\nWyrmprints have been removed from the displayed search results because only the rarity filter applies." if wrm[4]>wrm[1].length
     create_embed(event,str,textra,0xCE456B,"Totals: #{adv[1].length} adventurers, #{drg[1].length} dragons, #{wrm[4]} wyrmprints#{' (not shown)' if wrm[4]>wrm[1].length}, #{wpn[1].length} weapons",nil,flds)
   end
+end
+
+def sort_adventurers(bot,event,args=nil)
+  args=normalize(event.message.text.downcase).split(' ') if args.nil?
+  args=args.map{|q| normalize(q.downcase)}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  k=find_in_adventurers(bot,event,args,2,false)
+  return nil if k.nil?
+  search=k[0]
+  char=k[1]
+  char=char.sort{|a,b| a[0].gsub('*','')<=>b[0].gsub('*','')}.uniq
+  textra=k[3]
+  srt=[1,1,1,1]
+  srtt=0
+  lvl=-1
+  rar=-1
+  for i in 0...args.length
+    rar=args[i].to_i if rar<0 && args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6
+    rar=args[i][0,1].to_i if rar<0 && args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6
+    rar=6 if ['base'].include?(args[i].downcase)
+    lvl=0 if ['default'].include?(args[i].downcase)
+    lvl=1 if ['truemax','max','maximum','truemaximum','trumax','trumaximum'].include?(args[i].downcase)
+    if ['hp','health'].include?(args[i].downcase) && !srt.include?(3)
+      srt[srtt]=3
+      srtt+=1
+    elsif ['strength','str','atkstat','attstat','attackstat','statatk','statatt','statattack','statk','statt','stattack','statstr'].include?(args[i].downcase) && !srt.include?(4)
+      srt[srtt]=4
+      srtt+=1
+    elsif ['defstat','defensestat','defencestat','def','defense','defence'].include?(args[i].downcase)
+      srt[srtt]=5
+      srtt+=1
+    end
+  end
+  textra="**No adventurers match your search**" if char.length<=0
+  if lvl<0
+    lvl=0
+    if srt.reject{|q| q<3}.length>0
+      if rar==6
+        textra="#{textra}#{"\n\n" if textra.length>0}Sorting at default max level.\nIf you want to sort at absolute max stats, include the word \"max\" in your message."
+      elsif rar==5
+        textra="#{textra}#{"\n\n" if textra.length>0}Sorting at level #{30+10*rar} with no modifiers.\nIf you want to sort at absolute max stats, include the word \"max\" in your message."
+      end
+    end
+  end
+  if rar<0
+    rar=6-lvl
+    textra="#{textra}#{"\n\n" if textra.length>0}Sorting at each adventurer's default available rarity.\nIf you want to sort at a specific rarity, include that rarity in your message." unless rar==5 || srt.reject{|q| q<3}.length<=0
+  end
+  srt[srtt]=0
+  char=char.reject{|q| q[0][0,1]=='*'}
+  char=char.reject{|q| q[1][0,1].to_i>rar} unless rar==6 || args.map{|q| q.downcase}.include?('alladv')
+  stats=['Name','','','HP','Strength','Defense']
+  for i in 0...char.length
+    m=rar-3
+    m=char[i][1][0,1].to_i-3 if rar==6
+    m+=lvl if m==2
+    char[i][3]=char[i][3][1][m]
+    char[i][4]=char[i][4][1][m]
+    m2=[]
+    for i2 in 0...srt.length
+      unless srt[i2]<3
+        if rar==6 && m==3
+          m2.push("#{char[i][srt[i2]]} max #{stats[srt[i2]]}")
+        elsif rar==6
+          m2.push("#{char[i][srt[i2]]} L#{micronumber(30+10*char[i][1][0,1].to_i)} #{stats[srt[i2]]}")
+        else
+          m2.push("#{char[i][srt[i2]]} #{stats[srt[i2]]}")
+        end
+      end
+    end
+    char[i][6]="**#{char[i][0]}**#{adv_emoji(char[i],bot)} - #{m2.join(', ')}"
+  end
+  char.sort!{|b,a| (supersort(a,b,srt[0])==0 ? (supersort(a,b,srt[1])==0 ? (supersort(a,b,srt[2])==0 ? supersort(a,b,srt[3]) : supersort(a,b,srt[2])) : supersort(a,b,srt[1])) : supersort(a,b,srt[0]))}
+  if !safe_to_spam?(event) && char.length>10
+    textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results."
+    char=char[0,10]
+  end
+  disp="__**Adventurer Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}\n*Sorted at:* #{rar unless rar==6}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>',"<:Rarity_5:532086056737177600>#{', absolute max stats' if lvl==1}",'Default rarity'][rar]}#{"\n5<:Rarity_5:532086056737177600>s will be shown with absolute max stats" if rar==6 && lvl==1}"
+  disp=extend_message(disp,"__**Notes**__\n#{textra}",event,2) if textra.length>0
+  disp=extend_message(disp,"__**Results**__",event,2) if char.length>0
+  for i in 0...char.length
+    disp=extend_message(disp,char[i][6],event)
+  end
+  event.respond disp
+end
+
+def sort_dragons(bot,event,args=nil)
+  args=normalize(event.message.text.downcase).split(' ') if args.nil?
+  args=args.map{|q| normalize(q.downcase)}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  k=find_in_dragons(bot,event,args,2,false)
+  return nil if k.nil?
+  search=k[0]
+  char=k[1]
+  char=char.sort{|a,b| a[0].gsub('*','')<=>b[0].gsub('*','')}.uniq
+  textra=k[3]
+  srt=[1,1,1,1]
+  srtt=0
+  for i in 0...args.length
+    if ['hp','health'].include?(args[i].downcase) && !srt.include?(3)
+      srt[srtt]=3
+      srtt+=1
+    elsif ['strength','str','atkstat','attstat','attackstat','statatk','statatt','statattack','statk','statt','stattack','statstr','attack','att','atk'].include?(args[i].downcase) && !srt.include?(4)
+      srt[srtt]=4
+      srtt+=1
+    end
+  end
+  textra="**No dragons match your search**" if char.length<=0
+  srt[srtt]=0
+  char=char.reject{|q| q[0][0,1]=='*'}
+  stats=['Name','','','HP','Strength']
+  for i in 0...char.length
+    char[i][3]=char[i][3][1]
+    char[i][4]=char[i][4][1]
+    m2=[]
+    for i2 in 0...srt.length
+      m2.push("#{char[i][srt[i2]]} #{stats[srt[i2]]}") unless srt[i2]<3
+    end
+    char[i][6]="**#{char[i][0]}**#{dragon_emoji(char[i],bot)} - #{m2.join(', ')}"
+  end
+  char.sort!{|b,a| (supersort(a,b,srt[0])==0 ? (supersort(a,b,srt[1])==0 ? (supersort(a,b,srt[2])==0 ? supersort(a,b,srt[3]) : supersort(a,b,srt[2])) : supersort(a,b,srt[1])) : supersort(a,b,srt[0]))}
+  if !safe_to_spam?(event) && char.length>10
+    textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results."
+    char=char[0,10]
+  end
+  disp="__**Dragon Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}"
+  disp=extend_message(disp,"__**Notes**__\n#{textra}",event,2) if textra.length>0
+  disp=extend_message(disp,"__**Results**__",event,2) if char.length>0
+  for i in 0...char.length
+    disp=extend_message(disp,char[i][6],event)
+  end
+  event.respond disp
+end
+
+def sort_weapons(bot,event,args=nil)
+  args=normalize(event.message.text.downcase).split(' ') if args.nil?
+  args=args.map{|q| normalize(q.downcase)}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  k=find_in_weapons(bot,event,args,2,false)
+  return nil if k.nil?
+  search=k[0]
+  char=k[1]
+  char=char.sort{|a,b| a[0].gsub('*','')<=>b[0].gsub('*','')}.uniq
+  textra=k[3]
+  srt=[1,1,1,1]
+  srtt=0
+  x=0
+  for i in 0...args.length
+    if ['hp','health'].include?(args[i].downcase) && !srt.include?(4)
+      srt[srtt]=4
+      srtt+=1
+    elsif ['strength','str','atkstat','attstat','attackstat','statatk','statatt','statattack','statk','statt','stattack','statstr','attack','att','atk'].include?(args[i].downcase) && !srt.include?(5)
+      srt[srtt]=5
+      srtt+=1
+    end
+    x=1 if x<=0 && ['base','0ub','oub','default'].include?(args[i].downcase)
+    x=2 if x<=0 && ['mub','unbind','unbound','refined','refine','refinement','max'].include?(args[i].downcase)
+  end
+  textra="**No weapons match your search**" if char.length<=0
+  if x==0
+    x=1
+    textra="#{textra}#{"\n\n" if textra.length>0}Searching defaults to stats at 0UB.\nYou can sort by stats at MUB by including the word \"MUB\" in your message."
+  end
+  srt[srtt]=0
+  char=char.reject{|q| q[0][0,1]=='*'}
+  stats=['Name','','','','HP','Strength']
+  for i in 0...char.length
+    char[i][4]=char[i][4][x]
+    char[i][5]=char[i][5][x]
+    m2=[]
+    for i2 in 0...srt.length
+      m2.push("#{char[i][srt[i2]]} #{stats[srt[i2]]}") unless srt[i2]<3
+    end
+    char[i][6]="**#{char[i][0]}**#{weapon_emoji(char[i],bot)} - #{m2.join(', ')}"
+  end
+  char.sort!{|b,a| (supersort(a,b,srt[0])==0 ? (supersort(a,b,srt[1])==0 ? (supersort(a,b,srt[2])==0 ? supersort(a,b,srt[3]) : supersort(a,b,srt[2])) : supersort(a,b,srt[1])) : supersort(a,b,srt[0]))}
+  if !safe_to_spam?(event) && char.length>10
+    textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results."
+    char=char[0,10]
+  end
+  disp="__**Weapon Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}\n*Sorted at:* #{['',"#{'<:NonUnbound:534494090876682264>'*4} 0UB","#{'<:Unbind:534494090969088000>'*4} MUB"][x]}"
+  disp=extend_message(disp,"__**Notes**__\n#{textra}",event,2) if textra.length>0
+  disp=extend_message(disp,"__**Results**__",event,2) if char.length>0
+  for i in 0...char.length
+    disp=extend_message(disp,char[i][6],event)
+  end
+  event.respond disp
 end
 
 def spaceship_order(x)
@@ -7168,10 +7289,10 @@ end
 def show_abil_limits(event,bot)
   k=["Affliction Guard \u2192 III","Blindness Res \u2192 100%","Bog Res \u2192 100%","Broken Punisher \u2192 25%","Buff Time \u2192 30%","Burn Res \u2192 100%",
      "Crit Damage \u2192 25%","Crit Rate \u2192 15%","Curse Res \u2192 100%","Defense +% \u2192 20%","Dragon Time \u2192 15%","Element Res \u2192 15%",
-     "Energy Prep \u2192 V","Force Strike \u2192 40%","Freeze Res \u2192 100%","Healing Doublebuff \u2192 III","Last Offense \u2192 60%",
-     "Paralysis Res \u2192 100%","Player XP \u2192 10%","Poison Res \u2192 100%","Recovery Potency \u2192 20%","Shapeshift \u2192 10%","Shield Prep \u2192 II",
-     "Skill Damage \u2192 35%","Skill Haste \u2192 15%","Skill Prep \u2192 100%","Slayer's Strength \u2192 5%","Sleep Res \u2192 100%",
-     "Strength +% \u2192 15%","Stun Res \u2192 100%"]
+     "Energy Prep \u2192 V","Event Score \u2192 250%","Facility Material Intake \u2192 125%","Force Strike \u2192 40%","Freeze Res \u2192 100%",
+     "Healing Doublebuff \u2192 III","Last Offense \u2192 60%","Paralysis Res \u2192 100%","Player XP \u2192 10%","Poison Res \u2192 100%",
+     "Recovery Potency \u2192 20%","Shapeshift \u2192 10%","Shield Prep \u2192 II","Skill Damage \u2192 35%","Skill Haste \u2192 15%","Skill Prep \u2192 100%",
+     "Slayer's Strength \u2192 5%","Sleep Res \u2192 100%","Strength +% \u2192 15%","Stun Res \u2192 100%"]
   create_embed(event,'__**Ability stacking limits**__','',0xCE456B,nil,nil,triple_finish(k,true))
 end
 
@@ -7515,9 +7636,10 @@ bot.command([:alts,:alt]) do |event, *args|
   return nil
 end
 
-bot.command([:find,:search,:list,:lookup]) do |event, *args|
+bot.command([:find,:search,:lookup]) do |event, *args|
   return nil if overlap_prevent(event)
-  if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
+  if args.nil? || args.length<=0
+  elsif ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
     args.shift
     find_adventurers(bot,event,args)
     return nil
@@ -7543,6 +7665,25 @@ bot.command([:find,:search,:list,:lookup]) do |event, *args|
     return nil
   end
   find_all(bot,event,args)
+end
+
+bot.command([:sort,:list]) do |event, *args|
+  return nil if overlap_prevent(event)
+  if args.nil? || args.length<=0
+  elsif ['dragon','dragons','drg'].include?(args[0].downcase)
+    args.shift
+    sort_dragons(bot,event,args)
+    return nil
+  elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase) && @shardizard==4
+    args.shift
+    sort_wyrmprints(bot,event,args)
+    return nil
+  elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase) && @shardizard==4
+    args.shift
+    sort_weapons(bot,event,args)
+    return nil
+  end
+  sort_adventurers(bot,event,args)
 end
 
 bot.command([:limit,:limits,:stack,:stacks]) do |event|
@@ -8022,7 +8163,8 @@ bot.command(:restorealiases, from: 167657750971547648) do |event|
     b=[]
   end
   nzzzzz=b.uniq
-  if nzzzzz[nzzzzz.length-1][1]<225
+  nz=nzzzzz.reject{|q| q[0]!='Adventurer'}
+  if nz[nz.length-1][2]<'Zethia'
     event << 'Last backup of the alias list has been corrupted.  Restoring from manually-created backup.'
     if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLNames3.txt')
       b=[]
@@ -8889,10 +9031,11 @@ bot.mention do |event|
     args.shift
     help_text(event,bot,args[0],args[1])
     m=false
-  elsif ['find','search'].include?(args[0].downcase)
+  elsif ['find','search','lineup'].include?(args[0].downcase)
     m=false
     args.shift
-    if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
+    if args.length<=0
+    elsif ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
       args.shift
       find_adventurers(bot,event,args)
     elsif ['dragon','dragons','drag','drags','drg','drgs'].include?(args[0].downcase)
@@ -8912,6 +9055,24 @@ bot.mention do |event|
       find_banners(bot,event,args)
     else
       find_all(bot,event,args)
+    end
+  elsif ['sort','list']
+    m=false
+    if args.length<=0
+    elsif ['dragon','dragons','drg'].include?(args[0].downcase) && @shardizard==4
+      args.shift
+      sort_dragons(bot,event,args)
+      return nil
+    elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase) && @shardizard==4
+      args.shift
+      sort_wyrmprints(bot,event,args)
+      return nil
+    elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase) && @shardizard==4
+      args.shift
+      sort_weapons(bot,event,args)
+      return nil
+    else
+      sort_adventurers(bot,event,args)
     end
   elsif ['art'].include?(args[0].downcase)
     m=false
