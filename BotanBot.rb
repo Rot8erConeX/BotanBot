@@ -5112,8 +5112,22 @@ def sort_adventurers(bot,event,args=nil,mode=0)
     char[i][6]="**#{char[i][0]}**#{adv_emoji(char[i],bot)} - #{m2.join(', ')}"
   end
   char.sort!{|b,a| (supersort(a,b,srt[0])==0 ? (supersort(a,b,srt[1])==0 ? (supersort(a,b,srt[2])==0 ? supersort(a,b,srt[3]) : supersort(a,b,srt[2])) : supersort(a,b,srt[1])) : supersort(a,b,srt[0]))}
+  tx=0
+  bx=0
+  for i in 0...args.length
+    if args[i].downcase[0,3]=='top' && tx.zero?
+      tx=[args[i][3,args[i].length-3].to_i,char.length].min
+    elsif args[i].downcase[0,6]=='bottom' && bx.zero?
+      bx=[args[i][6,args[i].length-6].to_i,char.length].min
+    end
+  end
+  if tx>0
+    char=char[0,tx]
+  elsif bx>0
+    char=char[char.length-bx,bx]
+  end
   if !safe_to_spam?(event) && char.length>10
-    textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results."
+    textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results.\nYou can also make things easier by making the list shorter with words like `top#{rand(10)+1}` or `bottom#{rand(10)+1}`"
     char=char[0,10]
   end
   disp="__**Adventurer Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}\n*Sorted at:* #{rar unless rar==6}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>',"<:Rarity_5:532086056737177600>#{', absolute max stats' if lvl==1}",'Default rarity'][rar]}#{"\n5<:Rarity_5:532086056737177600>s will be shown with absolute max stats" if rar==6 && lvl==1}"
@@ -5161,8 +5175,22 @@ def sort_dragons(bot,event,args=nil)
     char[i][6]="**#{char[i][0]}**#{dragon_emoji(char[i],bot)} - #{m2.join(', ')}"
   end
   char.sort!{|b,a| (supersort(a,b,srt[0])==0 ? (supersort(a,b,srt[1])==0 ? (supersort(a,b,srt[2])==0 ? supersort(a,b,srt[3]) : supersort(a,b,srt[2])) : supersort(a,b,srt[1])) : supersort(a,b,srt[0]))}
+  tx=0
+  bx=0
+  for i in 0...args.length
+    if args[i].downcase[0,3]=='top' && tx.zero?
+      tx=[args[i][3,args[i].length-3].to_i,char.length].min
+    elsif args[i].downcase[0,6]=='bottom' && bx.zero?
+      bx=[args[i][6,args[i].length-6].to_i,char.length].min
+    end
+  end
+  if tx>0
+    char=char[0,tx]
+  elsif bx>0
+    char=char[char.length-bx,bx]
+  end
   if !safe_to_spam?(event) && char.length>10
-    textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results."
+    textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results.\nYou can also make things easier by making the list shorter with words like `top#{rand(10)+1}` or `bottom#{rand(10)+1}`"
     char=char[0,10]
   end
   disp="__**Dragon Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}"
@@ -5209,8 +5237,22 @@ def sort_wyrmprints(bot,event,args=nil)
     char[i][6]="**#{char[i][0]}**#{print_emoji(char[i],bot)} - #{m2.join(', ')}"
   end
   char.sort!{|b,a| (supersort(a,b,srt[0])==0 ? (supersort(a,b,srt[1])==0 ? (supersort(a,b,srt[2])==0 ? supersort(a,b,srt[3]) : supersort(a,b,srt[2])) : supersort(a,b,srt[1])) : supersort(a,b,srt[0]))}
+  tx=0
+  bx=0
+  for i in 0...args.length
+    if args[i].downcase[0,3]=='top' && tx.zero?
+      tx=[args[i][3,args[i].length-3].to_i,char.length].min
+    elsif args[i].downcase[0,6]=='bottom' && bx.zero?
+      bx=[args[i][6,args[i].length-6].to_i,char.length].min
+    end
+  end
+  if tx>0
+    char=char[0,tx]
+  elsif bx>0
+    char=char[char.length-bx,bx]
+  end
   if !safe_to_spam?(event) && char.length>10
-    textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results."
+    textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results.\nYou can also make things easier by making the list shorter with words like `top#{rand(10)+1}` or `bottom#{rand(10)+1}`"
     char=char[0,10]
   end
   disp="__**Wyrmprint Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}"
@@ -5264,8 +5306,22 @@ def sort_weapons(bot,event,args=nil)
     char[i][6]="**#{char[i][0]}**#{weapon_emoji(char[i],bot)} - #{m2.join(', ')}"
   end
   char.sort!{|b,a| (supersort(a,b,srt[0])==0 ? (supersort(a,b,srt[1])==0 ? (supersort(a,b,srt[2])==0 ? supersort(a,b,srt[3]) : supersort(a,b,srt[2])) : supersort(a,b,srt[1])) : supersort(a,b,srt[0]))}
+  tx=0
+  bx=0
+  for i in 0...args.length
+    if args[i].downcase[0,3]=='top' && tx.zero?
+      tx=[args[i][3,args[i].length-3].to_i,char.length].min
+    elsif args[i].downcase[0,6]=='bottom' && bx.zero?
+      bx=[args[i][6,args[i].length-6].to_i,char.length].min
+    end
+  end
+  if tx>0
+    char=char[0,tx]
+  elsif bx>0
+    char=char[char.length-bx,bx]
+  end
   if !safe_to_spam?(event) && char.length>10
-    textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results."
+    textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results.\nYou can also make things easier by making the list shorter with words like `top#{rand(10)+1}` or `bottom#{rand(10)+1}`"
     char=char[0,10]
   end
   disp="__**Weapon Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}\n*Sorted at:* #{['',"#{'<:NonUnbound:534494090876682264>'*4} 0UB","#{'<:Unbind:534494090969088000>'*4} MUB"][x]}"
