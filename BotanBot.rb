@@ -2499,7 +2499,7 @@ def disp_ability_data(bot,event,args=nil)
               advabils=[adv[i3][8][0][1],adv[i3][8][1][1],adv[i3][8][2][-1]]
               advabils.push(adv[i3][8][3][0]) if adv[i3][8].length>3
               advabils.push(adv[i3][8][3][1]) if adv[i3][8].length>3
-              m2.push("#{element_emote(adv[i][2][1],bot)}*#{adv[i3][0]}*") if advabils.include?(checkstr)
+              m2.push("#{element_emote(adv[i3][2][1],bot)}*#{adv[i3][0]}*") if advabils.include?(checkstr)
               for i2 in 0...elemo.length
                 checkstr2="(#{elemo[i2][0]}) #{checkstr}"
                 m2.push("#{elemo[i2][1]}#{adv[i3][0]}") if advabils.include?(checkstr2)
@@ -9144,7 +9144,7 @@ bot.mention do |event|
     else
       find_all(bot,event,args)
     end
-  elsif ['sort','list']
+  elsif ['sort','list'].include?(args[0].downcase)
     m=false
     if args.length<=0
     elsif ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
