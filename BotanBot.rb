@@ -2084,11 +2084,12 @@ def disp_skill_data(bot,event,args=nil)
   end
 end
 
-def disp_ability_data(bot,event,args=nil)
+def disp_ability_data(bot,event,args=nil,forceaura=false)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
   k=find_data_ex(:find_ability,args.join(' '),event)
+  k=k.reject{|q| q[2]!='Aura'} if forceaura
   if k.length.zero?
     event.respond 'No matches found.'
     return nil
@@ -2486,6 +2487,18 @@ def disp_ability_data(bot,event,args=nil)
                 m2.push("#{emo}#{drg[i][0]} (A\u2081)") if drg[i][6][0][0][0]==checkstr
                 m2.push("#{emo}#{drg[i][0]} (A\u2082)") if drg[i][6][0][0][1]==checkstr
               end
+              for i2 in 0...elemo.length
+                checkstr2="(#{elemo[i2][0]}) #{checkstr}"
+                if drg[i][6][0].length>1
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (A1\u2081)") if drg[i][6][0][0][0]==checkstr2
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (A1\u2082)") if drg[i][6][0][0][1]==checkstr2
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (A2\u2081)") if drg[i][6][0][1][0]==checkstr2
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (A2\u2082)") if drg[i][6][0][1][1]==checkstr2
+                else
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (A\u2081)") if drg[i][6][0][0][0]==checkstr2
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (A\u2082)") if drg[i][6][0][0][1]==checkstr2
+                end
+              end
             end
             str="#{str}\n*Dragons:* #{m2.join(', ')}" if m2.length>0
           end
@@ -2501,8 +2514,7 @@ def disp_ability_data(bot,event,args=nil)
               advabils.push(adv[i3][8][3][1]) if adv[i3][8].length>3
               m2.push("#{element_emote(adv[i3][2][1],bot)}*#{adv[i3][0]}*") if advabils.include?(checkstr)
               for i2 in 0...elemo.length
-                checkstr2="(#{elemo[i2][0]}) #{checkstr}"
-                m2.push("#{elemo[i2][1]}#{adv[i3][0]}") if advabils.include?(checkstr2)
+                m2.push("#{elemo[i2][1]}#{adv[i3][0]}") if advabils.include?("(#{elemo[i2][0]}) #{checkstr}")
               end
             end
             if m2.length>3 
@@ -2527,8 +2539,7 @@ def disp_ability_data(bot,event,args=nil)
             for i in 0...wrm.length
               m2.push("#{emo}#{wrm[i][0]}") if wrm[i][5].map{|q| q[1]}.include?(checkstr)
               for i2 in 0...elemo.length
-                checkstr2="(#{elemo[i2][0]}) #{checkstr}"
-                m2.push("#{elemo[i2][1]}#{wrm[i][0]}") if wrm[i][5].map{|q| q[1]}.include?(checkstr2)
+                m2.push("#{elemo[i2][1]}#{wrm[i][0]}") if wrm[i][5].map{|q| q[1]}.include?("(#{elemo[i2][0]}) #{checkstr}")
               end
             end
             if m2.length>3 
@@ -2574,6 +2585,9 @@ def disp_ability_data(bot,event,args=nil)
             m2=[]
             for i in 0...drg.length
               m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]}") if drg[i][6][0][0][1]==checkstr
+              for i2 in 0...elemo.length
+                m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]}") if drg[i][6][0][0][1]=="(#{elemo[i2][0]}) #{checkstr}"
+              end
             end
             str="#{str} - #{m2.join(', ')}" if m2.length>0
           end
@@ -4715,7 +4729,7 @@ def find_in_mats(bot,event,args=nil,mode=0)
       search[-1]="#{search[-1]}\n(searching for materials or items with all listed tags)" if tags.length>1
       textra="#{textra}\n\nTags searching defaults to searching for materials and items with all listed tags.\nTo search for materials or items with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
       for i in 0...tags.length
-        char=char.reject{|q| !q[8].include?(tags[i])}.uniq
+        char=char.reject{|q| q[8].nil? || !q[8].include?(tags[i])}.uniq
       end
     end
   end
@@ -7577,7 +7591,7 @@ bot.command([:skill,:skil]) do |event, *args|
   disp_skill_data(bot,event,args)
 end
 
-bot.command([:ability,:abil,:aura]) do |event, *args|
+bot.command([:ability,:abil]) do |event, *args|
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
   elsif ['limit','limits','stack','stacks'].include?(args[0].downcase)
@@ -7585,6 +7599,11 @@ bot.command([:ability,:abil,:aura]) do |event, *args|
     return nil
   end
   disp_ability_data(bot,event,args)
+end
+
+bot.command([:aura]) do |event, *args|
+  return nil if overlap_prevent(event)
+  disp_ability_data(bot,event,args,true)
 end
 
 bot.command([:facility,:faculty,:fac]) do |event, *args|
@@ -8923,7 +8942,7 @@ bot.command(:snagstats) do |event, f, f2|
   event << "**There are #{longFormattedNumber(@weapons.length)} *weapons*.**"
   event << ''
   event << "There are #{longFormattedNumber(@askilities.reject{|q| q[2]!='Skill'}.length)} skills."
-  event << "There are #{longFormattedNumber(@askilities.reject{|q| q[2]!='Aura'}.length)} dragon auras, split into #{longFormattedNumber(@askilities.reject{|q| q[2]!='Aura'}.map{|q| q[0]}.uniq.length)} families."
+  event << "There are #{longFormattedNumber(@askilities.reject{|q| q[2]!='Aura'}.length)} dragon auras, split into #{longFormattedNumber(@askilities.reject{|q| q[2]!='Aura'}.map{|q| q[0].split(') ')[-1]}.uniq.length)} families."
   event << "There are #{longFormattedNumber(@askilities.reject{|q| q[2]!='Ability'}.length)} abilities, split into #{longFormattedNumber(@askilities.reject{|q| q[2]!='Ability'}.map{|q| q[0].split(') ')[-1]}.uniq.length)} families."
   event << "There are #{longFormattedNumber(@askilities.reject{|q| q[2]!='CoAbility'}.length)} co-abilities, split into #{longFormattedNumber(@askilities.reject{|q| q[2]!='CoAbility'}.map{|q| q[0]}.uniq.length)} families."
   event << ''
@@ -9304,6 +9323,10 @@ bot.mention do |event|
   elsif ['limit','limits','stack','stacks'].include?(args[0].downcase)
     m=false
     show_abil_limits(event,bot)
+  elsif ['aura'].include?(args[0].downcase)
+    m=false
+    args.shift
+    disp_ability_data(bot,event,args,true)
   elsif ['ability','abil'].include?(args[0].downcase)
     m=false
     args.shift
