@@ -1403,13 +1403,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       m.push(k[8][i][lv[i+2]-1]) if lv[i+2]>0
     end
     str="#{str}\n\n;;;;;\n\n**Abilities:** #{m.join(', ')}"
-    if rar<5
-      str="#{str}\n**Co-Ability:** #{k[7].split('/')[0]}"
-    else
-      m=k[7].split(' ')
-      m[-1]=m[-1].split('/')
-      str="#{str}\n**Co-Ability:** #{m[0,m.length-1].join(' ')} #{m[-1][-1]}"
-    end
+    str="#{str}\n**Co-Ability:** #{k[7]}"
     if str.gsub(';;;;;',strx).length>=1800
       str=str.gsub(';;;;;',"#{strx2}\n~~Skill descriptions make this data too long.  Please try again in PM.~~")
     else
@@ -7391,7 +7385,7 @@ def show_abil_limits(event,bot)
      "Healing Doublebuff \u2192 III","Last Offense \u2192 60%","Paralysis Res \u2192 100%","Player XP \u2192 10%","Poison Res \u2192 100%",
      "Recovery Potency \u2192 20%","Shapeshift \u2192 10%","Shield Prep \u2192 II","Skill Damage \u2192 35%","Skill Haste \u2192 15%","Skill Prep \u2192 100%",
      "Slayer's Strength \u2192 5%","Sleep Res \u2192 100%","Strength +% \u2192 15%","Stun Res \u2192 100%"]
-  create_embed(event,'__**Ability stacking limits**__','',0xCE456B,nil,nil,triple_finish(k,true))
+  create_embed(event,'__**Ability stacking limits**__','',0xCE456B,'Limits shown here are per adventurer, not per team',nil,triple_finish(k,true))
 end
 
 def find_adv_alts(event,args,bot)
