@@ -814,125 +814,125 @@ def find_weapon(name,event,fullname=false,ext=false)
   return [] if name.length<2
   k=@weapons.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
   return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[2][0,1]}*#{q[3]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[2][0,1]}*#{q[3]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[2][0,1]}#{q[3]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[2][0,1]}#{q[3]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[2][0,1]}*#{q[1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[2][0,1]}*#{q[1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[2][0,1]}#{q[1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[2][0,1]}#{q[1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[3]}#{q[2][0,1]}*#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[3]}#{q[2][0,1]}*#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[3]}#{q[2][0,1]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[3]}#{q[2][0,1]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[1]}#{q[2][0,1]}*#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[1]}#{q[2][0,1]}*#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[1]}#{q[2][0,1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[1]}#{q[2][0,1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[3]}#{q[1]}#{q[2][0,1]}*".downcase==name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[3]}#{q[1]}#{q[2][0,1]}*".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[3]}#{q[1]}#{q[2][0,1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[3]}#{q[1]}#{q[2][0,1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[1]}#{q[3]}#{q[2][0,1]}*".downcase==name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[1]}#{q[3]}#{q[2][0,1]}*".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[1]}#{q[3]}#{q[2][0,1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[1]}#{q[3]}#{q[2][0,1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return @weapons[k] unless k.nil?
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[2][0,1]}*#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[2][0,1]}*#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[2][0,1]}#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[2][0,1]}#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[2][0,1]}*#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[2][0,1]}*#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[2][0,1]}#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[2][0,1]}#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[3]}#{q[2][0,1]}*#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[3]}#{q[2][0,1]}*#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[3]}#{q[2][0,1]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[3]}#{q[2][0,1]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[1]}#{q[2][0,1]}*#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[1]}#{q[2][0,1]}*#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[1]}#{q[2][0,1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[1]}#{q[2][0,1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[3]}#{q[1]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[3]}#{q[1]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[3]}#{q[1]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[3]}#{q[1]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[1]}#{q[3]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[1]}#{q[3]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[1]}#{q[3]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[1]}#{q[3]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*Void#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*Void#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}Void#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}Void#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*Void#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*Void#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}Void#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}Void#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}Void#{q[2][0,1]}*#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}Void#{q[2][0,1]}*#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}Void#{q[2][0,1]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}Void#{q[2][0,1]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}Void#{q[2][0,1]}*#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}Void#{q[2][0,1]}*#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}Void#{q[2][0,1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}Void#{q[2][0,1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}Void#{q[1]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}Void#{q[1]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}Void#{q[1]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}Void#{q[1]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}Void#{q[3]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}Void#{q[3]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}Void#{q[3]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}Void#{q[3]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*#{q[3]}Void#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*#{q[3]}Void#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}#{q[3]}Void#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}#{q[3]}Void#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*#{q[1]}Void#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*#{q[1]}Void#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}#{q[1]}Void#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}#{q[1]}Void#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[2][0,1]}*Void#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[2][0,1]}*Void#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[2][0,1]}Void#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[2][0,1]}Void#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[2][0,1]}*Void#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[2][0,1]}*Void#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[2][0,1]}Void#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[2][0,1]}Void#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[1]}Void#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[1]}Void#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[1]}Void#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[1]}Void#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[3]}Void#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[3]}Void#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[3]}Void#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[3]}Void#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*#{q[3]}#{q[1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*#{q[3]}#{q[1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}#{q[3]}#{q[1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}#{q[3]}#{q[1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*#{q[1]}#{q[3]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*#{q[1]}#{q[3]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}#{q[1]}#{q[3]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}#{q[1]}#{q[3]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[2][0,1]}*#{q[1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[2][0,1]}*#{q[1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[2][0,1]}#{q[1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[2][0,1]}#{q[1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[2][0,1]}*#{q[3]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[2][0,1]}*#{q[3]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[2][0,1]}#{q[3]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[2][0,1]}#{q[3]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[1]}#{q[2][0,1]}*Void".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[1]}#{q[2][0,1]}*Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[1]}#{q[2][0,1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[1]}#{q[2][0,1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[3]}#{q[2][0,1]}*Void".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[3]}#{q[2][0,1]}*Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[3]}#{q[2][0,1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow')}
+  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[3]}#{q[2][0,1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
   return k if k.length>0
   nicknames_load()
   alz=@aliases.reject{|q| q[0]!='Weapon'}.map{|q| [q[1],q[2],q[3]]}
@@ -6163,47 +6163,46 @@ def disp_aliases(bot,event,args=nil,mode=0)
     f.push("__**#{wpn[0]}#{weapon_emoji(wpn,bot)}**__#{"'s server-specific aliases" if mode==1}")
     unless mode==1
       f.push(wpn[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if wpn[0].include?('(') || wpn[0].include?(')') || wpn[0].include?(' ') || wpn[0].include?('!') || wpn[0].include?('_') || wpn[0].include?('?') || wpn[0].include?("'") || wpn[0].include?('"')
-      if wpn[2][1,1]!='v' && wpn[3]!='None'
-        mnm=[wpn[3]]
-        mnm.push('Fire') if wpn[3]=='Flame'
-        mnm.push('Dark') if wpn[3]=='Shadow'
-        for i in 0...mnm.length
-          f.push("#{wpn[2][0,1]}\\*#{mnm[i]}#{wpn[1]}")
-          f.push("#{wpn[2][0,1]}\\*#{wpn[1]}#{mnm[i]}")
-          f.push("#{mnm[i]}#{wpn[2][0,1]}\\*#{wpn[1]}")
-          f.push("#{wpn[1]}#{wpn[2][0,1]}\\*#{mnm[i]}")
-          f.push("#{mnm[i]}#{wpn[1]}#{wpn[2][0,1]}\\*")
-          f.push("#{wpn[1]}#{mnm[i]}#{wpn[2][0,1]}\\*")
-        end
-      elsif wpn[2][1,1]=='v' && wpn[3]!='None'
-        mnm=[wpn[3]]
-        mnm.push('Fire') if wpn[3]=='Flame'
-        mnm.push('Dark') if wpn[3]=='Shadow'
-        for i in 0...mnm.length
-          f.push("Void#{wpn[2][0,1]}\\*#{mnm[i]}#{wpn[1]}")
-          f.push("Void#{wpn[2][0,1]}\\*#{wpn[1]}#{mnm[i]}")
-          f.push("Void#{mnm[i]}#{wpn[2][0,1]}\\*#{wpn[1]}")
-          f.push("Void#{wpn[1]}#{wpn[2][0,1]}\\*#{mnm[i]}")
-          f.push("Void#{mnm[i]}#{wpn[1]}#{wpn[2][0,1]}\\*")
-          f.push("Void#{wpn[1]}#{mnm[i]}#{wpn[2][0,1]}\\*")
-          f.push("#{wpn[2][0,1]}\\*Void#{mnm[i]}#{wpn[1]}")
-          f.push("#{wpn[2][0,1]}\\*Void#{wpn[1]}#{mnm[i]}")
-          f.push("#{mnm[i]}Void#{wpn[2][0,1]}\\*#{wpn[1]}")
-          f.push("#{wpn[1]}Void#{wpn[2][0,1]}\\*#{mnm[i]}")
-          f.push("#{mnm[i]}Void#{wpn[1]}#{wpn[2][0,1]}\\*")
-          f.push("#{wpn[1]}Void#{mnm[i]}#{wpn[2][0,1]}\\*")
-          f.push("#{wpn[2][0,1]}\\*#{mnm[i]}Void#{wpn[1]}")
-          f.push("#{wpn[2][0,1]}\\*#{wpn[1]}Void#{mnm[i]}")
-          f.push("#{mnm[i]}#{wpn[2][0,1]}\\*Void#{wpn[1]}")
-          f.push("#{wpn[1]}#{wpn[2][0,1]}\\*Void#{mnm[i]}")
-          f.push("#{mnm[i]}#{wpn[1]}Void#{wpn[2][0,1]}\\*")
-          f.push("#{wpn[1]}#{mnm[i]}Void#{wpn[2][0,1]}\\*")
-          f.push("#{wpn[2][0,1]}\\*#{mnm[i]}#{wpn[1]}Void")
-          f.push("#{wpn[2][0,1]}\\*#{wpn[1]}#{mnm[i]}Void")
-          f.push("#{mnm[i]}#{wpn[2][0,1]}\\*#{wpn[1]}Void")
-          f.push("#{wpn[1]}#{wpn[2][0,1]}\\*#{mnm[i]}Void")
-          f.push("#{mnm[i]}#{wpn[1]}#{wpn[2][0,1]}\\*Void")
-          f.push("#{wpn[1]}#{mnm[i]}#{wpn[2][0,1]}\\*Void")
+      mnm=[wpn[3]]
+      mnm.push('Fire') if wpn[3]=='Flame'
+      mnm.push('Dark') if wpn[3]=='Shadow'
+      mnm2=[wpn[1]]
+      mnm2.push('Spear') if wpn[1]=='Lance'
+      for i in 0...mnm.length
+        for i2 in 0...mnm2.length
+          if wpn[2][1,1]!='v' && wpn[3]!='None'
+            f.push("#{wpn[2][0,1]}\\*#{mnm[i]}#{mnm2[i2]}")
+            f.push("#{wpn[2][0,1]}\\*#{mnm2[i2]}#{mnm[i]}")
+            f.push("#{mnm[i]}#{wpn[2][0,1]}\\*#{mnm2[i2]}")
+            f.push("#{mnm2[i2]}#{wpn[2][0,1]}\\*#{mnm[i]}")
+            f.push("#{mnm[i]}#{mnm2[i2]}#{wpn[2][0,1]}\\*")
+            f.push("#{mnm2[i2]}#{mnm[i]}#{wpn[2][0,1]}\\*")
+          elsif wpn[2][1,1]=='v' && wpn[3]!='None'
+            f.push("Void#{wpn[2][0,1]}\\*#{mnm[i]}#{mnm2[i2]}")
+            f.push("Void#{wpn[2][0,1]}\\*#{mnm2[i2]}#{mnm[i]}")
+            f.push("Void#{mnm[i]}#{wpn[2][0,1]}\\*#{mnm2[i2]}")
+            f.push("Void#{mnm2[i2]}#{wpn[2][0,1]}\\*#{mnm[i]}")
+            f.push("Void#{mnm[i]}#{mnm2[i2]}#{wpn[2][0,1]}\\*")
+            f.push("Void#{mnm2[i2]}#{mnm[i]}#{wpn[2][0,1]}\\*")
+            f.push("#{wpn[2][0,1]}\\*Void#{mnm[i]}#{mnm2[i2]}")
+            f.push("#{wpn[2][0,1]}\\*Void#{mnm2[i2]}#{mnm[i]}")
+            f.push("#{mnm[i]}Void#{wpn[2][0,1]}\\*#{mnm2[i2]}")
+            f.push("#{mnm2[i2]}Void#{wpn[2][0,1]}\\*#{mnm[i]}")
+            f.push("#{mnm[i]}Void#{mnm2[i2]}#{wpn[2][0,1]}\\*")
+            f.push("#{mnm2[i2]}Void#{mnm[i]}#{wpn[2][0,1]}\\*")
+            f.push("#{wpn[2][0,1]}\\*#{mnm[i]}Void#{mnm2[i2]}")
+            f.push("#{wpn[2][0,1]}\\*#{mnm2[i2]}Void#{mnm[i]}")
+            f.push("#{mnm[i]}#{wpn[2][0,1]}\\*Void#{mnm2[i2]}")
+            f.push("#{mnm2[i2]}#{wpn[2][0,1]}\\*Void#{mnm[i]}")
+            f.push("#{mnm[i]}#{mnm2[i2]}Void#{wpn[2][0,1]}\\*")
+            f.push("#{mnm2[i2]}#{mnm[i]}Void#{wpn[2][0,1]}\\*")
+            f.push("#{wpn[2][0,1]}\\*#{mnm[i]}#{mnm2[i2]}Void")
+            f.push("#{wpn[2][0,1]}\\*#{mnm2[i2]}#{mnm[i]}Void")
+            f.push("#{mnm[i]}#{wpn[2][0,1]}\\*#{mnm2[i2]}Void")
+            f.push("#{mnm2[i2]}#{wpn[2][0,1]}\\*#{mnm[i]}Void")
+            f.push("#{mnm[i]}#{mnm2[i2]}#{wpn[2][0,1]}\\*Void")
+            f.push("#{mnm2[i2]}#{mnm[i]}#{wpn[2][0,1]}\\*Void")
+          end
         end
       end
     end
