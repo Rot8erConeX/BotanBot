@@ -1041,13 +1041,13 @@ def find_ability(name,event,fullname=false,ext=false)
   return sklz.reject{|q| q[0]!=sklz[k][0]} unless k.nil?
   k=sklz.reject{|q| q[0].length<7 || q[0][0,7]!='Hits = ' || "#{q[1]} #{q[0]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]!=name || q[1].downcase=='example'}
   return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  k=alz.find_index{|q| q[0][0,name.length]!=q[0][0,name.length].to_i.to_s && q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   unless k.nil?
     m=sklz.find_index{|q| "#{q[0]} #{q[1]}"==alz[k][1]}
     return sklz[m] unless m.nil?
     return sklz.reject{|q| q[0]!=alz[k][1]}
   end
-  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  k=alz.find_index{|q| q[0].gsub('||','')[0,name.length]!=q[0].gsub('||','')[0,name.length].to_i.to_s && q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   unless k.nil?
     m=sklz.find_index{|q| "#{q[0]} #{q[1]}"==alz[k][1]}
     return sklz[m] unless m.nil?
@@ -1572,7 +1572,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   str="#{str}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
   str="#{str}\n**Starter**" if k[2].length>1 && k[2][1,1].downcase=='e'
   str="#{str}\n**Paid**" if k[2].length>1 && k[2][1,1].downcase=='p'
-  str="#{str}\n**Void**" if k[2].length>1 && k[2][1,1].downcase=='v'
+  str="#{str}\n<:Element_Void:548467446734913536> **Void**" if k[2].length>1 && k[2][1,1].downcase=='v'
   f=30*k[2][0,1].to_i-50
   f+=20 if k[2][0,1].to_i<3
   f0=30*k[2][0,1].to_i-70
@@ -1725,7 +1725,7 @@ def disp_weapon_lineage(bot,event,args=nil)
   str="#{str}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
   str="#{str}\n**Starter**" if k[2].length>1 && k[2][1,1].downcase=='e'
   str="#{str}\n**Paid**" if k[2].length>1 && k[2][1,1].downcase=='p'
-  str="#{str}\n**Void**" if k[2].length>1 && k[2][1,1].downcase=='v'
+  str="#{str}\n<:Element_Void:548467446734913536> **Void**" if k[2].length>1 && k[2][1,1].downcase=='v'
   f=30*k[2][0,1].to_i-50
   f+=20 if k[2][0,1].to_i<3
   f0=30*k[2][0,1].to_i-70
@@ -2788,6 +2788,18 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
   end
   xpic=xpic.gsub(' ','_')
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Abilities/#{xpic}.png"
+  flds=nil if !flds.nil? && flds.length<=0
+  unless flds.nil? || flds.length>1
+    m=flds[0][1].split("\n")
+    elemo=[['Base','<:Element_Null:532106087810334741>'],['Flame','<:Element_Flame:532106087952810005>'],['Water','<:Element_Water:532106088221376522>'],
+           ['Wind','<:Element_Wind:532106087948746763>'],['Light','<:Element_Light:532106088129101834>'],['Shadow','<:Element_Shadow:532106088154267658>']]
+    flds2=[]
+    for i in 0...elemo.length
+      k=m.reject{|q| !q.include?(elemo[i][1])}.map{|q| q.gsub(elemo[i][1],'')}
+      flds2.push(["#{elemo[i][1]}#{elemo[i][0]} #{flds[0][0]}",k.join("\n")]) if k.length>0
+    end
+    flds=flds2.map{|q| q}
+  end
   f=0
   f=flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length unless flds.nil?
   f+=ftr.length unless ftr.nil?
@@ -2814,17 +2826,17 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
       else
         create_embed(event,'',str,xcolor)
       end
-      unless flds.nil?
-        if flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length>=1900
-          for i in 0...flds.length
-            create_embed(event,'','',xcolor,nil,nil,[flds[i]])
-          end
-        else
-          create_embed(event,'','',xcolor,nil,nil,flds)
-        end
-      end
     else
       create_embed(event,hdr,str,xcolor,nil,xpic)
+    end
+    unless flds.nil?
+      if flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length>=1900
+        for i in 0...flds.length
+          create_embed(event,'','',xcolor,nil,nil,[flds[i]])
+        end
+      else
+        create_embed(event,'','',xcolor,nil,nil,flds)
+      end
     end
     event.respond ftr unless ftr.nil?
   else
@@ -2901,26 +2913,26 @@ def disp_facility_data(bot,event,args=nil)
   return nil if ['Smithy','Halidom'].include?(k[0]) && !safe_to_spam?(event)
   if k[0]=='Smithy'
     str="__**Can craft #{generate_rarity_row(3)} weapons**__"
-    str="#{str}\n*Level 1 \u2192 2:* ~~no mats~~"
-    str="#{str}\n*Level 2 \u2192 3:* Light Metal x3"
+    str="#{str}\n*Level 1 \u2192 2:* 1,000<:Resource_Rupies:532104504372363274> - ~~no mats~~"
+    str="#{str}\n*Level 2 \u2192 3:* 5,000<:Resource_Rupies:532104504372363274> - Light Metal x3"
     str="#{str}\n\n__**Can craft #{generate_rarity_row(4)} weapons**__"
-    str="#{str}\n*Level 3 \u2192 4:* Iron Ore x10, Fiend's Claw x10, Bat's Wing x10"
-    str="#{str}\n*Level 4 \u2192 5:* Iron Ore x15, Fiend's Claw x15, Bat's Wing x15, Light Metal x15"
-    str="#{str}\n*Level 5 \u2192 6:* Granite x10, Fiend's Horn x10, Ancient Bird's Feather x10"
+    str="#{str}\n*Level 3 \u2192 4:* 20,000<:Resource_Rupies:532104504372363274> - Iron Ore x10, Fiend's Claw x10, Bat's Wing x10"
+    str="#{str}\n*Level 4 \u2192 5:* 40,000<:Resource_Rupies:532104504372363274> - Iron Ore x15, Fiend's Claw x15, Bat's Wing x15, Light Metal x15"
+    str="#{str}\n*Level 5 \u2192 6:* 60,000<:Resource_Rupies:532104504372363274> - Granite x10, Fiend's Horn x10, Ancient Bird's Feather x10"
     str="#{str}\n\n__**Can craft #{generate_rarity_row(5)} weapons**__"
-    str="#{str}\n*Level 6 \u2192 7:* Granite x15, Fiend's Horn x15, Ancient Bird's Feather x15, Abyss Stone x15"
-    str="#{str}\n*Level 7 \u2192 8:* Meteorite x10, Fiend's Eye x10, Bewitching Wings x10"
-    str="#{str}\n*Level 8 \u2192 9:* Meteorite x15, Fiend's Eye x15, Bewitching Wings x15, Crimson Core x15"
+    str="#{str}\n*Level 6 \u2192 7:* 80,000<:Resource_Rupies:532104504372363274> - Granite x15, Fiend's Horn x15, Ancient Bird's Feather x15, Abyss Stone x15"
+    str="#{str}\n*Level 7 \u2192 8:* 100,000<:Resource_Rupies:532104504372363274> - Meteorite x10, Fiend's Eye x10, Bewitching Wings x10"
+    str="#{str}\n*Level 8 \u2192 9:* 120,000<:Resource_Rupies:532104504372363274> - Meteorite x15, Fiend's Eye x15, Bewitching Wings x15, Crimson Core x15"
     ftr='Each new level of smithy allows you to craft higher-tier weapons within the newest-allowed rarity bracket.'
   elsif k[0]=='Halidom'
-    str="__*Level 1 \u2192 2*__\nRequires Facility level of 5"
-    str="#{str}\n\n__*Level 2 \u2192 3*__\nRequires Facility level of 40\n<:Element_Wind:532106087948746763>Wind Orb x10, Storm Orb x1, Talonstone x3"
-    str="#{str}\n\n__*Level 3 \u2192 4*__\nRequires Facility level of 100\n<:Element_Water:532106088221376522>Water Orb x20, Stream Orb x3, Deluge Orb x1, Talonstone x5"
-    str="#{str}\n\n__*Level 4 \u2192 5*__\nRequires Facility level of 200\n<:Element_Flame:532106087952810005>Flame Orb x50, Blaze Orb x7, Inferno Orb x2, Talonstone x10"
-    str="#{str}\n\n__*Level 5 \u2192 6*__\nRequires Facility level of 300\n<:Element_Light:532106088129101834>Light Orb x100, Radiance Orb x15, Refulgence Orb x3, Talonstone x15"
-    str="#{str}\n\n__*Level 6 \u2192 7*__\nRequires Facility level of 400\n<:Element_Shadow:532106088154267658>Shadow Orb x150, Nightfall Orb x20, Nether Orb x4, Talonstone x20"
-    str="#{str}\n\n__*Level 7 \u2192 8*__\nRequires Facility level of 550\n<:Element_Wind:532106087948746763>Wind Orb x200, Storm Orb x25, Maelstrom Orb x6, Talonstone x25"
-    str="#{str}\n\n__*Level 8 \u2192 9*__\nRequires Facility level of 700\n<:Element_Water:532106088221376522>Water Orb x300, Stream Orb x40, Deluge Orb x9, Talonstone x30"
+    str="__*Level 1 \u2192 2*__\nRequires Facility level of 5\n5,000<:Resource_Rupies:532104504372363274>"
+    str="#{str}\n\n__*Level 2 \u2192 3*__\nRequires Facility level of 40\n20,000<:Resource_Rupies:532104504372363274>\n<:Element_Wind:532106087948746763>Wind Orb x10, Storm Orb x1, Talonstone x3"
+    str="#{str}\n\n__*Level 3 \u2192 4*__\nRequires Facility level of 100\n50,000<:Resource_Rupies:532104504372363274>\n<:Element_Water:532106088221376522>Water Orb x20, Stream Orb x3, Deluge Orb x1, Talonstone x5"
+    str="#{str}\n\n__*Level 4 \u2192 5*__\nRequires Facility level of 200\n100,000<:Resource_Rupies:532104504372363274>\n<:Element_Flame:532106087952810005>Flame Orb x50, Blaze Orb x7, Inferno Orb x2, Talonstone x10"
+    str="#{str}\n\n__*Level 5 \u2192 6*__\nRequires Facility level of 300\n150,000<:Resource_Rupies:532104504372363274>\n<:Element_Light:532106088129101834>Light Orb x100, Radiance Orb x15, Refulgence Orb x3, Talonstone x15"
+    str="#{str}\n\n__*Level 6 \u2192 7*__\nRequires Facility level of 400\n200,000<:Resource_Rupies:532104504372363274>\n<:Element_Shadow:532106088154267658>Shadow Orb x150, Nightfall Orb x20, Nether Orb x4, Talonstone x20"
+    str="#{str}\n\n__*Level 7 \u2192 8*__\nRequires Facility level of 550\n250,000<:Resource_Rupies:532104504372363274>\n<:Element_Wind:532106087948746763>Wind Orb x200, Storm Orb x25, Maelstrom Orb x6, Talonstone x25"
+    str="#{str}\n\n__*Level 8 \u2192 9*__\nRequires Facility level of 700\n300,000<:Resource_Rupies:532104504372363274>\n<:Element_Water:532106088221376522>Water Orb x300, Stream Orb x40, Deluge Orb x9, Talonstone x30"
   else
     nums=[]
     for i in 0...args.length
@@ -5671,6 +5683,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5691,6 +5704,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5711,6 +5725,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5731,6 +5746,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5751,6 +5767,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5771,6 +5788,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5791,6 +5809,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5811,6 +5830,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5823,7 +5843,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
         end
       end
     elsif has_any?(args,['mat','mats','material','materials','item','items'])
-      f.push('__**Items Aliases**__')
+      f.push('__**Item Aliases**__')
       n=@aliases.reject{|q| q[0]!='Material'}.map{|q| [q[1],q[2],q[3]]}
       n=n.reject{|q| q[2].nil?} if mode==1
       for i in 0...n.length
@@ -5831,6 +5851,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5852,55 +5873,55 @@ def disp_aliases(bot,event,args=nil,mode=0)
         end
         msg='__**Adventurer Aliases**__'
         for i in 0...n.length
-          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
+          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil?
         end
         msg=extend_message(msg,'__**Dragon Aliases**__',event,2)
         n=@aliases.reject{|q| q[0]!='Dragon'}.map{|q| [q[1],q[2],q[3]]}
         n=n.reject{|q| q[2].nil?} if mode==1
         for i in 0...n.length
-          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
+          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil?
         end
         msg=extend_message(msg,'__**Wyrmprint Aliases**__',event,2)
         n=@aliases.reject{|q| q[0]!='Wyrmprint'}.map{|q| [q[1],q[2],q[3]]}
         n=n.reject{|q| q[2].nil?} if mode==1
         for i in 0...n.length
-          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
+          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil?
         end
         msg=extend_message(msg,'__**Weapon Aliases**__',event,2)
         n=@aliases.reject{|q| !['Weapon'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
         n=n.reject{|q| q[2].nil?} if mode==1
         for i in 0...n.length
-          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
+          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil?
         end
         msg=extend_message(msg,'__**Enemy Aliases**__',event,2)
         n=@aliases.reject{|q| !['Enemy'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
         n=n.reject{|q| q[2].nil?} if mode==1
         for i in 0...n.length
-          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
+          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil?
         end
         msg=extend_message(msg,'__**Skill Aliases**__',event,2)
         n=@aliases.reject{|q| !['Skill'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
         n=n.reject{|q| q[2].nil?} if mode==1
         for i in 0...n.length
-          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
+          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil?
         end
         msg=extend_message(msg,'__**Ability Aliases**__',event,2)
         n=@aliases.reject{|q| !['Ability'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
         n=n.reject{|q| q[2].nil?} if mode==1
         for i in 0...n.length
-          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
+          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil?
         end
         msg=extend_message(msg,'__**Facility Aliases**__',event,2)
         n=@aliases.reject{|q| !['Facility'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
         n=n.reject{|q| q[2].nil?} if mode==1
         for i in 0...n.length
-          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
+          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil?
         end
         msg=extend_message(msg,'__**Item Aliases**__',event,2)
         n=@aliases.reject{|q| !['Material'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
         n=n.reject{|q| q[2].nil?} if mode==1
         for i in 0...n.length
-          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event)
+          msg=extend_message(msg,"#{n[i][0]} = #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil?
         end
         event.respond msg
         return nil
@@ -5912,6 +5933,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5931,6 +5953,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5950,6 +5973,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5969,6 +5993,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5988,6 +6013,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -6007,6 +6033,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -6026,6 +6053,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -6045,6 +6073,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -6064,6 +6093,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -6611,30 +6641,30 @@ def roost(event,bot,args=nil,ignoreinputs=false,mode=0)
     str="#{str}\n\n__**#{"#{str3}'s " if str3.length>0}Expert Ruins:**__"
     str="#{str}\n*Open:* #{['<:Element_Null:532106087810334741>All','<:Element_Null:532106087810334741>All','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep'][t.wday]}"
     if t.wday>2
-      str="#{str}\n*Available Orbs:* #{['All','All','Flame, Blaze, Inferno','Water, Stream, Deluge','Wind, Storm, Maelstorm','Light, Radiance, Refulgence','Shadow, Nightfull, Nether'][t.wday]}" if t.wday>1
+      str="#{str}\n*Available Orbs:* #{['All','All','Flame, Blaze, Inferno','Water, Stream, Deluge','Wind, Storm, Maelstorm','Light, Radiance, Refulgence','Shadow, Nightfall, Nether'][t.wday]}" if t.wday>1
       str="#{str}\n*Other Available Mats:* #{["Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye","Ancient Bird's Feather, Bewitching Wing",'Granite, Meteorite',"Fiend's Claw","Ancient Bird's Feather, Bewitching Wing"][t.wday]}" if t.wday>1
     end
     str="#{str}\n\n__**<:Element_Void:548467446734913536> #{"#{str3}'s " if str3.length>0}Void Strikes:**__"
-    if t.year>2019 || t.month>3 || t.day>30
-      void=['<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr', # sunday
-            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem', # monday
-            '<:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore', # tuesday
-            '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem', # wednesday
-            '<:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # thursday
-            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem', # friday
-            '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr'] # Saturday
+    if t.year>2019 || t.month>3 || t.day>25
+      void=['<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Flame:532106087952810005>Void Agni', # sunday
+            '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr', # monday
+            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Flame:532106087952810005>Void Agni', # tuesday
+            '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr, <:Element_Shadow:532106088154267658>Raging Manticore', # wednesday
+            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Flame:532106087952810005>Void Agni', # thursday
+            '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Flame:532106087952810005>Void Agni', # friday
+            '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr, <:Element_Flame:532106087952810005>Void Agni'] # saturday
     else
-      void=['<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # sunday
-            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem', # monday
-            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Raging Manticore', # tuesday
-            '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # wednesday
-            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore', # thursday
-            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem', # friday
-            '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr'] # Saturday
+      void=['<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Flame:532106087952810005>Void Agni', # sunday
+            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr', # monday
+            '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Flame:532106087952810005>Void Agni', # tuesday
+            '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # wednesday
+            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore', # thursday
+            '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Flame:532106087952810005>Void Agni', # friday
+            '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr, <:Element_Shadow:532106088154267658>Raging Manticore'] #saturday
     end
     void=void.map{|q| "<:Element_Light:532106088129101834>Wandering Shroom, #{q}"}
     str="#{str}\n*Open:* #{void[t.wday]}"
-    voidmats=void[t.wday].gsub('<:Element_Flame:532106087952810005>Steel Golem',"Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core").gsub('<:Element_Flame:532106087952810005>Blazing Ghost',"Old Cloth, Floating Red Cloth, Otherworldly Lantern").gsub('<:Element_Water:532106088221376522>Frost Hermit',"Goblin Thread, Aromatic Wood").gsub('<:Element_Wind:532106087948746763>Void Zephyr',"Great Feather, Void Leaf, Void Seed, Zephyr Rune").gsub('<:Element_Light:532106088129101834>Wandering Shroom',"Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore").gsub('<:Element_Shadow:532106088154267658>Raging Manticore',"Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn").gsub('<:Element_Shadow:532106088154267658>Obsidian Golem',"Obsidian Slab, Dark Core").split(', ').uniq.sort.join(', ')
+    voidmats=void[t.wday].gsub('<:Element_Flame:532106087952810005>Steel Golem',"Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core").gsub('<:Element_Flame:532106087952810005>Blazing Ghost',"Old Cloth, Floating Red Cloth, Otherworldly Lantern").gsub('<:Element_Water:532106088221376522>Frost Hermit',"Goblin Thread, Aromatic Wood").gsub('<:Element_Wind:532106087948746763>Void Zephyr',"Great Feather, Void Leaf, Void Seed, Zephyr Rune").gsub('<:Element_Light:532106088129101834>Wandering Shroom',"Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore").gsub('<:Element_Shadow:532106088154267658>Raging Manticore',"Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn").gsub('<:Element_Shadow:532106088154267658>Obsidian Golem',"Obsidian Slab, Dark Core").gsub('<:Element_Flame:532106087952810005>Void Agni',"Ancient Bird's Feather, Bewitching Wing, Blazing Ember, Blazing Horn, Void Leaf, Void Seed").split(', ').uniq.sort.join(', ')
     str="#{str}\n*Available Mats:* #{voidmats}"
   end
   str="#{str}\n\n**Shop Mats:** #{['Light Metal, Abyss Stone','Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather",'Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather"][t.wday]}" if t.wday>-1 && [3,0].include?(mode)
@@ -6708,7 +6738,7 @@ def next_events(event,bot,args=nil)
     mode=6 if mode==5 && ['mats','mat','material','materials'].include?(args[i]) && !safe_to_spam?(event)
   end
   if mode==0 && !safe_to_spam?(event)
-    event.respond "Please either specify an event type or use this command in PM.\n\nAvailable event types include:\n- Ruins\n- Mats\n- Shop\n- Bond items"
+    event.respond "Please either specify an event type or use this command in PM.\n\nAvailable event types include:\n- Ruins\n- Mats\n- Shop\n- Bond items\n- Void Strikes"
     return nil
   end
   if [1,0].include?(mode)
@@ -6716,7 +6746,7 @@ def next_events(event,bot,args=nil)
     ruin=ruin.rotate(t.wday)
     matz=["","","Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye","Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing",
           "Wind/Storm/Maelstorm Orbs, Granite, Meteorite","Light/Radiance/Refulgence Orbs, Fiend's Claw",
-          "Shadow/Nightfull/Nether Orbs, Ancient Bird's Feather, Bewitching Wing"]
+          "Shadow/Nightfall/Nether Orbs, Ancient Bird's Feather, Bewitching Wing"]
     matz=matz.rotate(t.wday)
     str2='__**Expert Ruins**__'
     for i in 0...ruin.length
@@ -6738,33 +6768,33 @@ def next_events(event,bot,args=nil)
     end
     str=extend_message(str,str2,event,2)
   end
-  voidx=['<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr', # sunday
-        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem', # monday
-        '<:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore', # tuesday
-        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem', # wednesday
-        '<:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # thursday
-        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem', # friday
-        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr'] # Saturday
-  voidxc=['<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # sunday
-        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem', # monday
-        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Raging Manticore', # tuesday
-        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # wednesday
-        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore', # thursday
-        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem', # friday
-        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Wind:532106087948746763>Void Zephyr'] # Saturday
+  voidx=['<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Flame:532106087952810005>Void Agni', # sunday
+        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr', # monday
+        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Flame:532106087952810005>Void Agni', # tuesday
+        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr, <:Element_Shadow:532106088154267658>Raging Manticore', # wednesday
+        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Flame:532106087952810005>Void Agni', # thursday
+        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Flame:532106087952810005>Void Agni', # friday
+        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr, <:Element_Flame:532106087952810005>Void Agni'] # saturday
+  voidxc=['<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Flame:532106087952810005>Void Agni', # sunday
+        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr', # monday
+        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Flame:532106087952810005>Void Agni', # tuesday
+        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # wednesday
+        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore', # thursday
+        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Flame:532106087952810005>Void Agni', # friday
+        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr, <:Element_Shadow:532106088154267658>Raging Manticore'] #saturday
   voidx=voidx.rotate(t.wday)
   voidxc=voidxc.rotate(t.wday)
   void=[]
   for i in 0...voidx.length
     t2=t+24*60*60*(i+1)
-    if t2.year>2019 || t2.month>3 || t2.day>30
+    if t2.year>2019 || t2.month>3 || t2.day>25
       void.push(voidx[i])
     else
       void.push(voidxc[i])
     end
   end
   t2=t+24*60*60*7
-  if t2.year>2019 || t2.month>3 || t2.day>30
+  if t2.year>2019 || t2.month>3 || t2.day>25
     void.push(voidx[i])
   else
     void.push(voidxc[i])
@@ -6778,11 +6808,12 @@ def next_events(event,bot,args=nil)
       for i2 in 0...m.length
         pos=1 if m[i2]=='<:Element_Flame:532106087952810005>Steel Golem'
         pos=2 if m[i2]=='<:Element_Flame:532106087952810005>Blazing Ghost'
-        pos=3 if m[i2]=='<:Element_Water:532106088221376522>Frost Hermit'
-        pos=4 if m[i2]=='<:Element_Wind:532106087948746763>Void Zephyr'
-        pos=5 if m[i2]=='<:Element_Light:532106088129101834>Wandering Shroom'
-        pos=6 if m[i2]=='<:Element_Shadow:532106088154267658>Raging Manticore'
-        pos=7 if m[i2]=='<:Element_Shadow:532106088154267658>Obsidian Golem'
+        pos=3 if m[i2]=='<:Element_Flame:532106087952810005>Void Agni'
+        pos=4 if m[i2]=='<:Element_Water:532106088221376522>Frost Hermit'
+        pos=5 if m[i2]=='<:Element_Wind:532106087948746763>Void Zephyr'
+        pos=6 if m[i2]=='<:Element_Light:532106088129101834>Wandering Shroom'
+        pos=7 if m[i2]=='<:Element_Shadow:532106088154267658>Raging Manticore'
+        pos=8 if m[i2]=='<:Element_Shadow:532106088154267658>Obsidian Golem'
         mmzz.push([m[i2],i,pos])
       end
     end
@@ -6799,8 +6830,8 @@ def next_events(event,bot,args=nil)
     str2="__**<:Element_Void:548467446734913536> Void Strikes**__"
     strpost=false
     matz=['',"Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core","Old Cloth, Floating Red Cloth, Otherworldly Lantern",
-          "Goblin Thread, Aromatic Wood","Great Feather, Void Leaf, Void Seed, Zephyr Rune",
-          "Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore",
+          "Ancient Bird's Feather, Bewitching Wing, Blazing Ember, Blazing Horn, Void Leaf, Void Seed","Goblin Thread, Aromatic Wood",
+          "Great Feather, Void Leaf, Void Seed, Zephyr Rune","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore",
           "Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn","Obsidian Slab, Dark Core"]
     for i in 0...mmzz.length
       str2="#{str2}#{"\n" if mode==5 && safe_to_spam?(event)}\n*#{mmzz[i][0]}* -"
@@ -6832,11 +6863,11 @@ def next_events(event,bot,args=nil)
   end
   f=[0,2]
   if f.include?(mode)
-    matz=["Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye, Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing, Wind/Storm/Maelstorm Orbs, Granite, Meteorite, Light/Radiance/Refulgence Orbs, Fiend's Claw, Shadow/Nightfull/Nether Orbs",
-          "Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye, Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing, Wind/Storm/Maelstorm Orbs, Granite, Meteorite, Light/Radiance/Refulgence Orbs, Fiend's Claw, Shadow/Nightfull/Nether Orbs",
+    matz=["Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye, Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing, Wind/Storm/Maelstorm Orbs, Granite, Meteorite, Light/Radiance/Refulgence Orbs, Fiend's Claw, Shadow/Nightfall/Nether Orbs",
+          "Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye, Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing, Wind/Storm/Maelstorm Orbs, Granite, Meteorite, Light/Radiance/Refulgence Orbs, Fiend's Claw, Shadow/Nightfall/Nether Orbs",
           "Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye","Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing",
           "Wind/Storm/Maelstorm Orbs, Granite, Meteorite","Light/Radiance/Refulgence Orbs, Fiend's Claw",
-          "Shadow/Nightfull/Nether Orbs, Ancient Bird's Feather, Bewitching Wing"]
+          "Shadow/Nightfall/Nether Orbs, Ancient Bird's Feather, Bewitching Wing"]
     matz=matz.rotate(t.wday)
     mmzz=[]
     for i in 0...matz.length
@@ -6884,7 +6915,7 @@ def next_events(event,bot,args=nil)
   end
   f.push(6)
   if f.include?(mode)
-    matz=void.map{|q| q.gsub('<:Element_Flame:532106087952810005>Steel Golem',"Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core").gsub('<:Element_Flame:532106087952810005>Blazing Ghost',"Old Cloth, Floating Red Cloth, Otherworldly Lantern").gsub('<:Element_Water:532106088221376522>Frost Hermit',"Goblin Thread, Aromatic Wood").gsub('<:Element_Wind:532106087948746763>Void Zephyr',"Great Feather, Void Leaf, Void Seed, Zephyr Rune").gsub('<:Element_Light:532106088129101834>Wandering Shroom',"Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore").gsub('<:Element_Shadow:532106088154267658>Raging Manticore',"Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn").gsub('<:Element_Shadow:532106088154267658>Obsidian Golem',"Obsidian Slab, Dark Core").split(', ').uniq.sort}
+    matz=void.map{|q| q.gsub('<:Element_Flame:532106087952810005>Steel Golem',"Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core").gsub('<:Element_Flame:532106087952810005>Blazing Ghost',"Old Cloth, Floating Red Cloth, Otherworldly Lantern").gsub('<:Element_Water:532106088221376522>Frost Hermit',"Goblin Thread, Aromatic Wood").gsub('<:Element_Wind:532106087948746763>Void Zephyr',"Great Feather, Void Leaf, Void Seed, Zephyr Rune").gsub('<:Element_Light:532106088129101834>Wandering Shroom',"Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore").gsub('<:Element_Shadow:532106088154267658>Raging Manticore',"Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn").gsub('<:Element_Shadow:532106088154267658>Obsidian Golem',"Obsidian Slab, Dark Core").gsub('<:Element_Flame:532106087952810005>Void Agni',"Ancient Bird's Feather, Bewitching Wing, Blazing Ember, Blazing Horn, Void Leaf, Void Seed").split(', ').uniq.sort}
     mmzz=[]
     for i in 0...matz.length
       m=matz[i]
@@ -9019,7 +9050,7 @@ bot.message do |event|
       s=s[prf.length,s.length-prf.length]
     end
   end
-  if @shardizard==4 && (['fea!','fef!','fea?','fef?'].include?(str[0,4]) || ['fe13!','fe14!','fe13?','fe14?'].include?(str[0,5]) || ['fe!','fe?'].include?(str[0,3]))
+  if @shardizard==4 && (['fea!','fef!','fea?','fef?'].include?(str[0,4]) || ['fe13!','fe14!','fe13?','fe14?'].include?(str[0,5]) || ['fe!','fe?'].include?(str[0,3])) && (event.server.nil? || event.server.id==285663217261477889)
     str=str[4,str.length-4] if ['fea!','fef!','fea?','fef?'].include?(str[0,4])
     str=str[5,str.length-5] if ['fe13!','fe14!','fe13?','fe14?'].include?(str[0,5])
     str=str[3,str.length-3] if ['fe!','fe?'].include?(str[0,3])
@@ -9030,7 +9061,7 @@ bot.message do |event|
     elsif event.server.nil? || event.server.id==285663217261477889
       event.respond 'I am not Robin right now.  Please use `FE!reboot` to turn me into Robin.'
     end
-  elsif (['feh!','feh?'].include?(str[0,4]) || ['f?','e?','h?'].include?(str[0,2])) && @shardizard==4
+  elsif (['feh!','feh?'].include?(str[0,4]) || ['f?','e?','h?'].include?(str[0,2])) && @shardizard==4 && (event.server.nil? || event.server.id==285663217261477889)
     s=event.message.text.downcase
     s=s[2,s.length-2] if ['f?','e?','h?'].include?(event.message.text.downcase[0,2])
     s=s[4,s.length-4] if ['feh!','feh?'].include?(event.message.text.downcase[0,4])
@@ -9041,7 +9072,7 @@ bot.message do |event|
     elsif event.server.nil? || event.server.id==285663217261477889
       event.respond "I am not Elise right now.  Please use `FEH!reboot` to turn me into Elise."
     end
-  elsif (['fgo!','fgo?','liz!','liz?'].include?(str[0,4]) || ['fate!','fate?'].include?(str[0,5])) && @shardizard==4
+  elsif (['fgo!','fgo?','liz!','liz?'].include?(str[0,4]) || ['fate!','fate?'].include?(str[0,5])) && @shardizard==4 && (event.server.nil? || event.server.id==285663217261477889)
     s=event.message.text.downcase
     s=s[5,s.length-5] if ['fate!','fate?'].include?(event.message.text.downcase[0,5])
     s=s[4,s.length-4] if ['fgo!','fgo?','liz!','liz?'].include?(event.message.text.downcase[0,4])
