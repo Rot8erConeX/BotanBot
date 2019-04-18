@@ -814,126 +814,128 @@ def find_weapon(name,event,fullname=false,ext=false)
   return [] if name.length<2
   k=@weapons.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
   return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[2][0,1]}*#{q[3]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[2][0,1]}#{q[3]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[2][0,1]}*#{q[1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[2][0,1]}#{q[1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[3]}#{q[2][0,1]}*#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[3]}#{q[2][0,1]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[1]}#{q[2][0,1]}*#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[1]}#{q[2][0,1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[3]}#{q[1]}#{q[2][0,1]}*".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[3]}#{q[1]}#{q[2][0,1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[1]}#{q[3]}#{q[2][0,1]}*".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return @weapons[k] unless k.nil?
-  k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[1]}#{q[3]}#{q[2][0,1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return @weapons[k] unless k.nil?
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[2][0,1]}*#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[2][0,1]}#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[2][0,1]}*#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[2][0,1]}#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[3]}#{q[2][0,1]}*#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[3]}#{q[2][0,1]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[1]}#{q[2][0,1]}*#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[1]}#{q[2][0,1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[3]}#{q[1]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[3]}#{q[1]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[1]}#{q[3]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[1]}#{q[3]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*Void#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}Void#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*Void#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}Void#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}Void#{q[2][0,1]}*#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}Void#{q[2][0,1]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}Void#{q[2][0,1]}*#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}Void#{q[2][0,1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}Void#{q[1]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}Void#{q[1]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}Void#{q[3]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}Void#{q[3]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*#{q[3]}Void#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}#{q[3]}Void#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*#{q[1]}Void#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}#{q[1]}Void#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[2][0,1]}*Void#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[2][0,1]}Void#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[2][0,1]}*Void#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[2][0,1]}Void#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[1]}Void#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[1]}Void#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[3]}Void#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[3]}Void#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*#{q[3]}#{q[1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}#{q[3]}#{q[1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*#{q[1]}#{q[3]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}#{q[1]}#{q[3]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[2][0,1]}*#{q[1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[2][0,1]}#{q[1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[2][0,1]}*#{q[3]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[2][0,1]}#{q[3]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[1]}#{q[2][0,1]}*Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[1]}#{q[2][0,1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[3]}#{q[2][0,1]}*Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
-  k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[3]}#{q[2][0,1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
-  return k if k.length>0
+  unless ext
+    k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[2][0,1]}*#{q[3]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return @weapons[k] unless k.nil?
+    k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[2][0,1]}#{q[3]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return @weapons[k] unless k.nil?
+    k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[2][0,1]}*#{q[1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return @weapons[k] unless k.nil?
+    k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[2][0,1]}#{q[1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return @weapons[k] unless k.nil?
+    k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[3]}#{q[2][0,1]}*#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return @weapons[k] unless k.nil?
+    k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[3]}#{q[2][0,1]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return @weapons[k] unless k.nil?
+    k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[1]}#{q[2][0,1]}*#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return @weapons[k] unless k.nil?
+    k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[1]}#{q[2][0,1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return @weapons[k] unless k.nil?
+    k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[3]}#{q[1]}#{q[2][0,1]}*".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return @weapons[k] unless k.nil?
+    k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[3]}#{q[1]}#{q[2][0,1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return @weapons[k] unless k.nil?
+    k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[1]}#{q[3]}#{q[2][0,1]}*".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return @weapons[k] unless k.nil?
+    k=@weapons.find_index{|q| q[2][1,1]!='v' && q[3]!='None' && "#{q[1]}#{q[3]}#{q[2][0,1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return @weapons[k] unless k.nil?
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[2][0,1]}*#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[2][0,1]}#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[2][0,1]}*#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[2][0,1]}#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[3]}#{q[2][0,1]}*#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[3]}#{q[2][0,1]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[1]}#{q[2][0,1]}*#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[1]}#{q[2][0,1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[3]}#{q[1]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[3]}#{q[1]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[1]}#{q[3]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "Void#{q[1]}#{q[3]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*Void#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}Void#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*Void#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}Void#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}Void#{q[2][0,1]}*#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}Void#{q[2][0,1]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}Void#{q[2][0,1]}*#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}Void#{q[2][0,1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}Void#{q[1]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}Void#{q[1]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}Void#{q[3]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}Void#{q[3]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*#{q[3]}Void#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}#{q[3]}Void#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*#{q[1]}Void#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}#{q[1]}Void#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[2][0,1]}*Void#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[2][0,1]}Void#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[2][0,1]}*Void#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[2][0,1]}Void#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[1]}Void#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[1]}Void#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[3]}Void#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[3]}Void#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*#{q[3]}#{q[1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}#{q[3]}#{q[1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}*#{q[1]}#{q[3]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[2][0,1]}#{q[1]}#{q[3]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[2][0,1]}*#{q[1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[2][0,1]}#{q[1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[2][0,1]}*#{q[3]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[2][0,1]}#{q[3]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[1]}#{q[2][0,1]}*Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[3]}#{q[1]}#{q[2][0,1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[3]}#{q[2][0,1]}*Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+    k=@weapons.reject{|q| q[2][1,1]!='v' || q[3]=='None' || "#{q[1]}#{q[3]}#{q[2][0,1]}Void".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+    return k if k.length>0
+  end
   nicknames_load()
   alz=@aliases.reject{|q| q[0]!='Weapon'}.map{|q| [q[1],q[2],q[3]]}
   g=0
@@ -1172,7 +1174,7 @@ def find_npc(name,event,fullname=false,ext=false)
   k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
   return @npcs[@npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return [] if fullname
-  k=@emotes.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
+  k=@npcs.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return @npcs[k] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
   return @npcs[@npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
@@ -1694,17 +1696,28 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   end
 end
 
-def disp_weapon_lineage(bot,event,args=nil)
+def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
   k=find_data_ex(:find_weapon,args.join(' '),event)
+  kx=find_data_ex(:find_weapon,args.join(' '),event,false,true)
+  kx=comparedata.map{|q| q} unless comparedata.nil?
   if k.length.zero?
     event.respond 'No matches found.'
     return nil
   elsif k[0].is_a?(Array)
+    if kx.length<=0
+      kx=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+    elsif !kx[0].is_a?(Array)
+      kx=[kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0]]
+    elsif k.length>k2.length
+      for i in 0...k.length-k2.length+1
+        k2.push(k2[i])
+      end
+    end
     for i in 0...k.length
-      disp_weapon_lineage(bot,event,k[i][0].split(' '))
+      disp_weapon_lineage(bot,event,k[i][0].split(' '),kx[i])
     end
     return nil
   end
@@ -1714,6 +1727,22 @@ def disp_weapon_lineage(bot,event,args=nil)
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Weapons/#{k[0].gsub(' ','_')}.png"
   mub=false
   mub=true if has_any?(['mub','unbind','unbound','refined','refine','refinement'],evn)
+  val=0
+  unbindnum=false
+  for i in 0...args.length
+    if count_in(args,args[i])<2 && args[i].to_i==k[2][0,1].to_i && k != kx && !args.include?("#{args[i]}*")
+    elsif args[i].to_i.to_s==args[i] && args[i].to_i>0
+      val=args[i].to_i unless unbindnum || val>0
+    elsif args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<5 && ['ub','unbind','unbound','unbinds','unbounds'].include?(args[i][1,args[i].length-1].downcase)
+      val=args[i].to_i+1 unless val>0
+      unbindnum=true
+    end
+  end
+  val=1 if val<=0
+  if val%5==0 && !mub
+    mub=true
+    val/=5
+  end
   str=generate_rarity_row(k[2][0,1].to_i)
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
   str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
@@ -1794,10 +1823,9 @@ def disp_weapon_lineage(bot,event,args=nil)
     str="#{str}, *#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*"
   end
   str2=''
-  val=1
-  val=5 if mub
+  val*=5 if mub
   ftr=nil
-  str="#{str}\n\n**This weapon#{" (x#{val})" unless val==1}**\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(val*k[11][0])}<:Resource_Rupies:532104504372363274>#{"\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{val*q[1].to_i}"}.join(', ')}" unless k[12].nil?}"
+  str="#{str}#{"\n\n**Crafting shown for #{'<:Unbind:534494090969088000>'*([val-1,4].min)}#{'<:NonUnbound:534494090876682264>'*([5-val,0].max)}**" if val>1 && !mub}\n\n**This weapon#{" (x#{val})" unless val==1}**\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(val*k[11][0])}<:Resource_Rupies:532104504372363274>#{"\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{val*q[1].to_i}"}.join(', ')}" unless k[12].nil?}"
   m2=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
   m2=wpnz.find_index{|q| q[1]==k[1] && q[2][1,1]=='v' && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300
   cost=0
@@ -1839,9 +1867,9 @@ def disp_weapon_lineage(bot,event,args=nil)
       end
     end
   end
-  if s2s
-    ftr='Include the word "Unbound" to show the data for MUB versions of these weapons.' unless mub
-  else
+  ftr='Include the word "Unbound" to show the data for MUB versions of these weapons.' unless mub || !s2s
+  ftr="This is multiplying all crafts by #{val}.  For crafts for a #{val}UB weapon, include \"#{val}UB\" in your message instead." if val>1 && val<5 && !unbindnum
+  unless s2s
     str2=''
     unless m2.nil?
       str2="#{str2}\n\n**Promotes from:** #{wpnz[m2][0]}"
@@ -1916,10 +1944,10 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
   flds=nil
   if s2s
     flds=[]
-    flds.push(['Weaknesses',"#{k[3].join("\n")}#{"\n\n~~Bold indicates strong weaknesses~~" if k[3].reject{|q| !q.include?('**')}.length>0}"])
+    flds.push(['Resistances',"#{k[3].join("\n")}"])
     flds.push(['Afflictions',"#{k[4].join("\n")}"])
   else
-    str="#{str}\n\n**Weaknesses:** #{k[3].join(', ').gsub('**','*')}#{"\n~~Italic indicates strong weaknesses~~" if k[3].reject{|q| !q.include?('**')}.length>0}"
+    str="#{str}\n\n**Resistances:** #{k[3].join(', ').gsub('**','*')}"
     str="#{str}\n\n**Afflictions:** #{k[4].join(', ')}"
   end
   unless k[5].nil? || k[5].length<=0
@@ -3778,7 +3806,7 @@ def current_banner(bot,event,args=nil,msg='',showerr=true)
     unless b[1]=='-' || b[1][0]=='-'
       for i in 0...b[1].length
         a=adv.find_index{|q| q[0]==b[1][i].gsub('*','')}
-        if safe_to_spam?(event) && b[1].length+b[2].length+b[3].length<=12
+        if b[1].length+b[2].length+b[3].length<=16
           b[1][i]="#{b[1][i]}#{adv_emoji(adv[a],bot)}" unless a.nil?
         elsif a.nil?
           b[1][i]="~~#{b[1][i]}~~"
@@ -3788,7 +3816,7 @@ def current_banner(bot,event,args=nil,msg='',showerr=true)
     unless b[2]=='-' || b[2][0]=='-'
       for i in 0...b[2].length
         a=drg.find_index{|q| q[0]==b[2][i].gsub('*','')}
-        if safe_to_spam?(event) && b[1].length+b[2].length+b[3].length<=12
+        if b[1].length+b[2].length+b[3].length<=16
           b[2][i]="#{b[2][i]}#{dragon_emoji(drg[a],bot)}" unless a.nil?
         elsif a.nil?
           b[2][i]="~~#{b[2][i]}~~"
@@ -3798,7 +3826,7 @@ def current_banner(bot,event,args=nil,msg='',showerr=true)
     unless b[3]=='-' || b[3][0]=='-'
       for i in 0...b[3].length
         a=wrm.find_index{|q| q[0]==b[3][i].gsub('*','')}
-        if safe_to_spam?(event) && b[1].length+b[2].length+b[3].length<=12
+        if b[1].length+b[2].length+b[3].length<=16
           b[3][i]="#{b[3][i]}#{print_emoji(wrm[a],bot)}" unless a.nil?
         elsif a.nil?
           b[3][i]="~~#{b[3][i]}~~"
@@ -3850,7 +3878,7 @@ def old_banner(bot,event,args=nil)
     unless b[1]=='-' || b[1][0]=='-'
       for i in 0...b[1].length
         a=adv.find_index{|q| q[0]==b[1][i].gsub('*','')}
-        if safe_to_spam?(event) && b[1].length+b[2].length+b[3].length<=12
+        if b[1].length+b[2].length+b[3].length<=12
           b[1][i]="#{b[1][i]}#{adv_emoji(adv[a],bot)}" unless a.nil?
         elsif a.nil?
           b[1][i]="~~#{b[1][i]}~~"
@@ -3860,7 +3888,7 @@ def old_banner(bot,event,args=nil)
     unless b[2]=='-' || b[2][0]=='-'
       for i in 0...b[2].length
         a=drg.find_index{|q| q[0]==b[2][i].gsub('*','')}
-        if safe_to_spam?(event) && b[1].length+b[2].length+b[3].length<=12
+        if b[1].length+b[2].length+b[3].length<=12
           b[2][i]="#{b[2][i]}#{dragon_emoji(drg[a],bot)}" unless a.nil?
         elsif a.nil?
           b[2][i]="~~#{b[2][i]}~~"
@@ -3870,7 +3898,7 @@ def old_banner(bot,event,args=nil)
     unless b[3]=='-' || b[3][0]=='-'
       for i in 0...b[3].length
         a=wrm.find_index{|q| q[0]==b[3][i].gsub('*','')}
-        if safe_to_spam?(event) && b[1].length+b[2].length+b[3].length<=12
+        if b[1].length+b[2].length+b[3].length<=12
           b[3][i]="#{b[3][i]}#{print_emoji(wrm[a],bot)}" unless a.nil?
         elsif a.nil?
           b[3][i]="~~#{b[3][i]}~~"
@@ -5646,7 +5674,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
     elsif find_data_ex(:find_ability,args.join(''),event).length>0
     elsif find_data_ex(:find_facility,args.join(''),event).length>0
     elsif find_data_ex(:find_mat,args.join(''),event).length>0
-    elsif has_any?(args,['adventurer','adventurers','adv','advs','unit','units','dragon','dragons','wyrmprint','wyrm','print','wyrmprints','wyrms','prints','weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap','skill','skil','skills','skils','ability','abilitys','abilities','abil','abils','able','ables','facility','facilitys','facilities','faculty','facultys','faculties','mat','mats','material','materials','item','items','enemy','enemies','boss','bosss','bosses'])
+    elsif has_any?(args,['adventurer','adventurers','adv','advs','unit','units','dragon','dragons','wyrmprint','wyrm','print','wyrmprints','wyrms','prints','weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap','skill','skil','skills','skils','ability','abilitys','abilities','abil','abils','able','ables','facility','facilitys','facilities','faculty','facultys','faculties','mat','mats','material','materials','item','items','enemy','enemies','boss','bosss','bosses','drg','drgs'])
     else
       event.respond "The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Enemies\n- Skills\n- Abilities\n- Auras\n- CoAbilities\n- Facilities\n- Materials\n\n#{args.join(' ')} does not fall into any of these categories."
       return nil
@@ -5683,7 +5711,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5695,7 +5723,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
         end
       end
-    elsif has_any?(args,['dragon','dragons'])
+    elsif has_any?(args,['dragon','dragons','drg','drgs'])
       f.push('__**Dragon Aliases**__')
       n=@aliases.reject{|q| q[0]!='Dragon'}.map{|q| [q[1],q[2],q[3]]}
       n=n.reject{|q| q[2].nil?} if mode==1
@@ -5704,7 +5732,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5725,7 +5753,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5746,7 +5774,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5767,7 +5795,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5788,7 +5816,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5809,7 +5837,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5830,7 +5858,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5851,7 +5879,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5953,7 +5981,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5973,7 +6001,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -5993,7 +6021,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -6013,7 +6041,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -6033,7 +6061,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -6053,7 +6081,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -6073,7 +6101,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -6093,7 +6121,7 @@ def disp_aliases(bot,event,args=nil,mode=0)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}")
         elsif !event.server.nil? && n[i][2].include?(event.server.id)
           f.push("#{n[i][0].gsub('_','\_')} = #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
-        elsif mode==1 && !event.server.nil?
+        elsif !event.server.nil?
         else
           a=[]
           for j in 0...n[i][2].length
@@ -6137,6 +6165,8 @@ def disp_aliases(bot,event,args=nil,mode=0)
     end
   elsif !drg.nil?
     drg=drg[0] if drg[0].is_a?(Array)
+    k=0
+    k=event.server.id unless event.server.nil?
     n=@aliases.reject{|q| q[0]!='Dragon'}.map{|q| [q[1],q[2],q[3]]}
     n=n.reject{|q| q[2].nil?} if mode==1
     f.push("__**#{drg[0]}#{dragon_emoji(drg,bot)}**__#{"'s server-specific aliases" if mode==1}")
@@ -6163,6 +6193,8 @@ def disp_aliases(bot,event,args=nil,mode=0)
     end
   elsif !wrm.nil?
     n=@aliases.reject{|q| q[0]!='Wyrmprint' || q[2]!=wrm[0]}.map{|q| [q[1],q[2],q[3]]}
+    k=0
+    k=event.server.id unless event.server.nil?
     n=n.reject{|q| q[2].nil?} if mode==1
     f.push("__**#{wrm[0]}#{print_emoji(wrm,bot)}**__#{"'s server-specific aliases" if mode==1}")
     unless mode==1
@@ -6188,6 +6220,8 @@ def disp_aliases(bot,event,args=nil,mode=0)
     end
   elsif !wpn.nil?
     wpn=wpn[0] if wpn[0].is_a?(Array)
+    k=0
+    k=event.server.id unless event.server.nil?
     n=@aliases.reject{|q| !['Weapon'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
     n=n.reject{|q| q[2].nil?} if mode==1
     f.push("__**#{wpn[0]}#{weapon_emoji(wpn,bot)}**__#{"'s server-specific aliases" if mode==1}")
@@ -6256,6 +6290,8 @@ def disp_aliases(bot,event,args=nil,mode=0)
     end
   elsif !enm.nil?
     n=@aliases.reject{|q| !['Enemy'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+    k=0
+    k=event.server.id unless event.server.nil?
     n=n.reject{|q| q[2].nil?} if mode==1
     f.push("__**#{enm[0]}#{enemy_emoji(enm,bot)}**__#{"'s server-specific aliases" if mode==1}")
     unless mode==1
@@ -6281,6 +6317,8 @@ def disp_aliases(bot,event,args=nil,mode=0)
     end
   elsif !skl.nil?
     n=@aliases.reject{|q| !['Skill'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+    k=0
+    k=event.server.id unless event.server.nil?
     n=n.reject{|q| q[2].nil?} if mode==1
     f.push("__**#{skl[0]}**__#{"'s server-specific aliases" if mode==1}")
     unless mode==1
@@ -6306,6 +6344,8 @@ def disp_aliases(bot,event,args=nil,mode=0)
     end
   elsif !abl.nil?
     abl=abl[0] if abl[0].is_a?(Array) && abl.length<=1
+    k=0
+    k=event.server.id unless event.server.nil?
     n=@aliases.reject{|q| !['Ability'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
     n=n.reject{|q| q[2].nil?} if mode==1
     if abl[0].is_a?(Array)
@@ -6391,6 +6431,8 @@ def disp_aliases(bot,event,args=nil,mode=0)
     end
   elsif !fac.nil?
     fac=fac[0] if fac[0].is_a?(Array)
+    k=0
+    k=event.server.id unless event.server.nil?
     n=@aliases.reject{|q| !['Facility'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
     n=n.reject{|q| q[2].nil?} if mode==1
     f.push("__**#{fac[0]}**__#{"'s server-specific aliases" if mode==1}")
@@ -6417,6 +6459,8 @@ def disp_aliases(bot,event,args=nil,mode=0)
     end
   elsif !mat.nil?
     n=@aliases.reject{|q| !['Material'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+    k=0
+    k=event.server.id unless event.server.nil?
     n=n.reject{|q| q[2].nil?} if mode==1
     f.push("__**#{mat[0]}**__#{"'s server-specific aliases" if mode==1}")
     unless mode==1
@@ -6531,7 +6575,8 @@ def roost(event,bot,args=nil,ignoreinputs=false,mode=0)
   t4.push("#{k} minutes") if k>0
   t3-=k*60
   t4.push("#{t3} seconds") if t3>0
-  str="#{str}\nTime until Void Treasure Trade reset: #{t4.join(', ')}#{'~~' unless sftday==t.wday}" if [4,0].include?(mode)
+  str="#{str}\nTime until Void Treasure Trade reset: #{t4.join(', ')}" if [4,0].include?(mode)
+  str="#{str}~~" unless sftday==t.wday
   str3=''
   if sftday<0
     t+=24*60*60
@@ -8251,9 +8296,10 @@ bot.command([:tools,:links,:tool,:link,:resources,:resources]) do |event|
     event << ''
     event << 'Stats Calculator: <https://docs.google.com/spreadsheets/d/1uyx9MRDeE4SnupOtQm2wm2rB2i2aXtMSHdGC908vpGg/edit#gid=1600382551>'
     event << 'Weapon Material Calculator: <https://yujinred.github.io/Dragalia-Weapon-Material-Calculator/>'
+    event << 'Healing Formula/Calculator: <https://dragalialost.gamepedia.com/Healing_Formula>'
   else
     xpic='https://lh3.googleusercontent.com/SIHM5RPpoLy3Xso8wxqzCzBggkNq6dYhLt8THToag6FW_peH43_k1YdKh23Xmu5i_6c=s180-rw'
-    create_embed(event,'**Useful tools for players of** ***Dragalia Lost***',"__Download the game__\n[Google Play](https://play.google.com/store/apps/details?id=com.nintendo.zaga&hl=en_US)\n[Apple App Store](https://itunes.apple.com/us/app/dragalia-lost/id1352230941?mt=8)\n\n__News__\n[In-game news](https://dragalialost.com/en/news/)\n\n__Calculators__\n[Stats Calculator](https://docs.google.com/spreadsheets/d/1uyx9MRDeE4SnupOtQm2wm2rB2i2aXtMSHdGC908vpGg/edit#gid=1600382551)\n[Weapon Material Calculator](https://yujinred.github.io/Dragalia-Weapon-Material-Calculator/)",0xED619A,nil,xpic)
+    create_embed(event,'**Useful tools for players of** ***Dragalia Lost***',"__Download the game__\n[Google Play](https://play.google.com/store/apps/details?id=com.nintendo.zaga&hl=en_US)\n[Apple App Store](https://itunes.apple.com/us/app/dragalia-lost/id1352230941?mt=8)\n\n__News__\n[In-game news](https://dragalialost.com/en/news/)\n\n__Calculators__\n[Stats Calculator](https://docs.google.com/spreadsheets/d/1uyx9MRDeE4SnupOtQm2wm2rB2i2aXtMSHdGC908vpGg/edit#gid=1600382551)\n[Weapon Material Calculator](https://yujinred.github.io/Dragalia-Weapon-Material-Calculator/)\n[Healing Formula/Calculator](https://dragalialost.gamepedia.com/Healing_Formula)",0xED619A,nil,xpic)
     event.respond 'If you are on a mobile device and cannot click the links in the embed above, type `DL!tools mobile` to receive this message as plaintext.'
   end
   event << ''
