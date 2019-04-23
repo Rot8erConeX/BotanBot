@@ -1,4 +1,5 @@
 A Heartfelt Gift\5w\Support\1, 10\1, 10\Loving Heart;; Loving Heart\5000, 300\bukurote\Cleo, Elisanne;; Cleo, Elisanne
+A Mother's Love\5w\Support\22, 151\7, 53\Gauge Accelerator +25%;; Gauge Accelerator +30%;;;; Paper-Mache +25%;; Paper-Mache +50%;;;; Eggsploration Points +25%;; Eggsploration Points +50%\5000, 300\Kometani Hisanobu\Simurgh
 A Slice of Dragonyule\5w\Healing\22, 151\7, 53\Skill Prep +20%;; Skill Prep +25%;;;; Astral Ornament +25%;; Astral Ornament +50%;;;; Holiday Cheer +25%;; Holiday Cheer +50%\5000, 300\ni02\Cleo, Elisanne, Notte;; Cleo, Elisanne, Notte, Euden
 A Solitary Light\5\Defense\29, 194\6, 46\(Light) Affliction Guard I;; (Light) Affliction Guard II;;;; Shadow Res +5%;; Shadow Res +8%\5000, 3000\Manabi Okada\Felicia, Phantom;; Felicia, Phantom, Thanatos
 A Wish Upon the Yuletree\5s\Defense\28, 189\7, 51\HP 70% = Defense +8%;; HP 70% = Defense +10%;;;; Healing Doublebuff I;; Healing Doublebuff II;;;; Holiday Cheer +100%;; Holiday Cheer +150%\5000, 3000\ameya\Euden, Notte, Zethia;; Euden, Notte, Zethia
@@ -26,6 +27,7 @@ Dragon Brethren\5\Support\27, 184\8, 56\Dragon Time +10%;; Dragon Time +15%;;;; 
 Dragon Dance\4w\Defense\18, 123\4, 33\Bog Res +40%;; Bog Res +50%\2000, 100\Kometani Hisanobu\Peng Lai;; Peng Lai
 Dragon's Nest\3\Support\10, 71\3, 25\Shapeshift Prep +8%;; Shapeshift Prep +10%\300, 150\Joshua Hutchinson\
 Dueling Dancers\4\Attack\22, 147\6, 45\Flurry Devastation +5%;; Flurry Devastation +8%;;;; Light Res +3%;; Light Res +5%\2000, 1000\N.A\Luther, Orsem;; Luther, Orsem
+Egg-Shaped Dreams\4\Defense\23, 156\5, 37\HP 70% = Defense +5%;; HP 70% = Defense +8%;;;; Stun Res +15%;; Stun Res +20%;;;; Eggsploration Points +50%;; Eggsploration Points +100%\2000, 1000\hajime\Sarisse, Fleur
 Eight-Leaf Clover\3\Attack\10, 71\3, 25\Critical Damage +8%;; Critical Damage +10%\300, 150\mochuhiro\
 Elegant Escort\5w\Attack\1, 115\1, 41\Burning Punisher +25%;; Burning Punisher +25%\3000, 300\Wadanaka\Orion;; Orion
 Enchiridion\3\Support\10, 71\3, 25\Skill Haste +3%;; Skill Haste +4%\300, 150\ni02\
@@ -36,6 +38,7 @@ First-Rate Hospitality\4\Attack\21, 142\7, 50\Strength Doublebuff +5%;; Strength
 Flash of Genius\5\Attack\27, 183\8, 57\Flurry Strength +13%;; Flurry Strength +15%;;;; Wind Res +5%;; Wind Res +8%\5000, 3000\Mikeboshi\Ezelith;; Ezelith, Ranzal
 Flower in the Fray\4\Attack\21, 140\7, 52\Critical Damage +10%;; Critical Damage +13%;;;; Skill Damage +10%;; Skill Damage +15%\2000, 1000\ni02\Emma, Lea;; Emma, Lea
 Forbidden Relic\3\Support\10, 71\3, 25\Gauge Inhibitor +15%;; Gauge Inhibitor +20%\300, 150\SEAL\
+Forest Bonds\5\Attack\26, 177\9, 64\(Bow) Skill Damage +30%;; (Bow) Skill Damage +35%;;;; Striking Haste +8%;; Striking Haste +10%;;;; Eggsploration Points +100%;; Eggsploration Points +150%\5000, 3000\Saito Naoki\Laranoa
 Fresh Perspective\4\Attack\21, 140\7, 52\Force Strike +20%;; Force Strike +30%;;;; Skill Damage +10%;; Skill Damage +15%;;;; Windwhistle Grass +50%;; Windwhistle Grass +75%\2000, 1000\Nadare\Lowen, Ranzal;; Lowen, Ranzal
 Gale of Beauty\5\Attack\26, 177\9, 64\Broken Punisher +20%;; Broken Punisher +25%;;;; Dragon Time +8%;; Dragon Time +10%;;;; Divine Gales +100%;; Divine Gales +150%\5000, 3000\hsn\Garuda;; Garuda
 Garuda's Feathers\3\Defense\11, 76\3, 20\Full HP = Defense +13%;; Full HP = Defense +15%;;;; Windwhistle Grass +50%;; Windwhistle Grass +75%\300, 150\Mayoko\
@@ -84,6 +87,7 @@ Plunder Pals\5w\Attack\22, 151\8, 54\Skill Damage +20%;; Skill Damage +25%;;;; S
 Potiongrass\3\Defense\11, 76\3, 20\Poison Res +15%;; Poison Res +20%\300, 150\bukurote\
 Promises in the Rain\4\Defense\23, 156\5, 37\Bog Res +20%;; Bog Res +25%;;;; Water Res +3%;; Water Res +5%\2000, 1000\Shikaku Yamamoto\Xainfried;; Xainfried
 Pumpkin Pail\3s\Defense\11, 76\3, 20\Curse Res +15%;; Curse Res +20%;;;; Snack-o'-Lanterns +25%;; Snack-o'-Lanterns +50%\300, 150\Chiaki Negishi\
+Queen of the Blue Seas\5\Defense\24, 39\5, 165\High Mercury Res +20%;; High Mercury Res +25%;;;; Mercury Res +15%;; Mercury Res +20%;;;; Water Res +3%;; Water Res +5%\5000, 300\KASHIYA\High Mercury
 Resounding Rendition\5\Attack\26, 177\9, 64\Skill Damage +20%;; Skill Damage +25%;;;; HP 70% = Critical Rate +5%;; HP 70% = Critical Rate +6%\5000, 3000\Mayoko\Lucretia, Vixel;; Lucretia, Vixel
 Revolutionary Magic\4\Attack\21, 146\6, 46\Full HP = Skill Damage +25%;; Full HP = Skill Damage +30%;;;; Paralysis Res +15%;; Paralysis Res +20%\2000, 1000\liiko\Althemia;; Althemia
 Ring of Exaltation\2\Attack\5, 36\1, 12\Critical Rate +2%;; Critical Rate +3%\50, 0\Akira Miyazaki\
@@ -95,7 +99,7 @@ Seafood Soup\2\Support\5, 36\1, 12\Skill Prep +8%;; Skill Prep +10%\50, 0\Makai 
 Secret Friend\3\Support\10, 71\3, 25\(Light) Skill Haste +4%;; (Light) Skill Haste +5%\300, 150\ShuLa\Matilda;; Matilda
 Silke Lends a Hand\4s\Defense\22, 150\6, 42\Blindness Res +20%;; Blindness Res +25%;;;; Skill Damage +10%;; Skill Damage +15%;;;; Snack-o'-Lanterns +25%;; Snack-o'-Lanterns +50%\2000, 1000\tetsuo\Silke;; Silke
 Sisters of the Anvil\4\Attack\21, 146\6, 46\Strength Doublebuff +5%;; Strength Doublebuff +8%;;;; Stun Res +15%;; Stun Res +20%\2000, 1000\hajime\Ramona, Rena, Renee;; Ramona, Rena, Renee
-Slow and Steady\4\Defense\23, 156\5, 37\Poison Res +20%;; Poison Res +25%;;;; Shadow Res +3%, Shadow Res +5%;;;; Tent Canvas +50%;; Tent Canvas +75%\2000, 1000\benitama\Annelie, Euden;; Annelie, Euden
+Slow and Steady\4\Defense\23, 156\5, 37\Poison Res +20%;; Poison Res +25%;;;; Shadow Res +3%;; Shadow Res +5%;;;; Tent Canvas +50%;; Tent Canvas +75%\2000, 1000\benitama\Annelie, Euden;; Annelie, Euden
 Sniper's Allure\4\Attack\21, 141\7, 51\Broken Punisher +15%;; Broken Punisher +20%;;;; Skill Prep +10%;; Skill Prep +15%\2000, 1000\Tsune-kun\Malora;; Malora
 Stellar Show\5\Attack\26, 176\9, 65\Force Strike +30%;; Force Strike +40%;;;; Critical Damage +10%;; Critical Damage +13%;;;; Renown +100%;; Renown +150%\5000, 3000\Rino\Fritz;; Fritz
 Syndicate Mask\3\Defense\11, 76\3, 20\Blindness Res +15%;; Blindness Res +20%\300, 150\Akira Miyazaki\
@@ -112,6 +116,7 @@ The Prince of Dragonyule\5s\Attack\26, 177\9, 63\Critical Damage +13%;; Critical
 The Rose Prince\5s\Support\29, 195\6, 46\(Flame) Affliction Guard I;; (Flame) Affliction Guard II;;;; Shield Prep I;; Shield Prep II\5000, 3000\sosuke miyana\Leif;; Leif
 The Shining Overlord\5\Attack\26, 176\9, 65\(Sword) Skill Damage +30%;; (Sword) Skill Damage +35%;;;; Dragon's Claws I;; Dragon's Claws II\5000, 3000\Eri Yanagawa\Gilgamesh;; Gilgamesh
 The Warrioresses\4\Attack\21, 140\7, 52\Force Strike +20%;; Force Strike +30%;;;; Critical Damage +8%;; Critical Damage +10%\2000, 1000\Maki\Johanna, Vanessa;; Johanna, Vanessa
+Tiny Dragonatas\3\Support\10, 71\3, 25\(Water) Skill Haste +3%;; (Water) Skill Haste +5%;;;; Paper-Mache +50%;; Paper-Mache +75%\300, 150\Dragalia Lost Art Team\
 To My Beloved\3s\Support\10, 71\3, 25\Skill Haste +10%;; Skill Haste +15%\300, 150\touhudashi\
 Together We Stand\4\Attack\21, 140\7, 52\Striker's Strength +3%;; Striker's Strength +4%;;;; Skill Damage +10%;; Skill Damage +15%\2000, 1000\Rino\Berserker, Ranzal;; Berserker, Ranzal
 Tough Love\5\Attack\26, 176\9, 65\Last Offense +30%;; Last Offense +40%;;;; Skill Damage +15%;; Skill Damage +20%\5000, 3000\N.A\Celliera;; Celliera

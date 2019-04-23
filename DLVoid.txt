@@ -1,0 +1,15 @@
+<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Flame:532106087952810005>Void Agni
+<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr
+<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Flame:532106087952810005>Void Agni
+<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr, <:Element_Shadow:532106088154267658>Raging Manticore
+<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Flame:532106087952810005>Void Agni
+<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Flame:532106087952810005>Void Agni
+<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr, <:Element_Flame:532106087952810005>Void Agni
+
+<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore, <:Element_Flame:532106087952810005>Void Agni
+<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr
+<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Flame:532106087952810005>Void Agni
+<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr
+<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore
+<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Flame:532106087952810005>Void Agni
+<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr, <:Element_Shadow:532106088154267658>Raging Manticore

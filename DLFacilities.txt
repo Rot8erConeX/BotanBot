@@ -1,3 +1,18 @@
+Aqua Slime Statue\1\The Aqua Slime Statue boosts the stats of water-attuned adventurers. It can be obtained from the Void Battles Treasure Trade for Void Seed x1.\Adventurer, Altar\2x2\1\0
+Aqua Slime Statue\2\-\Adventurer, Altar\2x2\1\5000\Iron Ore, 10
+Aqua Slime Statue\3\-\Adventurer, Altar\2x2\1\10000\Iron Ore, 15;; Old Cloth, 2
+Aqua Slime Statue\4\-\Adventurer, Altar\2x2\1\15000\Iron Ore, 20
+Aqua Slime Statue\5\-\Adventurer, Altar\2x2\1\20000\Iron Ore, 25;; Old Cloth, 5
+Aqua Slime Statue\6\-\Adventurer, Altar\2x2\1\25000\Iron Ore, 30;; Granite, 5
+Aqua Slime Statue\7\-\Adventurer, Altar\2x2\1\30000\Iron Ore, 35;; Granite, 10;; Steel Slab, 2
+Aqua Slime Statue\8\-\Adventurer, Altar\2x2\1\35000\Iron Ore, 40;; Granite, 15
+Aqua Slime Statue\9\-\Adventurer, Altar\2x2\1\40000\Iron Ore, 45;; Granite, 20;; Steel Slab, 5
+Aqua Slime Statue\10\-\Adventurer, Altar\2x2\1\50000\Iron Ore, 50;; Granite, 25
+Aqua Slime Statue\11\-\Adventurer, Altar\2x2\1\60000\Iron Ore, 55;; Granite, 30;; Meteorite, 5;; Blazing Horn, 2
+Aqua Slime Statue\12\-\Adventurer, Altar\2x2\1\70000\Iron Ore, 60;; Granite, 35;; Meteorite, 10
+Aqua Slime Statue\13\-\Adventurer, Altar\2x2\1\80000\Iron Ore, 65;; Granite, 40;; Meteorite, 15;; Blazing Horn, 5
+Aqua Slime Statue\14\-\Adventurer, Altar\2x2\1\90000\Iron Ore, 70;; Granite, 45;; Meteorite, 20
+Aqua Slime Statue\15\-\Adventurer, Altar\2x2\1\100000\Iron Ore, 75;; Granite, 50;; Meteorite, 30;; Blazing Horn, 8
 Axe Dojo\1\A training area built to hone one's skills with an axe. Use it to boosts the stats of axe-wielding adventures.\Adventurer, Dojo\3x3\2\0
 Axe Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10
 Axe Dojo\3\-\Adventurer, Dojo\3x3\2\3500\Dyrenell Aes, 10
@@ -152,6 +167,36 @@ Dagger Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Arge
 Dagger Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Violet Insignia, 120;; Dyrenell Aureus, 90;; Royal Violet Insignia, 40
 Dagger Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Violet Insignia, 160;; Dyrenell Aureus, 100;; Royal Violet Insignia, 50
 Dagger Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Violet Insignia, 160;; Dyrenell Aureus, 110;; Royal Violet Insignia, 60
+Dragonata\1\Use it to boost the stats of water-attuned adventurers.\Adventurer, Event Altar\3x3\1\0
+Dragonata\2\-\Adventurer, Event Altar\3x3\1\100\Paper-Mache, 3
+Dragonata\3\-\Adventurer, Event Altar\3x3\1\200\Paper-Mache, 5
+Dragonata\4\-\Adventurer, Event Altar\3x3\1\300\Paper-Mache, 7
+Dragonata\5\-\Adventurer, Event Altar\3x3\1\400\Paper-Mache, 10
+Dragonata\6\-\Adventurer, Event Altar\3x3\1\500\Paper-Mache, 12
+Dragonata\7\-\Adventurer, Event Altar\3x3\1\600\Paper-Mache, 15
+Dragonata\8\-\Adventurer, Event Altar\3x3\1\700\Paper-Mache, 18
+Dragonata\9\-\Adventurer, Event Altar\3x3\1\800\Paper-Mache, 21
+Dragonata\10\-\Adventurer, Event Altar\3x3\1\1000\Paper-Mache, 25
+Dragonata\11\-\Adventurer, Event Altar\3x3\1\1200\Paper-Mache, 30
+Dragonata\12\-\Adventurer, Event Altar\3x3\1\1400\Paper-Mache, 50
+Dragonata\13\-\Adventurer, Event Altar\3x3\1\1600\Paper-Mache, 70
+Dragonata\14\-\Adventurer, Event Altar\3x3\1\1800\Paper-Mache, 90
+Dragonata\15\-\Adventurer, Event Altar\3x3\1\2000\Paper-Mache, 120
+Dragonata\16\-\Adventurer, Event Altar\3x3\1\2200\Paper-Mache, 150
+Dragonata\17\-\Adventurer, Event Altar\3x3\1\2400\Paper-Mache, 180
+Dragonata\18\-\Adventurer, Event Altar\3x3\1\2600\Paper-Mache, 210
+Dragonata\19\-\Adventurer, Event Altar\3x3\1\2800\Paper-Mache, 250
+Dragonata\20\-\Adventurer, Event Altar\3x3\1\3000\Paper-Mache, 300
+Dragonata\21\-\Adventurer, Event Altar\3x3\1\3200\Paper-Mache, 350
+Dragonata\22\-\Adventurer, Event Altar\3x3\1\3400\Paper-Mache, 400
+Dragonata\23\-\Adventurer, Event Altar\3x3\1\3600\Paper-Mache, 450
+Dragonata\24\-\Adventurer, Event Altar\3x3\1\3800\Paper-Mache, 500
+Dragonata\25\-\Adventurer, Event Altar\3x3\1\4000\Paper-Mache, 550
+Dragonata\26\-\Adventurer, Event Altar\3x3\1\4200\Paper-Mache, 600
+Dragonata\27\-\Adventurer, Event Altar\3x3\1\4400\Paper-Mache, 700
+Dragonata\28\-\Adventurer, Event Altar\3x3\1\4600\Paper-Mache, 800
+Dragonata\29\-\Adventurer, Event Altar\3x3\1\4800\Paper-Mache, 900
+Dragonata\30\-\Adventurer, Event Altar\3x3\1\5000\Paper-Mache, 1000
 Dragontree\1\A tree that produces three varieties of dragonfruit, the preferred snack of dragons the world over.\Production\3x3\1\0
 Dragontree\2\-\Production\3x3\1\100
 Dragontree\3\-\Production\3x3\1\300
@@ -179,6 +224,8 @@ Dragontree\24\-\Production\3x3\1\120000\Talonstone, 22
 Dragontree\25\-\Production\3x3\1\140000\Talonstone, 24
 Dragontree\26\-\Production\3x3\1\160000\Talonstone, 25
 Dragontree\27\-\Production\3x3\1\180000\Talonstone, 26
+Eggy Luca\-\A colorful painted egg. Its defiant eyes resemble the ever-mischievous Luca, planning his next prank.;; Obtained from <:Element_Water:532106088221376522> The Hunt for Harmony Event\Decorative\1x1\4\
+Eggy Sarisse\-\A colorful painted egg. The face has the same charming, energetic eyes as the real Sarisse.;; Obtained from <:Element_Water:532106088221376522> The Hunt for Harmony Event\Decorative\1x1\4\
 Fafnir Statue (Flame)\1\Proof of overcoming the Flamewyrm's trial. A flame-imbued statue that boosts the HP and strength of flame dragons.\Dragon, Fafnir\3x3\1\0
 Fafnir Statue (Flame)\2\-\Dragon, Fafnir\3x3\1\10000\Flamewyrm's Greatsphere, 3
 Fafnir Statue (Flame)\3\-\Dragon, Fafnir\3x3\1\20000\Flamewyrm's Greatsphere, 3
@@ -209,6 +256,36 @@ Fafnir Statue (Flame)\27\-\Dragon, Fafnir\3x3\1\380000\Flamewyrm's Greatsphere, 
 Fafnir Statue (Flame)\28\-\Dragon, Fafnir\3x3\1\400000\Flamewyrm's Greatsphere, 60;; Flamewyrm's Scaldscale, 50;; Talonstone, 60
 Fafnir Statue (Flame)\29\-\Dragon, Fafnir\3x3\1\420000\Flamewyrm's Greatsphere, 70;; Flamewyrm's Scaldscale, 50;; Talonstone, 60
 Fafnir Statue (Flame)\30\-\Dragon, Fafnir\3x3\1\440000\Flamewyrm's Greatsphere, 70;; Flamewyrm's Scaldscale, 50;; Talonstone, 60
+Fafnir Statue (Water)\1\Proof of overcoming the Waterwyrm's trial. A water-imbued statue that boosts the HP and strength of water dragons.\Dragon, Fafnir\3x3\1\0
+Fafnir Statue (Water)\2\-\Dragon, Fafnir\3x3\1\10000\Waterwyrm's Greatsphere, 3
+Fafnir Statue (Water)\3\-\Dragon, Fafnir\3x3\1\20000\Waterwyrm's Greatsphere, 3
+Fafnir Statue (Water)\4\-\Dragon, Fafnir\3x3\1\30000\Waterwyrm's Greatsphere, 5
+Fafnir Statue (Water)\5\-\Dragon, Fafnir\3x3\1\40000\Waterwyrm's Greatsphere, 5
+Fafnir Statue (Water)\6\-\Dragon, Fafnir\3x3\1\50000\Waterwyrm's Greatsphere, 7;; Waterwyrm's Glistscale, 5;; Talonstone, 10
+Fafnir Statue (Water)\7\-\Dragon, Fafnir\3x3\1\60000\Waterwyrm's Greatsphere, 7;; Waterwyrm's Glistscale, 5;; Talonstone, 10
+Fafnir Statue (Water)\8\-\Dragon, Fafnir\3x3\1\70000\Waterwyrm's Greatsphere, 7;; Waterwyrm's Glistscale, 5;; Talonstone, 10
+Fafnir Statue (Water)\9\-\Dragon, Fafnir\3x3\1\80000\Waterwyrm's Greatsphere, 10;; Waterwyrm's Glistscale, 5;; Talonstone, 10
+Fafnir Statue (Water)\10\-\Dragon, Fafnir\3x3\1\90000\Waterwyrm's Greatsphere, 10;; Waterwyrm's Glistscale, 5;; Talonstone, 10
+Fafnir Statue (Water)\11\-\Dragon, Fafnir\3x3\1\100000\Waterwyrm's Greatsphere, 12;; Waterwyrm's Glistscale, 10;; Talonstone, 20
+Fafnir Statue (Water)\12\-\Dragon, Fafnir\3x3\1\110000\Waterwyrm's Greatsphere, 12;; Waterwyrm's Glistscale, 10;; Talonstone, 20
+Fafnir Statue (Water)\13\-\Dragon, Fafnir\3x3\1\120000\Waterwyrm's Greatsphere, 15;; Waterwyrm's Glistscale, 10;; Talonstone, 20
+Fafnir Statue (Water)\14\-\Dragon, Fafnir\3x3\1\130000\Waterwyrm's Greatsphere, 15;; Waterwyrm's Glistscale, 10;; Talonstone, 20
+Fafnir Statue (Water)\15\-\Dragon, Fafnir\3x3\1\140000\Waterwyrm's Greatsphere, 15;; Waterwyrm's Glistscale, 10;; Talonstone, 20
+Fafnir Statue (Water)\16\-\Dragon, Fafnir\3x3\1\160000\Waterwyrm's Greatsphere, 20;; Waterwyrm's Glistscale, 20;; Talonstone, 30
+Fafnir Statue (Water)\17\-\Dragon, Fafnir\3x3\1\180000\Waterwyrm's Greatsphere, 20;; Waterwyrm's Glistscale, 20;; Talonstone, 30
+Fafnir Statue (Water)\18\-\Dragon, Fafnir\3x3\1\200000\Waterwyrm's Greatsphere, 20;; Waterwyrm's Glistscale, 20;; Talonstone, 30
+Fafnir Statue (Water)\19\-\Dragon, Fafnir\3x3\1\220000\Waterwyrm's Greatsphere, 30;; Waterwyrm's Glistscale, 20;; Talonstone, 30
+Fafnir Statue (Water)\20\-\Dragon, Fafnir\3x3\1\240000\Waterwyrm's Greatsphere, 30;; Waterwyrm's Glistscale, 20;; Talonstone, 30
+Fafnir Statue (Water)\21\-\Dragon, Fafnir\3x3\1\260000\Waterwyrm's Greatsphere, 40;; Waterwyrm's Glistscale, 30;; Talonstone, 40
+Fafnir Statue (Water)\22\-\Dragon, Fafnir\3x3\1\280000\Waterwyrm's Greatsphere, 40;; Waterwyrm's Glistscale, 30;; Talonstone, 40
+Fafnir Statue (Water)\23\-\Dragon, Fafnir\3x3\1\300000\Waterwyrm's Greatsphere, 40;; Waterwyrm's Glistscale, 30;; Talonstone, 40
+Fafnir Statue (Water)\24\-\Dragon, Fafnir\3x3\1\320000\Waterwyrm's Greatsphere, 50;; Waterwyrm's Glistscale, 30;; Talonstone, 40
+Fafnir Statue (Water)\25\-\Dragon, Fafnir\3x3\1\340000\Waterwyrm's Greatsphere, 50;; Waterwyrm's Glistscale, 30;; Talonstone, 40
+Fafnir Statue (Water)\26\-\Dragon, Fafnir\3x3\1\360000\Waterwyrm's Greatsphere, 60;; Waterwyrm's Glistscale, 50;; Talonstone, 60
+Fafnir Statue (Water)\27\-\Dragon, Fafnir\3x3\1\380000\Waterwyrm's Greatsphere, 60;; Waterwyrm's Glistscale, 50;; Talonstone, 60
+Fafnir Statue (Water)\28\-\Dragon, Fafnir\3x3\1\400000\Waterwyrm's Greatsphere, 60;; Waterwyrm's Glistscale, 50;; Talonstone, 60
+Fafnir Statue (Water)\29\-\Dragon, Fafnir\3x3\1\420000\Waterwyrm's Greatsphere, 70;; Waterwyrm's Glistscale, 50;; Talonstone, 60
+Fafnir Statue (Water)\30\-\Dragon, Fafnir\3x3\1\440000\Waterwyrm's Greatsphere, 70;; Waterwyrm's Glistscale, 50;; Talonstone, 60
 Fafnir Statue (Wind)\1\Proof of overcoming the Windwyrm's trial. A wind-imbued statue that boosts the HP and strength of wind dragons.\Dragon, Fafnir\3x3\1\0
 Fafnir Statue (Wind)\2\-\Dragon, Fafnir\3x3\1\10000\Windwyrm's Greatsphere, 3
 Fafnir Statue (Wind)\3\-\Dragon, Fafnir\3x3\1\20000\Windwyrm's Greatsphere, 3
@@ -269,6 +346,26 @@ Flame Altar\27\-\Adventurer, Altar\3x3\2\32000\Flame Orb, 100;; Blaze Orb, 10;; 
 Flame Altar\28\-\Adventurer, Altar\3x3\2\34000\Flame Orb, 100;; Blaze Orb, 10;; Inferno Orb, 2
 Flame Altar\29\-\Adventurer, Altar\3x3\2\36000\Flame Orb, 150;; Blaze Orb, 12;; Inferno Orb, 3
 Flame Altar\30\-\Adventurer, Altar\3x3\2\38000\Flame Orb, 150;; Blaze Orb, 12;; Inferno Orb, 3
+Flame Dracolith\1\A monument made in the likeness of a flame dragon. Increases damage dealt when shapeshifting as a flame-attuned dragon.\Dragon, Dracolith\2x2\1\0
+Flame Dracolith\2\-\Dragon, Dracolith\2x2\1\3000
+Flame Dracolith\3\-\Dragon, Dracolith\2x2\1\4000
+Flame Dracolith\4\-\Dragon, Dracolith\2x2\1\5000\Flamewyrm's Sphere, 5;; Flamewyrm's Scale, 3;; Talonstone, 1
+Flame Dracolith\5\-\Dragon, Dracolith\2x2\1\6000\Flamewyrm's Sphere, 10;; Flamewyrm's Scale, 4;; Talonstone, 1
+Flame Dracolith\6\-\Dragon, Dracolith\2x2\1\7000\Flamewyrm's Sphere, 15;; Flamewyrm's Scale, 5;; Talonstone, 1
+Flame Dracolith\7\-\Dragon, Dracolith\2x2\1\8000\Flamewyrm's Sphere, 20;; Flamewyrm's Scale, 6;; Talonstone, 3
+Flame Dracolith\8\-\Dragon, Dracolith\2x2\1\10000\Flamewyrm's Sphere, 25;; Flamewyrm's Scale, 7;; Talonstone, 3
+Flame Dracolith\9\-\Dragon, Dracolith\2x2\1\12000\Flamewyrm's Sphere, 30;; Flamewyrm's Scale, 8;; Talonstone, 3
+Flame Dracolith\10\-\Dragon, Dracolith\2x2\1\14000\Flamewyrm's Sphere, 35;; Flamewyrm's Scale, 10;; Talonstone, 3
+Flame Dracolith\11\-\Dragon, Dracolith\2x2\1\16000\Flamewyrm's Sphere, 40;; Flamewyrm's Scale, 15;; Talonstone, 5
+Flame Dracolith\12\-\Dragon, Dracolith\2x2\1\18000\Flamewyrm's Sphere, 50;; Flamewyrm's Scale, 20;; Talonstone, 5
+Flame Dracolith\13\-\Dragon, Dracolith\2x2\1\20000\Flamewyrm's Sphere, 60;; Flamewyrm's Scale, 25;; Talonstone, 5
+Flame Dracolith\14\-\Dragon, Dracolith\2x2\1\22000\Flamewyrm's Sphere, 90;; Flamewyrm's Scale, 30;; Talonstone, 8
+Flame Dracolith\15\-\Dragon, Dracolith\2x2\1\24000\Flamewyrm's Sphere, 120;; Flamewyrm's Scale, 40;; Talonstone, 8
+Flame Dracolith\16\-\Dragon, Dracolith\2x2\1\26000\Flamewyrm's Sphere, 150;; Flamewyrm's Scale, 60;; Talonstone, 8
+Flame Dracolith\17\-\Dragon, Dracolith\2x2\1\28000\Flamewyrm's Sphere, 200;; Flamewyrm's Scale, 80;; Talonstone, 10
+Flame Dracolith\18\-\Dragon, Dracolith\2x2\1\30000\Flamewyrm's Sphere, 250;; Flamewyrm's Scale, 100;; Talonstone, 10
+Flame Dracolith\19\-\Dragon, Dracolith\2x2\1\32000\Flamewyrm's Sphere, 300;; Flamewyrm's Scale, 120;; Talonstone, 10
+Flame Dracolith\20\-\Dragon, Dracolith\2x2\1\34000\Flamewyrm's Sphere, 350;; Flamewyrm's Scale, 140;; Talonstone, 10
 Halidom\H\Euden's home base. Raise its level to expand the area in which you can build castle facilities.\General\4x4\1\0
 Jack-o'-Lantern\-\A lantern made by a sylvan who carved the insides out of a pumpkin, all the while insisting it represented his love of pranks. At least everyone enjoyed eating the filling.\Decorative\1x1\4\0
 Lance Dojo\1\A training area built to hone one's skills with a lance. Use it to boosts the stats of lance-wielding adventures.\Adventurer, Dojo\3x3\2\0
