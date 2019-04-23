@@ -144,6 +144,7 @@ end
 def safe_to_spam?(event,chn=nil) # determines whether or not it is safe to send extremely long messages
   return true if event.server.nil? # it is safe to spam in PM
   return false if event.message.text.downcase.split(' ').include?('smol') && @shardizard==4
+  return true if @shardizard==4
   return true if [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,523824424437415946,523825319916994564,523822789308841985,532083509083373579].include?(event.server.id) # it is safe to spam in the emoji servers
   chn=event.channel if chn.nil?
   return true if ['bots','bot'].include?(chn.name.downcase) # channels named "bots" are safe to spam in
@@ -199,6 +200,7 @@ def data_load()
     b[i][8]=b[i][8].split(', ').map{|q| q.to_f}
     b[i][9]=b[i][9].to_i
     b[i][12]=b[i][12].split(', ')
+    b[i][15]=b[i][15].split(';;;; ').map{|q| q.split(';; ')} unless b[i][15].nil?
   end
   @dragons=b.map{|q| q}
   if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLWyrmprints.txt')
@@ -252,10 +254,13 @@ def data_load()
       b[i][10]=b[i][10].split(', ') unless b[i][10].nil?
     elsif b[i][2]=='Aura'
       b[i][4]=b[i][4].to_i
+      b[i][6]=b[i][6].split(', ') unless b[i][6].nil?
     elsif b[i][2]=='Ability'
       b[i][4]=b[i][4].to_i
+      b[i][6]=b[i][6].split(', ') unless b[i][6].nil?
     elsif b[i][2]=='CoAbility'
       b[i][4]=b[i][4].to_i
+      b[i][6]=b[i][6].split(', ') unless b[i][6].nil?
     end
   end
   @askilities=b.map{|q| q}
@@ -1710,7 +1715,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     if kx.length<=0
       kx=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
     elsif !kx[0].is_a?(Array)
-      kx=[kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0],kx[0]]
+      kx=[kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx]
     elsif k.length>k2.length
       for i in 0...k.length-k2.length+1
         k2.push(k2[i])
@@ -1947,7 +1952,7 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
     flds.push(['Resistances',"#{k[3].join("\n")}"])
     flds.push(['Afflictions',"#{k[4].join("\n")}"])
   else
-    str="#{str}\n\n**Resistances:** #{k[3].join(', ').gsub('**','*')}"
+    str="#{str}\n\n**Resistances:** #{k[3].join(', ')}"
     str="#{str}\n\n**Afflictions:** #{k[4].join(', ')}"
   end
   unless k[5].nil? || k[5].length<=0
@@ -2204,6 +2209,24 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
               m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]}") if drg[i][6][1][1]==checkstr
             end
           end
+          unless drg[i][15].nil?
+            checkstr2="(#{drg[i][2]}) #{checkstr}"
+            if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
+              m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr
+              m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr
+              m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr
+              m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2082)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr
+              m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr2
+              m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr2
+              m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr2
+              m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2082)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr2
+            else
+              m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA)") if drg[i][15][0][1]==checkstr
+              m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA)") if drg[i][15][0][1]==checkstr2
+              m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr
+              m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr2
+            end
+          end
         end
         str="#{str}\n*Dragons:* #{m2.join(', ')}" if m2.length>0
         m2=[]
@@ -2417,6 +2440,24 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
                   m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]}") if drg[i][6][1][1]==checkstr
                 end
               end
+              unless drg[i][15].nil?
+                checkstr2="(#{drg[i][2]}) #{checkstr}"
+                if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2082)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr2
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr2
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr2
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2082)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr2
+                else
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA)") if drg[i][15][0][1]==checkstr
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA)") if drg[i][15][0][1]==checkstr2
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr2
+                end
+              end
             end
             str="#{str}\n*Dragons:* #{m2.join(', ')}" if m2.length>0
             m2=[]
@@ -2509,6 +2550,12 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
                 m2.push("#{emo}#{drg[i][0]} (A\u2081)") if drg[i][6][0][0][0]==checkstr
                 m2.push("#{emo}#{drg[i][0]} (A\u2082)") if drg[i][6][0][0][1]==checkstr
               end
+              unless drg[i][15].nil?
+                m2.push("#{emo}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr
+                m2.push("#{emo}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr
+                m2.push("#{emo}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr
+                m2.push("#{emo}#{drg[i][0]} (HA\u2082)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr
+              end
               for i2 in 0...elemo.length
                 checkstr2="(#{elemo[i2][0]}) #{checkstr}"
                 if drg[i][6][0].length>1
@@ -2519,6 +2566,12 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
                 else
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (A\u2081)") if drg[i][6][0][0][0]==checkstr2
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (A\u2082)") if drg[i][6][0][0][1]==checkstr2
+                end
+                unless drg[i][15].nil?
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr2
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr2
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr2
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2082)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr2
                 end
               end
             end
@@ -2607,11 +2660,22 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
             m2=[]
             for i in 0...drg.length
               m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]}") if drg[i][6][0][0][1]==checkstr
+              unless drg[i][15].nil?
+                checkstr2="(#{drg[i][2]}) #{checkstr}"
+                m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA)") if drg[i][15][0][1]==checkstr
+                m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA)") if drg[i][15][0][1]==checkstr2
+                m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr
+                m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr2
+              end
               for i2 in 0...elemo.length
                 m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]}") if drg[i][6][0][0][1]=="(#{elemo[i2][0]}) #{checkstr}"
+                unless drg[i][15].nil?
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA)") if drg[i][15][0][1]=="(#{elemo[i2][0]}) #{checkstr}"
+                  m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA)") if drg[i][15].length>1 && drg[i][15][1][1]=="(#{elemo[i2][0]}) #{checkstr}"
+                end
               end
             end
-            str="#{str} - #{m2.join(', ')}" if m2.length>0
+            str="#{str} - #{m2.uniq.join(', ')}" if m2.length>0
           end
         end
       end
@@ -2793,14 +2857,31 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
       checkstr="#{k[1]} #{k[0]}" if k[0][0,7]=='Hits = '
       checkstr="#{k[0]}" if k[1]=='-'
       for i in 0...drg.length
+        checkstr2="(#{drg[i][2]}) #{checkstr}"
         if drg[i][6][0].length>1
           m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A1\u2081)") if drg[i][6][0][0][0]==checkstr
           m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A1\u2082)") if drg[i][6][0][0][1]==checkstr
           m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A2\u2081)") if drg[i][6][0][1][0]==checkstr
           m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A2\u2082)") if drg[i][6][0][1][1]==checkstr
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A1\u2081)") if drg[i][6][0][0][0]==checkstr2
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A1\u2082)") if drg[i][6][0][0][1]==checkstr2
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A2\u2081)") if drg[i][6][0][1][0]==checkstr2
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A2\u2082)") if drg[i][6][0][1][1]==checkstr2
         else
           m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A\u2081)") if drg[i][6][0][0][0]==checkstr
           m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A\u2082)") if drg[i][6][0][0][1]==checkstr
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A\u2081)") if drg[i][6][0][0][0]==checkstr2
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (A\u2082)") if drg[i][6][0][0][1]==checkstr2
+        end
+        unless drg[i][15].nil?
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2082)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr2
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr2
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr2
+          m2.push("#{element_emote(drg[i][2],bot)}#{drg[i][0]} (HA\u2082)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr2
         end
       end
       if m2.length>0
@@ -2834,7 +2915,7 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
   if hdr.length+str.length+f>=1800
     if hdr.length+str.length>=1800
       m=[2,0,str.split("\n\n")]
-      m=[1,0,str.split("\n")] if m[2].length<=1
+      m=[1,0,str.split("\n")] if m[2].length<=1 || m[2].reject{|q| q.length<1500}.length>0
       str=''
       for i in 0...m[2].length
         if "#{str}#{"\n"*m[0]}#{m[2][i]}".length>=1900
@@ -2875,6 +2956,11 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
       flds=triple_finish(y,true).map{|q| [x,q[1]]}
     end
     create_embed(event,hdr,str,xcolor,ftr,xpic,flds)
+  end
+  if evn.include?('tags')
+    skill=k.map{|q| q}
+    skill=k[0].map{|q| q} if k[0].is_a?(Array)
+    create_embed(event,'Sorting tags','',xcolor,nil,nil,triple_finish(skill[6]))
   end
 end
 
@@ -4412,8 +4498,12 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
     search.push("*Skill Tags*: #{tags.join(', ')}")
     sklz=@askilities.reject{|q| q[2]!='Skill'}
     for i in 0...char.length
-      skl1=sklz[sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][5]}]
-      char[i][20]=skl1[10]
+      if sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][5]}.nil?
+        char[i][20]=[]
+      else
+        skl1=sklz[sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][5]}]
+        char[i][20]=skl1[10]
+      end
     end
     if args.include?('any')
       search[-1]="#{search[-1]}\n(searching for dragons with any listed tag in their skills)" if tags.length>1
@@ -4665,7 +4755,7 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true)
       m.push('3v')
       m.push('4v')
       m.push('5v')
-      emo.push('(v)') if fltr.length<2
+      emo.push('<:Element_Void:548467446734913536>') if fltr.length<2
     end
     if fltr.include?('Summon')
       m.push('1')
@@ -4676,7 +4766,7 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true)
       emo.push('(p)') if fltr.length<2
     end
     char=char.reject{|q| !m.include?(q[2])}.uniq
-    search.push("*Filters*: #{fltr.join(', ')}")
+    search.push("*Filters*: #{fltr.map{|q| q.gsub('Void','<:Element_Void:548467446734913536> Void')}.join(', ')}")
   end
   if tags.length>0
     search.push("*Skill Tags*: #{tags.join(', ')}")
@@ -5393,7 +5483,8 @@ def spaceship_order(x)
   return 9 if x=='Material'
   return 10 if x=='Sticker'
   return 11 if x=='NPC'
-  return 1200
+  return 12 if x=='Status'
+  return 1300
 end
 
 def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode=0)
@@ -6372,30 +6463,32 @@ def disp_aliases(bot,event,args=nil,mode=0)
         end
       end
       for i2 in 0...abl.length
-        f.push("\n__**#{abl[i2][0]} #{'+' if abl[i2][1].include?('%')}#{abl[i2][1]}**__#{"'s server-specific aliases" if mode==1}")
-        unless mode==1
-          f.push("#{abl[i2][0]}#{abl[i2][1]}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
-          if abl[i2][1].include?('%')
+        unless abl[i2][1]=='example'
+          f.push("\n__**#{abl[i2][0]} #{'+' if abl[i2][1].include?('%')}#{abl[i2][1]}**__#{"'s server-specific aliases" if mode==1}")
+          unless mode==1
             f.push("#{abl[i2][0]}#{abl[i2][1]}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
-            f.push("#{abl[i2][0]}#{abl[i2][1].gsub('%','')}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
-            f.push("#{abl[i2][0]}+#{abl[i2][1].gsub('%','')}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
+            if abl[i2][1].include?('%')
+              f.push("#{abl[i2][0]}#{abl[i2][1]}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
+              f.push("#{abl[i2][0]}#{abl[i2][1].gsub('%','')}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
+              f.push("#{abl[i2][0]}+#{abl[i2][1].gsub('%','')}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
+            end
           end
-        end
-        for i in 0...n.length
-          if n[i][1]=="#{abl[i2][0]} #{abl[i2][1]}"
-            if event.server.nil? && !n[i][2].nil?
-              a=[]
-              for j in 0...n[i][2].length
-                srv=(bot.server(n[i][2][j]) rescue nil)
-                unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
-                  a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+          for i in 0...n.length
+            if n[i][1]=="#{abl[i2][0]} #{abl[i2][1]}"
+              if event.server.nil? && !n[i][2].nil?
+                a=[]
+                for j in 0...n[i][2].length
+                  srv=(bot.server(n[i][2][j]) rescue nil)
+                  unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+                    a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+                  end
                 end
+                f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+              elsif n[i][2].nil?
+                f.push(n[i][0].gsub('_','\\_')) unless mode==1
+              else
+                f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
               end
-              f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
-            elsif n[i][2].nil?
-              f.push(n[i][0].gsub('_','\\_')) unless mode==1
-            else
-              f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
             end
           end
         end
@@ -8297,9 +8390,10 @@ bot.command([:tools,:links,:tool,:link,:resources,:resources]) do |event|
     event << 'Stats Calculator: <https://docs.google.com/spreadsheets/d/1uyx9MRDeE4SnupOtQm2wm2rB2i2aXtMSHdGC908vpGg/edit#gid=1600382551>'
     event << 'Weapon Material Calculator: <https://yujinred.github.io/Dragalia-Weapon-Material-Calculator/>'
     event << 'Healing Formula/Calculator: <https://dragalialost.gamepedia.com/Healing_Formula>'
+    event << 'Dragon Optimization Mastersheet: <https://docs.google.com/spreadsheets/d/1k-CROHAKTOGvR7-gJG5kFdMOc_qP5KayJ46fEI58GHI/edit#gid=700285435>'
   else
     xpic='https://lh3.googleusercontent.com/SIHM5RPpoLy3Xso8wxqzCzBggkNq6dYhLt8THToag6FW_peH43_k1YdKh23Xmu5i_6c=s180-rw'
-    create_embed(event,'**Useful tools for players of** ***Dragalia Lost***',"__Download the game__\n[Google Play](https://play.google.com/store/apps/details?id=com.nintendo.zaga&hl=en_US)\n[Apple App Store](https://itunes.apple.com/us/app/dragalia-lost/id1352230941?mt=8)\n\n__News__\n[In-game news](https://dragalialost.com/en/news/)\n\n__Calculators__\n[Stats Calculator](https://docs.google.com/spreadsheets/d/1uyx9MRDeE4SnupOtQm2wm2rB2i2aXtMSHdGC908vpGg/edit#gid=1600382551)\n[Weapon Material Calculator](https://yujinred.github.io/Dragalia-Weapon-Material-Calculator/)\n[Healing Formula/Calculator](https://dragalialost.gamepedia.com/Healing_Formula)",0xED619A,nil,xpic)
+    create_embed(event,'**Useful tools for players of** ***Dragalia Lost***',"__Download the game__\n[Google Play](https://play.google.com/store/apps/details?id=com.nintendo.zaga&hl=en_US)\n[Apple App Store](https://itunes.apple.com/us/app/dragalia-lost/id1352230941?mt=8)\n\n__News__\n[In-game news](https://dragalialost.com/en/news/)\n\n__Calculators__\n[Stats Calculator](https://docs.google.com/spreadsheets/d/1uyx9MRDeE4SnupOtQm2wm2rB2i2aXtMSHdGC908vpGg/edit#gid=1600382551)\n[Weapon Material Calculator](https://yujinred.github.io/Dragalia-Weapon-Material-Calculator/)\n[Healing Formula/Calculator](https://dragalialost.gamepedia.com/Healing_Formula)\n[Dragon Optimization Mastersheet](https://docs.google.com/spreadsheets/d/1k-CROHAKTOGvR7-gJG5kFdMOc_qP5KayJ46fEI58GHI/edit#gid=700285435)",0xED619A,nil,xpic)
     event.respond 'If you are on a mobile device and cannot click the links in the embed above, type `DL!tools mobile` to receive this message as plaintext.'
   end
   event << ''
@@ -8640,7 +8734,7 @@ bot.command(:snagstats) do |event, f, f2|
   elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(f.downcase)
     adv=@weapons.map{|q| q}
     adv=find_in_weapons(bot,event,[f2],2)[1] unless f2.nil?
-    str="**There are #{adv.length} weapons, including:**"
+    str="**There are #{adv.length} #{'<:Element_Void:548467446734913536> Void' if find_in_weapons(bot,event,[f2],2)[0].include?('*Filters*: <:Element_Void:548467446734913536> Void')} weapons, including:**"
     m=adv.reject{|q| q[1]!='Sword'}
     str2="<:Weapon_Sword:532106114540634113> #{m.length} Sword#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[1]!='Blade'}
@@ -9028,19 +9122,38 @@ end
 
 bot.command(:boop) do |event|
   return nil if overlap_prevent(event)
-  return nil unless event.channel.id==532083509083373583 # only work when used by the developer
+  return nil unless event.user.id==167657750971547648
+  return nil unless event.channel.id==532083509083373583 || @shardizard==4 # only work when used by the developer
   event.channel.send_temporary_message('Please wait...',10)
   data_load()
-  lookout=[]
+  lookout2=[]
   if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt')
-    lookout=[]
+    lookout2=[]
     File.open('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt').each_line do |line|
-      lookout.push(eval line)
+      lookout2.push(eval line)
     end
   end
-  lookout=lookout.reject{|q| q[2]!='Mat'}.map{|q| q[0]}
+  lookout=lookout2.reject{|q| q[2]!='Mat'}.map{|q| q[0]}
   m=@mats.map{|q| q[8]}.join(', ').split(', ').reject{|q| lookout.include?(q)}.uniq.sort
-  str=''
+  str='__**Mat tags**__'
+  for i in 0...m.length
+    str=extend_message(str,m[i],event)
+  end
+  lookout=lookout2.reject{|q| q[2]!='Skill'}.map{|q| q[0]}
+  m=@askilities.reject{|q| q[2]!='Skill'}.map{|q| q[10]}.join(', ').split(', ').reject{|q| lookout.include?(q) || (q[0,1]=='E' && q[1,1].to_i.to_s==q[1,1])}.uniq.sort
+  str=extend_message(str,'__**Skill tags**__',event,2)
+  for i in 0...m.length
+    str=extend_message(str,m[i],event)
+  end
+  lookout=lookout2.reject{|q| q[2]!='Ability'}.map{|q| q[0]}
+  m=@askilities.reject{|q| !['Ability','Aura','CoAbility'].include?(q[2])}.map{|q| q[6]}.join(', ').split(', ').reject{|q| lookout.include?(q)}.uniq.sort
+  str=extend_message(str,'__**Ability tags**__',event,2)
+  for i in 0...m.length
+    str=extend_message(str,m[i],event)
+  end
+  lookout=lookout2.reject{|q| q[2]!='Banner'}.map{|q| q[0]}
+  m=@banners.map{|q| q[5]}.join(', ').split(', ').reject{|q| lookout.include?(q) || ['Flame','Water','Wind','Light','Shadow','Mixed','fake'].include?(q)}.uniq.sort
+  str=extend_message(str,'__**Banner tags**__',event,2)
   for i in 0...m.length
     str=extend_message(str,m[i],event)
   end
@@ -9460,6 +9573,10 @@ bot.mention do |event|
   elsif ['daily','dailies'].include?(args[0].downcase)
     args.shift
     roost(event,bot,args)
+    m=false
+  elsif ['sp'].include?(args[0].downcase)
+    args.shift
+    disp_sp_table(bot,event,args)
     m=false
   elsif ['today','now','tomorrow','tommorrow','tomorow','tommorow','sunday','sundae','sun','sonday','sondae','son','monday','mondae','mon','monday','mondae','tuesday','tuesdae','tues','tue','wednesday','wednesdae','wednes','wed','thursday','thursdae','thurs','thu','thur','friday','fridae','fri','fryday','frydae','fry','saturday','saturdae','sat','saturnday','saturndae','saturn','satur'].include?(args[0].downcase)
     roost(event,bot,args)
