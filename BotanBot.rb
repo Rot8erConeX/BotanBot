@@ -4881,8 +4881,6 @@ def find_in_banners(bot,event,args=nil,mode=0)
   end
   lookout=lookout.reject{|q| q[2]!='Banner'}
   for i in 0...args.length
-    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6
-    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
     elem.push('Water') if ['water','waters'].include?(args[i].downcase)
     elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
@@ -4917,6 +4915,78 @@ def find_in_banners(bot,event,args=nil,mode=0)
     return nil
   else
     return [search,'',char]
+  end
+end
+
+def find_in_abilities(bot,event,args=nil,mode=0)
+  data_load()
+  args=normalize(event.message.text.downcase).gsub(',','').split(' ') if args.nil?
+  args=args.map{|q| normalize(q.downcase)}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  elem=[]
+  tags=[]
+  abiltypes=[]
+  lookout=[]
+  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt')
+    lookout=[]
+    File.open('C:/Users/Mini-Matt/Desktop/devkit/DLSkillSubsets.txt').each_line do |line|
+      lookout.push(eval line)
+    end
+  end
+  lookout=lookout.reject{|q| q[2]!='Ability'}
+  for i in 0...args.length
+    abiltypes.push('Ability') if ['ability','abil','abilitys','abils','abilities'].include?(args[i].downcase)
+    abiltypes.push('Aura') if ['aura','auras','drg','dragon'].include?(args[i].downcase)
+    abiltypes.push('CoAbility') if ['coability','coabil','coabilitys','coabils','coabilities','co','team'].include?(args[i].downcase)
+    elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
+    elem.push('Water') if ['water','waters'].include?(args[i].downcase)
+    elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
+    elem.push('Wind') if ['earth','earths'].include?(args[i].downcase) && event.user.id==192821228468305920
+    elem.push('Light') if ['light','lights'].include?(args[i].downcase)
+    elem.push('Shadow') if ['shadow','dark','shadows','darks'].include?(args[i].downcase)
+    elem.push('None') if ['none','no-element','no_element','noelement','elementless'].include?(args[i].downcase)
+    for i2 in 0...lookout.length
+      tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
+    end
+  end
+  elem.uniq!
+  abiltypes.uniq!
+  tags.uniq!
+  emo=[]
+  search=[]
+  char=@askilities.reject{|q| q[2]=='Skill'}
+  textra=''
+  if elem.length>0
+    char=char.reject{|q| !has_any?(elem,q[6])}.uniq
+    for i in 0...elem.length
+      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{elem[i].gsub('None','Null')}"}
+      emo.push(moji[0].mention) if elem.length<2 && moji.length>0
+      elem[i]="#{moji[0].mention}#{elem[i]}" if moji.length>0
+    end
+    search.push("*Elements*: #{elem.join(', ')}")
+  end
+  if abiltypes.length>0
+    char=char.reject{|q| !abiltypes.include?(q[2])}.uniq
+    search.push("*Categories*: #{abiltypes.join(', ')}")
+  end
+  if tags.length>0
+    search.push("*Tags*: #{tags.join(', ')}")
+    if args.include?('any')
+      search[-1]="#{search[-1]}\n(searching for abilities with any listed tag)" if tags.length>1
+      char=char.reject{|q| !has_any?(tags,q[6])}.uniq
+    else
+      search[-1]="#{search[-1]}\n(searching for abilities with all listed tags)" if tags.length>1
+      textra="#{textra}\n\nTags searching defaults to searching for abilities with all listed tags.\nTo search for abilities with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
+      for i in 0...tags.length
+        char=char.reject{|q| q[6].nil? || !q[6].include?(tags[i])}.uniq
+      end
+    end
+  end
+  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length>=1900) && !safe_to_spam?(event) && mode<2
+    event.respond "Too much data is trying to be displayed.  Please use this command in PM." if mode==0
+    return nil
+  else
+    return [search,textra,char]
   end
 end
 
@@ -5070,6 +5140,62 @@ def find_banners(bot,event,args=nil)
     flds=triple_finish(char,true) unless char.length<=0
     textra="#{textra}\n\n**No materials/items match your search**" if char.length<=0
     create_embed(event,"__**Banner Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total",nil,flds)
+  end
+end
+
+def find_abilities(bot,event,args=nil)
+  args=normalize(event.message.text.downcase).split(' ') if args.nil?
+  args=args.map{|q| normalize(q.downcase)}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  k=find_in_abilities(bot,event,args)
+  return nil if k.nil?
+  search=k[0]
+  textra=k[1]
+  char=k[2]
+  subchar=char.map{|q| [q[0],q[2]]}.uniq
+  m=char.map{|q| q}
+  char=[]
+  for i in 0...subchar.length
+    k=m.reject{|q| q[1]=='example' || q[0]!=subchar[i][0] || q[2]!=subchar[i][1]}
+    ccc='/'
+    ccc=', ' unless k.find_index{|q| q[1].include?('/')}.nil?
+    name="#{k[0][0]} #{'+' if k[0][1].include?('%')}#{k.map{|q| q[1]}.join(ccc)}"
+    name="#{k.map{|q| q[1]}.join(ccc)} #{k[0][0]}" if k[0][0][0,7]=='Hits = '
+    name="#{k[0][0]}" if k[0][1]=='-'
+    char.push([name,k[0][2]])
+  end
+  flds=nil
+  totals=[0,0,0]
+  unless char.length<=0
+    flds=[]
+    c=char.reject{|q| q[1]!='Ability'}.map{|q| q[0]}.join("\n")
+    flds.push(['Abilities',c]) if c.length>0
+    totals[0]=c.split("\n").length
+    c=char.reject{|q| q[1]!='Aura'}.map{|q| q[0]}.join("\n")
+    flds.push(['Dragon Auras',c]) if c.length>0
+    totals[1]=c.split("\n").length
+    c=char.reject{|q| q[1]!='CoAbility'}.map{|q| q[0]}.join("\n")
+    flds.push(['CoAbilities',c]) if c.length>0
+    totals[2]=c.split("\n").length
+    flds=nil if flds.length<=0
+  end
+  f=0
+  f=flds.map{|q| "__*#{q[0]}*__\n#{q[1]}"}.join("\n\n").length unless flds.nil?
+  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || f+search.join("\n").length>=1500
+    str="__**Ability Search**__\n#{search.join("\n")}#{"\n\n__**Notes**__\n#{textra}" if textra.length>0}\n\n__**Results**__"
+    flds=flds.map{|q| ["__*#{q[0]}*__",q[1].split("\n")]}
+    for i in 0...flds.length
+      str=extend_message(str,flds[i][0],event,2)
+      for i2 in 0...flds[i][1].length
+        str=extend_message(str,flds[i][1][i2],event)
+      end
+    end
+    str=extend_message(str,"#{char.length} total (#{totals[0]} abilities, #{totals[1]} auras, #{totals[2]} coabilities)",event,2)
+    event.respond str
+  else
+    flds=triple_finish(flds[0][1].split("\n")) if !flds.nil? && flds.length==1
+    textra="#{textra}\n\n**No materials/items match your search**" if char.length<=0 || flds.nil?
+    create_embed(event,"__**Ability Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total (#{totals[0]} abilities, #{totals[1]} auras, #{totals[2]} coabilities)",nil,flds)
   end
 end
 
@@ -7756,6 +7882,10 @@ end
 bot.command([:ability,:abil]) do |event, *args|
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    find_abilities(bot,event,args)
+    return nil
   elsif ['limit','limits','stack','stacks'].include?(args[0].downcase)
     show_abil_limits(event,bot)
     return nil
@@ -7927,6 +8057,10 @@ bot.command([:find,:search,:lookup]) do |event, *args|
   elsif ['banner','banners','summon','summoning','summons','summonings'].include?(args[0].downcase)
     args.shift
     find_banners(bot,event,args)
+    return nil
+  elsif ['abil','ability','abilitys','abilities','abils'].include?(args[0].downcase)
+    args.shift
+    find_abilities(bot,event,args)
     return nil
   end
   find_all(bot,event,args)
@@ -9343,6 +9477,9 @@ bot.mention do |event|
     elsif ['banner','banners','summon','summoning','summons','summonings'].include?(args[0].downcase)
       args.shift
       find_banners(bot,event,args)
+    elsif ['abil','ability','abilitys','abilities','abils'].include?(args[0].downcase)
+      args.shift
+      find_abilities(bot,event,args)
     else
       find_all(bot,event,args)
     end
@@ -9513,7 +9650,10 @@ bot.mention do |event|
   elsif ['ability','abil'].include?(args[0].downcase)
     m=false
     args.shift
-    if ['limit','limits','stack','stacks'].include?(args[0].downcase)
+    if ['find','search'].include?(args[0].downcase)
+      args.shift
+      find_abilities(bot,event,args)
+    elsif ['limit','limits','stack','stacks'].include?(args[0].downcase)
       show_abil_limits(event,bot)
     else
       disp_ability_data(bot,event,args)
