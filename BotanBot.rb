@@ -1341,8 +1341,14 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     rar=args[i].to_i if rar.zero? && args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<6
     rar=args[i].to_i if rar.zero? && args[i][1,1]=='*' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<6
   end
-  rar=k[1][0,1].to_i if rar.zero?
-  rar=k[1][0,1].to_i if rar>k[1][0,1].to_i && s2s
+  semirar=false
+  if rar.zero?
+    semirar=true
+    rar=5
+  elsif rar>k[1][0,1].to_i && s2s
+    semirar=true
+    rar=k[1][0,1].to_i
+  end
   str=''
   unless s2s
     str="#{generate_rarity_row(rar,true)}"
@@ -1352,6 +1358,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][1]}"
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[2][2]}"}
   str="#{str}\n#{moji[0].mention unless moji.length<=0} **Weapon:** #{k[2][2]}"
+  str="#{str} - *Def:* #{longFormattedNumber(k[5])}" unless s2s || juststats
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
   str="#{str}\n#{moji[0].mention unless moji.length<=0} **Class:** #{k[2][0]}"
   str="#{str}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
@@ -1400,9 +1407,10 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     end
   else
     xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Adventurers/#{k[0].gsub(' ','_')}_#{[rar,k[1][0,1].to_i].max}.png"
-    str="#{str}\n\n**Level 1**  \u200B  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0][rar-3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0][rar-3])}  \u200B  \u200B  *Def:*\u00A0\u00A0#{longFormattedNumber(k[5])}"
-    str="#{str}\n**Level #{30+10*rar}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][rar-3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][rar-3])}  \u200B  \u200B  *Def:*\u00A0\u00A0#{longFormattedNumber(k[5])}"
-    str="#{str}\n**Max Stats**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][3])}  \u200B  \u200B  *Def:*\u00A0\u00A0#{longFormattedNumber(k[5])}" if rar==5 && (!k[3][1][3].nil? || !k[4][1][3].nil?)
+    xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Adventurers/#{k[0].gsub(' ','_')}_#{k[1][0,1].to_i}.png" if semirar
+    str="#{str}\n\n**Level 1**  \u200B  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0][rar-3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0][rar-3])}"
+    str="#{str}\n**Level #{30+10*rar}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][rar-3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][rar-3])}"
+    str="#{str}\n**Max Stats**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][3])}" if rar==5 && (!k[3][1][3].nil? || !k[4][1][3].nil?)
     lv=[3,2,2,2,k[8][2].length]
     lv=[2,2,2,2,0] if rar==4
     lv=[2,1,2,1,0] if rar==3
@@ -1428,6 +1436,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       str=str.gsub(';;;;;',strx)
     end
     ftr="Data shown is for a #{rar}-star adventurer.  To show all data, use this command in PM or include 5* in your message." unless rar>=5
+    ftr="Data shown is for a 5-star adventurer.  To show data for a #{k[1][0,1]}-star version, please include #{k[1][0,1]}* in your message." if semirar
   end
   if flds.nil?
     create_embed(event,"__**#{k[0]}**__",str,element_color(k[2][1]),ftr,xpic,flds)
@@ -3060,29 +3069,40 @@ def disp_facility_data(bot,event,args=nil)
     str="#{str}\n\n__*Level 8 \u2192 9*__\nRequires Facility level of 700\n300,000<:Resource_Rupies:532104504372363274>\n<:Element_Water:532106088221376522>Water Orb x300, Stream Orb x40, Deluge Orb x9, Talonstone x30"
   else
     nums=[]
+    val=0
     for i in 0...args.length
-      nums.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0
+      if args[i].to_i.to_s==args[i] && args[i].to_i>0
+        if nums.length<2
+          nums.push(args[i].to_i)
+        elsif val<=0
+          val=args[i].to_i
+        end
+      elsif args[i][0,1].downcase=='x' && args[i][1,args[i].length-1].to_i.to_s==args[i][1,args[i].length-1] && args[i][1,args[i].length-1].to_i>0
+        val=args[i][1,args[i].length-1].to_i if val<=0
+      end
     end
+    val=1 if val<=0
+    str="**Amounts shown are for #{val} copies of this facility.**\n" unless val==1
     if nums.length<=0
       mtz=[]
       cost=0
       for i in 0...kxx.length
         cost+=kxx[i][6]
         if s2s
-          str="#{str}\nCreation: #{longFormattedNumber(kxx[i][6])}<:Resource_Rupies:532104504372363274>" if i==0
-          str="#{str}\nLevel #{i} \u2192 #{i+1}: #{longFormattedNumber(kxx[i][6])}<:Resource_Rupies:532104504372363274>" unless i==0
+          str="#{str}\nCreation: #{longFormattedNumber(kxx[i][6]*val)}<:Resource_Rupies:532104504372363274>" if i==0
+          str="#{str}\nLevel #{i} \u2192 #{i+1}: #{longFormattedNumber(kxx[i][6]*val)}<:Resource_Rupies:532104504372363274>" unless i==0
         end
         unless kxx[i][7].nil?
           for i2 in 0...kxx[i][7].length
             mtz.push(kxx[i][7][i2])
           end
-          str="#{str} - #{kxx[i][7].map{|q| "#{q[0]} x#{q[1]}"}.sort.join(', ')}" if s2s
+          str="#{str} - #{kxx[i][7].map{|q| "#{q[0]} x#{q[1].to_i*val}"}.sort.join(', ')}" if s2s
         end
       end
       mtzz=mtz.map{|q| q[0]}.uniq.sort
-      str3="TOTAL: #{longFormattedNumber(cost)}<:Resource_Rupies:532104504372363274> - "
+      str3="TOTAL: #{longFormattedNumber(cost*val)}<:Resource_Rupies:532104504372363274> - "
       for i in 0...mtzz.length
-        str3="#{str3}#{', ' unless i==0}#{mtzz[i]} x#{mtz.reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i}.inject(0){|sum,x| sum + x }}"
+        str3="#{str3}#{', ' unless i==0}#{mtzz[i]} x#{mtz.reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i*val}.inject(0){|sum,x| sum + x }}"
       end
       str="#{str}\n\n**#{str3}**"
     elsif nums.length==1
@@ -3090,8 +3110,8 @@ def disp_facility_data(bot,event,args=nil)
       mtz=[[],[]]
       cost=[0,0]
       for i in 0...kxx.length
-        cost[0]+=kxx[i][6] if i<n
-        cost[1]+=kxx[i][6] unless i<n
+        cost[0]+=kxx[i][6]*val if i<n
+        cost[1]+=kxx[i][6]*val unless i<n
         unless kxx[i][7].nil?
           for i2 in 0...kxx[i][7].length
             mtz[0].push(kxx[i][7][i2]) if i<n
@@ -3102,13 +3122,13 @@ def disp_facility_data(bot,event,args=nil)
       str3="**Total from level 1 to #{n}:** #{longFormattedNumber(cost[0])}<:Resource_Rupies:532104504372363274>"
       mtzz=mtz[0].map{|q| q[0]}.uniq.sort
       for i in 0...mtzz.length
-        str3="#{str3}#{' - ' if i==0}#{', ' unless i==0}#{mtzz[i]} x#{mtz[0].reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i}.inject(0){|sum,x| sum + x }}"
+        str3="#{str3}#{' - ' if i==0}#{', ' unless i==0}#{mtzz[i]} x#{mtz[0].reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i*val}.inject(0){|sum,x| sum + x }}"
       end
       str="#{str}\n\n#{str3}" unless n==1
       str3="**Total from level #{n} to #{kxx.length}:** #{longFormattedNumber(cost[1])}<:Resource_Rupies:532104504372363274>"
       mtzz=mtz[1].map{|q| q[0]}.uniq.sort
       for i in 0...mtzz.length
-        str3="#{str3}#{' - ' if i==0}#{', ' unless i==0}#{mtzz[i]} x#{mtz[1].reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i}.inject(0){|sum,x| sum + x }}"
+        str3="#{str3}#{' - ' if i==0}#{', ' unless i==0}#{mtzz[i]} x#{mtz[1].reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i*val}.inject(0){|sum,x| sum + x }}"
       end
       str="#{str}\n\n#{str3}" unless n==kxx.length
     else
@@ -3120,18 +3140,18 @@ def disp_facility_data(bot,event,args=nil)
       kxx=kxx[n,n2-n]
       for i in 0...kxx.length
         cost+=kxx[i][6]
-        str="#{str}\nLevel #{n+i} \u2192 #{n+i+1}: #{longFormattedNumber(kxx[i][6])}<:Resource_Rupies:532104504372363274>" if s2s
+        str="#{str}\nLevel #{n+i} \u2192 #{n+i+1}: #{longFormattedNumber(kxx[i][6]*val)}<:Resource_Rupies:532104504372363274>" if s2s
         unless kxx[i][7].nil?
           for i2 in 0...kxx[i][7].length
             mtz.push(kxx[i][7][i2])
           end
-          str="#{str} - #{kxx[i][7].map{|q| "#{q[0]} x#{q[1]}"}.sort.join(', ')}" if s2s
+          str="#{str} - #{kxx[i][7].map{|q| "#{q[0]} x#{q[1].to_i*val}"}.sort.join(', ')}" if s2s
         end
       end
       mtzz=mtz.map{|q| q[0]}.uniq.sort
-      str3="TOTAL from level #{n} to #{n2}: #{longFormattedNumber(cost)}<:Resource_Rupies:532104504372363274> - "
+      str3="TOTAL from level #{n} to #{n2}: #{longFormattedNumber(cost*val)}<:Resource_Rupies:532104504372363274> - "
       for i in 0...mtzz.length
-        str3="#{str3}#{', ' unless i==0}#{mtzz[i]} x#{mtz.reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i}.inject(0){|sum,x| sum + x }}"
+        str3="#{str3}#{', ' unless i==0}#{mtzz[i]} x#{mtz.reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i*val}.inject(0){|sum,x| sum + x }}"
       end
       str="#{str}\n\n**#{str3}**"
     end
