@@ -688,10 +688,12 @@ def help_text(event,bot,command=nil,subcommand=nil)
     str="#{str}\n\n`find` __\*filters__ - to find specific adventurers, dragons, wyrmprints, or weapons (*also `search`*)"
     str="#{str}\n`sort` __\*filters__ - to sort adventurers by specified stats (*also `list`*)"
     str="#{str}\n`today` - to show data on current events (*also `daily` or `todayInDL`*)"
+    str="#{str}\n`level` - to show costs of getting certain entities to certain levels."
     str="#{str}\n`next` - to show data on cyclical events (*also `schedule`*)"
     str="#{str}\n`art` __target__ - to show an adventurer's, dragon's, or wyrmprint's art"
     str="#{str}\n`sp` __types__ - shows SP gains for weapon types"
-    str="#{str}\n\n__**Meta Data**__"
+    create_embed([event,x],"Global Command Prefixes: `DL!` `DL?`#{"\nServer Command Prefix: `#{@prefixes[event.server.id]}`" if !event.server.nil? && !@prefixes[event.server.id].nil? && @prefixes[event.server.id].length>0}\nYou can also use `DL!help CommandName` to learn more on a particular command.\n__**Botan Bot help**__",str,0xCE456B)
+    str="__**Meta Data**__"
     str="#{str}\n`tools` - for a list of tools other than me that can help you"
     str="#{str}\n`invite` - for a link to invite me to your server"
     str="#{str}\n`snagstats` __type__ - to receive relevant bot stats"
@@ -702,7 +704,7 @@ def help_text(event,bot,command=nil,subcommand=nil)
     str="#{str}\n`suggestion` __\\*message__ - to send my developer a feature suggestion"
     str="#{str}\n`feedback` __\\*message__ - to send my developer other kinds of feedback"
     str="#{str}\n~~the above three commands are actually identical, merely given unique entries to help people find them~~"
-    create_embed([event,x],"Global Command Prefixes: `DL!` `DL?`#{"\nServer Command Prefix: `#{@prefixes[event.server.id]}`" if !event.server.nil? && !@prefixes[event.server.id].nil? && @prefixes[event.server.id].length>0}\nYou can also use `DL!help CommandName` to learn more on a particular command.\n__**Botan Bot help**__",str,0xCE456B)
+    create_embed([event,x],'',str,0xCE456B)
     str="__**Aliases**__"
     str="#{str}\n`addalias` __new alias__ __target__ - Adds a new server-specific alias"
     str="#{str}\n~~`aliases` __target__ (*also `checkaliases` or `seealiases`*)~~"
@@ -1541,6 +1543,7 @@ def disp_wyrmprint_stats(bot,event,args=nil)
   str="#{str}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
   str="#{str}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
   str="#{str}\n**Zodiac Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='z'
+  str="#{str}\n**Treasure Trade**" if k[1].length>1 && k[1][1,1].downcase=='t'
   f=k[1][0,1].to_i*20
   f-=10 if k[1][0,1].to_i<3
   if s2s
@@ -1564,9 +1567,16 @@ def disp_wyrmprint_stats(bot,event,args=nil)
     end
     str="#{str}\n\n__**Abilities**__\n#{k[5].join("\n")}"
   end
-  str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[6][0])}<:Resource_Rupies:532104504372363274> #{longFormattedNumber(k[6][1])}<:Resource_Eldwater:532104503777034270>"
-  ftr="Artist: #{k[7]}" unless k[7].nil? || k[7].length<=0
-  create_embed(event,"__**#{k[0]}**__",str,xcolor,ftr,xpic)
+  str="#{str}\n"
+  str="#{str}\n**Sells for:** #{longFormattedNumber(k[6][0])}<:Resource_Rupies:532104504372363274> #{longFormattedNumber(k[6][1])}<:Resource_Eldwater:532104503777034270>"
+  unless k[1].length>1 && ['s','z','y','t'].include?(k[1][1,1].downcase)
+    str="#{str}\n**Shop Price:** 17<:Resource_Eldwater:532104503777034270> per MUB" if k[1][0,1].to_i==1
+    str="#{str}\n**Shop Price:** 170<:Resource_Eldwater:532104503777034270> per MUB" if k[1][0,1].to_i==2
+    str="#{str}\n**Shop Price:** 1,700<:Resource_Eldwater:532104503777034270> per MUB" if k[1][0,1].to_i==3
+    str="#{str}\n**Shop Price:** 17,000<:Resource_Eldwater:532104503777034270> per MUB" if k[1][0,1].to_i==4
+    str="#{str}\n**Shop Price:** 37,000<:Resource_Eldwater:532104503777034270> per MUB" if k[1][0,1].to_i==5
+  end
+  create_embed(event,"__**#{k[0]}**__",str,xcolor,nil,xpic)
 end
 
 def disp_weapon_stats(bot,event,args=nil,juststats=false)
@@ -4575,6 +4585,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
     fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
     fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons'].include?(args[i].downcase)
     fltr.push('Summon') if ['summon','summons','summonable','summonables'].include?(args[i].downcase)
+    fltr.push('Treasure Trade') if ['treasure','trade','trades','treasures','treasuretrade','treasuretrades'].include?(args[i].downcase)
   end
   textra=''
   rarity.uniq!
@@ -4637,6 +4648,14 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
       m.push('4')
       m.push('5')
       emo.push('(p)') if fltr.length<2
+    end
+    if fltr.include?('Treasure Trade')
+      m.push('1t')
+      m.push('2t')
+      m.push('3t')
+      m.push('4t')
+      m.push('5t')
+      emo.push('(t)') if fltr.length<2
     end
     char=char.reject{|q| !m.include?(q[1])}.uniq
     search.push("*Filters*: #{fltr.join(', ')}")
