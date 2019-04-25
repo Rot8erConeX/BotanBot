@@ -1254,7 +1254,8 @@ def find_data_ex(callback,name,event,fullname=false,ext=false)
   return blank
 end
 
-def generate_rarity_row(rar,include_blanks=false)
+def generate_rarity_row(rar,include_blanks=false,feh=false)
+  return "#{['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][rar]*rar}#{['','<:Icon_Rarity_1n:570979179781160980>','<:Icon_Rarity_2n:570979178627858432>','<:Icon_Rarity_3n:570979178812407834>','<:Icon_Rarity_4n:570979181077463061>','<:Icon_Rarity_5n:570979178917396490>','<:Icon_Rarity_6n:570979179009409054>'][rar]*(5-rar) if include_blanks}" if feh
   return "#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][rar]*rar}#{['','<:Rarity_1_Blank:555459856476274691>','<:Rarity_2_Blank:555459856400908299>','<:Rarity_3_Blank:555459856568418314>','<:Rarity_4_Blank:555459856497246218>','<:Rarity_5_Blank:555459856190930955>'][rar]*(5-rar) if include_blanks}"
 end
 
@@ -1274,13 +1275,35 @@ def element_emote(ele,bot)
 end
 
 def adv_emoji(k,bot)
-  str=['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
-  str="#{str}#{moji[0].mention unless moji.length<=0}"
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[2][2]}"}
-  str="#{str}#{moji[0].mention unless moji.length<=0}"
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
-  str="#{str}#{moji[0].mention unless moji.length<=0}"
+  if !k[12].nil? && k[12]=='FEH'
+    str=['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][k[1][0,1].to_i]
+    moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2][1].gsub('Shadow','Dark').gsub('Flame','Fire')}"}
+    str="#{str}#{moji[0].mention unless moji.length<=0}"
+    wpn='<:Gold_Unknown:443172811499110411>'
+    wpn='<:Red_Blade:443172811830198282>' if k[2][2]=='Sword'
+    wpn='<:Colorless_Blade:443692132310712322>' if k[2][2]=='Blade'
+    wpn='<:Colorless_Dagger:443692132683743232>' if k[2][2]=='Dagger'
+    wpn='<:Green_Blade:467122927230386207>' if k[2][2]=='Axe'
+    wpn='<:Colorless_Bow:443692132616896512>' if k[2][2]=='Bow'
+    wpn='<:Blue_Blade:467112472768151562>' if k[2][2]=='Lance'
+    wpn=' <:Green_Tome:467122927666593822>' if k[2][2]=='Wand'
+    wpn='<:Colorless_Staff:443692132323295243>' if k[2][2]=='Staff'
+    str="#{str}#{wpn}"
+    clzz='<:Resource_Structure:510774545154572298>'
+    clzz='<:Skill_Weapon:444078171114045450>' if k[2][0]=='Attack'
+    clzz='<:Skill_Special:444078170665254929>' if k[2][0]=='Support'
+    clzz='<:Defense_Shield:570987444309196835>' if k[2][0]=='Defense'
+    clzz='<:Healing_Rod:570991014894895104>' if k[2][0]=='Healer'
+    str="#{str}#{clzz}"
+  else
+    str=['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
+    str="#{str}#{moji[0].mention unless moji.length<=0}"
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[2][2]}"}
+    str="#{str}#{moji[0].mention unless moji.length<=0}"
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
+    str="#{str}#{moji[0].mention unless moji.length<=0}"
+  end
   return str
 end
 
@@ -1299,11 +1322,29 @@ def print_emoji(k,bot)
 end
 
 def weapon_emoji(k,bot)
-  str=['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[2][0,1].to_i]
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
-  str="#{str}#{moji[0].mention unless moji.length<=0}"
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
-  str="#{str}#{moji[0].mention unless moji.length<=0}"
+  if !k[14].nil? && k[14]=='FEH'
+    str=['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][k[2][0,1].to_i]
+    moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[3].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Anima')}"}
+    str="#{str}#{moji[0].mention unless moji.length<=0}"
+    wpn='<:Gold_Unknown:443172811499110411>'
+    wpn='<:Red_Blade:443172811830198282>' if k[1]=='Sword'
+    wpn='<:Colorless_Blade:443692132310712322>' if k[1]=='Blade'
+    wpn='<:Colorless_Dagger:443692132683743232>' if k[1]=='Dagger'
+    wpn='<:Green_Blade:467122927230386207>' if k[1]=='Axe'
+    wpn='<:Colorless_Bow:443692132616896512>' if k[1]=='Bow'
+    wpn='<:Blue_Blade:467112472768151562>' if k[1]=='Lance'
+    wpn=' <:Green_Tome:467122927666593822>' if k[1]=='Wand'
+    wpn='<:Colorless_Staff:443692132323295243>' if k[1]=='Staff'
+    str="#{str}#{wpn}"
+    str="#{str}<:Current_Tempest_Bonus:498797966740422656>" if k[2].length>1 && k[2][1,1].downcase=='v'
+  else
+    str=['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[2][0,1].to_i]
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
+    str="#{str}#{moji[0].mention unless moji.length<=0}"
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
+    str="#{str}#{moji[0].mention unless moji.length<=0}"
+    str="#{str}<:Element_Void:548467446734913536>" if k[2].length>1 && k[2][1,1].downcase=='v'
+  end
   return str
 end
 
@@ -1352,17 +1393,43 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     rar=k[1][0,1].to_i
   end
   str=''
-  unless s2s
-    str="#{generate_rarity_row(rar,true)}"
-    str="#{str} (from #{k[1][0,1].to_i}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
+  if !k[12].nil? && k[12]=='FEH'
+    unless s2s
+      str="#{generate_rarity_row(rar,true,true)}"
+      str="#{str} (from #{k[1][0,1].to_i}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
+    end
+    moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2][1].gsub('Shadow','Dark').gsub('Flame','Fire')}"}
+    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][1]}"
+    wpn='<:Gold_Unknown:443172811499110411>'
+    wpn='<:Red_Blade:443172811830198282>' if k[2][2]=='Sword'
+    wpn='<:Colorless_Blade:443692132310712322>' if k[2][2]=='Blade'
+    wpn='<:Colorless_Dagger:443692132683743232>' if k[2][2]=='Dagger'
+    wpn='<:Green_Blade:467122927230386207>' if k[2][2]=='Axe'
+    wpn='<:Colorless_Bow:443692132616896512>' if k[2][2]=='Bow'
+    wpn='<:Blue_Blade:467112472768151562>' if k[2][2]=='Lance'
+    wpn=' <:Green_Tome:467122927666593822>' if k[2][2]=='Wand'
+    wpn='<:Colorless_Staff:443692132323295243>' if k[2][2]=='Staff'
+    str="#{str}\n#{wpn} **Weapon:** #{k[2][2]}"
+    str="#{str} - <:DefenseS:514712247461871616>*Def:* #{longFormattedNumber(k[5])}" unless s2s || juststats
+    clzz='<:Resource_Structure:510774545154572298>'
+    clzz='<:Skill_Weapon:444078171114045450>' if k[2][0]=='Attack'
+    clzz='<:Skill_Special:444078170665254929>' if k[2][0]=='Support'
+    clzz='<:Defense_Shield:570987444309196835>' if k[2][0]=='Defense'
+    clzz='<:Healing_Rod:570991014894895104>' if k[2][0]=='Healer'
+    str="#{str}\n#{clzz} **Class:** #{k[2][0]}"
+  else
+    unless s2s
+      str="#{generate_rarity_row(rar,true)}"
+      str="#{str} (from #{k[1][0,1].to_i}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
+    end
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
+    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][1]}"
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[2][2]}"}
+    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Weapon:** #{k[2][2]}"
+    str="#{str} - *Def:* #{longFormattedNumber(k[5])}" unless s2s || juststats
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
+    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Class:** #{k[2][0]}"
   end
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
-  str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][1]}"
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[2][2]}"}
-  str="#{str}\n#{moji[0].mention unless moji.length<=0} **Weapon:** #{k[2][2]}"
-  str="#{str} - *Def:* #{longFormattedNumber(k[5])}" unless s2s || juststats
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
-  str="#{str}\n#{moji[0].mention unless moji.length<=0} **Class:** #{k[2][0]}"
   str="#{str}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
   str="#{str}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
   str="#{str}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
@@ -1374,12 +1441,14 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   skl1=sklz[sklz.find_index{|q| q[2]=='Skill' && q[0]==k[6][0]}]
   skl2=sklz[sklz.find_index{|q| q[2]=='Skill' && q[0]==k[6][1]}]
   ftr=nil
+  feh=false
+  feh=true if !k[12].nil? && k[12]=='FEH'
   if s2s || juststats
     xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Adventurers/#{k[0].gsub(' ','_')}_#{k[1][0,1]}.png"
-    str="#{str}\n\n**Defense:** #{k[5]}"
+    str="#{str}\n\n#{'<:DefenseS:514712247461871616>' if feh}**Defense:** #{k[5]}"
     flds=[]
     for i in rar...6
-      flds.push([generate_rarity_row(i,true),"**Level 1**  \u200B  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0][i-3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0][i-3])}  \u00B7\n**Level #{30+10*i}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][i-3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][i-3])}  \u00B7#{"\n**Max Stats**  \u200B  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][3])}  \u00B7" if i==5 && (!k[3][1][3].nil? || !k[4][1][3].nil?)}"])
+      flds.push([generate_rarity_row(i,true,feh),"**Level 1**  \u200B  \u200B  \u200B  #{'<:HP_S:514712247503945739>' if feh}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0][i-3])}  \u200B  \u200B  #{'<:StrengthS:514712248372166666>' if feh}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0][i-3])}  \u00B7\n**Level #{30+10*i}**  \u200B  \u200B  #{'<:HP_S:514712247503945739>' if feh}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][i-3])}  \u200B  \u200B  #{'<:StrengthS:514712248372166666>' if feh}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][i-3])}  \u00B7#{"\n**Max Stats**  \u200B  \u200B  \u200B  #{'<:HP_S:514712247503945739>' if feh}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][3])}  \u200B  \u200B  #{'<:StrengthS:514712248372166666>' if feh}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][3])}  \u00B7" if i==5 && (!k[3][1][3].nil? || !k[4][1][3].nil?)}"])
     end
     unless juststats
       str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{', <:Energize:559629242137051155>Energizable' if skl1[7]=='Yes'}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min}"
@@ -1410,9 +1479,9 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   else
     xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Adventurers/#{k[0].gsub(' ','_')}_#{[rar,k[1][0,1].to_i].max}.png"
     xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Adventurers/#{k[0].gsub(' ','_')}_#{k[1][0,1].to_i}.png" if semirar
-    str="#{str}\n\n**Level 1**  \u200B  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0][rar-3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0][rar-3])}"
-    str="#{str}\n**Level #{30+10*rar}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][rar-3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][rar-3])}"
-    str="#{str}\n**Max Stats**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][3])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][3])}" if rar==5 && (!k[3][1][3].nil? || !k[4][1][3].nil?)
+    str="#{str}\n\n**Level 1**  \u200B  \u200B  \u200B  #{'<:HP_S:514712247503945739>' if feh}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0][rar-3])}  \u200B  \u200B  #{'<:StrengthS:514712248372166666>' if feh}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0][rar-3])}"
+    str="#{str}\n**Level #{30+10*rar}**  \u200B  \u200B  #{'<:HP_S:514712247503945739>' if feh}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][rar-3])}  \u200B  \u200B  #{'<:StrengthS:514712248372166666>' if feh}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][rar-3])}"
+    str="#{str}\n**Max Stats**  \u200B  \u200B  #{'<:HP_S:514712247503945739>' if feh}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][3])}  \u200B  \u200B  #{'<:StrengthS:514712248372166666>' if feh}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][3])}" if rar==5 && (!k[3][1][3].nil? || !k[4][1][3].nil?)
     lv=[3,2,2,2,k[8][2].length]
     lv=[2,2,2,2,0] if rar==4
     lv=[2,1,2,1,0] if rar==3
@@ -1551,11 +1620,11 @@ def disp_wyrmprint_stats(bot,event,args=nil)
     str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}"
     str="#{str}\n#{k[5].map{|q| q[0]}.join("\n")}"
     str="#{str}\n\n__**#{'<:Unbind:534494090969088000>'*4} Level #{f}**__"
-    str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}"
+    str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}"
     str="#{str}\n#{k[5].map{|q| q[1]}.join("\n")}"
   else
     str="#{str}\n\n**#{'<:NonUnbound:534494090876682264>'*4} Level 1**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}"
-    str="#{str}\n**#{'<:Unbind:534494090969088000>'*4} Level #{f}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}"
+    str="#{str}\n**#{'<:Unbind:534494090969088000>'*4} Level #{f}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[3][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}"
     for i in 0...k[5].length
       if k[5][i][0]==k[5][i][1]
         k[5][i]=k[5][i][0]
@@ -1595,21 +1664,45 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   end
   s2s=false
   s2s=true if safe_to_spam?(event)
+  feh=false
+  feh=true if !k[14].nil? && k[14]=='FEH'
   evn=event.message.text.downcase.split(' ')
   juststats=true if @shardizard != 4 && evn.include?('smol')
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Weapons/#{k[0].gsub(' ','_')}.png"
-  str=generate_rarity_row(k[2][0,1].to_i)
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
-  str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
-  str="#{str}\n#{moji[0].mention unless moji.length<=0} **Weapon Type:** #{k[1]}"
+  if feh
+    str=generate_rarity_row(k[2][0,1].to_i,false,true)
+    moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[3].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Anima')}"}
+    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+    wpn='<:Gold_Unknown:443172811499110411>'
+    wpn='<:Red_Blade:443172811830198282>' if k[1]=='Sword'
+    wpn='<:Colorless_Blade:443692132310712322>' if k[1]=='Blade'
+    wpn='<:Colorless_Dagger:443692132683743232>' if k[1]=='Dagger'
+    wpn='<:Green_Blade:467122927230386207>' if k[1]=='Axe'
+    wpn='<:Colorless_Bow:443692132616896512>' if k[1]=='Bow'
+    wpn='<:Blue_Blade:467112472768151562>' if k[1]=='Lance'
+    wpn=' <:Green_Tome:467122927666593822>' if k[1]=='Wand'
+    wpn='<:Colorless_Staff:443692132323295243>' if k[1]=='Staff'
+    str="#{str}\n#{wpn} **Weapon:** #{k[1]}"
+  else
+    str=generate_rarity_row(k[2][0,1].to_i)
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
+    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
+    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Weapon Type:** #{k[1]}"
+  end
   str="#{str}\n**Welfare**" if k[2].length>1 && k[2][1,1].downcase=='w'
   str="#{str}\n**Story**" if k[2].length>1 && k[2][1,1].downcase=='y'
   str="#{str}\n**Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='s'
   str="#{str}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
   str="#{str}\n**Starter**" if k[2].length>1 && k[2][1,1].downcase=='e'
   str="#{str}\n**Paid**" if k[2].length>1 && k[2][1,1].downcase=='p'
-  str="#{str}\n<:Element_Void:548467446734913536> **Void**" if k[2].length>1 && k[2][1,1].downcase=='v'
+  if k[2].length>1 && k[2][1,1].downcase=='v'
+    if feh
+      str="#{str}\n<:Current_Tempest_Bonus:498797966740422656> **Void**"
+    else
+      str="#{str}\n<:Element_Void:548467446734913536> **Void**"
+    end
+  end
   f=30*k[2][0,1].to_i-50
   f+=20 if k[2][0,1].to_i<3
   f0=30*k[2][0,1].to_i-70
@@ -1635,20 +1728,22 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
       ablx2=sklz[ablx2] unless ablx2.nil?
     end
   end
+  bemoji=['<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
+  bemoji=['<:Mortal_Dew:571007765699493888>','<:Divine_Dew:453618312434417691>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if feh
   if s2s && !skl.nil? && !juststats
-    str="#{str}\n\n__**#{'<:NonUnbound:534494090876682264>'*4} Level 1**__"
+    str="#{str}\n\n__**#{bemoji[0]*4} Level 1**__"
     str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
     str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
     str="#{str}\n*#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}*" unless abl.nil?
     str="#{str}\n*#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*" unless ablx.nil?
     if (k[4][1]>0 || k[5][1]>0)
-      str="#{str}\n\n__**#{'<:NonUnbound:534494090876682264>'*4} Level #{f0}**__"
+      str="#{str}\n\n__**#{bemoji[0]*4} Level #{f0}**__"
       str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}"
       str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
       str="#{str}\n*#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}*" unless abl.nil?
       str="#{str}\n*#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*" unless ablx.nil?
     end
-    str="#{str}\n\n__**#{'<:Unbind:534494090969088000>'*4} Level #{f}**__"
+    str="#{str}\n\n__**#{bemoji[1]*4} Level #{f}**__"
     str="#{str}\n*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
     str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][1])} SP\n#{skl[4].gsub(';; ',"\n")}"
     str="#{str}\n*#{abl2[0]}#{" #{'+' if abl2[1].include?('%')}#{abl2[1]}" unless abl2[1]=='-'}*" unless abl2.nil?
@@ -1656,9 +1751,9 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     str="#{str}\n*#{ablx2[0]}#{" #{'+' if ablx2[1].include?('%')}#{ablx2[1]}" unless ablx2[1]=='-'}*" unless ablx2.nil?
     str="#{str}\n*#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*" if ablx2.nil? && !ablx.nil?
   else
-    str="#{str}\n\n**#{'<:NonUnbound:534494090876682264>'*4} Level 1**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
-    str="#{str}\n**#{'<:NonUnbound:534494090876682264>'*4} Level #{f0}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}" if (k[4][1]>0 || k[5][1]>0)
-    str="#{str}\n**#{'<:Unbind:534494090969088000>'*4} Level #{f}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
+    str="#{str}\n\n**#{bemoji[0]*4} Level 1**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
+    str="#{str}\n**#{bemoji[0]*4} Level #{f0}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}" if (k[4][1]>0 || k[5][1]>0)
+    str="#{str}\n**#{bemoji[1]*4} Level #{f}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
     strx=''
     unless juststats
       unless skl.nil?
@@ -1696,10 +1791,10 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
       m2=wpnz.find_index{|q| q[1]==k[1] && q[2][1,1]=='v' && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300 && k[8].to_i<400
       m=wpnz.reject{|q| q[1]!=k[1] || q[2]!=k[2] || q[9]!=k[8] || ['','0',0].include?(q[9])}
       m=wpnz.reject{|q| q[1]!=k[1] || q[2][1,1]!='v' || q[2][0,1].to_i-1!=k[2][0,1].to_i || q[9]!=k[8] || ['','0',0].include?(q[9])} if k[2][1,1]=='v' && k[8].to_i>=200 && k[8].to_i<300
-      str2="#{str2}#{"\n" unless m.length==1}\n\n**Promotes from: #{element_emote(wpnz[m2][3],bot)}*#{wpnz[m2][0]}* **\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(k[11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}" unless m2.nil?
+      str2="#{str2}#{"\n" unless m.length==1}\n\n**Promotes from: #{element_emote(wpnz[m2][3],bot)}*#{wpnz[m2][0]}* **\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(k[11][0])}#{bemoji[2]}\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}" unless m2.nil?
       if m.length>0
         for i in 0...m.length
-          str2="#{str2}#{"\n" if i==0 && m.length>1}\n\n**#{"Promotion #{i+1}" if m.length>1}#{'Promotes into' if m.length==1}: #{element_emote(m[i][3],bot)}*#{m[i][0]}* **\n*Smithy level required:* #{m[i][10]}\n*Assembly cost:* #{longFormattedNumber(m[i][11][0])}<:Resource_Rupies:532104504372363274>\n*Required mats:* #{m[i][12].map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}"
+          str2="#{str2}#{"\n" if i==0 && m.length>1}\n\n**#{"Promotion #{i+1}" if m.length>1}#{'Promotes into' if m.length==1}: #{element_emote(m[i][3],bot)}*#{m[i][0]}* **\n*Smithy level required:* #{m[i][10]}\n*Assembly cost:* #{longFormattedNumber(m[i][11][0])}#{bemoji[2]}\n*Required mats:* #{m[i][12].map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}"
         end
       end
     else
@@ -1711,9 +1806,9 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
       str2="#{str2}\n**Promotes into:** #{m.map{|q| "#{element_emote(q[3],bot)}#{q[0]}"}.join(', ')}" unless m.length<=0
     end
     str="#{str}#{"\n" unless s2s}#{str2}" if str2.length>0
-    str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[7][0])}<:Resource_Rupies:532104504372363274>#{" #{longFormattedNumber(k[7][1])}<:Resource_Eldwater:532104503777034270>" if k[7][1]>0}"
-    str="#{str}\n**Assembles for:** #{longFormattedNumber(k[11][0])}<:Resource_Rupies:532104504372363274>"
-    str="#{str}\n**Disassembles for:** #{longFormattedNumber(k[11][1])}<:Resource_Rupies:532104504372363274>"
+    str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[7][0])}#{bemoji[2]}#{" #{longFormattedNumber(k[7][1])}#{bemoji[3]}" if k[7][1]>0}"
+    str="#{str}\n**Assembles for:** #{longFormattedNumber(k[11][0])}#{bemoji[2]}"
+    str="#{str}\n**Disassembles for:** #{longFormattedNumber(k[11][1])}#{bemoji[2]}"
   end
   unless s2s
     if str.gsub(';;;;;',"\n#{strx}").length>=1900
@@ -1758,6 +1853,8 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   end
   s2s=false
   s2s=true if safe_to_spam?(event)
+  feh=false
+  feh=true if !k[14].nil? && k[14]=='FEH'
   evn=event.message.text.downcase.split(' ')
   xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Weapons/#{k[0].gsub(' ','_')}.png"
   mub=false
@@ -1778,18 +1875,40 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     mub=true
     val/=5
   end
-  str=generate_rarity_row(k[2][0,1].to_i)
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
-  str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
-  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
-  str="#{str}\n#{moji[0].mention unless moji.length<=0} **Weapon Type:** #{k[1]}"
+  if feh
+    str=generate_rarity_row(k[2][0,1].to_i,false,true)
+    moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[3].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Anima')}"}
+    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+    wpn='<:Gold_Unknown:443172811499110411>'
+    wpn='<:Red_Blade:443172811830198282>' if k[1]=='Sword'
+    wpn='<:Colorless_Blade:443692132310712322>' if k[1]=='Blade'
+    wpn='<:Colorless_Dagger:443692132683743232>' if k[1]=='Dagger'
+    wpn='<:Green_Blade:467122927230386207>' if k[1]=='Axe'
+    wpn='<:Colorless_Bow:443692132616896512>' if k[1]=='Bow'
+    wpn='<:Blue_Blade:467112472768151562>' if k[1]=='Lance'
+    wpn=' <:Green_Tome:467122927666593822>' if k[1]=='Wand'
+    wpn='<:Colorless_Staff:443692132323295243>' if k[1]=='Staff'
+    str="#{str}\n#{wpn} **Weapon:** #{k[1]}"
+  else
+    str=generate_rarity_row(k[2][0,1].to_i)
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
+    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
+    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Weapon Type:** #{k[1]}"
+  end
   str="#{str}\n**Welfare**" if k[2].length>1 && k[2][1,1].downcase=='w'
   str="#{str}\n**Story**" if k[2].length>1 && k[2][1,1].downcase=='y'
   str="#{str}\n**Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='s'
   str="#{str}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
   str="#{str}\n**Starter**" if k[2].length>1 && k[2][1,1].downcase=='e'
   str="#{str}\n**Paid**" if k[2].length>1 && k[2][1,1].downcase=='p'
-  str="#{str}\n<:Element_Void:548467446734913536> **Void**" if k[2].length>1 && k[2][1,1].downcase=='v'
+  if k[2].length>1 && k[2][1,1].downcase=='v'
+    if feh
+      str="#{str}\n<:Current_Tempest_Bonus:498797966740422656> **Void**"
+    else
+      str="#{str}\n<:Element_Void:548467446734913536> **Void**"
+    end
+  end
   f=30*k[2][0,1].to_i-50
   f+=20 if k[2][0,1].to_i<3
   f0=30*k[2][0,1].to_i-70
@@ -1815,11 +1934,13 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
       ablx2=sklz[ablx2] unless ablx2.nil?
     end
   end
+  bemoji=['<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
+  bemoji=['<:Mortal_Dew:571007765699493888>','<:Divine_Dew:453618312434417691>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if !k[14].nil? && k[14]=='FEH'
   if mub
-    str="#{str}\n**#{'<:Unbind:534494090969088000>'*4} Level #{f}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
+    str="#{str}\n**#{bemoji[1]*4} Level #{f}**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
   else
-    str="#{str}\n**#{'<:NonUnbound:534494090876682264>'*4} Level 1**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
-    str="#{str}\n**#{'<:NonUnbound:534494090876682264>'*4} Level 80**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}" if (k[4][1]>0 || k[5][1]>0)
+    str="#{str}\n**#{bemoji[0]*4} Level 1**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
+    str="#{str}\n**#{bemoji[0]*4} Level 80**  \u200B  \u200B  *HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  \u200B  \u200B  *Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}" if (k[4][1]>0 || k[5][1]>0)
   end
   if s2s && !skl.nil?
     if mub
@@ -1860,7 +1981,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   str2=''
   val*=5 if mub
   ftr=nil
-  str="#{str}#{"\n\n**Crafting shown for #{'<:Unbind:534494090969088000>'*([val-1,4].min)}#{'<:NonUnbound:534494090876682264>'*([5-val,0].max)}**" if val>1 && !mub}\n\n**This weapon#{" (x#{val})" unless val==1}**\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(val*k[11][0])}<:Resource_Rupies:532104504372363274>#{"\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{val*q[1].to_i}"}.join(', ')}" unless k[12].nil?}"
+  str="#{str}#{"\n\n**Crafting shown for #{'<:Unbind:534494090969088000>'*([val-1,4].min)}#{'<:NonUnbound:534494090876682264>'*([5-val,0].max)}**" if val>1 && !mub}\n\n**This weapon#{" (x#{val})" unless val==1}**\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(val*k[11][0])}#{bemoji[2]}#{"\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{val*q[1].to_i}"}.join(', ')}" unless k[12].nil?}"
   m2=wpnz.find_index{|q| q[1]==k[1] && q[2]==k[2] && q[8]==k[9] && !['','0',0].include?(q[8])}
   m2=wpnz.find_index{|q| q[1]==k[1] && q[2][1,1]=='v' && q[2][0,1].to_i==k[2][0,1].to_i-1 && q[8]==k[9] && !['','0',0].include?(q[8])} if k[2][1,1]=='v' && k[8].to_i>=300
   cost=0
@@ -1872,7 +1993,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     end
   end
   unless m2.nil?
-    str2="#{str2}\n\n**Promotes from: #{element_emote(wpnz[m2][3],bot)}*#{wpnz[m2][0]}* (x#{5*val})**\n*Assembly cost:* #{longFormattedNumber(val*5*wpnz[m2][11][0])}<:Resource_Rupies:532104504372363274>\n#{"*Required mats:* #{wpnz[m2][12].map{|q| "#{q[0]} x#{val*5*q[1].to_i}"}.join(', ')}" unless wpnz[m2][12].nil?}"
+    str2="#{str2}\n\n**Promotes from: #{element_emote(wpnz[m2][3],bot)}*#{wpnz[m2][0]}* (x#{5*val})**\n*Assembly cost:* #{longFormattedNumber(val*5*wpnz[m2][11][0])}#{bemoji[2]}\n#{"*Required mats:* #{wpnz[m2][12].map{|q| "#{q[0]} x#{val*5*q[1].to_i}"}.join(', ')}" unless wpnz[m2][12].nil?}"
     cost+=val*5*wpnz[m2][11][0]
     unless wpnz[m2][12].nil?
       for i in 0...wpnz[m2][12].length
@@ -1882,7 +2003,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     m22=wpnz.find_index{|q| q[1]==wpnz[m2][1] && q[2]==wpnz[m2][2] && q[8]==wpnz[m2][9] && !['','0',0].include?(q[8])}
     m22=wpnz.find_index{|q| q[1]==wpnz[m2][1] && q[2][1,1]=='v' && q[2][0,1].to_i==wpnz[m2][2][0,1].to_i-1 && q[8]==wpnz[m2][9] && !['','0',0].include?(q[8])} if wpnz[m2][2][1,1]=='v' && wpnz[m2][8].to_i>=300
     unless m22.nil?
-      str2="#{str2}\n\n**Which promotes from: #{element_emote(wpnz[m22][3],bot)}*#{wpnz[m22][0]}* (x#{25*val})**\n*Assembly cost:* #{longFormattedNumber(val*25*wpnz[m22][11][0])}<:Resource_Rupies:532104504372363274>\n*#{"Required mats:* #{wpnz[m22][12].map{|q| "#{q[0]} x#{val*25*q[1].to_i}"}.join(', ')}" unless wpnz[m22][12].nil?}"
+      str2="#{str2}\n\n**Which promotes from: #{element_emote(wpnz[m22][3],bot)}*#{wpnz[m22][0]}* (x#{25*val})**\n*Assembly cost:* #{longFormattedNumber(val*25*wpnz[m22][11][0])}#{bemoji[2]}\n*#{"Required mats:* #{wpnz[m22][12].map{|q| "#{q[0]} x#{val*25*q[1].to_i}"}.join(', ')}" unless wpnz[m22][12].nil?}"
       cost+=val*25*wpnz[m22][11][0]
       unless wpnz[m22][12].nil?
         for i in 0...wpnz[m22][12].length
@@ -1892,7 +2013,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
       m222=wpnz.find_index{|q| q[1]==wpnz[m22][1] && q[2]==wpnz[m22][2] && q[8]==wpnz[m22][9] && !['','0',0].include?(q[8])}
       m222=wpnz.find_index{|q| q[1]==wpnz[m22][1] && q[2][1,1]=='v' && q[2][0,1].to_i==wpnz[m22][2][0,1].to_i-1 && q[8]==wpnz[m22][9] && !['','0',0].include?(q[8])} if wpnz[m22][2][1,1]=='v' && wpnz[m22][8].to_i>=300
       unless m222.nil?
-        str2="#{str2}\n\n**Which promotes from: #{element_emote(wpnz[m222][3],bot)}*#{wpnz[m222][0]}* (x#{125*val})**\n*Assembly cost:* #{longFormattedNumber(val*125*wpnz[m222][11][0])}<:Resource_Rupies:532104504372363274>\n#{"*Required mats:* #{wpnz[m222][12].map{|q| "#{q[0]} x#{val*125*q[1].to_i}"}.join(', ')}" unless wpnz[m222][12].nil?}"
+        str2="#{str2}\n\n**Which promotes from: #{element_emote(wpnz[m222][3],bot)}*#{wpnz[m222][0]}* (x#{125*val})**\n*Assembly cost:* #{longFormattedNumber(val*125*wpnz[m222][11][0])}#{bemoji[2]}\n#{"*Required mats:* #{wpnz[m222][12].map{|q| "#{q[0]} x#{val*125*q[1].to_i}"}.join(', ')}" unless wpnz[m222][12].nil?}"
         cost+=val*125*wpnz[m222][11][0]
         unless wpnz[m222][12].nil?
           for i in 0...wpnz[m222][12].length
@@ -1916,7 +2037,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   end
   str3=''
   unless m2.nil?
-    str3="**TOTALS**\n*Assembly cost:* #{longFormattedNumber(cost)}<:Resource_Rupies:532104504372363274>\n*Required Mats:* "
+    str3="**TOTALS**\n*Assembly cost:* #{longFormattedNumber(cost)}#{bemoji[2]}\n*Required Mats:* "
     mtzz=mtz.map{|q| q[0]}.uniq
     for i in 0...mtzz.length
       str3="#{str3}#{', ' unless i==0}#{mtzz[i]} x#{mtz.reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i}.inject(0){|sum,x| sum + x }}"
@@ -5542,8 +5663,8 @@ def sort_wyrmprints(bot,event,args=nil)
   char=char.reject{|q| q[0][0,1]=='*'}
   stats=['Name','','','HP','Strength']
   for i in 0...char.length
-    char[i][3]=char[i][3][1]
-    char[i][4]=char[i][4][1]
+    char[i][3]=char[i][3][2]
+    char[i][4]=char[i][4][2]
     m2=[]
     for i2 in 0...srt.length
       m2.push("#{char[i][srt[i2]]} #{stats[srt[i2]]}") unless srt[i2]<3
