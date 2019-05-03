@@ -1394,7 +1394,7 @@ def print_emoji(k,bot,ignorefeh=false)
     ignorefeh=false if t.month==4
     ignorefeh=false if t.month==5 && t.day<=12
   end
-  if !k[9].nil? && k[9]=='FGO' && !ignorefeh
+  if !k[10].nil? && k[10]=='FGO' && !ignorefeh
     str=['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][k[1][0,1].to_i]
     clzz=''
     clzz='<:Buster_y:526556105422274580>' if k[2]=='Attack'
@@ -1762,7 +1762,7 @@ def disp_wyrmprint_stats(bot,event,args=nil)
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Wyrmprints/#{dispname}_1.png?raw=true"
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Wyrmprints/#{dispname}_2.png?raw=true" if has_any?(['mub','unbind','unbound','refined','refine','refinement','2ub','3ub'],evn)
   str=generate_rarity_row(k[1][0,1].to_i,false,k[9])
-  if !k[9].nil? && k[9]=='FGO'
+  if !k[10].nil? && k[10]=='FGO'
     clzz=''
     clzz='<:Buster_y:526556105422274580>' if k[2]=='Attack'
     clzz='<:support:572315955397394452>' if k[2]=='Support'
@@ -1789,7 +1789,7 @@ def disp_wyrmprint_stats(bot,event,args=nil)
   f2-=10 if k[1][0,1].to_i>3
   f2+=10 if k[1][0,1].to_i==1
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>']
-  semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:Defense:573344832282689567>'] if !k[9].nil? && k[9]=='FGO'
+  semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:Defense:573344832282689567>'] if !k[10].nil? && k[10]=='FGO'
   if s2s
     str="#{str}\n\n__**#{'<:NonUnbound:534494090876682264>'*4} Level 1**__"
     str="#{str}\n#{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0])}  \u200B  \u200B  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}"
@@ -1830,6 +1830,7 @@ def disp_wyrmprint_stats(bot,event,args=nil)
     str="#{str}\n\n__**Abilities**__\n#{k[5].join("\n")}"
   end
   str="#{str}\n"
+  str="#{str}\n**Obtained:** #{k[9]}" if !k[9].nil? && k[9].length>0
   str="#{str}\n**Sells for:** #{longFormattedNumber(k[6][0])}<:Resource_Rupies:532104504372363274> #{longFormattedNumber(k[6][1])}<:Resource_Eldwater:532104503777034270>"
   unless k[1].length>1 && ['s','z','y','t','w'].include?(k[1][1,1].downcase)
     str="#{str}\n**Shop Price:** 900<:Resource_Eldwater:532104503777034270> per 2UB, 1,700<:Resource_Eldwater:532104503777034270> per MUB" if k[1][0,1].to_i==3
@@ -4199,9 +4200,9 @@ def disp_wyrmprint_art(bot,event,args=nil)
     k[8]=k[8][0] unless k[8].nil?
   end
   feh=false
-  feh=true if !k[12].nil? && k[12]=='FGO'
+  feh=true if !k[10].nil? && k[10]=='FGO'
   fehm=''
-  fehm='FGO' if !k[12].nil? && k[12]=='FGO'
+  fehm='FGO' if !k[10].nil? && k[10]=='FGO'
   str=generate_rarity_row(k[1][0,1].to_i,false,fehm)
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2]}"}
   str="#{str}\n#{moji[0].mention unless moji.length<=0} **Amulet Type:** #{k[2]}"
@@ -5352,7 +5353,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
       m.push('5c')
       emo.push('(c)') if fltr.length<2
     end
-    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[9].nil? && q[9].length>0)}.uniq
+    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[10].nil? && q[10].length>0)}.uniq
     search.push("*Filters*: #{fltr.join(', ')}")
   end
   if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
