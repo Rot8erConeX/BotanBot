@@ -129,7 +129,7 @@ Eternal Strife\\Skill\Increases the user's defense by 25% for 10 seconds.\Increa
 Ethereal Circle\\Skill\Deals 1 hit of 612% damage to surrounding enemies.\Deals 1 hit of 680% damage to surrounding enemies.\\15205, 15205, 15205\Yes\1.1\\Damage
 Ethereal Gleam\\Skill\Deals 1 hit of 642.6% light damage to enemies directly ahead.\Deals 1 hit of 714% light damage to enemies directly ahead.\\30, 30, 30\Yes\2.9\\Damage
 Evilsbane\\Skill\Deals 1 hit of 711% shadow damage to surrounding enemies.\Deals 1 hit of 790% shadow damage to surrounding enemies.\Deals 1 hit of 878% shadow damage to surrounding enemies.\5259, 5259, 5259\Yes\0.6\\Damage
-Exalted Fire\\Skill\Deals 1 hit of 608% flame damage to enemies in a line.\Deals 1 hit of 638% flame damage to enemies in a line, and reduces their defense by 5% with 90% base chance.\Deals 1 hit of 760% flame damage to enemies in a line, and reduces their defense by 10% with 100% base chance.\4880, 4880, 4880\Yes\1.2\\Damage, Debuff, DefDown
+Exalted Fire\\Skill\Deals 1 hit of 608% flame damage to enemies in a line.\Deals 1 hit of 638% flame damage to enemies in a line, and reduces their defense by 5% for 10 seconds with 90% base chance.\Deals 1 hit of 760% flame damage to enemies in a line, and reduces their defense by 5% for 10 seconds with 90% base chance.\4880, 4880, 4880\Yes\1.2\\Damage, Debuff, DefDown
 Executioner's Impact\\Skill\Deals 3 hits of 338% damage to enemies directly ahead.\Deals 3 hits of 376% damage to enemies directly ahead.\\9025, 9025, 9025\Yes\1.4\\Damage
 Explosive Descent\\Skill\Deals 2 hits of 373% damage to the target and enemies near it.\Deals 2 hits of 415% damage to the target and enemies near it.\\8111, 8111, 8111\Yes\1\\Damage
 Faerie Smash\\Skill\Deals 1 shot of 699% damage to enemies in a line.\Deals 1 shot of 777% damage to enemies in a line.\\7673, 7673, 7673\Yes\1.6\\Damage
@@ -602,8 +602,6 @@ Critical Damage\example\Aura\If the user is attuned to Light: adds `x`% to the m
 Critical Damage\50%\Aura\If the user is attuned to Light: adds 50% to the modifier applied to critical damage.\40\y\CritDamage
 Critical Damage\70%\Aura\If the user is attuned to Light: adds 70% to the modifier applied to critical damage.\60\y\CritDamage
 Critical Rate\example\Aura\If the user is attuned to Light: Increases critical rate by `x`%.\0\y\CritRate
-Critical Rate\5%\Aura\If the user is attuned to Light: Increases critical rate by 5%.\40\y\CritRate
-Critical Rate\6%\Aura\If the user is attuned to Light: Increases critical rate by 6%.\40\y\CritRate
 Critical Rate\15%\Aura\If the user is attuned to Light: Increases critical rate by 15%.\40\y\CritRate
 Critical Rate\20%\Aura\If the user is attuned to Light: Increases critical rate by 20%.\40\y\CritRate
 Dragon Time\example\Aura\Extends shapeshift time by `x`%.\0\y\DragonTime
@@ -629,11 +627,14 @@ HP\30%\Aura\Increases HP by 30%.\60\y\HP
 HP\40%\Aura\Increases HP by 40%.\70\y\HP
 HP\45%\Aura\Increases HP by 45%.\80\y\HP
 HP\60%\Aura\Increases HP by 60%.\100\y\HP
-Last Bulwark\I\Aura\Grants the user a one-use shield that nullifies damage less than 45% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\35\y\Last, Shield
+Last Bulwark\I\Aura\Grants the user a one-use shield that nullifies damage less than 50% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\35\y\Last, Shield
 Last Bulwark\II\Aura\Grants the user a one-use shield that nullifies damage less than 60% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\50\y\Last, Shield
 Overdrive Punisher\example\Aura\Increases damage to enemies in overdrive stats by `x`%\0\y\Overdrive, Punisher
 Overdrive Punisher\40%\Aura\Increases damage to enemies in overdrive stats by 40%\40\y\Overdrive, Punisher
 Overdrive Punisher\60%\Aura\Increases damage to enemies in overdrive stats by 60%\60\y\Overdrive, Punisher
+Poisoned Punisher\example\Aura\Increases damage to poisoned enemies by `x`%.\0\y\Poison, Punisher
+Poisoned Punisher\15%\Aura\Increases damage to poisoned enemies by 15%.\40\y\Poison, Punisher
+Poisoned Punisher\20%\Aura\Increases damage to poisoned enemies by 20%.\60\y\Poison, Punisher
 Shadow Res\15%\Aura\Grants 15% Shadow resistance.\65\y\ShadowRes, Resistance
 Strength\example\Aura\Increases strength by `x`%.\0\y\Strength
 Strength\5%\Aura\Increases strength by 5%.\10\y\Strength
@@ -777,9 +778,6 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Wind) Broken Punisher\example\Ability\If the user is attuned to Wind: increases damage to enemies in break state by `x`%.\0\y\Broken, Punisher, Wind
 (Wind) Broken Punisher\15%\Ability\If the user is attuned to Wind: increases damage to enemies in break state by 15%.\20\y\Broken, Punisher, Wind
 (Wind) Broken Punisher\20%\Ability\If the user is attuned to Wind: increases damage to enemies in break state by 20%.\40\y\Broken, Punisher, Wind
-Poisoned Punisher\example\Ability\Increases damage to poisoned enemies by `x`%.\0\y\Poison, Punisher
-Poisoned Punisher\15%\Ability\Increases damage to poisoned enemies by 15%.\40\y\Poison, Punisher
-Poisoned Punisher\20%\Ability\Increases damage to poisoned enemies by 20%.\60\y\Poison, Punisher
 Adventurer EXP\example\Ability\Increases adventurer EXP intake for clearing quests by `x`%\0\y\EXP
 Adventurer EXP\100%\Ability\Increases adventurer EXP intake for clearing quests by 100%\0\y\EXP
 Adventurer EXP\150%\Ability\Increases adventurer EXP intake for clearing quests by 150%\0\y\EXP
@@ -881,6 +879,7 @@ Divine Gales\150%\Ability\Increases divine gale intake for clearing quests by 15
 Dragon Damage\example\Ability\Adds `x`% to the modifier applied to damage when in dragon form\0\y\DragonDamage
 Dragon Damage\6%\Ability\Adds 6% to the modifier applied to damage when in dragon form\80\y\DragonDamage
 Dragon Damage\10%\Ability\Adds 10% to the modifier applied to damage when in dragon form\100\y\DragonDamage
+Dragon Damage\\Ability\Adds 14% to the modifier applied to damage when in dragon form\120\y\DragonDamage
 Dragon Delay\-\Ability\Sets back the Dragon Gauge by 150%.\-1\y\DragonDelay
 Dragon Delay Res\-\Ability\completely prevents dragon delaying.\50\y\DelayRes
 Dragon Time\example\Ability\Extends shapeshift time by `x`%.\50\n\DragonTime
@@ -904,8 +903,12 @@ Energized: Strength\example\Ability\Increases strength by `x`% for 15 seconds ea
 Energized: Strength\15%\Ability\Increases strength by 15% for 15 seconds each time the user is energized.\80\y\Strength, Energized
 Energized: Strength\20%\Ability\Increases strength by 20% for 15 seconds each time the user is energized.\100\y\Strength, Energized
 Energy Doublebuff\-\Ability\Increases energy level by one stage each time a defense up buff is received.\60\y\Energy, Doublebuff
-Energy Prep\-\Ability\Increases the user's energy level by one stage at the start of quests.\60\y\Energy
-Energized Prep\-\Ability\Energizes the user at the start of quests. When an adventurer is energized, their next attack or recovery skill will be upgraded. At this point, using any applicable skill will reset that adventurer's energy level to zero.\80\y\Energized, Energy
+Energy Prep\example\Ability\Increases the user's energy level by `x` stages at the start of quests.\0\y\Energy
+Energy Prep\I\Ability\Increases the user's energy level by one stage at the start of quests.\60\y\Energy
+Energy Prep\II\Ability\Increases the user's energy level by two stages at the start of quests.\70\y\Energy
+Energy Prep\III\Ability\Increases the user's energy level by three stages at the start of quests.\80\y\Energy
+Energy Prep\IV\Ability\Increases the user's energy level by four stages at the start of quests.\90\y\Energy
+Energy Prep\V\Ability\Increases the user's energy level by five stages at the start of quests.\100\y\Energy, Energized
 Experience's Boon\I\Ability\Grants the user an Attack Gauge and a Burst Gauge. The Attack Gauge fills when regular attacks connect with enemies, while the Burst Gauge is filled when force strikes successfully connect.;; The user's defense is increased by 5% for 1 completely filled gauge and 10% if both gauges are completely filled.;; Any filled gauges are consumed when using the Cyclone Blade skill, increasing its power by 15% for 1 completely filled gauge and 50% if both gauges are completely filled. \0\y\Defense
 Experience's Boon\II\Ability\Grants the user an Attack Gauge and a Burst Gauge. The Attack Gauge fills when regular attacks connect with enemies, while the Burst Gauge is filled when force strikes successfully connect.;; The user's defense is increased by 8% for 1 completely filled gauge and 15% if both gauges are completely filled.;; Any filled gauges are consumed when using the Cyclone Blade skill, increasing its power by 20% for 1 completely filled gauge and 80% if both gauges are completely filled. \0\y\Defense
 Flame Res\example\Ability\Reduces flame damage taken by `x`%.\0\y\FlameRes, Resistance
@@ -921,7 +924,7 @@ Flurry Devastation\5%\Ability\Increases critical rate by 5% when the combo count
 Flurry Devastation\8%\Ability\Increases critical rate by 8% when the combo count is 15 or higher.\60\y\Combo, CritRate
 Flurry Devastation\10%\Ability\Increases critical rate by 10% when the combo count is 15 or higher.\80\y\Combo, CritRate
 Flurry Devastation\12%\Ability\Increases critical rate by 12% when the combo count is 15 or higher.\90\y\Combo, CritRate
-Flurry Devastation\13%\Ability\Increases critical rate by 10% when the combo count is 15 or higher.\100\y\Combo, CritRate
+Flurry Devastation\13%\Ability\Increases critical rate by 13% when the combo count is 15 or higher.\100\y\Combo, CritRate
 Flurry Freezer\-\Ability\When the combo count is 15 or higher, grants a 6-second buff that gives standard attacks a 10% chance of inflicting freeze.\40\y\Combo, FreezeChance
 Flurry Strength\example\Ability\Increases strength by `x`% when the combo count is 15 or higher.\0\y\Combo, Strength
 Flurry Strength\13%\Ability\Increases strength by 13% when the combo count is 15 or higher.\60\y\Combo, Strength
@@ -978,11 +981,11 @@ Full HP = Skill Damage\30%\Ability\Increases attack skill damage by 30% when HP 
 Full HP = Skill Damage\35%\Ability\Increases attack skill damage by 35% when HP is full.\80\y\HP100, SkillDamage
 Full HP = Skill Damage\40%\Ability\Increases attack skill damage by 40% when HP is full.\100\y\HP100, SkillDamage
 Full HP = Strength\example\Ability\Increases strength by `x`% when HP is full.\0\y\HP100, Strength
+Full HP = Strength\5%\Ability\Increases strength by 5% when HP is full.\20\y\HP100, Strength
+Full HP = Strength\\Ability\Increases strength by 8% when HP is full.\40\y\HP100, Strength
 Full HP = Strength\10%\Ability\Increases strength by 10% when HP is full.\60\y\HP100, Strength
 Full HP = Strength\13%\Ability\Increases strength by 13% when HP is full.\80\y\HP100, Strength
 Full HP = Strength\15%\Ability\Increases strength by 15% when HP is full.\100\y\HP100, Strength
-Full HP = Strength\5%\Ability\Increases strength by 5% when HP is full.\20\y\HP100, Strength
-Full HP = Strength\8%\Ability\Increases strength by 8% when HP is full.\40\y\HP100, Strength
 Full HP = Stun\example\Ability\Increases the chances of inflicting stun by `x`% when HP is full.\0\y\HP100, StunChance, StatusChance
 Full HP = Stun\50%\Ability\Increases the chances of inflicting stun by 50% when HP is full.\70\y\HP100, StunChance, StatusChance
 Full HP = Stun\60%\Ability\Increases the chances of inflicting stun by 60% when HP is full.\100\y\HP100, StunChance, StatusChance
@@ -1140,10 +1143,6 @@ Poison Res\25%\Ability\Reduces susceptibility to poison by 25%.\40\y\PoisonRes, 
 Poison Res\50%\Ability\Reduces susceptibility to poison by 50%.\60\y\PoisonRes, Resistance
 Poison Res\75%\Ability\Reduces susceptibility to poison by 75%.\100\y\PoisonRes, Resistance
 Poison Res\100%\Ability\Reduces susceptibility to poison by 100%.\100\y\PoisonRes, Resistance
-Poisoned Punisher\example\Ability\Increases damage to poisoned enemies by `x`%.\0\y\Poison, Punisher
-Poisoned Punisher\15%\Ability\Increases damage to poisoned enemies by 15%.\40\y\Poison, Punisher
-Poisoned Punisher\20%\Ability\Increases damage to poisoned enemies by 20%.\60\y\Poison, Punisher
-Poisoned Punisher\25%\Ability\Increases damage to poisoned enemies by 25%.\80\y\Poison, Punisher
 Propagation\-\Ability\The enemy creates copies of itself.\-1\y\Propagation
 Ranged Resistance\-\Ability\Significantly reduces the damage received from bow, staff, and wand attacks and skills. These weapon types still deal reduced shapeshift damage.\-1\y\RangedRes
 Recovery Potency\example\Ability\Increases the potency of recovery skills by `x`%.\0\n\RecoveryPotency
@@ -1280,7 +1279,6 @@ Undead's Bane\10%\Ability\Increases damage to undead by 10%.\20\y\Undead, Bane
 Undead's Bane\15%\Ability\Increases damage to undead by 15%.\40\y\Undead, Bane
 Valor\example\Ability\Increases valor intake for clearing quests by `x`%\0\y\Event, Score
 Valor\20%\Ability\Increases valor intake for clearing quests by 20%\0\y\Event, Score
-Valor\25%\Ability\Increases valor intake for clearing quests by 25%\0\y\Event, Score
 Valor\30%\Ability\Increases valor intake for clearing quests by 30%\0\y\Event, Score
 Valor\40%\Ability\Increases valor intake for clearing quests by 40%\0\y\Event, Score
 Valor\45%\Ability\Increases valor intake for clearing quests by 45%\0\y\Event, Score

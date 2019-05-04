@@ -117,7 +117,7 @@ Flaming Big Boy\Dagger\3v\Flame\11, 25, 38\39, 85, 133\\100, 0\204\102\1\15000, 
 Flaming Fungi Dagger\Dagger\3v\Flame\11, 25, 38\39, 85, 133\\100, 0\201\101\1\15000, 30000\Fiend's Horn, 3;; Fiend's Eye, 1;; Solid Fungus, 2;; Blaze Orb, 1\(Flame) Thaumian's Bane +10%;;;; (Flame) Dragon Delay Res\
 Flash Axe\Axe\3\Light\19, 42, 65\66, 142, 220\Flash Swing\100, 0\304\202\3\15000, 30000\Granite, 10;; Light Metal, 5;; Light Orb, 5\\
 Flightfyre\Bow\3\Flame\16, 36, 56\64, 138, 214\Flare Volley\100, 0\301\201\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Flame Orb, 5\\
-Folkvangr\Sword\5\Light\30, 87, 101\108, 311, 362\\0, 0\309\0\3\300, 4000\\HP Below 50% = Strength +15%;; HP Below 50% = Strength +20%\FEH
+Folkvangr\Sword\5c\Light\30, 87, 101\108, 311, 362\\0, 0\309\0\3\300, 4000\\HP Below 50% = Strength +15%;; HP Below 50% = Strength +20%\FEH
 Forever Sky\Staff\4v\None\20, 55, 68\56, 150, 188\\500, 0\101\0\4\8000, 16000\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Great Feather, 2\Skill Prep +25%\
 Fragrant Bow\Bow\3v\None\6, 14, 22\25, 55, 85\\100, 0\102\0\1\1000, 2000\Fiend's Claw, 3;; Fiend's Horn, 1;; Goblin Thread, 1\Undead's Bane +10%\
 Frigid Sting\Dagger\5v\Water\29, 85, 98\103, 296, 344\\1500, 0\308\208\5\300000, 600000\Fiend's Horn, 15;; Fiend's Eye, 5;; Blazing Ember, 2;; Deluge Orb, 3\(Water) Full HP = Defense +20%;;;; (Water) High Brunhilda's Bane +20%\

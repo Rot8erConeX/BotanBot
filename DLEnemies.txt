@@ -10,31 +10,34 @@ Blazing Ghost\252840\Flame, Undead, Void\Freeze: *80%*, Paralysis: **20%**, Bog:
 Void Agni\422683\Flame, Dragon, Void\Bog: 60%\Stun\Scorching Air;; Skill Resistance
 High Midgardsormr (Enemy)\863164\Wind, Dragon, High Dragon\Burn: 55%\Stun\
 High Midgardsormr (Prelude)\497182\Wind, Dragon, High Dragon\Burn: 55%\Stun\
-High Brunhilda (Enemy)\1039797\Flame, Dragon, High Dragon\~~None~~\Burn\
+High Brunhilda (Enemy)\1039797\Flame, Dragon, High Dragon\~~Immune~~\Burn\
 High Mercury (Enemy)\2137371\Water, Dragon, High Dragon\Poison: **0%**\Bog\
-Matilda\-1, 1, -1, 100\Flame, Demon, Meme\~~None~~\Poison, Burn, Freeze, Paralysis, Blind, Stun, Bog, Sleep, Curse\Wonder Guard
+Matilda\-1, 1, -1, 100\Flame, Demon, Meme\~~Immune~~\Poison, Burn, Freeze, Paralysis, Blind, Stun, Bog, Sleep, Curse\Wonder Guard
 Elite Swordsman (Flame)\21500, 50000, 102600, 152618\Flame, Human, Imperial Onslaught\Poison: **30%**, Burn: 55%, Freeze: **10%**, Paralysis: **30%**, Blind: **30%**, Stun: 50%, Curse: **30%**, Bog: **10%**, Sleep: **30%**\Stun\
 Elite Axeman (Water)\22000, 50000, 103500, 132525\Water, Human, Imperial Onslaught\Poison: **30%**, Burn: **30%**, Freeze: 55%, Paralysis: **30%**, Blind: **30%**, Stun: **10%**, Curse: **30%**, Bog: 55%, Sleep: **10%**\Freeze\
 Elite Lancer (Wind)\22000, 50000, 102600, 136800\Wind, Human, Imperial Onslaught\Poison: **30%**, Burn: **10%**, Freeze: **30%**, Paralysis: **30%**, Blind: **10%**, Stun: **30%**, Curse: **30%**, Bog: **30%**, Sleep: 55%\Sleep\
 Elite Soldier (Light)\22000, 54000, 101250, 134663\Light, Human, Imperial Onslaught\Poison: **30%**, Burn: **30%**, Freeze: **30%**, Paralysis: 55%, Blind: 55%, Stun: **30%**, Curse: **10%**, Bog: **30%**, Sleep: **10%**\Blind\
 Elite Archer (Shadow)\20000, 30000, 92340, 130500\Shadow, Human, Imperial Onslaught\Poison: 55%, Burn: **30%**, Freeze: **30%**, Paralysis: **10%**, Blind: 55%, Stun: **10%**, Curse: 55%, Bog: **30%**, Sleep: **30%**\Poison\
-Phraeganoth\81472, 305520, 487948, -1, 424299\Flame, Thaumian, Raid, Loyalty's Requiem\~~None~~\Burn\
+Phraeganoth\81472, 305520, 487948, -1, 424299\Flame, Thaumian, Raid, Loyalty's Requiem\~~Immune~~\Burn\
 King Archeole\2880, 8800, 15520\Flame, Demihuman, Boss, Loyalty's Requiem\Poison: **30%**, Burn: 55%, Freeze: **10%**, Paralysis: **30%**, Blind: **30%**, Stun: **30%**, Curse: **30%**, Bog: **10%**, Sleep: **30%**\Stun\
 Pumpking\17325, 29757, 55440, -1, 79057, 122984\Shadow, Demihuman, Facility, Trick or Treasure!\Paralysis: 55%, Blind: 55%\Curse\
-Hypnos\30712, 139011, 512346, -1, 441271\Wind, Physian, Raid, Kindness and Captivity\~~None~~\Sleep\
+Hypnos\30712, 139011, 512346, -1, 441271\Wind, Physian, Raid, Kindness and Captivity\~~Immune~~\Sleep\
 Storm Sentinel\2268, 6930, 16296\Wind, Thaumian, Boss, Kindness and Captivity\Poison: 55%, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: *75*, Curse: 55%, Bog: 55%, Sleep: *75%*\~~None~~\
 Water Troll King\23310, 36225, 53974, -1, 90144, 123900\Water, Demihuman, Facility, A Wish to the Winds\Poison: **30%**, Burn: 55%, Freeze: *75%*, Paralysis: 55%, Blind: 55%, Stun: 55%, Curse: 55%, Bog: *75%*, Sleep: **30%**\Bog\
-Sabnock\67878, 170360, 565720, -1, 634880\Shadow, Demon, Raid, Resplendent Refrain\~~None~~\Curse\
+Sabnock\67878, 170360, 565720, -1, 634880\Shadow, Demon, Raid, Resplendent Refrain\~~Immune~~\Curse\
 Manticore\18270, 29925, 41475, 218673, 52605, 67200\Shadow, Therion, Boss, Refrain Under the Big Top\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: **10%**, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
 Manticore(Refrain)\3780, 11550, 20370\Shadow, Therion, Boss, Resplendent Refrain\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: **10%**, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
 Festive Treant\19980, 31050, 60345, -1, 169087, 170982\Flame, Physian, Facility, The Miracle of Dragonyule\Freeze: 55%, Bog: 55%\Burn\
-Shishimai\67200, 181600, 685146, -1, 624206\Light, Thaumian, Raid, Fortune from Afar\~~None~~\Curse\
-Gift Basket\10080, 27240, 137029, -1, 124841\Light, Thaumian, Raid, Fortune from Afar\~~None~~\~~None~~\
+Shishimai\67200, 181600, 685146, -1, 624206\Light, Thaumian, Raid, Fortune from Afar\~~Immune~~\Curse\
+Gift Basket\10080, 27240, 137029, -1, 124841\Light, Thaumian, Raid, Fortune from Afar\~~Immune~~\~~None~~\
 Ieyasu\2000, 4200, 12000\Shadow, Human, Boss, Fortune from Afar\Poison: 55%, Burn: 55%, Freeze: 55%, Blind: 55%, Stun: 55%, Curse: 55%, Bog: 55%, Sleep: 55%\Curse\
 Manticore(BigTop)\32760, 48300, 62580, 437346, 105210, 134400\Shadow, Therion, Facility, Dream Big Under the Big Top\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: **10%**, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
 Valfarre\76357, 191655, 714180, -1, 735436\Water, Therion, Raid, Skyborne Spectacle\~~None~~\Bog\
 Aquatic Cyclops\3570, 10710, 18690\Water, Demihuman, Boss, Skyborne Spectacle\Poison: 55%, Burn: 55%, Freeze: *75%*, Paralysis: *75%*, Blind: 55%, Stun: 55%, Curse: 55%, Bog: *75%*, Sleep: 55%\Bog\
-Thanatos\76357, 191655, 673905, -1, 654427\Shadow, Undead, Raid, A Waltz with Fate\~~None~~\Poison\
+Thanatos\76357, 191655, 673905, -1, 654427\Shadow, Undead, Raid, A Waltz with Fate\~~Immune~~\Poison\
 Guardian Sentinel\4410, 10500, 20580\Shadow, Thaumian, Boss, A Waltz with Fate\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: 55%, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
 Hefty Runic Treant\32760, 48300, 62580, 502632, 105210\Light, Physian, Facility, The Accursed Archives\Blind: 60%, Sleep: 60%\Paralysis\
 Volcanic Cyclops\34020, 50820, 63420, 402800, 110880, 133560\Flame, Demihuman, Facility, The Hunt for Harmony\Poison: 55%, Burn: *75%*, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: 55%, Curse: 55%, Bog: 55%, Sleep: 55%\Stun\
+Alfonse (Enemy)\658000\Light, Human, Boss, Fire Emblem: Lost Heroes\Poison: **0%**, Burn: **0%**, Freeze: 60%, Paralysis: 60%, Blind 60%, Stun 60%, Bog 60%, Sleep 60%\Paralysis\
+Veronica (Enemy)\800000\Shadow, Human, Boss, Fire Emblem: Lost Heroes\~~Immune~~\Unknown\
+Shadow Knight\-1, 99999, 300000, 550000\Shadow, Human, Boss, Fire Emblem: Lost Heroes\Poison: **0%**, Burn: **0%**, Freeze: **100%/0%/80%**, Paralysis: **0%**, Blind: **0%**, Stun: **100%/0%/80%**, Curse: **0%**, Bog: **0%**, Sleep: **100%/0%/80%**\~~None~~\
