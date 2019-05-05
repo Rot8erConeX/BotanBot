@@ -966,6 +966,7 @@ Full HP = Defense\example\Ability\Increases defense by `x`% when HP is full.\0\y
 Full HP = Defense\10%\Ability\Increases defense by 10% when HP is full.\10\y\HP100, Defense
 Full HP = Defense\13%\Ability\Increases defense by 13% when HP is full.\20\y\HP100, Defense
 Full HP = Defense\15%\Ability\Increases defense by 15% when HP is full.\40\y\HP100, Defense
+Full HP = Defense\18%\Ability\Increases defense by 18% when HP is full.\50\y\HP100, Defense
 Full HP = Defense\20%\Ability\Increases defense by 20% when HP is full.\60\y\HP100, Defense
 Full HP = Healing\example\Ability\Increases the potency of recovery skills by `x`% when HP is full.\40\y\HP100, RecoveryPotency
 Full HP = Healing\10%\Ability\Increases the potency of recovery skills by 10% when HP is full.\40\y\HP100, RecoveryPotency
@@ -982,7 +983,7 @@ Full HP = Skill Damage\35%\Ability\Increases attack skill damage by 35% when HP 
 Full HP = Skill Damage\40%\Ability\Increases attack skill damage by 40% when HP is full.\100\y\HP100, SkillDamage
 Full HP = Strength\example\Ability\Increases strength by `x`% when HP is full.\0\y\HP100, Strength
 Full HP = Strength\5%\Ability\Increases strength by 5% when HP is full.\20\y\HP100, Strength
-Full HP = Strength\\Ability\Increases strength by 8% when HP is full.\40\y\HP100, Strength
+Full HP = Strength\8%\Ability\Increases strength by 8% when HP is full.\40\y\HP100, Strength
 Full HP = Strength\10%\Ability\Increases strength by 10% when HP is full.\60\y\HP100, Strength
 Full HP = Strength\13%\Ability\Increases strength by 13% when HP is full.\80\y\HP100, Strength
 Full HP = Strength\15%\Ability\Increases strength by 15% when HP is full.\100\y\HP100, Strength
@@ -1291,6 +1292,7 @@ Wind Res\example\Ability\Reduces wind damage taken by `x`%.\0\y\WindRes, Resista
 Wind Res\3%\Ability\Reduces wind damage taken by 3%.\20\y\WindRes, Resistance
 Wind Res\5%\Ability\Reduces wind damage taken by 5%.\40\y\WindRes, Resistance
 Wind Res\8%\Ability\Reduces wind damage taken by 8%.\60\y\WindRes, Resistance
+Wind Res\10%\Ability\Reduces wind damage taken by 10%.\80\y\WindRes, Resistance
 Windwhistle Grass\example\Ability\Increases windwhistle grass intake for clearing quests by `x`%.\0\y\Event, Facility, Score
 Windwhistle Grass\25%\Ability\Increases windwhistle grass intake for clearing quests by 25%.\0\y\Event, Facility, Score
 Windwhistle Grass\50%\Ability\Increases windwhistle grass intake for clearing quests by 50%.\0\y\Event, Facility, Score
