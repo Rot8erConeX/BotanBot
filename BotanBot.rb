@@ -8624,7 +8624,7 @@ def level(event,bot,args=nil,mode=0)
 end
 
 def show_abil_limits(event,bot)
-  create_embed(event,'__**Ability stacking limits**__','',0xCE456B,'Limits shown here are per adventurer, not per team',nil,triple_finish(@abilimits,true))
+  create_embed(event,'__**Wyrmprint ability stacking limits**__','',0xCE456B,'Limits shown here are for wyrmprint totals per adventurer, not per team or including native adventurer abilities',nil,triple_finish(@abilimits,true))
 end
 
 def show_print_shop(event)
