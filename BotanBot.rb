@@ -121,6 +121,13 @@ system("title loading #{shard_data(2)[@shardizard]} BotanBot")
 @ignored=[]
 @embedless=[]
 @avvie_info=['Botan','*Dragalia Lost*','N/A']
+@voids=['<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore',
+        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr',
+        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Flame:532106087952810005>Void Agni',
+        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr',
+        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore',
+        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Flame:532106087952810005>Void Agni',
+        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr, <:Element_Shadow:532106088154267658>Raging Manticore']
 @abilimits=["Affliction Guard \u2192 III (5x)","Blindness Res \u2192 100%","Bog Res \u2192 100%","Broken Punisher \u2192 30%","Buff Time \u2192 30%",
             "Burn Res \u2192 100%","Burning Punisher \u2192 30%","Crit Damage \u2192 25%","Crit Rate \u2192 15%","Curse Res \u2192 100%","Defense +% \u2192 20%",
             "Dragon Time \u2192 20%","Element Res \u2192 15%","Energy Prep \u2192 V (5)","Event Score \u2192 250%","Facility Material Intake \u2192 125%",
@@ -1517,6 +1524,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     semirar=true
     rar=k[1][0,1].to_i
   end
+  title=''
   str=''
   if !k[12].nil? && k[12]=='FEH'
     unless s2s || juststats
@@ -1524,7 +1532,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       str="#{str} (from #{k[1][0,1].to_i}#{['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
     end
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2][1].gsub('Shadow','Dark').gsub('Flame','Fire')}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][1]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][1]}"
     wpn='<:Gold_Unknown:443172811499110411>'
     wpn='<:Red_Blade:443172811830198282>' if k[2][2]=='Sword'
     wpn='<:Colorless_Blade:443692132310712322>' if k[2][2]=='Blade'
@@ -1534,22 +1542,22 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     wpn='<:Blue_Blade:467112472768151562>' if k[2][2]=='Lance'
     wpn='<:Green_Tome:467122927666593822>' if k[2][2]=='Wand'
     wpn='<:Colorless_Staff:443692132323295243>' if k[2][2]=='Staff'
-    str="#{str}\n#{wpn} **Weapon:** #{k[2][2]}"
-    str="#{str} - <:DefenseS:514712247461871616>*Def:* #{longFormattedNumber(k[5])}" unless s2s || juststats
+    title="#{title}\n#{wpn} **Weapon:** #{k[2][2]}"
+    title="#{title} - <:DefenseS:514712247461871616>*Def:* #{longFormattedNumber(k[5])}" unless s2s || juststats
     clzz='<:Resource_Structure:510774545154572298>'
     clzz='<:Skill_Weapon:444078171114045450>' if k[2][0]=='Attack'
     clzz='<:Skill_Special:444078170665254929>' if k[2][0]=='Support'
     clzz='<:Defense_Shield:570987444309196835>' if k[2][0]=='Defense'
     clzz='<:Healing_Rod:570991014894895104>' if k[2][0]=='Healer'
-    str="#{str}\n#{clzz} **Class:** #{k[2][0]}"
-    str="#{str}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
+    title="#{title}\n#{clzz} **Class:** #{k[2][0]}"
+    title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[12].nil? && k[12]=='FGO'
     unless s2s || juststats
       str="#{generate_rarity_row(rar,true,'FGO')}"
       str="#{str} (from #{k[1][0,1].to_i}#{['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
     end
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][1]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][1]}"
     clzz='unknown'
     clzz='saber' if k[2][2]=='Sword'
     clzz='blade' if k[2][2]=='Blade'
@@ -1565,35 +1573,35 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     clr='silver' if k[1][0,1].to_i==4
     clr='bronze' if k[1][0,1].to_i<4
     moji=bot.server(srv).emoji.values.reject{|q| q.name != "class_#{clzz}_#{clr}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Weapon:** #{k[2][2]}"
-    str="#{str} - *Def:* #{longFormattedNumber(k[5])}" unless s2s || juststats
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Weapon:** #{k[2][2]}"
+    title="#{title} - *Def:* #{longFormattedNumber(k[5])}" unless s2s || juststats
     clzz=''
     clzz='<:Buster_y:526556105422274580>' if k[2][0]=='Attack'
     clzz='<:support:572315955397394452>' if k[2][0]=='Support'
     clzz='<:Arts_y:526556105489252352>' if k[2][0]=='Defense'
     clzz='<:healing:572342852420501506>' if k[2][0]=='Healer'
-    str="#{str}\n#{clzz} **Class:** #{k[2][0]}"
-    str="#{str}\n<:Bond:523903660913197056>**FGO Collab**"
+    title="#{title}\n#{clzz} **Class:** #{k[2][0]}"
+    title="#{title}\n<:Bond:523903660913197056>**FGO Collab**"
   else
     unless s2s || juststats
       str="#{generate_rarity_row(rar,true)}"
       str="#{str} (from #{k[1][0,1].to_i}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
     end
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][1]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][1]}"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[2][2]}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Weapon:** #{k[2][2]}"
-    str="#{str} - <:Defense:573344832282689567>*Def:* #{longFormattedNumber(k[5])}" unless s2s || juststats
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Weapon:** #{k[2][2]}"
+    title="#{title} - <:Defense:573344832282689567>*Def:* #{longFormattedNumber(k[5])}" unless s2s || juststats
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Class:** #{k[2][0]}"
-    str="#{str}\n**Collab**" unless k[12].nil?
-    str="#{str}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c'
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Class:** #{k[2][0]}"
+    title="#{title}\n**Collab**" unless k[12].nil?
+    title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c'
   end
-  str="#{str}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
-  str="#{str}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
-  str="#{str}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
-  str="#{str}\n**Zodiac Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='z'
-  str="#{str}\n**Unavailable**" if k[1].length>1 && k[1][1,1].downcase=='-'
+  title="#{title}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
+  title="#{title}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
+  title="#{title}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
+  title="#{title}\n**Zodiac Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='z'
+  title="#{title}\n**Unavailable**" if k[1].length>1 && k[1][1,1].downcase=='-'
   flds=nil
   xpic=nil
   sklz=@askilities.map{|q| q}
@@ -1674,13 +1682,13 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     ftr="Data shown is for a 5-star adventurer.  To show data for a #{k[1][0,1]}-star version, please include #{k[1][0,1]}* in your message." if semirar
   end
   if flds.nil?
-    create_embed(event,"__**#{k[0]}**__",str,element_color(k[2][1]),ftr,xpic,flds)
+    create_embed(event,["__**#{k[0]}**__",title],str,element_color(k[2][1]),ftr,xpic)
   elsif flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length>=1500
-    create_embed(event,"__**#{k[0]}**__",str,element_color(k[2][1]),ftr,xpic,flds[0,flds.length-2])
+    create_embed(event,["__**#{k[0]}**__",title],str,element_color(k[2][1]),ftr,xpic,flds[0,flds.length-2])
     create_embed(event,"__**#{flds[-2][0]}**__",flds[-2][1],element_color(k[2][1]))
     create_embed(event,"__**#{flds[-1][0]}**__",flds[-1][1],element_color(k[2][1]))
   else
-    create_embed(event,"__**#{k[0]}**__",str,element_color(k[2][1]),ftr,xpic,flds)
+    create_embed(event,["__**#{k[0]}**__",title],str,element_color(k[2][1]),ftr,xpic,flds)
   end
 end  
 
@@ -1690,7 +1698,24 @@ def disp_dragon_stats(bot,event,args=nil)
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
   k=find_data_ex(:find_dragon,args.join(' '),event)
   if k.length.zero?
-    event.respond 'No matches found.'
+    if args.join('').include?('frostfang')
+      disp_skill_data(bot,event,['dragon','frostfang'])
+    elsif args.join('').include?('time')
+      disp_ability_data(bot,event,['dragon','time'])
+      event.respond 'In addition to the ability, an aura exists.  To look that up, try `DL!aura Dragon Time`.'
+    elsif args.join('').include?('damage')
+      disp_ability_data(bot,event,['dragon','damage'])
+    elsif args.join('').include?('delayres')
+      disp_ability_data(bot,event,['dragon','delay','res'])
+    elsif args.join('').include?('delay')
+      disp_ability_data(bot,event,['dragon','delay'])
+    elsif args.join('').include?('claw')
+      disp_ability_data(bot,event,["dragon's",'claw'])
+    elsif args.join('').include?('prep')
+      disp_ability_data(bot,event,['shapeshift','prep'])
+    else
+      event.respond 'No matches found.'
+    end
     return nil
   end
   s2s=false
@@ -1699,24 +1724,24 @@ def disp_dragon_stats(bot,event,args=nil)
   feh=true if !k[16].nil? && k[16]=='FEH'
   dispname=k[0].gsub(' ','_')
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Dragons/#{dispname}.png?raw=true"
-  str=generate_rarity_row(k[1][0,1].to_i,false,k[16])
-  str='<:Rarity_3:532086056519204864>'*k[1][0,1].to_i if k[0]=='Bronze Fafnir'
-  str='<:Rarity_4:532086056301101067>'*k[1][0,1].to_i if k[0]=='Silver Fafnir'
-  str='<:Rarity_5:532086056737177600>'*k[1][0,1].to_i if k[0]=='Gold Fafnir'
+  title=generate_rarity_row(k[1][0,1].to_i,false,k[16])
+  title='<:Rarity_3:532086056519204864>'*k[1][0,1].to_i if k[0]=='Bronze Fafnir'
+  title='<:Rarity_4:532086056301101067>'*k[1][0,1].to_i if k[0]=='Silver Fafnir'
+  title='<:Rarity_5:532086056737177600>'*k[1][0,1].to_i if k[0]=='Gold Fafnir'
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2]}"}
   moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2].gsub('Shadow','Dark').gsub('Flame','Fire')}"} if feh
-  str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2]}"
-  str="#{str}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**" if feh
-  str="#{str}\n<:Bond:523903660913197056>**FGO Collab**" if !k[16].nil? && k[16]=='FGO'
-  str="#{str}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c' && !(feh || (!k[16].nil? && k[16]=='FGO'))
-  str="#{str}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
-  str="#{str}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
-  str="#{str}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
-  str="#{str}\n**Zodiac Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='z'
-  str="#{str}\n**Treasure Trade**" if k[1].length>1 && k[1][1,1].downcase=='t'
+  title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2]}"
+  title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**" if feh
+  title="#{title}\n<:Bond:523903660913197056>**FGO Collab**" if !k[16].nil? && k[16]=='FGO'
+  title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c' && !(feh || (!k[16].nil? && k[16]=='FGO'))
+  title="#{title}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
+  title="#{title}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
+  title="#{title}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
+  title="#{title}\n**Zodiac Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='z'
+  title="#{title}\n**Treasure Trade**" if k[1].length>1 && k[1][1,1].downcase=='t'
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Speed:573366907357495296>']
   semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:Defense:573344832282689567>','<:SpeedS:514712247625580555>'] if feh
-  str="#{str}\n\n**Level 1**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}"
+  str="**Level 1**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}"
   str="#{str}\n**Level #{k[1][0,1].to_i*20}**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}"
   str="#{str}\n\n#{semoji[3]}**Speed:**  *Dash:*\u00A0\u00A0#{k[8][0]}  *Turn:*\u00A0\u00A0#{k[8][1]}"
   str="#{str}\n*Automatically turns to damage direction*" if k[10]=='Yes'
@@ -1755,10 +1780,10 @@ def disp_dragon_stats(bot,event,args=nil)
     str=str.split("\n\n__**")
     str[1]="__**#{str[1]}".split("\n\n**Sells")
     str[0]="#{str[0]}\n\n**Sells#{str[1][1]}"
-    create_embed(event,"__**#{k[0]}**__",str[0],element_color(k[2]),nil,xpic)
+    create_embed(event,["__**#{k[0]}**__",title],str[0],element_color(k[2]),nil,xpic)
     create_embed(event,'',str[1][0],element_color(k[2]))
   else
-    create_embed(event,"__**#{k[0]}**__",str,element_color(k[2]),nil,xpic)
+    create_embed(event,["__**#{k[0]}**__",title],str,element_color(k[2]),nil,xpic)
   end
 end
 
@@ -1777,39 +1802,39 @@ def disp_wyrmprint_stats(bot,event,args=nil)
   dispname=k[0].gsub(' ','_')
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Wyrmprints/#{dispname}_1.png?raw=true"
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Wyrmprints/#{dispname}_2.png?raw=true" if has_any?(['mub','unbind','unbound','refined','refine','refinement','2ub','3ub'],evn)
-  str=generate_rarity_row(k[1][0,1].to_i,false,k[10])
+  title=generate_rarity_row(k[1][0,1].to_i,false,k[10])
   if !k[10].nil? && k[10]=='FEH'
     clzz='<:Resource_Structure:510774545154572298>'
     clzz='<:Skill_Weapon:444078171114045450>' if k[2]=='Attack'
     clzz='<:Skill_Special:444078170665254929>' if k[2]=='Support'
     clzz='<:Defense_Shield:570987444309196835>' if k[2]=='Defense'
     clzz='<:Healing_Rod:570991014894895104>' if k[2]=='Healer'
-    str="#{str}\n#{clzz} **Amulet Type:** #{k[2]}"
-    str="#{str}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
+    title="#{title}\n#{clzz} **Amulet Type:** #{k[2]}"
+    title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[10].nil? && k[10]=='FGO'
     clzz=''
     clzz='<:Buster_y:526556105422274580>' if k[2]=='Attack'
     clzz='<:support:572315955397394452>' if k[2]=='Support'
     clzz='<:Arts_y:526556105489252352>' if k[2]=='Defense'
     clzz='<:healing:572342852420501506>' if k[2]=='Healer'
-    str="#{str}\n#{clzz} **Amulet Type:** #{k[2]}"
-    str="#{str}\n<:Bond:523903660913197056>**FGO Collab**"
+    title="#{title}\n#{clzz} **Amulet Type:** #{k[2]}"
+    title="#{title}\n<:Bond:523903660913197056>**FGO Collab**"
   else
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2]}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Amulet Type:** #{k[2]}"
-    str="#{str}\n**Collab**" unless k[10].nil?
-    str="#{str}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c'
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Amulet Type:** #{k[2]}"
+    title="#{title}\n**Collab**" unless k[10].nil?
+    title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c'
   end
   xcolor=0x313439
   xcolor=0x5A0408 if k[2]=='Attack'
   xcolor=0x00205A if k[2]=='Defense'
   xcolor=0x39045A if k[2]=='Support'
   xcolor=0x005918 if k[2]=='Healing'
-  str="#{str}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
-  str="#{str}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
-  str="#{str}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
-  str="#{str}\n**Zodiac Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='z'
-  str="#{str}\n**Treasure Trade**" if k[1].length>1 && k[1][1,1].downcase=='t'
+  title="#{title}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
+  title="#{title}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
+  title="#{title}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
+  title="#{title}\n**Zodiac Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='z'
+  title="#{title}\n**Treasure Trade**" if k[1].length>1 && k[1][1,1].downcase=='t'
   f=k[1][0,1].to_i*20
   f-=10 if k[1][0,1].to_i<3
   f2=20*(k[1][0,1].to_i-1)
@@ -1820,6 +1845,7 @@ def disp_wyrmprint_stats(bot,event,args=nil)
   bemoji=['<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
   bemoji=['<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if !k[10].nil? && k[10]=='FGO'
   bemoji=['<:Aether_Stone:510776805746278421>','<:Refining_Stone:453618312165720086>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if !k[10].nil? && k[10]=='FEH'
+  str=''
   if s2s
     str="#{str}\n\n__**#{bemoji[0]*4} Level 1**__"
     str="#{str}\n#{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}"
@@ -1867,7 +1893,7 @@ def disp_wyrmprint_stats(bot,event,args=nil)
     str="#{str}\n**Shop Price:** 9,000#{bemoji[3]} per 2UB, 17,000#{bemoji[3]} per MUB" if k[1][0,1].to_i==4
     str="#{str}\n**Shop Price:** 19,000#{bemoji[3]} per 2UB, 37,000#{bemoji[3]} per MUB" if k[1][0,1].to_i==5
   end
-  create_embed(event,"__**#{k[0]}**__",str,xcolor,nil,xpic)
+  create_embed(event,["__**#{k[0]}**__",print],str,xcolor,nil,xpic)
 end
 
 def disp_weapon_stats(bot,event,args=nil,juststats=false)
@@ -1892,10 +1918,11 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   juststats=true if @shardizard != 4 && evn.include?('smol')
   dispname=k[0].gsub(' ','_')
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Weapons/#{dispname}.png?raw=true"
+  str=''
   if !k[14].nil? && k[14]=='FEH'
     str=generate_rarity_row(k[2][0,1].to_i,false,'FEH')
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[3].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Anima')}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
     wpn='<:Gold_Unknown:443172811499110411>'
     wpn='<:Red_Blade:443172811830198282>' if k[1]=='Sword'
     wpn='<:Colorless_Blade:443692132310712322>' if k[1]=='Blade'
@@ -1905,12 +1932,12 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     wpn='<:Blue_Blade:467112472768151562>' if k[1]=='Lance'
     wpn='<:Green_Tome:467122927666593822>' if k[1]=='Wand'
     wpn='<:Colorless_Staff:443692132323295243>' if k[1]=='Staff'
-    str="#{str}\n#{wpn} **Weapon:** #{k[1]}"
-    str="#{str}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
+    title="#{title}\n#{wpn} **Weapon:** #{k[1]}"
+    title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[14].nil? && k[14]=='FGO'
     str=generate_rarity_row(k[2][0,1].to_i,false,'FGO')
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
     clzz='unknown'
     clzz='saber' if k[1]=='Sword'
     clzz='blade' if k[1]=='Blade'
@@ -1926,32 +1953,33 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     clr='silver' if k[2][0,1].to_i==4
     clr='bronze' if k[2][0,1].to_i<4
     moji=bot.server(srv).emoji.values.reject{|q| q.name != "class_#{clzz}_#{clr}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Weapon:** #{k[1]}"
-    str="#{str}\n<:Bond:523903660913197056>**FGO Collab**"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Weapon:** #{k[1]}"
+    title="#{title}\n<:Bond:523903660913197056>**FGO Collab**"
   else
     str=generate_rarity_row(k[2][0,1].to_i)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Weapon Type:** #{k[1]}"
-    str="#{str}\n**Collab**" unless k[14].nil?
-    str="#{str}\n**Collab**" if k[2].length>1 && k[2][1,1].downcase=='c'
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Weapon Type:** #{k[1]}"
+    title="#{title}\n**Collab**" unless k[14].nil?
+    title="#{title}\n**Collab**" if k[2].length>1 && k[2][1,1].downcase=='c'
   end
-  str="#{str}\n**Welfare**" if k[2].length>1 && k[2][1,1].downcase=='w'
-  str="#{str}\n**Story**" if k[2].length>1 && k[2][1,1].downcase=='y'
-  str="#{str}\n**Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='s'
-  str="#{str}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
-  str="#{str}\n**Starter**" if k[2].length>1 && k[2][1,1].downcase=='e'
-  str="#{str}\n**Paid**" if k[2].length>1 && k[2][1,1].downcase=='p'
+  title="#{title}\n**Welfare**" if k[2].length>1 && k[2][1,1].downcase=='w'
+  title="#{title}\n**Story**" if k[2].length>1 && k[2][1,1].downcase=='y'
+  title="#{title}\n**Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='s'
+  title="#{title}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
+  title="#{title}\n**Starter**" if k[2].length>1 && k[2][1,1].downcase=='e'
+  title="#{title}\n**Paid**" if k[2].length>1 && k[2][1,1].downcase=='p'
   if k[2].length>1 && k[2][1,1].downcase=='v'
     if !k[14].nil? && k[14]=='FEH'
-      str="#{str}\n<:Current_Tempest_Bonus:498797966740422656> **Void**"
+      title="#{title}\n<:Current_Tempest_Bonus:498797966740422656> **Void**"
     elsif !k[14].nil? && k[14]=='FGO'
-      str="#{str}\n<:class_beast_gold:562413138356731905> **Void**"
+      title="#{title}\n<:class_beast_gold:562413138356731905> **Void**"
     else
-      str="#{str}\n<:Element_Void:548467446734913536> **Void**"
+      title="#{title}\n<:Element_Void:548467446734913536> **Void**"
     end
   end
+  puts title
   f=30*k[2][0,1].to_i-50
   f+=40-10*k[2][0,1].to_i if k[2][0,1].to_i<3
   f0=30*k[2][0,1].to_i-70
@@ -2069,12 +2097,12 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
       str=str.gsub(';;;;;',"\n#{strx}")
     end
   end
-  if str.length>=1900
+  if str.length+title.length>=1500
     str=str.split("\n\n\n")
-    create_embed(event,"__**#{k[0]}**__",str[0],element_color(k[3]),nil,xpic)
+    create_embed(event,["__**#{k[0]}**__",title],str[0],element_color(k[3]),nil,xpic)
     create_embed(event,'',str[1,str.length-1].join("\n\n\n"),element_color(k[3]))
   else
-    create_embed(event,"__**#{k[0]}**__",str,element_color(k[3]),nil,xpic)
+    create_embed(event,["__**#{k[0]}**__",title],str,element_color(k[3]),nil,xpic)
   end
 end
 
@@ -2129,9 +2157,9 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     val/=5
   end
   if !k[14].nil? && k[14]=='FEH'
-    str=generate_rarity_row(k[2][0,1].to_i,false,'FEH')
+    title=generate_rarity_row(k[2][0,1].to_i,false,'FEH')
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[3].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Anima')}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
     wpn='<:Gold_Unknown:443172811499110411>'
     wpn='<:Red_Blade:443172811830198282>' if k[1]=='Sword'
     wpn='<:Colorless_Blade:443692132310712322>' if k[1]=='Blade'
@@ -2141,12 +2169,12 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     wpn='<:Blue_Blade:467112472768151562>' if k[1]=='Lance'
     wpn='<:Green_Tome:467122927666593822>' if k[1]=='Wand'
     wpn='<:Colorless_Staff:443692132323295243>' if k[1]=='Staff'
-    str="#{str}\n#{wpn} **Weapon:** #{k[1]}"
-    str="#{str}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
+    title="#{title}\n#{wpn} **Weapon:** #{k[1]}"
+    title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[14].nil? && k[14]=='FGO'
-    str=generate_rarity_row(k[2][0,1].to_i,false,'FGO')
+    title=generate_rarity_row(k[2][0,1].to_i,false,'FGO')
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
     clzz='unknown'
     clzz='saber' if k[1]=='Sword'
     clzz='blade' if k[1]=='Blade'
@@ -2162,17 +2190,18 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     clr='silver' if k[2][0,1].to_i==4
     clr='bronze' if k[2][0,1].to_i<4
     moji=bot.server(srv).emoji.values.reject{|q| q.name != "class_#{clzz}_#{clr}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Weapon:** #{k[1]}"
-    str="#{str}\n<:Bond:523903660913197056>**FGO Collab**"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Weapon:** #{k[1]}"
+    title="#{title}\n<:Bond:523903660913197056>**FGO Collab**"
   else
-    str=generate_rarity_row(k[2][0,1].to_i)
+    title=generate_rarity_row(k[2][0,1].to_i)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
-    str="#{str}\n#{moji[0].mention unless moji.length<=0} **Weapon Type:** #{k[1]}"
-    str="#{str}\n**Collab**" unless k[14].nil?
-    str="#{str}\n**Collab**" if k[2].length>1 && k[2][1,1].downcase=='c'
+    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Weapon Type:** #{k[1]}"
+    title="#{title}\n**Collab**" unless k[14].nil?
+    title="#{title}\n**Collab**" if k[2].length>1 && k[2][1,1].downcase=='c'
   end
+  str=''
   str="#{str}\n**Welfare**" if k[2].length>1 && k[2][1,1].downcase=='w'
   str="#{str}\n**Story**" if k[2].length>1 && k[2][1,1].downcase=='y'
   str="#{str}\n**Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='s'
@@ -2181,11 +2210,11 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   str="#{str}\n**Paid**" if k[2].length>1 && k[2][1,1].downcase=='p'
   if k[2].length>1 && k[2][1,1].downcase=='v'
     if !k[14].nil? && k[14]=='FEH'
-      str="#{str}\n<:Current_Tempest_Bonus:498797966740422656> **Void**"
+      title="#{title}\n<:Current_Tempest_Bonus:498797966740422656> **Void**"
     elsif !k[14].nil? && k[14]=='FGO'
-      str="#{str}\n<:class_beast_gold:562413138356731905> **Void**"
+      title="#{title}\n<:class_beast_gold:562413138356731905> **Void**"
     else
-      str="#{str}\n<:Element_Void:548467446734913536> **Void**"
+      title="#{title}\n<:Element_Void:548467446734913536> **Void**"
     end
   end
   f=30*k[2][0,1].to_i-50
@@ -2358,14 +2387,15 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
   sklz=@askilities.map{|q| q}
+  title=''
   str=''
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][0].gsub('None','Null')}"}
   moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2][0].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Null')}"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
-  str="#{str}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][0]}" unless ['High Dragon','Void','Imperial Order'].include?(k[2][2])
+  title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][0]}" unless ['High Dragon','Void','Imperial Order'].include?(k[2][2])
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Tribe_#{k[2][1]}"}
   moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Infantry"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
   moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Armor"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes' && !k[0].include?('(Enemy)')
-  str="#{str}\n#{moji[0].mention unless moji.length<=0} **Tribe:** #{k[2][1]}"
+  title="#{title}\n#{moji[0].mention unless moji.length<=0} **Tribe:** #{k[2][1]}"
   if k[1].length<2
     str="#{str}\n**Maximum HP:** #{longFormattedNumber(k[1][0])}"
   elsif k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
@@ -2450,7 +2480,7 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
   end
   xpic=[nil,"https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/FightBanners/Banner_#{xpic}.png"]
   xpic='https://github.com/Rot8erConeX/BotanBot/blob/master/FightBanners/Matilda_5.png?raw=true' if k[0]=='Matilda'
-  create_embed(event,hdr,str,xcolor,ftr,xpic,flds)
+  create_embed(event,[hdr,title],str,xcolor,ftr,xpic,flds)
   if k[0]=="Wandering Shroom" && s2s
     disp_enemy_data(bot,event,"Wandering Shroom, Clone Wave 1".split(' '),true)
     disp_enemy_data(bot,event,"Wandering Shroom, Clone Wave 2".split(' '),true)
@@ -2476,10 +2506,10 @@ def disp_skill_data(bot,event,args=nil)
   xcolor=0x02010a
   mx=k[3,3].reject{|q| q.nil? || q.length<=0}
   str=''
-  str="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min
-  str="#{str}\n**Invulnerability duration:** #{k[8]} seconds"
-  str="#{str}\n<:Energize:559629242137051155> **Energizable**" if k[7]=='Yes'
-  str="#{str}\n~~Not energizable~~" if k[7]=='No'
+  title="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min
+  title="#{title}\n**Invulnerability duration:** #{k[8]} seconds"
+  title="#{title}\n<:Energize:559629242137051155> **Energizable**" if k[7]=='Yes'
+  title="#{title}\n~~Not energizable~~" if k[7]=='No'
   str2=''
   for i in 0...mx.length
     str2="#{str2}\n\n__**Level #{i+1}**__"
@@ -2517,15 +2547,15 @@ def disp_skill_data(bot,event,args=nil)
   flds=nil if flds.length<=0
   m=0
   m=flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length unless flds.nil?
-  if str.length+str2.length+m<1800 && (s2s || k[9].nil? || k[9].length<=0)
+  if str.length+title.length+str2.length+m<1800 && (s2s || k[9].nil? || k[9].length<=0)
     str="#{str}#{str2}"
-    create_embed(event,"__**#{k[0]}**__",str,xcolor,nil,xpic,flds)
+    create_embed(event,["__**#{k[0]}**__",title],str,xcolor,nil,xpic,flds)
   elsif str2.length<1800 && (s2s || k[9].nil? || k[9].length<=0)
-    create_embed(event,"__**#{k[0]}**__",str,xcolor,nil,xpic)
+    create_embed(event,["__**#{k[0]}**__",title],str,xcolor,nil,xpic)
     create_embed(event,'',str2,xcolor)
     create_embed(event,'','',xcolor,nil,nil,flds) unless flds.nil?
   elsif k[9].nil? || k[9].length<=0
-    create_embed(event,"__**#{k[0]}**__",str,xcolor,nil,xpic)
+    create_embed(event,["__**#{k[0]}**__",title],str,xcolor,nil,xpic)
     m=str2.split("\n\n").reject{|q| q.nil? || q.length<=0}
     s=''
     for i in 0...m.length
@@ -2541,13 +2571,13 @@ def disp_skill_data(bot,event,args=nil)
     end
     if str.length+str2.length+m<1800
       str="#{str}#{str2}"
-      create_embed(event,"__**#{k[0]}**__",str,xcolor,nil,xpic,flds)
+      create_embed(event,["__**#{k[0]}**__",title],str,xcolor,nil,xpic,flds)
     elsif str2.length<1800
-      create_embed(event,"__**#{k[0]}**__",str,xcolor,nil,xpic)
+      create_embed(event,["__**#{k[0]}**__",title],str,xcolor,nil,xpic)
       create_embed(event,'',str2,xcolor)
       create_embed(event,'','',xcolor,nil,nil,flds) unless flds.nil?
     else
-      create_embed(event,"__**#{k[0]}**__",str,xcolor,nil,xpic)
+      create_embed(event,["__**#{k[0]}**__",title],str,xcolor,nil,xpic)
       m=str2.split("\n").reject{|q| q.nil? || q.length<=0}
       s=''
       for i in 0...m.length
@@ -2693,7 +2723,7 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
         str="#{str}\n*Adventurers:* #{m2.join(', ')}" if m2.length>0
         m2=[]
         for i in 0...drg.length
-          unless drg[i][15].nil?
+          unless drg[i][15].nil? || drg[i][15].length<=0
             checkstr2="(#{drg[i][2]}) #{checkstr}"
             drgemo=element_emote(drg[i][2],bot,drg[i][16])
             drgemo=element_emote(drg[i][2],bot) if ignorefeh
@@ -3071,7 +3101,7 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
                 m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2081)") if drg[i][6][ix][0]==checkstr
                 m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2082)") if drg[i][6][ix][1]==checkstr
               end
-              unless drg[i][15].nil?
+              unless drg[i][15].nil? || drg[i][15].length<=0
                 m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr
                 m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr
                 m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr
@@ -3083,7 +3113,7 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (A#{ix+1}\u2081)") if drg[i][6][ix][0]==checkstr2
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (A#{ix+1}\u2082)") if drg[i][6][ix][1]==checkstr2
                 end
-                unless drg[i][15].nil?
+                unless drg[i][15].nil? || drg[i][15].length<=0
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr2
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr2
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr2
@@ -3407,7 +3437,7 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
           m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2081)") if drg[i][6][ix][0]==checkstr2
           m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2082)") if drg[i][6][ix][1]==checkstr2
         end
-        unless drg[i][15].nil?
+        unless drg[i][15].nil? || drg[i][15].length<=0
           m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr
           m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr
           m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr
@@ -3533,9 +3563,10 @@ def disp_facility_data(bot,event,args=nil)
   s2s=false if evn.include?('totals')
   s2s=false if evn.include?('total')
   str=''
-  str="**Type:** #{k[3][0]} #{"(#{k[3][1]})" if k[3].length>1}"
-  str="#{str}\n**Size:** #{k[4]}"
-  str="#{str}\n**Quantity available:** #{k[5]}"
+  title=''
+  title="**Type:** #{k[3][0]} #{"(#{k[3][1]})" if k[3].length>1}"
+  title="#{title}\n**Size:** #{k[4]}"
+  title="#{title}\n**Quantity available:** #{k[5]}"
   str="#{str}\n\n**Description:** #{k[2]}"
   m='t'
   m='Amber' if ['Staff Dojo'].include?(k[0])
@@ -3575,7 +3606,7 @@ def disp_facility_data(bot,event,args=nil)
   ftr='Use this command in PM to see the costs to upgrade this facility.' unless s2s
   dispname=k[0].gsub(' ','_')
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Facilities/#{dispname}.png?raw=true"
-  create_embed(event,"__**#{k[0]}**__",str,0x8BE3F7,ftr,xpic)
+  create_embed(event,["__**#{k[0]}**__",title],str,0x8BE3F7,ftr,xpic)
   str=''
   ftr=nil
   return nil if ['Smithy','Halidom'].include?(k[0]) && !safe_to_spam?(event)
@@ -3719,28 +3750,28 @@ def disp_mat_data(bot,event,args=nil)
   s2s=false
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
-  str=generate_rarity_row(k[1])
+  title=generate_rarity_row(k[1])
   if k[2]==101
-    str="#{str}\n**Type:** Upgrade\n**Subtype:** Adventurer"
+    title="#{title}\n**Type:** Upgrade\n**Subtype:** Adventurer"
   elsif k[2]==102
-    str="#{str}\n**Type:** Upgrade\n**Subtype:** Dragon"
+    title="#{title}\n**Type:** Upgrade\n**Subtype:** Dragon"
   elsif k[2]==103
-    str="#{str}\n**Type:** Upgrade\n**Subtype:** Weapon"
+    title="#{title}\n**Type:** Upgrade\n**Subtype:** Weapon"
   elsif k[2]==104
-    str="#{str}\n**Type:** Upgrade\n**Subtype:** Facility"
+    title="#{title}\n**Type:** Upgrade\n**Subtype:** Facility"
   elsif k[2]==111
-    str="#{str}\n**Type:** Unbind\n**Subtype:** Dragon"
+    title="#{title}\n**Type:** Unbind\n**Subtype:** Dragon"
   elsif k[2]==112
-    str="#{str}\n**Type:** Unbind\n**Subtype:** Weapon"
+    title="#{title}\n**Type:** Unbind\n**Subtype:** Weapon"
   elsif k[2]==113
-    str="#{str}\n**Type:** Upgrade\n**Subtype:** Wyrmprint"
+    title="#{title}\n**Type:** Upgrade\n**Subtype:** Wyrmprint"
   elsif k[2]==114
-    str="#{str}\n**Type:** Unbind\n**Subtype:** Wyrmprint"
+    title="#{title}\n**Type:** Unbind\n**Subtype:** Wyrmprint"
   else
-    str="#{str}\n**Type:** Misc."
+    title="#{title}\n**Type:** Misc."
   end
-  str="#{str}\n**Drop bag:** #{['<:Rarity_3:532086056519204864> Common','<:Rarity_5:532086056737177600> Rare'][k[6]]}" unless k[2]==0
-  str="#{str}\n\n**Description:** #{k[3].gsub(';; ',"\n")}"
+  title="#{title}\n**Drop bag:** #{['<:Rarity_3:532086056519204864> Common','<:Rarity_5:532086056737177600> Rare'][k[6]]}" unless k[2]==0
+  str="**Description:** #{k[3].gsub(';; ',"\n")}"
   str="#{str}\n**EXP:** #{longFormattedNumber(k[7])}" unless k[7]<=0
   str="#{str}\n\n**Ways to obtain:**\n#{k[4].join("\n")}"
   if s2s || k[5].length<=3 || k[5].length+k[4].length<=5
@@ -3755,13 +3786,13 @@ def disp_mat_data(bot,event,args=nil)
   flds=nil unless s2s
   f=0
   f=flds.map{|q| q[1]}.join("\n").length+"\n\n**searching tags:**".length unless flds.nil?
-  if str.length+f>=1800
+  if str.length+title.length+f>=1800
     str=str.split("\n\n")
     str[0]="#{str[0]}\n\n#{str[1]}"
     str[1]=nil
     str.compact!
     if s2s
-      create_embed(event,"__**#{k[0]}**__",str[0],0xE3F78B,nil,xpic)
+      create_embed(event,["__**#{k[0]}**__",title],str[0],0xE3F78B,nil,xpic)
       if str.length>=3 && "#{str[1]}\n\n#{str[2]}".length<1900
         create_embed(event,'',"#{str[1]}\n\n#{str[2]}",0xE3F78B)
       else
@@ -3770,10 +3801,10 @@ def disp_mat_data(bot,event,args=nil)
       end
       create_embed(event,'','Searching tags',0xE3F78B,nil,nil,flds) unless flds.nil?
     else
-      create_embed(event,"__**#{k[0]}**__","#{str[0]}#{"\n\n**Searching Tags:**" unless flds.nil?}",0xE3F78B,'For obtainment methods, please use this command in PM.  Including them made this reply too long.',xpic,flds)
+      create_embed(event,["__**#{k[0]}**__",title],"#{str[0]}#{"\n\n**Searching Tags:**" unless flds.nil?}",0xE3F78B,'For obtainment methods, please use this command in PM.  Including them made this reply too long.',xpic,flds)
     end
   else
-    create_embed(event,"__**#{k[0]}**__","#{str}#{"\n\n**Searching Tags:**" unless flds.nil?}",0xE3F78B,nil,xpic,flds)
+    create_embed(event,["__**#{k[0]}**__",title],"#{str}#{"\n\n**Searching Tags:**" unless flds.nil?}",0xE3F78B,nil,xpic,flds)
   end
 end  
 
@@ -7921,13 +7952,7 @@ def roost(event,bot,args=nil,ignoreinputs=false,mode=0)
       str="#{str}\n*Other Available Mats:* #{["Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye","Ancient Bird's Feather, Bewitching Wing",'Granite, Meteorite',"Fiend's Claw","Ancient Bird's Feather, Bewitching Wing"][t.wday]}" if t.wday>1
     end
     str="#{str}\n\n__**<:Element_Void:548467446734913536> #{"#{str3}'s " if str3.length>0}Void Strikes:**__"
-    void=['<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem', # sunday
-          '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr', # monday
-          '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Flame:532106087952810005>Void Agni', # tuesday
-          '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr, <:Element_Shadow:532106088154267658>Raging Manticore', # wednesday
-          '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Flame:532106087952810005>Void Agni', # thursday
-          '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Flame:532106087952810005>Void Agni', # friday
-          '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr, <:Element_Flame:532106087952810005>Void Agni'] # saturday
+    void=@voids.map{|q| q}
     void=void.map{|q| "<:Element_Light:532106088129101834>Wandering Shroom, #{q}"}
     str="#{str}\n*Open:* #{void[t.wday]}"
     voidmats=void[t.wday].gsub('<:Element_Flame:532106087952810005>Steel Golem',"Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core").gsub('<:Element_Flame:532106087952810005>Blazing Ghost',"Old Cloth, Floating Red Cloth, Otherworldly Lantern").gsub('<:Element_Water:532106088221376522>Frost Hermit',"Goblin Thread, Aromatic Wood").gsub('<:Element_Wind:532106087948746763>Void Zephyr',"Great Feather, Void Leaf, Void Seed, Zephyr Rune").gsub('<:Element_Light:532106088129101834>Wandering Shroom',"Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore").gsub('<:Element_Shadow:532106088154267658>Raging Manticore',"Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn").gsub('<:Element_Shadow:532106088154267658>Obsidian Golem',"Obsidian Slab, Dark Core").gsub('<:Element_Flame:532106087952810005>Void Agni',"Ancient Bird's Feather, Bewitching Wing, Blazing Ember, Blazing Horn, Void Leaf, Void Seed").split(', ').uniq.sort.join(', ')
@@ -8040,13 +8065,7 @@ def next_events(event,bot,args=nil)
     end
     str=extend_message(str,str2,event,2)
   end
-  void=['<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore', # sunday
-        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr', # monday
-        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Flame:532106087952810005>Void Agni', # tuesday
-        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr', # wednesday
-        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore', # thursday
-        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Flame:532106087952810005>Void Agni', # friday
-        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr, <:Element_Shadow:532106088154267658>Raging Manticore'] #saturday
+  void=@voids.map{|q| q}
   void=void.rotate(t.wday)
   void.push(void[0])
   void=void.map{|q| "<:Element_Light:532106088129101834>Wandering Shroom, #{q}"}
