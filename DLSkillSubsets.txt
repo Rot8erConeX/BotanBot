@@ -78,6 +78,7 @@
 ["ShadowIO", ["darkio", "darkonslaught", "darkimperialonslaught", "shadowio", "shadowonslaught", "shadowimperialonslaught"], "Mat"]
 ["WaterIO", ["waterio", "wateronslaught", "waterimperialonslaught"], "Mat"]
 ["WindIO", ["windio", "windonslaught", "windimperialonslaught"], "Mat"]
+["Allies", ["allies", "ally", "allys", "allied"], "Skill"]
 ["Bleed", ["bleed", "bleeding"], "Skill"]
 ["Blind", ["blind", "blinded", "blindness"], "Skill"]
 ["Bog", ["bog", "bogged", "bogging"], "Skill"]
