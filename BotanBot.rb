@@ -111,6 +111,7 @@ system("title loading #{shard_data(2)[@shardizard]} BotanBot")
 @facilities=[]
 @mats=[]
 @banners=[]
+@statuses=[]
 
 @emotes=[]
 @npcs=[]
@@ -121,13 +122,7 @@ system("title loading #{shard_data(2)[@shardizard]} BotanBot")
 @ignored=[]
 @embedless=[]
 @avvie_info=['Botan','*Dragalia Lost*','N/A']
-@voids=['<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore',
-        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr',
-        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Flame:532106087952810005>Void Agni',
-        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr',
-        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore',
-        '<:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Flame:532106087952810005>Void Agni',
-        '<:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Wind:532106087948746763>Void Zephyr, <:Element_Shadow:532106088154267658>Raging Manticore']
+@voids=[]
 @abilimits=["Affliction Guard \u2192 III (5x)","Blindness Res \u2192 100%","Bog Res \u2192 100%","Broken Punisher \u2192 30%","Buff Time \u2192 30%",
             "Burn Res \u2192 100%","Burning Punisher \u2192 30%","Crit Damage \u2192 25%","Crit Rate \u2192 15%","Curse Res \u2192 100%","Defense +% \u2192 20%",
             "Dragon Time \u2192 20%","Element Res \u2192 15%","Energy Prep \u2192 V (5)","Event Score \u2192 250%","Facility Material Intake \u2192 125%",
@@ -147,7 +142,7 @@ def all_commands(include_nil=false,permissions=-1)
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
      'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias',
      'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','limit',
-     'limits','stack','stacks','sort','list','unit']
+     'limits','stack','stacks','sort','list','unit','avvie','avatar']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop'] if permissions==2
   k=k.uniq
@@ -333,7 +328,7 @@ def data_load()
   end
   for i in 0...b.length
     b[i]=b[i].gsub("\n",'').split('\\'[0])
-    b[i][1]=b[i][1].split(', ').map{|q| q.to_i}
+    b[i][1]=b[i][1].split('; ').map{|q| q.split(', ').map{|q2| q2.to_i}}
     b[i][2]=b[i][2].split(', ')
     b[i][3]=b[i][3].split(', ')
     b[i][4]=b[i][4].split(', ')
@@ -383,6 +378,31 @@ def data_load()
     b[i][1]=b[i][1].to_i
   end
   @npcs=b.map{|q| q}
+  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLStatus.txt')
+    b=[]
+    File.open('C:/Users/Mini-Matt/Desktop/devkit/DLStatus.txt').each_line do |line|
+      b.push(line)
+    end
+  else
+    b=[]
+  end
+  for i in 0...b.length
+    b[i]=b[i].gsub("\n",'').split('\\'[0])
+    b[i][1]=b[i][1].to_i
+  end
+  @statuses=b.map{|q| q}
+  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLVoid.txt')
+    b=[]
+    File.open('C:/Users/Mini-Matt/Desktop/devkit/DLVoid.txt').each_line do |line|
+      b.push(line)
+    end
+  else
+    b=[]
+  end
+  for i in 0...b.length
+    b[i]=b[i].gsub("\n",'')
+  end
+  @voids=b.map{|q| q}
 end
 
 def prefixes_save()
@@ -1222,6 +1242,31 @@ def find_npc(name,event,fullname=false,ext=false)
   return []
 end
 
+def find_status(name,event,fullname=false,ext=false)
+  data_load()
+  name=normalize(name)
+  name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  return [] if name.length<2
+  k=@statuses.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
+  return @statuses[k] unless k.nil?
+  nicknames_load()
+  alz=@aliases.reject{|q| q[0]!='Status'}.map{|q| [q[1],q[2],q[3]]}
+  g=0
+  g=event.server.id unless event.server.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return @statuses[@statuses.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
+  return @statuses[@statuses.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return [] if fullname || name.length<=2
+  k=@statuses.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
+  return @statuses[k] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return @statuses[@statuses.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
+  return @statuses[@statuses.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return []
+end
+
 def find_banner(name,event,fullname=false,ext=false)
   data_load()
   name=normalize(name)
@@ -1893,7 +1938,7 @@ def disp_wyrmprint_stats(bot,event,args=nil)
     str="#{str}\n**Shop Price:** 9,000#{bemoji[3]} per 2UB, 17,000#{bemoji[3]} per MUB" if k[1][0,1].to_i==4
     str="#{str}\n**Shop Price:** 19,000#{bemoji[3]} per 2UB, 37,000#{bemoji[3]} per MUB" if k[1][0,1].to_i==5
   end
-  create_embed(event,["__**#{k[0]}**__",print],str,xcolor,nil,xpic)
+  create_embed(event,["__**#{k[0]}**__",title],str,xcolor,nil,xpic)
 end
 
 def disp_weapon_stats(bot,event,args=nil,juststats=false)
@@ -1979,7 +2024,6 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
       title="#{title}\n<:Element_Void:548467446734913536> **Void**"
     end
   end
-  puts title
   f=30*k[2][0,1].to_i-50
   f+=40-10*k[2][0,1].to_i if k[2][0,1].to_i<3
   f0=30*k[2][0,1].to_i-70
@@ -2100,7 +2144,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   if str.length+title.length>=1500
     str=str.split("\n\n\n")
     create_embed(event,["__**#{k[0]}**__",title],str[0],element_color(k[3]),nil,xpic)
-    create_embed(event,'',str[1,str.length-1].join("\n\n\n"),element_color(k[3]))
+    create_embed(event,'',str[1,str.length-1].join("\n\n\n"),element_color(k[3])) unless str.length<2 
   else
     create_embed(event,["__**#{k[0]}**__",title],str,element_color(k[3]),nil,xpic)
   end
@@ -2396,24 +2440,56 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
   moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Infantry"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
   moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Armor"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes' && !k[0].include?('(Enemy)')
   title="#{title}\n#{moji[0].mention unless moji.length<=0} **Tribe:** #{k[2][1]}"
-  if k[1].length<2
-    str="#{str}\n**Maximum HP:** #{longFormattedNumber(k[1][0])}"
+  k[1][1]=[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1] if k[1][1].nil? || k[1][1].length<=0
+  if k[1][0].length<2 && k[1][1].length<2
+    str="#{str}\n<:HP:573344832307593216>**Maximum HP:** #{longFormattedNumber(k[1][0][0])}"
+    str="#{str}\n<:Strength:573344931205349376>**Strength:** #{longFormattedNumber(k[1][1][0])}"
   elsif k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
-    str="#{str}\n\n__**Maximum HP:**__"
-    str="#{str}\n*Prologue:* #{longFormattedNumber(k[1][0])}" if k[1].length>0 && k[1][0]>-1
-    str="#{str}\n*Normal:* #{longFormattedNumber(k[1][1])}" if k[1].length>1 && k[1][1]>-1
-    str="#{str}\n*Hard:* #{longFormattedNumber(k[1][2])}" if k[1].length>2 && k[1][2]>-1
-    str="#{str}\n*Lunatic:* #{longFormattedNumber(k[1][3])}" if k[1].length>3 && k[1][3]>-1
-    str="#{str}\n*Infernal:* #{longFormattedNumber(k[1][4])}" if k[1].length>4 && k[1][4]>-1
-    str="#{str}\n*Abyssal:* #{longFormattedNumber(k[1][5])}" if k[1].length>5 && k[1][5]>-1
+    str="#{str}\n"
+    str="#{str}\n*Prologue:*" if (k[1][0].length>0 && k[1][0][0]>-1) || (k[1][1].length>0 && k[1][1][0]>-1)
+    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][0])}" if k[1][0].length>0 && k[1][0][0]>-1
+    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][0])}" if k[1][0].length>0 && k[1][1][0]>-1
+    str="#{str}\n*Normal:*" if (k[1][0].length>1 && k[1][0][1]>-1) || (k[1][1].length>1 && k[1][1][1]>-1)
+    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][1])}" if k[1].length>1 && k[1][0][1]>-1
+    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][1])}" if k[1].length>1 && k[1][1][1]>-1
+    str="#{str}\n*Hard:*" if (k[1][0].length>2 && k[1][0][2]>-1) || (k[1][1].length>2 && k[1][1][2]>-1)
+    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][2])}" if k[1].length>2 && k[1][0][2]>-1
+    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][2])}" if k[1].length>2 && k[1][1][2]>-1
+    str="#{str}\n*Lunatic:*" if (k[1][0].length>3 && k[1][0][3]>-1) || (k[1][1].length>3 && k[1][1][3]>-1)
+    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][3])}" if k[1].length>3 && k[1][0][3]>-1
+    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][3])}" if k[1].length>3 && k[1][1][3]>-1
+    str="#{str}\n*Infernal:*" if (k[1][0].length>4 && k[1][0][4]>-1) || (k[1][1].length>4 && k[1][1][4]>-1)
+    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][4])}" if k[1].length>4 && k[1][0][4]>-1
+    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][4])}" if k[1].length>4 && k[1][1][4]>-1
+    str="#{str}\n*Abyssal:*" if (k[1][0].length>5 && k[1][0][5]>-1) || (k[1][1].length>5 && k[1][1][5]>-1)
+    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][5])}" if k[1].length>5 && k[1][0][5]>-1
+    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][5])}" if k[1].length>5 && k[1][1][5]>-1
+    str="#{str}\n*Abyssal+:*" if (k[1][0].length>6 && k[1][0][6]>-1) || (k[1][1].length>6 && k[1][1][6]>-1)
+    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][6])}" if k[1].length>6 && k[1][0][6]>-1
+    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][6])}" if k[1].length>6 && k[1][1][6]>-1
   else
-    str="#{str}\n\n__**Maximum HP:**__"
-    str="#{str}\n*Beginner:* #{longFormattedNumber(k[1][0])}" if k[1].length>0 && k[1][0]>-1
-    str="#{str}\n*Standard:* #{longFormattedNumber(k[1][1])}" if k[1].length>1 && k[1][1]>-1
-    str="#{str}\n*Expert:* #{longFormattedNumber(k[1][2])}" if k[1].length>2 && k[1][2]>-1
-    str="#{str}\n*Master:* #{longFormattedNumber(k[1][3])}" if k[1].length>3 && k[1][3]>-1
-    str="#{str}\n*Special:* #{longFormattedNumber(k[1][4])}" if k[1].length>4 && k[1][4]>-1
-    str="#{str}\n*Challenge:* #{longFormattedNumber(k[1][5])}" if k[1].length>5 && k[1][5]>-1
+    str="#{str}\n"
+    str="#{str}\n*Beginner:*" if (k[1][0].length>0 && k[1][0][0]>-1) || (k[1][1].length>0 && k[1][1][0]>-1)
+    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][0])}" if k[1][0].length>0 && k[1][0][0]>-1
+    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][0])}" if k[1][0].length>0 && k[1][1][0]>-1
+    str="#{str}\n*Standard:*" if (k[1][0].length>1 && k[1][0][1]>-1) || (k[1][1].length>1 && k[1][1][1]>-1)
+    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][1])}" if k[1][0].length>1 && k[1][0][1]>-1
+    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][1])}" if k[1][0].length>1 && k[1][1][1]>-1
+    str="#{str}\n*Expert:*" if (k[1][0].length>2 && k[1][0][2]>-1) || (k[1][1].length>2 && k[1][1][2]>-1)
+    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][2])}" if k[1][0].length>2 && k[1][0][2]>-1
+    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][2])}" if k[1][0].length>2 && k[1][1][2]>-1
+    str="#{str}\n*Master:*" if (k[1][0].length>3 && k[1][0][3]>-1) || (k[1][1].length>3 && k[1][1][3]>-1)
+    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][3])}" if k[1][0].length>3 && k[1][0][3]>-1
+    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][3])}" if k[1][0].length>3 && k[1][1][3]>-1
+    str="#{str}\n*Nightmare:*" if (k[1][0].length>4 && k[1][0][4]>-1) || (k[1][1].length>4 && k[1][1][4]>-1)
+    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][4])}" if k[1][0].length>4 && k[1][0][4]>-1
+    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][4])}" if k[1][0].length>4 && k[1][1][4]>-1
+    str="#{str}\n*Special:*" if (k[1][0].length>5 && k[1][0][5]>-1) || (k[1][1].length>5 && k[1][1][5]>-1)
+    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][5])}" if k[1][0].length>5 && k[1][0][5]>-1
+    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][5])}" if k[1][0].length>5 && k[1][1][5]>-1
+    str="#{str}\n*Challenge:*" if (k[1][0].length>6 && k[1][0][6]>-1) || (k[1][1].length>6 && k[1][1][6]>-1)
+    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][6])}" if k[1][0].length>6 && k[1][0][6]>-1
+    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][6])}" if k[1][0].length>6 && k[1][1][6]>-1
   end
   if k[2].length>3
     m=@enemies.reject{|q| q[0]==k[0] || q[2].length<4 || q[2][3]!=k[2][3]}
@@ -2484,6 +2560,9 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
   if k[0]=="Wandering Shroom" && s2s
     disp_enemy_data(bot,event,"Wandering Shroom, Clone Wave 1".split(' '),true)
     disp_enemy_data(bot,event,"Wandering Shroom, Clone Wave 2".split(' '),true)
+  elsif k[0]=="Gust Shroom" && s2s
+    disp_enemy_data(bot,event,"Gust Shroom, Clone Wave 1".split(' '),true)
+    disp_enemy_data(bot,event,"Gust Shroom, Clone Wave 2".split(' '),true)
   elsif k[0]=="Shishimai" && s2s
     disp_enemy_data(bot,event,"Gift Basket".split(' '),true)
   end
@@ -3212,7 +3291,6 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
             str="#{str} - #{m2.join(', ')}" if m2.length>0
           elsif k[ii2][2]=='Aura'
             m2=[]
-            puts checkstr
             for i in 0...drg.length
               checkstr2="(#{drg[i][2]}) #{checkstr}"
               drgemo=element_emote(drg[i][2],bot,drg[i][16])
@@ -3478,7 +3556,32 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
       k=k.map{|q| q.gsub(elemo[i][2],'')}
       flds2.push(["#{elemoo}#{elemo[i][0]} #{flds[0][0]}",k.join("\n")]) if k.length>0
     end
-    flds=flds2.map{|q| q}
+    if flds2.length<=0
+      m=flds[0][1].split("\n")
+      elemo=[['Swords','<:Weapon_Sword:532106114540634113>','<:Red_Blade:443172811830198282>'],
+             ['Blades','<:Weapon_Blade:532106114628714496>','<:Colorless_Blade:443692132310712322>'],
+             ['Daggers','<:Weapon_Dagger:532106116025286656>','<:Colorless_Dagger:443692132683743232>'],
+             ['Axes','<:Weapon_Axe:532106114188443659>','<:Green_Blade:467122927230386207>'],
+             ['Bows','<:Weapon_Bow:532106114909732864>','<:Colorless_Bow:443692132616896512>'],
+             ['Lances','<:Weapon_Lance:532106114792423448>','<:Blue_Blade:467112472768151562>'],
+             ['Wands','<:Weapon_Wand:532106114985099264>','<:Green_Tome:467122927666593822>'],
+             ['Staves','<:Weapon_Staff:532106114733441024>','<:Colorless_Staff:443692132323295243>']]
+      flds2=[]
+      for i in 0...elemo.length
+        k=m.reject{|q| !q.include?(elemo[i][1]) && !q.include?(elemo[i][2])}.map{|q| q.gsub(elemo[i][1],'')}
+        elemoo="#{elemo[i][1]}"
+        elemoo="#{elemo[i][2]}" if k.reject{|q| q.include?(elemo[i][2])}.length<=0
+        k=k.map{|q| q.gsub(elemo[i][2],'')}
+        flds2.push(["#{elemoo}#{elemo[i][0]}",k.join("\n")]) if k.length>0
+      end
+      if flds2.length<=0
+        flds=triple_finish(m)
+      else
+        flds=flds2.map{|q| q}
+      end
+    else
+      flds=flds2.map{|q| q}
+    end
   end
   f=0
   f=flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length unless flds.nil?
@@ -3807,6 +3910,32 @@ def disp_mat_data(bot,event,args=nil)
     create_embed(event,["__**#{k[0]}**__",title],"#{str}#{"\n\n**Searching Tags:**" unless flds.nil?}",0xE3F78B,nil,xpic,flds)
   end
 end  
+
+def disp_status_data(bot,event,args=nil)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_status,args.join(' '),event)
+  if k.length.zero?
+    event.respond 'No matches found.'
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  evn=event.message.text.downcase.split(' ')
+  ftr=nil
+  xcolor=0xE3F78B
+  xcolor=0xE73031 if k[0]=='Burn'
+  xcolor=0x1890DE if k[0]=='Freeze'
+  xcolor=0x00D771 if k[0]=='Sleep'
+  xcolor=0xFFB90F if k[0]=='Blind'
+  xcolor=0xA637DE if k[0]=='Curse'
+  str="**Effect on player:** #{k[2]}"
+  str="#{str}\n\n**Effect on enemy:** #{k[3]}"
+  m=@statuses.reject{|q| q[1]!=k[1] || q[0]==k[0]}
+  ftr="#{list_lift(m.map{|q| q[0]},'and')} will overwrite this status.  All other statuses will stack instead." unless k[1]==0 || m.length<=0
+  create_embed(event,"__**#{k[0]}**__",str,xcolor,ftr)
+end
 
 def disp_adventurer_art(bot,event,args=nil)
   args=event.message.text.downcase.split(' ') if args.nil?
@@ -6125,10 +6254,8 @@ def find_banners(bot,event,args=nil)
     str=extend_message(str,"#{char.length} total",event,2)
     event.respond str
   else
-    flds=nil
-    flds=triple_finish(char,true) unless char.length<=0
     textra="#{textra}\n\n**No banners match your search**" if char.length<=0
-    create_embed(event,"__**Banner Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total",nil,flds)
+    create_embed(event,"__**Banner Search**__\n#{search.join("\n")}\n\n__**Results**__","#{textra}\n\n#{char.join("\n")}",0xCE456B,"#{char.length} total")
   end
 end
 
@@ -6200,7 +6327,7 @@ def find_enemies(bot,event,args=nil)
   char=char.sort{|a,b| a[0]<=>b[0]}.uniq
   flds=nil
   unless char.length<=0
-    flds=triple_finish(char,true)
+    flds=triple_finish(char.map{|q| q[0]},true)
     if char.map{|q| q[2][0]}.uniq.length>1
       flds=[]
       flds.push(['<:Element_Flame:532106087952810005>Flame',char.reject{|q| q[2][0]!='Flame'}.map{|q| q[0]}.uniq.join("\n")])
@@ -7952,10 +8079,18 @@ def roost(event,bot,args=nil,ignoreinputs=false,mode=0)
       str="#{str}\n*Other Available Mats:* #{["Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye","Ancient Bird's Feather, Bewitching Wing",'Granite, Meteorite',"Fiend's Claw","Ancient Bird's Feather, Bewitching Wing"][t.wday]}" if t.wday>1
     end
     str="#{str}\n\n__**<:Element_Void:548467446734913536> #{"#{str3}'s " if str3.length>0}Void Strikes:**__"
-    void=@voids.map{|q| q}
-    void=void.map{|q| "<:Element_Light:532106088129101834>Wandering Shroom, #{q}"}
+    data_load()
+    void=@voids[0,7].map{|q| q}
+    matz=@voids[8,@voids.length-8].map{|q| q}
     str="#{str}\n*Open:* #{void[t.wday]}"
-    voidmats=void[t.wday].gsub('<:Element_Flame:532106087952810005>Steel Golem',"Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core").gsub('<:Element_Flame:532106087952810005>Blazing Ghost',"Old Cloth, Floating Red Cloth, Otherworldly Lantern").gsub('<:Element_Water:532106088221376522>Frost Hermit',"Goblin Thread, Aromatic Wood").gsub('<:Element_Wind:532106087948746763>Void Zephyr',"Great Feather, Void Leaf, Void Seed, Zephyr Rune").gsub('<:Element_Light:532106088129101834>Wandering Shroom',"Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore").gsub('<:Element_Shadow:532106088154267658>Raging Manticore',"Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn").gsub('<:Element_Shadow:532106088154267658>Obsidian Golem',"Obsidian Slab, Dark Core").gsub('<:Element_Flame:532106087952810005>Void Agni',"Ancient Bird's Feather, Bewitching Wing, Blazing Ember, Blazing Horn, Void Leaf, Void Seed").split(', ').uniq.sort.join(', ')
+    voidmats=void[t.wday]
+    for i in 0...matz.length
+      matz[i]=matz[i].split(', ')
+      k=matz[i][0]
+      matz[i]=matz[i][1,matz[i].length-1].join(', ')
+      voidmats=voidmats.gsub(k,matz[i])
+    end
+    voidmats=voidmats.split(', ').uniq.sort.join(', ')
     str="#{str}\n*Available Mats:* #{voidmats}"
   end
   str="#{str}\n\n**Shop Mats:** #{['Light Metal, Abyss Stone','Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather",'Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather"][t.wday]}" if t.wday>-1 && [3,0].include?(mode)
@@ -8065,26 +8200,27 @@ def next_events(event,bot,args=nil)
     end
     str=extend_message(str,str2,event,2)
   end
-  void=@voids.map{|q| q}
+  data_load()
+  void=@voids[0,7].map{|q| q}
   void=void.rotate(t.wday)
   void.push(void[0])
-  void=void.map{|q| "<:Element_Light:532106088129101834>Wandering Shroom, #{q}"}
   if [0,5].include?(mode)
     mmzz=[]
+    matz=@voids[7,@voids.length-7].map{|q| q}
+    puts matz.to_s
     for i in 0...void.length
       m=void[i].split(', ')
       pos=0
       for i2 in 0...m.length
-        pos=1 if m[i2]=='<:Element_Flame:532106087952810005>Steel Golem'
-        pos=2 if m[i2]=='<:Element_Flame:532106087952810005>Blazing Ghost'
-        pos=3 if m[i2]=='<:Element_Flame:532106087952810005>Void Agni'
-        pos=4 if m[i2]=='<:Element_Water:532106088221376522>Frost Hermit'
-        pos=5 if m[i2]=='<:Element_Wind:532106087948746763>Void Zephyr'
-        pos=6 if m[i2]=='<:Element_Light:532106088129101834>Wandering Shroom'
-        pos=7 if m[i2]=='<:Element_Shadow:532106088154267658>Raging Manticore'
-        pos=8 if m[i2]=='<:Element_Shadow:532106088154267658>Obsidian Golem'
+        pos=matz.find_index{|q| m[i2]==q.split(', ')[0]}
+        pos=0 if pos.nil?
         mmzz.push([m[i2],i,pos])
       end
+    end
+    for i in 0...matz.length
+      matz[i]=matz[i].split(', ')
+      matz[i].shift
+      matz[i]=matz[i].join(', ')
     end
     mmzz.sort!{|a,b| (a[2]<=>b[2])==0 ? (a[1]<=>b[1]) : (a[2]<=>b[2])}
     mmzz.reverse!
@@ -8097,13 +8233,10 @@ def next_events(event,bot,args=nil)
     mmzz.compact!
     mmzz.reverse!
     str2="__**<:Element_Void:548467446734913536> Void Strikes**__"
+    str=extend_message(str,str2,event,2)
     strpost=false
-    matz=['',"Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core","Old Cloth, Floating Red Cloth, Otherworldly Lantern",
-          "Ancient Bird's Feather, Bewitching Wing, Blazing Ember, Blazing Horn, Void Leaf, Void Seed","Goblin Thread, Aromatic Wood",
-          "Great Feather, Void Leaf, Void Seed, Zephyr Rune","Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore",
-          "Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn","Obsidian Slab, Dark Core"]
     for i in 0...mmzz.length
-      str2="#{str2}#{"\n" if mode==5 && safe_to_spam?(event)}\n*#{mmzz[i][0]}* -"
+      str2="#{"\n" if mode==5 && safe_to_spam?(event)}*#{mmzz[i][0]}* -"
       if mmzz[i][1]==0
         str2="#{str2} **Today**#{' - Next available' unless mmzz[i][3].nil? || mmzz[i][3]<=0}"
         if mmzz[i][3].nil? || mmzz[i][3]<=0
@@ -8127,8 +8260,8 @@ def next_events(event,bot,args=nil)
       if mmzz[i][2]==1 && mmzz.find_index{|q| q[2]==2}.nil?
         str2="#{str2}#{"\n" if mode==5 && safe_to_spam?(event)}\n<:Element_Water:532106088221376522>*Water Void* - ~~never~~"
       end
+      str=extend_message(str,str2,event,1)
     end
-    str=extend_message(str,str2,event,2)
   end
   f=[0,2]
   if f.include?(mode)
@@ -8180,7 +8313,6 @@ def next_events(event,bot,args=nil)
         end
       end
     end
-    str=extend_message(str,str2,event,2)
   end
   f.push(6)
   if f.include?(mode)
@@ -9652,11 +9784,64 @@ bot.command([:tools,:links,:tool,:link,:resources,:resources]) do |event|
   event << ''
 end
 
-bot.command(:status, from: 167657750971547648) do |event, *args|
+bot.command(:status) do |event, *args|
   return nil if overlap_prevent(event)
-  return nil unless event.user.id==167657750971547648
-  bot.game=args.join(' ')
-  event.respond 'Status set.'
+  t=Time.now
+  timeshift=6
+  t-=60*60*timeshift
+  if event.user.id==167657750971547648 && !args.nil? && args.length>0 && args[0]=='set' # only work when used by the developer
+    args.shift
+  elsif find_data_ex(:find_status,args.join(' '),event,true).length>0
+    disp_status_data(bot,event,args)
+    return nil
+  end
+  if event.user.id==167657750971547648 && !args.nil? && args.length>0 # only work when used by the developer
+    bot.game=args.join(' ')
+    event.respond 'Status set.'
+    return nil
+  end
+  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
+    event << "No data found.  Showing *my* status instead."
+    event << ''
+    event << "Current avatar: #{bot.user(312451658908958721).avatar_url}"
+    event << "Adventurer/Dragon in avatar: #{@avvie_info[0]}"
+    event << ''
+    event << "Current status:"
+    event << "[Playing] #{@avvie_info[1]}"
+    event << ''
+    event << "Reason: #{@avvie_info[2]}" unless @avvie_info[2].length.zero?
+    event << ''
+    event << "Dev's timezone: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}) | #{'0' if t.hour<10}#{t.hour}:#{'0' if t.min<10}#{t.min}"
+  else
+    create_embed(event,"No data found.  Showing *my* status instead.","Adventurer/Dragon in avatar: #{@avvie_info[0]}\n\nCurrent status:\n[Playing] #{@avvie_info[1]}#{"\n\nReason: #{@avvie_info[2]}" unless @avvie_info[2].length.zero?}\n\n[For a full calendar of avatars, click here](https://docs.google.com/spreadsheets/d/1j-tdpotMO_DcppRLNnT8DN8Ftau-rdQ-ZmZh5rZkZP0/edit?usp=sharing)",(t.day*7+t.month*21*256+(t.year-2000)*10*256*256),"Dev's timezone: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}) | #{'0' if t.hour<10}#{t.hour}:#{'0' if t.min<10}#{t.min}",bot.user(543373018303299585).avatar_url)
+  end
+  return nil
+end
+
+bot.command([:avatar, :avvie]) do |event, *args|
+  return nil if overlap_prevent(event)
+  t=Time.now
+  timeshift=6
+  t-=60*60*timeshift
+  if event.user.id==167657750971547648 && !args.nil? && args.length>0 # only work when used by the developer
+    bot.game=args.join(' ')
+    event.respond 'Status set.'
+    return nil
+  end
+  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
+    event << "Current avatar: #{bot.user(312451658908958721).avatar_url}"
+    event << "Adventurer/Dragon in avatar: #{@avvie_info[0]}"
+    event << ''
+    event << "Current status:"
+    event << "[Playing] #{@avvie_info[1]}"
+    event << ''
+    event << "Reason: #{@avvie_info[2]}" unless @avvie_info[2].length.zero?
+    event << ''
+    event << "Dev's timezone: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}) | #{'0' if t.hour<10}#{t.hour}:#{'0' if t.min<10}#{t.min}"
+  else
+    create_embed(event,'',"Adventurer/Dragon in avatar: #{@avvie_info[0]}\n\nCurrent status:\n[Playing] #{@avvie_info[1]}#{"\n\nReason: #{@avvie_info[2]}" unless @avvie_info[2].length.zero?}\n\n[For a full calendar of avatars, click here](https://docs.google.com/spreadsheets/d/1j-tdpotMO_DcppRLNnT8DN8Ftau-rdQ-ZmZh5rZkZP0/edit?usp=sharing)",(t.day*7+t.month*21*256+(t.year-2000)*10*256*256),"Dev's timezone: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}) | #{'0' if t.hour<10}#{t.hour}:#{'0' if t.min<10}#{t.min}",bot.user(543373018303299585).avatar_url)
+  end
+  return nil
 end
 
 bot.command(:backupaliases, from: 167657750971547648) do |event|
@@ -10515,6 +10700,8 @@ bot.message do |event|
       disp_weapon_stats(bot,event,s.split(' '))
     elsif find_data_ex(:find_enemy,s,event,true).length>0
       disp_enemy_data(bot,event,s.split(' '))
+    elsif find_data_ex(:find_status,s,event,true).length>0
+      disp_status_data(bot,event,s.split(' '))
     elsif find_data_ex(:find_skill,s,event,true).length>0
       disp_skill_data(bot,event,s.split(' '))
     elsif find_data_ex(:find_ability,s,event,true).length>0
@@ -10537,6 +10724,8 @@ bot.message do |event|
       disp_weapon_stats(bot,event,s.split(' '))
     elsif find_data_ex(:find_enemy,s,event).length>0
       disp_enemy_data(bot,event,s.split(' '))
+    elsif find_data_ex(:find_status,s,event).length>0
+      disp_status_data(bot,event,s.split(' '))
     elsif find_data_ex(:find_skill,s,event).length>0
       disp_skill_data(bot,event,s.split(' '))
     elsif find_data_ex(:find_ability,s,event).length>0
@@ -10765,6 +10954,10 @@ bot.mention do |event|
     else
       disp_enemy_data(bot,event,args)
     end
+  elsif ['status'].include?(args[0].downcase)
+    m=false
+    args.shift
+    disp_status_data(bot,event,args)
   elsif ['skill','skil'].include?(args[0].downcase)
     m=false
     args.shift
@@ -10867,7 +11060,9 @@ bot.mention do |event|
     elsif find_data_ex(:find_weapon,name,event,true).length>0
       disp_weapon_stats(bot,event,args)
     elsif find_data_ex(:find_enemy,name,event,true).length>0
-      disp_enemy_data(bot,event,args.split(' '))
+      disp_enemy_data(bot,event,args)
+    elsif find_data_ex(:find_status,name,event,true).length>0
+      disp_status_data(bot,event,args)
     elsif find_data_ex(:find_skill,name,event,true).length>0
       disp_skill_data(bot,event,args)
     elsif find_data_ex(:find_ability,name,event,true).length>0
@@ -10889,7 +11084,9 @@ bot.mention do |event|
     elsif find_data_ex(:find_weapon,name,event).length>0
       disp_weapon_stats(bot,event,args)
     elsif find_data_ex(:find_enemy,name,event).length>0
-      disp_enemy_data(bot,event,args.split(' '))
+      disp_enemy_data(bot,event,args)
+    elsif find_data_ex(:find_status,name,event).length>0
+      disp_status_data(bot,event,args)
     elsif find_data_ex(:find_skill,name,event).length>0
       disp_skill_data(bot,event,args)
     elsif find_data_ex(:find_ability,name,event).length>0
