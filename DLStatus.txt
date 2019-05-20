@@ -1,0 +1,10 @@
+Blind\1\Causes the afflicted player to miss attacks and skills with a base chance of 80%.\Causes regular attacks to miss on lower tier enemies.
+Bleed\0\Causes damage for 30 seconds every 4.99 seconds that can stack up to three times, increasing damage by 50% with each stack. Cannot deal lethal damage.\Causes damage for 30 seconds every 4.99 seconds that can stack up to three times, increasing damage by 50% with each stack
+Bog\2\Reduces movement speed by 50%, and damage received is increased by 50% for the entire duration.\Reduces movement speed, and causes all incoming attacks to be critical hits.
+Burn\1\Deals damage over time equal to a fixed % of the afflicted player's HP.\Deals damage over time.
+Curse\1\Cause's the afflicted player's attacks to generate no SP, and also disables skills\Curse cannot be inflicted by players as of yet.
+Freeze\2\Causes the player to be unable to move or act until the effect wears off, or another player attacks you to break the ice.\Causes the enemy to be unable to move or act until the effect wears off.
+Paralysis\1\Deals damage over time equal to a fixed % of the inflicted player's HP, and interrupts the player every few seconds.\Deals damage over time.
+Poison\1\Deals damage over time equal to a fixed % of the afflicted player's HP.\Deals damage over time.
+Sleep\2\Causes the player to be unable to move or act until the effect wears off. Taking damage while afflicted with Sleep will cause the duration to decrease.\Causes the enemy to be unable to move or act until the effect wears off.
+Stun\2\Causes the player to be unable to move or act until the effect wears off. Taking damage while afflicted with Stun will cause the duration to decrease.\Causes the enemy to be unable to move or act until the effect wears off.

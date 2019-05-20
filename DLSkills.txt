@@ -108,7 +108,7 @@ Dark Wave\\Skill\Deals 2 hits of 338% shadow damage to enemies in a line.\Deals 
 Dark Whirlwind\\Skill\Deals 2 hits of 343% shadow damage to surrounding enemies.\Deals 2 hits of 381% shadow damage to surrounding enemies.\\7668, 7668, 7668\Yes\1\\Damage
 Darkness's Protection\\Skill\Increases the user's defense by 20% for 10 seconds.\Increases the user's defense by 25% for 10 seconds.\Increases the user's defense by 30% for 30 seconds.\6678, 6678, 6678\No\1.1\\Buff, DefenseSkill, User
 Daybreak Flurry\\Skill\Deals 6 hits of 99% shadow damage to enemies directly ahead, and inflicts bleeding for 30 seconds - dealing 110% damage every 4.99 seconds - with 90% base chance.\Deals 6 hits of 104% shadow damage to enemies directly ahead, and inflicts bleeding for 30 seconds - dealing 146% damage every 4.99 seconds - with 100% base chance.\\30, 30, 30\Yes\1.4\\Damage, Bleed
-Dazzling Show\\Skill\Activates "Stunning Knives." For the next three force strikes, the user will throw special knives that deal 47% (52%) damage and a hit for 24% (26%) that inflicts stun for 3-4 seconds with 90% base chance.\Activates "Stunning Knives." For the next three force strikes, the user will throw special knives that deal 52% (57%) damage and a hit for 26% (29%) that inflicts stun for 4-5 seconds with 100% base chance.\\5315, 5315, 5315\No\1.4\\Stance, Stun
+Dazzling Show\\Skill\Activates "Stunning Knives." For the next three force strikes, the user will throw special knives that deal 47% (52%) damage and a hit for 24% (26%) that inflicts stun for 3-4 seconds with 90% base chance. Bonus OD Bar damage is reduced to 4.2x for all hits of Stunning Knives, from 8.4x on the first two hits.\Activates "Stunning Knives." For the next three force strikes, the user will throw special knives that deal 52% (57%) damage and a hit for 26% (29%) that inflicts stun for 4-5 seconds with 100% base chance. Bonus OD Bar damage is reduced to 4.2x for all hits of Stunning Knives, from 8.4x on the first two hits.\\5315, 5315, 5315\No\1.4\\Stance, Stun
 Devastation\\Skill\Deals 2 hits of 441% flame damage to enemies in a line.\Deals 2 hits of 490% flame damage to enemies in a line.\\30, 30, 30\Yes\5.7\\Damage
 Dignified Soul\\Skill\Increases the user's strength by 20% for 10 seconds. While this skill is active, Bamboo Cutter will inflict bleeding instead of poison.\Increases the user's strength by 25% for 10 seconds. While this skill is active, Bamboo Cutter will inflict bleeding instead of poison.\\4877, 4877, 4877\No\1.4\Increases the user's strength by 20%/25% for 10 seconds. While this skill is active, Bamboo Cutter will inflict bleeding instead of poison.\Buff, StrengthSkill, Stance
 Divine Healing\\Skill\Restores HP to all allies.\Restores HP to all allies.\Restores HP to all allies.\2785, 2785, 2785\Yes\1.4\\HealSkill, Burst, Team
@@ -395,7 +395,7 @@ Tempestuous Discharge\\Skill\Deals 1 hit of 886% wind damage to surrounding enem
 Tempestuous Kiss\\Skill\Deals 4 hits of 200% wind damage to enemies directly ahead, and restores the user's HP by 33% of the damage inflicted.\Deals 4 hits of 210% wind damage to enemies directly ahead, and restores the user's HP by 35% of the damage inflicted.\\30, 30, 30\Yes\1.4\\Damage, HealSkill, User
 Tenacious Swing\\Skill\Deals 2 hits of 420% shadow damage to surrounding enemies and draws them toward the user for 0.5 seconds.\Deals 2 hits of 466% shadow damage to surrounding enemies and draws them toward the user for 0.5 seconds.\Deals 2 hits of 518% shadow damage to surrounding enemies and draws them toward the user for 0.5 seconds.\2868, 2868, 2868\Yes\0.9\\Damage
 Terpsichore\\Skill\Deals 4 hits of 137% water damage to enemies directly ahead, and reduces their strength by 5% for 10 seconds with 90% base chance.\Deals 4 hits of 144% water damage to enemies directly ahead, and reduces their strength by 5% for 10 seconds with 90% base chance. Also reduces their defense by 5% for 10 seconds with 30% base chance.\Deals 4 hits of 151% water damage to enemies directly ahead, and reduces their strength and defense by 10% for 10 seconds with 90% base chance.\4904, 4904, 4904\Yes\0.9\\Damage, Debuff, StrDown, DefDown
-Terror Sphere\\Skill\Deals 2 hits of 277.2% shadow damage to the target and nearby enemies, and reduces their defense by 10% for 10 seconds with 100% base chance.\Deals 2 hits of 308% shadow damage to the target and nearby enemies, and reduces their defense by 15% for 10 seconds with 100% base chance.\\50, 50, 50\Yes\2.4\Deals 2 hits of 277.2% shadow damage to the target and nearby enemies, and reduces their defense by 10% for 10 seconds with 100% base chance.\Damage, Debuff, DefDown
+Terror Sphere\\Skill\Deals 2 hits of 277.2% shadow damage to the target and nearby enemies, and reduces their defense by 10% for 10 seconds with 100% base chance.\Deals 2 hits of 308% shadow damage to the target and nearby enemies, and reduces their defense by 15% for 10 seconds with 100% base chance.\\50, 50, 50\Yes\2.4\\Damage, Debuff, DefDown
 Test of Integrity\\Skill\Deals 3 hits of 226.8% wind damage to surrounding enemies and draws them toward the user.\Deals 3 hits of 252% wind damage to surrounding enemies and draws them toward the user.\\50, 50, 50\Yes\1.9\\Damage
 Thorned Assault\\Skill\Deals 6 hits of 133% damage to enemies directly ahead.\Deals 6 hits of 148% damage to enemies directly ahead.\\7323, 7323, 7323\Yes\1.4\\Damage
 Thorny Spiral\\Skill\Deals 5 hits of 137% shadow damage to surrounding enemies, and inflicts blindness (applies 50% chance to miss on attacks) for 8 seconds with 160% base chance.\Deals 5 hits of 144% shadow damage to surrounding enemies, and inflicts blindness (applies 50% chance to miss on attacks) for 8 seconds with 180% base chance.\\30, 30, 30\Yes\1.8\\Damage, Blind
@@ -684,9 +684,17 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Flame) Affliction Guard\I\Ability\If the user is attuned to Flame: resists afflictions once per quest\80\y\AfflictionGuard, Flame
 (Flame) Affliction Guard\II\Ability\If the user is attuned to Flame: resists afflictions three times per quest\100\y\AfflictionGuard, Flame
 (Flame) Affliction Guard\III\Ability\If the user is attuned to Flame: resists afflictions three five per quest\120\y\AfflictionGuard, Flame
+(Flame) Blinded Punisher\example\Ability\If the user is attuned to Flame: Increases damage to blinded enemies by `x`%.\0\y\Blind, Punisher, Flame
+(Flame) Blinded Punisher\10%\Ability\If the user is attuned to Flame: Increases damage to blinded enemies by 10%.\20\y\Blind, Punisher, Flame
+(Flame) Blinded Punisher\15%\Ability\If the user is attuned to Flame: Increases damage to blinded enemies by 15%.\40\y\Blind, Punisher, Flame
 (Flame) Dragon Delay Res\-\Ability\If the user is attuned to Flame: completely prevents dragon delaying.\50\y\DelayRes, Flame
 (Flame) Dull Res\-\Ability\If the user is attuned to Flame: completely prevents dulling.\50\y\DullRes, Flame, Resistance
+(Flame) Full HP = Defense\example\Ability\If the user is attuned to Flame: increases defense by `x`% when HP is full.\0\y\HP100, Defense, Flame
+(Flame) Full HP = Defense\15%\Ability\If the user is attuned to Flame: increases defense by 15% when HP is full.\20\y\HP100, Defense, Flame
+(Flame) Full HP = Defense\20%\Ability\If the user is attuned to Flame: increases defense by 20% when HP is full.\40\y\HP100, Defense, Flame
+(Flame) Full HP = Strength\8%\Ability\If the user is attuned to Flame: increases strength by 8% when HP is full.\40\y\HP100, Strength, Flame
 (Flame) High Midgardsormr's Bane\20%\Ability\If the user is attuned to Flame: increases damage to High Midgardsormr by 20%.\100\y\HMS, Bane, Flame
+(Flame) HP 70% = Critical Rate\5%\Ability\If the user is attuned to Flame: increases critical rate by 5%.\20\y\HP70, CritRate, Flame
 (Flame) HP 70% = Defense\example\Ability\If the user is attuned to Flame: increases defense by `x`% when HP is 70% or above.\0\y\HP70, Defense, Flame
 (Flame) HP 70% = Defense\3%\Ability\If the user is attuned to Flame: increases defense by 3% when HP is 70% or above.\20\y\HP70, Defense, Flame
 (Flame) HP 70% = Defense\5%\Ability\If the user is attuned to Flame: increases defense by 5% when HP is 70% or above.\40\y\HP70, Defense, Flame
@@ -709,6 +717,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Light) Affliction Guard\I\Ability\If the user is attuned to Light: resists afflictions once per quest\80\y\AfflictionGuard, Light
 (Light) Affliction Guard\II\Ability\If the user is attuned to Light: resists afflictions up to three times per quest\100\y\AfflictionGuard, Light
 (Light) Affliction Guard\III\Ability\If the user is attuned to Light: resists afflictions up to five times per quest\120\y\AfflictionGuard, Light
+(Light) Copy Punisher\-\Ability\If the user is attuned to Light: increases damage to copies created by Propagation.\50\y\CopyPunisher, Light
 (Light) Curse Res\example\Ability\If the user is attuned to Light: reduces susceptibility to curses by `x`%.\0\y\CurseRes, Light, Resistance
 (Light) Curse Res\25%\Ability\If the user is attuned to Light: reduces susceptibility to curses by 25%.\40\y\CurseRes, Light, Resistance
 (Light) Curse Res\40%\Ability\If the user is attuned to Light: reduces susceptibility to curses by 40%.\50\y\CurseRes, Light, Resistance
@@ -726,9 +735,12 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Light) Skill Haste\5%\Ability\If the user is attuned to Light: Increases skill gauge fill rate by 5%.\50\y\SkillHaste, Light
 (Light) Skill Haste\6%\Ability\If the user is attuned to Light: Increases skill gauge fill rate by 6%.\70\y\SkillHaste, Light
 (Light) Skill Prep\example\Ability\If the user is attuned to Light: fills `x`% of skill gauges at the start of quests.\0\y\SkillPrep, Light
-(Light) Skill Prep\25%\Ability\If the user is attuned to Light: fills 50% of skill gauges at the start of quests.\40\y\SkillPrep, Light
+(Light) Skill Prep\25%\Ability\If the user is attuned to Light: fills 25% of skill gauges at the start of quests.\40\y\SkillPrep, Light
 (Light) Skill Prep\50%\Ability\If the user is attuned to Light: fills 50% of skill gauges at the start of quests.\60\y\SkillPrep, Light
 (Light) Stunned Punisher\15%\Ability\If the user is attuned to Light: increases damage to stunned enemies by 15%.\40\y\Stun, Punisher, Light
+(Light) Thaumian's Bane\example\Ability\If the user is attuned to Light: increases damage to thaumians by `x`%\0\y\Thaumian, Bane, Light
+(Light) Thaumian's Bane\10%\Ability\If the user is attuned to Light: increases damage to thaumians by 10%\20\y\Thaumian, Bane, Light
+(Light) Thaumian's Bane\15%\Ability\If the user is attuned to Light: increases damage to thaumians by 10%\40\y\Thaumian, Bane, Light
 (Light) Undead's Bane\example\Ability\If the user is attuned to Light: increases damage to undead by `x`%.\0\y\Undead, Bane, Light
 (Light) Undead's Bane\10%\Ability\If the user is attuned to Light: increases damage to undead by 10%.\20\y\Undead, Bane, Light
 (Light) Undead's Bane\15%\Ability\If the user is attuned to Light: increases damage to undead by 15%.\40\y\Undead, Bane, Light
@@ -736,9 +748,9 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Shadow) Affliction Guard\I\Ability\If the user is attuned to Shadow: resists afflictions once per quest\60\y\AfflictionGuard, Shadow
 (Shadow) Affliction Guard\II\Ability\If the user is attuned to Shadow: resists afflictions twice per quest\80\y\AfflictionGuard, Shadow
 (Shadow) Affliction Guard\III\Ability\If the user is attuned to Shadow: resists afflictions three times per quest\100\y\AfflictionGuard, Shadow
-(Shadow) Blinded Punisher\example\Ability\If the user is attuned to Light: Increases damage to blinded enemies by `x`%.\0\y\Blind, Punisher, Shadow
-(Shadow) Blinded Punisher\10%\Ability\If the user is attuned to Light: Increases damage to blinded enemies by 10%.\20\y\Blind, Punisher, Shadow
-(Shadow) Blinded Punisher\15%\Ability\If the user is attuned to Light: Increases damage to blinded enemies by 15%.\40\y\Blind, Punisher, Shadow
+(Shadow) Blinded Punisher\example\Ability\If the user is attuned to Shadow: Increases damage to blinded enemies by `x`%.\0\y\Blind, Punisher, Shadow
+(Shadow) Blinded Punisher\10%\Ability\If the user is attuned to Shadow: Increases damage to blinded enemies by 10%.\20\y\Blind, Punisher, Shadow
+(Shadow) Blinded Punisher\15%\Ability\If the user is attuned to Shadow: Increases damage to blinded enemies by 15%.\40\y\Blind, Punisher, Shadow
 (Shadow) Buff Time\example\Ability\If the user is attuned to Shadow: increases duration of buff skills by `x`%.\0\y\BuffTime, Shadow
 (Shadow) Buff Time\15%\Ability\If the user is attuned to Shadow: increases duration of buff skills by 15%.\20\y\BuffTime, Shadow
 (Shadow) Buff Time\20%\Ability\If the user is attuned to Shadow: increases duration of buff skills by 20%.\40\y\BuffTime, Shadow
@@ -791,9 +803,13 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Wind) Bog Res\25%\Ability\If the user is attuned to Wind: reduces susceptibility to bog by 25%.\40\y\BogRes, Wind
 (Wind) Bog Res\35%\Ability\If the user is attuned to Wind: reduces susceptibility to bog by 35%.\60\y\BogRes, Wind
 (Wind) Bog Res\40%\Ability\If the user is attuned to Wind: reduces susceptibility to bog by 40%\80\y\BogRes, Wind
+(Wind) Fury Penetrator\-\Ability\If the user is attuned to Wind: ignores the effects of fury when attacking enemies.\50\y\FuryPenetrator
 (Wind) Skill Prep\example\Ability\If the user is attuned to Wind: fills `x`% of skill gauges at the start of quests.\0\y\SkillPrep, Wind
 (Wind) Skill Prep\25%\Ability\If the user is attuned to Wind: fills 25% of skill gauges at the start of quests.\40\y\SkillPrep, Wind
 (Wind) Skill Prep\50%\Ability\If the user is attuned to Wind: fills 50% of skill gauges at the start of quests.\60\y\SkillPrep, Wind
+(Wind) Physian's Bane\example\Ability\If the user is attuned to Wind: increases damage to physians by `x`%.\0\y\Physian, Bane, Wind
+(Wind) Physian's Bane\10%\Ability\If the user is attuned to Wind: increases damage to physians by 10%.\20\y\Physian, Bane, Wind
+(Wind) Physian's Bane\15%\Ability\If the user is attuned to Wind: increases damage to physians by 15%.\40\y\Physian, Bane, Wind
 (Wind) Thaumian's Bane\example\Ability\If the user is attuned to Wind: increases damage to thaumians by `x`%.\0\y\Thaumian, Bane, Wind
 (Wind) Thaumian's Bane\10%\Ability\If the user is attuned to Wind: increases damage to thaumians by 10%.\20\y\Thaumian, Bane, Wind
 (Wind) Thaumian's Bane\15%\Ability\If the user is attuned to Wind: increases damage to thaumians by 15%.\40\y\Thaumian, Bane, Wind
@@ -1089,9 +1105,7 @@ HP 70% = Strength\5%\Ability\Increases strength by 5% when HP is 70% or above.\4
 HP 70% = Strength\8%\Ability\Increases strength by 8% when HP is 70% or above.\60\y\HP70, Strength
 HP 70% = Strength\10%\Ability\Increases strength by 10% when HP is 70% or above.\80\y\HP70, Strength
 HP 70% = Strength\13%\Ability\Increases strength by 13% when HP is 70% or above.\100\y\HP70, Strength
-HP Below 50% = Strength\example\Ability\Increases strength by `x`% when HP is 50% or below.\0\y\HP50, Strength, Last
 HP Below 50% = Strength\15%\Ability\Increases strength by 15% when HP is 50% or below.\40\y\HP50, Strength, Last
-HP Below 50% = Strength\20%\Ability\Increases strength by 20% when HP is 50% or below.\60\y\HP50, Strength, Last
 Hypnos's Bane\example\Ability\Increases damage to Hypnos by `x`%.\0\y\Hypnos, Bane
 Hypnos's Bane\30%\Ability\Increases damage to Hypnos by 30%.\0\y\Hypnos, Bane
 Hypnos's Bane\35%\Ability\Increases damage to Hypnos by 35%.\0\y\Hypnos, Bane

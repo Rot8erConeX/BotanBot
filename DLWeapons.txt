@@ -117,7 +117,7 @@ Flaming Big Boy\Dagger\3v\Flame\11, 25, 38\39, 85, 133\\100, 0\204\102\1\15000, 
 Flaming Fungi Dagger\Dagger\3v\Flame\11, 25, 38\39, 85, 133\\100, 0\201\101\1\15000, 30000\Fiend's Horn, 3;; Fiend's Eye, 1;; Solid Fungus, 2;; Blaze Orb, 1\(Flame) Thaumian's Bane +10%;;;; (Flame) Dragon Delay Res\
 Flash Axe\Axe\3\Light\19, 42, 65\66, 142, 220\Flash Swing\100, 0\304\202\3\15000, 30000\Granite, 10;; Light Metal, 5;; Light Orb, 5\\
 Flightfyre\Bow\3\Flame\16, 36, 56\64, 138, 214\Flare Volley\100, 0\301\201\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Flame Orb, 5\\
-Folkvangr\Sword\5c\Light\30, 87, 101\108, 311, 362\\0, 0\309\0\3\300, 4000\\HP Below 50% = Strength +15%;; HP Below 50% = Strength +20%\FEH
+Folkvangr\Sword\5c\Light\30, 87, 101\108, 311, 362\\0, 0\309\0\3\300, 4000\\HP Below 50% = Strength +15%\FEH
 Forever Sky\Staff\4v\None\20, 55, 68\56, 150, 188\\500, 0\101\0\4\8000, 16000\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Great Feather, 2\Skill Prep +25%\
 Fragrant Bow\Bow\3v\None\6, 14, 22\25, 55, 85\\100, 0\102\0\1\1000, 2000\Fiend's Claw, 3;; Fiend's Horn, 1;; Goblin Thread, 1\Undead's Bane +10%\
 Frigid Sting\Dagger\5v\Water\29, 85, 98\103, 296, 344\\1500, 0\308\208\5\300000, 600000\Fiend's Horn, 15;; Fiend's Eye, 5;; Blazing Ember, 2;; Deluge Orb, 3\(Water) Full HP = Defense +20%;;;; (Water) High Brunhilda's Bane +20%\
@@ -288,7 +288,7 @@ Starchaser\Bow\5\None\34, 99, 115\131, 376, 438\Star Volley\1500, 0\203\101\8\15
 Starlight Gaze\Axe\4v\Light\21, 58, 73\87, 233, 292\\1500, 0\203\101\4\50000, 100000\Granite, 7;; Meteorite, 3;; Great Feather, 5;; Refulgence Orb, 1\(Light) Skill Prep +25%;;;; (Light) Stunned Punisher +15%\
 Starwrath Gaze\Axe\5v\Light\28, 82, 95\114, 327, 380\\1500, 0\303\203\5\300000, 600000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Refulgence Orb, 3\(Light) Skill Prep +50%;;;; (Light) Stunned Punisher +15%\
 Stellar Pegasus\Bow\5\Wind\44, 127, 147\155, 445, 518\Pegasus Shot\1500, 0\303\201\9\900000, 4500000\Fiend's Eye, 150;; Crimson Core, 30;; Bow Tablet, 100;; Twinkling Sand, 2;; Royal Jade Insignia, 200\\
-Stormfungus\Bow\4v\Wind\17, 47, 59\62, 165, 207\\500, 0\303\202\2\90000, 180000\Fiend's Horn, 6;; Fiend's Eye, 2;; Shiny Spore, 1;; Maelstrom Orb, 1\(Wind) Thaumian's Bane +15%;;;; (Wind) Copy Punisher\
+Stormfungus\Bow\4v\Wind\17, 47, 59\62, 165, 207\\500, 0\303\203\2\90000, 180000\Fiend's Horn, 6;; Fiend's Eye, 2;; Shiny Spore, 1;; Maelstrom Orb, 1\(Wind) Thaumian's Bane +15%;;;; (Wind) Copy Punisher\
 Stormspawn\Dagger\3\Wind\18, 39, 61\63, 136, 212\Storm Chain\100, 0\304\202\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Wind Orb, 5\\
 Stormwind Gaze\Axe\4v\Wind\24, 65, 82\81, 220, 275\\, 0\202\101\4\50000, 100000\Granite, 7;; Meteorite, 3;; Great Feather, 5;; Maelstrom Orb, 1\(Wind) Skill Prep +25%;;;; (Wind) Broken Punisher +15%\
 Stormwrath Gaze\Axe\5v\Wind\31, 91, 107\105, 307, 357\\, 0\302\202\5\300000, 600000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Maelstrom Orb, 3\(Wind) Skill Prep +50%;;;; (Wind) Broken Punisher +15%\
@@ -302,7 +302,7 @@ Sunrise Scepter\Wand\3\Flame\16, 36, 56\66, 142, 222\Sunrise Blast\100, 0\301\20
 Tempest Blade\Blade\4\Wind\27, 72, 90\108, 288, 361\Tempest's Protection\500, 0\302\201\6\120000, 240000\Meteorite, 30;; Abyss Stone, 10;; Jade Insignia, 50\\
 Tempest Lance\Lance\4\Wind\28, 75, 94\110, 294, 369\Tempest Barrage\500, 0\305\202\6\120000, 240000\Fiend's Eye, 30;; Abyss Stone, 10;; Jade Insignia, 50\\
 Tempest Wand\Wand\4\Wind\26, 70, 87\111, 297, 372\Tempestuous Discharge\500, 0\302\201\6\120000, 240000\Bewitching Wings, 30;; Abyss Stone, 10;; Jade Insignia, 50\\
-Tempestrage\Blade\4v\Wind\19, 53, 66\85, 228, 286\\, 0\202\101\4\50000, 100000\Granite, 7;; Meteorite, 3;; Great Feather, 5;; Maelstrom Orb, 1\(Wind) Skill Prep +25%;;;; (Wind) Broken Punisher +15%\
+Tempestrage\Blade\4v\Wind\19, 53, 66\85, 228, 286\\500, 0\202\101\4\50000, 100000\Granite, 7;; Meteorite, 3;; Great Feather, 5;; Maelstrom Orb, 1\(Wind) Skill Prep +25%;;;; (Wind) Broken Punisher +15%\
 Terranigmus\Wand\5\Flame\45, 131, 152\158, 454, 528\Grand Healing\1500, 0\301\201\9\900000, 4500000\Bewitching Wings, 150;; Crimson Core, 30;; Wand Tablet, 100;; Twinkling Sand, 2;; Royal Vermilion Insignia, 200\\
 The Bellow\Wand\3v\Wind\11, 24, 37\40, 87, 136\\100, 0\203\101\1\15000, 30000\Ancient Bird's Feather, 3;; Bewitching Wings, 1;; Solid Fungus, 2;; Storm Orb, 1\(Wind) Thaumian's Bane +10%;;;; (Wind) Copy Punisher\
 The Dreamer's Greatsword\Dagger\4\None\21, 58, 72\81, 218, 273\Dreamer's Spiral\500, 0\201\101\5\20000, 40000\Fiend's Horn, 20;; Fiend's Eye, 5;; Abyss Stone, 2\\
@@ -337,7 +337,7 @@ Ultramarine Knife\Dagger\4\Water\27, 74, 93\106, 283, 354\Ultramarine Spin\500, 
 Underworld Despair\Wand\5\Shadow\45, 131, 152\158, 454, 528\Persephone's Healing\1500, 0\303\201\9\900000, 4500000\Bewitching Wings, 150;; Crimson Core, 30;; Wand Tablet, 100;; Twinkling Sand, 2;; Royal Violet Insignia, 200\\
 Unerring Gaze\Axe\4v\None\16, 45, 56\67, 180, 225\\500, 0\101\0\4\8000, 16000\Iron Ore, 5;; Granite, 2;; Great Feather, 2\Skill Prep +25%\
 Unsung Hero's Lance\Lance\3\Flame\17, 37, 58\68, 146, 227\Hero's Descent\100, 0\301\201\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Flame Orb, 5\\
-Unwelcome Meeting\Blade\4v\Shadow\16, 44, 55\66, 177, 222\\500, 0\304\302\2\90000, 180000\Granite, 5;; Meteorite, 1;; Floating Red Cloth, 2;; Otherworldly Lantern, 1;; Nether Orb, 1\(Shadow) Blinded Punisher +15%;;;; (Shadow) Dull Res\
+Unwelcome Meeting\Blade\4v\Shadow\16, 44, 55\66, 177, 222\\500, 0\304\204\2\90000, 180000\Granite, 5;; Meteorite, 1;; Floating Red Cloth, 2;; Otherworldly Lantern, 1;; Nether Orb, 1\(Shadow) Blinded Punisher +15%;;;; (Shadow) Dull Res\
 Valkaheim Blade\Blade\3\Flame\15, 34, 53\68, 147, 229\Valkan Wave\100, 0\301\201\3\15000, 30000\Granite, 10;; Light Metal, 5;; Flame Orb, 5\\
 Vampire's Lantern\Staff\3s\Light\17, 38, 59\55, 119, 185\Vampire's Treat\100, 0\0\0\0\0, 0\\\
 Vermillion Pain\Dagger\5v\Flame\27, 80, 93\106, 304, 354\\1500, 0\309\209\5\300000, 600000\Fiend's Horn, 15;; Fiend's Eye, 5;; Zephyr Rune, 2;; Inferno Orb, 3\(Flame) Skill Prep +50%;;;; (Flame) High Midgardsormr's Bane +20%\
@@ -365,3 +365,45 @@ Wizard's Rod\Wand\3\None\6, 14, 21\27, 59, 91\\100, 0\101\0\1\500, 1000\Bat's Wi
 Wyrmfang\Dagger\4\None\24, 65, 81\75, 201, 252\Fanged Recovery\500, 0\202\101\5\20000, 40000\Fiend's Horn, 20;; Fiend's Eye, 5;; Abyss Stone, 2\\
 Zethia's Staff\Staff\1\None\0, 0, 0\0, 0, 0\\0, 0\0\0\0\0, 0\\\
 Zex's End\Sword\5\Light\42, 123, 143\166, 478, 556\Zex's Waltz\1500, 0\303\201\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Sword Tablet, 100;; Twinkling Sand, 2;; Royal Amber Insignia, 200\\
+Wind Ingot\Sword\3v\Wind\10, 0, 0\42, 0, 0\\100, 0\207\101\1\15000, 30000\Meteorite, 2;; Granite, 2;; Steel Slab, 2;; Amber Slab, 1;; Storm Orb, 2\(Wind) Physian's Bane +10%;;;; (Wind) Fury Penetrator\
+Tornado Ingot\Sword\4v\Wind\17, 0, 0\66, 0, 0\\500, 0\307\207\2\90000, 180000\Meteorite, 3;; Granite, 8;; Amber Slab, 2;; Light Core, 1;; Maelstrom Orb, 2\(Wind) Physian's Bane +15%;;;; (Wind) Fury Penetrator\
+Verdantbreeze Cutter\Blade\3v\Wind\0, 0, 0\0, 0, 0\\100, 0\208\101\1\15000, 30000\Meteorite, 2;; Granite, 4;; Steel Slab, 2;; Amber Slab, 1;; Storm Orb, 2\(Wind) Physian's Bane +10%;;;; (Wind) Fury Penetrator\
+Verdurewind Cutter\Blade\4v\Wind\0, 0, 0\0, 0, 0\\500, 0\309\208\2\90000, 180000\Meteorite, 3;; Granite, 8;; Amber Slab, 2;; Light Core, 1;; Maelstrom Orb, 2\(Wind) Physian's Bane +15%;;;; (Wind) Fury Penetrator\
+Balefire Blade\Blade\3v\Flame\0, 0, 0\0, 0, 0\\100, 0\206\102\1\15000, 30000\Meteorite, 1;; Granite, 2;; Old Cloth, 1;; Floating Purple Cloth, 1;; Blaze Orb, 1\(Flame) Blinded Punisher +10%;;;; (Flame) Full HP = Strength +8%\
+Balefire Votive\Blade\4v\Flame\0, 0, 0\0, 0, 0\\500, 0\306\206\2\90000, 180000\Meteorite, 1;; Granite, 5;; Floating Purple Cloth, 2;; Shadowy Lantern, 1;; Inferno Orb, 1\(Flame) Blinded Punisher +15%;;;; (Flame) Full HP = Strength +8%\
+Hellfire Judgement\Blade\4v\Flame\0, 0, 0\0, 0, 0\\500, 0\210\109\4\50000, 100000\Meteorite, 3;; Granite, 7;; Blazing Horn, 5;; Inferno Orb, 1\(Flame) Full HP = Defense +15%;;;; (Flame) HP 70% = Critical Rate +5%\
+Ogreslayer Judgement\Blade\5v\Flame\0, 0, 0\0, 0, 0\\1500, 0\310\210\5\300000, 600000\Meteorite, 5;; Granite, 15;; Blazing Ember, 2;; Inferno Orb, 3\(Flame) Full HP = Defense +20%;;;; (Flame) HP 70% = Critical Rate +5%\
+Radiant Bolete Dagger\Dagger\3v\Light\0, 0, 0\0, 0, 0\\100, 0\205\101\1\15000, 30000\Fiend's Eye, 1;; Fiend's Horn, 2;; Solid Fungus, 1;; Storm Fungus, 1;; Radiance Orb, 1\(Light) Thaumian's Bane +10%;;;; (Light) Copy Punisher\
+Luminous Morel Dagger\Dagger\4v\Light\0, 0, 0\0, 0, 0\\500, 0\305\205\2\90000, 180000\Fiend's Eye, 1;; Fiend's Horn, 5;; Spongy Spore, 1;; Storm Fungus, 2;; Refulgence Orb, 1\(Light) Thaumian's Bane +15%;;;; (Light) Copy Punisher\
+Breezy Big Boy\Dagger\3v\Wind\0, 0, 0\0, 0, 0\\100, 0\207\102\1\15000, 30000\Fiend's Eye, 2;; Fiend's Horn, 4;; Steel Slab, 2;; Amber Slab, 1;; Storm Orb, 2\(Wind) Physian's Bane +10%;;;; (Wind) Fury Penetrator\
+Big Boy of Fortitude\Dagger\4v\Wind\0, 0, 0\0, 0, 0\\500, 0\307\207\2\90000, 180000\Fiend's Eye, 3;; Fiend's Horn, 8;; Amber Slab, 2;; Light Core, 1;; Maelstrom Orb, 2\(Wind) Physian's Bane +15%;;;; (Wind) Fury Penetrator\
+Flame Sting\Dagger\4v\Flame\0, 0, 0\0, 0, 0\\500, 0\210\108\4\50000, 100000\Fiend's Eye, 3;; Fiend's Horn, 7;; Blazing Horn, 5;; Inferno Orb, 1\(Flame) Full HP = Defense +15%;;;; (Flame) HP 70% = Critical Rate +5%\
+Searing Stinger\Dagger\5v\Flame\0, 0, 0\0, 0, 0\\1500, 0\310\210\5\300000, 600000\Fiend's Eye, 5;; Fiend's Horn, 15;; Blazing Ember, 2;; Inferno Orb, 3\(Flame) Full HP = Defense +20%;;;; (Flame) HP 70% = Critical Rate +5%\
+Aero Agony\Dagger\4v\Wind\0, 0, 0\0, 0, 0\\500, 0\210\109\4\50000, 100000\Fiend's Eye, 3;; Fiend's Horn, 7;; Great Feather, 5;; Maelstrom Orb, 1\(Wind) Skill Prep +25%;;;; (Wind) Broken Punisher +15%\
+Turbulent Agony\Dagger\5v\Wind\0, 0, 0\0, 0, 0\\1500, 0\310\210\5\300000, 600000\Fiend's Eye, 5;; Fiend's Horn, 15;; Zephyr Rune, 2;; Maelstrom Orb, 3\(Wind) Skill Prep +50%;;;; (Wind) Broken Punisher +15%\
+Lightspore Lance\Lance\3v\Light\0, 0, 0\0, 0, 0\\100, 0\205\101\1\15000, 30000\Fiend's Eye, 1;; Fiend's Horn, 2;; Solid Fungus, 1;; Storm Fungus, 1;; Radiance Orb, 1\(Light) Thaumian's Bane +10%;;;; (Light) Copy Punisher\
+Shinespore Lance\Lance\4v\Light\0, 0, 0\0, 0, 0\\500, 0\305\205\2\90000, 180000\Fiend's Eye, 1;; Fiend's Horn, 5;; Spongy Spore, 1;; Storm Fungus, 2;; Refulgence Orb, 1\(Light) Thaumian's Bane +15%;;;; (Light) Copy Punisher\
+Soulfire Spear\Lance\3v\Flame\0, 0, 0\0, 0, 0\\100, 0\206\103\1\15000, 30000\Fiend's Eye, 1;; Fiend's Horn, 2;; Old Cloth, 1;; Floating Purple Cloth, 1;; Blaze Orb, 1\(Flame) Blinded Punisher +10%;;;; (Flame) Full HP = Strength +8%\
+Spiritflame Spear\Lance\4v\Flame\0, 0, 0\0, 0, 0\\500, 0\306\206\2\90000, 180000\Fiend's Eye, 1;; Fiend's Horn, 5;; Shadowy Lantern, 1;; Floating Purple Cloth, 2;; Inferno Orb, 1\(Flame) Blinded Punisher +15%;;;; (Flame) Full HP = Strength +8%\
+Reisel, the Solar Flare\Lance\4v\Flame\0, 0, 0\0, 0, 0\\500, 0\210\108\4\50000, 100000\Fiend's Eye, 3;; Fiend's Horn, 7;; Blazing Horn, 5;; Inferno Orb, 1\(Flame) Full HP = Defense +15%;;;; (Flame) HP 70% = Critical Rate +5%\
+Reiselfeld, the Solar Spray\Lance\5v\Flame\0, 0, 0\0, 0, 0\\1500, 0\310\210\5\300000, 600000\Fiend's Eye, 5;; Fiend's Horn, 15;; Blazing Ember, 2;; Inferno Orb, 3\(Flame) Full HP = Defense +20%;;;; (Flame) HP 70% = Critical Rate +5%\
+Stormsiege Lance\Lance\4v\Wind\0, 0, 0\0, 0, 0\\500, 0\210\109\4\50000, 100000\Fiend's Eye, 3;; Fiend's Horn, 7;; Great Feather, 5;; Maelstrom Orb, 1\(Wind) Skill Prep +25%;;;; (Wind) Broken Punisher +15%\
+Stormpiercer Lance\Lance\5v\Wind\0, 0, 0\0, 0, 0\\1500, 0\310\210\5\300000, 600000\Fiend's Eye, 5;; Fiend's Horn, 15;; Zephyr Rune, 2;; Maelstrom Orb, 3\(Wind) Skill Prep +50%;;;; (Wind) Broken Punisher +15%\
+Flashfungus\Bow\3v\Light\0, 0, 0\0, 0, 0\\100, 0\204\101\1\15000, 30000\Fiend's Eye, 1;; Fiend's Horn, 2;; Solid Fungus, 1;; Storm Fungus, 1;; Radiance Orb, 1\(Light) Thaumian's Bane +10%;;;; (Light) Copy Punisher\
+Glowfungus\Bow\4v\Light\0, 0, 0\0, 0, 0\\500, 0\304\204\2\90000, 180000\Fiend's Eye, 1;; Fiend's Horn, 5;; Spongy Spore, 1;; Storm Fungus, 2;; Refulgence Orb, 1\(Light) Thaumian's Bane +15%;;;; (Light) Copy Punisher\
+Flickertorch Bow\Bow\3v\Flame\0, 0, 0\0, 0, 0\\100, 0\206\103\1\15000, 30000\Fiend's Eye, 1;; Fiend's Horn, 2;; Old Cloth, 1;; Floating Purple Cloth, 1;; Blaze Orb, 1\(Flame) Blinded Punisher +10%;;;; (Flame) Full HP = Strength +8%\
+Wispfire Bow\Bow\4v\Flame\0, 0, 0\0, 0, 0\\500, 0\306\206\2\90000, 180000\Fiend's Eye, 1;; Fiend's Horn, 5;; Shadowy Lantern, 1;; Floating Purple Cloth, 2;; Inferno Orb, 1\(Flame) Blinded Punisher +15%;;;; (Flame) Full HP = Strength +8%\
+Wind, the Dustwhirler\Bow\4v\Wind\0, 0, 0\0, 0, 0\\500, 0\209\108\4\50000, 100000\Fiend's Eye, 3;; Fiend's Horn, 7;; Great Feather, 5;; Maelstrom Orb, 1\(Wind) Skill Prep +25%;;;; (Wind) Broken Punisher +15%\
+Windhoze, the Dustblaster\Bow\5v\Wind\0, 0, 0\0, 0, 0\\1500, 0\309\209\5\300000, 600000\Fiend's Eye, 5;; Fiend's Horn, 15;; Zephyr Rune, 2;; Inferno Orb, 3\(Wind) Skill Prep +50%;;;; (Wind) Broken Punisher +15%\
+The Panic\Wand\3v\Light\0, 0, 0\0, 0, 0\\100, 0\204\101\1\15000, 30000\Bewitching Wings, 1;; Ancient Bird's Feather, 2;; Solid Fungus, 1;; Storm Fungus, 1;; Radiance Orb, 1\(Light) Thaumian's Bane +10%;;;; (Light) Copy Punisher\
+The Madness\Wand\4v\Light\0, 0, 0\0, 0, 0\\500, 0\304\204\2\90000, 180000\Bewitching Wings, 1;; Ancient Bird's Feather, 5;; Spongy Spore, 1;; Storm Fungus, 2;; Radiance Orb, 1\(Light) Thaumian's Bane +15%;;;; (Light) Copy Punisher\
+Heatshimmer Wand\Wand\3v\Flame\0, 0, 0\0, 0, 0\\100, 0\205\102\1\15000, 30000\Bewitching Wings, 1;; Ancient Bird's Feather, 2;; Old Cloth, 1;; Floating Purple Cloth, 1;; Blaze Orb, 1\(Flame) Blinded Punisher +10%;;;; (Flame) Full HP = Strength +8%\
+Brightshimmer Wand\Wand\4v\Flame\0, 0, 0\0, 0, 0\\500, 0\305\205\2\90000, 180000\Bewitching Wings, 1;; Ancient Bird's Feather, 5;; Shadowy Lantern, 1;; Floating Purple Cloth, 2;; Inferno Orb, 1\(Flame) Blinded Punisher +15%;;;; (Flame) Full HP = Strength +8%\
+Scepter of the Gale\Wand\4v\Wind\0, 0, 0\0, 0, 0\\500, 0\210\109\4\50000, 100000\Bewitching Wings, 3;; Ancient Bird's Feather, 7;; Great Feather, 5;; Maelstrom Orb, 1\(Wind) Skill Prep +25%;;;; (Wind) Broken Punisher +15%\
+Scepter of the Maelstrom\Wand\5v\Wind\0, 0, 0\0, 0, 0\\1500, 0\310\210\5\300000, 600000\Bewitching Wings, 5;; Ancient Bird's Feather, 15;; Zephyr Rune, 2;; Maelstrom Orb, 3\(Wind) Skill Prep +50%;;;; (Wind) Broken Punisher +15%\
+Brinechant\Staff\3v\Water\0, 0, 0\0, 0, 0\\100, 0\202\101\1\15000, 30000\Bewitching Wings, 2;; Ancient Bird's Feather, 4;; Steel Slab, 2;; Obsidian Slab, 1;; Stream Orb, 2\(Water) HP 70 = Defense +3%;;;; (Water) Scorching Air Res\
+Seachant\Staff\4v\Water\0, 0, 0\0, 0, 0\\500, 0\302\202\2\90000, 180000\Bewitching Wings, 3;; Ancient Bird's Feather, 8;; Dark Core, 1;; Obsidian Slab, 2;; Deluge Orb, 2\(Water) HP 70 = Defense +3%;;;; (Water) Scorching Air Res\
+Squallchant\Staff\3v\Wind\0, 0, 0\0, 0, 0\\100, 0\204\101\1\15000, 30000\Bewitching Wings, 2;; Ancient Bird's Feather, 4;; Steel Slab, 2;; Amber Slab, 1;; Storm Orb, 2\(Wind) HP 70 = Defense +3%;;;; (Wind) Recovery Potency +5%\
+Stormchant\Staff\4v\Wind\0, 0, 0\0, 0, 0\\500, 0\304\204\2\90000, 180000\Bewitching Wings, 3;; Ancient Bird's Feather, 8;; Amber Slab, 2;; Light Core, 1;; Maelstrom Orb, 2\(Wind) HP 70 = Defense +3%;;;; (Wind) Recovery Potency +5%\
+Ignis Core\Staff\4v\Flame\0, 0, 0\0, 0, 0\\500, 0\209\108\4\50000, 100000\Bewitching Wings, 3;; Ancient Bird's Feather, 7;; Blazing Horn, 5;; Inferno Orb, 1\(Flame) Full HP = Defense +15%;;;; (Flame) HP 70% = Critical Rate +5%\
+Igniflare Core\Staff\5v\Flame\0, 0, 0\0, 0, 0\\1500, 0\309\209\5\300000, 600000\Bewitching Wings, 5;; Ancient Bird's Feather, 15;; Blazing Ember, 2;; Inferno Orb, 3\(Flame) Full HP = Defense +20%;;;; (Flame) HP 70% = Critical Rate +5%\
