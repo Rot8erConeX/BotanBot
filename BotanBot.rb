@@ -32,6 +32,8 @@ end
 # The bot's token is basically their password, so is censored for obvious reasons
 if @shardizard==4
   bot = Discordrb::Commands::CommandBot.new token: '>Debug Token<', client_id: >Debug ID<, prefix: prefix_proc
+elsif @shardizard>4
+  bot = Discordrb::Commands::CommandBot.new token: '>Token<', shard_id: (@shardizard-1), num_shards: 4, client_id: >ID<, prefix: prefix_proc
 else
   bot = Discordrb::Commands::CommandBot.new token: '>Token<', shard_id: @shardizard, num_shards: 4, client_id: >ID<, prefix: prefix_proc
 end
