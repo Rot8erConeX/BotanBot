@@ -1966,6 +1966,35 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
   k=find_data_ex(:find_weapon,args.join(' '),event)
   if k.length.zero?
+    k4=find_in_weapons(bot,event,args,2,false,true)
+    args2=args.map{|q| q}
+    args2=args2.reject{|q| q.to_i.to_s==q || q.gsub('*','').to_i.to_s==q} if k4.map{|q| q[2][0,1]}.uniq.length==1
+    args2=args2.join(' ')
+    if k4.map{|q| q[3]}.uniq.length==1
+      args2=first_sub(args2,k4[0][3].downcase,'')
+      args2=first_sub(args2,'fire','') if k4[0][3]=='Flame'
+      args2=first_sub(args2,'dark','') if k4[0][3]=='Shadow'
+    end
+    if k4.map{|q| q[1]}.uniq.length==1
+      args2=first_sub(args2,k4[0][1].downcase,'')
+      args2=first_sub(args2,'spear','') if k4[0][1]=='Lance'
+    end
+    args2=first_sub(args2,'void','') if k4.reject{|q| q[1][1,1]!='v'}.length<=0
+    k2=find_data_ex(:find_enemy,args2,event)
+    if k2.length>0 && k2[2][2]=='Void'
+      k3=k4.reject{|q| q[15].nil? || q[15]!=k2[0]}
+      k4=k3.map{|q| q} if k3.length>0
+    end
+    if k4.length>3
+      event.respond "Too many weapons qualify.  I will not display them all."
+      return nil
+    end
+    for i in 0...k4.length
+      disp_weapon_stats(bot,event,k4[i][0].split(' '),juststats)
+    end
+    return nil
+  end
+  if k.length.zero?
     event.respond 'No matches found.'
     return nil
   elsif k[0].is_a?(Array)
@@ -1979,10 +2008,13 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     args2=first_sub(args2,'spear','') if k[0][1]=='Lance'
     args2=first_sub(args2,'void','')
     k2=find_data_ex(:find_enemy,args2,event)
-    puts k2.to_s
     if k2.length>0 && k2[2][2]=='Void'
       k3=k.reject{|q| q[15].nil? || q[15]!=k2[0]}
       k=k3.map{|q| q} if k3.length>0
+    end
+    if k.length>5
+      event.respond "Too many weapons are qualify.  I will not display them all."
+      return nil
     end
     for i in 0...k.length
       disp_weapon_stats(bot,event,k[i][0].split(' '),juststats)
@@ -2191,6 +2223,44 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   k=find_data_ex(:find_weapon,args.join(' '),event)
   kx=find_data_ex(:find_weapon,args.join(' '),event,false,true)
   kx=comparedata.map{|q| q} unless comparedata.nil?
+  if k.length.zero?
+    k4=find_in_weapons(bot,event,args,2,false,true)
+    args2=args.map{|q| q}
+    args2=args2.reject{|q| q.to_i.to_s==q || q.gsub('*','').to_i.to_s==q} if k4.map{|q| q[2][0,1]}.uniq.length==1
+    args2=args2.join(' ')
+    if k4.map{|q| q[3]}.uniq.length==1
+      args2=first_sub(args2,k4[0][3].downcase,'')
+      args2=first_sub(args2,'fire','') if k4[0][3]=='Flame'
+      args2=first_sub(args2,'dark','') if k4[0][3]=='Shadow'
+    end
+    if k4.map{|q| q[1]}.uniq.length==1
+      args2=first_sub(args2,k4[0][1].downcase,'')
+      args2=first_sub(args2,'spear','') if k4[0][1]=='Lance'
+    end
+    args2=first_sub(args2,'void','') if k4.reject{|q| q[1][1,1]!='v'}.length<=0
+    k2=find_data_ex(:find_enemy,args2,event)
+    if k2.length>0 && k2[2][2]=='Void'
+      k3=k4.reject{|q| q[15].nil? || q[15]!=k2[0]}
+      k4=k3.map{|q| q} if k3.length>0
+    end
+    if k4.length>3
+      event.respond "Too many weapons qualify.  I will not display them all."
+      return nil
+    end
+    if kx.length<=0
+      kx=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+    elsif !kx[0].is_a?(Array)
+      kx=[kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx]
+    elsif k.length>k2.length
+      for i in 0...k.length-k2.length+1
+        k2.push(k2[i])
+      end
+    end
+    for i in 0...k4.length
+      disp_weapon_lineage(bot,event,k4[i][0].split(' '),kx[i])
+    end
+    return nil
+  end
   if k.length.zero?
     event.respond 'No matches found.'
     return nil
@@ -2445,11 +2515,11 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
       str=str.gsub(';;;;;',"\n#{strx}")
     end
   end
-  if str.length+str3.length>=1900
-    create_embed(event,"__**#{k[0]}**__",str,element_color(k[3]),nil,xpic)
+  if str.length+str3.length+title.length>=1900
+    create_embed(event,["__**#{k[0]}**__",title],str,element_color(k[3]),nil,xpic)
     create_embed(event,'',str3,element_color(k[3]),ftr)
   else
-    create_embed(event,"__**#{k[0]}**__","#{str}\n\n#{str3}",element_color(k[3]),ftr,xpic)
+    create_embed(event,["__**#{k[0]}**__",title],"#{str}\n\n#{str3}",element_color(k[3]),ftr,xpic)
   end
 end
 
@@ -5320,7 +5390,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   end
   if races.length>0
     char=char.reject{|q| !races.include?(q[14])}.uniq
-    textra="#{textra}\n\nThis is showing adventurers from the Human race.\nFor enemies from the Human tribe, try `DL!find boss human`."
+    textra="#{textra}\n\nThis is showing adventurers from the Human race.\nFor enemies from the Human tribe, try `DL!find boss human`." if races.include?('Human')
     search.push("*Races*: #{races.join(', ')}")
   end
   if tags.length>0
@@ -5666,7 +5736,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
   end
 end
 
-def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true)
+def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   data_load()
   args=normalize(event.message.text.downcase).gsub(',','').split(' ') if args.nil?
   args=args.map{|q| normalize(q.downcase)}
@@ -5702,19 +5772,21 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true)
     wpn.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
     wpn.push('Wand') if ['wand','wands'].include?(args[i].downcase)
     wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
-    fltr.push('Welfare') if ['welfare','welfares','free','freebies','f2p'].include?(args[i].downcase)
-    fltr.push('Starter') if ['starter','starters','start','starting'].include?(args[i].downcase)
-    fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
-    fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons','limited','limit'].include?(args[i].downcase)
-    fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons','limited','limit'].include?(args[i].downcase)
-   # fltr.push('PseudoSummon') if ['summon','summons','summonable','summonables'].include?(args[i].downcase)
-    fltr.push('Paid') if ['payment','paid','paying','whale'].include?(args[i].downcase)
-    fltr.push('Void') if ['void'].include?(args[i].downcase)
-    fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers','feh','limited','limit'].include?(args[i].downcase)
-    for i2 in 0...lookout.length
-      tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
+    unless juststats
+      fltr.push('Welfare') if ['welfare','welfares','free','freebies','f2p'].include?(args[i].downcase)
+      fltr.push('Starter') if ['starter','starters','start','starting'].include?(args[i].downcase)
+      fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
+      fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons','limited','limit'].include?(args[i].downcase)
+      fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons','limited','limit'].include?(args[i].downcase)
+     # fltr.push('PseudoSummon') if ['summon','summons','summonable','summonables'].include?(args[i].downcase)
+      fltr.push('Paid') if ['payment','paid','paying','whale'].include?(args[i].downcase)
+      fltr.push('Void') if ['void'].include?(args[i].downcase)
+      fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers','feh','limited','limit'].include?(args[i].downcase)
+      for i2 in 0...lookout.length
+        tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
+      end
+      tags.push('StrengthSkill') if ['strength','str'].include?(args[i].downcase) && allowstr
     end
-    tags.push('StrengthSkill') if ['strength','str'].include?(args[i].downcase) && allowstr
   end
   textra=''
   rarity.uniq!
@@ -5852,7 +5924,9 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true)
       end
     end
   end
-  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
+  if juststats
+    return char
+  elsif (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
     event.respond "Too much data is trying to be displayed.  Please use this command in PM." if mode==0
     return nil
   else
