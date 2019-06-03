@@ -2,10 +2,11 @@ Aurelius\1\y\\
 Chelle\1\y\\
 Elysium\1\y\\
 Emile\1\y\\
+Fa Ming\1\y\\
 Harle\1\y\\
 Leif\1\y\\
 Lathna\2\y\\
-Leonidas\1\y\\
+Leonidas\1\y\\Tomokazu Seki
 Loki\1\y\\
 Mars\1\y\\
 Nina\2\y\\
@@ -16,4 +17,5 @@ Ramona\1\n\\
 Rolf\1\y\\
 Sarisse\1\n\\
 Valyx\1\y\\
+Wu Kong\1\y\\
 Zacharias\1\y\\
