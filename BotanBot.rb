@@ -1355,19 +1355,22 @@ def element_emote(ele,bot,feh='')
   return ''
 end
 
-def adv_emoji(k,bot,ignorefeh=false)
+def adv_emoji(k,bot,ignorefeh=false,advheader=false)
   t=Time.now
   timeshift=7
   timeshift-=1 unless (t-24*60*60).dst?
   t-=60*60*timeshift
-  if t.year==2019
+  if advheader
+    ignorefeh=false
+  elsif t.year==2019
     ignorefeh=false if t.month==4
     ignorefeh=false if t.month==5 && t.day<=12
   end
+  str=''
   if !k[12].nil? && k[12]=='FEH' && !ignorefeh
-    str=['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][k[1][0,1].to_i]
+    str=['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][k[1][0,1].to_i] unless advheader
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2][1].gsub('Shadow','Dark').gsub('Flame','Fire')}"}
-    str="#{str}#{moji[0].mention unless moji.length<=0}"
+    str="#{str}#{moji[0].mention unless moji.length<=0}#{"#{k[2][1]}  " if advheader}"
     wpn='<:Gold_Unknown:443172811499110411>'
     wpn='<:Red_Blade:443172811830198282>' if k[2][2]=='Sword'
     wpn='<:Colorless_Blade:443692132310712322>' if k[2][2]=='Blade'
@@ -1377,17 +1380,17 @@ def adv_emoji(k,bot,ignorefeh=false)
     wpn='<:Blue_Blade:467112472768151562>' if k[2][2]=='Lance'
     wpn='<:Green_Tome:467122927666593822>' if k[2][2]=='Wand'
     wpn='<:Colorless_Staff:443692132323295243>' if k[2][2]=='Staff'
-    str="#{str}#{wpn}"
+    str="#{str}#{wpn}#{"#{k[2][2]}  " if advheader}"
     clzz='<:Resource_Structure:510774545154572298>'
     clzz='<:Skill_Weapon:444078171114045450>' if k[2][0]=='Attack'
     clzz='<:Skill_Special:444078170665254929>' if k[2][0]=='Support'
     clzz='<:Defense_Shield:570987444309196835>' if k[2][0]=='Defense'
     clzz='<:Healing_Rod:570991014894895104>' if k[2][0]=='Healer'
-    str="#{str}#{clzz}"
+    str="#{str}#{clzz}#{k[2][0] if advheader}"
   elsif !k[12].nil? && k[12]=='FGO' && !ignorefeh
     str=''
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
-    str="#{str}#{moji[0].mention unless moji.length<=0}"
+    str="#{str}#{moji[0].mention unless moji.length<=0}#{"#{k[2][1]}  " if advheader}"
     clzz='unknown'
     clzz='saber' if k[2][2]=='Sword'
     clzz='blade' if k[2][2]=='Blade'
@@ -1403,21 +1406,21 @@ def adv_emoji(k,bot,ignorefeh=false)
     clr='silver' if k[1][0,1].to_i==4
     clr='bronze' if k[1][0,1].to_i<4
     moji=bot.server(srv).emoji.values.reject{|q| q.name != "class_#{clzz}_#{clr}"}
-    str="#{str}#{moji[0].mention unless moji.length<=0}"
+    str="#{str}#{moji[0].mention unless moji.length<=0}#{"#{k[2][2]}  " if advheader}"
     clzz=''
     clzz='<:Buster_y:526556105422274580>' if k[2][0]=='Attack'
     clzz='<:support:572315955397394452>' if k[2][0]=='Support'
     clzz='<:Arts_y:526556105489252352>' if k[2][0]=='Defense'
     clzz='<:healing:572342852420501506>' if k[2][0]=='Healer'
-    str="#{str}#{clzz}"
+    str="#{str}#{clzz}#{k[2][0] if advheader}"
   else
-    str=['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]
+    str=['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i] unless advheader
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
-    str="#{str}#{moji[0].mention unless moji.length<=0}"
+    str="#{str}#{moji[0].mention unless moji.length<=0}#{"#{k[2][1]}  " if advheader}"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[2][2]}"}
-    str="#{str}#{moji[0].mention unless moji.length<=0}"
+    str="#{str}#{moji[0].mention unless moji.length<=0}#{"#{k[2][2]}  " if advheader}"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
-    str="#{str}#{moji[0].mention unless moji.length<=0}"
+    str="#{str}#{moji[0].mention unless moji.length<=0}#{k[2][0] if advheader}"
     str="#{str}<:Great_Badge_Golden:443704781068959744>" if !k[12].nil? && k[12]=='FEH'
     str="#{str}<:Bond:523903660913197056>" if !k[12].nil? && k[12]=='FGO'
   end
@@ -1583,15 +1586,18 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     rar=k[1][0,1].to_i
   end
   title=''
+  titlex=[]
   str=''
-  deftext=''
   if !k[12].nil? && k[12]=='FEH'
     unless s2s || juststats
       str="#{generate_rarity_row(rar,true,'FEH')}"
       str="#{str} (from #{k[1][0,1].to_i}#{['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
     end
+    titlex=["#{generate_rarity_row(rar,true,'FEH')}"]
+    titlex.push("(from #{k[1][0,1].to_i}#{['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
+    titlex.push("<:DefenseS:514712247461871616>#{longFormattedNumber(k[5])}")
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2][1].gsub('Shadow','Dark').gsub('Flame','Fire')}"}
-    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][1]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][1]}**"
     wpn='<:Gold_Unknown:443172811499110411>'
     wpn='<:Red_Blade:443172811830198282>' if k[2][2]=='Sword'
     wpn='<:Colorless_Blade:443692132310712322>' if k[2][2]=='Blade'
@@ -1601,22 +1607,24 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     wpn='<:Blue_Blade:467112472768151562>' if k[2][2]=='Lance'
     wpn='<:Green_Tome:467122927666593822>' if k[2][2]=='Wand'
     wpn='<:Colorless_Staff:443692132323295243>' if k[2][2]=='Staff'
-    title="#{title}\n#{wpn} **Weapon:** #{k[2][2]}"
-    deftext="  <:DefenseS:514712247461871616>*Def:*\u00A0#{longFormattedNumber(k[5])}"
+    title="#{title}\n#{wpn}**#{k[2][2]}**  <:DefenseS:514712247461871616>#{longFormattedNumber(k[5])}"
     clzz='<:Resource_Structure:510774545154572298>'
     clzz='<:Skill_Weapon:444078171114045450>' if k[2][0]=='Attack'
     clzz='<:Skill_Special:444078170665254929>' if k[2][0]=='Support'
     clzz='<:Defense_Shield:570987444309196835>' if k[2][0]=='Defense'
     clzz='<:Healing_Rod:570991014894895104>' if k[2][0]=='Healer'
-    title="#{title}\n#{clzz} **Class:** #{k[2][0]}"
+    title="#{title}\n#{clzz}**#{k[2][0]}**"
     title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[12].nil? && k[12]=='FGO'
     unless s2s || juststats
       str="#{generate_rarity_row(rar,true,'FGO')}"
       str="#{str} (from #{k[1][0,1].to_i}#{['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
     end
+    titlex=["#{generate_rarity_row(rar,true,'FGO')}"]
+    titlex.push("(from #{k[1][0,1].to_i}#{['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
+    titlex.push("*Def:* #{longFormattedNumber(k[5])}")
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
-    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][1]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][1]}**"
     clzz='unknown'
     clzz='saber' if k[2][2]=='Sword'
     clzz='blade' if k[2][2]=='Blade'
@@ -1632,31 +1640,32 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     clr='silver' if k[1][0,1].to_i==4
     clr='bronze' if k[1][0,1].to_i<4
     moji=bot.server(srv).emoji.values.reject{|q| q.name != "class_#{clzz}_#{clr}"}
-    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Weapon:** #{k[2][2]}"
-    deftext="  *Def:*\u00A0#{longFormattedNumber(k[5])}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][2]}**  *Def:* #{longFormattedNumber(k[5])}"
     clzz=''
     clzz='<:Buster_y:526556105422274580>' if k[2][0]=='Attack'
     clzz='<:support:572315955397394452>' if k[2][0]=='Support'
     clzz='<:Arts_y:526556105489252352>' if k[2][0]=='Defense'
     clzz='<:healing:572342852420501506>' if k[2][0]=='Healer'
-    title="#{title}\n#{clzz} **Class:** #{k[2][0]}"
+    title="#{title}\n#{clzz}**#{k[2][0]}**"
     title="#{title}\n<:Bond:523903660913197056>**FGO Collab**"
+    titlex=[]
   else
     unless s2s || juststats
       str="#{generate_rarity_row(rar,true)}"
       str="#{str} (from #{k[1][0,1].to_i}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
     end
+    titlex=["#{generate_rarity_row(rar,true)}"]
+    titlex.push("(from #{k[1][0,1].to_i}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
+    titlex.push("<:Defense:573344832282689567>#{longFormattedNumber(k[5])}")
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
-    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][1]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][1]}**"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[2][2]}"}
-    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Weapon:** #{k[2][2]}"
-    deftext="  <:Defense:573344832282689567>*Def:*\u00A0#{longFormattedNumber(k[5])}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][2]}**  <:Defense:573344832282689567>#{longFormattedNumber(k[5])}"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
-    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Class:** #{k[2][0]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][0]}**"
     title="#{title}\n**Collab**" unless k[12].nil? || k[12].length<=0
     title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c'
   end
-  deftext='' if s2s || juststats
   title="#{title}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
   title="#{title}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
   title="#{title}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
@@ -1675,13 +1684,12 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>']
   semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:DefenseS:514712247461871616>'] if feh
   if s2s || juststats
-    str="#{str}\n\n#{semoji[2]}**Defense:** #{k[5]}"
     flds=[]
     fehm=''
     fehm='FEH' if feh
     fehm='FGO' if !k[12].nil? && k[12]=='FGO'
     for i in rar...6
-      flds.push([generate_rarity_row(i,true,fehm),"**Level 1**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0][i-3])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0][i-3])}\n**Level #{30+10*i}**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][i-3])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][i-3])}#{"\n**Max Stats**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1][3])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1][3])}" if i==5 && (!k[3][1][3].nil? || !k[4][1][3].nil?)}"])
+      flds.push([generate_rarity_row(i,true,fehm),"**Lv.1**  #{semoji[0]}#{longFormattedNumber(k[3][0][i-3])}  #{semoji[1]}#{longFormattedNumber(k[4][0][i-3])}  \u00B7\n**Lv.#{30+10*i}**  #{semoji[0]}#{longFormattedNumber(k[3][1][i-3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][i-3])}  \u00B7#{"\n**Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][3])}" if i==5 && (!k[3][1][3].nil? || !k[4][1][3].nil?)}"])
     end
     unless juststats
       str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{', <:Energize:559629242137051155>Energizable' if skl1[7]=='Yes'}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min}"
@@ -1712,12 +1720,16 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       nde=0 if k[0]=='Gala Mym'
       flds.push(['Abilities',"#{k[8][0][0]} (F#{nde}) \u2192 #{k[8][0][1]} (F3)\n#{k[8][1][0]} (F1) \u2192 #{k[8][1][1]} (F4)\n#{a3}\n\n*Co-Ability:* #{k[7]}"])
     end
+    titlex=[]
   else
     xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Adventurers/#{dispname}_#{[rar,k[1][0,1].to_i].max}.png?raw=true" unless semirar
-    str="#{str}\n\n**Level 1**  #{semoji[0]}*HP:*\u00A0#{longFormattedNumber(k[3][0][rar-3])}  #{semoji[1]}*Str:*\u00A0#{longFormattedNumber(k[4][0][rar-3])}"
-    str="#{str}\n**Level #{30+10*rar}**  #{semoji[0]}*HP:*\u00A0#{longFormattedNumber(k[3][1][rar-3])}  #{semoji[1]}*Str:*\u00A0#{longFormattedNumber(k[4][1][rar-3])}"
-    str="#{str}\n**Max Stats**  #{semoji[0]}*HP:*\u00A0#{longFormattedNumber(k[3][1][3])}  #{semoji[1]}*Str:*\u00A0#{longFormattedNumber(k[4][1][3])}" if rar==5 && (!k[3][1][3].nil? || !k[4][1][3].nil?)
-    str="#{str}#{deftext}"
+    if rar==5 && (!k[3][1][3].nil? || !k[4][1][3].nil?)
+      title="#{adv_emoji(k,bot,true,true)}\n**Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][3])}"
+    else
+      title="#{adv_emoji(k,bot,true,true)}\n**Lv.#{30+10*rar}**  #{semoji[0]}#{longFormattedNumber(k[3][1][rar-3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][rar-3])}"
+    end
+    title="#{title}  #{titlex[-1]}"
+    str=''
     lv=[3,2,2,2,k[8][2].length]
     lv=[2,2,2,2,0] if rar==4
     lv=[2,1,2,1,0] if rar==3
@@ -1746,21 +1758,26 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     ftr="Data shown is for a 5-star adventurer.  To show data for a #{k[1][0,1]}-star version, please include #{k[1][0,1]}* in your message." if semirar
     ftr=nil if k[1][0,1].to_i==5
   end
+  hdr="__**#{k[0]}**__"
+  if titlex.length>0
+    hdr="#{hdr} #{titlex[0]}"
+    hdr="#{hdr} #{titlex[1]}" if titlex.length>2
+  end
   if flds.nil?
     f=0
     f=ftr.length unless ftr.nil?
     if str.length+title.length+f>=1500
-      create_embed(event,["__**#{k[0]}**__",title],'',element_color(k[2][1]),nil,xpic)
+      create_embed(event,[hdr,title],'',element_color(k[2][1]),nil,xpic)
       create_embed(event,'',str,element_color(k[2][1]),ftr)
     else
-      create_embed(event,["__**#{k[0]}**__",title],str,element_color(k[2][1]),ftr,xpic)
+      create_embed(event,[hdr,title],str,element_color(k[2][1]),ftr,xpic)
     end
   elsif flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length+title.length+str.length>=1500
-    create_embed(event,["__**#{k[0]}**__",title],str,element_color(k[2][1]),ftr,xpic,flds[0,flds.length-2])
+    create_embed(event,[hdr,title],str,element_color(k[2][1]),ftr,xpic,flds[0,flds.length-2])
     create_embed(event,"__**#{flds[-2][0]}**__",flds[-2][1],element_color(k[2][1]))
     create_embed(event,"__**#{flds[-1][0]}**__",flds[-1][1],element_color(k[2][1]))
   else
-    create_embed(event,["__**#{k[0]}**__",title],str,element_color(k[2][1]),ftr,xpic,flds)
+    create_embed(event,[hdr,title],str,element_color(k[2][1]),ftr,xpic,flds)
   end
 end  
 
@@ -1807,7 +1824,7 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false)
   str='<:Rarity_5:532086056737177600>'*k[1][0,1].to_i if k[0]=='Gold Fafnir'
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2]}"}
   moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2].gsub('Shadow','Dark').gsub('Flame','Fire')}"} if feh
-  title="#{moji[0].mention unless moji.length<=0} **Element:** #{k[2]}"
+  title="#{moji[0].mention unless moji.length<=0}**#{k[2]}**"
   title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**" if feh
   title="#{title}\n<:Bond:523903660913197056>**FGO Collab**" if !k[16].nil? && k[16]=='FGO'
   title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c' && !(feh || (!k[16].nil? && k[16].length>0 && k[16]=='FGO'))
@@ -1818,14 +1835,16 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false)
   title="#{title}\n**Treasure Trade**" if k[1].length>1 && k[1][1,1].downcase=='t'
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Speed:573366907357495296>']
   semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:Defense:573344832282689567>','<:SpeedS:514712247625580555>'] if feh
-  str="#{str}\n\n**Level 1**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}"
-  str="#{str}\n**Level #{k[1][0,1].to_i*20}**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}"
-  str="#{str}\n\n#{semoji[3]}**Speed:**  *Dash:*\u00A0\u00A0#{k[8][0]}  *Turn:*\u00A0\u00A0#{k[8][1]}"
-  str="#{str}\n*Automatically turns to damage direction*" if k[10]=='Yes'
-  if k[11]=='Yes'
-    str="#{str}\n*Long range attacks*"
-  else
-    str="#{str}\n*Short range attacks*"
+  str="#{str}\n\n**Level 1**  #{semoji[0]}#{longFormattedNumber(k[3][0])}  #{semoji[1]}#{longFormattedNumber(k[4][0])}"
+  str="#{str}\n**Level #{k[1][0,1].to_i*20}**  #{semoji[0]}#{longFormattedNumber(k[3][1])}  #{semoji[1]}#{longFormattedNumber(k[4][1])}"
+  if s2s || juststats
+    str="#{str}\n\n#{semoji[3]}**Speed:**  *Dash:*\u00A0\u00A0#{k[8][0]}  *Turn:*\u00A0\u00A0#{k[8][1]}"
+    str="#{str}\n*Automatically turns to damage direction*" if k[10]=='Yes'
+    if k[11]=='Yes'
+      str="#{str}\n*Long range attacks*"
+    else
+      str="#{str}\n*Short range attacks*"
+    end
   end
   sklz=@askilities.map{|q| q}
   skl1=sklz[sklz.find_index{|q| q[2]=='Skill' && q[0]==k[5]}]
@@ -1880,19 +1899,21 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/#{pic.join('/')}.png?raw=true"
   str=generate_rarity_row(5,false,k[0][16])
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[0][2]}"}
-  title="#{moji[0].mention unless moji.length<=0} **Element:** #{k[0][2]}\n**Pseudodragon**"
+  title="#{moji[0].mention unless moji.length<=0}**#{k[0][2]}**\n**Pseudodragon**"
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Speed:573366907357495296>']
   sklz=@askilities.map{|q| q}
   unless k.map{|q| q[8]}.uniq.length<2 && k.map{|q| q[10]}.uniq.length<2 && k.map{|q| q[11]}.uniq.length<2 && (k2[2].is_a?(String) || k2[2].length==1)
     for i in 0...k.length
       str="#{str}\n\n__**#{k2[1][i]}**__"
-      str="#{str}\n#{semoji[3]}**Speed:**  *Dash:*\u00A0\u00A0#{k[i][8][0]}  *Turn:*\u00A0\u00A0#{k[i][8][1]}" unless k.map{|q| q[8]}.uniq.length<2
-      str="#{str}\n*Automatically turns to damage direction*" if k[i][10]=='Yes' && k.map{|q| q[10]}.uniq.length>1
-      if k.map{|q| q[11]}.uniq.length<2
-      elsif k[i][11]=='Yes'
-        str="#{str}\n*Long range attacks*"
-      else
-        str="#{str}\n*Short range attacks*"
+      if s2s || juststats
+        str="#{str}\n#{semoji[3]}**Speed:**  *Dash:*\u00A0\u00A0#{k[i][8][0]}  *Turn:*\u00A0\u00A0#{k[i][8][1]}" unless k.map{|q| q[8]}.uniq.length<2
+        str="#{str}\n*Automatically turns to damage direction*" if k[i][10]=='Yes' && k.map{|q| q[10]}.uniq.length>1
+        if k.map{|q| q[11]}.uniq.length<2
+        elsif k[i][11]=='Yes'
+          str="#{str}\n*Long range attacks*"
+        else
+          str="#{str}\n*Short range attacks*"
+        end
       end
       if k2[2].is_a?(Array) && k2[2].length>[i,1].max && !juststats
         skl1=sklz[sklz.find_index{|q| q[2]=='Skill' && q[0]==k2[2][i]}]
@@ -1903,13 +1924,15 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
   if k.length==1
   elsif k.map{|q| q[8]}.uniq.length<2 || k.map{|q| q[10]}.uniq.length<2 || k.map{|q| q[11]}.uniq.length<2 || (k2[2].is_a?(Array) && k2[2].length>1)
     str="#{str}\n\n__**Both**__"
-    str="#{str}\n#{semoji[3]}**Speed:**  *Dash:*\u00A0\u00A0#{k[0][8][0]}  *Turn:*\u00A0\u00A0#{k[0][8][1]}" if k.map{|q| q[8]}.uniq.length<2
-    str="#{str}\n*Automatically turns to damage direction*" if k[0][10]=='Yes' && k.map{|q| q[10]}.uniq.length<2
-    if k.map{|q| q[11]}.uniq.length>1
-    elsif k[0][11]=='Yes'
-      str="#{str}\n*Long range attacks*"
-    else
-      str="#{str}\n*Short range attacks*"
+    if s2s || juststats
+      str="#{str}\n#{semoji[3]}**Speed:**  *Dash:*\u00A0\u00A0#{k[0][8][0]}  *Turn:*\u00A0\u00A0#{k[0][8][1]}" if k.map{|q| q[8]}.uniq.length<2
+      str="#{str}\n*Automatically turns to damage direction*" if k[0][10]=='Yes' && k.map{|q| q[10]}.uniq.length<2
+      if k.map{|q| q[11]}.uniq.length>1
+      elsif k[0][11]=='Yes'
+        str="#{str}\n*Long range attacks*"
+      else
+        str="#{str}\n*Short range attacks*"
+      end
     end
   end
   if (k2[2].is_a?(String) || k2[2].length==1) && !juststats
@@ -1969,7 +1992,7 @@ def disp_wyrmprint_stats(bot,event,args=nil)
     clzz='<:Skill_Special:444078170665254929>' if k[2]=='Support'
     clzz='<:Defense_Shield:570987444309196835>' if k[2]=='Defense'
     clzz='<:Healing_Rod:570991014894895104>' if k[2]=='Healer'
-    title="#{clzz} **Amulet Type:** #{k[2]}"
+    title="#{clzz}**#{k[2]}**"
     title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[10].nil? && k[10]=='FGO'
     clzz=''
@@ -1977,11 +2000,11 @@ def disp_wyrmprint_stats(bot,event,args=nil)
     clzz='<:support:572315955397394452>' if k[2]=='Support'
     clzz='<:Arts_y:526556105489252352>' if k[2]=='Defense'
     clzz='<:healing:572342852420501506>' if k[2]=='Healer'
-    title="#{clzz} **Amulet Type:** #{k[2]}"
+    title="#{clzz}**#{k[2]}**"
     title="#{title}\n<:Bond:523903660913197056>**FGO Collab**"
   else
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2]}"}
-    title="#{moji[0].mention unless moji.length<=0} **Amulet Type:** #{k[2]}"
+    title="#{moji[0].mention unless moji.length<=0}**#{k[2]}**"
     title="#{title}\n**Collab**" unless k[10].nil? || k[10].length<=0
     title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c'
   end
@@ -2133,7 +2156,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   if !k[14].nil? && k[14]=='FEH'
     str=generate_rarity_row(k[2][0,1].to_i,false,'FEH')
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[3].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Anima')}"}
-    title="#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+    title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     wpn='<:Gold_Unknown:443172811499110411>'
     wpn='<:Red_Blade:443172811830198282>' if k[1]=='Sword'
     wpn='<:Colorless_Blade:443692132310712322>' if k[1]=='Blade'
@@ -2143,12 +2166,12 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     wpn='<:Blue_Blade:467112472768151562>' if k[1]=='Lance'
     wpn='<:Green_Tome:467122927666593822>' if k[1]=='Wand'
     wpn='<:Colorless_Staff:443692132323295243>' if k[1]=='Staff'
-    title="#{title}\n#{wpn} **Weapon:** #{k[1]}"
+    title="#{title}\n#{wpn}**#{k[1]}**"
     title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[14].nil? && k[14]=='FGO'
     str=generate_rarity_row(k[2][0,1].to_i,false,'FGO')
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
-    title="#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+    title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     clzz='unknown'
     clzz='saber' if k[1]=='Sword'
     clzz='blade' if k[1]=='Blade'
@@ -2164,14 +2187,14 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     clr='silver' if k[2][0,1].to_i==4
     clr='bronze' if k[2][0,1].to_i<4
     moji=bot.server(srv).emoji.values.reject{|q| q.name != "class_#{clzz}_#{clr}"}
-    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Weapon:** #{k[1]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[1]}**"
     title="#{title}\n<:Bond:523903660913197056>**FGO Collab**"
   else
     str=generate_rarity_row(k[2][0,1].to_i)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
-    title="#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+    title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
-    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Weapon Type:** #{k[1]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[1]}**"
     title="#{title}\n**Collab**" unless k[14].nil? || k[14].length<=0
     title="#{title}\n**Collab**" if k[2].length>1 && k[2][1,1].downcase=='c'
   end
@@ -2223,28 +2246,28 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   bemoji=['<:Aether_Stone:510776805746278421>','<:Refining_Stone:453618312165720086>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if !k[14].nil? && k[14]=='FEH'
   if s2s && !skl.nil? && !juststats
     str="#{str}\n\n__**#{bemoji[0]*4} Level 1**__"
-    str="#{str}\n#{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
+    str="#{str}\n#{semoji[0]}#{longFormattedNumber(k[4][0])}  #{semoji[1]}#{longFormattedNumber(k[5][0])}"
     str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
     str="#{str}\n*#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}*" unless abl.nil?
     str="#{str}\n*#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*" unless ablx.nil?
     if (k[4][1]>0 || k[5][1]>0)
       str="#{str}\n\n__**#{bemoji[0]*4} Level #{f0}**__"
-      str="#{str}\n#{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}"
+      str="#{str}\n#{semoji[0]}#{longFormattedNumber(k[4][1])}  #{semoji[1]}#{longFormattedNumber(k[5][1])}"
       str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][0])} SP\n#{skl[3].gsub(';; ',"\n")}"
       str="#{str}\n*#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}*" unless abl.nil?
       str="#{str}\n*#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*" unless ablx.nil?
     end
     str="#{str}\n\n__**#{bemoji[1]*4} Level #{f}**__"
-    str="#{str}\n#{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
+    str="#{str}\n#{semoji[0]}#{longFormattedNumber(k[4][2])}  #{semoji[1]}#{longFormattedNumber(k[5][2])}"
     str="#{str}\n*#{skl[0]}* - #{longFormattedNumber(skl[6][1])} SP\n#{skl[4].gsub(';; ',"\n")}"
     str="#{str}\n*#{abl2[0]}#{" #{'+' if abl2[1].include?('%')}#{abl2[1]}" unless abl2[1]=='-'}*" unless abl2.nil?
     str="#{str}\n*#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}*" if abl2.nil? && !abl.nil?
     str="#{str}\n*#{ablx2[0]}#{" #{'+' if ablx2[1].include?('%')}#{ablx2[1]}" unless ablx2[1]=='-'}*" unless ablx2.nil?
     str="#{str}\n*#{ablx[0]}#{" #{'+' if ablx[1].include?('%')}#{ablx[1]}" unless ablx[1]=='-'}*" if ablx2.nil? && !ablx.nil?
   else
-    str="#{str}\n\n**#{bemoji[0]*4} Level 1**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
-    str="#{str}\n**#{bemoji[0]*4} Level #{f0}**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}" if (k[4][1]>0 || k[5][1]>0)
-    str="#{str}\n**#{bemoji[1]*4} Level #{f}**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
+    str="#{str}\n\n**#{bemoji[0]*4} Level 1**  #{semoji[0]}#{longFormattedNumber(k[4][0])}  #{semoji[1]}#{longFormattedNumber(k[5][0])}"
+    str="#{str}\n**#{bemoji[0]*4} Level #{f0}**  #{semoji[0]}#{longFormattedNumber(k[4][1])}  #{semoji[1]}#{longFormattedNumber(k[5][1])}" if (k[4][1]>0 || k[5][1]>0)
+    str="#{str}\n**#{bemoji[1]*4} Level #{f}**  #{semoji[0]}#{longFormattedNumber(k[4][2])}  #{semoji[1]}#{longFormattedNumber(k[5][2])}"
     strx=''
     unless juststats
       unless skl.nil?
@@ -2417,7 +2440,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   if !k[14].nil? && k[14]=='FEH'
     str=generate_rarity_row(k[2][0,1].to_i,false,'FEH')
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[3].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Anima')}"}
-    title="#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+    title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     wpn='<:Gold_Unknown:443172811499110411>'
     wpn='<:Red_Blade:443172811830198282>' if k[1]=='Sword'
     wpn='<:Colorless_Blade:443692132310712322>' if k[1]=='Blade'
@@ -2427,12 +2450,12 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     wpn='<:Blue_Blade:467112472768151562>' if k[1]=='Lance'
     wpn='<:Green_Tome:467122927666593822>' if k[1]=='Wand'
     wpn='<:Colorless_Staff:443692132323295243>' if k[1]=='Staff'
-    title="#{title}\n#{wpn} **Weapon:** #{k[1]}"
+    title="#{title}\n#{wpn}**#{k[1]}**"
     title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[14].nil? && k[14]=='FGO'
     str=generate_rarity_row(k[2][0,1].to_i,false,'FGO')
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
-    title="#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+    title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     clzz='unknown'
     clzz='saber' if k[1]=='Sword'
     clzz='blade' if k[1]=='Blade'
@@ -2448,14 +2471,14 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     clr='silver' if k[2][0,1].to_i==4
     clr='bronze' if k[2][0,1].to_i<4
     moji=bot.server(srv).emoji.values.reject{|q| q.name != "class_#{clzz}_#{clr}"}
-    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Weapon:** #{k[1]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[1]}**"
     title="#{title}\n<:Bond:523903660913197056>**FGO Collab**"
   else
     str=generate_rarity_row(k[2][0,1].to_i)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
-    title="#{moji[0].mention unless moji.length<=0} **Element:** #{k[3]}"
+    title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
-    title="#{title}\n#{moji[0].mention unless moji.length<=0} **Weapon Type:** #{k[1]}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[1]}**"
     title="#{title}\n**Collab**" unless k[14].nil? || k[14].length<=0
     title="#{title}\n**Collab**" if k[2].length>1 && k[2][1,1].downcase=='c'
   end
@@ -2506,10 +2529,10 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   bemoji=['<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if !k[14].nil? && k[14]=='FGO'
   bemoji=['<:Aether_Stone:510776805746278421>','<:Refining_Stone:453618312165720086>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if !k[14].nil? && k[14]=='FEH'
   if mub
-    str="#{str}\n**#{bemoji[1]*4} Level #{f}**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[5][2])}"
+    str="#{str}\n**#{bemoji[1]*4} Level #{f}**  #{semoji[0]}#{longFormattedNumber(k[4][2])}  #{semoji[1]}#{longFormattedNumber(k[5][2])}"
   else
-    str="#{str}\n**#{bemoji[0]*4} Level 1**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[5][0])}"
-    str="#{str}\n**#{bemoji[0]*4} Level 80**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[5][1])}" if (k[4][1]>0 || k[5][1]>0)
+    str="#{str}\n**#{bemoji[0]*4} Level 1**  #{semoji[0]}#{longFormattedNumber(k[4][0])}  #{semoji[1]}#{longFormattedNumber(k[5][0])}"
+    str="#{str}\n**#{bemoji[0]*4} Level 80**  #{semoji[0]}#{longFormattedNumber(k[4][1])}  #{semoji[1]}#{longFormattedNumber(k[5][1])}" if (k[4][1]>0 || k[5][1]>0)
   end
   if s2s && !skl.nil?
     if mub
