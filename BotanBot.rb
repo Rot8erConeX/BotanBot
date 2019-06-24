@@ -1681,8 +1681,8 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   feh=true if !k[12].nil? && k[12]=='FEH'
   dispname=k[0].gsub(' ','_')
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Adventurers/#{dispname}_#{k[1][0,1]}.png?raw=true"
-  semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>']
-  semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:DefenseS:514712247461871616>'] if feh
+  semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Energize:559629242137051155>']
+  semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:DefenseS:514712247461871616>','<:FEHEnergized:587684963000909845>'] if feh
   if s2s || juststats
     flds=[]
     fehm=''
@@ -1692,7 +1692,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       flds.push([generate_rarity_row(i,true,fehm),"**Lv.1**  #{semoji[0]}#{longFormattedNumber(k[3][0][i-3])}  #{semoji[1]}#{longFormattedNumber(k[4][0][i-3])}  \u00B7\n**Lv.#{30+10*i}**  #{semoji[0]}#{longFormattedNumber(k[3][1][i-3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][i-3])}  \u00B7#{"\n**Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][3])}" if i==5 && (!k[3][1][3].nil? || !k[4][1][3].nil?)}"])
     end
     unless juststats
-      str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{', <:Energize:559629242137051155>Energizable' if skl1[7]=='Yes'}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min}"
+      str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{", #{semoji[3]}Energizable" if skl1[7]=='Yes'}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min}"
       if (skl1[9].nil? || skl1[9].length<=0) && skl1[6].max != skl1[6].min
         str2="#{str2}\n*Lv.1 (F0, #{skl1[6][0]} SP):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (F3, #{skl1[6][1]} SP):* #{skl1[4].gsub(';; ',"\n")}\n*Lv.3 (F5, #{skl1[6][2]} SP):* #{skl1[5].gsub(';; ',"\n")}"
       elsif skl1[9].nil? || skl1[9].length<=0
@@ -1702,7 +1702,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       else
         str2="#{str2}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}\n*Lv.1 (F0) \u2192 Lv.2 (F3) \u2192 Lv.3 (F5)*"
       end
-      str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{', <:Energize:559629242137051155>Energizable' if skl2[7]=='Yes'}#{energy_emoji(skl2[10],true)})__#{" - #{longFormattedNumber(skl2[6][0])} SP" if skl2[6][0]===skl2[6][1]}"
+      str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{", #{semoji[3]}Energizable" if skl2[7]=='Yes'}#{energy_emoji(skl2[10],true)})__#{" - #{longFormattedNumber(skl2[6][0])} SP" if skl2[6][0]===skl2[6][1]}"
       if (skl2[9].nil? || skl2[9].length<=0) && skl2[6][0]!=skl2[6][1]
         str2="#{str2}\n*Lv.1 (F2, #{skl2[6][0]} SP):* #{skl2[3].gsub(';; ',"\n")}\n*Lv.2 (F4, #{skl2[6][1]} SP):* #{skl2[4].gsub(';; ',"\n")}"
       elsif skl2[9].nil? || skl2[9].length<=0
@@ -1738,11 +1738,11 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     lv=[1,1,1,0,0] if rar==1
     x=[skl1[3,3].reject{|q| q.nil? || q.length<=0}[lv[0]-1].gsub(';; ',"\n"),skl2[3,3].reject{|q| q.nil? || q.length<=0}[lv[1]-1].gsub(';; ',"\n")]
     strx="__**Skills:**__"
-    strx="#{strx}\n*#{k[6][0]}#{'<:Energize:559629242137051155>' if skl1[7]=='Yes'}#{energy_emoji(skl1[10])} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP*\n#{x[0]}"
-    strx="#{strx}\n\n*#{k[6][1]}#{'<:Energize:559629242137051155>' if skl2[7]=='Yes'}#{energy_emoji(skl2[10])} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP*\n#{x[1]}"
+    strx="#{strx}\n*#{k[6][0]}#{semoji[3] if skl1[7]=='Yes'}#{energy_emoji(skl1[10])} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP*\n#{x[0]}"
+    strx="#{strx}\n\n*#{k[6][1]}#{semoji[3] if skl2[7]=='Yes'}#{energy_emoji(skl2[10])} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP*\n#{x[1]}"
     strx2="**Skills:**"
-    strx2="#{strx2}\n#{k[6][0]}#{'<:Energize:559629242137051155>' if skl1[7]=='Yes'}#{energy_emoji(skl1[10])} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP"
-    strx2="#{strx2}\n#{k[6][1]}#{'<:Energize:559629242137051155>' if skl2[7]=='Yes'}#{energy_emoji(skl2[10])} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP"
+    strx2="#{strx2}\n#{k[6][0]}#{semoji[3] if skl1[7]=='Yes'}#{energy_emoji(skl1[10])} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP"
+    strx2="#{strx2}\n#{k[6][1]}#{semoji[3] if skl2[7]=='Yes'}#{energy_emoji(skl2[10])} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP"
     m=[]
     for i in 0...3
       m.push(k[8][i][lv[i+2]-1]) if lv[i+2]>0
@@ -1833,8 +1833,8 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false)
   title="#{title}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
   title="#{title}\n**Zodiac Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='z'
   title="#{title}\n**Treasure Trade**" if k[1].length>1 && k[1][1,1].downcase=='t'
-  semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Speed:573366907357495296>']
-  semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:Defense:573344832282689567>','<:SpeedS:514712247625580555>'] if feh
+  semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Speed:573366907357495296>','<:Energize:559629242137051155>']
+  semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:Defense:573344832282689567>','<:SpeedS:514712247625580555>','<:FEHEnergized:587684963000909845>'] if feh
   str="#{str}\n\n**Level 1**  #{semoji[0]}#{longFormattedNumber(k[3][0])}  #{semoji[1]}#{longFormattedNumber(k[4][0])}"
   str="#{str}\n**Level #{k[1][0,1].to_i*20}**  #{semoji[0]}#{longFormattedNumber(k[3][1])}  #{semoji[1]}#{longFormattedNumber(k[4][1])}"
   if s2s || juststats
@@ -1850,14 +1850,14 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false)
   skl1=sklz[sklz.find_index{|q| q[2]=='Skill' && q[0]==k[5]}]
   if juststats
   elsif s2s
-    str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{', <:Energize:559629242137051155>Energizable' if skl1[7]=='Yes'}#{energy_emoji(skl1[10],true)})__"
+    str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{", #{semoji[4]}Energizable" if skl1[7]=='Yes'}#{energy_emoji(skl1[10],true)})__"
     if skl1[9].nil? || skl1[9].length<=0
       str="#{str}\n*Lv.1:* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2:* #{skl1[4].gsub(';; ',"\n")}"
     else
       str="#{str}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}"
     end
   else
-    str="#{str}\n\n**Skill:** *#{k[5]}#{'<:Energize:559629242137051155>' if skl1[7]=='Yes'}#{energy_emoji(skl1[10])}*;;;;;"
+    str="#{str}\n\n**Skill:** *#{k[5]}#{semoji[4] if skl1[7]=='Yes'}#{energy_emoji(skl1[10])}*;;;;;"
     strx=skl1[4].gsub(';; ',"\n")
   end
   bemoji=['<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
@@ -2660,6 +2660,9 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
     disp_enemy_data(bot,event,['Manticore(Refrain)'])
     disp_enemy_data(bot,event,['Manticore(BigTop)'])
     return nil
+  elsif k[2][2]=='Gauntlet'
+    disp_gauntlet_data(bot,event,args,k[0])
+    return nil
   end
   s2s=false
   s2s=true if safe_to_spam?(event)
@@ -2802,6 +2805,147 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
     disp_enemy_data(bot,event,"Gust Shroom, Clone Wave 2".split(' '),true)
   elsif k[0]=="Shishimai" && s2s
     disp_enemy_data(bot,event,"Gift Basket".split(' '),true)
+  end
+end
+
+def disp_gauntlet_data(bot,event,args=nil,name=nil)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  if name.nil?
+    k=find_data_ex(:find_enemy,args.join(' '),event)
+  else
+    k=find_data_ex(:find_enemy,name,event)
+  end
+  if k.nil? || k.length<=0
+    event.respond 'No matches found.'
+    return nil
+  end
+  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/DLGauntlet.txt')
+    b=[]
+    File.open('C:/Users/Mini-Matt/Desktop/devkit/DLGauntlet.txt').each_line do |line|
+      b.push(line)
+    end
+  else
+    b=[]
+  end
+  for i in 0...b.length
+    b[i]=b[i].gsub("\n",'').split('\\'[0])
+    b[i][2]=b[i][2].to_i
+  end
+  gaunt=b.reject{|q| q[0]!=k[0]}
+  element=''
+  level=0
+  for i in 0...args.length
+    element='Flame' if ['flame','fire','flames','fires'].include?(args[i].downcase) && element.length<=0
+    element='Water' if ['water','waters'].include?(args[i].downcase) && element.length<=0
+    element='Wind' if ['wind','air','winds','airs'].include?(args[i].downcase) && element.length<=0
+    element='Wind' if ['earth','earths'].include?(args[i].downcase) && event.user.id==192821228468305920 && element.length<=0
+    element='Light' if ['light','lights'].include?(args[i].downcase) && element.length<=0
+    element='Shadow' if ['shadow','dark','shadows','darks'].include?(args[i].downcase) && element.length<=0
+  end
+  gaunt=gaunt.reject{|q| q[1]!=element} if element.length>0
+  for i in 0...args.length
+    level=args[i].to_i if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<=gaunt.map{|q| q[2]}.max && level<=0
+  end
+  gaunt=gaunt.reject{|q| q[2]!=level} if level>0
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  evn=event.message.text.downcase.split(' ')
+  sklz=@askilities.map{|q| q}
+  title=''
+  str=''
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{gaunt[0][1].gsub('None','Null')}"}
+  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{gaunt[0][1].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Null')}"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
+  title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{gaunt[0][1]}" unless ['High Dragon','Void','Imperial Order'].include?(k[2][2]) || gaunt.map{|q| q[1]}.uniq.length>1
+  title="#{title}\n**Stage:** #{gaunt[0][2]}" unless gaunt.map{|q| q[2]}.uniq.length>1
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Tribe_#{k[2][1]}"}
+  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Infantry"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
+  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Armor"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes' && !k[0].include?('(Enemy)')
+  title="#{title}\n#{moji[0].mention unless moji.length<=0} **Tribe:** #{k[2][1]}"
+  xcolor=0xE3F78B
+  xcolor=0xEF8663 if k[2][1]=='Thaumian'
+  xcolor=0x5AD363 if k[2][1]=='Physian'
+  xcolor=0xAD9087 if k[2][1]=='Therion'
+  xcolor=0x271B2F if k[2][1]=='Dragon'
+  xcolor=0x3B4DBB if k[2][1]=='Demon'
+  xcolor=0x495218 if k[2][1]=='Demihuman'
+  xcolor=0xFFDC5D if k[2][1]=='Human'
+  xcolor=0xAD82DE if k[2][1]=='Undead'
+  if k[2].length>3 && !['Jingu Bang','Mini Dasheng'].include?(k[0])
+    m=@enemies.reject{|q| q[0]==k[0] || q[2].length<4 || q[2][3]!=k[2][3] || ['Jingu Bang','Mini Dasheng'].include?(q[0])}
+    str="#{str}#{"\n" if k[1].length>1 || m.length>0}\n**Event Name:** #{k[2][3]}"
+    str="#{str}\n*Other bosses from this event:* #{m.map{|q| "#{enemy_emoji(q,bot)}#{q[0]}"}.join(', ')}" if m.length>0 && !ignoresub
+  end
+  str="#{str}\n"
+  flds=nil
+  ftr='For more detailed information, look up a single element/stage combination.'
+  if gaunt.map{|q| q[1]}.uniq.length<2 && gaunt.map{|q| q[2]}.uniq.length<2
+    str="#{str}\n<:HP:573344832307593216>*Maximum HP*: #{longFormattedNumber(gaunt[0][3].to_i)}\n<:Strength:573344931205349376>*Strength*: #{longFormattedNumber(gaunt[0][4].to_i)}"
+    flds=[]
+    flds.push(['Resistances',gaunt[0][8].gsub(', ',"\n")]) unless gaunt[0][8].nil? || gaunt[0][8].length<=0
+    flds.push(['Afflictions',gaunt[0][9].gsub(', ',"\n")]) unless gaunt[0][9].nil? || gaunt[0][9].length<=0
+    ftr=nil
+  elsif gaunt.map{|q| q[1]}.uniq.length<2
+    for i in 0...gaunt.length
+      str="#{str}\n*Stage #{gaunt[i][2]}*: <:HP:573344832307593216>HP: #{longFormattedNumber(gaunt[i][3].to_i)}  <:Strength:573344931205349376>Str: #{longFormattedNumber(gaunt[i][4].to_i)}" if [0,19,39,59,79,99,gaunt.length-1].include?(i) || safe_to_spam?(event)
+    end
+  elsif gaunt.map{|q| q[2]}.uniq.length<2
+    for i in 0...gaunt.length
+      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{gaunt[i][1].gsub('None','Null')}"}
+      str="#{str}\n#{moji[0].mention if moji.length>0}*#{gaunt[i][1]}*: <:HP:573344832307593216>HP: #{longFormattedNumber(gaunt[i][3].to_i)}  <:Strength:573344931205349376>Str: #{longFormattedNumber(gaunt[i][4].to_i)}"
+    end
+  else
+    flds=[]
+    f=gaunt.map{|q| q[1]}.uniq
+    for i in 0...f.length
+      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{f[i].gsub('None','Null')}"}
+      f2=gaunt.reject{|q| q[1]!=f[i]}
+      f2=f2.sort{|a,b| a[2]<=>b[2]}
+      f3="*Stage #{f2[0][2]}*: <:HP:573344832307593216>HP: #{longFormattedNumber(f2[0][3].to_i)}  <:Strength:573344931205349376>Str: #{longFormattedNumber(f2[0][4].to_i)}"
+      f3="#{f3}\n*Stage #{f2[-1][2]}*: <:HP:573344832307593216>HP: #{longFormattedNumber(f2[-1][3].to_i)}  <:Strength:573344931205349376>Str: #{longFormattedNumber(f2[-1][4].to_i)}"
+      flds.push(["#{moji[0].mention unless moji.length<=0}#{f[i]}",f3])
+    end
+  end
+  xpic="#{k[0].gsub(' ','_')}"
+  m=false
+  IO.copy_stream(open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/FightBanners/Banner_#{xpic}.png"), "C:/Users/Mini-Matt/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
+  if File.size("C:/Users/Mini-Matt/Desktop/devkit/DLTemp#{@shardizard}.png")<=100 || m
+    xpic="#{xpic.gsub('_(Enemy)','')}"
+  end
+  xpic=[nil,"https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/FightBanners/Banner_#{xpic}.png"]
+  xpic='https://github.com/Rot8erConeX/BotanBot/blob/master/FightBanners/Matilda_5.png?raw=true' if k[0]=='Matilda'
+  name="__**#{name}**__"
+  if title.length+str.length>=1900
+    m=[0,str.split("\n\n")]
+    for i in 0...m[1].length
+      m[1][i]=m[1][i].split("\n") if m[1][i].length>=1900
+    end
+    m[1]=m[1].flatten
+    str=''
+    for i in 0...m[1].length
+      if "#{str}\n\n#{m[1][i]}".length>=1900
+        if m[0]==0
+          create_embed(event,[name,title],str,xcolor,nil,xpic)
+        else
+          create_embed(event,'',str,xcolor)
+        end
+        m[0]+=1
+        str="#{m[1][i]}"
+      else
+        str="#{str}#{"\n" unless !str.split("\n")[-1].nil? && str.split("\n")[-1][0,7]=='*Stage '}\n#{m[1][i]}"
+      end
+    end
+    if m[0]==0
+      create_embed(event,[name,title],str,xcolor,nil,xpic)
+    elsif flds.nil?
+      create_embed(event,'',str,xcolor,ftr)
+    else
+      create_embed(event,'',str,xcolor)
+    end
+    create_embed(event,'','',xcolor,ftr,nil,flds) unless flds.nil?
+  else
+    create_embed(event,[name,title],str,xcolor,ftr,xpic,flds)
   end
 end
 
@@ -3827,8 +3971,8 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
     end
     flds=nil if flds.length<=0
   end
-  xpic=xpic.gsub(' ','_')
-  xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Wyrmprints/#{xpic}_1.png?raw=true"
+  xpic=xpic.split(') ')[-1].gsub(' ','_').gsub('%','')
+  xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Abilities/#{xpic}.png?raw=true"
   flds=nil if !flds.nil? && flds.length<=0
   unless flds.nil? || flds.length>1
     m=flds[0][1].split("\n")
@@ -6687,7 +6831,7 @@ def find_banners(bot,event,args=nil)
   for i in 0...char.length
     char[i][4]=char[i][4].map{|q| q.split('/')}.map{|q| "#{q[0]}#{['','Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'][q[1].to_i]}#{q[2]}"} unless char[i][4].nil?
   end
-  char=char.map{|q| "#{q[0]}#{" (#{q[4].join(' - ')})" unless q[4].nil? || q[4].length<=0}"}.uniq
+  char=char.map{|q| "#{q[0]}#{" (#{q[4].join(' - ')})" unless q[4].nil? || q[4].length<=0 || q[4]=='-'}"}.uniq
   if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || char.join("\n").length+search.join("\n").length>=1900
     str="__**Banner Search**__\n#{search.join("\n")}#{"\n\n__**Notes**__\n#{textra}" if textra.length>0}\n\n__**Results**__"
     for i in 0...char.length
@@ -10118,16 +10262,17 @@ bot.command([:donation, :donate]) do |event, uid|
       end
     end
     color=n3[0]*256*256+n3[1]*256+n3[2]
-    str="**Tier 1:** Ability to give server-specific aliases in any server\n\u2713 Given" if g[2].max>=1
-    if g[2][2]>=2
+    str="**Tier 1:** Access to the donor-exclusive channel in my debug server.\n\u2713 This perk cannot be checked dynamically.\nYou can check if it was given to you by clicking this channel link: <#590642838497394689>" if g[2].max>=1
+    str="#{str}\n\n**Tier 2:** Ability to give server-specific aliases in any server\n\u2713 Given" if g[2].max>=2
+    if g[2][2]>=3
       if g[3].nil? || g[3].length.zero? || g[4].nil? || g[4].length.zero?
-        str="#{str}\n\n**Tier 2:** Birthday avatar\n\u2717 Not given.  Please contact <@167657750971547648> to have this corrected."
+        str="#{str}\n\n**Tier 3:** Birthday avatar\n\u2717 Not given.  Please contact <@167657750971547648> to have this corrected."
       elsif g[4][2]=='-'
-        str="#{str}\n\n**Tier 2:** Birthday avatar\n\u2713 May be given via another bot."
+        str="#{str}\n\n**Tier 3:** Birthday avatar\n\u2713 May be given via another bot."
       elsif !File.exist?("C:/Users/Mini-Matt/Desktop/devkit/EliseImages/#{g[4][2]}.png")
-        str="#{str}\n\n**Tier 2:** Birthday avatar\n\u2717 Not given.  Please contact <@167657750971547648> to have this corrected.\n*Birthday:* #{g[3][1]} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][g[3][0]]}\n*Character:* #{g[4][2]}"
+        str="#{str}\n\n**Tier 3:** Birthday avatar\n\u2717 Not given.  Please contact <@167657750971547648> to have this corrected.\n*Birthday:* #{g[3][1]} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][g[3][0]]}\n*Character:* #{g[4][2]}"
       else
-        str="#{str}\n\n**Tier 2:** Birthday avatar\n\u2713 Given\n*Birthday:* #{g[3][1]} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][g[3][0]]}\n*Character:* #{g[4][2]}"
+        str="#{str}\n\n**Tier 3:** Birthday avatar\n\u2713 Given\n*Birthday:* #{g[3][1]} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][g[3][0]]}\n*Character:* #{g[4][2]}"
       end
     end
     create_embed(event,"__**#{n} a Tier #{g[2][2]} donor.**__",str,color)
@@ -11678,8 +11823,7 @@ def next_holiday(bot,mode=0)
   t=Time.now
   t-=60*60*6
   holidays=[[0,3,22,'Karina',"with this sweet eyepatch","Info gatherer's birthday"]]
-  d=get_donor_list()
-  d=d.reject{|q| q[2][2]<2 || q[4][2]=='-'}
+  d=get_donor_list().reject{|q| q[2][2]<3 || q[4][2]=='-'}
   for i in 0...d.length
     if d[i][4][2]!='-' && d[i][0]!=141260274144509952
       holidays.push([0,d[i][3][0],d[i][3][1],d[i][4][2],"in recognition of #{bot.user(d[i][0]).distinct}","Donator's birthday"])
