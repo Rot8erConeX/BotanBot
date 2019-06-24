@@ -1,19 +1,20 @@
+<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Violet Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr, <:Element_Water:532106088221376522>Void Poseidon
 <:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Violet Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr
-<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr
-<:Element_Wind:532106087948746763>Gust Shroom, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Light:532106088129101834>Amber Golem, <:Element_Flame:532106087952810005>Void Agni
-<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Violet Ghost, <:Element_Flame:532106087952810005>Steel Golem, <:Element_Wind:532106087948746763>Void Zephyr
-<:Element_Wind:532106087948746763>Gust Shroom, <:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Shadow:532106088154267658>Raging Manticore
-<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Violet Ghost, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Flame:532106087952810005>Void Agni
-<:Element_Wind:532106087948746763>Gust Shroom, <:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Light:532106088129101834>Amber Golem, <:Element_Flame:532106087952810005>Void Agni, <:Element_Shadow:532106088154267658>Raging Manticore
+<:Element_Wind:532106087948746763>Gust Shroom, <:Element_Shadow:532106088154267658>Violet Ghost, <:Element_Light:532106088129101834>Amber Golem, <:Element_Water:532106088221376522>Void Poseidon, <:Element_Flame:532106087952810005>Void Agni
+<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Violet Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Wind:532106087948746763>Void Zephyr, <:Element_Water:532106088221376522>Void Poseidon
+<:Element_Wind:532106087948746763>Gust Shroom, <:Element_Shadow:532106088154267658>Violet Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Shadow:532106088154267658>Obsidian Golem, <:Element_Water:532106088221376522>Void Poseidon, <:Element_Shadow:532106088154267658>Raging Manticore
+<:Element_Light:532106088129101834>Wandering Shroom, <:Element_Shadow:532106088154267658>Violet Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Water:532106088221376522>Void Poseidon, <:Element_Flame:532106087952810005>Void Agni
+<:Element_Wind:532106087948746763>Gust Shroom, <:Element_Flame:532106087952810005>Blazing Ghost, <:Element_Water:532106088221376522>Frost Hermit, <:Element_Light:532106088129101834>Amber Golem, <:Element_Water:532106088221376522>Void Poseidon, <:Element_Flame:532106087952810005>Void Agni
 
 <:Element_Flame:532106087952810005>Steel Golem, Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core
 <:Element_Flame:532106087952810005>Blazing Ghost, Old Cloth, Floating Red Cloth, Otherworldly Lantern
 <:Element_Flame:532106087952810005>Void Agni, Ancient Bird's Feather, Bewitching Wing, Blazing Ember, Blazing Horn, Void Leaf, Void Seed
-<:Element_Water:532106088221376522>Frost Hermit, Goblin Thread, Aromatic Wood
-<:Element_Wind:532106087948746763>Void Zephyr, Great Feather, Void Leaf, Void Seed, Zephyr Rune
+<:Element_Water:532106088221376522>Frost Hermit, Fiend's Claw, Fiend's Horn, Goblin Thread, Aromatic Wood
+<:Element_Water:532106088221376522>Void Poseidon, Fiend's Eye, Fiend's Horn, Oceanic Crown, Oceanic Fin, Squishums, Void Leaf, Void Seed
+<:Element_Wind:532106087948746763>Void Zephyr, Granite, Great Feather, Meteorite, Void Leaf, Void Seed, Zephyr Rune
 <:Element_Wind:532106087948746763>Gust Shroom, Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Storm Fungus, Void Seed, Spongy Spore
 <:Element_Light:532106088129101834>Wandering Shroom, Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore
 <:Element_Light:532106088129101834>Amber Golem, Iron Ore, Steel Slab, Granite, Void Leaf, Amber Slab, Void Seed, Amber Core
 <:Element_Shadow:532106088154267658>Raging Manticore, Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn
-<:Element_Shadow:532106088154267658>Obsidian Golem, Obsidian Slab, Dark Core
+<:Element_Shadow:532106088154267658>Obsidian Golem, Granite, Iron Ore, Obsidian Slab, Steel Slab, Void Leaf, Void Seed, Dark Core
 <:Element_Shadow:532106088154267658>Violet Ghost, Bat's Wing, Old Cloth, Ancient Bird's Feather, Void Leaf, Floating Purple Cloth, Void Seed, Shadowy Lantern

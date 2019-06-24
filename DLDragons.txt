@@ -5,6 +5,7 @@ Brunhilda\4y\Flame\20, 203\7, 70\Muspelheim\(Flame) Strength +15%;; (Flame) Stre
 Cerberus\5\Flame\36, 369\12, 127\Infernal Damnation\(Flame) Strength +40%;; (Flame) Strength +60%\5000, 8500\1.8, 1\3\No\Yes\Cerberus\Kitamura Eri\Mae Matchett\\\F
 Cinder Drake\3\Flame\19, 190\5, 57\Cinderball\(Flame) HP +10%;; (Flame) HP +15%\300, 150\1.35, 3.5\2\Yes\No\Cinder Drake\\\\\M
 Cupid\5\Light\37, 377\11, 119\Lovely Pose\(Light) Strength +40%;; (Light) Strength +60%\5000, 8500\1.8, 1\3\No\Yes\Cupid\Ise Mariya\Mavis Ada\\\M
+Freyja\5\Wind\37, 375\12, 120\Breath of Life\(Wind) HP +20%;; (Wind) HP +30%;;; (Wind) Skill Haste +25%;; (Wind) Skill Haste +35%\5000, 8500\0, 0\3\No\Yes\Freyja\\\\\F
 Fubuki\3\Water\18, 185\6, 63\Freezing Breath\(Water) Strength +10%;; (Water) Strength +15%\300, 150\1.35, 3.5\4\Yes\No\Fubuki\\\\\M
 Garuda\5\Wind\38, 383\11, 114\Tempestuous Kiss\(Wind) HP +40%;; (Wind) HP +60%\5000, 8500\1.5, 1.5\4\No\Yes\Garuda\Kaida Yuhko\Kathleen Hunter\\\F
 Gilgamesh\5\Light\37, 371\12, 124\Subjugating Sword\(Light) Strength +35% Shadow Res +15%;; (Light) Strength +50% Shadow Res +15%\5000, 8500\1.8, 1\5\Yes\Yes\Gilgamesh\\\(Light) Strength +35%;; (Light) Strength +50%;;;; (Light) Shadow Res +15%;; (Light) Shadow Res +15\\M
@@ -23,7 +24,7 @@ Jeanne(Dragonyule)\5s\Water\37, 370\12, 125\Frost Beam\Dragonyule Blessing I;; D
 Juggernaut (Dragon)\4\Shadow\29, 294\10, 102\Shadow Carnage\(Shadow) Strength +30%;; (Shadow) Strength +45%\2000, 2200\1.5, 1.5\1\No\No\Juggernaut (Dragon)\\\\\M
 Jupiter\4y\Light\20, 207\6, 65\Lightning Rood\(Light) HP & Strength +8%;; (Light) HP & Strength +10%\2000, 100\1.5, 1.5\2\No\No\Jupiter\Takayama Minami\Sabrina Pitre\(Light) HP +8%;; (Light) HP +10%;;;; (Light) Strength +8%;; (Light) Strength +10%\\M
 Kindling Imp\3\Flame\18, 187\6, 60\Ember Toss\(Flame) HP & Strength +5%;; (Flame) HP & Strength +8%\300, 150\1.35, 3.5\3\Yes\No\Kindling Imp\\\(Flame) HP +5%;; (Flame) HP +8%;;;; (Flame) Strength +5%;; (Flame) Strength +8%\\M
-Konohana Sakuya\5\Flame\37, 374\12, 121\Deciduous Dance\(Flame) Strength +15%;; (Flame) Strength +20%;;; (Flame) Skill Damage +60%;; (Flame) Skill Damage +70%\5000, 8500\1.8, 1\3\Yes\No\Konohana Sakuya\Nakahara Mai\Joy Frender\\\F
+Konohana Sakuya\5\Flame\37, 374\12, 121\Deciduous Dance\(Flame) Strength +10%;; (Flame) Strength +20%;;; (Flame) Skill Damage +50%;; (Flame) Skill Damage +70%\5000, 8500\1.8, 1\3\Yes\No\Konohana Sakuya\Nakahara Mai\Joy Frender\\\F
 Leviathan\5\Water\37, 370\12, 125\Tidal Stream\(Water) Strength +40%;; (Water) Strength +60%\5000, 8500\1.8, 1\5\No\Yes\Leviathan\\\\\M
 Liger\5\Light\37, 377\11, 119\Lightning Blitz\(Light) HP & Strength +20%;; (Light) HP & Strength +30%\5000, 8500\1.8, 1\1\No\No\Liger\\\(Light) HP +20%;; (Light) HP +30%;;;; (Light) Strength +20%;; (Light) Strength +30%\\M
 Lindworm\4\Light\29, 297\10, 100\Ethereal Gleam\(Light) Strength +30%;; (Light) Strength +45%\2000, 2200\1.5, 1\2\No\No\Lindworm\\\\\F

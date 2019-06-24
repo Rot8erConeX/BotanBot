@@ -60,6 +60,7 @@ Bone Stinger\\Skill\Deals 3 hits of 206% shadow damage to enemies directly ahead
 Bonecrusher\\Skill\Deals 1 hit of 552% shadow damage to enemies in a line.\Deals 1 hit of 614% shadow damage to enemies in a line.\Deals 1 hit of 682% shadow damage to enemies in a line.\2613, 2613, 2613\Yes\0.7\\Damage
 Bracing Spirit\\Skill\Increases the potency of the user's recovery skills by 15% for 5 seconds.\Increases the potency of the user's recovery skills by 20% for 5 seconds.\Increases the potency of the user's recovery skills by 30% for 30 seconds.\17748, 17748, 17748\No\1.4\\Buff, Potency, User
 Brave Bastion\\Skill\Increases the entire team's strength by 10% for 15 seconds.\Increases the entire team's strength by 15% for 15 seconds.\Increases the entire team's strength by 20% for 15 seconds.\3817, 3817, 3817\No\1.4\\Buff, StrengthSkill, Team
+Breath of Life\\Skill\Restores HP to all allies with 37% Recovery Potency, continues healing over the next 15 seconds with 25% Recovery Potency every 2.9 seconds, and energizes the entire team.\Restores HP to all allies with 42% Recovery Potency, continues healing over the next 20 seconds with 30% Recovery Potency every 2.9 seconds, and energizes the entire team.\\30, 30, 30\Yes\2.4\\Buff, Energize, Team, HealSkill, Burst
 Brilliant Bolt\\Skill\Deals 1 shot of 769% flame damage to enemies directly ahead, and fires extra shots equal to the number of buffs the user has with 77% flame damage each. A maximum of seven additional shots can be fired.\Deals 1 shot of 854% flame damage to enemies directly ahead, and fires extra shots equal to the number of buffs the user has with 85% flame damage each. A maximum of seven additional shots can be fired.\Deals 1 shot of 949% flame damage to enemies directly ahead, and fires extra shots equal to the number of buffs the user has with 95% flame damage each. A maximum of seven additional shots can be fired.\2803, 2803, 2803\Yes\3.4\\Damage, Stacking
 Brilliant Inferno\\Skill\Activates "Inferno Mode" for 15 seconds. The user gains a strength increase of 10% , and their normal attacks have a 15% chance to reduce enemy defense by 5% for 5 seconds.\Activates "Inferno Mode" for 15 seconds. The user gains a strength increase of 15% , and their normal attacks have a 15% chance to reduce enemy defense by 5% for 5 seconds.\Activates "Inferno Mode" for 30seconds. The user gains a strength increase of 20% , and their normal attacks reduce enemy defense.\8940, 8940, 8940\No\0.6\\Stance, Debuff, DefDown
 Broad Cleaver\\Skill\Deals 1 hit of 553% damage to enemies directly ahead.\Deals 1 hit of 614% damage to enemies directly ahead.\Deals non-elemental damage to enemies directly ahead.\7330, 7330, 7330\Yes\0.8\\Damage
@@ -119,6 +120,7 @@ Divine Thunder\\Skill\Deals 1 shot of 854% light damage to enemies in a line.\De
 Dragon Claw\\Skill\Deals 3 hits of 249% flame damage to enemies directly ahead, and raises the dragon gauge by 5% if the attack connects.\Deals 3 hits of 276% flame damage to enemies directly ahead, and raises the dragon gauge by 5% if the attack connects.\Deals 3 hits of 307% flame damage to enemies directly ahead, and raises the dragon gauge by 5% if the attack connects.\2914, 2914, 2914\Yes\1.65\\Damage
 Dragon Frostfang\\Skill\Deals 4 hits of 186% water damage to the target and nearby enemies.\Deals 4 hits of 207% water damage to the target and nearby enemies.\Deals 4 hits of 230% water damage to the target and nearby enemies.\2450, 2450, 2450\Yes\4.5\\Damage
 Dreamer's Spiral\\Skill\Deals 4 hits of 150% damage to enemies directly ahead.\Deals 4 hits of 167% damage to enemies directly ahead.\\7028, 7028, 7028\Yes\1.1\\Damage
+Dream Wedding\\Skill\Restores HP to all allies with 72% Recovery Potency.\Restores HP to all allies with 90% Recovery Potency and removes freeze.\Restores HP to all allies with 108% Recovery Potency and removes freeze.\7888, 7888, 7888\Yes\1.4\\Healskill, Burst, Team, Cleanse
 Duskhawk's Energy\\Skill\Increases max HP by 10% for the remainder of the quest. Once HP buffs reach the limit, an HP recovery effect is granted instead.\Increases max HP by 15% for the remainder of the quest. Once HP buffs reach the limit, an HP recovery effect is granted instead.\Increases the user's HP by 25% for 30 seconds.\11213, 11213, 11213\No\1.4\\Buff, HealthSkill
 Elder Cure\\Skill\Restores HP to all allies with 72% Recovery Potency.\Restores HP to all allies with 90% Recovery Potency and removes paralysis.\Restores HP to all allies with 108% Recovery Potency and removes paralysis.\5916, 5916, 5916\Yes\1.1\\HealSkill, Burst, Team, Cleanse
 Electrical Discharge\\Skill\Deals 1 hit of 806% light damage to surrounding enemies.\Deals 1 hit of 806% light damage to surrounding enemies.\\8062, 8062, 8062\Yes\1.1\\Damage
@@ -254,6 +256,7 @@ Love Goes Round\\Skill\Deals 4 hits of 151% shadow damage to surrounding enemies
 Lovelorn Arrow\\Skill\Deals 1 shot of 635% wind damage to enemies in a line.\Deals 1 shot of 667% wind damage to enemies in a line, and inflicts paralysis for 12 seconds - dealing 60% damage every 3.99 seconds - with 90% base chance.\Deals 1 shot of 701% wind damage to enemies in a line, and inflicts paralysis for 12 seconds - dealing 60% damage every 3.99 seconds - with 100% base chance.\5051, 5051, 5051\Yes\0.9\\Damage, Paralysis
 Lovely Pose\\Skill\Restores HP to all allies with 25% Recovery Potency, and increases their critical rate by 20% for 15 seconds.\Restores HP to all allies with 30% Recovery Potency, and increases their critical rate by 25% for 15 seconds.\\30, 30, 30\Yes\1.4\\HealSkill, Burst, Team, CritRate
 Lover's Strike\\Skill\Deals 4 hits of 137% damage to enemies directly ahead.\Deals 4 hits of 152% damage to enemies directly ahead.\\6770, 6770, 6770\Yes\1.4\\Damage
+Love's Protection\\Skill\Gradually recovers the entire team's HP for 15 seconds, healing with 25% Recovery Potency every 2.9 seconds.\Increases the entire team's defense by 10% for 15 seconds, and gradually recovers their HP for 15 seconds, healing with 29% Recovery Potency every 2.9 seconds.\\13804, 13804, 13804\Yes\1.4\\Healskill, Burst, Regen, Team, Buff, DefenseSkill
 Lunar Whirlwind\\Skill\Deals 2 hits of 343% light damage to surrounding enemies.\Deals 2 hits of 381% light damage to surrounding enemies.\\7668, 7668, 7668\Yes\1.2\\Damage
 Lupine Vision\\Skill\Increases the user's critical rate by 20% for 10 seconds.\Increases the user's critical rate by 25% for 10 seconds.\Increases the user's critical rate by 40% for 30 seconds.\7316, 7316, 7316\No\1.4\\Buff, CritRate, User
 Maar's Recovery\\Skill\Restores the user's HP with 72% recovery potency\Restores the user's HP with 90% recovery potency\\12841, 12841, 12841\Yes\1.1\\HealSkill, Burst, User
@@ -285,6 +288,8 @@ Necro Volley\\Skill\Deals 3 shots of 284% shadow damage to enemies in a line.\De
 Night of Antiquity\\Skill\Deals 8 hits of 96% shadow damage to the target and nearby enemies.\Deals 8 hits of 101% shadow damage to the target and nearby enemies. Against blinded foes, deals 8 hits of 170.69% shadow damage instead.\Deals 8 hits of 106% shadow damage to the target and nearby enemies. Against blinded foes, deals 8 hits of 184.44% shadow damage instead.\2713, 2713, 2713\Yes\2.7\Deals 8 hits of 96%/101%/106% shadow damage to the target and nearby enemies.  Against blinded foes, levels 2 and 3 will deal 8 hits of ~~0%~~/170.69%/184.44% shadow damage instead.\Damage, Conditional
 Night Spiral\\Skill\Deals 4 hits of 167% light damage to enemies directly ahead.\Deals 4 hits of 186% light damage to enemies directly ahead.\\7028, 7028, 7028\Yes\1.1\\Damage
 Nightmare Waltz\\Skill\Deals 1 hit of 711% light damage to surrounding enemies, and restores the user's HP by 1% of damage inflicted.\Deals 1 hit of 747% light damage to surrounding enemies, and restores the user's HP by 2% of damage inflicted.\Deals 1 hit of 784% light-based damage to surrounding enemies, and restores the user's HP.\5346, 5346, 5346\Yes\1.4\\Damage, HealSkill, User
+Ninja Bride Sunshower\\Skill\Deals 5 hits of 133% wind damage to enemies directly ahead, and restores HP to all allies with 20% Recovery Potency. Sleeping foes take 5 hits of 266% wind damage instead.\Deals 5 hits of 140% wind damage to enemies directly ahead, and restores HP to all allies with 25% Recovery Potency. Sleeping foes take 5 hits of 280% wind damage instead.\\4400, 4400, 4400\Yes\0.5\\Damage, HealSkill, Burst, Team, SleepingPunisher
+Ninja Bride Sweep\\Skill\Deals 4 hits of 133% and 1 hit of 531% wind damage to enemies directly ahead, draws them toward the user, and inflicts sleep for 4-5 seconds with 100% base chance.\Deals 4 hits of 140% and 1 hit of 558% wind damage to enemies directly ahead, draws them toward the user, and inflicts sleep for 5-6 seconds with 100% base chance.\Deals 4 hits of 147% and 1 hit of 586% wind damage to enemies directly ahead, draws them toward the user, and inflicts sleep for 6-7 seconds with 110% base chance.\2401, 2401, 2401\Yes\1.7\\Damage, Sleep
 Noble Dance\\Skill\Increases the entire team's defense by 20% for 15 seconds.\Increases the entire team's defense by 25% for 15 seconds.\Increases the entire team's defense by 20% for 30 seconds.\30, 30, 30\No\1.9\\Buff, DefenseSkill, Team
 Noble Flame\\Skill\Deals 3 hits of 206% flame damage to enemies directly ahead.\Deals 3 hits of 229% flame damage to enemies directly ahead.\Deals 3 hits of 254% flame damage to enemies directly ahead.\2581, 2581, 2581\Yes\1.2\\Damage
 Noble Flash\\Skill\Deals 5 hits of 134% damage to enemies directly ahead.\Deals 5 hits of 149% damage to enemies directly ahead.\\6847, 6847, 6847\Yes\1.4\\Damage
@@ -335,8 +340,9 @@ Regeneration Flame\\Skill\Restores HP to all allies with 45% Recovery Potency an
 Relentless Torrent\\Skill\Deals 3 hits of 138.6% water damage to enemies directly ahead.\Deals 3 hits of 154% water damage to enemies directly ahead.\\50, 50, 50\Yes\1.4\\Damage
 Royal Assault\\Skill\Deals 2 hits of 305% light damage to enemies directly ahead.\Deals 2 hits of 339% light damage to enemies directly ahead.\\7339, 7339, 7339\Yes\1.4\\Damage
 Royal Maelstrom\\Skill\Deals 3 hits of 223% water damage to surrounding enemies.\Deals 3 hits of 248% water damage to surrounding enemies.\Deals 3 hits of 275% water damage to surrounding enemies.\4817, 4817, 4817\Yes\1.3\\Damage
-Sacred Guardian\\Skill\Grants all teammates a shield that nullifies damage less than 20% of their maximum HP once, and applies Regen for 15 seconds, healing with 25% Regen Potencyevery 2.99 seconds. This does not stack with any other shields.\Grants all teammates a shield that nullifies damage less than 30% of their maximum HP once, and applies Regen for 15 seconds, healing with 29% Regen Potencyevery 2.99 seconds. This does not stack with any other shields.\Grants all teammates a shield that nullifies damage less than 40% of their maximum HP once. This does not stack with any other shields.\11832, 11832, 11832\Yes\1.4\\Buff, Shield, HealSkill, Regen, Team
+Sacred Guardian\\Skill\Grants all teammates a shield that nullifies damage less than 20% of their maximum HP once, and applies Regen for 15 seconds, healing with 25% Regen Potency every 2.99 seconds. This does not stack with any other shields.\Grants all teammates a shield that nullifies damage less than 30% of their maximum HP once, and applies Regen for 15 seconds, healing with 29% Regen Potency every 2.99 seconds. This does not stack with any other shields.\Grants all teammates a shield that nullifies damage less than 40% of their maximum HP once. This does not stack with any other shields.\11832, 11832, 11832\Yes\1.4\\Buff, Shield, HealSkill, Regen, Team
 Sacred Maiden\\Skill\Phase I deals 7 hits of 93% light damage to enemies directly ahead, and activates "Skill Shift" if the attack connects. ;; Phase II deals 7 hits of 93% light damage and increases the entire team's strength by 5% for 15 seconds, and activates "Skill Shift" if the attack connects. ;; Phase III deals 7 hits of 93% light damage, increases the entire team's strength by 5% for 15 seconds and adds health restoration with 54 Recovery Potency. Skill Shift ends when you connect again during Phase III.\Phase I deals 7 hits of 104% light damage to enemies directly ahead, and activates "Skill Shift" if the attack connects. ;; Phase II deals 7 hits of 104% light damage and increases the entire team's strength by 8% for 15 seconds, and activates "Skill Shift" if the attack connects. ;; Phase III deals 7 hits of 104% light damage, increases the entire team's strength by 8% for 15 seconds and adds health restoration with 72 Recovery Potency. Skill Shift ends when you connect again during Phase III.\Phase I deals 7 hits of 115% light damage to enemies directly ahead, and activates "Skill Shift" if the attack connects. ;; Phase II deals 7 hits of 115% light damage and increases the entire team's strength by 10% for 15 seconds, and activates "Skill Shift" if the attack connects.;; Phase III deals 7 hits of 115% light damage, increases the entire team's strength by 10% for 15 seconds and adds health restoration with 90 Recovery Potency. Skill Shift ends when you connect again during Phase III.\2450, 2450, 2450\Yes\3.2\Phase I deals 7 hits of 93%/104%/115% light damage to enemies directly ahead.;; Phase II deals 7 hits of 93%/104%/115% light damage and increases the entire team's strength by 10% for 15 seconds.;; Phase III deals 7 hits of 93%/104%/115% light damage, increases the entire team's strength by 5%/8%/10% for 15 seconds and adds health restoration with 54%/72%/90% Recovery Potency.;; Skill Shift activates when you connect during Phase I or II, and ends when you connect again during Phase III.\Damage, Buff, StrengthSkill, HealSkill, Team, SkillShift
+Sacred Union\\Skill\Deals 1 hit of 802% wind damage to enemies directly ahead, and creates a buff zone that lasts for 10 seconds and gradually heals the HP of adventurers inside it with 16% Recovery Potency every 3 seconds.\Deals 1 hit of 892% wind damage to enemies directly ahead, and creates a buff zone that lasts for 10 seconds and gradually heals the HP of adventurers inside it with 18% Recovery Potency every 3 seconds.\Deals 1 hit of 990% wind damage to enemies directly ahead, and creates a buff zone that lasts for 10 seconds and gradually heals the HP of adventurers inside it with 20% Recovery Potency every 3 seconds.\2902, 2902, 2902\Yes\2.15\\Damage, Healskill, Regen, BuffZone, Zone
 Safeguard Surge\\Skill\Grants all teammates a one-use shield that nullifies damage less than 15% of their maximum HP. This does not stack with any other shields.\Grants all teammates a one-use shield that nullifies damage less than 20% of their maximum HP. This does not stack with any other shields.\Increases the entire team's defense by 15% for 30 seconds.\5840, 5840, 5840\No\1.4\\Buff, Shield, Team
 Saga of the Soul\\Skill\Deals 6 hits of 148% wind damage to enemies directly ahead.\Deals 6 hits of 164% wind damage to enemies directly ahead.\\7323, 7323, 7323\Yes\1.4\\Damage
 Saint's Banner\\Skill\Deals 1 hit of 743.4% light damage to surrounding enemies, and increases the entire team's defense by 25% for 15 seconds.\Deals 1 hit of 826% light damage to surrounding enemies, and increases the entire team's defense by 30% for 15 seconds.\\50, 50, 50\Yes\3.4\\Damage, Buff, DefenseSkill, Team
@@ -454,6 +460,7 @@ Virtuous Guard\\Skill\Grants all teammates a one-hit shield that nullifies damag
 Vivid Volley\\Skill\Deals 14 hits of 55% water damage to enemies in a line.\Deals 14 hits of 61% water damage to enemies in a line.\Deals 14 hits of 68% water damage to enemies in a line.\2567, 2567, 2567\Yes\2.9\\Damage
 Water Chain\\Skill\Deals 4 hits of 152% water damage to enemies directly ahead.\Deals 4 hits of 169% water damage to enemies directly ahead.\\6770, 6770, 6770\Yes\1.4\\Damage
 Way of the Serpent\\Skill\Increases the user's critical rate by 15% for 10 seconds.\Increases the user's critical rate by 20% for 10 seconds.\Increases the user's critical rate by 30% for 30 seconds.\5973, 5973, 5973\No\1.1\\Buff, CritRate, User
+Wedding Bell\\Skill\Deals 1 hit of 668% wind damage to enemies directly ahead, and creates a debuff zone that lasts for 10 seconds and reduces the defense of enemies inside it by 10%.\Deals 1 hit of 701% wind damage to enemies directly ahead, and creates a debuff zone that lasts for 10 seconds and reduces the defense of enemies inside it by 15%.\\6243, 6243, 6243\Yes\2.15\\Damage, BuffZone, DefDown, Debuff, Zone
 Welkin Blast\\Skill\Deals 4 hits of 220% damage to the target and enemies near it.\Deals 4 hits of 244% damage to the target and enemies near it.\\8757, 8757, 8757\Yes\1\\Damage
 Whirlpool\\Skill\Deals 1 hit of 869% water damage to surrounding enemies.\Deals 1 hit of 966% water damage to surrounding enemies.\\8178, 8178, 8178\Yes\1.4\\Damage
 Wild Instinct\\Skill\Activates "Wild Child" for 20 seconds. During Wild Child, the user's critical rate is increased by 15%, their HP is restored by 2% of damage inflicted, and their defense is reduced by 40%.\Activates "Wild Child" for 20 seconds. During Wild Child, the user's critical rate is increased by 20%, their HP is restored by 3% of damage inflicted, and their defense is reduced by 40%.\\8000, 8000, 8000\No\1.4\Activates "Wild Child" for 20 seconds. During Wild Child, the user's critical rate is increased by 15%/20%, their HP is restored by 3% of damage inflicted, and their defense is reduced by 40%.\Stance, HealSkill, User, CritRate
@@ -612,6 +619,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Wind) Poisoned Punisher\example\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by `x`%\0\y\Poison, Punisher
 (Wind) Poisoned Punisher\15%\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by 15%\20\y\Poison, Punisher
 (Wind) Poisoned Punisher\20%\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by 20%\40\y\Poison, Punisher
+(Wind) Skill Haste\example\Aura\If the user is attuned to Wind: Increases skill gauge fill rate by `x`%.\0\y\SkillHaste, Wind
+(Wind) Skill Haste\25%\Aura\If the user is attuned to Wind: Increases skill gauge fill rate by 25%.\60\y\SkillHaste, Wind
+(Wind) Skill Haste\35%\Aura\If the user is attuned to Wind: Increases skill gauge fill rate by 35%.\80\y\SkillHaste, Wind
 (Wind) Strength\example\Aura\If the user is attuned to Wind: increases strength by `x`%.\0\y\Strength, Wind
 (Wind) Strength\10%\Aura\If the user is attuned to Wind: increases strength by 10%.\20\y\Strength, Wind
 (Wind) Strength\15%\Aura\If the user is attuned to Wind: increases strength by 15%.\30\y\Strength, Wind
@@ -673,6 +683,12 @@ Poisoned Punisher\20%\Aura\Increases damage to poisoned enemies by 20%.\60\y\Poi
 Rupies\25%\Aura\Increase rupie intake for clearing quests by 25%\0\y\Rupies
 Rupies\50%\Aura\Increase rupie intake for clearing quests by 50%\0\y\Rupies
 Shadow Res\15%\Aura\Grants 15% Shadow resistance.\65\y\ShadowRes, Resistance
+Skill Damage\example\Aura\Increases attack skill damage by `x`%\0\y\SkillDamage
+Skill Damage\50%\Aura\Increases attack skill damage by 50%\80\y\SkillDamage
+Skill Damage\70%\Aura\Increases attack skill damage by 70%\100\y\SkillDamage
+Skill Haste\example\Aura\Increases skill gauge fill rate by `x`%.\0\y\SkillHaste
+Skill Haste\25%\Aura\Increases skill gauge fill rate by 25%.\60\y\SkillHaste
+Skill Haste\35%\Aura\Increases skill gauge fill rate by 35%.\80\y\SkillHaste
 Strength\example\Aura\Increases strength by `x`%.\0\y\Strength
 Strength\5%\Aura\Increases strength by 5%.\10\y\Strength
 Strength\8%\Aura\Increases strength by 8%.\15\y\Strength
@@ -782,11 +798,11 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Shadow) Buff Time\20%\Ability\If the user is attuned to Shadow: increases duration of buff skills by 20%.\40\y\BuffTime, Shadow
 (Shadow) Buff Time\25%\Ability\If the user is attuned to Shadow: increases duration of buff skills by 25%.\60\y\BuffTime, Shadow
 (Shadow) Dull Res\-\Ability\If the user is attuned to Shadow: completely prevents dulling.\50\y\DullRes, Shadow
-(Shadow) Paralysis Res\example\Ability\If the user is attuned to Shadow: reduces susceptibility to paralysis by `x`%.\0\y\ParalysisRes, Shadow
-(Shadow) Paralysis Res\25%\Ability\If the user is attuned to Shadow: reduces susceptibility to paralysis by 25%.\80\y\ParalysisRes, Shadow
-(Shadow) Paralysis Res\40%\Ability\If the user is attuned to Shadow: reduces susceptibility to paralysis by 40%.\100\y\ParalysisRes, Shadow
-(Shadow) Paralysis Res\50%\Ability\If the user is attuned to Shadow: reduces susceptibility to paralysis by 50%.\120\y\ParalysisRes, Shadow
-(Shadow) Paralysis Res\75%\Ability\If the user is attuned to Shadow: reduces susceptibility to paralysis by 75%.\140\y\ParalysisRes, Shadow
+(Shadow) Paralysis Res\example\Ability\If the user is attuned to Shadow: reduces susceptibility to paralysis by `x`%.\0\y\ParalysisRes, Shadow, Resistance
+(Shadow) Paralysis Res\25%\Ability\If the user is attuned to Shadow: reduces susceptibility to paralysis by 25%.\80\y\ParalysisRes, Shadow, Resistance
+(Shadow) Paralysis Res\40%\Ability\If the user is attuned to Shadow: reduces susceptibility to paralysis by 40%.\100\y\ParalysisRes, Shadow, Resistance
+(Shadow) Paralysis Res\50%\Ability\If the user is attuned to Shadow: reduces susceptibility to paralysis by 50%.\120\y\ParalysisRes, Shadow, Resistance
+(Shadow) Paralysis Res\75%\Ability\If the user is attuned to Shadow: reduces susceptibility to paralysis by 75%.\140\y\ParalysisRes, Shadow, Resistance
 (Shadow) Skill Haste\example\Ability\If the user is attuned to Light: Increases skill gauge fill rate by `x`%.\0\y\SkillHaste, Shadow
 (Shadow) Skill Haste\4%\Ability\If the user is attuned to Light: Increases skill gauge fill rate by 4%.\30\y\SkillHaste, Shadow
 (Shadow) Skill Haste\5%\Ability\If the user is attuned to Light: Increases skill gauge fill rate by 5%.\50\y\SkillHaste, Shadow
@@ -807,7 +823,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Water) Physian's Bane\example\Ability\If the user is attuned to Water: increases damage to physians by `x`%\0\y\Physian, Bane, Water
 (Water) Physian's Bane\10%\Ability\If the user is attuned to Water: increases damage to physians by 10%\20\y\Physian, Bane, Water
 (Water) Physian's Bane\15%\Ability\If the user is attuned to Water: increases damage to physians by 15%\40\y\Physian, Bane, Water
-(Water) Scorching Air Res\-\Ability\if the user is attuned to Water: completely nullifies damage from scorching air.\50\y\ScorchingAirRes, Water
+(Water) Scorching Air Res\-\Ability\if the user is attuned to Water: completely nullifies damage from scorching air.\50\y\ScorchingAirRes, Water, Resistance
 (Water) Skill Haste\example\Ability\If the user is attuned to Water: Increases skill gauge fill rate by `x`%.\0\y\SkillHaste, Water
 (Water) Skill Haste\3%\Ability\If the user is attuned to Water: Increases skill gauge fill rate by 3%.\20\y\SkillHaste, Water
 (Water) Skill Haste\4%\Ability\If the user is attuned to Water: Increases skill gauge fill rate by 4%.\30\y\SkillHaste, Water
@@ -825,23 +841,32 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Water) Undead's Bane\15%\Ability\if the user is attuned to Water: increases damage to undead by 15%.\40\y\Undead, Bane, Water
 (Wind) Copy Punisher\-\Ability\If the user is attuned to Wind: increases damage to copies created by Propagation.\50\y\CopyPunisher, Wind
 (Wind) HP 70% = Healing\8%\Ability\if the user is attuned to Wind: increases the potency of recovery skills by 8% when HP is 70% or above.\40\y\HP70, RecoveryPotency, Wind
-(Wind) Bog Res\example\Ability\If the user is attuned to Wind: reduces susceptibility to bog by `x`%.\0\y\BogRes, Wind
-(Wind) Bog Res\25%\Ability\If the user is attuned to Wind: reduces susceptibility to bog by 25%.\40\y\BogRes, Wind
-(Wind) Bog Res\35%\Ability\If the user is attuned to Wind: reduces susceptibility to bog by 35%.\60\y\BogRes, Wind
-(Wind) Bog Res\40%\Ability\If the user is attuned to Wind: reduces susceptibility to bog by 40%\80\y\BogRes, Wind
+(Wind) Blinded Punisher\example\Ability\If the user is attuned to Wind: Increases damage to blinded enemies by `x`%.\0\y\Blind, Punisher, Wind
+(Wind) Blinded Punisher\10%\Ability\If the user is attuned to Wind: Increases damage to blinded enemies by 10%.\20\y\Blind, Punisher, Wind
+(Wind) Blinded Punisher\15%\Ability\If the user is attuned to Wind: Increases damage to blinded enemies by 15%.\40\y\Blind, Punisher, Wind
+(Wind) Bog Res\example\Ability\If the user is attuned to Wind: reduces susceptibility to bog by `x`%.\0\y\BogRes, Wind, Resistance
+(Wind) Bog Res\25%\Ability\If the user is attuned to Wind: reduces susceptibility to bog by 25%.\40\y\BogRes, Wind, Resistance
+(Wind) Bog Res\35%\Ability\If the user is attuned to Wind: reduces susceptibility to bog by 35%.\60\y\BogRes, Wind, Resistance
+(Wind) Bog Res\40%\Ability\If the user is attuned to Wind: reduces susceptibility to bog by 40%\80\y\BogRes, Wind, Resistance
+(Wind) Broken Punisher\example\Ability\If the user is attuned to Wind: increases damage to enemies in break state by `x`%.\0\y\Broken, Punisher, Wind
+(Wind) Broken Punisher\15%\Ability\If the user is attuned to Wind: increases damage to enemies in break state by 15%.\20\y\Broken, Punisher, Wind
+(Wind) Broken Punisher\20%\Ability\If the user is attuned to Wind: increases damage to enemies in break state by 20%.\40\y\Broken, Punisher, Wind
 (Wind) Fury Penetrator\-\Ability\If the user is attuned to Wind: ignores the effects of fury when attacking enemies.\50\y\FuryPenetrator
+(Wind) High Mercury's Bane\30%\Ability\if the user is attuned to Wind: increases damage to High Mercury by 30%.\50\y\HMC, Bane, Wind
 (Wind) Skill Prep\example\Ability\If the user is attuned to Wind: fills `x`% of skill gauges at the start of quests.\0\y\SkillPrep, Wind
 (Wind) Skill Prep\25%\Ability\If the user is attuned to Wind: fills 25% of skill gauges at the start of quests.\40\y\SkillPrep, Wind
 (Wind) Skill Prep\50%\Ability\If the user is attuned to Wind: fills 50% of skill gauges at the start of quests.\60\y\SkillPrep, Wind
 (Wind) Physian's Bane\example\Ability\If the user is attuned to Wind: increases damage to physians by `x`%.\0\y\Physian, Bane, Wind
 (Wind) Physian's Bane\10%\Ability\If the user is attuned to Wind: increases damage to physians by 10%.\20\y\Physian, Bane, Wind
 (Wind) Physian's Bane\15%\Ability\If the user is attuned to Wind: increases damage to physians by 15%.\40\y\Physian, Bane, Wind
+(Wind) Skill Resistance Penetrator\-\Ability\if the user is attuned to Wind: completely negates skill resistance.\40\y\SkillResistancePenetrator, Wind
 (Wind) Thaumian's Bane\example\Ability\If the user is attuned to Wind: increases damage to thaumians by `x`%.\0\y\Thaumian, Bane, Wind
 (Wind) Thaumian's Bane\10%\Ability\If the user is attuned to Wind: increases damage to thaumians by 10%.\20\y\Thaumian, Bane, Wind
 (Wind) Thaumian's Bane\15%\Ability\If the user is attuned to Wind: increases damage to thaumians by 15%.\40\y\Thaumian, Bane, Wind
-(Wind) Broken Punisher\example\Ability\If the user is attuned to Wind: increases damage to enemies in break state by `x`%.\0\y\Broken, Punisher, Wind
-(Wind) Broken Punisher\15%\Ability\If the user is attuned to Wind: increases damage to enemies in break state by 15%.\20\y\Broken, Punisher, Wind
-(Wind) Broken Punisher\20%\Ability\If the user is attuned to Wind: increases damage to enemies in break state by 20%.\40\y\Broken, Punisher, Wind
+(Wind) Undead's Bane\example\Ability\If the user is attuned to Wind: increases damage to Undead by `x`%.\0\y\Undead, Bane, Wind
+(Wind) Undead's Bane\10%\Ability\If the user is attuned to Wind: increases damage to Undead by 10%.\20\y\Undead, Bane, Wind
+(Wind) Undead's Bane\15%\Ability\If the user is attuned to Wind: increases damage to Undead by 15%.\40\y\Undead, Bane, Wind
+(Wind) Whirlpool Res\-\Ability\if the user is attuned to Wind: Ignores the effects of whirlpool.\60\y\Wind, Resistance
 Affliction Guard\example\Ability\resists afflictions `x` times per quest\0\y\AfflictionGuard
 Affliction Guard\I\Ability\resists afflictions once per quest\80\y\AfflictionGuard
 Affliction Guard\II\Ability\resists afflictions twice per quest\100\y\AfflictionGuard
@@ -870,9 +895,9 @@ Blinded Punisher\15%\Ability\Increases damage to blinded enemies by 15%.\60\y\Bl
 Blinded Punisher\20%\Ability\Increases damage to blinded enemies by 20%.\70\y\Blind, Punisher
 Blinded Punisher\25%\Ability\Increases damage to blinded enemies by 25%.\80\y\Blind, Punisher
 Blinded Punisher\30%\Ability\Increases damage to blinded enemies by 30%.\100\y\Blind, Punisher
-Blindness = Team Strength\example\Ability\Buffs the entire team's strength by `x`% for 10 seconds upon successfully blinding an enemy. After activating, this ability will not activate again for five seconds.\0\y\Blind, Buff, Team, StatusDoublebuff
-Blindness = Team Strength\8%\Ability\Buffs the entire team's strength by 8% for 10 seconds upon successfully blinding an enemy. After activating, this ability will not activate again for five seconds.\60\y\Blind, Buff, Team, StatusDoublebuff
-Blindness = Team Strength\10%\Ability\Buffs the entire team's strength by 10% for 10 seconds upon successfully blinding an enemy. After activating, this ability will not activate again for five seconds.\80\y\Blind, Buff, Team, StatusDoublebuff
+Blindness = Team Strength\example\Ability\Buffs the entire team's strength by `x`% for 10 seconds upon successfully blinding an enemy. After activating, this ability will not activate again for five seconds.\0\y\Blind, Buff, Team, Strength, StatusDoublebuff
+Blindness = Team Strength\8%\Ability\Buffs the entire team's strength by 8% for 10 seconds upon successfully blinding an enemy. After activating, this ability will not activate again for five seconds.\60\y\Blind, Buff, Team, Strength, StatusDoublebuff
+Blindness = Team Strength\10%\Ability\Buffs the entire team's strength by 10% for 10 seconds upon successfully blinding an enemy. After activating, this ability will not activate again for five seconds.\80\y\Blind, Buff, Team, Strength, StatusDoublebuff
 Blindness Res\example\Ability\Reduces susceptibility to blindness by `x`%.\0\y\BlindnessRes, Resistance
 Blindness Res\15%\Ability\Reduces susceptibility to blindness by 15%.\10\y\BlindnessRes, Resistance
 Blindness Res\20%\Ability\Reduces susceptibility to blindness by 20%.\20\y\BlindnessRes, Resistance
@@ -947,17 +972,19 @@ Demihuman's Bane\25%\Ability\Increases damage to demihumans by 25%.\80\y\Demihum
 Demon's Bane\example\Ability\Increases damage to demons by `x`%.\0\y\Demon, Bane
 Demon's Bane\20%\Ability\Increases damage to demons by 20%.\60\y\Demon, Bane
 Demon's Bane\25%\Ability\Increases damage to demons by 25%.\80\y\Demon, Bane
-Disperse\-\Ability\Once the enemy's HP falls below a certain threshold, it will consume some of it's own HP to spawn a larger number of other shrooms.\-1\y\Disperse
+Disperse\-\Ability\Once the enemy's HP falls below a certain threshold, it will consume some of it's own HP to spawn a larger number of other shrooms.\-1\y\Disperse, Enemy
 Divine Gales\example\Ability\Increases divine gale intake for clearing quests by `x`%.\0\y\Event, Facility, Score
 Divine Gales\25%\Ability\Increases divine gale intake for clearing quests by 25%.\0\y\Event, Facility, Score
+Divine Gales\35%\Ability\Increases divine gale intake for clearing quests by 35%.\0\y\Event, Facility, Score
 Divine Gales\50%\Ability\Increases divine gale intake for clearing quests by 50%.\0\y\Event, Facility, Score
 Divine Gales\100%\Ability\Increases divine gale intake for clearing quests by 100%.\0\y\Event, Facility, Score
+Divine Gales\125%\Ability\Increases divine gale intake for clearing quests by 125%.\0\y\Event, Facility, Score
 Divine Gales\150%\Ability\Increases divine gale intake for clearing quests by 150%.\0\y\Event, Facility, Score
 Dragon Damage\example\Ability\Adds `x`% to the modifier applied to damage when in dragon form\0\y\DragonDamage
 Dragon Damage\6%\Ability\Adds 6% to the modifier applied to damage when in dragon form\80\y\DragonDamage
 Dragon Damage\10%\Ability\Adds 10% to the modifier applied to damage when in dragon form\100\y\DragonDamage
 Dragon Damage\14%\Ability\Adds 14% to the modifier applied to damage when in dragon form\120\y\DragonDamage
-Dragon Delay\-\Ability\Sets back the Dragon Gauge by 150%.\-1\y\DragonDelay
+Dragon Delay\-\Ability\Sets back the Dragon Gauge by 150%.\-1\y\DragonDelay, Enemy
 Dragon Delay Res\-\Ability\completely prevents dragon delaying.\50\y\DelayRes
 Dragon Time\example\Ability\Extends shapeshift time by `x`%.\50\n\DragonTime
 Dragon Time\8%\Ability\Extends shapeshift time by 8%.\50\n\DragonTime
@@ -967,7 +994,7 @@ Dragon Time\20%\Ability\Extends shapeshift time by 20%.\100\n\DragonTime
 Dragon's Claws\I\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 4% in total. On second shapeshift strength is increased by 10% in total. On third shapeshift strength is increased by 20% in total.\60\y\Strength, InCombat
 Dragon's Claws\II\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 5% in total. On second shapeshift strength is increased by 13% in total. On third shapeshift strength is increased by 25% in total.\80\y\Strength, InCombat
 Dragon's Claws\III\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 6% in total. On second shapeshift strength is increased by 15% in total. On third shapeshift strength is increased by 30% in total.\100\y\Strength, InCombat
-Dull\-\Ability\The afflicted adventurer's weapon will be dulled, lowering their strength by 90%.\-1\y\Dull
+Dull\-\Ability\The afflicted adventurer's weapon will be dulled, lowering their strength by 90%.\-1\y\Dull, Enemy
 Dull Res\-\Ability\completely prevents dulling.\50\y\DullRes, Resistance
 Eggsploration Points\example\Ability\Increases eggsploration point intake for clearing quests by `x`%\0\y\Event, Facility, Score
 Eggsploration Points\25%\Ability\Increases eggsploration point intake for clearing quests by 25%\0\y\Event, Facility, Score
@@ -1030,7 +1057,7 @@ Freeze Res\25%\Ability\Reduces susceptibility to freezing by 25%.\40\y\FreezeRes
 Freeze Res\50%\Ability\Reduces susceptibility to freezing by 50%.\60\y\FreezeRes, Resistance
 Freeze Res\75%\Ability\Reduces susceptibility to freezing by 75%.\100\y\FreezeRes, Resistance
 Freeze Res\100%\Ability\Reduces susceptibility to freezing by 100%.\100\y\FreezeRes, Resistance
-Fury\-\Ability\The overdrive guage will stop decreasing\-1\y\Fury
+Fury\-\Ability\The overdrive guage will stop decreasing\-1\y\Fury, Enemy
 Fury Penetrator\-\Ability\ignores the effects of fury when attacking enemies.\50\y\FuryPenetrator
 Full HP = Blindness\example\Ability\Increases the chances of inflicting blindness by `x`% when HP is full.\0\y\HP100, BlindChance, StatusChance
 Full HP = Blindness\50%\Ability\Increases the chances of inflicting blindness by 50% when HP is full.\80\y\HP100, BlindChance, StatusChance
@@ -1094,6 +1121,7 @@ High Mercury Res\example\Ability\Reduces damage taken from High Mercury by `x`%\
 High Mercury Res\20%\Ability\Reduces damage taken from High Mercury by 20%\60\y\HMCRes, Resistance
 High Mercury Res\23%\Ability\Reduces damage taken from High Mercury by 23%\80\y\HMCRes, Resistance
 High Mercury Res\25%\Ability\Reduces damage taken from High Mercury by 25%\100\y\HMCRes, Resistance
+High Mercury's Bane\30%\Ability\increases damage to High Mercury by 30%.\100\y\HMC, Bane
 High Midgardsormr's Bane\20%\Ability\increases damage to High Midgardsormr by 20%.\100\y\HMS, Bane
 High Midgardsormr Res\example\Ability\Reduces damage taken from High Midgardsormr by `x`%.\0\y\HMSRes, Resistance
 High Midgardsormr Res\20%\Ability\Reduces damage taken from High Midgardsormr by 20%.\60\y\HMSRes, Resistance
@@ -1240,8 +1268,8 @@ Poison Res\25%\Ability\Reduces susceptibility to poison by 25%.\40\y\PoisonRes, 
 Poison Res\50%\Ability\Reduces susceptibility to poison by 50%.\60\y\PoisonRes, Resistance
 Poison Res\75%\Ability\Reduces susceptibility to poison by 75%.\100\y\PoisonRes, Resistance
 Poison Res\100%\Ability\Reduces susceptibility to poison by 100%.\100\y\PoisonRes, Resistance
-Propagation\-\Ability\The enemy creates copies of itself.\-1\y\Propagation
-Ranged Resistance\-\Ability\Significantly reduces the damage received from bow, staff, and wand attacks and skills. These weapon types still deal reduced shapeshift damage.\-1\y\RangedRes
+Propagation\-\Ability\The enemy creates copies of itself.\-1\y\Propagation, Enemy
+Ranged Resistance\-\Ability\Significantly reduces the damage received from bow, staff, and wand attacks and skills. These weapon types still deal reduced shapeshift damage.\-1\y\RangedRes, Enemy
 Recovery Potency\example\Ability\Increases the potency of recovery skills by `x`%.\0\n\RecoveryPotency
 Recovery Potency\2%\Ability\Increases the potency of recovery skills by 2%.\10\n\RecoveryPotency
 Recovery Potency\3%\Ability\Increases the potency of recovery skills by 3%.\20\n\RecoveryPotency
@@ -1257,7 +1285,7 @@ Renown\50%\Ability\Increases renown intake for clearing quests by +50%\0\y\Event
 Renown\100%\Ability\Increases renown intake for clearing quests by +100%\0\y\Event, Facility, Score
 Renown\150%\Ability\Increases renown intake for clearing quests by +150%\0\y\Event, Facility, Score
 Scorching Air\-\Ability\This continuously deals damage to any adventurers in range\-1\y\ScorchingAir
-Scorching Air Res\-\Ability\Completely nullifies damage from scorching air.\50\y\ScorchingAirRes
+Scorching Air Res\-\Ability\Completely nullifies damage from scorching air.\50\y\ScorchingAirRes, Resistance
 Shadow Res\example\Ability\Reduces shadow damage taken by `x`%.\0\y\ShadowRes, Resistance
 Shadow Res\3%\Ability\Reduces shadow damage taken by 3%.\20\y\ShadowRes, Resistance
 Shadow Res\4%\Ability\Reduces shadow damage taken by 4%.\30\y\ShadowRes, Resistance
@@ -1281,7 +1309,6 @@ Skill Damage\25%\Ability\Increases attack skill damage by 25%.\80\y\SkillDamage
 Skill Damage\30%\Ability\Increases attack skill damage by 30%.\100\y\SkillDamage
 Skill Damage\35%\Ability\Increases attack skill damage by 35%.\120\y\SkillDamage
 Skill Damage\40%\Ability\Increases attack skill damage by 40%.\140\y\SkillDamage
-Skill Resistance\-\Ability\This significantly reduces the damage received from skills.\-1\y\SkillRes
 Skill Haste\example\Ability\Increases skill gauge fill rate by `x`%.\0\y\SkillHaste
 Skill Haste\3%\Ability\Increases skill gauge fill rate by 3%.\30\y\SkillHaste
 Skill Haste\4%\Ability\Increases skill gauge fill rate by 4%.\50\y\SkillHaste
@@ -1297,6 +1324,7 @@ Skill Prep\25%\Ability\Fills 25% of skill gauges at the start of quests.\40\y\Sk
 Skill Prep\50%\Ability\Fills 50% of skill gauges at the start of quests.\60\y\SkillPrep
 Skill Prep\75%\Ability\Fills 75% of skill gauges at the start of quests.\80\y\SkillPrep
 Skill Prep\100%\Ability\Fills 100% of skill gauges at the start of quests.\100\y\SkillPrep
+Skill Resistance\-\Ability\This significantly reduces the damage received from skills.\-1\y\SkillRes, Enemy
 Skill Resistance Penetrator\-\Ability\Completely negates skill resistance.\50\y\SkillResistancePenetrator
 Slayer's Strength\example\Ability\Increases strength by `x`% for every five enemies defeated (up to five times per quest).\0\y\Strength, Slayers
 Slayer's Strength\2%\Ability\Increases strength by 2% for every five enemies defeated (up to five times per quest).\20\y\Strength, Slayers
@@ -1304,6 +1332,9 @@ Slayer's Strength\3%\Ability\Increases strength by 3% for every five enemies def
 Slayer's Strength\4%\Ability\Increases strength by 4% for every five enemies defeated (up to five times per quest).\60\y\Strength, Slayers
 Slayer's Strength\5%\Ability\Increases strength by 5% for every five enemies defeated (up to five times per quest).\80\y\Strength, Slayers
 Slayer's Strength\6%\Ability\Increases strength by 6% for every five enemies defeated (up to five times per quest).\100\y\Strength, Slayers
+Sleep = Team Strength\example\Ability\Buffs the entire team's strength by `x`% for 10 seconds upon successfully putting an enemy to sleep. After activating, this ability will not activate again for five seconds.\0\y\Sleep, Buff, Team, Strength, StatusDoublebuff
+Sleep = Team Strength\10%\Ability\Buffs the entire team's strength by 10% for 10 seconds upon successfully putting an enemy to sleep. After activating, this ability will not activate again for five seconds.\60\y\Sleep, Buff, Team, Strength, StatusDoublebuff
+Sleep = Team Strength\15%\Ability\Buffs the entire team's strength by 15% for 10 seconds upon successfully putting an enemy to sleep. After activating, this ability will not activate again for five seconds.\80\y\Sleep, Buff, Team, Strength, StatusDoublebuff
 Sleep Res\example\Ability\Reduces susceptibility to sleep by `x`%.\0\y\SleepRes, Resistance
 Sleep Res\15%\Ability\Reduces susceptibility to sleep by 15%.\10\y\SleepRes, Resistance
 Sleep Res\20%\Ability\Reduces susceptibility to sleep by 20%.\20\y\SleepRes, Resistance
@@ -1385,6 +1416,8 @@ Water Res\3%\Ability\Reduces water damage taken by 3%.\20\y\WaterRes, Resistance
 Water Res\4%\Ability\Reduces water damage taken by 4%.\30\y\WaterRes, Resistance
 Water Res\5%\Ability\Reduces water damage taken by 5%.\40\y\WaterRes, Resistance
 Water Res\8%\Ability\Reduces water damage taken by 8%.\60\y\WaterRes, Resistance
+Whirlpool\-\Ability\If an adventurer is within the whirlpool's area of effect, they will be drawn in, and their movement will be significantly slowed\-1\y\Enemy
+Whirlpool Res\-\Ability\Ignores the effects of whirlpool.\60\y\Resistance
 Wind Res\example\Ability\Reduces wind damage taken by `x`%.\0\y\WindRes, Resistance
 Wind Res\3%\Ability\Reduces wind damage taken by 3%.\20\y\WindRes, Resistance
 Wind Res\4%\Ability\Reduces wind damage taken by 4%.\30\y\WindRes, Resistance
@@ -1393,7 +1426,9 @@ Wind Res\8%\Ability\Reduces wind damage taken by 8%.\60\y\WindRes, Resistance
 Wind Res\10%\Ability\Reduces wind damage taken by 10%.\80\y\WindRes, Resistance
 Windwhistle Grass\example\Ability\Increases windwhistle grass intake for clearing quests by `x`%.\0\y\Event, Facility, Score
 Windwhistle Grass\25%\Ability\Increases windwhistle grass intake for clearing quests by 25%.\0\y\Event, Facility, Score
+Windwhistle Grass\35%\Ability\Increases windwhistle grass intake for clearing quests by 35%.\0\y\Event, Facility, Score
 Windwhistle Grass\50%\Ability\Increases windwhistle grass intake for clearing quests by 50%.\0\y\Event, Facility, Score
+Windwhistle Grass\60%\Ability\Increases windwhistle grass intake for clearing quests by 60%.\0\y\Event, Facility, Score
 Windwhistle Grass\75%\Ability\Increases wind whistle grass intake for clearing quests by 75%.\0\y\Event, Facility, Score
 Wonder Guard\-\Ability\Only adventurers with the proper bane skill can damage this enemy\-1\y\WonderGuard
 Woodland Blessing\example\Ability\Reduces susceptibility to stun and sleep by `x`%.\0\y\StunRes, SleepRes, Resistance

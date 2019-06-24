@@ -1,6 +1,6 @@
 Blind\1\Causes the afflicted player to miss attacks and skills with a base chance of 80%.\Causes regular attacks to miss on lower tier enemies.
 Bleed\0\Causes damage for 30 seconds every 4.99 seconds that can stack up to three times, increasing damage by 50% with each stack. Cannot deal lethal damage.\Causes damage for 30 seconds every 4.99 seconds that can stack up to three times, increasing damage by 50% with each stack
-Bog\2\Reduces movement speed by 50%, and damage received is increased by 50% for the entire duration.\Reduces movement speed, and causes all incoming attacks to be critical hits.
+Bog\2\Reduces movement speed by 50%, and damage received is increased by 50% for the entire duration.\Reduces movement speed, and causes all incoming attacks to deal 50% more damage.
 Burn\1\Deals damage over time equal to a fixed % of the afflicted player's HP.\Deals damage over time.
 Curse\1\Cause's the afflicted player's attacks to generate no SP, and also disables skills\Curse cannot be inflicted by players as of yet.
 Energized\0\"Energy" is a special kind of buff which upgrades certain skills once five energy levels have been accumulated. Once five energy levels have been accumulated, an adventurer becomes "Energized", and their next attack skill / recovery skill will be upgraded to deal 50% more damage or recover 50% more health.;; Using a skill upgraded by energized resets the user's energy level and ends the energized state. Furthermore, becoming afflicted will also have the same effect.\-

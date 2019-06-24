@@ -1,3 +1,4 @@
+Fafnir Roy III\-1; -1\Yes, Dragon, Gauntlet\nothing\~~Massive headaches for my dev and data input guy~~, ~~nothing for players though~~\
 Wandering Shroom\246120; 1058\Light, Physian, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\Paralysis\Disperse
 Wandering Shroom, Clone Wave 1\4000; 609\Shadow, Physian, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Bog: **0%**, Sleep: **0%**\Poison\
 Wandering Shroom, Clone Wave 2\4000; 609\Shadow, Physian, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Bog: **0%**, Sleep: **0%**\Poison\
@@ -12,6 +13,7 @@ Obsidian Golem\250000; 2530\Shadow, Thaumian, Void\Paralysis: **20%**, Stun: 40%
 Amber Golem\250000; 2530\Light, Thaumian, Void\~~TBC~~\Paralysis\Dull
 Void Zephyr\407680; 3572\Wind, Dragon, Void\Burn: **0%**\Sleep\Dragon Delay;; Dull
 Void Agni\422683; 3572\Flame, Dragon, Void\Bog: 60%\Stun\Scorching Air;; Skill Resistance
+Void Poseidon\422683; 3572\Water, Dragon, Void\Sleep: *80%*\Freeze\Whirlpool, Skill Resistance
 Raging Manticore\264856; 2290\Shadow, Therion, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\Curse, Poison\Fury
 Midgardsormr (Enemy)\5880, 21060, 64350, 120000; 231, 761, 1205, 1800\Wind, Dragon, Dragon Trial\Burn: 55%\Stun\
 Brunhilda (Enemy)\5880, 19656, 64350, 111540; 231, 766, 1339, 1968\Flame, Dragon, Dragon Trial\Freeze: 55%, Bog: 55%\Burn\

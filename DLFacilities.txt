@@ -1,3 +1,18 @@
+Aero Slime Statue\1\The Aqua Slime Statue boosts the stats of wind-attuned adventurers. It can be obtained from the Void Battles Treasure Trade for Void Seed x1.\Adventurer, Altar\2x2\1\0
+Aero Slime Statue\2\\Adventurer, Altar\2x2\1\5000\Fiend's Claw, 10
+Aero Slime Statue\3\\Adventurer, Altar\2x2\1\10000\Fiend's Claw, 15;; Solid Fungus, 2
+Aero Slime Statue\4\\Adventurer, Altar\2x2\1\15000\Fiend's Claw, 20
+Aero Slime Statue\5\\Adventurer, Altar\2x2\1\20000\Fiend's Claw, 25;; Solid Fungus, 5
+Aero Slime Statue\6\\Adventurer, Altar\2x2\1\25000\Fiend's Claw, 30;; Fiend's Horn, 5
+Aero Slime Statue\7\\Adventurer, Altar\2x2\1\30000\Fiend's Claw, 35;; Fiend's Horn, 10;; Goblin Thread, 2
+Aero Slime Statue\8\\Adventurer, Altar\2x2\1\35000\Fiend's Claw, 40;; Fiend's Horn, 15
+Aero Slime Statue\9\\Adventurer, Altar\2x2\1\40000\Fiend's Claw, 45;; Fiend's Horn, 20;; Goblin Thread, 5
+Aero Slime Statue\10\\Adventurer, Altar\2x2\1\50000\Fiend's Claw, 50;; Fiend's Horn, 25
+Aero Slime Statue\11\\Adventurer, Altar\2x2\1\60000\Fiend's Claw, 55;; Fiend's Horn, 30;; Fiend's Eye, 5;; Oceanic Fin, 2
+Aero Slime Statue\12\\Adventurer, Altar\2x2\1\70000\Fiend's Claw, 60;; Fiend's Horn, 35;; Fiend's Eye, 10
+Aero Slime Statue\13\\Adventurer, Altar\2x2\1\80000\Fiend's Claw, 65;; Fiend's Horn, 40;; Fiend's Eye, 15;; Oceanic Fin, 5
+Aero Slime Statue\14\\Adventurer, Altar\2x2\1\90000\Fiend's Claw, 70;; Fiend's Horn, 45;; Fiend's Eye, 20
+Aero Slime Statue\15\\Adventurer, Altar\2x2\1\100000\Fiend's Claw, 75;; Fiend's Horn, 50;; Fiend's Eye, 30;; Oceanic Fin, 8
 Aqua Slime Statue\1\The Aqua Slime Statue boosts the stats of water-attuned adventurers. It can be obtained from the Void Battles Treasure Trade for Void Seed x1.\Adventurer, Altar\2x2\1\0
 Aqua Slime Statue\2\-\Adventurer, Altar\2x2\1\5000\Iron Ore, 10
 Aqua Slime Statue\3\-\Adventurer, Altar\2x2\1\10000\Iron Ore, 15;; Old Cloth, 2

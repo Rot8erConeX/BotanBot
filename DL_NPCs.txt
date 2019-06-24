@@ -1,5 +1,6 @@
 Aurelius\1\y\\
 Chelle\1\y\\
+Dove\1\y\\
 Elysium\1\y\\
 Emile\1\y\\
 Fa Ming\1\y\\
@@ -13,8 +14,10 @@ Nina\2\y\\
 Notte\2\y\\Yukana
 Patia\1\y\\
 Phares\1\y\\
+Pigeon\5\y\\
 Ramona\1\n\\
 Rolf\1\y\\
+Roy the Third\1\y\\
 Sarisse\1\n\\
 Valyx\1\y\\
 Wu Kong\1\y\\
