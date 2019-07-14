@@ -13,6 +13,36 @@ Aero Slime Statue\12\\Adventurer, Altar\2x2\1\70000\Fiend's Claw, 60;; Fiend's H
 Aero Slime Statue\13\\Adventurer, Altar\2x2\1\80000\Fiend's Claw, 65;; Fiend's Horn, 40;; Fiend's Eye, 15;; Oceanic Fin, 5
 Aero Slime Statue\14\\Adventurer, Altar\2x2\1\90000\Fiend's Claw, 70;; Fiend's Horn, 45;; Fiend's Eye, 20
 Aero Slime Statue\15\\Adventurer, Altar\2x2\1\100000\Fiend's Claw, 75;; Fiend's Horn, 50;; Fiend's Eye, 30;; Oceanic Fin, 8
+Arctos Monument\1\Use it to boost the stats of flame-attuned adventurers.\Adventurer, Event Altar\3x3\1\0
+Arctos Monument\2\-\Adventurer, Event Altar\3x3\1\100\Motivational Log, 3
+Arctos Monument\3\-\Adventurer, Event Altar\3x3\1\200\Motivational Log, 5
+Arctos Monument\4\-\Adventurer, Event Altar\3x3\1\300\Motivational Log, 7
+Arctos Monument\5\-\Adventurer, Event Altar\3x3\1\400\Motivational Log, 10
+Arctos Monument\6\-\Adventurer, Event Altar\3x3\1\500\Motivational Log, 12
+Arctos Monument\7\-\Adventurer, Event Altar\3x3\1\600\Motivational Log, 15
+Arctos Monument\8\-\Adventurer, Event Altar\3x3\1\700\Motivational Log, 18
+Arctos Monument\9\-\Adventurer, Event Altar\3x3\1\800\Motivational Log, 21
+Arctos Monument\10\-\Adventurer, Event Altar\3x3\1\1000\Motivational Log, 25
+Arctos Monument\11\-\Adventurer, Event Altar\3x3\1\1200\Motivational Log, 30
+Arctos Monument\12\-\Adventurer, Event Altar\3x3\1\1400\Motivational Log, 50
+Arctos Monument\13\-\Adventurer, Event Altar\3x3\1\1600\Motivational Log, 70
+Arctos Monument\14\-\Adventurer, Event Altar\3x3\1\1800\Motivational Log, 90
+Arctos Monument\15\-\Adventurer, Event Altar\3x3\1\2000\Motivational Log, 120
+Arctos Monument\16\-\Adventurer, Event Altar\3x3\1\2200\Motivational Log, 150
+Arctos Monument\17\-\Adventurer, Event Altar\3x3\1\2400\Motivational Log, 180
+Arctos Monument\18\-\Adventurer, Event Altar\3x3\1\2600\Motivational Log, 210
+Arctos Monument\19\-\Adventurer, Event Altar\3x3\1\2800\Motivational Log, 250
+Arctos Monument\20\-\Adventurer, Event Altar\3x3\1\3000\Motivational Log, 300
+Arctos Monument\21\-\Adventurer, Event Altar\3x3\1\3200\Motivational Log, 350
+Arctos Monument\22\-\Adventurer, Event Altar\3x3\1\3400\Motivational Log, 400
+Arctos Monument\23\-\Adventurer, Event Altar\3x3\1\3600\Motivational Log, 450
+Arctos Monument\24\-\Adventurer, Event Altar\3x3\1\3800\Motivational Log, 500
+Arctos Monument\25\-\Adventurer, Event Altar\3x3\1\4000\Motivational Log, 550
+Arctos Monument\26\-\Adventurer, Event Altar\3x3\1\4200\Motivational Log, 600
+Arctos Monument\27\-\Adventurer, Event Altar\3x3\1\4400\Motivational Log, 700
+Arctos Monument\28\-\Adventurer, Event Altar\3x3\1\4600\Motivational Log, 800
+Arctos Monument\29\-\Adventurer, Event Altar\3x3\1\4800\Motivational Log, 900
+Arctos Monument\30\-\Adventurer, Event Altar\3x3\1\5000\Motivational Log, 1000
 Aqua Slime Statue\1\The Aqua Slime Statue boosts the stats of water-attuned adventurers. It can be obtained from the Void Battles Treasure Trade for Void Seed x1.\Adventurer, Altar\2x2\1\0
 Aqua Slime Statue\2\-\Adventurer, Altar\2x2\1\5000\Iron Ore, 10
 Aqua Slime Statue\3\-\Adventurer, Altar\2x2\1\10000\Iron Ore, 15;; Old Cloth, 2
@@ -58,6 +88,11 @@ Axe Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Argente
 Axe Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Jade Insignia, 120;; Dyrenell Aureus, 90;; Royal Jade Insignia, 40
 Axe Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Jade Insignia, 160;; Dyrenell Aureus, 100;; Royal Jade Insignia, 50
 Axe Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Jade Insignia, 160;; Dyrenell Aureus, 110;; Royal Jade Insignia, 60
+Axe Dojo\31\-\Adventurer, Dojo\3x3\2\160000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Jade Insignia, 200;; Dyrenell Aureus, 120;; Royal Jade Insignia, 80
+Axe Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Jade Insignia, 200;; Dyrenell Aureus, 130;; Royal Jade Insignia, 80
+Axe Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Jade Insignia, 200;; Dyrenell Aureus, 140;; Royal Jade Insignia, 80
+Axe Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Jade Insignia, 240;; Dyrenell Aureus, 150;; Royal Jade Insignia, 100
+Axe Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Jade Insignia, 240;; Dyrenell Aureus, 160;; Royal Jade Insignia, 100
 Battle Standard\-\A large flag with intricate embroidery. Soldiers have long rallied under this symbol to fight for what they believe in.\Decorative\1x1\5\0
 Blade Dojo\1\A training area built to hone one's skills with a blade. Use it to boosts the stats of blade-wielding adventures.\Adventurer, Dojo\3x3\2\0
 Blade Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10
@@ -89,6 +124,11 @@ Blade Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Argen
 Blade Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Azure Insignia, 120;; Dyrenell Aureus, 90;; Royal Azure Insignia, 40
 Blade Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Azure Insignia, 160;; Dyrenell Aureus, 100;; Royal Azure Insignia, 50
 Blade Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Azure Insignia, 160;; Dyrenell Aureus, 110;; Royal Azure Insignia, 60
+Blade Dojo\31\-\Adventurer, Dojo\3x3\2\160000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Azure Insignia, 200;; Dyrenell Aureus, 120;; Royal Azure Insignia, 80
+Blade Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Azure Insignia, 200;; Dyrenell Aureus, 130;; Royal Azure Insignia, 80
+Blade Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Azure Insignia, 200;; Dyrenell Aureus, 140;; Royal Azure Insignia, 80
+Blade Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Azure Insignia, 240;; Dyrenell Aureus, 150;; Royal Azure Insignia, 100
+Blade Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Azure Insignia, 240;; Dyrenell Aureus, 160;; Royal Azure Insignia, 100
 Blue Flowers\-\A bed of blooming blue flowers. Once thought to be a myth, these beauties are now symbolic of hope and miracles.\Decorative\1x1\5\0
 Bow Dojo\1\A training area built to hone one's skills with a bow. Use it to boosts the stats of bow-wielding adventures.\Adventurer, Dojo\3x3\2\0
 Bow Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10
@@ -120,6 +160,11 @@ Bow Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Argente
 Bow Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Vermilion Insignia, 120;; Dyrenell Aureus, 90;; Royal Vermilion Insignia, 40
 Bow Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Vermilion Insignia, 160;; Dyrenell Aureus, 100;; Royal Vermilion Insignia, 50
 Bow Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Vermilion Insignia, 160;; Dyrenell Aureus, 110;; Royal Vermilion Insignia, 60
+Bow Dojo\31\-\Adventurer, Dojo\3x3\2\160000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Vermilion Insignia, 200;; Dyrenell Aureus, 120;; Royal Vermilion Insignia, 80
+Bow Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Vermilion Insignia, 200;; Dyrenell Aureus, 130;; Royal Vermilion Insignia, 80
+Bow Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Vermilion Insignia, 200;; Dyrenell Aureus, 140;; Royal Vermilion Insignia, 80
+Bow Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Vermilion Insignia, 240;; Dyrenell Aureus, 150;; Royal Vermilion Insignia, 100
+Bow Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Vermilion Insignia, 240;; Dyrenell Aureus, 160;; Royal Vermilion Insignia, 100
 Broadleaf Tree\-\An iconic tree with broad leaves. A standard of any garden, its placement and health are indicative of its gardener's skills.\Decorative\1x1\5\0
 Circus Tent\1\Use it to boost the stats of light-attuned adventurers.\Adventurer, Event Altar\3x3\1\0
 Circus Tent\2\-\Adventurer, Event Altar\3x3\1\100\Tent Canvas, 3
@@ -182,6 +227,11 @@ Dagger Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Arge
 Dagger Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Violet Insignia, 120;; Dyrenell Aureus, 90;; Royal Violet Insignia, 40
 Dagger Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Violet Insignia, 160;; Dyrenell Aureus, 100;; Royal Violet Insignia, 50
 Dagger Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Violet Insignia, 160;; Dyrenell Aureus, 110;; Royal Violet Insignia, 60
+Dagger Dojo\31\-\Adventurer, Dojo\3x3\2\160000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Violet Insignia, 200;; Dyrenell Aureus, 120;; Royal Violet Insignia, 80
+Dagger Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Violet Insignia, 200;; Dyrenell Aureus, 130;; Royal Violet Insignia, 80
+Dagger Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Violet Insignia, 200;; Dyrenell Aureus, 140;; Royal Violet Insignia, 80
+Dagger Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Violet Insignia, 240;; Dyrenell Aureus, 150;; Royal Violet Insignia, 100
+Dagger Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Violet Insignia, 240;; Dyrenell Aureus, 160;; Royal Violet Insignia, 100
 Dragonata\1\Use it to boost the stats of water-attuned adventurers.\Adventurer, Event Altar\3x3\1\0
 Dragonata\2\-\Adventurer, Event Altar\3x3\1\100\Paper-Mache, 3
 Dragonata\3\-\Adventurer, Event Altar\3x3\1\200\Paper-Mache, 5
@@ -361,6 +411,11 @@ Flame Altar\27\-\Adventurer, Altar\3x3\2\32000\Flame Orb, 100;; Blaze Orb, 10;; 
 Flame Altar\28\-\Adventurer, Altar\3x3\2\34000\Flame Orb, 100;; Blaze Orb, 10;; Inferno Orb, 2
 Flame Altar\29\-\Adventurer, Altar\3x3\2\36000\Flame Orb, 150;; Blaze Orb, 12;; Inferno Orb, 3
 Flame Altar\30\-\Adventurer, Altar\3x3\2\38000\Flame Orb, 150;; Blaze Orb, 12;; Inferno Orb, 3
+Flame Altar\31\-\Adventurer, Altar\3x3\2\42000\Flame Orb, 200;; Blaze Orb, 15;; Inferno Orb, 5
+Flame Altar\32\-\Adventurer, Altar\3x3\2\46000\Flame Orb, 200;; Blaze Orb, 15;; Inferno Orb, 5
+Flame Altar\33\-\Adventurer, Altar\3x3\2\50000\Flame Orb, 200;; Blaze Orb, 15;; Inferno Orb, 5
+Flame Altar\34\-\Adventurer, Altar\3x3\2\54000\Flame Orb, 250;; Blaze Orb, 18;; Inferno Orb, 7
+Flame Altar\35\-\Adventurer, Altar\3x3\2\58000\Flame Orb, 250;; Blaze Orb, 18;; Inferno Orb, 7
 Flame Dracolith\1\A monument made in the likeness of a flame dragon. Increases damage dealt when shapeshifting as a flame-attuned dragon.\Dragon, Dracolith\2x2\1\0
 Flame Dracolith\2\-\Dragon, Dracolith\2x2\1\3000
 Flame Dracolith\3\-\Dragon, Dracolith\2x2\1\4000
@@ -382,6 +437,7 @@ Flame Dracolith\18\-\Dragon, Dracolith\2x2\1\30000\Flamewyrm's Sphere, 250;; Fla
 Flame Dracolith\19\-\Dragon, Dracolith\2x2\1\32000\Flamewyrm's Sphere, 300;; Flamewyrm's Scale, 120;; Talonstone, 10
 Flame Dracolith\20\-\Dragon, Dracolith\2x2\1\34000\Flamewyrm's Sphere, 350;; Flamewyrm's Scale, 140;; Talonstone, 10
 Halidom\H\Euden's home base. Raise its level to expand the area in which you can build castle facilities.\General\4x4\1\0
+Iron Weather Vane\-\An iron instrument indicating the direction of the wind. Manufactured using the finest smithing techniques, it moves smoothly in the breeze.\Decorative\1x1\4\0
 Jack-o'-Lantern\-\A lantern made by a sylvan who carved the insides out of a pumpkin, all the while insisting it represented his love of pranks. At least everyone enjoyed eating the filling.\Decorative\1x1\4\0
 Lance Dojo\1\A training area built to hone one's skills with a lance. Use it to boosts the stats of lance-wielding adventures.\Adventurer, Dojo\3x3\2\0
 Lance Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10
@@ -413,7 +469,11 @@ Lance Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Argen
 Lance Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Azure Insignia, 120;; Dyrenell Aureus, 90;; Royal Azure Insignia, 40
 Lance Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Azure Insignia, 160;; Dyrenell Aureus, 100;; Royal Azure Insignia, 50
 Lance Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Azure Insignia, 160;; Dyrenell Aureus, 110;; Royal Azure Insignia, 60
-Lectern\-\A stand designed for reading heavy books. Useful when you want to have a good, long read.\Decorative\1x1\4\0
+Lance Dojo\31\-\Adventurer, Dojo\3x3\2\160000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Azure Insignia, 200;; Dyrenell Aureus, 120;; Royal Azure Insignia, 80
+Lance Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Azure Insignia, 200;; Dyrenell Aureus, 130;; Royal Azure Insignia, 80
+Lance Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Azure Insignia, 200;; Dyrenell Aureus, 140;; Royal Azure Insignia, 80
+Lance Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Azure Insignia, 240;; Dyrenell Aureus, 150;; Royal Azure Insignia, 100
+Lance Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Azure Insignia, 240;; Dyrenell Aureus, 160;; Royal Azure Insignia, 100
 Library Obscura\1\Use it to boost the stats of shadow-attuned adventurers.\Adventurer, Event Altar\3x3\1\0
 Library Obscura\2\-\Adventurer, Event Altar\3x3\1\100\Arcane Tome, 3
 Library Obscura\3\-\Adventurer, Event Altar\3x3\1\200\Arcane Tome, 5
@@ -474,6 +534,11 @@ Light Altar\27\-\Adventurer, Altar\3x3\2\32000\Light Orb, 100;; Radiance Orb, 10
 Light Altar\28\-\Adventurer, Altar\3x3\2\34000\Light Orb, 100;; Radiance Orb, 10;; Refulgence Orb, 2
 Light Altar\29\-\Adventurer, Altar\3x3\2\36000\Light Orb, 150;; Radiance Orb, 12;; Refulgence Orb, 3
 Light Altar\30\-\Adventurer, Altar\3x3\2\38000\Light Orb, 150;; Radiance Orb, 12;; Refulgence Orb, 3
+Light Altar\31\-\Adventurer, Altar\3x3\2\42000\Light Orb, 200;; Radiance Orb, 15;; Refulgence Orb, 5
+Light Altar\32\-\Adventurer, Altar\3x3\2\46000\Light Orb, 200;; Radiance Orb, 15;; Refulgence Orb, 5
+Light Altar\33\-\Adventurer, Altar\3x3\2\50000\Light Orb, 200;; Radiance Orb, 15;; Refulgence Orb, 5
+Light Altar\34\-\Adventurer, Altar\3x3\2\54000\Light Orb, 250;; Radiance Orb, 18;; Refulgence Orb, 7
+Light Altar\35\-\Adventurer, Altar\3x3\2\58000\Light Orb, 250;; Radiance Orb, 18;; Refulgence Orb, 7
 Magma Slime Statue\1\A statue of a magma slime granted to those who are victorious in void battles. The burning flame mana grants vitality. Use it to boost the stats of flame-attuned adventurers.\Adventurer, Void Altar\2x2\1\0
 Magma Slime Statue\2\-\Adventurer, Void Altar\2x2\1\5000\Bat's Wing, 10;; Solid Fungus, 2
 Magma Slime Statue\3\-\Adventurer, Void Altar\2x2\1\10000\Bat's Wing, 15
@@ -550,6 +615,11 @@ Shadow Altar\27\-\Adventurer, Altar\3x3\2\32000\Shadow Orb, 100;; Nightfall Orb,
 Shadow Altar\28\-\Adventurer, Altar\3x3\2\34000\Shadow Orb, 100;; Nightfall Orb, 10;; Nether Orb, 2
 Shadow Altar\29\-\Adventurer, Altar\3x3\2\36000\Shadow Orb, 150;; Nightfall Orb, 12;; Nether Orb, 3
 Shadow Altar\30\-\Adventurer, Altar\3x3\2\38000\Shadow Orb, 150;; Nightfall Orb, 12;; Nether Orb, 3
+Shadow Altar\31\-\Adventurer, Altar\3x3\2\42000\Shadow Orb, 200;; Nightfall Orb, 15;; Nether Orb, 5
+Shadow Altar\32\-\Adventurer, Altar\3x3\2\46000\Shadow Orb, 200;; Nightfall Orb, 15;; Nether Orb, 5
+Shadow Altar\33\-\Adventurer, Altar\3x3\2\50000\Shadow Orb, 200;; Nightfall Orb, 15;; Nether Orb, 5
+Shadow Altar\34\-\Adventurer, Altar\3x3\2\54000\Shadow Orb, 250;; Nightfall Orb, 18;; Nether Orb, 7
+Shadow Altar\35\-\Adventurer, Altar\3x3\2\58000\Shadow Orb, 250;; Nightfall Orb, 18;; Nether Orb, 7
 Smithy\H\The smithy run by Ramona. Raise its level to expand the selection of weapons you can craft or enhance.\General\3x3\1\0
 Snowdrake\-\An adorable drake made from snow. It's so cute, in fact, that someone cast a spell on it to make sure it doesn't melt.\Decorative\1x1\4\0
 Staff Dojo\1\A training area built to hone one's skills with a staff. Use it to boosts the stats of staff-wielding adventures.\Adventurer, Dojo\3x3\2\0
@@ -582,7 +652,11 @@ Staff Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Argen
 Staff Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Amber Insignia, 120;; Dyrenell Aureus, 90;; Royal Amber Insignia, 40
 Staff Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Amber Insignia, 160;; Dyrenell Aureus, 100;; Royal Amber Insignia, 50
 Staff Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Amber Insignia, 160;; Dyrenell Aureus, 110;; Royal Amber Insignia, 60
-Sweet Retreat\1\A candy house made to be the centerpiece of the Halidom's Halloween party, and bound to liven up the event. Use it to boost the stats of light-attuned adventurers.\Adventurer, Event Altar\3x3\1\0
+Staff Dojo\31\-\Adventurer, Dojo\3x3\2\160000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Amber Insignia, 200;; Dyrenell Aureus, 120;; Royal Amber Insignia, 80
+Staff Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Amber Insignia, 200;; Dyrenell Aureus, 130;; Royal Amber Insignia, 80
+Staff Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Amber Insignia, 200;; Dyrenell Aureus, 140;; Royal Amber Insignia, 80
+Staff Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Amber Insignia, 240;; Dyrenell Aureus, 150;; Royal Amber Insignia, 100
+Staff Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Amber Insignia, 240;; Dyrenell Aureus, 160;; Royal Amber Insignia, 100
 Sweet Retreat\2\-\Adventurer, Event Altar\3x3\1\100\Snack-o'-Lantern, 3
 Sweet Retreat\3\-\Adventurer, Event Altar\3x3\1\200\Snack-o'-Lantern, 5
 Sweet Retreat\4\-\Adventurer, Event Altar\3x3\1\300\Snack-o'-Lantern, 7
@@ -642,6 +716,11 @@ Sword Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Argen
 Sword Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Vermilion Insignia, 120;; Dyrenell Aureus, 90;; Royal Vermilion Insignia, 40
 Sword Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Vermilion Insignia, 160;; Dyrenell Aureus, 100;; Royal Vermilion Insignia, 50
 Sword Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Vermilion Insignia, 160;; Dyrenell Aureus, 110;; Royal Vermilion Insignia, 60
+Sword Dojo\31\-\Adventurer, Dojo\3x3\2\160000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Vermilion Insignia, 200;; Dyrenell Aureus, 120;; Royal Vermilion Insignia, 80
+Sword Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Vermilion Insignia, 200;; Dyrenell Aureus, 130;; Royal Vermilion Insignia, 80
+Sword Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Vermilion Insignia, 200;; Dyrenell Aureus, 140;; Royal Vermilion Insignia, 80
+Sword Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Vermilion Insignia, 240;; Dyrenell Aureus, 150;; Royal Vermilion Insignia, 100
+Sword Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Vermilion Insignia, 240;; Dyrenell Aureus, 160;; Royal Vermilion Insignia, 100
 Wand Dojo\1\A training area built to hone one's skills with a wand. Use it to boosts the stats of wand-wielding adventures.\Adventurer, Dojo\3x3\2\0
 Wand Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10
 Wand Dojo\3\-\Adventurer, Dojo\3x3\2\3500\Dyrenell Aes, 10
@@ -672,6 +751,11 @@ Wand Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Argent
 Wand Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Jade Insignia, 120;; Dyrenell Aureus, 90;; Royal Jade Insignia, 40
 Wand Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Jade Insignia, 160;; Dyrenell Aureus, 100;; Royal Jade Insignia, 50
 Wand Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Jade Insignia, 160;; Dyrenell Aureus, 110;; Royal Jade Insignia, 60
+Wand Dojo\31\-\Adventurer, Dojo\3x3\2\160000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Jade Insignia, 200;; Dyrenell Aureus, 120;; Royal Jade Insignia, 80
+Wand Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Jade Insignia, 200;; Dyrenell Aureus, 130;; Royal Jade Insignia, 80
+Wand Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Jade Insignia, 200;; Dyrenell Aureus, 140;; Royal Jade Insignia, 80
+Wand Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Jade Insignia, 240;; Dyrenell Aureus, 150;; Royal Jade Insignia, 100
+Wand Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Jade Insignia, 240;; Dyrenell Aureus, 160;; Royal Jade Insignia, 100
 Water Altar\1\An altar to honor water. The mana housed within sharpens the mind, boosting the stats of water-attuned adventurers.\Adventurer, Altar\3x3\2\200
 Water Altar\2\-\Adventurer, Altar\3x3\2\400
 Water Altar\3\-\Adventurer, Altar\3x3\2\600
@@ -702,6 +786,11 @@ Water Altar\27\-\Adventurer, Altar\3x3\2\32000\Water Orb, 100;; Stream Orb, 10;;
 Water Altar\28\-\Adventurer, Altar\3x3\2\34000\Water Orb, 100;; Stream Orb, 10;; Deluge Orb, 2
 Water Altar\29\-\Adventurer, Altar\3x3\2\36000\Water Orb, 150;; Stream Orb, 12;; Deluge Orb, 3
 Water Altar\30\-\Adventurer, Altar\3x3\2\38000\Water Orb, 150;; Stream Orb, 12;; Deluge Orb, 3
+Water Altar\31\-\Adventurer, Altar\3x3\2\42000\Water Orb, 200;; Stream Orb, 15;; Deluge Orb, 5
+Water Altar\32\-\Adventurer, Altar\3x3\2\46000\Water Orb, 200;; Stream Orb, 15;; Deluge Orb, 5
+Water Altar\33\-\Adventurer, Altar\3x3\2\50000\Water Orb, 200;; Stream Orb, 15;; Deluge Orb, 5
+Water Altar\34\-\Adventurer, Altar\3x3\2\54000\Water Orb, 250;; Stream Orb, 18;; Deluge Orb, 7
+Water Altar\35\-\Adventurer, Altar\3x3\2\58000\Water Orb, 250;; Stream Orb, 18;; Deluge Orb, 7
 Water Dracolith\1\A monument made in the likeness of a water dragon. Increases damage dealt when shapeshifting as a water-attuned dragon.\Dragon, Dracolith\2x2\1\0
 Water Dracolith\2\-\Dragon, Dracolith\2x2\1\3000
 Water Dracolith\3\-\Dragon, Dracolith\2x2\1\4000
@@ -752,6 +841,11 @@ Wind Altar\27\-\Adventurer, Altar\3x3\2\32000\Wind Orb, 100;; Storm Orb, 10;; Ma
 Wind Altar\28\-\Adventurer, Altar\3x3\2\34000\Wind Orb, 100;; Storm Orb, 10;; Maelstrom Orb, 2
 Wind Altar\29\-\Adventurer, Altar\3x3\2\36000\Wind Orb, 150;; Storm Orb, 12;; Maelstrom Orb, 3
 Wind Altar\30\-\Adventurer, Altar\3x3\2\38000\Wind Orb, 150;; Storm Orb, 12;; Maelstrom Orb, 3
+Wind Altar\31\-\Adventurer, Altar\3x3\2\42000\Wind Orb, 200;; Storm Orb, 15;; Maelstrom Orb, 5
+Wind Altar\32\-\Adventurer, Altar\3x3\2\46000\Wind Orb, 200;; Storm Orb, 15;; Maelstrom Orb, 5
+Wind Altar\33\-\Adventurer, Altar\3x3\2\50000\Wind Orb, 200;; Storm Orb, 15;; Maelstrom Orb, 5
+Wind Altar\34\-\Adventurer, Altar\3x3\2\54000\Wind Orb, 250;; Storm Orb, 18;; Maelstrom Orb, 7
+Wind Altar\35\-\Adventurer, Altar\3x3\2\58000\Wind Orb, 250;; Storm Orb, 18;; Maelstrom Orb, 7
 Wind Dracolith\1\A monument made in the likeness of a wind dragon. Increases damage dealt when shapeshifting as a wind-attuned dragon.\Dragon, Dracolith\2x2\1\0
 Wind Dracolith\2\-\Dragon, Dracolith\2x2\1\3000
 Wind Dracolith\3\-\Dragon, Dracolith\2x2\1\4000

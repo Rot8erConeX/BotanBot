@@ -1,10 +1,12 @@
 Again!\Luca
 Ahoo\Fafnir
 Argh\Euden
+Boom\Notte
 For Real\Ranzal
 Good Job\Notte
 Grr\Notte
 Heal\Cleo
+Hee hee!\Notte
 Heh\Cleo
 Hey\Euden
 Help\Zethia
@@ -15,7 +17,7 @@ I'll Lead The Charge\Euden
 I'm On Defense\Ranzal
 Leave it to me!\Euden
 Let's Go!\Fjorm
-Let's Play\Veronica
+Let's Play...\Veronica
 Look Out\Elisanne
 Lovely!\Loki
 Nice\Ranzal
@@ -34,6 +36,7 @@ Together\Marth
 Thanks\Notte
 Victory Will Be Ours\Midgardsormr
 Wait\Slime
+What You Said!\Elisanne
 Whew\Notte
 Yes\Luca
 You Got This!\Notte

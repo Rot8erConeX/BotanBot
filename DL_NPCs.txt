@@ -14,8 +14,7 @@ Nina\2\y\\
 Notte\2\y\\Yukana
 Patia\1\y\\
 Phares\1\y\\
-Pigeon\5\y\\
-Ramona\1\n\\
+Pigeon\2\y\\
 Rolf\1\y\\
 Roy the Third\1\y\\
 Sarisse\1\n\\

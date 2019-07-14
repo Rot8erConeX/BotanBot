@@ -41,8 +41,8 @@ Sabnock\67878, 170360, 634880, -1, 2518181, 565720; 362, 500, 1705, -1, 3248, 27
 Manticore\18270, 29925, 41475, 218673, -1, 52605, 67200; \Shadow, Therion, Boss, Refrain Under the Big Top\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: **10%**, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
 Manticore(Refrain)\3780, 11550, 20370; 241, 628, 1070\Shadow, Therion, Boss, Resplendent Refrain\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: **10%**, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
 Festive Treant\19980, 31050, 60345, -1, -1, 169087, 170982; 800, 1194, 1493, -1, -1, 1820, 2962\Flame, Physian, Facility, The Miracle of Dragonyule\Freeze: 55%, Bog: 55%\Burn\
-Shishimai (Enemy)\67200, 181600, 685146, -1, -1, 624206; 362, 500, 1568, -1, -1, 2707\Light, Thaumian, Raid, Fortune from Afar\~~Immune~~\Curse\
-Gift Basket\10080, 27240, 137029, -1, -1, 124841; 362, 500, 1568, -1, -1, 2707\Light, Thaumian, Raid, Fortune from Afar\~~Immune~~\~~None~~\
+Shishimai (Enemy)\67200, 181600, 685146, -1, 3121030, 624206; 362, 500, 1568, -1, 3799, 2707\Light, Thaumian, Raid, Fortune from Afar\~~Immune~~\Curse\
+Gift Basket\10080, 27240, 137029, -1, 717836, 124841; 362, 500, 1568, -1, 3799, 2707\Light, Thaumian, Raid, Fortune from Afar\~~Immune~~\~~None~~\
 Ieyasu (Enemy)\2000, 4200, 12000; \Shadow, Human, Boss, Fortune from Afar\Poison: 55%, Burn: 55%, Freeze: 55%, Blind: 55%, Stun: 55%, Curse: 55%, Bog: 55%, Sleep: 55%\Curse\
 Manticore(BigTop)\32760, 48300, 62580, 437346, -1, 105210, 134400; 711, 1045, 1306, 6738, -1, 1686, 2961\Shadow, Therion, Facility, Dream Big Under the Big Top\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: **10%**, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
 Valfarre\76357, 191655, 735436, -1, -1, 714180; 362, 500, 1705, -1, -1, 2707\Water, Therion, Raid, Skyborne Spectacle\~~Immune~~\Bog\
@@ -58,3 +58,4 @@ Qitian Dasheng\73760, 182072, 873380, -1, 2756445, 850755; 362, 842, 1705, -1, 3
 Jingu Bang\1844, 4551, 21834, -1, 76567, 21268; 362, 842, 1705, -1, 3248, 2707\Wind, Demihuman, Raid, Echoes of Antiquity\~~None~~\Stun\
 Mini Dasheng\295, 728, 3493, -1, 9188, 3403; 114, 265, 537, -1, 1023, 852\Wind, Demihuman, Raid, Echoes of Antiquity\~~None~~\Stun\
 Cyclops(EchoesOfAntiquity)\0, 0, 0; 0, 0, 0\Wind, Demihuman, Boss, Echoes of Antiquity\~~TBC~~\~~TBC~~\
+Troll Smith\0, 0, 0, -1, 0, 0; 0, 0, 0, -1, 0, 0\Wind, Demihuman, Boss, Flames of Passion\~~TBC~~\~~TBC~~\
