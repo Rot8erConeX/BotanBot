@@ -1912,7 +1912,6 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
   k=k2[0].map{|q| find_data_ex(:find_dragon,q,event)}
-  puts k.map{|q| q.to_s}
   if k.length.zero?
     event.respond 'No matches found.'
     return nil
@@ -2986,10 +2985,52 @@ def disp_skill_data(bot,event,args=nil)
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
   k=find_data_ex(:find_skill,args.join(' '),event)
   if k.length.zero?
+    sklz=@askilities.map{|q| q}
     if args.join('').include?('shift')
       disp_status_data(bot,event,['skill','shift'])
     elsif args.join('').downcase.gsub('s','').include?('dragonclaw')
       disp_skill_data(bot,event,['dragon','claw'])
+    elsif find_data_ex(:find_adventurer,args.join(' '),event).length>0 && has_any?(args,['s1','s2','1','2','skill1','skill2','skl1','skl2'])
+      adv=find_data_ex(:find_adventurer,args.join(' '),event)
+      p=0
+      p=1 if has_any?(args,['s2','2','skill2','skl2'])
+      if adv[6][p].nil? || adv[6][p].length<=0
+        event.respond "#{adv[0]} does not have a #{['1st','2nd'][p]} skill."
+        return nil
+      end
+      skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==adv[6][p]}
+      if skl1.nil?
+        event.respond "#{adv[0]}'s #{['1st','2nd'][p]} skill, #{adv[6][p]}, has no data."
+        return nil
+      end
+      disp_skill_data(bot,event,adv[6][p].split(' '))
+    elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
+      adv=find_data_ex(:find_dragon,args.join(' '),event)
+      if adv[5].nil? || adv[5].length<=0
+        event.respond "#{adv[0]} does not have a skill."
+        return nil
+      end
+      skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==adv[5]}
+      if skl1.nil?
+        event.respond "#{adv[0]}'s skill, #{adv[5]}, has no data."
+        return nil
+      end
+      disp_skill_data(bot,event,adv[5].split(' '))
+    elsif find_data_ex(:find_weapon,args.join(' '),event).length>0 && has_any?(args,['s3','skill3','skl3'])
+      adv=find_data_ex(:find_weapon,args.join(' '),event)
+      if adv[0].is_a?(Array)
+        event.respond "There are multiple weapons with that criterium, and I won't display a skill for each."
+        return nil
+      elsif adv[6].nil? || adv[6].length<=0
+        event.respond "#{adv[0]} does not have a skill."
+        return nil
+      end
+      skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==adv[6]}
+      if skl1.nil?
+        event.respond "#{adv[0]}'s skill, #{adv[6]}, has no data."
+        return nil
+      end
+      disp_skill_data(bot,event,adv[6].split(' '))
     else
       event.respond 'No matches found.'
     end
@@ -4452,6 +4493,10 @@ def disp_adventurer_art(bot,event,args=nil)
     IO.copy_stream(open(art), "C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
     if File.size("C:/Users/#{@mash}/Desktop/devkit/FGOTemp#{@shardizard}.png")<=100 || m
       rar=k[1][0,1].to_i
+      disp="#{generate_rarity_row(rar,true,fehm)}"
+    elsif rar=='NPC'
+      rar=1
+      rar=2 if ['Lathna','Nina','Notte'].include?(k[0])
       disp="#{generate_rarity_row(rar,true,fehm)}"
     else
       disp="#{rar} design"
