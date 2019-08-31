@@ -1422,7 +1422,7 @@ def adv_emoji(k,bot,ignorefeh=false,advheader=false)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
     str="#{str}#{moji[0].mention unless moji.length<=0}#{k[2][0] if advheader}"
     str="#{str}<:Great_Badge_Golden:443704781068959744>" if !k[12].nil? && k[12]=='FEH'
-    str="#{str}<:Bond:523903660913197056>" if !k[12].nil? && k[12]=='FGO'
+    str="#{str}<:Bond:613804021119189012>" if !k[12].nil? && k[12]=='FGO'
   end
   return str
 end
@@ -1647,7 +1647,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     clzz='<:Arts_y:526556105489252352>' if k[2][0]=='Defense'
     clzz='<:healing:572342852420501506>' if k[2][0]=='Healer'
     title="#{title}\n#{clzz}**#{k[2][0]}**"
-    title="#{title}\n<:Bond:523903660913197056>**FGO Collab**"
+    title="#{title}\n<:Bond:613804021119189012>**FGO Collab**"
     titlex=[]
   else
     unless s2s || juststats
@@ -1846,7 +1846,7 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false)
   moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2].gsub('Shadow','Dark').gsub('Flame','Fire')}"} if feh
   title="#{moji[0].mention unless moji.length<=0}**#{k[2]}**"
   title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**" if feh
-  title="#{title}\n<:Bond:523903660913197056>**FGO Collab**" if !k[16].nil? && k[16]=='FGO'
+  title="#{title}\n<:Bond:613804021119189012>**FGO Collab**" if !k[16].nil? && k[16]=='FGO'
   title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c' && !(feh || (!k[16].nil? && k[16].length>0 && k[16]=='FGO'))
   title="#{title}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
   title="#{title}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
@@ -2031,7 +2031,7 @@ def disp_wyrmprint_stats(bot,event,args=nil)
     clzz='<:Arts_y:526556105489252352>' if k[2]=='Defense'
     clzz='<:healing:572342852420501506>' if k[2]=='Healer'
     title="#{clzz}**#{k[2]}**"
-    title="#{title}\n<:Bond:523903660913197056>**FGO Collab**"
+    title="#{title}\n<:Bond:613804021119189012>**FGO Collab**"
   else
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2]}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[2]}**"
@@ -2218,7 +2218,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     clr='bronze' if k[2][0,1].to_i<4
     moji=bot.server(srv).emoji.values.reject{|q| q.name != "class_#{clzz}_#{clr}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[1]}**"
-    title="#{title}\n<:Bond:523903660913197056>**FGO Collab**"
+    title="#{title}\n<:Bond:613804021119189012>**FGO Collab**"
   else
     str=generate_rarity_row(k[2][0,1].to_i)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
@@ -2502,7 +2502,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     clr='bronze' if k[2][0,1].to_i<4
     moji=bot.server(srv).emoji.values.reject{|q| q.name != "class_#{clzz}_#{clr}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[1]}**"
-    title="#{title}\n<:Bond:523903660913197056>**FGO Collab**"
+    title="#{title}\n<:Bond:613804021119189012>**FGO Collab**"
   else
     str=generate_rarity_row(k[2][0,1].to_i)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
@@ -8891,7 +8891,6 @@ def next_events(event,bot,args=nil)
   if [0,5].include?(mode)
     mmzz=[]
     matz=@voids[7,@voids.length-7].map{|q| q}
-    puts matz.to_s
     for i in 0...void.length
       m=void[i].split(', ')
       pos=0
@@ -9000,7 +8999,17 @@ def next_events(event,bot,args=nil)
   end
   f.push(6)
   if f.include?(mode)
-    matz=void.map{|q| q.gsub('<:Element_Flame:532106087952810005>Steel Golem',"Iron Ore, Steel Slab, Granite, Void Leaf, Void Seed, Golem Core").gsub('<:Element_Flame:532106087952810005>Blazing Ghost',"Old Cloth, Floating Red Cloth, Otherworldly Lantern").gsub('<:Element_Water:532106088221376522>Frost Hermit',"Goblin Thread, Aromatic Wood").gsub('<:Element_Wind:532106087948746763>Void Zephyr',"Great Feather, Void Leaf, Void Seed, Zephyr Rune").gsub('<:Element_Light:532106088129101834>Wandering Shroom',"Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore").gsub('<:Element_Shadow:532106088154267658>Raging Manticore',"Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn").gsub('<:Element_Shadow:532106088154267658>Obsidian Golem',"Obsidian Slab, Dark Core").gsub('<:Element_Flame:532106087952810005>Void Agni',"Ancient Bird's Feather, Bewitching Wing, Blazing Ember, Blazing Horn, Void Leaf, Void Seed").split(', ').uniq.sort}
+    matz=void.map{|q| q.split(', ').uniq.sort.join(', ')}
+    matzx=@voids[8,@voids.length-8].map{|q| q.split(', ')}
+    for i in 0...matzx.length
+      matzx[i]=[matzx[i][0],matzx[i][1,matzx[i].length-1].join(', ')]
+    end
+    for i in 0...matz.length
+      for i2 in 0...matzx.length
+        matz[i]=matz[i].gsub(matzx[i2][0],matzx[i2][1])
+      end
+    end
+    matz=matz.map{|q| q.split(', ').uniq.sort}
     mmzz=[]
     for i in 0...matz.length
       m=matz[i]
@@ -9043,7 +9052,15 @@ def next_events(event,bot,args=nil)
         end
       end
     end
-    str=extend_message(str,str2,event,2)
+    if str2.length>2000
+      str2=str2.split("\n")
+      str=extend_message(str,str2[0],event,2)
+      for i in 1...str2.length
+        str=extend_message(str,str2[i],event)
+      end
+    else
+      str=extend_message(str,str2,event,2)
+    end
   end
   f=[0,3]
   f.push(2) if safe_to_spam?(event)
@@ -11387,8 +11404,8 @@ end
 
 bot.server_delete do |event|
   unless @shardizard==4
-    bot.user(167657750971547648).pm("Left server **#{event.server.name}**")
-    bot.user(141260274144509952).pm("Left server **#{event.server.name}**")
+    bot.user(167657750971547648).pm("Left server **#{event.server.name}**\nThis server was using #{shard_data(0,true)[((event.server.id >> 22) % @shards)]} Shards")
+    bot.user(141260274144509952).pm("Left server **#{event.server.name}**\nThis server was using #{shard_data(0,true)[((event.server.id >> 22) % @shards)]} Shards")
     metadata_load()
     @server_data[0][((event.server.id >> 22) % @shards)] -= 1
     metadata_save()
