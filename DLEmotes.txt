@@ -2,6 +2,7 @@ Again!\Luca
 Ahoo\Fafnir
 Argh\Euden
 Boom\Notte
+Bravo\Mym, Sarisse
 For Real\Ranzal
 Good Job\Notte
 Grr\Notte
@@ -31,7 +32,10 @@ On Me!\Euden
 On My Way\Ranzal
 Really\Elisanne
 Sorry\Elisanne
+Squishums\Squishum
+Sup\Sarisse
 Take Defense\Euden
+Three Cheers for Me\Mym 
 Together\Marth
 Thanks\Notte
 Victory Will Be Ours\Midgardsormr

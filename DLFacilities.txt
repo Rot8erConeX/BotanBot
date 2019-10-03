@@ -471,6 +471,36 @@ Fafnir Statue (Flame)\27\-\Dragon, Fafnir\3x3\1\380000\Flamewyrm's Greatsphere, 
 Fafnir Statue (Flame)\28\-\Dragon, Fafnir\3x3\1\400000\Flamewyrm's Greatsphere, 60;; Flamewyrm's Scaldscale, 50;; Talonstone, 60
 Fafnir Statue (Flame)\29\-\Dragon, Fafnir\3x3\1\420000\Flamewyrm's Greatsphere, 70;; Flamewyrm's Scaldscale, 50;; Talonstone, 60
 Fafnir Statue (Flame)\30\-\Dragon, Fafnir\3x3\1\440000\Flamewyrm's Greatsphere, 70;; Flamewyrm's Scaldscale, 50;; Talonstone, 60
+Fafnir Statue (Shadow)\1\Proof of overcoming the Shadowwyrm's trial. A shadow-imbued statue that boosts the HP and strength of shadow dragons.\Dragon, Fafnir\3x3\1\0
+Fafnir Statue (Shadow)\2\-\Dragon, Fafnir\3x3\1\10000\Shadowwyrm's Greatsphere, 3
+Fafnir Statue (Shadow)\3\-\Dragon, Fafnir\3x3\1\20000\Shadowwyrm's Greatsphere, 3
+Fafnir Statue (Shadow)\4\-\Dragon, Fafnir\3x3\1\30000\Shadowwyrm's Greatsphere, 5
+Fafnir Statue (Shadow)\5\-\Dragon, Fafnir\3x3\1\40000\Shadowwyrm's Greatsphere, 5
+Fafnir Statue (Shadow)\6\-\Dragon, Fafnir\3x3\1\50000\Shadowwyrm's Greatsphere, 7;; Shadowwyrm's Darkscale, 5;; Talonstone, 10
+Fafnir Statue (Shadow)\7\-\Dragon, Fafnir\3x3\1\60000\Shadowwyrm's Greatsphere, 7;; Shadowwyrm's Darkscale, 5;; Talonstone, 10
+Fafnir Statue (Shadow)\8\-\Dragon, Fafnir\3x3\1\70000\Shadowwyrm's Greatsphere, 7;; Shadowwyrm's Darkscale, 5;; Talonstone, 10
+Fafnir Statue (Shadow)\9\-\Dragon, Fafnir\3x3\1\80000\Shadowwyrm's Greatsphere, 10;; Shadowwyrm's Darkscale, 5;; Talonstone, 10
+Fafnir Statue (Shadow)\10\-\Dragon, Fafnir\3x3\1\90000\Shadowwyrm's Greatsphere, 10;; Shadowwyrm's Darkscale, 5;; Talonstone, 10
+Fafnir Statue (Shadow)\11\-\Dragon, Fafnir\3x3\1\100000\Shadowwyrm's Greatsphere, 12;; Shadowwyrm's Darkscale, 10;; Talonstone, 20
+Fafnir Statue (Shadow)\12\-\Dragon, Fafnir\3x3\1\110000\Shadowwyrm's Greatsphere, 12;; Shadowwyrm's Darkscale, 10;; Talonstone, 20
+Fafnir Statue (Shadow)\13\-\Dragon, Fafnir\3x3\1\120000\Shadowwyrm's Greatsphere, 15;; Shadowwyrm's Darkscale, 10;; Talonstone, 20
+Fafnir Statue (Shadow)\14\-\Dragon, Fafnir\3x3\1\130000\Shadowwyrm's Greatsphere, 15;; Shadowwyrm's Darkscale, 10;; Talonstone, 20
+Fafnir Statue (Shadow)\15\-\Dragon, Fafnir\3x3\1\140000\Shadowwyrm's Greatsphere, 15;; Shadowwyrm's Darkscale, 10;; Talonstone, 20
+Fafnir Statue (Shadow)\16\-\Dragon, Fafnir\3x3\1\160000\Shadowwyrm's Greatsphere, 20;; Shadowwyrm's Darkscale, 20;; Talonstone, 30
+Fafnir Statue (Shadow)\17\-\Dragon, Fafnir\3x3\1\180000\Shadowwyrm's Greatsphere, 20;; Shadowwyrm's Darkscale, 20;; Talonstone, 30
+Fafnir Statue (Shadow)\18\-\Dragon, Fafnir\3x3\1\200000\Shadowwyrm's Greatsphere, 20;; Shadowwyrm's Darkscale, 20;; Talonstone, 30
+Fafnir Statue (Shadow)\19\-\Dragon, Fafnir\3x3\1\220000\Shadowwyrm's Greatsphere, 30;; Shadowwyrm's Darkscale, 20;; Talonstone, 30
+Fafnir Statue (Shadow)\20\-\Dragon, Fafnir\3x3\1\240000\Shadowwyrm's Greatsphere, 30;; Shadowwyrm's Darkscale, 20;; Talonstone, 30
+Fafnir Statue (Shadow)\21\-\Dragon, Fafnir\3x3\1\260000\Shadowwyrm's Greatsphere, 40;; Shadowwyrm's Darkscale, 30;; Talonstone, 40
+Fafnir Statue (Shadow)\22\-\Dragon, Fafnir\3x3\1\280000\Shadowwyrm's Greatsphere, 40;; Shadowwyrm's Darkscale, 30;; Talonstone, 40
+Fafnir Statue (Shadow)\23\-\Dragon, Fafnir\3x3\1\300000\Shadowwyrm's Greatsphere, 40;; Shadowwyrm's Darkscale, 30;; Talonstone, 40
+Fafnir Statue (Shadow)\24\-\Dragon, Fafnir\3x3\1\320000\Shadowwyrm's Greatsphere, 50;; Shadowwyrm's Darkscale, 30;; Talonstone, 40
+Fafnir Statue (Shadow)\25\-\Dragon, Fafnir\3x3\1\340000\Shadowwyrm's Greatsphere, 50;; Shadowwyrm's Darkscale, 30;; Talonstone, 40
+Fafnir Statue (Shadow)\26\-\Dragon, Fafnir\3x3\1\360000\Shadowwyrm's Greatsphere, 60;; Shadowwyrm's Darkscale, 50;; Talonstone, 60
+Fafnir Statue (Shadow)\27\-\Dragon, Fafnir\3x3\1\380000\Shadowwyrm's Greatsphere, 60;; Shadowwyrm's Darkscale, 50;; Talonstone, 60
+Fafnir Statue (Shadow)\28\-\Dragon, Fafnir\3x3\1\400000\Shadowwyrm's Greatsphere, 60;; Shadowwyrm's Darkscale, 50;; Talonstone, 60
+Fafnir Statue (Shadow)\29\-\Dragon, Fafnir\3x3\1\420000\Shadowwyrm's Greatsphere, 70;; Shadowwyrm's Darkscale, 50;; Talonstone, 60
+Fafnir Statue (Shadow)\30\-\Dragon, Fafnir\3x3\1\440000\Shadowwyrm's Greatsphere, 70;; Shadowwyrm's Darkscale, 50;; Talonstone, 60
 Fafnir Statue (Water)\1\Proof of overcoming the Waterwyrm's trial. A water-imbued statue that boosts the HP and strength of water dragons.\Dragon, Fafnir\3x3\1\0
 Fafnir Statue (Water)\2\-\Dragon, Fafnir\3x3\1\10000\Waterwyrm's Greatsphere, 3
 Fafnir Statue (Water)\3\-\Dragon, Fafnir\3x3\1\20000\Waterwyrm's Greatsphere, 3
@@ -836,6 +866,26 @@ Shadow Altar\32\-\Adventurer, Altar\3x3\2\46000\Shadow Orb, 200;; Nightfall Orb,
 Shadow Altar\33\-\Adventurer, Altar\3x3\2\50000\Shadow Orb, 200;; Nightfall Orb, 15;; Nether Orb, 5
 Shadow Altar\34\-\Adventurer, Altar\3x3\2\54000\Shadow Orb, 250;; Nightfall Orb, 18;; Nether Orb, 7
 Shadow Altar\35\-\Adventurer, Altar\3x3\2\58000\Shadow Orb, 250;; Nightfall Orb, 18;; Nether Orb, 7
+Shadow Dracolith\1\A monument made in the likeness of a dragon. Increases damage dealt when shapeshifting as a shadow-attuned dragon.\Dragon, Dracolith\2x2\1\0
+Shadow Dracolith\2\-\Dragon, Dracolith\2x2\1\3000
+Shadow Dracolith\3\-\Dragon, Dracolith\2x2\1\4000
+Shadow Dracolith\4\-\Dragon, Dracolith\2x2\1\5000\Shadowwyrm's Sphere, 5;; Shadowwyrm's Scale, 3;; Talonstone, 1
+Shadow Dracolith\5\-\Dragon, Dracolith\2x2\1\6000\Shadowwyrm's Sphere, 10;; Shadowwyrm's Scale, 4;; Talonstone, 1
+Shadow Dracolith\6\-\Dragon, Dracolith\2x2\1\7000\Shadowwyrm's Sphere, 15;; Shadowwyrm's Scale, 5;; Talonstone, 1
+Shadow Dracolith\7\-\Dragon, Dracolith\2x2\1\8000\Shadowwyrm's Sphere, 20;; Shadowwyrm's Scale, 6;; Talonstone, 3
+Shadow Dracolith\8\-\Dragon, Dracolith\2x2\1\10000\Shadowwyrm's Sphere, 25;; Shadowwyrm's Scale, 7;; Talonstone, 3
+Shadow Dracolith\9\-\Dragon, Dracolith\2x2\1\12000\Shadowwyrm's Sphere, 30;; Shadowwyrm's Scale, 8;; Talonstone, 3
+Shadow Dracolith\10\-\Dragon, Dracolith\2x2\1\14000\Shadowwyrm's Sphere, 35;; Shadowwyrm's Scale, 10;; Talonstone, 3
+Shadow Dracolith\11\-\Dragon, Dracolith\2x2\1\16000\Shadowwyrm's Sphere, 40;; Shadowwyrm's Scale, 15;; Talonstone, 5
+Shadow Dracolith\12\-\Dragon, Dracolith\2x2\1\18000\Shadowwyrm's Sphere, 50;; Shadowwyrm's Scale, 20;; Talonstone, 5
+Shadow Dracolith\13\-\Dragon, Dracolith\2x2\1\20000\Shadowwyrm's Sphere, 60;; Shadowwyrm's Scale, 25;; Talonstone, 5
+Shadow Dracolith\14\-\Dragon, Dracolith\2x2\1\22000\Shadowwyrm's Sphere, 90;; Shadowwyrm's Scale, 30;; Talonstone, 8
+Shadow Dracolith\15\-\Dragon, Dracolith\2x2\1\24000\Shadowwyrm's Sphere, 120;; Shadowwyrm's Scale, 40;; Talonstone, 8
+Shadow Dracolith\16\-\Dragon, Dracolith\2x2\1\26000\Shadowwyrm's Sphere, 150;; Shadowwyrm's Scale, 60;; Talonstone, 8
+Shadow Dracolith\17\-\Dragon, Dracolith\2x2\1\28000\Shadowwyrm's Sphere, 200;; Shadowwyrm's Scale, 80;; Talonstone, 10
+Shadow Dracolith\18\-\Dragon, Dracolith\2x2\1\30000\Shadowwyrm's Sphere, 250;; Shadowwyrm's Scale, 100;; Talonstone, 10
+Shadow Dracolith\19\-\Dragon, Dracolith\2x2\1\32000\Shadowwyrm's Sphere, 300;; Shadowwyrm's Scale, 120;; Talonstone, 10
+Shadow Dracolith\20\-\Dragon, Dracolith\2x2\1\34000\Shadowwyrm's Sphere, 350;; Shadowwyrm's Scale, 140;; Talonstone, 10
 Smithy\H\The smithy run by Ramona. Raise its level to expand the selection of weapons you can craft or enhance.\General\3x3\1\0
 Snowdrake\-\An adorable drake made from snow. It's so cute, in fact, that someone cast a spell on it to make sure it doesn't melt.\Decorative\1x1\4\0
 Staff Dojo\1\A training area built to hone one's skills with a staff. Use it to boosts the stats of staff-wielding adventures.\Adventurer, Dojo\3x3\2\0
@@ -937,6 +987,21 @@ Sword Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argen
 Sword Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Vermilion Insignia, 200;; Dyrenell Aureus, 140;; Royal Vermilion Insignia, 80
 Sword Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Vermilion Insignia, 240;; Dyrenell Aureus, 150;; Royal Vermilion Insignia, 100
 Sword Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Vermilion Insignia, 240;; Dyrenell Aureus, 160;; Royal Vermilion Insignia, 100
+Twinkling Slime Statue\1\A statue of a twinkling slime granted to those who are victorious in void battles. The still light mana within it sharpens the mind. Use it to boost the stats of light-attuned adventurers.\Adventurer, Void Altar\2x2\1\0
+Twinkling Slime Statue\2\-\Adventurer, Void Altar\2x2\1\5000\Iron Ore, 10
+Twinkling Slime Statue\3\-\Adventurer, Void Altar\2x2\1\10000\Iron Ore, 15;; Solid Fungus, 2
+Twinkling Slime Statue\4\-\Adventurer, Void Altar\2x2\1\15000\Iron Ore, 20
+Twinkling Slime Statue\5\-\Adventurer, Void Altar\2x2\1\20000\Iron Ore, 25;; Solid Fungus, 5
+Twinkling Slime Statue\6\-\Adventurer, Void Altar\2x2\1\25000\Iron Ore, 30;; Granite, 5
+Twinkling Slime Statue\7\-\Adventurer, Void Altar\2x2\1\30000\Iron Ore, 35;; Granite, 10;; Old Cloth, 2
+Twinkling Slime Statue\8\-\Adventurer, Void Altar\2x2\1\35000\Iron Ore, 40;; Granite, 15
+Twinkling Slime Statue\9\-\Adventurer, Void Altar\2x2\1\40000\Iron Ore, 45;; Granite, 20;; Old Cloth, 5
+Twinkling Slime Statue\10\-\Adventurer, Void Altar\2x2\1\50000\Iron Ore, 50;; Granite, 25
+Twinkling Slime Statue\11\-\Adventurer, Void Altar\2x2\1\60000\Iron Ore, 55;; Granite, 30;; Meteorite, 5;; Ruinous Horn, 2
+Twinkling Slime Statue\12\-\Adventurer, Void Altar\2x2\1\70000\Iron Ore, 60;; Granite, 35;; Meteorite, 10
+Twinkling Slime Statue\13\-\Adventurer, Void Altar\2x2\1\80000\Iron Ore, 65;; Granite, 40;; Meteorite, 15;; Ruinous Horn, 5
+Twinkling Slime Statue\14\-\Adventurer, Void Altar\2x2\1\90000\Iron Ore, 70;; Granite, 45;; Meteorite, 20
+Twinkling Slime Statue\15\-\Adventurer, Void Altar\2x2\1\100000\Iron Ore, 75;; Granite, 50;; Meteorite, 30;; Ruinous Horn, 8
 Wand Dojo\1\A training area built to hone one's skills with a wand. Use it to boosts the stats of wand-wielding adventures.\Adventurer, Dojo\3x3\2\0
 Wand Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10
 Wand Dojo\3\-\Adventurer, Dojo\3x3\2\3500\Dyrenell Aes, 10

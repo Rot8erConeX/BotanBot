@@ -1,26 +1,29 @@
-Fafnir Roy III\-1; -1\Yes, Dragon, Gauntlet\nothing\~~Massive headaches for my dev and data input guy~~, ~~nothing for players though~~\
+Fafnir Roy III\-1; -1\Yes, Dragon, Gauntlet\he fears no man\~~Massive headaches for my dev and data input guy~~, ~~nothing for players though~~\
+Chthonius\120000, 270000; 1800, 4500\Shadow, Dragon, Chapter 10, Chapter 10\~~Immune~~\None\
 Wandering Shroom\246120; 1058\Light, Physian, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\Paralysis\Disperse
 Wandering Shroom, Clone Wave 1\4000; 609\Shadow, Physian, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Bog: **0%**, Sleep: **0%**\Poison\
 Wandering Shroom, Clone Wave 2\4000; 609\Shadow, Physian, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Bog: **0%**, Sleep: **0%**\Poison\
 Gust Shroom\246120; 1058\Wind, Physian, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**\Sleep\Disperse
 Gust Shroom, Clone Wave 1\4000; 609\Flame, Physian, Void\Poison: **0%**, Freeze: 55%, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**\Burn\
 Gust Shroom, Clone Wave 2\4000; 609\Flame, Physian, Void\Poison: **0%**, Freeze: 55%, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**\Burn\
-Scalding Shroom\246120; 1058\Flame, Physian, Void\TBC\Burn\Disperse
-Scalding Shroom, Clone Wave 1\4000; 609\Water, Physian, Void\TBC\Bog\
-Scalding Shroom, Clone Wave 2\4000; 609\Water, Physian, Void\TBC\Bog\
+Scalding Shroom\196900; 846\Flame, Physian, Void\Poison: **0%**, Freeze: 55%, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\Burn\Disperse
+Scalding Shroom, Clone Wave 1\3000; 487\Water, Physian, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Sleep: **0%**\Bog\
+Scalding Shroom, Clone Wave 2\3000; 487\Water, Physian, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Sleep: **0%**\Bog\
 Blazing Ghost\252840; 2116\Flame, Undead, Void\Freeze: *80%*, Paralysis: **20%**, Bog: **20%**, Sleep: **20%**\Strength Down, Stun\Ranged Resistance
 Violet Ghost\252840; 2116\Shadow, Undead, Void\Stun: *80%*, Paralysis: **20%**, Burn: **20%**\Strength Down, Curse\Ranged Resistance
 Frost Hermit\151875; 1877\Water, Demihuman, Void\Poison: **0%**, Blind: **0%**, Stun: **0%**, Sleep **0%**\Freeze, Bog\Propagation
-Twilight Hermit\151875; 1877\Shadow, Demihuman, Void\TBC\Poison\Propagation
+Twilight Hermit\151875; 1877\Shadow, Demihuman, Void\Burn: **0%**, Freeze: **0%**, Paralysis: **0%**, Stun: **0%**, Bog: **0%**\Poison\Propagation
 Steel Golem\265650; 2530\Flame, Thaumian, Void\Freeze: 55%, Bog: **20%**\Burn\Dull
 Obsidian Golem\250000; 2530\Shadow, Thaumian, Void\Paralysis: **20%**, Stun: 40%, Sleep: **20%**\Poison\Dull
 Amber Golem\250000; 2530\Light, Thaumian, Void\Poison: 55%, Blind: **20%**, Sleep: *60%*\Paralysis\Dull
 Void Zephyr\407680; 3572\Wind, Dragon, Void\Burn: **0%**\Sleep\Dragon Delay;; Dull
 Void Jeanne d'Arc\359280; 2143\Light, Dragon, Void\Burn: **0%**, Poison: **0%**, Blind: 50%, Sleep: 50%\Blind\Divine Protection;; Dragon Delay
 Void Agni\422683; 3572\Flame, Dragon, Void\Bog: 60%\Stun\Scorching Air;; Skill Resistance
-Void Poseidon\422683; 3572\Water, Dragon, Void\Sleep: *80%*\Freeze\Whirlpool, Skill Resistance
+Void Poseidon\422683; 3572\Water, Dragon, Void\Sleep: *80%*\Freeze\Whirlpool;; Skill Resistance
+Void Nidhogg\450000; 3572\Shadow, Dragon, Void\Poison: **0%**, Burn: **0%**, Paralysis: *80%*, Stun: *80%*\Poison\Enervation;; Ranged Resistance
 Raging Manticore\264856; 2290\Shadow, Therion, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\Curse, Poison\Fury
 Greedy Manticore\264856; 2290\Water, Therion, Void\Poison: **0%**, Burn: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Sleep: **0%**\Poison, Freeze\Fury
+Catoblepas Anemos\262587; 2052\Wind, Therion, Void\Poison: **40%**, Burn: **40%**, Stun: **40%**\Stun\Petrify
 Midgardsormr (Enemy)\5880, 21060, 64350, 120000; 231, 761, 1205, 1800\Wind, Dragon, Dragon Trial\Burn: 55%\Stun\
 Brunhilda (Enemy)\5880, 19656, 64350, 111540; 231, 766, 1339, 1968\Flame, Dragon, Dragon Trial\Freeze: 55%, Bog: 55%\Burn\
 Mercury (Enemy)\5880, 22320, 69300, 121200; 231, 803, 1189, 1747\Water, Dragon, Dragon Trial\Poison: 55%, Sleep: 55%\Bog\
@@ -33,45 +36,52 @@ High Brunhilda (Prelude)\675868; 3253\Flame, Dragon, High Dragon\~~Immune~~\Burn
 High Mercury (Enemy)\2137371; 7230\Water, Dragon, High Dragon\Poison: **0%**\Bog\
 High Mercury (Prelude)\790827; 7230\Water, Dragon, High Dragon\Poison: **0%**\Bog\
 High Jupiter (Enemy)\2020100; 7230\Light, Dragon, High Dragon\Poison: **0%**, Burn: **0%**, Blind: *70%*\Paralysis\
-High Jupiter (Prelude)\0; 0\Light, Dragon, High Dragon\Poison: **0%**, Burn: **0%**, Blind: *70%*\Paralysis\
+High Jupiter (Prelude)\808040; 7230\Light, Dragon, High Dragon\Poison: **0%**, Burn: **0%**, Blind: *70%*\Paralysis\
+High Zodiark (Enemy)\2448750; 7996\Shadow, Dragon, High Dragon\Paralysis: **0%**\Curse\
 Matilda\-1, 1, -1, 100; -1, 1, -1, 20\Flame, Demon, Meme\~~Immune~~\Poison, Burn, Freeze, Paralysis, Blind, Stun, Bog, Sleep, Curse\Wonder Guard
 Elite Swordsman (Flame)\21500, 50000, 102600, 152618; 190, 440, 770, 872\Flame, Human, Imperial Onslaught\Poison: **30%**, Burn: 55%, Freeze: **10%**, Paralysis: **30%**, Blind: **30%**, Stun: 50%, Curse: **30%**, Bog: **10%**, Sleep: **30%**\Stun\
 Elite Axeman (Water)\22000, 50000, 103500, 132525; 190, 440, 770, 990\Water, Human, Imperial Onslaught\Poison: **30%**, Burn: **30%**, Freeze: 55%, Paralysis: **30%**, Blind: **30%**, Stun: **10%**, Curse: **30%**, Bog: 55%, Sleep: **10%**\Freeze\
 Elite Lancer (Wind)\22000, 50000, 102600, 136800; 190, 440, 770, 941\Wind, Human, Imperial Onslaught\Poison: **30%**, Burn: **10%**, Freeze: **30%**, Paralysis: **30%**, Blind: **10%**, Stun: **30%**, Curse: **30%**, Bog: **30%**, Sleep: 55%\Sleep\
 Elite Soldier (Light)\22000, 54000, 101250, 134663; 190, 440, 770, 891\Light, Human, Imperial Onslaught\Poison: **30%**, Burn: **30%**, Freeze: **30%**, Paralysis: 55%, Blind: 55%, Stun: **30%**, Curse: **10%**, Bog: **30%**, Sleep: **10%**\Blind\
 Elite Archer (Shadow)\20000, 30000, 92340, 130500; 190, 350, 700, 910\Shadow, Human, Imperial Onslaught\Poison: 55%, Burn: **30%**, Freeze: **30%**, Paralysis: **10%**, Blind: 55%, Stun: **10%**, Curse: 55%, Bog: **30%**, Sleep: **30%**\Poison\
-Phraeganoth\81472, 305520, 487948, -1, -1, 424299; 362, 500, 1705, -1, -1, 2707\Flame, Thaumian, Raid, Loyalty's Requiem\~~Immune~~\Burn\
+Phraeganoth\81472, 305520, 487948, -1, -1, -1, -1, 424299; 362, 500, 1705, -1, -1, -1, -1, 2707\Flame, Thaumian, Raid, Loyalty's Requiem\~~Immune~~\Burn\
 King Archeole\2880, 8800, 15520; 241, 628, 1070\Flame, Demihuman, Boss, Loyalty's Requiem\Poison: **30%**, Burn: 55%, Freeze: **10%**, Paralysis: **30%**, Blind: **30%**, Stun: **30%**, Curse: **30%**, Bog: **10%**, Sleep: **30%**\Stun\
-Pumpking\17325, 29757, 55440, -1, -1, 79057, 122984; 754, 1133, 1435, -1, -1, 2021, 1975\Shadow, Demihuman, Facility, Trick or Treasure!\Paralysis: 55%, Blind: 55%\Curse\
-Hypnos\30712, 139011, 512346, -1, -1, 441271; 362, 1000, 1705, -1, -1, 2707\Wind, Physian, Raid, Kindness and Captivity\~~Immune~~\Sleep\
+Pumpking\17325, 29757, 55440, -1, -1, -1, -1, 79057, 122984; 754, 1133, 1435, -1, -1, -1, -1, 2021, 1975\Shadow, Demihuman, Facility, Trick or Treasure!\Paralysis: 55%, Blind: 55%\Curse\
+Hypnos\30712, 139011, 512346, -1, -1, -1, -1, 441271; 362, 1000, 1705, -1, -1, -1, -1, 2707\Wind, Physian, Raid, Kindness and Captivity\~~Immune~~\Sleep\
 Storm Sentinel\2268, 6930, 16296; 241, 628, 1070\Wind, Thaumian, Boss, Kindness and Captivity\Poison: 55%, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: *75*, Curse: 55%, Bog: 55%, Sleep: *75%*\~~None~~\
-Water Troll King\23310, 36225, 53974, -1, -1, 90144, 123900; 778, 1161, 1451, -1, -1, 1770, 3291\Water, Demihuman, Facility, A Wish to the Winds\Poison: **30%**, Burn: 55%, Freeze: *75%*, Paralysis: 55%, Blind: 55%, Stun: 55%, Curse: 55%, Bog: *75%*, Sleep: **30%**\Bog\
-Sabnock\67878, 170360, 634880, -1, 2518181, 565720; 362, 500, 1705, -1, 3248, 2707\Shadow, Demon, Raid, Resplendent Refrain\~~Immune~~\Curse\
-Manticore\18270, 29925, 41475, 218673, -1, 52605, 67200; \Shadow, Therion, Boss, Refrain Under the Big Top\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: **10%**, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
+Water Troll King\23310, 36225, 53974, -1, -1, -1, -1, 90144, 123900; 778, 1161, 1451, -1, -1, -1, -1, 1770, 3291\Water, Demihuman, Facility, A Wish to the Winds\Poison: **30%**, Burn: 55%, Freeze: *75%*, Paralysis: 55%, Blind: 55%, Stun: 55%, Curse: 55%, Bog: *75%*, Sleep: **30%**\Bog\
+Sabnock\67878, 170360, 634880, -1, 2518181, -1, -1, 565720; 362, 500, 1705, -1, 3248, -1, -1, 2707\Shadow, Demon, Raid, Resplendent Refrain\~~Immune~~\Curse\
+Manticore\18270, 29925, 41475, 218673, -1, -1, -1, 52605, 67200; \Shadow, Therion, Boss, Refrain Under the Big Top\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: **10%**, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
 Manticore(Refrain)\3780, 11550, 20370; 241, 628, 1070\Shadow, Therion, Boss, Resplendent Refrain\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: **10%**, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
-Festive Treant\19980, 31050, 60345, -1, -1, 169087, 170982; 800, 1194, 1493, -1, -1, 1820, 2962\Flame, Physian, Facility, The Miracle of Dragonyule\Freeze: 55%, Bog: 55%\Burn\
-Shishimai (Enemy)\67200, 181600, 685146, -1, 3121030, 624206; 362, 500, 1568, -1, 3799, 2707\Light, Thaumian, Raid, Fortune from Afar\~~Immune~~\Curse\
-Gift Basket\10080, 27240, 137029, -1, 717836, 124841; 362, 500, 1568, -1, 3799, 2707\Light, Thaumian, Raid, Fortune from Afar\~~Immune~~\~~None~~\
-Ieyasu (Enemy)\2000, 4200, 12000; \Shadow, Human, Boss, Fortune from Afar\Poison: 55%, Burn: 55%, Freeze: 55%, Blind: 55%, Stun: 55%, Curse: 55%, Bog: 55%, Sleep: 55%\Curse\
-Manticore(BigTop)\32760, 48300, 62580, 437346, -1, 105210, 134400; 711, 1045, 1306, 6738, -1, 1686, 2961\Shadow, Therion, Facility, Dream Big Under the Big Top\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: **10%**, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
-Valfarre\76357, 191655, 735436, -1, -1, 714180; 362, 500, 1705, -1, -1, 2707\Water, Therion, Raid, Skyborne Spectacle\~~Immune~~\Bog\
+Festive Treant\19980, 31050, 60345, -1, -1, -1, -1, 169087, 170982; 800, 1194, 1493, -1, -1, -1, -1, 1820, 2962\Flame, Physian, Facility, The Miracle of Dragonyule\Freeze: 55%, Bog: 55%\Burn\
+Shishimai (Enemy)\67200, 181600, 685146, -1, 3121030, -1, -1, 624206; 362, 500, 1568, -1, 3799, -1, -1, 2707\Light, Thaumian, Raid, Fortune from Afar\~~Immune~~\Curse\
+Gift Basket\10080, 27240, 137029, -1, 717836, -1, -1, 124841; 362, 500, 1568, -1, 3799, -1, -1, 2707\Light, Thaumian, Raid, Fortune from Afar\~~Immune~~\~~None~~\
+Ieyasu (Enemy)\2000, 4200, 12000; 82, 161, 221\Shadow, Human, Boss, Fortune from Afar\Poison: 55%, Burn: 55%, Freeze: 55%, Blind: 55%, Stun: 55%, Curse: 55%, Bog: 55%, Sleep: 55%\Curse\
+Manticore(BigTop)\32760, 48300, 62580, 437346, -1, -1, -1, 105210, 134400; 711, 1045, 1306, 6738, -1, -1, -1, 1686, 2961\Shadow, Therion, Facility, Dream Big Under the Big Top\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: **10%**, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
+Valfarre\76357, 191655, 735436, -1, -1, -1, -1, 714180; 362, 500, 1705, -1, -1, -1, -1, 2707\Water, Therion, Raid, Skyborne Spectacle\~~Immune~~\Bog\
 Aquatic Cyclops\3570, 10710, 18690; 241, 377, 1070\Water, Demihuman, Boss, Skyborne Spectacle\Poison: 55%, Burn: 55%, Freeze: *75%*, Paralysis: *75%*, Blind: 55%, Stun: 55%, Curse: 55%, Bog: *75%*, Sleep: 55%\Bog\
-Thanatos\76357, 191655, 673905, -1, -1, 654427; 362, 1000, 1705, -1, -1, 2707\Shadow, Undead, Raid, A Waltz with Fate\~~Immune~~\Poison\
+Thanatos\76357, 191655, 673905, -1, -1, -1, -1, 654427; 362, 1000, 1705, -1, -1, -1, -1, 2707\Shadow, Undead, Raid, A Waltz with Fate\~~Immune~~\Poison\
 Guardian Sentinel\4410, 10500, 20580; 241, 628, 1070\Shadow, Thaumian, Boss, A Waltz with Fate\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: 55%, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
-Hefty Runic Treant\32760, 48300, 62580, 502632, -1, 105210, 146160; 711, 1045, 1306, 5421, -1, 1686, 2821\Light, Physian, Facility, The Accursed Archives\Blind: 60%, Sleep: 60%\Paralysis\
-Volcanic Cyclops\34020, 50820, 63420, 402800, -1, 110880, 133560; 723, 1111, 1411, 6451, -1, 1688, 3291\Flame, Demihuman, Facility, The Hunt for Harmony\Poison: 55%, Burn: *75%*, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: 55%, Curse: 55%, Bog: 55%, Sleep: 55%\Stun\
+Hefty Runic Treant\32760, 48300, 62580, 502632, -1, -1, -1, 105210, 146160; 711, 1045, 1306, 5421, -1, -1, -1, 1686, 2821\Light, Physian, Facility, The Accursed Archives\Blind: 60%, Sleep: 60%\Paralysis\
+Volcanic Cyclops\34020, 50820, 63420, 402800, -1, -1, -1, 110880, 133560; 723, 1111, 1411, 6451, -1, -1, -1, 1688, 3291\Flame, Demihuman, Facility, The Hunt for Harmony\Poison: 55%, Burn: *75%*, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: 55%, Curse: 55%, Bog: 55%, Sleep: 55%\Stun\
 Alfonse (Enemy)\658000; 4500\Light, Human, Boss, Fire Emblem: Lost Heroes\Poison: **0%**, Burn: **0%**, Freeze: 60%, Paralysis: 60%, Blind 60%, Stun 60%, Bog 60%, Sleep 60%\Paralysis\
 Veronica (Enemy)\800000; 4500\Shadow, Human, Boss, Fire Emblem: Lost Heroes\~~Immune~~\Unknown\
 Shadow Knight\-1, 99999, 300000, 550000; -1, 160, 2000, 3500\Shadow, Human, Boss, Fire Emblem: Lost Heroes\Poison: **0%**, Burn: **0%**, Freeze: **100%/0%/80%**, Paralysis: **0%**, Blind: **0%**, Stun: **100%/0%/80%**, Curse: **0%**, Bog: **0%**, Sleep: **100%/0%/80%**\~~None~~\
-Qitian Dasheng\73760, 182072, 873380, -1, 2756445, 850755; 362, 842, 1705, -1, 3248, 2707\Wind, Demihuman, Raid, Echoes of Antiquity\~~Immune~~\Stun\
-Jingu Bang\1844, 4551, 21834, -1, 76567, 21268; 362, 842, 1705, -1, 3248, 2707\Wind, Demihuman, Raid, Echoes of Antiquity\~~Immune~~\Stun\
-Mini Dasheng\295, 728, 3493, -1, 9188, 3403; 114, 265, 537, -1, 1023, 852\Wind, Demihuman, Raid, Echoes of Antiquity\~~Immune~~\Stun\
+Qitian Dasheng\73760, 182072, 873380, -1, 2756445, -1, -1, 850755; 362, 842, 1705, -1, 3248, -1, -1, 2707\Wind, Demihuman, Raid, Echoes of Antiquity\~~Immune~~\Stun\
+Jingu Bang\1844, 4551, 21834, -1, 76567, -1, -1, 21268; 362, 842, 1705, -1, 3248, -1, -1, 2707\Wind, Demihuman, Raid, Echoes of Antiquity\~~Immune~~\Stun\
+Mini Dasheng\295, 728, 3493, -1, 9188, -1, -1, 3403; 114, 265, 537, -1, 1023, -1, -1, 852\Wind, Demihuman, Raid, Echoes of Antiquity\~~Immune~~\Stun\
 Cyclops(EchoesOfAntiquity)\3990, 11550, 20370; 241, 628, 1070\Wind, Demihuman, Boss, Echoes of Antiquity\Poison: 55%, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: *75%*, Curse: 55%, Bog: 55%, Sleep: *75%*\Sleep\
-Troll Smith\14616, 31185, 55440, 475360, -1, 71820, 143640; 586, 921, 1321, 9451, -1, 1688, 3296\Wind, Demihuman, Boss, Flames of Passion\Poison: 55%, Burn: **30%**, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: *75%*, Curse: 55%, Bog: 55%, Sleep: *75%*\Sleep\
-Barbary\73760, 182072, 829711, -1, 3557975, 808217; 362, 842, 1705, -1, 3897, 2707\Flame, Demihuman, Raid, A Splash of Adventure\Bog: *80%*\Stun\
+Troll Smith\14616, 31185, 55440, 475360, -1, -1, -1, 71820, 143640; 586, 921, 1321, 9451, -1, -1, -1, 1688, 3296\Wind, Demihuman, Boss, Flames of Passion\Poison: 55%, Burn: **30%**, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: *75%*, Curse: 55%, Bog: 55%, Sleep: *75%*\Sleep\
+Barbary\73760, 182072, 829711, -1, 3557975, -1, -1, 808217; 362, 842, 1705, -1, 3897, -1, -1, 2707\Flame, Demihuman, Raid, A Splash of Adventure\Bog: *80%*\Stun\
 Giant Ember Toad\3990, 11550, 20370; 241, 628, 1070\Flame, Physian, Boss, A Splash of Adventure\Poison: 55%, Burn: *75%*, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: 55%, Curse: 55%, Bog: **30%**, Sleep: 55%\Stun\
-Palm Treant\15360, 30235, 55400, 545340, 981612, 107730, 155680; 477, 788, 1214, 5441, 6052, 1447, 2825\Shadow, Physian, Boss, A Crescendo of Courage\Paralysis: **10%**, Stun: 55%\Curse\
-Astral Hypnos\52957, 139011, 512346, 2222797; 362, 1000, 1075, 6080\Wind, Physian, AstralRaid, Astral Raid\~~Immune~~\Sleep\
-Astral Valfarre\0, 0, 0, 0; 0, 0, 0, 0\Water, Demihuman, AstralRaid, Astral Raid\~~Immune~~\Bog\
-Astral Sabnock\2600000; 5945\Shadow, Demon, AstralRaid, Astral Raid\~~Immune~~\Curse\
-Astral Phraeganoth\3000000; 5400\Flame, Thaumian, AstralRaid, Astral Raid\~~Immune~~\Burn\
+Palm Treant\15360, 30235, 55400, 545340, 981612, -1, -1, 107730, 155680; 477, 788, 1214, 5441, 6052, -1, -1, 1447, 2825\Shadow, Physian, Boss, A Crescendo of Courage\Paralysis: **10%**, Stun: 55%\Curse\
+Astral Hypnos\52957, 139011, 512346, 2222797; 362, 1000, 1705, 6080\Wind, Physian, AstralRaid, Astral Raid\~~Immune~~\Sleep\
+Astral Valfarre\76357, 191655, 714180, 2910806; 362, 500, 1705, 5945\Water, Demihuman, AstralRaid, Astral Raid\~~Immune~~\Bog\
+Astral Sabnock\67878, 170630, 634880, 2600000; 362, 500, 1705, 5945\Shadow, Demon, AstralRaid, Astral Raid\~~Immune~~\Curse\
+Astral Phraeganoth\81472, 305520, 487948, 3000000; 362, 500, 1705, 5400\Flame, Thaumian, AstralRaid, Astral Raid\~~Immune~~\Burn\
+Astral Shishimai\67200, 181600, 685146, 4950000; 362, 500, 1568, 7020\Light, Thaumian, AstralRaid, Astral Raid\~~Immune~~\Paralysis\
+Astral Gift Basket\10080, 27240, 137029, 990000; 362, 500, 1568, 2707\Light, Thaumian, AstralRaid, Astral Raid\~~Immune~~\Paralysis\
+Cube\200000, 600000; 1800, 5500\Shadow, New Horizons, Chapter 10, Chapter 10\Poison: **0%**, Burn: **0%**, Freeze: *99%*, Paralysis: 50%, Blind: 50%, Stun: *99%*, Bog: **0%**, Sleep: *99%*\Poison\
+Chronos\66384, 217300, 960718, -1, -1, 4938248, 22222117; 145, 590, 1705, -1, -1, 3410, 3410\Light, Dragon, Raid, Fractured Futures\Poison: **0%**, Burn:  **0%**, Freeze: *99%*, Paralysis: **0%**, Blind: *99%*, Stun: *99%*, Bog: **0%**\Everything\
+Chronos Nyx\-1, -1, -1, -1, 6842299, 5165264, 19360178, 2258632; -1, -1, -1, -1, 2557, 3410, 3410, 1200\Light, Dragon, Raid, Fractured Futures\Poison: **0%**, Burn:  **0%**, Freeze: *99%*, Paralysis: **0%**, Stun: *99%*, Bog: *80%*, Sleep: *99%*\Everything\
+Shining Cyclops\3990, 11340, 20580; 240, 630, 1070\Light, Demihuman, Boss, Fractured Futures\Poison: 55%, Burn: 55%, Freeze: *55%, Paralysis: *75%*, Bind: *75%*, Stun: 55%, Curse: 55%, Bog: 55%, Sleep: 55%\TBC\

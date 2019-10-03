@@ -1,9 +1,11 @@
 Agni\5\Flame\36, 369\12, 127\Devastation\(Flame) Strength +40%;; (Flame) Strength +60%\5000, 8500\1.8, 1\1\No\Yes\Agni\\\\\M
+Apollo\5\Flame\36, 369\12, 127\Arrow of Glory\(Flame) Strength +35%;; (Flame) Strength +50%;;; (Flame) Burning Punisher +15%;; (Flame) Burning Punisher +20%\5000, 8500\0, 0\5\Yes\Yes\Apollo\Ono Daisuke\\\\M
 Arctos\5\Flame\374, 374\121, 121\Dragon Drop\(Flame) Strength +30%;; (Flame) Strength +45%;;; (Flame) Critical Damage +50%;; (Flame) Critical Damage +55%\5000, 8500\1.65, 1\1\Yes\No\Arctos\Takagi Wataru\Mark Mathison\\\M
 Astral Imp\3\Light\18, 188\5, 59\Wisdom Dance\(Light) HP & Strength +5%;; (Light) HP & Strength +8%\300, 150\1.35, 3.5\4\Yes\No\Astral Imp\\\(Light) HP +5%;; (Light) HP +8%;;;; (Light) Strength +5%;; (Light) Strength +8%\\M
 Bronze Fafnir\4t\Shadow\20, 209\6, 63\Bronze Strength\Adventurer EXP +100%;; Adventurer EXP +150%\2000, 100\1.35, 3.5\1\Yes\No\Bronze Fafnir\\\\\M
 Brunhilda\4y\Flame\20, 203\7, 70\Muspelheim\(Flame) Strength +15%;; (Flame) Strength +20%\2000, 100\1.5, 1\3\No\No\Brunhilda, Low\Endo Aya\Kelly Marie\\\F
 Cerberus\5\Flame\36, 369\12, 127\Infernal Damnation\(Flame) Strength +40%;; (Flame) Strength +60%\5000, 8500\1.8, 1\3\No\Yes\Cerberus\Kitamura Eri\Mae Matchett\\\F
+Chthonius\5\Shadow\36, 368\12, 128\Immortal Spirit\(Shadow) Strength & Dragon's Might I;; (Shadow) Strength & Dragon's Might II\5000, 8500\1.5, 1\4\Yes\No\Chthonius\Morikawa Toshiyuki\\(Shadow) Strength +45%;; (Shadow) Strength +55%;;;; (Shadow) Dragon's Might I;; (Shadow) Dragon's Might II\\M
 Cinder Drake\3\Flame\19, 190\5, 57\Cinderball\(Flame) HP +10%;; (Flame) HP +15%\300, 150\1.35, 3.5\2\Yes\No\Cinder Drake\\\\\M
 Cupid\5\Light\37, 377\11, 119\Lovely Pose\(Light) Strength +40%;; (Light) Strength +60%\5000, 8500\1.8, 1\3\No\Yes\Cupid\Ise Mariya\Mavis Ada\\\M
 Erasmus\5w\Flame\22, 221\7, 76\Illuminated Path\(Flame) Strength +20%;; (Flame) Strength +30%\5000, 300\1.65, 1\2\No\Yes\Erasmus\Takemoto Eiji\\\\M
@@ -15,9 +17,10 @@ Gloom Drake\3\Shadow\19, 190\5, 58\Black Hole\(Shadow) HP +10%;; (Shadow) HP +15
 Gold Fafnir\5t\Shadow\22, 209\6, 63\Gold Heal\Rupies +25%;; Rupies +50%\2000, 100\1.35, 3.5\5\Yes\No\Gold Fafnir\\\\\M
 Gust Drake\3\Wind\19, 191\5, 57\Gust Drop\(Wind) HP +10%;; (Wind) HP +15%\300, 150\1.35, 3.5\1\Yes\No\Gust Drake\\\\\F
 High Brunhilda\5t\Flame\35, 350\12, 120\Crimson Inferno\(Flame) HP & Strength +20%;; (Flame) HP & Strength +30%;;; Dragon Time +15%;; Dragon Time +20%\5000, 300\1.5, 1\3\No\No\*Brunhilda, High\Endo Aya\Kelly Marie\(Flame) HP +20%;; (Flame) HP +30%;;;; (Flame) Strength +20%;; (Flame) Strength +30%\\F
-High Jupiter\5t\Light\35, 352\11, 118\Primal Thunder\(Light) HP & Strength +20%;; (Light) HP & Strength +30%;;; Dragon Time +15%;; Dragon Time +20%\5000, 300\1.5, 1\2\Yes\No\High Jupiter\Takayama Minami\Sabrina Pitre\(Light) HP +8%;; (Light) HP +10%;;;; (Light) Strength +8%;; (Light) Strength +10%\\M
+High Jupiter\5t\Light\35, 352\11, 118\Primal Thunder\(Light) HP & Strength +20%;; (Light) HP & Strength +30%;;; Dragon Time +15%;; Dragon Time +20%\5000, 300\1.5, 1\2\Yes\No\*Jupiter, High\Takayama Minami\Sabrina Pitre\(Light) HP +20%;; (Light) HP +30%;;;; (Light) Strength +20%;; (Light) Strength +30%\\M
 High Mercury\5t\Water\35, 357\11, 113\Aqua Spiral\(Water) HP & Strength +20%;; (Water) HP & Strength +30%;;; Dragon Time +15%;; Dragon Time +20%\5000, 300\1.5, 1\5\Yes\No\*Mercury, High\Inoue Kikuko\Ava Lindstrom\(Water) HP +20%;; (Water) HP +30%;;;; (Water) Strength +20%;; (Water) Strength +30%\\F
 High Midgardsormr\5t\Wind\35, 356\11, 114\Grand Tempest\(Wind) HP & Strength +20%;; (Wind) HP & Strength +30%;;; Dragon Time +15%;; Dragon Time +20%\5000, 300\1.5, 1\4\No\No\*Midgardsormr, High\Yamadera Koichi\Jeremy George\(Wind) HP +20%;; (Wind) HP +30%;;;; (Wind) Strength +20%;; (Wind) Strength +30%\\M
+High Zodiark\5t\Shadow\35, 350\12, 120\Obsidian Ray\(Shadow) HP & Strength +20%;; (Shadow) HP & Strength +30%;;; Dragon Time +15%;; Dragon Time +20%\5000, 300\0, 0\1\Yes\No\*Zodiark, High\Wakamoto Norio\Brian Davidson\(Shadow) HP +20%;; (Shadow) HP +30%;;;; (Shadow) Strength +20%;; (Shadow) Strength +30%\\M
 Hikage\3\Shadow\18, 183\6, 64\Gloom Tackle\(Shadow) Strength +10%;; (Shadow) Strength +15%\300, 150\1.35, 3.5\2\Yes\No\Hikage\\\\\M
 Hinata\3\Light\18, 185\6, 62\Shining Breath\(Light) Strength +10%;; (Light) Strength +15%\300, 150\1.35, 3.5\1\Yes\No\Hinata\\\\\F
 Homura\3\Flame\18, 184\6, 63\Fire Breath\(Flame) Strength +10%;; (Flame) Strength +15%\300, 150\1.35, 3.5\5\Yes\No\Homura\\\\\F
@@ -36,10 +39,12 @@ Marishiten\5z\Shadow\37, 374\12, 121\Daybreak Flurry\(Shadow) Strength +40%;; (S
 Maritimus\5w\Shadow\22, 224\7, 73\Polar Roller\(Shadow) HP & Strength +10%;; (Shadow) HP & Strength +15%\5000, 300\1.65, 1\2\No\No\Maritimus\Kozakura Etsuko\\(Shadow) HP +10%;; (Shadow) HP +15%;;;; (Shadow) Strength +10%;; (Shadow) Strength +15%\\M
 Mercury\4y\Water\21, 211\6, 62\Hydrocannon\(Water) HP +15%;; (Water) HP +20%\2000, 100\1.5, 1\5\No\No\*Mercury, Low\Inoue Kikuko\Ava Lindstrom\\\F
 Midgardsormr\4y\Wind\20, 206\6, 66\Tornado Tail\(Wind) HP & Strength +8%;; (Wind) HP & Strength +10%\2000, 100\1.5, 1\4\No\No\Midgardsormr, Low\Yamadera Koichi\Jeremy George\(Wind) HP +8%;; (Wind) HP +10%;;;; (Wind) Strength +8%;; (Wind) Strength +10%\\M
-Moon Drake\3\Light\19, 192\5, 56\Moon Drop\(Light) HP +10%;; (Light) HP +15%\300, 150\1.35, 3.5\5\Yes\No\Moon Drake\\\\\M
+Mini Mids\5w\Wind\22, 225\7, 75\Celebratory Storm\HP & Strength +20%;; HP & Strength +30%\5000, 8500\0, 0\4\Yes\No\Midgardsormr, Low\Yamadera Koichi\\HP +20%;; HP +30%;;;; Strength +20%;; Strength +30%\\M
+Moon Drake\3\Light\19, 192\5, 56\Gale Tail\(Light) HP +10%;; (Light) HP +15%\300, 150\1.35, 3.5\5\Yes\No\Moon Drake\\\\\M
 Nidhogg\5\Shadow\37, 374\12, 121\Total Eclipse\(Shadow) HP & Strength +20%;; (Shadow) HP & Strength +30%\5000, 8500\1.8, 1\4\No\Yes\Nidhogg\\\(Shadow) HP +20%;; (Shadow) HP +30%;;;; (Shadow) Strength +20%;; (Shadow) Strength +30%\\M
 Nyarlathotep\5\Shadow\36, 368\12, 128\All-Encompassing Darkness\(Shadow) HP 30% = Strength +35%;; (Shadow) HP 30% = Strength +50%;;; (Shadow) Last Bulwark I;; (Shadow) Last Bulwark II\5000, 8500\1.35, 1\4\Yes\No\Nyarlathotep\Naganawa Maria & Hayami Show\\\\M
 Pallid Imp\3\Shadow\18, 186\6, 61\Grave Tidings\(Shadow) HP & Strength +5%;; (Shadow) HP & Strength +8%\300, 150\1.35, 3.5\5\Yes\No\Pallid Imp\\\(Shadow) HP +5%;; (Shadow) HP +8%;;;; (Shadow) Strength +5%;; (Shadow) Strength +8%\\M
+Parallel Zodiark\5w\Shadow\22, 221\7, 77\Malevolent Venom\(Shadow) Critical Damage +20%;; (Shadow) Critical Damage +40%;;; (Shadow) Strength +10%;; (Shadow) Strength +20%\5000, 300\1.5, 1\1\Yes\No\Zodiark\Wakamoto Norio\\\\F
 Pazuzu\5\Wind\36, 369\12, 126\Catastrophic Winds\(Wind) Strength +35%;; (Wind) Strength +50%;;; (Wind) Poisoned Punisher +15%;; (Wind) Poisoned Punisher +20%\5000, 8500\1.65, 1\5\Yes\Yes\Pazuzu\\\\\M
 Pele\5w\Flame\22, 221\7, 76\Blazing Pillars\(Flame) Strength +20%;; (Flame) Strength +30%\5000, 300\1.8, 1.5\1\No\No\Pele\\\\\F
 Peng Lai\5w\Water\22, 222\7, 75\Swift Stream\(Water) HP +20%;; (Water) HP +30%\5000, 300\1.8, 1\5\No\Yes\Peng Lai\Ogata Kenichi\\\\M
@@ -63,7 +68,7 @@ Sylvia\5w\Wind\22, 225\7, 72\Hurricane Drive\(Wind) HP +20%;; (Wind) HP +30%\500
 Takemikazuchi\5\Light\37, 371\12, 124\Thunderous Charge\(Light) Strength +30%;; (Light) Strength +40%;;; (Light) Overdrive Punisher +20%;; (Light) Overdrive Punisher +25%\5000, 8500\1.8, 1\4\No\Yes\Takemikazuchi\\\\\M
 Tsumuji\3\Wind\18, 184\6, 63\Air Tackle\(Wind) Strength +10%;; (Wind) Strength +15%\300, 150\1.35, 3.5\3\Yes\No\Tsumuji\\\\\F
 Unicorn\4\Light\30, 301\9, 95\Immaculate Light\(Light) HP +30%;; (Light) HP +45%\2000, 2200\1.5, 1.5\3\No\No\Unicorn\\\\\F
-Vayu\5\Wind\0, 369\0, 126\Purusha Prana\(Wind) Strength +10%;; (Wind) Strength +20%;;; (Wind) Skill Damage +70%;; (Wind) Skill Damage +90%\5000, 8500\0, 0\1\Yes\No\Vayu\\\\\M
+Vayu\5\Wind\36, 369\12, 126\Purusha Prana\(Wind) Strength +10%;; (Wind) Strength +20%;;; (Wind) Skill Damage +70%;; (Wind) Skill Damage +90%\5000, 8500\0, 0\1\Yes\No\Vayu\\\\\M
 Vodyanoy\4\Water\29, 296\10, 100\Relentless Torrent\(Water) Strength +30%;; (Water) Strength +45%\2000, 2200\1.5, 3.5\1\No\No\Vodyanoy\\\\\M
 Wellspring Imp\3\Water\18, 187\6, 60\Noble Dance\(Water) HP & Strength +5%;; (Water) HP & Strength +8%\300, 150\1.35, 3.5\1\Yes\No\Wellspring Imp\\\(Water) HP +5%;; (Water) HP +8%;;;; (Water) Strength +5%;; (Water) Strength +8%\\F
 Yulong\5w\Wind\22, 225\7, 72\Subjugating Storm\(Wind) Strength +20%;; (Wind) Strength +30%\5000, 300\1.8, 1\4\Yes\No\Yulong\\Mark Mathison\\\M
