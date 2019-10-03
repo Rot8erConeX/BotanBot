@@ -1794,7 +1794,15 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     end
   elsif flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length+title.length+str.length>=1500
     create_embed(event,[hdr,title],str,element_color(k[2][1]),ftr,xpic,flds[0,flds.length-2])
-    create_embed(event,"__**#{flds[-2][0]}**__",flds[-2][1],element_color(k[2][1]))
+    if flds[-2][1].length>=1900
+      s1=flds[-2][1].split("\n\n")
+      for i in 0...s1.length
+        s2=s1[i].split("\n")
+        create_embed(event,"__Skill #{i+1}: #{s2[0].gsub('__','')}__",s2[1,s2.length-1].join("\n"),element_color(k[2][1]))
+      end
+    else
+      create_embed(event,"__**#{flds[-2][0]}**__",flds[-2][1],element_color(k[2][1]))
+    end
     create_embed(event,"__**#{flds[-1][0]}**__",flds[-1][1],element_color(k[2][1]))
   else
     create_embed(event,[hdr,title],str,element_color(k[2][1]),ftr,xpic,flds)
@@ -2711,6 +2719,16 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
   if k[1][0].length<2 && k[1][1].length<2
     str="#{str}\n<:HP:573344832307593216>**Maximum HP:** #{longFormattedNumber(k[1][0][0])}"
     str="#{str}\n<:Strength:573344931205349376>**Strength:** #{longFormattedNumber(k[1][1][0])}"
+  elsif k[0]=='Cube'
+    str="#{str}\n"
+    str="#{str}\n*Normal:*" if (k[1][0].length>0 && k[1][0][0]>-1) || (k[1][1].length>0 && k[1][1][0]>-1)
+    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][0])}" if k[1][0].length>0 && k[1][0][0]>-1
+    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][0])}" if k[1][1].length>0 && k[1][1][0]>-1
+    str="#{str}  **Binary Subtractor**"
+    str="#{str}\n*Hard:*" if (k[1][0].length>1 && k[1][0][1]>-1) || (k[1][1].length>1 && k[1][1][1]>-1)
+    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][1])}" if k[1][0].length>1 && k[1][0][1]>-1
+    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][1])}" if k[1][1].length>1 && k[1][1][1]>-1
+    str="#{str}  **Septenary Increaser**"
   elsif k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
     str="#{str}\n"
     str="#{str}\n*Prologue:*" if (k[1][0].length>0 && k[1][0][0]>-1) || (k[1][1].length>0 && k[1][1][0]>-1)
@@ -2725,15 +2743,21 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
     str="#{str}\n*Lunatic:*" if (k[1][0].length>3 && k[1][0][3]>-1) || (k[1][1].length>3 && k[1][1][3]>-1)
     str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][3])}" if k[1][0].length>3 && k[1][0][3]>-1
     str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][3])}" if k[1][1].length>3 && k[1][1][3]>-1
-    str="#{str}\n*Infernal:*" if (k[1][0].length>4 && k[1][0][4]>-1) || (k[1][1].length>4 && k[1][1][4]>-1)
+    str="#{str}\n*Maddening:*" if (k[1][0].length>4 && k[1][0][4]>-1) || (k[1][1].length>4 && k[1][1][4]>-1)
     str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][4])}" if k[1][0].length>4 && k[1][0][4]>-1
     str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][4])}" if k[1][1].length>4 && k[1][1][4]>-1
-    str="#{str}\n*Abyssal:*" if (k[1][0].length>5 && k[1][0][5]>-1) || (k[1][1].length>5 && k[1][1][5]>-1)
+    str="#{str}\n*Infernal:*" if (k[1][0].length>5 && k[1][0][5]>-1) || (k[1][1].length>5 && k[1][1][5]>-1)
     str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][5])}" if k[1][0].length>5 && k[1][0][5]>-1
     str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][5])}" if k[1][1].length>5 && k[1][1][5]>-1
-    str="#{str}\n*Abyssal+:*" if (k[1][0].length>6 && k[1][0][6]>-1) || (k[1][1].length>6 && k[1][1][6]>-1)
+    str="#{str}\n*Abyssal:*" if (k[1][0].length>6 && k[1][0][6]>-1) || (k[1][1].length>6 && k[1][1][6]>-1)
     str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][6])}" if k[1][0].length>6 && k[1][0][6]>-1
     str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][6])}" if k[1][1].length>6 && k[1][1][6]>-1
+    str="#{str}\n*Abyssal+ (Solo):*" if (k[1][0].length>7 && k[1][0][7]>-1) || (k[1][1].length>7 && k[1][1][7]>-1)
+    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][7])}" if k[1][0].length>7 && k[1][0][7]>-1
+    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][7])}" if k[1][1].length>7 && k[1][1][7]>-1
+    str="#{str}\n*Abyssal+ (Raid):*" if (k[1][0].length>8 && k[1][0][8]>-1) || (k[1][1].length>8 && k[1][1][8]>-1)
+    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][8])}" if k[1][0].length>8 && k[1][0][8]>-1
+    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][8])}" if k[1][1].length>8 && k[1][1][8]>-1
   else
     str="#{str}\n"
     str="#{str}\n*Beginner:*" if (k[1][0].length>0 && k[1][0][0]>-1) || (k[1][1].length>0 && k[1][1][0]>-1)
@@ -2751,12 +2775,18 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
     str="#{str}\n*Nightmare:*" if (k[1][0].length>4 && k[1][0][4]>-1) || (k[1][1].length>4 && k[1][1][4]>-1)
     str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][4])}" if k[1][0].length>4 && k[1][0][4]>-1
     str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][4])}" if k[1][1].length>4 && k[1][1][4]>-1
-    str="#{str}\n*Special:*" if (k[1][0].length>5 && k[1][0][5]>-1) || (k[1][1].length>5 && k[1][1][5]>-1)
+    str="#{str}\n*Omega (Solo):*" if (k[1][0].length>5 && k[1][0][5]>-1) || (k[1][1].length>5 && k[1][1][5]>-1)
     str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][5])}" if k[1][0].length>5 && k[1][0][5]>-1
     str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][5])}" if k[1][1].length>5 && k[1][1][5]>-1
-    str="#{str}\n*Challenge:*" if (k[1][0].length>6 && k[1][0][6]>-1) || (k[1][1].length>6 && k[1][1][6]>-1)
+    str="#{str}\n*Omega (Raid):*" if (k[1][0].length>6 && k[1][0][6]>-1) || (k[1][1].length>6 && k[1][1][6]>-1)
     str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][6])}" if k[1][0].length>6 && k[1][0][6]>-1
     str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][6])}" if k[1][1].length>6 && k[1][1][6]>-1
+    str="#{str}\n*Special:*" if (k[1][0].length>7 && k[1][0][7]>-1) || (k[1][1].length>7 && k[1][1][7]>-1)
+    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][7])}" if k[1][0].length>7 && k[1][0][7]>-1
+    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][7])}" if k[1][1].length>7 && k[1][1][7]>-1
+    str="#{str}\n*Challenge:*" if (k[1][0].length>8 && k[1][0][8]>-1) || (k[1][1].length>8 && k[1][1][8]>-1)
+    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][8])}" if k[1][0].length>8 && k[1][0][8]>-1
+    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][8])}" if k[1][1].length>8 && k[1][1][8]>-1
   end
   if k[2].length>3 && !['Jingu Bang','Mini Dasheng'].include?(k[0])
     m=@enemies.reject{|q| q[0]==k[0] || q[2].length<4 || q[2][3]!=k[2][3] || ['Jingu Bang','Mini Dasheng'].include?(q[0])}
@@ -2802,6 +2832,7 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
   ftr=nil
   ftr='For information about the enemies that spawn during the fight, try adding "Clone Wave 1" or "Clone Wave 2" to your message.' if k[0]=="Wandering Shroom" && !s2s
   ftr='For information about the enemies that spawn during the fight, they are named "Gift Basket".' if k[0]=="Shishimai" && !s2s
+  ftr='For information about the enemies that spawn during the fight, they are named "Astral Gift Basket".' if k[0]=="Astral Shishimai" && !s2s
   hdr="__**#{k[0]}**__"
   if k[2][2]=='Void' && k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2][1].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Null')}"}
@@ -2835,6 +2866,8 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
     disp_enemy_data(bot,event,"Gust Shroom, Clone Wave 2".split(' '),true)
   elsif k[0]=="Shishimai" && s2s
     disp_enemy_data(bot,event,"Gift Basket".split(' '),true)
+  elsif k[0]=="Astral Shishimai" && s2s
+    disp_enemy_data(bot,event,"Astral Gift Basket".split(' '),true)
   end
 end
 
@@ -2979,11 +3012,12 @@ def disp_gauntlet_data(bot,event,args=nil,name=nil)
   end
 end
 
-def disp_skill_data(bot,event,args=nil)
+def disp_skill_data(bot,event,args=nil,forcetags=false)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
   k=find_data_ex(:find_skill,args.join(' '),event)
+  forcetags=true if args.include?('tags')
   if k.length.zero?
     sklz=@askilities.map{|q| q}
     if args.join('').include?('shift')
@@ -3003,7 +3037,7 @@ def disp_skill_data(bot,event,args=nil)
         event.respond "#{adv[0]}'s #{['1st','2nd'][p]} skill, #{adv[6][p]}, has no data."
         return nil
       end
-      disp_skill_data(bot,event,adv[6][p].split(' '))
+      disp_skill_data(bot,event,adv[6][p].split(' '),forcetags)
     elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
       adv=find_data_ex(:find_dragon,args.join(' '),event)
       if adv[5].nil? || adv[5].length<=0
@@ -3015,7 +3049,7 @@ def disp_skill_data(bot,event,args=nil)
         event.respond "#{adv[0]}'s skill, #{adv[5]}, has no data."
         return nil
       end
-      disp_skill_data(bot,event,adv[5].split(' '))
+      disp_skill_data(bot,event,adv[5].split(' '),forcetags)
     elsif find_data_ex(:find_weapon,args.join(' '),event).length>0 && has_any?(args,['s3','skill3','skl3'])
       adv=find_data_ex(:find_weapon,args.join(' '),event)
       if adv[0].is_a?(Array)
@@ -3030,7 +3064,7 @@ def disp_skill_data(bot,event,args=nil)
         event.respond "#{adv[0]}'s skill, #{adv[6]}, has no data."
         return nil
       end
-      disp_skill_data(bot,event,adv[6].split(' '))
+      disp_skill_data(bot,event,adv[6].split(' '),forcetags)
     else
       event.respond 'No matches found.'
     end
@@ -3074,7 +3108,7 @@ def disp_skill_data(bot,event,args=nil)
     m.push("#{x[i][0]} - S3") if x[i][6]==k[0]
   end
   flds.push(['Weapons',m.join("\n")]) if m.length>0
-  if args.include?('tags')
+  if args.include?('tags') || forcetags
     if flds.length<=0
       flds=triple_finish(k[10].reject{|q| q[0,1]=='E' && q[1,1].to_i.to_s==q[1,1]})
       str="#{str}\n\n__**Tags**__"
@@ -4392,7 +4426,7 @@ def disp_mat_data(bot,event,args=nil)
   else
     title="#{title}\n**Type:** Misc."
   end
-  title="#{title}\n**Drop bag:** #{['<:Rarity_3:532086056519204864> Common','<:Rarity_5:532086056737177600> Rare'][k[6]]}" unless k[2]==0
+  title="#{title}\n**Drop bag:** #{['<:Pouch_1:622140100679303189> Common','<:Pouch_2:622140100960190475> Rare','<:Pouch_3:622140100888756237> Legendary'][k[6]]}" unless k[2]==0
   str="**Description:** #{k[3].gsub(';; ',"\n")}"
   str="#{str}\n**EXP:** #{longFormattedNumber(k[7])}" unless k[7]<=0
   str="#{str}\n\n**Ways to obtain:**\n#{k[4].join("\n")}"
@@ -4491,7 +4525,7 @@ def disp_adventurer_art(bot,event,args=nil)
   if rar.is_a?(String)
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Adventurers/#{k[0].gsub(' ','_')}_#{rar}.png"
     IO.copy_stream(open(art), "C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
-    if File.size("C:/Users/#{@mash}/Desktop/devkit/FGOTemp#{@shardizard}.png")<=100 || m
+    if File.size("C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png")<=100 || m
       rar=k[1][0,1].to_i
       disp="#{generate_rarity_row(rar,true,fehm)}"
     elsif rar=='NPC'
@@ -4721,7 +4755,7 @@ def disp_dragon_art(bot,event,args=nil)
   if !rar.nil? && rar.is_a?(String)
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Dragons/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
     IO.copy_stream(open(art), "C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
-    if File.size("C:/Users/#{@mash}/Desktop/devkit/FGOTemp#{@shardizard}.png")<=100 || m
+    if File.size("C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png")<=100 || m
       rar=nil
     else
       disp="#{disp}\n#{rar} design\n"
@@ -5051,7 +5085,30 @@ def disp_boss_art(bot,event,args=nil)
   s2s=false
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
-  xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Bosses/#{k[0].gsub(' ','_')}.png"
+  lookout=[]
+  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
+    lookout=[]
+    File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
+      lookout.push(eval line)
+    end
+  end
+  rar=nil
+  lookout=lookout.reject{|q| q[2]!='Art' && q[2]!='Art/Enemy'}
+  for i in 0...args.length
+    for j in 0...lookout.length
+      rar=lookout[j][0] if rar.nil? && lookout[j][1].include?(args[i].downcase)
+    end
+  end
+  if !rar.nil? && rar.is_a?(String)
+    art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Bosses/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
+    IO.copy_stream(open(art), "C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
+    if File.size("C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png")<=100 || m
+      rar=nil
+    else
+      disp="#{disp}\n#{rar} design\n"
+    end
+  end
+  xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Bosses/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
   xcolor=0xE3F78B
   xcolor=0xEF8663 if k[2][1]=='Thaumian'
   xcolor=0x5AD363 if k[2][1]=='Physian'
@@ -5069,7 +5126,8 @@ def disp_boss_art(bot,event,args=nil)
   str2=''
   m=false
   IO.copy_stream(open(xpic), "C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
-  str2='No art found' if File.size("C:/Users/#{@mash}/Desktop/devkit/FGOTemp#{@shardizard}.png")<=100 || m
+  str2='No art found' if File.size("C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png")<=100 || m
+  str2="#{rar} design" unless rar.nil?
   create_embed(event,str,str2,xcolor,nil,[nil,xpic])
 end
 
@@ -6437,6 +6495,7 @@ def find_in_mats(bot,event,args=nil,mode=0)
     pouch.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>=0 && args[i][0,1].to_i<2
     pouch.push(0) if ['common','commons'].include?(args[i])
     pouch.push(1) if ['rare','rares'].include?(args[i])
+    pouch.push(2) if ['legend','legendary','legends','legendarys','legendaries'].include?(args[i])
     for i2 in 0...lookout.length
       tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
     end
@@ -6453,7 +6512,7 @@ def find_in_mats(bot,event,args=nil,mode=0)
   end
   if pouch.length>0
     char=char.reject{|q| !pouch.include?(q[6].to_i)}.uniq
-    search.push("*Pouch Rarities*: #{pouch.map{|q| "#{['<:Rarity_3:532086056519204864> Common','<:Rarity_5:532086056737177600> Rare'][q]}"}.join(', ')}")
+    search.push("*Pouch Rarities*: #{pouch.map{|q| "#{['<:Pouch_1:622140100679303189> Common','<:Pouch_2:622140100960190475> Rare','<:Pouch_3:622140100888756237> Legendary'][q]}"}.join(', ')}")
   end
   if tags.length>0
     search.push("*Tags*: #{tags.join(', ')}")
@@ -10585,7 +10644,7 @@ bot.command(:status) do |event, *args|
   if @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
     event << "No data found.  Showing *my* status instead."
     event << ''
-    event << "Current avatar: #{bot.user(312451658908958721).avatar_url}"
+    event << "Current avatar: #{bot.user(543373018303299585).avatar_url}"
     event << "Adventurer/Dragon in avatar: #{@avvie_info[0]}"
     event << ''
     event << "Current status:"
@@ -10611,7 +10670,7 @@ bot.command([:avatar, :avvie]) do |event, *args|
     return nil
   end
   if @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
-    event << "Current avatar: #{bot.user(312451658908958721).avatar_url}"
+    event << "Current avatar: #{bot.user(543373018303299585).avatar_url}"
     event << "Adventurer/Dragon in avatar: #{@avvie_info[0]}"
     event << ''
     event << "Current status:"
