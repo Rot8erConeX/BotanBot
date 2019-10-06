@@ -144,9 +144,9 @@ def all_commands(include_nil=false,permissions=-1)
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
      'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias',
      'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','limit',
-     'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol']
+     'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol','reload']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
-  k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop'] if permissions==2
+  k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload'] if permissions==2
   k=k.uniq
   k.push(nil) if include_nil
   return k
@@ -510,6 +510,8 @@ def help_text(event,bot,command=nil,subcommand=nil)
     create_embed(event,'**reboot**',"Reboots this shard of the bot, installing any updates.\n\n**This command is only able to be used by Rot8er_ConeX**",0x008b8b)
   elsif command.downcase=='prefix'
     create_embed(event,'**prefix** __new prefix__',"Sets the server's custom prefix to `prefix`.\n\n**This command can only be used by server mods.**",0xC31C19)
+  elsif ['reload'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}**","Reloads specified data.\n\n**This command is only able to be used by Rot8er_ConeX**.",0x008b8b)
   elsif ['exp','level','xp'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __start__ __end__","Shows how much EXP to get from level `start` to level `end`.\nIf the levels are in the wrong order, will auto-switch them.\n\nIf only one level is listed, will show *both* EXP to get from level 1 to specified level, and EXP to get from specified level to max level.\nIf no level is listed, will show EXP required to get from level 1 to max level.\n\nIn PM, shows everything unless you specify a particular type of EXP.\nOtherwise, only works if you specify a particular type of EXP:\n- Player\n- Adventurer\n- Dragon\n- Dragon Bond\n- Wyrmprint\n- Weapon",0xCE456B)
   elsif ['plxp','plexp','pllevel','plevel','pxp','pexp'].include?(command.downcase)
@@ -11437,6 +11439,98 @@ bot.command(:boop) do |event|
     str=extend_message(str,m[i],event)
   end
   event.respond str
+end
+
+bot.command(:reload, from: 167657750971547648) do |event|
+  return nil if overlap_prevent(event)
+  return nil unless [167657750971547648].include?(event.user.id) || [502288368777035777,532083509083373583].include?(event.channel.id)
+  event.respond "Reload what?\n1.) Aliases, from backups#{"\n2.) Data, from GitHub" if [167657750971547648,141260274144509952].include?(event.user.id)}#{"\n3.) Source code, from GitHub" if event.user.id==167657750971547648}\nYou can include multiple numbers to load multiple things."
+  event.channel.await(:bob, from: event.user.id) do |e|
+    reload=false
+    if e.message.text.include?('1')
+      if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLNames2.txt")
+        b=[]
+        File.open("C:/Users/#{@mash}/Desktop/devkit/DLNames2.txt").each_line do |line|
+          b.push(eval line)
+        end
+      else
+        b=[]
+      end
+      nzzzzz=b.uniq
+      nz=nzzzzz.reject{|q| q[0]!='Servant'}
+      if nz[nz.length-1][2]<238
+        e << 'Last backup of the alias list has been corrupted.  Restoring from manually-created backup.'
+        if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLNames3.txt")
+          b=[]
+          File.open("C:/Users/#{@mash}/Desktop/devkit/DLNames3.txt").each_line do |line|
+            b.push(eval line)
+          end
+        else
+          b=[]
+        end
+        nzzzzz=b.uniq
+      else
+        e << 'Last backup of the alias list being used.'
+      end
+      open("C:/Users/#{@mash}/Desktop/devkit/DLNames.txt", 'w') { |f|
+        for i in 0...nzzzzz.length
+          f.puts "#{nzzzzz[i].to_s}#{"\n" if i<nzzzzz.length-1}"
+        end
+      }
+      e << 'Alias list has been restored from backup.'
+      reload=true
+    end
+    if e.message.text.include?('2') && [167657750971547648,141260274144509952].include?(event.user.id)
+      event.channel.send_temporary_message('Loading.  Please wait 5 seconds...',3)
+      to_reload=['Adventurers','Dragons','Wyrmprints','Weapons','Skills','Banners','Emotes','Enemies','Gauntlet','SkillSubsets','Materials','Status','Void','_NPCs']
+      for i in 0...to_reload.length
+        download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/DL#{to_reload[i]}.txt")
+        IO.copy_stream(download, "FEHTemp.txt")
+        if File.size("DLTemp.txt")>100
+          b=[]
+          File.open("DLTemp.txt").each_line.with_index do |line, idx|
+            b.push(line)
+          end
+          open("DL#{to_reload[i]}.txt", 'w') { |f|
+            f.puts b.join('')
+          }
+        end
+      end
+      e.respond 'New data loaded.'
+      reload=true
+    end
+    if e.message.text.include?('3') && [167657750971547648].include?(event.user.id)
+      download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/BotanBot.rb")
+      IO.copy_stream(download, "DLTemp.txt")
+      if File.size("DLTemp.txt")>100
+        if File.exist?("C:/Users/#{@mash}/Desktop/devkit/BotTokens.txt")
+          b2=[]
+          File.open("C:/Users/#{@mash}/Desktop/devkit/BotTokens.txt").each_line do |line|
+            b2.push(line.split(' # ')[0])
+          end
+        else
+          b2=[]
+        end
+        if b2.length>0
+          b=[]
+          File.open("DLTemp.txt").each_line.with_index do |line, idx|
+            if idx<100
+              b.push(line.gsub('>Main Token<',b2[3]).gsub('>Debug Token<',b2[-1]))
+            else
+              b.push(line)
+            end
+          end
+          open("BotanBot.rb", 'w') { |f|
+            f.puts b.join('')
+          }
+          e.respond 'New source code loaded.'
+          reload=true
+        end
+      end
+    end
+    e.respond 'Nothing reloaded.  If you meant to use the command, please try it again.' unless reload
+  end
+  return nil
 end
 
 bot.server_create do |event|
