@@ -26,6 +26,7 @@
 ["Gift", ["gift", "gifts"], "Mat"]
 ["GreedyManticore", ["greedymanticore", "greedo"], "Mat"]
 ["Halidom", ["halidom", "castle"], "Mat"]
+["Heart", ["heart", "<3"], "Mat"]
 ["HighBrunhilda", ["highbrunhilda", "hbh", "hbrun", "hmym", "hbrunhilda", "hibrun", "hibrunhilda", "highmym", "himym"], "Mat"]
 ["HighJupiter", ["hjp", "highjupiter", "highchicken", "highchocobo", "highjoop", "highjoopiter", "highjup", "hijupiter", "hichicken", "hichocobo", "hijoop", "hijoopiter", "hijup", "hjupiter", "hchicken", "hchocobo", "hjoop", "hjoopiter", "hjup"], "Mat"]
 ["HighMidgardsormr", ["highmidgardsormr", "highmiddy", "highmidgard", "himid", "himiddy", "himidgard", "himidgardsormr", "himidguard", "hmid", "hmiddy", "hmidgardsormr", "hms"], "Mat"]
