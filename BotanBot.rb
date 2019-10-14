@@ -6193,6 +6193,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   lookout=[]
   genders=[]
   races=[]
+  cygames=[]
   if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
     lookout=[]
     File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
@@ -6200,6 +6201,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
     end
   end
   lookout2=lookout.reject{|q| q[2]!='Race'}
+  lookout3=lookout.reject{|q| q[2]!='Cygame'}
   lookout=lookout.reject{|q| q[2]!='Skill'}
   for i in 0...args.length
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6 && allowstr
@@ -6235,6 +6237,9 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
     end
     for i2 in 0...lookout2.length
       races.push(lookout2[i2][0]) if lookout2[i2][1].include?(args[i])
+    end
+    for i2 in 0...lookout3.length
+      cygames.push(lookout3[i2][0]) if lookout3[i2][1].include?(args[i])
     end
     tags.push('StrengthSkill') if ['strength','str'].include?(args[i].downcase) && allowstr
   end
@@ -6348,6 +6353,10 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
     textra="#{textra}\n\nThis is showing adventurers from the Human race.\nFor enemies from the Human tribe, try `DL!find boss human`." if races.include?('Human')
     search.push("*Races*: #{races.join(', ')}")
   end
+  if cygames.length>0
+    char=char.reject{|q| !cygames.map{|q2| q2[0]}.include?(q[16])}.uniq
+    search.push("*Cygames Origin*: #{cygames.map{|q2| q2[1]}.join(', ')}")
+  end
   if tags.length>0
     search.push("*Skill Tags*: #{tags.join(', ')}")
     sklz=@askilities.reject{|q| q[2]!='Skill'}
@@ -6404,12 +6413,14 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   tags=[]
   lookout=[]
   genders=[]
+  cygames=[]
   if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
     lookout=[]
     File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
       lookout.push(eval line)
     end
   end
+  lookout2=lookout.reject{|q| q[2]!='Cygame'}
   lookout=lookout.reject{|q| q[2]!='Skill'}
   for i in 0...args.length
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6
@@ -6440,6 +6451,9 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
     genders.push('F') if ['female','woman','girl'].include?(args[i].downcase)
     for i2 in 0...lookout.length
       tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
+    end
+    for i2 in 0...lookout2.length
+      cygames.push(lookout2[i2][0]) if lookout2[i2][1].include?(args[i])
     end
     tags.push('StrengthSkill') if ['strength','str'].include?(args[i].downcase) && allowstr
   end
@@ -6550,6 +6564,10 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
       genders[i]='Genderless' if genders[i]=='G'
     end
     search.push("*Genders*: #{genders.join(', ')}")
+  end
+  if cygames.length>0
+    char=char.reject{|q| !cygames.map{|q2| q2[0]}.include?(q[18])}.uniq
+    search.push("*Cygames Origin*: #{cygames.map{|q2| q2[1]}.join(', ')}")
   end
   if tags.length>0
     search.push("*Skill Tags*: #{tags.join(', ')}")
