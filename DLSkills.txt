@@ -988,6 +988,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Shadow) HP 50% = Defense\example\Ability\If the user is attuned to Shadow: increases defense by `x`% when HP is 50% or above.\0\y\HP50, Shadow, Defense
 (Shadow) HP 50% = Defense\4%\Ability\If the user is attuned to Shadow: increases defense by 4% when HP is 50% or above.\20\y\HP50, Shadow, Defense
 (Shadow) HP 50% = Defense\7%\Ability\If the user is attuned to Shadow: increases defense by 7% when HP is 50% or above.\40\y\HP50, Shadow, Defense
+(Shadow) HP 50% = Healing\12%\Ability\If the user is attuned to Shadow: increases healing potency by 12%\60\y\HP50, RecoveryPotency, Shadow
 (Shadow) HP 70% = Defense\example\Ability\If the user is attuned to Shadow: increases defense by `x`% when HP is 70% or above.\0\y\HP70, Defense, Shadow
 (Shadow) HP 70% = Defense\3%\Ability\If the user is attuned to Shadow: increases defense by 3% when HP is 70% or above.\20\y\HP70, Defense, Shadow
 (Shadow) HP 70% = Defense\5%\Ability\If the user is attuned to Shadow: increases defense by 5% when HP is 70% or above.\40\y\HP70, Defense, Shadow
