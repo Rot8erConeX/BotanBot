@@ -2849,7 +2849,11 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     str="#{str}#{"\n" unless s2s}#{str2}" if str2.length>0
     str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[7][0])}#{bemoji[2]}#{" #{longFormattedNumber(k[7][1])}#{bemoji[3]}" if k[7][1]>0}"
     str="#{str}\n**Assembles for:** #{longFormattedNumber(k[11][0])}#{bemoji[2]}"
-    str="#{str}\n**Disassembles for:** #{longFormattedNumber(k[11][1])}#{bemoji[2]}"
+    if k[2][1,1]=='h'
+      str="#{str}\n~~Cannot be disassembled~~"
+    else
+      str="#{str}\n**Disassembles for:** #{longFormattedNumber(k[11][1])}#{bemoji[2]}"
+    end
   end
   unless s2s
     if str.gsub(';;;;;',"\n#{strx}").length>=1900
