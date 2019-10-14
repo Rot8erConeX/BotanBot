@@ -296,6 +296,8 @@
 ["Seasonal", ["seasonal", "seasonals"], "Banner"]
 ["Gala", ["gala", "galadragalia"], "Banner"]
 ["Dragon", ["dragon", "drg", "dragonspecial", "dragonsp", "drgspecial", "drgsp"], "Banner"]
+[["KoG", "Knights of Glory"], ["kog", "knightsofglory", "knightofglory", "nightsofglory", "nightofglory", "gloryknight", "gloryknights", "glorynight", "glorynights", "nitesofglory", "niteofglory", "glorynite", "glorynites"], "Cygame"]
+[["RoB", "Rage of Bahamut"], ["rob", "rageofbahamut", "bahamut", "bahamut'srage", "bahamutsrage", "bahamutrage", "rage"], "Cygame"]
 ["Alt", ["alt", "alternate", "2"], "Art"]
 ["Apron", ["apron", "cooking"], "Art"]
 ["Kimono", ["kimono"], "Art"]
