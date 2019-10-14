@@ -12009,8 +12009,8 @@ bot.command(:reload, from: 167657750971547648) do |event|
         b=[]
       end
       nzzzzz=b.uniq
-      nz=nzzzzz.reject{|q| q[0]!='Servant'}
-      if nz[nz.length-1][2]<238
+      nz=nzzzzz.reject{|q| q[0]!='Adventurer'}
+      if nz[nz.length-1][2]<'Zethia'
         e << 'Last backup of the alias list has been corrupted.  Restoring from manually-created backup.'
         if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLNames3.txt")
           b=[]
@@ -12035,10 +12035,13 @@ bot.command(:reload, from: 167657750971547648) do |event|
     if e.message.text.include?('2') && [167657750971547648,141260274144509952].include?(event.user.id)
       event.channel.send_temporary_message('Loading.  Please wait 5 seconds...',3)
       to_reload=['Adventurers','Dragons','Wyrmprints','Weapons','Skills','Banners','Emotes','Enemies','Gauntlet','SkillSubsets','Materials','Status','Void','_NPCs']
+      stx=''
       for i in 0...to_reload.length
         download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/DL#{to_reload[i]}.txt")
         IO.copy_stream(download, "DLTemp.txt")
-        if File.size("DLTemp.txt")>100
+        if to_reload[i]=='Skills' && File.size("DLTemp.txt")<File.size("DLSkills.txt")*3/2
+          stx='Skills were not reloaded because the file was loaded from the wrong sheet.'
+        elsif File.size("DLTemp.txt")>100
           b=[]
           File.open("DLTemp.txt").each_line.with_index do |line, idx|
             b.push(line)
@@ -12048,7 +12051,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
           }
         end
       end
-      e.respond 'New data loaded.'
+      e.respond "New data loaded.\n#{stx}"
       reload=true
     end
     if e.message.text.include?('3') && [167657750971547648].include?(event.user.id)
