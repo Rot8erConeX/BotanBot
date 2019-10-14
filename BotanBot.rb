@@ -12819,6 +12819,7 @@ bot.ready do |event|
   else
     next_holiday(bot)
   end
+  bot.channel(285663217261477889).send_message("Hello!") if @shardizard==4
 end
 
 bot.run
