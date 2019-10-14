@@ -6251,6 +6251,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   tags.uniq!
   genders.uniq!
   races.uniq!
+  cygames.uniq!
   char=@adventurers.map{|q| q}.uniq
   search=[]
   emo=[]
@@ -6465,6 +6466,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   ranged.uniq!
   fltr.uniq!
   tags.uniq!
+  cygames.uniq!
   char=@dragons.map{|q| q}.uniq
   search=[]
   emo=[]
@@ -12057,7 +12059,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
       for i in 0...to_reload.length
         download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/DL#{to_reload[i]}.txt")
         IO.copy_stream(download, "DLTemp.txt")
-        if to_reload[i]=='Skills' && File.size("DLTemp.txt")<File.size("DLSkills.txt")*3/2
+        if to_reload[i]=='Skills' && File.size("DLTemp.txt")<File.size("DLSkills.txt")*2/3
           stx='Skills were not reloaded because the file was loaded from the wrong sheet.'
         elsif File.size("DLTemp.txt")>100
           b=[]
