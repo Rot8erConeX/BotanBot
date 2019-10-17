@@ -32,7 +32,7 @@ Jupiter (Enemy)\8960, 22680, 69300, 121200; 284, 766, 1339, 1968\Light, Dragon, 
 Zodiark (Enemy)\10575, 25342, 80549, 116152; 491, 782, 1328, 1952\Shadow, Dragon, Dragon Trial\Paralysis: 55%\Curse\
 High Midgardsormr (Enemy)\-1, 863164, 2589492, 4661086; -1, 7230, 9000, 13000\Wind, Dragon, High Dragon\Burn: 55%\Stun\
 High Midgardsormr (Prelude)\497182; 3253\Wind, Dragon, High Dragon\Burn: 55%\Stun\
-High Brunhilda (Enemy)\-1, 1039797, 2433124, 4014656; -1, 7230, 9000, 13000\Flame, Dragon, High Dragon\~~Immune~~\Burn\
+High Brunhilda (Enemy)\-1, 1039797, 2433124, 3179607; -1, 7230, 9000, 13000\Flame, Dragon, High Dragon\~~Immune~~\Burn\
 High Brunhilda (Prelude)\675868; 3253\Flame, Dragon, High Dragon\~~Immune~~\Burn\
 High Mercury (Enemy)\-1, 2137371, 5407548, 7523546; -1, 7230, 9000, 13000\Water, Dragon, High Dragon\Poison: **0%**\Bog\
 High Mercury (Prelude)\790827; 7230\Water, Dragon, High Dragon\Poison: **0%**\Bog\
