@@ -924,6 +924,7 @@ Staff Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argen
 Staff Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Amber Insignia, 200;; Dyrenell Aureus, 140;; Royal Amber Insignia, 80
 Staff Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Amber Insignia, 240;; Dyrenell Aureus, 150;; Royal Amber Insignia, 100
 Staff Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Amber Insignia, 240;; Dyrenell Aureus, 160;; Royal Amber Insignia, 100
+Sweet Retreat\1\A candy house made to be the centerpiece of the Halidom's Halloween party, and bound to liven up the event. Use it to boost the stats of light-attuned adventurers.\Adventurer, Event Altar\3x3\1\0
 Sweet Retreat\2\-\Adventurer, Event Altar\3x3\1\100\Snack-o'-Lantern, 3
 Sweet Retreat\3\-\Adventurer, Event Altar\3x3\1\200\Snack-o'-Lantern, 5
 Sweet Retreat\4\-\Adventurer, Event Altar\3x3\1\300\Snack-o'-Lantern, 7
