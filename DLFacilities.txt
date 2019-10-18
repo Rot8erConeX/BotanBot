@@ -801,36 +801,36 @@ Rupie Mine\27\-\Production\3x3\4\3400\Light Orb, 30;; Radiance Orb, 3;; Refulgen
 Rupie Mine\28\-\Production\3x3\4\3600\Light Orb, 30;; Radiance Orb, 3;; Refulgence Orb, 1
 Rupie Mine\29\-\Production\3x3\4\3800\Light Orb, 40;; Radiance Orb, 3;; Refulgence Orb, 1
 Rupie Mine\30\-\Production\3x3\4\4000\Light Orb, 40;; Radiance Orb, 3;; Refulgence Orb, 1
-Seabed Stage\1\Use it to boost the stats of bow and dagger wielding adventurers.\Adventurer, Event Altar\3x3\1\0
-Seabed Stage\2\-\Adventurer, Event Altar\3x3\1\100\Glam Shells, 3
-Seabed Stage\3\-\Adventurer, Event Altar\3x3\1\200\Glam Shells, 5
-Seabed Stage\4\-\Adventurer, Event Altar\3x3\1\300\Glam Shells, 7
-Seabed Stage\5\-\Adventurer, Event Altar\3x3\1\400\Glam Shells, 10
-Seabed Stage\6\-\Adventurer, Event Altar\3x3\1\500\Glam Shells, 12
-Seabed Stage\7\-\Adventurer, Event Altar\3x3\1\600\Glam Shells, 15
-Seabed Stage\8\-\Adventurer, Event Altar\3x3\1\700\Glam Shells, 18
-Seabed Stage\9\-\Adventurer, Event Altar\3x3\1\800\Glam Shells, 21
-Seabed Stage\10\-\Adventurer, Event Altar\3x3\1\1000\Glam Shells, 25
-Seabed Stage\11\-\Adventurer, Event Altar\3x3\1\1200\Glam Shells, 30
-Seabed Stage\12\-\Adventurer, Event Altar\3x3\1\1400\Glam Shells, 50
-Seabed Stage\13\-\Adventurer, Event Altar\3x3\1\1600\Glam Shells, 70
-Seabed Stage\14\-\Adventurer, Event Altar\3x3\1\1800\Glam Shells, 90
-Seabed Stage\15\-\Adventurer, Event Altar\3x3\1\2000\Glam Shells, 120
-Seabed Stage\16\-\Adventurer, Event Altar\3x3\1\2200\Glam Shells, 150
-Seabed Stage\17\-\Adventurer, Event Altar\3x3\1\2400\Glam Shells, 180
-Seabed Stage\18\-\Adventurer, Event Altar\3x3\1\2600\Glam Shells, 210
-Seabed Stage\19\-\Adventurer, Event Altar\3x3\1\2800\Glam Shells, 250
-Seabed Stage\20\-\Adventurer, Event Altar\3x3\1\3000\Glam Shells, 300
-Seabed Stage\21\-\Adventurer, Event Altar\3x3\1\3200\Glam Shells, 350
-Seabed Stage\22\-\Adventurer, Event Altar\3x3\1\3400\Glam Shells, 400
-Seabed Stage\23\-\Adventurer, Event Altar\3x3\1\3600\Glam Shells, 450
-Seabed Stage\24\-\Adventurer, Event Altar\3x3\1\3800\Glam Shells, 500
-Seabed Stage\25\-\Adventurer, Event Altar\3x3\1\4000\Glam Shells, 550
-Seabed Stage\26\-\Adventurer, Event Altar\3x3\1\4200\Glam Shells, 600
-Seabed Stage\27\-\Adventurer, Event Altar\3x3\1\4400\Glam Shells, 700
-Seabed Stage\28\-\Adventurer, Event Altar\3x3\1\4600\Glam Shells, 800
-Seabed Stage\29\-\Adventurer, Event Altar\3x3\1\4800\Glam Shells, 900
-Seabed Stage\30\-\Adventurer, Event Altar\3x3\1\5000\Glam Shells, 1000
+Seabed Stage\1\Use it to boost the stats of bow and dagger wielding adventurers.\Adventurer, Event Dual Dojo\3x3\1\0
+Seabed Stage\2\-\Adventurer, Event Dual Dojo\3x3\1\100\Glam Shells, 3
+Seabed Stage\3\-\Adventurer, Event Dual Dojo\3x3\1\200\Glam Shells, 5
+Seabed Stage\4\-\Adventurer, Event Dual Dojo\3x3\1\300\Glam Shells, 7
+Seabed Stage\5\-\Adventurer, Event Dual Dojo\3x3\1\400\Glam Shells, 10
+Seabed Stage\6\-\Adventurer, Event Dual Dojo\3x3\1\500\Glam Shells, 12
+Seabed Stage\7\-\Adventurer, Event Dual Dojo\3x3\1\600\Glam Shells, 15
+Seabed Stage\8\-\Adventurer, Event Dual Dojo\3x3\1\700\Glam Shells, 18
+Seabed Stage\9\-\Adventurer, Event Dual Dojo\3x3\1\800\Glam Shells, 21
+Seabed Stage\10\-\Adventurer, Event Dual Dojo\3x3\1\1000\Glam Shells, 25
+Seabed Stage\11\-\Adventurer, Event Dual Dojo\3x3\1\1200\Glam Shells, 30
+Seabed Stage\12\-\Adventurer, Event Dual Dojo\3x3\1\1400\Glam Shells, 50
+Seabed Stage\13\-\Adventurer, Event Dual Dojo\3x3\1\1600\Glam Shells, 70
+Seabed Stage\14\-\Adventurer, Event Dual Dojo\3x3\1\1800\Glam Shells, 90
+Seabed Stage\15\-\Adventurer, Event Dual Dojo\3x3\1\2000\Glam Shells, 120
+Seabed Stage\16\-\Adventurer, Event Dual Dojo\3x3\1\2200\Glam Shells, 150
+Seabed Stage\17\-\Adventurer, Event Dual Dojo\3x3\1\2400\Glam Shells, 180
+Seabed Stage\18\-\Adventurer, Event Dual Dojo\3x3\1\2600\Glam Shells, 210
+Seabed Stage\19\-\Adventurer, Event Dual Dojo\3x3\1\2800\Glam Shells, 250
+Seabed Stage\20\-\Adventurer, Event Dual Dojo\3x3\1\3000\Glam Shells, 300
+Seabed Stage\21\-\Adventurer, Event Dual Dojo\3x3\1\3200\Glam Shells, 350
+Seabed Stage\22\-\Adventurer, Event Dual Dojo\3x3\1\3400\Glam Shells, 400
+Seabed Stage\23\-\Adventurer, Event Dual Dojo\3x3\1\3600\Glam Shells, 450
+Seabed Stage\24\-\Adventurer, Event Dual Dojo\3x3\1\3800\Glam Shells, 500
+Seabed Stage\25\-\Adventurer, Event Dual Dojo\3x3\1\4000\Glam Shells, 550
+Seabed Stage\26\-\Adventurer, Event Dual Dojo\3x3\1\4200\Glam Shells, 600
+Seabed Stage\27\-\Adventurer, Event Dual Dojo\3x3\1\4400\Glam Shells, 700
+Seabed Stage\28\-\Adventurer, Event Dual Dojo\3x3\1\4600\Glam Shells, 800
+Seabed Stage\29\-\Adventurer, Event Dual Dojo\3x3\1\4800\Glam Shells, 900
+Seabed Stage\30\-\Adventurer, Event Dual Dojo\3x3\1\5000\Glam Shells, 1000
 Shadow Altar\1\An altar to honor shadow. The mana housed within reveals hidden strengths, boosting the stats of shadow-attuned adventurers.\Adventurer, Altar\3x3\2\200
 Shadow Altar\2\-\Adventurer, Altar\3x3\2\400
 Shadow Altar\3\-\Adventurer, Altar\3x3\2\600
