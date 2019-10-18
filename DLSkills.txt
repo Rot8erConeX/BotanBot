@@ -1798,10 +1798,10 @@ Zodiark Res\example\Ability\Reduces damage taken from Zodiark by `x`%.\0\y\Zodia
 Zodiark Res\15%\Ability\Reduces damage taken from Zodiark by 15%.\30\y\ZodiarkRes, Resistance
 Zodiark Res\18%\Ability\Reduces damage taken from Zodiark by 18%.\45\y\ZodiarkRes, Resistance
 Zodiark Res\20%\Ability\Reduces damage taken from Zodiark by 20%.\60\y\ZodiarkRes, Resistance
-Critical Damage\22%\CoAbility\Increases critical damage by 22%\170\n\CritDamage
-Critical Damage\24%\CoAbility\Increases critical damage by 24%\200\n\CritDamage
-Critical Damage\26%\CoAbility\Increases critical damage by 26%\230\n\CritDamage
-Critical Damage\28%\CoAbility\Increases critical damage by 28%\260\n\CritDamage
+Critical Damage\17%\CoAbility\Increases critical damage by 22%\170\n\CritDamage
+Critical Damage\20%\CoAbility\Increases critical damage by 24%\200\n\CritDamage
+Critical Damage\23%\CoAbility\Increases critical damage by 26%\230\n\CritDamage
+Critical Damage\26%\CoAbility\Increases critical damage by 28%\260\n\CritDamage
 Critical Damage\30%\CoAbility\Increases critical damage by 30%\320\n\CritDamage
 Critical Rate\1%\CoAbility\Increases critical rate by 1%.\50\n\CritRate
 Critical Rate\2%\CoAbility\Increases critical rate by 2%.\80\n\CritRate
