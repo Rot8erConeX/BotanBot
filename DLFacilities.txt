@@ -953,6 +953,11 @@ Sweet Retreat\27\-\Adventurer, Event Altar\3x3\1\4400\Snack-o'-Lantern, 700
 Sweet Retreat\28\-\Adventurer, Event Altar\3x3\1\4600\Snack-o'-Lantern, 800
 Sweet Retreat\29\-\Adventurer, Event Altar\3x3\1\4800\Snack-o'-Lantern, 900
 Sweet Retreat\30\-\Adventurer, Event Altar\3x3\1\5000\Snack-o'-Lantern, 1000
+Sweet Retreat\31\-\Adventurer, Event Altar\3x3\1\5200\Snack-o'-Lantern, 1100
+Sweet Retreat\32\-\Adventurer, Event Altar\3x3\1\5400\Snack-o'-Lantern, 1200
+Sweet Retreat\33\-\Adventurer, Event Altar\3x3\1\5600\Snack-o'-Lantern, 1300
+Sweet Retreat\34\-\Adventurer, Event Altar\3x3\1\5800\Snack-o'-Lantern, 1400
+Sweet Retreat\35\-\Adventurer, Event Altar\3x3\1\6000\Snack-o'-Lantern, 1500
 Sword Dojo\1\A training area built to hone one's skills with a sword. Use it to boosts the stats of sword-wielding adventures.\Adventurer, Dojo\3x3\2\0
 Sword Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10
 Sword Dojo\3\-\Adventurer, Dojo\3x3\2\3500\Dyrenell Aes, 10
