@@ -4824,11 +4824,29 @@ def disp_facility_data(bot,event,args=nil)
           end
           str="#{str} - #{kxx[i][7].map{|q| "#{q[0]} x#{q[1].to_i*val}"}.sort.join(', ')}" if s2s
         end
+        if ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1]) && s2s
+          alta=[(i+1)/2,i/2]
+          alta[0]*=0.3
+          alta[1]*=0.3
+          alta[0]+=0.5
+          alta[1]+=0.5
+          alta[1]+=0.3 if i>=29
+          str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+        end
       end
       mtzz=mtz.map{|q| q[0]}.uniq.sort
       str3="TOTAL: #{longFormattedNumber(cost*val)}<:Resource_Rupies:532104504372363274> - "
       for i in 0...mtzz.length
         str3="#{str3}#{', ' unless i==0}#{mtzz[i]} x#{mtz.reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i*val}.inject(0){|sum,x| sum + x }}"
+      end
+      if ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1])
+        alta=[(kxx.length)/2,(kxx.length-1)/2]
+        alta[0]*=0.3
+        alta[1]*=0.3
+        alta[0]+=0.5
+        alta[1]+=0.5
+        alta[1]+=0.3 if kxx.length>=30
+        str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       end
       str="#{str}\n\n**#{str3}**"
     elsif nums.length==1
@@ -4850,11 +4868,29 @@ def disp_facility_data(bot,event,args=nil)
       for i in 0...mtzz.length
         str3="#{str3}#{' - ' if i==0}#{', ' unless i==0}#{mtzz[i]} x#{mtz[0].reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i*val}.inject(0){|sum,x| sum + x }}"
       end
+      if ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1])
+        alta=[(n)/2,(n-1)/2]
+        alta[0]*=0.3
+        alta[1]*=0.3
+        alta[0]+=0.5
+        alta[1]+=0.5
+        alta[1]+=0.3 if n>=30
+        str3="#{str3}\nBuffs at Level #{n}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+      end
       str="#{str}\n\n#{str3}" unless n==1
       str3="**Total from level #{n} to #{kxx.length}:** #{longFormattedNumber(cost[1])}<:Resource_Rupies:532104504372363274>"
       mtzz=mtz[1].map{|q| q[0]}.uniq.sort
       for i in 0...mtzz.length
         str3="#{str3}#{' - ' if i==0}#{', ' unless i==0}#{mtzz[i]} x#{mtz[1].reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i*val}.inject(0){|sum,x| sum + x }}"
+      end
+      if ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1])
+        alta=[(kxx.length)/2,(kxx.length-1)/2]
+        alta[0]*=0.3
+        alta[1]*=0.3
+        alta[0]+=0.5
+        alta[1]+=0.5
+        alta[1]+=0.3 if kxx.length>=30
+        str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       end
       str="#{str}\n\n#{str3}" unless n==kxx.length
     else
@@ -12054,7 +12090,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
     end
     if e.message.text.include?('2') && [167657750971547648,141260274144509952].include?(event.user.id)
       event.channel.send_temporary_message('Loading.  Please wait 5 seconds...',3)
-      to_reload=['Adventurers','Dragons','Wyrmprints','Weapons','Skills','Banners','Emotes','Enemies','Gauntlet','SkillSubsets','Materials','Status','Void','_NPCs']
+      to_reload=['Adventurers','Dragons','Wyrmprints','Weapons','Skills','Banners','Emotes','Enemies','Gauntlet','SkillSubsets','Facilities','Materials','Status','Void','_NPCs']
       stx=''
       for i in 0...to_reload.length
         download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/DL#{to_reload[i]}.txt")
