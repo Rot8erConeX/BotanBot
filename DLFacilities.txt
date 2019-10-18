@@ -770,6 +770,7 @@ Poison Slime Statue\12\-\Adventurer, Void Altar\2x2\1\70000\Iron Ore, 60;; Grani
 Poison Slime Statue\13\-\Adventurer, Void Altar\2x2\1\80000\Iron Ore, 65;; Granite, 40;; Meteorite, 15;; Necroblossom, 5
 Poison Slime Statue\14\-\Adventurer, Void Altar\2x2\1\90000\Iron Ore, 70;; Granite, 45;; Meteorite, 20
 Poison Slime Statue\15\-\Adventurer, Void Altar\2x2\1\100000\Iron Ore, 75;; Granite, 50;; Meteorite, 30;; Necroblossom, 8
+Pumpkin Mariti\-\An adorable ornament, featuring Maritimus in a pumpkin basket. Put them up everywhere to really get into the halloween spirit!\Decorative\1x1\4\0
 Red Flowers\-\A bed of blooming red flowers. Perennial symbols of love and passion, they're often given as gifts.\Decorative\1x1\5\0
 Rupie Mine\1\A facility for mining rupies from the earth. Shipments arrive in regular intervals, providing a great source of easy income!\Production\3x3\4\50
 Rupie Mine\2\-\Production\3x3\4\100
