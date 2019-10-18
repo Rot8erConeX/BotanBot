@@ -1395,6 +1395,7 @@ Happy Dragonyule!\-\Ability\Increases player EXP intake for clearing quests by 1
 Healing Doublebuff\I\Ability\Grants an HP regen buff healing you for 1% Max HP every 3.9 seconds for 20 seconds each time a defense up buff is received.\40\y\Regen, Doublebuff
 Healing Doublebuff\II\Ability\Grants an HP regen buff healing you for 2% Max HP every 3.9 seconds for 20 seconds each time a defense up buff is received.\60\y\Regen, Doublebuff
 Healing Doublebuff\III\Ability\Grants an HP regen buff healing you for 3% Max HP every 3.9 seconds for 20 seconds each time a defense up buff is received.\80\y\Regen, Doublebuff
+High Brunhilda's Bane\example\Ability\increases damage to High Brunhilda by `x`%.\0\y\HBH, Bane
 High Brunhilda's Bane\20%\Ability\increases damage to High Brunhilda by 20%.\100\y\HBH, Bane
 High Brunhilda's Bane\30%\Ability\increases damage to High Brunhilda by 30%.\120\y\HBH, Bane
 High Brunhilda Res\example\Ability\Reduces damage taken from High Brunhilda by `x`%.\0\y\HBHRes, Resistance, HBH
@@ -1411,6 +1412,7 @@ High Mercury Res\20%\Ability\Reduces damage taken from High Mercury by 20%\60\y\
 High Mercury Res\23%\Ability\Reduces damage taken from High Mercury by 23%\80\y\HMCRes, Resistance, HMC
 High Mercury Res\25%\Ability\Reduces damage taken from High Mercury by 25%\100\y\HMCRes, Resistance, HMC
 High Mercury's Bane\30%\Ability\increases damage to High Mercury by 30%.\100\y\HMC, Bane
+High Midgardsormr's Bane\example\Ability\increases damage to High Midgardsormr by `x`%.\0\y\HMS, Bane
 High Midgardsormr's Bane\20%\Ability\increases damage to High Midgardsormr by 20%.\100\y\HMS, Bane
 High Midgardsormr's Bane\30%\Ability\increases damage to High Midgardsormr by 30%.\120\y\HMS, Bane
 High Midgardsormr Res\example\Ability\Reduces damage taken from High Midgardsormr by `x`%.\0\y\HMSRes, Resistance, HMS
