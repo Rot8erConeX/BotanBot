@@ -25,7 +25,7 @@ Void Nidhogg\450000; 3572\Shadow, Dragon, Void\Poison: **0%**, Burn: **0%**, Par
 Raging Manticore\264856; 2290\Shadow, Therion, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\Curse, Poison\Fury
 Greedy Manticore\264856; 2290\Water, Therion, Void\Poison: **0%**, Burn: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Sleep: **0%**\Poison, Freeze\Fury
 Catoblepas Anemos\262587; 2052\Wind, Therion, Void\Poison: **40%**, Burn: **40%**, Stun: **40%**\Stun\Petrify
-Midgardsormr (Enemy)\5880, 21060, 64350, 120000; 231, 761, 1205, 1800\Wind, Dragon, Dragon Trial\Burn: 55%\Stun\
+Midgardsormr (Enemy)\5880, 21060, 64350, 120000; 231, 761, 1205, 1800\Wind, Dragon, Dragon Trial\Burn: **0%**, Poison: **0%**, Freeze: *100%/100%/99%*, Paralysis: *100%*/*100%*/**0%**, Blind: *100%/100%/99%*, Stun: *100%/100%/99%*, Bog: *100%/100%/99%*, Sleep: *100%/100%/99%*\Stun\
 Brunhilda (Enemy)\5880, 19656, 64350, 111540; 231, 766, 1339, 1968\Flame, Dragon, Dragon Trial\Freeze: 55%, Bog: 55%\Burn\
 Mercury (Enemy)\5880, 22320, 69300, 121200; 231, 803, 1189, 1747\Water, Dragon, Dragon Trial\Poison: 55%, Sleep: 55%\Bog\
 Jupiter (Enemy)\8960, 22680, 69300, 121200; 284, 766, 1339, 1968\Light, Dragon, Dragon Trial\Blind: 55%, Curse: 55%\Paralysis\
