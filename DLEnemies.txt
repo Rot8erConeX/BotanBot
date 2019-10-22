@@ -31,14 +31,15 @@ Mercury (Enemy)\5880, 22320, 69300, 121200; 231, 803, 1189, 1747\Water, Dragon, 
 Jupiter (Enemy)\8960, 22680, 69300, 121200; 284, 766, 1339, 1968\Light, Dragon, Dragon Trial\Blind: 55%, Curse: 55%\Paralysis\
 Zodiark (Enemy)\10575, 25342, 80549, 116152; 491, 782, 1328, 1952\Shadow, Dragon, Dragon Trial\Paralysis: 55%\Curse\
 High Midgardsormr (Enemy)\-1, 863164, 2589492, 4661086; -1, 7230, 9000, 13000\Wind, Dragon, High Dragon\Burn: **0%**, Poison: **0%**, Freeze: *100%/100%/99%*, Paralysis: *100%*/*100%*/**0%**, Blind: *100%/100%/99%*, Stun: *100%/100%/99%*, Bog: *100%/100%/99%*, Sleep: *100%/100%/99%*\Stun\
-High Midgardsormr (Prelude)\497182; 3253\Wind, Dragon, High Dragon\Burn: 55%\Stun\
-High Brunhilda (Enemy)\-1, 1039797, 2433124, 3179607; -1, 7230, 9000, 13000\Flame, Dragon, High Dragon\~~Immune~~\Burn\
-High Brunhilda (Prelude)\675868; 3253\Flame, Dragon, High Dragon\~~Immune~~\Burn\
-High Mercury (Enemy)\-1, 2137371, 5407548, 7523546; -1, 7230, 9000, 13000\Water, Dragon, High Dragon\Poison: **0%**\Bog\
-High Mercury (Prelude)\790827; 7230\Water, Dragon, High Dragon\Poison: **0%**\Bog\
-High Jupiter (Enemy)\-1, 2020100, 4488479, 7405990; -1, 7230, 9000, 13000\Light, Dragon, High Dragon\Poison: **0%**, Burn: **0%**, Blind: *70%*\Paralysis\
-High Jupiter (Prelude)\808040; 7230\Light, Dragon, High Dragon\Poison: **0%**, Burn: **0%**, Blind: *70%*\Paralysis\
-High Zodiark (Enemy)\-1, 2448750, 3428250, 4652625; -1, 7996, 8386, 9000\Shadow, Dragon, High Dragon\Paralysis: **0%**\Curse\
+High Midgardsormr (Prelude)\497182; 3253\Wind, Dragon, High Dragon\see Standard.\Stun\
+High Brunhilda (Enemy)\-1, 1039797, 2433124, 3179607; -1, 7230, 9000, 13000\Flame, Dragon, High Dragon\Poison: **0%**, Paralysis: *100%*/*100%*/**0%**, Blind: *100%/100%/99%*, Bog: *100%/100%/99%*\Burn\
+High Brunhilda (Prelude)\675868; 3253\Flame, Dragon, High Dragon\see Standard.\Burn\
+High Mercury (Enemy)\-1, 2137371, 5407548, 7523546; -1, 7230, 9000, 13000\Water, Dragon, High Dragon\Burn: **0%**, Poison: **0%**, Freeze: *100%/100%/99%*, Paralysis: *100%*/*100%*/**0%**, Blind: *100%/100%/99%*, Stun: *100%/100%/99%*, Bog: *100%/100%/99%*, Sleep: *100%/100%/99%*\Bog\
+High Mercury (Prelude)\790827; 7230\Water, Dragon, High Dragon\see Standard.\Bog\
+High Jupiter (Enemy)\-1, 2020100, 4488479, 7405990; -1, 7230, 9000, 13000\Light, Dragon, High Dragon\Burn: **0%**, Poison: **0%**, Freeze: *100%/100%/99%*, Paralysis: *100%*/*100%*/**0%**, Blind: *100%/100%/99%*, Stun: *100%/100%/99%*, Bog: *100%/100%/99%*, Sleep: *100%/100%/99%*\Paralysis\
+High Jupiter (Prelude)\808040; 7230\Light, Dragon, High Dragon\see Standard.\Paralysis\
+High Zodiark (Enemy)\-1, 2448750, 3428250, 4652625; -1, 7996, 8386, 9000\Shadow, Dragon, High Dragon\Burn: **0%**, Poison: **0%**, Freeze: *100%/100%/99%*, Paralysis: *100%*/*100%*/**0%**, Blind: *100%*/*100%*/**0%**, Stun: *100%/100%/99%*, Bog: *100%/100%/99%*, Sleep: *100%/100%/99%*\Curse\
+High Zodiark (Prelude)\810220; 7996\Shadow, Dragon, High Dragon\see Standard.\Curse\
 Matilda\-1, 1, -1, 100; -1, 1, -1, 20\Flame, Demon, Meme\~~Immune~~\Poison, Burn, Freeze, Paralysis, Blind, Stun, Bog, Sleep, Curse\Wonder Guard
 Elite Swordsman (Flame)\21500, 50000, 102600, 152618; 190, 440, 770, 872\Flame, Human, Imperial Onslaught\Poison: **30%**, Burn: 55%, Freeze: **10%**, Paralysis: **30%**, Blind: **30%**, Stun: 50%, Curse: **30%**, Bog: **10%**, Sleep: **30%**\Stun\
 Elite Axeman (Water)\22000, 50000, 103500, 132525; 190, 440, 770, 990\Water, Human, Imperial Onslaught\Poison: **30%**, Burn: **30%**, Freeze: 55%, Paralysis: **30%**, Blind: **30%**, Stun: **10%**, Curse: **30%**, Bog: 55%, Sleep: **10%**\Freeze\
