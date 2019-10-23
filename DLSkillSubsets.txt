@@ -315,6 +315,7 @@
 ["Damaged", ["damaged", "damage", "hurt", "pain", "painful"], "Art/Adventurer"]
 ["Human", ["human", "humanoid", "npc"], "Art/Dragon"]
 ["Corrupted", ["corrupted", "corrupt", "corruption"], "Art/NPC"]
+["Anniversary", ["anniversary", "annual", "yearly"], "Art/NPC"]
 ["Fat", ["fat", "chubby", "large"], "Art/NPC"]
 ["Imp", ["imp", "impish", "smol", "small", "tiny"], "Art/Enemy"]
 ["Human", ["human", "humans", "humanoid", "humanoids"], "Race"]
