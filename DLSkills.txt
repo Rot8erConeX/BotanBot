@@ -1550,6 +1550,9 @@ Midgardsormr Res\15%\Ability\Reduces damage taken from Midgardsormr by 15%.\30\y
 Midgardsormr Res\18%\Ability\Reduces damage taken from Midgardsormr by 18%.\45\y\MidgardsormrRes, Resistance
 Midgardsormr Res\20%\Ability\Reduces damage taken from Midgardsormr by 20%.\60\y\MidgardsormrRes, Resistance
 Midgardsormr Res\25%\Ability\Reduces damage taken from Midgardsormr by 25%.\100\y\MidgardsormrRes, Resistance
+Moonlit Howl\example\Ability\If the user is attuned to Shadow: grants the user the "Bloody Tongue" effect for 20 seconds when HP drops to 30%. This effect grants the user a one-use shield that nullifies damage less than `x`% of their maximum HP, and increases their strength by `x`%. These effects do not stack, and are lost upon taking damage.\0\y\Shield, Last, Strength
+Moonlit Howl\I\Ability\If the user is attuned to Shadow: grants the user the "Bloody Tongue" effect for 20 seconds when HP drops to 30%. This effect grants the user a one-use shield that nullifies damage less than 50% of their maximum HP, and increases their strength by 20%. These effects do not stack, and are lost upon taking damage.\60\y\Shield, Last, Strength
+Moonlit Howl\II\Ability\If the user is attuned to Shadow: grants the user the "Bloody Tongue" effect for 20 seconds when HP drops to 30%. This effect grants the user a one-use shield that nullifies damage less than 60% of their maximum HP, and increases their strength by 30%. These effects do not stack, and are lost upon taking damage.\80\y\Shield, Last, Strength
 Motivational Logs\example\Ability\Increases motivational log intake for clearing quests by `x`%.\0\y\Event, Facility, Score
 Motivational Logs\25%\Ability\Increases motivational log intake for clearing quests by 25%.\0\y\Event, Facility, Score
 Motivational Logs\35%\Ability\Increases motivational log intake for clearing quests by 35%.\0\y\Event, Facility, Score
