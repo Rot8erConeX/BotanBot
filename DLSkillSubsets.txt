@@ -250,6 +250,7 @@
 ["Poison", ["poison", "poisoned", "poisoning"], "Ability"]
 ["PoisonChance", ["poisonchance", "poisonedchance", "poisoningchance", "poison%", "poisoned%", "poisoning%"], "Ability"]
 ["PoisonRes", ["poisonres", "poisonedres", "poisoningres", "poisonresistance", "poisonedresistance", "poisoningresistance"], "Ability"]
+["PoisonedPunisher", ["poisonedpunisher", "poisonpunisher", "poisoningpunisher", "poisonedpunish", "poisonpunish", "poisoningpunish", "poisonedpunishment", "poisonpunishment", "poisoningpunishment"], "Ability"]
 ["Primed", ["primed", "prime"], "Ability"]
 ["Propagation", ["propagation", "propagate"], "Ability"]
 ["Punisher", ["punisher", "punish", "punished", "punishing"], "Ability"]
