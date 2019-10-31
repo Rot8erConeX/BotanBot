@@ -2301,7 +2301,13 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false)
   k=find_data_ex(:find_dragon,args.join(' '),event)
   args2=args.map{|q| q.downcase}
   if (has_any?(args2,['super','gala']) && has_any?(args2,['mym','brunhilda'])) || has_any?(args2,['supermym','superbrunhilda','brunhildasuper','mymsuper','galamym','galabrunhilda','brunhildagala','mymgala','mymhilda'])
-    disp_pseudodragon_stats(bot,event,args,juststats,[['Brunhilda','High Brunhilda'],['"Mymhilda"','"Super Mym"'],'Infernal Ray'],['Adventurers','Gala_Mym_5'])
+    disp_pseudodragon_stats(bot,event,args,juststats,[['Brunhilda','High Brunhilda'],['"Mymhilda"','"Super Mym"'],'Infernal Ray'],['Adventurers','Gala_Mym_5'],'Gala Brunhilda')
+    return nil
+  elsif (has_any?(args2,['halloween','spooky','spoopy','scary']) && has_any?(args2,['mym','brunhilda'])) || has_any?(args2,['halloweenmym','halloweenbrunhilda','brunhildahalloween','mymhalloween','spookymym','spookybrunhilda','brunhildaspooky','mymspooky','spoopymym','spoopybrunhilda','brunhildaspoopy','mymspoopy','scarymym','scarybrunhilda','brunhildascary','mymscary','mymhilda'])
+    disp_pseudodragon_stats(bot,event,args,juststats,[['Brunhilda'],['"Halloween Mymhilda"'],'Muspelheim'],['Adventurers','Mym(Halloween)_5'],'Halloween Brunhilda')
+    return nil
+  elsif (has_any?(args2,['shiny']) && has_any?(args2,['nyarlathotep'])) || has_any?(args2,['shinynyarlathotep','lathna'])
+    disp_pseudodragon_stats(bot,event,args,juststats,[['Nyarlathotep'],['"Shiny Nyarlathotep"'],'All-Encompassing Darkness'],['Adventurers','Lathna_5'],'Shiny Nyarlathotep')
     return nil
   end
   if k.length.zero?
@@ -2400,7 +2406,7 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false)
   end
 end
 
-def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic=[])
+def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic=[],pseudonym='Brunhilda')
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
@@ -2486,10 +2492,10 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
     str=str.split("\n\n__**")
     str[1]="__**#{str[1]}".split("\n\n**Sells")
     str[0]="#{str[0]}\n\n**Sells#{str[1][1]}"
-    create_embed(event,["__**Gala Brunhilda**__",title],str[0],element_color(k[0][2]),nil,xpic)
+    create_embed(event,["__**#{pseudonym}**__",title],str[0],element_color(k[0][2]),nil,xpic)
     create_embed(event,'',str[1][0],element_color(k[0][2]),"Any data not dosplayed is taken instead from the user's normal dragon equip.")
   else
-    create_embed(event,["__**Gala Brunhilda**__",title],str,element_color(k[0][2]),"Any data not dosplayed is taken instead from the user's normal dragon equip.",xpic)
+    create_embed(event,["__**#{pseudonym}**__",title],str,element_color(k[0][2]),"Any data not dosplayed is taken instead from the user's normal dragon equip.",xpic)
   end
 end
 
@@ -2627,7 +2633,9 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
         k3=k4.reject{|q| q[15].nil? || q[15]!=k2[0]}
         k4=k3.map{|q| q} if k3.length>0
       end
-      if k4.length>3 && find_data_ex(:find_weapon,args.join(' '),event).length<=0
+      kk5=3
+      kk5=8 if safe_to_spam?(event)
+      if k4.length>kk5 && find_data_ex(:find_weapon,args.join(' '),event).length<=0
         event.respond "Too many weapons qualify.  I will not display them all."
         return nil
       end
@@ -2850,7 +2858,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[7][0])}#{bemoji[2]}#{" #{longFormattedNumber(k[7][1])}#{bemoji[3]}" if k[7][1]>0}"
     str="#{str}\n**Assembles for:** #{longFormattedNumber(k[11][0])}#{bemoji[2]}"
     if k[2][1,1]=='h'
-      str="#{str}\n~~Cannot be disassembled~~"
+      str="#{str}\n*Cannot be disassembled*"
     else
       str="#{str}\n**Disassembles for:** #{longFormattedNumber(k[11][1])}#{bemoji[2]}"
     end
@@ -2899,7 +2907,9 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
         k3=k4.reject{|q| q[15].nil? || q[15]!=k2[0]}
         k4=k3.map{|q| q} if k3.length>0
       end
-      if k4.length>3 && find_data_ex(:find_weapon,args.join(' '),event).length<=0
+      kk5=3
+      kk5=8 if safe_to_spam?(event)
+      if k4.length>kk5 && find_data_ex(:find_weapon,args.join(' '),event).length<=0
         event.respond "Too many weapons qualify.  I will not display them all."
         return nil
       end
@@ -3265,7 +3275,13 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
     str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][8])}" if k[1][1].length>8 && k[1][1][8]>-1
   else
     str="#{str}\n"
-    str="#{str}\n*Beginner:*" if (k[1][0].length>0 && k[1][0][0]>-1) || (k[1][1].length>0 && k[1][1][0]>-1)
+    if (k[1][0].length>0 && k[1][0][0]>-1) || (k[1][1].length>0 && k[1][1][0]>-1)
+      if k[2][2]=='High Dragon'
+        str="#{str}\n*Prelude:*"
+      else
+        str="#{str}\n*Beginner:*"
+      end
+    end
     str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][0])}" if k[1][0].length>0 && k[1][0][0]>-1
     str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][0])}" if k[1][1].length>0 && k[1][1][0]>-1
     str="#{str}\n*Standard:*" if (k[1][0].length>1 && k[1][0][1]>-1) || (k[1][1].length>1 && k[1][1][1]>-1)
@@ -4832,6 +4848,28 @@ def disp_facility_data(bot,event,args=nil)
           alta[1]+=0.5
           alta[1]+=0.3 if i>=29
           str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+        elsif k[3][1]=='Altar' && s2s
+          alta=[(i+1)/2,i/2]
+          alta=alta.map{|q| q*0.5+0.5}
+          str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+        elsif k[3][1]=='Dojo' && s2s
+          alta=[(i+1)/2,i/2]
+          alta=alta.map{|q| q*0.5+3.0}
+          for i2 in 0...(kxx.length/15+1)
+            if i>15*i2+14 && i2%2==0
+              alta[0]+=1+i2
+              alta[1]+=1.5+i2
+            elsif i>15*i2+14 && i2%2==1
+              alta[0]+=1.5+i2
+              alta[1]+=1+i2
+            end
+          end
+          str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+        elsif k[3][1]=='Event Altar' && s2s
+          alta=[(i+1)/2,i/2]
+          alta=alta.map{|q| q*0.5}
+          alta[0]+=1
+          str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
         end
       end
       mtzz=mtz.map{|q| q[0]}.uniq.sort
@@ -4841,12 +4879,31 @@ def disp_facility_data(bot,event,args=nil)
       end
       if ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1])
         alta=[(kxx.length)/2,(kxx.length-1)/2]
-        alta[0]*=0.3
-        alta[1]*=0.3
-        alta[0]+=0.5
-        alta[1]+=0.5
+        alta.map{|q| q*0.3+0.5}
         alta[1]+=0.3 if kxx.length>=30
-        str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+        str3="#{str3}**\n**FINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+      elsif k[3][1]=='Altar'
+        alta=[kxx.length/2,(kxx.length-1)/2]
+        alta=alta.map{|q| q*0.5+0.5}
+        str3="#{str3}**\n**FINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+      elsif k[3][1]=='Dojo'
+        alta=[kxx.length/2,(kxx.length-1)/2]
+        alta=alta.map{|q| q*0.5+3.0}
+        for i2 in 0...(kxx.length/15+1)
+          if kxx.length>15*i2+14 && i2%2==0
+            alta[0]+=1+i2
+            alta[1]+=1.5+i2
+          elsif kxx.length>15*i2+14 && i2%2==1
+            alta[0]+=1.5+i2
+            alta[1]+=1+i2
+          end
+        end
+        str3="#{str3}**\n**FINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+      elsif k[3][1]=='Event Altar'
+        alta=[kxx.length/2,(kxx.length-1)/2]
+        alta=alta.map{|q| q*0.5}
+        alta[0]+=1
+        str3="#{str3}**\n**FINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       end
       str="#{str}\n\n**#{str3}**"
     elsif nums.length==1
@@ -4870,11 +4927,30 @@ def disp_facility_data(bot,event,args=nil)
       end
       if ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1])
         alta=[(n)/2,(n-1)/2]
-        alta[0]*=0.3
-        alta[1]*=0.3
-        alta[0]+=0.5
-        alta[1]+=0.5
+        alta.map{|q| q*0.3+0.5}
         alta[1]+=0.3 if n>=30
+        str3="#{str3}\nBuffs at Level #{n}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+      elsif k[3][1]=='Altar'
+        alta=[(n)/2,(n-1)/2]
+        alta=alta.map{|q| q*0.5+0.5}
+        str3="#{str3}\nBuffs at Level #{n}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+      elsif k[3][1]=='Dojo'
+        alta=[(n)/2,(n-1)/2]
+        alta=alta.map{|q| q*0.5+3.0}
+        for i2 in 0...(kxx.length/15+1)
+          if n>15*i2+14 && i2%2==0
+            alta[0]+=1+i2
+            alta[1]+=1.5+i2
+          elsif n>15*i2+14 && i2%2==1
+            alta[0]+=1.5+i2
+            alta[1]+=1+i2
+          end
+        end
+        str3="#{str3}\nBuffs at Level #{n}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+      elsif k[3][1]=='Event Altar'
+        alta=[(n)/2,(n-1)/2]
+        alta=alta.map{|q| q*0.5}
+        alta[0]+=1
         str3="#{str3}\nBuffs at Level #{n}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       end
       str="#{str}\n\n#{str3}" unless n==1
@@ -4885,11 +4961,30 @@ def disp_facility_data(bot,event,args=nil)
       end
       if ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1])
         alta=[(kxx.length)/2,(kxx.length-1)/2]
-        alta[0]*=0.3
-        alta[1]*=0.3
-        alta[0]+=0.5
-        alta[1]+=0.5
+        alta.map{|q| q*0.3+0.5}
         alta[1]+=0.3 if kxx.length>=30
+        str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+      elsif k[3][1]=='Altar'
+        alta=[kxx.length/2,(kxx.length-1)/2]
+        alta=alta.map{|q| q*0.5+0.5}
+        str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+      elsif k[3][1]=='Dojo'
+        alta=[kxx.length/2,(kxx.length-1)/2]
+        alta=alta.map{|q| q*0.5+3.0}
+        for i2 in 0...(kxx.length/15+1)
+          if kxx.length>15*i2+14 && i2%2==0
+            alta[0]+=1+i2
+            alta[1]+=1.5+i2
+          elsif kxx.length>15*i2+14 && i2%2==1
+            alta[0]+=1.5+i2
+            alta[1]+=1+i2
+          end
+        end
+        str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+      elsif k[3][1]=='Event Altar'
+        alta=[kxx.length/2,(kxx.length-1)/2]
+        alta=alta.map{|q| q*0.5}
+        alta[0]+=1
         str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       end
       str="#{str}\n\n#{str3}" unless n==kxx.length
@@ -6210,7 +6305,7 @@ def disp_sp_table(bot,event,args=nil)
     m=''
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn[0]}"}
     m=moji[0].mention unless moji.length<=0
-    disp="__**Combo:**__\n*First Hit:* #{k[0]}\n*Second Hit:* #{k[1]}\n*Third Hit:* #{k[2]}\n*Fourth Hit:* #{k[3]}\n*Fifth Hit:* #{k[4]}\n~~*Total:* #{k[7]}~~\n\n**Dash Attack:** #{k[5]}\n\n**Force Strike** #{k[6]}"
+    disp="__**Combo:**__\n*First Hit:* #{k[0]}\n*Second Hit:* #{k[1]}\n*Third Hit:* #{k[2]}\n*Fourth Hit:* #{k[3]}\n*Fifth Hit:* #{k[4]}\n~~*Total: #{k[7]}*~~\n\n**Dash Attack:** #{k[5]}\n\n**Force Strike** #{k[6]}"
     create_embed(event,"__SP gains for **#{m}#{wpn[0]}** users__",disp,0xCE456B)
   end
 end
@@ -9240,12 +9335,6 @@ def disp_aliases(bot,event,args=nil,mode=0)
   return nil
 end
 
-def disp_date(t,mode=0)
-  return "#{t.day}#{['','Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'][t.month]}#{t.year}" if mode==2
-  return "#{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year}" if mode==1
-  return "#{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]})"
-end
-
 def roost(event,bot,args=nil,ignoreinputs=false,mode=0)
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
@@ -12237,7 +12326,7 @@ bot.message do |event|
     a=str.split(' ')
     if a[0].downcase=='reboot'
       event.respond 'Becoming Robin.  Please wait approximately ten seconds...'
-      exec "cd C:/Users/#{@mash}/Desktop/devkit && feindex.rb 4"
+      exec "cd C:/Users/#{@mash}/Desktop/devkit && RobinBot.rb 4"
     elsif event.server.nil? || event.server.id==285663217261477889
       event.respond 'I am not Robin right now.  Please use `FE!reboot` to turn me into Robin.'
     end
@@ -12883,7 +12972,20 @@ bot.ready do |event|
   else
     next_holiday(bot)
   end
-  bot.channel(285663217261477889).send_message("Hello!") if @shardizard==4
+  if @shardizard==4
+    if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DebugSav.txt")
+      b=[]
+      File.open("C:/Users/#{@mash}/Desktop/devkit/DebugSav.txt").each_line do |line|
+        b.push(eval line)
+      end
+    else
+      b=[]
+    end
+    bot.channel(285663217261477889).send_message("Hello!") if b[0]!='Botan'
+    open("C:/Users/#{@mash}/Desktop/devkit/DebugSav.txt", 'w') { |f|
+      f.puts '"Botan"'
+    }
+  end
 end
 
 bot.run
