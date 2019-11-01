@@ -2307,7 +2307,7 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false)
     disp_pseudodragon_stats(bot,event,args,juststats,[['Brunhilda'],['"Halloween Mymhilda"'],'Muspelheim'],['Adventurers','Mym(Halloween)_5'],'Halloween Brunhilda')
     return nil
   elsif (has_any?(args2,['shiny']) && has_any?(args2,['nyarlathotep'])) || has_any?(args2,['shinynyarlathotep','lathna'])
-    disp_pseudodragon_stats(bot,event,args,juststats,[['Nyarlathotep'],['"Shiny Nyarlathotep"'],'All-Encompassing Darkness'],['Adventurers','Lathna_5'],'Shiny Nyarlathotep')
+    disp_pseudodragon_stats(bot,event,args,juststats,[['Nyarlathotep'],['"Shiny Nyarlathotep"'],'All-Encompassing Darkness (Yang)'],['Dragons','Shiny_Nyarlathotep_5'],'Shiny Nyarlathotep')
     return nil
   end
   if k.length.zero?
@@ -9514,17 +9514,18 @@ def roost(event,bot,args=nil,ignoreinputs=false,mode=0)
     str="#{str}\nTime until Void Treasure Trade reset, come next #{str3.split(' ')[1]}: #{t4.join(', ')}" if [3,4,0].include?(mode)
   end
   if [2,0].include?(mode)
-    str="#{str}\n\n__**#{"#{str3}'s " if str3.length>0}Expert Ruins:**__"
-    str="#{str}\n*Open:* #{['<:Element_Null:532106087810334741>All','<:Element_Null:532106087810334741>All','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep'][t.wday]}"
+    str5="__**#{"#{str3}'s " if str3.length>0}Expert Ruins:**__"
+    str5="#{str5}\n*Open:* #{['<:Element_Null:532106087810334741>All','<:Element_Null:532106087810334741>All','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep'][t.wday]}"
     if t.wday>2
-      str="#{str}\n*Available Orbs:* #{['All','All','Flame, Blaze, Inferno','Water, Stream, Deluge','Wind, Storm, Maelstorm','Light, Radiance, Refulgence','Shadow, Nightfall, Nether'][t.wday]}" if t.wday>1
-      str="#{str}\n*Other Available Mats:* #{["Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye","Ancient Bird's Feather, Bewitching Wing",'Granite, Meteorite',"Fiend's Claw","Ancient Bird's Feather, Bewitching Wing"][t.wday]}" if t.wday>1
+      str5="#{str5}\n*Available Orbs:* #{['All','All','Flame, Blaze, Inferno','Water, Stream, Deluge','Wind, Storm, Maelstorm','Light, Radiance, Refulgence','Shadow, Nightfall, Nether'][t.wday]}" if t.wday>1
+      str5="#{str5}\n*Other Available Mats:* #{["Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye","Ancient Bird's Feather, Bewitching Wing",'Granite, Meteorite',"Fiend's Claw","Ancient Bird's Feather, Bewitching Wing"][t.wday]}" if t.wday>1
     end
-    str="#{str}\n\n__**<:Element_Void:548467446734913536> #{"#{str3}'s " if str3.length>0}Void Strikes:**__"
+    str=extend_message(str,str5,event,2)
+    str5="__**<:Element_Void:548467446734913536> #{"#{str3}'s " if str3.length>0}Void Strikes:**__"
     data_load()
     void=@voids[0,7].map{|q| q}
     matz=@voids[8,@voids.length-8].map{|q| q}
-    str="#{str}\n*Open:* #{void[t.wday]}"
+    str5="#{str5}\n*Open:* #{void[t.wday]}"
     voidmats=void[t.wday]
     for i in 0...matz.length
       matz[i]=matz[i].split(', ')
@@ -9533,22 +9534,27 @@ def roost(event,bot,args=nil,ignoreinputs=false,mode=0)
       voidmats=voidmats.gsub(k,matz[i])
     end
     voidmats=voidmats.split(', ').uniq.sort.join(', ')
-    str="#{str}\n*Available Mats:* #{voidmats}"
-  end
-  str="#{str}\n\n**Shop Mats:** #{['Light Metal, Abyss Stone','Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather",'Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather"][t.wday]}" if t.wday>-1 && [3,0].include?(mode)
-  if [1,0].include?(mode)
-    str="#{str}\n\n**#{"#{str3}'s " if str3.length>0}Bond Gift:** #{['Golden Chalice','Juicy Meat','Kaleidoscope','Floral Circlet','Compelling Book','Mana Essence','Golden Chalice'][t.wday]}"
-    ignorefeh=true
-    if t.year==2019
-      ignorefeh=false if t.month<=4
-      ignorefeh=false if t.month==5 && t.day<=12
+    str5="#{str5}\n*Available Mats:* #{voidmats}"
+    str=extend_message(str,str5,event,2)
+    showhdt=false
+    showhdt=true if @shardizard==4
+    showhdt=true if t.year>2019
+    showhdt=true if t.month>11
+    showhdt=true if t.day>18
+    if showhdt
+      str5="__**<:Tribe_Dragon:549947361745567754> #{"#{str3}'s " if str3.length>0}High Dragon Trials:**__"
+      str5="#{str5}\n*Open:* #{['<:Element_Null:532106087810334741> High All','<:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Water:532106088221376522> High Mercury','<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Shadow:532106088154267658> High Zodiark','<:Element_Water:532106088221376522> High Mercury, <:Element_Light:532106088129101834> High Jupiter','<:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Shadow:532106088154267658> High Zodiark','<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Light:532106088129101834> High Jupiter','<:Element_Null:532106087810334741> High All'][t.wday]}"
+      str=extend_message(str,str5,event,2)
     end
+  end
+  str=extend_message(str,"**Shop Mats:** #{['Light Metal, Abyss Stone','Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather",'Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather"][t.wday]}",event,2) if t.wday>-1 && [3,0].include?(mode)
+  if [1,0].include?(mode)
+    str=extend_message(str,"**#{"#{str3}'s " if str3.length>0}Bond Gift:** #{['Golden Chalice','Juicy Meat','Kaleidoscope','Floral Circlet','Compelling Book','Mana Essence','Golden Chalice'][t.wday]}",event,2)
     if t.wday>0 && t.wday<6
       drg=@dragons.reject{|q| q[9]!=t.wday}
       m=[[generate_rarity_row(1),[]],[generate_rarity_row(2),[]],[generate_rarity_row(3),[]],[generate_rarity_row(4),[]],[generate_rarity_row(5),[]]]
       for i in 0...drg.length
         f="#{drg[i][0]}#{element_emote(drg[i][2],bot,drg[i][16])}"
-        f="#{drg[i][0]}#{element_emote(drg[i][2],bot)}" if ignorefeh
         m[0][1].push(f) if drg[i][1][0,1].to_i==1
         m[1][1].push(f) if drg[i][1][0,1].to_i==2
         m[2][1].push(f) if drg[i][1][0,1].to_i==3
@@ -9610,9 +9616,10 @@ def next_events(event,bot,args=nil)
     mode=6 if mode<1 && ['voidmat','strikemat','voidstrikemat','voidmats','strikemats','voidstrikemats','voidmaterial','strikematerial','voidstrikematerial','voidmaterials','strikematerials','voidstrikematerials'].include?(args[i])
     mode=6 if mode==2 && ['void','strike','voidstrike','voidstrikes','strikes'].include?(args[i]) && !safe_to_spam?(event)
     mode=6 if mode==5 && ['mats','mat','material','materials'].include?(args[i]) && !safe_to_spam?(event)
+    mode=7 if mode<1 && ['high','highdragon','hdt','trial','trials','hd'].include?(args[i])
   end
   if mode==0 && !safe_to_spam?(event)
-    event.respond "Please either specify an event type or use this command in PM.\n\nAvailable event types include:\n- Ruins\n- Mats\n- Shop\n- Bond items\n- Void Strikes"
+    event.respond "Please either specify an event type or use this command in PM.\n\nAvailable event types include:\n- Ruins\n- Mats\n- Shop\n- Bond items\n- Void Strikes\n- High Dragon Trials"
     return nil
   end
   if [1,0].include?(mode)
@@ -9703,6 +9710,64 @@ def next_events(event,bot,args=nil)
       end
       str=extend_message(str,str2,event,1)
     end
+  end
+  if [0,7].include?(mode)
+    str2="__**<:Tribe_Dragon:549947361745567754> High Dragon Trials**__"
+    hdt=['<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Water:532106088221376522> High Mercury, <:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Light:532106088129101834> High Jupiter, <:Element_Shadow:532106088154267658> High Zodiark',
+         '<:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Water:532106088221376522> High Mercury',
+         '<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Shadow:532106088154267658> High Zodiark',
+         '<:Element_Water:532106088221376522> High Mercury, <:Element_Light:532106088129101834> High Jupiter',
+         '<:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Shadow:532106088154267658> High Zodiark',
+         '<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Light:532106088129101834> High Jupiter',
+         '<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Water:532106088221376522> High Mercury, <:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Light:532106088129101834> High Jupiter, <:Element_Shadow:532106088154267658> High Zodiark']
+    hdt=hdt.rotate(t.wday)
+    mmzz=[]
+    for i in 0...hdt.length
+      m=hdt[i].split(', ')
+      pos=0
+      for i2 in 0...m.length
+        pos=1 if m[i2]=='<:Element_Flame:532106087952810005> High Brunhilda'
+        pos=2 if m[i2]=='<:Element_Water:532106088221376522> High Mercury'
+        pos=3 if m[i2]=='<:Element_Wind:532106087948746763> High Midgardsormr'
+        pos=4 if m[i2]=='<:Element_Light:532106088129101834> High Jupiter'
+        pos=5 if m[i2]=='<:Element_Shadow:532106088154267658> High Zodiark'
+        pos=0 if pos.nil?
+        mmzz.push([m[i2],i,pos])
+      end
+    end
+    mmzz.sort!{|a,b| (a[2]<=>b[2])==0 ? (a[1]<=>b[1]) : (a[2]<=>b[2])}
+    mmzz.reverse!
+    for i in 0...mmzz.length-1
+      if mmzz[i][0]==mmzz[i+1][0]
+        mmzz[i+1][3]=mmzz[i][1]*1 unless mmzz[i+1][1]>0
+        mmzz[i]=nil
+      end
+    end
+    mmzz.compact!
+    mmzz.reverse!
+    for i in 0...mmzz.length
+      str2="#{str2}\n*#{mmzz[i][0]}* -"
+      if mmzz[i][1]==0
+        str2="#{str2} **Today**#{' - Next available' unless mmzz[i][3].nil? || mmzz[i][3]<=0}"
+        if mmzz[i][3].nil? || mmzz[i][3]<=0
+        else
+          t_d=t+mmzz[i][3]*24*60*60
+          if mmzz[i][3]==1
+            str2="#{str2} tomorrow (#{disp_date(t_d,1)})"
+          else
+            str2="#{str2} #{mmzz[i][3]} days from now (#{disp_date(t_d,1)})"
+          end
+        end
+      else
+        t_d=t+mmzz[i][1]*24*60*60
+        if mmzz[i][1]==1
+          str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
+        else
+          str2="#{str2} #{mmzz[i][1]} days from now (#{disp_date(t_d,1)})"
+        end
+      end
+    end
+    str=extend_message(str,str2,event,2)
   end
   f=[0,2]
   if f.include?(mode)
