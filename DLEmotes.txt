@@ -14,6 +14,7 @@ Help\Zethia
 Here Goes\Euden
 I Got This\Luca
 I Need Healing\Luca
+Intriguing!\Heinwald
 I'll Lead The Charge\Euden
 I'm On Defense\Ranzal
 Leave it to me!\Alfonse
@@ -40,7 +41,9 @@ Together\Marth
 Thanks\Notte
 Victory Will Be Ours\Midgardsormr
 Wait\Slime
+We've Got a Case!\Curran
 What You Said!\Elisanne
 Whew\Notte
 Yes\Luca
+You Called\Lathna
 You Got This!\Notte
