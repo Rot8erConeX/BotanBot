@@ -10,6 +10,7 @@ Fa Ming\1\y\\
 Gold Slime\1\y\\
 Guildmaster\1\y\\
 Harle\1\y\\KENN
+Hastur\1\y\\
 Lazry\1\y\\
 Leif\1\y\\Takahiro Sakurai
 Leonidas\1\y\\Tomokazu Seki
