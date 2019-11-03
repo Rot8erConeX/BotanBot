@@ -884,6 +884,7 @@ Strength & Shadow Res\50/15%\Aura\Increases strength by 50% and grants 15% Shado
 Strength & Wind Res\example\Aura\Increases strength by `x`% and grants `y`% Wind resistance.\0\y\Strength, WindRes, Resistance
 Strength & Wind Res\35/15%\Aura\Increases strength by 35% and grants 15% Wind resistance.\70\y\Strength, WindRes, Resistance
 Strength & Wind Res\50/15%\Aura\Increases strength by 50% and grants 15% Wind resistance.\100\y\Strength, WindRes, Resistance
+Unknown\-\Ability\We don't know. This is a placeholder. Stop challenging my made up abilities <:wrathful:621402788177510453>\0\y\WonderGuard
 Wind Res\15%\Aura\Grants 15% Wind resistance.\65\y\WindRes, Resistance
 Dragonyule Blessing\I\Aura\If the user is attuned to Water: increases strength by 30% and critical rate by 15%.\70\y\Strength, CritRate, Water
 Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength by 45% and critical rate by 20%.\100\y\Strength, CritRate, Water
