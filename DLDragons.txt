@@ -16,7 +16,7 @@ Gilgamesh\5\Light\37, 371\12, 124\Subjugating Sword\(Light) Strength +35% Shadow
 Gloom Drake\3\Shadow\19, 190\5, 58\Black Hole\(Shadow) HP +10%;; (Shadow) HP +15%\300, 150\1.35, 3.5\4\Yes\No\Gloom Drake\\\\\F\
 Gold Fafnir\5t\Shadow\22, 209\6, 63\Gold Heal\Rupies +25%;; Rupies +50%\2000, 100\1.35, 3.5\5\Yes\No\Gold Fafnir\\\\\M\
 Gust Drake\3\Wind\19, 191\5, 57\Gust Drop\(Wind) HP +10%;; (Wind) HP +15%\300, 150\1.35, 3.5\1\Yes\No\Gust Drake\\\\\F\
-Hastur\5\Wind\36, 369\12, 126\Void Volley\(Wind) Strength +30%;; (Wind) Strength +45%;;; (Wind) Primed Strength +10%;; (Wind) Primed Strength +15%\5000, 8500\0, 0\1\Yes\Yes\Hastur\\\\\M\
+Hastur\5\Wind\36, 369\12, 126\Void Volley\(Wind) Strength +35%;; (Wind) Strength +45%;;; (Wind) Primed Strength +10%;; (Wind) Primed Strength +15%\5000, 8500\0, 0\2\Yes\Yes\Hastur\Mayima Yasuhiro\\\\M\
 High Brunhilda\5t\Flame\35, 350\12, 120\Crimson Inferno\(Flame) HP & Strength +20%;; (Flame) HP & Strength +30%;;; Dragon Time +15%;; Dragon Time +20%\5000, 300\1.5, 1\3\No\No\*Brunhilda, High\Endo Aya\Kelly Marie\(Flame) HP +20%;; (Flame) HP +30%;;;; (Flame) Strength +20%;; (Flame) Strength +30%\\F\
 High Jupiter\5t\Light\35, 352\11, 118\Primal Thunder\(Light) HP & Strength +20%;; (Light) HP & Strength +30%;;; Dragon Time +15%;; Dragon Time +20%\5000, 300\1.5, 1\2\Yes\No\*Jupiter, High\Takayama Minami\Sabrina Pitre\(Light) HP +20%;; (Light) HP +30%;;;; (Light) Strength +20%;; (Light) Strength +30%\\M\
 High Mercury\5t\Water\35, 357\11, 113\Aqua Spiral\(Water) HP & Strength +20%;; (Water) HP & Strength +30%;;; Dragon Time +15%;; Dragon Time +20%\5000, 300\1.5, 1\5\Yes\No\*Mercury, High\Inoue Kikuko\Ava Lindstrom\(Water) HP +20%;; (Water) HP +30%;;;; (Water) Strength +20%;; (Water) Strength +30%\\F\
