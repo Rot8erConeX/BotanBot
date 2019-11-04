@@ -75,7 +75,7 @@ Hitting the Books\5w\Attack\22, 112, 151\8, 41, 54\Skill Damage +20%;; Skill Dam
 Honest Repose\5w\Support\22, 112, 151\7, 40, 53\(Flame) Skill Haste +8%;; (Flame) Skill Haste +8%;; (Flame) Skill Haste +10%\3000, 300\ICHIGO\Prometheus;; Prometheus\<:Element_Flame:532106087952810005> Valentine's Confections Event\
 How to Flee Properly\4\Defense\22, 103, 151\6, 28, 41\Last Defense +40%;; Last Defense +50%;; Last Defense +60%;;;; Recovery Potency +3%;; Recovery Potency +5%;; Recovery Potency +8%\2000, 1000\Naoki Saito\Alain;; Alain\Void Battles\
 Howling Predator\3\Attack\10, 51, 71\3, 18, 25\Critical Rate +3%;; Critical Rate +4%;; Critical Rate +5%\300, 150\Kouta Nagamori\\Ruins\
-In An Unending World\5p\Support\26, 132, 178\9, 46, 62\A Song That Envelops the World\5000, 3000\Dragalia Lost Art Team\DAOKO;; DAOKO\DAOKO x Dragalia Lost Anniversary CD Gift\
+In An Unending World\5\Support\26, 132, 178\9, 46, 62\A Song That Envelops the World\5000, 3000\Dragalia Lost Art Team\DAOKO;; DAOKO\DAOKO x Dragalia Lost Anniversary CD Gift\
 Indelible Summer\5\Support\28, 140, 188\7, 39, 52\(Water) Affliction Guard I;; (Water) Affliction Guard III;; (Water) Affliction Guard III;;;; (Water) Skill Haste +6%;; (Water) Skill Haste +7%;; (Water) Skill Haste +9%\5000, 3000\yuhi\Cleo;; Cleo\Wyrmprint Shop\
 Ironside Shield\3\Defense\11, 54, 76\3, 15, 20\Last Defense +30%;; Last Defense +40%;; Last Defense +50%\300, 150\Tricky Agura\\Avenues\
 Jewels of the Sun\5\Healing\26, 131, 176\9, 48, 64\Skill Haste +5%;; Skill Haste +6%;; Skill Haste +8%;;;; HP 70% = Strength +5%;; HP 70% = Strength +8%;; HP 70% = Strength +10%\5000, 3000\ell\Naveed, Verica;; Naveed, Verica\Dragon Trials\
