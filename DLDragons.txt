@@ -30,6 +30,7 @@ Jeanne d'Arc\5\Light\38, 384\11, 113\Saint's Banner\(Light) HP +40%;; (Light) HP
 Jeanne(Dragonyule)\5s\Water\37, 370\12, 125\Frost Beam\(Water) Strength +30% & Critical Rate +15%;; (Water) Strength +45% & Critical Rate +20%\5000, 8500\1.8, 1\3\No\Yes\Jeanne d'Arc\Han Megumi\Lexi Klein\\\F\
 Juggernaut (Dragon)\4\Shadow\29, 294\10, 102\Shadow Carnage\(Shadow) Strength +30%;; (Shadow) Strength +45%\2000, 2200\1.5, 1.5\1\No\No\Juggernaut (Dragon)\\\\\M\KoG
 Jupiter\4y\Light\20, 207\6, 65\Lightning Rood\(Light) HP & Strength +8%;; (Light) HP & Strength +10%\2000, 100\1.5, 1.5\2\No\No\Jupiter, Low\Takayama Minami\Sabrina Pitre\(Light) HP +8%;; (Light) HP +10%;;;; (Light) Strength +8%;; (Light) Strength +10%\\M\KoG
+Kagutsuchi\5\Flame\36, 369\12, 127\Coruscating Flames\(Flame) Strength +35%;; (Flame) Strength +45%;;; (Flame) Primed Strength +10%;; (Flame) Primed Strength +15%\5000, 8500\0, 0\0\No\No\Kagutsuchi\\\\\M\
 Kindling Imp\3\Flame\18, 187\6, 60\Ember Toss\(Flame) HP & Strength +5%;; (Flame) HP & Strength +8%\300, 150\1.35, 3.5\3\Yes\No\Kindling Imp\\\(Flame) HP +5%;; (Flame) HP +8%;;;; (Flame) Strength +5%;; (Flame) Strength +8%\\M\
 Konohana Sakuya\5\Flame\37, 374\12, 121\Deciduous Dance\(Flame) Strength +10%;; (Flame) Strength +20%;;; (Flame) Skill Damage +70%;; (Flame) Skill Damage +90%\5000, 8500\1.8, 1\3\Yes\No\Konohana Sakuya\Nakahara Mai\Joy Frender\\\F\
 Leviathan\5\Water\37, 370\12, 125\Tidal Stream\(Water) Strength +40%;; (Water) Strength +60%\5000, 8500\1.8, 1\5\No\Yes\Leviathan\\\\\M\KoG
