@@ -44,7 +44,7 @@ Elite Archer (Shadow)\20000, 30000, 92340, 130500; 190, 350, 700, 910\Shadow, Hu
 Phraeganoth\81472, 305520, 487948, -1, -1, -1, -1, 424299; 362, 500, 1705, -1, -1, -1, -1, 2707\Flame, Thaumian, Raid, Loyalty's Requiem\~~Immune~~\Burn\
 King Archeole\2880, 8800, 15520; 241, 628, 1070\Flame, Demihuman, Boss, Loyalty's Requiem\Poison: **30%**, Burn: 55%, Freeze: **10%**, Paralysis: **30%**, Blind: **30%**, Stun: **30%**, Curse: **30%**, Bog: **10%**, Sleep: **30%**\Stun\
 Pumpking\17325, 29757, 55440, -1, -1, -1, -1, 79057, 122984; 754, 1133, 1435, -1, -1, -1, -1, 2021, 1975\Shadow, Demihuman, Facility, Trick or Treasure!\Paralysis: 55%, Blind: 55%\Curse\
-Hypnos\30712, 139011, 512346, -1, -1, -1, -1, 441271; 362, 1000, 1705, -1, -1, -1, -1, 2707\Wind, Physian, Raid, Kindness and Captivity\~~Immune~~\Sleep\
+Hypnos\30712, 139011, 512346, -1, 5170431, 3693165, 17465825, 441271; 362, 1000, 1705, -1, 3000, 3400, 3400, 2707\Wind, Physian, Raid, Kindness and Captivity\~~Immune~~\Sleep\
 Storm Sentinel\2268, 6930, 16296; 241, 628, 1070\Wind, Thaumian, Boss, Kindness and Captivity\Poison: 55%, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: *75*, Curse: 55%, Bog: 55%, Sleep: *75%*\~~None~~\
 Water Troll King\23310, 36225, 53974, -1, -1, -1, -1, 90144, 123900; 778, 1161, 1451, -1, -1, -1, -1, 1770, 3291\Water, Demihuman, Facility, A Wish to the Winds\Poison: **30%**, Burn: 55%, Freeze: *75%*, Paralysis: 55%, Blind: 55%, Stun: 55%, Curse: 55%, Bog: *75%*, Sleep: **30%**\Bog\
 Sabnock\67878, 170360, 634880, -1, 2518181, -1, -1, 565720; 362, 500, 1705, -1, 3248, -1, -1, 2707\Shadow, Demon, Raid, Resplendent Refrain\~~Immune~~\Curse\
