@@ -227,6 +227,7 @@
 ["HP100", ["hp100", "fullhp", "hpfull", "100hp", "hp100%", "100%hp", "health100", "fullhealth", "healthfull", "100health", "health100%", "100%health"], "Ability"]
 ["HP30", ["hp30", "lowhp", "hp30%", "30%hp", "health30", "lowhealth", "health30%", "30%health"], "Ability"]
 ["HP50", ["hp50", "halfhp", "hp50%", "50%hp", "health50", "halfhealth", "health50%", "50%health"], "Ability"]
+["HP60", ["hp60", "hp60%", "60%hp", "health60", "health60%", "60%health"], "Ability"]
 ["HP70", ["hp70", "hp70%", "70%hp", "health70", "health70%", "70%health"], "Ability"]
 ["Hypnos", ["hypnos", "hypno"], "Ability"]
 ["HZD", ["hzd", "hzod", "hizod", "highzod", "hzodiark", "hizodiark", "highzodiark"], "Ability"]
