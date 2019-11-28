@@ -745,3 +745,59 @@ Venomous Curse\Wand\5h\Shadow\60, 175, 203\222, 637, 742\Enveloping Darkness\150
 Darkbinder\Wand\5h\Shadow\73, 210, 244\445, 1275, 1484\Binding Darkness\1500, 0\747\746\0\1500000, 7500000\High Shadowwyrm's Tail, 40;; High Shadowwyrm's Horn, 30;; Ebony Heart, 10;; Shadowwyrm's Greatsphere, 50;; Orichalcum, 3\\\\2
 Creeping Death\Staff\5h\Shadow\73, 211, 245\201, 576, 670\Night Devourer\1500, 0\748\0\0\1200000, 6000000\High Shadowwyrm's Tail, 18;; Ebony Heart, 5;; Shadowwyrm's Greatsphere, 25;; Orichalcum, 1\(Shadow) High Jupiter's Bane +30%\\\1
 Dark Hunger\Staff\5h\Shadow\88, 253, 294\402, 1151, 1340\Despair Devourer\1500, 0\749\748\0\1500000, 7500000\High Shadowwyrm's Tail, 40;; High Shadowwyrm's Horn, 30;; Ebony Heart, 10;; Shadowwyrm's Greatsphere, 50;; Orichalcum, 3\\\\2
+Fiercetail\Sword\4\None\0, 0, 0\0, 0, 0\\0, 0\750\0\\, 0\\Slayer's Strength +3%\\\1
+Searing Savagetail\Sword\4\Flame\0, 0, 0\0, 0, 0\\0, 0\751\750\\, 0\\(Flame) Slayer's Strength +3%;;;; (Flame) Skill Haste +4%\\\2
+Flaming Savagetail\Sword\5\Flame\0, 0, 0\0, 0, 0\\0, 0\752\751\\, 0\\(Water) Slayer's Strength +3%;;;; (Flame) Skill Haste +4%\\\3
+Angry Aquatail\Sword\4\Water\0, 0, 0\0, 0, 0\\0, 0\753\750\\, 0\\(Water) Slayer's Strength +4%;;;; (Water) HP 70% = Strength +5%\\\2
+Raging Aquatail\Sword\5\Water\0, 0, 0\0, 0, 0\\0, 0\754\753\\, 0\\(Water) Slayer's Strength +4%;;;; (Water) HP 70% = Strength +5%\\\3
+Slicing Stormtail\Sword\4\Wind\0, 0, 0\0, 0, 0\\0, 0\755\750\\, 0\\(Wind) Slayer's Strength +3%;;;; (Wind) Therion's Bane +15%\\\2
+Slaughtering Stormtail\Sword\5\Wind\0, 0, 0\0, 0, 0\\0, 0\756\755\\, 0\\(Wind) Slayer's Strength +4%;;;; (Wind) Therion's Bane +15%\\\3
+Sword of Dancing Sparks\Sword\4\Flame\0, 0, 0\0, 0, 0\\0, 0\757\610\\, 0\\(Flame) HP 70% = Strength +5%;;;; (Flame) Spectral Shield Penetrator\\\2
+Sword of Surging Flame\Sword\5\Flame\0, 0, 0\0, 0, 0\\0, 0\758\757\\, 0\\(Flame) HP 70% = Strength +8%;;;; (Flame) Spectral Shield Penetrator\\\3
+Direblade Mugatachi\Blade\4\None\0, 0, 0\0, 0, 0\\0, 0\759\0\\, 0\\Slayer's Strength +3%\\\1
+Direblade Kagachi\Blade\4\Flame\0, 0, 0\0, 0, 0\\0, 0\760\759\\, 0\\(Flame) Slayer's Strength +3%;;;; (Flame) Skill Haste +4%\\\2
+Great Direblade Kagachi\Blade\5\Flame\0, 0, 0\0, 0, 0\\0, 0\761\760\\, 0\\(Flame) Slayer's Strength +4%;;;; (Flame) Skill Haste +4%\\\3
+Direblade Mizuha\Blade\4\Water\0, 0, 0\0, 0, 0\\0, 0\762\759\\, 0\\(Water) Slayer's Strength +3%;;;; (Water) HP 70% = Strength +5%\\\2
+Dark Direblade Mizuha\Blade\5\Water\0, 0, 0\0, 0, 0\\0, 0\763\762\\, 0\\(Water) Slayer's Strength +4%;;;; (Water) HP 70% = Strength +5%\\\3
+Direblade Hayate\Blade\4\Wind\0, 0, 0\0, 0, 0\\0, 0\764\759\\, 0\\(Wind) Slayer's Strength +3%;;;; (Wind) Therion's Bane +15%\\\2
+Swift Direblade Hayate\Blade\5\Wind\0, 0, 0\0, 0, 0\\0, 0\765\764\\, 0\\(Wind) Slayer's Strength +4%;;;; (Wind) Therion's Bane +15%\\\3
+Burning Blade\Blade\4\Flame\0, 0, 0\0, 0, 0\\0, 0\766\616\\, 0\\(Flame) HP 70% = Strength +5%;;;; (Flame) Spectral Shield Penetrator\\\2
+Liquefaction Blade\Blade\5\Flame\0, 0, 0\0, 0, 0\\0, 0\767\766\\, 0\\(Flame) HP 70% = Strength +8%;;;; (Flame) Spectral Shield Penetrator\\\3
+Flamesin\Dagger\4\Flame\0, 0, 0\0, 0, 0\\0, 0\768\261\\, 0\\(Flame) Slayer's Strength +3%;;;; (Flame) Skill Haste +4%\\\2
+Blazesin\Dagger\5\Flame\0, 0, 0\0, 0, 0\\0, 0\769\768\\, 0\\(Flame) Slayer's Strength +4%;;;; (Flame) Skill Haste +4%\\\3
+Brutality Crux\Axe\4\Flame\0, 0, 0\0, 0, 0\\0, 0\770\241\\, 0\\(Flame) Slayer's Strength +3%;;;; (Flame) Skill Haste +4%\\\2
+Atrocity Crux\Axe\5\Flame\0, 0, 0\0, 0, 0\\0, 0\771\770\\, 0\\(Flame) Slayer's Strength +4%;;;; (Flame) Skill Haste +4%\\\3
+Sun Ray Destroyer\Axe\4\Flame\0, 0, 0\0, 0, 0\\0, 0\772\625\\, 0\\(Flame) HP 70% = Strength +5%;;;; (Flame) Spectral Shield Penetrator\\\2
+Sun Flare Destroyer\Axe\5\Flame\0, 0, 0\0, 0, 0\\0, 0\773\772\\, 0\\(Flame) HP 70% = Strength +8%;;;; (Flame) Spectral Shield Penetrator\\\3
+Soul Crusher\Axe\4\None\0, 0, 0\0, 0, 0\\0, 0\774\0\\, 0\\Therion's Bane +15%\\\1
+Crusher of the Shallows\Axe\4\Water\0, 0, 0\0, 0, 0\\0, 0\775\774\\, 0\\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\\2
+Crusher of the Depths\Axe\5\Water\0, 0, 0\0, 0, 0\\0, 0\776\775\\, 0\\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\\3
+Cinder Beast\Lance\4\Flame\0, 0, 0\0, 0, 0\\0, 0\777\255\\, 0\\(Flame) Slayer's Strength +3%;;;; (Flame) Skill Haste +4%\\\2
+Ashen Beast\Lance\5\Flame\0, 0, 0\0, 0, 0\\0, 0\778\777\\, 0\\(Flame) Slayer's Strength +4%;;;; (Flame) Skill Haste +4%\\\3
+Ignition Flamelance\Lance\4\Flame\0, 0, 0\0, 0, 0\\0, 0\779\631\\, 0\\(Flame) HP 70% = Strength +5%;;;; (Flame) Spectral Shield Penetrator\\\2
+Combustion Flamelance\Lance\5\Flame\0, 0, 0\0, 0, 0\\0, 0\780\779\\, 0\\(Flame) HP 70% = Strength +8%;;;; (Flame) Spectral Shield Penetrator\\\3
+Lance of Lamentation\Lance\4\None\0, 0, 0\0, 0, 0\\0, 0\781\0\\, 0\\Therion's Bane +15%\\\1
+Lance of Dark Depths\Lance\4\Water\0, 0, 0\0, 0, 0\\0, 0\782\781\\, 0\\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\\2
+Lance of Frozen Depths\Lance\5\Water\0, 0, 0\0, 0, 0\\0, 0\783\782\\, 0\\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\\3
+Ragebow\Bow\4\None\0, 0, 0\0, 0, 0\\0, 0\784\0\\, 0\\Slayer's Strength +3%\\\1
+Flameburst Dreadbow\Bow\4\Flame\0, 0, 0\0, 0, 0\\0, 0\785\784\\, 0\\(Flame) Slayer's Strength +3%;;;; (Flame) Skill Haste +4%\\\2
+Detonation Dreadbow\Bow\5\Flame\0, 0, 0\0, 0, 0\\0, 0\786\785\\, 0\\(Flame) Slayer's Strength +4%;;;; (Flame) Skill Haste +4%\\\3
+Wavedrinker Bow\Bow\4\Water\0, 0, 0\0, 0, 0\\0, 0\787\784\\, 0\\(Water) Slayer's Strength +3%;;;; (Water) HP 70% = Strength +5%\\\2
+Streamgorger Bow\Bow\5\Water\0, 0, 0\0, 0, 0\\0, 0\788\787\\, 0\\(Water) Slayer's Strength +4%;;;; (Water) HP 70% = Strength +5%\\\3
+Ill-Wind Whipper\Bow\4\Wind\0, 0, 0\0, 0, 0\\0, 0\789\784\\, 0\\(Wind) Slayer's Strength +3%;;;; (Wind) Therion's Bane +15%\\\2
+Deathwind Caller\Bow\5\Wind\0, 0, 0\0, 0, 0\\0, 0\790\789\\, 0\\(Wind) Slayer's Strength +4%;;;; (Wind) Therion's Bane +15%\\\3
+Hollow Scream\Bow\4\Water\0, 0, 0\0, 0, 0\\0, 0\791\0\\, 0\\Therion's Bane +15%\\\1
+Despair Bringer\Bow\4\Water\0, 0, 0\0, 0, 0\\0, 0\792\791\\, 0\\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\\2
+Despair Spiral\Bow\5\Water\0, 0, 0\0, 0, 0\\0, 0\793\792\\, 0\\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\\3
+Blazewing\Wand\4\Flame\0, 0, 0\0, 0, 0\\0, 0\794\218\\, 0\\(Flame) Slayer's Strength +3%;;;; (Flame) Skill Haste +4%\\\2
+Hellwing\Wand\5\Flame\0, 0, 0\0, 0, 0\\0, 0\795\794\\, 0\\(Flame) Slayer's Strength +4%;;;; (Flame) Skill Haste +4%\\\3
+Iratus Staff\Staff\4\Water\0, 0, 0\0, 0, 0\\0, 0\796\0\\, 0\\Full HP = Defense +15%\\\1
+Tideway Staff\Staff\4\Water\0, 0, 0\0, 0, 0\\0, 0\797\796\\, 0\\(Flame) Slayer's Strength +3%;;;; (Flame) Skill Haste +4%\\\2
+Riptide Staff\Staff\5\Water\0, 0, 0\0, 0, 0\\0, 0\798\797\\, 0\\(Flame) Slayer's Strength +4%;;;; (Flame) Skill Haste +4%\\\3
+Combustion Staff\Staff\4\Flame\0, 0, 0\0, 0, 0\\0, 0\799\796\\, 0\\(Water) Slayer's Strength +3%;;;; (Water) HP 70% = Strength +5%\\\2
+Fangflame Staff\Staff\5\Flame\0, 0, 0\0, 0, 0\\0, 0\800\799\\, 0\\(Water) Slayer's Strength +4%;;;; (Water) HP 70% = Strength +5%\\\3
+Gust Staff\Staff\4\Wind\0, 0, 0\0, 0, 0\\0, 0\801\796\\, 0\\(Wind) Slayer's Strength +3%;;;; (Wind) Therion's Bane +15%\\\2
+Whirlwind Staff\Staff\5\Wind\0, 0, 0\0, 0, 0\\0, 0\802\801\\, 0\\(Wind) Slayer's Strength +4%;;;; (Wind) Therion's Bane +15%\\\3
+Rancor Staff\Staff\4\None\0, 0, 0\0, 0, 0\\0, 0\803\0\\, 0\\Therion's Bane +15%\\\1
+Air Fouler\Staff\4\Water\0, 0, 0\0, 0, 0\\0, 0\804\803\\, 0\\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\\2
+Breath Snuffer\Staff\5\Water\0, 0, 0\0, 0, 0\\0, 0\805\804\\, 0\\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\\3

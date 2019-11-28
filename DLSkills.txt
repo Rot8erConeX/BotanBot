@@ -959,6 +959,10 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Flame) Skill Prep\example\Ability\If the user is attuned to Flame: fills `x`% of skill gauges at the start of quests.\0\y\SkillPrep, Flame
 (Flame) Skill Prep\25%\Ability\If the user is attuned to Flame: fills 25% of skill gauges at the start of quests.\40\y\SkillPrep, Flame
 (Flame) Skill Prep\50%\Ability\If the user is attuned to Flame: fills 50% of skill gauges at the start of quests.\50\y\SkillPrep, Flame
+(Flame) Slayer's Strength\example\Ability\If the user is attuned to Flame: increases strength by `x`% for every five enemies defeated (up to five times per quest).\0\y\Strength, Flame, Slayers
+(Flame) Slayer's Strength\3%\Ability\If the user is attuned to Flame: increases strength by 3% for every five enemies defeated (up to five times per quest).\40\y\Strength, Flame, Slayers
+(Flame) Slayer's Strength\4%\Ability\If the user is attuned to Flame: increases strength by 4% for every five enemies defeated (up to five times per quest).\60\y\Strength, Flame, Slayers
+(Flame) Spectral Shield Penetrator\-\Ability\If the user is attuned to Flame: ignores the effects of spectral shield when attacking enemies.\40\y\Penetrator, Flame
 (Flame) Thaumian's Bane\example\Ability\If the user is attuned to Flame: increases damage to thaumians by `x`%.\0\y\Thaumian, Bane, Flame
 (Flame) Thaumian's Bane\10%\Ability\If the user is attuned to Flame: increases damage to thaumians by 10%.\20\y\Thaumian, Bane, Flame
 (Flame) Thaumian's Bane\15%\Ability\If the user is attuned to Flame: increases damage to thaumians by 15%.\40\y\Thaumian, Bane, Flame
@@ -1062,6 +1066,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Water) Flurry Devastation\example\Ability\If the user is attuned to Water: increases critical rate by `x`% when the combo count is 15 or higher.\0\y\CritRate, Water, Flurry
 (Water) Flurry Devastation\8%\Ability\If the user is attuned to Water: increases critical rate by 8% when the combo count is 15 or higher.\40\y\CritRate, Water, Flurry
 (Water) Flurry Devastation\10%\Ability\If the user is attuned to Water: increases critical rate by 10% when the combo count is 15 or higher.\60\y\CritRate, Water, Flurry
+(Water) Frenzy Res\-\Ability\If the user is attuned to Water: resists Frenzy.\40\y\Resistance
 (Water) Full HP = Defense\example\Ability\if the user is attuned to Water: increases defense by `x`% when HP is full.\0\y\HP100, Defense, Water
 (Water) Full HP = Defense\15%\Ability\if the user is attuned to Water: increases defense by 15% when HP is full.\0\y\HP100, Defense, Water
 (Water) Full HP = Defense\20%\Ability\if the user is attuned to Water: increases defense by 20% when HP is full.\0\y\HP100, Defense, Water
@@ -1094,6 +1099,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Water) Undead's Bane\example\Ability\if the user is attuned to Water: increases damage to undead by `x`%.\0\y\Undead, Bane, Water
 (Water) Undead's Bane\10%\Ability\if the user is attuned to Water: increases damage to undead by 10%.\20\y\Undead, Bane, Water
 (Water) Undead's Bane\15%\Ability\if the user is attuned to Water: increases damage to undead by 15%.\40\y\Undead, Bane, Water
+(Water) Volcanic Chimera's Bane\20%\Ability\if the user is attuned to Water: increases damage to the Volcanic Chimera by 20%.\40\y\Bane, Water
 (Wind) Copy Punisher\-\Ability\If the user is attuned to Wind: increases damage to copies created by Propagation.\50\y\CopyPunisher, Wind
 (Wind) HP 70% = Healing\8%\Ability\if the user is attuned to Wind: increases the potency of recovery skills by 8% when HP is 70% or above.\40\y\HP70, RecoveryPotency, Wind
 (Wind) Blinded Punisher\example\Ability\If the user is attuned to Wind: Increases damage to blinded enemies by `x`%.\0\y\Blind, Punisher, Wind
@@ -1364,6 +1370,7 @@ Freeze Res\25%\Ability\Reduces susceptibility to freezing by 25%.\40\y\FreezeRes
 Freeze Res\50%\Ability\Reduces susceptibility to freezing by 50%.\60\y\FreezeRes, Resistance
 Freeze Res\75%\Ability\Reduces susceptibility to freezing by 75%.\100\y\FreezeRes, Resistance
 Freeze Res\100%\Ability\Reduces susceptibility to freezing by 100%.\100\y\FreezeRes, Resistance
+Frenzy Res\-\Ability\Resists Frenzy.\40\y\Resistance
 Fury\-\Ability\The overdrive guage will stop decreasing\-1\y\Fury, Enemy
 Fury Penetrator\-\Ability\ignores the effects of fury when attacking enemies.\50\y\FuryPenetrator
 Full HP = Blindness\example\Ability\Increases the chances of inflicting blindness by `x`% when HP is full.\0\y\HP100, BlindChance, StatusChance
@@ -1753,6 +1760,9 @@ Sleeping Punisher\20%\Ability\Increases damage to sleeping enemies by 20%.\60\y\
 Snack-o'-Lanterns\example\Ability\Increases Snack-o'-Lantern intake for clearing quests by `x`%.\0\y\Event, Facility, Materials
 Snack-o'-Lanterns\25%\Ability\Increases Snack-o'-Lantern intake for clearing quests by 25%.\0\y\Event, Facility, Materials
 Snack-o'-Lanterns\50%\Ability\Increases Snack-o'-Lantern intake for clearing quests by 50%.\0\y\Event, Facility, Materials
+Soul Eater\-1\Ability\When you take damage from the Eolian Phantom, he will recover a portion of the damage dealt as HP.\40000\y\Enemy
+Spectral Shield\-1\Ability\This ability increases the defense of the Eolian Phantom's undead minions.\40000\y\Enemy
+Spectral Shield Penetrator\-\Ability\Ignores the effects of spectral shield when attacking enemies.\40\y\Penetrator
 Strength Doublebuff\example\Ability\Increases strength by `x`% for 15 seconds each time a defense up buff is received.\0\y\Strength, Doublebuff
 Strength Doublebuff\3%\Ability\Increases strength by 3% for 15 seconds each time a defense up buff is received.\30\y\Strength, Doublebuff
 Strength Doublebuff\5%\Ability\Increases strength by 5% for 15 seconds each time a defense up buff is received.\40\y\Strength, Doublebuff
@@ -1821,6 +1831,7 @@ Valor\30%\Ability\Increases valor intake for clearing quests by 30%\0\y\Event, S
 Valor\40%\Ability\Increases valor intake for clearing quests by 40%\0\y\Event, Score
 Valor\45%\Ability\Increases valor intake for clearing quests by 45%\0\y\Event, Score
 Valor\60%\Ability\Increases valor intake for clearing quests by 60%\0\y\Event, Score
+Volcanic Chimera's Bane\20%\Ability\Increases damage to the Volcanic Chimera by 20%.\40\y\Bane
 Water Res\example\Ability\Reduces water damage taken by `x`%.\0\y\WaterRes, Resistance
 Water Res\3%\Ability\Reduces water damage taken by 3%.\20\y\WaterRes, Resistance
 Water Res\4%\Ability\Reduces water damage taken by 4%.\30\y\WaterRes, Resistance
