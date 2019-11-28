@@ -1760,8 +1760,8 @@ Sleeping Punisher\20%\Ability\Increases damage to sleeping enemies by 20%.\60\y\
 Snack-o'-Lanterns\example\Ability\Increases Snack-o'-Lantern intake for clearing quests by `x`%.\0\y\Event, Facility, Materials
 Snack-o'-Lanterns\25%\Ability\Increases Snack-o'-Lantern intake for clearing quests by 25%.\0\y\Event, Facility, Materials
 Snack-o'-Lanterns\50%\Ability\Increases Snack-o'-Lantern intake for clearing quests by 50%.\0\y\Event, Facility, Materials
-Soul Eater\-1\Ability\When you take damage from the Eolian Phantom, he will recover a portion of the damage dealt as HP.\40000\y\Enemy
-Spectral Shield\-1\Ability\This ability increases the defense of the Eolian Phantom's undead minions.\40000\y\Enemy
+Soul Eater\-\Ability\When you take damage from the Eolian Phantom, he will recover a portion of the damage dealt as HP.\-1\y\Enemy
+Spectral Shield\-\Ability\This ability increases the defense of the Eolian Phantom's undead minions.\-1\y\Enemy
 Spectral Shield Penetrator\-\Ability\Ignores the effects of spectral shield when attacking enemies.\40\y\Penetrator
 Strength Doublebuff\example\Ability\Increases strength by `x`% for 15 seconds each time a defense up buff is received.\0\y\Strength, Doublebuff
 Strength Doublebuff\3%\Ability\Increases strength by 3% for 15 seconds each time a defense up buff is received.\30\y\Strength, Doublebuff
