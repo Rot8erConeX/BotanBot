@@ -1,21 +1,3 @@
-Again!\Luca
-Ahoo\Fafnir
-Argh\Euden
-Boom\Notte
-Bravo\Mym, Sarisse
-For Real\Ranzal
-Good Job\Notte
-Grr\Notte
-Heal\Cleo
-Hee hee!\Notte
-Heh\Cleo
-Hey\Euden
-Help\Zethia
-Here Goes\Euden
-I Got This\Luca
-I Need Healing\Luca
-Intriguing!\Heinwald
-I'll Lead The Charge\Euden
 I'm On Defense\Ranzal
 Leave it to me!\Alfonse
 Let's Go!\Fjorm
@@ -34,6 +16,7 @@ On My Way\Ranzal
 Really\Elisanne
 Sorry\Elisanne
 Squishums\Squishum
+Steel Stalwart\Mega Man
 Sup\Sarisse
 Take Defense\Euden
 Three Cheers for Me\Mym 
