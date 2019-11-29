@@ -801,3 +801,11 @@ Whirlwind Staff\Staff\5\Wind\0, 0, 0\0, 0, 0\\0, 0\802\801\\, 0\\(Wind) Slayer's
 Rancor Staff\Staff\4\None\0, 0, 0\0, 0, 0\\0, 0\803\0\\, 0\\Therion's Bane +15%\\\1
 Air Fouler\Staff\4\Water\0, 0, 0\0, 0, 0\\0, 0\804\803\\, 0\\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\\2
 Breath Snuffer\Staff\5\Water\0, 0, 0\0, 0, 0\\0, 0\805\804\\, 0\\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\\3
+Mega Axe\Axe\5c\None\30, 94, 101\108, 337, 362\Mega Buster(Axe)\1500, 0\806\0\\, 0\\\MM\\1
+Mega Blade\Blade\5c\None\26, 82, 88\115, 357, 384\Mega Buster(Blade)\1500, 0\807\0\\, 0\\\MM\\1
+Mega Bow\Bow\5c\None\29, 92, 98\104, 323, 347\Mega Buster(Bow)\1500, 0\808\0\\, 0\\\MM\\1
+Mega Dagger\Dagger\5c\None\30, 95, 102\106, 330, 355\Mega Buster(Dagger)\1500, 0\809\0\\, 0\\\MM\\1
+Mega Lance\Lance\5c\None\30, 96, 103\110, 343, 369\Mega Buster(Lance)\1500, 0\810\0\\, 0\\\MM\\1
+Mega Staff\Staff\5c\None\33, 104, 111\103, 320, 344\Mega Buster(Staff)\1500, 0\811\0\\, 0\\\MM\\1
+Mega Sword\Sword\5c\None\30, 94, 101\108, 337, 362\Mega Buster(Sword)\1500, 0\812\0\\, 0\\\MM\\1
+Mega Wand\Wand\5c\None\28, 88, 94\111, 347, 373\Mega Buster(Wand)\1500, 0\813\0\\, 0\\\MM\\1
