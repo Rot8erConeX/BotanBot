@@ -66,6 +66,13 @@ Volcanic Cyclops\34020, 50820, 63420, 402800, -1, -1, -1, 110880, 133560; 723, 1
 Alfonse (Enemy)\658000; 4500\Light, Human, Boss, Fire Emblem: Lost Heroes\Poison: **0%**, Burn: **0%**, Freeze: 60%, Paralysis: 60%, Blind 60%, Stun 60%, Bog 60%, Sleep 60%\Paralysis\
 Veronica (Enemy)\800000; 4500\Shadow, Human, Boss, Fire Emblem: Lost Heroes\~~Immune~~\Unknown\
 Shadow Knight\-1, 99999, 300000, 550000; -1, 160, 2000, 3500\Shadow, Human, Boss, Fire Emblem: Lost Heroes\Poison: **0%**, Burn: **0%**, Freeze: **100%/0%/80%**, Paralysis: **0%**, Blind: **0%**, Stun: **100%/0%/80%**, Curse: **0%**, Bog: **0%**, Sleep: **100%/0%/80%**\~~None~~\
+Brainwashed Brunhilda\0; 0\Flame, Dragon, Boss, Mega Man: Chaos Protocol\TBA\TBA\
+Brainwashed Jupiter\0; 0\Light, Dragon, Boss, Mega Man: Chaos Protocol\TBA\TBA\
+Brainwashed Mercury\0; 0\Water, Dragon, Boss, Mega Man: Chaos Protocol\TBA\TBA\
+Brainwashed Midgardsormr\0; 0\Wind, Dragon, Boss, Mega Man: Chaos Protocol\TBA\TBA\
+Brainwashed Zodiark\0; 0\Shadow, Dragon, Boss, Mega Man: Chaos Protocol\TBA\TBA\
+Dr. Wily\0; 0\Null, Human, Boss, Mega Man: Chaos Protocol\TBA\TBA\
+Mega Man\0; 0\Null, Human, Boss, Mega Man: Chaos Protocol\TBA\TBA\
 Qitian Dasheng\73760, 182072, 873380, -1, 2756445, -1, -1, 850755; 362, 842, 1705, -1, 3248, -1, -1, 2707\Wind, Demihuman, Raid, Echoes of Antiquity\~~Immune~~\Stun\
 Jingu Bang\1844, 4551, 21834, -1, 76567, -1, -1, 21268; 362, 842, 1705, -1, 3248, -1, -1, 2707\Wind, Demihuman, Raid, Echoes of Antiquity\~~Immune~~\Stun\
 Mini Dasheng\295, 728, 3493, -1, 9188, -1, -1, 3403; 114, 265, 537, -1, 1023, -1, -1, 852\Wind, Demihuman, Raid, Echoes of Antiquity\~~Immune~~\Stun\

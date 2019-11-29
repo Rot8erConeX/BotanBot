@@ -1189,6 +1189,22 @@ Bog Res\55%\Ability\Reduces susceptibility to bog by 55%.\70\y\BogRes, Resistanc
 Bog Res\60%\Ability\Reduces susceptibility to bog by 60%.\80\y\BogRes, Resistance
 Bog Res\75%\Ability\Reduces susceptibility to bog by 75%.\100\y\BogRes, Resistance
 Bog Res\100%\Ability\Reduces susceptibility to bog by 100%.\100\y\BogRes, Resistance
+Brainwashed Brunhilda's Bane\example\Ability\Increases damage to Brainwashed Brunhilda by `x`%.\0\y\Brainwashed, Bane
+Brainwashed Brunhilda's Bane\40%\Ability\Increases damage to Brainwashed Brunhilda by 40%.\0\y\Brainwashed, Bane
+Brainwashed Brunhilda's Bane\50%\Ability\Increases damage to Brainwashed Brunhilda by 50%.\0\y\Brainwashed, Bane
+Brainwashed Brunhilda's Bane\60%\Ability\Increases damage to Brainwashed Brunhilda by 60%.\0\y\Brainwashed, Bane
+Brainwashed Jupiter's Bane\example\Ability\Increases damage to Brainwashed Jupiter by `x`%.\0\y\Brainwashed, Bane
+Brainwashed Jupiter's Bane\40%\Ability\Increases damage to Brainwashed Jupiter by 40%.\0\y\Brainwashed, Bane
+Brainwashed Jupiter's Bane\50%\Ability\Increases damage to Brainwashed Jupiter by 50%.\0\y\Brainwashed, Bane
+Brainwashed Jupiter's Bane\60%\Ability\Increases damage to Brainwashed Jupiter by 60%.\0\y\Brainwashed, Bane
+Brainwashed Mercury's Bane\example\Ability\Increases damage to Brainwashed Mercury by `x`%.\0\y\Brainwashed, Bane
+Brainwashed Mercury's Bane\40%\Ability\Increases damage to Brainwashed Mercury by 40%.\0\y\Brainwashed, Bane
+Brainwashed Mercury's Bane\50%\Ability\Increases damage to Brainwashed Mercury by 50%.\0\y\Brainwashed, Bane
+Brainwashed Mercury's Bane\60%\Ability\Increases damage to Brainwashed Mercury by 60%.\0\y\Brainwashed, Bane
+Brainwashed Zodiark's Bane\example\Ability\Increases damage to Brainwashed Zodiark by `x`%.\0\y\Brainwashed, Bane
+Brainwashed Zodiark's Bane\40%\Ability\Increases damage to Brainwashed Zodiark by 40%.\0\y\Brainwashed, Bane
+Brainwashed Zodiark's Bane\50%\Ability\Increases damage to Brainwashed Zodiark by 50%.\0\y\Brainwashed, Bane
+Brainwashed Zodiark's Bane\60%\Ability\Increases damage to Brainwashed Zodiark by 60%.\0\y\Brainwashed, Bane
 Broken Punisher\example\Ability\Increases damage to enemies in break state by `x`%.\0\y\Broken, Punisher
 Broken Punisher\10%\Ability\Increases damage to enemies in break state by 10%.\20\y\Broken, Punisher
 Broken Punisher\15%\Ability\Increases damage to enemies in break state by 15%.\40\y\Broken, Punisher
@@ -1843,6 +1859,10 @@ Water Res\5%\Ability\Reduces water damage taken by 5%.\40\y\WaterRes, Resistance
 Water Res\8%\Ability\Reduces water damage taken by 8%.\60\y\WaterRes, Resistance
 Whirlpool\-\Ability\If an adventurer is within the whirlpool's area of effect, they will be drawn in, and their movement will be significantly slowed\-1\y\Enemy
 Whirlpool Res\-\Ability\Ignores the effects of whirlpool.\60\y\Resistance
+Wily Machine's Bane\example\Ability\Increases damage to Wily Machine 2 by `x`%.\0\y\Bane
+Wily Machine's Bane\40%\Ability\Increases damage to Wily Machine 2 by 40%.\0\y\Bane
+Wily Machine's Bane\50%\Ability\Increases damage to Wily Machine 2 by 50%.\0\y\Bane
+Wily Machine's Bane\60%\Ability\Increases damage to Wily Machine 2 by 60%.\0\y\Bane
 Wind Res\example\Ability\Reduces wind damage taken by `x`%.\0\y\WindRes, Resistance
 Wind Res\3%\Ability\Reduces wind damage taken by 3%.\20\y\WindRes, Resistance
 Wind Res\4%\Ability\Reduces wind damage taken by 4%.\30\y\WindRes, Resistance

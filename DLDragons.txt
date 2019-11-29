@@ -57,6 +57,7 @@ Poli'ahu\4\Water\30, 301\9, 95\Lilinoe's Mist\(Water) HP & Strength +15%;; (Wate
 Poseidon\5\Water\37, 376\11, 119\Poseidon's Trident\(Water) HP & Strength +20%;; (Water) HP & Strength +30%\5000, 8500\1.8, 1\2\No\Yes\Poseidon\\\(Water) HP +20%;; (Water) HP +30%;;;; (Water) Strength +20%;; (Water) Strength +30%\\M\KoG
 Prometheus\5\Flame\37, 374\12, 121\Promethean Flame\(Flame) Strength +35% Wind Res +15%;; (Flame) Strength +50% Wind Res +15%\5000, 8500\1.8, 1\5\Yes\Yes\Prometheus\Umehara Yuuichirou\Simon King\(Flame) Strength +35%;; (Flame) Strength +50%;;;; (Flame) Wind Res +15%;; (Flame) Wind Res +15%\\M\
 Roc\4\Wind\29, 296\10, 101\Tactical Vortex\(Wind) Strength +30%;; (Wind) Strength +45%\2000, 2200\1.5, 1.5\5\No\No\Roc\\\\\F\
+Rush\5\Flame\-, -\-, -\Rush Buster\-\-, -\0, 0\0\Yes\Yes\Rush\\\\Mega Man\M\
 Shinobi\5\Shadow\36, 368\12, 128\Shuriken Shower\(Shadow) Strength +10%;; (Shadow) Strength +20%;;; (Shadow) Skill Damage +70%;; (Shadow) Skill Damage +90%\5000, 8500\1.8, 1\5\Yes\Yes\Shinobi\Ishikawa Hideo\Mark Mathison\\\M\
 Shishimai\5\Light\22, 223\7, 75\Blessed Ritual\(Light) Critical Damage +50%;; (Light) Critical Damage +70%\5000, 300\1.65, 1\2\No\No\Shishimai\Ito Miyako\Paul Dobson\\\M\
 Silke\4\Shadow\29, 299\9, 97\Terror Sphere\(Shadow) HP & Strength +15%;; (Shadow) HP & Strength +20%\2000, 2200\1.5, 1\3\No\No\Silke\Yuki Aoi\Raynn Eastwood\(Shadow) HP +15%;; (Shadow) HP +20%;;;; (Shadow) Strength +15%;; (Shadow) Strength +20%\\F\KoG
