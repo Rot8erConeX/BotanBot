@@ -66,13 +66,13 @@ Volcanic Cyclops\34020, 50820, 63420, 402800, -1, -1, -1, 110880, 133560; 723, 1
 Alfonse (Enemy)\658000; 4500\Light, Human, Boss, Fire Emblem: Lost Heroes\Poison: **0%**, Burn: **0%**, Freeze: 60%, Paralysis: 60%, Blind 60%, Stun 60%, Bog 60%, Sleep 60%\Paralysis\
 Veronica (Enemy)\800000; 4500\Shadow, Human, Boss, Fire Emblem: Lost Heroes\~~Immune~~\Unknown\
 Shadow Knight\-1, 99999, 300000, 550000; -1, 160, 2000, 3500\Shadow, Human, Boss, Fire Emblem: Lost Heroes\Poison: **0%**, Burn: **0%**, Freeze: **100%/0%/80%**, Paralysis: **0%**, Blind: **0%**, Stun: **100%/0%/80%**, Curse: **0%**, Bog: **0%**, Sleep: **100%/0%/80%**\~~None~~\
-Brainwashed Brunhilda\0; 0\Flame, Dragon, Boss, Mega Man: Chaos Protocol\TBA\TBA\
-Brainwashed Jupiter\0; 0\Light, Dragon, Boss, Mega Man: Chaos Protocol\TBA\TBA\
-Brainwashed Mercury\0; 0\Water, Dragon, Boss, Mega Man: Chaos Protocol\TBA\TBA\
-Brainwashed Midgardsormr\0; 0\Wind, Dragon, Boss, Mega Man: Chaos Protocol\TBA\TBA\
-Brainwashed Zodiark\0; 0\Shadow, Dragon, Boss, Mega Man: Chaos Protocol\TBA\TBA\
-Dr. Wily\0; 0\Null, Human, Boss, Mega Man: Chaos Protocol\TBA\TBA\
-Mega Man\0; 0\Null, Human, Boss, Mega Man: Chaos Protocol\TBA\TBA\
+Brainwashed Brunhilda\539, 9821, 89090, 161551, -1, 597620, 1745800; 57, 160, 1856, 3920, -1, 7280, 7280\Flame, Dragon, Boss, Mega Man: Chaos Protocol\Poison: **0%**, Burn: **0%**, Freeze: 55%, Paralysis: *99%*, Blind: *99%*, Stun: *99%*, Curse: *99%*, Bog: 55%, Sleep: *99%*\Burn\
+Brainwashed Jupiter\435, 8100, 11200, 200500, -1, 918930, 2641923; 59, 120, 1992, 2800, -1, 7200, 7200\Light, Dragon, Boss, Mega Man: Chaos Protocol\Poison: **0%**, Burn: **0%**, Freeze: *99%*, Paralysis: *99%*, Blind: 55%, Stun: *99%*, Bog: *99%*, Sleep: *99%*\Paralysis\
+Brainwashed Mercury\492, 8960, 135453, 245623, -1, 908624, 2388888; 41, 114, 1326, 2800, -1, 5200, 5200\Water, Dragon, Boss, Mega Man: Chaos Protocol\Poison: **0%**, Burn: *99%*, Freeze: *99%*, Paralysis: *99%*, Blind: *99%*, Stun: *90%*, Curse:*99%*, Bog: *99%*, Sleep: *90%*\Bog\
+Brainwashed Midgardsormr\470, 8213, 116509, 210000, -1, 825000, 1404000; 41, 114, 1326, 2800, -1, 5200, 5200\Wind, Dragon, Boss, Mega Man: Chaos Protocol\Poison: **0%**, Burn: **0%**, Freeze: *99%*, Paralysis: *99%*, Blind: *99%*, Stun: 55%, Bog: *99%*, Sleep: *99%*\Stun\
+Brainwashed Zodiark\460, 11404, 170798, 280220, -1, 1561077, 2448750; 67, 122, 2022, 3352, -1, 6152, 6455\Shadow, Dragon, Boss, Mega Man: Chaos Protocol\Poison: **0%**, Burn: **0%**, Paralysis: 55%\Curse\
+Dr. Wily\706, 14892, 186144, 484800, -1, 806707, 2032900; 63, 132, 1755, 3510, -1, 3510, 3510\Null, Thaumian, Boss, Mega Man: Chaos Protocol\Poison: **0%**, Burn: **0%**, Paralysis: **20%**, Blind: 60%, Bog: **20%**\~~None~~\
+Mega Man (Enemy)\-1, -1, -1, -1, -1, 1270000, 1530000; -1, -1, -1, -1, -1, 2500, 3200\Null, Human, Boss, Mega Man: Chaos Protocol\Poison: **0%**, Burn: **0%**, Freeze: *99%*, Paralysis: *80%*, Blind: *80%*, Stun: *99%*, Bog: 55%, Sleep: *99%*\**Yes**\
 Qitian Dasheng\73760, 182072, 873380, -1, 2756445, -1, -1, 850755; 362, 842, 1705, -1, 3248, -1, -1, 2707\Wind, Demihuman, Raid, Echoes of Antiquity\~~Immune~~\Stun\
 Jingu Bang\1844, 4551, 21834, -1, 76567, -1, -1, 21268; 362, 842, 1705, -1, 3248, -1, -1, 2707\Wind, Demihuman, Raid, Echoes of Antiquity\~~Immune~~\Stun\
 Mini Dasheng\295, 728, 3493, -1, 9188, -1, -1, 3403; 114, 265, 537, -1, 1023, -1, -1, 852\Wind, Demihuman, Raid, Echoes of Antiquity\~~Immune~~\Stun\
@@ -87,6 +87,7 @@ Astral Sabnock\67878, 170630, 634880, 2600000; 362, 500, 1705, 5945\Shadow, Demo
 Astral Phraeganoth\81472, 305520, 487948, 3000000; 362, 500, 1705, 5400\Flame, Thaumian, AstralRaid, Astral Raid\~~Immune~~\Burn\
 Astral Shishimai\67200, 181600, 685146, 4950000; 362, 500, 1568, 7020\Light, Thaumian, AstralRaid, Astral Raid\~~Immune~~\Paralysis\
 Astral Gift Basket\10080, 27240, 137029, 990000; 362, 500, 1568, 2707\Light, Thaumian, AstralRaid, Astral Raid\~~Immune~~\Paralysis\
+Astral Thanatos\0; 0\Shadow, Undead, AstralRaid, Astral Raid\~~Immune~~\Poison\
 Cube\200000, 600000; 1800, 5500\Shadow, New Horizons, Chapter 10, Chapter 10\Poison: **0%**, Burn: **0%**, Freeze: *99%*, Paralysis: 50%, Blind: 50%, Stun: *99%*, Bog: **0%**, Sleep: *99%*\Poison\
 Chronos\66384, 217300, 960718, -1, -1, 4938248, 22222117; 145, 590, 1705, -1, -1, 3410, 3410\Light, Dragon, Raid, Fractured Futures\Poison: **0%**, Burn:  **0%**, Freeze: *99%*, Paralysis: **0%**, Blind: *99%*, Stun: *99%*, Bog: **0%**\Everything\
 Chronos Nyx\-1, -1, -1, -1, 6842299, 5165264, 19360178, 2258632; -1, -1, -1, -1, 2557, 3410, 3410, 1200\Light, Dragon, Raid, Fractured Futures\Poison: **0%**, Burn:  **0%**, Freeze: *99%*, Paralysis: **0%**, Stun: *99%*, Bog: *80%*, Sleep: *99%*\Everything\
