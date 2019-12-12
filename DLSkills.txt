@@ -1524,6 +1524,7 @@ Hits = Energy Level Up\35\Ability\Increases the user's energy level by one stage
 Hits = Energy Level Up\40\Ability\Increases the user's energy level by one stage for every 40-hit combo.\50\y\Combo, Energy
 Holiday Cheer\example\Ability\Increases Holiday Cheer intake for clearing quests by `x`%.\0\y\Event, Facility, Score
 Holiday Cheer\25%\Ability\Increases Holiday Cheer intake for clearing quests by 25%.\0\y\Event, Facility, Score
+Holiday Cheer\35%\Ability\Increases Holiday Cheer intake for clearing quests by 35%.\0\y\Event, Facility, Score
 Holiday Cheer\50%\Ability\Increases Holiday Cheer intake for clearing quests by 50%.\0\y\Event, Facility, Score
 Holiday Cheer\100%\Ability\Increases Holiday Cheer intake for clearing quests by 100%.\0\y\Event, Facility, Score
 Holiday Cheer\125%\Ability\Increases Holiday Cheer intake for clearing quests by 125%.\0\y\Event, Facility, Score
