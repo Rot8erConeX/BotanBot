@@ -10,7 +10,8 @@ Game Over\
 Good Job\Notte
 Grr\Notte
 Heal\Cleo
-Hee hee!\Notte
+Hee hee!(Maritimus)\Maritimus
+Hee hee!(Notte)\Notte
 Heh\Cleo
 Hey\Euden
 Help\Zethia
@@ -22,7 +23,7 @@ I'll Lead The Charge\Euden
 I'm On Defense\Ranzal
 Leave it to me!\Alfonse
 Let's Go!\Fjorm
-Let's Play...\Veronica
+Let's Play\Veronica
 Look Out\Elisanne
 Lovely!\Loki
 Nice\Ranzal
@@ -35,6 +36,7 @@ OMG\>Unknown<
 On Me!\Euden
 On My Way\Ranzal
 Really\Elisanne
+Splendid\Xander
 Sorry\Elisanne
 Squishums\Squishum
 Steel Stalwart\Mega Man
@@ -45,6 +47,7 @@ Together\Marth
 Thanks\Notte
 Victory Will Be Ours\Midgardsormr
 Wait\Slime
+Well Aren't You Sweet\Malora
 We've Got a Case!\Curran
 What You Said!\Elisanne
 Whew\Notte
