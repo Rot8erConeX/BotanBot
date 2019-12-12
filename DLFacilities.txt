@@ -1215,3 +1215,8 @@ Yuletree\27\-\Adventurer, Event Altar\3x3\1\4400\Astral Ornament, 700
 Yuletree\28\-\Adventurer, Event Altar\3x3\1\4600\Astral Ornament, 800
 Yuletree\29\-\Adventurer, Event Altar\3x3\1\4800\Astral Ornament, 900
 Yuletree\30\-\Adventurer, Event Altar\3x3\1\5000\Astral Ornament, 1000
+Yuletree\31\-\Adventurer, Event Altar\3x3\1\5200\Astral Ornament, 1100
+Yuletree\32\-\Adventurer, Event Altar\3x3\1\5400\Astral Ornament, 1200
+Yuletree\33\-\Adventurer, Event Altar\3x3\1\5600\Astral Ornament, 1300
+Yuletree\34\-\Adventurer, Event Altar\3x3\1\5800\Astral Ornament, 1400
+Yuletree\35\-\Adventurer, Event Altar\3x3\1\6000\Astral Ornament, 1500
