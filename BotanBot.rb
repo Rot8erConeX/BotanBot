@@ -2206,6 +2206,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   dispname=k[0].gsub(' ','_')
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Adventurers/#{dispname}_#{k[1][0,1]}.png?raw=true"
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Energize:559629242137051155>']
+  semoji=['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','<:FGO_Def:653485374605361162>','<:Energize:559629242137051155>'] if !k[12].nil? && k[12]=='FGO'
   semoji=['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:ProtoShield:642287078943752202>','<:Energize:559629242137051155>'] if !k[12].nil? && k[12]=='MM'
   semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:DefenseS:514712247461871616>','<:FEHEnergized:587684963000909845>'] if feh
   if s2s || juststats
@@ -2350,6 +2351,9 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false)
   elsif (has_any?(args2,['shiny']) && has_any?(args2,['nyarlathotep'])) || has_any?(args2,['shinynyarlathotep','lathna'])
     disp_pseudodragon_stats(bot,event,args,juststats,[['Nyarlathotep'],['"Shiny Nyarlathotep"'],'All-Encompassing Darkness (Yang)'],['Dragons','Shiny_Nyarlathotep_5'],'Shiny Nyarlathotep')
     return nil
+  elsif (has_any?(args2,['mega','rock']) && has_any?(args2,['man'])) || has_any?(args2,['megaman','rockman']) || k[0]=='Rush'
+    disp_pseudodragon_stats(bot,event,args,juststats,[['Rush'],['"Rush Coil"'],'Rush Buster'],['Dragons','Rush'],'Rush')
+    return nil
   end
   if k.length.zero?
     if args.join('').include?('frostfang')
@@ -2396,7 +2400,8 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false)
   title="#{title}\n**Treasure Trade**" if k[1].length>1 && k[1][1,1].downcase=='t'
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Speed:573366907357495296>','<:Energize:559629242137051155>']
   semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:ProtoShield:642287078943752202>','<:SpeedS:514712247625580555>','<:FEHEnergized:587684963000909845>'] if feh
-  semoji=['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:Defense:573344832282689567>','<:SpeedS:514712247625580555>','<:FEHEnergized:587684963000909845>'] if !k[16].nil? && k[16]=='FEH'
+  semoji=['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:Defense:573344832282689567>','<:SpeedS:514712247625580555>','<:Energize:559629242137051155>'] if !k[16].nil? && k[16]=='MM'
+  semoji=['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','<:FGO_Def:653485374605361162>','<:SpeedS:514712247625580555>','<:Energize:559629242137051155>'] if !k[16].nil? && k[16]=='FGO'
   str="#{str}\n\n**Level 1**  #{semoji[0]}#{longFormattedNumber(k[3][0])}  #{semoji[1]}#{longFormattedNumber(k[4][0])}"
   str="#{str}\n**Level #{k[1][0,1].to_i*20}**  #{semoji[0]}#{longFormattedNumber(k[3][1])}  #{semoji[1]}#{longFormattedNumber(k[4][1])}"
   if s2s || juststats
@@ -2577,9 +2582,12 @@ def disp_wyrmprint_stats(bot,event,args=nil)
   else
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2]}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[2]}**"
-    title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**" if !k[10].nil? && k[10]=='MM'
-    title="#{title}\n**Collab**" unless k[10].nil? || k[10].length<=0 || k[10]=='MM'
-    title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c' && k[14]!='MM'
+    if !k[10].nil? && k[10]=='MM'
+      title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**"
+    else
+      title="#{title}\n**Collab**" unless k[10].nil? || k[10].length<=0
+      title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c'
+    end
   end
   xcolor=0x313439
   xcolor=0x5A0408 if k[2]=='Attack'
@@ -2599,20 +2607,25 @@ def disp_wyrmprint_stats(bot,event,args=nil)
   f2+=10 if k[1][0,1].to_i==1
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>']
   semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:Defense:573344832282689567>'] if !k[10].nil? && k[10]=='FEH'
+  semoji=['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','<:FGO_Def:653485374605361162>'] if !k[10].nil? && k[10]=='FGO'
   semoji=['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:ProtoShield:642287078943752202>'] if !k[10].nil? && k[10]=='MM'
   bemoji=['<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
   bemoji=['<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if !k[10].nil? && k[10]=='FGO'
   bemoji=['<:Aether_Stone:510776805746278421>','<:Refining_Stone:453618312165720086>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if !k[10].nil? && k[10]=='FEH'
-  if s2s
+  if ['Wily Warriors','Greatwyrm'].include?(k[0])
+    str="#{str}\n\n**#{bemoji[0]*4} Level 1**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}"
+    str="#{str}\n**#{bemoji[1]*2}#{bemoji[0]*2} Level #{f2}**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}"
+    str="#{str}\n**#{bemoji[1]*4} Level #{f}**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][2])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}"
+  elsif s2s
     str="#{str}\n\n__**#{bemoji[0]*4} Level 1**__"
     str="#{str}\n#{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}"
-    str="#{str}\n#{k[5].map{|q| q[0]}.join("\n")}"
+    str="#{str}\n#{k[5].map{|q| q[0]}.join("\n")}" unless k[5].length<=0
     str="#{str}\n\n__**#{bemoji[1]*2}#{bemoji[0]*2} Level #{f2}**__"
     str="#{str}\n#{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}"
-    str="#{str}\n#{k[5].map{|q| q[1]}.join("\n")}"
+    str="#{str}\n#{k[5].map{|q| q[1]}.join("\n")}" unless k[5].length<=0
     str="#{str}\n\n__**#{bemoji[1]*4} Level #{f}**__"
     str="#{str}\n#{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][2])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][2])}"
-    str="#{str}\n#{k[5].map{|q| "#{q[2] if q.length>2}#{q[1] if q.length<3}"}.join("\n")}"
+    str="#{str}\n#{k[5].map{|q| "#{q[2] if q.length>2}#{q[1] if q.length<3}"}.join("\n")}" unless k[5].length<=0
   else
     str="#{str}\n\n**#{bemoji[0]*4} Level 1**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][0])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][0])}"
     str="#{str}\n**#{bemoji[1]*2}#{bemoji[0]*2} Level #{f2}**  #{semoji[0]}*HP:*\u00A0\u00A0#{longFormattedNumber(k[3][1])}  #{semoji[1]}*Str:*\u00A0\u00A0#{longFormattedNumber(k[4][1])}"
@@ -2640,12 +2653,26 @@ def disp_wyrmprint_stats(bot,event,args=nil)
         k[5][i]=k[5][i][0,3].join(" \u2192 ")
       end
     end
-    str="#{str}\n\n__**Abilities**__\n#{k[5].join("\n")}"
+    str="#{str}\n\n__**Abilities**__\n#{k[5].join("\n")}" unless k[5].length<=0
   end
   str="#{str}\n"
   str="#{str}\n**Obtained:** #{k[9]}" if !k[9].nil? && k[9].length>0
   str="#{str}\n**Sells for:** #{longFormattedNumber(k[6][0])}#{bemoji[2]} #{longFormattedNumber(k[6][1])}#{bemoji[3]}"
-  unless k[1].length>1 && ['s','z','y','t','w'].include?(k[1][1,1].downcase)
+  if k[0]=='Wily Warriors'
+    pr=@wyrmprints.reject{|q| !q[0].include?('Wily Warriors ')}.map{|q| q[0].gsub('Wily Warriors ','')}.uniq
+    str="#{str}\n**Shop Price:** 3,600#{bemoji[3]} per 2UB, 6,800#{bemoji[3]} per MUB" if k[1][0,1].to_i==3
+    str="#{str}\n**Shop Price:** 36,000#{bemoji[3]} per 2UB, 68,000#{bemoji[3]} per MUB" if k[1][0,1].to_i==4
+    str="#{str}\n**Shop Price:** 76,000#{bemoji[3]} per 2UB, 148,000#{bemoji[3]} per MUB" if k[1][0,1].to_i==5
+    str="#{str}\n"
+    str="#{str}\nThis print entry only exists to contain the combined art of the Wily Warriors series of wyrmprints.  For individual pieces of this series, use their subtitles:\n#{pr.join("\n")}"
+  elsif k[0]=='Greatwyrm'
+    pr=@wyrmprints.reject{|q| !q[0].include?('Greatwyrm ')}.uniq
+    str="#{str}\n**Shop Price:** 3,600#{bemoji[3]} per 2UB, 6,800#{bemoji[3]} per MUB" if k[1][0,1].to_i==3
+    str="#{str}\n**Shop Price:** 36,000#{bemoji[3]} per 2UB, 68,000#{bemoji[3]} per MUB" if k[1][0,1].to_i==4
+    str="#{str}\n**Shop Price:** 76,000#{bemoji[3]} per 2UB, 148,000#{bemoji[3]} per MUB" if k[1][0,1].to_i==5
+    str="#{str}\n"
+    str="#{str}\nThis print entry only exists to contain the combined art of the Greatwyrm series of wyrmprints.  For individual pieces of this series, use their full names:\n#{pr.join("\n")}"
+  elsif k[1].length<=1 || !['s','z','y','t','w'].include?(k[1][1,1].downcase)
     str="#{str}\n**Shop Price:** 900#{bemoji[3]} per 2UB, 1,700#{bemoji[3]} per MUB" if k[1][0,1].to_i==3
     str="#{str}\n**Shop Price:** 9,000#{bemoji[3]} per 2UB, 17,000#{bemoji[3]} per MUB" if k[1][0,1].to_i==4
     str="#{str}\n**Shop Price:** 19,000#{bemoji[3]} per 2UB, 37,000#{bemoji[3]} per MUB" if k[1][0,1].to_i==5
@@ -2828,6 +2855,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>']
   semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:Defense:573344832282689567>'] if feh
   semoji=['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:ProtoShield:642287078943752202>'] if !k[14].nil? && k[14]=='MM'
+  semoji=['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','<:FGO_Def:653485374605361162>'] if !k[14].nil? && k[14]=='FGO'
   bemoji=['<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
   bemoji=['<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if !k[14].nil? && k[14]=='FGO'
   bemoji=['<:Aether_Stone:510776805746278421>','<:Refining_Stone:453618312165720086>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if !k[14].nil? && k[14]=='FEH'
@@ -3127,6 +3155,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   end
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>']
   semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:Defense:573344832282689567>'] if feh
+  semoji=['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','<:FGO_Def:653485374605361162>'] if !k[14].nil? && k[14]=='FGO'
   semoji=['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:ProtoShield:642287078943752202>'] if !k[14].nil? && k[14]=='MM'
   bemoji=['<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
   bemoji=['<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if !k[14].nil? && k[14]=='FGO'
@@ -3332,32 +3361,35 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
         str="#{str}\n*Beginner:*"
       end
     end
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][0])}" if k[1][0].length>0 && k[1][0][0]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][0])}" if k[1][1].length>0 && k[1][1][0]>-1
+    statemotes=['<:HP:573344832307593216>','<:Strength:573344931205349376>','Omega']
+    statemotes=['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','Singularity'] if k[2][3]=='Fate/Grand Order'
+    statemotes=['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','Superhero'] if k[2][3]=='Mega Man: Chaos Protocol'
+    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][0])}" if k[1][0].length>0 && k[1][0][0]>-1
+    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][0])}" if k[1][1].length>0 && k[1][1][0]>-1
     str="#{str}\n*Standard:*" if (k[1][0].length>1 && k[1][0][1]>-1) || (k[1][1].length>1 && k[1][1][1]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][1])}" if k[1][0].length>1 && k[1][0][1]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][1])}" if k[1][1].length>1 && k[1][1][1]>-1
+    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][1])}" if k[1][0].length>1 && k[1][0][1]>-1
+    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][1])}" if k[1][1].length>1 && k[1][1][1]>-1
     str="#{str}\n*Expert:*" if (k[1][0].length>2 && k[1][0][2]>-1) || (k[1][1].length>2 && k[1][1][2]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][2])}" if k[1][0].length>2 && k[1][0][2]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][2])}" if k[1][1].length>2 && k[1][1][2]>-1
+    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][2])}" if k[1][0].length>2 && k[1][0][2]>-1
+    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][2])}" if k[1][1].length>2 && k[1][1][2]>-1
     str="#{str}\n*Master:*" if (k[1][0].length>3 && k[1][0][3]>-1) || (k[1][1].length>3 && k[1][1][3]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][3])}" if k[1][0].length>3 && k[1][0][3]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][3])}" if k[1][1].length>3 && k[1][1][3]>-1
+    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][3])}" if k[1][0].length>3 && k[1][0][3]>-1
+    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][3])}" if k[1][1].length>3 && k[1][1][3]>-1
     str="#{str}\n*Nightmare:*" if (k[1][0].length>4 && k[1][0][4]>-1) || (k[1][1].length>4 && k[1][1][4]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][4])}" if k[1][0].length>4 && k[1][0][4]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][4])}" if k[1][1].length>4 && k[1][1][4]>-1
-    str="#{str}\n*Omega (Solo):*" if (k[1][0].length>5 && k[1][0][5]>-1) || (k[1][1].length>5 && k[1][1][5]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][5])}" if k[1][0].length>5 && k[1][0][5]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][5])}" if k[1][1].length>5 && k[1][1][5]>-1
-    str="#{str}\n*Omega (Raid):*" if (k[1][0].length>6 && k[1][0][6]>-1) || (k[1][1].length>6 && k[1][1][6]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][6])}" if k[1][0].length>6 && k[1][0][6]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][6])}" if k[1][1].length>6 && k[1][1][6]>-1
+    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][4])}" if k[1][0].length>4 && k[1][0][4]>-1
+    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][4])}" if k[1][1].length>4 && k[1][1][4]>-1
+    str="#{str}\n*#{statemotes[2]} (Solo):*" if (k[1][0].length>5 && k[1][0][5]>-1) || (k[1][1].length>5 && k[1][1][5]>-1)
+    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][5])}" if k[1][0].length>5 && k[1][0][5]>-1
+    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][5])}" if k[1][1].length>5 && k[1][1][5]>-1
+    str="#{str}\n*#{statemotes[2]}#{' (Raid)' unless k[2][3]=='Mega Man: Chaos Protocol'}:*" if (k[1][0].length>6 && k[1][0][6]>-1) || (k[1][1].length>6 && k[1][1][6]>-1)
+    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][6])}" if k[1][0].length>6 && k[1][0][6]>-1
+    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][6])}" if k[1][1].length>6 && k[1][1][6]>-1
     str="#{str}\n*Special:*" if (k[1][0].length>7 && k[1][0][7]>-1) || (k[1][1].length>7 && k[1][1][7]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][7])}" if k[1][0].length>7 && k[1][0][7]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][7])}" if k[1][1].length>7 && k[1][1][7]>-1
+    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][7])}" if k[1][0].length>7 && k[1][0][7]>-1
+    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][7])}" if k[1][1].length>7 && k[1][1][7]>-1
     str="#{str}\n*Challenge:*" if (k[1][0].length>8 && k[1][0][8]>-1) || (k[1][1].length>8 && k[1][1][8]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][8])}" if k[1][0].length>8 && k[1][0][8]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][8])}" if k[1][1].length>8 && k[1][1][8]>-1
+    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][8])}" if k[1][0].length>8 && k[1][0][8]>-1
+    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][8])}" if k[1][1].length>8 && k[1][1][8]>-1
   end
   if k[2].length>3 && !['Jingu Bang','Mini Dasheng'].include?(k[0])
     m=@enemies.reject{|q| q[0]==k[0] || q[2].length<4 || q[2][3]!=k[2][3] || ['Jingu Bang','Mini Dasheng'].include?(q[0])}
@@ -5668,7 +5700,8 @@ def disp_wyrmprint_art(bot,event,args=nil)
     charsx=[[],[],[]]
   else
     charsx=[[],[],[]]
-    chars=@wyrmprints.reject{|q| q[0]==k[0] || ((q[7].nil? || q[7].length<=0))}
+    chars=@wyrmprints.reject{|q| q[0]==k[0] || q[0].include?('Wily Warriors ') || ((q[7].nil? || q[7].length<=0))}
+    chars=@wyrmprints.reject{|q| q[0]==k[0] || q[0].include?('Wily Warriors ') || q[0].include?('Greatwyrm ') || ((q[7].nil? || q[7].length<=0))} unless @wyrmprints.find_index{|q| q[0]=='Greatwyrm'}.nil?
     for i in 0...chars.length
       x=chars[i]
       unless x[7].nil? || x[7].length<=0
@@ -6376,6 +6409,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   races=[]
   crossgames=[]
   cygames=[]
+  launch=false
   if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
     lookout=[]
     File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
@@ -6386,6 +6420,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   lookout3=lookout.reject{|q| q[2]!='Cygame'}
   lookout=lookout.reject{|q| q[2]!='Skill'}
   for i in 0...args.length
+    launch=true if ['launch'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6 && allowstr
     rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6 && allowstr
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
@@ -6470,6 +6505,11 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
       clzz[i]="#{moji[0].mention}#{clzz[i]}" if moji.length>0
     end
     search.push("*Classes*: #{clzz.join(', ')}")
+  end
+  if launch
+    search.push('*Game Launch*')
+    b=@banners[0]
+    char=char.reject{|q| !b[1].include?(q[0])}
   end
   if fltr.length>0
     m=[]
@@ -6609,6 +6649,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   genders=[]
   cygames=[]
   crossgames=[]
+  launch=false
   if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
     lookout=[]
     File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
@@ -6618,6 +6659,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   lookout2=lookout.reject{|q| q[2]!='Cygame'}
   lookout=lookout.reject{|q| q[2]!='Skill'}
   for i in 0...args.length
+    launch=true if ['launch'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6
     rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
@@ -6679,6 +6721,11 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
       elem[i]="#{moji[0].mention}#{elem[i]}" if moji.length>0
     end
     search.push("*Elements*: #{elem.join(', ')}")
+  end
+  if launch
+    search.push('*Game Launch*')
+    b=@banners[0]
+    char=char.reject{|q| !b[2].include?(q[0])}
   end
   if wday.length>0
     char=char.reject{|q| !wday.include?(q[9])}.uniq
@@ -6815,7 +6862,9 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
   clzz=[]
   fltr=[]
   crossgames=[]
+  launch=false
   for i in 0...args.length
+    launch=true if ['launch'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6
     rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6
     clzz.push('Attack') if ['attack','atk','att','attacking'].include?(args[i].downcase)
@@ -6836,7 +6885,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
   textra=''
   rarity.uniq!
   clzz.uniq!
-  char=@wyrmprints.map{|q| q}.uniq
+  char=@wyrmprints.reject{|q| ['Wily Warriors','Greatwyrm'].include?(q[0])}.uniq
   search=[]
   emo=[]
   if rarity.length>0
@@ -6852,6 +6901,11 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
       clzz[i]="#{moji[0].mention}#{clzz[i]}" if moji.length>0
     end
     search.push("*Amulet Types*: #{clzz.join(', ')}")
+  end
+  if launch
+    search.push('*Game Launch*')
+    b=@banners[0]
+    char=char.reject{|q| !b[3].include?(q[0])}
   end
   if fltr.length>0
     m=[]
@@ -6954,6 +7008,7 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   tags=[]
   crossgames=[]
   lookout=[]
+  launch=false
   if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
     lookout=[]
     File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
@@ -6963,6 +7018,7 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   lookout=lookout.reject{|q| q[2]!='Skill'}
   args2=args.map{|q| q}
   for i in 0...args.length
+    launch=true if ['launch'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6
     rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6
     tier.push(args[i][1,args[i].length-1].to_i) if args[i][0,1].downcase=='t' && args[i][1,args[i].length-1].to_i.to_s==args[i][1,args[i].length-1] && args[i][1,args[i].length-1].to_i>0 && args[i][1,args[i].length-1].to_i<4
@@ -7116,6 +7172,10 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
     end
     search.push("*Elements*: #{elem.join(', ')}")
   end
+  if launch
+    search.push('*Game Launch*')
+    char=char.reject{|q| q[8].to_i<8 || q[8].to_i>211}
+  end
   if fltr.length>0
     m=[]
     if fltr.include?('Welfare')
@@ -7237,7 +7297,7 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       end
     end
   end
-  if !juststats && find_data_ex(:find_enemy,args2.join(' '),event).length>0
+  if !juststats && find_data_ex(:find_enemy,args2.join(' '),event).length>0 && find_data_ex(:find_enemy,args2.join(' '),event)[0][0,8]!='Mega Man'
     args2=args2.reject{|q| q.to_i.to_s==q || q.gsub('*','').to_i.to_s==q.gsub('*','')}
     k2=find_data_ex(:find_enemy,args2.join(' '),event)
     unless k2.nil? || k2.length<=0
@@ -7880,7 +7940,7 @@ def find_all(bot,event,args=nil)
   wpn=find_in_weapons(bot,event,args,2)
   adv=nil if !adv.nil? && adv[1].length>=@adventurers.length
   drg=nil if !drg.nil? && drg[1].length>=@dragons.length
-  wrm=nil if !wrm.nil? && wrm[1].length>=@wyrmprints.length
+  wrm=nil if !wrm.nil? && wrm[1].length>=@wyrmprints.reject{|q| ['Wily Warriors','Greatwyrm'].include?(q[0])}.uniq.length
   wpn=nil if !wpn.nil? && wpn[1].length>=@weapons.length
   if adv.nil? && drg.nil? && wrm.nil? && wpn.nil?
     event.respond "I'm not showing everything, you jerk!"
