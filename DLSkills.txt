@@ -117,6 +117,8 @@ Circular Judgement\\Skill\Deals 3 hits of 169% and 1 hit of 508% shadow damage t
 Clean Slate\\Skill\Removes all debuffs from the user.;; If the user's HP is below 30% of max HP when using this skill, increases the user's strength by 10% for 10 seconds.;; If the user's HP is above or equal to 30% of max HP, reduces their HP to 20% of max HP and grants them a one-use divergent shield that nullifies damage less than 70% of the user's maximum HP.;; Divergent shields can stack with ordinary shields. \Removes all debuffs from the user.;; If the user's HP is below 30% of max HP when using this skill, increases the user's strength by 15% for 10 seconds.;; If the user's HP is above or equal to 30% of max HP, reduces their HP to 20% of max HP and grants them a one-use divergent shield that nullifies damage less than 80% of the user's maximum HP.;; Divergent shields can stack with ordinary shields. \\6000, 6000, 6000\No\1.4\\Buff, Strength, Shield, Cleanse, User
 Cleansing Dance\\Skill\Grants all teammates a one-use shield that nullifies damage less than 20% of their maximum HP (but does not stack with any other shields), and removes poison.\Grants all teammates a one-use shield that nullifies damage less than 30% of their maximum HP (but does not stack with any other shields), and removes poison.\\7288, 7288, 7288\No\1.6\\Buff, Team, Shield, Cleanse
 Cobalt Strength\\Skill\Increases the user's strength by 35% for 5 seconds.\Increases the user's strength by 40% for 5 seconds.\Increases the user's strength by 25% for 30 seconds.\7103, 7103, 7103\No\1.4\\Buff, User, StrengthSkill
+Code 04: Combustion Slash\\Skill\Deals 4 hits of 66% flame damage to enemies directly ahead. If "Limiters Released" is active, deals 8 hits instead.\Deals 4 hits of 77% flame damage to enemies directly ahead. If "Limiters Released" is active, deals 8 hits instead.\Deals 4 hits of 87% flame damage to enemies directly ahead. If "Limiters Released" is active, deals 8 hits instead.\2537, 2537, 2537\Yes\1.9\\Damage, Conditional
+Code 07: Limit Breaker\\Skill\Activates "Limiters Released." During Limiters Released, the user's strength is increased by 10%, and the Code 07: Combustion Slash skill is powered up, but the user will take 3.5% Max HP damage every 2.9 seconds. Using the skill again will toggle Limiters Released.\Activates "Limiters Released." During Limiters Released, the user's strength is increased by 15%, and the Code 07: Combustion Slash skill is powered up, but the user will take 3.5% Max HP damage every 2.9 seconds. Using the skill again will toggle Limiters Released.\\4877, 4877, 4877\No\1.4\\StrengthSkill, Buff, Self
 Commander's Blitz\\Skill\Deals 3 hits of 264% wind damage to enemies directly ahead.\Deals 3 hits of 293% wind damage to enemies directly ahead.\\7175, 7175, 7175\Yes\0.9\\Damage
 Conchoidal Blast\\Skill\Deals 1 hit of 725% damage to the target and enemies near it.\Deals 1 hit of 806% damage to the target and enemies near it.\\8355, 8355, 8355\Yes\1\\Damage
 Conductive Protection\\Skill\Increases the user's defense by 25% for 10 seconds.\Increases the user's defense by 30% for 10 seconds.\Increases the user's defense by 30% for 30 seconds.\7316, 7316, 7316\No\1.1\\Buff, DefenseSkill, User
@@ -675,9 +677,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) HP\15%\Aura\If the user is attuned to Flame: increases HP by 15%.\30\y\HP, Flame
 (Flame) HP\30%\Aura\If the user is attuned to Flame: increases HP by 30%.\60\y\HP, Flame
 (Flame) HP\45%\Aura\If the user is attuned to Flame: increases HP by 45%.\80\y\HP, Flame
-(Flame) Primed Strength\example\Aura\Increases the strength of the adventurer you are currently controlling by `x`% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\0\y\Primed, StrengthSkill, Flame
-(Flame) Primed Strength\10%\Aura\Increases the strength of the adventurer you are currently controlling by 10% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\80\y\Primed, StrengthSkill, Flame
-(Flame) Primed Strength\15%\Aura\Increases the strength of the adventurer you are currently controlling by 15% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\100\y\Primed, StrengthSkill, Flame
+(Flame) Primed Strength\example\Aura\Increases the strength of the adventurer you are currently controlling by `x`% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\0\y\Primed, Strength, Flame
+(Flame) Primed Strength\10%\Aura\Increases the strength of the adventurer you are currently controlling by 10% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\80\y\Primed, Strength, Flame
+(Flame) Primed Strength\15%\Aura\Increases the strength of the adventurer you are currently controlling by 15% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\100\y\Primed, Strength, Flame
 (Flame) Skill Damage\example\Aura\If the user is attuned to Flame: increases attack skill damage by `x`%\0\y\Flame, SkillDamage
 (Flame) Skill Damage\70%\Aura\If the user is attuned to Flame: increases attack skill damage by 70%\100\y\Flame, SkillDamage
 (Flame) Skill Damage\90%\Aura\If the user is attuned to Flame: increases attack skill damage by 90%\120\y\Flame, SkillDamage
@@ -740,9 +742,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Shadow) Critical Damage\example\Aura\if the user is attuned to Shadow: adds 20% to the modifier applied to critical damage.\0\y\Shadow, CritDamage
 (Shadow) Critical Damage\10%\Aura\if the user is attuned to Shadow: adds 20% to the modifier applied to critical damage.\20\y\Shadow, CritDamage
 (Shadow) Critical Damage\20%\Aura\if the user is attuned to Shadow: adds 20% to the modifier applied to critical damage.\40\y\Shadow, CritDamage
-(Shadow) Dragon's Might\example\Aura\If the user is attuned to Shadow: Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\StrengthSkill, InCombat, Shadow
-(Shadow) Dragon's Might\I\Aura\If the user is attuned to Shadow: Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\StrengthSkill, InCombat, Shadow
-(Shadow) Dragon's Might\II\Aura\If the user is attuned to Shadow: Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\100\y\StrengthSkill, InCombat, Shadow
+(Shadow) Dragon's Might\example\Aura\If the user is attuned to Shadow: Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\Strength, InCombat, Shadow
+(Shadow) Dragon's Might\I\Aura\If the user is attuned to Shadow: Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\Strength, InCombat, Shadow
+(Shadow) Dragon's Might\II\Aura\If the user is attuned to Shadow: Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\100\y\Strength, InCombat, Shadow
 (Shadow) HP 30% = Strength\example\Aura\If the user is attuned to Shadow: increases strength by `x`% when HP is 30% or above.\0\y\HP30, Strength, Shadow
 (Shadow) HP 30% = Strength\35%\Aura\If the user is attuned to Shadow: increases strength by 35% when HP is 30% or above.\35\y\HP30, Strength, Shadow
 (Shadow) HP 30% = Strength\50%\Aura\If the user is attuned to Shadow: increases strength by 50% when HP is 30% or above.\50\y\HP30, Strength, Shadow
@@ -823,9 +825,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Wind) Poisoned Punisher\example\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by `x`%\0\y\Poison, Punisher
 (Wind) Poisoned Punisher\15%\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by 15%\20\y\Poison, Punisher
 (Wind) Poisoned Punisher\20%\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by 20%\40\y\Poison, Punisher
-(Wind) Primed Strength\example\Aura\Increases the strength of the adventurer you are currently controlling by `x`% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\0\y\Primed, StrengthSkill, Wind
-(Wind) Primed Strength\10%\Aura\Increases the strength of the adventurer you are currently controlling by 10% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\80\y\Primed, StrengthSkill, Wind
-(Wind) Primed Strength\15%\Aura\Increases the strength of the adventurer you are currently controlling by 15% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\100\y\Primed, StrengthSkill, Wind
+(Wind) Primed Strength\example\Aura\Increases the strength of the adventurer you are currently controlling by `x`% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\0\y\Primed, Strength, Wind
+(Wind) Primed Strength\10%\Aura\Increases the strength of the adventurer you are currently controlling by 10% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\80\y\Primed, Strength, Wind
+(Wind) Primed Strength\15%\Aura\Increases the strength of the adventurer you are currently controlling by 15% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\100\y\Primed, Strength, Wind
 (Wind) Skill Damage\example\Aura\If the user is attuned to Wind: increases skill damage by `x`%.\0\y\Wind, SkillDamage
 (Wind) Skill Damage\70%\Aura\If the user is attuned to Wind: increases skill damage by 70%.\110\y\Wind, SkillDamage
 (Wind) Skill Damage\90%\Aura\If the user is attuned to Wind: increases skill damage by 90%.\120\y\Wind, SkillDamage
@@ -857,9 +859,9 @@ Critical Rate\20%\Aura\If the user is attuned to Light: Increases critical rate 
 Dragon Time\example\Aura\Extends shapeshift time by `x`%.\0\y\DragonTime
 Dragon Time\15%\Aura\Extends shapeshift time by 15%.\60\y\DragonTime
 Dragon Time\20%\Aura\Extends shapeshift time by 20%.\80\y\DragonTime
-Dragon's Might\example\Aura\Increases strength by a further `x`% for the remainder of the quest upon shapeshifting, up to twice per quest.\0\y\StrengthSkill, InCombat
-Dragon's Might\10%\Aura\Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\StrengthSkill, InCombat
-Dragon's Might\10%\Aura\Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\100\y\StrengthSkill, InCombat
+Dragon's Might\example\Aura\Increases strength by a further `x`% for the remainder of the quest upon shapeshifting, up to twice per quest.\0\y\Strength, InCombat
+Dragon's Might\10%\Aura\Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\Strength, InCombat
+Dragon's Might\10%\Aura\Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\100\y\Strength, InCombat
 Exhilaration\-\Aura\If the user is attuned to Light: increases shapeshift time for the entire team by 3 seconds. The team's shapeshift time can only be increased by a maximum of 5 seconds through this ability.\30\y\DragonTime, Team
 HP 30% = Strength\example\Aura\Increases strength by `x`% when HP is 30% or above.\0\y\HP30, Strength
 HP 30% = Strength\35%\Aura\Increases strength by 35% when HP is 30% or above.\35\y\HP30, Strength
@@ -1341,6 +1343,8 @@ Eggsploration Points\100%\Ability\Increases eggsploration point intake for clear
 Eggsploration Points\150%\Ability\Increases eggsploration point intake for clearing quests by 150%\0\y\Event, Facility, Score
 Electrically Charged\I\Ability\Increases strength by 15% when electrified.\60\y\Strength
 Electrically Charged\II\Ability\Increases strength by 25% when electrified.\80\y\Strength
+Emergency Repairs\I\Ability\Removes all buffs and debuffs on the user, grants them an HP regen buff, healing 20% Max HP every 1.5 seconds for 5 seconds, but renders them unable to move or attack for 5 seconds when HP drops to 30% (once per quest).\60\y\
+Emergency Repairs\II\Ability\Removes all buffs and debuffs on the user, grants them an HP regen buff, healing 25% Max HP every 1.5 seconds for 5 seconds, but renders them unable to move or attack for 5 seconds when HP drops to 30% (once per quest).\80\y\
 Energized: Strength\example\Ability\Increases strength by `x`% for 15 seconds each time the user is energized.\0\y\Strength, Energized
 Energized: Strength\15%\Ability\Increases strength by 15% for 15 seconds each time the user is energized.\80\y\Strength, Energized
 Energized: Strength\20%\Ability\Increases strength by 20% for 15 seconds each time the user is energized.\100\y\Strength, Energized
@@ -1741,10 +1745,10 @@ Renown\25%\Ability\Increases renown intake for clearing quests by +25%\0\y\Event
 Renown\50%\Ability\Increases renown intake for clearing quests by +50%\0\y\Event, Facility, Score
 Renown\100%\Ability\Increases renown intake for clearing quests by +100%\0\y\Event, Facility, Score
 Renown\150%\Ability\Increases renown intake for clearing quests by +150%\0\y\Event, Facility, Score
-Resilient Offense\example\Ability\Increases strength by `x`% for the remainder of the quest when the user's HP drops to 30% (three times per quest).\80\y\StrengthSkill, Resilient
-Resilient Offense\5%\Ability\Increases strength by 5% for the remainder of the quest when the user's HP drops to 30% (three times per quest).\80\y\StrengthSkill, Resilient
-Resilient Offense\8%\Ability\Increases strength by 8% for the remainder of the quest when the user's HP drops to 30% (three times per quest).\80\y\StrengthSkill, Resilient
-Resilient Offense\10%\Ability\Increases strength by 10% for the remainder of the quest when the user's HP drops to 30% (three times per quest).\80\y\StrengthSkill, Resilient
+Resilient Offense\example\Ability\Increases strength by `x`% for the remainder of the quest when the user's HP drops to 30% (three times per quest).\80\y\Strength, Resilient
+Resilient Offense\5%\Ability\Increases strength by 5% for the remainder of the quest when the user's HP drops to 30% (three times per quest).\80\y\Strength, Resilient
+Resilient Offense\8%\Ability\Increases strength by 8% for the remainder of the quest when the user's HP drops to 30% (three times per quest).\80\y\Strength, Resilient
+Resilient Offense\10%\Ability\Increases strength by 10% for the remainder of the quest when the user's HP drops to 30% (three times per quest).\80\y\Strength, Resilient
 Sacred Shield\example\Ability\Reduces susceptibility to poison and curses by `x`%.\0\y\Resistance, BlindRes, PoisonRes
 Sacred Shield\I\Ability\Reduces susceptibility to poison and curses by 50%.\80\y\Resistance, BlindRes, PoisonRes
 Sacred Shield\II\Ability\Reduces susceptibility to poison and curses by 100%.\100\y\Resistance, BlindRes, PoisonRes
@@ -1853,6 +1857,7 @@ Stunned Punisher\25%\Ability\Increases damage to stunned enemies by 25%.\80\y\St
 Stunned Punisher\30%\Ability\Increases damage to stunned enemies by 30%.\100\y\Stun, Punisher
 Sylvan Strength\I\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 25-hit combo.\70\y\CritRate, Strength, Combo
 Sylvan Strength\II\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 20-hit combo.\100\y\CritRate, Strength, Combo
+System Overload\I\Ability\Increases strength by 20% but decreases defense by 50% when HP is 30% or below.\60\y\Strength
 Tent Canvas\example\Ability\Increases canvas tent intake for clearing quests by `x`%\0\y\Event, Facility, Materials
 Tent Canvas\25%\Ability\Increases canvas tent intake for clearing quests by 25%\0\y\Event, Facility, Materials
 Tent Canvas\50%\Ability\Increases canvas tent intake for clearing quests by 50%\0\y\Event, Facility, Materials
