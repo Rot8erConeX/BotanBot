@@ -10,7 +10,7 @@ Game Over\
 Good Job\Notte
 Grr\Notte
 Heal\Cleo
-Hee hee(Maritimus)\Maritimus
+Hee Hee(Maritimus)\Maritimus
 Hee hee(Notte)\Notte
 Heh\Cleo
 Hey\Euden
