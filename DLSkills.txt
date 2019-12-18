@@ -954,6 +954,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Flame) Affliction Guard\I\Ability\If the user is attuned to Flame: resists afflictions once per quest\80\y\AfflictionGuard, Flame
 (Flame) Affliction Guard\II\Ability\If the user is attuned to Flame: resists afflictions twice per quest\100\y\AfflictionGuard, Flame
 (Flame) Affliction Guard\III\Ability\If the user is attuned to Flame: resists afflictions thrice per quest\120\y\AfflictionGuard, Flame
+(Flame) Astral's Bane\60%\Ability\If the user is attuned to (Flame): increases damage to wind-attuned Astrals by 60%.\40\y\Flame, Astral, Bane
 (Flame) Blinded Punisher\example\Ability\If the user is attuned to Flame: Increases damage to blinded enemies by `x`%.\0\y\Blind, Punisher, Flame
 (Flame) Blinded Punisher\10%\Ability\If the user is attuned to Flame: Increases damage to blinded enemies by 10%.\20\y\Blind, Punisher, Flame
 (Flame) Blinded Punisher\15%\Ability\If the user is attuned to Flame: Increases damage to blinded enemies by 15%.\40\y\Blind, Punisher, Flame
@@ -1085,6 +1086,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Water) Affliction Guard\I\Ability\If the user is attuned to Water: resists afflictions once per quest\60\y\Water, AfflictionGuard
 (Water) Affliction Guard\II\Ability\If the user is attuned to Water: resists afflictions two times per quest\80\y\Water, AfflictionGuard
 (Water) Affliction Guard\III\Ability\If the user is attuned to Water: resists afflictions three times per quest\100\y\Water, AfflictionGuard
+(Water) Astral's Bane\60%\Ability\If the user is attuned to (Water): increases damage to flame-attuned Astrals by 60%.\40\y\Water, Astral, Bane
 (Water) Broken Punisher\example\Ability\If the user is attuned to Water: increases damage to enemies in break state by `x`%.\0\y\Water, BrokenPunisher
 (Water) Broken Punisher\10%\Ability\If the user is attuned to Water: increases damage to enemies in break state by 10%.\20\y\Water, BrokenPunisher
 (Water) Broken Punisher\15%\Ability\If the user is attuned to Water: increases damage to enemies in break state by 15%.\40\y\Water, BrokenPunisher
@@ -1124,6 +1126,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Water) Undead's Bane\10%\Ability\if the user is attuned to Water: increases damage to undead by 10%.\20\y\Undead, Bane, Water
 (Water) Undead's Bane\15%\Ability\if the user is attuned to Water: increases damage to undead by 15%.\40\y\Undead, Bane, Water
 (Water) Volcanic Chimera's Bane\20%\Ability\if the user is attuned to Water: increases damage to the Volcanic Chimera by 20%.\40\y\Bane, Water
+(Wind) Astral's Bane\60%\Ability\If the user is attuned to (Wind): increases damage to water-attuned Astrals by 60%.\40\y\Wind, Astral, Bane
 (Wind) Copy Punisher\-\Ability\If the user is attuned to Wind: increases damage to copies created by Propagation.\50\y\CopyPunisher, Wind
 (Wind) HP 70% = Healing\8%\Ability\if the user is attuned to Wind: increases the potency of recovery skills by 8% when HP is 70% or above.\40\y\HP70, RecoveryPotency, Wind
 (Wind) Blinded Punisher\example\Ability\If the user is attuned to Wind: Increases damage to blinded enemies by `x`%.\0\y\Blind, Punisher, Wind
@@ -1177,6 +1180,7 @@ Astral Ornament\25%\Ability\Increases Astral Ornaments intake for clearing quest
 Astral Ornament\50%\Ability\Increases Astral Ornaments intake for clearing quests by 50%.\0\y\Event, Facility, Materials
 Astral Ornament\60%\Ability\Increases Astral Ornaments intake for clearing quests by 60%.\0\y\Event, Facility, Materials
 Astral Ornament\75%\Ability\Increases Astral Ornaments intake for clearing quests by 75%.\0\y\Event, Facility, Materials
+Astral's Bane\60%\Ability\Increases damage to Astrals by 60%.\40\y\Astral, Bane
 Barrage Devastation\3%\Ability\Increases critical rate by 3% for every 30-hit combo (up to three times per quest)\60\y\CritRate, Combo
 Barrage Obliteration\example\Ability\Adds `x`% to the modifier applied to critical damage for every 20-hit combo (up to three times per quest)\0\y\CritDamage, Combo
 Barrage Obliteration\5%\Ability\Adds 5% to the modifier applied to critical damage for every 20-hit combo (up to three times per quest)\40\y\CritDamage, Combo
