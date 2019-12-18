@@ -967,8 +967,6 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Flame) Full HP = Defense\15%\Ability\If the user is attuned to Flame: increases defense by 15% when HP is full.\20\y\HP100, Defense, Flame
 (Flame) Full HP = Defense\20%\Ability\If the user is attuned to Flame: increases defense by 20% when HP is full.\40\y\HP100, Defense, Flame
 (Flame) Full HP = Strength\8%\Ability\If the user is attuned to Flame: increases strength by 8% when HP is full.\40\y\HP100, Strength, Flame
-(Flame) High Midgardsormr's Bane\example\Ability\If the user is attuned to Flame: increases damage to High Midgardsormr by `x`%.\0\y\HMS, Bane, Flame
-(Flame) High Midgardsormr's Bane\20%\Ability\If the user is attuned to Flame: increases damage to High Midgardsormr by 20%.\100\y\HMS, Bane, Flame
 (Flame) High Midgardsormr's Bane\30%\Ability\If the user is attuned to Flame: increases damage to High Midgardsormr by 30%.\120\y\HMS, Bane, Flame
 (Flame) HP 70% = Critical Rate\5%\Ability\If the user is attuned to Flame: increases critical rate by 5%.\20\y\HP70, CritRate, Flame
 (Flame) HP 70% = Defense\example\Ability\If the user is attuned to Flame: increases defense by `x`% when HP is 70% or above.\0\y\HP70, Defense, Flame
@@ -1098,8 +1096,6 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Water) Full HP = Defense\example\Ability\if the user is attuned to Water: increases defense by `x`% when HP is full.\0\y\HP100, Defense, Water
 (Water) Full HP = Defense\15%\Ability\if the user is attuned to Water: increases defense by 15% when HP is full.\0\y\HP100, Defense, Water
 (Water) Full HP = Defense\20%\Ability\if the user is attuned to Water: increases defense by 20% when HP is full.\0\y\HP100, Defense, Water
-(Water) High Brunhilda's Bane\example\Ability\if the user is attuned to Water: increases damage to High Brunhilda by `x`%\0\y\HBH, Bane, Water
-(Water) High Brunhilda's Bane\20%\Ability\if the user is attuned to Water: increases damage to High Brunhilda by 20%\50\y\HBH, Bane, Water
 (Water) High Brunhilda's Bane\30%\Ability\if the user is attuned to Water: increases damage to High Brunhilda by 30%\70\y\HBH, Bane, Water
 (Water) HP 70% = Strength\5%\Ability\If the user is attuned to Water: increases strength by 5% when HP is 70% or above.\40\y\HP70, Strength, Water
 (Water) Petrify Res\-\Ability\If the user is attuned to Water: completely prevents petrification.\60\y\Water, PetrifyRes
@@ -1490,8 +1486,6 @@ Healing Doublebuff (Team)\I\Ability\Grants an HP regen buff healing the entire t
 Heaven's Shield\example\Ability\Reduces susceptibility to burning and stun by 50/100%.\0\y\Resistance, BurnRes, StunRes
 Heaven's Shield\I\Ability\Reduces susceptibility to burning and stun by 50%.\0\y\Resistance, BurnRes, StunRes
 Heaven's Shield\II\Ability\Reduces susceptibility to burning and stun by 100%.\0\y\Resistance, BurnRes, StunRes
-High Brunhilda's Bane\example\Ability\increases damage to High Brunhilda by `x`%.\0\y\HBH, Bane
-High Brunhilda's Bane\20%\Ability\increases damage to High Brunhilda by 20%.\100\y\HBH, Bane
 High Brunhilda's Bane\30%\Ability\increases damage to High Brunhilda by 30%.\120\y\HBH, Bane
 High Brunhilda Res\example\Ability\Reduces damage taken from High Brunhilda by `x`%.\0\y\HBHRes, Resistance, HBH
 High Brunhilda Res\20%\Ability\Reduces damage taken from High Brunhilda by 20%.\60\y\HBHRes, Resistance, HBH
@@ -1507,8 +1501,6 @@ High Mercury Res\20%\Ability\Reduces damage taken from High Mercury by 20%\60\y\
 High Mercury Res\23%\Ability\Reduces damage taken from High Mercury by 23%\80\y\HMCRes, Resistance, HMC
 High Mercury Res\25%\Ability\Reduces damage taken from High Mercury by 25%\100\y\HMCRes, Resistance, HMC
 High Mercury's Bane\30%\Ability\increases damage to High Mercury by 30%.\100\y\HMC, Bane
-High Midgardsormr's Bane\example\Ability\increases damage to High Midgardsormr by `x`%.\0\y\HMS, Bane
-High Midgardsormr's Bane\20%\Ability\increases damage to High Midgardsormr by 20%.\100\y\HMS, Bane
 High Midgardsormr's Bane\30%\Ability\increases damage to High Midgardsormr by 30%.\120\y\HMS, Bane
 High Midgardsormr Res\example\Ability\Reduces damage taken from High Midgardsormr by `x`%.\0\y\HMSRes, Resistance, HMS
 High Midgardsormr Res\20%\Ability\Reduces damage taken from High Midgardsormr by 20%.\60\y\HMSRes, Resistance, HMS
