@@ -138,7 +138,7 @@ Crimson Wave\\Skill\Deals 2 hits of 338% flame damage to enemies in a line.\Deal
 Crimson Wildfire\\Skill\Deals 2 hits of 415% flame damage to the target and nearby enemies.\Deals 2 hits of 461% flame damage to the target and nearby enemies.\\7299, 7299, 7299\Yes\0\\Damage
 Critter Slayer\\Skill\Deals 1 shot of 699% light damage to the target.\Deals 1 shot of 734% light damage to the target, and inflicts stun for 4-5 seconds with 100% base chance.\\5008, 5008, 5008\Yes\1.8\\Damage, Stun
 Cruel Assault\\Skill\Deals 2 hits of 305% flame damage to enemies directly ahead.\Deals 2 hits of 339% flame damage to enemies directly ahead.\\7339, 7339, 7339\Yes\1.4\\Damage
-Crystalline Blades\\Skill\Deals 4 hits of 138% flame damage to enemies directly ahead, and shoots 3 additional flame blades each dealing 23% flame damage for each time "Radiant Bauble" has been used, to a maximum of 15 additional blades.\Deals 4 hits of 153% flame damage to enemies directly ahead, and shoots 3 additional flame blades each dealing 25% flame damage for each time "Radiant Bauble" has been used, to a maximum of 15 additional blades.\Deals 4 hits of 170% flame damage to enemies directly ahead, *dispels one buff from each target*, and shoots 3 additional flame blades each dealing 28% flame damage for each time "Radiant Bauble" has been used, to a maximum of 15 additional blades. This skill can be enhanced up to 5 times.\2590, 2590, 2590\Yes\2\\Damage, Stacking, Conditional
+Crystalline Blades\\Skill\Deals 4 hits of 138% flame damage to enemies directly ahead, and shoots 3 additional flame blades each dealing 23% flame damage for each time "Radiant Bauble" has been used, to a maximum of 15 additional blades.\Deals 4 hits of 153% flame damage to enemies directly ahead, and shoots 3 additional flame blades each dealing 25% flame damage for each time "Radiant Bauble" has been used, to a maximum of 15 additional blades.\Deals 4 hits of 170% flame damage to enemies directly ahead, *dispels one buff from each target*, and shoots 3 additional flame blades each dealing 28% flame damage for each time "Radiant Bauble" has been used, to a maximum of 15 additional blades. This skill can be enhanced up to 5 times.\2590, 2590, 2590\Yes\2\\Damage, Stacking, Conditional, Dispel
 Curative Catch\\Skill\Restores HP to all allies with 72% Recovery Potency.\Restores HP to all allies with 90% Recovery Potency and removes burning.\Restores HP to all allies with 108% Recovery Potency and removes burning.\5916, 5916, 5916\Yes\1.1\\HealSkill, Team, Burst, Cleanse
 Custom Concoction\\Skill\Applies one of the following at random to the entire team:;; Increases strength by 15% for 15 seconds;; Increases defense by 15% for 15 seconds;; Increases critical rate by 15% for 10 seconds;; Increases max HP by 5% for the remainder of the quest.\Applies one of the following at random to the entire team:;; Increases strength by 20% for 15 seconds;; Increases defense by 20% for 15 seconds;; Increases critical rate by 20% for 10 seconds;; Increases max HP by 10% for the remainder of the quest.\Applies one of the following at random to the entire team:;; Increases strength by 25% for 15 seconds;; Increases defense by 25% for 15 seconds;; Increases critical rate by 25% for 10 seconds;; Increases max HP by 15% for the remainder of the quest.\3817, 3817, 3817\No\1.4\Applies one of the following at random to the entire team:;; Increases strength by 15%/20%/25% for 15 seconds;; Increases defense by 15%/20%/25% for 15 seconds;; Increases critical rate by 15%/20%/25% for 10 seconds;; Increases max HP by 5%/10%/15% for the remainder of the quest.\Buff, Random, StrengthSkill, DefenseSkill, CritRate, HealthSkill, Team
 Cyclone Axe\\Skill\Deals 2 hits of 420% wind damage to surrounding enemies and draws them toward the user for 0.5 seconds.\Deals 2 hits of 466% wind damage to surrounding enemies and draws them toward the user for 0.5 seconds.\Deals 2 hits of 518% wind damage to surrounding enemies and draws them toward the user for 0.5 seconds.\5735, 5735, 5735\Yes\0.9\\Damage
@@ -1335,9 +1335,11 @@ Dragon Time\8%\Ability\Extends shapeshift time by 8%.\50\n\DragonTime
 Dragon Time\10%\Ability\Extends shapeshift time by 10%.\60\n\DragonTime
 Dragon Time\15%\Ability\Extends shapeshift time by 15%.\80\n\DragonTime
 Dragon Time\20%\Ability\Extends shapeshift time by 20%.\100\n\DragonTime
+Dragon's Dominance\-\Ability\Increases player EXP intake for clearing quests by 15%. This ability does not stack with other similar abilities; the highest value will be applied. Normal attacks when in dragon form will dispel one enemy buff.\120\y\EXP, Dispel
 Dragon's Claws\I\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 4% in total. On second shapeshift strength is increased by 10% in total. On third shapeshift strength is increased by 20% in total.\60\y\Strength, InCombat
 Dragon's Claws\II\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 5% in total. On second shapeshift strength is increased by 13% in total. On third shapeshift strength is increased by 25% in total.\80\y\Strength, InCombat
 Dragon's Claws\III\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 6% in total. On second shapeshift strength is increased by 15% in total. On third shapeshift strength is increased by 30% in total.\100\y\Strength, InCombat
+Dragon's Claws\IV\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 7% in total. On second shapeshift strength is increased by 20% in total. On third shapeshift strength is increased by 35% in total.\120\y\Strength, InCombat
 Dull\-\Ability\The afflicted adventurer's weapon will be dulled, lowering their strength by 90%.\-1\y\Dull, Enemy
 Dull Res\-\Ability\completely prevents dulling.\50\y\DullRes, Resistance
 Eggsploration Points\example\Ability\Increases eggsploration point intake for clearing quests by `x`%\0\y\Event, Facility, Score
@@ -1370,6 +1372,7 @@ Extra Energy\example\Ability\Grants an `x`% chance that a user's energy level wi
 Extra Energy\I\Ability\Grants a 40% chance that a user's energy level will be increased by an additional stage upon being increased\60\y\Energy
 Extra Energy\II\Ability\Grants a 50% chance that a user's energy level will be increased by an additional stage upon being increased\70\y\Energy
 Extra Energy\III\Ability\Grants an 80% chance that a user's energy level will be increased by an additional stage upon being increased\80\y\Energy
+Flame Blades' Protection\-\Ability\Fills 100% of skill gauges at the start of quests, and increases defense by 20% while Crystalline Blades Buffed is in effect.\100\y\SkillPrep, Defense
 Flame Res\example\Ability\Reduces flame damage taken by `x`%.\0\y\FlameRes, Resistance
 Flame Res\3%\Ability\Reduces flame damage taken by 3%.\20\y\FlameRes, Resistance
 Flame Res\4%\Ability\Reduces flame damage taken by 4%.\30\y\FlameRes, Resistance
@@ -1393,6 +1396,7 @@ Flurry Devastation\8%\Ability\Increases critical rate by 8% when the combo count
 Flurry Devastation\10%\Ability\Increases critical rate by 10% when the combo count is 15 or higher.\80\y\Combo, CritRate, Flurry
 Flurry Devastation\12%\Ability\Increases critical rate by 12% when the combo count is 15 or higher.\90\y\Combo, CritRate, Flurry
 Flurry Devastation\13%\Ability\Increases critical rate by 13% when the combo count is 15 or higher.\100\y\Combo, CritRate, Flurry
+Flurry Devastation\15%\Ability\Increases critical rate by 15% when the combo count is 15 or higher.\120\y\Combo, CritRate, Flurry
 Flurry Freezer\I\Ability\When the combo count is 15 or higher, grants a 6-second buff that gives standard attacks a 10% chance of inflicting freeze.\40\y\Combo, FreezeChance, Flurry
 Flurry Poison Edge\example\Ability\Increases chances of inflicting poison by `x`% when the combo count is 15 or higher.\0\y\Combo, Flurry, PoisonChance
 Flurry Poison Edge\50%\Ability\Increases chances of inflicting poison by 50% when the combo count is 15 or higher.\60\y\Combo, Flurry, PoisonChance
@@ -1437,6 +1441,7 @@ Full HP = Bog\40%\Ability\Increases the chances of inflicting bog by 40% when HP
 Full HP = Burn\example\Ability\Increases the chances of inflicting burn by `x`% when HP is full.\0\y\HP100, BurnChance, StatusChance
 Full HP = Burn\30%\Ability\Increases the chances of inflicting burn by 30% when HP is full.\50\y\HP100, BurnChance, StatusChance
 Full HP = Burn\40%\Ability\Increases the chances of inflicting burn by 40% when HP is full.\60\y\HP100, BurnChance, StatusChance
+Full HP = Burn\70%\Ability\Increases the chances of inflicting burn by 70% when HP is full.\80\y\HP100, BurnChance, StatusChance
 Full HP = Critical Damage\example\Ability\Adds `x`% to the modifier applied to critical damage when HP is full.\0\y\HP100, CriticalDamage
 Full HP = Critical Damage\15%\Ability\Adds 15% to the modifier applied to critical damage when HP is full.\40\y\HP100, CriticalDamage
 Full HP = Critical Damage\17%\Ability\Adds 17% to the modifier applied to critical damage when HP is full.\50\y\HP100, CriticalDamage
@@ -1564,6 +1569,7 @@ HP 70% = Skill Damage\20%\Ability\Increases attack skill damage by 20% when HP i
 HP 70% = Skill Damage\25%\Ability\Increases attack skill damage by 25% when HP is 70% or above.\60\y\HP70, SkillDamage
 HP 70% = Skill Damage\30%\Ability\Increases attack skill damage by 30% when HP is 70% or above.\80\y\HP70, SkillDamage
 HP 70% = Skill Damage\35%\Ability\Increases attack skill damage by 35% when HP is 70% or above.\100\y\HP70, SkillDamage
+HP 70% = Skill Damage\40%\Ability\Increases attack skill damage by 40% when HP is 70% or above.\120\y\HP70, SkillDamage
 HP 70% = Skill Haste\example\Ability\Increases skill gauge fill rate by `x`% when HP is 70% or above.\0\y\HP70, SkillHaste
 HP 70% = Skill Haste\6%\Ability\Increases skill gauge fill rate by 6% when HP is 70% or above.\60\y\HP70, SkillHaste
 HP 70% = Skill Haste\8%\Ability\Increases skill gauge fill rate by 8% when HP is 70% or above.\80\y\HP70, SkillHaste
@@ -1574,6 +1580,7 @@ HP 70% = Strength\6%\Ability\Increases strength by 6% when HP is 70% or above.\5
 HP 70% = Strength\8%\Ability\Increases strength by 8% when HP is 70% or above.\60\y\HP70, Strength
 HP 70% = Strength\10%\Ability\Increases strength by 10% when HP is 70% or above.\80\y\HP70, Strength
 HP 70% = Strength\13%\Ability\Increases strength by 13% when HP is 70% or above.\100\y\HP70, Strength
+HP 70% = Strength\15%\Ability\Increases strength by 15% when HP is 70% or above.\120\y\HP70, Strength
 HP Below 30% = Strength & Attack Rate\example\Ability\Increases strength by `x`% and attack rate by `x`% when HP is 30% or below.\0\y\Strength, Speed
 HP Below 30% = Strength & Attack Rate\II\Ability\Increases strength by 15% and attack rate by 10% when HP is 30% or below.\60\y\Strength, Speed
 HP Below 30% = Strength & Attack Rate\III\Ability\Increases strength by 20% and attack rate by 10% when HP is 30% or below.\80\y\Strength, Speed
@@ -1605,6 +1612,7 @@ Last Defense\30%\Ability\Buffs defense by 30% for 15 seconds when HP drops to 30
 Last Defense\40%\Ability\Buffs defense by 40% for 15 seconds when HP drops to 30% (once per quest).\40\y\Last, Defense
 Last Defense\50%\Ability\Buffs defense by 50% for 15 seconds when HP drops to 30% (once per quest).\60\y\Last, Defense
 Last Defense\60%\Ability\Buffs defense by 60% for 15 seconds when HP drops to 30% (once per quest).\80\y\Last, Defense
+Last Defense\100%\Ability\Buffs defense by 100% for 15 seconds when HP drops to 30% (once per quest).\120\y\Last, Defense
 Last Destruction\I\Ability\Increases the damage of the next attack skill used by each team member by 30% when the user's HP drops to 30% (once per quest).\40\y\Last, Strength
 Last Destruction\II\Ability\Increases the damage of the next attack skill used by each team member by 40% when the user's HP drops to 30% (once per quest).\60\y\Last, Strength
 Last Offense\example\Ability\Buffs strength by `x`% for 15 seconds when HP drops to 30% (once per quest).\0\y\Last, Strength
@@ -1664,6 +1672,7 @@ Overdrive Punisher\5%\Ability\Increases damage to enemies in overdrive state by 
 Overdrive Punisher\8%\Ability\Increases damage to enemies in overdrive state by 8%.\60\y\Overdrive, Punisher
 Overdrive Punisher\10%\Ability\Increases damage to enemies in overdrive state by 10%.\80\y\Overdrive, Punisher
 Overdrive Punisher\13%\Ability\Increases damage to enemies in overdrive state by 13%.\100\y\Overdrive, Punisher
+Overdrive Punisher\15%\Ability\Increases damage to enemies in overdrive state by 15%.\120\y\Overdrive, Punisher
 Paper-Mache\example\Ability\Increases Paper-Mache intake by `x`%\0\y\Event, Facility, Materials
 Paper-Mache\50%\Ability\Increases Paper-Mache intake by 50%\0\y\Event, Facility, Materials
 Paper-Mache\75%\Ability\Increases Paper-Mache intake by 75%\0\y\Event, Facility, Materials
@@ -1715,9 +1724,17 @@ Poison Res\100%\Ability\Reduces susceptibility to poison by 100%.\100\y\PoisonRe
 Poisonous Cage\example\Ability\The user's strength is lowered by `x`% during quests. Using Ruination Cage grants the user the "Poisonous Cage" effect. When this effect is active, the user's next force strike will inflict poison. This effect cannot stack, and will be consumed on use.\0\y\
 Poisonous Cage\I\Ability\The user's strength is lowered by 70% during Quests. Using Ruination Cage *[S1]* grants the user the "Poisonous Cage" effect. When this effect is active, the user's next force strike will deal 3 hits of 47% (52%) Shadow Damage, throw three knives in front of the user dealing 9% (10%) each for Force Strike Lv1 (Lv2) and inflict poison - dealing 270% damage every 2.9 seconds for 24 seconds - with 110% base chance. Bonus OD Damage is reduced to 4.2x for all hits of "Poisonous Cage", from 8.4x on the first two hits. This effect cannot stack, and will be consumed on use.\80\y\
 Poisonous Cage\II\Ability\The user's strength is lowered by 60% during Quests. Using Ruination Cage *[S1]* grants the user the "Poisonous Cage" effect. When this effect is active, the user's next force strike will deal 3 hits of 52% (57%) Shadow Damage, throw three knives in front of the user dealing 10% (11%) each for Force Strike Lv1 (Lv2) and inflict poison - dealing 300% damage every 2.9 seconds for 24 seconds - with 120% base chance. Bonus OD Damage is reduced to 4.2x for all hits of "Poisonous Cage", from 8.4x on the first two hits. This effect cannot stack, and will be consumed on use.\100\y\
+Potent Paralysis Res\example\Ability\\0\y\ParalysisRes, Resistance, Potent
+Potent Paralysis Res\50%\Ability\Reduces susceptibility to paralysis by 50%. When the user is hit by an attack that would have paralyzed them, their strength is increased by 15% for 10 seconds. After activating, this buff will not activate again for 15 seconds.\80\y\ParalysisRes, Resistance, Potent
+Potent Paralysis Res\100%\Ability\Reduces susceptibility to paralysis by 100%. When the user is hit by an attack that would have paralyzed them, their strength is increased by 15% for 10 seconds. After activating, this buff will not activate again for 15 seconds.\100\y\ParalysisRes, Resistance, Potent
 Potent Sleep Res\example\Ability\Reduces susceptibility to sleep by `x`%. When the user is hit by an attack that would have put them to sleep, their strength is increased by 15% for 10 seconds. After activating, this buff will not activate again for 15 seconds.\0\y\SleepRes, Resistance, Potent
+Potent Sleep Res\25%\Ability\Reduces susceptibility to sleep by 25%. When the user is hit by an attack that would have put them to sleep, their strength is increased by 15% for 10 seconds. After activating, this buff will not activate again for 15 seconds.\80\y\SleepRes, Resistance, Potent
 Potent Sleep Res\50%\Ability\Reduces susceptibility to sleep by 50%. When the user is hit by an attack that would have put them to sleep, their strength is increased by 15% for 10 seconds. After activating, this buff will not activate again for 15 seconds.\80\y\SleepRes, Resistance, Potent
 Potent Sleep Res\100%\Ability\Reduces susceptibility to sleep by 100%. When the user is hit by an attack that would have put them to sleep, their strength is increased by 15% for 10 seconds. After activating, this buff will not activate again for 15 seconds.\100\y\SleepRes, Resistance, Potent
+Potent Stun Res\example\Ability\Reduces susceptibility to stun by `x`%. When the user is hit by an attack that would have stunned them, their strength is increased by 15% for 10 seconds. After activating, this buff will not activate again for 15 seconds.\0\y\StunRes, Resistance, Potent
+Potent Stun Res\25%\Ability\Reduces susceptibility to stun by 25%. When the user is hit by an attack that would have stunned them, their strength is increased by 15% for 10 seconds. After activating, this buff will not activate again for 15 seconds.\80\y\StunRes, Resistance, Potent
+Potent Stun Res\50%\Ability\Reduces susceptibility to stun by 50%. When the user is hit by an attack that would have stunned them, their strength is increased by 15% for 10 seconds. After activating, this buff will not activate again for 15 seconds.\80\y\StunRes, Resistance, Potent
+Potent Stun Res\100%\Ability\Reduces susceptibility to stun by 100%. When the user is hit by an attack that would have stunned them, their strength is increased by 15% for 10 seconds. After activating, this buff will not activate again for 15 seconds.\100\y\StunRes, Resistance, Potent
 Primed Defense\example\Ability\Increases the defense of the adventurer you are currently controlling by `x`% for 10 seconds every time their initial skill, displayed at the top of their skill list *[S1]*, becomes available for use. After activating, this ability will not activate again for 15 seconds.\0\y\Primed, Defense, Buff
 Primed Defense\8%\Ability\Increases the defense of the adventurer you are currently controlling by 8% for 10 seconds every time their initial skill, displayed at the top of their skill list *[S1]*, becomes available for use. After activating, this ability will not activate again for 15 seconds.\40\y\Primed, Defense, Buff
 Primed Defense\10%\Ability\Increases the defense of the adventurer you are currently controlling by 10% for 10 seconds every time their initial skill, displayed at the top of their skill list *[S1]*, becomes available for use. After activating, this ability will not activate again for 15 seconds.\60\y\Primed, Defense, Buff
@@ -1750,6 +1767,7 @@ Resilient Offense\example\Ability\Increases strength by `x`% for the remainder o
 Resilient Offense\5%\Ability\Increases strength by 5% for the remainder of the quest when the user's HP drops to 30% (three times per quest).\80\y\Strength, Resilient
 Resilient Offense\8%\Ability\Increases strength by 8% for the remainder of the quest when the user's HP drops to 30% (three times per quest).\80\y\Strength, Resilient
 Resilient Offense\10%\Ability\Increases strength by 10% for the remainder of the quest when the user's HP drops to 30% (three times per quest).\80\y\Strength, Resilient
+Resilient Offense\15%\Ability\Increases strength by 15% for the remainder of the quest when the user's HP drops to 30% (three times per quest).\100\y\Strength, Resilient
 Sacred Shield\example\Ability\Reduces susceptibility to poison and curses by `x`%.\0\y\Resistance, BlindRes, PoisonRes
 Sacred Shield\I\Ability\Reduces susceptibility to poison and curses by 50%.\80\y\Resistance, BlindRes, PoisonRes
 Sacred Shield\II\Ability\Reduces susceptibility to poison and curses by 100%.\100\y\Resistance, BlindRes, PoisonRes
@@ -1794,8 +1812,10 @@ Skill Prep\25%\Ability\Fills 25% of skill gauges at the start of quests.\40\y\Sk
 Skill Prep\50%\Ability\Fills 50% of skill gauges at the start of quests.\60\y\SkillPrep
 Skill Prep\75%\Ability\Fills 75% of skill gauges at the start of quests.\80\y\SkillPrep
 Skill Prep\100%\Ability\Fills 100% of skill gauges at the start of quests.\100\y\SkillPrep
+Skill Prep & Skill Charge\-\Ability\Fills 100% of skill gauges at the start of quests. Using a skill fills skill gauges by 5%.\120\y\SkillPrep, SkillCharge
 Skill Resistance\-\Ability\This significantly reduces the damage received from skills.\-1\y\SkillRes, Enemy
 Skill Resistance Penetrator\-\Ability\Completely negates skill resistance.\50\y\SkillResistancePenetrator
+Slayer's Flurry Strength\I\Ability\Increases strength by 6% for every five enemies defeated (up to five times per quest), and increases strength by 8% when the combo count is 15 or higher.\100\y\Strength, Slayers, Combo, Flurry
 Slayer's Strength\example\Ability\Increases strength by `x`% for every five enemies defeated (up to five times per quest).\0\y\Strength, Slayers
 Slayer's Strength\2%\Ability\Increases strength by 2% for every five enemies defeated (up to five times per quest).\20\y\Strength, Slayers
 Slayer's Strength\3%\Ability\Increases strength by 3% for every five enemies defeated (up to five times per quest).\40\y\Strength, Slayers
@@ -1868,6 +1888,7 @@ Thaumian's Bane\10%\Ability\Increases damage to thaumians by 10%.\20\y\Thaumian,
 Thaumian's Bane\15%\Ability\Increases damage to thaumians by 15%.\40\y\Thaumian, Bane
 Thaumian's Bane\20%\Ability\Increases damage to thaumians by 20%.\60\y\Thaumian, Bane
 Thaumian's Bane\25%\Ability\Increases damage to thaumians by 25%.\80\y\Thaumian, Bane
+Thaumian's Bane\35%\Ability\Increases damage to thaumians by 35%.\120\y\Thaumian, Bane
 The Faceless God\example\Ability\When shapeshifting, Lathna will transform into Nyarlathotep regardless of what dragon she is equipped with. Grants an HP regen buff healing for `x`% Max HP every 3.9s for 20 seconds each time she shapeshifts.\0\y\Regen
 The Faceless God\I\Ability\When shapeshifting, Lathna will transform into Nyarlathotep regardless of what dragon she is equipped with. Grants an HP regen buff healing for 12% Max HP every 3.9s for 20 seconds each time she shapeshifts.\60\y\Regen
 The Faceless God\II\Ability\When shapeshifting, Lathna will transform into Nyarlathotep regardless of what dragon she is equipped with. Grants an HP regen buff healing for 14% Max HP every 3.9s for 20 seconds each time she shapeshifts.\80\y\Regen
