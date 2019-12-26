@@ -811,3 +811,11 @@ Mega Sword\Sword\5c\None\30, 94, 101\108, 337, 362\Mega Buster(Sword)\1500, 0\81
 Mega Wand\Wand\5c\None\28, 88, 94\111, 347, 373\Mega Buster(Wand)\1500, 0\813\0\\, 0\\\MM\\1
 Wishing Knife\Dagger\4s\Water\29, 98, 98\103, 344, 344\\500, 0\814\0\\, 0\\\\\0
 Ringing Wand\Wand\4s\Water\27, 0, 91\108, 0, 362\\500, 0\815\0\\, 0\\\\\0
+Nothung\Sword\6a\Flame\0, 0, 237\0, 0, 1544\Megingjord\2000, 0\816\0\\2000000, -\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 30;; Twinkling Sand, 1\\\Volk\1
+Tyrfing\Blade\6a\Flame\0, 0, 209\0, 0, 1636\Megingjord\2000, 0\817\0\\2000000, -\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 30;; Twinkling Sand, 1\\\Volk\1
+Hrotti\Dagger\6a\Flame\0, 0, 239\0, 0, 1513\Megingjord\2000, 0\818\0\\2000000, -\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 30;; Twinkling Sand, 1\\\Volk\1
+Mjolnir\Axe\6a\Flame\0, 0, 244\0, 0, 1621\Megingjord\2000, 0\819\0\\2000000, -\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 30;; Twinkling Sand, 1\\\Volk\1
+Gungnir\Lance\6a\Flame\0, 0, 242\0, 0, 1575\Megingjord\2000, 0\820\0\\2000000, -\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 30;; Twinkling Sand, 1\\\Volk\1
+Ydalir\Bow\6a\Flame\0, 0, 232\0, 0, 1482\Megingjord\2000, 0\821\0\\2000000, -\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 30;; Twinkling Sand, 1\\\Volk\1
+Brisingr\Wand\6a\Flame\0, 0, 223\0, 0, 1590\Megingjord\2000, 0\822\0\\2000000, -\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 30;; Twinkling Sand, 1\\\Volk\1
+Gjallarhorn\Staff\6a\Flame\0, 0, 261\0, 0, 1467\Megingjord\2000, 0\823\0\\2000000, -\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 30;; Twinkling Sand, 1\\\Volk\1
