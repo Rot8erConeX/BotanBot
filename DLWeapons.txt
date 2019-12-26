@@ -819,3 +819,19 @@ Gungnir\Lance\6a\Flame\0, 0, 242\0, 0, 1575\Megingjord\2000, 0\820\0\\2000000, -
 Ydalir\Bow\6a\Flame\0, 0, 232\0, 0, 1482\Megingjord\2000, 0\821\0\\2000000, -\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 30;; Twinkling Sand, 1\\\Volk\1
 Brisingr\Wand\6a\Flame\0, 0, 223\0, 0, 1590\Megingjord\2000, 0\822\0\\2000000, -\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 30;; Twinkling Sand, 1\\\Volk\1
 Gjallarhorn\Staff\6a\Flame\0, 0, 261\0, 0, 1467\Megingjord\2000, 0\823\0\\2000000, -\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 30;; Twinkling Sand, 1\\\Volk\1
+Chimeratech Officer\Sword\5m\Flame\0, 0, 189\0, 0, 680\\1500, 0\824\0\\400000, \Iron Ore, 5;; Granite, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\\1
+Chimeratech Commander\Sword\5m\Flame\0, 0, 270\0, 0, 972\\1500, 0\825\824\\900000, \Granite, 7;; Meteorite, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\\2
+Chimeratech Knight\Blade\5m\Flame\0, 0, 95\0, 0, 743\\1500, 0\826\0\\400000, \Iron Ore, 5;; Granite, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\\1
+Chimeratech Lord\Blade\5m\Flame\0, 0, 158\0, 0, 1061\\1500, 0\827\826\\900000, \Granite, 7;; Meteorite, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\\2
+Chimeratech Fighter\Dagger\5m\Flame\0, 0, 109\0, 0, 687\\1500, 0\828\0\\400000, \Fiend's Claw, 5;; Fiend's Horn, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\\1
+Chimeratech Elite\Dagger\5m\Flame\0, 0, 181\0, 0, 981\\1500, 0\829\828\\900000, \Fiend's Horn, 7;; Fiend's Eye, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\\2
+Chimeratech Warrior\Axe\5m\Flame\0, 0, 111\0, 0, 736\\1500, 0\830\0\\400000, \Iron Ore, 5;; Granite, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\\1
+Chimeratech Warlord\Axe\5m\Flame\0, 0, 185\0, 0, 1051\\1500, 0\831\830\\900000, \Granite, 7;; Meteorite, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\\2
+Chimeratech Lancer\Lance\5m\Flame\0, 0, 121\0, 0, 673\\1500, 0\832\0\\400000, \Fiend's Claw, 5;; Fiend's Horn, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\\1
+Chimeratech Lancemaster\Lance\5m\Flame\0, 0, 202\0, 0, 962\\1500, 0\833\832\\900000, \Fiend's Horn, 7;; Fiend's Eye, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\\2
+Chimeratech Archer\Bow\5m\Flame\0, 0, 106\0, 0, 673\\1500, 0\834\0\\400000, \Fiend's Claw, 5;; Fiend's Horn, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\\1
+Chimeratech Sniper\Bow\5m\Flame\0, 0, 176\0, 0, 961\\1500, 0\835\834\\900000, \Fiend's Horn, 7;; Fiend's Eye, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\\2
+Chimeratech Sorcerer\Wand\5m\Flame\0, 0, 107\0, 0, 701\\1500, 0\836\0\\400000, \Bat's Wing, 5;; Ancient Bird's Feather, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\\1
+Chimeratech Archmage\Wand\5m\Flame\0, 0, 178\0, 0, 1001\\1500, 0\837\836\\900000, \Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\\2
+Chimeratech Bishop\Staff\5m\Flame\0, 0, 135\0, 0, 614\\1500, 0\838\0\\400000, \Bat's Wing, 5;; Ancient Bird's Feather, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\\1
+Chimeratech Cardinal\Staff\5m\Flame\0, 0, 225\0, 0, 877\\1500, 0\839\838\\900000, \Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\\2
