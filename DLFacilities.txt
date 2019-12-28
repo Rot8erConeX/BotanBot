@@ -616,21 +616,21 @@ Flame Dracolith\17\-\Dragon, Dracolith\2x2\1\28000\Flamewyrm's Sphere, 200;; Fla
 Flame Dracolith\18\-\Dragon, Dracolith\2x2\1\30000\Flamewyrm's Sphere, 250;; Flamewyrm's Scale, 100;; Talonstone, 10
 Flame Dracolith\19\-\Dragon, Dracolith\2x2\1\32000\Flamewyrm's Sphere, 300;; Flamewyrm's Scale, 120;; Talonstone, 10
 Flame Dracolith\20\-\Dragon, Dracolith\2x2\1\34000\Flamewyrm's Sphere, 350;; Flamewyrm's Scale, 140;; Talonstone, 10
-Flame Tree\1\A mystical tree filled with flame mana and granted new power upon defeating Volk. Use it to boost the stats of *flame-attuned* adventurers.\Adventurer, Altar\2x2\1\0
-Flame Tree\2\-\Adventurer, Altar\2x2\1\10000\Destitute One's Mask Fragment, 10
-Flame Tree\3\-\Adventurer, Altar\2x2\1\20000\Destitute One's Mask Fragment, 10
-Flame Tree\4\-\Adventurer, Altar\2x2\1\30000\Destitute One's Mask Fragment, 20
-Flame Tree\5\-\Adventurer, Altar\2x2\1\40000\Destitute One's Mask Fragment, 20
-Flame Tree\6\-\Adventurer, Altar\2x2\1\50000\Destitute One's Mask Fragment, 30
-Flame Tree\7\-\Adventurer, Altar\2x2\1\60000\Destitute One's Mask Fragment, 30
-Flame Tree\8\-\Adventurer, Altar\2x2\1\70000\Destitute One's Mask Fragment, 30
-Flame Tree\9\-\Adventurer, Altar\2x2\1\80000\Destitute One's Mask Fragment, 30
-Flame Tree\10\-\Adventurer, Altar\2x2\1\90000\Destitute One's Mask Fragment, 30
-Flame Tree\11\-\Adventurer, Altar\2x2\1\100000\Destitute One's Mask Fragment, 35;; Plagued One's Mask Fragment, 5
-Flame Tree\12\-\Adventurer, Altar\2x2\1\110000\Destitute One's Mask Fragment, 35;; Plagued One's Mask Fragment, 5
-Flame Tree\13\-\Adventurer, Altar\2x2\1\120000\Destitute One's Mask Fragment, 35;; Plagued One's Mask Fragment, 5
-Flame Tree\14\-\Adventurer, Altar\2x2\1\130000\Destitute One's Mask Fragment, 35;; Plagued One's Mask Fragment, 5
-Flame Tree\15\-\Adventurer, Altar\2x2\1\140000\Destitute One's Mask Fragment, 35;; Plagued One's Mask Fragment, 5
+Flame Tree\1\A mystical tree filled with flame mana and granted new power upon defeating Volk. Use it to boost the stats of *flame-attuned* adventurers.\Adventurer, Tree\3x3\1\0
+Flame Tree\2\-\Adventurer, Tree\3x3\1\10000\Destitute One's Mask Fragment, 10
+Flame Tree\3\-\Adventurer, Tree\3x3\1\20000\Destitute One's Mask Fragment, 10
+Flame Tree\4\-\Adventurer, Tree\3x3\1\30000\Destitute One's Mask Fragment, 20
+Flame Tree\5\-\Adventurer, Tree\3x3\1\40000\Destitute One's Mask Fragment, 20
+Flame Tree\6\-\Adventurer, Tree\3x3\1\50000\Destitute One's Mask Fragment, 30
+Flame Tree\7\-\Adventurer, Tree\3x3\1\60000\Destitute One's Mask Fragment, 30
+Flame Tree\8\-\Adventurer, Tree\3x3\1\70000\Destitute One's Mask Fragment, 30
+Flame Tree\9\-\Adventurer, Tree\3x3\1\80000\Destitute One's Mask Fragment, 30
+Flame Tree\10\-\Adventurer, Tree\3x3\1\90000\Destitute One's Mask Fragment, 30
+Flame Tree\11\-\Adventurer, Tree\3x3\1\100000\Destitute One's Mask Fragment, 35;; Plagued One's Mask Fragment, 5
+Flame Tree\12\-\Adventurer, Tree\3x3\1\110000\Destitute One's Mask Fragment, 35;; Plagued One's Mask Fragment, 5
+Flame Tree\13\-\Adventurer, Tree\3x3\1\120000\Destitute One's Mask Fragment, 35;; Plagued One's Mask Fragment, 5
+Flame Tree\14\-\Adventurer, Tree\3x3\1\130000\Destitute One's Mask Fragment, 35;; Plagued One's Mask Fragment, 5
+Flame Tree\15\-\Adventurer, Tree\3x3\1\140000\Destitute One's Mask Fragment, 35;; Plagued One's Mask Fragment, 5
 Halidom\H\Euden's home base. Raise its level to expand the area in which you can build castle facilities.\General\4x4\1\0
 Iron Weather Vane\-\An iron instrument indicating the direction of the wind. Manufactured using the finest smithing techniques, it moves smoothly in the breeze.\Decorative\1x1\4\0
 Jack-o'-Lantern\-\A lantern made by a sylvan who carved the insides out of a pumpkin, all the while insisting it represented his love of pranks. At least everyone enjoyed eating the filling.\Decorative\1x1\4\0
