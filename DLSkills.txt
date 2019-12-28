@@ -367,14 +367,14 @@ Masamura's Slash\\Skill\Deals 1 hit of 782% damage to surrounding enemies.\Deals
 Measure of Mercy\\Skill\Restores HP to all allies with 72% Recovery Potency.\Restores HP to all allies with 90% Recovery Potency.\Restores HP to all allies with 108% Recovery Potency.\7888, 7888, 7888\Yes\1.1\\HealSkill, Burst, Team
 Mechanical Volley\\Skill\Deals 3 shots of 212% damage to enemies in a line.\Deals 3 shots of 235% damage to enemies in a line.\\7185, 7185, 7185\Yes\1.6\\Damage
 Medicinal Cure\\Skill\Restores HP to all allies with 31% Recovery Potency, and applies Regen for 15 seconds, healing with 25% Regen Potency every 2.99 seconds, and activates **Skill Shift**.;; Phase II grants +8% defense to the entire team for 5 seconds.;; Phase III grants +5% strength to the entire team for 10 seconds.\Restores HP to all allies with 36% Recovery Potency, and applies Regen for 15 seconds, healing with 29% Regen Potency every 2.99 seconds, and activates **Skill Shift**.;; Phase II grants +10% defense to the entire team for 5 seconds.;; Phase III grants +8% strength to the entire team for 10 seconds.\Restores HP to all allies with 44% Recovery Potency, and applies Regen for 15 seconds, healing with 35% Regen Potency every 2.99 seconds, and activates **Skill Shift**.;; Phase II grants +15% defense to the entire team for 5 seconds.;; Phase III grants +10% strength to the entire team for 10 seconds.\7888, 7888, 7888\Yes\1.1\Restores HP to all allies with 31%/36%/44% Recovery Potency, and applies Regen for 15 seconds, healing with 25%/29%/35% Regen Potency every 2.99 seconds, and activates **Skill Shift**.;; Phase II grants +8%/10%/15% defense to the entire team for 5 seconds.;; Phase III grants +5%/8%/10% strength to the entire team for 10 seconds.\Buff, HealSkill, Team, Regen, SkillShift
-Mega Buster(Axe)\\Skill\Deals damage to enemies in a line.\Deals damage to enemies in a line.\\6552, 6552, 6552\Yes\1.4\\Damage
-Mega Buster(Blade)\\Skill\Deals damage to enemies in a line.\Deals damage to enemies in a line.\\6443, 6443, 6443\Yes\1.4\\Damage
-Mega Buster(Bow)\\Skill\Deals damage to enemies in a line.\Deals damage to enemies in a line.\\6868, 6868, 6868\Yes\1.4\\Damage
-Mega Buster(Dagger)\\Skill\Deals damage to enemies in a line.\Deals damage to enemies in a line.\\8016, 8016, 8016\Yes\1.4\\Damage
-Mega Buster(Lance)\\Skill\Deals damage to enemies in a line.\Deals damage to enemies in a line.\\7229, 7229, 7229\Yes\1.4\\Damage
-Mega Buster(Staff)\\Skill\Deals damage to enemies in a line.\Deals damage to enemies in a line.\\9672, 9672, 9672\Yes\1.4\\Damage
-Mega Buster(Sword)\\Skill\Deals damage to enemies in a line.\Deals damage to enemies in a line.\\7501, 7501, 7501\Yes\1.4\\Damage
-Mega Buster(Wand)\\Skill\Deals damage to enemies in a line.\Deals damage to enemies in a line.\\6355, 6355, 6355\Yes\1.4\\Damage
+Mega Buster(Axe)\\Skill\Deals 1 hit of 900% damage to enemies in a line.\Deals 1 hit of 1000% damage to enemies in a line.\\6552, 6552, 6552\Yes\1.4\\Damage
+Mega Buster(Blade)\\Skill\Deals 1 hit of 900% damage to enemies in a line.\Deals 1 hit of 1000% damage to enemies in a line.\\6443, 6443, 6443\Yes\1.4\\Damage
+Mega Buster(Bow)\\Skill\Deals 1 hit of 900% damage to enemies in a line.\Deals 1 hit of 1000% damage to enemies in a line.\\6868, 6868, 6868\Yes\1.4\\Damage
+Mega Buster(Dagger)\\Skill\Deals 1 hit of 900% damage to enemies in a line.\Deals 1 hit of 1000% damage to enemies in a line.\\8016, 8016, 8016\Yes\1.4\\Damage
+Mega Buster(Lance)\\Skill\Deals 1 hit of 900% damage to enemies in a line.\Deals 1 hit of 1000% damage to enemies in a line.\\7229, 7229, 7229\Yes\1.4\\Damage
+Mega Buster(Staff)\\Skill\Deals 1 hit of 900% damage to enemies in a line.\Deals 1 hit of 1000% damage to enemies in a line.\\9672, 9672, 9672\Yes\1.4\\Damage
+Mega Buster(Sword)\\Skill\Deals 1 hit of 900% damage to enemies in a line.\Deals 1 hit of 1000% damage to enemies in a line.\\7501, 7501, 7501\Yes\1.4\\Damage
+Mega Buster(Wand)\\Skill\Deals 1 hit of 900% damage to enemies in a line.\Deals 1 hit of 1000% damage to enemies in a line.\\6355, 6355, 6355\Yes\1.4\\Damage
 Meggidoth's Protection\\Skill\Increases the user's defense by 20% for 10 seconds.\Increases the user's defense by 25% for 10 seconds.\\14632, 14632, 14632\No\1.1\\Buff, DefenseSkill, User
 Megingjord\\Skill\Increases the user's strength by 10% until the next time this skill is used. The second time this skill is used, it will gradually recover the user's HP for  3% Healing Potency every 2.9 seconds. The skill will alternate between these two effects with every use.\Increases the user's strength by 20% until the next time this skill is used. The second time this skill is used, it will gradually recover the user's HP for  5% Healing Potency every 2.9 seconds. The skill will alternate between these two effects with every use.\\3000, 3000, 3000\No\1.4\\StrengthSkill, HealSkill, Regen
 Memento's Protection\\Skill\Increases the user's defense by 15% for 10 seconds.\Increases the user's defense by 20% for 10 seconds.\\6678, 6678, 6678\No\1.4\\Buff, DefenseSkill, User
@@ -1344,7 +1344,7 @@ Dragon's Claws\I\Ability\Each shapeshift increases strength for the remainder of
 Dragon's Claws\II\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 5% in total. On second shapeshift strength is increased by 13% in total. On third shapeshift strength is increased by 25% in total.\80\y\Strength, InCombat
 Dragon's Claws\III\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 6% in total. On second shapeshift strength is increased by 15% in total. On third shapeshift strength is increased by 30% in total.\100\y\Strength, InCombat
 Dragon's Claws\IV\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 10% in total. On second shapeshift strength is increased by 25% in total. On third shapeshift strength is increased by 40% in total.\120\y\Strength, InCombat
-Dull\-\Ability\The afflicted adventurer's weapon will be dulled, lowering their strength by 90%.\-1\y\Dull, Enemy
+Dull\-\Ability\The afflicted adventurer's weapon will be dulled, lowering their strength by 40%.\-1\y\Dull, Enemy
 Dull Res\-\Ability\completely prevents dulling.\50\y\DullRes, Resistance
 Eggsploration Points\example\Ability\Increases eggsploration point intake for clearing quests by `x`%\0\y\Event, Facility, Score
 Eggsploration Points\25%\Ability\Increases eggsploration point intake for clearing quests by 25%\0\y\Event, Facility, Score
@@ -1433,7 +1433,8 @@ Freeze Res\40%\Ability\Reduces susceptibility to freezing by 40%.\50\y\FreezeRes
 Freeze Res\50%\Ability\Reduces susceptibility to freezing by 50%.\60\y\FreezeRes, Resistance
 Freeze Res\75%\Ability\Reduces susceptibility to freezing by 75%.\100\y\FreezeRes, Resistance
 Freeze Res\100%\Ability\Reduces susceptibility to freezing by 100%.\100\y\FreezeRes, Resistance
-Frenzy Res\-\Ability\Resists Frenzy.\40\y\Resistance
+Frenzy\-\Ability\Causes the enemy's strength to gradually increase and damage taken from skills to gradually decrease.\-1\y\Enemy
+Frenzy Res\-\Ability\Ignores the effects of frenzy when attacking and taking damage from enemies.\40\y\Resistance
 Fury\-\Ability\The overdrive guage will stop decreasing\-1\y\Fury, Enemy
 Fury Penetrator\-\Ability\ignores the effects of fury when attacking enemies.\50\y\FuryPenetrator
 Full HP = Blindness\example\Ability\Increases the chances of inflicting blindness by `x`% when HP is full.\0\y\HP100, BlindChance, StatusChance
@@ -1677,6 +1678,7 @@ Overdrive Punisher\8%\Ability\Increases damage to enemies in overdrive state by 
 Overdrive Punisher\10%\Ability\Increases damage to enemies in overdrive state by 10%.\80\y\Overdrive, Punisher
 Overdrive Punisher\13%\Ability\Increases damage to enemies in overdrive state by 13%.\100\y\Overdrive, Punisher
 Overdrive Punisher\15%\Ability\Increases damage to enemies in overdrive state by 15%.\120\y\Overdrive, Punisher
+Overgrowth\-\Ability\Causes the enemy's physical size and attack range to increase over time.\-1\y\Enemy
 Paper-Mache\example\Ability\Increases Paper-Mache intake by `x`%\0\y\Event, Facility, Materials
 Paper-Mache\50%\Ability\Increases Paper-Mache intake by 50%\0\y\Event, Facility, Materials
 Paper-Mache\75%\Ability\Increases Paper-Mache intake by 75%\0\y\Event, Facility, Materials
@@ -1817,7 +1819,7 @@ Skill Prep\50%\Ability\Fills 50% of skill gauges at the start of quests.\60\y\Sk
 Skill Prep\75%\Ability\Fills 75% of skill gauges at the start of quests.\80\y\SkillPrep
 Skill Prep\100%\Ability\Fills 100% of skill gauges at the start of quests.\100\y\SkillPrep
 Skill Prep & Skill Charge\-\Ability\Fills 100% of skill gauges at the start of quests. Using a skill fills skill gauges by 5%.\120\y\SkillPrep, SkillCharge
-Skill Resistance\-\Ability\This significantly reduces the damage received from skills.\-1\y\SkillRes, Enemy
+Skill Resistance\-\Ability\Reduces the damage received from skills by 35%.\-1\y\SkillRes, Enemy
 Skill Resistance Penetrator\-\Ability\Completely negates skill resistance.\50\y\SkillResistancePenetrator
 Slayer's Flurry Strength\I\Ability\Increases strength by 6% for every five enemies defeated (up to five times per quest), and increases strength by 8% when the combo count is 15 or higher.\100\y\Strength, Slayers, Combo, Flurry
 Slayer's Strength\example\Ability\Increases strength by `x`% for every five enemies defeated (up to five times per quest).\0\y\Strength, Slayers
