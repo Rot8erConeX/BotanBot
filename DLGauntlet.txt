@@ -48,6 +48,11 @@ Fafnir Roy III\Flame\47\1626376\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Fre
 Fafnir Roy III\Flame\48\1650771\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
 Fafnir Roy III\Flame\49\1680485\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
 Fafnir Roy III\Flame\50\1714095\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Flame\51\1884304\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Flame\52\2071416\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Flame\53\2277107\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Flame\54\2503224\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Flame\55\2751794\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
 Fafnir Roy III\Water\1\4416\300\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\~~None~~\
 Fafnir Roy III\Water\2\8224\300\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\~~None~~\
 Fafnir Roy III\Water\3\12031\600\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\~~None~~\
@@ -98,6 +103,11 @@ Fafnir Roy III\Water\47\2028047\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Fre
 Fafnir Roy III\Water\48\2066579\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
 Fafnir Roy III\Water\49\2112043\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
 Fafnir Roy III\Water\50\2162733\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Water\51\3041667\23000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Water\52\3285001\23000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Water\53\3547801\23000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Water\54\3725191\23000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Water\55\3855572\23000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
 Fafnir Roy III\Wind\1\4416\300\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\~~None~~\
 Fafnir Roy III\Wind\2\8224\300\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\~~None~~\
 Fafnir Roy III\Wind\3\12031\600\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\~~None~~\
@@ -148,6 +158,11 @@ Fafnir Roy III\Wind\47\1974870\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Free
 Fafnir Roy III\Wind\48\2004493\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
 Fafnir Roy III\Wind\49\2040574\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
 Fafnir Roy III\Wind\50\2081385\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Wind\51\2781426\23000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Wind\52\3159790\23000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Wind\53\3349378\23000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Wind\54\3483353\23000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Wind\55\3605270\23000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
 Fafnir Roy III\Light\1\4416\300\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\~~None~~\
 Fafnir Roy III\Light\2\8224\300\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\~~None~~\
 Fafnir Roy III\Light\3\12031\600\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\~~None~~\
@@ -198,6 +213,11 @@ Fafnir Roy III\Light\47\2675182\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Fre
 Fafnir Roy III\Light\48\2696583\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
 Fafnir Roy III\Light\49\2718156\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
 Fafnir Roy III\Light\50\2739901\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Light\51\2978272\19000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Light\52\3237382\19000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Light\53\3519034\19000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Light\54\3825190\19000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Light\55\4157981\19000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
 Fafnir Roy III\Shadow\1\4416\300\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\~~None~~\
 Fafnir Roy III\Shadow\2\8224\300\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\~~None~~\
 Fafnir Roy III\Shadow\3\12031\600\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\~~None~~\
@@ -248,3 +268,8 @@ Fafnir Roy III\Shadow\47\2162759\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Fr
 Fafnir Roy III\Shadow\48\2227641\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
 Fafnir Roy III\Shadow\49\2294470\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
 Fafnir Roy III\Shadow\50\2363305\15000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Shadow\51\2002847\23000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Shadow\52\2153061\23000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Shadow\53\2357601\23000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Shadow\54\2583931\23000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
+Fafnir Roy III\Shadow\55\2806149\23000\Dragon\\\Poison: **0%**, Burn: **0%**, Freeze: 80%, Paralysis: 80%, Blind: 80%, Stun: 80%, Curse: 80%, Bog: 80%, Sleep: 80%\~~None~~\
