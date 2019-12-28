@@ -17,15 +17,15 @@ Twilight Hermit\151875; 1877\Shadow, Demihuman, Void\Burn: **0%**, Freeze: **0%*
 Steel Golem\265650; 2530\Flame, Thaumian, Void\Freeze: 55%, Bog: **20%**\Burn\Dull
 Obsidian Golem\250000; 2530\Shadow, Thaumian, Void\Paralysis: **20%**, Stun: 40%, Sleep: **20%**\Poison\Dull
 Amber Golem\250000; 2530\Light, Thaumian, Void\Poison: 55%, Blind: **20%**, Sleep: *60%*\Paralysis\Dull
-Void Zephyr\407680; 3572\Wind, Dragon, Void\Burn: **0%**\Sleep\Dragon Delay;; Dull
-Void Jeanne d'Arc\359280; 2143\Light, Dragon, Void\Burn: **0%**, Poison: **0%**, Blind: 50%, Sleep: 50%\Blind\Divine Protection;; Dragon Delay
-Void Agni\422683; 3572\Flame, Dragon, Void\Bog: 60%\Stun\Scorching Air;; Skill Resistance
-Void Poseidon\422683; 3572\Water, Dragon, Void\Sleep: *80%*\Freeze\Whirlpool;; Skill Resistance
-Void Nidhogg\450000; 3572\Shadow, Dragon, Void\Poison: **0%**, Burn: **0%**, Paralysis: *80%*, Stun: *80%*\Poison\Enervation;; Ranged Resistance
+Void Zephyr\-1, 407680, 750131; -1, 3572, 6430\Wind, Dragon, Void\Burn: **0%**\Sleep\Dragon Delay;; Dull
+Void Jeanne d'Arc\-1, 359280, 941314; -1, 2143, 4715\Light, Dragon, Void\Burn: **0%**, Poison: **0%**, Blind: 50%, Sleep: 50%\Blind\Divine Protection;; Dragon Delay
+Void Agni\-1, 422683, 1056708; -1, 3572, 6430\Flame, Dragon, Void\Bog: 60%\Stun\Scorching Air;; Skill Resistance
+Void Poseidon\-1, 422683, 967944; -1, 3572, 7144\Water, Dragon, Void\Sleep: *80%*\Freeze\Whirlpool;; Skill Resistance
+Void Nidhogg\-1, 450000, 1260000; -1, 3572, 7858\Shadow, Dragon, Void\Poison: **0%**, Burn: **0%**, Paralysis: *80%*, Stun: *80%*\Poison\Enervation;; Ranged Resistance
 Raging Manticore\264856; 2290\Shadow, Therion, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\Curse, Poison\Fury
 Greedy Manticore\264856; 2290\Water, Therion, Void\Poison: **0%**, Burn: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Sleep: **0%**\Poison, Freeze\Fury
 Smoldering Manticore\264856; 1450\Flame, Therion, Void\Poison: **0%**, Freeze: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\Burn, Stun\Fury
-Volcanic Chimera\-1, 311938, 1039797; -1, 1177, 1430\Flame, Therion, Void\TBC\Burn, Poison\Frenzy, Overgrowth
+Volcanic Chimera\-1, 311938, 1039797; -1, 1177, 1430\Flame, Therion, Void\Bog: 60%\Burn, Poison\Frenzy, Overgrowth
 Catoblepas Anemos\262587; 2052\Wind, Therion, Void\Poison: **40%**, Burn: **40%**, Stun: **40%**\Stun\Petrify
 Eolian Phantom\291017; 1684\Wind, Undead, Void\Poison: **40%**, Burn: **40%**, Paralysis: **40%**, Stun: **40%**\Stun\Soul Eater, Spectral Shield
 Midgardsormr (Enemy)\5880, 21060, 64350, 120000; 231, 761, 1205, 1800\Wind, Dragon, Dragon Trial\Burn: **0%**\Stun\
@@ -60,7 +60,7 @@ Ieyasu (Enemy)\2000, 4200, 12000; 82, 161, 221\Shadow, Human, Boss, Fortune from
 Manticore(BigTop)\32760, 48300, 62580, 437346, -1, -1, -1, 105210, 134400; 711, 1045, 1306, 6738, -1, -1, -1, 1686, 2961\Shadow, Therion, Facility, Dream Big Under the Big Top\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: **10%**, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
 Valfarre\76357, 191655, 735436, -1, -1, -1, -1, 714180; 362, 500, 1705, -1, -1, -1, -1, 2707\Water, Therion, Raid, Skyborne Spectacle\~~Immune~~\Bog\
 Aquatic Cyclops\3570, 10710, 18690; 241, 377, 1070\Water, Demihuman, Boss, Skyborne Spectacle\Poison: 55%, Burn: 55%, Freeze: *75%*, Paralysis: *75%*, Blind: 55%, Stun: 55%, Curse: 55%, Bog: *75%*, Sleep: 55%\Bog\
-Thanatos\76357, 191655, 673905, -1, -1, -1, -1, 654427; 362, 1000, 1705, -1, -1, -1, -1, 2707\Shadow, Undead, Raid, A Waltz with Fate\~~Immune~~\Poison\
+Thanatos\76357, 191655, 673905, 3465000, -1, -1, -1, 654427; 362, 1000, 1705, 7020, -1, -1, -1, 2707\Shadow, Undead, Raid, A Waltz with Fate\~~Immune~~\Poison\
 Guardian Sentinel\4410, 10500, 20580; 241, 628, 1070\Shadow, Thaumian, Boss, A Waltz with Fate\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: 55%, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
 Hefty Runic Treant\32760, 48300, 62580, 502632, -1, -1, -1, 105210, 146160; 711, 1045, 1306, 5421, -1, -1, -1, 1686, 2821\Light, Physian, Facility, The Accursed Archives\Blind: 60%, Sleep: 60%\Paralysis\
 Volcanic Cyclops\34020, 50820, 63420, 402800, -1, -1, -1, 110880, 133560; 723, 1111, 1411, 6451, -1, -1, -1, 1688, 3291\Flame, Demihuman, Facility, The Hunt for Harmony\Poison: 55%, Burn: *75%*, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: 55%, Curse: 55%, Bog: 55%, Sleep: 55%\Stun\
@@ -88,8 +88,9 @@ Astral Sabnock\67878, 170630, 634880, 2600000; 362, 500, 1705, 5945\Shadow, Demo
 Astral Phraeganoth\81472, 305520, 487948, 3000000; 362, 500, 1705, 5400\Flame, Thaumian, AstralRaid, Astral Raid\~~Immune~~\Burn\
 Astral Shishimai\67200, 181600, 685146, 4950000; 362, 500, 1568, 7020\Light, Thaumian, AstralRaid, Astral Raid\~~Immune~~\Paralysis\
 Astral Gift Basket\10080, 27240, 137029, 990000; 362, 500, 1568, 2707\Light, Thaumian, AstralRaid, Astral Raid\~~Immune~~\Paralysis\
-Astral Thanatos\0; 0\Shadow, Undead, AstralRaid, Astral Raid\~~Immune~~\Poison\
-Cube\200000, 600000; 1800, 5500\Shadow, New Horizons, Chapter 10, Chapter 10\Poison: **0%**, Burn: **0%**, Freeze: *99%*, Paralysis: 50%, Blind: 50%, Stun: *99%*, Bog: **0%**, Sleep: *99%*\Poison\
+Astral Thanatos\76357, 191655, 673905, 3465000; 362, 1000, 1705, 7020\Shadow, Undead, AstralRaid, Astral Raid\~~Immune~~\Poison\
+Cube\200000, 600000, 2728928; 1800, 5500, 6000\Shadow, New Horizons, Chapter 10, Chapter 10\Poison: **0%**, Burn: **0%**, Freeze: *99%*, Paralysis: 50%, Blind: 50%, Stun: *99%*, Bog: **0%**, Sleep: *99%*\Poison\
+Cube 2\458436, 721648, 3020842; 3000, 6000, 7200\Light, New Horizons, Chapter 11, Chapter 11\Poison: **0%**, Burn: **0%**, Blind: 50%, Bog: **0%**\Paralysis\
 Chronos\66384, 217300, 960718, -1, -1, 4938248, 22222117; 145, 590, 1705, -1, -1, 3410, 3410\Light, Dragon, Raid, Fractured Futures\Poison: **0%**, Burn:  **0%**, Freeze: *99%*, Paralysis: **0%**, Blind: *99%*, Stun: *99%*, Bog: **0%**\Everything\
 Chronos Nyx\-1, -1, -1, -1, 6842299, 5165264, 19360178, 2258632; -1, -1, -1, -1, 2557, 3410, 3410, 1200\Light, Dragon, Raid, Fractured Futures\Poison: **0%**, Burn:  **0%**, Freeze: *99%*, Paralysis: **0%**, Stun: *99%*, Bog: *80%*, Sleep: *99%*\Everything\
 Shining Cyclops\3990, 11340, 20580; 240, 630, 1070\Light, Demihuman, Boss, Fractured Futures\Poison: 55%, Burn: 55%, Freeze: *55%, Paralysis: *75%*, Bind: *75%*, Stun: 55%, Curse: 55%, Bog: 55%, Sleep: 55%\Paralysis\
