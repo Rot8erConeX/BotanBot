@@ -9,7 +9,7 @@ Chthonius\5\Shadow\36, 368\12, 128\Immortal Spirit\(Shadow) Strength & Dragon's 
 Cinder Drake\3\Flame\19, 190\5, 57\Cinderball\(Flame) HP +10%;; (Flame) HP +15%\300, 150\1.35, 3.5\2\Yes\No\Cinder Drake\\\\\M\
 Corsaint Phoenix\5\Light\37, 371\12, 124\Refreshing Flare\(Light) Strength +35%;; (Light) Strength +50%;;; (Light) Paralyzed Punisher +15%;; (Light) Paralyzed Punisher +20%\5000, 8500\1.8, 1\2\No\Yes\Corsaint Phoenix\Ichinose Kana\Elysia Rotaru\\\F\
 Cupid\5\Light\37, 377\11, 119\Lovely Pose\(Light) Strength +40%;; (Light) Strength +60%\5000, 8500\1.8, 1\3\No\Yes\Cupid\Ise Mariya\Mavis Ada\\\M\KoG
-Daikokuten\5z\Light\0, 0\0, 0\Unknown\(Light) Strength +10%;; (Light) Strength +20%;;; (Light) Skill Damage +70%;; (Light) Skill Damage +90%\5000, 8500\0, 0\0\Yes\No\Daikokuten\Vanille\Vanille\\\M\
+Daikokuten\5z\Light\0, 0\0, 0\Lucky Mallet\(Light) Strength +45%;; (Light) Strength +55%;;; (Light) Whirlwind Strength +20%;; (Light) Whirlwind Strength +25%\5000, 8500\0, 0\0\Yes\No\Daikokuten\Vanille\Vanille\\\M\
 Ebisu\5w\Shadow\0, 0\0, 0\Unknown\(Shadow) HP +20%;; (Shadow) HP +30%\5000, 300\0, 0\0\Yes\Yes\Ebisu\Vanille\Vanille\\\M\
 Erasmus\5w\Flame\22, 221\7, 76\Illuminated Path\(Flame) Strength +20%;; (Flame) Strength +30%\5000, 300\1.65, 1\2\No\Yes\Erasmus\Takemoto Eiji\\\\M\
 Freyja\5\Wind\37, 375\12, 120\Breath of Life\(Wind) HP +20%;; (Wind) HP +30%;;; (Wind) Skill Haste +25%;; (Wind) Skill Haste +35%\5000, 8500\0, 0\3\No\Yes\Freyja\\\\\F\
