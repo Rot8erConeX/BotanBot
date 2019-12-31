@@ -82,6 +82,8 @@ Troll Smith\14616, 31185, 55440, 475360, -1, -1, -1, 71820, 143640; 586, 921, 13
 Barbary\73760, 182072, 829711, -1, 3557975, -1, -1, 808217; 362, 842, 1705, -1, 3897, -1, -1, 2707\Flame, Demihuman, Raid, A Splash of Adventure\Bog: *80%*\Stun\
 Giant Ember Toad\3990, 11550, 20370; 241, 628, 1070\Flame, Physian, Boss, A Splash of Adventure\Poison: 55%, Burn: *75%*, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: 55%, Curse: 55%, Bog: **30%**, Sleep: 55%\Stun\
 Palm Treant\15360, 30235, 55400, 545340, 981612, -1, -1, 107730, 155680; 477, 788, 1214, 5441, 6052, -1, -1, 1447, 2825\Shadow, Physian, Boss, A Crescendo of Courage\Paralysis: **10%**, Stun: 55%\Curse\
+Ebisu (Enemy)\0; 0\Shadow, Therion, Raid, A Clawful Caper\TBC\Curse\
+Snapper\0; 0\Shadow, Therion, Boss, A Clawful Caper\TBC\Bog\
 Astral Hypnos\52957, 139011, 512346, 2222797; 362, 1000, 1705, 6080\Wind, Physian, AstralRaid, Astral Raid\~~Immune~~\Sleep\
 Astral Valfarre\76357, 191655, 714180, 2910806; 362, 500, 1705, 5945\Water, Demihuman, AstralRaid, Astral Raid\~~Immune~~\Bog\
 Astral Sabnock\67878, 170630, 634880, 2600000; 362, 500, 1705, 5945\Shadow, Demon, AstralRaid, Astral Raid\~~Immune~~\Curse\
