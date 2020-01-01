@@ -11,7 +11,7 @@ Scalding Shroom, Clone Wave 1\3000; 487\Water, Physian, Void\Poison: **0%**, Bur
 Scalding Shroom, Clone Wave 2\3000; 487\Water, Physian, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Sleep: **0%**\Bog\
 Blazing Ghost\252840; 2116\Flame, Undead, Void\Freeze: *80%*, Paralysis: **20%**, Bog: **20%**, Sleep: **20%**\Strength Down, Stun\Ranged Resistance
 Violet Ghost\252840; 2116\Shadow, Undead, Void\Stun: *80%*, Paralysis: **20%**, Burn: **20%**\Strength Down, Curse\Ranged Resistance
-Lambent Ghost\0; 0\Light, Undead, Void\TBC\Strength Down, Blindness\Ranged Resistance
+Lambent Ghost\182040; 1481\Light, Undead, Void\Poison: **20%**, Burn: **20%**, Freeze: *80%*, Paralysis: **20%**, Blind: **0%**, Stun: *80%*, Bog: **20%**, Sleep: 60%\Strength Down, Blindness\Ranged Resistance
 Frost Hermit\151875; 1877\Water, Demihuman, Void\Poison: **0%**, Blind: **0%**, Stun: **0%**, Sleep **0%**\Freeze, Bog\Propagation
 Twilight Hermit\151875; 1877\Shadow, Demihuman, Void\Burn: **0%**, Freeze: **0%**, Paralysis: **0%**, Stun: **0%**, Bog: **0%**\Poison\Propagation
 Steel Golem\265650; 2530\Flame, Thaumian, Void\Freeze: 55%, Bog: **20%**\Burn\Dull
@@ -51,7 +51,7 @@ Hypnos\30712, 139011, 512346, -1, 5170431, 3693165, 17465825, 441271; 362, 1000,
 Storm Sentinel\2268, 6930, 16296; 241, 628, 1070\Wind, Thaumian, Boss, Kindness and Captivity\Poison: 55%, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: *75*, Curse: 55%, Bog: 55%, Sleep: *75%*\~~None~~\
 Water Troll King\23310, 36225, 53974, -1, -1, -1, -1, 90144, 123900; 778, 1161, 1451, -1, -1, -1, -1, 1770, 3291\Water, Demihuman, Facility, A Wish to the Winds\Poison: **30%**, Burn: 55%, Freeze: *75%*, Paralysis: 55%, Blind: 55%, Stun: 55%, Curse: 55%, Bog: *75%*, Sleep: **30%**\Bog\
 Sabnock\67878, 170360, 634880, -1, 2518181, -1, -1, 565720; 362, 500, 1705, -1, 3248, -1, -1, 2707\Shadow, Demon, Raid, Resplendent Refrain\~~Immune~~\Curse\
-Manticore\18270, 29925, 41475, 218673, -1, -1, -1, 52605, 67200; \Shadow, Therion, Boss, Refrain Under the Big Top\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: **10%**, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
+Manticore\18270, 29925, 41475, 218673, -1, -1, -1, 52605, 67200; 0, 0, 0, 0, -1, -1, -1, 0, 0\Shadow, Therion, Boss, Refrain Under the Big Top\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: **10%**, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
 Manticore(Refrain)\3780, 11550, 20370; 241, 628, 1070\Shadow, Therion, Boss, Resplendent Refrain\Poison: *75%*, Burn: 55%, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: **10%**, Curse: *75%*, Bog: 55%, Sleep: 55%\Poison\
 Festive Treant\19980, 31050, 60345, -1, -1, -1, -1, 169087, 170982; 800, 1194, 1493, -1, -1, -1, -1, 1820, 2962\Flame, Physian, Facility, The Miracle of Dragonyule\Freeze: 55%, Bog: 55%\Burn\
 Shishimai (Enemy)\67200, 181600, 685146, -1, 3121030, -1, -1, 624206; 362, 500, 1568, -1, 3799, -1, -1, 2707\Light, Thaumian, Raid, Fortune from Afar\~~Immune~~\Curse\
@@ -82,8 +82,8 @@ Troll Smith\14616, 31185, 55440, 475360, -1, -1, -1, 71820, 143640; 586, 921, 13
 Barbary\73760, 182072, 829711, -1, 3557975, -1, -1, 808217; 362, 842, 1705, -1, 3897, -1, -1, 2707\Flame, Demihuman, Raid, A Splash of Adventure\Bog: *80%*\Stun\
 Giant Ember Toad\3990, 11550, 20370; 241, 628, 1070\Flame, Physian, Boss, A Splash of Adventure\Poison: 55%, Burn: *75%*, Freeze: 55%, Paralysis: 55%, Blind: 55%, Stun: 55%, Curse: 55%, Bog: **30%**, Sleep: 55%\Stun\
 Palm Treant\15360, 30235, 55400, 545340, 981612, -1, -1, 107730, 155680; 477, 788, 1214, 5441, 6052, -1, -1, 1447, 2825\Shadow, Physian, Boss, A Crescendo of Courage\Paralysis: **10%**, Stun: 55%\Curse\
-Ebisu (Enemy)\0; 0\Shadow, Therion, Raid, A Clawful Caper\TBC\Curse\
-Snapper\0; 0\Shadow, Therion, Boss, A Clawful Caper\TBC\Bog\
+Ebisu (Enemy)\63218, -1, 845100, -1, 4770045, 4043391, 20216956, 1262464; 3000, -1, 3000, -1, 3000, 3000, 3000, 3000\Shadow, Therion, Raid, A Clawful Caper\Poison: **0%**, Burn: **0%**, Paralysis: **0%**, Blind 50%, Bog: 80%\Curse\
+Sunrise Snapper\4410, -1, 21420; 246, -1, 1070\Shadow, Therion, Boss, A Clawful Caper\Poison: **0%**, Burn: **0%**, Paralysis: **0%**, Blind: **0%**, Bog: **0%**\Bog\
 Astral Hypnos\52957, 139011, 512346, 2222797; 362, 1000, 1705, 6080\Wind, Physian, AstralRaid, Astral Raid\~~Immune~~\Sleep\
 Astral Valfarre\76357, 191655, 714180, 2910806; 362, 500, 1705, 5945\Water, Demihuman, AstralRaid, Astral Raid\~~Immune~~\Bog\
 Astral Sabnock\67878, 170630, 634880, 2600000; 362, 500, 1705, 5945\Shadow, Demon, AstralRaid, Astral Raid\~~Immune~~\Curse\
