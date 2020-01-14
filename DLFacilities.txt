@@ -78,6 +78,11 @@ Arctos Monument\27\-\Adventurer, Event Altar\3x3\1\4400\Motivational Log, 700
 Arctos Monument\28\-\Adventurer, Event Altar\3x3\1\4600\Motivational Log, 800
 Arctos Monument\29\-\Adventurer, Event Altar\3x3\1\4800\Motivational Log, 900
 Arctos Monument\30\-\Adventurer, Event Altar\3x3\1\5000\Motivational Log, 1000
+Arctos Monument\31\-\Adventurer, Event Altar\3x3\1\5200\Motivational Log, 1100
+Arctos Monument\32\-\Adventurer, Event Altar\3x3\1\5400\Motivational Log, 1200
+Arctos Monument\33\-\Adventurer, Event Altar\3x3\1\5600\Motivational Log, 1300
+Arctos Monument\34\-\Adventurer, Event Altar\3x3\1\5800\Motivational Log, 1400
+Arctos Monument\45\-\Adventurer, Event Altar\3x3\1\6000\Motivational Log, 1500
 Aqua Slime Statue\1\The Aqua Slime Statue boosts the stats of water-attuned adventurers. It can be obtained from the Void Battles Treasure Trade for Void Seed x1.\Adventurer, Altar\2x2\1\0
 Aqua Slime Statue\2\-\Adventurer, Altar\2x2\1\5000\Iron Ore, 10
 Aqua Slime Statue\3\-\Adventurer, Altar\2x2\1\10000\Iron Ore, 15;; Old Cloth, 2
