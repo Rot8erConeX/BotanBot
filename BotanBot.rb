@@ -123,6 +123,19 @@ system("title loading #{shard_data(2)[@shardizard]} BotanBot")
 @server_data=[[],[]]
 @ignored=[]
 @embedless=[]
+@max_rarity=[5, 5, 5, 6] # adventurer, dragon, print, weapon
+@rarity_stars=[['','<:Rarity_1:532086056594440231>',
+                   '<:Rarity_2:532086056254963713>',
+                   '<:Rarity_3:532086056519204864>',
+                   '<:Rarity_4:532086056301101067>',
+                   '<:Rarity_5:532086056737177600>',
+                   '<:Rarity_6:660289379520086046>'],
+               ['','<:Rarity_1_Blank:555459856476274691>',
+                   '<:Rarity_2_Blank:555459856400908299>',
+                   '<:Rarity_3_Blank:555459856568418314>',
+                   '<:Rarity_4_Blank:555459856497246218>',
+                   '<:Rarity_5_Blank:555459856190930955>',
+                   '<:Rarity_6_Blank:660289380807737354>']]
 @avvie_info=['Botan','*Dragalia Lost*','N/A']
 @voids=[]
 @abilimits=["Affliction Guard \u2192 III (5x)","Blindness Res \u2192 100%","Bog Res \u2192 100%","Broken Punisher \u2192 30%","Buff Time \u2192 30%",
@@ -1817,10 +1830,11 @@ def find_data_ex(callback,name,event,fullname=false,ext=false)
   return blank
 end
 
-def generate_rarity_row(rar,include_blanks=false,feh='')
-  return "#{['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][rar]*rar}#{'<:FGO_rarity_inverted:544568437029208094>'*(5-rar) if include_blanks}" if feh=='FGO'
-  return "#{['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][rar]*rar}#{'<:Icon_Rarity_Empty:631460895851282433>'*(5-rar) if include_blanks}" if feh=='FEH'
-  return "#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][rar]*rar}#{['','<:Rarity_1_Blank:555459856476274691>','<:Rarity_2_Blank:555459856400908299>','<:Rarity_3_Blank:555459856568418314>','<:Rarity_4_Blank:555459856497246218>','<:Rarity_5_Blank:555459856190930955>'][rar]*(5-rar) if include_blanks}"
+def generate_rarity_row(rar,blanks=0,feh='')
+  blanks=rar*1 if blanks<=0
+  return "#{['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][rar]*([rar,blanks].min)}#{'<:FGO_rarity_inverted:544568437029208094>'*(blanks-rar) if blanks>rar}" if feh=='FGO'
+  return "#{['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][rar]*([rar,blanks].min)}#{'<:Icon_Rarity_Empty:631460895851282433>'*(blanks-rar) if blanks>rar}" if feh=='FEH'
+  return "#{@rarity_stars[0][rar]*([rar,blanks].min)}#{@rarity_stars[1][rar]*(blanks-rar) if blanks>rar}"
 end
 
 def element_color(ele)
@@ -1852,7 +1866,7 @@ def adv_emoji(k,bot,ignorefeh=false,advheader=false)
   end
   str=''
   if !k[12].nil? && k[12]=='MM'
-    str=['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i] unless advheader
+    str=@rarity_stars[0][k[1][0,1].to_i] unless advheader
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
     str="#{str}#{moji[0].mention unless moji.length<=0}#{"#{k[2][1]}  " if advheader}"
     wpn='<:Icon_Weapon_Gear:641466825212821514>'
@@ -1909,7 +1923,7 @@ def adv_emoji(k,bot,ignorefeh=false,advheader=false)
     str="#{str}#{clzz}#{k[2][0] if advheader}"
     str="#{str}<:Bond:613804021119189012>" if !k[12].nil? && k[12]=='FGO' && !advheader
   else
-    str=['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i] unless advheader
+    str=@rarity_stars[0][k[1][0,1].to_i] unless advheader
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
     str="#{str}#{moji[0].mention unless moji.length<=0}#{"#{k[2][1]}  " if advheader}"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[2][2]}"}
@@ -1941,7 +1955,7 @@ def dragon_emoji(k,bot,ignorefeh=false)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2]}"}
     str="#{str}#{moji[0].mention unless moji.length<=0}"
   else
-    str=['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]
+    str=@rarity_stars[0][k[1][0,1].to_i]
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2]}"}
     str="#{str}#{moji[0].mention unless moji.length<=0}"
     str="#{str}<:Great_Badge_Golden:443704781068959744>" if !k[16].nil? && k[16]=='FEH'
@@ -1977,7 +1991,7 @@ def print_emoji(k,bot,ignorefeh=false)
     clzz='<:healing:572342852420501506>' if k[2]=='Healer'
     str="#{str}#{clzz}"
   else
-    str=['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]
+    str=@rarity_stars[0][k[1][0,1].to_i]
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2]}"}
     str="<:Wyrmprint:560542319636381725>#{str}#{moji[0].mention unless moji.length<=0}"
     str="#{str}<:Great_Badge_Golden:443704781068959744>" if !k[10].nil? && k[10]=='FEH'
@@ -2027,7 +2041,7 @@ def weapon_emoji(k,bot,ignorefeh=false)
     str="#{str}#{wpn}"
     str="#{str}<:class_beast_gold:562413138356731905>" if k[2].length>1 && k[2][1,1].downcase=='v'
   else
-    str=['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[2][0,1].to_i]
+    str=@rarity_stars[0][k[2][0,1].to_i]
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
     str="#{str}#{moji[0].mention unless moji.length<=0}"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
@@ -2080,28 +2094,34 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   juststats=true if @shardizard != 4 && event.message.text.downcase.split(' ').include?('smol')
   rar=0
   for i in 0...args.length
-    rar=args[i].to_i if rar.zero? && args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<6
-    rar=args[i].to_i if rar.zero? && args[i][1,1]=='*' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<6
+    rar=args[i].to_i if rar.zero? && args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<@max_rarity[0]+2
+    rar=args[i].to_i if rar.zero? && args[i][1,1]=='*' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<@max_rarity[0]+2
   end
   semirar=false
   if rar.zero?
     semirar=true
     rar=k[1][0,1].to_i
-    rar=5 unless juststats || s2s
+    unless juststats || s2s
+      rar=@max_rarity[0]+1
+      rar=@max_rarity[0] unless (!k[3][1][@max_rarity[0]].nil? && k[3][1][@max_rarity[0]]>0) || (!k[4][1][@max_rarity[0]].nil? && k[4][1][@max_rarity[0]]>0)
+    end
   elsif rar>k[1][0,1].to_i && s2s
     semirar=true
     rar=k[1][0,1].to_i
+  elsif rar>k[1][0,1].to_i && !((!k[3][1][@max_rarity[0]].nil? && k[3][1][@max_rarity[0]]>0) || (!k[4][1][@max_rarity[0]].nil? && k[4][1][@max_rarity[0]]>0))
+    rar=k[1][0,1].to_i
+    rar=@max_rarity[0]+1 unless juststats || s2s
   end
   title=''
   titlex=[]
   str=''
   if !k[12].nil? && k[12]=='MM'
     unless s2s || juststats
-      str="#{generate_rarity_row(rar,true)}"
-      str="#{str} (from #{k[1][0,1].to_i}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
+      str="#{generate_rarity_row(rar,@max_rarity[0])}"
+      str="#{str} (#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{@rarity_stars[0][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
     end
-    titlex=["#{generate_rarity_row(rar,true)}"]
-    titlex.push("(from #{k[1][0,1].to_i}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
+    titlex=["#{generate_rarity_row(rar,@max_rarity[0])}"]
+    titlex.push("(#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{@rarity_stars[0][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
     titlex.push("<:Defense:573344832282689567>#{longFormattedNumber(k[5])}")
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][1]}**"
@@ -2112,11 +2132,11 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**"
   elsif !k[12].nil? && k[12]=='FEH'
     unless s2s || juststats
-      str="#{generate_rarity_row(rar,true,'FEH')}"
-      str="#{str} (from #{k[1][0,1].to_i}#{['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
+      str="#{generate_rarity_row(rar,@max_rarity[0],'FEH')}"
+      str="#{str} (#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
     end
-    titlex=["#{generate_rarity_row(rar,true,'FEH')}"]
-    titlex.push("(from #{k[1][0,1].to_i}#{['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
+    titlex=["#{generate_rarity_row(rar,@max_rarity[0],'FEH')}"]
+    titlex.push("(#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
     titlex.push("<:DefenseS:514712247461871616>#{longFormattedNumber(k[5])}")
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2][1].gsub('Shadow','Dark').gsub('Flame','Fire')}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][1]}**"
@@ -2139,11 +2159,11 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[12].nil? && k[12]=='FGO'
     unless s2s || juststats
-      str="#{generate_rarity_row(rar,true,'FGO')}"
-      str="#{str} (from #{k[1][0,1].to_i}#{['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
+      str="#{generate_rarity_row(rar,@max_rarity[0],'FGO')}"
+      str="#{str} (#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
     end
-    titlex=["#{generate_rarity_row(rar,true,'FGO')}"]
-    titlex.push("(from #{k[1][0,1].to_i}#{['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
+    titlex=["#{generate_rarity_row(rar,@max_rarity[0],'FGO')}"]
+    titlex.push("(#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
     titlex.push("*Def:* #{longFormattedNumber(k[5])}")
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][1]}**"
@@ -2173,11 +2193,11 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     titlex=[]
   else
     unless s2s || juststats
-      str="#{generate_rarity_row(rar,true)}"
-      str="#{str} (from #{k[1][0,1].to_i}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
+      str="#{generate_rarity_row(rar,@max_rarity[0])}"
+      str="#{str} (#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{@rarity_stars[0][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
     end
-    titlex=["#{generate_rarity_row(rar,true)}"]
-    titlex.push("(from #{k[1][0,1].to_i}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
+    titlex=["#{generate_rarity_row(rar,@max_rarity[0])}"]
+    titlex.push("(#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{@rarity_stars[0][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
     titlex.push("<:Defense:573344832282689567>#{longFormattedNumber(k[5])}")
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][1]}**"
@@ -2214,8 +2234,12 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     fehm=''
     fehm='FEH' if feh
     fehm='FGO' if !k[12].nil? && k[12]=='FGO'
-    for i in rar...6
-      flds.push([generate_rarity_row(i,true,fehm),"**Lv.1**  #{semoji[0]}#{longFormattedNumber(k[3][0][i-3])}  #{semoji[1]}#{longFormattedNumber(k[4][0][i-3])}  \u00B7\n**Lv.#{30+10*i}**  #{semoji[0]}#{longFormattedNumber(k[3][1][i-3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][i-3])}  \u00B7#{"\n**Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][3])}" if i==5 && (!k[3][1][3].nil? || !k[4][1][3].nil?)}"])
+    for i in rar...@max_rarity[0]+1
+      flds.push([generate_rarity_row(i,@max_rarity[0],fehm),"**Lv.1**  #{semoji[0]}#{longFormattedNumber(k[3][0][i-3])}  #{semoji[1]}#{longFormattedNumber(k[4][0][i-3])}\n**Lv.#{30+10*i}**  #{semoji[0]}#{longFormattedNumber(k[3][1][i-3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][i-3])}#{"\n**Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]-1])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]-1])}" if i==@max_rarity[0] && (!k[3][1][@max_rarity[0]-1].nil? || !k[4][1][@max_rarity[0]-1].nil?)}"])
+    end
+    if (!k[3][1][@max_rarity[0]].nil? && k[3][1][@max_rarity[0]]>0) || (!k[4][1][@max_rarity[0]].nil? && k[4][1][@max_rarity[0]]>0)
+      flds.push(["#{generate_rarity_row(@max_rarity[0]+1,@max_rarity[0],fehm)}\n**Mana Spiral**","**Lv.100**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]])}\n**Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]-2])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]-2])}"])
+      flds[-1].push(true) if flds.length==3
     end
     unless juststats
       if skl1.nil?
@@ -2224,53 +2248,82 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
         str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{", #{semoji[3]}Energizable" if skl1[7]=='Yes'}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min}"
         if (skl1[9].nil? || skl1[9].length<=0) && skl1[6].max != skl1[6].min
           str2="#{str2}\n*Lv.1 (F0, #{skl1[6][0]} SP):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (F3, #{skl1[6][1]} SP):* #{skl1[4].gsub(';; ',"\n")}\n*Lv.3 (F5, #{skl1[6][2]} SP):* #{skl1[5].gsub(';; ',"\n")}"
+          str2="#{str2}\n*Lv.4 (F6, #{skl1[6][3]} SP):* #{skl1[11].gsub(';; ',"\n")}" unless skl1[11].nil? || skl1[11].length<=0
         elsif skl1[9].nil? || skl1[9].length<=0
           str2="#{str2}\n*Lv.1 (F0):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (F3):* #{skl1[4].gsub(';; ',"\n")}\n*Lv.3 (F5):* #{skl1[5].gsub(';; ',"\n")}"
+          str2="#{str2}\n*Lv.4 (F6):* #{skl1[11].gsub(';; ',"\n")}" unless skl1[11].nil? || skl1[11].length<=0
         elsif skl1[6].max != skl1[6].min
           str2="#{str2}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}\n*Lv.1 (F0, #{skl1[6][0]} SP) \u2192 Lv.2 (F3, #{skl1[6][1]} SP) \u2192 Lv.3 (F5, #{skl1[6][2]} SP)*"
+          str2="#{str2} \u2192 *Lv.4 (F6, #{skl1[6][3]} SP)*" unless skl1[11].nil? || skl1[11].length<=0
         else
           str2="#{str2}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}\n*Lv.1 (F0) \u2192 Lv.2 (F3) \u2192 Lv.3 (F5)*"
+          str2="#{str2} \u2192 *Lv.4 (F6)*" unless skl1[11].nil? || skl1[11].length<=0
         end
       end
       if skl2.nil?
         str2="**#{k[6][1]}** - LOAD ERROR"
       else
-        str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{", #{semoji[3]}Energizable" if skl2[7]=='Yes'}#{energy_emoji(skl2[10],true)})__#{" - #{longFormattedNumber(skl2[6][0])} SP" if skl2[6][0]===skl2[6][1]}"
-        if (skl2[9].nil? || skl2[9].length<=0) && skl2[6][0]!=skl2[6][1]
+        str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{", #{semoji[3]}Energizable" if skl2[7]=='Yes'}#{energy_emoji(skl2[10],true)})__#{" - #{longFormattedNumber(skl2[6][0])} SP" if skl2[6].max===skl2[6].min}"
+        if (skl2[9].nil? || skl2[9].length<=0) && skl2[6].max != skl2[6].min
           str2="#{str2}\n*Lv.1 (F2, #{skl2[6][0]} SP):* #{skl2[3].gsub(';; ',"\n")}\n*Lv.2 (F4, #{skl2[6][1]} SP):* #{skl2[4].gsub(';; ',"\n")}"
+          str2="#{str2}\n*Lv.3 (F6, #{skl2[6][2]} SP):* #{skl2[5].gsub(';; ',"\n")}" if !skl2[5].nil? && skl2[5].length>0
         elsif skl2[9].nil? || skl2[9].length<=0
           str2="#{str2}\n*Lv.1 (F2):* #{skl2[3].gsub(';; ',"\n")}\n*Lv.2 (F4):* #{skl2[4].gsub(';; ',"\n")}"
-        elsif skl2[6][0]!=skl2[6][1]
+          str2="#{str2}\n*Lv.3 (F6):* #{skl2[5].gsub(';; ',"\n")}" if !skl2[5].nil? && skl2[5].length>0
+        elsif skl2[6].max != skl2[6].min
           str2="#{str2}\n*Effect:* #{skl2[9].gsub(';; ',"\n")}\n*Lv.1 (F2, #{skl2[6][0]} SP) \u2192 Lv.2 (F4, #{skl2[6][1]} SP)*"
+          str2="#{str2} \u2192 *Lv.3 (F6, #{skl2[6][2]} SP)*" if !skl2[5].nil? && skl2[5].length>0
         else
           str2="#{str2}\n*Effect:* #{skl2[9].gsub(';; ',"\n")}\n*Lv.1 (F2) \u2192 Lv.2 (F4)*"
+          str2="#{str2} \u2192 *Lv.3 (F6)*" if !skl2[5].nil? && skl2[5].length>0
         end
       end
       flds.push(['Skills',str2,1])
       a3="#{k[8][2][0]} (F5)"
       a3="#{k[8][2][0]} (F3) \u2192 #{k[8][2][1]} (F5)" if k[1][0,1].to_i==5
       a3="#{k[8][2][0]} (F2) \u2192 #{k[8][2][1]} (F5)" if k[0]=='Euden'
+      m=1
+      m=2 if k[1][0,1].to_i==5 || k[0]=='Euden'
+      if !k[8][2][m].nil? && k[8][2][m].length>1
+        a3="#{a3} \u2192 #{k[8][2][m,k[8][2].length-m].join(" \u2192 ")} (F6)"
+        m+=1
+      end
       nde=1
       nde=0 if k[0]=='Gala Mym'
-      flds.push(['Abilities',"#{k[8][0][0]} (F#{nde}) \u2192 #{k[8][0][1]} (F3)\n#{k[8][1][0]} (F1) \u2192 #{k[8][1][1]} (F4)\n#{a3}\n\n*Co-Ability:* #{k[7]}"])
+      flds.push(['Abilities',"#{k[8][0][0]} (F#{nde}) \u2192 #{k[8][0][1]} (F3)#{" \u2192 #{k[8][0][2]} (F6)" unless k[8][0].length<3 || k[8][0][2].length<=0}\n#{k[8][1][0]} (F1) \u2192 #{k[8][1][1]} (F4)#{" \u2192 #{k[8][1][2]} (F6)" unless k[8][1].length<3 || k[8][1][2].length<=0}\n#{a3}\n\n*Co-Ability:* #{k[7]}"])
     end
     titlex=[]
   else
     xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Adventurers/#{dispname}_#{[rar,k[1][0,1].to_i].max}.png?raw=true" unless semirar
-    if rar==5 && (!k[3][1][3].nil? || !k[4][1][3].nil?)
-      title="#{adv_emoji(k,bot,true,true)}\n**Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][3])}"
-    else
-      title="#{adv_emoji(k,bot,true,true)}\n**Lv.#{30+10*rar}**  #{semoji[0]}#{longFormattedNumber(k[3][1][rar-3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][rar-3])}"
+    str=''
+    title="#{adv_emoji(k,bot,true,true)}\n**Lv.#{30+10*rar}**  #{semoji[0]}#{longFormattedNumber(k[3][1][rar-3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][rar-3])}"
+    if rar>@max_rarity[0]
+      title="#{adv_emoji(k,bot,true,true)}\n**Lv.100 Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]-2])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]-2])}"
+    elsif rar==@max_rarity[0] && (!k[3][1][@max_rarity[0]-1].nil? || !k[4][1][@max_rarity[0]-1].nil?)
+      title="#{adv_emoji(k,bot,true,true)}\n**Lv.#{30+10*rar} Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]-1])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]-1])}"
     end
     title="#{title}  #{titlex[-1]}"
-    str=''
-    lv=[3,2,2,2,k[8][2].length]
+    lv=[3,3,k[8][0].length,k[8][1].length,k[8][2].length]
+    lv[0]=4 unless skl1[11].nil? || skl1[11].length<=0
+    lv[1]=2 if skl2[5].nil? || skl2[5].length<=0
+    lv=[3,2,2,2,1] if rar==5
+    lv[4]=2 if k[1][0,1].to_i==5 && rar==5
+    lv[4]=2 if k[0]=='Euden' && rar==5
     lv=[2,2,2,2,0] if rar==4
     lv=[2,1,2,1,0] if rar==3
     lv[4]=1 if k[1][0,1].to_i==5 && rar<5
     lv=[1,1,1,1,0] if rar==2
     lv=[1,1,1,0,0] if rar==1
-    x=[skl1[3,3].reject{|q| q.nil? || q.length<=0}[lv[0]-1].gsub(';; ',"\n"),skl2[3,3].reject{|q| q.nil? || q.length<=0}[lv[1]-1].gsub(';; ',"\n")]
+    x=[skl1[3,3],skl2[3,3]]
+    for i in 11...skl1.length
+      x[0].push(skl1[i])
+    end
+    for i in 11...skl2.length
+      x[1].push(skl2[i])
+    end
+    x=x.map{|q| q.reject{|q2| q2.nil? || q2.length<=0}}
+    x[0]=x[0][[lv[0],x[0].length].min-1].gsub(';; ',"\n")
+    x[1]=x[1][[lv[1],x[1].length].min-1].gsub(';; ',"\n")
     strx="__**Skills:**__"
     strx="<:Mega_Man:641484836304846857>**Mega Man Collab**\n\n#{strx}" if !k[12].nil? && k[12]=='MM'
     strx="<:Great_Badge_Golden:443704781068959744>**FEH Collab**\n\n#{strx}" if !k[12].nil? && k[12]=='FEH'
@@ -2301,9 +2354,10 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     else
       str=str.gsub(';;;;;',strx)
     end
-    ftr="Data shown is for a #{rar}-star adventurer.  To show all data, use this command in PM or include 5* in your message." unless rar>=5
-    ftr="Data shown is for a 5-star adventurer.  To show data for a #{k[1][0,1]}-star version, please include #{k[1][0,1]}* in your message." if semirar
-    ftr=nil if k[1][0,1].to_i==5
+    ftr="Data shown is for a #{rar}-star adventurer.  To show all data, use this command in PM or include #{@max_rarity[0]}* in your message." unless rar>=@max_rarity[0]
+    ftr="Data shown is for a #{@max_rarity[0]}-star adventurer.  To show data for a #{k[1][0,1]}-star version, please include #{k[1][0,1]}* in your message." if semirar
+    ftr="Data shown is for an adventurer whose mana spiral has been unlocked.  To show data for a #{@max_rarity[0]}-star#{" or #{k[1][0,1]}-star" unless @max_rarity[0]==k[1][0,1]} version, please include the number in your message." if rar>@max_rarity[0]
+    ftr=nil if k[1][0,1].to_i==@max_rarity[0]
   end
   hdr="__**#{k[0]}**__"
   if titlex.length>0
@@ -2334,7 +2388,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   else
     create_embed(event,[hdr,title],str,element_color(k[2][1]),ftr,xpic,flds)
   end
-end  
+end
 
 def disp_dragon_stats(bot,event,args=nil,juststats=false)
   dispstr=event.message.text.downcase.split(' ')
@@ -2382,7 +2436,7 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false)
   feh=true if !k[16].nil? && k[16]=='FEH'
   dispname=k[0].gsub(' ','_')
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Dragons/#{dispname}.png?raw=true"
-  str=generate_rarity_row(k[1][0,1].to_i,false,k[16])
+  str=generate_rarity_row(k[1][0,1].to_i,0,k[16])
   str='<:Rarity_3:532086056519204864>'*k[1][0,1].to_i if k[0]=='Bronze Fafnir'
   str='<:Rarity_4:532086056301101067>'*k[1][0,1].to_i if k[0]=='Silver Fafnir'
   str='<:Rarity_5:532086056737177600>'*k[1][0,1].to_i if k[0]=='Gold Fafnir'
@@ -2465,8 +2519,9 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
   end
   s2s=false
   s2s=true if safe_to_spam?(event)
-  xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/#{pic.join('/')}.png?raw=true"
-  str=generate_rarity_row(5,false,k[0][16])
+  xpic=pic.join('/')
+  xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/#{xpic}.png?raw=true"
+  str=generate_rarity_row(5,0,k[0][16])
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[0][2]}"}
   title="#{moji[0].mention unless moji.length<=0}**#{k[0][2]}**\n**Pseudodragon**"
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Speed:573366907357495296>']
@@ -2562,7 +2617,7 @@ def disp_wyrmprint_stats(bot,event,args=nil)
   dispname=k[0].gsub(' ','_')
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Wyrmprints/#{dispname}_1.png?raw=true"
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Wyrmprints/#{dispname}_2.png?raw=true" if has_any?(['mub','unbind','unbound','refined','refine','refinement','2ub','3ub'],evn)
-  str=generate_rarity_row(k[1][0,1].to_i,false,k[10])
+  str=generate_rarity_row(k[1][0,1].to_i,0,k[10])
   if !k[10].nil? && k[10]=='FEH'
     clzz='<:Resource_Structure:510774545154572298>'
     clzz='<:Skill_Weapon:444078171114045450>' if k[2]=='Attack'
@@ -2758,7 +2813,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Weapons/#{dispname}.png?raw=true"
   str=''
   if !k[14].nil? && k[14]=='FEH'
-    str=generate_rarity_row(k[2][0,1].to_i,false,'FEH')
+    str=generate_rarity_row(k[2][0,1].to_i,0,'FEH')
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[3].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Anima')}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     wpn='<:Gold_Unknown:443172811499110411>'
@@ -2773,7 +2828,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     title="#{title}\n#{wpn}**#{k[1]}**"
     title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[14].nil? && k[14]=='FGO'
-    str=generate_rarity_row(k[2][0,1].to_i,false,'FGO')
+    str=generate_rarity_row(k[2][0,1].to_i,0,'FGO')
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     clzz='unknown'
@@ -2805,6 +2860,8 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   end
   str="#{str} - T#{k[16]}" unless k[16]==0
   title="#{title}\n**Welfare**" if k[2].length>1 && k[2][1,1].downcase=='w'
+  title="#{title}\n**Agito**" if k[2].length>1 && k[2][1,1].downcase=='a'
+  title="#{title}\n**Chimera**" if k[2].length>1 && k[2][1,1].downcase=='m'
   title="#{title}\n**Story**" if k[2].length>1 && k[2][1,1].downcase=='y'
   title="#{title}\n**Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='s'
   title="#{title}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
@@ -2829,8 +2886,10 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   end
   f=30*k[2][0,1].to_i-50
   f+=40-10*k[2][0,1].to_i if k[2][0,1].to_i<3
+  f=200 if k[2][0,1].to_i>5
   f0=30*k[2][0,1].to_i-70
   f0=5*k[2][0,1].to_i if k[2][0,1].to_i<3
+  f0=100 if k[2][0,1].to_i>5
   wpnz=@weapons.map{|q| q}
   sklz=@askilities.map{|q| q}
   skl=nil
@@ -2933,7 +2992,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     str="#{str}#{"\n" unless s2s}#{str2}" if str2.length>0
     str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[7][0])}#{bemoji[2]}#{" #{longFormattedNumber(k[7][1])}#{bemoji[3]}" if k[7][1]>0}"
     str="#{str}\n**Assembles for:** #{longFormattedNumber(k[11][0])}#{bemoji[2]}"
-    if k[2][1,1]=='h'
+    if ['h','a','m'].include?(k[2][1,1])
       str="#{str}\n*Cannot be disassembled*"
     else
       str="#{str}\n**Disassembles for:** #{longFormattedNumber(k[11][1])}#{bemoji[2]}"
@@ -3059,7 +3118,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     val/=5
   end
   if !k[14].nil? && k[14]=='FEH'
-    str=generate_rarity_row(k[2][0,1].to_i,false,'FEH')
+    str=generate_rarity_row(k[2][0,1].to_i,0,'FEH')
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[3].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Anima')}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     wpn='<:Gold_Unknown:443172811499110411>'
@@ -3074,7 +3133,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     title="#{title}\n#{wpn}**#{k[1]}**"
     title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[14].nil? && k[14]=='FGO'
-    str=generate_rarity_row(k[2][0,1].to_i,false,'FGO')
+    str=generate_rarity_row(k[2][0,1].to_i,0,'FGO')
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     clzz='unknown'
@@ -3106,6 +3165,8 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   end
   str="#{str} - T#{k[16]}" unless k[16]==0
   title="#{title}\n**Welfare**" if k[2].length>1 && k[2][1,1].downcase=='w'
+  title="#{title}\n**Agito**" if k[2].length>1 && k[2][1,1].downcase=='a'
+  title="#{title}\n**Chimera**" if k[2].length>1 && k[2][1,1].downcase=='m'
   title="#{title}\n**Story**" if k[2].length>1 && k[2][1,1].downcase=='y'
   title="#{title}\n**Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='s'
   title="#{title}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
@@ -3130,8 +3191,10 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   end
   f=30*k[2][0,1].to_i-50
   f+=20 if k[2][0,1].to_i<3
+  f=200 if k[2][0,1].to_i>5
   f0=30*k[2][0,1].to_i-70
   f0=5*k[2][0,1].to_i if k[2][0,1].to_i<3
+  f0=100 if k[2][0,1].to_i>5
   wpnz=@weapons.map{|q| q}
   sklz=@askilities.map{|q| q}
   skl=nil
@@ -3164,7 +3227,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     str="#{str}\n**#{bemoji[1]*4} Level #{f}**  #{semoji[0]}#{longFormattedNumber(k[4][2])}  #{semoji[1]}#{longFormattedNumber(k[5][2])}"
   else
     str="#{str}\n**#{bemoji[0]*4} Level 1**  #{semoji[0]}#{longFormattedNumber(k[4][0])}  #{semoji[1]}#{longFormattedNumber(k[5][0])}"
-    str="#{str}\n**#{bemoji[0]*4} Level 80**  #{semoji[0]}#{longFormattedNumber(k[4][1])}  #{semoji[1]}#{longFormattedNumber(k[5][1])}" if (k[4][1]>0 || k[5][1]>0)
+    str="#{str}\n**#{bemoji[0]*4} Level #{f0}**  #{semoji[0]}#{longFormattedNumber(k[4][1])}  #{semoji[1]}#{longFormattedNumber(k[5][1])}" if (k[4][1]>0 || k[5][1]>0)
   end
   if s2s && !skl.nil?
     if mub
@@ -3205,7 +3268,9 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   str2=''
   val*=5 if mub
   ftr=nil
-  str="#{str}#{"\n\n**Crafting shown for #{'<:Unbind:534494090969088000>'*([val-1,4].min)}#{'<:NonUnbound:534494090876682264>'*([5-val,0].max)}**" if val>1 && !mub}\n\n**This weapon#{" (x#{val})" unless val==1}**\n*Smithy level required:* #{k[10]}\n*Assembly cost:* #{longFormattedNumber(val*k[11][0])}#{bemoji[2]}#{"\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{val*q[1].to_i}"}.join(', ')}" unless k[12].nil?}"
+  str="#{str}#{"\n\n**Crafting shown for #{'<:Unbind:534494090969088000>'*([val-1,4].min)}#{'<:NonUnbound:534494090876682264>'*([5-val,0].max)}**" if val>1 && !mub}\n\n**This weapon#{" (x#{val})" unless val==1}**"
+  str="#{str}\n*Smithy level required:* #{k[10]}" unless ['a','m'].include?(k[2][1,1])
+  str="#{str}\n*Assembly cost:* #{longFormattedNumber(val*k[11][0])}#{bemoji[2]}#{"\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{val*q[1].to_i}"}.join(', ')}" unless k[12].nil?}"
   m2=wpnz.find_index{|q| q[8]==k[9] && !['','0',0].include?(q[8])}
   cost=0
   cost+=val*k[11][0]
@@ -3680,6 +3745,9 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Skills/#{dispname}.png?raw=true"
   xcolor=0x02010a
   mx=k[3,3].reject{|q| q.nil? || q.length<=0}
+  for i in 11...k.length
+    mx.push(k[i]) if !k[i].nil? && k[i].length>0
+  end
   str=''
   title="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min
   title="#{title}\n**Invulnerability duration:** #{k[8]} seconds"
@@ -3689,7 +3757,11 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   for i in 0...mx.length
     str2="#{str2}\n\n__**Level #{i+1}**__"
     str2="#{str2} - #{k[6][i]} SP" unless k[6][0,mx.length].max==k[6][0,mx.length].min
-    str2="#{str2}\n#{k[i+3].gsub(';; ',"\n")}"
+    if i>=3
+      str2="#{str2}\n#{k[i+8].gsub(';; ',"\n")}"
+    else
+      str2="#{str2}\n#{k[i+3].gsub(';; ',"\n")}"
+    end
   end
   flds=[]
   m=[]
@@ -3811,7 +3883,7 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
   end
   unless evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter') || adv.length<=0
     for i in 0...adv.length
-      m=[adv[i][8][0][1].split(' '),adv[i][8][1][1].split(' '),adv[i][8][2][-1].split(' ')]
+      m=[adv[i][8][0][-1].split(' '),adv[i][8][1][-1].split(' '),adv[i][8][2][-1].split(' ')]
       adv[i][8][3]=['x','x']
       if adv[i][8][2].length>1
       elsif m[0][-1].include?('%') && m[2][-1].include?('%') && m[0][0,m[0].length-1].join(' ')==m[2][0,m[2].length-1].join(' ')
@@ -3880,18 +3952,22 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
           advemo=element_emote(adv[i][2][1],bot,adv[i][12])
           advemo=element_emote(adv[i][2][1],bot) if ignorefeh
           if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-            m2.push("#{advemo}#{adv[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][0][0]==checkstr
-            m2.push("#{advemo}#{adv[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][0][1]==checkstr
-            m2.push("#{advemo}#{adv[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][1][0]==checkstr
-            m2.push("#{advemo}#{adv[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][1][1]==checkstr
-            m2.push("#{advemo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
-            m2.push("#{advemo}#{adv[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length>1
-            m2.push("#{advemo}#{adv[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+            for i4 in 0...3
+              if adv[i][8][i4].length<=1
+                m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}" if dispslots}") if adv[i][8][i4][0]==checkstr
+              elsif adv[i][8][i4].length<=2
+                m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][i4][0]==checkstr
+                m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][i4][1]==checkstr
+              else
+                m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][i4][0]==checkstr
+                m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}\u2082)" if dispslots}#{' [mid]' unless dispslots}") if adv[i][8][i4][1]==checkstr
+                m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}\u2083)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][i4][2]==checkstr
+              end
+            end
           else
-            m2.push("#{advemo}#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0][1]==checkstr
-            m2.push("#{advemo}#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1][1]==checkstr
-            m2.push("#{advemo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
-            m2.push("#{advemo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+            m2.push("#{advemo}#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0].reject{|q| q.length<=0}[-1]==checkstr
+            m2.push("#{advemo}#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1].reject{|q| q.length<=0}[-1]==checkstr
+            m2.push("#{advemo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2].reject{|q| q.length<=0}[-1]==checkstr
             m2.push("#{advemo}#{adv[i][0]}#{" (A1+3)" if dispslots}") if adv[i][8][3][0]==checkstr
             m2.push("#{advemo}#{adv[i][0]}#{" (A2+3)" if dispslots}") if adv[i][8][3][1]==checkstr
           end
@@ -4061,7 +4137,7 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
           brk=false
           m2=[]
           for i3 in 0...adv.length
-            advabils=[adv[i3][8][0][1],adv[i3][8][1][1],adv[i3][8][2][-1]]
+            advabils=[adv[i3][8][0][-1],adv[i3][8][1][-1],adv[i3][8][2][-1]]
             advabils.push(adv[i3][8][3][0]) if adv[i3][8].length>3
             advabils.push(adv[i3][8][3][1]) if adv[i3][8].length>3
             if advabils.include?(checkstr)
@@ -4171,18 +4247,22 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
               advemo=element_emote(adv[i][2][1],bot,adv[i][12])
               advemo=element_emote(adv[i][2][1],bot) if ignorefeh
               if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-                m2.push("#{advemo}#{adv[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][0][0]==checkstr
-                m2.push("#{advemo}#{adv[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][0][1]==checkstr
-                m2.push("#{advemo}#{adv[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][1][0]==checkstr
-                m2.push("#{advemo}#{adv[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][1][1]==checkstr
-                m2.push("#{advemo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
-                m2.push("#{advemo}#{adv[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length>1
-                m2.push("#{advemo}#{adv[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+                for i4 in 0...3
+                  if adv[i][8][i4].length<=1
+                    m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}" if dispslots}") if adv[i][8][i4][0]==checkstr
+                  elsif adv[i][8][i4].length<=2
+                    m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][i4][0]==checkstr
+                    m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][i4][1]==checkstr
+                  else
+                    m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][i4][0]==checkstr
+                    m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}\u2082)" if dispslots}#{' [mid]' unless dispslots}") if adv[i][8][i4][1]==checkstr
+                    m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}\u2083)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][i4][2]==checkstr
+                  end
+                end
               else
-                m2.push("#{advemo}#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0][1]==checkstr
-                m2.push("#{advemo}#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1][1]==checkstr
-                m2.push("#{advemo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
-                m2.push("#{advemo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+                m2.push("#{advemo}#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0].reject{|q| q.length<=0}[-1]==checkstr
+                m2.push("#{advemo}#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1].reject{|q| q.length<=0}[-1]==checkstr
+                m2.push("#{advemo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2].reject{|q| q.length<=0}[-1]==checkstr
                 m2.push("#{advemo}#{adv[i][0]}#{" (A1+3)" if dispslots}") if adv[i][8][3][0]==checkstr
                 m2.push("#{advemo}#{adv[i][0]}#{" (A2+3)" if dispslots}") if adv[i][8][3][1]==checkstr
               end
@@ -4477,18 +4557,22 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
         advemo=element_emote(adv[i][2][1],bot,adv[i][12])
         advemo=element_emote(adv[i][2][1],bot) if ignorefeh
         if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-          m2.push("#{advemo}#{adv[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][0][0]==checkstr
-          m2.push("#{advemo}#{adv[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][0][1]==checkstr
-          m2.push("#{advemo}#{adv[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][1][0]==checkstr
-          m2.push("#{advemo}#{adv[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][1][1]==checkstr
-          m2.push("#{advemo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
-          m2.push("#{advemo}#{adv[i][0]}#{" (A3\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length>1
-          m2.push("#{advemo}#{adv[i][0]}#{" (A3\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+          for i4 in 0...3
+            if adv[i][8][i4].length<=1
+              m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}" if dispslots}") if adv[i][8][i4][0]==checkstr
+            elsif adv[i][8][i4].length<=2
+              m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][i4][0]==checkstr
+              m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][i4][1]==checkstr
+            else
+              m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}\u2081)" if dispslots}#{' [Min]' unless dispslots}") if adv[i][8][i4][0]==checkstr
+              m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}\u2082)" if dispslots}#{' [mid]' unless dispslots}") if adv[i][8][i4][1]==checkstr
+              m2.push("#{advemo}#{adv[i][0]}#{" (A#{i4+1}\u2083)" if dispslots}#{' [Max]' unless dispslots}") if adv[i][8][i4][2]==checkstr
+            end
+          end
         else
-          m2.push("#{advemo}#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0][1]==checkstr
-          m2.push("#{advemo}#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1][1]==checkstr
-          m2.push("#{advemo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][0]==checkstr && adv[i][8][2].length<=1
-          m2.push("#{advemo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2][1]==checkstr && adv[i][8][2].length>1
+          m2.push("#{advemo}#{adv[i][0]}#{" (A1)" if dispslots}") if adv[i][8][0].reject{|q| q.length<=0}[-1]==checkstr
+          m2.push("#{advemo}#{adv[i][0]}#{" (A2)" if dispslots}") if adv[i][8][1].reject{|q| q.length<=0}[-1]==checkstr
+          m2.push("#{advemo}#{adv[i][0]}#{" (A3)" if dispslots}") if adv[i][8][2].reject{|q| q.length<=0}[-1]==checkstr
           m2.push("#{advemo}#{adv[i][0]}#{" (A1+3)" if dispslots}") if adv[i][8][3][0]==checkstr
           m2.push("#{advemo}#{adv[i][0]}#{" (A2+3)" if dispslots}") if adv[i][8][3][1]==checkstr
         end
@@ -4859,6 +4943,7 @@ def disp_facility_data(bot,event,args=nil)
     str="#{str}\n\nLevel 1-3 Smithies can craft #{generate_rarity_row(3)} weapons"
     str="#{str}\nLevel 4-6 Smithies can craft #{generate_rarity_row(4)} weapons"
     str="#{str}\nLevel 7-9 Smithies can craft #{generate_rarity_row(5)} weapons"
+    str="#{str}\n~~Level 10-12 Smithies can craft #{generate_rarity_row(6)} weapons~~ (assumed, may not be true)"
     str="#{str}\nEach new level of smithy allows you to craft higher-tier weapons within the newest-allowed rarity bracket."
   end
   ftr=nil
@@ -4881,6 +4966,10 @@ def disp_facility_data(bot,event,args=nil)
     str="#{str}\n*Level 6 \u2192 7:* 80,000<:Resource_Rupies:532104504372363274> - Granite x15, Fiend's Horn x15, Ancient Bird's Feather x15, Abyss Stone x15"
     str="#{str}\n*Level 7 \u2192 8:* 100,000<:Resource_Rupies:532104504372363274> - Meteorite x10, Fiend's Eye x10, Bewitching Wings x10"
     str="#{str}\n*Level 8 \u2192 9:* 120,000<:Resource_Rupies:532104504372363274> - Meteorite x15, Fiend's Eye x15, Bewitching Wings x15, Crimson Core x15"
+    str="#{str}\n\n__**Can craft #{generate_rarity_row(6)} weapons**__"
+    str="#{str}\n*Level 9 \u2192 10:* 140,000<:Resource_Rupies:532104504372363274> - Unknown mats"
+    str="#{str}\n*Level 10 \u2192 11:* 160,000<:Resource_Rupies:532104504372363274> - Unknown mats"
+    str="#{str}\n*Level 11 \u2192 12:* 180,000<:Resource_Rupies:532104504372363274> - Unknown mats"
     ftr='Each new level of smithy allows you to craft higher-tier weapons within the newest-allowed rarity bracket.'
   elsif k[0]=='Halidom'
     str="__*Level 1 \u2192 2*__\nRequires Facility level of 5\n5,000<:Resource_Rupies:532104504372363274>"
@@ -4891,6 +4980,7 @@ def disp_facility_data(bot,event,args=nil)
     str="#{str}\n\n__*Level 6 \u2192 7*__\nRequires Facility level of 400\n200,000<:Resource_Rupies:532104504372363274>\n<:Element_Shadow:532106088154267658>Shadow Orb x150, Nightfall Orb x20, Nether Orb x4, Talonstone x20"
     str="#{str}\n\n__*Level 7 \u2192 8*__\nRequires Facility level of 550\n250,000<:Resource_Rupies:532104504372363274>\n<:Element_Wind:532106087948746763>Wind Orb x200, Storm Orb x25, Maelstrom Orb x6, Talonstone x25"
     str="#{str}\n\n__*Level 8 \u2192 9*__\nRequires Facility level of 700\n300,000<:Resource_Rupies:532104504372363274>\n<:Element_Water:532106088221376522>Water Orb x300, Stream Orb x40, Deluge Orb x9, Talonstone x30"
+    str="#{str}\n\n__*Level 9 \u2192 10*__\nRequires Facility level of 850\n350,000<:Resource_Rupies:532104504372363274>\n<:Element_Flame:532106087952810005>Flame Orb x400, Blaze Orb x80, Inferno Orb x20, Rainbow Orb x40, Talonstone x50"
   else
     nums=[]
     val=0
@@ -4930,6 +5020,25 @@ def disp_facility_data(bot,event,args=nil)
           alta[1]+=0.5
           alta[1]+=0.3 if i>=29
           str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+        elsif k[3][1]=='Tree' && s2s
+          alta=[i+2.0,i+2.0]
+          if i<9
+            x=i/4
+            alta=[x*3.0+3.0,x*3.0+3.0]
+            if i%4>0
+              alta[0]+=1.0
+              alta[1]+=0.5
+            end
+            if i%4>1
+              alta[1]+=1.0
+              alta[0]+=0.5
+            end
+            if i%4>2
+              alta[0]+=1.0
+              alta[1]+=0.5
+            end
+          end
+          str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
         elsif k[3][1]=='Altar' && s2s
           alta=[(i+1)/2,i/2]
           alta=alta.map{|q| q*0.5+0.5}
@@ -4937,7 +5046,7 @@ def disp_facility_data(bot,event,args=nil)
         elsif k[3][1]=='Dojo' && s2s
           alta=[(i+1)/2,i/2]
           alta=alta.map{|q| q*0.5+3.0}
-          for i2 in 0...(kxx.length/15+1)
+          for i2 in 0...((i+1)/15+1)
             if i>15*i2+14 && i2%2==0
               alta[0]+=1+i2
               alta[1]+=1.5+i2
@@ -4963,6 +5072,25 @@ def disp_facility_data(bot,event,args=nil)
         alta=[(kxx.length)/2,(kxx.length-1)/2]
         alta=alta.map{|q| q*0.3+0.5}
         alta[1]+=0.3 if kxx.length>=30
+        str3="#{str3}**\n**FINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+      elsif k[3][1]=='Tree'
+        alta=[kxx.length+1.0,kxx.length+1.0]
+        if (kxx.length-1)<9
+          x=(kxx.length-1)/4
+          alta=[x*3.0+3.0,x*3.0+3.0]
+          if (kxx.length-1)%4>0
+            alta[0]+=1.0
+            alta[1]+=0.5
+          end
+          if (kxx.length-1)%4>1
+            alta[1]+=1.0
+            alta[0]+=0.5
+          end
+          if (kxx.length-1)%4>2
+            alta[0]+=1.0
+            alta[1]+=0.5
+          end
+        end
         str3="#{str3}**\n**FINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       elsif k[3][1]=='Altar'
         alta=[kxx.length/2,(kxx.length-1)/2]
@@ -5016,6 +5144,25 @@ def disp_facility_data(bot,event,args=nil)
         alta=[(n)/2,(n-1)/2]
         alta=alta.map{|q| q*0.5+0.5}
         str3="#{str3}\nBuffs at Level #{n}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+      elsif k[3][1]=='Tree'
+        alta=[n+1.0,n+1.0]
+        if (n-1)<9
+          x=(n-1)/4
+          alta=[x*3.0+3.0,x*3.0+3.0]
+          if (n-1)%4>0
+            alta[0]+=1.0
+            alta[1]+=0.5
+          end
+          if (n-1)%4>1
+            alta[1]+=1.0
+            alta[0]+=0.5
+          end
+          if (n-1)%4>2
+            alta[0]+=1.0
+            alta[1]+=0.5
+          end
+        end
+        str3="#{str3}\nBuffs at Level #{n}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       elsif k[3][1]=='Dojo'
         alta=[(n)/2,(n-1)/2]
         alta=alta.map{|q| q*0.5+3.0}
@@ -5049,6 +5196,25 @@ def disp_facility_data(bot,event,args=nil)
       elsif k[3][1]=='Altar'
         alta=[kxx.length/2,(kxx.length-1)/2]
         alta=alta.map{|q| q*0.5+0.5}
+        str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+      elsif k[3][1]=='Tree'
+        alta=[kxx.length+1.0,kxx.length+1.0]
+        if (kxx.length-1)<9
+          x=(kxx.length-1)/4
+          alta=[x*3.0+3.0,x*3.0+3.0]
+          if (kxx.length-1)%4>0
+            alta[0]+=1.0
+            alta[1]+=0.5
+          end
+          if (kxx.length-1)%4>1
+            alta[1]+=1.0
+            alta[0]+=0.5
+          end
+          if (kxx.length-1)%4>2
+            alta[0]+=1.0
+            alta[1]+=0.5
+          end
+        end
         str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       elsif k[3][1]=='Dojo'
         alta=[kxx.length/2,(kxx.length-1)/2]
@@ -5227,12 +5393,19 @@ def disp_adventurer_art(bot,event,args=nil)
     end
   end
   lookout=lookout.reject{|q| q[2]!='Art' && q[2]!='Art/Adventurer'}
+  rarval=[]
+  for i in 0...@max_rarity[0]+1
+    rarval.push(i)
+  end
   for i in 0...args.length
-    rar=args[i].to_i if rar==0 && args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<6
-    rar=args[i].to_i if rar==0 && args[i][1,1]=='*' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<6
+    rar=args[i].to_i if rar==0 && args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<@max_rarity[0]+1
+    rar=args[i].to_i if rar==0 && args[i][1,1]=='*' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<@max_rarity[0]+1
     for j in 0...lookout.length
-      rar=lookout[j][0] if [0,1,2,3,4,5].include?(rar) && lookout[j][1].include?(args[i].downcase)
+      rar=lookout[j][0] if rarval.include?(rar) && lookout[j][1].include?(args[i].downcase)
     end
+  end
+  if k[0]=='Xainfried' && rar=='Animal' && has_any?(['christmas','winter','dy','dragonyule','santa'],args.map{|q| q.downcase})
+    k=find_data_ex(:find_adventurer,'Xainfried(Dragonyule)',event)
   end
   feh=false
   feh=true if !k[12].nil? && k[12]=='FEH'
@@ -5245,17 +5418,17 @@ def disp_adventurer_art(bot,event,args=nil)
     IO.copy_stream(open(art), "C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
     if File.size("C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png")<=100 || m
       rar=k[1][0,1].to_i
-      disp="#{generate_rarity_row(rar,true,fehm)}"
+      disp="#{generate_rarity_row(rar,@max_rarity[0],fehm)}"
     elsif rar=='NPC'
       rar=1
       rar=2 if ['Lathna','Nina','Notte'].include?(k[0])
-      disp="#{generate_rarity_row(rar,true,fehm)}"
+      disp="#{generate_rarity_row(rar,@max_rarity[0],fehm)}"
     else
       disp="#{rar} design"
     end
   else
     rar=k[1][0,1].to_i if rar<k[1][0,1].to_i || rar>5
-    disp="#{generate_rarity_row(rar,true,fehm)}"
+    disp="#{generate_rarity_row(rar,@max_rarity[0],fehm)}"
   end
   art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Adventurers/#{k[0].gsub(' ','_')}_#{rar}.png"
   nammes=['','','']
@@ -5449,7 +5622,7 @@ def disp_dragon_art(bot,event,args=nil)
   fehm='FEH' if feh
   fehm='FGO' if !k[12].nil? && k[12]=='FGO'
   disp=''
-  disp="#{generate_rarity_row(k[1][0,1].to_i,false,fehm)}"
+  disp="#{generate_rarity_row(k[1][0,1].to_i,0,fehm)}"
   disp='<:Rarity_3:532086056519204864>'*k[1][0,1].to_i if k[0]=='Bronze Fafnir'
   disp='<:Rarity_4:532086056301101067>'*k[1][0,1].to_i if k[0]=='Silver Fafnir'
   disp='<:Rarity_5:532086056737177600>'*k[1][0,1].to_i if k[0]=='Gold Fafnir'
@@ -5468,7 +5641,7 @@ def disp_dragon_art(bot,event,args=nil)
   end
   if rar.nil? && k[0]=='Brunhilda' && args.include?('mym')
     rar='Human'
-    disp="#{generate_rarity_row(k[1][0,1].to_i,true,fehm)}"
+    disp="#{generate_rarity_row(k[1][0,1].to_i,@max_rarity[0],fehm)}"
   end
   if !rar.nil? && rar.is_a?(String)
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Dragons/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
@@ -5689,7 +5862,7 @@ def disp_wyrmprint_art(bot,event,args=nil)
   xcolor=0x39045A if k[2]=='Support'
   xcolor=0x005918 if k[2]=='Healing'
   halfemote="\u200B  \u200B  \u200B  \u200B"
-  disp="#{halfemote*(4-k[1][0,1].to_i) if k[1][0,1].to_i<4}#{" \u200B" if k[1][0,1].to_i<3}#{generate_rarity_row(k[1][0,1].to_i,false,fehm)}\n#{"#{halfemote} \u200B" if k[1][0,1].to_i==5}#{emote*4}"
+  disp="#{halfemote*(4-k[1][0,1].to_i) if k[1][0,1].to_i<4}#{" \u200B" if k[1][0,1].to_i<3}#{generate_rarity_row(k[1][0,1].to_i,0,fehm)}\n#{"#{halfemote} \u200B" if k[1][0,1].to_i==5}#{emote*4}"
   nammes=['','','']
   unless k[7].nil? || k[7].length<=0
     m=k[7].split(' as ')
@@ -5880,8 +6053,8 @@ def disp_npc_art(bot,event,args=nil)
   rar=nil
   fehm=''
   fehm='FEH' if k[0]=='Loki'
-  disp="#{generate_rarity_row(k[1],false,fehm)}"
-  disp="#{generate_rarity_row(k[1],true,fehm)}" if k[2]=='n'
+  disp="#{generate_rarity_row(k[1],0,fehm)}"
+  disp="#{generate_rarity_row(k[1],@max_rarity[0],fehm)}" if k[2]=='n'
   lookout=[]
   if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
     lookout=[]
@@ -5898,7 +6071,6 @@ def disp_npc_art(bot,event,args=nil)
   wrm=@wyrmprints.reject{|q| q[8].nil? || q[8].length<=0}
   wrmz=[]
   nammes=['','','']
-  puts k.to_s
   unless k[3].nil? || k[3].length<=0
     m=k[3].split(' as ')
     nammes[1]=m[0]
@@ -6421,8 +6593,8 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   lookout=lookout.reject{|q| q[2]!='Skill'}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
-    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6 && allowstr
-    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6 && allowstr
+    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1 && allowstr
+    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1 && allowstr
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
     elem.push('Water') if ['water','waters'].include?(args[i].downcase)
     elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
@@ -6445,7 +6617,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
     fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
     fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons','limited','limit'].include?(args[i].downcase)
     fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons','limited','limit'].include?(args[i].downcase)
-    fltr.push('Summon') if ['summon','summons','summonable','summonables'].include?(args[i].downcase)
+    fltr.push('NonLimited') if ['summon','summons','summonable','summonables','nonlimited','non-limited'].include?(args[i].downcase)
     fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers','limited','limit'].include?(args[i].downcase)
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
@@ -6476,8 +6648,8 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   emo=[]
   if rarity.length>0
     char=char.reject{|q| !rarity.include?(q[1][0,1].to_i)}.uniq
-    search.push("*Rarities*: #{rarity.map{|q| "#{q}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][q]}"}.join(', ')}")
-    emo.push(['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][rarity[0]]) if rarity.length<2
+    search.push("*Rarities*: #{rarity.map{|q| "#{q}#{@rarity_stars[0][q]}"}.join(', ')}")
+    emo.push(@rarity_stars[0][rarity[0]]) if rarity.length<2
   end
   if elem.length>0
     char=char.reject{|q| !elem.include?(q[2][1])}.uniq
@@ -6514,51 +6686,39 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   if fltr.length>0
     m=[]
     if fltr.include?('Welfare')
-      m.push('1w')
-      m.push('2w')
-      m.push('3w')
-      m.push('4w')
-      m.push('5w')
+      for i in 0...@max_rarity[0]
+        m.push("#{i+1}w")
+      end
       emo.push('(w)') if fltr.length<2
     end
     if fltr.include?('Seasonal')
-      m.push('1s')
-      m.push('2s')
-      m.push('3s')
-      m.push('4s')
-      m.push('5s')
+      for i in 0...@max_rarity[0]
+        m.push("#{i+1}s")
+      end
       emo.push('(s)') if fltr.length<2
     end
     if fltr.include?('Zodiac Seasonal')
-      m.push('1z')
-      m.push('2z')
-      m.push('3z')
-      m.push('4z')
-      m.push('5z')
+      for i in 0...@max_rarity[0]
+        m.push("#{i+1}z")
+      end
       emo.push('(z)') if fltr.length<2
     end
     if fltr.include?('Story')
-      m.push('1y')
-      m.push('2y')
-      m.push('3y')
-      m.push('4y')
-      m.push('5y')
+      for i in 0...@max_rarity[0]
+        m.push("#{i+1}y")
+      end
       emo.push('(y)') if fltr.length<2
     end
-    if fltr.include?('Summon')
-      m.push('1')
-      m.push('2')
-      m.push('3')
-      m.push('4')
-      m.push('5')
+    if fltr.include?('NonLimited')
+      for i in 0...@max_rarity[0]
+        m.push("#{i+1}")
+      end
       emo.push('(p)') if fltr.length<2
     end
     if fltr.include?('Collab')
-      m.push('1c')
-      m.push('2c')
-      m.push('3c')
-      m.push('4c')
-      m.push('5c')
+      for i in 0...@max_rarity[0]
+        m.push("#{i+1}c")
+      end
       emo.push('(c)') if fltr.length<2
     end
     char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[12].nil? && q[12].length>0)}.uniq
@@ -6660,8 +6820,8 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   lookout=lookout.reject{|q| q[2]!='Skill'}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
-    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6
-    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6
+    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
+    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
     elem.push('Water') if ['water','waters'].include?(args[i].downcase)
     elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
@@ -6682,7 +6842,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
     fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
     fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons','limited','limit'].include?(args[i].downcase)
     fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons','limited','limit'].include?(args[i].downcase)
-    fltr.push('Summon') if ['summon','summons','summonable','summonables'].include?(args[i].downcase)
+    fltr.push('NonLimited') if ['summon','summons','summonable','summonables','nonlimited','non-limited'].include?(args[i].downcase)
     fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers','limited','limit'].include?(args[i].downcase)
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
@@ -6710,8 +6870,8 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   emo=[]
   if rarity.length>0
     char=char.reject{|q| !rarity.include?(q[1][0,1].to_i)}.uniq
-    search.push("*Rarities*: #{rarity.map{|q| "#{q}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][q]}"}.join(', ')}")
-    emo.push(['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][rarity[0]]) if rarity.length<2
+    search.push("*Rarities*: #{rarity.map{|q| "#{q}#{@rarity_stars[0][q]}"}.join(', ')}")
+    emo.push(@rarity_stars[0][rarity[0]]) if rarity.length<2
   end
   if elem.length>0
     char=char.reject{|q| !elem.include?(q[2])}.uniq
@@ -6751,51 +6911,39 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   if fltr.length>0
     m=[]
     if fltr.include?('Welfare')
-      m.push('1w')
-      m.push('2w')
-      m.push('3w')
-      m.push('4w')
-      m.push('5w')
+      for i in 0...@max_rarity[1]
+        m.push("#{i+1}w")
+      end
       emo.push('(w)') if fltr.length<2
     end
     if fltr.include?('Seasonal')
-      m.push('1s')
-      m.push('2s')
-      m.push('3s')
-      m.push('4s')
-      m.push('5s')
+      for i in 0...@max_rarity[1]
+        m.push("#{i+1}s")
+      end
       emo.push('(s)') if fltr.length<2
     end
     if fltr.include?('Zodiac Seasonal')
-      m.push('1z')
-      m.push('2z')
-      m.push('3z')
-      m.push('4z')
-      m.push('5z')
+      for i in 0...@max_rarity[1]
+        m.push("#{i+1}z")
+      end
       emo.push('(z)') if fltr.length<2
     end
     if fltr.include?('Story')
-      m.push('1y')
-      m.push('2y')
-      m.push('3y')
-      m.push('4y')
-      m.push('5y')
+      for i in 0...@max_rarity[1]
+        m.push("#{i+1}y")
+      end
       emo.push('(y)') if fltr.length<2
     end
-    if fltr.include?('Summon')
-      m.push('1')
-      m.push('2')
-      m.push('3')
-      m.push('4')
-      m.push('5')
+    if fltr.include?('NonLimited')
+      for i in 0...@max_rarity[1]
+        m.push("#{i+1}")
+      end
       emo.push('(p)') if fltr.length<2
     end
     if fltr.include?('Collab')
-      m.push('1c')
-      m.push('2c')
-      m.push('3c')
-      m.push('4c')
-      m.push('5c')
+      for i in 0...@max_rarity[1]
+        m.push("#{i+1}c")
+      end
       emo.push('(c)') if fltr.length<2
     end
     char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[16].nil? && q[16].length>0)}.uniq
@@ -6865,8 +7013,8 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
   launch=false
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
-    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6
-    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6
+    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
+    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1
     clzz.push('Attack') if ['attack','atk','att','attacking'].include?(args[i].downcase)
     clzz.push('Defense') if ['defense','defence','def','defending','defensive','defencive'].include?(args[i].downcase)
     clzz.push('Support') if ['support','supports','supportive','supporting'].include?(args[i].downcase)
@@ -6875,7 +7023,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
     fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
     fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons','limited','limit'].include?(args[i].downcase)
     fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons','limited','limit'].include?(args[i].downcase)
-    fltr.push('Summon') if ['summon','summons','summonable','summonables'].include?(args[i].downcase)
+    fltr.push('NonLimited') if ['nonlimited','non-limited'].include?(args[i].downcase)
     fltr.push('Treasure Trade') if ['treasure','trade','trades','treasures','treasuretrade','treasuretrades'].include?(args[i].downcase)
     fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers','limited','limit'].include?(args[i].downcase)
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
@@ -6890,8 +7038,8 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
   emo=[]
   if rarity.length>0
     char=char.reject{|q| !rarity.include?(q[1][0,1].to_i)}.uniq
-    search.push("*Rarities*: #{rarity.map{|q| "#{q}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][q]}"}.join(', ')}")
-    emo.push(['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][rarity[0]]) if rarity.length<2
+    search.push("*Rarities*: #{rarity.map{|q| "#{q}#{@rarity_stars[0][q]}"}.join(', ')}")
+    emo.push(@rarity_stars[0][rarity[0]]) if rarity.length<2
   end
   if clzz.length>0
     char=char.reject{|q| !clzz.include?(q[2])}.uniq
@@ -6910,67 +7058,51 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
   if fltr.length>0
     m=[]
     if fltr.include?('Welfare')
-      m.push('1w')
-      m.push('2w')
-      m.push('3w')
-      m.push('4w')
-      m.push('5w')
+      for i in 0...@max_rarity[2]
+        m.push("#{i+1}w")
+      end
       emo.push('(w)') if fltr.length<2
     end
     if fltr.include?('Seasonal')
-      m.push('1s')
-      m.push('2s')
-      m.push('3s')
-      m.push('4s')
-      m.push('5s')
+      for i in 0...@max_rarity[2]
+        m.push("#{i+1}s")
+      end
       emo.push('(s)') if fltr.length<2
     end
     if fltr.include?('Zodiac Seasonal')
-      m.push('1z')
-      m.push('2z')
-      m.push('3z')
-      m.push('4z')
-      m.push('5z')
+      for i in 0...@max_rarity[2]
+        m.push("#{i+1}z")
+      end
       emo.push('(z)') if fltr.length<2
     end
     if fltr.include?('Story')
-      m.push('1y')
-      m.push('2y')
-      m.push('3y')
-      m.push('4y')
-      m.push('5y')
+      for i in 0...@max_rarity[2]
+        m.push("#{i+1}y")
+      end
       emo.push('(y)') if fltr.length<2
     end
-    if fltr.include?('Summon')
-      m.push('1')
-      m.push('2')
-      m.push('3')
-      m.push('4')
-      m.push('5')
-      emo.push('(p)') if fltr.length<2
+    if fltr.include?('NonLimited')
+      for i in 0...@max_rarity[2]
+        m.push("#{i+1}")
+      end
+      emo.push('(u)') if fltr.length<2
     end
     if fltr.include?('Treasure Trade')
-      m.push('1t')
-      m.push('2t')
-      m.push('3t')
-      m.push('4t')
-      m.push('5t')
+      for i in 0...@max_rarity[2]
+        m.push("#{i+1}t")
+      end
       emo.push('(t)') if fltr.length<2
     end
     if fltr.include?('Collab')
-      m.push('1c')
-      m.push('2c')
-      m.push('3c')
-      m.push('4c')
-      m.push('5c')
+      for i in 0...@max_rarity[2]
+        m.push("#{i+1}c")
+      end
       emo.push('(c)') if fltr.length<2
     end
     if fltr.include?('Paid')
-      m.push('1p')
-      m.push('2p')
-      m.push('3p')
-      m.push('4p')
-      m.push('5p')
+      for i in 0...@max_rarity[2]
+        m.push("#{i+1}p")
+      end
       emo.push('(p)') if fltr.length<2
     end
     char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[10].nil? && q[10].length>0)}.uniq
@@ -7019,8 +7151,8 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   args2=args.map{|q| q}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
-    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6
-    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6
+    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
+    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1
     tier.push(args[i][1,args[i].length-1].to_i) if args[i][0,1].downcase=='t' && args[i][1,args[i].length-1].to_i.to_s==args[i][1,args[i].length-1] && args[i][1,args[i].length-1].to_i>0 && args[i][1,args[i].length-1].to_i<4
     tier.push(args[i][4,args[i].length-4].to_i) if ['tier','teir'].include?(args[i][0,4].downcase) && args[i][4,args[i].length-4].to_i.to_s==args[i][4,args[i].length-4] && args[i][4,args[i].length-4].to_i>0 && args[i][4,args[i].length-4].to_i<4
     rarity_tier.push(args[i].downcase) if args[i][1,1]=='t' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6 && args[i][2,args[i].length-2].to_i.to_s==args[i][2,args[i].length-2] && args[i][2,args[i].length-2].to_i>0 && args[i][2,args[i].length-2].to_i<4
@@ -7095,6 +7227,14 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       args2[i]=nil unless fltr.include?('High Dragon')
       fltr.push('High Dragon')
     end
+    if ['agito'].include?(args[i].downcase)
+      args2[i]=nil unless fltr.include?('Agito')
+      fltr.push('Agito')
+    end
+    if ['chimera'].include?(args[i].downcase)
+      args2[i]=nil unless fltr.include?('chimera')
+      fltr.push('Chimera')
+    end
     if ['core','cores'].include?(args[i].downcase)
       args2[i]=nil unless fltr.include?('Core')
       fltr.push('Core')
@@ -7129,8 +7269,8 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   emo=[]
   if rarity.length>0 || tier.length>0 || rarity_tier.length>0 || rarity_tier_2.length>0
     if rarity.length>0
-      search.push("*Rarities*: #{rarity.map{|q| "#{q}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][q]}"}.join(', ')}")
-      emo.push(['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][rarity[0]]) if rarity.length==1
+      search.push("*Rarities*: #{rarity.map{|q| "#{q}#{@rarity_stars[0][q]}"}.join(', ')}")
+      emo.push(@rarity_stars[0][rarity[0]]) if rarity.length==1
     elsif tier.length>0
       rarity=[1,2,3,4,5]
     end
@@ -7140,7 +7280,7 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
     elsif rarity.length>0
       tier=[0,1,2,3]
     end
-    search.push("*Combined Rarity/Tiers*: #{rarity_tier.map{|q| "#{q[0,1]}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][q[0,1].to_i]}-T#{q[2,1]}"}.join(', ') if rarity_tier.length>0}#{', ' if rarity_tier.length>0 && rarity_tier_2.length>0}#{rarity_tier_2.map{|q| "High Dragon-T#{q[3,1]}"}.join(', ')}") if rarity_tier.length>0 || rarity_tier_2.length>0
+    search.push("*Combined Rarity/Tiers*: #{rarity_tier.map{|q| "#{q[0,1]}#{@rarity_stars[0][q[0,1].to_i]}-T#{q[2,1]}"}.join(', ') if rarity_tier.length>0}#{', ' if rarity_tier.length>0 && rarity_tier_2.length>0}#{rarity_tier_2.map{|q| "High Dragon-T#{q[3,1]}"}.join(', ')}") if rarity_tier.length>0 || rarity_tier_2.length>0
     for i in 0...rarity.length
       for i2 in 0...tier.length
         rarity_tier.push("#{rarity[i]}t#{tier[i2]}")
@@ -7179,83 +7319,75 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   if fltr.length>0
     m=[]
     if fltr.include?('Welfare')
-      m.push('1w')
-      m.push('2w')
-      m.push('3w')
-      m.push('4w')
-      m.push('5w')
+      for i in 0...@max_rarity[3]
+        m.push("#{i+1}w")
+      end
       emo.push('(w)') if fltr.length<2
     end
     if fltr.include?('Seasonal')
-      m.push('1s')
-      m.push('2s')
-      m.push('3s')
-      m.push('4s')
-      m.push('5s')
+      for i in 0...@max_rarity[3]
+        m.push("#{i+1}s")
+      end
       emo.push('(s)') if fltr.length<2
     end
     if fltr.include?('Zodiac Seasonal')
-      m.push('1z')
-      m.push('2z')
-      m.push('3z')
-      m.push('4z')
-      m.push('5z')
+      for i in 0...@max_rarity[3]
+        m.push("#{i+1}z")
+      end
       emo.push('(z)') if fltr.length<2
     end
     if fltr.include?('Story')
-      m.push('1y')
-      m.push('2y')
-      m.push('3y')
-      m.push('4y')
-      m.push('5y')
+      for i in 0...@max_rarity[3]
+        m.push("#{i+1}y")
+      end
       emo.push('(y)') if fltr.length<2
     end
     if fltr.include?('Starter')
-      m.push('1e')
-      m.push('2e')
-      m.push('3e')
-      m.push('4e')
-      m.push('5e')
+      for i in 0...@max_rarity[3]
+        m.push("#{i+1}e")
+      end
       emo.push('(e)') if fltr.length<2
     end
     if fltr.include?('Paid')
-      m.push('1p')
-      m.push('2p')
-      m.push('3p')
-      m.push('4p')
-      m.push('5p')
+      for i in 0...@max_rarity[3]
+        m.push("#{i+1}p")
+      end
       emo.push('(p)') if fltr.length<2
     end
+    if fltr.include?('Agito')
+      for i in 0...@max_rarity[3]
+        m.push("#{i+1}a")
+      end
+      emo.push('(a)') if fltr.length<2
+    end
+    if fltr.include?('Chimera')
+      for i in 0...@max_rarity[3]
+        m.push("#{i+1}m")
+      end
+      emo.push('(ch)') if fltr.length<2
+    end
     if fltr.include?('Void')
-      m.push('1v')
-      m.push('2v')
-      m.push('3v')
-      m.push('4v')
-      m.push('5v')
+      for i in 0...@max_rarity[3]
+        m.push("#{i+1}v")
+      end
       emo.push('<:Element_Void:548467446734913536>') if fltr.length<2
     end
     if fltr.include?('High Dragon') || rarity_tier_2.length>0
-      m.push('1h')
-      m.push('2h')
-      m.push('3h')
-      m.push('4h')
-      m.push('5h')
+      for i in 0...@max_rarity[3]
+        m.push("#{i+1}h")
+      end
       emo.push('<:Tribe_Dragon:549947361745567754>') if fltr.length<2
     end
     if fltr.include?('Core')
-      m.push('1')
-      m.push('2')
-      m.push('3')
-      m.push('4')
-      m.push('5')
+      for i in 0...@max_rarity[3]
+        m.push("#{i+1}")
+      end
       emo.push('(c)') if fltr.length<2
     end
     if fltr.include?('Collab')
-      m.push('1c')
-      m.push('2c')
-      m.push('3c')
-      m.push('4c')
-      m.push('5c')
+      for i in 0...@max_rarity[3]
+        m.push("#{i+1}c")
+      end
       emo.push('(clb)') if fltr.length<2
     end
     char=char.reject{|q| !m.include?(q[2]) && !(fltr.include?('Collab') && !q[14].nil? && q[14].length>0)}.uniq
@@ -7352,7 +7484,7 @@ def find_in_mats(bot,event,args=nil,mode=0)
   search=[]
   if rarity.length>0
     char=char.reject{|q| !rarity.include?(q[1].to_i)}.uniq
-    search.push("*Rarities*: #{rarity.map{|q| "#{q}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>','<:Rarity_5:532086056737177600>'][q]}"}.join(', ')}")
+    search.push("*Rarities*: #{rarity.map{|q| "#{q}#{@rarity_stars[0][q]}"}.join(', ')}")
   end
   if pouch.length>0
     char=char.reject{|q| !pouch.include?(q[6].to_i)}.uniq
@@ -7594,12 +7726,12 @@ def find_adventurers(bot,event,args=nil)
       flds.push(['<:Element_Null:532106087810334741>Other',char.reject{|q| ['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff'].include?(q[2][2])}.map{|q| q[0]}.uniq.join("\n")])
     elsif char.map{|q| q[1][0,1]}.uniq.length>1
       flds=[]
-      flds.push([generate_rarity_row(1,true),char.reject{|q| q[1][0,1]!='1'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push([generate_rarity_row(2,true),char.reject{|q| q[1][0,1]!='2'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push([generate_rarity_row(3,true),char.reject{|q| q[1][0,1]!='3'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push([generate_rarity_row(4,true),char.reject{|q| q[1][0,1]!='4'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push([generate_rarity_row(5,true),char.reject{|q| q[1][0,1]!='5'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push(['Unknown rarity',char.reject{|q| ['1','2','3','4','5'].include?(q[1][0,1])}.map{|q| q[0]}.uniq.join("\n")])
+      mrar=[]
+      for i in 0...@max_rarity[0]+1
+        flds.push([generate_rarity_row(i,@max_rarity[0]),char.reject{|q| q[1][0,1]!=i.to_s}.map{|q| q[0]}.uniq.join("\n")])
+        mrar.push(i.to_s)
+      end
+      flds.push(['Unknown rarity',char.reject{|q| mrar.include?(q[1][0,1])}.map{|q| q[0]}.uniq.join("\n")])
     elsif char.map{|q| q[2][0]}.uniq.length>1
       flds=[]
       flds.push(['<:Type_Attack:532107867520630784>Attack',char.reject{|q| q[2][0]!='Attack'}.map{|q| q[0]}.uniq.join("\n")])
@@ -7646,12 +7778,12 @@ def find_dragons(bot,event,args=nil)
       flds.push(['<:Element_Null:532106087810334741>Null',char.reject{|q| ['Flame','Water','Wind','Light','Shadow'].include?(q[2])}.map{|q| q[0]}.uniq.join("\n")])
     elsif char.map{|q| q[1][0,1]}.uniq.length>1
       flds=[]
-      flds.push([generate_rarity_row(1),char.reject{|q| q[1][0,1]!='1'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push([generate_rarity_row(2),char.reject{|q| q[1][0,1]!='2'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push([generate_rarity_row(3),char.reject{|q| q[1][0,1]!='3'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push([generate_rarity_row(4),char.reject{|q| q[1][0,1]!='4'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push([generate_rarity_row(5),char.reject{|q| q[1][0,1]!='5'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push(['Unknown rarity',char.reject{|q| ['1','2','3','4','5'].include?(q[1][0,1])}.map{|q| q[0]}.uniq.join("\n")])
+      mrar=[]
+      for i in 0...@max_rarity[1]+1
+        flds.push([generate_rarity_row(i,0),char.reject{|q| q[1][0,1]!=i.to_s}.map{|q| q[0]}.uniq.join("\n")])
+        mrar.push(i.to_s)
+      end
+      flds.push(['Unknown rarity',char.reject{|q| mrar.include?(q[1][0,1])}.map{|q| q[0]}.uniq.join("\n")])
     end
     flds=flds.reject{|q| q[1].length<=0}
   end
@@ -7683,12 +7815,12 @@ def find_wyrmprints(bot,event,args=nil)
     flds=triple_finish(char.map{|q| q[0]}.uniq)
     if char.map{|q| q[1][0,1]}.uniq.length>1
       flds=[]
-      flds.push([generate_rarity_row(1),char.reject{|q| q[1][0,1]!='1'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push([generate_rarity_row(2),char.reject{|q| q[1][0,1]!='2'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push([generate_rarity_row(3),char.reject{|q| q[1][0,1]!='3'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push([generate_rarity_row(4),char.reject{|q| q[1][0,1]!='4'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push([generate_rarity_row(5),char.reject{|q| q[1][0,1]!='5'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push(['Unknown rarity',char.reject{|q| ['1','2','3','4','5'].include?(q[1][0,1])}.map{|q| q[0]}.uniq.join("\n")])
+      mrar=[]
+      for i in 0...@max_rarity[2]+1
+        flds.push([generate_rarity_row(i,0),char.reject{|q| q[1][0,1]!=i.to_s}.map{|q| q[0]}.uniq.join("\n")])
+        mrar.push(i.to_s)
+      end
+      flds.push(['Unknown rarity',char.reject{|q| mrar.include?(q[1][0,1])}.map{|q| q[0]}.uniq.join("\n")])
     elsif char.map{|q| q[2]}.uniq.length>1
       flds=[]
       flds.push(['<:Type_Attack:532107867520630784>Attack',char.reject{|q| q[2]!='Attack'}.map{|q| q[0]}.uniq.join("\n")])
@@ -7746,12 +7878,12 @@ def find_weapons(bot,event,args=nil)
       flds.push(['<:Element_Null:532106087810334741>Null',char.reject{|q| ['Flame','Water','Wind','Light','Shadow'].include?(q[3])}.map{|q| q[0]}.uniq.join("\n")])
     elsif char.map{|q| q[2][0,1]}.uniq.length>1
       flds=[]
-      flds.push([generate_rarity_row(1),char.reject{|q| q[2][0,1]!='1'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push([generate_rarity_row(2),char.reject{|q| q[2][0,1]!='2'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push([generate_rarity_row(3),char.reject{|q| q[2][0,1]!='3'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push([generate_rarity_row(4),char.reject{|q| q[2][0,1]!='4'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push([generate_rarity_row(5),char.reject{|q| q[2][0,1]!='5'}.map{|q| q[0]}.uniq.join("\n")])
-      flds.push(['Unknown rarity',char.reject{|q| ['1','2','3','4','5'].include?(q[2][0,1])}.map{|q| q[0]}.uniq.join("\n")])
+      mrar=[]
+      for i in 0...@max_rarity[3]+1
+        flds.push([generate_rarity_row(i,0),char.reject{|q| q[1][0,1]!=i.to_s}.map{|q| q[0]}.uniq.join("\n")])
+        mrar.push(i.to_s)
+      end
+      flds.push(['Unknown rarity',char.reject{|q| mrar.include?(q[1][0,1])}.map{|q| q[0]}.uniq.join("\n")])
     elsif char.map{|q| q[16]}.uniq.length>1
       flds=[]
       flds.push(['Tier 0 weapons',char.reject{|q| q[16]!=0}.map{|q| q[0]}.uniq.join("\n")])
@@ -8066,9 +8198,9 @@ def sort_adventurers(bot,event,args=nil,mode=0)
   lvl=-1
   rar=-1
   for i in 0...args.length
-    rar=args[i].to_i if rar<0 && args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<6
-    rar=args[i][0,1].to_i if rar<0 && args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6
-    rar=6 if ['base'].include?(args[i].downcase)
+    rar=args[i].to_i if rar<0 && args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity[0]+1
+    rar=args[i][0,1].to_i if rar<0 && args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity[0]+1
+    rar=@max_rarity[0]+1 if ['base'].include?(args[i].downcase)
     lvl=0 if ['default'].include?(args[i].downcase)
     lvl=1 if ['truemax','max','maximum','truemaximum','trumax','trumaximum'].include?(args[i].downcase)
     if ['hp','health'].include?(args[i].downcase) && !srt.include?(3)
@@ -8086,33 +8218,33 @@ def sort_adventurers(bot,event,args=nil,mode=0)
   if lvl<0
     lvl=0
     if srt.reject{|q| q<3}.length>0
-      if rar==6
+      if rar>@max_rarity[0]
         textra="#{textra}#{"\n\n" if textra.length>0}Sorting at default max level.\nIf you want to sort at absolute max stats, include the word \"max\" in your message."
-      elsif rar==5
+      elsif rar==@max_rarity[0]
         textra="#{textra}#{"\n\n" if textra.length>0}Sorting at level #{30+10*rar} with no modifiers.\nIf you want to sort at absolute max stats, include the word \"max\" in your message."
       end
     end
   end
   if rar<0
-    rar=6-lvl
-    textra="#{textra}#{"\n\n" if textra.length>0}Sorting at each adventurer's default available rarity.\nIf you want to sort at a specific rarity, include that rarity in your message." unless rar==5 || srt.reject{|q| q<3}.length<=0
+    rar=@max_rarity[0]+1-lvl
+    textra="#{textra}#{"\n\n" if textra.length>0}Sorting at each adventurer's default available rarity.\nIf you want to sort at a specific rarity, include that rarity in your message." unless rar==@max_rarity[0] || srt.reject{|q| q<3}.length<=0
   end
   srt[srtt]=0
   char=char.reject{|q| q[0][0,1]=='*'}
-  char=char.reject{|q| q[1][0,1].to_i>rar} unless rar==6 || args.map{|q| q.downcase}.include?('alladv')
+  char=char.reject{|q| q[1][0,1].to_i>rar} unless rar>@max_rarity[0] || args.map{|q| q.downcase}.include?('alladv')
   stats=['Name','','','HP','Strength','Defense']
   for i in 0...char.length
     m=rar-3
-    m=char[i][1][0,1].to_i-3 if rar==6
+    m=char[i][1][0,1].to_i-3 if rar>@max_rarity[0]
     m+=lvl if m==2
     char[i][3]=char[i][3][1][m]
     char[i][4]=char[i][4][1][m]
     m2=[]
     for i2 in 0...srt.length
       unless srt[i2]<3
-        if rar==6 && m==3
+        if rar>@max_rarity[0] && m==3
           m2.push("#{char[i][srt[i2]]} max #{stats[srt[i2]]}")
-        elsif rar==6
+        elsif rar>@max_rarity[0]
           m2.push("#{char[i][srt[i2]]} #{stats[srt[i2]]}")
         else
           m2.push("#{char[i][srt[i2]]} #{stats[srt[i2]]}")
@@ -8141,7 +8273,10 @@ def sort_adventurers(bot,event,args=nil,mode=0)
     textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results.\nYou can also make things easier by making the list shorter with words like `top#{rand(10)+1}` or `bottom#{rand(10)+1}`"
     char=char[0,10]
   end
-  disp="__**Adventurer Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}\n*Sorted at:* #{rar unless rar==6}#{['','<:Rarity_1:532086056594440231>','<:Rarity_2:532086056254963713>','<:Rarity_3:532086056519204864>','<:Rarity_4:532086056301101067>',"<:Rarity_5:532086056737177600>#{', absolute max stats' if lvl==1}",'Default rarity'][rar]}#{"\n5<:Rarity_5:532086056737177600>s will be shown with absolute max stats" if rar==6 && lvl==1}"
+  fpop=@rarity_stars[0][0,@max_rarity[0]+1]
+  fpop[fpop.length-1]="#{fpop[fpop.length-1]}, absolute max stats" if lvl==1
+  fpop.push('Default rarity')
+  disp="__**Adventurer Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}\n*Sorted at:* #{rar unless rar>@max_rarity[0]}#{fpop[rar]}#{"\n#{@max_rarity[0]}#{@rarity_stars[0][@max_rarity[0]]}s will be shown with absolute max stats" if rar>@max_rarity[1] && lvl==1}"
   disp=extend_message(disp,"__**Notes**__\n#{textra}",event,2) if textra.length>0
   disp=extend_message(disp,"__**Results**__",event,2) if char.length>0
   for i in 0...char.length
@@ -9734,14 +9869,15 @@ def roost(event,bot,args=nil,ignoreinputs=false,mode=0)
     str=extend_message(str,"**#{"#{str3}'s " if str3.length>0}Bond Gift:** #{['Golden Chalice','Juicy Meat','Kaleidoscope','Floral Circlet','Compelling Book','Mana Essence','Golden Chalice'][t.wday]}",event,2)
     if t.wday>0 && t.wday<6
       drg=@dragons.reject{|q| q[9]!=t.wday}
-      m=[[generate_rarity_row(1),[]],[generate_rarity_row(2),[]],[generate_rarity_row(3),[]],[generate_rarity_row(4),[]],[generate_rarity_row(5),[]]]
+      m=[]
+      for i in 0...@max_rarity[1]
+        m.push([generate_rarity_row(i),[]])
+      end
       for i in 0...drg.length
         f="#{drg[i][0]}#{element_emote(drg[i][2],bot,drg[i][16])}"
-        m[0][1].push(f) if drg[i][1][0,1].to_i==1
-        m[1][1].push(f) if drg[i][1][0,1].to_i==2
-        m[2][1].push(f) if drg[i][1][0,1].to_i==3
-        m[3][1].push(f) if drg[i][1][0,1].to_i==4
-        m[4][1].push(f) if drg[i][1][0,1].to_i==5
+        for i2 in 0...@max_rarity[1]
+          m[i2][1].push(f) if drg[i][1][0,1].to_i==i2+1
+        end
       end
       m=m.reject{|q| q[1].length<=0}
       create_embed(event,str,'',0xCE456B,nil,nil,m.map{|q| [q[0],q[1].join("\n")]})
@@ -10333,7 +10469,8 @@ def level(event,bot,args=nil,mode=0)
   if [2,0].include?(mode)
     axp=[3,5,7,9,11,15,19,23,27,31,38,45,52,59,66,78,90,102,114,126,151,176,201,226,251,301,351,401,451,501,576,651,726,801,876,951,1026,1101,1176,1251,1326,
          1401,1476,1551,1626,1701,1776,1851,1926,2001,2076,2151,2226,2301,2376,2451,2526,2601,2676,2751,3260,3280,3300,3320,3340,3360,3380,3400,3420,3440,3460,
-         3480,3500,3520,3540,3560,3580,3600,3620,0]
+         3480,3500,3520,3540,3560,3580,3600,3620,20000,21500,23000,24500,26000,27500,29000,30500,32000,33500,35000,38000,41000,44000,47000,50000,54500,59000,
+         63500,68000,0]
     str2="__**Adventurer EXP**__"
     if nums.length<=0
       m=axp[0,60].map{|q| q*10}.inject(0){|sum,x| sum + x }
@@ -10342,6 +10479,8 @@ def level(event,bot,args=nil,mode=0)
       str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level 1 to level 70:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
       m=axp[0,80].map{|q| q*10}.inject(0){|sum,x| sum + x }
       str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level 1 to level 80:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      m=axp[0,1000].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_6:660289379520086046> *To get from level 1 to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
     elsif nums.length==1
       n=[nums[0],axp.length].min
       m=axp[0,n].map{|q| q*10}.inject(0){|sum,x| sum + x }
@@ -10358,6 +10497,10 @@ def level(event,bot,args=nil,mode=0)
         m=axp[n-1,80-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
         str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level #{n} to level 80:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
       end
+      if n<100
+        m=axp[n-1,100-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_6:660289379520086046> *To get from level #{n} to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      end
     else
       n=[nums[0,2].min,1].max
       n=1 if n>axp.length
@@ -10373,11 +10516,11 @@ def level(event,bot,args=nil,mode=0)
          1908,1968,2028,2088,2148,2208,2268,2328,2403,2478,2553,2628,2703,2778,2853,2928,3003,3078,3168,3258,3348,3438,3528,3618,3708,3798,3888,0]
     str2="__**Dragon EXP**__"
     if nums.length<=0
-      m=dxp[0,60].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      m=dxp[0,59].map{|q| q*10}.inject(0){|sum,x| sum + x }
       str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level 1 to level 60:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
-      m=dxp[0,80].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      m=dxp[0,79].map{|q| q*10}.inject(0){|sum,x| sum + x }
       str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level 1 to level 80:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
-      m=dxp[0,100].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      m=dxp[0,99].map{|q| q*10}.inject(0){|sum,x| sum + x }
       str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level 1 to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
     elsif nums.length==1
       n=[nums[0],dxp.length].min
@@ -10451,9 +10594,9 @@ def level(event,bot,args=nil,mode=0)
     str=extend_message(str,str2,event,2)
   end
   if [5,7,0].include?(mode)
-    wrxp=[15,20,25,30,35,40,45,50,55,60,69,78,87,96,105,114,123,132,141,150,164,178,192,206,220,234,248,262,276,290,308,326,344,362,380,398,416,434,452,470,493,
-          516,539,562,585,608,631,654,677,700,727,754,781,808,835,862,889,916,943,970,1004,1038,1072,1106,1140,1174,1208,1242,1276,1310,1355,1400,1445,1490,
-          1535,1580,1625,1670,1715,1760,1816,1872,1928,1984,2040,2096,2152,2208,2264,2320,2388,2456,2524,2592,2660,2728,2796,2864,2932,0]
+    wrxp=[15,20,25,30,35,40,45,50,55,60,69,78,87,96,105,114,123,132,141,150,164,178,192,206,220,234,248,262,276,290,308,326,344,362,380,398,416,434,452,470,
+          493,516,539,562,585,608,631,654,677,700,727,754,781,808,835,862,889,916,943,970,1004,1038,1072,1106,1140,1174,1208,1242,1276,1310,1355,1400,1445,
+          1490,1535,1580,1625,1670,1715,1760,1816,1872,1928,1984,2040,2096,2152,2208,2264,2320,2388,2456,2524,2592,2660,2728,2796,2864,2932,0]
     str2="__**Wyrmprint EXP**__"
     if nums.length<=0
       m=wrxp[0,30].map{|q| q*10}.inject(0){|sum,x| sum + x }
@@ -10496,7 +10639,11 @@ def level(event,bot,args=nil,mode=0)
   if [6,7,0].include?(mode)
     wrxp=[50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,155,165,175,185,195,205,215,225,235,245,260,275,290,305,320,335,350,365,380,
           395,425,455,485,515,545,575,605,635,665,695,730,765,800,835,870,905,940,975,1010,1045,1090,1135,1180,1225,1270,1315,1360,1405,1450,1495,1575,1655,
-          1735,1815,1895,1975,2055,2135,2215,2295,2395,2495,2595,2695,2795,2895,2995,3095,3195,3295,3415,3535,3655,3775,3895,4015,4135,4255,4375,0]
+          1735,1815,1895,1975,2055,2135,2215,2295,2395,2495,2595,2695,2795,2895,2995,3095,3195,3295,3415,3535,3655,3775,3895,4015,4135,4255,4375,4495,4620,
+          4745,4870,4995,5120,5245,5370,5495,5620,5745,5870,5995,6120,6245,6370,6495,6620,6745,6870,6995,7120,7245,7370,7495,7620,7745,7870,7995,8120,8245,
+          8370,8495,8620,8745,8870,8995,9120,9245,9370,9495,9620,9745,9870,9995,10120,10245,10370,10495,10620,10745,10875,11005,11135,11265,11395,11525,11655,
+          11785,11915,12045,12175,12305,12435,12565,12695,12825,12955,13085,13215,13345,13475,13605,13735,13865,13995,14125,14255,14385,14515,14645,14775,
+          14905,15035,15165,15295,15425,15555,15685,15815,15945,16075,16205,16335,16465,16595,16725,16855,16985,17115,0]
     str2="__**Weapon EXP**__"
     if nums.length<=0
       m=wrxp[0,30].inject(0){|sum,x| sum + x }
@@ -10507,6 +10654,8 @@ def level(event,bot,args=nil,mode=0)
       str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level 1 to level 70:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
       m=wrxp[0,100].inject(0){|sum,x| sum + x }
       str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level 1 to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      m=wrxp[0,200].inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_6:660289379520086046> *To get from level 1 to level 200:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
     elsif nums.length==1
       n=[nums[0],wrxp.length].min
       m=wrxp[0,n].inject(0){|sum,x| sum + x }
@@ -10526,6 +10675,10 @@ def level(event,bot,args=nil,mode=0)
       if n<100
         m=wrxp[n-1,100-n].inject(0){|sum,x| sum + x }
         str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level #{n} to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      end
+      if n<200
+        m=wrxp[n-1,200-n].inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_6:660289379520086046> *To get from level #{n} to level 200:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
       end
     else
       n=[nums[0,2].min,1].max
@@ -10552,7 +10705,7 @@ def show_print_shop(event)
     rar.push(args[i].to_i) if args[i].to_i.to_s==args[i]
     rar.push(args[i][0,1].to_i) if args[i][1,1]=='*' && args[i][0,1].to_i.to_s==args[i][0,1]
   end
-  rar=rar.reject{|q| q<3 || q>5}
+  rar=rar.reject{|q| q<3 || q>@max_rarity[2]}
   if rar.length<=0 && !safe_to_spam?(event)
     event.respond "Too much data is trying to be displayed.  Please either specify a rarity or use this command in PM."
     return nil
@@ -10562,6 +10715,7 @@ def show_print_shop(event)
   flds.push(["#{generate_rarity_row(3)}\n900<:Resource_Eldwater:532104503777034270> per 2UB\n1,700<:Resource_Eldwater:532104503777034270> per MUB\n\n200, 300, 400, 400, 400",prn.reject{|q| q[1][0,1]!='3'}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(3)
   flds.push(["#{generate_rarity_row(4)}\n9,000<:Resource_Eldwater:532104503777034270> per 2UB\n17,000<:Resource_Eldwater:532104503777034270> per MUB\n\n2000, 3000, 4000, 4000, 4000",prn.reject{|q| q[1][0,1]!='4'}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(4)
   flds.push(["#{generate_rarity_row(5)}\n19,000<:Resource_Eldwater:532104503777034270> per 2UB\n37,000<:Resource_Eldwater:532104503777034270> per MUB\n\n4000, 6000, 9000, 9000, 9000",prn.reject{|q| q[1][0,1]!='5'}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(5)
+  flds.push(["#{generate_rarity_row(6)}\n39,000<:Resource_Eldwater:532104503777034270> per 2UB\n77,000<:Resource_Eldwater:532104503777034270> per MUB\n\n8000, 12000, 19000, 19000, 19000",prn.reject{|q| q[1][0,1]!='6'}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(6)
   flds=flds.map{|q| [q[0],q[1].join("\n"),q[1].length]}
   flds=flds.reject{|q| q[2]<=0}
   flds=flds.map{|q| [q[0],q[1]]}
@@ -11466,6 +11620,9 @@ bot.command([:shard,:attribute]) do |event, i, j|
     event.respond "In a system of #{j} shards, this server would use #{shard_data(0,true,j)[1]} Shards." if j != @shards
     event.respond "This server uses #{shard_data(0,true,j)[1]} Shards." if j == @shards
     return nil
+  elsif bot.profile.id==618979409059119113
+    event.respond "This is a cloned version of Botan.  There are no shards."
+    return nil
   end
   event.respond "This is the debug mode, which uses #{shard_data(0,false,j)[4]} Shards." if @shardizard==4
   event.respond "PMs always use #{shard_data(0,true,j)[0]} Shards." if event.server.nil? && @shardizard != 4
@@ -11521,8 +11678,9 @@ end
 bot.command(:invite) do |event, user|
   return nil if overlap_prevent(event)
   usr=event.user
-  txt="**You can invite me to your server with this link: <https://goo.gl/mp77kQ>**\nTo look at my source code: <https://github.com/Rot8erConeX/LizBot/blob/master/BotanBot.rb>\nTo follow my coder's development Twitter and learn of updates: <https://twitter.com/EliseBotDev>\nIf you suggested me to server mods and they ask what I do, show them this image: https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/MarketingBotan.png"
+  txt="**You can invite me to your server with this link: <https://goo.gl/mp77kQ>**\nTo look at my source code: <https://github.com/Rot8erConeX/BotanBot/blob/master/BotanBot.rb>\nTo follow my coder's development Twitter and learn of updates: <https://twitter.com/EliseBotDev>\nIf you suggested me to server mods and they ask what I do, show them this image: https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/MarketingBotan.png"
   user_to_name="you"
+  user=nil if event.message.mentions.length<=0 && user.to_i.to_s != user
   unless user.nil?
     if /<@!?(?:\d+)>/ =~ user
       usr=event.message.mentions[0]
@@ -11793,6 +11951,9 @@ bot.command(:snagstats) do |event, f, f2|
       str=extend_message(str,"The #{shard_data(0,true)[i]} Shard is in #{longFormattedNumber(@server_data[0][m])} server#{"s" if @server_data[0][m]!=1}, reaching #{longFormattedNumber(@server_data[1][m])} unique members.",event)
     end
     str=extend_message(str,"The #{shard_data(0)[4]} Shard is in #{longFormattedNumber(@server_data[0][4])} server#{"s" if @server_data[0][4]!=1}, reaching #{longFormattedNumber(@server_data[1][4])} unique members.",event,2) if event.user.id==167657750971547648
+    if bot.profile.id==618979409059119113
+      str="This cloned version of Botan is in #{longFormattedNumber(@server_data[0][0])} server#{"s" if @server_data[0][0]!=1}, reaching #{longFormattedNumber(@server_data[1][0])} unique members."
+    end
     event.respond str
     return nil
   elsif ['adventurer','adventurers','adv','advs','unit','units'].include?(f.downcase)
@@ -11800,16 +11961,10 @@ bot.command(:snagstats) do |event, f, f2|
     adv=find_in_adventurers(bot,event,[f2],2)[1] unless f2.nil? || f2.length<=0
     str="**There are #{adv.length} adventurers, including:**"
     str2=''
-    m=adv.reject{|q| q[1][0,1].to_i != 1}
-    str2="#{str2}\n<:Rarity_1:532086056594440231> #{m.length} one-star adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[1][0,1].to_i != 2}
-    str2="#{str2}\n<:Rarity_2:532086056254963713> #{m.length} two-star adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[1][0,1].to_i != 3}
-    str2="#{str2}\n<:Rarity_3:532086056519204864> #{m.length} three-star adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[1][0,1].to_i != 4}
-    str2="#{str2}\n<:Rarity_4:532086056301101067> #{m.length} four-star adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[1][0,1].to_i != 5}
-    str2="#{str2}\n<:Rarity_5:532086056737177600> #{m.length} five-star adventurer#{'s' unless m.length==1}" if m.length>0
+    for i in 0...@max_rarity[0]
+      m=adv.reject{|q| q[1][0,1].to_i != i+1}
+      str2="#{str2}\n#{@rarity_stars[0][i+1]} #{m.length} #{['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'][i]}-star adventurer#{'s' unless m.length==1}" if m.length>0
+    end
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
@@ -11884,16 +12039,10 @@ bot.command(:snagstats) do |event, f, f2|
     adv=find_in_dragons(bot,event,[f2],2)[1] unless f2.nil?
     str="**There are #{adv.length} dragons, including:**"
     str2=''
-    m=adv.reject{|q| q[1][0,1].to_i != 1}
-    str2="#{str2}\n<:Rarity_1:532086056594440231> #{m.length} one-star dragon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[1][0,1].to_i != 2}
-    str2="#{str2}\n<:Rarity_2:532086056254963713> #{m.length} two-star dragon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[1][0,1].to_i != 3}
-    str2="#{str2}\n<:Rarity_3:532086056519204864> #{m.length} three-star dragon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[1][0,1].to_i != 4}
-    str2="#{str2}\n<:Rarity_4:532086056301101067> #{m.length} four-star dragon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[1][0,1].to_i != 5}
-    str2="#{str2}\n<:Rarity_5:532086056737177600> #{m.length} five-star dragon#{'s' unless m.length==1}" if m.length>0
+    for i in 0...@max_rarity[1]
+      m=adv.reject{|q| q[1][0,1].to_i != i+1}
+      str2="#{str2}\n#{@rarity_stars[0][i+1]} #{m.length} #{['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'][i]}-star dragon#{'s' unless m.length==1}" if m.length>0
+    end
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
@@ -11956,16 +12105,10 @@ bot.command(:snagstats) do |event, f, f2|
     adv=find_in_wyrmprints(bot,event,[f2],2)[1] unless f2.nil?
     str="**There are #{adv.length} Wyrmprints, including:**"
     str2=''
-    m=adv.reject{|q| q[1][0,1].to_i != 1}
-    str2="#{str2}\n<:Rarity_1:532086056594440231> #{m.length} one-star print#{'s' unless m.length==1}" if m.length>0 if m.length>0
-    m=adv.reject{|q| q[1][0,1].to_i != 2}
-    str2="#{str2}\n<:Rarity_2:532086056254963713> #{m.length} two-star print#{'s' unless m.length==1}" if m.length>0 if m.length>0
-    m=adv.reject{|q| q[1][0,1].to_i != 3}
-    str2="#{str2}\n<:Rarity_3:532086056519204864> #{m.length} three-star print#{'s' unless m.length==1}" if m.length>0 if m.length>0
-    m=adv.reject{|q| q[1][0,1].to_i != 4}
-    str2="#{str2}\n<:Rarity_4:532086056301101067> #{m.length} four-star print#{'s' unless m.length==1}" if m.length>0 if m.length>0
-    m=adv.reject{|q| q[1][0,1].to_i != 5}
-    str2="#{str2}\n<:Rarity_5:532086056737177600> #{m.length} five-star print#{'s' unless m.length==1}" if m.length>0 if m.length>0
+    for i in 0...@max_rarity[2]
+      m=adv.reject{|q| q[1][0,1].to_i != i+1}
+      str2="#{str2}\n#{@rarity_stars[0][i+1]} #{m.length} #{['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'][i]}-star wyrmprint#{'s' unless m.length==1}" if m.length>0
+    end
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
@@ -12019,16 +12162,10 @@ bot.command(:snagstats) do |event, f, f2|
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     str2=''
-    m=adv.reject{|q| q[2][0,1].to_i != 1}
-    str2="#{str2}\n<:Rarity_1:532086056594440231> #{m.length} one-star weapon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][0,1].to_i != 2}
-    str2="#{str2}\n<:Rarity_2:532086056254963713> #{m.length} two-star weapon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][0,1].to_i != 3}
-    str2="#{str2}\n<:Rarity_3:532086056519204864> #{m.length} three-star weapon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][0,1].to_i != 4}
-    str2="#{str2}\n<:Rarity_4:532086056301101067> #{m.length} four-star weapon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][0,1].to_i != 5}
-    str2="#{str2}\n<:Rarity_5:532086056737177600> #{m.length} five-star weapon#{'s' unless m.length==1}" if m.length>0
+    for i in 0...@max_rarity[3]
+      m=adv.reject{|q| q[2][0,1].to_i != i+1}
+      str2="#{str2}\n#{@rarity_stars[0][i+1]} #{m.length} #{['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'][i]}-star weapon#{'s' unless m.length==1}" if m.length>0
+    end
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
@@ -12697,6 +12834,9 @@ bot.message do |event|
     elsif find_data_ex(:find_npc,s,event).length>0
       disp_npc_art(bot,event,s.split(' '))
     end
+  elsif !event.server.nil? && (above_memes().include?("s#{event.server.id}") || above_memes().include?(event.server.id))
+  elsif !event.channel.nil? && above_memes().include?("c#{event.channel.id}")
+  elsif above_memes().include?("u#{event.user.id}") || above_memes().include?(event.user.id)
   elsif event.message.text.include?('0x4') && !event.user.bot_account? && @shardizard==4
     s=event.message.text
     s=remove_format(s,'```')              # remove large code blocks
@@ -13091,6 +13231,7 @@ bot.mention do |event|
 end
 
 def next_holiday(bot,mode=0)
+  return nil if bot.profile.id==618979409059119113
   t=Time.now
   t-=60*60*6
   holidays=[[0,3,22,'Karina',"with this sweet eyepatch","Info gatherer's birthday"]]
@@ -13251,7 +13392,8 @@ bot.ready do |event|
   system("color 1#{shard_data(3)[@shardizard,1]}")
   system("title #{shard_data(2)[@shardizard]} BotanBot")
   bot.game='Dragalia Lost (DL!help for info)'
-  if @shardizard==4
+  if bot.profile.id==618979409059119113
+  elsif @shardizard==4
     next_holiday(bot)
     bot.user(bot.profile.id).on(285663217261477889).nickname='BotanBot (Debug)' if @shardizard==4
     bot.profile.avatar=(File.open("C:/Users/#{@mash}/Desktop/devkit/DebugBotan.png",'r')) if @shardizard==4
