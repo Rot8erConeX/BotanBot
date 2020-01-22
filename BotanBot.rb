@@ -1930,6 +1930,7 @@ def adv_emoji(k,bot,ignorefeh=false,advheader=false)
     str="#{str}#{moji[0].mention unless moji.length<=0}#{"#{k[2][2]}  " if advheader}"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
     str="#{str}#{moji[0].mention unless moji.length<=0}#{k[2][0] if advheader}"
+    str="#{str}<:MH_Rathalos:669319247670804506>" if !k[12].nil? && k[12]=='MH' && !advheader
     str="#{str}<:Mega_Man:641484836304846857>" if !k[12].nil? && k[12]=='MM' && !advheader
     str="#{str}<:Great_Badge_Golden:443704781068959744>" if !k[12].nil? && k[12]=='FEH' && !advheader
     str="#{str}<:Bond:613804021119189012>" if !k[12].nil? && k[12]=='FGO' && !advheader
@@ -1959,6 +1960,7 @@ def dragon_emoji(k,bot,ignorefeh=false)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2]}"}
     str="#{str}#{moji[0].mention unless moji.length<=0}"
     str="#{str}<:Great_Badge_Golden:443704781068959744>" if !k[16].nil? && k[16]=='FEH'
+    str="#{str}<:MH_Rathalos:669319247670804506>" if !k[16].nil? && k[16]=='MH'
     str="#{str}<:Mega_Man:641484836304846857>" if !k[16].nil? && k[16]=='MM'
     str="#{str}<:Bond:613804021119189012>" if !k[16].nil? && k[16]=='FGO'
   end
@@ -1995,6 +1997,7 @@ def print_emoji(k,bot,ignorefeh=false)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2]}"}
     str="<:Wyrmprint:560542319636381725>#{str}#{moji[0].mention unless moji.length<=0}"
     str="#{str}<:Great_Badge_Golden:443704781068959744>" if !k[10].nil? && k[10]=='FEH'
+    str="#{str}<:MH_Rathalos:669319247670804506>" if !k[10].nil? && k[10]=='MH'
     str="#{str}<:Mega_Man:641484836304846857>" if !k[10].nil? && k[10]=='MM'
     str="#{str}<:Bond:613804021119189012>" if !k[10].nil? && k[10]=='FGO'
   end
@@ -2050,6 +2053,7 @@ def weapon_emoji(k,bot,ignorefeh=false)
     str="#{str}<:Tribe_Dragon:549947361745567754>" if k[2].length>1 && k[2][1,1].downcase=='h'
     str="#{str}<:Great_Badge_Golden:443704781068959744>" if !k[14].nil? && k[14]=='FEH'
     str="#{str}<:Mega_Man:641484836304846857>" if !k[14].nil? && k[14]=='MM'
+    str="#{str}<:MH_Rathalos:669319247670804506>" if !k[14].nil? && k[14]=='MH'
     str="#{str}<:Bond:613804021119189012>" if !k[14].nil? && k[14]=='FGO'
   end
   return str
@@ -2066,6 +2070,7 @@ def enemy_emoji(k,bot)
   sty=''
   sty='<:Great_Badge_Golden:443704781068959744>' if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
   sty='<:Mega_Man:641484836304846857>' if k[2].length>3 && k[2][3]=='Mega Man: Chaos Protocol'
+  sty='<:MH_Rathalos:669319247670804506>' if k[2].length>3 && k[2][3]=='Monster Hunter'
   str="#{str}#{moji[0].mention unless moji.length<=0}#{sty}"
   return str
 end
@@ -2326,6 +2331,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     x[1]=x[1][[lv[1],x[1].length].min-1].gsub(';; ',"\n")
     strx="__**Skills:**__"
     strx="<:Mega_Man:641484836304846857>**Mega Man Collab**\n\n#{strx}" if !k[12].nil? && k[12]=='MM'
+    strx="<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**\n\n#{strx}" if !k[12].nil? && k[12]=='MH'
     strx="<:Great_Badge_Golden:443704781068959744>**FEH Collab**\n\n#{strx}" if !k[12].nil? && k[12]=='FEH'
     strx="<:Bond:613804021119189012>**FGO Collab**\n\n#{strx}" if !k[12].nil? && k[12]=='FGO'
     strx2="**Skills:**"
@@ -2446,6 +2452,7 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false)
   title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**" if feh
   title="#{title}\n<:Bond:613804021119189012>**FGO Collab**" if !k[16].nil? && k[16]=='FGO'
   title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**" if !k[16].nil? && k[16]=='MM'
+  title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**" if !k[16].nil? && k[16]=='MH'
   title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c' && !(feh || (!k[16].nil? && k[16].length>0 && k[16]=='FGO'))
   title="#{title}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
   title="#{title}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
@@ -2639,6 +2646,8 @@ def disp_wyrmprint_stats(bot,event,args=nil)
     title="#{moji[0].mention unless moji.length<=0}**#{k[2]}**"
     if !k[10].nil? && k[10]=='MM'
       title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**"
+    elsif !k[10].nil? && k[10]=='MH'
+      title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**"
     else
       title="#{title}\n**Collab**" unless k[10].nil? || k[10].length<=0
       title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c'
@@ -2854,9 +2863,10 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[1]}**"
+    title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**" if !k[14].nil? && k[14]=='MH'
     title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**" if !k[14].nil? && k[14]=='MM'
-    title="#{title}\n**Collab**" unless k[14].nil? || k[14].length<=0 || k[14]=='MM'
-    title="#{title}\n**Collab**" if k[2].length>1 && k[2][1,1].downcase=='c' && k[14]!='MM'
+    title="#{title}\n**Collab**" unless k[14].nil? || k[14].length<=0 || k[14]=='MM' || k[14]=='MH'
+    title="#{title}\n**Collab**" if k[2].length>1 && k[2][1,1].downcase=='c' && k[14]!='MM' && k[14]!='MH'
   end
   str="#{str} - T#{k[16]}" unless k[16]==0
   title="#{title}\n**Welfare**" if k[2].length>1 && k[2][1,1].downcase=='w'
@@ -3160,8 +3170,9 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[1]}**"
     title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**" if !k[14].nil? && k[14]=='MM'
-    title="#{title}\n**Collab**" unless k[14].nil? || k[14].length<=0 || k[14]=='MM'
-    title="#{title}\n**Collab**" if k[2].length>1 && k[2][1,1].downcase=='c' && k[14]!='MM'
+    title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**" if !k[14].nil? && k[14]=='MH'
+    title="#{title}\n**Collab**" unless k[14].nil? || k[14].length<=0 || k[14]=='MM' || k[14]=='MH'
+    title="#{title}\n**Collab**" if k[2].length>1 && k[2][1,1].downcase=='c' && k[14]!='MM' && k[14]!='MH'
   end
   str="#{str} - T#{k[16]}" unless k[16]==0
   title="#{title}\n**Welfare**" if k[2].length>1 && k[2][1,1].downcase=='w'
@@ -6748,6 +6759,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
       crossgames[i]='<:Great_Badge_Golden:443704781068959744>Fire Emblem Heroes' if crossgames[i]=='FEH'
       crossgames[i]='<:Bond:613804021119189012>Fate/Grand Order' if crossgames[i]=='FGO'
       crossgames[i]='<:Mega_Man:641484836304846857>Mega Man' if crossgames[i]=='MM'
+      crossgames[i]='<:MH_Rathalos:669319247670804506>Monster Hunter' if crossgames[i]=='MH'
     end
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
@@ -6968,6 +6980,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
       crossgames[i]='<:Great_Badge_Golden:443704781068959744>Fire Emblem Heroes' if crossgames[i]=='FEH'
       crossgames[i]='<:Bond:613804021119189012>Fate/Grand Order' if crossgames[i]=='FGO'
       crossgames[i]='<:Mega_Man:641484836304846857>Mega Man' if crossgames[i]=='MM'
+      crossgames[i]='<:MH_Rathalos:669319247670804506>Monster Hunter' if crossgames[i]=='MH'
     end
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
@@ -7114,6 +7127,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
       crossgames[i]='<:Great_Badge_Golden:443704781068959744>Fire Emblem Heroes' if crossgames[i]=='FEH'
       crossgames[i]='<:Bond:613804021119189012>Fate/Grand Order' if crossgames[i]=='FGO'
       crossgames[i]='<:Mega_Man:641484836304846857>Mega Man' if crossgames[i]=='MM'
+      crossgames[i]='<:MH_Rathalos:669319247670804506>Monster Hunter' if crossgames[i]=='MH'
     end
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
@@ -7399,6 +7413,7 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       crossgames[i]='<:Great_Badge_Golden:443704781068959744>Fire Emblem Heroes' if crossgames[i]=='FEH'
       crossgames[i]='<:Bond:613804021119189012>Fate/Grand Order' if crossgames[i]=='FGO'
       crossgames[i]='<:Mega_Man:641484836304846857>Mega Man' if crossgames[i]=='MM'
+      crossgames[i]='<:MH_Rathalos:669319247670804506>Monster Hunter' if crossgames[i]=='MH'
     end
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
@@ -11881,7 +11896,7 @@ end
 
 bot.command(:sendmessage, from: 167657750971547648) do |event, channel_id, *args| # sends a message to a specific channel
   return nil if overlap_prevent(event)
-  dev_message(bot,event,channel_id)
+  dev_message(bot,event,channel_id,[141260274144509952])
 end
 
 bot.command(:sendpm, from: 167657750971547648) do |event, user_id, *args| # sends a PM to a specific user
