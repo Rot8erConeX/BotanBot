@@ -13,6 +13,7 @@ Cupid\5\Light\37, 377\11, 119\Lovely Pose\(Light) Strength +40%;; (Light) Streng
 Daikokuten\5z\Light\37, 371\12, 124\Lucky Mallet\(Light) Strength +45%;; (Light) Strength +55%;;; (Light) Whirlwind Strength +20%;; (Light) Whirlwind Strength +25%\5000, 8500\1.8, 1\2\Yes\No\Daikokuten\Asakura Momo\Tim Carlson\\\M\
 Ebisu\5w\Shadow\22, 221\7, 77\Taiyaki Time\(Shadow) HP +30%;; (Shadow) HP +40%\5000, 300\1.5, 1\1\Yes\Yes\Ebisu\Mizuta Wasabi\Brian Drummond\\\M\
 Erasmus\5w\Flame\22, 221\7, 76\Illuminated Path\(Flame) Strength +20%;; (Flame) Strength +30%\5000, 300\1.65, 1\2\No\Yes\Erasmus\Takemoto Eiji\\\\M\
+Fatalis\5\Shadow\36, 368\12, 128\Dust Explosion\Strength & Ending Shapeshift = Curse I;; Strength & Ending Shapeshift = Curse II;;; (Shadow) Strength +20%;; (Shadow) Strength +30%\5000, 8000\0, 0\0\Yes\Yes\Fatalis\\\Ending Shapeshift = Curse I;; Ending Shapeshift = Curse II;;;; Strength +30%;; Strength +50%\MH\M\
 Freyja\5\Wind\37, 375\12, 120\Breath of Life\(Wind) HP +20%;; (Wind) HP +30%;;; (Wind) Skill Haste +25%;; (Wind) Skill Haste +35%\5000, 8500\1.65, 1\5\No\Yes\Freyja\Ohara Sayaka\Aimee Ayotte\\\F\
 Fubuki\3\Water\18, 185\6, 63\Freezing Breath\(Water) Strength +10%;; (Water) Strength +15%\300, 150\1.35, 3.5\4\Yes\No\Fubuki\\\\\M\KoG
 Garuda\5\Wind\38, 383\11, 114\Tempestuous Kiss\(Wind) HP +40%;; (Wind) HP +60%\5000, 8500\1.5, 1.5\4\No\Yes\Garuda\Kaida Yuhko\Kathleen Hunter\\\F\KoG
