@@ -74,6 +74,8 @@ Brainwashed Midgardsormr\470, 8213, 116509, 210000, -1, 825000, 1404000; 41, 114
 Brainwashed Zodiark\460, 11404, 170798, 280220, -1, 1561077, 2448750; 67, 122, 2022, 3352, -1, 6152, 6455\Shadow, Dragon, Boss, Mega Man: Chaos Protocol\Poison: **0%**, Burn: **0%**, Paralysis: 55%\Curse\
 Dr. Wily\706, 14892, 186144, 484800, -1, 806707, 2032900; 63, 132, 1755, 3510, -1, 3510, 3510\Null, Thaumian, Boss, Mega Man: Chaos Protocol\Poison: **0%**, Burn: **0%**, Paralysis: **20%**, Blind: 60%, Bog: **20%**\~~None~~\
 Mega Man (Enemy)\-1, -1, -1, -1, -1, 1270000, 1530000; -1, -1, -1, -1, -1, 2500, 3200\Null, Human, Boss, Mega Man: Chaos Protocol\Poison: **0%**, Burn: **0%**, Freeze: *99%*, Paralysis: *80%*, Blind: *80%*, Stun: *99%*, Bog: 55%, Sleep: *99%*\**Yes**\
+Fatalis\0; 0\Null, Monster, Raid, Monster Hunter Primal Crisis\TBC\TBC\
+Rathalos\0; 0\Null, Monster, Boss, Monster Hunter Primal Crisis\TBC\Burn\
 Qitian Dasheng\73760, 182072, 873380, -1, 2756445, -1, -1, 850755; 362, 842, 1705, -1, 3248, -1, -1, 2707\Wind, Demihuman, Raid, Echoes of Antiquity\~~Immune~~\Stun\
 Jingu Bang\1844, 4551, 21834, -1, 76567, -1, -1, 21268; 362, 842, 1705, -1, 3248, -1, -1, 2707\Wind, Demihuman, Raid, Echoes of Antiquity\~~Immune~~\Stun\
 Mini Dasheng\295, 728, 3493, -1, 9188, -1, -1, 3403; 114, 265, 537, -1, 1023, -1, -1, 852\Wind, Demihuman, Raid, Echoes of Antiquity\~~Immune~~\Stun\
