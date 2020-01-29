@@ -1008,6 +1008,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Flame) Blinded Punisher\15%\Ability\If the user is attuned to Flame: Increases damage to blinded enemies by 15%.\40\y\Blind, Punisher, Flame
 (Flame) Dragon Delay Res\-\Ability\If the user is attuned to Flame: completely prevents dragon delaying.\50\y\DelayRes, Flame
 (Flame) Dull Res\-\Ability\If the user is attuned to Flame: completely prevents dulling.\50\y\DullRes, Flame, Resistance
+(Flame) Fatalis's Bane\15%\Ability\If the user is attuned to Flame: Increases damage dealt to Fatalis by 15%\60\y\Bane, Flame
 (Flame) Flurry Devastation\example\Ability\If the user is attuned to Flame: increases critical rate by `x`% when the combo count is 15 or higher.\0\y\Flame, Flurry, CritRate
 (Flame) Flurry Devastation\8%\Ability\If the user is attuned to Flame: increases critical rate by 8% when the combo count is 15 or higher.\40\y\Flame, Flurry, CritRate
 (Flame) Flurry Devastation\10%\Ability\If the user is attuned to Flame: increases critical rate by 10% when the combo count is 15 or higher.\60\y\Flame, Flurry, CritRate
@@ -1439,6 +1440,7 @@ Extra Energy\example\Ability\Grants an `x`% chance that a user's energy level wi
 Extra Energy\I\Ability\Grants a 40% chance that a user's energy level will be increased by an additional stage upon being increased\60\y\Energy
 Extra Energy\II\Ability\Grants a 50% chance that a user's energy level will be increased by an additional stage upon being increased\70\y\Energy
 Extra Energy\III\Ability\Grants an 80% chance that a user's energy level will be increased by an additional stage upon being increased\80\y\Energy
+Fatalis's Bane\15%\Ability\Increases damage dealt to Fatalis by 15%\60\y\Bane
 Flame Blades' Protection\-\Ability\Fills 100% of skill gauges at the start of quests, and increases defense by 20% while Crystalline Blades Buffed is in effect.\100\y\SkillPrep, Defense
 Flame Res\example\Ability\Reduces flame damage taken by `x`%.\0\y\FlameRes, Resistance
 Flame Res\3%\Ability\Reduces flame damage taken by 3%.\20\y\FlameRes, Resistance
@@ -1738,6 +1740,7 @@ Midgardsormr Res\15%\Ability\Reduces damage taken from Midgardsormr by 15%.\30\y
 Midgardsormr Res\18%\Ability\Reduces damage taken from Midgardsormr by 18%.\45\y\MidgardsormrRes, Resistance
 Midgardsormr Res\20%\Ability\Reduces damage taken from Midgardsormr by 20%.\60\y\MidgardsormrRes, Resistance
 Midgardsormr Res\25%\Ability\Reduces damage taken from Midgardsormr by 25%.\100\y\MidgardsormrRes, Resistance
+Monster's Bane\30%\Ability\Increases damage dealt to Rathalos and Fatalis by 30%\80\y\Bane
 Motivational Logs\example\Ability\Increases motivational log intake for clearing quests by `x`%.\0\y\Event, Facility, Score
 Motivational Logs\25%\Ability\Increases motivational log intake for clearing quests by 25%.\0\y\Event, Facility, Score
 Motivational Logs\35%\Ability\Increases motivational log intake for clearing quests by 35%.\0\y\Event, Facility, Score
