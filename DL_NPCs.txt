@@ -1,15 +1,18 @@
 Alberius\1\y\\
 Aurelius\1\y\\
 Chelle\1\y\\Saori Onishi
-Christmas Slime\5\y\\
+Chief Researcher\1\y\\
+Christmas Slime\3\y\\
 Dove\1\y\\
 Elysium\1\y\\
 Emile\1\y\\
 Fa Ming\1\y\\
+Felyne\2\y\\
 Gold Slime\1\y\\
 Guildmaster\1\y\\
 Harle\1\y\\KENN
 Hastur\1\y\\
+Kirin Felyne\3\y\\
 Lazry\1\y\\
 Leif\1\y\\Takahiro Sakurai
 Leonidas\1\y\\Tomokazu Seki
@@ -24,10 +27,13 @@ Pigeon\2\y\\
 Purple Slime\1\y\\
 Rolf\1\y\\
 Roy the Third\1\y\\
+Saoratorium Gal\4\y\\
 Sarisse\1\n\\Ayaka Asai
 Silver Slime\1\y\\
+Snapper\5\y\\
 Valentines Slime\1\y\\
 Valyx\1\y\\
 Wu Kong\1\y\\Chihiro Suzuki
+Wyventurer\1\y\\
 Xu Fu\1\y\\
 Zacharias\1\y\\

@@ -4,11 +4,15 @@ Argh\Euden
 Begging For Forgiveness\Dr. Wily
 Boom\Notte
 Bravo\Mym, Sarisse
+Down\
 Energy Tank\Mega Man
+Felyne\Felyne
 For Real\Ranzal
 Game Over\
 Good Job\Notte
+Goodnight\Euden
 Grr\Notte
+Happy Hunting\Berserker
 Happy New Year (Elisanne)\Elisanne
 Happy New Year (Euden)\Euden
 Happy New Year (Mitsuhide)\Mitsuhide
@@ -24,12 +28,18 @@ I Got This\Luca
 I Need Healing\Luca
 Intriguing!\Heinwald
 I'll Lead The Charge\Euden
+I'll Tag Along\Sarisse
 I'm On Defense\Ranzal
 Leave it to me!\Alfonse
+Left\
+Let's Fight Together\Elisanne
 Let's Go!\Fjorm
 Let's Play\Veronica
 Look Out\Elisanne
 Lovely!\Loki
+Lower Left\
+Lower Right\
+Mmm, So Tasty\Vanessa
 Nice\Ranzal
 No Worries\Elisanne
 Nope\Cleo
@@ -40,6 +50,9 @@ OMG\>Unknown<
 On Me!\Euden
 On My Way\Ranzal
 Really\Elisanne
+Right\
+See Ya\Luca
+Shapeshift Now\Euden
 Splendid\Xander
 Sorry\Elisanne
 Squishums\Squishum
@@ -47,10 +60,15 @@ Steel Stalwart\Mega Man
 Sup\Sarisse
 Take Defense\Euden
 Three Cheers for Me\Mym 
+Time For a Break\Cleo
 Together\Marth
 Thanks\Notte
+Up\
+Upper Left\
+Upper Right\
 Victory Will Be Ours\Midgardsormr
 Wait\Slime
+Want to Join Up\Euden
 Well Aren't You Sweet\Malora
 We've Got a Case!\Curran
 What You Said!\Elisanne

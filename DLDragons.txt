@@ -62,6 +62,7 @@ Phoenix\4\Flame\29, 299\9, 97\Regeneration Flame\(Flame) HP +30%;; (Flame) HP +4
 Poli'ahu\4\Water\30, 301\9, 95\Lilinoe's Mist\(Water) HP & Strength +15%;; (Water) HP & Strength +20%\2000, 2200\1.5, 1.5\2\No\No\Poli'ahu\\\(Water) HP +15%;; (Water) HP +20%;;;; (Water) Strength +15%;; (Water) Strength +20%\\F\KoG
 Poseidon\5\Water\37, 376\11, 119\Poseidon's Trident\(Water) HP & Strength +20%;; (Water) HP & Strength +30%\5000, 8500\1.8, 1\2\No\Yes\Poseidon\\\(Water) HP +20%;; (Water) HP +30%;;;; (Water) Strength +20%;; (Water) Strength +30%\\M\KoG
 Prometheus\5\Flame\37, 374\12, 121\Promethean Flame\(Flame) Strength +35% Wind Res +15%;; (Flame) Strength +50% Wind Res +15%\5000, 8500\1.8, 1\5\Yes\Yes\Prometheus\Umehara Yuuichirou\Simon King\(Flame) Strength +35%;; (Flame) Strength +50%;;;; (Flame) Wind Res +15%;; (Flame) Wind Res +15%\\M\
+Rathalos\5c\Flame\0, 0\0, 0\Firestorm\(Flame) HP & Strength +20%;; (Flame) HP & Strength +30%\5000, 300\0, 0\0\Yes\Yes\Rathalos\\\\MH\M\
 Roc\4\Wind\29, 296\10, 101\Tactical Vortex\(Wind) Strength +30%;; (Wind) Strength +45%\2000, 2200\1.5, 1.5\5\No\No\Roc\\\\\F\
 Rush\5\Flame\-, -\-, -\Rush Buster\-\-, -\4.375, 1.5\0\Yes\Yes\Rush\\\\MM\M\
 Shinobi\5\Shadow\36, 368\12, 128\Shuriken Shower\(Shadow) Strength +10%;; (Shadow) Strength +20%;;; (Shadow) Skill Damage +70%;; (Shadow) Skill Damage +90%\5000, 8500\1.8, 1\5\Yes\Yes\Shinobi\Ishikawa Hideo\Mark Mathison\\\M\
