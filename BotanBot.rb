@@ -2070,7 +2070,7 @@ def enemy_emoji(k,bot)
   sty=''
   sty='<:Great_Badge_Golden:443704781068959744>' if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
   sty='<:Mega_Man:641484836304846857>' if k[2].length>3 && k[2][3]=='Mega Man: Chaos Protocol'
-  sty='<:MH_Rathalos:669319247670804506>' if k[2].length>3 && k[2][3]=='Monster Hunter'
+  sty='<:MH_Rathalos:669319247670804506>' if k[2].length>3 && k[2][3]=='Monster Hunter: Primal Crisis'
   str="#{str}#{moji[0].mention unless moji.length<=0}#{sty}"
   return str
 end
@@ -6632,6 +6632,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
     fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers','limited','limit'].include?(args[i].downcase)
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
+    crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
     genders.push('M') if ['male','boy','m','males','boys','man'].include?(args[i].downcase)
     genders.push('F') if ['female','woman','girl','f','females','women','girls'].include?(args[i].downcase)
     for i2 in 0...lookout.length
@@ -6858,6 +6859,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
     fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers','limited','limit'].include?(args[i].downcase)
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
+    crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
     genders.push('M') if ['male','boy','m','males','boys','man'].include?(args[i].downcase)
     genders.push('F') if ['female','woman','girl'].include?(args[i].downcase)
     for i2 in 0...lookout.length
@@ -7041,6 +7043,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
     fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers','limited','limit'].include?(args[i].downcase)
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
+    crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
     fltr.push('Paid') if ['payment','paid','paying','whale'].include?(args[i].downcase)
   end
   textra=''
@@ -7263,6 +7266,7 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers','limited','limit'].include?(args[i].downcase)
       crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
       crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
+      crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
       for i2 in 0...lookout.length
         tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
       end
@@ -11212,8 +11216,7 @@ end
 bot.command([:sort,:list]) do |event, *args|
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
-  elsif ['aliases','alias'].include?(args[0].downcase) && event.user.id==167657750971547648
-    data_load()
+  elsif ['aliases','alias'].include?(args[0].downcase) && event.user.id==167657750971547648data_load()
     nicknames_load()
     @aliases.uniq!
     @aliases.sort! {|a,b| (spaceship_order(a[0]) <=> spaceship_order(b[0])) == 0 ? ((a[2].downcase <=> b[2].downcase) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2].downcase <=> b[2].downcase)) : (spaceship_order(a[0]) <=> spaceship_order(b[0]))}
