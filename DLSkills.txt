@@ -275,6 +275,7 @@ Hallowed Raiments\\Skill\Increases the user's strength by 10% for 10 seconds, an
 Hallowed Waters\\Skill\Deals 1 hit of 679% water damage to the target and nearby enemies.\Deals 1 hit of 754% water damage to the target and nearby enemies.\\5158, 5158, 5158, 5158\Yes\1\\Damage\
 Happiness Spike\\Skill\Deals 1 hit 668% damage to the target and nearby enemies.\Deals 1 hit of 743% damage to the target and nearby enemies.\\7773, 7773, 7773, 7773\Yes\1.4\\Damage\
 Happy Memories\\Skill\Deals 2 hits of 613% flame damage to surrounding enemies.\Deals 2 hits of 644% flame damage to surrounding enemies.\\8300, 8300, 8300, 8300\Yes\1.9\\Damage\
+Haste Rain\\Skill\Increases the rate at which the user's force strikes charge by 20% for 30 seconds. This speed increase will not stack.\Increases the rate at which the user's force strikes charge by 30% for 30 seconds. This speed increase will not stack.\\10000, 10000, 10000, 10000\No\1.4\Increases the rate at which the user's force strikes charge by 20/30% for 30 seconds. This speed increase will not stack.\ChargeRate\
 Hazy Hex\\Skill\Deals 2 hits of 415% shadow damage to the target and nearby enemies.\Deals 2 hits of 461% shadow damage to the target and nearby enemies.\\7299, 7299, 7299, 7299\Yes\0\\Damage\
 Healer's Luck\\Skill\Restores HP to all allies with 72% Recovery Potency.\Restores HP to all allies with 90% Recovery Potency.\Restores HP to all allies with 108% Recovery Potency.\5916, 5916, 5916, 5916\Yes\1.1\\HealSkill, Burst, Team\Restores HP to all allies with 130% Recovery Potency.
 Healing Faith\\Skill\Restores HP to the team member most in need with 225% Recovery Potency.\Restores HP to the team member most in need with 250% Recovery Potency.\Restores HP to the team member most in need with 279% Recovery Potency.\4930, 4930, 4930, 4930\Yes\1.1\\HealSkill, Single\
@@ -311,6 +312,7 @@ Hunter's Strength\\Skill\Increases the user's strength by 20% for 5 seconds.\Inc
 Hurricane Drive\\Skill\Deals 3 hits of 131% wind damage per hit to enemies directly ahead.\Deals 3 hits of 146% wind damage per hit to enemies directly ahead.\\30, 30, 30, 30\Yes\2.1\\Damage\
 Hydrocannon\\Skill\Deals 1 hit of 554% water damage to enemies in a line.\Deals 1 hit of 616% water damage to enemies in a line.\\30, 30, 30, 30\Yes\1.9\\Damage\
 Ice Mirror\\Skill\Summons "Ice Mirror," then deals 1 hit of 746% water damage to the target and nearby enemies. Additional bonus neutral-element damage will be dealt equal to 1100% of the damage taken while "Ice Mirror" is active. Reflected damage receives no bonuses from Skill Damage or other damage modifiers.\Summons "Ice Mirror," then deals 1 hit of 829% water damage to the target and nearby enemies. Additional bonus neutral-element damage will be dealt equal to 1100% of the damage taken while "Ice Mirror" is active. Reflected damage receives no bonuses from Skill Damage or other damage modifiers.\\4548, 4548, 4548, 4548\Yes\2.6\Summons "Ice Mirror," then deals 1 hit of 746%/829% water damage to the target and nearby enemies. Additional bonus neutral-element damage will be dealt equal to 1100% of the damage taken while "Ice Mirror" is active. Reflected damage receives no bonuses from Skill Damage or other damage modifiers.\Damage, Reflect\
+Ignition Breath\\Skill\Deals 1 hit of 90% and 1 hit of 360% flame damage to enemies directly ahead, and inflicts burn - dealing 72.7% flame damage every 3.9 seconds for 12 seconds - with a 110% base chance.\Deals 1 hit of 100% and 1 hit of 400% flame damage to enemies directly ahead, and inflicts burn - dealing 97% flame damage every 3.9 seconds for 12 seconds - with a 120% base chance.\\30, 30, 30, 30\Yes\1.8\\Damage, Burn\
 Illuminated Path\\Skill\Deals 4 hits of 225% flame damage to enemies in a line.\Deals 4 hits of 250% flame damage to enemies in a line.\\30, 30, 30, 30\Yes\2.4\\Damage\
 Illuminating Sneer\\Skill\Deals 1 hit of 680% light damage to surrounding enemies.\Deals 1 hit of 755% light damage to surrounding enemies.\\13684, 13684, 13684, 13684\Yes\0\\Damage\
 Immaculate Light\\Skill\Deals 1 hit of 567% light damage to enemies in a line.\Deals 1 hit of 630% light damage to enemies in a line.\\30, 30, 30, 30\Yes\2.2\\Damage\
@@ -588,6 +590,7 @@ Swift Stream\\Skill\Deals 1 hit of 630% water damage to enemies directly ahead, 
 Swordsmith's Recovery\\Skill\Restores HP the user's HP with 72% Recovery Potency\Restores HP the user's HP with 90% Recovery Potency\\12841, 12841, 12841, 12841\Yes\1.1\\HealSkill, Burst, User\
 Sworn Gale\\Skill\Deals 10 hits of 83% wind damage to enemies directly ahead.\Deals 10 hits of 92% wind damage to enemies directly ahead.\\6762, 6762, 6762, 6762\Yes\0\\Damage\
 Tactical Analysis\\Skill\Increases the entire team's critical rate by 5% and adds 30% to the modifier applied to critical damage for 10 seconds.\Increases the entire team's critical rate by 8% and adds 40% to the modifier applied to critical damage for 10 seconds.\\3909, 3909, 3909, 3909\No\1.4\\Buff, CritRate, CritDamage, Team\
+Tactical Retreat\\Skill\Deals 1 hit of 77% and 1 hit of 769% water damage to enemies in a line, and increases the damage of the user's next force strike by 60%. This damage increase will not stack.\Deals 1 hit of 85% and 1 hit of 854% water damage to enemies in a line, and increases the damage of the user's next force strike by 80%. This damage increase will not stack.\Deals 1 hit of 95% and 1 hit of 949% water damage to enemies in a line, and increases the damage of the user's next force strike by 100%. This damage increase will not stack.\3933, 3933, 3933, 3933\Yes\2.2\Deals 1 hit of 77/85/95% and 1 hit of 769/854/949% water damage to enemies in a line, and increases the damage of the user's next force strike by 60/80/100%. This damage increase will not stack.\ForceStrike, Damage\
 Tactical Vortex\\Skill\Deals 1 hit of 524.3% wind damage to surrounding enemies and inflicts stun for 4-5 seconds with 120% base chance.\Deals 1 hit of 550.2% wind damage to surrounding enemies and inflicts stun for 5-6 seconds with 140% base chance.\\50, 50, 50, 50\Yes\1.3\\Damage, Stun\
 Taiyaki Time\\Skill\Restores HP to the user with 25% Recovery Potency and applies Regen for 15 seconds, healing with 36% Regen Potency every 2.9 seconds.\Restores HP to the user with 30% Recovery Potency and applies Regen for 15 seconds, healing with 41% Regen Potency every 2.9 seconds.\\30, 30, 30, 30\Yes\1.4\Restores HP to the user with 25% / 30% Recovery Potency and applies Regen for 15 seconds, healing with 36% / 41% Regen Potency every 2.9 seconds.\HealSkill, User, Regen\
 Tempering Fancy\\Skill\Increases the strength of *flame-attuned* teammates by 15% for 15 seconds, and activates Dream Boost for 15 seconds. During Dream Boost, the user's critical rate is increased by 3%.\Increases the strength of *flame-attuned* teammates by 20% for 15 seconds, and activates Dream Boost for 15 seconds. During Dream Boost, the user's critical rate is increased by 5%.\\8534, 8534, 8534, 8534\No\1.4\\Damage, CritRate, StrengthSkill, Team, Buff, Stance, FlameBias\
@@ -691,6 +694,11 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) Critical Damage\example\Aura\If the user is attuned to Flame: adds `x`% to the modifier applied to critical damage.\0\y\Flame, CritDamage
 (Flame) Critical Damage\50%\Aura\If the user is attuned to Flame: adds 50% to the modifier applied to critical damage.\40\y\Flame, CritDamage
 (Flame) Critical Damage\55%\Aura\If the user is attuned to Flame: adds 55% to the modifier applied to critical damage.\40\y\Flame, CritDamage
+(Flame) Force Strike Damage\example\Aura\If the user is attuned to Flame: increases Force Strike damage by 50/60%.\0\y\Flame, ForceStrike
+(Flame) Force Strike Damage\50%\Aura\If the user is attuned to Flame: increases Force Strike damage by 50%.\80\y\Flame, ForceStrike
+(Flame) Force Strike Damage\60%\Aura\If the user is attuned to Flame: increases Force Strike damage by 60%.\100\y\Flame, ForceStrike
+(Flame) Gauge Accelerator\example\Aura\If the user is attuned to Flame: Speeds the rate the mode gauge decreases by `x`%.\0\y\Flame, GaugeAccelerator
+(Flame) Gauge Accelerator\30%\Aura\If the user is attuned to Flame: Speeds the rate the mode gauge decreases by 30%.\100\y\Flame, GaugeAccelerator
 (Flame) HP & Strength\example\Aura\If the user is attuned to Flame: increases strength and HP by `x`%.\0\y\HP, Strength, Flame
 (Flame) HP & Strength\5%\Aura\If the user is attuned to Flame: increases strength and HP by 5%.\20\y\HP, Strength, Flame
 (Flame) HP & Strength\8%\Aura\If the user is attuned to Flame: increases strength and HP by 8%.\30\y\HP, Strength, Flame
@@ -716,10 +724,14 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) Strength\40%\Aura\If the user is attuned to Flame: increases strength by 40%.\70\y\Strength, Flame
 (Flame) Strength\45%\Aura\If the user is attuned to Flame: increases strength by 45%.\80\y\Strength, Flame
 (Flame) Strength\50%\Aura\If the user is attuned to Flame: increases strength by 50%.\90\y\Strength, Flame
+(Flame) Strength\55%\Aura\If the user is attuned to Flame: increases strength by 55%.\95\y\Strength, Flame
 (Flame) Strength\60%\Aura\If the user is attuned to Flame: increases strength by 60%.\100\y\Strength, Flame
 (Flame) Strength & Wind Res\example\Aura\If the user is attuned to Flame: increases strength by `x`% and grants `y`% Wind resistance.\0\y\Strength, WindRes, Flame, Resistance
 (Flame) Strength & Wind Res\35/15%\Aura\If the user is attuned to Flame: increases strength by 35% and grants 15% Wind resistance.\70\y\Strength, WindRes, Flame, Resistance
 (Flame) Strength & Wind Res\50/15%\Aura\If the user is attuned to Flame: increases strength by 50% and grants 15% Wind resistance.\100\y\Strength, WindRes, Flame, Resistance
+(Flame) Striking Haste\example\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by `x` when the user's force strikes connect.\0\y\Flame, StrikingHaste, SkillHaste
+(Flame) Striking Haste\20%\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by 20% when the user's force strikes connect.\80\y\Flame, StrikingHaste, SkillHaste
+(Flame) Striking Haste\30%\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by 30% when the user's force strikes connect.\100\y\Flame, StrikingHaste, SkillHaste
 (Flame) Wind Res\15%\Aura\If the user is attuned to Flame: grants 15% Wind resistance.\65\y\WindRes, Flame, Resistance
 (Light) Critical Damage\example\Aura\If the user is attuned to Light: adds `x`% to the modifier applied to critical damage.\0\y\CritDamage, Light
 (Light) Critical Damage\50%\Aura\If the user is attuned to Light: adds 50% to the modifier applied to critical damage.\40\y\CritDamage, Light
@@ -1276,6 +1288,9 @@ Bog Res\55%\Ability\Reduces susceptibility to bog by 55%.\70\y\BogRes, Resistanc
 Bog Res\60%\Ability\Reduces susceptibility to bog by 60%.\80\y\BogRes, Resistance
 Bog Res\75%\Ability\Reduces susceptibility to bog by 75%.\100\y\BogRes, Resistance
 Bog Res\100%\Ability\Reduces susceptibility to bog by 100%.\100\y\BogRes, Resistance
+Bow Expertise\example\Ability\Grants the user a unique force strike, and increases force strike damage by 20/30%. Their force strike has four increasingly powerful charge levels and movement is possible while charging. In addition, it will reduce enemy strength by 15% for 10 seconds. This debuff will not stack.\0\y\
+Bow Expertise\I\Ability\Grants the user a unique force strike, and increases force strike damage by 20%. Their force strike has four increasingly powerful charge levels and movement is possible while charging. In addition, it will reduce enemy strength by 15% for 10 seconds. This debuff will not stack.\80\y\
+Bow Expertise\II\Ability\Grants the user a unique force strike, and increases force strike damage by 30%. Their force strike has four increasingly powerful charge levels and movement is possible while charging. In addition, it will reduce enemy strength by 15% for 10 seconds. This debuff will not stack.\100\y\
 Brainwashed Brunhilda's Bane\example\Ability\Increases damage to Brainwashed Brunhilda by `x`%.\0\y\Brainwashed, Bane
 Brainwashed Brunhilda's Bane\40%\Ability\Increases damage to Brainwashed Brunhilda by 40%.\0\y\Brainwashed, Bane
 Brainwashed Brunhilda's Bane\50%\Ability\Increases damage to Brainwashed Brunhilda by 50%.\0\y\Brainwashed, Bane
@@ -1319,6 +1334,9 @@ Burn Res\75%\Ability\Reduces susceptibility to burning by 75%.\100\n\BurnRes, Re
 Burn Res\100%\Ability\Reduces susceptibility to burning by 100%.\100\n\BurnRes, Resistance
 Burning Punisher\25%\Ability\Increases damage to burning enemies by 25%\80\y\Burn, Punisher
 Burning Punisher\30%\Ability\Increases damage to burning enemies by 30%\100\y\Burn, Punisher
+Charge Rate\example\Ability\Increases force strike charge rate by 15/20%\0\y\ChargeRate
+Charge Rate\15%\Ability\Increases force strike charge rate by 15%\80\y\ChargeRate
+Charge Rate\20%\Ability\Increases force strike charge rate by 20%\100\y\ChargeRate
 Chicken At Heart\example\Ability\Increases strength by `x`% when HP is 60% or above, but decreases strength by 20% when HP is less than 60%.\0\y\Strength, HP60
 Chicken At Heart\I\Ability\Increases strength by 15% when HP is 60% or above, but decreases strength by 20% when HP is less than 60%.\60\y\Strength, HP60
 Chicken At Heart\II\Ability\Increases strength by 20% when HP is 60% or above, but decreases strength by 20% when HP is less than 60%.\80\y\Strength, HP60
@@ -1491,6 +1509,9 @@ Force Strike\20%\Ability\Increases force strike damage by 20%.\40\n\ForceStrike
 Force Strike\30%\Ability\Increases force strike damage by 30%.\60\n\ForceStrike
 Force Strike\40%\Ability\Increases force strike damage by 40%.\80\n\ForceStrike
 Force Strike\50%\Ability\Increases force strike damage by 50%.\100\n\ForceStrike
+Force Strike Damage & Charge Rate\example\Ability\Increases force strike damage by 20/25% and charge rate by 15/20%.\0\y\ForceStrike, ChargeRate
+Force Strike Damage & Charge Rate\I\Ability\Increases force strike damage by 20% and charge rate by 15%.\80\y\ForceStrike, ChargeRate
+Force Strike Damage & Charge Rate\II\Ability\Increases force strike damage by 25% and charge rate by 20%.\100\y\ForceStrike, ChargeRate
 Freeze Res\example\Ability\Reduces susceptibility to freezing by `x`%.\0\y\FreezeRes, Resistance
 Freeze Res\15%\Ability\Reduces susceptibility to freezing by 15%.\10\y\FreezeRes, Resistance
 Freeze Res\20%\Ability\Reduces susceptibility to freezing by 20%.\20\y\FreezeRes, Resistance
@@ -1694,6 +1715,10 @@ Last Defense\60%\Ability\Buffs defense by 60% for 15 seconds when HP drops to 30
 Last Defense\100%\Ability\Buffs defense by 100% for 15 seconds when HP drops to 30% (once per quest).\120\y\Last, Defense
 Last Destruction\I\Ability\Increases the damage of the next attack skill used by each team member by 30% when the user's HP drops to 30% (once per quest).\40\y\Last, Strength
 Last Destruction\II\Ability\Increases the damage of the next attack skill used by each team member by 40% when the user's HP drops to 30% (once per quest).\60\y\Last, Strength
+Last Devastation\example\Ability\Increases critical rate by `x`% for 15 seconds when HP drops to 30% (once per quest).\0\y\Last, CritRate
+Last Devastation\10%\Ability\Increases critical rate by 10% for 15 seconds when HP drops to 30% (once per quest).\60\y\Last, CritRate
+Last Devastation\20%\Ability\Increases critical rate by 20% for 15 seconds when HP drops to 30% (once per quest).\80\y\Last, CritRate
+Last Devastation\30%\Ability\Increases critical rate by 30% for 15 seconds when HP drops to 30% (once per quest).\100\y\Last, CritRate
 Last Offense\example\Ability\Buffs strength by `x`% for 15 seconds when HP drops to 30% (once per quest).\0\y\Last, Strength
 Last Offense\20%\Ability\Buffs strength by 20% for 15 seconds when HP drops to 30% (once per quest).\40\y\Last, Strength
 Last Offense\30%\Ability\Buffs strength by 30% for 15 seconds when HP drops to 30% (once per quest).\60\y\Last, Strength
