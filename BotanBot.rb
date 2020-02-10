@@ -32,11 +32,11 @@ end
 
 # The bot's token is basically their password, so is censored for obvious reasons
 if @shardizard==4
-  bot = Discordrb::Commands::CommandBot.new token: 'NDMxODk1NTYxMTkzMzkwMDkw.DalZoA.QQ6Ar8x852aErhYZqBFBx91n4UQ', client_id: 431895561193390090, prefix: prefix_proc
+  bot = Discordrb::Commands::CommandBot.new token: '>Debug Token<', client_id: 431895561193390090, prefix: prefix_proc
 elsif @shardizard>4
-  bot = Discordrb::Commands::CommandBot.new token: 'NTQzMzczMDE4MzAzMjk5NTg1.Dz7nYQ.Rj9VxL9ieJy_C6eGkThabmHRh_s', shard_id: (@shardizard-1), num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
+  bot = Discordrb::Commands::CommandBot.new token: '>Token<', shard_id: (@shardizard-1), num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
 else
-  bot = Discordrb::Commands::CommandBot.new token: 'NTQzMzczMDE4MzAzMjk5NTg1.Dz7nYQ.Rj9VxL9ieJy_C6eGkThabmHRh_s', shard_id: @shardizard, num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
+  bot = Discordrb::Commands::CommandBot.new token: '>Token<', shard_id: @shardizard, num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
 end
 bot.gateway.check_heartbeat_acks = false
 
