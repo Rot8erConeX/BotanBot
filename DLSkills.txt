@@ -697,8 +697,8 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) Force Strike Damage\example\Aura\If the user is attuned to Flame: increases Force Strike damage by 50/60%.\0\y\Flame, ForceStrike
 (Flame) Force Strike\50%\Aura\If the user is attuned to Flame: increases Force Strike damage by 50%.\80\y\Flame, ForceStrike
 (Flame) Force Strike\60%\Aura\If the user is attuned to Flame: increases Force Strike damage by 60%.\100\y\Flame, ForceStrike
-(Flame) Gauge Decelerator\example\Aura\If the user is attuned to Flame: Speeds the rate the mode gauge decreases by `x`%.\0\y\Flame, GaugeAccelerator
-(Flame) Gauge Decelerator\30%\Aura\If the user is attuned to Flame: Speeds the rate the mode gauge decreases by 30%.\100\y\Flame, GaugeAccelerator
+(Flame) Gauge Decelerator\example\Aura\If the user is attuned to Flame: Slows the rate the mode gauge decreases by `x`%.\0\y\Flame, GaugeAccelerator
+(Flame) Gauge Decelerator\30%\Aura\If the user is attuned to Flame: Slows the rate the mode gauge decreases by 30%.\100\y\Flame, GaugeAccelerator
 (Flame) HP & Strength\example\Aura\If the user is attuned to Flame: increases strength and HP by `x`%.\0\y\HP, Strength, Flame
 (Flame) HP & Strength\5%\Aura\If the user is attuned to Flame: increases strength and HP by 5%.\20\y\HP, Strength, Flame
 (Flame) HP & Strength\8%\Aura\If the user is attuned to Flame: increases strength and HP by 8%.\30\y\HP, Strength, Flame
@@ -715,6 +715,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) Skill Damage\example\Aura\If the user is attuned to Flame: increases attack skill damage by `x`%\0\y\Flame, SkillDamage
 (Flame) Skill Damage\70%\Aura\If the user is attuned to Flame: increases attack skill damage by 70%\100\y\Flame, SkillDamage
 (Flame) Skill Damage\90%\Aura\If the user is attuned to Flame: increases attack skill damage by 90%\120\y\Flame, SkillDamage
+(Flame) Striking Haste\example\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by `x`% when the user's force strikes connect.\0\y\Flame, StrikingHaste
+(Flame) Striking Haste\20%\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by 20% when the user's force strikes connect.\100\y\Flame, StrikingHaste
+(Flame) Striking Haste\30%\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by 30% when the user's force strikes connect.\120\y\Flame, StrikingHaste
 (Flame) Strength\example\Aura\If the user is attuned to Flame: increases strength by `x`%.\0\y\Strength, Flame
 (Flame) Strength\10%\Aura\If the user is attuned to Flame: increases strength by 10%.\20\y\Strength, Flame
 (Flame) Strength\15%\Aura\If the user is attuned to Flame: increases strength by 15%.\30\y\Strength, Flame
@@ -917,6 +920,7 @@ Exhilaration\-\Aura\If the user is attuned to Light: increases shapeshift time f
 Force Strike\example\Aura\Increases force strike damage by `x`%.\0\y\ForceStrike
 Force Strike\50%\Aura\Increases force strike damage by 50%.\80\y\ForceStrike
 Force Strike\60%\Aura\Increases force strike damage by 60%.\100\y\ForceStrike
+Gauge Decelerator\30%\Aura\Slows the rate the mode gauge decreases by 30%.\100\y\
 HP 30% = Strength\example\Aura\Increases strength by `x`% when HP is 30% or above.\0\y\HP30, Strength
 HP 30% = Strength\35%\Aura\Increases strength by 35% when HP is 30% or above.\35\y\HP30, Strength
 HP 30% = Strength\50%\Aura\Increases strength by 50% when HP is 30% or above.\50\y\HP30, Strength
@@ -973,6 +977,7 @@ Strength\35%\Aura\Increases strength by 35%.\65\y\Strength
 Strength\40%\Aura\Increases strength by 40%.\70\y\Strength
 Strength\45%\Aura\Increases strength by 45%.\80\y\Strength
 Strength\50%\Aura\Increases strength by 50%.\90\y\Strength
+Strength\55%\Aura\Increases strength by 55%.\100\y\Strength
 Strength\60%\Aura\Increases strength by 60%.\100\y\Strength
 Strength & Critical Damage\example\Aura\Increases strength by `x`% and adds `y`% to the modifier applied to critical damage.\70\y\Strength, CritDamage
 Strength & Critical Damage\30/50%\Aura\Increases strength by 30% and adds 50% to the modifier applied to critical damage.\70\y\Strength, CritDamage
@@ -986,6 +991,9 @@ Strength & Shadow Res\50/15%\Aura\Increases strength by 50% and grants 15% Shado
 Strength & Wind Res\example\Aura\Increases strength by `x`% and grants `y`% Wind resistance.\0\y\Strength, WindRes, Resistance
 Strength & Wind Res\35/15%\Aura\Increases strength by 35% and grants 15% Wind resistance.\70\y\Strength, WindRes, Resistance
 Strength & Wind Res\50/15%\Aura\Increases strength by 50% and grants 15% Wind resistance.\100\y\Strength, WindRes, Resistance
+Striking Haste\example\Aura\Increases skill gauge fill rate by `x`% when the user's force strikes connect.\0\y\StrikingHaste
+Striking Haste\20%\Aura\Increases skill gauge fill rate by 20% when the user's force strikes connect.\100\y\StrikingHaste
+Striking Haste\30%\Aura\Increases skill gauge fill rate by 30% when the user's force strikes connect.\120\y\StrikingHaste
 Unknown\-\Ability\We don't know. This is a placeholder. Stop challenging my made up abilities <:wrathful:621402788177510453>\0\y\WonderGuard
 Whirlwind Strength\example\Aura\Increases strength by `x`% when the combo count is 15 or higher.\0\y\Light, Flurry, Strength
 Whirlwind Strength\20%\Aura\Increases strength by 20% when the combo count is 15 or higher.\80\y\Light, Flurry, Strength
