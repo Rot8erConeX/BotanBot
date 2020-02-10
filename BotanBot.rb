@@ -12601,7 +12601,7 @@ end
 bot.command(:reload, from: 167657750971547648) do |event|
   return nil if overlap_prevent(event)
   return nil unless [167657750971547648,141260274144509952].include?(event.user.id) || [502288368777035777,532083509083373583].include?(event.channel.id)
-  event.respond "Reload what?\n1.) Aliases, from backups#{"\n2.) Data, from GitHub" if [167657750971547648,141260274144509952].include?(event.user.id)}#{"\n3.) Source code, from GitHub" if event.user.id==167657750971547648}\nYou can include multiple numbers to load multiple things."
+  event.respond "Reload what?\n1.) Aliases, from backups#{"\n2.) Data, from GitHub" if [167657750971547648,141260274144509952].include?(event.user.id)}#{"\n3.) Source code, from GitHub\n4.) Crossover data." if event.user.id==167657750971547648}\nYou can include multiple numbers to load multiple things."
   event.channel.await(:bob, from: event.user.id) do |e|
     reload=false
     if e.message.text.include?('1')
@@ -12688,6 +12688,43 @@ bot.command(:reload, from: 167657750971547648) do |event|
           reload=true
         end
       end
+    end
+    if e.message.text.include?('4') && [167657750971547648].include?(event.user.id)
+      download = open("https://raw.githubusercontent.com/Rot8erConeX/LizBot/master/FGOServants.txt")
+      IO.copy_stream(download, "DLTemp.txt")
+      if File.size("DLTemp.txt")>100
+        b=[]
+        File.open("DLTemp.txt").each_line.with_index do |line, idx|
+          b.push(line)
+        end
+        open("FGOServants.txt", 'w') { |f|
+          f.puts b.join('')
+        }
+      end
+      download = open("https://raw.githubusercontent.com/Rot8erConeX/LizBot/master/FGOCraftEssances.txt")
+      IO.copy_stream(download, "DLTemp.txt")
+      if File.size("DLTemp.txt")>100
+        b=[]
+        File.open("DLTemp.txt").each_line.with_index do |line, idx|
+          b.push(line)
+        end
+        open("FGOCraftEssances.txt", 'w') { |f|
+          f.puts b.join('')
+        }
+      end
+      download = open("https://github.com/Rot8erConeX/EliseBot/blob/master/EliseBot/FEHUnits.txt")
+      IO.copy_stream(download, "DLTemp.txt")
+      if File.size("DLTemp.txt")>100
+        b=[]
+        File.open("DLTemp.txt").each_line.with_index do |line, idx|
+          b.push(line)
+        end
+        open("FEHUnits.txt", 'w') { |f|
+          f.puts b.join('')
+        }
+      end
+      e.respond 'New cross-data loaded.'
+      reload=true
     end
     e.respond 'Nothing reloaded.  If you meant to use the command, please try it again.' unless reload
   end
