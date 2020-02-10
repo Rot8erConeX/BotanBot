@@ -28,9 +28,9 @@ def pseudocase(str)
 end
 
 def get_donor_list()
-  if File.exist?('C:/Users/Mini-Matt/Desktop/devkit/FEHDonorList.txt')
+  if File.exist?("#{@location}devkit/FEHDonorList.txt")
     b=[]
-    File.open('C:/Users/Mini-Matt/Desktop/devkit/FEHDonorList.txt').each_line do |line|
+    File.open("#{@location}devkit/FEHDonorList.txt").each_line do |line|
       b.push(line.gsub("\n",'').split('\\'[0]))
     end
     for i in 0...b.length
