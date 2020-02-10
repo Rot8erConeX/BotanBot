@@ -4022,20 +4022,16 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
               m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2081)") if drg[i][6][ix][0]==checkstr2
               m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2082)") if drg[i][6][ix][1]==checkstr2
             end
-            if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-              m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr
-              m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr
-              m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr
-              m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr
-              m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr2
-              m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr2
-              m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr2
-              m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr2
-            else
-              m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][0][1]==checkstr
-              m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][0][1]==checkstr2
-              m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr
-              m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr2
+            for i4 in 0...drg[i][15].length
+              if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
+                m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][i4][0]==checkstr
+                m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][i4][1]==checkstr
+                m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][i4][0]==checkstr2
+                m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][i4][1]==checkstr2
+              else
+                m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][i4][1]==checkstr
+                m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][i4][1]==checkstr2
+              end
             end
           end
         end
@@ -4414,10 +4410,10 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
                 m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2082)") if drg[i][6][ix][1]==checkstr
               end
               unless drg[i][15].nil? || drg[i][15].length<=0
-                m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr
-                m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr
-                m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr
-                m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr
+                for i4 in 0...drg[i][15].length
+                  m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][i4][0]==checkstr
+                  m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][i4][1]==checkstr
+                end
               end
               for i2 in 0...elemo.length
                 checkstr2="(#{elemo[i2][0]}) #{checkstr}"
@@ -4533,10 +4529,10 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
                 m2.push("#{drgemo}#{drg[i][0]}") if drg[i][6][ix][1]==checkstr2
               end
               unless drg[i][15].nil? || drg[i][15].length<=0
-                m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][0][1]==checkstr
-                m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][0][1]==checkstr2
-                m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr
-                m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr2
+                for i4 in 0...drg[i][15].length
+                  m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][i4][1]==checkstr
+                  m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][i4][1]==checkstr2
+                end
               end
               for i2 in 0...elemo.length
                 drgemo=elemo[i2][1]
@@ -4767,14 +4763,12 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
           m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2082)") if drg[i][6][ix][1]==checkstr2
         end
         unless drg[i][15].nil? || drg[i][15].length<=0
-          m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr
-          m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr
-          m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr
-          m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr
-          m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr2
-          m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr2
-          m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr2
-          m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr2
+          for i4 in 0...drg[i][15].length
+            m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][i4][0]==checkstr
+            m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][i4][1]==checkstr
+            m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][i4][0]==checkstr2
+            m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][i4][1]==checkstr2
+          end
         end
       end
       if m2.length>0
@@ -5920,6 +5914,7 @@ def disp_wyrmprint_art(bot,event,args=nil)
     for i in 0...b.length
       b[i]=b[i].gsub("\n",'').split('\\'[0])
       if !b[i][6].nil? && b[i][6].length>0
+        b[i][6]=b[i][6].split(';; ')
         charsx[0].push("*[FEH]* #{b[i][0]}") if b[i][6][0].split(' as ')[0]==nammes[0]
         charsx[0].push("*[FEH]* - Resplendent #{b[i][0]}") if !b[i][6][1].nil? && b[i][6][1].split(' as ')[0]==nammes[0]
       end
@@ -12662,6 +12657,17 @@ bot.command(:reload, from: 167657750971547648) do |event|
       reload=true
     end
     if e.message.text.include?('3') && [167657750971547648].include?(event.user.id)
+      download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/rot8er_functs.rb")
+      IO.copy_stream(download, "DLTemp.txt")
+      if File.size("DLTemp.txt")>100
+        b=[]
+        File.open("DLTemp.txt").each_line.with_index do |line, idx|
+          b.push(line)
+        end
+        open("rot8er_functs.rb", 'w') { |f|
+          f.puts b.join('')
+        }
+      end
       download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/BotanBot.rb")
       IO.copy_stream(download, "DLTemp.txt")
       if File.size("DLTemp.txt")>100
@@ -12713,7 +12719,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
           f.puts b.join('')
         }
       end
-      download = open("https://github.com/Rot8erConeX/EliseBot/blob/master/EliseBot/FEHUnits.txt")
+      download = open("https://raw.githubusercontent.com/Rot8erConeX/EliseBot/master/EliseBot/FEHUnits.txt")
       IO.copy_stream(download, "DLTemp.txt")
       if File.size("DLTemp.txt")>100
         b=[]
