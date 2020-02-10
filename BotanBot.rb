@@ -10,6 +10,7 @@ require 'tzinfo/data'                  # Downloaded with active_support below, b
 require 'rufus-scheduler'              # Download link: https://github.com/jmettraux/rufus-scheduler
 require 'active_support/core_ext/time' # Download link: https://rubygems.org/gems/activesupport/versions/5.0.0
 require_relative 'rot8er_functs'       # functions I use commonly in bots
+@location="C:/Users/#{@mash}/Desktop/"
 
 # this is required to get her to change her avatar on certain holidays
 ENV['TZ'] = 'America/Chicago'
@@ -17,12 +18,12 @@ ENV['TZ'] = 'America/Chicago'
 
 # All the possible command prefixes
 @prefixes={}
-load 'C:/Users/Mini-Matt/Desktop/devkit/DLPrefix.rb'
+load "#{@location}devkit/DLPrefix.rb"
 
 prefix_proc = proc do |message|
   next pseudocase(message.text[3..-1]) if message.text.downcase.start_with?('dl!')
   next pseudocase(message.text[3..-1]) if message.text.downcase.start_with?('dl?')
-  load 'C:/Users/Mini-Matt/Desktop/devkit/DLPrefix.rb'
+  load "#{@location}devkit/DLPrefix.rb"
   next if message.channel.server.nil? || @prefixes[message.channel.server.id].nil? || @prefixes[message.channel.server.id].length<=0
   prefix = @prefixes[message.channel.server.id]
   # We use [prefix.size..-1] so we can handle prefixes of any length
@@ -31,11 +32,11 @@ end
 
 # The bot's token is basically their password, so is censored for obvious reasons
 if @shardizard==4
-  bot = Discordrb::Commands::CommandBot.new token: '>Debug Token<', client_id: 431895561193390090, prefix: prefix_proc
+  bot = Discordrb::Commands::CommandBot.new token: 'NDMxODk1NTYxMTkzMzkwMDkw.DalZoA.QQ6Ar8x852aErhYZqBFBx91n4UQ', client_id: 431895561193390090, prefix: prefix_proc
 elsif @shardizard>4
-  bot = Discordrb::Commands::CommandBot.new token: '>Token<', shard_id: (@shardizard-1), num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
+  bot = Discordrb::Commands::CommandBot.new token: 'NTQzMzczMDE4MzAzMjk5NTg1.Dz7nYQ.Rj9VxL9ieJy_C6eGkThabmHRh_s', shard_id: (@shardizard-1), num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
 else
-  bot = Discordrb::Commands::CommandBot.new token: '>Token<', shard_id: @shardizard, num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
+  bot = Discordrb::Commands::CommandBot.new token: 'NTQzMzczMDE4MzAzMjk5NTg1.Dz7nYQ.Rj9VxL9ieJy_C6eGkThabmHRh_s', shard_id: @shardizard, num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
 end
 bot.gateway.check_heartbeat_acks = false
 
@@ -193,9 +194,9 @@ def is_mod?(user,server,channel,mode=0)
 end
 
 def data_load()
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLAdventurers.txt")
+  if File.exist?("#{@location}devkit/DLAdventurers.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLAdventurers.txt").each_line do |line|
+    File.open("#{@location}devkit/DLAdventurers.txt").each_line do |line|
       b.push(line)
     end
   else
@@ -213,9 +214,9 @@ def data_load()
     b[i][15]=b[i][15].split(';;;; ').map{|q| q.split(';; ')} unless b[i][15].nil?
   end
   @adventurers=b.map{|q| q}
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLDragons.txt")
+  if File.exist?("#{@location}devkit/DLDragons.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLDragons.txt").each_line do |line|
+    File.open("#{@location}devkit/DLDragons.txt").each_line do |line|
       b.push(line)
     end
   else
@@ -233,9 +234,9 @@ def data_load()
     b[i][15]=b[i][15].split(';;;; ').map{|q| q.split(';; ')} unless b[i][15].nil?
   end
   @dragons=b.map{|q| q}
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLWyrmprints.txt")
+  if File.exist?("#{@location}devkit/DLWyrmprints.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLWyrmprints.txt").each_line do |line|
+    File.open("#{@location}devkit/DLWyrmprints.txt").each_line do |line|
       b.push(line)
     end
   else
@@ -250,9 +251,9 @@ def data_load()
     b[i][8]=b[i][8].split(';; ').map{|q| q.split(', ')} unless b[i][8].nil?
   end
   @wyrmprints=b.map{|q| q}
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLWeapons.txt")
+  if File.exist?("#{@location}devkit/DLWeapons.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLWeapons.txt").each_line do |line|
+    File.open("#{@location}devkit/DLWeapons.txt").each_line do |line|
       b.push(line)
     end
   else
@@ -270,9 +271,9 @@ def data_load()
     b[i][16]=b[i][16].to_i
   end
   @weapons=b.map{|q| q}
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkills.txt")
+  if File.exist?("#{@location}devkit/DLSkills.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkills.txt").each_line do |line|
+    File.open("#{@location}devkit/DLSkills.txt").each_line do |line|
       b.push(line)
     end
   else
@@ -296,9 +297,9 @@ def data_load()
     end
   end
   @askilities=b.map{|q| q}
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLFacilities.txt")
+  if File.exist?("#{@location}devkit/DLFacilities.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLFacilities.txt").each_line do |line|
+    File.open("#{@location}devkit/DLFacilities.txt").each_line do |line|
       b.push(line)
     end
   else
@@ -317,9 +318,9 @@ def data_load()
     end
   end
   @facilities=b.map{|q| q}
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLMaterials.txt")
+  if File.exist?("#{@location}devkit/DLMaterials.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLMaterials.txt").each_line do |line|
+    File.open("#{@location}devkit/DLMaterials.txt").each_line do |line|
       b.push(line)
     end
   else
@@ -336,9 +337,9 @@ def data_load()
     b[i][8]=b[i][8].split(', ') unless b[i][8].nil?
   end
   @mats=b.map{|q| q}
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLEnemies.txt")
+  if File.exist?("#{@location}devkit/DLEnemies.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLEnemies.txt").each_line do |line|
+    File.open("#{@location}devkit/DLEnemies.txt").each_line do |line|
       b.push(line)
     end
   else
@@ -353,9 +354,9 @@ def data_load()
     b[i][5]=b[i][5].split(';; ') unless b[i][5].nil?
   end
   @enemies=b.map{|q| q}
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLBanners.txt")
+  if File.exist?("#{@location}devkit/DLBanners.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLBanners.txt").each_line do |line|
+    File.open("#{@location}devkit/DLBanners.txt").each_line do |line|
       b.push(line)
     end
   else
@@ -371,9 +372,9 @@ def data_load()
     b[i][7]=b[i][7].split(', ') unless b[i][7].nil?
   end
   @banners=b.map{|q| q}
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLEmotes.txt")
+  if File.exist?("#{@location}devkit/DLEmotes.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLEmotes.txt").each_line do |line|
+    File.open("#{@location}devkit/DLEmotes.txt").each_line do |line|
       b.push(line)
     end
   else
@@ -383,9 +384,9 @@ def data_load()
     b[i]=b[i].gsub("\n",'').split('\\'[0])
   end
   @emotes=b.map{|q| q}
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DL_NPCs.txt")
+  if File.exist?("#{@location}devkit/DL_NPCs.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DL_NPCs.txt").each_line do |line|
+    File.open("#{@location}devkit/DL_NPCs.txt").each_line do |line|
       b.push(line)
     end
   else
@@ -396,9 +397,9 @@ def data_load()
     b[i][1]=b[i][1].to_i
   end
   @npcs=b.map{|q| q}
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLStatus.txt")
+  if File.exist?("#{@location}devkit/DLStatus.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLStatus.txt").each_line do |line|
+    File.open("#{@location}devkit/DLStatus.txt").each_line do |line|
       b.push(line)
     end
   else
@@ -409,9 +410,9 @@ def data_load()
     b[i][1]=b[i][1].to_i
   end
   @statuses=b.map{|q| q}
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLVoid.txt")
+  if File.exist?("#{@location}devkit/DLVoid.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLVoid.txt").each_line do |line|
+    File.open("#{@location}devkit/DLVoid.txt").each_line do |line|
       b.push(line)
     end
   else
@@ -425,15 +426,15 @@ end
 
 def prefixes_save()
   x=@prefixes
-  open("C:/Users/#{@mash}/Desktop/devkit/DLPrefix.rb", 'w') { |f|
+  open("#{@location}devkit/DLPrefix.rb", 'w') { |f|
     f.puts x.to_s.gsub('=>',' => ').gsub(', ',",\n  ").gsub('{',"@prefixes = {\n  ").gsub('}',"\n}")
   }
 end
 
 def metadata_load()
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSave.txt")
+  if File.exist?("#{@location}devkit/DLSave.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLSave.txt").each_line do |line|
+    File.open("#{@location}devkit/DLSave.txt").each_line do |line|
       b.push(eval line)
     end
   else
@@ -471,7 +472,7 @@ def metadata_save()
     end
   end
   x=[@embedless.map{|q| q}, @ignored.map{|q| q}, @server_data.map{|q| q}, @spam_channels.map{|q| q}]
-  open("C:/Users/#{@mash}/Desktop/devkit/DLSave.txt", 'w') { |f|
+  open("#{@location}devkit/DLSave.txt", 'w') { |f|
     f.puts x[0].to_s
     f.puts x[1].to_s
     f.puts x[2].to_s
@@ -481,15 +482,15 @@ def metadata_save()
 end
 
 def nicknames_load(mode=1)
-  if mode==2 && File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLNames2.txt")
+  if mode==2 && File.exist?("#{@location}devkit/DLNames2.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLNames.txt").each_line do |line|
+    File.open("#{@location}devkit/DLNames.txt").each_line do |line|
       b.push(eval line)
     end
     return b
-  elsif File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLNames.txt")
+  elsif File.exist?("#{@location}devkit/DLNames.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLNames.txt").each_line do |line|
+    File.open("#{@location}devkit/DLNames.txt").each_line do |line|
       b.push(eval line)
     end
   else
@@ -502,7 +503,7 @@ bot.command(:reboot, from: 167657750971547648) do |event| # reboots Botan
   return nil if overlap_prevent(event)
   return nil unless event.user.id==167657750971547648 # only work when used by the developer
   puts 'DL!reboot'
-  exec "cd C:/Users/#{@mash}/Desktop/devkit && BotanBot.rb #{@shardizard}"
+  exec "cd #{@location}devkit && BotanBot.rb #{@shardizard}"
 end
 
 bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, command, subcommand|
@@ -623,9 +624,9 @@ def help_text(event,bot,command=nil,subcommand=nil)
     create_embed(event,"**#{command.downcase}** __target__","Shows `target`'s art.  Target can be:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Enemies\n- Stickers\n- NPCs",0xCE456B)
     if safe_to_spam?(event)
       lookout=[]
-      if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
+      if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
         lookout=[]
-        File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
+        File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
           lookout.push(eval line)
         end
       end
@@ -671,9 +672,9 @@ def help_text(event,bot,command=nil,subcommand=nil)
     elsif ['mat','mats','material','materials','item','items'].include?(subcommand.downcase)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all materials and items that fit `filters`.\n\nYou can search by:\n- Rarity\n- Pouch Rarity\n- Tags\n\nIf too many materials and items are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
       lookout=[]
-      if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
+      if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
         lookout=[]
-        File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
+        File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
           lookout.push(eval line)
         end
       end
@@ -682,9 +683,9 @@ def help_text(event,bot,command=nil,subcommand=nil)
     elsif ['abil','abilities','ability','abils','abilitys'].include?(subcommand.downcase)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all abilities, dragon auras, and co-abilities that fit `filters`.\n\nYou can search by:\n- Ability Class (ability/aura/coability)\n- Element\n- Tags\n\nIf too many abilities are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
       lookout=[]
-      if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
+      if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
         lookout=[]
-        File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
+        File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
           lookout.push(eval line)
         end
       end
@@ -696,9 +697,9 @@ def help_text(event,bot,command=nil,subcommand=nil)
       create_embed(event,"**#{command.downcase}** __\*filters__","Displays all adventurers, dragons, wyrmprints, and weapons that fit `filters`.\n\nYou can search by:\n- Rarity\n- Element\n- Weapon type\n- Class / Amulet type\n- Availability\n- Gender (for adventurers and dragons)\n\nIn addition, adventurers can be sorted by:\n- Race\n\nIn addition, dragons can be sorted by:\n- Dragon Roost Bond Gift preference\n- Whether or not the dragon turns to face damage sources\n- Whether or not the dragon is a ranged attacker\n\nIn addition, weapons can be sorted by:\n- Crafting tier\n\nIf too much data is trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
     end
     lookout=[]
-    if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
+    if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
       lookout=[]
-      File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
+      File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
         lookout.push(eval line)
       end
     end
@@ -1830,11 +1831,11 @@ def find_data_ex(callback,name,event,fullname=false,ext=false)
   return blank
 end
 
-def generate_rarity_row(rar,blanks=0,feh='')
+def generate_rarity_row(rar,blanks=0,feh='',hyperblanks=false)
   blanks=rar*1 if blanks<=0
-  return "#{['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][rar]*([rar,blanks].min)}#{'<:FGO_rarity_inverted:544568437029208094>'*(blanks-rar) if blanks>rar}" if feh=='FGO'
-  return "#{['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][rar]*([rar,blanks].min)}#{'<:Icon_Rarity_Empty:631460895851282433>'*(blanks-rar) if blanks>rar}" if feh=='FEH'
-  return "#{@rarity_stars[0][rar]*([rar,blanks].min)}#{@rarity_stars[1][rar]*(blanks-rar) if blanks>rar}"
+  return "#{['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][rar]*([rar,blanks].min)}#{'<:FGO_rarity_inverted:544568437029208094>'*(blanks-rar) if blanks>rar}#{'<:Blank:676220519690928179>'*(6-blanks) if hyperblanks}" if feh=='FGO'
+  return "#{['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][rar]*([rar,blanks].min)}#{'<:Icon_Rarity_Empty:631460895851282433>'*(blanks-rar) if blanks>rar}#{'<:Blank:676220519690928179>'*(6-blanks) if hyperblanks}" if feh=='FEH'
+  return "#{@rarity_stars[0][rar]*([rar,blanks].min)}#{@rarity_stars[1][rar]*(blanks-rar) if blanks>rar}#{'<:Blank:676220519690928179>'*(6-blanks) if hyperblanks}"
 end
 
 def element_color(ele)
@@ -2122,10 +2123,10 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   str=''
   if !k[12].nil? && k[12]=='MM'
     unless s2s || juststats
-      str="#{generate_rarity_row(rar,@max_rarity[0])}"
+      str="#{generate_rarity_row(rar,@max_rarity[0],'',true)}"
       str="#{str} (#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{@rarity_stars[0][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
     end
-    titlex=["#{generate_rarity_row(rar,@max_rarity[0])}"]
+    titlex=["#{generate_rarity_row(rar,@max_rarity[0],'',true)}"]
     titlex.push("(#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{@rarity_stars[0][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
     titlex.push("<:Defense:573344832282689567>#{longFormattedNumber(k[5])}")
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
@@ -2135,12 +2136,27 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][0]}**"
     title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**"
+  elsif !k[12].nil? && k[12]=='MH'
+    unless s2s || juststats
+      str="#{generate_rarity_row(rar,@max_rarity[0],'',true)}"
+      str="#{str} (#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{@rarity_stars[0][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
+    end
+    titlex=["#{generate_rarity_row(rar,@max_rarity[0],'',true)}"]
+    titlex.push("(#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{@rarity_stars[0][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
+    titlex.push("<:Defense:573344832282689567>#{longFormattedNumber(k[5])}")
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
+    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][1]}**"
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[2][2]}"}
+    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][2]}**  <:Defense:573344832282689567>#{longFormattedNumber(k[5])}"
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
+    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][0]}**"
+    title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**"
   elsif !k[12].nil? && k[12]=='FEH'
     unless s2s || juststats
-      str="#{generate_rarity_row(rar,@max_rarity[0],'FEH')}"
+      str="#{generate_rarity_row(rar,@max_rarity[0],'FEH',true)}"
       str="#{str} (#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
     end
-    titlex=["#{generate_rarity_row(rar,@max_rarity[0],'FEH')}"]
+    titlex=["#{generate_rarity_row(rar,@max_rarity[0],'FEH',true)}"]
     titlex.push("(#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
     titlex.push("<:DefenseS:514712247461871616>#{longFormattedNumber(k[5])}")
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2][1].gsub('Shadow','Dark').gsub('Flame','Fire')}"}
@@ -2164,10 +2180,10 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[12].nil? && k[12]=='FGO'
     unless s2s || juststats
-      str="#{generate_rarity_row(rar,@max_rarity[0],'FGO')}"
+      str="#{generate_rarity_row(rar,@max_rarity[0],'FGO',true)}"
       str="#{str} (#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
     end
-    titlex=["#{generate_rarity_row(rar,@max_rarity[0],'FGO')}"]
+    titlex=["#{generate_rarity_row(rar,@max_rarity[0],'FGO',true)}"]
     titlex.push("(#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
     titlex.push("*Def:* #{longFormattedNumber(k[5])}")
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
@@ -2198,10 +2214,10 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     titlex=[]
   else
     unless s2s || juststats
-      str="#{generate_rarity_row(rar,@max_rarity[0])}"
+      str="#{generate_rarity_row(rar,@max_rarity[0],'',true)}"
       str="#{str} (#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{@rarity_stars[0][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
     end
-    titlex=["#{generate_rarity_row(rar,@max_rarity[0])}"]
+    titlex=["#{generate_rarity_row(rar,@max_rarity[0],'',true)}"]
     titlex.push("(#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{@rarity_stars[0][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
     titlex.push("<:Defense:573344832282689567>#{longFormattedNumber(k[5])}")
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
@@ -2210,7 +2226,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][2]}**  <:Defense:573344832282689567>#{longFormattedNumber(k[5])}"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][0]}**"
-    title="#{title}\n**Collab**" unless k[12].nil? || k[12].length<=0
+    title="#{title}\n**Collab**" unless k[12].nil? || k[12].length<=0 || (k[1].length>1 && k[1][1,1].downcase=='c')
     title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c'
   end
   title="#{title}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
@@ -2240,10 +2256,10 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     fehm='FEH' if feh
     fehm='FGO' if !k[12].nil? && k[12]=='FGO'
     for i in rar...@max_rarity[0]+1
-      flds.push([generate_rarity_row(i,@max_rarity[0],fehm),"**Lv.1**  #{semoji[0]}#{longFormattedNumber(k[3][0][i-3])}  #{semoji[1]}#{longFormattedNumber(k[4][0][i-3])}\n**Lv.#{30+10*i}**  #{semoji[0]}#{longFormattedNumber(k[3][1][i-3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][i-3])}#{"\n**Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]-1])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]-1])}" if i==@max_rarity[0] && (!k[3][1][@max_rarity[0]-1].nil? || !k[4][1][@max_rarity[0]-1].nil?)}"])
+      flds.push([generate_rarity_row(i,@max_rarity[0],fehm,true),"**Lv.1**  #{semoji[0]}#{longFormattedNumber(k[3][0][i-3])}  #{semoji[1]}#{longFormattedNumber(k[4][0][i-3])}\n**Lv.#{30+10*i}**  #{semoji[0]}#{longFormattedNumber(k[3][1][i-3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][i-3])}#{"\n**Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]-1])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]-1])}" if i==@max_rarity[0] && (!k[3][1][@max_rarity[0]-1].nil? || !k[4][1][@max_rarity[0]-1].nil?)}"])
     end
     if (!k[3][1][@max_rarity[0]].nil? && k[3][1][@max_rarity[0]]>0) || (!k[4][1][@max_rarity[0]].nil? && k[4][1][@max_rarity[0]]>0)
-      flds.push(["#{generate_rarity_row(@max_rarity[0]+1,@max_rarity[0],fehm)}\n**Mana Spiral**","**Lv.100**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]])}\n**Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]-2])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]-2])}"])
+      flds.push(["#{generate_rarity_row(@max_rarity[0]+1,@max_rarity[0],fehm,true)}\n**Mana Spiral**","**Lv.100**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]])}\n**Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]-2])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]-2])}"])
       flds[-1].push(true) if flds.length==3
     end
     unless juststats
@@ -2442,7 +2458,7 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false)
   feh=true if !k[16].nil? && k[16]=='FEH'
   dispname=k[0].gsub(' ','_')
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Dragons/#{dispname}.png?raw=true"
-  str=generate_rarity_row(k[1][0,1].to_i,0,k[16])
+  str=generate_rarity_row(k[1][0,1].to_i,0,k[16],true)
   str='<:Rarity_3:532086056519204864>'*k[1][0,1].to_i if k[0]=='Bronze Fafnir'
   str='<:Rarity_4:532086056301101067>'*k[1][0,1].to_i if k[0]=='Silver Fafnir'
   str='<:Rarity_5:532086056737177600>'*k[1][0,1].to_i if k[0]=='Gold Fafnir'
@@ -2453,7 +2469,7 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false)
   title="#{title}\n<:Bond:613804021119189012>**FGO Collab**" if !k[16].nil? && k[16]=='FGO'
   title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**" if !k[16].nil? && k[16]=='MM'
   title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**" if !k[16].nil? && k[16]=='MH'
-  title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c' && !(feh || (!k[16].nil? && k[16].length>0 && k[16]=='FGO'))
+  title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c' && !(feh || (!k[16].nil? && k[16].length>0 && ['FEH','FGO','MM','MH'].include?(k[16])))
   title="#{title}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
   title="#{title}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
   title="#{title}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
@@ -2528,7 +2544,7 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
   s2s=true if safe_to_spam?(event)
   xpic=pic.join('/')
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/#{xpic}.png?raw=true"
-  str=generate_rarity_row(5,0,k[0][16])
+  str=generate_rarity_row(5,0,k[0][16],true)
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[0][2]}"}
   title="#{moji[0].mention unless moji.length<=0}**#{k[0][2]}**\n**Pseudodragon**"
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Speed:573366907357495296>']
@@ -2624,7 +2640,7 @@ def disp_wyrmprint_stats(bot,event,args=nil)
   dispname=k[0].gsub(' ','_')
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Wyrmprints/#{dispname}_1.png?raw=true"
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Wyrmprints/#{dispname}_2.png?raw=true" if has_any?(['mub','unbind','unbound','refined','refine','refinement','2ub','3ub'],evn)
-  str=generate_rarity_row(k[1][0,1].to_i,0,k[10])
+  str=generate_rarity_row(k[1][0,1].to_i,0,k[10],true)
   if !k[10].nil? && k[10]=='FEH'
     clzz='<:Resource_Structure:510774545154572298>'
     clzz='<:Skill_Weapon:444078171114045450>' if k[2]=='Attack'
@@ -2822,7 +2838,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Weapons/#{dispname}.png?raw=true"
   str=''
   if !k[14].nil? && k[14]=='FEH'
-    str=generate_rarity_row(k[2][0,1].to_i,0,'FEH')
+    str=generate_rarity_row(k[2][0,1].to_i,0,'FEH',true)
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[3].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Anima')}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     wpn='<:Gold_Unknown:443172811499110411>'
@@ -2837,7 +2853,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     title="#{title}\n#{wpn}**#{k[1]}**"
     title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[14].nil? && k[14]=='FGO'
-    str=generate_rarity_row(k[2][0,1].to_i,0,'FGO')
+    str=generate_rarity_row(k[2][0,1].to_i,0,'FGO',true)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     clzz='unknown'
@@ -2858,7 +2874,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[1]}**"
     title="#{title}\n<:Bond:613804021119189012>**FGO Collab**"
   else
-    str=generate_rarity_row(k[2][0,1].to_i)
+    str=generate_rarity_row(k[2][0,1].to_i,0,'',true)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
@@ -3128,7 +3144,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     val/=5
   end
   if !k[14].nil? && k[14]=='FEH'
-    str=generate_rarity_row(k[2][0,1].to_i,0,'FEH')
+    str=generate_rarity_row(k[2][0,1].to_i,0,'FEH',true)
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[3].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Anima')}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     wpn='<:Gold_Unknown:443172811499110411>'
@@ -3143,7 +3159,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     title="#{title}\n#{wpn}**#{k[1]}**"
     title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[14].nil? && k[14]=='FGO'
-    str=generate_rarity_row(k[2][0,1].to_i,0,'FGO')
+    str=generate_rarity_row(k[2][0,1].to_i,0,'FGO',true)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     clzz='unknown'
@@ -3164,7 +3180,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[1]}**"
     title="#{title}\n<:Bond:613804021119189012>**FGO Collab**"
   else
-    str=generate_rarity_row(k[2][0,1].to_i)
+    str=generate_rarity_row(k[2][0,1].to_i,0,'',true)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
@@ -3527,8 +3543,8 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
     hdr="#{moji[0].mention} #{hdr}" if moji.length>0
   end
   m=false
-  IO.copy_stream(open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/FightBanners/Banner_#{xpic}.png"), "C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
-  if File.size("C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png")<=100 || m
+  IO.copy_stream(open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/FightBanners/Banner_#{xpic}.png"), "#{@location}devkit/DLTemp#{@shardizard}.png") rescue m=true
+  if File.size("#{@location}devkit/DLTemp#{@shardizard}.png")<=100 || m
     xpic="#{xpic.gsub('_(Enemy)','')}"
   end
   xpic=[nil,"https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/FightBanners/Banner_#{xpic}.png"]
@@ -3563,9 +3579,9 @@ def disp_gauntlet_data(bot,event,args=nil,name=nil)
     event.respond 'No matches found.'
     return nil
   end
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLGauntlet.txt")
+  if File.exist?("#{@location}devkit/DLGauntlet.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLGauntlet.txt").each_line do |line|
+    File.open("#{@location}devkit/DLGauntlet.txt").each_line do |line|
       b.push(line)
     end
   else
@@ -3651,8 +3667,8 @@ def disp_gauntlet_data(bot,event,args=nil,name=nil)
   end
   xpic="#{k[0].gsub(' ','_')}"
   m=false
-  IO.copy_stream(open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/FightBanners/Banner_#{xpic}.png"), "C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
-  if File.size("C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png")<=100 || m
+  IO.copy_stream(open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/FightBanners/Banner_#{xpic}.png"), "#{@location}devkit/DLTemp#{@shardizard}.png") rescue m=true
+  if File.size("#{@location}devkit/DLTemp#{@shardizard}.png")<=100 || m
     xpic="#{xpic.gsub('_(Enemy)','')}"
   end
   xpic=[nil,"https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/FightBanners/Banner_#{xpic}.png"]
@@ -5397,9 +5413,9 @@ def disp_adventurer_art(bot,event,args=nil)
   s2s=true if safe_to_spam?(event)
   rar=0
   lookout=[]
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
+  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
     lookout=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
+    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
       lookout.push(eval line)
     end
   end
@@ -5426,8 +5442,8 @@ def disp_adventurer_art(bot,event,args=nil)
   fehm='FGO' if !k[12].nil? && k[12]=='FGO'
   if rar.is_a?(String)
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Adventurers/#{k[0].gsub(' ','_')}_#{rar}.png"
-    IO.copy_stream(open(art), "C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
-    if File.size("C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png")<=100 || m
+    IO.copy_stream(open(art), "#{@location}devkit/DLTemp#{@shardizard}.png") rescue m=true
+    if File.size("#{@location}devkit/DLTemp#{@shardizard}.png")<=100 || m
       rar=k[1][0,1].to_i
       disp="#{generate_rarity_row(rar,@max_rarity[0],fehm)}"
     elsif rar=='NPC'
@@ -5505,9 +5521,9 @@ def disp_adventurer_art(bot,event,args=nil)
         charsx[1].push(@dragons.reject{|q| q[13]!=m[i]}.map{|q| "#{q[0]}#{'.' if q[0]>=2}) #{q[1]} *[Japanese voice #{i+1}]*"}.join("\n"))
       end
     end
-    if File.exist?("C:/Users/#{@mash}/Desktop/devkit/FEHUnits.txt")
+    if File.exist?("#{@location}devkit/FEHUnits.txt")
       b=[]
-      File.open("C:/Users/#{@mash}/Desktop/devkit/FEHUnits.txt").each_line do |line|
+      File.open("#{@location}devkit/FEHUnits.txt").each_line do |line|
         b.push(line)
       end
     else
@@ -5527,9 +5543,9 @@ def disp_adventurer_art(bot,event,args=nil)
       end
     end
     if event.server.nil? || !bot.user(502288364838322176).on(event.server.id).nil? || @shardizard==4
-      if File.exist?("C:/Users/#{@mash}/Desktop/devkit/FGOServants.txt")
+      if File.exist?("#{@location}devkit/FGOServants.txt")
         b=[]
-        File.open("C:/Users/#{@mash}/Desktop/devkit/FGOServants.txt").each_line do |line|
+        File.open("#{@location}devkit/FGOServants.txt").each_line do |line|
           b.push(line)
         end
       else
@@ -5638,9 +5654,9 @@ def disp_dragon_art(bot,event,args=nil)
   disp='<:Rarity_4:532086056301101067>'*k[1][0,1].to_i if k[0]=='Silver Fafnir'
   disp='<:Rarity_5:532086056737177600>'*k[1][0,1].to_i if k[0]=='Gold Fafnir'
   lookout=[]
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
+  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
     lookout=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
+    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
       lookout.push(eval line)
     end
   end
@@ -5656,8 +5672,8 @@ def disp_dragon_art(bot,event,args=nil)
   end
   if !rar.nil? && rar.is_a?(String)
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Dragons/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
-    IO.copy_stream(open(art), "C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
-    if File.size("C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png")<=100 || m
+    IO.copy_stream(open(art), "#{@location}devkit/DLTemp#{@shardizard}.png") rescue m=true
+    if File.size("#{@location}devkit/DLTemp#{@shardizard}.png")<=100 || m
       rar=nil
     else
       disp="#{disp}\n#{rar} design\n"
@@ -5726,9 +5742,9 @@ def disp_dragon_art(bot,event,args=nil)
         charsx[1].push(@dragons.reject{|q| q[13]!=m[i]}.map{|q| "#{q[0]} *[Japanese voice #{i+1}]*"}.join("\n"))
       end
     end
-    if File.exist?("C:/Users/#{@mash}/Desktop/devkit/FEHUnits.txt")
+    if File.exist?("#{@location}devkit/FEHUnits.txt")
       b=[]
-      File.open("C:/Users/#{@mash}/Desktop/devkit/FEHUnits.txt").each_line do |line|
+      File.open("#{@location}devkit/FEHUnits.txt").each_line do |line|
         b.push(line)
       end
     else
@@ -5747,9 +5763,9 @@ def disp_dragon_art(bot,event,args=nil)
       end
     end
     if event.server.nil? || !bot.user(502288364838322176).on(event.server.id).nil? || @shardizard==4
-      if File.exist?("C:/Users/#{@mash}/Desktop/devkit/FGOServants.txt")
+      if File.exist?("#{@location}devkit/FGOServants.txt")
         b=[]
-        File.open("C:/Users/#{@mash}/Desktop/devkit/FGOServants.txt").each_line do |line|
+        File.open("#{@location}devkit/FGOServants.txt").each_line do |line|
           b.push(line)
         end
       else
@@ -5893,9 +5909,9 @@ def disp_wyrmprint_art(bot,event,args=nil)
         charsx[0].push("#{x[0]}") if m[0]==nammes[0]
       end
     end
-    if File.exist?("C:/Users/#{@mash}/Desktop/devkit/FEHUnits.txt")
+    if File.exist?("#{@location}devkit/FEHUnits.txt")
       b=[]
-      File.open("C:/Users/#{@mash}/Desktop/devkit/FEHUnits.txt").each_line do |line|
+      File.open("#{@location}devkit/FEHUnits.txt").each_line do |line|
         b.push(line)
       end
     else
@@ -5904,13 +5920,14 @@ def disp_wyrmprint_art(bot,event,args=nil)
     for i in 0...b.length
       b[i]=b[i].gsub("\n",'').split('\\'[0])
       if !b[i][6].nil? && b[i][6].length>0
-        charsx[0].push("*[FEH]* #{b[i][0]}") if b[i][6].split(' as ')[0]==nammes[0]
+        charsx[0].push("*[FEH]* #{b[i][0]}") if b[i][6][0].split(' as ')[0]==nammes[0]
+        charsx[0].push("*[FEH]* - Resplendent #{b[i][0]}") if !b[i][6][1].nil? && b[i][6][1].split(' as ')[0]==nammes[0]
       end
     end
     if event.server.nil? || !bot.user(502288364838322176).on(event.server.id).nil? || @shardizard==4
-      if File.exist?("C:/Users/#{@mash}/Desktop/devkit/FGOServants.txt")
+      if File.exist?("#{@location}devkit/FGOServants.txt")
         b=[]
-        File.open("C:/Users/#{@mash}/Desktop/devkit/FGOServants.txt").each_line do |line|
+        File.open("#{@location}devkit/FGOServants.txt").each_line do |line|
           b.push(line)
         end
       else
@@ -5922,9 +5939,9 @@ def disp_wyrmprint_art(bot,event,args=nil)
           charsx[0].push("*[FGO]* Srv-#{b[i][0]}#{"#{'.' if b[i][0].to_i>=2}) #{b[i][1]}" unless @embedless.include?(event.user.id) || was_embedless_mentioned?(event)}") if b[i][24]==nammes[0]
         end
       end
-      if File.exist?("C:/Users/#{@mash}/Desktop/devkit/FGOCraftEssances.txt")
+      if File.exist?("#{@location}devkit/FGOCraftEssances.txt")
         b=[]
-        File.open("C:/Users/#{@mash}/Desktop/devkit/FGOCraftEssances.txt").each_line do |line|
+        File.open("#{@location}devkit/FGOCraftEssances.txt").each_line do |line|
           b.push(line)
         end
       else
@@ -5989,9 +6006,9 @@ def disp_boss_art(bot,event,args=nil)
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
   lookout=[]
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
+  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
     lookout=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
+    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
       lookout.push(eval line)
     end
   end
@@ -6004,8 +6021,8 @@ def disp_boss_art(bot,event,args=nil)
   end
   if !rar.nil? && rar.is_a?(String)
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Bosses/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
-    IO.copy_stream(open(art), "C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
-    if File.size("C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png")<=100 || m
+    IO.copy_stream(open(art), "#{@location}devkit/DLTemp#{@shardizard}.png") rescue m=true
+    if File.size("#{@location}devkit/DLTemp#{@shardizard}.png")<=100 || m
       rar=nil
     else
       disp="#{disp}\n#{rar} design\n"
@@ -6028,8 +6045,8 @@ def disp_boss_art(bot,event,args=nil)
   str="#{str}#{moji[0].mention unless moji.length<=0}"
   str2=''
   m=false
-  IO.copy_stream(open(xpic), "C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
-  str2='No art found' if File.size("C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png")<=100 || m
+  IO.copy_stream(open(xpic), "#{@location}devkit/DLTemp#{@shardizard}.png") rescue m=true
+  str2='No art found' if File.size("#{@location}devkit/DLTemp#{@shardizard}.png")<=100 || m
   str2="#{rar} design" unless rar.nil?
   create_embed(event,str,str2,xcolor,nil,[nil,xpic])
 end
@@ -6067,9 +6084,9 @@ def disp_npc_art(bot,event,args=nil)
   disp="#{generate_rarity_row(k[1],0,fehm)}"
   disp="#{generate_rarity_row(k[1],@max_rarity[0],fehm)}" if k[2]=='n'
   lookout=[]
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
+  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
     lookout=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
+    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
       lookout.push(eval line)
     end
   end
@@ -6145,9 +6162,9 @@ def disp_npc_art(bot,event,args=nil)
         charsx[1].push(@dragons.reject{|q| q[13]!=m[i]}.map{|q| "#{q[0]}#{'.' if q[0]>=2}) #{q[1]} *[Japanese voice #{i+1}]*"}.join("\n"))
       end
     end
-    if File.exist?("C:/Users/#{@mash}/Desktop/devkit/FEHUnits.txt")
+    if File.exist?("#{@location}devkit/FEHUnits.txt")
       b=[]
-      File.open("C:/Users/#{@mash}/Desktop/devkit/FEHUnits.txt").each_line do |line|
+      File.open("#{@location}devkit/FEHUnits.txt").each_line do |line|
         b.push(line)
       end
     else
@@ -6167,9 +6184,9 @@ def disp_npc_art(bot,event,args=nil)
       end
     end
     if event.server.nil? || !bot.user(502288364838322176).on(event.server.id).nil? || @shardizard==4
-      if File.exist?("C:/Users/#{@mash}/Desktop/devkit/FGOServants.txt")
+      if File.exist?("#{@location}devkit/FGOServants.txt")
         b=[]
-        File.open("C:/Users/#{@mash}/Desktop/devkit/FGOServants.txt").each_line do |line|
+        File.open("#{@location}devkit/FGOServants.txt").each_line do |line|
           b.push(line)
         end
       else
@@ -6195,8 +6212,8 @@ def disp_npc_art(bot,event,args=nil)
   if !rar.nil? && rar.is_a?(String)
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Misc/#{k[0].gsub(' ','_')}#{"_#{rar}" unless rar.nil?}.png"
     m=false
-    IO.copy_stream(open(art), "C:/Users/#{@mash}/Desktop/devkit/DLTemp#{@shardizard}.png") rescue m=true
-    if File.size("C:/Users/#{@mash}/Desktop/devkit/FGOTemp#{@shardizard}.png")<=100 || m
+    IO.copy_stream(open(art), "#{@location}devkit/DLTemp#{@shardizard}.png") rescue m=true
+    if File.size("#{@location}devkit/FGOTemp#{@shardizard}.png")<=100 || m
       rar=nil
     else
       disp="#{disp}\n#{rar} design\n"
@@ -6593,9 +6610,9 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   crossgames=[]
   cygames=[]
   launch=false
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
+  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
     lookout=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
+    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
       lookout.push(eval line)
     end
   end
@@ -6823,9 +6840,9 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   cygames=[]
   crossgames=[]
   launch=false
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
+  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
     lookout=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
+    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
       lookout.push(eval line)
     end
   end
@@ -7158,9 +7175,9 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   crossgames=[]
   lookout=[]
   launch=false
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
+  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
     lookout=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
+    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
       lookout.push(eval line)
     end
   end
@@ -7476,9 +7493,9 @@ def find_in_mats(bot,event,args=nil,mode=0)
   pouch=[]
   tags=[]
   lookout=[]
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
+  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
     lookout=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
+    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
       lookout.push(eval line)
     end
   end
@@ -7538,9 +7555,9 @@ def find_in_banners(bot,event,args=nil,mode=0)
   elem=[]
   tags=[]
   lookout=[]
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
+  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
     lookout=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
+    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
       lookout.push(eval line)
     end
   end
@@ -7592,9 +7609,9 @@ def find_in_abilities(bot,event,args=nil,mode=0)
   tags=[]
   abiltypes=[]
   lookout=[]
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
+  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
     lookout=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
+    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
       lookout.push(eval line)
     end
   end
@@ -8762,7 +8779,7 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
   end
   @aliases.uniq!
   nzzz=@aliases.map{|a| a}
-  open("C:/Users/#{@mash}/Desktop/devkit/DLNames.txt", 'w') { |f|
+  open("#{@location}devkit/DLNames.txt", 'w') { |f|
     for i in 0...nzzz.length
       f.puts "#{nzzz[i].to_s}#{"\n" if i<nzzz.length-1}"
     end
@@ -8772,7 +8789,7 @@ def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode
   nzzz=@aliases.map{|a| a}
   if nzzz[nzzz.length-1].length>1 && nzzz[nzzz.length-1][2]>=nzz[nzz.length-1][2]
     bot.channel(logchn).send_message('Alias list saved.')
-    open("C:/Users/#{@mash}/Desktop/devkit/DLNames2.txt", 'w') { |f|
+    open("#{@location}devkit/DLNames2.txt", 'w') { |f|
       for i in 0...nzzz.length
         f.puts "#{nzzz[i].to_s}#{"\n" if i<nzzz.length-1}"
       end
@@ -11216,11 +11233,12 @@ end
 bot.command([:sort,:list]) do |event, *args|
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
-  elsif ['aliases','alias'].include?(args[0].downcase) && event.user.id==167657750971547648data_load()
+  elsif ['aliases','alias'].include?(args[0].downcase) && event.user.id==167657750971547648
+    data_load()
     nicknames_load()
     @aliases.uniq!
     @aliases.sort! {|a,b| (spaceship_order(a[0]) <=> spaceship_order(b[0])) == 0 ? ((a[2].downcase <=> b[2].downcase) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2].downcase <=> b[2].downcase)) : (spaceship_order(a[0]) <=> spaceship_order(b[0]))}
-    open("C:/Users/#{@mash}/Desktop/devkit/DLNames.txt", 'w') { |f|
+    open("#{@location}devkit/DLNames.txt", 'w') { |f|
       for i in 0...@aliases.length
         f.puts "#{@aliases[i].to_s}#{"\n" if i<@aliases.length-1}"
       end
@@ -11486,7 +11504,7 @@ bot.command([:deletealias,:removealias]) do |event, name|
   srvname='PM with dev'
   srvname=bot.server(srv).name unless event.server.nil? && srv.zero?
   bot.channel(logchn).send_message("**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n~~**#{j[0]} Alias:** #{name} for #{j[1]}~~ **DELETED**.")
-  open("C:/Users/#{@mash}/Desktop/devkit/DLNames.txt", 'w') { |f|
+  open("#{@location}devkit/DLNames.txt", 'w') { |f|
     for i in 0...@aliases.length
       f.puts "#{@aliases[i].to_s}#{"\n" if i<@aliases.length-1}"
     end
@@ -11497,7 +11515,7 @@ bot.command([:deletealias,:removealias]) do |event, name|
   nzzz=@aliases.map{|a| a}
   if nzzz[nzzz.length-1].length>2 && nzzz[nzzz.length-1][2]>=nzz[nzz.length-1][2]
     bot.channel(logchn).send_message("Alias list saved.")
-    open("C:/Users/#{@mash}/Desktop/devkit/DLNames.txt", 'w') { |f|
+    open("#{@location}devkit/DLNames.txt", 'w') { |f|
       for i in 0...nzzz.length
         f.puts "#{nzzz[i].to_s}#{"\n" if i<nzzz.length-1}"
       end
@@ -11576,7 +11594,7 @@ bot.command([:donation, :donate]) do |event, uid|
         str="#{str}\n\n**Tier 3:** Birthday avatar\n\u2717 Not given.  Please contact <@167657750971547648> to have this corrected."
       elsif g[4][2]=='-'
         str="#{str}\n\n**Tier 3:** Birthday avatar\n\u2713 May be given via another bot."
-      elsif !File.exist?("C:/Users/#{@mash}/Desktop/devkit/EliseImages/#{g[4][2]}.png")
+      elsif !File.exist?("#{@location}devkit/EliseImages/#{g[4][2]}.png")
         str="#{str}\n\n**Tier 3:** Birthday avatar\n\u2717 Not given.  Please contact <@167657750971547648> to have this corrected.\n*Birthday:* #{g[3][1]} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][g[3][0]]}\n*Character:* #{g[4][2]}"
       else
         str="#{str}\n\n**Tier 3:** Birthday avatar\n\u2713 Given\n*Birthday:* #{g[3][1]} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][g[3][0]]}\n*Character:* #{g[4][2]}"
@@ -11721,7 +11739,7 @@ bot.command(:sortaliases, from: 167657750971547648) do |event, *args|
   nicknames_load()
   @aliases.uniq!
   @aliases.sort! {|a,b| (spaceship_order(a[0]) <=> spaceship_order(b[0])) == 0 ? ((a[2].downcase <=> b[2].downcase) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2].downcase <=> b[2].downcase)) : (spaceship_order(a[0]) <=> spaceship_order(b[0]))}
-  open("C:/Users/#{@mash}/Desktop/devkit/DLNames.txt", 'w') { |f|
+  open("#{@location}devkit/DLNames.txt", 'w') { |f|
     for i in 0...@aliases.length
       f.puts "#{@aliases[i].to_s}#{"\n" if i<@aliases.length-1}"
     end
@@ -11752,6 +11770,7 @@ bot.command([:tools,:links,:tool,:link,:resources,:resources]) do |event|
     event << 'Healing Formula/Calculator: <https://dragalialost.gamepedia.com/Healing_Formula>'
     event << 'Dragon Optimization Mastersheet: <https://docs.google.com/spreadsheets/d/1k-CROHAKTOGvR7-gJG5kFdMOc_qP5KayJ46fEI58GHI/edit#gid=700285435>'
     event << 'Skill Haste Calculator: <https://docs.google.com/spreadsheets/d/1Z886qU6xg4wp8ql_d7l6Kz5-aD4u_tvUXaAIgOGMq_s/edit#gid=97131039>'
+    event << 'Time Attack Rankings: <https://dragalialost.com/en/special/timeattack/>'
   else
     xpic='https://lh3.googleusercontent.com/SIHM5RPpoLy3Xso8wxqzCzBggkNq6dYhLt8THToag6FW_peH43_k1YdKh23Xmu5i_6c=s180-rw'
     str="__Download the game__"
@@ -11771,6 +11790,7 @@ bot.command([:tools,:links,:tool,:link,:resources,:resources]) do |event|
     str="#{str}\n[Healing Formula/Calculator](https://dragalialost.gamepedia.com/Healing_Formula)"
     str="#{str}\n[Dragon Optimization Mastersheet](https://docs.google.com/spreadsheets/d/1k-CROHAKTOGvR7-gJG5kFdMOc_qP5KayJ46fEI58GHI/edit#gid=700285435)"
     str="#{str}\n[Skill Haste Calculator](https://docs.google.com/spreadsheets/d/1Z886qU6xg4wp8ql_d7l6Kz5-aD4u_tvUXaAIgOGMq_s/edit#gid=97131039)"
+    str="#{str}\n[Time Attack Rankings](https://dragalialost.com/en/special/timeattack/)"
     create_embed(event,'**Useful tools for players of** ***Dragalia Lost***',str,0xED619A,nil,xpic)
     event.respond 'If you are on a mobile device and cannot click the links in the embed above, type `DL!tools mobile` to receive this message as plaintext.'
   end
@@ -11854,7 +11874,7 @@ bot.command(:backupaliases, from: 167657750971547648) do |event|
   @aliases.uniq!
   @aliases.sort! {|a,b| (a[0] <=> b[0]) == 0 ? ((a[2] <=> b[2]) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2] <=> b[2])) : (a[0] <=> b[0])}
   nzzzzz=@aliases.map{|a| a}
-  open("C:/Users/#{@mash}/Desktop/devkit/DLNames2.txt", 'w') { |f|
+  open("#{@location}devkit/DLNames2.txt", 'w') { |f|
     for i in 0...nzzzzz.length
       f.puts "#{nzzzzz[i].to_s}#{"\n" if i<nzzzzz.length-1}"
     end
@@ -11865,9 +11885,9 @@ end
 bot.command(:restorealiases, from: 167657750971547648) do |event|
   return nil if overlap_prevent(event)
   return nil unless [167657750971547648,bot.profile.id].include?(event.user.id) || event.channel.id==502288368777035777
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLNames2.txt")
+  if File.exist?("#{@location}devkit/DLNames2.txt")
     b=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLNames2.txt").each_line do |line|
+    File.open("#{@location}devkit/DLNames2.txt").each_line do |line|
       b.push(eval line)
     end
   else
@@ -11877,9 +11897,9 @@ bot.command(:restorealiases, from: 167657750971547648) do |event|
   nz=nzzzzz.reject{|q| q[0]!='Adventurer'}
   if nz[nz.length-1][2]<'Zethia'
     event << 'Last backup of the alias list has been corrupted.  Restoring from manually-created backup.'
-    if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLNames3.txt")
+    if File.exist?("#{@location}devkit/DLNames3.txt")
       b=[]
-      File.open("C:/Users/#{@mash}/Desktop/devkit/DLNames3.txt").each_line do |line|
+      File.open("#{@location}devkit/DLNames3.txt").each_line do |line|
         b.push(eval line)
       end
     else
@@ -11889,7 +11909,7 @@ bot.command(:restorealiases, from: 167657750971547648) do |event|
   else
     event << 'Last backup of the alias list being used.'
   end
-  open("C:/Users/#{@mash}/Desktop/devkit/DLNames.txt", 'w') { |f|
+  open("#{@location}devkit/DLNames.txt", 'w') { |f|
     for i in 0...nzzzzz.length
       f.puts "#{nzzzzz[i].to_s}#{"\n" if i<nzzzzz.length-1}"
     end
@@ -11939,7 +11959,7 @@ bot.command(:cleanupaliases, from: 167657750971547648) do |event|
     end
   end
   nmz.compact!
-  open("C:/Users/#{@mash}/Desktop/devkit/DLNames.txt", 'w') { |f|
+  open("#{@location}devkit/DLNames.txt", 'w') { |f|
     for i in 0...nmz.length
       f.puts "#{nmz[i].to_s}#{"\n" if i<nmz.length-1}"
     end
@@ -12341,25 +12361,25 @@ bot.command(:snagstats) do |event, f, f2|
   elsif ['code','lines','line','sloc'].include?(f.downcase)
     event.channel.send_temporary_message('Calculating data, please wait...',3)
     b=[[],[],[],[],[]]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/BotanBot.rb").each_line do |line|
+    File.open("#{@location}devkit/BotanBot.rb").each_line do |line|
       l=line.gsub("\n",'')
       b[0].push(l)
       b[3].push(l)
       l=line.gsub("\n",'').gsub(' ','')
       b[1].push(l) unless l.length<=0
     end
-    File.open("C:/Users/#{@mash}/Desktop/devkit/rot8er_functs.rb").each_line do |line|
+    File.open("#{@location}devkit/rot8er_functs.rb").each_line do |line|
       l=line.gsub("\n",'')
       b[0].push(l)
       b[4].push(l)
       l=line.gsub("\n",'').gsub(' ','')
       b[2].push(l) unless l.length<=0
     end
-    event << "**I am #{longFormattedNumber(File.foreach("C:/Users/#{@mash}/Desktop/devkit/BotanBot.rb").inject(0) {|c, line| c+1})} lines of code long.**"
+    event << "**I am #{longFormattedNumber(File.foreach("#{@location}devkit/BotanBot.rb").inject(0) {|c, line| c+1})} lines of code long.**"
     event << "Of those, #{longFormattedNumber(b[1].length)} are SLOC (non-empty)."
     event << "~~When fully collapsed, I appear to be #{longFormattedNumber(b[3].reject{|q| q.length>0 && (q[0,2]=='  ' || q[0,3]=='end' || q[0,4]=='else')}.length)} lines of code long.~~"
     event << ''
-    event << "**I rely on a library that is #{longFormattedNumber(File.foreach("C:/Users/#{@mash}/Desktop/devkit/rot8er_functs.rb").inject(0) {|c, line| c+1})} lines of code long.**"
+    event << "**I rely on a library that is #{longFormattedNumber(File.foreach("#{@location}devkit/rot8er_functs.rb").inject(0) {|c, line| c+1})} lines of code long.**"
     event << "Of those, #{longFormattedNumber(b[2].length)} are SLOC (non-empty)."
     event << "~~When fully collapsed, it appears to be #{longFormattedNumber(b[4].reject{|q| q.length>0 && (q[0,2]=='  ' || q[0,3]=='end' || q[0,4]=='else')}.length)} lines of code long.~~"
     event << ''
@@ -12512,7 +12532,7 @@ bot.command(:snagstats) do |event, f, f2|
   glbl=@aliases.reject{|q| q[0]!='Adventurer' || !q[3].nil?}
   srv_spec=@aliases.reject{|q| q[0]!='Adventurer' || q[3].nil?}
   b=[]
-  File.open("C:/Users/#{@mash}/Desktop/devkit/BotanBot.rb").each_line do |line|
+  File.open("#{@location}devkit/BotanBot.rb").each_line do |line|
     l=line.gsub(' ','').gsub("\n",'')
     b.push(l) unless l.length<=0
   end
@@ -12534,7 +12554,7 @@ bot.command(:snagstats) do |event, f, f2|
   event << ''
   event << "**There are #{longFormattedNumber(glbl.length)} global and #{longFormattedNumber(srv_spec.length)} server-specific *aliases*.**"
   event << ''
-  event << "**I am #{longFormattedNumber(File.foreach("C:/Users/#{@mash}/Desktop/devkit/BotanBot.rb").inject(0) {|c, line| c+1})} lines of *code* long.**"
+  event << "**I am #{longFormattedNumber(File.foreach("#{@location}devkit/BotanBot.rb").inject(0) {|c, line| c+1})} lines of *code* long.**"
   event << "Of those, #{longFormattedNumber(b.length)} are SLOC (non-empty)."
   return nil
 end
@@ -12546,9 +12566,9 @@ bot.command(:boop) do |event|
   event.channel.send_temporary_message('Please wait...',10)
   data_load()
   lookout2=[]
-  if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt")
+  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
     lookout2=[]
-    File.open("C:/Users/#{@mash}/Desktop/devkit/DLSkillSubsets.txt").each_line do |line|
+    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
       lookout2.push(eval line)
     end
   end
@@ -12586,9 +12606,9 @@ bot.command(:reload, from: 167657750971547648) do |event|
   event.channel.await(:bob, from: event.user.id) do |e|
     reload=false
     if e.message.text.include?('1')
-      if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLNames2.txt")
+      if File.exist?("#{@location}devkit/DLNames2.txt")
         b=[]
-        File.open("C:/Users/#{@mash}/Desktop/devkit/DLNames2.txt").each_line do |line|
+        File.open("#{@location}devkit/DLNames2.txt").each_line do |line|
           b.push(eval line)
         end
       else
@@ -12598,9 +12618,9 @@ bot.command(:reload, from: 167657750971547648) do |event|
       nz=nzzzzz.reject{|q| q[0]!='Adventurer'}
       if nz[nz.length-1][2]<'Zethia'
         e << 'Last backup of the alias list has been corrupted.  Restoring from manually-created backup.'
-        if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DLNames3.txt")
+        if File.exist?("#{@location}devkit/DLNames3.txt")
           b=[]
-          File.open("C:/Users/#{@mash}/Desktop/devkit/DLNames3.txt").each_line do |line|
+          File.open("#{@location}devkit/DLNames3.txt").each_line do |line|
             b.push(eval line)
           end
         else
@@ -12610,7 +12630,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
       else
         e << 'Last backup of the alias list being used.'
       end
-      open("C:/Users/#{@mash}/Desktop/devkit/DLNames.txt", 'w') { |f|
+      open("#{@location}devkit/DLNames.txt", 'w') { |f|
         for i in 0...nzzzzz.length
           f.puts "#{nzzzzz[i].to_s}#{"\n" if i<nzzzzz.length-1}"
         end
@@ -12645,9 +12665,9 @@ bot.command(:reload, from: 167657750971547648) do |event|
       download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/BotanBot.rb")
       IO.copy_stream(download, "DLTemp.txt")
       if File.size("DLTemp.txt")>100
-        if File.exist?("C:/Users/#{@mash}/Desktop/devkit/BotTokens.txt")
+        if File.exist?("#{@location}devkit/BotTokens.txt")
           b2=[]
-          File.open("C:/Users/#{@mash}/Desktop/devkit/BotTokens.txt").each_line do |line|
+          File.open("#{@location}devkit/BotTokens.txt").each_line do |line|
             b2.push(line.split(' # ')[0])
           end
         else
@@ -12767,7 +12787,7 @@ bot.message do |event|
     a=str.split(' ')
     if a[0].downcase=='reboot'
       event.respond 'Becoming Robin.  Please wait approximately ten seconds...'
-      exec "cd C:/Users/#{@mash}/Desktop/devkit && RobinBot.rb 4"
+      exec "cd #{@location}devkit && RobinBot.rb 4"
     elsif event.server.nil? || event.server.id==285663217261477889
       event.respond 'I am not Robin right now.  Please use `FE!reboot` to turn me into Robin.'
     end
@@ -12778,7 +12798,7 @@ bot.message do |event|
     a=s.split(' ')
     if a[0].downcase=='reboot'
       event.respond "Becoming Elise.  Please wait approximately ten seconds..."
-      exec "cd C:/Users/#{@mash}/Desktop/devkit && PriscillaBot.rb 4"
+      exec "cd #{@location}devkit && PriscillaBot.rb 4"
     elsif event.server.nil? || event.server.id==285663217261477889
       event.respond "I am not Elise right now.  Please use `FEH!reboot` to turn me into Elise."
     end
@@ -12789,7 +12809,7 @@ bot.message do |event|
     a=s.split(' ')
     if a[0].downcase=='reboot'
       event.respond "Becoming Liz.  Please wait approximately ten seconds..."
-      exec "cd C:/Users/#{@mash}/Desktop/devkit && LizBot.rb 4"
+      exec "cd #{@location}devkit && LizBot.rb 4"
     elsif event.server.nil? || event.server.id==285663217261477889
       event.respond "I am not Liz right now.  Please use `FGO!reboot` to turn me into Liz."
     end
@@ -13319,7 +13339,7 @@ def next_holiday(bot,mode=0)
     t=Time.now
     t-=60*60*6
     bot.game='Dragalia Lost (DL!help for info)'
-    bot.profile.avatar=(File.open("C:/Users/#{@mash}/Desktop/devkit/BotanBot.png",'r')) rescue nil if @shardizard.zero?
+    bot.profile.avatar=(File.open("#{@location}devkit/BotanBot.png",'r')) rescue nil if @shardizard.zero?
     @avvie_info=['Botan','*Dragalia Lost*','']
     t+=24*60*60
     @scheduler.at "#{t.year}/#{t.month}/#{t.day} 0000" do
@@ -13330,7 +13350,7 @@ def next_holiday(bot,mode=0)
       # Only one holiday is today.  Display new avatar, and set another check for midnight
       bot.game=k[0][4]
       if @shardizard.zero?
-        bot.profile.avatar=(File.open("C:/Users/#{@mash}/Desktop/devkit/EliseImages/#{k[0][3]}.png",'r')) rescue nil
+        bot.profile.avatar=(File.open("#{@location}devkit/EliseImages/#{k[0][3]}.png",'r')) rescue nil
       end
       @avvie_info=[k[0][3],k[0][4],k[0][5]]
       t2= Time.now + 18*60*60
@@ -13345,7 +13365,7 @@ def next_holiday(bot,mode=0)
         # in last area of day.  Set avatar to the last one for the day, then set a check for tomorrow at midnight
         bot.game=k[k.length-1][4]
         if @shardizard.zero?
-          bot.profile.avatar=(File.open("C:/Users/#{@mash}/Desktop/devkit/BotanImages/#{k[k.length-1][3]}.png",'r')) rescue nil
+          bot.profile.avatar=(File.open("#{@location}devkit/BotanImages/#{k[k.length-1][3]}.png",'r')) rescue nil
         end
         @avvie_info=[k[k.length-1][3],k[k.length-1][4],k[k.length-1][5]]
         t2= Time.now + 18*60*60
@@ -13364,7 +13384,7 @@ def next_holiday(bot,mode=0)
         # ...set avatar properly and set check for the beginning of the next chunk of the day
         bot.game=k[j][4]
         if @shardizard.zero?
-          bot.profile.avatar=(File.open("C:/Users/#{@mash}/Desktop/devkit/BotanImages/#{k[j][3]}.png",'r')) rescue nil
+          bot.profile.avatar=(File.open("#{@location}devkit/BotanImages/#{k[j][3]}.png",'r')) rescue nil
         end
         @avvie_info=[k[j][3],k[j][4],k[j][5]]
         t=Time.now
@@ -13378,7 +13398,7 @@ def next_holiday(bot,mode=0)
     t=Time.now
     t-=60*60*6
     bot.game='Dragalia Lost (DL!help for info)'
-    bot.profile.avatar=(File.open("C:/Users/#{@mash}/Desktop/devkit/BotanBot.png",'r')) rescue nil if @shardizard.zero?
+    bot.profile.avatar=(File.open("#{@location}devkit/BotanBot.png",'r')) rescue nil if @shardizard.zero?
     @avvie_info=['Botan','*Dragalia Lost*','']
     t+=24*60*60
     @scheduler.at "#{t.year}/#{t.month}/#{t.day} 0000" do
@@ -13414,21 +13434,21 @@ bot.ready do |event|
   elsif @shardizard==4
     next_holiday(bot)
     bot.user(bot.profile.id).on(285663217261477889).nickname='BotanBot (Debug)' if @shardizard==4
-    bot.profile.avatar=(File.open("C:/Users/#{@mash}/Desktop/devkit/DebugBotan.png",'r')) if @shardizard==4
+    bot.profile.avatar=(File.open("#{@location}devkit/DebugBotan.png",'r')) if @shardizard==4
   else
     next_holiday(bot)
   end
   if @shardizard==4
-    if File.exist?("C:/Users/#{@mash}/Desktop/devkit/DebugSav.txt")
+    if File.exist?("#{@location}devkit/DebugSav.txt")
       b=[]
-      File.open("C:/Users/#{@mash}/Desktop/devkit/DebugSav.txt").each_line do |line|
+      File.open("#{@location}devkit/DebugSav.txt").each_line do |line|
         b.push(eval line)
       end
     else
       b=[]
     end
     bot.channel(285663217261477889).send_message("Hello!") if b[0]!='Botan'
-    open("C:/Users/#{@mash}/Desktop/devkit/DebugSav.txt", 'w') { |f|
+    open("#{@location}devkit/DebugSav.txt", 'w') { |f|
       f.puts '"Botan"'
     }
   end
