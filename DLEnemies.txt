@@ -25,6 +25,7 @@ Void Nidhogg\-1, 450000, 1260000; -1, 3572, 7858\Shadow, Dragon, Void\Poison: **
 Raging Manticore\264856; 2290\Shadow, Therion, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\Curse, Poison\Fury
 Greedy Manticore\264856; 2290\Water, Therion, Void\Poison: **0%**, Burn: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Sleep: **0%**\Poison, Freeze\Fury
 Smoldering Manticore\264856; 1450\Flame, Therion, Void\Poison: **0%**, Freeze: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\Burn, Stun\Fury
+Proud Manticore\0; 0\Light, Therion, Void\Ask the wiki team\Blind, Paralysis\Fury
 Volcanic Chimera\-1, 311938, 1039797; -1, 1177, 1430\Flame, Therion, Void\Poison: 60%, Freeze: **20%**, Blind: 60%, Bog: **20%**\Burn, Poison\Frenzy;; Overgrowth
 Catoblepas Anemos\262587; 2052\Wind, Therion, Void\Poison: **40%**, Burn: **40%**, Stun: **40%**\Stun\Petrify
 Eolian Phantom\291017; 1684\Wind, Undead, Void\Poison: **40%**, Burn: **40%**, Paralysis: **40%**, Stun: **40%**\Stun\Soul Eater;; Spectral Shield
