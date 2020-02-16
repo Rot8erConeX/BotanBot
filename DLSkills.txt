@@ -2044,6 +2044,9 @@ Tricker Treats\25%\Ability\Increases Tricker Treat intake for clearing quests by
 Tricker Treats\50%\Ability\Increases Tricker Treat intake for clearing quests by 50%.\0\y\Event, Facility, Score
 Tricker Treats\100%\Ability\Increases Tricker Treat intake for clearing quests by 100%.\0\y\Event, Facility, Score
 United Haste\I\Ability\Increases Skill Gauge fill rate relative to the number of active team members. Increases skill gauge fill rate by 2%, 6%, or 8% total relative to the number of active (living) team members. (Does not count the unit with United Haste).;; Does not share an ability cap with Skill Haste.\40\y\SkillHaste
+Undead Res\example\Ability\Decreases damage from undead by `x`%.\0\y\Undead, Resistance
+Undead Res\15%\Ability\Decreases damage from undead by 15%.\1\y\Undead, Resistance
+Undead Res\20%\Ability\Decreases damage from undead by 20%.\2\y\Undead, Resistance
 Undead's Bane\example\Ability\Increases damage to undead by `x`%\0\y\Undead, Bane
 Undead's Bane\10%\Ability\Increases damage to undead by 10%.\20\y\Undead, Bane
 Undead's Bane\15%\Ability\Increases damage to undead by 15%.\40\y\Undead, Bane
