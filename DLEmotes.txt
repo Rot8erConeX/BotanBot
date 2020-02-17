@@ -30,6 +30,7 @@ Intriguing!\Heinwald
 I'll Lead The Charge\Euden
 I'll Tag Along\Sarisse
 I'm On Defense\Ranzal
+Keep it Up\Melody
 Leave it to me!\Alfonse
 Left\
 Let's Fight Together\Elisanne
@@ -70,6 +71,7 @@ Victory Will Be Ours\Midgardsormr
 Wait\Slime
 Want to Join Up\Euden
 Well Aren't You Sweet\Malora
+Well Well\Addis
 We've Got a Case!\Curran
 What You Said!\Elisanne
 Whew\Notte
