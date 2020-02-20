@@ -305,6 +305,8 @@
 ["Zone", ["zone", "zones", "bonezone", "bonezone"], "Ability"]
 ["Seasonal", ["seasonal", "seasonals"], "Banner"]
 ["Gala", ["gala", "galadragalia"], "Banner"]
+["Dream", ["dream", "dreamy", "dreamsummon", "dreams", "dreamsummons"], "Banner"]
+["Plat", ["plat", "platinum", "platsummon", "platinumsummon"], "Banner"]
 ["Dragon", ["dragon", "drg", "dragonspecial", "dragonsp", "drgspecial", "drgsp"], "Banner"]
 [["KoG", "Knights of Glory"], ["kog", "knightsofglory", "knightofglory", "nightsofglory", "nightofglory", "gloryknight", "gloryknights", "glorynight", "glorynights", "nitesofglory", "niteofglory", "glorynite", "glorynites"], "Cygame"]
 [["RoB", "Rage of Bahamut"], ["rob", "rageofbahamut", "bahamut", "bahamut'srage", "bahamutsrage", "bahamutrage", "rage"], "Cygame"]
