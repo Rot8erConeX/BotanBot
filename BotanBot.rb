@@ -9873,8 +9873,9 @@ def roost(event,bot,args=nil,ignoreinputs=false,mode=0)
     data_load()
     void=@voids[0,7].map{|q| q}
     matz=@voids[8,@voids.length-8].map{|q| q}
-    str5="#{str5}\n*Open:* #{void[t.wday]}"
-    voidmats=void[t.wday]
+    str5="#{str5}\n*Single Drop:* #{void[t.wday].split(', ').reject{|q| q.include?('*')}.join(', ')}"
+    str5="#{str5}\n*Double Drop:* #{void[t.wday].split(', ').reject{|q| !q.include?('*')}.map{|q| q.gsub('*','')}.join(', ')}"
+    voidmats=void[t.wday].split(', ').map{|q| q.gsub('*','')}.join(', ')
     for i in 0...matz.length
       matz[i]=matz[i].split(', ')
       k=matz[i][0]
@@ -9902,7 +9903,7 @@ def roost(event,bot,args=nil,ignoreinputs=false,mode=0)
       drg=@dragons.reject{|q| q[9]!=t.wday}
       m=[]
       for i in 0...@max_rarity[1]
-        m.push([generate_rarity_row(i),[]])
+        m.push([generate_rarity_row(i+1),[]])
       end
       for i in 0...drg.length
         f="#{drg[i][0]}#{element_emote(drg[i][2],bot,drg[i][16])}"
@@ -9999,7 +10000,7 @@ def next_events(event,bot,args=nil)
     str=extend_message(str,str2,event,2)
   end
   data_load()
-  void=@voids[0,7].map{|q| q}
+  void=@voids[0,7].map{|q| q.gsub('*','')}
   void=void.rotate(t.wday)
   void.push(void[0])
   if [0,5].include?(mode)
