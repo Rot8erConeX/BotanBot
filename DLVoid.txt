@@ -11,19 +11,19 @@
 <:Element_Flame:532106087952810005>Blazing Ghost, Old Cloth, Floating Red Cloth, Otherworldly Lantern
 <:Element_Flame:532106087952810005>Void Agni, Ancient Bird's Feather, Bewitching Wing, Blazing Ember, Blazing Horn, Void Leaf, Void Seed
 <:Element_Flame:532106087952810005>Volcanic Chimera, Fiend's Horn, Fiend's Eye, Incandescence Orb, Volcanic Claw, Volcanic Mane, Void Leaf, Void Seed, Squishums
-<:Element_Flame:532106087952810005>Smoldering Manticore
+<:Element_Flame:532106087952810005>Smoldering Manticore, Fiend's Eye, Fiend's Horn, Raging Fang, Smoldering Tail, Void Leaf, Void Seed
 <:Element_Water:532106088221376522>Frost Hermit, Fiend's Claw, Fiend's Horn, Goblin Thread, Aromatic Wood
 <:Element_Water:532106088221376522>Void Poseidon, Fiend's Eye, Fiend's Horn, Oceanic Crown, Oceanic Fin, Squishums, Void Leaf, Void Seed
 <:Element_Water:532106088221376522>Greedy Manticore, Fiend's Horn, Fiend's Eye, Greedy Tail, Raging Fang, Void Leaf, Void Seed
 <:Element_Wind:532106087948746763>Void Zephyr, Granite, Great Feather, Meteorite, Void Leaf, Void Seed, Zephyr Rune
 <:Element_Wind:532106087948746763>Gust Shroom, Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Storm Fungus, Void Seed, Spongy Spore
 <:Element_Wind:532106087948746763>Catoblepas Anemos, Fiend's Horn, Fiend's Eye, Catoblepas's Hoof, Catoblepas's Stormeye, Void Leaf, Void Seed
-<:Element_Wind:532106087948746763>Eolian Phantom
+<:Element_Wind:532106087948746763>Eolian Phantom, Ancient Bird's Feather, Bewitching Wings, Eolian Soul, Soul Vestiges, Void Leaf, Void Seed
 <:Element_Light:532106088129101834>Wandering Shroom, Bat's Wing, Solid Fungus, Ancient Bird's Feather, Void Leaf, Void Seed, Shiny Spore
 <:Element_Light:532106088129101834>Amber Golem, Iron Ore, Steel Slab, Granite, Void Leaf, Amber Slab, Void Seed, Amber Core
-<:Element_Light:532106088129101834>Void Jeanne d'Arc, Granite, Necroblossom, Meteorite, Abyssal Standard, Void Leaf, Void Seed, Squishum
+<:Element_Light:532106088129101834>Void Jeanne d'Arc, Granite, Necroblossom, Meteorite, Abyssal Standard, Void Leaf, Void Seed, Squishums
 <:Element_Light:532106088129101834>Lambent Ghost, Bat's Wing, Old Cloth, Ancient Bird's Feather, Floating Yellow Cloth, Unearthly Lantern, Void Leaf, Void Seed
-<:Element_Light:532106088129101834>Proud Manticore
+<:Element_Light:532106088129101834>Proud Manticore, Fiend's Claw, Fiend's Horn, Void Leaf, Void Seed
 <:Element_Shadow:532106088154267658>Raging Manticore, Raging Fang, Raging Tail, Void Leaf, Void Seed, Fiend's Claw, Fiend's Horn
 <:Element_Shadow:532106088154267658>Twilight Hermit, Fiend's Claw, Goblin Thread, Fiend's Horn, Purple Thread, Acoustic Wood, Void Leaf, Void Seed
 <:Element_Shadow:532106088154267658>Obsidian Golem, Granite, Iron Ore, Obsidian Slab, Steel Slab, Void Leaf, Void Seed, Dark Core
