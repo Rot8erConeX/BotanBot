@@ -60,6 +60,7 @@
 ["Tier1", ["tier1", "t1"], "Mat"]
 ["Tier2", ["tier2", "t2"], "Mat"]
 ["Tier3", ["tier3", "t3"], "Mat"]
+["Tier4", ["tier4", "t4"], "Mat"]
 ["Trials", ["trials", "trial"], "Mat"]
 ["Unbinding", ["unbinding", "unbind", "unbound"], "Mat"]
 ["Vermilion", ["vermilion", "red"], "Mat"]
