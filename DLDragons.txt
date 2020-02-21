@@ -51,7 +51,7 @@ Maritimus(Halloween)\5\Water\37, 11\376, 119\Hocus Pocus!\(Water) HP +20%;; (Wat
 Mercury\4y\Water\21, 211\6, 62\Hydrocannon\(Water) HP +15%;; (Water) HP +20%\2000, 100\1.5, 1\5\No\No\*Mercury, Low\Inoue Kikuko\Ava Lindstrom\\\F\KoG
 Midgardsormr\4y\Wind\20, 206\6, 66\Tornado Tail\(Wind) HP & Strength +8%;; (Wind) HP & Strength +10%\2000, 100\1.5, 1\4\No\No\Midgardsormr, Low\Yamadera Koichi\Jeremy George\(Wind) HP +8%;; (Wind) HP +10%;;;; (Wind) Strength +8%;; (Wind) Strength +10%\\M\KoG
 Mini Mids\5w\Wind\22, 225\7, 75\Celebratory Storm\HP & Strength +20%;; HP & Strength +30%\5000, 8500\4.375, 1.5\4\Yes\No\Midgardsormr, Toon\Yamadera Koichi\\HP +20%;; HP +30%;;;; Strength +20%;; Strength +30%\\M\
-Moon Drake\3\Light\19, 192\5, 56\Gale Tail\(Light) HP +10%;; (Light) HP +15%\300, 150\1.35, 3.5\5\Yes\No\Moon Drake\\\\\M\
+Moon Drake\3\Light\19, 192\5, 56\Moon Drop\(Light) HP +10%;; (Light) HP +15%\300, 150\1.35, 3.5\5\Yes\No\Moon Drake\\\\\M\
 Nidhogg\5\Shadow\37, 374\12, 121\Total Eclipse\(Shadow) HP & Strength +20%;; (Shadow) HP & Strength +30%\5000, 8500\1.8, 1\4\No\Yes\Nidhogg\\\(Shadow) HP +20%;; (Shadow) HP +30%;;;; (Shadow) Strength +20%;; (Shadow) Strength +30%\\M\KoG
 Nyarlathotep\5\Shadow\36, 368\12, 128\All-Encompassing Darkness (Yin)\(Shadow) HP 30% = Strength +35%;; (Shadow) HP 30% = Strength +50%;;; Moonlit Howl I;; Moonlit Howl II\5000, 8500\1.35, 1\4\Yes\No\Nyarlathotep\Naganawa Maria & Hayami Show\\\\M\
 Pallid Imp\3\Shadow\18, 186\6, 61\Grave Tidings\(Shadow) HP & Strength +5%;; (Shadow) HP & Strength +8%\300, 150\1.35, 3.5\5\Yes\No\Pallid Imp\\\(Shadow) HP +5%;; (Shadow) HP +8%;;;; (Shadow) Strength +5%;; (Shadow) Strength +8%\\M\
@@ -87,4 +87,4 @@ Wellspring Imp\3\Water\18, 187\6, 60\Noble Dance\(Water) HP & Strength +5%;; (Wa
 Yulong\5w\Wind\22, 225\7, 72\Subjugating Storm\(Wind) Strength +20%;; (Wind) Strength +30%\5000, 300\1.8, 1\4\Yes\No\Yulong\\Mark Mathison\\\M\
 Zephyr\5\Wind\36, 369\12, 126\Zephyr's Wrath\(Wind) Strength +40%;; (Wind) Strength +60%\5000, 8500\1.8, 1\5\No\Yes\Zephyr\\\\\M\KoG
 Zephyr Imp\3\Wind\18, 187\6, 60\Affinity Dance\(Wind) HP & Strength +5%;; (Wind) HP & Strength +8%\300, 150\1.35, 3.5\2\Yes\No\Zephyr Imp\\\(Wind) HP +5%;; (Wind) HP +8%;;;; (Wind) Strength +5%;; (Wind) Strength +8%\\M\
-Zodiark\4y\Shadow\20, 202\7, 70\Accursed Venom\(Shadow) Strength +15%;; (Shadow) Strength +20%\2000, 100\1.5, 1\1\No\No\Zodiark, Low\Wakamoto Norio\Brian Davidson\\\M\KoG	
+Zodiark\4y\Shadow\20, 202\7, 70\Accursed Venom\(Shadow) Strength +15%;; (Shadow) Strength +20%\2000, 100\1.5, 1\1\No\No\Zodiark, Low\Wakamoto Norio\Brian Davidson\\\M\KoG
