@@ -9873,8 +9873,10 @@ def roost(event,bot,args=nil,ignoreinputs=false,mode=0)
     data_load()
     void=@voids[0,7].map{|q| q}
     matz=@voids[8,@voids.length-8].map{|q| q}
-    str5="#{str5}\n*Single Drop:* #{void[t.wday].split(', ').reject{|q| q.include?('*')}.join(', ')}"
-    str5="#{str5}\n*Double Drop:* #{void[t.wday].split(', ').reject{|q| !q.include?('*')}.map{|q| q.gsub('*','')}.join(', ')}"
+    str5="#{str5}\n*Open:* "
+    str5="#{str5}#{void[t.wday].split(', ').reject{|q| q.include?('*')}.join(', ')}"
+    str5="#{str5}, " if void[t.wday].split(', ').reject{|q| q.include?('*')}.length>0 && void[t.wday].split(', ').reject{|q| !q.include?('*')}.length>0
+    str5="#{str5}#{void[t.wday].split(', ').reject{|q| !q.include?('*')}.map{|q| "#{q.gsub('*','')}<:x2:680152943299002370>"}.join(', ')}"
     voidmats=void[t.wday].split(', ').map{|q| q.gsub('*','')}.join(', ')
     for i in 0...matz.length
       matz[i]=matz[i].split(', ')
@@ -10001,10 +10003,28 @@ def next_events(event,bot,args=nil)
   end
   data_load()
   void=@voids[0,7].map{|q| q.gsub('*','')}
+  void2=@voids[0,7].map{|q| q.split(', ').reject{|q2| !q2.include?('*')}.join(', ').gsub('*','')}
   void=void.rotate(t.wday)
+  void2=void2.rotate(t.wday)
   void.push(void[0])
+  void2.push(void2[0])
   if [0,5].include?(mode)
+    double=false
+    shortlist=false
+    shortlist=true if mode==0
+    shortlist=true if !safe_to_spam?(event)
+    elem=[]
+    for i in 0...args.length
+      double=true if ['double','x2','2'].include?(args[i])
+      elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i])
+      elem.push('Water') if ['water','waters'].include?(args[i])
+      elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i])
+      elem.push('Wind') if ['earth','earths'].include?(args[i]) && event.user.id==192821228468305920
+      elem.push('Light') if ['light','lights'].include?(args[i])
+      elem.push('Shadow') if ['shadow','dark','shadows','darks'].include?(args[i])
+    end
     mmzz=[]
+    mmzz2=[]
     matz=@voids[7,@voids.length-7].map{|q| q}
     for i in 0...void.length
       m=void[i].split(', ')
@@ -10013,6 +10033,13 @@ def next_events(event,bot,args=nil)
         pos=matz.find_index{|q| m[i2]==q.split(', ')[0]}
         pos=0 if pos.nil?
         mmzz.push([m[i2],i,pos])
+      end
+      m=void2[i].split(', ')
+      pos=0
+      for i2 in 0...m.length
+        pos=matz.find_index{|q| m[i2]==q.split(', ')[0]}
+        pos=0 if pos.nil?
+        mmzz2.push([m[i2],i,pos])
       end
     end
     for i in 0...matz.length
@@ -10030,35 +10057,103 @@ def next_events(event,bot,args=nil)
     end
     mmzz.compact!
     mmzz.reverse!
+    mmzz2.sort!{|a,b| (a[2]<=>b[2])==0 ? (a[1]<=>b[1]) : (a[2]<=>b[2])}
+    mmzz2.reverse!
+    for i in 0...mmzz2.length-1
+      if mmzz2[i][0]==mmzz2[i+1][0]
+        mmzz2[i+1][3]=mmzz2[i][1]*1 unless mmzz2[i+1][1]>0
+        mmzz2[i]=nil
+      end
+    end
+    mmzz2.compact!
+    mmzz2.reverse!
     str2="__**<:Element_Void:548467446734913536> Void Strikes**__"
+    if double
+      mmzz=mmzz2.map{|q| q}
+      mmzz2=[]
+      str2="__**<:Element_Void:548467446734913536><:x2:680152943299002370> Void Strikes: Double Drop**__"
+    end
+    if mmzz.length>10 && !safe_to_spam?(event)
+      if !(double || elem.length>0) || mmzz.length>25
+        otheroptions=[]
+        otheroptions.push("an element name") unless elem.length>0
+        otheroptions.push("the word \"double\"") unless double
+        str2="#{str2}\nThere are so many #{'qualifying ' if double || elem.length>0}Void Strikes that I will reduce the list to those available today or tomorrow.\nFor the full list, use this command in PM.#{"\nYou can also include #{otheroptions.join(' or ')} to reduce the list accordingly." if otheroptions.length>0}\n"
+        mmzz=mmzz.reject{|q| q[1]>1}
+        if mmzz.length>25
+          event.respond "Even reduced, the list of Void Strikes is too long for this channel.  Please retry this command in PM."
+          return nil
+        end
+      end
+    end
     str=extend_message(str,str2,event,2)
     strpost=false
     for i in 0...mmzz.length
       str2="#{"\n" if mode==5 && safe_to_spam?(event)}*#{mmzz[i][0]}* -"
+      i2=mmzz2.find_index{|q| q[0]==mmzz[i][0]}
       if mmzz[i][1]==0
-        str2="#{str2} **Today**#{' - Next available' unless mmzz[i][3].nil? || mmzz[i][3]<=0}"
+        str2="#{str2} **Today**#{'<:x2:680152943299002370>' if !i2.nil? && shortlist && mmzz2[i2][1]==0}#{' - Next available' unless mmzz[i][3].nil? || mmzz[i][3]<=0}"
         if mmzz[i][3].nil? || mmzz[i][3]<=0
         else
           t_d=t+mmzz[i][3]*24*60*60
-          if mmzz[i][3]==1
-            str2="#{str2} tomorrow (#{disp_date(t_d,1)})"
+          if !i2.nil? && shortlist && [mmzz2[i2][3],mmzz2[i2][1]].include?(mmzz[i][3])
+            str2="#{str2} #{mmzz[i][3]} days from now<:x2:680152943299002370> (#{disp_date(t_d,1)})" unless mmzz[i][3]==1
+            str2="#{str2} tomorrow<:x2:680152943299002370> (#{disp_date(t_d,1)})" if mmzz[i][3]==1
+          elsif !i2.nil? && shortlist
+            str2="#{str2.gsub('Next','~~Next')} #{mmzz[i][3]} days from now (#{disp_date(t_d,2)})~~" unless mmzz[i][3]==1
+            str2="#{str2.gsub('Next','~~Next')} tomorrow (#{disp_date(t_d,2)})~~" if mmzz[i][3]==1
+            if mmzz2[i2][1]==0
+              t_d=t+mmzz2[i2][3]*24*60*60
+            else
+              t_d=t+mmzz2[i2][1]*24*60*60
+            end
+            str2="#{str2} - <:x2:680152943299002370> next available #{mmzz2[i2][3]} days from now (#{disp_date(t_d,2)})"
+          elsif mmzz[i][3]==1
+            str2="#{str2} tomorrow#{'<:x2:680152943299002370>' if !i2.nil? && shortlist && [mmzz2[i2][1],mmzz2[i2][3]].include?(1)} (#{disp_date(t_d,1)})"
           else
             str2="#{str2} #{mmzz[i][3]} days from now (#{disp_date(t_d,1)})"
           end
         end
       else
         t_d=t+mmzz[i][1]*24*60*60
-        if mmzz[i][1]==1
+        if !i2.nil? && shortlist && mmzz2[i2][1]==mmzz[i][1]
+          str2="#{str2} #{mmzz[i][1]} days from now<:x2:680152943299002370> (#{disp_date(t_d,1)})" unless mmzz[i][1]==1
+          str2="#{str2} Tomorrow<:x2:680152943299002370> (#{disp_date(t_d,1)})" if mmzz[i][1]==1
+        elsif !i2.nil? && shortlist
+          str2="#{str2} ~~#{mmzz[i][1]} days from now (#{disp_date(t_d,2)})~~" unless mmzz[i][1]==1
+          str2="#{str2} ~~Tomorrow (#{disp_date(t_d,2)})~~" if mmzz[i][1]==1
+          t_d=t+mmzz2[i2][1]*24*60*60
+          str2="#{str2} - <:x2:680152943299002370> coming #{mmzz2[i2][1]} days from now (#{disp_date(t_d,2)})"
+        elsif mmzz[i][1]==1
           str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
         else
           str2="#{str2} #{mmzz[i][1]} days from now (#{disp_date(t_d,1)})"
         end
       end
-      str2="#{str2}\n~~Available mats: #{matz[mmzz[i][2]]}~~" if mode==5 && safe_to_spam?(event)
-      if mmzz[i][2]==1 && mmzz.find_index{|q| q[2]==2}.nil?
-        str2="#{str2}#{"\n" if mode==5 && safe_to_spam?(event)}\n<:Element_Water:532106088221376522>*Water Void* - ~~never~~"
+      unless i2.nil? || shortlist
+        str2="#{str2}\n<:x2:680152943299002370>*Double Drops* - "
+        if mmzz2[i2][1]==0
+          str2="#{str2} **Today**#{' - Next available' unless mmzz2[i2][3].nil? || mmzz2[i2][3]<=0}"
+          if mmzz2[i2][3].nil? || mmzz2[i2][3]<=0
+          else
+            t_d=t+mmzz2[i2][3]*24*60*60
+            if mmzz2[i2][3]==1
+              str2="#{str2} tomorrow (#{disp_date(t_d,1)})"
+            else
+              str2="#{str2} #{mmzz2[i2][3]} days from now (#{disp_date(t_d,1)})"
+            end
+          end
+        else
+          t_d=t+mmzz2[i2][1]*24*60*60
+          if mmzz2[i2][1]==1
+            str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
+          else
+            str2="#{str2} #{mmzz2[i2][1]} days from now (#{disp_date(t_d,1)})"
+          end
+        end
       end
-      str=extend_message(str,str2,event,1)
+      str2="#{str2}\n~~Available mats: #{matz[mmzz[i][2]]}~~" if mode==5 && safe_to_spam?(event)
+      str=extend_message(str,str2,event,1) unless elem.length>0 && !str2.include?("<:Element_#{elem[0]}:")
     end
   end
   if [0,7].include?(mode)
@@ -10070,19 +10165,7 @@ def next_events(event,bot,args=nil)
          '<:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Shadow:532106088154267658> High Zodiark',
          '<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Light:532106088129101834> High Jupiter',
          '<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Water:532106088221376522> High Mercury, <:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Light:532106088129101834> High Jupiter, <:Element_Shadow:532106088154267658> High Zodiark']
-    tooearly=true
-    tooearly=false if t.year>2019
-    tooearly=false if t.month>11
-    tooearly=false if t.day>18
-    if tooearly
-      t2=Time.new(2019,11,20)
-      timeshift=7
-      timeshift-=1 unless (t2-24*60*60).dst?
-      t2-=60*60*timeshift
-      hdt=hdt.rotate(t2.wday)
-    else
-      hdt=hdt.rotate(t.wday)
-    end
+    hdt=hdt.rotate(t.wday)
     mmzz=[]
     for i in 0...hdt.length
       m=hdt[i].split(', ')
@@ -10106,12 +10189,6 @@ def next_events(event,bot,args=nil)
       end
     end
     mmzz.compact!
-    if tooearly
-      tt=t2.day-t.day
-      for i in 0...mmzz.length
-        mmzz[i][1]+=tt
-      end
-    end
     mmzz.reverse!
     for i in 0...mmzz.length
       str2="#{str2}\n*#{mmzz[i][0]}* -"
@@ -10209,6 +10286,7 @@ def next_events(event,bot,args=nil)
         mmzz.push([m[i2],7]) if i==0
       end
     end
+    mmzz=mmzz.reject{|q| q[0].nil? || q[0].length<=0}
     mmzz.sort!{|a,b| (a[0]<=>b[0])==0 ? (a[1]<=>b[1]) : (a[0]<=>b[0])}
     mmzz.reverse!
     for i in 0...mmzz.length-1
@@ -10220,6 +10298,16 @@ def next_events(event,bot,args=nil)
     mmzz.compact!
     mmzz.reverse!
     str2="__**Materials** found in the Void Strikes__"
+    if mmzz.length>25 && !safe_to_spam?(event)
+      mmzz=mmzz.reject{|q| q[1]>2} if mmzz.length>50
+      mmzz=mmzz.reject{|q| q[1]>1} if mmzz.length>50
+      for i in 0...mmzz.length
+        mmzz[i][0]="*#{mmzz[i][0]}*" if mmzz[i][1]==1 || mmzz[i][2]==1
+        mmzz[i][0]="**#{mmzz[i][0]}**#{"  (#{mmzz[i][2]})" unless mmzz[i][2]==1}" if mmzz[i][1]==0
+      end
+      create_embed(event,"#{str}\n\n#{str2}","**Bold** mats are available today, and include in parenthesis the number of days for them to become available again.\n*Italic* mats are available tomorrow.",0xCE456B,'For the full list of mats, use this command in PM.',nil,triple_finish(mmzz.map{|q| q[0]}))
+      return nil
+    end
     strpost=false
     for i in 0...mmzz.length
       str2="#{str2}\n*#{mmzz[i][0]}* -"
