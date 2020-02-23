@@ -210,6 +210,7 @@ def data_load()
     b[i][5]=b[i][5].to_i
     b[i][6]=b[i][6].split(';; ')
     b[i][8]=b[i][8].split(';;;; ').map{|q| q.split(';; ')}
+    b[i][8][3]=b[i][8][3].join(';; ') unless b[i][8].length<=3
     b[i][9]=b[i][9].split(', ')
     b[i][15]=b[i][15].split(';;;; ').map{|q| q.split(';; ')} unless b[i][15].nil?
   end
@@ -2300,9 +2301,11 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
         end
       end
       flds.push(['Skills',str2,1])
-      a3="#{k[8][2][0]} (F5)"
-      a3="#{k[8][2][0]} (F3) \u2192 #{k[8][2][1]} (F5)" if k[1][0,1].to_i==5
-      a3="#{k[8][2][0]} (F2) \u2192 #{k[8][2][1]} (F5)" if k[0]=='Euden'
+      nde=1
+      nde=0 if k[8][3].include?('3')
+      a3="#{k[8][2][0]} (F#{5*nde})"
+      a3="#{k[8][2][0]} (F#{3*nde}) \u2192 #{k[8][2][1]} (F5)" if k[1][0,1].to_i==5
+      a3="#{k[8][2][0]} (F#{2*nde}) \u2192 #{k[8][2][1]} (F5)" if k[0]=='Euden'
       m=1
       m=2 if k[1][0,1].to_i==5 || k[0]=='Euden'
       if !k[8][2][m].nil? && k[8][2][m].length>1
@@ -2310,7 +2313,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
         m+=1
       end
       nde=1
-      nde=0 if k[0]=='Gala Mym'
+      nde=0 if k[8][3].include?('1')
       flds.push(['Abilities',"#{k[8][0][0]} (F#{nde}) \u2192 #{k[8][0][1]} (F3)#{" \u2192 #{k[8][0][2]} (F6)" unless k[8][0].length<3 || k[8][0][2].length<=0}\n#{k[8][1][0]} (F1) \u2192 #{k[8][1][1]} (F4)#{" \u2192 #{k[8][1][2]} (F6)" unless k[8][1].length<3 || k[8][1][2].length<=0}\n#{a3}\n\n*Co-Ability:* #{k[7]}"])
     end
     titlex=[]
