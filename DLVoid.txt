@@ -28,5 +28,5 @@
 <:Element_Shadow:532106088154267658>Twilight Hermit, Fiend's Claw, Goblin Thread, Fiend's Horn, Purple Thread, Acoustic Wood, Void Leaf, Void Seed
 <:Element_Shadow:532106088154267658>Obsidian Golem, Granite, Iron Ore, Obsidian Slab, Steel Slab, Void Leaf, Void Seed, Dark Core
 <:Element_Shadow:532106088154267658>Violet Ghost, Bat's Wing, Old Cloth, Ancient Bird's Feather, Void Leaf, Floating Purple Cloth, Void Seed, Shadowy Lantern
-<:Element_Shadow:532106088154267658>Void Nidhogg, Granite, Meteorite, Ruinous Horn, Ruinous Wing, Void Leaf, Void Sword
+<:Element_Shadow:532106088154267658>Void Nidhogg, Granite, Meteorite, Ruinous Horn, Ruinous Wing, Void Leaf, Void Seed
 <:Element_Shadow:532106088154267658>Ebon Chimera, Fiend's Horn, Fiend's Eye, Ebon Claw, Ebon Horn, Abaddon Orb, Void Leaf, Void Seed, Squishums
