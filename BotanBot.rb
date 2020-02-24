@@ -4933,6 +4933,7 @@ def disp_facility_data(bot,event,args=nil)
   title=''
   title="**Type:** #{k[3][0]} #{"(#{k[3][1]})" if k[3].length>1}"
   title="#{title}\n**Size:** #{k[4]}"
+  title="#{title}\n**Final Level:** #{kxx.length}" if kxx.length>1
   title="#{title}\n**Quantity available:** #{k[5]}"
   str="#{str}\n\n**Description:** #{k[2]}"
   m='t'
@@ -4967,7 +4968,7 @@ def disp_facility_data(bot,event,args=nil)
     str="#{str}\n\nLevel 1-3 Smithies can craft #{generate_rarity_row(3)} weapons"
     str="#{str}\nLevel 4-6 Smithies can craft #{generate_rarity_row(4)} weapons"
     str="#{str}\nLevel 7-9 Smithies can craft #{generate_rarity_row(5)} weapons"
-    str="#{str}\n~~Level 10-12 Smithies can craft #{generate_rarity_row(6)} weapons~~ (assumed, may not be true)"
+    str="#{str}\nLevel 9 Smithies can craft #{generate_rarity_row(6)} weapons"
     str="#{str}\nEach new level of smithy allows you to craft higher-tier weapons within the newest-allowed rarity bracket."
   end
   ftr=nil
@@ -4991,9 +4992,7 @@ def disp_facility_data(bot,event,args=nil)
     str="#{str}\n*Level 7 \u2192 8:* 100,000<:Resource_Rupies:532104504372363274> - Meteorite x10, Fiend's Eye x10, Bewitching Wings x10"
     str="#{str}\n*Level 8 \u2192 9:* 120,000<:Resource_Rupies:532104504372363274> - Meteorite x15, Fiend's Eye x15, Bewitching Wings x15, Crimson Core x15"
     str="#{str}\n\n__**Can craft #{generate_rarity_row(6)} weapons**__"
-    str="#{str}\n*Level 9 \u2192 10:* 140,000<:Resource_Rupies:532104504372363274> - Unknown mats"
-    str="#{str}\n*Level 10 \u2192 11:* 160,000<:Resource_Rupies:532104504372363274> - Unknown mats"
-    str="#{str}\n*Level 11 \u2192 12:* 180,000<:Resource_Rupies:532104504372363274> - Unknown mats"
+    str="#{str}\n*Level 9*"
     ftr='Each new level of smithy allows you to craft higher-tier weapons within the newest-allowed rarity bracket.'
   elsif k[0]=='Halidom'
     str="__*Level 1 \u2192 2*__\nRequires Facility level of 5\n5,000<:Resource_Rupies:532104504372363274>"
@@ -6608,6 +6607,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   crossgames=[]
   cygames=[]
   launch=false
+  mana=false
   if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
     lookout=[]
     File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
@@ -6619,6 +6619,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   lookout=lookout.reject{|q| q[2]!='Skill'}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
+    mana=true if ['mana','spiral','manaspiral','70','70node','70mc','70ms'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1 && allowstr
     rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1 && allowstr
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
@@ -6709,6 +6710,10 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
     search.push('*Game Launch*')
     b=@banners[0]
     char=char.reject{|q| !b[1].include?(q[0])}
+  end
+  if mana
+    search.push('*<:Rarity_6:660289379520086046>Mana Spiral*')
+    char=char.reject{|q| q[3][1][@max_rarity[0]].nil? || q[3][1][@max_rarity[0]]<=0 || q[4][1][@max_rarity[0]].nil? || q[4][1][@max_rarity[0]]<=0}
   end
   if fltr.length>0
     m=[]
