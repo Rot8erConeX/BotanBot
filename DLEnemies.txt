@@ -25,8 +25,9 @@ Void Nidhogg\-1, 450000, 1260000; -1, 3572, 7858\Shadow, Dragon, Void\Poison: **
 Raging Manticore\264856; 2290\Shadow, Therion, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\Curse, Poison\Fury
 Greedy Manticore\264856; 2290\Water, Therion, Void\Poison: **0%**, Burn: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Sleep: **0%**\Poison, Freeze\Fury
 Smoldering Manticore\264856; 1450\Flame, Therion, Void\Poison: **0%**, Freeze: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**\Burn, Stun\Fury
-Proud Manticore\0; 0\Light, Therion, Void\Ask the wiki team\Blind, Paralysis\Fury
+Proud Manticore\264856; 1603\Light, Therion, Void\Ask the wiki team\Blind, Paralysis\Fury
 Volcanic Chimera\-1, 311938, 1039797; -1, 1177, 1430\Flame, Therion, Void\Poison: 60%, Freeze: **20%**, Blind: 60%, Bog: **20%**\Burn, Poison\Frenzy;; Overgrowth
+Ebon Chimera\-1, 311938, 935817; -1, 1177, 1430\Shadow, Therion, Void\Poison: 60%, Burn: *99%*, Freeze: **20%**, Paralysis: **20%**, Blind: 60%, Bog: **20%**\Poison, Blind\Frenzy;; Overgrowth
 Catoblepas Anemos\262587; 2052\Wind, Therion, Void\Poison: **40%**, Burn: **40%**, Stun: **40%**\Stun\Petrify
 Eolian Phantom\291017; 1684\Wind, Undead, Void\Poison: **40%**, Burn: **40%**, Paralysis: **40%**, Stun: **40%**\Stun\Soul Eater;; Spectral Shield
 Midgardsormr (Enemy)\5880, 21060, 64350, 120000; 231, 761, 1205, 1800\Wind, Dragon, Dragon Trial\Burn: **0%**\Stun\
@@ -100,3 +101,4 @@ Chronos\66384, 217300, 960718, -1, -1, 4938248, 22222117; 145, 590, 1705, -1, -1
 Chronos Nyx\-1, -1, -1, -1, 6842299, 5165264, 19360178, 2258632; -1, -1, -1, -1, 2557, 3410, 3410, 1200\Light, Dragon, Raid, Fractured Futures\Poison: **0%**, Burn:  **0%**, Freeze: *99%*, Paralysis: **0%**, Stun: *99%*, Bog: *80%*, Sleep: *99%*\Everything\
 Shining Cyclops\3990, 11340, 20580; 240, 630, 1070\Light, Demihuman, Boss, Fractured Futures\Poison: 55%, Burn: 55%, Freeze: *55%, Paralysis: *75%*, Bind: *75%*, Stun: 55%, Curse: 55%, Bog: 55%, Sleep: 55%\Paralysis\
 Volk\-1, 1759649, 8711648; -1, 7230, 10064\Wind, Therion, Agito, Agito Uprising\Poison: **0%**, Burn: **0%**, Blind: *99%*, Stun: *99%*, Bog: *99%*, Sleep: *99%*\Sleep, Stun, Poison\
+Kai Yan\-1, 0, 0; -1, 0, 0\Light, Therion, Agito, Agito Uprising\Poison: **0%**, Burn: **0%**, Blind: *99%*, Stun: *99%*, Bog: *99%*, Sleep: *99%*\\TBA
