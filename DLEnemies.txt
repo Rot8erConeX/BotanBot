@@ -97,6 +97,7 @@ Astral Gift Basket\10080, 27240, 137029, 990000; 362, 500, 1568, 2707\Light, Tha
 Astral Thanatos\76357, 191655, 673905, 3465000; 362, 1000, 1705, 7020\Shadow, Undead, AstralRaid, Astral Raid\~~Immune~~\Poison\
 Cube\200000, 600000, 2728928; 1800, 5500, 6000\Shadow, New Horizons, Chapter 10, Chapter 10\Poison: **0%**, Burn: **0%**, Freeze: *99%*, Paralysis: 50%, Blind: 50%, Stun: *99%*, Bog: **0%**, Sleep: *99%*\Poison\
 Cube 2\458436, 721648, 3020842; 3000, 6000, 7200\Light, New Horizons, Chapter 11, Chapter 11\Poison: **0%**, Burn: **0%**, Blind: 50%, Bog: **0%**\Paralysis\
+Cube 3\0, 0, 0; 0, 0, 0\Flame, New Horizons, Chapter 12, Chapter 12\TBA\Burn\
 Chronos\66384, 217300, 960718, -1, -1, 4938248, 22222117; 145, 590, 1705, -1, -1, 3410, 3410\Light, Dragon, Raid, Fractured Futures\Poison: **0%**, Burn:  **0%**, Freeze: *99%*, Paralysis: **0%**, Blind: *99%*, Stun: *99%*, Bog: **0%**\Everything\
 Chronos Nyx\-1, -1, -1, -1, 6842299, 5165264, 19360178, 2258632; -1, -1, -1, -1, 2557, 3410, 3410, 1200\Light, Dragon, Raid, Fractured Futures\Poison: **0%**, Burn:  **0%**, Freeze: *99%*, Paralysis: **0%**, Stun: *99%*, Bog: *80%*, Sleep: *99%*\Everything\
 Shining Cyclops\3990, 11340, 20580; 240, 630, 1070\Light, Demihuman, Boss, Fractured Futures\Poison: 55%, Burn: 55%, Freeze: *55%, Paralysis: *75%*, Bind: *75%*, Stun: 55%, Curse: 55%, Bog: 55%, Sleep: 55%\Paralysis\
