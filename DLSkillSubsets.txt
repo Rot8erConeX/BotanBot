@@ -104,7 +104,7 @@
 ["Allies", ["allies", "ally", "allys", "allied"], "Skill"]
 ["Bleed", ["bleed", "bleeding"], "Skill"]
 ["Blind", ["blind", "blinded", "blindness"], "Skill"]
-["BlindedPunisher", ["blindedpunisher", "blindpunisher", "blindedpunish", "blindpunish", "Skill"]
+["BlindedPunisher", ["blindedpunisher", "blindpunisher", "blindedpunish", "blindpunish"], "Skill"]
 ["Bog", ["bog", "bogged", "bogging"], "Skill"]
 ["BurningPunisher", ["burningpunisher", "burningpunish", "burningpunishment", "burnpunisher", "burnpunishment", "burnpunish", "burntpunisher", "burntpunish", "burntpunishment"], "Skill"]
 ["BrokenPunisher", ["brokenpunisher", "brokenpunish", "brokenpunishment", "brokepunisher", "brokepunish", "brokepunishment", "breakpunisher", "breakpunishment", "breakpunish"], "Skill"]
