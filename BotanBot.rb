@@ -3882,6 +3882,11 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
   evn=event.message.text.downcase.split(' ')
   k=k.reject{|q| q[2]=='Aura'} if k.is_a?(Array) && k.map{|q| q[2]}.uniq.length>1
   k=k[0] if k[0].is_a?(Array) && k.length<=1
+  data_load()
+  if k[0].is_a?(Array) && k.length>1
+    m=@askilities.reject{|q| q[0]!=k[0][0] || !k.map{|q2| q2[2]}.include?(q[2])}
+    k=m.map{|q| q}
+  end
   str=''
   hdr=''
   xpic=k[0]
@@ -3936,10 +3941,6 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
   timeshift-=1 unless (t-24*60*60).dst?
   t-=60*60*timeshift
   ignorefeh=true
-  if t.year==2019
-    ignorefeh=false if t.month<=4
-    ignorefeh=false if t.month==5 && t.day<=12
-  end
   elemo=[['Flame','<:Element_Flame:532106087952810005>','<:Boost_Fire:498863399116079123>'],
          ['Water','<:Element_Water:532106088221376522>','<:Boost_Water:498863398944243712>'],
          ['Wind','<:Element_Wind:532106087948746763>','<:Boost_Wind:498863398918815745>'],
@@ -4441,9 +4442,8 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
             brk=false
             m2=[]
             for i3 in 0...adv.length
-              advabils=[adv[i3][8][0][1],adv[i3][8][1][1],adv[i3][8][2][-1]]
-              advabils.push(adv[i3][8][3][0]) if adv[i3][8].length>3
-              advabils.push(adv[i3][8][3][1]) if adv[i3][8].length>3
+              advabils=[adv[i3][8][0][-1],adv[i3][8][1][-1],adv[i3][8][2][-1]]
+              advabils.push(adv[i3][8][3][-1]) if adv[i3][8].length>3
               advemo=element_emote(adv[i3][2][1],bot,adv[i3][12])
               advemo=element_emote(adv[i3][2][1],bot) if ignorefeh
               mm2=1
@@ -4962,8 +4962,14 @@ def disp_facility_data(bot,event,args=nil)
     end
   elsif k[0]=='Fafnir Statue (Flame)'
     str="#{str}\n\n**Unlocked by:** Completing <:Element_Flame:532106087952810005>High Brunhilda's Trial\n**Cost:** Flamewyrm's Greatsphere x30, Talonstone x10"
+  elsif k[0]=='Fafnir Statue (Water)'
+    str="#{str}\n\n**Unlocked by:** Completing <:Element_Water:532106088221376522>High Mercury's Trial\n**Cost:** Waterwyrm's Greatsphere x30, Talonstone x10"
   elsif k[0]=='Fafnir Statue (Wind)'
     str="#{str}\n\n**Unlocked by:** Completing <:Element_Wind:532106087948746763>High Midgardsormr's Trial\n**Cost:** Windwyrm's Greatsphere x30, Talonstone x10"
+  elsif k[0]=='Fafnir Statue (Light)'
+    str="#{str}\n\n**Unlocked by:** Completing <:Element_Light:532106088129101834>High Jupiter's Trial\n**Cost:** Lightwyrm's Greatsphere x30, Talonstone x10"
+  elsif k[0]=='Fafnir Statue (Shadow)'
+    str="#{str}\n\n**Unlocked by:** Completing <:Element_Shadow:532106088154267658>High Zodiark's Trial\n**Cost:** Shadowwyrm's Greatsphere x30, Talonstone x10"
   elsif k[0]=='Smithy' && !s2s
     str="#{str}\n\nLevel 1-3 Smithies can craft #{generate_rarity_row(3)} weapons"
     str="#{str}\nLevel 4-6 Smithies can craft #{generate_rarity_row(4)} weapons"
@@ -5066,7 +5072,7 @@ def disp_facility_data(bot,event,args=nil)
           alta=[(i+1)/2,i/2]
           alta=alta.map{|q| q*0.5+0.5}
           str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-        elsif k[3][1]=='Dojo' && s2s
+        elsif ['Dojo','Fafnir'].include?(k[3][1]) && s2s
           alta=[(i+1)/2,i/2]
           alta=alta.map{|q| q*0.5+3.0}
           for i2 in 0...((i+1)/15+1)
@@ -5119,11 +5125,12 @@ def disp_facility_data(bot,event,args=nil)
         alta=[kxx.length/2,(kxx.length-1)/2]
         alta=alta.map{|q| q*0.5+0.5}
         str3="#{str3}**\n**FINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif k[3][1]=='Dojo'
+      elsif ['Dojo','Fafnir'].include?(k[3][1])
         alta=[kxx.length/2,(kxx.length-1)/2]
         alta=alta.map{|q| q*0.5+3.0}
         for i2 in 0...(kxx.length/15+1)
-          if kxx.length>15*i2+14 && i2%2==0
+          if kxx.length%15==0 && i2*15+15==kxx.length
+          elsif kxx.length>15*i2+14 && i2%2==0
             alta[0]+=1+i2
             alta[1]+=1.5+i2
           elsif kxx.length>15*i2+14 && i2%2==1
@@ -5186,7 +5193,7 @@ def disp_facility_data(bot,event,args=nil)
           end
         end
         str3="#{str3}\nBuffs at Level #{n}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif k[3][1]=='Dojo'
+      elsif ['Dojo','Fafnir'].include?(k[3][1])
         alta=[(n)/2,(n-1)/2]
         alta=alta.map{|q| q*0.5+3.0}
         for i2 in 0...(kxx.length/15+1)
@@ -5239,7 +5246,7 @@ def disp_facility_data(bot,event,args=nil)
           end
         end
         str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif k[3][1]=='Dojo'
+      elsif ['Dojo','Fafnir'].include?(k[3][1])
         alta=[kxx.length/2,(kxx.length-1)/2]
         alta=alta.map{|q| q*0.5+3.0}
         for i2 in 0...(kxx.length/15+1)
@@ -6641,6 +6648,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
     clzz.push('Support') if ['support','supports','supportive','supporting'].include?(args[i].downcase)
     clzz.push('Healer') if ['heal','healing','heals','healer','healers'].include?(args[i].downcase)
     fltr.push('Welfare') if ['welfare','welfares','free','freebies','f2p'].include?(args[i].downcase)
+    fltr.push('Gala') if ['gala','galadragalia'].include?(args[i].downcase)
     fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
     fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons','limited','limit'].include?(args[i].downcase)
     fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons','limited','limit'].include?(args[i].downcase)
@@ -6753,7 +6761,8 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
       end
       emo.push('(c)') if fltr.length<2
     end
-    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[12].nil? && q[12].length>0)}.uniq
+    emo.push('(g)') if fltr.length<2 && fltr.include?('Gala')
+    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[12].nil? && q[12].length>0) && !(fltr.include?('Gala') && q[0][0,5]=='Gala ')}.uniq
     search.push("*Filters*: #{fltr.join(', ')}")
   end
   if genders.length>0
@@ -7268,7 +7277,7 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       args2[i]=nil unless fltr.include?('Agito')
       fltr.push('Agito')
     end
-    if ['chimera'].include?(args[i].downcase)
+    if ['chimera','chimeratech'].include?(args[i].downcase)
       args2[i]=nil unless fltr.include?('chimera')
       fltr.push('Chimera')
     end
