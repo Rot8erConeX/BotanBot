@@ -877,5 +877,5 @@ Qinghong Jian\Dagger\6a\Shadow\71, 155, 239\453, 981, 1513\Qimen Dunjia\2000, 0\
 Fangtian Huaji\Axe\6a\Shadow\73, 159, 244\486, 1051, 1621\Qimen Dunjia\2000, 0\879\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
 Qinglong Yanyu\Lance\6a\Shadow\72, 157, 242\472, 1021, 1575\Qimen Dunjia\2000, 0\880\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
 Longshe Gong\Bow\6a\Shadow\69, 151, 232\444, 961, 1482\Qimen Dunjia\2000, 0\881\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
-Jui Ci\Wand\6a\Shadow\66, 145, 223\477, 1031, 1590\Qimen Dunjia\2000, 0\882\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
+Jiu Ci\Wand\6a\Shadow\66, 145, 223\477, 1031, 1590\Qimen Dunjia\2000, 0\882\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
 Goosefoot Staff\Staff\6a\Shadow\78, 170, 261\440, 951, 1467\Qimen Dunjia\2000, 0\883\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
