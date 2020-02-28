@@ -907,6 +907,21 @@ Shadow Dracolith\17\-\Dragon, Dracolith\2x2\1\28000\Shadowwyrm's Sphere, 200;; S
 Shadow Dracolith\18\-\Dragon, Dracolith\2x2\1\30000\Shadowwyrm's Sphere, 250;; Shadowwyrm's Scale, 100;; Talonstone, 10
 Shadow Dracolith\19\-\Dragon, Dracolith\2x2\1\32000\Shadowwyrm's Sphere, 300;; Shadowwyrm's Scale, 120;; Talonstone, 10
 Shadow Dracolith\20\-\Dragon, Dracolith\2x2\1\34000\Shadowwyrm's Sphere, 350;; Shadowwyrm's Scale, 140;; Talonstone, 10
+Shadow Tree\1\A mystical tree filled with shadow mana and granted new power upon defeating Kai Yan. Use it to boost the stats of *shadow-attuned* adventurers.\Adventurer, Tree\3x3\1\0
+Shadow Tree\2\-\Adventurer, Tree\3x3\1\10000\Almighty One's Mask Fragment, 10
+Shadow Tree\3\-\Adventurer, Tree\3x3\1\20000\Almighty One's Mask Fragment, 10
+Shadow Tree\4\-\Adventurer, Tree\3x3\1\30000\Almighty One's Mask Fragment, 20
+Shadow Tree\5\-\Adventurer, Tree\3x3\1\40000\Almighty One's Mask Fragment, 20
+Shadow Tree\6\-\Adventurer, Tree\3x3\1\50000\Almighty One's Mask Fragment, 30
+Shadow Tree\7\-\Adventurer, Tree\3x3\1\60000\Almighty One's Mask Fragment, 30
+Shadow Tree\8\-\Adventurer, Tree\3x3\1\70000\Almighty One's Mask Fragment, 30
+Shadow Tree\9\-\Adventurer, Tree\3x3\1\80000\Almighty One's Mask Fragment, 30
+Shadow Tree\10\-\Adventurer, Tree\3x3\1\90000\Almighty One's Mask Fragment, 30
+Shadow Tree\11\-\Adventurer, Tree\3x3\1\100000\Almighty One's Mask Fragment, 35;; Uprooting One's Mask Fragment, 5
+Shadow Tree\12\-\Adventurer, Tree\3x3\1\110000\Almighty One's Mask Fragment, 35;; Uprooting One's Mask Fragment, 5
+Shadow Tree\13\-\Adventurer, Tree\3x3\1\120000\Almighty One's Mask Fragment, 35;; Uprooting One's Mask Fragment, 5
+Shadow Tree\14\-\Adventurer, Tree\3x3\1\130000\Almighty One's Mask Fragment, 35;; Uprooting One's Mask Fragment, 5
+Shadow Tree\15\-\Adventurer, Tree\3x3\1\140000\Almighty One's Mask Fragment, 35;; Uprooting One's Mask Fragment, 5
 Smithy\H\The smithy run by Ramona. Raise its level to expand the selection of weapons you can craft or enhance.\General\3x3\1\0
 Snowdrake\-\An adorable drake made from snow. It's so cute, in fact, that someone cast a spell on it to make sure it doesn't melt.\Decorative\1x1\4\0
 Staff Dojo\1\A training area built to hone one's skills with a staff. Use it to boosts the stats of staff-wielding adventures.\Adventurer, Dojo\3x3\2\0
@@ -1014,6 +1029,36 @@ Sword Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argen
 Sword Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Vermilion Insignia, 200;; Dyrenell Aureus, 140;; Royal Vermilion Insignia, 80
 Sword Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Vermilion Insignia, 240;; Dyrenell Aureus, 150;; Royal Vermilion Insignia, 100
 Sword Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Vermilion Insignia, 240;; Dyrenell Aureus, 160;; Royal Vermilion Insignia, 100
+The Hungerdome\1\Use it to boost the stats of wand and blade wielding adventurers.\Adventurer, Event Dual Dojo\3x3\1\0
+The Hungerdome\2\-\Adventurer, Event Dual Dojo\3x3\1\100\Chef's Special, 3
+The Hungerdome\3\-\Adventurer, Event Dual Dojo\3x3\1\200\Chef's Special, 5
+The Hungerdome\4\-\Adventurer, Event Dual Dojo\3x3\1\300\Chef's Special, 7
+The Hungerdome\5\-\Adventurer, Event Dual Dojo\3x3\1\400\Chef's Special, 10
+The Hungerdome\6\-\Adventurer, Event Dual Dojo\3x3\1\500\Chef's Special, 12
+The Hungerdome\7\-\Adventurer, Event Dual Dojo\3x3\1\600\Chef's Special, 15
+The Hungerdome\8\-\Adventurer, Event Dual Dojo\3x3\1\700\Chef's Special, 18
+The Hungerdome\9\-\Adventurer, Event Dual Dojo\3x3\1\800\Chef's Special, 21
+The Hungerdome\10\-\Adventurer, Event Dual Dojo\3x3\1\1000\Chef's Special, 25
+The Hungerdome\11\-\Adventurer, Event Dual Dojo\3x3\1\1200\Chef's Special, 30
+The Hungerdome\12\-\Adventurer, Event Dual Dojo\3x3\1\1400\Chef's Special, 50
+The Hungerdome\13\-\Adventurer, Event Dual Dojo\3x3\1\1600\Chef's Special, 70
+The Hungerdome\14\-\Adventurer, Event Dual Dojo\3x3\1\1800\Chef's Special, 90
+The Hungerdome\15\-\Adventurer, Event Dual Dojo\3x3\1\2000\Chef's Special, 120
+The Hungerdome\16\-\Adventurer, Event Dual Dojo\3x3\1\2200\Chef's Special, 150
+The Hungerdome\17\-\Adventurer, Event Dual Dojo\3x3\1\2400\Chef's Special, 180
+The Hungerdome\18\-\Adventurer, Event Dual Dojo\3x3\1\2600\Chef's Special, 210
+The Hungerdome\19\-\Adventurer, Event Dual Dojo\3x3\1\2800\Chef's Special, 250
+The Hungerdome\20\-\Adventurer, Event Dual Dojo\3x3\1\3000\Chef's Special, 300
+The Hungerdome\21\-\Adventurer, Event Dual Dojo\3x3\1\3200\Chef's Special, 350
+The Hungerdome\22\-\Adventurer, Event Dual Dojo\3x3\1\3400\Chef's Special, 400
+The Hungerdome\23\-\Adventurer, Event Dual Dojo\3x3\1\3600\Chef's Special, 450
+The Hungerdome\24\-\Adventurer, Event Dual Dojo\3x3\1\3800\Chef's Special, 500
+The Hungerdome\25\-\Adventurer, Event Dual Dojo\3x3\1\4000\Chef's Special, 550
+The Hungerdome\26\-\Adventurer, Event Dual Dojo\3x3\1\4200\Chef's Special, 600
+The Hungerdome\27\-\Adventurer, Event Dual Dojo\3x3\1\4400\Chef's Special, 700
+The Hungerdome\28\-\Adventurer, Event Dual Dojo\3x3\1\4600\Chef's Special, 800
+The Hungerdome\29\-\Adventurer, Event Dual Dojo\3x3\1\4800\Chef's Special, 900
+The Hungerdome\30\-\Adventurer, Event Dual Dojo\3x3\1\5000\Chef's Special, 1000
 Twinkling Slime Statue\1\A statue of a twinkling slime granted to those who are victorious in void battles. The still light mana within it sharpens the mind. Use it to boost the stats of light-attuned adventurers.\Adventurer, Void Altar\2x2\1\0
 Twinkling Slime Statue\2\-\Adventurer, Void Altar\2x2\1\5000\Iron Ore, 10
 Twinkling Slime Statue\3\-\Adventurer, Void Altar\2x2\1\10000\Iron Ore, 15;; Solid Fungus, 2
