@@ -871,3 +871,11 @@ Chimeratech Scherzo\Wand\5m\Shadow\32, 0, 107\210, 0, 701\\1500, 0\872\0\0\40000
 Chimeratech Oratorio\Wand\5m\Shadow\53, 0, 178\300, 0, 1001\\1500, 0\873\872\0\900000, -\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
 Chimeratech Intro\Staff\5m\Shadow\41, 0, 135\184, 0, 614\\1500, 0\874\0\0\400000, -\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
 Chimeratech Coda\Staff\5m\Shadow\67, 0, 225\263, 0, 877\\1500, 0\875\874\0\900000, -\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
+Yitian Jian\Sword\6a\Shadow\71, 154, 237\463, 1001, 1544\Qimen Dunjia\2000, 0\876\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
+Qixing Baodao\Blade\6a\Shadow\62, 136, 209\490, 1061, 1636\Qimen Dunjia\2000, 0\877\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
+Qinghong Jian\Dagger\6a\Shadow\71, 155, 239\453, 981, 1513\Qimen Dunjia\2000, 0\878\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
+Fangtian Huaji\Axe\6a\Shadow\73, 159, 244\486, 1051, 1621\Qimen Dunjia\2000, 0\879\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
+Qinglong Yanyu\Lance\6a\Shadow\72, 157, 242\472, 1021, 1575\Qimen Dunjia\2000, 0\880\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
+Longshe Gong\Bow\6a\Shadow\69, 151, 232\444, 961, 1482\Qimen Dunjia\2000, 0\881\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
+Jui Ci\Wand\6a\Shadow\66, 145, 223\477, 1031, 1590\Qimen Dunjia\2000, 0\882\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
+Goosefoot Staff\Staff\6a\Shadow\78, 170, 261\440, 951, 1467\Qimen Dunjia\2000, 0\883\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
