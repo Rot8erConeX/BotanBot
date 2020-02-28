@@ -1361,6 +1361,10 @@ Burning Punisher\30%\Ability\Increases damage to burning enemies by 30%\100\y\Bu
 Charge Rate\example\Ability\Increases force strike charge rate by 15/20%\0\y\ChargeRate
 Charge Rate\15%\Ability\Increases force strike charge rate by 15%\80\y\ChargeRate
 Charge Rate\20%\Ability\Increases force strike charge rate by 20%\100\y\ChargeRate
+Chef's Special\example\Ability\Increases Chef's Special intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by `x`%.\0\y\Event, Facility
+Chef's Special\25%\Ability\Increases Chef's Special intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by 25%.\0\y\Event, Facility
+Chef's Special\35%\Ability\Increases Chef's Special intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by 35%.\0\y\Event, Facility
+Chef's Special\50%\Ability\Increases Chef's Special intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by 50%.\0\y\Event, Facility
 Chicken At Heart\example\Ability\Increases strength by `x`% when HP is 60% or above, but decreases strength by 20% when HP is less than 60%.\0\y\Strength, HP60
 Chicken At Heart\I\Ability\Increases strength by 15% when HP is 60% or above, but decreases strength by 20% when HP is less than 60%.\60\y\Strength, HP60
 Chicken At Heart\II\Ability\Increases strength by 20% when HP is 60% or above, but decreases strength by 20% when HP is less than 60%.\80\y\Strength, HP60
@@ -2115,6 +2119,14 @@ Woodland Blessing\100%\Ability\Reduces susceptibility to stun and sleep by 100%.
 World's Dream\example\Ability\Grants the user's force strikes the ability to dispel one enemy buff when the combo count is 20/15 or higher.\0\y\Dispel
 World's Dream\I\Ability\Grants the user's force strikes the ability to dispel one enemy buff when the combo count is 20 or higher.\80\y\Dispel
 World's Dream\II\Ability\Grants the user's force strikes the ability to dispel one enemy buff when the combo count is 15 or higher.\100\y\Dispel
+Zest\example\Ability\Increases zest intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by `x`%.\0\y\Event, Facility, Score
+Zest\25%\Ability\Increases zest intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by 25%.\0\y\Event, Facility, Score
+Zest\35%\Ability\Increases zest intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by 35%.\0\y\Event, Facility, Score
+Zest\50%\Ability\Increases zest intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by 150%.\0\y\Event, Facility, Score
+Zest\75%\Ability\Increases zest intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by 75%.\0\y\Event, Facility, Score
+Zest\100%\Ability\Increases zest intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by 100%.\0\y\Event, Facility, Score
+Zest\125%\Ability\Increases zest intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by 125%.\0\y\Event, Facility, Score
+Zest\150%\Ability\Increases zest intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by 150%.\0\y\Event, Facility, Score
 Zodiark Res\example\Ability\Reduces damage taken from Zodiark by `x`%.\0\y\ZodiarkRes, Resistance
 Zodiark Res\15%\Ability\Reduces damage taken from Zodiark by 15%.\30\y\ZodiarkRes, Resistance
 Zodiark Res\18%\Ability\Reduces damage taken from Zodiark by 18%.\45\y\ZodiarkRes, Resistance
