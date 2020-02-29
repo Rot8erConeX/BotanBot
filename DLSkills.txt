@@ -1285,6 +1285,7 @@ Barrage Devastation\3%\Ability\Increases critical rate by 3% for every 30-hit co
 Barrage Obliteration\example\Ability\Adds `x`% to the modifier applied to critical damage for every 20-hit combo (up to three times per quest)\0\y\CritDamage, Combo
 Barrage Obliteration\5%\Ability\Adds 5% to the modifier applied to critical damage for every 20-hit combo (up to three times per quest)\40\y\CritDamage, Combo
 Barrage Obliteration\6%\Ability\Adds 6% to the modifier applied to critical damage for every 20-hit combo (up to three times per quest)\60\y\CritDamage, Combo
+Battleground\-\Ability\Adventurers do double damage to Kai Yan, but he deals 50% more damage to you.\-1\y\Enemy
 Bleeding Punisher\example\Ability\Increases damage to bleeding enemies by `x`%.\0\y\Bleed, Punisher
 Bleeding Punisher\5%\Ability\Increases damage to bleeding enemies by 5%.\60\y\Bleed, Punisher
 Bleeding Punisher\8%\Ability\Increases damage to bleeding enemies by 8%.\80\y\Bleed, Punisher
@@ -1925,6 +1926,7 @@ Recovery Potency\13%\Ability\Increases the potency of recovery skills by 13%.\10
 Reduced Defense Devastator\example\Ability\Increases critical rate by 15/20% against enemies with reduced defense.\0\y\DebuffPunisher, CritRate
 Reduced Defense Devastator\15%\Ability\Increases critical rate by 15% against enemies with reduced defense.\80\y\DebuffPunisher, CritRate
 Reduced Defense Devastator\20%\Ability\Increases critical rate by 20% against enemies with reduced defense.\100\y\DebuffPunisher, CritRate
+Reflection Shield\-\Ability\Blocks Hits - Human Form: 30, Blocks Hits - Demihuman Form: 60. Damage Reflection: 50 (unaffected by Battleground). Dispellable.\-1\y\Enemy
 Relentless Spirit\I\Ability\Reduces susceptibility to freeze and bog by 50%.\0\y\FreezeRes, BogRes
 Relentless Spirit\II\Ability\Reduces susceptibility to freeze and bog by 100%.\0\y\FreezeRes, BogRes
 Renown\example\Ability\Increases renown intake for clearing quests by +`x`%\0\y\Event, Facility, Score
