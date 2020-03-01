@@ -11236,7 +11236,7 @@ def disp_adv_mats(event,args,bot,forcespiral=false)
       for i2 in 0...m.length
         m[i2]=m[i2].split(' ')
         m[i2]=[m[i2][0,m[i2].length-1].join(' '),m[i2][m[i2].length-1].gsub('x','').to_i]
-        f2.push(m[i2].map{|q| q}) unless i<xx.find_index{|q| q>=nums[0]} || i>xx.find_index{|q| q>=nums[1]}
+        f2.push(m[i2].map{|q| q}) unless i<xx.find_index{|q| q>=nums[0]} || i>xx.find_index{|q| q>=nums[1]} || (i==9 && nums[1]==50)
         if m[i2][0]=='Mana'
           m[i2]="#{longFormattedNumber(m[i2][1])}<:Resource_Mana:532104503852400640>"
         elsif m[i2][0]=='Eldwater'
@@ -11253,7 +11253,7 @@ def disp_adv_mats(event,args,bot,forcespiral=false)
       f2.push([2,"#{f[2] if nums[0]<20}\n\n__*Floor 3 unbind*__\n#{f[3]}"]) if nums[0]<30 && nums[1]>=20
       f2.push([3,"#{f[4] if nums[0]<30}\n\n__*Floor 4 unbind*__\n#{f[5]}"]) if nums[0]<40 && nums[1]>=30
       f2.push([4,"#{f[6] if nums[0]<40}\n\n__*Floor 5 unbind*__\n#{f[7]}"]) if nums[0]<50 && nums[1]>=40
-      f2.push([5,"#{f[8] if nums[0]<50}#{"\n\n__*Mana Spiral unlock*__\n#{f[9]}" if mana}"]) if nums[0]<=50 && nums[1]>=50
+      f2.push([5,"#{f[8] if nums[0]<50}#{"\n\n__*Mana Spiral unlock*__\n#{f[9]}" if mana && nums[1]<=49}"]) if nums[0]<=50 && nums[1]>=50
       xcolor=element_color(elem)
       disp="__**#{name}**'s Mana Spiral mats#{" (#{nums_mean})" if nums_mean.length>0}__"
       if f2.length>0
