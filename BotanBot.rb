@@ -11236,7 +11236,7 @@ def disp_adv_mats(event,args,bot,forcespiral=false)
       for i2 in 0...m.length
         m[i2]=m[i2].split(' ')
         m[i2]=[m[i2][0,m[i2].length-1].join(' '),m[i2][m[i2].length-1].gsub('x','').to_i]
-        f2.push(m[i2].map{|q| q}) unless i<xx.find_index{|q| q<=nums[0]} || i>xx.find_index{|q| q>=nums[1]}
+        f2.push(m[i2].map{|q| q}) unless i<xx.find_index{|q| q>=nums[0]} || i>xx.find_index{|q| q>=nums[1]}
         if m[i2][0]=='Mana'
           m[i2]="#{longFormattedNumber(m[i2][1])}<:Resource_Mana:532104503852400640>"
         elsif m[i2][0]=='Eldwater'
