@@ -158,7 +158,7 @@ def all_commands(include_nil=false,permissions=-1)
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
      'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias',
      'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','limit',
-     'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol','reload','update']
+     'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol','reload','update','mats','materials']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -1554,9 +1554,15 @@ end
 def find_ability(name,event,fullname=false,ext=false)
   data_load()
   name=normalize(name)
+  romanums=['O','I','II','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV','XXV',
+            'XXVI','XXVII','XXVIII','XXIX','XXX','XXXI','XXXII','XXXIII','XXXIV','XXXV','XXXVI','XXXVII','XXXVIII','XXXIX','XL','XLI','XLII','XLII','XLIII',
+            'XLIV','XLV','XLVI','XLVII','XLVIII','XLIX','L']
   name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   sklz=@askilities.reject{|q| q[2]=='Skill'}
+  sklz2=sklz.reject{|q| !romanums.include?(q[1])}
   return [] if name.length<2
+  k=sklz2.reject{|q| "#{q[0]} #{romanums.find_index{|q2| q2==q[1]}}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name || q[1].downcase=='example'}
+  return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   k=sklz.reject{|q| "#{q[0]} #{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name || q[1].downcase=='example'}
   return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   k=sklz.reject{|q| "#{q[0]} +#{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name || q[1].downcase=='example'}
@@ -1808,24 +1814,27 @@ def find_banner(name,event,fullname=false,ext=false)
   return []
 end
 
-def find_data_ex(callback,name,event,fullname=false,ext=false)
+def find_data_ex(callback,name,event,fullname=false,ext=false,includematch=false)
   k=method(callback).call(name,event,true,ext)
+  return [k,name] if includematch && k.length>0
   return k if k.length>0
   blank=[]
   args=name.split(' ')
   for i in 0...args.length
     for i2 in 0...args.length-i
       k=method(callback).call(args[i,args.length-i-i2].join(' '),event,true,ext)
+      return [k,args[i,args.length-i-i2].join(' ')] if includematch && k.length>0 && args[i,args.length-i-i2].length>0
       return k if k.length>0 && args[i,args.length-i-i2].length>0
     end
   end
   return blank if fullname || name.length<=2
   k=method(callback).call(name,event,false,ext)
-  return k if k.length>0
+  return [k,name] if includematch && k.length>0
   args=name.split(' ')
   for i in 0...args.length
     for i2 in 0...args.length-i
       k=method(callback).call(args[i,args.length-i-i2].join(' '),event,false,ext)
+      return [k,args[i,args.length-i-i2].join(' ')] if includematch && k.length>0 && args[i,args.length-i-i2].length>0
       return k if k.length>0 && args[i,args.length-i-i2].length>0
     end
   end
@@ -11025,6 +11034,244 @@ def find_dragon_alts(event,args,bot)
   return nil
 end
 
+def disp_adv_mats(event,args,bot)
+  data_load()
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_adventurer,args.join(' '),event,false,false,true)
+  if k.length>0
+    elems=['flame','fire','flames','fires','water','waters','wind','air','winds','airs','light','lights','shadow','dark','shadows','darks']
+    if event.user.id==192821228468305920
+      elems.push('earth')
+      elems.push('earths')
+    end
+    if elems.include?(k[1].downcase)
+      k=[]
+    else
+      k=k[0]
+    end
+  end
+  elem=''
+  name=''
+  nums=[]
+  mana=false
+  euden=false
+  xpic=nil
+  unless k.length.zero?
+    name=k[0]
+    elem=k[2][1]
+    nums.push(k[1][0,1].to_i)
+    mana=true unless k[3][1][@max_rarity[0]].nil? || k[3][1][@max_rarity[0]]<=0 || k[4][1][@max_rarity[0]].nil? || k[4][1][@max_rarity[0]]<=0
+    euden=true if k[0]=='Euden'
+    dispname=k[0].gsub(' ','_')
+    xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Adventurers/#{dispname}_#{k[1][0,1]}.png?raw=true"
+  end
+  for i in 0...args.length
+    elem='Flame' if ['flame','fire','flames','fires'].include?(args[i].downcase) && elem.length<=0
+    elem='Water' if ['water','waters'].include?(args[i].downcase) && elem.length<=0
+    elem='Wind' if ['wind','air','winds','airs'].include?(args[i].downcase) && elem.length<=0
+    elem='Wind' if ['earth','earths'].include?(args[i].downcase) && event.user.id==192821228468305920 && elem.length<=0
+    elem='Light' if ['light','lights'].include?(args[i].downcase) && elem.length<=0
+    elem='Shadow' if ['shadow','dark','shadows','darks'].include?(args[i].downcase) && elem.length<=0
+    nums.push(args[i].to_i) if args[i].to_i.to_s==args[i]
+  end
+  if nums.length<=0 || elem.length<=0
+    event.respond "You need either an element and a rarity, or an adventurer name."
+    return nil
+  end
+  rar=-1
+  for i in 0...nums.length
+    if rar<0 && nums[i]>2 && nums[i]<6
+      rar=nums[i]*1
+      nums[i]=nil
+    elsif nums[i]<0 || nums[i]>100
+      nums[i]=nil
+    end
+  end
+  if rar<0
+    event.respond "You need either an element and a rarity, or an adventurer name."
+    return nil
+  end
+  nums.compact!
+  nums_mean=[]
+  if nums.length>0
+    for i in 0...nums.length
+      if nums[i]<6 && i<=0
+        nums_mean.push("Floor #{nums[i]}")
+        nums[i]=nums[i]*10-10
+      elsif nums[i]<6
+        nums_mean.push("Floor #{nums[i]}")
+        nums[i]=nums[i]*10
+      elsif nums[i]<51 && nums[i]%10==0
+        nums_mean.push("Floor #{nums[i]/10}")
+      elsif nums[i]<51
+        nums[i]=(nums[i]/10+1)*10
+        nums_mean.push("Floor #{nums[i]/10}")
+      elsif nums[i]<=70
+        nums_mean.push("Node #{nums[i]}")
+      end
+    end
+  end
+  nums.push(0) if nums.length<1
+  nums.push(100) if nums.length<2
+  nums=nums[0,2].uniq.sort
+  nums.push(100) if nums.length<2
+  if nums_mean.length>1
+    nums_mean="from #{nums_mean[0]} to #{nums_mean[1]}"
+  elsif nums_mean.length>0
+    nums_mean="from #{nums_mean[0]} onwards"
+  else
+    nums_mean=''
+  end
+  f=[]
+  xx=[0,10,10,20,20,30,30,40,40,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,100]
+  if euden
+    f=["Mana x3950","Flame Orb x7","Flame Orb x15, Blaze Orb x2, Mana x14300","Flame Orb x12, Blaze Orb x3",
+       "Flame Orb x30, Blaze Orb x3, Inferno Orb x1, Flamewyrm's Scale x5, Flamewyrm's Scaldscale x1, Mana x32100",
+       "Blaze Orb x5, Inferno Orb x3, Rainbow Orb x1, Flamewyrm's Scale x15, Flamewyrm's Scaldscale x5",
+       "Flame Orb x75, Blaze Orb x10, Inferno Orb x1, Flamewyrm's Scale x13, Flamewyrm's Scaldscale x4, Mana x51400",
+       "Inferno Orb x4, Rainbow Orb x1, Flamewyrm's Scale x10, Flamewyrm's Scaldscale x7, Knight's Testament x2",
+       "Blaze Orb x12, Inferno Orb x7, Rainbow Orb x2, Flamewyrm's Scale x25, Flamewyrm's Scaldscale x7, Knight's Testament x1, Champion's Testament x1, Mana x86000, Eldwater x73,000","Inferno Orb x8, Rainbow Orb x16, Flamewyrm's Scaldscale x12, Knight's Testament x2, Void Seed x8","Mana x16000",
+       "Mana x24000, Inferno Orb x8, Incandescence Orb x4, Rainbow Orb x4","Mana x16000","Mana x16000",
+       "Mana x30000, Incandescence Orb x4, Knight's Testament x3, Longing Heart x5",
+       "Mana x56000, Incandescence Orb x3, Flamewyrm's Scaldscale x14, Burning Heart x4","Mana x16000","Mana x16000",
+       "Mana x36000, Inferno Orb x12, Incandescence Orb x4, Rainbow Orb x4","Mana x60000, Incandescence Orb x4, Blazing Ember x5, Champion's Testament x1",
+       "Mana x16000","Mana x16000","Mana x24000, Inferno Orb x16, Incandescence Orb x4, Rainbow Orb x4","Mana x16000",
+       "Mana x90000, Incandescence Orb x4, Windwyrm's Greatsphere x4, Champion's Testament x1","Mana x16000",
+       "Mana x36000, Incandescence Orb x4, Rainbow Orb x4, Flamewyrm's Scaldscale x16","Mana x16000","Mana x16000",
+       "Mana x120000, Incandescence Orb x8, Rainbow Orb x4, Windwyrm's Greatsphere x4"]
+  else
+    if rar==5
+    elsif rar==4
+    else
+      f=["Mana x2650","Bronze Orb x5","Bronze Orb x8, Silver Orb x1, Mana x10050","Bronze Orb x10, Silver Orb x3",
+         "Bronze Orb x25, Silver Orb x3, Samewyrm's Scale x3, Mana x23100","Silver Orb x5, Gold Orb x1, Samewyrm's Scale x10, Samewyrm's Superscale x3",
+         "Bronze Orb x70, Silver Orb x10, Gold Orb x1, Samewyrm's Scale x10, Samewyrm's Superscale x2, Mana x36500",
+         "Gold Orb x4, Rainbow Orb x1, Samewyrm's Scale x15, Samewyrm's Superscale x5, Knight's Testament x1",
+         "Silver Orb x12, Gold Orb x7, Rainbow Orb x2, Samewyrm's Scale x15, Samewyrm's Superscale x7, Knight's Testament x1, Champion's Testament x1, Mana x70000, Eldwater x73000","Gold Orb x6, Rainbow Orb x12, Samewyrm's Superscale x9, Void Seed x6, Knight's Testament x1","Mana x12000",
+         "Gold Orb x6, Platinum Orb x3, Rainbow Orb x3, Mana x18000","Mana x12000","Mana x12000",
+         "Platinum Orb x3, Longing Heart x4, Knight's Testament x1, Mana x22500","Platinum Orb x2, Samewyrm's Superscale x11, Void Heart x2, Mana x42000",
+         "Mana x12000","Mana x12000","Gold Orb x9, Platinum Orb x3, Rainbow Orb x3, Mana x27000",
+         "Platinum Orb x3, HighDragon Tail x3, Knight's Testament x2, Mana x45000","Mana x12000","Mana x12000",
+         "Gold Orb x12, Platinum Orb x3, Rainbow Orb x3, Mana x18000","Mana x12000",
+         "Platinum Orb x3, Weakwyrm's Greatsphere x2, Champion's Testament x1, Mana x67500","Mana x12000",
+         "Platinum Orb x3, Rainbow Orb x3, Samewyrm's Superscale x12, Mana x27000","Mana x12000","Mana x12000",
+         "Platinum Orb x6, Rainbow Orb x3, Weakwyrm's Greatsphere x2, Mana x90000"]
+    end
+    for i in 0...f.length
+      if elem=='Flame'
+        f[i]=f[i].gsub("Bronze Orb","Flame Orb").gsub("Silver Orb","Blaze Orb").gsub("Gold Orb","Inferno Orb").gsub("Platinum Orb","Incandescence Orb")
+        f[i]=f[i].gsub("Samewyrm's Scale","Flamewyrm's Scale").gsub("Samewyrm's Superscale","Flamewyrm's Scaldscale")
+        f[i]=f[i].gsub("Void Heart","Burning Heart").gsub("HighDragon Tail","Blazing Ember")
+        f[i]=f[i].gsub("Weakwyrm's Greatsphere","Windwyrm's Greatsphere")
+      elsif elem=='Water'
+        f[i]=f[i].gsub("Bronze Orb","Water Orb").gsub("Silver Orb","Stream Orb").gsub("Gold Orb","Deluge Orb").gsub("Platinum Orb","Tsunami Orb")
+        f[i]=f[i].gsub("Samewyrm's Scale","Waterwyrm's Scale").gsub("Samewyrm's Superscale","Waterwyrm's Glistscale")
+        f[i]=f[i].gsub("Void Heart","Azure Heart").gsub("HighDragon Tail","Oceanic Crown")
+        f[i]=f[i].gsub("Weakwyrm's Greatsphere","Flamewyrm's Greatsphere")
+      elsif elem=='Wind'
+        f[i]=f[i].gsub("Bronze Orb","Wind Orb").gsub("Silver Orb","Storm Orb").gsub("Gold Orb","Maelstrom Orb").gsub("Platinum Orb","Tempest Orb")
+        f[i]=f[i].gsub("Samewyrm's Scale","Windwyrm's Scale").gsub("Samewyrm's Superscale","Windwyrm's Squallscale")
+        f[i]=f[i].gsub("Void Heart","Verdant Heart").gsub("HighDragon Tail","Zephyr Rune")
+        f[i]=f[i].gsub("Weakwyrm's Greatsphere","Waterwyrm's Greatsphere")
+      elsif elem=='Light'
+        f[i]=f[i].gsub("Bronze Orb","Light Orb").gsub("Silver Orb","Radiance Orb").gsub("Gold Orb","Refulgence Orb").gsub("Platinum Orb","Resplendence Orb")
+        f[i]=f[i].gsub("Samewyrm's Scale","Lightwyrm's Scale").gsub("Samewyrm's Superscale","Lightwyrm's Glowscale")
+        f[i]=f[i].gsub("Void Heart","Coronal Heart").gsub("HighDragon Tail","Abyssal Standard")
+        f[i]=f[i].gsub("Weakwyrm's Greatsphere","Shadowwyrm's Greatsphere")
+      elsif elem=='Shadow'
+        f[i]=f[i].gsub("Bronze Orb","Shadow Orb").gsub("Silver Orb","Nightfall Orb").gsub("Gold Orb","Nether Orb").gsub("Platinum Orb","Abaddon Orb")
+        f[i]=f[i].gsub("Samewyrm's Scale","Shadowwyrm's Scale").gsub("Samewyrm's Superscale","Shadowwyrm's Darkscale")
+        f[i]=f[i].gsub("Void Heart","Ebony Heart").gsub("HighDragon Tail","Ruinous Wing")
+        f[i]=f[i].gsub("Weakwyrm's Greatsphere","Lightwyrm's Greatsphere")
+      end
+    end
+  end
+  name="#{rar}#{@rarity_stars[0][rar]} #{elem}#{element_emote(elem,bot)} Adventurer" if name.length<=0
+  if f.length>0
+    f=f[0,9] unless mana
+    f2=[]
+    for i in 0...f.length
+      m=f[i].split(', ')
+      for i2 in 0...m.length
+        m[i2]=m[i2].split(' ')
+        m[i2]=[m[i2][0,m[i2].length-1].join(' '),m[i2][m[i2].length-1].gsub('x','').to_i]
+        f2.push(m[i2].map{|q| q}) unless i<xx.find_index{|q| q<=nums[0]} || i>xx.find_index{|q| q>=nums[1]}
+        if m[i2][0]=='Mana'
+          m[i2]="#{longFormattedNumber(m[i2][1])}<:Resource_Mana:532104503852400640>"
+        elsif m[i2][0]=='Eldwater'
+          m[i2]="#{longFormattedNumber(m[i2][1])}<:Resource_Eldwater:532104503777034270>"
+        else
+          m[i2]="#{m[i2][0]} x#{longFormattedNumber(m[i2][1])}"
+        end
+      end
+      f[i]=m.join("\n")
+    end
+    if safe_to_spam?(event) && !has_any?(args.map{|q| q.downcase},['total','totals','summary'])
+      f2=[]
+      f2.push([1,"#{f[0] if nums[0]<10}\n\n__*Floor 2 unbind*__\n#{f[1]}"]) if nums[0]<20 && nums[1]>=10
+      f2.push([2,"#{f[2] if nums[0]<20}\n\n__*Floor 3 unbind*__\n#{f[3]}"]) if nums[0]<30 && nums[1]>=20
+      f2.push([3,"#{f[4] if nums[0]<30}\n\n__*Floor 4 unbind*__\n#{f[5]}"]) if nums[0]<40 && nums[1]>=30
+      f2.push([4,"#{f[6] if nums[0]<40}\n\n__*Floor 5 unbind*__\n#{f[7]}"]) if nums[0]<50 && nums[1]>=40
+      f2.push([5,"#{f[8] if nums[0]<50}#{"\n\n__*Mana Spiral unlock*__\n#{f[9]}" if mana}"]) if nums[0]<=50 && nums[1]>=50
+      xcolor=element_color(elem)
+      disp="__**#{name}**'s Mana Spiral mats#{" (#{nums_mean})" if nums_mean.length>0}__"
+      if f2.length>0
+        if f2[0][1].split("\n").reject{|q| q.length<=0}[0].include?('unbind')
+          f2[1][1]="#{f2[0][1]}\n\n#{f2[1][1]}"
+          f2[0]=nil
+          f2.compact!
+        end
+        create_embed(event,"__**#{name}**'s mats#{" (#{nums_mean})" if nums_mean.length>0}__",'',element_color(elem),'Floors are given totals as nodes can be unlocked in any order',xpic,f2.map{|q| ["Floor #{q[0]}",q[1]]})
+        xcolor=0xB14ABC
+        disp='Mana Spiral'
+        xpic=nil
+      end
+      if mana
+        f2=[]
+        for i in 10...f.length
+          if f[i].include?("\n")
+            f2.push([i+41,"\n__*Node #{i+41}*__\n#{f[i]}\n"])
+          else
+            f2.push([i+41,"*Node #{i+41}:* #{f[i]}"])
+          end
+        end
+        f2=f2.reject{|q| q[0]<nums[0] || q[0]>nums[1]}
+        f3=[]
+        f3.push([6,f2.reject{|q| q[0]>60}.map{|q| q[1]}.join("\n").gsub("\n\n\n","\n\n")])
+        f3.push([7,f2.reject{|q| q[0]<61}.map{|q| q[1]}.join("\n").gsub("\n\n\n","\n\n")])
+        f3=f3.reject{|q| q[1].nil? || q[1].length<=0}
+        create_embed(event,disp,'',xcolor,nil,xpic,f3.map{|q| ["Floor #{q[0]}",q[1]]}) if f3.length>0
+      end
+    else
+      f3=f2.map{|q| q[0]}.uniq.map{|q| [q,0]}
+      for i in 0...f3.length
+        f4=f2.reject{|q| q[0]!=f3[i][0]}
+        for i2 in 0...f4.length
+          f3[i][1]+=f4[i2][1]
+        end
+        if f3[i][0]=='Mana'
+          f3[i]="\u00B7  #{longFormattedNumber(f3[i][1])}<:Resource_Mana:532104503852400640>"
+        elsif f3[i][0]=='Eldwater'
+          f3[i]="\u00B7  #{longFormattedNumber(f3[i][1])}<:Resource_Eldwater:532104503777034270>"
+        else
+          f3[i]="#{f3[i][0]} x**#{longFormattedNumber(f3[i][1])}**"
+        end
+      end
+      f3=f3.sort!
+      create_embed(event,"__**#{name}**'s mat totals#{" (#{nums_mean})" if nums_mean.length>0}__",'',element_color(elem),nil,xpic,triple_finish(f3,true))
+    end
+    return nil
+  end
+  event.respond "**Element:** #{element_emote(elem,bot)}\n**Rarity:** #{generate_rarity_row(rar)}#{"\n**Mana Spiral**" if mana}#{"\n**Additional Numbers:** #{nums[0,[nums.length,2].min].join(', ')}" if nums.length>0}"
+end
+
+bot.command([:mats,:materials]) do |event, *args|
+  return nil if overlap_prevent(event)
+  disp_adv_mats(event,args,bot)
+  return nil
+end
+
 bot.command([:embeds,:embed]) do |event|
   return nil if overlap_prevent(event)
   metadata_load()
@@ -11060,6 +11307,10 @@ bot.command([:adventurer,:adv,:unit]) do |event, *args|
   elsif ['alt','alts'].include?(args[0].downcase)
     args.shift
     find_adv_alts(event,args,bot)
+    return nil
+  elsif ['mat','mats','material','materials'].include?(args[0].downcase)
+    args.shift
+    disp_adv_mats(event,args,bot)
     return nil
   end
   disp_adventurer_stats(bot,event,args)
@@ -11163,6 +11414,10 @@ bot.command([:mat,:material,:item]) do |event, *args|
   if ['find','search'].include?(args[0].downcase)
     args.shift
     find_mats(bot,event,args)
+    return nil
+  elsif ['adv','adventurer'].include?(args[0].downcase)
+    args.shift
+    disp_adv_mats(event,args,bot)
     return nil
   end
   disp_mat_data(bot,event,args)
@@ -13206,6 +13461,9 @@ bot.mention do |event|
     elsif ['art'].include?(args[0].downcase)
       args.shift
       disp_adventurer_art(bot,event,args)
+    elsif ['mats','mat','materials','material'].include?(args[0].downcase)
+      args.shift
+      disp_adv_mats(event,args,bot)
     else
       disp_adventurer_stats(bot,event,args)
     end
@@ -13304,6 +13562,9 @@ bot.mention do |event|
     if ['find','search'].include?(args[0].downcase)
       args.shift
       find_mats(bot,event,args)
+    elsif ['adv','adventurer'].include?(args[0].downcase)
+      args.shift
+      disp_adv_mats(event,args,bot)
     else
       disp_mat_data(bot,event,args)
     end
