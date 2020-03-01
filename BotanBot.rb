@@ -158,7 +158,7 @@ def all_commands(include_nil=false,permissions=-1)
      'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
      'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias',
      'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','limit',
-     'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol','reload','update','mats','materials']
+     'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol','reload','update','mats','materials','spiral','node','nodes']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -592,7 +592,7 @@ def help_text(event,bot,command=nil,subcommand=nil)
   elsif ['weapon','weap','wep','wpn'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows `name`'s stats and skills.",0xCE456B)
   elsif ['lineage','craft','crafting'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","Shows the weapons that `name` directly promotes from.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __name__","Shows the weapons that `name` directly promotes from, as well as the materials required to craft this weapon from it.",0xCE456B)
   elsif command.downcase=='invite'
     create_embed(event,'**invite**','PMs the invoker with a link to invite me to their server.',0xCE456B)
   elsif ['skill','skil'].include?(command.downcase)
@@ -712,6 +712,8 @@ def help_text(event,bot,command=nil,subcommand=nil)
     create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s server-specific aliases.\nIf no name is listed, responds with a list of all server-specific aliases and who/what they are for.\n\nAliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Auras\n- Abilities\n- CoAbilities\n- Facilities\n- Materials\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
   elsif ['tools','links','resources','tool','link','resource'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}**","Responds with a list of links useful to players of *Dragalia Lost*.",0xCE456B)
+  elsif ['mats','materials','nodes','node','spiral'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Displays all of the mats required for `name`'s mana nodes.",0xCE456B)
   elsif command.downcase=='snagstats'
     subcommand='' if subcommand.nil?
     if ['server','servers','member','members','shard','shards','users','user'].include?(subcommand.downcase)
@@ -743,6 +745,7 @@ def help_text(event,bot,command=nil,subcommand=nil)
     event.respond "#{command.downcase} is not a command" if command!='' && command.downcase != 'devcommands'
     str="__**Game Data**__"
     str="#{str}\n`adventurer` __name__ - for data on an adventurer (*also `adv`*)"
+    str="#{str}\n`mats` __name__ - for data on an adventurer's mana nodes (*also `nodes`*)"
     str="#{str}\n`dragon` __name__ - for data on a dragon (*also `drg`*)"
     str="#{str}\n`wyrmprint` __name__ - for data on a wyrmprint (*also `wyrm` or `print`*)"
     str="#{str}\n`weapon` __name__ - for data on a weapon (*also `weap` or `wep`*)"
@@ -11034,7 +11037,7 @@ def find_dragon_alts(event,args,bot)
   return nil
 end
 
-def disp_adv_mats(event,args,bot)
+def disp_adv_mats(event,args,bot,forcespiral=false)
   data_load()
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
@@ -11057,7 +11060,9 @@ def disp_adv_mats(event,args,bot)
   mana=false
   euden=false
   xpic=nil
-  unless k.length.zero?
+  if k.length.zero?
+    mana=true if forcespiral
+  else
     name=k[0]
     elem=k[2][1]
     nums.push(k[1][0,1].to_i)
@@ -11077,6 +11082,9 @@ def disp_adv_mats(event,args,bot)
   end
   if nums.length<=0 || elem.length<=0
     event.respond "You need either an element and a rarity, or an adventurer name."
+    return nil
+  elsif forcespiral && !mana
+    event.respond "This adventurer does not have a mana spiral."
     return nil
   end
   rar=-1
@@ -11116,6 +11124,10 @@ def disp_adv_mats(event,args,bot)
   nums.push(100) if nums.length<2
   nums=nums[0,2].uniq.sort
   nums.push(100) if nums.length<2
+  if forcespiral
+    nums=[50,100]
+    nums_mean=[]
+  end
   if nums_mean.length>1
     nums_mean="from #{nums_mean[0]} to #{nums_mean[1]}"
   elsif nums_mean.length>0
@@ -11131,18 +11143,46 @@ def disp_adv_mats(event,args,bot)
        "Blaze Orb x5, Inferno Orb x3, Rainbow Orb x1, Flamewyrm's Scale x15, Flamewyrm's Scaldscale x5",
        "Flame Orb x75, Blaze Orb x10, Inferno Orb x1, Flamewyrm's Scale x13, Flamewyrm's Scaldscale x4, Mana x51400",
        "Inferno Orb x4, Rainbow Orb x1, Flamewyrm's Scale x10, Flamewyrm's Scaldscale x7, Knight's Testament x2",
-       "Blaze Orb x12, Inferno Orb x7, Rainbow Orb x2, Flamewyrm's Scale x25, Flamewyrm's Scaldscale x7, Knight's Testament x1, Champion's Testament x1, Mana x86000, Eldwater x73,000","Inferno Orb x8, Rainbow Orb x16, Flamewyrm's Scaldscale x12, Knight's Testament x2, Void Seed x8","Mana x16000",
-       "Mana x24000, Inferno Orb x8, Incandescence Orb x4, Rainbow Orb x4","Mana x16000","Mana x16000",
-       "Mana x30000, Incandescence Orb x4, Knight's Testament x3, Longing Heart x5",
-       "Mana x56000, Incandescence Orb x3, Flamewyrm's Scaldscale x14, Burning Heart x4","Mana x16000","Mana x16000",
-       "Mana x36000, Inferno Orb x12, Incandescence Orb x4, Rainbow Orb x4","Mana x60000, Incandescence Orb x4, Blazing Ember x5, Champion's Testament x1",
-       "Mana x16000","Mana x16000","Mana x24000, Inferno Orb x16, Incandescence Orb x4, Rainbow Orb x4","Mana x16000",
-       "Mana x90000, Incandescence Orb x4, Windwyrm's Greatsphere x4, Champion's Testament x1","Mana x16000",
-       "Mana x36000, Incandescence Orb x4, Rainbow Orb x4, Flamewyrm's Scaldscale x16","Mana x16000","Mana x16000",
-       "Mana x120000, Incandescence Orb x8, Rainbow Orb x4, Windwyrm's Greatsphere x4"]
+       "Blaze Orb x12, Inferno Orb x7, Rainbow Orb x2, Flamewyrm's Scale x25, Flamewyrm's Scaldscale x7, Knight's Testament x1, Champion's Testament x1, Mana x86000, Eldwater x73000","Inferno Orb x8, Rainbow Orb x16, Flamewyrm's Scaldscale x12, Knight's Testament x2, Void Seed x8","Mana x16000",
+       "Inferno Orb x8, Incandescence Orb x4, Rainbow Orb x4, Mana x24000","Mana x16000","Mana x16000",
+       "Incandescence Orb x4, Knight's Testament x3, Longing Heart x5, Mana x30000",
+       "Incandescence Orb x3, Flamewyrm's Scaldscale x14, Burning Heart x4, Mana x56000","Mana x16000","Mana x16000",
+       "Inferno Orb x12, Incandescence Orb x4, Rainbow Orb x4, Mana x36000","Incandescence Orb x4, Blazing Ember x5, Champion's Testament x1, Mana x60000",
+       "Mana x16000","Mana x16000","Inferno Orb x16, Incandescence Orb x4, Rainbow Orb x4, Mana x24000","Mana x16000",
+       "Incandescence Orb x4, Windwyrm's Greatsphere x4, Champion's Testament x1, Mana x90000","Mana x16000",
+       "Incandescence Orb x4, Rainbow Orb x4, Flamewyrm's Scaldscale x16, Mana x36000","Mana x16000","Mana x16000",
+       "Incandescence Orb x8, Rainbow Orb x4, Windwyrm's Greatsphere x4, Mana x120000"]
   else
     if rar==5
+      f=["Mana x5700","Bronze Orb x10, Silver Orb x1","Bronze Orb x15, Silver Orb x3, Mana x20250","Bronze Orb x20, Silver Orb x5, Gold Orb x1",
+         "Bronze Orb x50, Silver Orb x7, Gold Orb x2, Rainbow Orb x1, Samewyrm's Scale x8, Samewyrm's Superscale x3, Mana x45900",
+         "Silver Orb x10, Gold Orb x5, Rainbow Orb x1, Samewyrm's Scale x25, Samewyrm's Superscale x10",
+         "Bronze Orb x115, Silver Orb x15, Gold Orb x3, Samewyrm's Scale x20, Samewyrm's Superscale x7, Mana x72800",
+         "Gold Orb x7, Rainbow Orb x3, Samewyrm's Scale x30, Samewyrm's Superscale x12, Champion's Testament x1",
+         "Silver Orb x20, Gold Orb x10, Rainbow Orb x3, Samewyrm's Scale x35, Samewyrm's Superscale x12, Champion's Testament x2, Eldwater x73000, Mana x111000","Gold Orb x10, Rainbow Orb x20, Samewyrm's Superscale x15, Void Seed x3, Champion's Testament x1","Mana x20000",
+         "Gold Orb x10, Platinum Orb x5, Rainbow Orb x5, Mana x30000","Mana x20000","Mana x20000",
+         "Platinum Orb x5, Rainbow Orb x3, Champion's Testament x1, Mana x37500","Platinum Orb x3, Samewyrm's Superscale x17, Longing Heart x6, Mana x70000",
+         "Mana x20000","Mana x20000","Gold Orb x15, Platinum Orb x5, Rainbow Orb x5, Mana x45000",
+         "Platinum Orb x5, Void Heart x5, Champion's Testament x1, Mana x75000","Mana x20000","Mana x20000",
+         "Gold Orb x20, Platinum Orb x5, Rainbow Orb x5, Mana x30000","Mana x20000",
+         "Platinum Orb x5, Weakwyrm's Greatsphere x5, Champion's Testament x1, Mana x112500","Mana x20000",
+         "Platinum Orb x5, Rainbow Orb x5, Samewyrm's Superscale x20, Mana x45000","Mana x20000","Mana x20000",
+         "Platinum Orb x10, Rainbow Orb x5, High Weakwyrm's Tail x1, Mana x150000"]
     elsif rar==4
+      f=["Mana x4550","Bronze Orb x8, Silver Orb x1","Bronze Orb x12, Silver Orb x2, Mana x16150","Bronze Orb x15, Silver Orb x4, Gold Orb x1",
+         "Bronze Orb x37, Silver Orb x5, Gold Orb x1, Samewyrm's Scale x6, Samewyrm's Superscale x2, Mana x36900",
+         "Silver Orb x8, Gold Orb x4, Rainbow Orb x1, Samewyrm's Scale x20, Samewyrm's Superscale x8",
+         "Bronze Orb x90, Silver Orb x12, Gold Orb x2, Samewyrm's Scale x16, Samewyrm's Superscale x5, Mana x57500",
+         "Gold Orb x5, Rainbow Orb x2, Samewyrm's Scale x25, Samewyrm's Superscale x10, Knight's Testament x2",
+         "Silver Orb x15, Gold Orb x8, Rainbow Orb x2, Champion's Testament x1, Samewyrm's Scale x30, Samewyrm's Superscale x10, Knight's Testament x1, Mana x95000, Eldwater x73000","Gold Orb x8, Rainbow Orb x16, Samewyrm's Superscale x12, Void Seed x8, Knight's Testament x2","Mana x16000",
+         "Gold Orb x8, Platinum Orb x4, Rainbow Orb x4, Mana x24000","Mana x16000","Mana x16000",
+         "Platinum Orb x4, Knight's Testament x3, Longing Heart x5, Mana x30000","Platinum Orb x3, Samewyrm's Superscale x14, Void Heart x4, Mana x56000",
+         "Mana x16000","Mana x16000","Gold Orb x12, Platinum Orb x4, Rainbow Orb x4, Mana x36000",
+         "Platinum Orb x4, HighDragon Tail x5, Champion's Testament x1, Mana x60000","Mana x16000","Mana x16000",
+         "Gold Orb x16, Platinum Orb x4, Rainbow Orb x4, Mana x24000","Mana x16000",
+         "Platinum Orb x4, Weakwyrm's Greatsphere x4, Champion's Testament x1, Mana x90000","Mana x16000",
+         "Platinum Orb x4, Rainbow Orb x4, Samewyrm's Superscale x16, Mana x36000","Mana x16000","Mana x16000",
+         "Platinum Orb x8, Rainbow Orb x4, Weakwyrm's Greatsphere x4, Mana x120000"]
     else
       f=["Mana x2650","Bronze Orb x5","Bronze Orb x8, Silver Orb x1, Mana x10050","Bronze Orb x10, Silver Orb x3",
          "Bronze Orb x25, Silver Orb x3, Samewyrm's Scale x3, Mana x23100","Silver Orb x5, Gold Orb x1, Samewyrm's Scale x10, Samewyrm's Superscale x3",
@@ -11163,27 +11203,27 @@ def disp_adv_mats(event,args,bot)
         f[i]=f[i].gsub("Bronze Orb","Flame Orb").gsub("Silver Orb","Blaze Orb").gsub("Gold Orb","Inferno Orb").gsub("Platinum Orb","Incandescence Orb")
         f[i]=f[i].gsub("Samewyrm's Scale","Flamewyrm's Scale").gsub("Samewyrm's Superscale","Flamewyrm's Scaldscale")
         f[i]=f[i].gsub("Void Heart","Burning Heart").gsub("HighDragon Tail","Blazing Ember")
-        f[i]=f[i].gsub("Weakwyrm's Greatsphere","Windwyrm's Greatsphere")
+        f[i]=f[i].gsub("Weakwyrm's Greatsphere","Windwyrm's Greatsphere").gsub("High Weakwyrm's Tail","High Windwyrm's Tail")
       elsif elem=='Water'
         f[i]=f[i].gsub("Bronze Orb","Water Orb").gsub("Silver Orb","Stream Orb").gsub("Gold Orb","Deluge Orb").gsub("Platinum Orb","Tsunami Orb")
         f[i]=f[i].gsub("Samewyrm's Scale","Waterwyrm's Scale").gsub("Samewyrm's Superscale","Waterwyrm's Glistscale")
         f[i]=f[i].gsub("Void Heart","Azure Heart").gsub("HighDragon Tail","Oceanic Crown")
-        f[i]=f[i].gsub("Weakwyrm's Greatsphere","Flamewyrm's Greatsphere")
+        f[i]=f[i].gsub("Weakwyrm's Greatsphere","Flamewyrm's Greatsphere").gsub("High Weakwyrm's Tail","High Flamewyrm's Tail")
       elsif elem=='Wind'
         f[i]=f[i].gsub("Bronze Orb","Wind Orb").gsub("Silver Orb","Storm Orb").gsub("Gold Orb","Maelstrom Orb").gsub("Platinum Orb","Tempest Orb")
         f[i]=f[i].gsub("Samewyrm's Scale","Windwyrm's Scale").gsub("Samewyrm's Superscale","Windwyrm's Squallscale")
         f[i]=f[i].gsub("Void Heart","Verdant Heart").gsub("HighDragon Tail","Zephyr Rune")
-        f[i]=f[i].gsub("Weakwyrm's Greatsphere","Waterwyrm's Greatsphere")
+        f[i]=f[i].gsub("Weakwyrm's Greatsphere","Waterwyrm's Greatsphere").gsub("High Weakwyrm's Tail","High Waterwyrm's Tail")
       elsif elem=='Light'
         f[i]=f[i].gsub("Bronze Orb","Light Orb").gsub("Silver Orb","Radiance Orb").gsub("Gold Orb","Refulgence Orb").gsub("Platinum Orb","Resplendence Orb")
         f[i]=f[i].gsub("Samewyrm's Scale","Lightwyrm's Scale").gsub("Samewyrm's Superscale","Lightwyrm's Glowscale")
         f[i]=f[i].gsub("Void Heart","Coronal Heart").gsub("HighDragon Tail","Abyssal Standard")
-        f[i]=f[i].gsub("Weakwyrm's Greatsphere","Shadowwyrm's Greatsphere")
+        f[i]=f[i].gsub("Weakwyrm's Greatsphere","Shadowwyrm's Greatsphere").gsub("High Weakwyrm's Tail","High Shadowwyrm's Tail")
       elsif elem=='Shadow'
         f[i]=f[i].gsub("Bronze Orb","Shadow Orb").gsub("Silver Orb","Nightfall Orb").gsub("Gold Orb","Nether Orb").gsub("Platinum Orb","Abaddon Orb")
         f[i]=f[i].gsub("Samewyrm's Scale","Shadowwyrm's Scale").gsub("Samewyrm's Superscale","Shadowwyrm's Darkscale")
         f[i]=f[i].gsub("Void Heart","Ebony Heart").gsub("HighDragon Tail","Ruinous Wing")
-        f[i]=f[i].gsub("Weakwyrm's Greatsphere","Lightwyrm's Greatsphere")
+        f[i]=f[i].gsub("Weakwyrm's Greatsphere","Lightwyrm's Greatsphere").gsub("High Weakwyrm's Tail","High Lightwyrm's Tail")
       end
     end
   end
@@ -11266,7 +11306,13 @@ def disp_adv_mats(event,args,bot)
   event.respond "**Element:** #{element_emote(elem,bot)}\n**Rarity:** #{generate_rarity_row(rar)}#{"\n**Mana Spiral**" if mana}#{"\n**Additional Numbers:** #{nums[0,[nums.length,2].min].join(', ')}" if nums.length>0}"
 end
 
-bot.command([:mats,:materials]) do |event, *args|
+bot.command([:spiral]) do |event, *args|
+  return nil if overlap_prevent(event)
+  disp_adv_mats(event,args,bot,true)
+  return nil
+end
+
+bot.command([:mats,:materials,:node,:nodes]) do |event, *args|
   return nil if overlap_prevent(event)
   disp_adv_mats(event,args,bot)
   return nil
@@ -11308,7 +11354,7 @@ bot.command([:adventurer,:adv,:unit]) do |event, *args|
     args.shift
     find_adv_alts(event,args,bot)
     return nil
-  elsif ['mat','mats','material','materials'].include?(args[0].downcase)
+  elsif ['mat','mats','material','materials','node','nodes'].include?(args[0].downcase)
     args.shift
     disp_adv_mats(event,args,bot)
     return nil
@@ -12280,7 +12326,7 @@ end
 
 bot.command(:sendpm, from: 167657750971547648) do |event, user_id, *args| # sends a PM to a specific user
   return nil if overlap_prevent(event)
-  dev_pm(bot,event,user_id)
+  dev_pm(bot,event,user_id,[141260274144509952])
 end
 
 bot.command(:ignoreuser, from: 167657750971547648) do |event, user_id| # causes Botan to ignore the specified user
@@ -13461,7 +13507,7 @@ bot.mention do |event|
     elsif ['art'].include?(args[0].downcase)
       args.shift
       disp_adventurer_art(bot,event,args)
-    elsif ['mats','mat','materials','material'].include?(args[0].downcase)
+    elsif ['mats','mat','materials','material','node','nodes'].include?(args[0].downcase)
       args.shift
       disp_adv_mats(event,args,bot)
     else
