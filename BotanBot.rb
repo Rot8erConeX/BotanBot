@@ -2410,6 +2410,9 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     else
       create_embed(event,[hdr,title],str,element_color(k[2][1]),ftr,xpic)
     end
+  elsif flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length+title.length+str.length>=1500 && juststats
+    create_embed(event,[hdr,title],str,element_color(k[2][1]),nil,xpic,flds[0,flds.length-1])
+    create_embed(event,'','',element_color(k[2][1]),ftr,nil,flds[flds.length-1,1])
   elsif flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length+title.length+str.length>=1500
     create_embed(event,[hdr,title],str,element_color(k[2][1]),ftr,xpic,flds[0,flds.length-2])
     if flds[-2][1].length>=1900
