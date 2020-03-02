@@ -11259,8 +11259,9 @@ def disp_adv_mats(event,args,bot,forcespiral=false)
       f2.push([5,"#{f[8] if nums[0]<50}#{"\n\n__*Mana Spiral unlock*__\n#{f[9]}" if mana && nums[1]<=49}"]) if nums[0]<=50 && nums[1]>=50
       xcolor=element_color(elem)
       disp="__**#{name}**'s Mana Spiral mats#{" (#{nums_mean})" if nums_mean.length>0}__"
-      if f2.length>0
-        if f2[0][1].split("\n").reject{|q| q.length<=0}[0].include?('unbind')
+      if f2.length>0 && !forcespiral
+        if f2[0][1].length<=0
+        elsif f2[0][1].split("\n").reject{|q| q.length<=0}[0].include?('unbind')
           f2[1][1]="#{f2[0][1]}\n\n#{f2[1][1]}"
           f2[0]=nil
           f2.compact!
@@ -11281,6 +11282,7 @@ def disp_adv_mats(event,args,bot,forcespiral=false)
         end
         f2=f2.reject{|q| q[0]<nums[0] || q[0]>nums[1]}
         f3=[]
+        f3.push([5,"__*Mana Spiral unlock*__\n#{f[9]}"]) if forcespiral
         f3.push([6,f2.reject{|q| q[0]>60}.map{|q| q[1]}.join("\n").gsub("\n\n\n","\n\n")])
         f3.push([7,f2.reject{|q| q[0]<61}.map{|q| q[1]}.join("\n").gsub("\n\n\n","\n\n")])
         f3=f3.reject{|q| q[1].nil? || q[1].length<=0}
