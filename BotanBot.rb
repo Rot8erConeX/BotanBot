@@ -2396,12 +2396,15 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     ftr="Data shown is for an adventurer whose mana spiral has been unlocked.  To show data for a #{@max_rarity[0]}-star#{" or #{k[1][0,1]}-star" unless @max_rarity[0]==k[1][0,1]} version, please include the number in your message." if rar>@max_rarity[0]
     ftr=nil if k[1][0,1].to_i==@max_rarity[0]
   end
+  ftr2=nil
+  ftr2=k[17] unless k[17].nil? || k[17].gsub(' ','').length<=0
   hdr="__**#{k[0]}**__"
   if titlex.length>0
     hdr="#{hdr} #{titlex[0]}"
     hdr="#{hdr} #{titlex[1]}" if titlex.length>2
   end
   if flds.nil?
+    ftr=ftr2 unless ftr2.nil?
     f=0
     f=ftr.length unless ftr.nil?
     if str.length+title.length+f>=1500
@@ -2419,13 +2422,16 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       s1=flds[-2][1].split("\n\n")
       for i in 0...s1.length
         s2=s1[i].split("\n")
-        create_embed(event,"__Skill #{i+1}: #{s2[0].gsub('__','')}__",s2[1,s2.length-1].join("\n"),element_color(k[2][1]))
+        ftr3=nil
+        ftr3="#{ftr2}" if !ftr2.nil? && i==s1.length-1
+        create_embed(event,"__Skill #{i+1}: #{s2[0].gsub('__','')}__",s2[1,s2.length-1].join("\n"),element_color(k[2][1]),ftr3)
       end
     else
-      create_embed(event,"__**#{flds[-2][0]}**__",flds[-2][1],element_color(k[2][1]))
+      create_embed(event,"__**#{flds[-2][0]}**__",flds[-2][1],element_color(k[2][1]),ftr2)
     end
     create_embed(event,"__**#{flds[-1][0]}**__",flds[-1][1],element_color(k[2][1]))
   else
+    ftr=ftr2 unless ftr2.nil?
     create_embed(event,[hdr,title],str,element_color(k[2][1]),ftr,xpic,flds)
   end
 end
