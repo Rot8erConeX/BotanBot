@@ -13086,6 +13086,17 @@ bot.command(:reload, from: 167657750971547648) do |event|
           f.puts b.join('')
         }
       end
+      download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/BotanText.rb")
+      IO.copy_stream(download, "DLTemp.txt")
+      if File.size("DLTemp.txt")>100
+        b=[]
+        File.open("DLTemp.txt").each_line.with_index do |line, idx|
+          b.push(line)
+        end
+        open("BotanText.rb", 'w') { |f|
+          f.puts b.join('')
+        }
+      end
       download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/BotanBot.rb")
       IO.copy_stream(download, "DLTemp.txt")
       if File.size("DLTemp.txt")>100
