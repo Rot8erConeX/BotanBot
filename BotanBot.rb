@@ -213,6 +213,7 @@ def data_load()
     b[i][8][3]=b[i][8][3].join(';; ') unless b[i][8].length<=3
     b[i][9]=b[i][9].split(', ')
     b[i][15]=b[i][15].split(';;;; ').map{|q| q.split(';; ')} unless b[i][15].nil?
+    b[i][18]=b[i][18].split(';; ').map{|q| q.split('; ')} unless b[i][18].nil?
   end
   @adventurers=b.map{|q| q}
   if File.exist?("#{@location}devkit/DLDragons.txt")
@@ -3836,10 +3837,10 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   flds.push(['Weapons',m.join("\n")]) if m.length>0
   if args.include?('tags') || forcetags
     if flds.length<=0
-      flds=triple_finish(k[10].reject{|q| q[0,1]=='E' && q[1,1].to_i.to_s==q[1,1]})
+      flds=triple_finish(k[10].reject{|q| ['E','I'].include?(q[0,1]) && q[1,1].to_i.to_s==q[1,1]})
       str="#{str}\n\n__**Tags**__"
     else
-      flds.push(['Tags',k[10].reject{|q| q[0,1]=='E' && q[1,1].to_i.to_s==q[1,1]}.join("\n")])
+      flds.push(['Tags',k[10].reject{|q| ['E','I'].include?(q[0,1]) && q[1,1].to_i.to_s==q[1,1]}.join("\n")])
     end
   end
   str="#{str}\n\nYou may instead be searching for the ability family `Dragon's Claws`." if k[0]=='Dragon Claw'
@@ -6580,6 +6581,46 @@ def disp_sp_table(bot,event,args=nil)
         wpn.push(k[1])
         k=nil
       end
+    elsif !k[18].nil? && k[18].length>0
+      f=[]
+      m=[0,'First','Second','Third','Fourth','Fifth','Sixth','Seventh','Eighth','Ninth','Tenth','Eleventh','Twelfth','Thirteenth','Fourteenth','Fifteenth',
+         '16th','17th','18th','19th','20th','21st','22nd','23rd','24th','25th','26th','27th','28th','29th','30th','31st','32nd','33rd','34th','35th','36th',
+         '37th','38th','39th','40th','41st','42nd','43rd','44th','45th','46th','47th','48th','49th','50th']
+      k2=[1,2,3,4,5,6,7]
+      k2=[150,150,196,265,391,143,345,1152] if k[2][2]=='Sword'
+      k2=[130,130,220,360,'660 uncharged, 900 charged',104,200,'1500 uncharged, 1740 charged'] if k[2][2]=='Blade'
+      k2=[144,144,264,288,288,132,288,1128] if k[2][2]=='Dagger'
+      k2=[200,240,360,380,420,160,300,1600] if k[2][2]=='Axe'
+      k2=[120,240,120,480,600,111,400,1560] if k[2][2]=='Lance'
+      k2=[184,92,276,414,529,208,460,1495] if k[2][2]=='Bow'
+      k2=[130,200,240,430,600,156,400,1600] if k[2][2]=='Wand'
+      k2=[232,232,348,464,696,300,580,1972] if k[2][2]=='Staff'
+      disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n~~*Total: #{k2[7]}*~~\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike** #{k2[6]}"
+      for i in 0...k[18].length
+        ff=[]
+        t=0
+        for i2 in 1...k[18][i].length-2
+          ff.push("*#{m[i2]} Hit:* #{k[18][i][i2]}")
+          if k[18][i][i2].to_i.to_s==k[18][i][i2] && t>=0
+            t+=k[18][i][i2].to_i
+          else
+            t=-1
+          end
+        end
+        if t<0
+          ff.push("~~*Total cannot be calculated dynamically*~~")
+        else
+          ff.push("~~*Total:* #{t}~~")
+        end
+        ff.push("\n**Dash Attack:** #{k[18][i][-2]}") unless k[18][i][-2].to_i==k2[5]
+        ff.push("\n**Force Strike:** #{k[18][i][-1]}") unless k[18][i][-1].to_i==k2[6]
+        f.push([k[18][i][0],ff.join("\n")])
+      end
+      dispname=k[0].gsub(' ','_')
+      xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Adventurers/#{dispname}_#{k[1][0,1]}.png?raw=true"
+      puts f.map{|q| q.to_s}
+      create_embed(event,"__SP gains for **#{k[0]}#{adv_emoji(k,bot)}**__",disp,element_color(k[2][1]),nil,xpic,f)
+      return nil
     else
       wpn.push(k[2][2])
       k=nil
@@ -13366,7 +13407,7 @@ bot.mention do |event|
   name=args.join(' ')
   m=true
   m=false if event.user.bot_account?
-  if !m
+  if !m || args.nil? || args.length<=0
   elsif ['help','commands','command_list','commandlist'].include?(args[0].downcase)
     args.shift
     help_text(event,bot,args[0],args[1])
