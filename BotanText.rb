@@ -302,6 +302,42 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
   end
 end
 
+@abilimits=["Affliction Guard \u2192 III (5x)",
+            "Blindness Res \u2192 100%",
+            "Bog Res \u2192 100%",
+            "Broken Punisher \u2192 30%",
+            "Buff Time \u2192 30%",
+            "Burn Res \u2192 100%",
+            "Burning Punisher \u2192 30%",
+            "Crit Damage \u2192 25%",
+            "Crit Rate \u2192 15%",
+            "Curse Res \u2192 100%",
+            "Defense +% \u2192 20%",
+            "Dragon Time \u2192 20%",
+            "Element Res \u2192 15%",
+            "Energy Prep \u2192 V (5)",
+            "Event Score \u2192 250%",
+            "Facility Material Intake \u2192 125%",
+            "Force Strike \u2192 50%",
+            "Freeze Res \u2192 100%",
+            "Gauge Accelerator \u2192 35%",
+            "Healing Doublebuff \u2192 III (3%)",
+            "Last Offense \u2192 60%",
+            "Paralysis Res \u2192 100%",
+            "Player XP \u2192 10%",
+            "Poison Res \u2192 100%",
+            "Recovery Potency \u2192 20%",
+            "Shapeshift \u2192 10%",
+            "Shield Prep \u2192 III (30%)",
+            "Skill Damage \u2192 40%",
+            "Skill Haste \u2192 15%",
+            "Skill Prep \u2192 100%",
+            "Slayer's Strength \u2192 6%",
+            "Sleep Res \u2192 100%",
+            "Strength +% \u2192 20%",
+            "Stun Res \u2192 100%",
+            "United Haste \u2192 I (8%)"]
+
 def damage_modifiers(bot,event,args=nil)
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
@@ -557,6 +593,735 @@ def sp_table(bot,event,args=nil)
     disp="__**Combo:**__\n*First Hit:* #{k[0]}\n*Second Hit:* #{k[1]}\n*Third Hit:* #{k[2]}\n*Fourth Hit:* #{k[3]}\n*Fifth Hit:* #{k[4]}\n~~*Total: #{k[7]}*~~\n\n**Dash Attack:** #{k[5]}\n\n**Force Strike** #{k[6]}"
     create_embed(event,"__SP gains for **#{m}#{wpn[0]}** users__",disp,0xCE456B)
   end
+end
+
+def grab_today(event,bot,args=nil,ignoreinputs=false,mode=0)
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  args=args.map{|q| q.downcase}
+  t=Time.now
+  timeshift=7
+  timeshift-=1 unless (t-24*60*60).dst?
+  t-=60*60*timeshift
+  sftday=-2
+  for i in 0...args.length
+    stfday=t.wday if ['today','now'].include?(args[i]) && sftday<-1
+    sftday=-1 if ['tomorrow','tommorrow','tomorow','tommorow','next'].include?(args[i]) && sftday<-1
+    sftday=0 if ['sunday','sundae','sun','su','sonday','sondae','son','u'].include?(args[i]) && sftday<-1
+    sftday=1 if ['mo','monday','mondae','mon','m'].include?(args[i]) && sftday<-1
+    sftday=2 if ['tu','tuesday','tuesdae','tues','tue','t'].include?(args[i]) && sftday<-1
+    sftday=3 if ['we','wednesday','wednesdae','wednes','wed','w'].include?(args[i]) && sftday<-1
+    sftday=4 if ['th','thursday','thursdae','thurs','thu','thur','h','r'].include?(args[i]) && sftday<-1
+    sftday=5 if ['fr','friday','fridae','fri','fryday','frydae','fry','f'].include?(args[i]) && sftday<-1
+    sftday=6 if ['sa','saturday','saturdae','sat','saturnday','saturndae','saturn','satur'].include?(args[i]) && sftday<-1
+  end
+  sftday=t.wday if sftday<-1 || ignoreinputs
+  sftday=ignoreinputs*1 if ignoreinputs.is_a?(Numeric)
+  str="Time elapsed since #{"today's " if sftday==t.wday}reset: #{"#{t.hour} hours, " if t.hour>0}#{"#{'0' if t.min<10}#{t.min} minutes, " if t.hour>0 || t.min>0}#{'0' if t.sec<10}#{t.sec} seconds"
+  str="#{str}\nTime until #{"tomorrow's " if sftday==t.wday}reset: #{"#{23-t.hour} hours, " if 23-t.hour>0}#{"#{'0' if 59-t.min<10}#{59-t.min} minutes, " if 23-t.hour>0 || 59-t.min>0}#{'0' if 60-t.sec<10}#{60-t.sec} seconds"
+  t2=Time.new(2018,9,27)-60*60
+  t2=t-t2
+  date=(((t2.to_i/60)/60)/24)
+  str="#{str}\n"
+  str="#{str}\n#{'~~' unless sftday==t.wday}Date assuming reset is at midnight: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]})"
+  str="#{str}\nDays since game release: #{longFormattedNumber(date)}"
+  if t.wday==1
+    m=0
+  else
+    m=8-t.wday
+  end
+  t3=t+m*24*60*60
+  t3=Time.new(t3.year,t3.month,t3.day)
+  t3+=60*60 if t3.dst? && !t.dst?
+  t3=(t3-t).to_i
+  t4=[]
+  k=t3/86400
+  kx=k*1
+  kx+=7 if kx<0
+  t4.push("#{longFormattedNumber(kx)} days") if k%7>0
+  t3-=k*86400
+  k=t3/3600
+  t4.push("#{k} hours") if k>0
+  t3-=k*3600
+  k=t3/60
+  t4.push("#{k} minutes") if k>0
+  t3-=k*60
+  t4.push("#{t3} seconds") if t3>0
+  str="#{str}\nTime until High Dragon bonus chest reset: #{t4.join(', ')}" if [4,0].include?(mode)
+  if t.month==12
+    t3=Time.new(t.year+1,1,1)
+  else
+    t3=Time.new(t.year,t.month+1,1)
+  end
+  t3+=60*60 if t3.dst? && !t.dst?
+  t3=(t3-t).to_i
+  t4=[]
+  k=t3/86400
+  t4.push("#{longFormattedNumber(k)} days") if k>0
+  t3-=k*86400
+  k=t3/3600
+  t4.push("#{k} hours") if k>0
+  t3-=k*3600
+  k=t3/60
+  t4.push("#{k} minutes") if k>0
+  t3-=k*60
+  t4.push("#{t3} seconds") if t3>0
+  str="#{str}\nTime until Void Treasure Trade reset: #{t4.join(', ')}" if [3,4,0].include?(mode)
+  str="#{str}~~" unless sftday==t.wday
+  str3=''
+  if sftday<0
+    t+=24*60*60
+    t2=Time.new(2018,9,27)-60*60
+    t2=t-t2
+    date=(((t2.to_i/60)/60)/24)
+    str="#{str}\n\nTomorrow's date: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]})"
+    str="#{str}\nDays since game release, come tomorrow: #{longFormattedNumber(date)}"
+    if t.wday==1
+      m=0
+    else
+      m=8-t.wday
+    end
+    t3=t+m*24*60*60
+    t3=Time.new(t3.year,t3.month,t3.day)
+    t3+=60*60 if t3.dst? && !t.dst?
+    t3=(t3-t).to_i
+    t4=[]
+    k=t3/86400
+    kx=k*1
+    kx+=7 if kx<0
+    t4.push("#{longFormattedNumber(kx)} days") if k%7>0
+    t3-=k*86400
+    k=t3/3600
+    t4.push("#{k} hours") if k>0
+    t3-=k*3600
+    k=t3/60
+    t4.push("#{k} minutes") if k>0
+    t3-=k*60
+    t4.push("#{t3} seconds") if t3>0
+    str="#{str}\nTime until High Dragon bonus chest reset, come tomorrow: #{t4.join(', ')}" if [4,0].include?(mode)
+    if t.month==12
+      t3=Time.new(t.year+1,1,1)
+    else
+      t3=Time.new(t.year,t.month+1,1)
+    end
+    t3+=60*60 if t3.dst? && !t.dst?
+    t3=(t3-t).to_i
+    t4=[]
+    k=t3/86400
+    t4.push("#{longFormattedNumber(k)} days") if k>0
+    t3-=k*86400
+    k=t3/3600
+    t4.push("#{k} hours") if k>0
+    t3-=k*3600
+    k=t3/60
+    t4.push("#{k} minutes") if k>0
+    t3-=k*60
+    t4.push("#{t3} seconds") if t3>0
+    str="#{str}\nTime until Void Treasure Trade reset, come tomorrow: #{t4.join(', ')}" if [3,4,0].include?(mode)
+    str3='Tomorrow'
+  elsif sftday != t.wday
+    tmw=(sftday==t.wday+1)
+    tmw=true if sftday==0 && t.wday==6
+    t+=7*24*60*60 if sftday<t.wday
+    t+=(sftday-t.wday)*24*60*60
+    t2=Time.new(2018,9,27)-60*60
+    t2=t-t2
+    date=(((t2.to_i/60)/60)/24)
+    str3="Next #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}"
+    str="#{str}\n\n#{str3}'s date: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} #{'(Tomorrow)' if tmw}"
+    str="#{str}\nDays since game release, come next #{str3.split(' ')[1]}: #{longFormattedNumber(date)}"
+    if t.wday==1
+      m=0
+    else
+      m=8-t.wday
+    end
+    t3=t+m*24*60*60
+    t3=Time.new(t3.year,t3.month,t3.day)
+    t3+=60*60 if t3.dst? && !t.dst?
+    t3=(t3-t).to_i
+    t4=[]
+    k=t3/86400
+    kx=k*1
+    kx+=7 if kx<0
+    t4.push("#{longFormattedNumber(kx)} days") if k%7>0
+    t3-=k*86400
+    k=t3/3600
+    t4.push("#{k} hours") if k>0
+    t3-=k*3600
+    k=t3/60
+    t4.push("#{k} minutes") if k>0
+    t3-=k*60
+    t4.push("#{t3} seconds") if t3>0
+    str="#{str}\nTime until High Dragon bonus chest reset, come next #{str3.split(' ')[1]}: #{t4.join(', ')}" if [4,0].include?(mode)
+    if t.month==12
+      t3=Time.new(t.year+1,1,1)
+    else
+      t3=Time.new(t.year,t.month+1,1)
+    end
+    t3+=60*60 if t3.dst? && !t.dst?
+    t3=(t3-t).to_i
+    t4=[]
+    k=t3/86400
+    t4.push("#{longFormattedNumber(k)} days") if k>0
+    t3-=k*86400
+    k=t3/3600
+    t4.push("#{k} hours") if k>0
+    t3-=k*3600
+    k=t3/60
+    t4.push("#{k} minutes") if k>0
+    t3-=k*60
+    t4.push("#{t3} seconds") if t3>0
+    str="#{str}\nTime until Void Treasure Trade reset, come next #{str3.split(' ')[1]}: #{t4.join(', ')}" if [3,4,0].include?(mode)
+  end
+  if [2,0].include?(mode)
+    str5="__**#{"#{str3}'s " if str3.length>0}Expert Ruins:**__"
+    str5="#{str5}\n*Open:* #{['<:Element_Null:532106087810334741>All','<:Element_Null:532106087810334741>All','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep'][t.wday]}"
+    if t.wday>2
+      str5="#{str5}\n*Available Orbs:* #{['All','All','Flame, Blaze, Inferno','Water, Stream, Deluge','Wind, Storm, Maelstorm','Light, Radiance, Refulgence','Shadow, Nightfall, Nether'][t.wday]}" if t.wday>1
+      str5="#{str5}\n*Other Available Mats:* #{["Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye","Ancient Bird's Feather, Bewitching Wing",'Granite, Meteorite',"Fiend's Claw","Ancient Bird's Feather, Bewitching Wing"][t.wday]}" if t.wday>1
+    end
+    str=extend_message(str,str5,event,2)
+    str5="__**<:Element_Void:548467446734913536> #{"#{str3}'s " if str3.length>0}Void Strikes:**__"
+    data_load()
+    void=@voids[0,7].map{|q| q}
+    matz=@voids[8,@voids.length-8].map{|q| q}
+    str5="#{str5}\n*Open:* "
+    str5="#{str5}#{void[t.wday].split(', ').reject{|q| q.include?('*')}.join(', ')}"
+    str5="#{str5}, " if void[t.wday].split(', ').reject{|q| q.include?('*')}.length>0 && void[t.wday].split(', ').reject{|q| !q.include?('*')}.length>0
+    str5="#{str5}#{void[t.wday].split(', ').reject{|q| !q.include?('*')}.map{|q| "#{q.gsub('*','')}<:x2:680152943299002370>"}.join(', ')}"
+    voidmats=void[t.wday].split(', ').map{|q| q.gsub('*','')}.join(', ')
+    for i in 0...matz.length
+      matz[i]=matz[i].split(', ')
+      k=matz[i][0]
+      matz[i]=matz[i][1,matz[i].length-1].join(', ')
+      voidmats=voidmats.gsub(k,matz[i])
+    end
+    voidmats=voidmats.split(', ').uniq.sort.join(', ')
+    str5="#{str5}\n*Available Mats:* #{voidmats}"
+    str=extend_message(str,str5,event,2)
+    showhdt=false
+    showhdt=true if @shardizard==4
+    showhdt=true if t.year>2019
+    showhdt=true if t.month>11
+    showhdt=true if t.day>18
+    if showhdt
+      str5="__**<:Tribe_Dragon:549947361745567754> #{"#{str3}'s " if str3.length>0}High Dragon Trials:**__"
+      str5="#{str5}\n*Open:* #{['<:Element_Null:532106087810334741> High All','<:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Water:532106088221376522> High Mercury','<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Shadow:532106088154267658> High Zodiark','<:Element_Water:532106088221376522> High Mercury, <:Element_Light:532106088129101834> High Jupiter','<:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Shadow:532106088154267658> High Zodiark','<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Light:532106088129101834> High Jupiter','<:Element_Null:532106087810334741> High All'][t.wday]}"
+      str=extend_message(str,str5,event,2)
+    end
+  end
+  str=extend_message(str,"**Shop Mats:** #{['Light Metal, Abyss Stone','Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather",'Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather"][t.wday]}",event,2) if t.wday>-1 && [3,0].include?(mode)
+  if [1,0].include?(mode)
+    str=extend_message(str,"**#{"#{str3}'s " if str3.length>0}Bond Gift:** #{['Golden Chalice','Juicy Meat','Kaleidoscope','Floral Circlet','Compelling Book','Mana Essence','Golden Chalice'][t.wday]}",event,2)
+    if t.wday>0 && t.wday<6
+      drg=@dragons.reject{|q| q[9]!=t.wday}
+      m=[]
+      for i in 0...@max_rarity[1]
+        m.push([generate_rarity_row(i+1),[]])
+      end
+      for i in 0...drg.length
+        f="#{drg[i][0]}#{element_emote(drg[i][2],bot,drg[i][16])}"
+        for i2 in 0...@max_rarity[1]
+          m[i2][1].push(f) if drg[i][1][0,1].to_i==i2+1
+        end
+      end
+      m=m.reject{|q| q[1].length<=0}
+      create_embed(event,str,'',0xCE456B,nil,nil,m.map{|q| [q[0],q[1].join("\n")]})
+    else
+      event.respond str
+    end
+  else
+    event.respond str
+  end
+  current_banner(bot,event,args,'__Current banner:__ ',false) if (safe_to_spam?(event) || has_any?(event.message.text.downcase.split(' '),['banner','banners'])) && str3.length<=0 && mode==0
+end
+
+def future_events(event,bot,args=nil)
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  args=args.map{|q| q.downcase}
+  t=Time.now
+  timeshift=7
+  timeshift-=1 unless (t-24*60*60).dst?
+  t-=60*60*timeshift
+  str="Time elapsed since today's reset: #{"#{t.hour} hours, " if t.hour>0}#{"#{'0' if t.min<10}#{t.min} minutes, " if t.hour>0 || t.min>0}#{'0' if t.sec<10}#{t.sec} seconds"
+  str="#{str}\nTime until tomorrow's reset: #{"#{23-t.hour} hours, " if 23-t.hour>0}#{"#{'0' if 59-t.min<10}#{59-t.min} minutes, " if 23-t.hour>0 || 59-t.min>0}#{'0' if 60-t.sec<10}#{60-t.sec} seconds"
+  t2=Time.new(2018,9,27)-60*60
+  t2=t-t2
+  date=(((t2.to_i/60)/60)/24)
+  str="#{str}\n"
+  str="#{str}\nDate assuming reset is at midnight: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]})"
+  str="#{str}\nDays since game release: #{longFormattedNumber(date)}"
+  if t.month==12
+    t3=Time.new(t.year+1,1,1)
+  else
+    t3=Time.new(t.year,t.month+1,1)
+  end
+  t3=(t3-t).to_i
+  t4=[]
+  k=t3/86400
+  t4.push("#{longFormattedNumber(k)} days") if k>0
+  t3-=k*86400
+  k=t3/3600
+  t4.push("#{k} hours") if k>0
+  t3-=k*3600
+  k=t3/60
+  t4.push("#{k} minutes") if k>0
+  t3-=k*60
+  t4.push("#{t3} seconds") if t3>0
+  str="#{str}\nTime until Void Treasure Trade reset: #{t4.join(', ')}"
+  mode=0
+  for i in 0...args.length
+    mode=1 if mode<1 && ['ruin','ruins'].include?(args[i])
+    mode=2 if mode<1 && ['mats','mat','material','materials'].include?(args[i])
+    mode=3 if mode<1 && ['shop','store'].include?(args[i])
+    mode=4 if mode<1 && ['bond','dragon','bonds','dragons'].include?(args[i])
+    mode=5 if mode<1 && ['void','strike','voidstrike','voidstrikes','strikes'].include?(args[i])
+    mode=6 if mode<1 && ['voidmat','strikemat','voidstrikemat','voidmats','strikemats','voidstrikemats','voidmaterial','strikematerial','voidstrikematerial','voidmaterials','strikematerials','voidstrikematerials'].include?(args[i])
+    mode=6 if mode==2 && ['void','strike','voidstrike','voidstrikes','strikes'].include?(args[i]) && !safe_to_spam?(event)
+    mode=6 if mode==5 && ['mats','mat','material','materials'].include?(args[i]) && !safe_to_spam?(event)
+    mode=7 if mode<1 && ['high','highdragon','hdt','trial','trials','hd'].include?(args[i])
+  end
+  if mode==0 && !safe_to_spam?(event)
+    event.respond "Please either specify an event type or use this command in PM.\n\nAvailable event types include:\n- Ruins\n- Mats\n- Shop\n- Bond items\n- Void Strikes\n- High Dragon Trials"
+    return nil
+  end
+  if [1,0].include?(mode)
+    ruin=['<:Element_Null:532106087810334741>All','<:Element_Null:532106087810334741>All','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep']
+    ruin=ruin.rotate(t.wday)
+    matz=["","","Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye","Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing",
+          "Wind/Storm/Maelstorm Orbs, Granite, Meteorite","Light/Radiance/Refulgence Orbs, Fiend's Claw",
+          "Shadow/Nightfall/Nether Orbs, Ancient Bird's Feather, Bewitching Wing"]
+    matz=matz.rotate(t.wday)
+    str2='__**Expert Ruins**__'
+    for i in 0...ruin.length
+      if i==0
+        t2=t+24*60*60*(i+1)
+        str2="#{str2}#{"\n" if mode==1 && safe_to_spam?(event)}\n#{ruin[i]} - Today#{" - Next available tomorrow (#{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t2.wday]}, #{t2.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t2.month]} #{t2.year})" if ruin[0]==ruin[1]}"
+        str2="#{str2}\n~~Available mats: #{matz[i]}~~" if mode==1 && safe_to_spam?(event)
+      elsif ruin[i]==ruin[i-1]
+      else
+        t2=t+24*60*60*i
+        str2="#{str2}#{"\n" if mode==1 && safe_to_spam?(event)}\n#{ruin[i]} - #{"#{i} days from now" if i>1}#{"Tomorrow" if i==1} - #{t2.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t2.month]} #{t2.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t2.wday]})"
+        str2="#{str2}\n~~Available mats: #{matz[i]}~~" if mode==1 && safe_to_spam?(event)
+      end
+    end
+    t2=t+24*60*60*ruin.length
+    unless [ruin[1],ruin[-1]].include?(ruin[0])
+      str2="#{str2}#{"\n" if mode==1 && safe_to_spam?(event)}\n#{ruin[0]} - #{ruin.length} days from now - #{t2.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t2.month]} #{t2.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t2.wday]})"
+      str2="#{str2}\n~~Available mats: #{matz[0]}~~" if mode==1 && safe_to_spam?(event)
+    end
+    str=extend_message(str,str2,event,2)
+  end
+  data_load()
+  void=@voids[0,7].map{|q| q.gsub('*','')}
+  void2=@voids[0,7].map{|q| q.split(', ').reject{|q2| !q2.include?('*')}.join(', ').gsub('*','')}
+  void=void.rotate(t.wday)
+  void2=void2.rotate(t.wday)
+  void.push(void[0])
+  void2.push(void2[0])
+  if [0,5].include?(mode)
+    double=false
+    shortlist=false
+    shortlist=true if mode==0
+    shortlist=true if !safe_to_spam?(event)
+    elem=[]
+    for i in 0...args.length
+      double=true if ['double','x2','2'].include?(args[i])
+      elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i])
+      elem.push('Water') if ['water','waters'].include?(args[i])
+      elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i])
+      elem.push('Wind') if ['earth','earths'].include?(args[i]) && event.user.id==192821228468305920
+      elem.push('Light') if ['light','lights'].include?(args[i])
+      elem.push('Shadow') if ['shadow','dark','shadows','darks'].include?(args[i])
+    end
+    mmzz=[]
+    mmzz2=[]
+    matz=@voids[7,@voids.length-7].map{|q| q}
+    for i in 0...void.length
+      m=void[i].split(', ')
+      pos=0
+      for i2 in 0...m.length
+        pos=matz.find_index{|q| m[i2]==q.split(', ')[0]}
+        pos=0 if pos.nil?
+        mmzz.push([m[i2],i,pos])
+      end
+      m=void2[i].split(', ')
+      pos=0
+      for i2 in 0...m.length
+        pos=matz.find_index{|q| m[i2]==q.split(', ')[0]}
+        pos=0 if pos.nil?
+        mmzz2.push([m[i2],i,pos])
+      end
+    end
+    for i in 0...matz.length
+      matz[i]=matz[i].split(', ')
+      matz[i].shift
+      matz[i]=matz[i].join(', ')
+    end
+    mmzz.sort!{|a,b| (a[2]<=>b[2])==0 ? (a[1]<=>b[1]) : (a[2]<=>b[2])}
+    mmzz.reverse!
+    for i in 0...mmzz.length-1
+      if mmzz[i][0]==mmzz[i+1][0]
+        mmzz[i+1][3]=mmzz[i][1]*1 unless mmzz[i+1][1]>0
+        mmzz[i]=nil
+      end
+    end
+    mmzz.compact!
+    mmzz.reverse!
+    mmzz2.sort!{|a,b| (a[2]<=>b[2])==0 ? (a[1]<=>b[1]) : (a[2]<=>b[2])}
+    mmzz2.reverse!
+    for i in 0...mmzz2.length-1
+      if mmzz2[i][0]==mmzz2[i+1][0]
+        mmzz2[i+1][3]=mmzz2[i][1]*1 unless mmzz2[i+1][1]>0
+        mmzz2[i]=nil
+      end
+    end
+    mmzz2.compact!
+    mmzz2.reverse!
+    str2="__**<:Element_Void:548467446734913536> Void Strikes**__"
+    if double
+      mmzz=mmzz2.map{|q| q}
+      mmzz2=[]
+      str2="__**<:Element_Void:548467446734913536><:x2:680152943299002370> Void Strikes: Double Drop**__"
+    end
+    if mmzz.length>10 && !safe_to_spam?(event)
+      if !(double || elem.length>0) || mmzz.length>25
+        otheroptions=[]
+        otheroptions.push("an element name") unless elem.length>0
+        otheroptions.push("the word \"double\"") unless double
+        str2="#{str2}\nThere are so many #{'qualifying ' if double || elem.length>0}Void Strikes that I will reduce the list to those available today or tomorrow.\nFor the full list, use this command in PM.#{"\nYou can also include #{otheroptions.join(' or ')} to reduce the list accordingly." if otheroptions.length>0}\n"
+        mmzz=mmzz.reject{|q| q[1]>1}
+        if mmzz.length>25
+          event.respond "Even reduced, the list of Void Strikes is too long for this channel.  Please retry this command in PM."
+          return nil
+        end
+      end
+    end
+    str=extend_message(str,str2,event,2)
+    strpost=false
+    for i in 0...mmzz.length
+      str2="#{"\n" if mode==5 && safe_to_spam?(event)}*#{mmzz[i][0]}* -"
+      i2=mmzz2.find_index{|q| q[0]==mmzz[i][0]}
+      if mmzz[i][1]==0
+        str2="#{str2} **Today**#{'<:x2:680152943299002370>' if !i2.nil? && shortlist && mmzz2[i2][1]==0}#{' - Next available' unless mmzz[i][3].nil? || mmzz[i][3]<=0}"
+        if mmzz[i][3].nil? || mmzz[i][3]<=0
+        else
+          t_d=t+mmzz[i][3]*24*60*60
+          if !i2.nil? && shortlist && [mmzz2[i2][3],mmzz2[i2][1]].include?(mmzz[i][3])
+            str2="#{str2} #{mmzz[i][3]} days from now<:x2:680152943299002370> (#{disp_date(t_d,1)})" unless mmzz[i][3]==1
+            str2="#{str2} tomorrow<:x2:680152943299002370> (#{disp_date(t_d,1)})" if mmzz[i][3]==1
+          elsif !i2.nil? && shortlist
+            str2="#{str2.gsub('Next','~~Next')} #{mmzz[i][3]} days from now (#{disp_date(t_d,2)})~~" unless mmzz[i][3]==1
+            str2="#{str2.gsub('Next','~~Next')} tomorrow (#{disp_date(t_d,2)})~~" if mmzz[i][3]==1
+            if mmzz2[i2][1]==0
+              t_d=t+mmzz2[i2][3]*24*60*60
+            else
+              t_d=t+mmzz2[i2][1]*24*60*60
+            end
+            str2="#{str2} - <:x2:680152943299002370> next available #{mmzz2[i2][3]} days from now (#{disp_date(t_d,2)})"
+          elsif mmzz[i][3]==1
+            str2="#{str2} tomorrow#{'<:x2:680152943299002370>' if !i2.nil? && shortlist && [mmzz2[i2][1],mmzz2[i2][3]].include?(1)} (#{disp_date(t_d,1)})"
+          else
+            str2="#{str2} #{mmzz[i][3]} days from now (#{disp_date(t_d,1)})"
+          end
+        end
+      else
+        t_d=t+mmzz[i][1]*24*60*60
+        if !i2.nil? && shortlist && mmzz2[i2][1]==mmzz[i][1]
+          str2="#{str2} #{mmzz[i][1]} days from now<:x2:680152943299002370> (#{disp_date(t_d,1)})" unless mmzz[i][1]==1
+          str2="#{str2} Tomorrow<:x2:680152943299002370> (#{disp_date(t_d,1)})" if mmzz[i][1]==1
+        elsif !i2.nil? && shortlist
+          str2="#{str2} ~~#{mmzz[i][1]} days from now (#{disp_date(t_d,2)})~~" unless mmzz[i][1]==1
+          str2="#{str2} ~~Tomorrow (#{disp_date(t_d,2)})~~" if mmzz[i][1]==1
+          t_d=t+mmzz2[i2][1]*24*60*60
+          str2="#{str2} - <:x2:680152943299002370> coming #{mmzz2[i2][1]} days from now (#{disp_date(t_d,2)})"
+        elsif mmzz[i][1]==1
+          str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
+        else
+          str2="#{str2} #{mmzz[i][1]} days from now (#{disp_date(t_d,1)})"
+        end
+      end
+      unless i2.nil? || shortlist
+        str2="#{str2}\n<:x2:680152943299002370>*Double Drops* - "
+        if mmzz2[i2][1]==0
+          str2="#{str2} **Today**#{' - Next available' unless mmzz2[i2][3].nil? || mmzz2[i2][3]<=0}"
+          if mmzz2[i2][3].nil? || mmzz2[i2][3]<=0
+          else
+            t_d=t+mmzz2[i2][3]*24*60*60
+            if mmzz2[i2][3]==1
+              str2="#{str2} tomorrow (#{disp_date(t_d,1)})"
+            else
+              str2="#{str2} #{mmzz2[i2][3]} days from now (#{disp_date(t_d,1)})"
+            end
+          end
+        else
+          t_d=t+mmzz2[i2][1]*24*60*60
+          if mmzz2[i2][1]==1
+            str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
+          else
+            str2="#{str2} #{mmzz2[i2][1]} days from now (#{disp_date(t_d,1)})"
+          end
+        end
+      end
+      str2="#{str2}\n~~Available mats: #{matz[mmzz[i][2]]}~~" if mode==5 && safe_to_spam?(event)
+      str=extend_message(str,str2,event,1) unless elem.length>0 && !str2.include?("<:Element_#{elem[0]}:")
+    end
+  end
+  if [0,7].include?(mode)
+    str2="__**<:Tribe_Dragon:549947361745567754> High Dragon Trials**__"
+    hdt=['<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Water:532106088221376522> High Mercury, <:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Light:532106088129101834> High Jupiter, <:Element_Shadow:532106088154267658> High Zodiark',
+         '<:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Water:532106088221376522> High Mercury',
+         '<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Shadow:532106088154267658> High Zodiark',
+         '<:Element_Water:532106088221376522> High Mercury, <:Element_Light:532106088129101834> High Jupiter',
+         '<:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Shadow:532106088154267658> High Zodiark',
+         '<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Light:532106088129101834> High Jupiter',
+         '<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Water:532106088221376522> High Mercury, <:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Light:532106088129101834> High Jupiter, <:Element_Shadow:532106088154267658> High Zodiark']
+    hdt=hdt.rotate(t.wday)
+    mmzz=[]
+    for i in 0...hdt.length
+      m=hdt[i].split(', ')
+      pos=0
+      for i2 in 0...m.length
+        pos=1 if m[i2]=='<:Element_Flame:532106087952810005> High Brunhilda'
+        pos=2 if m[i2]=='<:Element_Water:532106088221376522> High Mercury'
+        pos=3 if m[i2]=='<:Element_Wind:532106087948746763> High Midgardsormr'
+        pos=4 if m[i2]=='<:Element_Light:532106088129101834> High Jupiter'
+        pos=5 if m[i2]=='<:Element_Shadow:532106088154267658> High Zodiark'
+        pos=0 if pos.nil?
+        mmzz.push([m[i2],i,pos])
+      end
+    end
+    mmzz.sort!{|a,b| (a[2]<=>b[2])==0 ? (a[1]<=>b[1]) : (a[2]<=>b[2])}
+    mmzz.reverse!
+    for i in 0...mmzz.length-1
+      if mmzz[i][0]==mmzz[i+1][0]
+        mmzz[i+1][3]=mmzz[i][1]*1 unless mmzz[i+1][1]>0
+        mmzz[i]=nil
+      end
+    end
+    mmzz.compact!
+    mmzz.reverse!
+    for i in 0...mmzz.length
+      str2="#{str2}\n*#{mmzz[i][0]}* -"
+      if mmzz[i][1]==0
+        str2="#{str2} **Today**#{' - Next available' unless mmzz[i][3].nil? || mmzz[i][3]<=0}"
+        if mmzz[i][3].nil? || mmzz[i][3]<=0
+        else
+          t_d=t+mmzz[i][3]*24*60*60
+          if mmzz[i][3]==1
+            str2="#{str2} tomorrow (#{disp_date(t_d,1)})"
+          else
+            str2="#{str2} #{mmzz[i][3]} days from now (#{disp_date(t_d,1)})"
+          end
+        end
+      else
+        t_d=t+mmzz[i][1]*24*60*60
+        if mmzz[i][1]==1
+          str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
+        else
+          str2="#{str2} #{mmzz[i][1]} days from now (#{disp_date(t_d,1)})"
+        end
+      end
+    end
+    str=extend_message(str,str2,event,2)
+  end
+  f=[0,2]
+  if f.include?(mode)
+    matz=["Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye, Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing, Wind/Storm/Maelstorm Orbs, Granite, Meteorite, Light/Radiance/Refulgence Orbs, Fiend's Claw, Shadow/Nightfall/Nether Orbs",
+          "Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye, Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing, Wind/Storm/Maelstorm Orbs, Granite, Meteorite, Light/Radiance/Refulgence Orbs, Fiend's Claw, Shadow/Nightfall/Nether Orbs",
+          "Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye","Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing",
+          "Wind/Storm/Maelstorm Orbs, Granite, Meteorite","Light/Radiance/Refulgence Orbs, Fiend's Claw",
+          "Shadow/Nightfall/Nether Orbs, Ancient Bird's Feather, Bewitching Wing"]
+    matz=matz.rotate(t.wday)
+    mmzz=[]
+    for i in 0...matz.length
+      m=matz[i].split(', ')
+      for i2 in 0...m.length
+        mmzz.push([m[i2],i])
+        mmzz.push([m[i2],7]) if i==0
+      end
+    end
+    mmzz.sort!{|a,b| (a[0]<=>b[0])==0 ? (a[1]<=>b[1]) : (a[0]<=>b[0])}
+    mmzz.reverse!
+    for i in 0...mmzz.length-1
+      if mmzz[i][0]==mmzz[i+1][0]
+        mmzz[i+1][2]=mmzz[i][1]*1 unless mmzz[i+1][1]>0
+        mmzz[i]=nil
+      end
+    end
+    mmzz.compact!
+    mmzz.reverse!
+    str2="__**Materials** found in the Elemental Ruins__"
+    strpost=false
+    for i in 0...mmzz.length
+      str2="#{str2}\n*#{mmzz[i][0]}* -"
+      if mmzz[i][1]==0
+        str2="#{str2} **Today**#{' - Next available' unless mmzz[i][2].nil? || mmzz[i][2]<=0}"
+        if mmzz[i][2].nil? || mmzz[i][2]<=0
+        else
+          t_d=t+mmzz[i][2]*24*60*60
+          if mmzz[i][2]==1
+            str2="#{str2} tomorrow (#{disp_date(t_d,1)})"
+          else
+            str2="#{str2} #{mmzz[i][2]} days from now (#{disp_date(t_d,1)})"
+          end
+        end
+      else
+        t_d=t+mmzz[i][1]*24*60*60
+        if mmzz[i][1]==1
+          str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
+        else
+          str2="#{str2} #{mmzz[i][1]} days from now (#{disp_date(t_d,1)})"
+        end
+      end
+    end
+  end
+  f.push(6)
+  if f.include?(mode)
+    matz=void.map{|q| q.split(', ').uniq.sort.join(', ')}
+    matzx=@voids[8,@voids.length-8].map{|q| q.split(', ')}
+    for i in 0...matzx.length
+      matzx[i]=[matzx[i][0],matzx[i][1,matzx[i].length-1].join(', ')]
+    end
+    for i in 0...matz.length
+      for i2 in 0...matzx.length
+        matz[i]=matz[i].gsub(matzx[i2][0],matzx[i2][1])
+      end
+    end
+    matz=matz.map{|q| q.split(', ').uniq.sort}
+    mmzz=[]
+    for i in 0...matz.length
+      m=matz[i]
+      for i2 in 0...m.length
+        mmzz.push([m[i2],i])
+        mmzz.push([m[i2],7]) if i==0
+      end
+    end
+    mmzz=mmzz.reject{|q| q[0].nil? || q[0].length<=0}
+    mmzz.sort!{|a,b| (a[0]<=>b[0])==0 ? (a[1]<=>b[1]) : (a[0]<=>b[0])}
+    mmzz.reverse!
+    for i in 0...mmzz.length-1
+      if mmzz[i][0]==mmzz[i+1][0]
+        mmzz[i+1][2]=mmzz[i][1]*1 unless mmzz[i+1][1]>0
+        mmzz[i]=nil
+      end
+    end
+    mmzz.compact!
+    mmzz.reverse!
+    str2="__**Materials** found in the Void Strikes__"
+    if mmzz.length>25 && !safe_to_spam?(event)
+      mmzz=mmzz.reject{|q| q[1]>2} if mmzz.length>50
+      mmzz=mmzz.reject{|q| q[1]>1} if mmzz.length>50
+      for i in 0...mmzz.length
+        mmzz[i][0]="*#{mmzz[i][0]}*" if mmzz[i][1]==1 || mmzz[i][2]==1
+        mmzz[i][0]="**#{mmzz[i][0]}**#{"  (#{mmzz[i][2]})" unless mmzz[i][2]==1}" if mmzz[i][1]==0
+      end
+      create_embed(event,"#{str}\n\n#{str2}","**Bold** mats are available today, and include in parenthesis the number of days for them to become available again.\n*Italic* mats are available tomorrow.",0xCE456B,'For the full list of mats, use this command in PM.',nil,triple_finish(mmzz.map{|q| q[0]}))
+      return nil
+    end
+    strpost=false
+    for i in 0...mmzz.length
+      str2="#{str2}\n*#{mmzz[i][0]}* -"
+      if mmzz[i][1]==0
+        str2="#{str2} **Today**#{' - Next available' unless mmzz[i][2].nil? || mmzz[i][2]<=0}"
+        if mmzz[i][2].nil? || mmzz[i][2]<=0
+        else
+          t_d=t+mmzz[i][2]*24*60*60
+          if mmzz[i][2]==1
+            str2="#{str2} tomorrow (#{disp_date(t_d,1)})"
+          else
+            str2="#{str2} #{mmzz[i][2]} days from now (#{disp_date(t_d,1)})"
+          end
+        end
+      else
+        t_d=t+mmzz[i][1]*24*60*60
+        if mmzz[i][1]==1
+          str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
+        else
+          str2="#{str2} #{mmzz[i][1]} days from now (#{disp_date(t_d,1)})"
+        end
+      end
+    end
+    if str2.length>2000
+      str2=str2.split("\n")
+      str=extend_message(str,str2[0],event,2)
+      for i in 1...str2.length
+        str=extend_message(str,str2[i],event)
+      end
+    else
+      str=extend_message(str,str2,event,2)
+    end
+  end
+  f=[0,3]
+  f.push(2) if safe_to_spam?(event)
+  if f.include?(mode)
+    matz=["Light Metal, Abyss Stone","Iron Ore, Granite","Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather",'Iron Ore, Granite',
+          "Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather"]
+    matz=matz.rotate(t.wday)
+    mmzz=[]
+    for i in 0...matz.length
+      m=matz[i].split(', ')
+      for i2 in 0...m.length
+        mmzz.push([m[i2],i])
+        mmzz.push([m[i2],7]) if i==0
+      end
+    end
+    mmzz.sort!{|a,b| (a[0]<=>b[0])==0 ? (a[1]<=>b[1]) : (a[0]<=>b[0])}
+    mmzz.reverse!
+    for i in 0...mmzz.length-1
+      if mmzz[i][0]==mmzz[i+1][0]
+        mmzz[i+1][2]=mmzz[i][1]*1 unless mmzz[i+1][1]>0
+        mmzz[i]=nil
+      end
+    end
+    mmzz.compact!
+    mmzz.reverse!
+    str2="__Materials sold by the **Shop**__"
+    strpost=false
+    for i in 0...mmzz.length
+      str2="#{str2}\n*#{mmzz[i][0]}* -"
+      if mmzz[i][1]==0
+        str2="#{str2} **Today**#{' - Next available' unless mmzz[i][2].nil? || mmzz[i][2]<=0}"
+        if mmzz[i][2].nil? || mmzz[i][2]<=0
+        else
+          t_d=t+mmzz[i][2]*24*60*60
+          if mmzz[i][2]==1
+            str2="#{str2} tomorrow (#{disp_date(t_d,1)})"
+          else
+            str2="#{str2} #{mmzz[i][2]} days from now (#{disp_date(t_d,1)})"
+          end
+        end
+      else
+        t_d=t+mmzz[i][1]*24*60*60
+        if mmzz[i][1]==1
+          str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
+        else
+          str2="#{str2} #{mmzz[i][1]} days from now (#{disp_date(t_d,1)})"
+        end
+      end
+    end
+    str=extend_message(str,str2,event,2)
+  end
+  if [0,4].include?(mode)
+    bond=['Golden Chalice','Juicy Meat','Kaleidoscope','Floral Circlet','Compelling Book','Mana Essence','Golden Chalice']
+    bond=bond.rotate(t.wday)
+    str2='__**Dragon Bond items**__'
+    for i in 0...bond.length
+      if i==0
+        t2=t+24*60*60*(i+1)
+        str2="#{str2}\n#{bond[i]} - Today#{" - Next available tomorrow (#{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t2.wday]}, #{t2.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t2.month]} #{t2.year})" if bond[0]==bond[1]}"
+      elsif bond[i]==bond[i-1]
+      else
+        t2=t+24*60*60*i
+        str2="#{str2}\n#{bond[i]} - #{"#{i} days from now" if i>1}#{"Tomorrow" if i==1} - #{t2.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t2.month]} #{t2.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t2.wday]})"
+      end
+    end
+    t2=t+24*60*60*bond.length
+    str2="#{str2}\n#{bond[0]} - #{bond.length} days from now - #{t2.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t2.month]} #{t2.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t2.wday]})" unless [bond[1],bond[-1]].include?(bond[0])
+    str=extend_message(str,str2,event,2)
+  end
+  event.respond str
 end
 
 def snagstats(event,bot,f=nil,f2=nil)
