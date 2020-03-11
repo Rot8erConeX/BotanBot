@@ -899,7 +899,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Wind) Skill Damage\70%\Aura\If the user is attuned to Wind: increases skill damage by 70%.\110\y\Wind, SkillDamage
 (Wind) Skill Damage\90%\Aura\If the user is attuned to Wind: increases skill damage by 90%.\120\y\Wind, SkillDamage
 (Wind) Skill Haste\example\Aura\If the user is attuned to Wind: Increases skill gauge fill rate by `x`%.\0\y\SkillHaste, Wind
+(Wind) Skill Haste\20%\Aura\If the user is attuned to Wind: Increases skill gauge fill rate by 20%.\40\y\SkillHaste, Wind
 (Wind) Skill Haste\25%\Aura\If the user is attuned to Wind: Increases skill gauge fill rate by 25%.\60\y\SkillHaste, Wind
+(Wind) Skill Haste\30%\Aura\If the user is attuned to Wind: Increases skill gauge fill rate by 30%.\70\y\SkillHaste, Wind
 (Wind) Skill Haste\35%\Aura\If the user is attuned to Wind: Increases skill gauge fill rate by 35%.\80\y\SkillHaste, Wind
 (Wind) Strength\example\Aura\If the user is attuned to Wind: increases strength by `x`%.\0\y\Strength, Wind
 (Wind) Strength\10%\Aura\If the user is attuned to Wind: increases strength by 10%.\20\y\Strength, Wind
