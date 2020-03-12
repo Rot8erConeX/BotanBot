@@ -381,16 +381,18 @@ def damage_modifiers(bot,event,args=nil)
           k2[6]=k[19][0][-1]
           k2[5]=k[19][0][-2] if k[19][0].length>2
         end
-        for i in 0...k2.length
-          k2[i]="#{k2[i]}%" unless k2[i].is_a?(String) && k2[i].to_i.to_s != k2[i]
-        end
+      end
+      for i in 0...k2.length
+        k2[i]="#{k2[i]}%" unless k2[i].is_a?(String) && k2[i].to_i.to_s != k2[i]
+      end
+      if k[19].length==1
         if k[19][0].length>3
           ff=[]
           for i2 in 1...k[19][0].length-2
             ff.push("*#{m[i2]} Hit:* #{k[19][0][i2]}#{'%' if k[19][0][i2].to_i.to_s==k[19][0][i2]}")
           end
-          ff.push("\n**Dash Attack:** #{k[19][0][-2]}#{'%' if k[19][0][-2].to_i.to_s==k[19][0][-2]}") unless k[19][0][-2].to_i==k2[5]
-          ff.push("\n**Force Strike:** #{k[19][0][-1]}#{'%' if k[19][0][-1].to_i.to_s==k[19][0][-1]}") unless k[19][0][-1].to_i==k2[6]
+          ff.push("\n**Dash Attack:** #{k[19][0][-2]}#{'%' if k[19][0][-2].to_i.to_s==k[19][0][-2]}")
+          ff.push("\n**Force Strike:** #{k[19][0][-1]}#{'%' if k[19][0][-1].to_i.to_s==k[19][0][-1]}")
           disp=ff.join("\n")
         else
           disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n~~*Total: #{k2[7]}*~~\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike** #{k2[6]}"
@@ -405,8 +407,8 @@ def damage_modifiers(bot,event,args=nil)
             for i2 in 1...k[19][i].length-2
               ff.push("*#{m[i2]} Hit:* #{k[19][i][i2]}")
             end
-            ff.push("\n**Dash Attack:** #{k[19][i][-2]}") unless k[19][i][-2].to_i==k2[5]
-            ff.push("\n**Force Strike:** #{k[19][i][-1]}") unless k[19][i][-1].to_i==k2[6]
+            ff.push("\n**Dash Attack:** #{k[19][i][-2]}") unless k[19][i][-2].to_s.gsub('%','')==k2[5].to_s.gsub('%','')
+            ff.push("\n**Force Strike:** #{k[19][i][-1]}") unless k[19][i][-1].to_s.gsub('%','')==k2[6].to_s.gsub('%','')
             f.push([k[19][i][0],ff.join("\n")])
           end
         end
@@ -527,8 +529,8 @@ def sp_table(bot,event,args=nil)
           else
             ff.push("~~*Total:* #{t}~~")
           end
-          ff.push("\n**Dash Attack:** #{k[18][0][-2]}") unless k[18][0][-2].to_i==k2[5]
-          ff.push("\n**Force Strike:** #{k[18][0][-1]}") unless k[18][0][-1].to_i==k2[6]
+          ff.push("\n**Dash Attack:** #{k[18][0][-2]}")
+          ff.push("\n**Force Strike:** #{k[18][0][-1]}")
           disp=ff.join("\n")
         else
           disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n~~*Total: #{k2[7]}*~~\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike** #{k2[6]}"
