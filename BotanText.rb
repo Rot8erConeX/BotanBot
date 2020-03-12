@@ -395,7 +395,7 @@ def damage_modifiers(bot,event,args=nil)
           ff.push("\n**Force Strike:** #{k[19][0][-1]}#{'%' if k[19][0][-1].to_i.to_s==k[19][0][-1]}")
           disp=ff.join("\n")
         else
-          disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n~~*Total: #{k2[7]}*~~\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike** #{k2[6]}"
+          disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike** #{k2[6]}"
         end
       else
         disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike** #{k2[6]}"
