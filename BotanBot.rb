@@ -1264,9 +1264,9 @@ end
 def find_ability(name,event,fullname=false,ext=false)
   data_load()
   name=normalize(name)
-  romanums=['O','I','II','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV','XXV',
-            'XXVI','XXVII','XXVIII','XXIX','XXX','XXXI','XXXII','XXXIII','XXXIV','XXXV','XXXVI','XXXVII','XXXVIII','XXXIX','XL','XLI','XLII','XLII','XLIII',
-            'XLIV','XLV','XLVI','XLVII','XLVIII','XLIX','L']
+  romanums=['O','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV',
+            'XXV','XXVI','XXVII','XXVIII','XXIX','XXX','XXXI','XXXII','XXXIII','XXXIV','XXXV','XXXVI','XXXVII','XXXVIII','XXXIX','XL','XLI','XLII','XLII',
+            'XLIII','XLIV','XLV','XLVI','XLVII','XLVIII','XLIX','L']
   name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   sklz=@askilities.reject{|q| q[2]=='Skill'}
   sklz2=sklz.reject{|q| !romanums.include?(q[1])}
