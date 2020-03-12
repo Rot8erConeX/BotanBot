@@ -367,13 +367,13 @@ def damage_modifiers(bot,event,args=nil)
          '37th','38th','39th','40th','41st','42nd','43rd','44th','45th','46th','47th','48th','49th','50th']
       k2=[1,2,3,4,5,6,7]
       k2=[75,80,95,100,150,95,'104% L1, 115% L2'] if k[2][2]=='Sword'
-      k2=[97,97,63,129,'194% uncharged, 143% charged',94,"83% L1, 92% L2"] if k[2][2]=='Blade'
-      k2=[75,38,54,119,119,89,"43.20% L1, 47% L2"] if k[2][2]=='Dagger'
+      k2=[97,97,'63% x2',129,'194% uncharged, 143% charged',94,"83% L1, 92% L2"] if k[2][2]=='Blade'
+      k2=[75,'38% x2','54% x2',119,119,89,"43.20% L1, 47% L2"] if k[2][2]=='Dagger'
       k2=[114,122,204,216,228,73,"173% L1, 192% L2"] if k[2][2]=='Axe'
-      k2=[84,45,108,150,112,89,"27% L1, 30% L2"] if k[2][2]=='Lance'
-      k2=[29,37,42,63,35,30,"28% L1, 31% L2"] if k[2][2]=='Bow'
-      k2=[98,53,36,78,"61.8% big ball, 36.05% small projectile",100,"81% L1, 90% L2"] if k[2][2]=='Wand'
-      k2=[69,80,45,150,196,80,"55% L1, 61% L2"] if k[2][2]=='Staff'
+      k2=[84,'45% x2',108,150,112,89,"27% L1, 30% L2"] if k[2][2]=='Lance'
+      k2=['29% x3','37% x2','42% x3','63% x2','35% x5','30% x3',"28% L1, 31% L2"] if k[2][2]=='Bow'
+      k2=[98,53,36,78,"61.8% x1 + 36.05% x4",100,"81% L1, 90% L2"] if k[2][2]=='Wand'
+      k2=[69,80,'45% x2',150,196,80,"55% L1, 61% L2"] if k[2][2]=='Staff'
       if k[19].length==1
         if ['Dash','DA'].include?(k[19][0][0])
           k2[5]=k[19][0][-1]
@@ -382,7 +382,7 @@ def damage_modifiers(bot,event,args=nil)
           k2[5]=k[19][0][-2] if k[19][0].length>2
         end
         for i in 0...k2.length
-          k2[i]="#{k2[i]}%" unless k2[i].is_a?(String)
+          k2[i]="#{k2[i]}%" unless k2[i].is_a?(String) && k2[i].to_i.to_s != k2[i]
         end
         if k[19][0].length>3
           ff=[]
@@ -396,24 +396,26 @@ def damage_modifiers(bot,event,args=nil)
           disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n~~*Total: #{k2[7]}*~~\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike** #{k2[6]}"
         end
       else
-        disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n~~*Total: #{k2[7]}*~~\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike** #{k2[6]}"
+        disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike** #{k2[6]}"
       end
       if k[19].length>1
         for i in 0...k[19].length
-          ff=[]
-          for i2 in 1...k[19][i].length-2
-            ff.push("*#{m[i2]} Hit:* #{k[19][i][i2]}")
+          if k[19][i].length>1
+            ff=[]
+            for i2 in 1...k[19][i].length-2
+              ff.push("*#{m[i2]} Hit:* #{k[19][i][i2]}")
+            end
+            ff.push("\n**Dash Attack:** #{k[19][i][-2]}") unless k[19][i][-2].to_i==k2[5]
+            ff.push("\n**Force Strike:** #{k[19][i][-1]}") unless k[19][i][-1].to_i==k2[6]
+            f.push([k[19][i][0],ff.join("\n")])
           end
-          ff.push("\n**Dash Attack:** #{k[19][i][-2]}") unless k[19][i][-2].to_i==k2[5]
-          ff.push("\n**Force Strike:** #{k[19][i][-1]}") unless k[19][i][-1].to_i==k2[6]
-          f.push([k[19][i][0],ff.join("\n")])
         end
       else
         f=nil
       end
       dispname=k[0].gsub(' ','_')
       xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Adventurers/#{dispname}_#{k[1][0,1]}.png?raw=true"
-      create_embed(event,"__Damage modifiers gains for **#{k[0]}#{adv_emoji(k,bot)}**__",disp,element_color(k[2][1]),nil,xpic,f)
+      create_embed(event,"__Damage modifiers for **#{k[0]}#{adv_emoji(k,bot)}**__",disp,element_color(k[2][1]),nil,xpic,f)
       return nil
     else
       wpn.push(k[2][2])
@@ -423,9 +425,14 @@ def damage_modifiers(bot,event,args=nil)
   if wpn.length<=0 && !safe_to_spam?(event)
     event.respond "The complete table is too large.  Please either specify a weapon type or use this command in PM."
   elsif wpn.length<=0
-    kx=[[75,80,95,100,150,95,"104% L1, 115% L2"],[97,97,63,129,"194% uncharged, 143% charged",94,"83% L1, 92% L2"],[75,38,54,119,119,89,"43.20% L1, 47% L2"],
-        [114,122,204,216,228,73,"173% L1, 192% L2"],[84,45,108,150,112,89,"27% L1, 30% L2"],[29,37,42,63,35,30,"28% L1, 31% L2"],
-        [98,53,36,78,"61.8% big ball, 36.05% small projectile",100,"81% L1, 90% L2"],[69,80,45,150,196,80,"55% L1, 61% L2"]]
+    kx=[[75,80,95,100,150,95,"104% L1, 115% L2"],
+        [97,97,'63% x2',129,"194% uncharged, 143% charged",94,"83% L1, 92% L2"],
+        [75,'38% x2','54% x2',119,119,89,"43.20% L1, 47% L2"],
+        [114,122,204,216,228,73,"173% L1, 192% L2"],
+        [84,'45% x2',108,150,112,89,"27% L1, 30% L2"],
+        ['29% x3','37% x2','42% x3','63% x2','35% x5','30% x3',"28% L1, 31% L2"],
+        [98,53,36,78,"61.8% x1 + 36.05% x4",100,"81% L1, 90% L2"],
+        [69,80,'45% x2',150,196,80,"55% L1, 61% L2"]]
     for i in 0...kx.length
       for i2 in 0...kx[i].length
         kx[i][i2]="#{kx[i][i2]}%" unless kx[i][i2].is_a?(String)
@@ -443,13 +450,13 @@ def damage_modifiers(bot,event,args=nil)
   else
     k=[1,2,3,4,5,6,7]
     k=[75,80,95,100,150,95,"104% L1, 115% L2"] if wpn[0]=='Sword'
-    k=[97,97,63,129,"194% uncharged, 143% charged",94,"83% L1, 92% L2"] if wpn[0]=='Blade'
-    k=[75,38,54,119,119,89,"43.20% L1, 47% L2"] if wpn[0]=='Dagger'
+    k=[97,97,'63% x2',129,"194% uncharged, 143% charged",94,"83% L1, 92% L2"] if wpn[0]=='Blade'
+    k=[75,'38% x2','54% x2',119,119,89,"43.20% L1, 47% L2"] if wpn[0]=='Dagger'
     k=[114,122,204,216,228,73,"173% L1, 192% L2"] if wpn[0]=='Axe'
-    k=[84,45,108,150,112,89,"27% L1, 30% L2"] if wpn[0]=='Lance'
-    k=[29,37,42,63,35,30,"28% L1, 31% L2"] if wpn[0]=='Bow'
-    k=[98,53,36,78,"61.8% big ball, 36.05% small projectile",100,"81% L1, 90% L2"] if wpn[0]=='Wand'
-    k=[69,80,45,150,196,80,"55% L1, 61% L2"] if wpn[0]=='Staff'
+    k=[84,'45% x2',108,150,112,89,"27% L1, 30% L2"] if wpn[0]=='Lance'
+    k=['29% x3','37% x2','42% x3','63% x2','35% x5','30% x3',"28% L1, 31% L2"] if wpn[0]=='Bow'
+    k=[98,53,36,78,"61.8% x1 + 36.05% x4",100,"81% L1, 90% L2"] if wpn[0]=='Wand'
+    k=[69,80,'45% x2',150,196,80,"55% L1, 61% L2"] if wpn[0]=='Staff'
     for i in 0...k.length
       k[i]="#{k[i]}%" unless k[i].is_a?(String)
     end
@@ -457,7 +464,7 @@ def damage_modifiers(bot,event,args=nil)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn[0]}"}
     m=moji[0].mention unless moji.length<=0
     disp="__**Combo:**__\n*First Hit:* #{k[0]}\n*Second Hit:* #{k[1]}\n*Third Hit:* #{k[2]}\n*Fourth Hit:* #{k[3]}\n*Fifth Hit:* #{k[4]}\n\n**Dash Attack:** #{k[5]}\n\n**Force Strike** #{k[6]}"
-    create_embed(event,"__Damage modifiers gains for **#{m}#{wpn[0]}** users__",disp,0xCE456B)
+    create_embed(event,"__Damage modifiers for **#{m}#{wpn[0]}** users__",disp,0xCE456B)
   end
 end
 
@@ -531,24 +538,26 @@ def sp_table(bot,event,args=nil)
       end
       if k[18].length>1
         for i in 0...k[18].length
-          ff=[]
-          t=0
-          for i2 in 1...k[18][i].length-2
-            ff.push("*#{m[i2]} Hit:* #{k[18][i][i2]}")
-            if k[18][i][i2].to_i.to_s==k[18][i][i2] && t>=0
-              t+=k[18][i][i2].to_i
-            else
-              t=-1
+          if k[19][i].length>1
+            ff=[]
+            t=0
+            for i2 in 1...k[18][i].length-2
+              ff.push("*#{m[i2]} Hit:* #{k[18][i][i2]}")
+              if k[18][i][i2].to_i.to_s==k[18][i][i2] && t>=0
+                t+=k[18][i][i2].to_i
+              else
+                t=-1
+              end
             end
+            if t<0
+              ff.push("~~*Total cannot be calculated dynamically*~~")
+            else
+              ff.push("~~*Total:* #{t}~~")
+            end
+            ff.push("\n**Dash Attack:** #{k[18][i][-2]}") unless k[18][i][-2].to_i==k2[5]
+            ff.push("\n**Force Strike:** #{k[18][i][-1]}") unless k[18][i][-1].to_i==k2[6]
+            f.push([k[18][i][0],ff.join("\n")])
           end
-          if t<0
-            ff.push("~~*Total cannot be calculated dynamically*~~")
-          else
-            ff.push("~~*Total:* #{t}~~")
-          end
-          ff.push("\n**Dash Attack:** #{k[18][i][-2]}") unless k[18][i][-2].to_i==k2[5]
-          ff.push("\n**Force Strike:** #{k[18][i][-1]}") unless k[18][i][-1].to_i==k2[6]
-          f.push([k[18][i][0],ff.join("\n")])
         end
       else
         f=nil
