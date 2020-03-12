@@ -540,7 +540,7 @@ def sp_table(bot,event,args=nil)
       end
       if k[18].length>1
         for i in 0...k[18].length
-          if k[19][i].length>1
+          if k[18][i].length>1
             ff=[]
             t=0
             for i2 in 1...k[18][i].length-2
