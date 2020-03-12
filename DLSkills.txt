@@ -1235,6 +1235,10 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Water) Undead's Bane\10%\Ability\if the user is attuned to Water: increases damage to undead by 10%.\20\y\Undead, Bane, Water
 (Water) Undead's Bane\15%\Ability\if the user is attuned to Water: increases damage to undead by 15%.\40\y\Undead, Bane, Water
 (Water) Volcanic Chimera's Bane\20%\Ability\if the user is attuned to Water: increases damage to the Volcanic Chimera by 20%.\40\y\Bane, Water
+(Wind) Affliction Guard\example\Ability\If the user is attuned to Wind: resists afflictions `x` times per quest.\0\y\Water, AfflictionGuard
+(Wind) Affliction Guard\I\Ability\If the user is attuned to Wind: resists afflictions once per quest.\60\y\Water, AfflictionGuard
+(Wind) Affliction Guard\II\Ability\If the user is attuned to Wind: resists afflictions two times per quest.\80\y\Water, AfflictionGuard
+(Wind) Affliction Guard\III\Ability\If the user is attuned to Wind: resists afflictions three times per quest.\100\y\Water, AfflictionGuard
 (Wind) Astral's Bane\60%\Ability\If the user is attuned to (Wind): increases damage to water-attuned Astrals by 60%.\40\y\Wind, Astral, Bane
 (Wind) Copy Punisher\-\Ability\If the user is attuned to Wind: increases damage to copies created by Propagation.\50\y\CopyPunisher, Wind
 (Wind) HP 70% = Healing\8%\Ability\if the user is attuned to Wind: increases the potency of recovery skills by 8% when HP is 70% or above.\40\y\HP70, RecoveryPotency, Wind
@@ -2053,6 +2057,7 @@ Striking Haste\6%\Ability\Increases skill gauge fill rate by 6% when the user's 
 Striking Haste\8%\Ability\Increases skill gauge fill rate by 8% when the user's force strikes connect.\80\y\StrikingHaste, SkillHaste, Strikers
 Striking Haste\10%\Ability\Increases skill gauge fill rate by 10% when the user's force strikes connect.\100\y\StrikingHaste, SkillHaste, Strikers
 Striking Haste\12%\Ability\Increases skill gauge fill rate by 12% when the user's force strikes connect.\120\y\StrikingHaste, SkillHaste, Strikers
+Striking Haste\15%\Ability\Increases skill gauge fill rate by 15% when the user's force strikes connect.\140\y\StrikingHaste, SkillHaste, Strikers
 Striking Strength Debilitator \I\Ability\Grants the user's force strikes a 50% chance to reduce enemy strength by 3% for 10 seconds.\80\y\Debuff, Debilitator, StrDown
 Striking Strength Debilitator \II\Ability\Grants the user's force strikes a 70% chance to reduce enemy strength by 3% for 10 seconds.\100\y\Debuff, Debilitator, StrDown
 Stun Chance\50%\Ability\Increases the chances of inflicting stun by 50%\100\y\StunChance, StatusChance
