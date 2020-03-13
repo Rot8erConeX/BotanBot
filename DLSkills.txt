@@ -1101,6 +1101,9 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Light) Curse Res\25%\Ability\If the user is attuned to Light: reduces susceptibility to curses by 25%.\40\y\CurseRes, Light, Resistance
 (Light) Curse Res\40%\Ability\If the user is attuned to Light: reduces susceptibility to curses by 40%.\50\y\CurseRes, Light, Resistance
 (Light) Dull Res\-\Ability\If the user is attuned to Light: completely prevents dulling.\50\y\DullRes, Light, Resistance
+(Light) Ebon Chimera's Bane\example\Ability\if the user is attuned to Shadow: increases damage to the Ebon Chimera by `x`%.\0\y\Light, Bane
+(Light) Ebon Chimera's Bane\20%\Ability\if the user is attuned to Shadow: increases damage to the Ebon Chimera by 20%.\40\y\Light, Bane
+(Light) Ebon Chimera's Bane\30%\Ability\if the user is attuned to Shadow: increases damage to the Ebon Chimera by 30%.\60\y\Light, Bane
 (Light) Enervation Res\-\Ability\If the user is attuned to Light: completely prevents enervation.\50\y\Enervation, Resistance, Light
 (Light) Fury Penetrator\-\Ability\If the user is attuned to Light: ignores the effects of fury when attacking enemies.\50\y\FuryPenetrator, Light
 (Light) High Zodiark's Bane\30%\Ability\If the user is attuned to Light: increases damage to High Zodiark by 30%.\100\y\Light, HZD, Bane
@@ -1235,6 +1238,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Water) Undead's Bane\10%\Ability\if the user is attuned to Water: increases damage to undead by 10%.\20\y\Undead, Bane, Water
 (Water) Undead's Bane\15%\Ability\if the user is attuned to Water: increases damage to undead by 15%.\40\y\Undead, Bane, Water
 (Water) Volcanic Chimera's Bane\20%\Ability\if the user is attuned to Water: increases damage to the Volcanic Chimera by 20%.\40\y\Bane, Water
+(Water) Volcanic Chimera's Bane\30%\Ability\if the user is attuned to Water: increases damage to the Volcanic Chimera by 30%.\60\y\Bane, Water
 (Wind) Affliction Guard\example\Ability\If the user is attuned to Wind: resists afflictions `x` times per quest.\0\y\Water, AfflictionGuard
 (Wind) Affliction Guard\I\Ability\If the user is attuned to Wind: resists afflictions once per quest.\60\y\Water, AfflictionGuard
 (Wind) Affliction Guard\II\Ability\If the user is attuned to Wind: resists afflictions two times per quest.\80\y\Water, AfflictionGuard
@@ -1480,6 +1484,9 @@ Dragon's Claws\III\Ability\Each shapeshift increases strength for the remainder 
 Dragon's Claws\IV\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 10% in total. On second shapeshift strength is increased by 25% in total. On third shapeshift strength is increased by 40% in total.\120\y\Strength, InCombat
 Dull\-\Ability\The afflicted adventurer's weapon will be dulled, lowering their strength by 40%.\-1\y\Dull, Enemy
 Dull Res\-\Ability\completely prevents dulling.\50\y\DullRes, Resistance
+Ebon Chimera's Bane\example\Ability\Increases damage to the Ebon Chimera by `x`%.\0\y\Bane
+Ebon Chimera's Bane\20%\Ability\Increases damage to the Ebon Chimera by `x`%.\40\y\Bane
+Ebon Chimera's Bane\30%\Ability\Increases damage to the Ebon Chimera by `x`%.\60\y\Bane
 Eggsploration Points\example\Ability\Increases eggsploration point intake for clearing quests by `x`%\0\y\Event, Facility, Score
 Eggsploration Points\25%\Ability\Increases eggsploration point intake for clearing quests by 25%\0\y\Event, Facility, Score
 Eggsploration Points\50%\Ability\Increases eggsploration point intake for clearing quests by 50%\0\y\Event, Facility, Score
@@ -2119,6 +2126,7 @@ Valor\40%\Ability\Increases valor intake for clearing quests by 40%\0\y\Event, S
 Valor\45%\Ability\Increases valor intake for clearing quests by 45%\0\y\Event, Score
 Valor\60%\Ability\Increases valor intake for clearing quests by 60%\0\y\Event, Score
 Volcanic Chimera's Bane\20%\Ability\Increases damage to the Volcanic Chimera by 20%.\40\y\Bane
+Volcanic Chimera's Bane\30%\Ability\Increases damage to the Volcanic Chimera by 30%.\60\y\Bane
 Water Res\example\Ability\Reduces water damage taken by `x`%.\0\y\WaterRes, Resistance
 Water Res\3%\Ability\Reduces water damage taken by 3%.\20\y\WaterRes, Resistance
 Water Res\4%\Ability\Reduces water damage taken by 4%.\30\y\WaterRes, Resistance
@@ -2255,3 +2263,4 @@ Strength\5%\CoAbility\Increases strength by 5%.\170\n\Strength
 Strength\6%\CoAbility\Increases strength by 6%.\200\n\Strength
 Strength\7%\CoAbility\Increases strength by 7%.\230\n\Strength
 Strength\8%\CoAbility\Increases strength by 8%.\260\n\Strength
+Strength\10%\CoAbility\Increases strength by 10%.\320\n\Strength

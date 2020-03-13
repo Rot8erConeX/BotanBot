@@ -745,62 +745,62 @@ Venomous Curse\Wand\5h\Shadow\60, 175, 203\222, 637, 742\Enveloping Darkness\150
 Darkbinder\Wand\5h\Shadow\73, 210, 244\445, 1275, 1484\Binding Darkness\1500, 0\747\746\0\1500000, 7500000\High Shadowwyrm's Tail, 40;; High Shadowwyrm's Horn, 30;; Ebony Heart, 10;; Shadowwyrm's Greatsphere, 50;; Orichalcum, 3\\\\2
 Creeping Death\Staff\5h\Shadow\73, 211, 245\201, 576, 670\Night Devourer\1500, 0\748\0\0\1200000, 6000000\High Shadowwyrm's Tail, 18;; Ebony Heart, 5;; Shadowwyrm's Greatsphere, 25;; Orichalcum, 1\(Shadow) High Jupiter's Bane +30%\\\1
 Dark Hunger\Staff\5h\Shadow\88, 253, 294\402, 1151, 1340\Despair Devourer\1500, 0\749\748\0\1500000, 7500000\High Shadowwyrm's Tail, 40;; High Shadowwyrm's Horn, 30;; Ebony Heart, 10;; Shadowwyrm's Greatsphere, 50;; Orichalcum, 3\\\\2
-Fiercetail\Sword\4\None\16, 0, 55\64, 0, 214\\0, 0\750\0\4\8000, 16000\Iron Ore, 5;; Granite, 2;; Raging Fang, 2\Slayer's Strength +3%\\Manticore\1
-Searing Savagetail\Sword\4\Flame\21, 0, 71\83, 0, 278\\0, 0\751\750\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
-Flaming Savagetail\Sword\5\Flame\27, 0, 92\108, 0, 362\\0, 0\752\751\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Water) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\3
-Angry Aquatail\Sword\4\Water\21, 0, 71\83, 0, 278\\0, 0\753\750\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Deluge Orb, 1\(Water) Slayer's Strength +4%;;;; (Water) Astral's Bane +60%\\Manticore\2
-Raging Aquatail\Sword\5\Water\27, 0, 92\108, 0, 362\\0, 0\754\753\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Raging Tail, 2;; Deluge Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) Astral's Bane +60%\\Manticore\3
-Slicing Stormtail\Sword\4\Wind\22, 0, 75\81, 0, 270\\0, 0\755\750\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Maelstrom Orb, 1\(Wind) Slayer's Strength +3%;;;; (Wind) Astral's Bane +60%\\Manticore\2
-Slaughtering Stormtail\Sword\5\Wind\29, 0, 97\105, 0, 351\\0, 0\756\755\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Greedy Tail, 2;; Maelstrom Orb, 3\(Wind) Slayer's Strength +4%;;;; (Wind) Astral's Bane +60%\\Manticore\3
-Sword of Dancing Sparks\Sword\4\Flame\21, 0, 71\83, 0, 278\\0, 0\757\610\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) HP 70% = Strength +5%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\2
-Sword of Surging Flame\Sword\5\Flame\27, 0, 92\108, 0, 362\\0, 0\758\757\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) HP 70% = Strength +8%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\3
-Direblade Mugatachi\Blade\4\None\14, 0, 48\68, 0, 227\\0, 0\759\0\4\8000, 16000\Iron Ore, 5;; Granite, 2;; Raging Fang, 2\Slayer's Strength +3%\\Manticore\1
-Direblade Kagachi\Blade\4\Flame\18, 0, 62\88, 0, 295\\0, 0\760\759\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
-Great Direblade Kagachi\Blade\5\Flame\24, 0, 81\114, 0, 383\\0, 0\761\760\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
-Direblade Mizuha\Blade\4\Water\20, 0, 69\83, 0, 278\\0, 0\762\759\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Deluge Orb, 1\(Water) Slayer's Strength +3%;;;; (Water) Astral's Bane +60%\\Manticore\2
-Dark Direblade Mizuha\Blade\5\Water\27, 0, 90\108, 0, 361\\0, 0\763\762\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Raging Tail, 2;; Deluge Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) Astral's Bane +60%\\Manticore\3
-Direblade Hayate\Blade\4\Wind\19, 0, 66\85, 0, 286\\0, 0\764\759\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Maelstrom Orb, 1\(Wind) Slayer's Strength +3%;;;; (Wind) Astral's Bane +60%\\Manticore\2
-Swift Direblade Hayate\Blade\5\Wind\25, 0, 85\111, 0, 372\\0, 0\765\764\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Greedy Tail, 2;; Maelstrom Orb, 3\(Wind) Slayer's Strength +4%;;;; (Wind) Astral's Bane +60%\\Manticore\3
-Burning Blade\Blade\4\Flame\18, 0, 62\88, 0, 295\\0, 0\766\616\4\50000, 250000\Granite, 7;; Meteorite, 3;; Catoblepas's Hoof, 5;; Inferno Orb, 1\(Flame) HP 70% = Strength +5%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\2
-Liquefaction Blade\Blade\5\Flame\24, 0, 81\114, 0, 383\\0, 0\767\766\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Catoblepas's Stormeye, 2;; Inferno Orb, 3\(Flame) HP 70% = Strength +8%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\3
-Flamesin\Dagger\4\Flame\23, 0, 79\77, 0, 257\\0, 0\768\261\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
-Blazesin\Dagger\5\Flame\30, 0, 103\100, 0, 334\\0, 0\769\768\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
-Brutality Crux\Axe\4\Flame\21, 0, 73\87, 0, 292\\0, 0\770\241\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
-Atrocity Crux\Axe\5\Flame\28, 0, 95\114, 0, 380\\0, 0\771\770\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
-Sun Ray Destroyer\Axe\4\Flame\21, 0, 73\87, 0, 292\\0, 0\772\625\4\50000, 250000\Granite, 7;; Meteorite, 3;; Catoblepas's Hoof, 5;; Inferno Orb, 1\(Flame) HP 70% = Strength +5%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\2
-Sun Flare Destroyer\Axe\5\Flame\28, 0, 95\114, 0, 380\\0, 0\773\772\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Catoblepas's Stormeye, 2;; Inferno Orb, 3\(Flame) HP 70% = Strength +8%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\3
-Soul Crusher\Axe\4\None\18, 0, 62\63, 0, 212\\0, 0\774\0\4\8000, 16000\Iron Ore, 5;; Granite, 2;; Soul Vestiges, 2\Therion's Bane +15%\\Eolian\1
-Crusher of the Shallows\Axe\4\Water\24, 0, 81\82, 0, 275\\0, 0\775\774\4\50000, 250000\Granite, 7;; Meteorite, 3;; Soul Vestiges, 5;; Deluge Orb, 1\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\2
-Crusher of the Depths\Axe\5\Water\31, 0, 105\107, 0, 357\\0, 0\776\775\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\3
-Cinder Beast\Lance\4\Flame\22, 0, 76\82, 0, 276\\0, 0\777\255\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
-Ashen Beast\Lance\5\Flame\29, 0, 99\107, 0, 358\\0, 0\778\777\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
-Ignition Flamelance\Lance\4\Flame\24, 0, 80\80, 0, 267\\0, 0\779\631\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Catoblepas's Hoof, 5;; Inferno Orb, 1\(Flame) HP 70% = Strength +5%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\2
-Combustion Flamelance\Lance\5\Flame\31, 0, 104\104, 0, 347\\0, 0\780\779\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Catoblepas's Stormeye, 2;; Inferno Orb, 3\(Flame) HP 70% = Strength +8%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\3
-Lance of Lamentation\Lance\4\None\17, 0, 59\63, 0, 212\\0, 0\781\0\4\8000, 16000\Fiend's Claw, 5;; Fiend's Horn, 2;; Soul Vestiges, 2\Therion's Bane +15%\\Eolian\1
-Lance of Dark Depths\Lance\4\Water\22, 0, 76\82, 0, 276\\0, 0\782\781\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Soul Vestiges, 5;; Deluge Orb, 1\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\2
-Lance of Frozen Depths\Lance\5\Water\29, 0, 99\107, 0, 358\\0, 0\783\782\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\3
-Ragebow\Bow\4\None\16, 0, 56\60, 0, 200\\0, 0\784\0\4\8000, 16000\Fiend's Claw, 5;; Fiend's Horn, 2;; Raging Fang, 2\Slayer's Strength +3%\\Manticore\1
-Flameburst Dreadbow\Bow\4\Flame\21, 0, 70\80, 0, 267\\0, 0\785\784\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
-Detonation Dreadbow\Bow\5\Flame\27, 0, 90\104, 0, 347\\0, 0\786\785\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
-Wavedrinker Bow\Bow\4\Water\21, 0, 70\80, 0, 267\\0, 0\787\784\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Raging Fang, 5;; Deluge Orb, 1\(Water) Slayer's Strength +3%;;;; (Water) Astral's Bane +60%\\Manticore\2
-Streamgorger Bow\Bow\5\Water\27, 0, 90\104, 0, 347\\0, 0\788\787\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Raging Tail, 2;; Deluge Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) Astral's Bane +60%\\Manticore\3
-Ill-Wind Whipper\Bow\4\Wind\23, 0, 77\75, 0, 252\\0, 0\789\784\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Raging Fang, 5;; Maelstrom Orb, 1\(Wind) Slayer's Strength +3%;;;; (Wind) Astral's Bane +60%\\Manticore\2
-Deathwind Caller\Bow\5\Wind\30, 0, 100\98, 0, 327\\0, 0\790\789\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Greedy Tail, 2;; Maelstrom Orb, 3\(Wind) Slayer's Strength +4%;;;; (Wind) Astral's Bane +60%\\Manticore\3
-Hollow Scream\Bow\4\Water\16, 0, 54\61, 0, 206\\0, 0\791\0\4\8000, 16000\Fiend's Claw, 5;; Fiend's Horn, 2;; Soul Vestiges, 2\Therion's Bane +15%\\Eolian\1
-Despair Bringer\Bow\4\Water\21, 0, 70\80, 0, 267\\0, 0\792\791\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Soul Vestiges, 5;; Deluge Orb, 1\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\2
-Despair Spiral\Bow\5\Water\27, 0, 90\104, 0, 347\\0, 0\793\792\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\3
-Blazewing\Wand\4\Flame\21, 0, 70\83, 0, 278\\0, 0\794\218\4\50000, 250000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
-Hellwing\Wand\5\Flame\27, 0, 91\108, 0, 362\\0, 0\795\794\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
-Iratus Staff\Staff\4\Water\20, 0, 68\56, 0, 188\\0, 0\796\0\4\8000, 16000\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Raging Fang, 2\Full HP = Defense +15%\\Manticore\1
-Tideway Staff\Staff\4\Water\26, 0, 89\73, 0, 244\\0, 0\797\796\4\50000, 250000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Raging Fang, 5;; Deluge Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
-Riptide Staff\Staff\5\Water\34, 0, 115\95, 0, 317\\0, 0\798\797\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Raging Tail, 2;; Deluge Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
-Combustion Staff\Staff\4\Flame\26, 0, 89\73, 0, 244\\0, 0\799\796\4\50000, 250000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Raging Fang, 5;; Inferno Orb, 1\(Water) Slayer's Strength +3%;;;; (Water) Astral's Bane +60%\\Manticore\2
-Fangflame Staff\Staff\5\Flame\34, 0, 115\95, 0, 317\\0, 0\800\799\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) Astral's Bane +60%\\Manticore\3
-Gust Staff\Staff\4\Wind\26, 0, 89\73, 0, 244\\0, 0\801\796\4\50000, 250000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Raging Fang, 5;; Maelstrom Orb, 1\(Wind) Slayer's Strength +3%;;;; (Wind) Astral's Bane +60%\\Manticore\2
-Whirlwind Staff\Staff\5\Wind\34, 0, 115\95, 0, 317\\0, 0\802\801\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Greedy Tail, 2;; Maelstrom Orb, 3\(Wind) Slayer's Strength +4%;;;; (Wind) Astral's Bane +60%\\Manticore\3
-Rancor Staff\Staff\4\None\20, 0, 68\56, 0, 188\\0, 0\803\0\4\8000, 16000\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Soul Vestiges, 2\Therion's Bane +15%\\Eolian\1
-Air Fouler\Staff\4\Water\26, 0, 89\73, 0, 244\\0, 0\804\803\4\50000, 250000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Soul Vestiges, 5;; Deluge Orb, 1\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\2
-Breath Snuffer\Staff\5\Water\34, 0, 115\95, 0, 317\\0, 0\805\804\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\3
+Fiercetail\Sword\4v\None\16, 0, 55\64, 0, 214\\0, 0\750\0\4\8000, 16000\Iron Ore, 5;; Granite, 2;; Raging Fang, 2\Slayer's Strength +3%\\Manticore\1
+Searing Savagetail\Sword\4v\Flame\21, 0, 71\83, 0, 278\\0, 0\751\750\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
+Flaming Savagetail\Sword\5v\Flame\27, 0, 92\108, 0, 362\\0, 0\752\751\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Water) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\3
+Angry Aquatail\Sword\4v\Water\21, 0, 71\83, 0, 278\\0, 0\753\750\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Deluge Orb, 1\(Water) Slayer's Strength +4%;;;; (Water) Astral's Bane +60%\\Manticore\2
+Raging Aquatail\Sword\5v\Water\27, 0, 92\108, 0, 362\\0, 0\754\753\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Raging Tail, 2;; Deluge Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) Astral's Bane +60%\\Manticore\3
+Slicing Stormtail\Sword\4v\Wind\22, 0, 75\81, 0, 270\\0, 0\755\750\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Maelstrom Orb, 1\(Wind) Slayer's Strength +3%;;;; (Wind) Astral's Bane +60%\\Manticore\2
+Slaughtering Stormtail\Sword\5v\Wind\29, 0, 97\105, 0, 351\\0, 0\756\755\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Greedy Tail, 2;; Maelstrom Orb, 3\(Wind) Slayer's Strength +4%;;;; (Wind) Astral's Bane +60%\\Manticore\3
+Sword of Dancing Sparks\Sword\4v\Flame\21, 0, 71\83, 0, 278\\0, 0\757\610\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) HP 70% = Strength +5%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\2
+Sword of Surging Flame\Sword\5v\Flame\27, 0, 92\108, 0, 362\\0, 0\758\757\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) HP 70% = Strength +8%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\3
+Direblade Mugatachi\Blade\4v\None\14, 0, 48\68, 0, 227\\0, 0\759\0\4\8000, 16000\Iron Ore, 5;; Granite, 2;; Raging Fang, 2\Slayer's Strength +3%\\Manticore\1
+Direblade Kagachi\Blade\4v\Flame\18, 0, 62\88, 0, 295\\0, 0\760\759\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
+Great Direblade Kagachi\Blade\5v\Flame\24, 0, 81\114, 0, 383\\0, 0\761\760\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
+Direblade Mizuha\Blade\4v\Water\20, 0, 69\83, 0, 278\\0, 0\762\759\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Deluge Orb, 1\(Water) Slayer's Strength +3%;;;; (Water) Astral's Bane +60%\\Manticore\2
+Dark Direblade Mizuha\Blade\5v\Water\27, 0, 90\108, 0, 361\\0, 0\763\762\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Raging Tail, 2;; Deluge Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) Astral's Bane +60%\\Manticore\3
+Direblade Hayate\Blade\4v\Wind\19, 0, 66\85, 0, 286\\0, 0\764\759\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Maelstrom Orb, 1\(Wind) Slayer's Strength +3%;;;; (Wind) Astral's Bane +60%\\Manticore\2
+Swift Direblade Hayate\Blade\5v\Wind\25, 0, 85\111, 0, 372\\0, 0\765\764\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Greedy Tail, 2;; Maelstrom Orb, 3\(Wind) Slayer's Strength +4%;;;; (Wind) Astral's Bane +60%\\Manticore\3
+Burning Blade\Blade\4v\Flame\18, 0, 62\88, 0, 295\\0, 0\766\616\4\50000, 250000\Granite, 7;; Meteorite, 3;; Catoblepas's Hoof, 5;; Inferno Orb, 1\(Flame) HP 70% = Strength +5%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\2
+Liquefaction Blade\Blade\5v\Flame\24, 0, 81\114, 0, 383\\0, 0\767\766\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Catoblepas's Stormeye, 2;; Inferno Orb, 3\(Flame) HP 70% = Strength +8%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\3
+Flamesin\Dagger\4v\Flame\23, 0, 79\77, 0, 257\\0, 0\768\261\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
+Blazesin\Dagger\5v\Flame\30, 0, 103\100, 0, 334\\0, 0\769\768\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
+Brutality Crux\Axe\4v\Flame\21, 0, 73\87, 0, 292\\0, 0\770\241\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
+Atrocity Crux\Axe\5v\Flame\28, 0, 95\114, 0, 380\\0, 0\771\770\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
+Sun Ray Destroyer\Axe\4v\Flame\21, 0, 73\87, 0, 292\\0, 0\772\625\4\50000, 250000\Granite, 7;; Meteorite, 3;; Catoblepas's Hoof, 5;; Inferno Orb, 1\(Flame) HP 70% = Strength +5%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\2
+Sun Flare Destroyer\Axe\5v\Flame\28, 0, 95\114, 0, 380\\0, 0\773\772\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Catoblepas's Stormeye, 2;; Inferno Orb, 3\(Flame) HP 70% = Strength +8%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\3
+Soul Crusher\Axe\4v\None\18, 0, 62\63, 0, 212\\0, 0\774\0\4\8000, 16000\Iron Ore, 5;; Granite, 2;; Soul Vestiges, 2\Therion's Bane +15%\\Eolian\1
+Crusher of the Shallows\Axe\4v\Water\24, 0, 81\82, 0, 275\\0, 0\775\774\4\50000, 250000\Granite, 7;; Meteorite, 3;; Soul Vestiges, 5;; Deluge Orb, 1\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\2
+Crusher of the Depths\Axe\5v\Water\31, 0, 105\107, 0, 357\\0, 0\776\775\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\3
+Cinder Beast\Lance\4v\Flame\22, 0, 76\82, 0, 276\\0, 0\777\255\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
+Ashen Beast\Lance\5v\Flame\29, 0, 99\107, 0, 358\\0, 0\778\777\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
+Ignition Flamelance\Lance\4v\Flame\24, 0, 80\80, 0, 267\\0, 0\779\631\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Catoblepas's Hoof, 5;; Inferno Orb, 1\(Flame) HP 70% = Strength +5%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\2
+Combustion Flamelance\Lance\5v\Flame\31, 0, 104\104, 0, 347\\0, 0\780\779\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Catoblepas's Stormeye, 2;; Inferno Orb, 3\(Flame) HP 70% = Strength +8%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\3
+Lance of Lamentation\Lance\4v\None\17, 0, 59\63, 0, 212\\0, 0\781\0\4\8000, 16000\Fiend's Claw, 5;; Fiend's Horn, 2;; Soul Vestiges, 2\Therion's Bane +15%\\Eolian\1
+Lance of Dark Depths\Lance\4v\Water\22, 0, 76\82, 0, 276\\0, 0\782\781\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Soul Vestiges, 5;; Deluge Orb, 1\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\2
+Lance of Frozen Depths\Lance\5v\Water\29, 0, 99\107, 0, 358\\0, 0\783\782\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\3
+Ragebow\Bow\4v\None\16, 0, 56\60, 0, 200\\0, 0\784\0\4\8000, 16000\Fiend's Claw, 5;; Fiend's Horn, 2;; Raging Fang, 2\Slayer's Strength +3%\\Manticore\1
+Flameburst Dreadbow\Bow\4v\Flame\21, 0, 70\80, 0, 267\\0, 0\785\784\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
+Detonation Dreadbow\Bow\5v\Flame\27, 0, 90\104, 0, 347\\0, 0\786\785\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
+Wavedrinker Bow\Bow\4v\Water\21, 0, 70\80, 0, 267\\0, 0\787\784\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Raging Fang, 5;; Deluge Orb, 1\(Water) Slayer's Strength +3%;;;; (Water) Astral's Bane +60%\\Manticore\2
+Streamgorger Bow\Bow\5v\Water\27, 0, 90\104, 0, 347\\0, 0\788\787\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Raging Tail, 2;; Deluge Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) Astral's Bane +60%\\Manticore\3
+Ill-Wind Whipper\Bow\4v\Wind\23, 0, 77\75, 0, 252\\0, 0\789\784\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Raging Fang, 5;; Maelstrom Orb, 1\(Wind) Slayer's Strength +3%;;;; (Wind) Astral's Bane +60%\\Manticore\2
+Deathwind Caller\Bow\5v\Wind\30, 0, 100\98, 0, 327\\0, 0\790\789\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Greedy Tail, 2;; Maelstrom Orb, 3\(Wind) Slayer's Strength +4%;;;; (Wind) Astral's Bane +60%\\Manticore\3
+Hollow Scream\Bow\4v\Water\16, 0, 54\61, 0, 206\\0, 0\791\0\4\8000, 16000\Fiend's Claw, 5;; Fiend's Horn, 2;; Soul Vestiges, 2\Therion's Bane +15%\\Eolian\1
+Despair Bringer\Bow\4v\Water\21, 0, 70\80, 0, 267\\0, 0\792\791\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Soul Vestiges, 5;; Deluge Orb, 1\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\2
+Despair Spiral\Bow\5v\Water\27, 0, 90\104, 0, 347\\0, 0\793\792\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\3
+Blazewing\Wand\4v\Flame\21, 0, 70\83, 0, 278\\0, 0\794\218\4\50000, 250000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
+Hellwing\Wand\5v\Flame\27, 0, 91\108, 0, 362\\0, 0\795\794\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
+Iratus Staff\Staff\4v\Water\20, 0, 68\56, 0, 188\\0, 0\796\0\4\8000, 16000\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Raging Fang, 2\Full HP = Defense +15%\\Manticore\1
+Tideway Staff\Staff\4v\Water\26, 0, 89\73, 0, 244\\0, 0\797\796\4\50000, 250000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Raging Fang, 5;; Deluge Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
+Riptide Staff\Staff\5v\Water\34, 0, 115\95, 0, 317\\0, 0\798\797\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Raging Tail, 2;; Deluge Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
+Combustion Staff\Staff\4v\Flame\26, 0, 89\73, 0, 244\\0, 0\799\796\4\50000, 250000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Raging Fang, 5;; Inferno Orb, 1\(Water) Slayer's Strength +3%;;;; (Water) Astral's Bane +60%\\Manticore\2
+Fangflame Staff\Staff\5v\Flame\34, 0, 115\95, 0, 317\\0, 0\800\799\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) Astral's Bane +60%\\Manticore\3
+Gust Staff\Staff\4v\Wind\26, 0, 89\73, 0, 244\\0, 0\801\796\4\50000, 250000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Raging Fang, 5;; Maelstrom Orb, 1\(Wind) Slayer's Strength +3%;;;; (Wind) Astral's Bane +60%\\Manticore\2
+Whirlwind Staff\Staff\5v\Wind\34, 0, 115\95, 0, 317\\0, 0\802\801\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Greedy Tail, 2;; Maelstrom Orb, 3\(Wind) Slayer's Strength +4%;;;; (Wind) Astral's Bane +60%\\Manticore\3
+Rancor Staff\Staff\4v\None\20, 0, 68\56, 0, 188\\0, 0\803\0\4\8000, 16000\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Soul Vestiges, 2\Therion's Bane +15%\\Eolian\1
+Air Fouler\Staff\4v\Water\26, 0, 89\73, 0, 244\\0, 0\804\803\4\50000, 250000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Soul Vestiges, 5;; Deluge Orb, 1\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\2
+Breath Snuffer\Staff\5v\Water\34, 0, 115\95, 0, 317\\0, 0\805\804\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\3
 Mega Axe\Axe\5c\None\30, 94, 101\108, 337, 362\Mega Buster(Axe)\1500, 0\806\0\0\, 0\\\MM\\1
 Mega Blade\Blade\5c\None\26, 82, 88\115, 357, 384\Mega Buster(Blade)\1500, 0\807\0\0\, 0\\\MM\\1
 Mega Bow\Bow\5c\None\29, 92, 98\104, 323, 347\Mega Buster(Bow)\1500, 0\808\0\0\, 0\\\MM\\1
@@ -819,58 +819,58 @@ Gungnir\Lance\6a\Flame\72, 157, 242\472, 1021, 1575\Megingjord\2000, 0\820\0\0\2
 Ydalir\Bow\6a\Flame\69, 151, 232\444, 961, 1482\Megingjord\2000, 0\821\0\0\2000000, -\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 30;; Twinkling Sand, 1\\\Volk\1
 Brisingr\Wand\6a\Flame\66, 145, 223\477, 1031, 1590\Megingjord\2000, 0\822\0\0\2000000, -\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 30;; Twinkling Sand, 1\\\Volk\1
 Gjallarhorn\Staff\6a\Flame\78, 170, 261\440, 951, 1467\Megingjord\2000, 0\823\0\0\2000000, -\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 30;; Twinkling Sand, 1\\\Volk\1
-Chimeratech Officer\Sword\5m\Flame\56, 0, 189\204, 0, 680\\1500, 0\824\0\0\400000, -\Iron Ore, 5;; Granite, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\VolcanicChimera\1
-Chimeratech Commander\Sword\5m\Flame\81, 0, 270\291, 0, 972\\1500, 0\825\824\0\900000, -\Granite, 7;; Meteorite, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\VolcanicChimera\2
-Chimeratech Knight\Blade\5m\Flame\28, 0, 95\222, 0, 743\\1500, 0\826\0\0\400000, -\Iron Ore, 5;; Granite, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\VolcanicChimera\1
-Chimeratech Lord\Blade\5m\Flame\47, 0, 158\318, 0, 1061\\1500, 0\827\826\0\900000, -\Granite, 7;; Meteorite, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\VolcanicChimera\2
-Chimeratech Fighter\Dagger\5m\Flame\32, 0, 109\206, 0, 687\\1500, 0\828\0\0\400000, -\Fiend's Claw, 5;; Fiend's Horn, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\VolcanicChimera\1
-Chimeratech Elite\Dagger\5m\Flame\54, 0, 181\294, 0, 981\\1500, 0\829\828\0\900000, -\Fiend's Horn, 7;; Fiend's Eye, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\VolcanicChimera\2
-Chimeratech Warrior\Axe\5m\Flame\33, 0, 111\220, 0, 736\\1500, 0\830\0\0\400000, -\Iron Ore, 5;; Granite, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\VolcanicChimera\1
-Chimeratech Warlord\Axe\5m\Flame\55, 0, 185\315, 0, 1051\\1500, 0\831\830\0\900000, -\Granite, 7;; Meteorite, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\VolcanicChimera\2
-Chimeratech Lancer\Lance\5m\Flame\36, 0, 121\201, 0, 673\\1500, 0\832\0\0\400000, -\Fiend's Claw, 5;; Fiend's Horn, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\VolcanicChimera\1
-Chimeratech Lancemaster\Lance\5m\Flame\60, 0, 202\288, 0, 962\\1500, 0\833\832\0\900000, -\Fiend's Horn, 7;; Fiend's Eye, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\VolcanicChimera\2
-Chimeratech Archer\Bow\5m\Flame\31, 0, 106\201, 0, 673\\1500, 0\834\0\0\400000, -\Fiend's Claw, 5;; Fiend's Horn, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\VolcanicChimera\1
-Chimeratech Sniper\Bow\5m\Flame\52, 0, 176\288, 0, 961\\1500, 0\835\834\0\900000, -\Fiend's Horn, 7;; Fiend's Eye, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\VolcanicChimera\2
-Chimeratech Sorcerer\Wand\5m\Flame\32, 0, 107\210, 0, 701\\1500, 0\836\0\0\400000, -\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\VolcanicChimera\1
-Chimeratech Archmage\Wand\5m\Flame\53, 0, 178\300, 0, 1001\\1500, 0\837\836\0\900000, -\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\VolcanicChimera\2
-Chimeratech Bishop\Staff\5m\Flame\41, 0, 135\184, 0, 614\\1500, 0\838\0\0\400000, -\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\VolcanicChimera\1
-Chimeratech Cardinal\Staff\5m\Flame\67, 0, 225\263, 0, 877\\1500, 0\839\838\0\900000, -\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\VolcanicChimera\2
-Triumphal Breamblade\Sword\5s\Null\28, 0, 95\111, 0, 373\\1500, 0\840\0\0\0, -\\\\\0
-Evilsbane Kadomatsu\Blade\5s\Null\26, 0, 88\115, 0, 384\\1500, 0\841\0\0\0, -\\\\\0
-The Big Cheese\Dagger\5s\Null\70, 0, 102\255, 0, 355\\1500, 0\842\0\0\0, -\\\\\0
-Catspaw Rod\Wand\5s\Null\66, 0, 94\263, 0, 373\\1500, 0\843\0\0\0, -\\\\\0
-Fatalis Sword\Sword\5c\Null\0, 0, 143\0, 0, 556\\1500, 0\844\0\0\0, -\\Monster's Bane +30%\\Fatalis\0
-Rathalos Firesword\Sword\5c\Flame\0, 0, 95\0, 0, 373\\1500, 0\845\0\0\0, -\\(Flame) Fatalis's Bane +15%\MH\Rathalos\0
-Fatalis Xiphos\Blade\5c\Null\0, 0, 132\0, 0, 572\\1500, 0\846\0\0\0, -\\Monster's Bane +30%\MH\Fatalis\0
-Wyvern Blade Maple\Blade\5c\Flame\0, 0, 84\0, 0, 395\\1500, 0\847\0\0\0, -\\(Flame) Fatalis's Bane +15%\MH\Rathalos\0
-Black Dragon Blade\Dagger\5c\Null\0, 0, 152\0, 0, 529\\1500, 0\848\0\0\0, -\\Monster's Bane +30%\MH\Fatalis\0
-Blazing Falchion\Dagger\5c\Flame\0, 0, 96\0, 0, 365\\1500, 0\849\0\0\0, -\\(Flame) Fatalis's Bane +15%\MH\Rathalos\0
-Black Dragon Axe\Axe\5c\Null\0, 0, 155\0, 0, 567\\1500, 0\850\0\0\0, -\\Monster's Bane +30%\MH\Fatalis\0
-Rath Blaze Splitter\Axe\5c\Flame\0, 0, 98\0, 0, 391\\1500, 0\851\0\0\0, -\\(Flame) Fatalis's Bane +15%\MH\Rathalos\0
-Black Dragon Spear\Lance\5c\Null\0, 0, 153\0, 0, 551\\1500, 0\852\0\0\0, -\\Monster's Bane +30%\MH\Fatalis\0
-Spear of Prominence\Lance\5c\Flame\0, 0, 108\0, 0, 358\\1500, 0\853\0\0\0, -\\(Flame) Fatalis's Bane +15%\MH\Rathalos\0
-Black Dragon Bow\Bow\5c\Null\0, 0, 147\0, 0, 518\\1500, 0\854\0\0\0, -\\Monster's Bane +30%\MH\Fatalis\0
-Dark Filament\Bow\5c\Flame\0, 0, 94\0, 0, 358\\1500, 0\855\0\0\0, -\\(Flame) Fatalis's Bane +15%\MH\Rathalos\0
-Fatalis Rhabdos\Wand\5c\Null\0, 0, 141\0, 0, 556\\1500, 0\856\0\0\0, -\\Monster's Bane +30%\MH\Fatalis\0
-Plage Rod\Wand\5c\Flame\0, 0, 94\0, 0, 373\\1500, 0\857\0\0\0, -\\(Flame) Fatalis's Bane +15%\MH\Rathalos\0
-Black Dragon Staff\Staff\5c\Null\0, 0, 165\0, 0, 513\\1500, 0\858\0\0\0, -\\Monster's Bane +30%\MH\Fatalis\0
-Wyvern Staff Elsewhere\Staff\5c\Flame\0, 0, 119\0, 0, 327\\1500, 0\859\0\0\0, -\\(Flame) Fatalis's Bane +15%\MH\Rathalos\0
-Chimeratech Tiento\Sword\5m\Shadow\56, 0, 189\204, 0, 680\\1500, 0\860\0\0\400000, -\Iron Ore, 5;; Granite, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
-Chimeratech Nocturne\Sword\5m\Shadow\81, 0, 270\291, 0, 972\\1500, 0\861\860\0\900000, -\Granite, 7;; Meteorite, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
-Chimeratech Serenade\Blade\5m\Shadow\28, 0, 95\222, 0, 743\\1500, 0\862\0\0\400000, -\Iron Ore, 5;; Granite, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
-Chimeratech Requiem\Blade\5m\Shadow\47, 0, 158\318, 0, 1061\\1500, 0\863\862\0\900000, -\Granite, 7;; Meteorite, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
-Chimeratech Rondo\Dagger\5m\Shadow\32, 0, 109\206, 0, 687\\1500, 0\864\0\0\400000, -\Fiend's Claw, 5;; Fiend's Horn, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
-Chimeratech Rhapsody\Dagger\5m\Shadow\54, 0, 181\294, 0, 981\\1500, 0\865\864\0\900000, -\Fiend's Horn, 7;; Fiend's Eye, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
-Chimeratech Sonata\Axe\5m\Shadow\33, 0, 111\220, 0, 736\\1500, 0\866\0\0\400000, -\Iron Ore, 5;; Granite, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
-Chimeratech Fugue\Axe\5m\Shadow\55, 0, 185\315, 0, 1051\\1500, 0\867\866\0\900000, -\Granite, 7;; Meteorite, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
-Chimeratech Lament\Lance\5m\Shadow\36, 0, 121\201, 0, 673\\1500, 0\868\0\0\400000, -\Fiend's Claw, 5;; Fiend's Horn, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
-Chimeratech Elegy\Lance\5m\Shadow\60, 0, 202\288, 0, 962\\1500, 0\869\868\0\900000, -\Fiend's Horn, 7;; Fiend's Eye, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
-Chimeratech Canon\Bow\5m\Shadow\31, 0, 106\201, 0, 673\\1500, 0\870\0\0\400000, -\Fiend's Claw, 5;; Fiend's Horn, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
-Chimeratech Concerto\Bow\5m\Shadow\52, 0, 176\288, 0, 961\\1500, 0\871\870\0\900000, -\Fiend's Horn, 7;; Fiend's Eye, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
-Chimeratech Scherzo\Wand\5m\Shadow\32, 0, 107\210, 0, 701\\1500, 0\872\0\0\400000, -\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
-Chimeratech Oratorio\Wand\5m\Shadow\53, 0, 178\300, 0, 1001\\1500, 0\873\872\0\900000, -\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
-Chimeratech Intro\Staff\5m\Shadow\41, 0, 135\184, 0, 614\\1500, 0\874\0\0\400000, -\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
-Chimeratech Coda\Staff\5m\Shadow\67, 0, 225\263, 0, 877\\1500, 0\875\874\0\900000, -\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
+Chimeratech Officer\Sword\5m\Flame\56, 163, 189\204, 584, 680\\1500, 0\824\0\0\400000, -\Iron Ore, 5;; Granite, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\VolcanicChimera\1
+Chimeratech Commander\Sword\5m\Flame\81, 232, 270\291, 835, 972\\1500, 0\825\824\0\900000, -\Granite, 7;; Meteorite, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\VolcanicChimera\2
+Chimeratech Knight\Blade\5m\Flame\28, 82, 95\222, 638, 743\\1500, 0\826\0\0\400000, -\Iron Ore, 5;; Granite, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\VolcanicChimera\1
+Chimeratech Lord\Blade\5m\Flame\47, 136, 158\318, 911, 1061\\1500, 0\827\826\0\900000, -\Granite, 7;; Meteorite, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\VolcanicChimera\2
+Chimeratech Fighter\Dagger\5m\Flame\32, 94, 109\206, 590, 687\\1500, 0\828\0\0\400000, -\Fiend's Claw, 5;; Fiend's Horn, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\VolcanicChimera\1
+Chimeratech Elite\Dagger\5m\Flame\54, 156, 181\294, 843, 981\\1500, 0\829\828\0\900000, -\Fiend's Horn, 7;; Fiend's Eye, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\VolcanicChimera\2
+Chimeratech Warrior\Axe\5m\Flame\33, 96, 111\220, 632, 736\\1500, 0\830\0\0\400000, -\Iron Ore, 5;; Granite, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\VolcanicChimera\1
+Chimeratech Warlord\Axe\5m\Flame\55, 159, 185\315, 903, 1051\\1500, 0\831\830\0\900000, -\Granite, 7;; Meteorite, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\VolcanicChimera\2
+Chimeratech Lancer\Lance\5m\Flame\36, 104, 121\201, 578, 673\\1500, 0\832\0\0\400000, -\Fiend's Claw, 5;; Fiend's Horn, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\VolcanicChimera\1
+Chimeratech Lancemaster\Lance\5m\Flame\60, 174, 202\288, 826, 962\\1500, 0\833\832\0\900000, -\Fiend's Horn, 7;; Fiend's Eye, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\VolcanicChimera\2
+Chimeratech Archer\Bow\5m\Flame\31, 91, 106\201, 578, 673\\1500, 0\834\0\0\400000, -\Fiend's Claw, 5;; Fiend's Horn, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\VolcanicChimera\1
+Chimeratech Sniper\Bow\5m\Flame\52, 151, 176\288, 826, 961\\1500, 0\835\834\0\900000, -\Fiend's Horn, 7;; Fiend's Eye, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\VolcanicChimera\2
+Chimeratech Sorcerer\Wand\5m\Flame\32, 92, 107\210, 602, 701\\1500, 0\836\0\0\400000, -\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\VolcanicChimera\1
+Chimeratech Archmage\Wand\5m\Flame\53, 153, 178\300, 860, 1001\\1500, 0\837\836\0\900000, -\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\VolcanicChimera\2
+Chimeratech Bishop\Staff\5m\Flame\41, 116, 135\184, 528, 614\\1500, 0\838\0\0\400000, -\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Volcanic Mane, 10;; Volcanic Claw, 2\(Flame) Unyielding Offense +2%\\VolcanicChimera\1
+Chimeratech Cardinal\Staff\5m\Flame\67, 194, 225\263, 753, 877\\1500, 0\839\838\0\900000, -\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Volcanic Mane, 25;; Volcanic Mane, 10;; Volcanic Horn, 3\(Flame) Unyielding Offense +4%\\VolcanicChimera\2
+Triumphal Breamblade\Sword\5s\Null\28, 82, 95\111, 321, 373\\1500, 0\840\0\0\0, -\\\\\0
+Evilsbane Kadomatsu\Blade\5s\Null\26, 76, 88\115, 330, 384\\1500, 0\841\0\0\0, -\\\\\0
+The Big Cheese\Dagger\5s\Null\70, 88, 102\255, 305, 355\\1500, 0\842\0\0\0, -\\\\\0
+Catspaw Rod\Wand\5s\Null\66, 81, 94\263, 321, 373\\1500, 0\843\0\0\0, -\\\\\0
+Fatalis Sword\Sword\5c\Null\42, 123, 143\166, 478, 556\\1500, 0\844\0\0\0, -\\Monster's Bane +30%\\Fatalis\0
+Rathalos Firesword\Sword\5c\Flame\28, 82, 95\111, 321, 373\\1500, 0\845\0\0\0, -\\(Flame) Fatalis's Bane +15%\MH\Rathalos\0
+Fatalis Xiphos\Blade\5c\Null\39, 114, 132\171, 491, 572\\1500, 0\846\0\0\0, -\\Monster's Bane +30%\MH\Fatalis\0
+Wyvern Blade Maple\Blade\5c\Flame\25, 73, 84\118, 340, 395\\1500, 0\847\0\0\0, -\\(Flame) Fatalis's Bane +15%\MH\Rathalos\0
+Black Dragon Blade\Dagger\5c\Null\45, 131, 152\158, 455, 529\\1500, 0\848\0\0\0, -\\Monster's Bane +30%\MH\Fatalis\0
+Blazing Falchion\Dagger\5c\Flame\28, 83, 96\109, 314, 365\\1500, 0\849\0\0\0, -\\(Flame) Fatalis's Bane +15%\MH\Rathalos\0
+Black Dragon Axe\Axe\5c\Null\46, 133, 155\170, 487, 567\\1500, 0\850\0\0\0, -\\Monster's Bane +30%\MH\Fatalis\0
+Rath Blaze Splitter\Axe\5c\Flame\29, 85, 98\117, 336, 391\\1500, 0\851\0\0\0, -\\(Flame) Fatalis's Bane +15%\MH\Rathalos\0
+Black Dragon Spear\Lance\5c\Null\45, 132, 153\165, 474, 551\\1500, 0\852\0\0\0, -\\Monster's Bane +30%\MH\Fatalis\0
+Spear of Prominence\Lance\5c\Flame\32, 93, 108\107, 308, 358\\1500, 0\853\0\0\0, -\\(Flame) Fatalis's Bane +15%\MH\Rathalos\0
+Black Dragon Bow\Bow\5c\Null\44, 127, 147\155, 445, 518\\1500, 0\854\0\0\0, -\\Monster's Bane +30%\MH\Fatalis\0
+Dark Filament\Bow\5c\Flame\28, 81, 94\107, 308, 358\\1500, 0\855\0\0\0, -\\(Flame) Fatalis's Bane +15%\MH\Rathalos\0
+Fatalis Rhabdos\Wand\5c\Null\42, 121, 141\166, 478, 556\\1500, 0\856\0\0\0, -\\Monster's Bane +30%\MH\Fatalis\0
+Plage Rod\Wand\5c\Flame\28, 81, 94\111, 321, 373\\1500, 0\857\0\0\0, -\\(Flame) Fatalis's Bane +15%\MH\Rathalos\0
+Black Dragon Staff\Staff\5c\Null\49, 142, 165\153, 441, 513\\1500, 0\858\0\0\0, -\\Monster's Bane +30%\MH\Fatalis\0
+Wyvern Staff Elsewhere\Staff\5c\Flame\35, 103, 119\98, 281, 327\\1500, 0\859\0\0\0, -\\(Flame) Fatalis's Bane +15%\MH\Rathalos\0
+Chimeratech Tiento\Sword\5m\Shadow\56, 163, 189\204, 584, 680\\1500, 0\860\0\0\400000, -\Iron Ore, 5;; Granite, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
+Chimeratech Nocturne\Sword\5m\Shadow\81, 232, 270\291, 835, 972\\1500, 0\861\860\0\900000, -\Granite, 7;; Meteorite, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
+Chimeratech Serenade\Blade\5m\Shadow\49, 143, 166\216, 619, 721\\1500, 0\862\0\0\400000, -\Iron Ore, 5;; Granite, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
+Chimeratech Requiem\Blade\5m\Shadow\71, 205, 238\309, 885, 1030\\1500, 0\863\862\0\900000, -\Granite, 7;; Meteorite, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
+Chimeratech Rondo\Dagger\5m\Shadow\57, 164, 191\200, 573, 667\\1500, 0\864\0\0\400000, -\Fiend's Claw, 5;; Fiend's Horn, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
+Chimeratech Rhapsody\Dagger\5m\Shadow\81, 235, 273\285, 819, 953\\1500, 0\865\864\0\900000, -\Fiend's Horn, 7;; Fiend's Eye, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
+Chimeratech Sonata\Axe\5m\Shadow\58, 168, 195\214, 613, 714\\1500, 0\866\0\0\400000, -\Iron Ore, 5;; Granite, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
+Chimeratech Fugue\Axe\5m\Shadow\83, 239, 278\306, 877, 1021\\1500, 0\867\866\0\900000, -\Granite, 7;; Meteorite, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
+Chimeratech Lament\Lance\5m\Shadow\57, 166, 193\208, 596, 694\\1500, 0\868\0\0\400000, -\Fiend's Claw, 5;; Fiend's Horn, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
+Chimeratech Elegy\Lance\5m\Shadow\82, 237, 275\297, 851, 991\\1500, 0\869\868\0\900000, -\Fiend's Horn, 7;; Fiend's Eye, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
+Chimeratech Canon\Bow\5m\Shadow\55, 159, 185\195, 561, 653\\1500, 0\870\0\0\400000, -\Fiend's Claw, 5;; Fiend's Horn, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
+Chimeratech Concerto\Bow\5m\Shadow\79, 228, 265\279, 801, 933\\1500, 0\871\870\0\900000, -\Fiend's Horn, 7;; Fiend's Eye, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
+Chimeratech Scherzo\Wand\5m\Shadow\53, 153, 178\210, 602, 701\\1500, 0\872\0\0\400000, -\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
+Chimeratech Oratorio\Wand\5m\Shadow\76, 219, 254\300, 860, 1001\\1500, 0\873\872\0\900000, -\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
+Chimeratech Intro\Staff\5m\Shadow\62, 179, 208\193, 555, 646\\1500, 0\874\0\0\400000, -\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Ebon Mane, 10;; Ebon Claw, 2\(Shadow) Unyielding Offense +2%\\EbonChimera\1
+Chimeratech Coda\Staff\5m\Shadow\89, 255, 297\276, 793, 923\\1500, 0\875\874\0\900000, -\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Ebon Mane, 25;; Ebon Mane, 10;; Ebon Horn, 3\(Shadow) Unyielding Offense +4%\\EbonChimera\2
 Yitian Jian\Sword\6a\Shadow\71, 154, 237\463, 1001, 1544\Qimen Dunjia\2000, 0\876\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
 Qixing Baodao\Blade\6a\Shadow\62, 136, 209\490, 1061, 1636\Qimen Dunjia\2000, 0\877\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
 Qinghong Jian\Dagger\6a\Shadow\71, 155, 239\453, 981, 1513\Qimen Dunjia\2000, 0\878\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
@@ -879,3 +879,21 @@ Qinglong Yanyu\Lance\6a\Shadow\72, 157, 242\472, 1021, 1575\Qimen Dunjia\2000, 0
 Longshe Gong\Bow\6a\Shadow\69, 151, 232\444, 961, 1482\Qimen Dunjia\2000, 0\881\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
 Jiu Ci\Wand\6a\Shadow\66, 145, 223\477, 1031, 1590\Qimen Dunjia\2000, 0\882\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
 Goosefoot Staff\Staff\6a\Shadow\78, 170, 261\440, 951, 1467\Qimen Dunjia\2000, 0\883\0\0\2000000, -\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 30;; Twinkling Sand, 1\\\KaiYan\1
+Shadehaze Blade\Blade\4v\Null\14, 39, 48\68, 181, 227\\500, 0\884\0\4\8000, 16000\Iron Ore, 5;; Granite, 2;; Soul Vestiges, 2\Therion's Bane +15%\\EolianPhantom\1
+Shadeflood Grimblade\Blade\4v\Water\20, 55, 69\83, 222, 278\\500, 0\885\884\4\50000, 100000\Granite, 7;; Meteorite, 3;; Soul Vestiges, 5;; Deluge Orb, 1\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\EolianPhantom\2
+Shadeflood Waveblade\Blade\5v\Water\27, 78, 90\108, 310, 361\\1500, 0\886\885\5\300000, 600000\Granite, 15;; Meteorite, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +30%;;;; (Water) Frenzy Res\\EolianPhantom\3
+Dread Necrom\Dagger\4v\Null\18, 50, 63\58, 155, 194\\500, 0\887\0\4\8000, 16000\Fiend's Claw, 5;; Fiend's Horn, 2;; Soul Vestiges, 2\Therion's Bane +15%\\EolianPhantom\1
+Aquaflow Necrom\Dagger\4v\Water\22, 60, 75\79, 212, 265\\500, 0\888\887\4\50000, 100000\Fiend's Horn, 7;; Fiend's Eye, 3;; Soul Vestiges, 5;; Deluge Orb, 1\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\EolianPhantom\2
+Hydroflow Necrom\Dagger\5v\Water\29, 85, 98\103, 296, 344\\1500, 0\889\888\5\300000, 600000\Fiend's Horn, 15;; Fiend's Eye, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +30%;;;; (Water) Frenzy Res\\EolianPhantom\3
+Shadelight Grimblade\Blade\4v\Light\18, 50, 62\88, 235, 295\\500, 0\890\884\4\50000, 100000\Granite, 7;; Meteorite, 3;; Soul Vestiges, 5;; Refulgence Orb, 1\(Light) Ebon Chimera's Bane +20%;;;; (Light) Frenzy Res\\EolianPhantom\2
+Shadegleam Flashblade\Blade\5v\Light\24, 70, 81\114, 329, 383\\1500, 0\891\890\5\300000, 600000\Granite, 15;; Meteorite, 5;; Eolian Soul, 2;; Refulgence Orb, 3\(Light) Ebon Chimera's Bane +30%;;;; (Light) Frenzy Res\\EolianPhantom\3
+Luminolight Necrom\Dagger\4v\Light\21, 58, 72\81, 218, 273\\500, 0\892\887\4\50000, 100000\Fiend's Horn, 7;; Fiend's Eye, 3;; Soul Vestiges, 5;; Refulgence Orb, 1\(Light) Ebon Chimera's Bane +20%;;;; (Light) Frenzy Res\\EolianPhantom\2
+Luminospark Necrom\Dagger\5v\Light\27, 80, 93\106, 304, 354\\1500, 0\893\892\5\300000, 600000\Fiend's Horn, 15;; Fiend's Eye, 5;; Eolian Soul, 2;; Refulgence Orb, 3\(Light) Ebon Chimera's Bane +30%;;;; (Light) Frenzy Res\\EolianPhantom\3
+Crushglare\Axe\4v\Light\21, 58, 73\87, 233, 292\\500, 0\894\774\4\50000, 100000\Granite, 7;; Meteorite, 3;; Soul Vestiges, 5;; Refulgence Orb, 1\(Light) Ebon Chimera's Bane +20%;;;; (Light) Frenzy Res\\EolianPhantom\2
+Crushdazzle\Axe\5v\Light\28, 82, 95\114, 327, 380\\1500, 0\895\894\5\300000, 600000\Granite, 15;; Meteorite, 5;; Eolian Soul, 2;; Refulgence Orb, 3\(Light) Ebon Chimera's Bane +30%;;;; (Light) Frenzy Res\\EolianPhantom\3
+Soulflash Splitter\Bow\4v\Light\21, 56, 70\80, 213, 267\\500, 0\896\791\4\50000, 100000\Fiend's Horn, 7;; Fiend's Eye, 3;; Soul Vestiges, 5;; Refulgence Orb, 1\(Light) Ebon Chimera's Bane +20%;;;; (Light) Frenzy Res\\EolianPhantom\2
+Soulshine Splitter\Bow\5v\Light\27, 78, 90\104, 298, 347\\1500, 0\897\896\5\300000, 600000\Fiend's Horn, 15;; Fiend's Eye, 5;; Eolian Soul, 2;; Refulgence Orb, 3\(Light) Ebon Chimera's Bane +30%;;;; (Light) Frenzy Res\\EolianPhantom\3
+Lance of Starry Skies\Lance\4v\Light\21, 58, 72\85, 227, 284\\500, 0\898\781\4\50000, 100000\Fiend's Horn, 7;; Fiend's Eye, 3;; Soul Vestiges, 5;; Refulgence Orb, 1\(Light) Ebon Chimera's Bane +20%;;;; (Light) Frenzy Res\\EolianPhantom\2
+Lance of Bright Skies\Lance\5v\Light\28, 81, 94\110, 317, 369\\1500, 0\899\898\5\300000, 600000\Fiend's Horn, 15;; Fiend's Eye, 5;; Eolian Soul, 2;; Refulgence Orb, 3\(Light) Ebon Chimera's Bane +30%;;;; (Light) Frenzy Res\\EolianPhantom\3
+Glintray Grudge\Staff\4v\Light\23, 63, 48\79, 211, 264\\500, 0\900\803\4\50000, 100000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Soul Vestiges, 5;; Refulgence Orb, 1\(Light) Ebon Chimera's Bane +20%;;;; (Light) Frenzy Res\\EolianPhantom\2
+Glintshine Grudge\Staff\5v\Light\30, 87, 101\102, 295, 343\\1500, 0\901\900\5\300000, 600000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Eolian Soul, 2;; Refulgence Orb, 3\(Light) Ebon Chimera's Bane +30%;;;; (Light) Frenzy Res\\EolianPhantom\3
