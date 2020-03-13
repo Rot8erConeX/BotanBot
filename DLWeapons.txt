@@ -771,14 +771,14 @@ Sun Ray Destroyer\Axe\4v\Flame\21, 0, 73\87, 0, 292\\0, 0\772\625\4\50000, 25000
 Sun Flare Destroyer\Axe\5v\Flame\28, 0, 95\114, 0, 380\\0, 0\773\772\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Catoblepas's Stormeye, 2;; Inferno Orb, 3\(Flame) HP 70% = Strength +8%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\3
 Soul Crusher\Axe\4v\None\18, 0, 62\63, 0, 212\\0, 0\774\0\4\8000, 16000\Iron Ore, 5;; Granite, 2;; Soul Vestiges, 2\Therion's Bane +15%\\Eolian\1
 Crusher of the Shallows\Axe\4v\Water\24, 0, 81\82, 0, 275\\0, 0\775\774\4\50000, 250000\Granite, 7;; Meteorite, 3;; Soul Vestiges, 5;; Deluge Orb, 1\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\2
-Crusher of the Depths\Axe\5v\Water\31, 0, 105\107, 0, 357\\0, 0\776\775\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\3
+Crusher of the Depths\Axe\5v\Water\31, 0, 105\107, 0, 357\\0, 0\776\775\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +30%;;;; (Water) Frenzy Res\\Eolian\3
 Cinder Beast\Lance\4v\Flame\22, 0, 76\82, 0, 276\\0, 0\777\255\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
 Ashen Beast\Lance\5v\Flame\29, 0, 99\107, 0, 358\\0, 0\778\777\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
 Ignition Flamelance\Lance\4v\Flame\24, 0, 80\80, 0, 267\\0, 0\779\631\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Catoblepas's Hoof, 5;; Inferno Orb, 1\(Flame) HP 70% = Strength +5%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\2
 Combustion Flamelance\Lance\5v\Flame\31, 0, 104\104, 0, 347\\0, 0\780\779\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Catoblepas's Stormeye, 2;; Inferno Orb, 3\(Flame) HP 70% = Strength +8%;;;; (Flame) Spectral Shield Penetrator\\Catoblepas\3
 Lance of Lamentation\Lance\4v\None\17, 0, 59\63, 0, 212\\0, 0\781\0\4\8000, 16000\Fiend's Claw, 5;; Fiend's Horn, 2;; Soul Vestiges, 2\Therion's Bane +15%\\Eolian\1
 Lance of Dark Depths\Lance\4v\Water\22, 0, 76\82, 0, 276\\0, 0\782\781\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Soul Vestiges, 5;; Deluge Orb, 1\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\2
-Lance of Frozen Depths\Lance\5v\Water\29, 0, 99\107, 0, 358\\0, 0\783\782\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\3
+Lance of Frozen Depths\Lance\5v\Water\29, 0, 99\107, 0, 358\\0, 0\783\782\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +30%;;;; (Water) Frenzy Res\\Eolian\3
 Ragebow\Bow\4v\None\16, 0, 56\60, 0, 200\\0, 0\784\0\4\8000, 16000\Fiend's Claw, 5;; Fiend's Horn, 2;; Raging Fang, 2\Slayer's Strength +3%\\Manticore\1
 Flameburst Dreadbow\Bow\4v\Flame\21, 0, 70\80, 0, 267\\0, 0\785\784\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
 Detonation Dreadbow\Bow\5v\Flame\27, 0, 90\104, 0, 347\\0, 0\786\785\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
@@ -788,7 +788,7 @@ Ill-Wind Whipper\Bow\4v\Wind\23, 0, 77\75, 0, 252\\0, 0\789\784\4\50000, 250000\
 Deathwind Caller\Bow\5v\Wind\30, 0, 100\98, 0, 327\\0, 0\790\789\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Greedy Tail, 2;; Maelstrom Orb, 3\(Wind) Slayer's Strength +4%;;;; (Wind) Astral's Bane +60%\\Manticore\3
 Hollow Scream\Bow\4v\Water\16, 0, 54\61, 0, 206\\0, 0\791\0\4\8000, 16000\Fiend's Claw, 5;; Fiend's Horn, 2;; Soul Vestiges, 2\Therion's Bane +15%\\Eolian\1
 Despair Bringer\Bow\4v\Water\21, 0, 70\80, 0, 267\\0, 0\792\791\4\50000, 250000\Fiend's Horn, 7;; Fiend's Eye, 3;; Soul Vestiges, 5;; Deluge Orb, 1\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\2
-Despair Spiral\Bow\5v\Water\27, 0, 90\104, 0, 347\\0, 0\793\792\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\3
+Despair Spiral\Bow\5v\Water\27, 0, 90\104, 0, 347\\0, 0\793\792\5\300000, 1500000\Fiend's Horn, 15;; Fiend's Eye, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +30%;;;; (Water) Frenzy Res\\Eolian\3
 Blazewing\Wand\4v\Flame\21, 0, 70\83, 0, 278\\0, 0\794\218\4\50000, 250000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
 Hellwing\Wand\5v\Flame\27, 0, 91\108, 0, 362\\0, 0\795\794\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
 Iratus Staff\Staff\4v\Water\20, 0, 68\56, 0, 188\\0, 0\796\0\4\8000, 16000\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Raging Fang, 2\Full HP = Defense +15%\\Manticore\1
@@ -800,7 +800,7 @@ Gust Staff\Staff\4v\Wind\26, 0, 89\73, 0, 244\\0, 0\801\796\4\50000, 250000\Anci
 Whirlwind Staff\Staff\5v\Wind\34, 0, 115\95, 0, 317\\0, 0\802\801\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Greedy Tail, 2;; Maelstrom Orb, 3\(Wind) Slayer's Strength +4%;;;; (Wind) Astral's Bane +60%\\Manticore\3
 Rancor Staff\Staff\4v\None\20, 0, 68\56, 0, 188\\0, 0\803\0\4\8000, 16000\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Soul Vestiges, 2\Therion's Bane +15%\\Eolian\1
 Air Fouler\Staff\4v\Water\26, 0, 89\73, 0, 244\\0, 0\804\803\4\50000, 250000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Soul Vestiges, 5;; Deluge Orb, 1\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\2
-Breath Snuffer\Staff\5v\Water\34, 0, 115\95, 0, 317\\0, 0\805\804\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\3
+Breath Snuffer\Staff\5v\Water\34, 0, 115\95, 0, 317\\0, 0\805\804\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +30%;;;; (Water) Frenzy Res\\Eolian\3
 Mega Axe\Axe\5c\None\30, 94, 101\108, 337, 362\Mega Buster(Axe)\1500, 0\806\0\0\, 0\\\MM\\1
 Mega Blade\Blade\5c\None\26, 82, 88\115, 357, 384\Mega Buster(Blade)\1500, 0\807\0\0\, 0\\\MM\\1
 Mega Bow\Bow\5c\None\29, 92, 98\104, 323, 347\Mega Buster(Bow)\1500, 0\808\0\0\, 0\\\MM\\1
