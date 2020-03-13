@@ -2571,7 +2571,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Weapons/#{dispname}.png?raw=true"
   str=''
   if !k[14].nil? && k[14]=='FEH'
-    str=generate_rarity_row(k[2][0,1].to_i,0,'FEH',true)
+    str=generate_rarity_row(k[2][0,1].to_i,0,'FEH',(k[16]==0))
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[3].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Anima')}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     wpn='<:Gold_Unknown:443172811499110411>'
@@ -2586,7 +2586,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     title="#{title}\n#{wpn}**#{k[1]}**"
     title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[14].nil? && k[14]=='FGO'
-    str=generate_rarity_row(k[2][0,1].to_i,0,'FGO',true)
+    str=generate_rarity_row(k[2][0,1].to_i,0,'FGO',(k[16]==0))
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     clzz='unknown'
@@ -2607,7 +2607,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[1]}**"
     title="#{title}\n<:Bond:613804021119189012>**FGO Collab**"
   else
-    str=generate_rarity_row(k[2][0,1].to_i,0,'',true)
+    str=generate_rarity_row(k[2][0,1].to_i,0,'',(k[16]==0))
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
@@ -2877,7 +2877,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     val/=5
   end
   if !k[14].nil? && k[14]=='FEH'
-    str=generate_rarity_row(k[2][0,1].to_i,0,'FEH',true)
+    str=generate_rarity_row(k[2][0,1].to_i,0,'FEH',(k[16]==0))
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[3].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Anima')}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     wpn='<:Gold_Unknown:443172811499110411>'
@@ -2892,7 +2892,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     title="#{title}\n#{wpn}**#{k[1]}**"
     title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[14].nil? && k[14]=='FGO'
-    str=generate_rarity_row(k[2][0,1].to_i,0,'FGO',true)
+    str=generate_rarity_row(k[2][0,1].to_i,0,'FGO',(k[16]==0))
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     clzz='unknown'
@@ -2913,7 +2913,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[1]}**"
     title="#{title}\n<:Bond:613804021119189012>**FGO Collab**"
   else
-    str=generate_rarity_row(k[2][0,1].to_i,0,'',true)
+    str=generate_rarity_row(k[2][0,1].to_i,0,'',(k[16]==0))
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[3].gsub('None','Null')}"}
     title="#{moji[0].mention unless moji.length<=0}**#{k[3]}**"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[1]}"}
