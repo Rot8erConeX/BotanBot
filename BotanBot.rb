@@ -10,7 +10,7 @@ require 'tzinfo/data'                  # Downloaded with active_support below, b
 require 'rufus-scheduler'              # Download link: https://github.com/jmettraux/rufus-scheduler
 require 'active_support/core_ext/time' # Download link: https://rubygems.org/gems/activesupport/versions/5.0.0
 require_relative 'rot8er_functs'       # functions I use commonly in bots
-@location="C:/Users/#{@mash}/Desktop/"
+@location="C:/"
 
 load "#{@location}devkit/BotanText.rb"
 
