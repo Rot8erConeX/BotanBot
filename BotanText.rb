@@ -352,19 +352,47 @@ def damage_modifiers(bot,event,args=nil)
     wpn.push('Wand') if ['wand','wands'].include?(args[i].downcase)
     wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
   end
+  m=[0,'First','Second','Third','Fourth','Fifth','Sixth','Seventh','Eighth','Ninth','Tenth','Eleventh','Twelfth','Thirteenth','Fourteenth','Fifteenth','16th',
+     '17th','18th','19th','20th','21st','22nd','23rd','24th','25th','26th','27th','28th','29th','30th','31st','32nd','33rd','34th','35th','36th','37th','38th',
+     '39th','40th','41st','42nd','43rd','44th','45th','46th','47th','48th','49th','50th']
   if wpn.length<=0
     k=find_data_ex(:find_adventurer,args.join(' '),event)
     if k.nil? || k.length<=0
-      k=find_data_ex(:find_weapon,args.join(' '),event)
-      unless k.nil? || k.length<=0
-        wpn.push(k[1])
-        k=nil
+      k=find_data_ex(:find_dragon,args.join(' '),event)
+      if k.nil? || k.length<=0
+        k=find_data_ex(:find_weapon,args.join(' '),event)
+        unless k.nil? || k.length<=0
+          wpn.push(k[1])
+          k=nil
+        end
+      else
+        if k[19].nil? || k[19].length<=0
+          event.respond "**#{k[0]}**#{dragon_emoji(k,bot)} does not have any damage modifiers stored."
+          return nil
+        end
+        for i in 0...k[19].length
+          for i2 in 1...k[19][i].length
+            k[19][i][i2]="#{k[19][i][i2]}%" unless k[19][i][i2].is_a?(String) && k[19][i][i2].to_i.to_s != k[19][i][i2]
+            k[19][i][i2]="*#{m[i2]} Hit:* #{k[19][i][i2]}"
+          end
+        end
+        f=nil
+        disp=''
+        if k[19].length==1
+          disp=k[19][0][1,k[19][0].length-1].join("\n")
+        else
+          f=[]
+          for i in 0...k[19].length
+            f.push(k[19][i][0],k[19][i][1,k[19][i].length-1].join("\n"))
+          end
+        end
+        dispname=k[0].gsub(' ','_')
+        xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Dragons/#{dispname}.png?raw=true"
+        create_embed(event,"__Damage modifiers for **#{k[0]}#{dragon_emoji(k,bot)}**__",disp,element_color(k[2]),nil,xpic,f)
+        return nil
       end
     elsif !k[19].nil? && k[19].length>0
       f=[]
-      m=[0,'First','Second','Third','Fourth','Fifth','Sixth','Seventh','Eighth','Ninth','Tenth','Eleventh','Twelfth','Thirteenth','Fourteenth','Fifteenth',
-         '16th','17th','18th','19th','20th','21st','22nd','23rd','24th','25th','26th','27th','28th','29th','30th','31st','32nd','33rd','34th','35th','36th',
-         '37th','38th','39th','40th','41st','42nd','43rd','44th','45th','46th','47th','48th','49th','50th']
       k2=[1,2,3,4,5,6,7]
       k2=[75,80,95,100,150,95,'104% L1, 115% L2'] if k[2][2]=='Sword'
       k2=[97,97,'63% x2',129,'194% uncharged, 143% charged',94,"83% L1, 92% L2"] if k[2][2]=='Blade'
@@ -448,7 +476,7 @@ def damage_modifiers(bot,event,args=nil)
     for i in 0...k.length
       f.push([k2[i],k[i]])
     end
-    create_embed(event,"__**SP gains**__",'',0xCE456B,nil,nil,f)
+    create_embed(event,"__**Damage modifiers**__",'',0xCE456B,nil,nil,f)
   else
     k=[1,2,3,4,5,6,7]
     k=[75,80,95,100,150,95,"104% L1, 115% L2"] if wpn[0]=='Sword'
