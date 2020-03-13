@@ -230,6 +230,7 @@ def data_load()
     b[i][9]=b[i][9].to_i
     b[i][12]=b[i][12].split(', ')
     b[i][15]=b[i][15].split(';;;; ').map{|q| q.split(';; ')} unless b[i][15].nil?
+    b[i][19]=b[i][19].split(';; ').map{|q| q.split('; ')} unless b[i][19].nil?
   end
   @dragons=b.map{|q| q}
   if File.exist?("#{@location}devkit/DLWyrmprints.txt")
