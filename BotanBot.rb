@@ -10,7 +10,9 @@ require 'tzinfo/data'                  # Downloaded with active_support below, b
 require 'rufus-scheduler'              # Download link: https://github.com/jmettraux/rufus-scheduler
 require 'active_support/core_ext/time' # Download link: https://rubygems.org/gems/activesupport/versions/5.0.0
 require_relative 'rot8er_functs'       # functions I use commonly in bots
-@location='C:/'
+@location="C:/Users/#{@mash}/Desktop/"
+
+load "#{@location}devkit/BotanText.rb"
 
 # this is required to get her to change her avatar on certain holidays
 ENV['TZ'] = 'America/Chicago'
@@ -18,7 +20,6 @@ ENV['TZ'] = 'America/Chicago'
 
 # All the possible command prefixes
 @prefixes={}
-load "#{@location}devkit/DLPrefix.rb"
 
 prefix_proc = proc do |message|
   next pseudocase(message.text[3..-1]) if message.text.downcase.start_with?('dl!')
