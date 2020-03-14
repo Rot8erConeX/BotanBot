@@ -431,13 +431,19 @@ def damage_modifiers(bot,event,args=nil)
       if k[19].length>1
         for i in 0...k[19].length
           if k[19][i].length>1
-            ff=[]
+            ff=["__**Combo**__"]
             for i2 in 1...k[19][i].length-2
               ff.push("*#{m[i2]} Hit:* #{k[19][i][i2]}")
             end
             ff.push("\n**Dash Attack:** #{k[19][i][-2]}") unless k[19][i][-2].to_s.gsub('%','')==k2[5].to_s.gsub('%','')
             ff.push("\n**Force Strike:** #{k[19][i][-1]}") unless k[19][i][-1].to_s.gsub('%','')==k2[6].to_s.gsub('%','')
-            f.push([k[19][i][0],ff.join("\n")])
+            if k[19][i][0][0,1]=='*' && i==0
+              disp=ff.join("\n")
+              k2[5]=k[19][i][-2]
+              k2[6]=k[19][i][-1]
+            else
+              f.push([k[19][i][0],ff.join("\n")])
+            end
           end
         end
       else
