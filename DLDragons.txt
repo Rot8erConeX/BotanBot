@@ -68,7 +68,7 @@ Poseidon\5\Water\37, 376\11, 119\Poseidon's Trident\(Water) HP & Strength +20%;;
 Prometheus\5\Flame\37, 374\12, 121\Promethean Flame\(Flame) Strength +35% Wind Res +15%;; (Flame) Strength +50% Wind Res +15%\5000, 8500\1.8, 1\5\Yes\Yes\Prometheus\Umehara Yuuichirou\Simon King\(Flame) Strength +35%;; (Flame) Strength +50%;;;; (Flame) Wind Res +15%;; (Flame) Wind Res +15%\\M\\default; 160%; 176%; 224%
 Rathalos\5c\Flame\22, 221\7, 76\Firestorm\(Flame) HP & Strength +20%;; (Flame) HP & Strength +30%\5000, 300\0, 0\1\Yes\Yes\Rathalos\\\\MH\M\\default; 167%; 73%; 292% x2
 Roc\4\Wind\29, 296\10, 101\Tactical Vortex\(Wind) Strength +30%;; (Wind) Strength +45%\2000, 2200\1.5, 1.5\5\No\No\Roc\\\\\F\\default; 176%; 194%; 246%
-Rush\5\Flame\-, -\-, -\Rush Buster\-\-, -\4.375, 1.5\0\Yes\Yes\Rush\\\\MM\M\\default; 40% x3, 40% x3, 40% x3
+Rush\5\Flame\-, -\-, -\Rush Buster\-\-, -\4.375, 1.5\5\Yes\Yes\Rush\\\\MM\M\\default; 40% x3, 40% x3, 40% x3
 Shinobi\5\Shadow\36, 368\12, 128\Shuriken Shower\(Shadow) Strength +10%;; (Shadow) Strength +20%;;; (Shadow) Skill Damage +70%;; (Shadow) Skill Damage +90%\5000, 8500\1.8, 1\5\Yes\Yes\Shinobi\Ishikawa Hideo\Mark Mathison\\\M\\default; 75% x2; 41% x6; 36% x8
 Shishimai\5\Light\22, 223\7, 75\Blessed Ritual\(Light) Critical Damage +50%;; (Light) Critical Damage +70%\5000, 300\1.65, 1\2\No\No\Shishimai\Ito Miyako\Paul Dobson\\\M\\default; 165%; 182%; 231%
 Silke\4\Shadow\29, 299\9, 97\Terror Sphere\(Shadow) HP & Strength +15%;; (Shadow) HP & Strength +20%\2000, 2200\1.5, 1\3\No\No\Silke\Yuki Aoi\Raynn Eastwood\(Shadow) HP +15%;; (Shadow) HP +20%;;;; (Shadow) Strength +15%;; (Shadow) Strength +20%\\F\KoG\default; 53% + 123%; 58% + 135%; 74% + 173%
