@@ -335,6 +335,7 @@ end
             "Slayer's Strength \u2192 6%",
             "Sleep Res \u2192 100%",
             "Strength +% \u2192 20%",
+            "Striking Haste \u2192 15%",
             "Stun Res \u2192 100%",
             "United Haste \u2192 I (8%)"]
 
@@ -1367,6 +1368,904 @@ def future_events(event,bot,args=nil)
     str=extend_message(str,str2,event,2)
   end
   event.respond str
+end
+
+def disp_alias_list(bot,event,args=nil,mode=0)
+  event.channel.send_temporary_message('Calculating data, please wait...',2)
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  data_load()
+  nicknames_load()
+  unless args.length.zero?
+    if find_data_ex(:find_adventurer,args.join(''),event).length>0
+    elsif find_data_ex(:find_dragon,args.join(''),event).length>0
+    elsif find_data_ex(:find_wyrmprint,args.join(''),event).length>0
+    elsif find_data_ex(:find_weapon,args.join(''),event).length>0
+    elsif find_data_ex(:find_enemy,args.join(''),event).length>0
+    elsif find_data_ex(:find_skill,args.join(''),event).length>0
+    elsif find_data_ex(:find_ability,args.join(''),event).length>0
+    elsif find_data_ex(:find_facility,args.join(''),event).length>0
+    elsif find_data_ex(:find_mat,args.join(''),event).length>0
+    elsif has_any?(args,['adventurer','adventurers','adv','advs','unit','units','dragon','dragons','wyrmprint','wyrm','print','wyrmprints','wyrms','prints','weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap','skill','skil','skills','skils','ability','abilitys','abilities','abil','abils','able','ables','facility','facilitys','facilities','faculty','facultys','faculties','mat','mats','material','materials','item','items','enemy','enemies','boss','bosss','bosses','drg','drgs'])
+    else
+      event.respond "The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Enemies\n- Skills\n- Abilities\n- Auras\n- CoAbilities\n- Facilities\n- Materials\n\n#{args.join(' ')} does not fall into any of these categories."
+      return nil
+    end
+  end
+  adv=find_data_ex(:find_adventurer,args.join(''),event,true)
+  adv=nil if adv.length<=0 || args.length.zero?
+  drg=find_data_ex(:find_dragon,args.join(''),event,true)
+  drg=nil if drg.length<=0 || args.length.zero?
+  wrm=find_data_ex(:find_wyrmprint,args.join(''),event,true)
+  wrm=nil if wrm.length<=0 || args.length.zero?
+  wpn=find_data_ex(:find_weapon,args.join(''),event,true)
+  wpn=nil if wpn.length<=0 || args.length.zero?
+  enm=find_data_ex(:find_enemy,args.join(''),event,true)
+  enm=nil if enm.length<=0 || args.length.zero?
+  skl=find_data_ex(:find_skill,args.join(''),event,true)
+  skl=nil if skl.length<=0 || args.length.zero?
+  abl=find_data_ex(:find_ability,args.join(''),event,true)
+  abl=nil if abl.length<=0 || args.length.zero?
+  fac=find_data_ex(:find_facility,args.join(''),event,true)
+  fac=nil if fac.length<=0 || args.length.zero?
+  mat=find_data_ex(:find_mat,args.join(''),event,true)
+  mat=nil if mat.length<=0 || args.length.zero?
+  if adv.nil? && drg.nil? && wrm.nil? && wpn.nil? && enm.nil? && skl.nil? && abl.nil? && abl.nil? && fac.nil? && mat.nil?
+    adv=find_data_ex(:find_adventurer,args.join(''),event)
+    adv=nil if adv.length<=0 || args.length.zero?
+    drg=find_data_ex(:find_dragon,args.join(''),event)
+    drg=nil if drg.length<=0 || args.length.zero?
+    wrm=find_data_ex(:find_wyrmprint,args.join(''),event)
+    wrm=nil if wrm.length<=0 || args.length.zero?
+    wpn=find_data_ex(:find_weapon,args.join(''),event)
+    wpn=nil if wpn.length<=0 || args.length.zero?
+    enm=find_data_ex(:find_enemy,args.join(''),event)
+    enm=nil if enm.length<=0 || args.length.zero?
+    skl=find_data_ex(:find_skill,args.join(''),event)
+    skl=nil if skl.length<=0 || args.length.zero?
+    abl=find_data_ex(:find_ability,args.join(''),event)
+    abl=nil if abl.length<=0 || args.length.zero?
+    fac=find_data_ex(:find_facility,args.join(''),event)
+    fac=nil if fac.length<=0 || args.length.zero?
+    mat=find_data_ex(:find_mat,args.join(''),event)
+    mat=nil if mat.length<=0 || args.length.zero?
+  end
+  f=[]
+  n=@aliases.reject{|q| q[0]!='Adventurer'}.map{|q| [q[1],q[2],q[3]]}
+  h=''
+  if adv.nil? && drg.nil? && wrm.nil? && wpn.nil? && enm.nil? && skl.nil? && abl.nil? && abl.nil? && fac.nil? && mat.nil?
+    if has_any?(args,['adventurer','adventurers','adv','advs','unit','units'])
+      n=n.reject{|q| q[2].nil?} if mode==1
+      f.push('__**Adventurer Aliases**__')
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+    elsif has_any?(args,['dragon','dragons','drg','drgs'])
+      f.push('__**Dragon Aliases**__')
+      n=@aliases.reject{|q| q[0]!='Dragon'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+    elsif has_any?(args,['wyrmprint','wyrm','print','wyrmprints','wyrms','prints'])
+      f.push('__**Wyrmprint Aliases**__')
+      n=@aliases.reject{|q| q[0]!='Wyrmprint'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+    elsif has_any?(args,['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'])
+      f.push('__**Weapon Aliases**__')
+      n=@aliases.reject{|q| q[0]!='Weapon'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+    elsif has_any?(args,['enemy','enemies','boss','bosss','bosses'])
+      f.push('__**Enemy Aliases**__')
+      n=@aliases.reject{|q| q[0]!='Enemy'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+    elsif has_any?(args,['skill','skil','skills','skils'])
+      f.push('__**Skill Aliases**__')
+      n=@aliases.reject{|q| q[0]!='Skill'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+    elsif has_any?(args,['ability','abilitys','abilities','abil','abils','able','ables'])
+      f.push('__**Ability Aliases**__')
+      n=@aliases.reject{|q| q[0]!='Ability'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+    elsif has_any?(args,['facility','facilitys','facilities','faculty','facultys','faculties'])
+      f.push('__**Facility Aliases**__')
+      n=@aliases.reject{|q| q[0]!='Facility'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+    elsif has_any?(args,['mat','mats','material','materials','item','items'])
+      f.push('__**Item Aliases**__')
+      n=@aliases.reject{|q| q[0]!='Material'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub("*","\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub("*","\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub("*","\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+    elsif safe_to_spam?(event) || mode==1
+      n=n.reject{|q| q[2].nil?} if mode==1
+      unless event.server.nil?
+        n=n.reject{|q| !q[2].nil? && !q[2].include?(event.server.id)}
+        if n.length>25 && !safe_to_spam?(event)
+          event.respond "There are so many aliases that I don't want to spam the server.  Please use the command in PM."
+          return nil
+        end
+        msg='__**Adventurer Aliases**__'
+        for i in 0...n.length
+          msg=extend_message(msg,"#{n[i][0].gsub('*',"\\*")} == #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil? && !n[i][2].nil? && !n[i][2].include?(event.server.id)
+        end
+        msg=extend_message(msg,'__**Dragon Aliases**__',event,2)
+        n=@aliases.reject{|q| q[0]!='Dragon'}.map{|q| [q[1],q[2],q[3]]}
+        n=n.reject{|q| !q[2].nil? && !q[2].include?(event.server.id)}
+        n=n.reject{|q| q[2].nil?} if mode==1
+        for i in 0...n.length
+          msg=extend_message(msg,"#{n[i][0].gsub('*',"\\*")} == #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil? && !n[i][2].nil? && !n[i][2].include?(event.server.id)
+        end
+        msg=extend_message(msg,'__**Wyrmprint Aliases**__',event,2)
+        n=@aliases.reject{|q| q[0]!='Wyrmprint'}.map{|q| [q[1],q[2],q[3]]}
+        n=n.reject{|q| !q[2].nil? && !q[2].include?(event.server.id)}
+        n=n.reject{|q| q[2].nil?} if mode==1
+        for i in 0...n.length
+          msg=extend_message(msg,"#{n[i][0].gsub('*',"\\*")} == #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil? && !n[i][2].nil? && !n[i][2].include?(event.server.id)
+        end
+        msg=extend_message(msg,'__**Weapon Aliases**__',event,2)
+        n=@aliases.reject{|q| !['Weapon'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+        n=n.reject{|q| !q[2].nil? && !q[2].include?(event.server.id)}
+        n=n.reject{|q| q[2].nil?} if mode==1
+        for i in 0...n.length
+          msg=extend_message(msg,"#{n[i][0].gsub('*',"\\*")} == #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil? && !n[i][2].nil? && !n[i][2].include?(event.server.id)
+        end
+        msg=extend_message(msg,'__**Enemy Aliases**__',event,2)
+        n=@aliases.reject{|q| !['Enemy'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+        n=n.reject{|q| !q[2].nil? && !q[2].include?(event.server.id)}
+        n=n.reject{|q| q[2].nil?} if mode==1
+        for i in 0...n.length
+          msg=extend_message(msg,"#{n[i][0].gsub('*',"\\*")} == #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil? && !n[i][2].nil? && !n[i][2].include?(event.server.id)
+        end
+        msg=extend_message(msg,'__**Skill Aliases**__',event,2)
+        n=@aliases.reject{|q| !['Skill'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+        n=n.reject{|q| !q[2].nil? && !q[2].include?(event.server.id)}
+        n=n.reject{|q| q[2].nil?} if mode==1
+        for i in 0...n.length
+          msg=extend_message(msg,"#{n[i][0].gsub('*',"\\*")} == #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil? && !n[i][2].nil? && !n[i][2].include?(event.server.id)
+        end
+        msg=extend_message(msg,'__**Ability Aliases**__',event,2)
+        n=@aliases.reject{|q| !['Ability'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+        n=n.reject{|q| !q[2].nil? && !q[2].include?(event.server.id)}
+        n=n.reject{|q| q[2].nil?} if mode==1
+        for i in 0...n.length
+          msg=extend_message(msg,"#{n[i][0].gsub('*',"\\*")} == #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil? && !n[i][2].nil? && !n[i][2].include?(event.server.id)
+        end
+        msg=extend_message(msg,'__**Facility Aliases**__',event,2)
+        n=@aliases.reject{|q| !['Facility'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+        n=n.reject{|q| !q[2].nil? && !q[2].include?(event.server.id)}
+        n=n.reject{|q| q[2].nil?} if mode==1
+        for i in 0...n.length
+          msg=extend_message(msg,"#{n[i][0].gsub('*',"\\*")} == #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil? && !n[i][2].nil? && !n[i][2].include?(event.server.id)
+        end
+        msg=extend_message(msg,'__**Item Aliases**__',event,2)
+        n=@aliases.reject{|q| !['Material'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+        n=n.reject{|q| !q[2].nil? && !q[2].include?(event.server.id)}
+        n=n.reject{|q| q[2].nil?} if mode==1
+        for i in 0...n.length
+          msg=extend_message(msg,"#{n[i][0].gsub('*',"\\*")} == #{n[i][1]}#{' *(in this server only)*' unless n[i][2].nil? || mode==1}",event) unless mode==1 && !event.server.nil? && !n[i][2].nil? && !n[i][2].include?(event.server.id)
+        end
+        event.respond msg
+        return nil
+      end
+      f.push('__**Adventurer Aliases**__')
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif mode==1 && !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+      f.push("\n__**Dragon Aliases**__")
+      n=@aliases.reject{|q| q[0]!='Dragon'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+      f.push("\n__**Wyrmprint Aliases**__")
+      n=@aliases.reject{|q| q[0]!='Wyrmprint'}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+      f.push("\n__**Weapon Aliases**__")
+      n=@aliases.reject{|q| !['Weapon'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+      f.push("\n__**Enemy Aliases**__")
+      n=@aliases.reject{|q| !['Enemy'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+      f.push("\n__**Skill Aliases**__")
+      n=@aliases.reject{|q| !['Skill'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+      f.push("\n__**Ability Aliases**__")
+      n=@aliases.reject{|q| !['Ability'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+      f.push("\n__**Facility Aliases**__")
+      n=@aliases.reject{|q| !['Facility'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+      f.push("\n__**Item Aliases**__")
+      n=@aliases.reject{|q| !['Material'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+      n=n.reject{|q| q[2].nil?} if mode==1
+      for i in 0...n.length
+        if n[i][2].nil?
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}")
+        elsif !event.server.nil? && n[i][2].include?(event.server.id)
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]}#{" *(in this server only)*" unless mode==1}")
+        elsif !event.server.nil?
+        else
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\_').gsub('*',"\\*")} == #{n[i][1]} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        end
+      end
+    else
+      event.respond "The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Abilities\n- Auras\n- CoAbilities\n- Facilities\n- Materials\n\nPlease either specify a member of one of these categories or use this command in PM."
+      return nil
+    end
+  elsif !adv.nil?
+    n=n.reject{|q| q[2].nil?} if mode==1
+    k=0
+    k=event.server.id unless event.server.nil?
+    f.push("__**#{adv[0]}#{adv_emoji(adv,bot)}**__#{"'s server-specific aliases" if mode==1}")
+    unless mode==1
+      f.push(adv[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if adv[0].include?('(') || adv[0].include?(')') || adv[0].include?(' ') || adv[0].include?('!') || adv[0].include?('_') || adv[0].include?('?') || adv[0].include?("'") || adv[0].include?('"')
+    end
+    for i in 0...n.length
+      if n[i][1]==adv[0]
+        if event.server.nil? && !n[i][2].nil?
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        elsif n[i][2].nil?
+          f.push(n[i][0].gsub('_','\\_')) unless mode==1
+        else
+          f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
+        end
+      end
+    end
+  elsif !drg.nil?
+    drg=drg[0] if drg[0].is_a?(Array)
+    k=0
+    k=event.server.id unless event.server.nil?
+    n=@aliases.reject{|q| q[0]!='Dragon'}.map{|q| [q[1],q[2],q[3]]}
+    n=n.reject{|q| q[2].nil?} if mode==1
+    f.push("__**#{drg[0]}#{dragon_emoji(drg,bot)}**__#{"'s server-specific aliases" if mode==1}")
+    unless mode==1
+      f.push(drg[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if drg[0].include?('(') || drg[0].include?(')') || drg[0].include?(' ') || drg[0].include?('!') || drg[0].include?('_') || drg[0].include?('?') || drg[0].include?("'") || drg[0].include?('"')
+    end
+    for i in 0...n.length
+      if n[i][1]==drg[0]
+        if event.server.nil? && !n[i][2].nil?
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        elsif n[i][2].nil?
+          f.push(n[i][0].gsub('_','\\_')) unless mode==1
+        else
+          f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
+        end
+      end
+    end
+  elsif !wrm.nil?
+    n=@aliases.reject{|q| q[0]!='Wyrmprint' || q[2]!=wrm[0]}.map{|q| [q[1],q[2],q[3]]}
+    k=0
+    k=event.server.id unless event.server.nil?
+    n=n.reject{|q| q[2].nil?} if mode==1
+    f.push("__**#{wrm[0]}#{print_emoji(wrm,bot)}**__#{"'s server-specific aliases" if mode==1}")
+    unless mode==1
+      f.push(wrm[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if wrm[0].include?('(') || wrm[0].include?(')') || wrm[0].include?(' ') || wrm[0].include?('!') || wrm[0].include?('_') || wrm[0].include?('?') || wrm[0].include?("'") || wrm[0].include?('"')
+    end
+    for i in 0...n.length
+      if n[i][1]==wrm[0]
+        if event.server.nil? && !n[i][2].nil?
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        elsif n[i][2].nil?
+          f.push(n[i][0].gsub('_','\\_')) unless mode==1
+        else
+          f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
+        end
+      end
+    end
+  elsif !wpn.nil?
+    wpn=wpn[0] if wpn[0].is_a?(Array)
+    k=0
+    k=event.server.id unless event.server.nil?
+    n=@aliases.reject{|q| !['Weapon'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+    n=n.reject{|q| q[2].nil?} if mode==1
+    f.push("__**#{wpn[0]}#{weapon_emoji(wpn,bot)}**__#{"'s server-specific aliases" if mode==1}")
+    unless mode==1
+      f.push(wpn[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if wpn[0].include?('(') || wpn[0].include?(')') || wpn[0].include?(' ') || wpn[0].include?('!') || wpn[0].include?('_') || wpn[0].include?('?') || wpn[0].include?("'") || wpn[0].include?('"')
+      mnm=[wpn[3]]
+      mnm.push('Fire') if wpn[3]=='Flame'
+      mnm.push('Dark') if wpn[3]=='Shadow'
+      mnm2=[wpn[1]]
+      mnm2.push('Spear') if wpn[1]=='Lance'
+      for i in 0...mnm.length
+        for i2 in 0...mnm2.length
+          if wpn[2][1,1]!='v' && wpn[2][1,1]!='h' && wpn[3]!='None'
+            f.push("#{wpn[2][0,1]}\\*#{mnm[i]}#{mnm2[i2]}")
+            f.push("#{wpn[2][0,1]}\\*#{mnm2[i2]}#{mnm[i]}")
+            f.push("#{mnm[i]}#{wpn[2][0,1]}\\*#{mnm2[i2]}")
+            f.push("#{mnm2[i2]}#{wpn[2][0,1]}\\*#{mnm[i]}")
+            f.push("#{mnm[i]}#{mnm2[i2]}#{wpn[2][0,1]}\\*")
+            f.push("#{mnm2[i2]}#{mnm[i]}#{wpn[2][0,1]}\\*")
+          elsif wpn[2][1,1]=='v' && wpn[3]!='None'
+            f.push("Void#{wpn[2][0,1]}\\*#{mnm[i]}#{mnm2[i2]}")
+            f.push("Void#{wpn[2][0,1]}\\*#{mnm2[i2]}#{mnm[i]}")
+            f.push("Void#{mnm[i]}#{wpn[2][0,1]}\\*#{mnm2[i2]}")
+            f.push("Void#{mnm2[i2]}#{wpn[2][0,1]}\\*#{mnm[i]}")
+            f.push("Void#{mnm[i]}#{mnm2[i2]}#{wpn[2][0,1]}\\*")
+            f.push("Void#{mnm2[i2]}#{mnm[i]}#{wpn[2][0,1]}\\*")
+            f.push("#{wpn[2][0,1]}\\*Void#{mnm[i]}#{mnm2[i2]}")
+            f.push("#{wpn[2][0,1]}\\*Void#{mnm2[i2]}#{mnm[i]}")
+            f.push("#{mnm[i]}Void#{wpn[2][0,1]}\\*#{mnm2[i2]}")
+            f.push("#{mnm2[i2]}Void#{wpn[2][0,1]}\\*#{mnm[i]}")
+            f.push("#{mnm[i]}Void#{mnm2[i2]}#{wpn[2][0,1]}\\*")
+            f.push("#{mnm2[i2]}Void#{mnm[i]}#{wpn[2][0,1]}\\*")
+            f.push("#{wpn[2][0,1]}\\*#{mnm[i]}Void#{mnm2[i2]}")
+            f.push("#{wpn[2][0,1]}\\*#{mnm2[i2]}Void#{mnm[i]}")
+            f.push("#{mnm[i]}#{wpn[2][0,1]}\\*Void#{mnm2[i2]}")
+            f.push("#{mnm2[i2]}#{wpn[2][0,1]}\\*Void#{mnm[i]}")
+            f.push("#{mnm[i]}#{mnm2[i2]}Void#{wpn[2][0,1]}\\*")
+            f.push("#{mnm2[i2]}#{mnm[i]}Void#{wpn[2][0,1]}\\*")
+            f.push("#{wpn[2][0,1]}\\*#{mnm[i]}#{mnm2[i2]}Void")
+            f.push("#{wpn[2][0,1]}\\*#{mnm2[i2]}#{mnm[i]}Void")
+            f.push("#{mnm[i]}#{wpn[2][0,1]}\\*#{mnm2[i2]}Void")
+            f.push("#{mnm2[i2]}#{wpn[2][0,1]}\\*#{mnm[i]}Void")
+            f.push("#{mnm[i]}#{mnm2[i2]}#{wpn[2][0,1]}\\*Void")
+            f.push("#{mnm2[i2]}#{mnm[i]}#{wpn[2][0,1]}\\*Void")
+          elsif wpn[2][1,1]=='h' && wpn[3]!='None'
+            mnm3=['High','Dragon','Drg','HDT','HD']
+            for i3 in 0...mnm3.length
+              f.push("#{mnm3[i3]}#{wpn[2][0,1]}\\*#{mnm[i]}#{mnm2[i2]}")
+              f.push("#{mnm3[i3]}#{wpn[2][0,1]}\\*#{mnm2[i2]}#{mnm[i]}")
+              f.push("#{mnm3[i3]}#{mnm[i]}#{wpn[2][0,1]}\\*#{mnm2[i2]}")
+              f.push("#{mnm3[i3]}#{mnm2[i2]}#{wpn[2][0,1]}\\*#{mnm[i]}")
+              f.push("#{mnm3[i3]}#{mnm[i]}#{mnm2[i2]}#{wpn[2][0,1]}\\*")
+              f.push("#{mnm3[i3]}#{mnm2[i2]}#{mnm[i]}#{wpn[2][0,1]}\\*")
+              f.push("#{wpn[2][0,1]}\\*#{mnm3[i3]}#{mnm[i]}#{mnm2[i2]}")
+              f.push("#{wpn[2][0,1]}\\*#{mnm3[i3]}#{mnm2[i2]}#{mnm[i]}")
+              f.push("#{mnm[i]}#{mnm3[i3]}#{wpn[2][0,1]}\\*#{mnm2[i2]}")
+              f.push("#{mnm2[i2]}#{mnm3[i3]}#{wpn[2][0,1]}\\*#{mnm[i]}")
+              f.push("#{mnm[i]}#{mnm3[i3]}#{mnm2[i2]}#{wpn[2][0,1]}\\*")
+              f.push("#{mnm2[i2]}#{mnm3[i3]}#{mnm[i]}#{wpn[2][0,1]}\\*")
+              f.push("#{wpn[2][0,1]}\\*#{mnm[i]}#{mnm3[i3]}#{mnm2[i2]}")
+              f.push("#{wpn[2][0,1]}\\*#{mnm2[i2]}#{mnm3[i3]}#{mnm[i]}")
+              f.push("#{mnm[i]}#{wpn[2][0,1]}\\*#{mnm3[i3]}#{mnm2[i2]}")
+              f.push("#{mnm2[i2]}#{wpn[2][0,1]}\\*#{mnm3[i3]}#{mnm[i]}")
+              f.push("#{mnm[i]}#{mnm2[i2]}#{mnm3[i3]}#{wpn[2][0,1]}\\*")
+              f.push("#{mnm2[i2]}#{mnm[i]}#{mnm3[i3]}#{wpn[2][0,1]}\\*")
+              f.push("#{wpn[2][0,1]}\\*#{mnm[i]}#{mnm2[i2]}#{mnm3[i3]}")
+              f.push("#{wpn[2][0,1]}\\*#{mnm2[i2]}#{mnm[i]}#{mnm3[i3]}")
+              f.push("#{mnm[i]}#{wpn[2][0,1]}\\*#{mnm2[i2]}#{mnm3[i3]}")
+              f.push("#{mnm2[i2]}#{wpn[2][0,1]}\\*#{mnm[i]}#{mnm3[i3]}")
+              f.push("#{mnm[i]}#{mnm2[i2]}#{wpn[2][0,1]}\\*#{mnm3[i3]}")
+              f.push("#{mnm2[i2]}#{mnm[i]}#{wpn[2][0,1]}\\*#{mnm3[i3]}")
+            end
+          end
+        end
+      end
+    end
+    for i in 0...n.length
+      if n[i][1]==wpn[0]
+        if event.server.nil? && !n[i][2].nil?
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        elsif n[i][2].nil?
+          f.push(n[i][0].gsub('_','\\_')) unless mode==1
+        else
+          f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
+        end
+      end
+    end
+  elsif !enm.nil?
+    n=@aliases.reject{|q| !['Enemy'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+    k=0
+    k=event.server.id unless event.server.nil?
+    n=n.reject{|q| q[2].nil?} if mode==1
+    f.push("__**#{enm[0]}#{enemy_emoji(enm,bot)}**__#{"'s server-specific aliases" if mode==1}")
+    unless mode==1
+      f.push(enm[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if enm[0].include?('(') || enm[0].include?(')') || enm[0].include?(' ') || enm[0].include?('!') || enm[0].include?('_') || enm[0].include?('?') || enm[0].include?("'") || enm[0].include?('"')
+    end
+    for i in 0...n.length
+      if n[i][1]==enm[0]
+        if event.server.nil? && !n[i][2].nil?
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        elsif n[i][2].nil?
+          f.push(n[i][0].gsub('_','\\_')) unless mode==1
+        else
+          f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
+        end
+      end
+    end
+  elsif !skl.nil?
+    n=@aliases.reject{|q| !['Skill'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+    k=0
+    k=event.server.id unless event.server.nil?
+    n=n.reject{|q| q[2].nil?} if mode==1
+    f.push("__**#{skl[0]}**__#{"'s server-specific aliases" if mode==1}")
+    unless mode==1
+      f.push(skl[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if skl[0].include?('(') || skl[0].include?(')') || skl[0].include?(' ') || skl[0].include?('!') || skl[0].include?('_') || skl[0].include?('?') || skl[0].include?("'") || skl[0].include?('"')
+    end
+    for i in 0...n.length
+      if n[i][1]==skl[0]
+        if event.server.nil? && !n[i][2].nil?
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        elsif n[i][2].nil?
+          f.push(n[i][0].gsub('_','\\_')) unless mode==1
+        else
+          f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
+        end
+      end
+    end
+  elsif !abl.nil?
+    abl=abl[0] if abl[0].is_a?(Array) && abl.length<=1
+    k=0
+    k=event.server.id unless event.server.nil?
+    n=@aliases.reject{|q| !['Ability'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+    n=n.reject{|q| q[2].nil?} if mode==1
+    if abl[0].is_a?(Array)
+      f.push("__**#{abl[0][0]}**__#{"'s server-specific aliases" if mode==1}")
+      unless mode==1
+        f.push(abl[0][0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if abl[0][0].include?('(') || abl[0][0].include?(')') || abl[0][0].include?(' ') || abl[0][0].include?('!') || abl[0][0].include?('_') || abl[0][0].include?('?') || abl[0][0].include?("'") || abl[0][0].include?('"')
+      end
+      for i in 0...n.length
+        if n[i][1]==abl[0][0]
+          if event.server.nil? && !n[i][2].nil?
+            a=[]
+            for j in 0...n[i][2].length
+              srv=(bot.server(n[i][2][j]) rescue nil)
+              unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+                a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+              end
+            end
+            f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+          elsif n[i][2].nil?
+            f.push(n[i][0].gsub('_','\\_')) unless mode==1
+          else
+            f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
+          end
+        end
+      end
+      for i2 in 0...abl.length
+        unless abl[i2][1]=='example'
+          f.push("\n__**#{abl[i2][0]} #{'+' if abl[i2][1].include?('%')}#{abl[i2][1]}**__#{"'s server-specific aliases" if mode==1}")
+          unless mode==1
+            f.push("#{abl[i2][0]}#{abl[i2][1]}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
+            if abl[i2][1].include?('%')
+              f.push("#{abl[i2][0]}#{abl[i2][1]}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
+              f.push("#{abl[i2][0]}#{abl[i2][1].gsub('%','')}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
+              f.push("#{abl[i2][0]}+#{abl[i2][1].gsub('%','')}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
+            end
+          end
+          for i in 0...n.length
+            if n[i][1]=="#{abl[i2][0]} #{abl[i2][1]}"
+              if event.server.nil? && !n[i][2].nil?
+                a=[]
+                for j in 0...n[i][2].length
+                  srv=(bot.server(n[i][2][j]) rescue nil)
+                  unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+                    a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+                  end
+                end
+                f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+              elsif n[i][2].nil?
+                f.push(n[i][0].gsub('_','\\_')) unless mode==1
+              else
+                f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
+              end
+            end
+          end
+        end
+      end
+    else
+      f.push("__**#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}**__#{"'s server-specific aliases" if mode==1}")
+      unless mode==1
+        f.push("#{abl[0]}#{abl[1]}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
+        if abl[i2][1].include?('%')
+          f.push("#{abl[0]}#{abl[1]}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
+          f.push("#{abl[0]}#{abl[1].gsub('%','')}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
+          f.push("#{abl[0]}+#{abl[1].gsub('%','')}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
+        end
+      end
+      for i in 0...n.length
+        if n[i][1]=="#{abl[0]} #{abl[1]}"
+          if event.server.nil? && !n[i][2].nil?
+            a=[]
+            for j in 0...n[i][2].length
+              srv=(bot.server(n[i][2][j]) rescue nil)
+              unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+                a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+              end
+            end
+            f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+          elsif n[i][2].nil?
+            f.push(n[i][0].gsub('_','\\_')) unless mode==1
+          else
+            f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
+          end
+        end
+      end
+    end
+  elsif !fac.nil?
+    fac=fac[0] if fac[0].is_a?(Array)
+    k=0
+    k=event.server.id unless event.server.nil?
+    n=@aliases.reject{|q| !['Facility'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+    n=n.reject{|q| q[2].nil?} if mode==1
+    f.push("__**#{fac[0]}**__#{"'s server-specific aliases" if mode==1}")
+    unless mode==1
+      f.push(fac[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if fac[0].include?('(') || fac[0].include?(')') || fac[0].include?(' ') || fac[0].include?('!') || fac[0].include?('_') || fac[0].include?('?') || fac[0].include?("'") || fac[0].include?('"')
+    end
+    for i in 0...n.length
+      if n[i][1]==fac[0]
+        if event.server.nil? && !n[i][2].nil?
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        elsif n[i][2].nil?
+          f.push(n[i][0].gsub('_','\\_')) unless mode==1
+        else
+          f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
+        end
+      end
+    end
+  elsif !mat.nil?
+    n=@aliases.reject{|q| !['Material'].include?(q[0])}.map{|q| [q[1],q[2],q[3]]}
+    k=0
+    k=event.server.id unless event.server.nil?
+    n=n.reject{|q| q[2].nil?} if mode==1
+    f.push("__**#{mat[0]}**__#{"'s server-specific aliases" if mode==1}")
+    unless mode==1
+      f.push(mat[0].gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')) if mat[0].include?('(') || mat[0].include?(')') || mat[0].include?(' ') || mat[0].include?('!') || mat[0].include?('_') || mat[0].include?('?') || mat[0].include?("'") || mat[0].include?('"')
+    end
+    for i in 0...n.length
+      if n[i][1]==mat[0]
+        if event.server.nil? && !n[i][2].nil?
+          a=[]
+          for j in 0...n[i][2].length
+            srv=(bot.server(n[i][2][j]) rescue nil)
+            unless srv.nil? || bot.user(bot.profile.id).on(srv.id).nil?
+              a.push("*#{bot.server(n[i][2][j]).name}*") unless event.user.on(n[i][2][j]).nil?
+            end
+          end
+          f.push("#{n[i][0].gsub('_','\\_')} (in the following servers: #{list_lift(a,'and')})") if a.length>0
+        elsif n[i][2].nil?
+          f.push(n[i][0].gsub('_','\\_')) unless mode==1
+        else
+          f.push("#{n[i][0].gsub('_','\\_')}#{" *(in this server only)*" unless mode==1}") if n[i][2].include?(k)
+        end
+      end
+    end
+  end
+  f.uniq!
+  if f.length>50 && !safe_to_spam?(event)
+    event.respond "There are so many aliases that I don't want to spam the server.  Please use the command in PM."
+    return nil
+  end
+  msg=''
+  for i in 0...f.length
+    msg=extend_message(msg,f[i],event)
+  end
+  event.respond msg
+  return nil
 end
 
 def snagstats(event,bot,f=nil,f2=nil)
