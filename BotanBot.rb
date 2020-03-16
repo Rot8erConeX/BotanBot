@@ -3350,7 +3350,7 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   title="#{title}\n~~Not energizable~~" if k[7]=='No'
   title="#{title}\n<:Inspiring:688916587079663625> **Inspirable**" if k[10].include?('Damage')
   title="#{title}\n~~Not inspirable~~" unless k[10].include?('Damage')
-  str2=''
+  str2="#{energy_emoji(k[10],true)}#{inspiration_emoji(k[10],true)}".gsub(', ',"\n")
   for i in 0...mx.length
     str2="#{str2}\n\n__**Level #{i+1}**__"
     str2="#{str2} - #{k[6][i]} SP" unless k[6][0,mx.length].max==k[6][0,mx.length].min
