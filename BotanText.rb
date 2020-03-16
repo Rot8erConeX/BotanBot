@@ -428,7 +428,7 @@ def dragon_data(bot,event,args=nil,juststats=false)
     eng=", #{semoji[4]}Energizable" if skl1[7]=='Yes'
     eng=", #{semoji[5]}Inspirable" if skl1[10].include?('Damage')
     eng=", #{semoji[6]}Energizable/Inspirable" if skl1[7]=='Yes' && skl1[10].include?('Damage')
-    str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)}#{inspiration_emoji(skl1[10],true)})__"
+    str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__"
     if skl1[9].nil? || skl1[9].length<=0
       str="#{str}\n*Lv.1:* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2:* #{skl1[4].gsub(';; ',"\n")}"
     else
@@ -439,7 +439,7 @@ def dragon_data(bot,event,args=nil,juststats=false)
     eng=semoji[4] if skl1[7]=='Yes'
     eng=semoji[5] if skl1[10].include?('Damage')
     eng=semoji[6] if skl1[7]=='Yes' && skl1[10].include?('Damage')
-    str="#{str}\n\n**Skill:** *#{k[5]}#{eng}#{energy_emoji(skl1[10])}#{inspiration_emoji(skl1[10])}*;;;;;"
+    str="#{str}\n\n**Skill:** *#{k[5]}#{eng}#{energy_emoji(skl1[10])}*;;;;;"
     strx=skl1[4].gsub(';; ',"\n")
   end
   bemoji=['<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
@@ -503,7 +503,11 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
           str="#{str}\n**Skill:** *#{k2[2][i]}* - LOAD ERROR"
         else
           skl1=sklz[skl1]
-          str="#{str}\n**Skill:** *#{skl1[0]}#{'<:Energize:559629242137051155>' if skl1[7]=='Yes'}#{energy_emoji(skl1[10])}*\n#{skl1[4].gsub(';; ',"\n")}"
+          eng=''
+          eng=", #{semoji[4]}Energizable" if skl1[7]=='Yes'
+          eng=", #{semoji[5]}Inspirable" if skl1[10].include?('Damage')
+          eng=", #{semoji[6]}Energizable/Inspirable" if skl1[7]=='Yes' && skl1[10].include?('Damage')
+          str="#{str}\n**Skill:** *#{skl1[0]}#{eng}#{energy_emoji(skl1[10])}*\n#{skl1[4].gsub(';; ',"\n")}"
         end
       end
     end
