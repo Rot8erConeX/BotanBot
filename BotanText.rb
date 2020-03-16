@@ -402,10 +402,10 @@ def dragon_data(bot,event,args=nil,juststats=false)
   title="#{title}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
   title="#{title}\n**Zodiac Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='z'
   title="#{title}\n**Treasure Trade**" if k[1].length>1 && k[1][1,1].downcase=='t'
-  semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Speed:573366907357495296>','<:Energize:559629242137051155>']
-  semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:ProtoShield:642287078943752202>','<:SpeedS:514712247625580555>','<:FEHEnergized:587684963000909845>'] if feh
-  semoji=['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:Defense:573344832282689567>','<:SpeedS:514712247625580555>','<:Energize:559629242137051155>'] if !k[16].nil? && k[16]=='MM'
-  semoji=['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','<:FGO_Def:653485374605361162>','<:SpeedS:514712247625580555>','<:Energize:559629242137051155>'] if !k[16].nil? && k[16]=='FGO'
+  semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Speed:573366907357495296>','<:Energize:559629242137051155>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>']
+  semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:ProtoShield:642287078943752202>','<:SpeedS:514712247625580555>','<:FEHEnergized:587684963000909845>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>'] if feh
+  semoji=['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:Defense:573344832282689567>','<:SpeedS:514712247625580555>','<:Energize:559629242137051155>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>'] if !k[16].nil? && k[16]=='MM'
+  semoji=['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','<:FGO_Def:653485374605361162>','<:SpeedS:514712247625580555>','<:Energize:559629242137051155>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>'] if !k[16].nil? && k[16]=='FGO'
   str="#{str}\n\n**Level 1**  #{semoji[0]}#{longFormattedNumber(k[3][0])}  #{semoji[1]}#{longFormattedNumber(k[4][0])}"
   str="#{str}\n**Level #{k[1][0,1].to_i*20}**  #{semoji[0]}#{longFormattedNumber(k[3][1])}  #{semoji[1]}#{longFormattedNumber(k[4][1])}"
   if s2s || juststats
@@ -424,14 +424,22 @@ def dragon_data(bot,event,args=nil,juststats=false)
   elsif skl1.nil?
     str="#{str}\n\n**Skill:** *#{k[5]}* - LOAD ERROR"
   elsif s2s
-    str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{", #{semoji[4]}Energizable" if skl1[7]=='Yes'}#{energy_emoji(skl1[10],true)})__"
+    eng=''
+    eng=", #{semoji[4]}Energizable" if skl1[7]=='Yes'
+    eng=", #{semoji[5]}Inspirable" if skl1[10].include?('Damage')
+    eng=", #{semoji[6]}Energizable/Inspirable" if skl1[7]=='Yes' && skl1[10].include?('Damage')
+    str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)}#{inspiration_emoji(skl1[10],true)})__"
     if skl1[9].nil? || skl1[9].length<=0
       str="#{str}\n*Lv.1:* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2:* #{skl1[4].gsub(';; ',"\n")}"
     else
       str="#{str}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}"
     end
   else
-    str="#{str}\n\n**Skill:** *#{k[5]}#{semoji[4] if skl1[7]=='Yes'}#{energy_emoji(skl1[10])}*;;;;;"
+    eng=''
+    eng=semoji[4] if skl1[7]=='Yes'
+    eng=semoji[5] if skl1[10].include?('Damage')
+    eng=semoji[6] if skl1[7]=='Yes' && skl1[10].include?('Damage')
+    str="#{str}\n\n**Skill:** *#{k[5]}#{eng}#{energy_emoji(skl1[10])}#{inspiration_emoji(skl1[10])}*;;;;;"
     strx=skl1[4].gsub(';; ',"\n")
   end
   bemoji=['<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
@@ -474,7 +482,7 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
   str=generate_rarity_row(5,0,k[0][16],true)
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[0][2]}"}
   title="#{moji[0].mention unless moji.length<=0}**#{k[0][2]}**\n**Pseudodragon**"
-  semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Speed:573366907357495296>']
+  semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Speed:573366907357495296>','<:Energize:559629242137051155>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>']
   sklz=@askilities.map{|q| q}
   unless k.map{|q| q[8]}.uniq.length<2 && k.map{|q| q[10]}.uniq.length<2 && k.map{|q| q[11]}.uniq.length<2 && (k2[2].is_a?(String) || k2[2].length==1)
     for i in 0...k.length
@@ -521,14 +529,18 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
     if skl1.nil?
       str="#{str}\n\n**Skill:** *#{k2[2][i]}* - LOAD ERROR"
     elsif s2s
-      str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{', <:Energize:559629242137051155>Energizable' if skl1[7]=='Yes'}#{energy_emoji(skl1[10],true)})__"
+      eng=''
+      eng=", #{semoji[4]}Energizable" if skl1[7]=='Yes'
+      eng=", #{semoji[5]}Inspirable" if skl1[10].include?('Damage')
+      eng=", #{semoji[6]}Energizable/Inspirable" if skl1[7]=='Yes' && skl1[10].include?('Damage')
+      str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__"
       if skl1[9].nil? || skl1[9].length<=0
         str="#{str}\n*Lv.1:* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2:* #{skl1[4].gsub(';; ',"\n")}"
       else
         str="#{str}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}"
       end
     else
-      str="#{str}\n\n**Skill:** *#{skl1[0]}#{'<:Energize:559629242137051155>' if skl1[7]=='Yes'}#{energy_emoji(skl1[10])}*;;;;;"
+      str="#{str}\n\n**Skill:** *#{skl1[0]}#{semoji[4] if skl1[7]=='Yes'}#{energy_emoji(skl1[10])}*;;;;;"
       strx=skl1[4].gsub(';; ',"\n")
     end
   end
