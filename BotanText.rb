@@ -1560,6 +1560,7 @@ def fac_stats(bot,event,args=nil)
   else
     nums=[]
     val=0
+    minmax=false
     for i in 0...args.length
       if args[i].to_i.to_s==args[i] && args[i].to_i>0
         if nums.length<2
@@ -1569,8 +1570,11 @@ def fac_stats(bot,event,args=nil)
         end
       elsif args[i][0,1].downcase=='x' && args[i][1,args[i].length-1].to_i.to_s==args[i][1,args[i].length-1] && args[i][1,args[i].length-1].to_i>0
         val=args[i][1,args[i].length-1].to_i if val<=0
+      elsif ['min','max','maximum','minimum'].include?(args[i].downcase)
+        minmax=true
       end
     end
+    nums=[] if minmax
     val=1 if val<=0
     str="**Amounts shown are for #{val} copies of this facility.**\n" unless val==1
     if nums.length<=0
@@ -1578,7 +1582,7 @@ def fac_stats(bot,event,args=nil)
       cost=0
       for i in 0...kxx.length
         cost+=kxx[i][6]
-        if s2s
+        if s2s && !minmax
           str="#{str}\nCreation: #{longFormattedNumber(kxx[i][6]*val)}<:Resource_Rupies:532104504372363274>" if i==0
           str="#{str}\nLevel #{i} \u2192 #{i+1}: #{longFormattedNumber(kxx[i][6]*val)}<:Resource_Rupies:532104504372363274>" unless i==0
         end
@@ -1586,9 +1590,11 @@ def fac_stats(bot,event,args=nil)
           for i2 in 0...kxx[i][7].length
             mtz.push(kxx[i][7][i2])
           end
-          str="#{str} - #{kxx[i][7].map{|q| "#{q[0]} x#{q[1].to_i*val}"}.sort.join(', ')}" if s2s
+          str="#{str} - #{kxx[i][7].map{|q| "#{q[0]} x#{q[1].to_i*val}"}.sort.join(', ')}" if s2s && !minmax
         end
-        if ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1]) && s2s
+        if minmax && i>0
+        elsif !s2s && !minmax
+        elsif ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1])
           alta=[(i+1)/2,i/2]
           alta[0]*=0.3
           alta[1]*=0.3
@@ -1596,7 +1602,7 @@ def fac_stats(bot,event,args=nil)
           alta[1]+=0.5
           alta[1]+=0.3 if i>=29
           str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-        elsif k[3][1]=='Tree' && s2s
+        elsif k[3][1]=='Tree'
           alta=[i+2.0,i+2.0]
           if i<9
             x=i/4
@@ -1615,11 +1621,11 @@ def fac_stats(bot,event,args=nil)
             end
           end
           str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-        elsif k[3][1]=='Altar' && s2s
+        elsif k[3][1]=='Altar'
           alta=[(i+1)/2,i/2]
           alta=alta.map{|q| q*0.5+0.5}
           str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-        elsif ['Dojo','Fafnir'].include?(k[3][1]) && s2s
+        elsif ['Dojo','Fafnir'].include?(k[3][1])
           alta=[(i+1)/2,i/2]
           alta=alta.map{|q| q*0.5+3.0}
           for i2 in 0...((i+1)/15+1)
@@ -1632,13 +1638,14 @@ def fac_stats(bot,event,args=nil)
             end
           end
           str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-        elsif k[3][1]=='Event Altar' && s2s
+        elsif k[3][1]=='Event Altar'
           alta=[(i+1)/2,i/2]
           alta=alta.map{|q| q*0.5}
           alta[0]+=1
           str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
         end
       end
+      str=str.gsub('Level 1:','**Initial Buff:**') if minmax
       mtzz=mtz.map{|q| q[0]}.uniq.sort
       str3="TOTAL: #{longFormattedNumber(cost*val)}<:Resource_Rupies:532104504372363274> - "
       for i in 0...mtzz.length
@@ -1838,6 +1845,7 @@ def fac_stats(bot,event,args=nil)
       str="#{str}\n\n**#{str3}**"
     end
   end
+  str=str.gsub("\n\n","\n") if minmax
   if str.length>=1900
     str=str.split("\n")
     str2=''
