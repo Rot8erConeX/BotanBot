@@ -2082,7 +2082,7 @@ Stunned Punisher\25%\Ability\Increases damage to stunned enemies by 25%.\80\y\St
 Stunned Punisher\30%\Ability\Increases damage to stunned enemies by 30%.\100\y\Stun, Punisher
 Sylvan Strength\I\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 25-hit combo.\70\y\CritRate, Strength, Combo
 Sylvan Strength\II\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 20-hit combo.\100\y\CritRate, Strength, Combo
-System Overload\I\Ability\Increases strength by 20% but decreases defense by 50% when HP is 30% or below.\60\y\Strength
+System Overload\-\Ability\Increases strength by 20% but decreases defense by 50% when HP is 30% or below.\60\y\Strength
 Tent Canvas\example\Ability\Increases canvas tent intake for clearing quests by `x`%\0\y\Event, Facility, Materials
 Tent Canvas\25%\Ability\Increases canvas tent intake for clearing quests by 25%\0\y\Event, Facility, Materials
 Tent Canvas\50%\Ability\Increases canvas tent intake for clearing quests by 50%\0\y\Event, Facility, Materials
