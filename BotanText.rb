@@ -4058,6 +4058,9 @@ def disp_alias_list(bot,event,args=nil,mode=0)
   if f.length>50 && !safe_to_spam?(event)
     event.respond "There are so many aliases that I don't want to spam the server.  Please use the command in PM."
     return nil
+  elsif event.user.id==328380949484011532 && !event.server.nil? && f.length>25
+    event.respond "There are so many aliases that I don't want to spam the server.  Please use the command in PM."
+    return nil
   end
   msg=''
   for i in 0...f.length
