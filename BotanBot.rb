@@ -4953,7 +4953,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   end
   lookout2=lookout.reject{|q| q[2]!='Race'}
   lookout3=lookout.reject{|q| q[2]!='Cygame'}
-  lookout=lookout.reject{|q| q[2]!='Skill'}
+  lookout=lookout.reject{|q| q[2]!='Skill' && q[2]!='Ability'}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
     mana=true if ['mana','spiral','manaspiral','70','70node','70mc','70ms'].include?(args[i].downcase)
@@ -5124,25 +5124,47 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
   if tags.length>0
-    search.push("*Skill Tags*: #{tags.join(', ')}")
-    sklz=@askilities.reject{|q| q[2]!='Skill'}
+    search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
+    sklz=@askilities.map{|q| q}
     for i in 0...char.length
       skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6][0]}
       skl1=sklz[skl1] unless skl1.nil?
       skl2=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6][1]}
       skl2=sklz[skl2] unless skl2.nil?
-      char[i][20]="#{skl1[10].join("\n") unless skl1.nil?}\n#{skl2[10].join("\n") unless skl2.nil?}".split("\n")
+      coab=sklz.find_index{|q| q[2]=='CoAbility' && q[0]==char[i][7].split(' ')[0,char[i][7].split(' ').length-1].join(' ')}
+      coab=sklz[coab] unless coab.nil?
+      coab[6]=[] if !coab.nil? && coab[6].nil?
+      ab1=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][8][0][-1]}
+      ab1=sklz[ab1] unless ab1.nil?
+      ab1[6]=[] if !ab1.nil? && ab1[6].nil?
+      ab2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][8][1][-1]}
+      ab2=sklz[ab2] unless ab2.nil?
+      ab2[6]=[] if !ab2.nil? && ab2[6].nil?
+      ab3=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][8][2][-1]}
+      ab3=sklz[ab3] unless ab3.nil?
+      ab3[6]=[] if !ab3.nil? && ab3[6].nil?
+      char[i][20]="#{skl1[10].join("\n") unless skl1.nil?}\n#{skl2[10].join("\n") unless skl2.nil?}\n#{coab[6].join("\n") unless coab.nil?}\n#{ab1[6].join("\n") unless ab1.nil?}\n#{ab2[6].join("\n") unless ab2.nil?}\n#{ab3[6].join("\n") unless ab3.nil?}".split("\n")
       if args.include?('any') || tags.length<=1
-        char[i][0]="#{char[i][0]} *[S1]*" if !skl1.nil? && has_any?(tags,skl1[10]) && (skl2.nil? || !has_any?(tags,skl2[10]))
-        char[i][0]="#{char[i][0]} *[S2]*" if !skl2.nil? && has_any?(tags,skl2[10]) && (skl1.nil? || !has_any?(tags,skl1[10]))
-        char[i][0]="#{char[i][0]} *[S1/2]*" if !skl1.nil? && !skl2.nil? && has_any?(tags,skl1[10]) && has_any?(tags,skl2[10])
+        x=[[],[],[]]
+        x[0].push('1') if !skl1.nil? && has_any?(tags,skl1[10])
+        x[0].push('2') if !skl2.nil? && has_any?(tags,skl2[10])
+        x[1].push('o') if !coab.nil? && has_any?(tags,coab[6])
+        x[2].push('1') if !ab1.nil? && has_any?(tags,ab1[6])
+        x[2].push('2') if !ab2.nil? && has_any?(tags,ab2[6])
+        x[2].push('3') if !ab3.nil? && has_any?(tags,ab3[6])
+        x[0]="S#{x[0].join('/')}" if x[0].length>0
+        x[1]='Co' if x[1].length>0
+        x[2]="A#{x[2].join('/')}" if x[2].length>0
+        x=x.reject{|q| q.length<=0}
+        x.compact!
+        char[i][0]="#{char[i][0]} *[#{x.join('+')}]*" if x.length>0
       end
     end
     if args.include?('any')
-      search[-1]="#{search[-1]}\n(searching for adventurers with any listed tag in their skills)" if tags.length>1
+      search[-1]="#{search[-1]}\n(searching for adventurers with any listed tag in their skills and abilities)" if tags.length>1
       char=char.reject{|q| !has_any?(tags,q[20])}.uniq
     else
-      search[-1]="#{search[-1]}\n(searching for adventurers with all listed tags in their skills)" if tags.length>1
+      search[-1]="#{search[-1]}\n(searching for adventurers with all listed tags in their skills and abilities)" if tags.length>1
       textra="#{textra}\n\nTags searching defaults to searching for adventurers with all listed tags.\nTo search for adventurers with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
       for i in 0...tags.length
         char=char.reject{|q| !q[20].include?(tags[i])}.uniq
@@ -5189,7 +5211,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
     end
   end
   lookout2=lookout.reject{|q| q[2]!='Cygame'}
-  lookout=lookout.reject{|q| q[2]!='Skill'}
+  lookout=lookout.reject{|q| q[2]!='Skill' && !q[2]!='Ability'}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
@@ -5346,21 +5368,43 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
   if tags.length>0
-    search.push("*Skill Tags*: #{tags.join(', ')}")
-    sklz=@askilities.reject{|q| q[2]!='Skill'}
+    search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
+    sklz=@askilities.map{|q| q}
     for i in 0...char.length
-      if sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][5]}.nil?
-        char[i][20]=[]
-      else
-        skl1=sklz[sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][5]}]
-        char[i][20]=skl1[10]
+      skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][5]}
+      skl1=sklz[skl1] unless skl1.nil?
+      ab1=nil
+      ab1=sklz.find_index{|q| ['Ability','Aura'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][6][0][-1]} unless char[i][6].length<1
+      ab1=sklz[ab1] unless ab1.nil?
+      ab1[6]=[] if !ab1.nil? && ab1[6].nil?
+      ab2=nil
+      ab2=sklz.find_index{|q| ['Ability','Aura'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][6][1][-1]} unless char[i][6].length<2
+      ab2=sklz[ab2] unless ab2.nil?
+      ab2[6]=[] if !ab2.nil? && ab2[6].nil?
+      ab3=nil
+      ab3=sklz.find_index{|q| ['Ability','Aura'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][6][2][-1]} unless char[i][6].length<3
+      ab3=sklz[ab3] unless ab3.nil?
+      ab3[6]=[] if !ab3.nil? && ab3[6].nil?
+      if args.include?('any') || tags.length<=1
+        x=[[],[],[]]
+        x[0].push('1') if !skl1.nil? && has_any?(tags,skl1[10])
+        x[2].push('1') if !ab1.nil? && has_any?(tags,ab1[6])
+        x[2].push('2') if !ab2.nil? && has_any?(tags,ab2[6])
+        x[2].push('3') if !ab3.nil? && has_any?(tags,ab3[6])
+        x[0]="S" if x[0].length>0
+        x[1]='Co' if x[1].length>0
+        x[2]="A#{x[2].join('/')}" if x[2].length>0
+        x=x.reject{|q| q.length<=0}
+        x.compact!
+        char[i][0]="#{char[i][0]} *[#{x.join('+')}]*" if x.length>0
       end
+      char[i][20]="#{skl1[10].join("\n")}\n#{ab1[6].join("\n") unless ab1.nil?}\n#{ab2[6].join("\n") unless ab2.nil?}\n#{ab3[6].join("\n") unless ab3.nil?}".split("\n")
     end
     if args.include?('any')
-      search[-1]="#{search[-1]}\n(searching for dragons with any listed tag in their skills)" if tags.length>1
+      search[-1]="#{search[-1]}\n(searching for dragons with any listed tag in their skills and abilities)" if tags.length>1
       char=char.reject{|q| !has_any?(tags,q[20])}.uniq
     else
-      search[-1]="#{search[-1]}\n(searching for dragons with all listed tags in their skills)" if tags.length>1
+      search[-1]="#{search[-1]}\n(searching for dragons with all listed tags in their skills and abilities)" if tags.length>1
       textra="#{textra}\n\nTags searching defaults to searching for dragons with all listed tags.\nTo search for dragons with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
       for i in 0...tags.length
         char=char.reject{|q| !q[20].include?(tags[i])}.uniq
@@ -5385,6 +5429,15 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
   fltr=[]
   crossgames=[]
   launch=false
+  tags=[]
+  lookout=[]
+  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
+    lookout=[]
+    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
+      lookout.push(eval line)
+    end
+  end
+  lookout=lookout.reject{|q| q[2]!='Skill' && !q[2]!='Ability'}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
@@ -5404,10 +5457,14 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
     crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
     fltr.push('Paid') if ['payment','paid','paying','whale'].include?(args[i].downcase)
+    for i2 in 0...lookout.length
+      tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
+    end
   end
   textra=''
   rarity.uniq!
   clzz.uniq!
+  tags.uniq!
   char=@wyrmprints.reject{|q| ['Wily Warriors','Greatwyrm'].include?(q[0])}.uniq
   search=[]
   emo=[]
@@ -5493,6 +5550,48 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
     end
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
+  if tags.length>0
+    search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
+    sklz=@askilities.map{|q| q}
+    for i in 0...char.length
+      puts char[i][5].to_s
+      ab1=nil
+      ab1=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][5][0][-1]} unless char[i][5].length<1
+      ab1=sklz[ab1] unless ab1.nil?
+      ab1[6]=[] if !ab1.nil? && ab1[6].nil?
+      ab2=nil
+      ab2=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][5][1][-1]} unless char[i][5].length<2
+      ab2=sklz[ab2] unless ab2.nil?
+      ab2[6]=[] if !ab2.nil? && ab2[6].nil?
+      ab3=nil
+      ab3=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][5][2][-1]} unless char[i][5].length<3
+      ab3=sklz[ab3] unless ab3.nil?
+      ab3[6]=[] if !ab3.nil? && ab3[6].nil?
+      if args.include?('any') || tags.length<=1
+        x=[[],[],[]]
+        x[2].push('1') if !ab1.nil? && has_any?(tags,ab1[6])
+        x[2].push('2') if !ab2.nil? && has_any?(tags,ab2[6])
+        x[2].push('3') if !ab3.nil? && has_any?(tags,ab3[6])
+        x[0]="S" if x[0].length>0
+        x[1]='Co' if x[1].length>0
+        x[2]="A#{x[2].join('/')}" if x[2].length>0
+        x=x.reject{|q| q.length<=0}
+        x.compact!
+        char[i][0]="#{char[i][0]} *[#{x.join('+')}]*" if x.length>0
+      end
+      char[i][20]="#{ab1[6].join("\n") unless ab1.nil?}\n#{ab2[6].join("\n") unless ab2.nil?}\n#{ab3[6].join("\n") unless ab3.nil?}".split("\n")
+    end
+    if args.include?('any')
+      search[-1]="#{search[-1]}\n(searching for wyrmprints with any listed tag in their abilities)" if tags.length>1
+      char=char.reject{|q| !has_any?(tags,q[20])}.uniq
+    else
+      search[-1]="#{search[-1]}\n(searching for wyrmprints with all listed tags in their abilities)" if tags.length>1
+      textra="#{textra}\n\nTags searching defaults to searching for wyrmprints with all listed tags.\nTo search for dragons with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
+      for i in 0...tags.length
+        char=char.reject{|q| !q[20].include?(tags[i])}.uniq
+      end
+    end
+  end
   if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
     event.respond "__**Search**__\n#{search.join("\n")}\n\n__**Note**__\nAt #{char.length} entries, too much data is trying to be displayed.  Please use this command in PM." if mode==0
     return nil
@@ -5523,7 +5622,7 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       lookout.push(eval line)
     end
   end
-  lookout=lookout.reject{|q| q[2]!='Skill'}
+  lookout=lookout.reject{|q| q[2]!='Skill' && q[2]!='Ability'}
   args2=args.map{|q| q}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
@@ -5781,29 +5880,48 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
   if tags.length>0
-    search.push("*Skill Tags*: #{tags.join(', ')}")
+    search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
     sklz=@askilities.reject{|q| q[2]!='Skill'}
     for i in 0...char.length
-      if char[i][6].nil? || char[i][6].length<=0
-        char[i][20]=[]
-      else
-        skl1=sklz[sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6]}]
-        char[i][20]=skl1[10]
+      skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6]}
+      skl1=sklz[skl1] unless skl1.nil?
+      ab1=nil
+      ab2=nil
+      ab3=nil
+      unless char[i][13].nil?
+        ab1=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][13][0][-1]} unless char[i][13].length<1
+        ab1=sklz[ab1] unless ab1.nil?
+        ab1[6]=[] if !ab1.nil? && ab1[6].nil?
+        ab2=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][13][1][-1]} unless char[i][13].length<2
+        ab2=sklz[ab2] unless ab2.nil?
+        ab2[6]=[] if !ab2.nil? && ab2[6].nil?
+        ab3=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][13][2][-1]} unless char[i][13].length<3
+        ab3=sklz[ab3] unless ab3.nil?
+        ab3[6]=[] if !ab3.nil? && ab3[6].nil?
       end
+      if args.include?('any') || tags.length<=1
+        x=[[],[],[]]
+        x[0].push('3') if !skl1.nil? && has_any?(tags,skl1[10])
+        x[2].push('1') if !ab1.nil? && has_any?(tags,ab1[6])
+        x[2].push('2') if !ab2.nil? && has_any?(tags,ab2[6])
+        x[2].push('3') if !ab3.nil? && has_any?(tags,ab3[6])
+        x[0]="S#{x[0].join('/')}" if x[0].length>0
+        x[1]='Co' if x[1].length>0
+        x[2]="A#{x[2].join('/')}" if x[2].length>0
+        x=x.reject{|q| q.length<=0}
+        x.compact!
+        char[i][0]="#{char[i][0]} *[#{x.join('+')}]*" if x.length>0
+      end
+      char[i][20]="#{skl1[10].join("\n") unless skl1.nil?}\n#{ab1[6].join("\n") unless ab1.nil?}\n#{ab2[6].join("\n") unless ab2.nil?}\n#{ab3[6].join("\n") unless ab3.nil?}".split("\n")
     end
     if args.include?('any')
-      search[-1]="#{search[-1]}\n(searching for weapons with any listed tag in their skills)" if tags.length>1
+      search[-1]="#{search[-1]}\n(searching for weapons with any listed tag in their skills and abilities)" if tags.length>1
       char=char.reject{|q| !has_any?(tags,q[20])}.uniq
     else
-      search[-1]="#{search[-1]}\n(searching for weapons with all listed tags in their skills)" if tags.length>1
+      search[-1]="#{search[-1]}\n(searching for weapons with all listed tags in their skills and abilities)" if tags.length>1
       textra="#{textra}\n\nTags searching defaults to searching for weapons with all listed tags.\nTo search for weapons with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
       for i in 0...tags.length
         char=char.reject{|q| !q[20].include?(tags[i])}.uniq
-      end
-    end
-    if args.include?('any') || tags.length<=1
-      for i in 0...char.length
-        char[i][0]="#{char[i][0]} *[S3]*"
       end
     end
   end
@@ -5939,6 +6057,69 @@ def find_in_banners(bot,event,args=nil,mode=0)
     return nil
   else
     return [search,'',char]
+  end
+end
+
+def find_in_skills(bot,event,args=nil,mode=0)
+  data_load()
+  args=normalize(event.message.text.downcase).gsub(',','').split(' ') if args.nil?
+  args=args.map{|q| normalize(q.downcase)}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  elem=[]
+  tags=[]
+  lookout=[]
+  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
+    lookout=[]
+    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
+      lookout.push(eval line)
+    end
+  end
+  lookout=lookout.reject{|q| q[2]!='Skill'}
+  for i in 0...args.length
+    elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
+    elem.push('Water') if ['water','waters'].include?(args[i].downcase)
+    elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
+    elem.push('Wind') if ['earth','earths'].include?(args[i].downcase) && event.user.id==192821228468305920
+    elem.push('Light') if ['light','lights'].include?(args[i].downcase)
+    elem.push('Shadow') if ['shadow','dark','shadows','darks'].include?(args[i].downcase)
+    elem.push('None') if ['none','no-element','no_element','noelement','elementless'].include?(args[i].downcase)
+    for i2 in 0...lookout.length
+      tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
+    end
+  end
+  elem.uniq!
+  tags.uniq!
+  emo=[]
+  search=[]
+  char=@askilities.reject{|q| q[2]!='Skill'}
+  textra=''
+  if elem.length>0
+    char=char.reject{|q| !has_any?(elem,q[10])}.uniq
+    for i in 0...elem.length
+      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{elem[i].gsub('None','Null')}"}
+      emo.push(moji[0].mention) if elem.length<2 && moji.length>0
+      elem[i]="#{moji[0].mention}#{elem[i]}" if moji.length>0
+    end
+    search.push("*Elements*: #{elem.join(', ')}")
+  end
+  if tags.length>0
+    search.push("*Tags*: #{tags.join(', ')}")
+    if args.include?('any')
+      search[-1]="#{search[-1]}\n(searching for abilities with any listed tag)" if tags.length>1
+      char=char.reject{|q| !has_any?(tags,q[10])}.uniq
+    else
+      search[-1]="#{search[-1]}\n(searching for abilities with all listed tags)" if tags.length>1
+      textra="#{textra}\n\nTags searching defaults to searching for abilities with all listed tags.\nTo search for abilities with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
+      for i in 0...tags.length
+        char=char.reject{|q| q[10].nil? || !q[10].include?(tags[i])}.uniq
+      end
+    end
+  end
+  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length>=1900) && !safe_to_spam?(event) && mode<2
+    event.respond "__**Search**__\n#{search.join("\n")}\n\n__**Note**__\nAt #{char.length} entries, too much data is trying to be displayed.  Please use this command in PM." if mode==0
+    return nil
+  else
+    return [search,textra,char]
   end
 end
 
@@ -6333,6 +6514,31 @@ def find_banners(bot,event,args=nil)
   else
     textra="#{textra}\n\n**No banners match your search**" if char.length<=0
     create_embed(event,"__**Banner Search**__\n#{search.join("\n")}\n\n__**Results**__","#{textra}\n\n#{char.join("\n")}",0xCE456B,"#{char.length} total")
+  end
+end
+
+def find_skills(bot,event,args=nil)
+  args=normalize(event.message.text.downcase).split(' ') if args.nil?
+  args=args.map{|q| normalize(q.downcase)}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  k=find_in_skills(bot,event,args)
+  return nil if k.nil?
+  search=k[0]
+  textra=k[1]
+  char=k[2]
+  char=char.sort{|a,b| a[0]<=>b[0]}.map{|q| q[0]}.uniq
+  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || char.join("\n").length+search.join("\n").length>=1900
+    str="__**Skill Search**__\n#{search.join("\n")}#{"\n\n__**Notes**__\n#{textra}" if textra.length>0}\n\n__**Results**__"
+    for i in 0...char.length
+      str=extend_message(str,char[i],event)
+    end
+    str=extend_message(str,"#{char.length} total",event,2)
+    event.respond str
+  else
+    flds=nil
+    flds=triple_finish(char) unless char.length<=0
+    textra="#{textra}\n\n**No skills match your search**" if char.length<=0
+    create_embed(event,"__**Skill Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total",nil,flds)
   end
 end
 
@@ -7898,6 +8104,12 @@ end
 
 bot.command([:skill,:skil]) do |event, *args|
   return nil if overlap_prevent(event)
+  if args.nil? || args.length<=0
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    find_skills(bot,event,args)
+    return nil
+  end
   disp_skill_data(bot,event,args)
 end
 
@@ -8102,6 +8314,10 @@ bot.command([:find,:search,:lookup]) do |event, *args|
   elsif ['abil','ability','abilitys','abilities','abils'].include?(args[0].downcase)
     args.shift
     find_abilities(bot,event,args)
+    return nil
+  elsif ['skill','skills','skls','skl','skil','skils'].include?(args[0].downcase)
+    args.shift
+    find_skills(bot,event,args)
     return nil
   elsif ['enemies','boss','enemy','bosses','enemie','enemys','bosss'].include?(args[0].downcase)
     args.shift
@@ -9297,6 +9513,9 @@ bot.mention do |event|
     elsif ['abil','ability','abilitys','abilities','abils'].include?(args[0].downcase)
       args.shift
       find_abilities(bot,event,args)
+    elsif ['skill','skills','skls','skl','skil','skils'].include?(args[0].downcase)
+      args.shift
+      find_skills(bot,event,args)
     elsif ['enemies','boss','enemy','bosses','enemie','enemys','bosss'].include?(args[0].downcase)
       args.shift
       find_enemies(bot,event,args)
@@ -9502,7 +9721,12 @@ bot.mention do |event|
   elsif ['skill','skil'].include?(args[0].downcase)
     m=false
     args.shift
-    disp_skill_data(bot,event,args)
+    if ['find','search'].include?(args[0].downcase)
+      args.shift
+      find_skills(bot,event,args)
+    else
+      disp_skill_data(bot,event,args)
+    end
   elsif ['limit','limits','stack','stacks'].include?(args[0].downcase)
     m=false
     show_abil_limits(event,bot)
