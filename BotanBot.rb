@@ -5554,7 +5554,6 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
     search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
     sklz=@askilities.map{|q| q}
     for i in 0...char.length
-      puts char[i][5].to_s
       ab1=nil
       ab1=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][5][0][-1]} unless char[i][5].length<1
       ab1=sklz[ab1] unless ab1.nil?
@@ -5586,7 +5585,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
       char=char.reject{|q| !has_any?(tags,q[20])}.uniq
     else
       search[-1]="#{search[-1]}\n(searching for wyrmprints with all listed tags in their abilities)" if tags.length>1
-      textra="#{textra}\n\nTags searching defaults to searching for wyrmprints with all listed tags.\nTo search for dragons with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
+      textra="#{textra}\n\nTags searching defaults to searching for wyrmprints with all listed tags.\nTo search for wyrmprints with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
       for i in 0...tags.length
         char=char.reject{|q| !q[20].include?(tags[i])}.uniq
       end
@@ -6092,8 +6091,19 @@ def find_in_skills(bot,event,args=nil,mode=0)
   emo=[]
   search=[]
   char=@askilities.reject{|q| q[2]!='Skill'}
+  adv=@adventurers.map{|q| q}
+  drg=@dragons.map{|q| q}
+  wpn=@weapons.map{|q| q}
   textra=''
   if elem.length>0
+    for i in 0...char.length
+      m=adv.find_index{|q| q[6].include?(char[i][0])}
+      char[i][10].push(adv[m][2][1]) unless m.nil?
+      m=drg.find_index{|q| q[5]==char[i][0]}
+      char[i][10].push(drg[m][2]) unless m.nil?
+      m=wpn.find_index{|q| q[6]==char[i][0]}
+      char[i][10].push(wpn[m][3]) unless m.nil?
+    end
     char=char.reject{|q| !has_any?(elem,q[10])}.uniq
     for i in 0...elem.length
       moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{elem[i].gsub('None','Null')}"}
@@ -6105,11 +6115,11 @@ def find_in_skills(bot,event,args=nil,mode=0)
   if tags.length>0
     search.push("*Tags*: #{tags.join(', ')}")
     if args.include?('any')
-      search[-1]="#{search[-1]}\n(searching for abilities with any listed tag)" if tags.length>1
+      search[-1]="#{search[-1]}\n(searching for skills with any listed tag)" if tags.length>1
       char=char.reject{|q| !has_any?(tags,q[10])}.uniq
     else
-      search[-1]="#{search[-1]}\n(searching for abilities with all listed tags)" if tags.length>1
-      textra="#{textra}\n\nTags searching defaults to searching for abilities with all listed tags.\nTo search for abilities with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
+      search[-1]="#{search[-1]}\n(searching for skills with all listed tags)" if tags.length>1
+      textra="#{textra}\n\nTags searching defaults to searching for skills with all listed tags.\nTo search for skills with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
       for i in 0...tags.length
         char=char.reject{|q| q[10].nil? || !q[10].include?(tags[i])}.uniq
       end
@@ -6540,6 +6550,7 @@ def find_skills(bot,event,args=nil)
     textra="#{textra}\n\n**No skills match your search**" if char.length<=0
     create_embed(event,"__**Skill Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total",nil,flds)
   end
+  event.respond "The `DL!find skill` subcommand is new.  Every time you used it before, the bot was actually ignoring the word \"skill\" and showing the generic command.\nFor the results that you would've gotten from the way things worked before, use the generic command ```DL!find #{args.join(' ')}```"
 end
 
 def find_abilities(bot,event,args=nil)
@@ -6688,7 +6699,7 @@ def find_all(bot,event,args=nil)
   adv[0]=adv[0].reject{|q| search.include?(q.gsub('adventurers','items'))}
   drg[0]=drg[0].reject{|q| search.include?(q.gsub('dragons','items'))}
   wrm[1]=[] if wrm[0].length==1 && wrm[0][0][0,11]=='*Rarities*:' && search.length>1
-  wrm[0]=wrm[0].reject{|q| search.include?(q.gsub('wyrmprints','items'))}
+  wrm[0]=wrm[0].reject{|q| search.include?(q.gsub('wyrmprints','items').gsub('abilities','skills and abilities'))}
   wpn[0]=wpn[0].reject{|q| search.include?(q.gsub('weapons','items'))}
   str=''
   str="__**Overall Search**__\n#{search.join("\n")}" if search.length>0
@@ -6717,7 +6728,8 @@ def find_all(bot,event,args=nil)
   drg[3]=drg[3].reject{|q| textra.include?(q.gsub('dragons','items'))}
   wrm[3]=wrm[3].reject{|q| textra.include?(q.gsub('wyrmprints','items'))}
   wpn[3]=wpn[3].reject{|q| textra.include?(q.gsub('weapons','items'))}
-  textra="#{textra.join("\n\n")}\n\n#{adv[3].join("\n\n").gsub('adventurers','items')}\n\n#{drg[3].join("\n\n").gsub('dragons','items')}\n\n#{wrm[3].join("\n\n").gsub('wyrmprints','items')}\n\n#{wpn[3].join("\n\n").gsub('weapons','items')}"
+  puts textra
+  textra="#{textra.join("\n\n")}#{"\n\n#{adv[3].join("\n\n").gsub('adventurers','items')}" unless adv[3].nil? || adv[3].length<=0}#{"\n\n#{drg[3].join("\n\n").gsub('dragons','items')}" unless drg[3].nil? || drg[3].length<=0}#{"\n\n#{wrm[3].join("\n\n").gsub('wyrmprints','items')}" unless wrm[3].nil? || wrm[3].length<=0}#{"\n\n#{wpn[3].join("\n\n").gsub('weapons','items')}" unless wpn[3].nil? || wpn[3].length<=0}"
   textra='' if textra.gsub("\n",'').length<=0
   if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || str.length+adv[1].join("\n").length+drg[1].join("\n").length+wrm[1].join("\n").length+wpn[1].join("\n").length+"Totals: #{adv[1].length} adventurers, #{drg[1].length} dragons, #{wrm[4]} wyrmprints#{' (not shown)' if wrm[4]>wrm[1].length}, #{wpn[1].length} weapons".length+textra.length>=1800
     unless safe_to_spam?(event)
