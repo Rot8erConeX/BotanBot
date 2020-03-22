@@ -313,6 +313,7 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
   end
 end
 
+@max_rarity=[5, 5, 5, 6] # adventurer, dragon, print, weapon
 @abilimits=["Affliction Guard \u2192 III (5x)",
             "Blindness Res \u2192 100%",
             "Bog Res \u2192 100%",
@@ -4174,6 +4175,8 @@ def snagstats(event,bot,f=nil,f2=nil)
       str2="#{str2}\n#{m.length} welfare adventurer#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='s'}
       str2="#{str2}\n#{m.length} seasonal adventurer#{'s' unless m.length==1}" if m.length>0
+      m=adv.reject{|q| q[1][1,1]!='f'}
+      str2="#{str2}\n#{m.length} former-seasonal adventurer#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='z'}
       str2="#{str2}\n#{m.length} Zodiac adventurer#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='-'}
@@ -4242,6 +4245,8 @@ def snagstats(event,bot,f=nil,f2=nil)
       str2="#{str2}\n#{m.length} welfare dragon#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='s'}
       str2="#{str2}\n#{m.length} seasonal dragon#{'s' unless m.length==1}" if m.length>0
+      m=adv.reject{|q| q[1][1,1]!='f'}
+      str2="#{str2}\n#{m.length} former-seasonal dragon#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='z'}
       str2="#{str2}\n#{m.length} Zodiac dragon#{'s' unless m.length==1}" if m.length>0
       str2=str2[1,str2.length-1] if str2[0,1]=="\n"
@@ -4282,6 +4287,8 @@ def snagstats(event,bot,f=nil,f2=nil)
       str2="#{str2}\n#{m.length} welfare print#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='s'}
       str2="#{str2}\n#{m.length} seasonal print#{'s' unless m.length==1}" if m.length>0
+      m=adv.reject{|q| q[1][1,1]!='f'}
+      str2="#{str2}\n#{m.length} former-seasonal print#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='z'}
       str2="#{str2}\n#{m.length} Zodiac print#{'s' unless m.length==1}" if m.length>0
       str=extend_message(str,str2,event,2)
@@ -4343,6 +4350,8 @@ def snagstats(event,bot,f=nil,f2=nil)
       str2="#{str2}\n#{m.length} welfare weapon#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[2][1,1]!='s'}
       str2="#{str2}\n#{m.length} seasonal weapon#{'s' unless m.length==1}" if m.length>0
+      m=adv.reject{|q| q[2][1,1]!='f'}
+      str2="#{str2}\n#{m.length} former-seasonal weapon#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[2][1,1]!='z'}
       str2="#{str2}\n#{m.length} Zodiac weapon#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[2][1,1]!='e'}
