@@ -126,7 +126,6 @@ system("title loading #{shard_data(2)[@shardizard]} BotanBot")
 @ignored=[]
 @embedless=[]
 @last_multi_reload=[0,0,0]
-@max_rarity=[5, 5, 5, 6] # adventurer, dragon, print, weapon
 @rarity_stars=[['','<:Rarity_1:532086056594440231>',
                    '<:Rarity_2:532086056254963713>',
                    '<:Rarity_3:532086056519204864>',
@@ -1962,6 +1961,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   title="#{title}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
   title="#{title}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
   title="#{title}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
+  title="#{title}\n**Former Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='f'
   title="#{title}\n**Zodiac Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='z'
   title="#{title}\n**Unavailable**" if k[1].length>1 && k[1][1,1].downcase=='-'
   flds=nil
@@ -2231,6 +2231,7 @@ def disp_wyrmprint_stats(bot,event,args=nil)
   title="#{title}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
   title="#{title}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
   title="#{title}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
+  title="#{title}\n**Former Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='f'
   title="#{title}\n**Zodiac Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='z'
   title="#{title}\n**Treasure Trade**" if k[1].length>1 && k[1][1,1].downcase=='t'
   title="#{title}\n**Paid**" if k[1].length>1 && k[1][1,1].downcase=='p'
@@ -2444,6 +2445,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   title="#{title}\n**Chimera**" if k[2].length>1 && k[2][1,1].downcase=='m'
   title="#{title}\n**Story**" if k[2].length>1 && k[2][1,1].downcase=='y'
   title="#{title}\n**Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='s'
+  title="#{title}\n**Former Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='f'
   title="#{title}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
   title="#{title}\n**Starter**" if k[2].length>1 && k[2][1,1].downcase=='e'
   title="#{title}\n**Paid**" if k[2].length>1 && k[2][1,1].downcase=='p'
@@ -2762,6 +2764,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   title="#{title}\n**Chimera**" if k[2].length>1 && k[2][1,1].downcase=='m'
   title="#{title}\n**Story**" if k[2].length>1 && k[2][1,1].downcase=='y'
   title="#{title}\n**Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='s'
+  title="#{title}\n**Former Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='f'
   title="#{title}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
   title="#{title}\n**Starter**" if k[2].length>1 && k[2][1,1].downcase=='e'
   title="#{title}\n**Paid**" if k[2].length>1 && k[2][1,1].downcase=='p'
@@ -4980,10 +4983,11 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
     fltr.push('Welfare') if ['welfare','welfares','free','freebies','f2p'].include?(args[i].downcase)
     fltr.push('Gala') if ['gala','galadragalia'].include?(args[i].downcase)
     fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
-    fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons','limited','limit'].include?(args[i].downcase)
-    fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons','limited','limit'].include?(args[i].downcase)
+    fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
+    fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons'].include?(args[i].downcase)
     fltr.push('NonLimited') if ['summon','summons','summonable','summonables','nonlimited','non-limited'].include?(args[i].downcase)
-    fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers','limited','limit'].include?(args[i].downcase)
+    fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
+    fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
     crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
@@ -5064,6 +5068,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
     if fltr.include?('Seasonal')
       for i in 0...@max_rarity[0]
         m.push("#{i+1}s")
+        m.push("#{i+1}f")
       end
       emo.push('(s)') if fltr.length<2
     end
@@ -5091,9 +5096,18 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
       end
       emo.push('(c)') if fltr.length<2
     end
+    search.push("*Filters*: #{fltr.join(', ')}")
+    if fltr.include?('Limited')
+      for i in 0...@max_rarity[0]
+        m.push("#{i+1}c")
+        m.push("#{i+1}s")
+        m.push("#{i+1}z")
+      end
+      emo.push('(L)') if fltr.length<2
+      fltr.push('Collab')
+    end
     emo.push('(g)') if fltr.length<2 && fltr.include?('Gala')
     char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[12].nil? && q[12].length>0) && !(fltr.include?('Gala') && q[0][0,5]=='Gala ')}.uniq
-    search.push("*Filters*: #{fltr.join(', ')}")
   end
   if genders.length>0
     char=char.reject{|q| !genders.include?(q[13])}.uniq
@@ -5234,10 +5248,11 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
     ranged.push('no') if ['short','shortrange','melee'].include?(args[i].downcase)
     fltr.push('Welfare') if ['welfare','welfares','free','freebies','f2p'].include?(args[i].downcase)
     fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
-    fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons','limited','limit'].include?(args[i].downcase)
-    fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons','limited','limit'].include?(args[i].downcase)
+    fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
+    fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons'].include?(args[i].downcase)
     fltr.push('NonLimited') if ['summon','summons','summonable','summonables','nonlimited','non-limited'].include?(args[i].downcase)
-    fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers','limited','limit'].include?(args[i].downcase)
+    fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
+    fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
     crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
@@ -5314,6 +5329,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
     if fltr.include?('Seasonal')
       for i in 0...@max_rarity[1]
         m.push("#{i+1}s")
+        m.push("#{i+1}f")
       end
       emo.push('(s)') if fltr.length<2
     end
@@ -5341,8 +5357,17 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
       end
       emo.push('(c)') if fltr.length<2
     end
-    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[16].nil? && q[16].length>0)}.uniq
     search.push("*Filters*: #{fltr.join(', ')}")
+    if fltr.include?('Limited')
+      for i in 0...@max_rarity[0]
+        m.push("#{i+1}c")
+        m.push("#{i+1}s")
+        m.push("#{i+1}z")
+      end
+      emo.push('(L)') if fltr.length<2
+      fltr.push('Collab')
+    end
+    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[16].nil? && q[16].length>0)}.uniq
   end
   if genders.length>0
     char=char.reject{|q| !genders.include?(q[17])}.uniq
@@ -5448,11 +5473,12 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
     clzz.push('Healing') if ['heal','healing','heals','healer','healers'].include?(args[i].downcase)
     fltr.push('Welfare') if ['welfare','welfares','free','freebies','f2p'].include?(args[i].downcase)
     fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
-    fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons','limited','limit'].include?(args[i].downcase)
-    fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons','limited','limit'].include?(args[i].downcase)
+    fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
+    fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons'].include?(args[i].downcase)
     fltr.push('NonLimited') if ['nonlimited','non-limited'].include?(args[i].downcase)
+    fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
     fltr.push('Treasure Trade') if ['treasure','trade','trades','treasures','treasuretrade','treasuretrades'].include?(args[i].downcase)
-    fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers','limited','limit'].include?(args[i].downcase)
+    fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
     crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
@@ -5498,6 +5524,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
     if fltr.include?('Seasonal')
       for i in 0...@max_rarity[2]
         m.push("#{i+1}s")
+        m.push("#{i+1}f")
       end
       emo.push('(s)') if fltr.length<2
     end
@@ -5537,8 +5564,17 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
       end
       emo.push('(p)') if fltr.length<2
     end
-    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[10].nil? && q[10].length>0)}.uniq
     search.push("*Filters*: #{fltr.join(', ')}")
+    if fltr.include?('Limited')
+      for i in 0...@max_rarity[0]
+        m.push("#{i+1}c")
+        m.push("#{i+1}s")
+        m.push("#{i+1}z")
+      end
+      emo.push('(L)') if fltr.length<2
+      fltr.push('Collab')
+    end
+    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[10].nil? && q[10].length>0)}.uniq
   end
   if crossgames.length>0
     char=char.reject{|q| q[10].nil? || !crossgames.include?(q[10])}.uniq
@@ -5717,10 +5753,11 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       fltr.push('Welfare') if ['welfare','welfares','free','freebies','f2p'].include?(args[i].downcase)
       fltr.push('Starter') if ['starter','starters','start','starting'].include?(args[i].downcase)
       fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
-      fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons','limited','limit'].include?(args[i].downcase)
-      fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons','limited','limit'].include?(args[i].downcase)
+      fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
+      fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons'].include?(args[i].downcase)
       fltr.push('Paid') if ['payment','paid','paying','whale'].include?(args[i].downcase)
-      fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers','limited','limit'].include?(args[i].downcase)
+      fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
+      fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
       crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
       crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
       crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
@@ -5802,6 +5839,7 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
     if fltr.include?('Seasonal')
       for i in 0...@max_rarity[3]
         m.push("#{i+1}s")
+        m.push("#{i+1}f")
       end
       emo.push('(s)') if fltr.length<2
     end
@@ -5865,8 +5903,17 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       end
       emo.push('(clb)') if fltr.length<2
     end
-    char=char.reject{|q| !m.include?(q[2]) && !(fltr.include?('Collab') && !q[14].nil? && q[14].length>0)}.uniq
     search.push("*Filters*: #{fltr.map{|q| q.gsub('Void','<:Element_Void:548467446734913536> Void')}.join(', ')}")
+    if fltr.include?('Limited')
+      for i in 0...@max_rarity[0]
+        m.push("#{i+1}c")
+        m.push("#{i+1}s")
+        m.push("#{i+1}z")
+      end
+      emo.push('(L)') if fltr.length<2
+      fltr.push('Collab')
+    end
+    char=char.reject{|q| !m.include?(q[2]) && !(fltr.include?('Collab') && !q[14].nil? && q[14].length>0)}.uniq
   end
   if crossgames.length>0
     char=char.reject{|q| q[14].nil? || !crossgames.include?(q[14])}.uniq
@@ -10048,6 +10095,8 @@ bot.ready do |event|
   data_load()
   @last_multi_reload[0]=Time.now
   @last_multi_reload[1]=Time.now
+  puts 'reloading BotanText'
+  load "#{@location}devkit/BotanText.rb"
   system("color 1#{shard_data(3)[@shardizard,1]}")
   system("title #{shard_data(2)[@shardizard]} BotanBot")
   bot.game='Dragalia Lost (DL!help for info)'
