@@ -712,21 +712,21 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) Critical Damage\example\Aura\If the user is attuned to Flame: adds `x`% to the modifier applied to critical damage.\0\y\Flame, CritDamage
 (Flame) Critical Damage\50%\Aura\If the user is attuned to Flame: adds 50% to the modifier applied to critical damage.\40\y\Flame, CritDamage
 (Flame) Critical Damage\55%\Aura\If the user is attuned to Flame: adds 55% to the modifier applied to critical damage.\40\y\Flame, CritDamage
-(Flame) Force Strike\example\Aura\If the user is attuned to Flame: increases Force Strike damage by 50/60%.\0\y\Flame, ForceStrike
+(Flame) Force Strike Damage\example\Aura\If the user is attuned to Flame: increases Force Strike damage by 50/60%.\0\y\Flame, ForceStrike
 (Flame) Force Strike\50%\Aura\If the user is attuned to Flame: increases Force Strike damage by 50%.\80\y\Flame, ForceStrike
 (Flame) Force Strike\60%\Aura\If the user is attuned to Flame: increases Force Strike damage by 60%.\100\y\Flame, ForceStrike
 (Flame) Gauge Decelerator\example\Aura\If the user is attuned to Flame: Slows the rate the mode gauge decreases by `x`%.\0\y\Flame, GaugeAccelerator
 (Flame) Gauge Decelerator\30%\Aura\If the user is attuned to Flame: Slows the rate the mode gauge decreases by 30%.\100\y\Flame, GaugeAccelerator
-(Flame) HP & Strength\example\Aura\If the user is attuned to Flame: increases strength and HP by `x`%.\0\y\HP, Strength, Flame
-(Flame) HP & Strength\5%\Aura\If the user is attuned to Flame: increases strength and HP by 5%.\20\y\HP, Strength, Flame
-(Flame) HP & Strength\8%\Aura\If the user is attuned to Flame: increases strength and HP by 8%.\30\y\HP, Strength, Flame
-(Flame) HP & Strength\20%\Aura\If the user is attuned to Flame: increases strength and HP by 20%.\70\y\HP, Strength, Flame
-(Flame) HP & Strength\30%\Aura\If the user is attuned to Flame: increases strength and HP by 30%.\100\y\HP, Strength, Flame
-(Flame) HP\example\Aura\If the user is attuned to Flame: increases HP by `x`%.\0\y\HP, Flame
-(Flame) HP\10%\Aura\If the user is attuned to Flame: increases HP by 10%.\20\y\HP, Flame
-(Flame) HP\15%\Aura\If the user is attuned to Flame: increases HP by 15%.\30\y\HP, Flame
-(Flame) HP\30%\Aura\If the user is attuned to Flame: increases HP by 30%.\60\y\HP, Flame
-(Flame) HP\45%\Aura\If the user is attuned to Flame: increases HP by 45%.\80\y\HP, Flame
+(Flame) HP & Strength\example\Aura\If the user is attuned to Flame: increases strength and HP by `x`%.\0\y\HealthSkill, Strength, Flame
+(Flame) HP & Strength\5%\Aura\If the user is attuned to Flame: increases strength and HP by 5%.\20\y\HealthSkill, Strength, Flame
+(Flame) HP & Strength\8%\Aura\If the user is attuned to Flame: increases strength and HP by 8%.\30\y\HealthSkill, Strength, Flame
+(Flame) HP & Strength\20%\Aura\If the user is attuned to Flame: increases strength and HP by 20%.\70\y\HealthSkill, Strength, Flame
+(Flame) HP & Strength\30%\Aura\If the user is attuned to Flame: increases strength and HP by 30%.\100\y\HealthSkill, Strength, Flame
+(Flame) HP\example\Aura\If the user is attuned to Flame: increases HP by `x`%.\0\y\HealthSkill, Flame
+(Flame) HP\10%\Aura\If the user is attuned to Flame: increases HP by 10%.\20\y\HealthSkill, Flame
+(Flame) HP\15%\Aura\If the user is attuned to Flame: increases HP by 15%.\30\y\HealthSkill, Flame
+(Flame) HP\30%\Aura\If the user is attuned to Flame: increases HP by 30%.\60\y\HealthSkill, Flame
+(Flame) HP\45%\Aura\If the user is attuned to Flame: increases HP by 45%.\80\y\HealthSkill, Flame
 (Flame) Primed Strength\example\Aura\Increases the strength of the adventurer you are currently controlling by `x`% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\0\y\Primed, Strength, Flame
 (Flame) Primed Strength\10%\Aura\Increases the strength of the adventurer you are currently controlling by 10% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\80\y\Primed, Strength, Flame
 (Flame) Primed Strength\15%\Aura\Increases the strength of the adventurer you are currently controlling by 15% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\100\y\Primed, Strength, Flame
@@ -760,22 +760,22 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Light) Critical Rate\example\Aura\If the user is attuned to Light: Increases critical rate by `x`%.\0\y\CritRate, Light
 (Light) Critical Rate\5%\Aura\If the user is attuned to Light: Increases critical rate by 5%.\40\y\CritRate, Light
 (Light) Critical Rate\6%\Aura\If the user is attuned to Light: Increases critical rate by 6%.\40\y\CritRate, Light
-(Light) HP & Strength\example\Aura\If the user is attuned to Light: increases strength and HP by `x`%.\0\y\HP, Strength, Light
-(Light) HP & Strength\5%\Aura\If the user is attuned to Light: increases strength and HP by 5%.\20\y\HP, Strength, Light
-(Light) HP & Strength\8%\Aura\If the user is attuned to Light: increases strength and HP by 8%.\30\y\HP, Strength, Light
-(Light) HP & Strength\10%\Aura\If the user is attuned to Light: increases strength and HP by 10%.\50\y\HP, Strength, Light
-(Light) HP & Strength\15%\Aura\If the user is attuned to Light: increases strength and HP by 15%.\60\y\HP, Strength, Light
-(Light) HP & Strength\20%\Aura\If the user is attuned to Light: increases strength and HP by 20%.\70\y\HP, Strength, Light
-(Light) HP & Strength\30%\Aura\If the user is attuned to Light: increases strength and HP by 30%.\100\y\HP, Strength, Light
-(Light) HP\example\Aura\If the user is attuned to Light: increases HP by `x`%.\0\y\HP, Light
-(Light) HP\5%\Aura\If the user is attuned to Light: increases HP by 5%.\10\y\HP, Light
-(Light) HP\8%\Aura\If the user is attuned to Light: increases HP by 8%.\15\y\HP, Light
-(Light) HP\10%\Aura\If the user is attuned to Light: increases HP by 10%.\20\y\HP, Light
-(Light) HP\15%\Aura\If the user is attuned to Light: increases HP by 15%.\30\y\HP, Light
-(Light) HP\30%\Aura\If the user is attuned to Light: increases HP by 30%.\60\y\HP, Light
-(Light) HP\40%\Aura\If the user is attuned to Light: increases HP by 40%.\70\y\HP, Light
-(Light) HP\45%\Aura\If the user is attuned to Light: increases HP by 45%.\80\y\HP, Light
-(Light) HP\60%\Aura\If the user is attuned to Light: increases HP by 60%.\100\y\HP, Light
+(Light) HP & Strength\example\Aura\If the user is attuned to Light: increases strength and HP by `x`%.\0\y\HealthSkill, Strength, Light
+(Light) HP & Strength\5%\Aura\If the user is attuned to Light: increases strength and HP by 5%.\20\y\HealthSkill, Strength, Light
+(Light) HP & Strength\8%\Aura\If the user is attuned to Light: increases strength and HP by 8%.\30\y\HealthSkill, Strength, Light
+(Light) HP & Strength\10%\Aura\If the user is attuned to Light: increases strength and HP by 10%.\50\y\HealthSkill, Strength, Light
+(Light) HP & Strength\15%\Aura\If the user is attuned to Light: increases strength and HP by 15%.\60\y\HealthSkill, Strength, Light
+(Light) HP & Strength\20%\Aura\If the user is attuned to Light: increases strength and HP by 20%.\70\y\HealthSkill, Strength, Light
+(Light) HP & Strength\30%\Aura\If the user is attuned to Light: increases strength and HP by 30%.\100\y\HealthSkill, Strength, Light
+(Light) HP\example\Aura\If the user is attuned to Light: increases HP by `x`%.\0\y\HealthSkill, Light
+(Light) HP\5%\Aura\If the user is attuned to Light: increases HP by 5%.\10\y\HealthSkill, Light
+(Light) HP\8%\Aura\If the user is attuned to Light: increases HP by 8%.\15\y\HealthSkill, Light
+(Light) HP\10%\Aura\If the user is attuned to Light: increases HP by 10%.\20\y\HealthSkill, Light
+(Light) HP\15%\Aura\If the user is attuned to Light: increases HP by 15%.\30\y\HealthSkill, Light
+(Light) HP\30%\Aura\If the user is attuned to Light: increases HP by 30%.\60\y\HealthSkill, Light
+(Light) HP\40%\Aura\If the user is attuned to Light: increases HP by 40%.\70\y\HealthSkill, Light
+(Light) HP\45%\Aura\If the user is attuned to Light: increases HP by 45%.\80\y\HealthSkill, Light
+(Light) HP\60%\Aura\If the user is attuned to Light: increases HP by 60%.\100\y\HealthSkill, Light
 (Light) Overdrive Punisher\example\Aura\If the user is attuned to Light: Increases damage to enemies in overdrive state by `x`%\0\y\Light, Overdrive, Punisher
 (Light) Overdrive Punisher\20%\Aura\If the user is attuned to Light: Increases damage to enemies in overdrive state by 20%\30\y\Light, Overdrive, Punisher
 (Light) Overdrive Punisher\25%\Aura\If the user is attuned to Light: Increases damage to enemies in overdrive state by 25%\35\y\Light, Overdrive, Punisher
@@ -809,18 +809,18 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Shadow) HP 30% = Strength\example\Aura\If the user is attuned to Shadow: increases strength by `x`% when HP is 30% or above.\0\y\HP30, Strength, Shadow
 (Shadow) HP 30% = Strength\35%\Aura\If the user is attuned to Shadow: increases strength by 35% when HP is 30% or above.\35\y\HP30, Strength, Shadow
 (Shadow) HP 30% = Strength\50%\Aura\If the user is attuned to Shadow: increases strength by 50% when HP is 30% or above.\50\y\HP30, Strength, Shadow
-(Shadow) HP & Strength\example\Aura\If the user is attuned to Shadow: increases strength and HP by `x`%.\20\y\HP, Strength, Shadow
-(Shadow) HP & Strength\5%\Aura\If the user is attuned to Shadow: increases strength and HP by 5%.\20\y\HP, Strength, Shadow
-(Shadow) HP & Strength\8%\Aura\If the user is attuned to Shadow: increases strength and HP by 8%.\30\y\HP, Strength, Shadow
-(Shadow) HP & Strength\10%\Aura\If the user is attuned to Shadow: increases strength and HP by 10%.\50\y\HP, Strength, Shadow
-(Shadow) HP & Strength\15%\Aura\If the user is attuned to Shadow: increases strength and HP by 15%.\60\y\HP, Strength, Shadow
-(Shadow) HP & Strength\20%\Aura\If the user is attuned to Shadow: increases strength and HP by 20%.\70\y\HP, Strength, Shadow
-(Shadow) HP & Strength\30%\Aura\If the user is attuned to Shadow: increases strength and HP by 30%.\100\y\HP, Strength, Shadow
-(Shadow) HP\example\Aura\If the user is attuned to Shadow: increases HP by `x`%.\0\y\HP, Shadow
-(Shadow) HP\10%\Aura\If the user is attuned to Shadow: increases HP by 10%.\20\y\HP, Shadow
-(Shadow) HP\15%\Aura\If the user is attuned to Shadow: increases HP by 15%.\30\y\HP, Shadow
-(Shadow) HP\30%\Aura\If the user is attuned to Shadow: increases HP by 30%.\50\y\HP, Shadow
-(Shadow) HP\40%\Aura\If the user is attuned to Shadow: increases HP by 40%.\60\y\HP, Shadow
+(Shadow) HP & Strength\example\Aura\If the user is attuned to Shadow: increases strength and HP by `x`%.\20\y\HealthSkill, Strength, Shadow
+(Shadow) HP & Strength\5%\Aura\If the user is attuned to Shadow: increases strength and HP by 5%.\20\y\HealthSkill, Strength, Shadow
+(Shadow) HP & Strength\8%\Aura\If the user is attuned to Shadow: increases strength and HP by 8%.\30\y\HealthSkill, Strength, Shadow
+(Shadow) HP & Strength\10%\Aura\If the user is attuned to Shadow: increases strength and HP by 10%.\50\y\HealthSkill, Strength, Shadow
+(Shadow) HP & Strength\15%\Aura\If the user is attuned to Shadow: increases strength and HP by 15%.\60\y\HealthSkill, Strength, Shadow
+(Shadow) HP & Strength\20%\Aura\If the user is attuned to Shadow: increases strength and HP by 20%.\70\y\HealthSkill, Strength, Shadow
+(Shadow) HP & Strength\30%\Aura\If the user is attuned to Shadow: increases strength and HP by 30%.\100\y\HealthSkill, Strength, Shadow
+(Shadow) HP\example\Aura\If the user is attuned to Shadow: increases HP by `x`%.\0\y\HealthSkill, Shadow
+(Shadow) HP\10%\Aura\If the user is attuned to Shadow: increases HP by 10%.\20\y\HealthSkill, Shadow
+(Shadow) HP\15%\Aura\If the user is attuned to Shadow: increases HP by 15%.\30\y\HealthSkill, Shadow
+(Shadow) HP\30%\Aura\If the user is attuned to Shadow: increases HP by 30%.\50\y\HealthSkill, Shadow
+(Shadow) HP\40%\Aura\If the user is attuned to Shadow: increases HP by 40%.\60\y\HealthSkill, Shadow
 (Shadow) Last Bulwark\I\Aura\if the user is attuned to Shadow: grants the user a one-use shield that nullifies damage less than 45% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\35\y\Shield, Shadow, Last
 (Shadow) Last Bulwark\II\Aura\if the user is attuned to Shadow: grants the user a one-use shield that nullifies damage less than 60% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\50\y\Shield, Shadow, Last
 (Shadow) Poisoned Punisher\example\Aura\if the user is attuned to Shadow: increases damage dealt to poisoned foes by `x`%.\0\y\Shadow, PoisonedPunisher
@@ -844,18 +844,18 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Water) Critical Rate\example\Aura\If the user is attuned to Water: increases critical rate by `x`%.\0\y\Water, CritRate
 (Water) Critical Rate\15%\Aura\If the user is attuned to Water: increases critical rate by 15%.\40\y\Water, CritRate
 (Water) Critical Rate\20%\Aura\If the user is attuned to Water: increases critical rate by 20%.\40\y\Water, CritRate
-(Water) HP & Strength\example\Aura\If the user is attuned to Water: increases strength and HP by `x`%.\0\y\HP, Strength, Water
-(Water) HP & Strength\5%\Aura\If the user is attuned to Water: increases strength and HP by 5%.\20\y\HP, Strength, Water
-(Water) HP & Strength\8%\Aura\If the user is attuned to Water: increases strength and HP by 8%.\30\y\HP, Strength, Water
-(Water) HP & Strength\15%\Aura\If the user is attuned to Water: increases strength and HP by 15%.\60\y\HP, Strength, Water
-(Water) HP & Strength\20%\Aura\If the user is attuned to Water: increases strength and HP by 20%.\70\y\HP, Strength, Water
-(Water) HP & Strength\30%\Aura\If the user is attuned to Water: increases strength and HP by 30%.\100\y\HP, Strength, Water
-(Water) HP\example\Aura\If the user is attuned to Water: increases HP by `x`%.\0\y\HP, Water
-(Water) HP\10%\Aura\If the user is attuned to Water: increases HP by 10%.\20\y\HP, Water
-(Water) HP\15%\Aura\If the user is attuned to Water: increases HP by 15%.\30\y\HP, Water
-(Water) HP\20%\Aura\If the user is attuned to Water: increases HP by 20%.\40\y\HP, Water
-(Water) HP\30%\Aura\If the user is attuned to Water: increases HP by 30%.\60\y\HP, Water
-(Water) HP\40%\Aura\If the user is attuned to Water: increases HP by 40%.\80\y\HP, Water
+(Water) HP & Strength\example\Aura\If the user is attuned to Water: increases strength and HP by `x`%.\0\y\HealthSkill, Strength, Water
+(Water) HP & Strength\5%\Aura\If the user is attuned to Water: increases strength and HP by 5%.\20\y\HealthSkill, Strength, Water
+(Water) HP & Strength\8%\Aura\If the user is attuned to Water: increases strength and HP by 8%.\30\y\HealthSkill, Strength, Water
+(Water) HP & Strength\15%\Aura\If the user is attuned to Water: increases strength and HP by 15%.\60\y\HealthSkill, Strength, Water
+(Water) HP & Strength\20%\Aura\If the user is attuned to Water: increases strength and HP by 20%.\70\y\HealthSkill, Strength, Water
+(Water) HP & Strength\30%\Aura\If the user is attuned to Water: increases strength and HP by 30%.\100\y\HealthSkill, Strength, Water
+(Water) HP\example\Aura\If the user is attuned to Water: increases HP by `x`%.\0\y\HealthSkill, Water
+(Water) HP\10%\Aura\If the user is attuned to Water: increases HP by 10%.\20\y\HealthSkill, Water
+(Water) HP\15%\Aura\If the user is attuned to Water: increases HP by 15%.\30\y\HealthSkill, Water
+(Water) HP\20%\Aura\If the user is attuned to Water: increases HP by 20%.\40\y\HealthSkill, Water
+(Water) HP\30%\Aura\If the user is attuned to Water: increases HP by 30%.\60\y\HealthSkill, Water
+(Water) HP\40%\Aura\If the user is attuned to Water: increases HP by 40%.\80\y\HealthSkill, Water
 (Water) Overdrive Punisher\example\Aura\If the user is attuned to Water: increases damage to enemies in overdrive stats by `x`%\0\y\Overdrive, Punisher, Water
 (Water) Overdrive Punisher\40%\Aura\If the user is attuned to Water: increases damage to enemies in overdrive stats by 40%\40\y\Overdrive, Punisher, Water
 (Water) Overdrive Punisher\60%\Aura\If the user is attuned to Water: increases damage to enemies in overdrive stats by 60%\60\y\Overdrive, Punisher, Water
@@ -877,20 +877,20 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Wind) Dauntless Rampart\example\Aura\If the user is attuned to Wind: grants them a one-use divergent shield that nullifies damage less than 30%/40% of the user's maximum HP every 15 seconds that pass without the user being knocked back by an enemy. Divergent shields can stack with ordinary shields. Also, the user's strength is increased by 30% while this shield is active.\0\y\Wind, Shield, Strength
 (Wind) Dauntless Rampart\I\Aura\If the user is attuned to Wind: grants them a one-use divergent shield that nullifies damage less than 30% of the user's maximum HP every 15 seconds that pass without the user being knocked back by an enemy. Divergent shields can stack with ordinary shields. Also, the user's strength is increased by 30% while this shield is active.\0\y\Wind, Shield, Strength
 (Wind) Dauntless Rampart\II\Aura\If the user is attuned to Wind: grants them a one-use divergent shield that nullifies damage less than 40% of the user's maximum HP every 15 seconds that pass without the user being knocked back by an enemy. Divergent shields can stack with ordinary shields. Also, the user's strength is increased by 30% while this shield is active.\0\y\Wind, Shield, Strength
-(Wind) HP & Strength\example\Aura\If the user is attuned to Wind: increases strength and HP by `x`%.\0\y\HP, Strength, Wind
-(Wind) HP & Strength\5%\Aura\If the user is attuned to Wind: increases strength and HP by 5%.\20\y\HP, Strength, Wind
-(Wind) HP & Strength\8%\Aura\If the user is attuned to Wind: increases strength and HP by 8%.\30\y\HP, Strength, Wind
-(Wind) HP & Strength\10%\Aura\If the user is attuned to Wind: increases strength and HP by 10%.\50\y\HP, Strength, Wind
-(Wind) HP & Strength\20%\Aura\If the user is attuned to Wind: increases strength and HP by 20%.\70\y\HP, Strength, Wind
-(Wind) HP & Strength\30%\Aura\If the user is attuned to Wind: increases strength and HP by 30%.\100\y\HP, Strength, Wind
-(Wind) HP\example\Aura\If the user is attuned to Wind: increases HP by `x`%.\0\y\HP, Wind
-(Wind) HP\10%\Aura\If the user is attuned to Wind: increases HP by 10%.\20\y\HP, Wind
-(Wind) HP\15%\Aura\If the user is attuned to Wind: increases HP by 15%.\30\y\HP, Wind
-(Wind) HP\20%\Aura\If the user is attuned to Wind: increases HP by 20%.\40\y\HP, Wind
-(Wind) HP\30%\Aura\If the user is attuned to Wind: increases HP by 30%.\60\y\HP, Wind
-(Wind) HP\40%\Aura\If the user is attuned to Wind: increases HP by 40%.\70\y\HP, Wind
-(Wind) HP\45%\Aura\If the user is attuned to Wind: increases HP by 45%.\80\y\HP, Wind
-(Wind) HP\60%\Aura\If the user is attuned to Wind: increases HP by 60%.\100\y\HP, Wind
+(Wind) HP & Strength\example\Aura\If the user is attuned to Wind: increases strength and HP by `x`%.\0\y\HealthSkill, Strength, Wind
+(Wind) HP & Strength\5%\Aura\If the user is attuned to Wind: increases strength and HP by 5%.\20\y\HealthSkill, Strength, Wind
+(Wind) HP & Strength\8%\Aura\If the user is attuned to Wind: increases strength and HP by 8%.\30\y\HealthSkill, Strength, Wind
+(Wind) HP & Strength\10%\Aura\If the user is attuned to Wind: increases strength and HP by 10%.\50\y\HealthSkill, Strength, Wind
+(Wind) HP & Strength\20%\Aura\If the user is attuned to Wind: increases strength and HP by 20%.\70\y\HealthSkill, Strength, Wind
+(Wind) HP & Strength\30%\Aura\If the user is attuned to Wind: increases strength and HP by 30%.\100\y\HealthSkill, Strength, Wind
+(Wind) HP\example\Aura\If the user is attuned to Wind: increases HP by `x`%.\0\y\HealthSkill, Wind
+(Wind) HP\10%\Aura\If the user is attuned to Wind: increases HP by 10%.\20\y\HealthSkill, Wind
+(Wind) HP\15%\Aura\If the user is attuned to Wind: increases HP by 15%.\30\y\HealthSkill, Wind
+(Wind) HP\20%\Aura\If the user is attuned to Wind: increases HP by 20%.\40\y\HealthSkill, Wind
+(Wind) HP\30%\Aura\If the user is attuned to Wind: increases HP by 30%.\60\y\HealthSkill, Wind
+(Wind) HP\40%\Aura\If the user is attuned to Wind: increases HP by 40%.\70\y\HealthSkill, Wind
+(Wind) HP\45%\Aura\If the user is attuned to Wind: increases HP by 45%.\80\y\HealthSkill, Wind
+(Wind) HP\60%\Aura\If the user is attuned to Wind: increases HP by 60%.\100\y\HealthSkill, Wind
 (Wind) Poisoned Punisher\example\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by `x`%\0\y\Poison, Punisher
 (Wind) Poisoned Punisher\15%\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by 15%\20\y\Poison, Punisher
 (Wind) Poisoned Punisher\20%\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by 20%\40\y\Poison, Punisher
@@ -947,23 +947,23 @@ Gauge Decelerator\30%\Aura\Slows the rate the mode gauge decreases by 30%.\100\y
 HP 30% = Strength\example\Aura\Increases strength by `x`% when HP is 30% or above.\0\y\HP30, Strength
 HP 30% = Strength\35%\Aura\Increases strength by 35% when HP is 30% or above.\35\y\HP30, Strength
 HP 30% = Strength\50%\Aura\Increases strength by 50% when HP is 30% or above.\50\y\HP30, Strength
-HP & Strength\example\Aura\Increases strength and HP by `x`%.\0\y\HP, Strength
-HP & Strength\5%\Aura\Increases strength and HP by 5%.\20\y\HP, Strength
-HP & Strength\8%\Aura\Increases strength and HP by 8%.\30\y\HP, Strength
-HP & Strength\10%\Aura\Increases strength and HP by 10%.\50\y\HP, Strength
-HP & Strength\15%\Aura\Increases strength and HP by 15%.\60\y\HP, Strength
-HP & Strength\20%\Aura\Increases strength and HP by 20%.\70\y\HP, Strength
-HP & Strength\30%\Aura\Increases strength and HP by 30%.\100\y\HP, Strength
-HP\example\Aura\Increases HP by `x`%.\0\y\HP
-HP\5%\Aura\Increases HP by 5%.\10\y\HP
-HP\8%\Aura\Increases HP by 8%.\15\y\HP
-HP\10%\Aura\Increases HP by 10%.\20\y\HP
-HP\15%\Aura\Increases HP by 15%.\30\y\HP
-HP\20%\Aura\Increases HP by 20%.\40\y\HP
-HP\30%\Aura\Increases HP by 30%.\60\y\HP
-HP\40%\Aura\Increases HP by 40%.\70\y\HP
-HP\45%\Aura\Increases HP by 45%.\80\y\HP
-HP\60%\Aura\Increases HP by 60%.\100\y\HP
+HP & Strength\example\Aura\Increases strength and HP by `x`%.\0\y\HealthSkill, Strength
+HP & Strength\5%\Aura\Increases strength and HP by 5%.\20\y\HealthSkill, Strength
+HP & Strength\8%\Aura\Increases strength and HP by 8%.\30\y\HealthSkill, Strength
+HP & Strength\10%\Aura\Increases strength and HP by 10%.\50\y\HealthSkill, Strength
+HP & Strength\15%\Aura\Increases strength and HP by 15%.\60\y\HealthSkill, Strength
+HP & Strength\20%\Aura\Increases strength and HP by 20%.\70\y\HealthSkill, Strength
+HP & Strength\30%\Aura\Increases strength and HP by 30%.\100\y\HealthSkill, Strength
+HP\example\Aura\Increases HP by `x`%.\0\y\HealthSkill
+HP\5%\Aura\Increases HP by 5%.\10\y\HealthSkill
+HP\8%\Aura\Increases HP by 8%.\15\y\HealthSkill
+HP\10%\Aura\Increases HP by 10%.\20\y\HealthSkill
+HP\15%\Aura\Increases HP by 15%.\30\y\HealthSkill
+HP\20%\Aura\Increases HP by 20%.\40\y\HealthSkill
+HP\30%\Aura\Increases HP by 30%.\60\y\HealthSkill
+HP\40%\Aura\Increases HP by 40%.\70\y\HealthSkill
+HP\45%\Aura\Increases HP by 45%.\80\y\HealthSkill
+HP\60%\Aura\Increases HP by 60%.\100\y\HealthSkill
 Last Bulwark\I\Aura\Grants the user a one-use shield that nullifies damage less than 50% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\35\y\Last, Shield
 Last Bulwark\II\Aura\Grants the user a one-use shield that nullifies damage less than 60% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\50\y\Last, Shield
 Mana\example\Aura\Increases Mana intake for clearing quests by `x`%\0\y\Mana
@@ -1698,10 +1698,10 @@ Holiday Cheer\50%\Ability\Increases Holiday Cheer intake for clearing quests by 
 Holiday Cheer\100%\Ability\Increases Holiday Cheer intake for clearing quests by 100%.\0\y\Event, Facility, Score
 Holiday Cheer\125%\Ability\Increases Holiday Cheer intake for clearing quests by 125%.\0\y\Event, Facility, Score
 Holiday Cheer\150%\Ability\Increases Holiday Cheer intake for clearing quests by 150%.\0\y\Event, Facility, Score
-HP\example\Ability\Increases HP by `x`%\0\y\HP
-HP\4%\Ability\Increases HP by 4%\20\y\HP
-HP\6%\Ability\Increases HP by 6%\40\y\HP
-HP\8%\Ability\Increases HP by 8%\60\y\HP
+HP\example\Ability\Increases HP by `x`%\0\y\HealthSkill
+HP\4%\Ability\Increases HP by 4%\20\y\HealthSkill
+HP\6%\Ability\Increases HP by 6%\40\y\HealthSkill
+HP\8%\Ability\Increases HP by 8%\60\y\HealthSkill
 HP 50% = Defense\4%\Ability\Increases defense by 4% when HP is 50% or above.\20\y\HP50, Defense
 HP 50% = Healing\7%\Ability\Increases the potency of recovery skills by 7% when HP is 50% or above.\20\y\HP50, RecoveryPotency
 HP 70% = Critical Damage\example\Ability\Adds `x`% to the modifier applied to critical damage when HP is 70% or above.\0\y\HP70, CritcalDamage
@@ -2206,15 +2206,15 @@ Dragon Haste\9%\CoAbility\Increases dragon gauge fill rate by 9%.\200\n\DragonHa
 Dragon Haste\11%\CoAbility\Increases dragon gauge fill rate by 11%.\230\n\DragonHaste
 Dragon Haste\12%\CoAbility\Increases dragon gauge fill rate by 12%.\260\n\DragonHaste
 Dragon Haste\15%\CoAbility\Increases dragon gauge fill rate by 15%.\320\n\DragonHaste
-HP\5%\CoAbility\Increases HP by 5%.\50\n\HP
-HP\6%\CoAbility\Increases HP by 6%.\80\n\HP
-HP\7%\CoAbility\Increases HP by 7%.\110\n\HP
-HP\8%\CoAbility\Increases HP by 8%.\140\n\HP
-HP\9%\CoAbility\Increases HP by 9%.\170\n\HP
-HP\10%\CoAbility\Increases HP by 10%.\200\n\HP
-HP\12%\CoAbility\Increases HP by 12%.\230\n\HP
-HP\13%\CoAbility\Increases HP by 13%.\260\n\HP
-HP\15%\CoAbility\Increases HP by 15%.\320\n\HP
+HP\5%\CoAbility\Increases HP by 5%.\50\n\HealthSkill
+HP\6%\CoAbility\Increases HP by 6%.\80\n\HealthSkill
+HP\7%\CoAbility\Increases HP by 7%.\110\n\HealthSkill
+HP\8%\CoAbility\Increases HP by 8%.\140\n\HealthSkill
+HP\9%\CoAbility\Increases HP by 9%.\170\n\HealthSkill
+HP\10%\CoAbility\Increases HP by 10%.\200\n\HealthSkill
+HP\12%\CoAbility\Increases HP by 12%.\230\n\HealthSkill
+HP\13%\CoAbility\Increases HP by 13%.\260\n\HealthSkill
+HP\15%\CoAbility\Increases HP by 15%.\320\n\HealthSkill
 Overdrive Punisher & Gauge Accelerator\11/10%\CoAbility\Increases damage to enemies in overdrive state by 11% and the rate the mode gauge decreases by 10%.\160\y\
 Overdrive Punisher & Gauge Accelerator\12/10%\CoAbility\Increases damage to enemies in overdrive state by 12% and the rate the mode gauge decreases by 10%.\200\y\
 Overdrive Punisher & Gauge Accelerator\13/10%\CoAbility\Increases damage to enemies in overdrive state by 13% and the rate the mode gauge decreases by 10%.\240\y\
