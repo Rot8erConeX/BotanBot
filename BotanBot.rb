@@ -9224,7 +9224,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
         IO.copy_stream(download, "DLTemp.txt")
         if to_reload[i]=='Skills' && File.size("DLTemp.txt")<File.size("DLSkills.txt")*2/3
           stx='Skills were not reloaded because the file was loaded from the wrong sheet.'
-        elsif to_reload[i]=='SkillSubsets' && File.size("DLTemp.txt")<File.size("DLSkillSubsets.txt")
+        elsif to_reload[i]=='SkillSubsets' && File.size("DLTemp.txt")<File.size("DLSkillSubsets.txt") && !e.message.text.include?('x')
         elsif File.size("DLTemp.txt")>100
           b=[]
           File.open("DLTemp.txt").each_line.with_index do |line, idx|
