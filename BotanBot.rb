@@ -5238,10 +5238,10 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
       skl1=sklz[skl1] unless skl1.nil?
       skl2=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6][1]}
       skl2=sklz[skl2] unless skl2.nil?
-      coab=sklz.find_index{|q| q[2]=='CoAbility' && q[0]==char[i][7][0].split(' ')[0,char[i][7].split(' ').length-1].join(' ')}
+      coab=sklz.find_index{|q| q[2]=='CoAbility' && q[0]==char[i][7][0].split(' ')[0,char[i][7][0].split(' ').length-1].join(' ')}
       coab=sklz[coab] unless coab.nil?
       coab[6]=[] if !coab.nil? && coab[6].nil?
-      cha=sklz.find_index{|q| q[2]=='Chain' && q[0]==char[i][7][0].split(' ')[0,char[i][7].split(' ').length-1].join(' ')}
+      cha=sklz.find_index{|q| q[2]=='Chain' && q[0]==char[i][7][1].split(' ')[0,char[i][7][1].split(' ').length-1].join(' ')}
       cha=sklz[cha] unless cha.nil?
       cha[6]=[] if !cha.nil? && cha[6].nil?
       ab1=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][8][0][-1]}
