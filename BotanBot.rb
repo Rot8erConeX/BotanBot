@@ -153,7 +153,7 @@ def all_commands(include_nil=false,permissions=-1)
      'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias','dmg',
      'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','limit',
      'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol','reload','update','mats','materials','spiral','node','nodes',
-     'damage']
+     'damage','coability','coabil','coab','chain']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -204,6 +204,7 @@ def data_load()
     b[i][4]=b[i][4].split('; ').map{|q| q.split(', ').map{|q2| q2.to_i}}
     b[i][5]=b[i][5].to_i
     b[i][6]=b[i][6].split(';; ')
+    b[i][7]=b[i][7].split(';; ')
     b[i][8]=b[i][8].split(';;;; ').map{|q| q.split(';; ')}
     b[i][8][3]=b[i][8][3].join(';; ') unless b[i][8].length<=3
     b[i][9]=b[i][9].split(', ')
@@ -291,6 +292,9 @@ def data_load()
       b[i][4]=b[i][4].to_i
       b[i][6]=b[i][6].split(', ') unless b[i][6].nil?
     elsif b[i][2]=='CoAbility'
+      b[i][4]=b[i][4].to_i
+      b[i][6]=b[i][6].split(', ') unless b[i][6].nil?
+    elsif b[i][2]=='Chain'
       b[i][4]=b[i][4].to_i
       b[i][6]=b[i][6].split(', ') unless b[i][6].nil?
     end
@@ -2051,7 +2055,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       end
       nde=1
       nde=0 if !k[8][3].nil? && k[8][3].include?('1')
-      flds.push(['Abilities',"#{k[8][0][0]} (F#{nde}) \u2192 #{k[8][0][1]} (F3)#{" \u2192 #{k[8][0][2]} (F6)" unless k[8][0].length<3 || k[8][0][2].length<=0}\n#{k[8][1][0]} (F1) \u2192 #{k[8][1][1]} (F4)#{" \u2192 #{k[8][1][2]} (F6)" unless k[8][1].length<3 || k[8][1][2].length<=0}\n#{a3}\n\n*Co-Ability:* #{k[7]}"])
+      flds.push(['Abilities',"#{k[8][0][0]} (F#{nde}) \u2192 #{k[8][0][1]} (F3)#{" \u2192 #{k[8][0][2]} (F6)" unless k[8][0].length<3 || k[8][0][2].length<=0}\n#{k[8][1][0]} (F1) \u2192 #{k[8][1][1]} (F4)#{" \u2192 #{k[8][1][2]} (F6)" unless k[8][1].length<3 || k[8][1][2].length<=0}\n#{a3}\n\n*Co-Ability:* #{k[7][0]}#{"\n\n*Chain Co-Ability:* #{k[7][1]}" if k[7].length>1}"])
     end
     titlex=[]
   else
@@ -2118,7 +2122,8 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       m.push(k[8][i][lv[i+2]-1]) if lv[i+2]>0
     end
     str="#{str}\n\n;;;;;\n\n**Abilities:** #{m.join(', ')}"
-    str="#{str}\n**Co-Ability:** #{k[7]}"
+    str="#{str}\n**Co-Ability:** #{k[7][0]}"
+    str="#{str}\n**Chain Co-Ability:** #{k[7][1]}" if k[7].length>1
     if str.gsub(';;;;;',strx).length>=1800
       str=str.gsub(';;;;;',"#{strx2}\n~~Skill descriptions make this data too long.  Please try again in PM.~~")
     else
@@ -3435,7 +3440,7 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   end
 end
 
-def disp_ability_data(bot,event,args=nil,forceaura=false)
+def disp_ability_data(bot,event,args=nil,forceaura='')
   t=Time.now
   if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
     puts 'reloading BotanText'
@@ -3446,13 +3451,17 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
   k=find_data_ex(:find_ability,args.join(' '),event)
-  k=k.reject{|q| q[2]!='Aura'} if forceaura
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  if forceaura=='CoAbility' && s2s
+    k=k.reject{|q| q[2]!=forceaura && q[2]!='Chain'}
+  elsif forceaura.length>0
+    k=k.reject{|q| q[2]!=forceaura}
+  end
   if k.length.zero?
     event.respond 'No matches found.'
     return nil
   end
-  s2s=false
-  s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
   k=k.reject{|q| q[2]=='Aura'} if k.is_a?(Array) && k.map{|q| q[2]}.uniq.length>1
   k=k[0] if k[0].is_a?(Array) && k.length<=1
@@ -3483,7 +3492,7 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
       typ.push('Enemies') if ['enemies','boss','enemy','bosses','enemie','enemys','bosss'].include?(evn[i].downcase)
     end
   end
-  unless typ.length<=0 || forceaura
+  unless typ.length<=0 || forceaura.length>0
     adv=[] unless typ.include?('Adventurers')
     drg=[] unless typ.include?('Dragons')
     wrm=[] unless typ.include?('Wyrmprints')
@@ -3535,14 +3544,16 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
     emo2=''
     emo2='<:Element_Null:532106087810334741>' unless @askilities.find_index{|q| q[2]==k[0][2] && q[0].include?(") #{k[0][0]}")}.nil?
     emo2='<:Boost_Anima:521910175955943444>' unless @askilities.find_index{|q| q[2]==k[0][2] && q[0].include?(") #{k[0][0]}")}.nil? || ignorefeh
-    hdr="__**#{k[0][0]}**__ [#{k[0][2].gsub('Co','')} family]"
+    hdr="__**#{k[0][0]}**__ [#{k[0][2].gsub('Chain','CoAbility').gsub('Co','')} family]"
     xpic=k[0][0]
     xcolor=0x7D7682
     xcolor=0xC6BEB6 if k[0][2]=='Aura'
     xcolor=0x342E4C if k[0][2]=='CoAbility' && k.map{|q| q[2]}.uniq.length==1
+    xcolor=0x442E3C if k[0][2]=='Chain' && k.map{|q| q[2]}.uniq.length==1
     k2=k.reject{|q| q[2]!='Ability'}
     k3=k.reject{|q| q[2]!='CoAbility'}
-    if k2.length>0 && k3.length>0
+    k4=k.reject{|q| q[2]!='Chain'}
+    if k2.length>0 && (k3.length>0 || k4.length>0)
       if k.map{|q| q[1]}.uniq.length<=1
         hdr="__**#{k[0][0]} #{'+' if k[0][1].include?('%')}#{k[0][1]}**__ [Ability family]"
         hdr="__**#{k[0][1]} #{k[0][0]}**__ [Ability family]" if k[0][0][0,5]=='Hits '
@@ -3711,21 +3722,42 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
         elsif "Dragon's Claws"==k[0][0]
           str="#{str}\n\n**You may instead be searching for the skill `Dragon Claw`, which belongs to Gala Mym<:Rarity_5:532086056737177600><:Element_Flame:532106087952810005><:Weapon_Lance:532106114792423448><:Type_Attack:532107867520630784>.**"
         end
-        m=k3[0]
-        str="#{str}\n\n__**Co-Ability**__"
-        str="#{str}\n*Effect:* #{m[3]}" unless m[5]=='n'
-        m2=[]
-        for i in 0...adv.length
-          mx=adv[i][7].split(' ')
-          mxx=mx[0,mx.length-1].join(' ')
-          mx=mx[-1].split('/').map{|q| "#{mxx} #{q}"}
-          advemo=element_emote(adv[i][2][1],bot,adv[i][12])
-          advemo=element_emote(adv[i][2][1],bot) if ignorefeh
-          for i2 in 0...mx.length
-            m2.push("#{advemo}#{adv[i][0]} (C#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
+        if k3.length>0
+          m=k3[0]
+          str="#{str}\n\n__**Co-Ability**__"
+          str="#{str}\n*Effect:* #{m[3]}" unless m[5]=='n'
+          m2=[]
+          for i in 0...adv.length
+            mx=adv[i][7][0].split(' ')
+            mxx=mx[0,mx.length-1].join(' ')
+            mx=mx[-1].split('/').map{|q| "#{mxx} #{q}"}
+            advemo=element_emote(adv[i][2][1],bot,adv[i][12])
+            advemo=element_emote(adv[i][2][1],bot) if ignorefeh
+            for i2 in 0...mx.length
+              m2.push("#{advemo}#{adv[i][0]} (C#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
+            end
           end
+          str="#{str}\n*Adventurers:* #{m2.join(', ')}" if m2.length>0
         end
-        str="#{str}\n*Adventurers:* #{m2.join(', ')}" if m2.length>0
+        if k4.length>0
+          m=k3[0]
+          str="#{str}\n\n__**Chain Co-Ability**__"
+          str="#{str}\n*Effect:* #{m[3]}" unless m[5]=='n'
+          m2=[]
+          for i in 0...adv.length
+            unless adv[i][7].length<=1
+              mx=adv[i][7][1].split(' ')
+              mxx=mx[0,mx.length-1].join(' ')
+              mx=mx[-1].split('/').map{|q| "#{mxx} #{q}"}
+              advemo=element_emote(adv[i][2][1],bot,adv[i][12])
+              advemo=element_emote(adv[i][2][1],bot) if ignorefeh
+              for i2 in 0...mx.length
+                m2.push("#{advemo}#{adv[i][0]} (C#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
+              end
+            end
+          end
+          str="#{str}\n*Adventurers:* #{m2.join(', ')}" if m2.length>0
+        end
         ftr='The numbers in parenthesis indicate which CoAbility stage the adventurer needs to have.'
       else
         str=""
@@ -3805,7 +3837,8 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
             str="#{str} - #{m2.join(', ')}"
           end
         end
-        str="#{str}\n\n**CoAbility Levels:** #{k3.map{|q| q[1]}.join(', ')}"
+        str="#{str}\n\n**CoAbility Levels:** #{k3.map{|q| q[1]}.join(', ')}" if k3.length>0
+        str="#{str}\n**Chain CoAbility Levels:** #{k4.map{|q| q[1]}.join(', ')}" if k4.length>0
         f=@abilimits.map{|q| q.split(" \u2192 ")}
         if f.map{|q| q[0]}.include?(k[0][0])
           str="#{str}\n**Per-adventurer wyrmprint stack limit:** #{f[f.find_index{|q| q[0]==k[0][0]}][1]}"
@@ -3833,9 +3866,11 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
           else
             str="#{str}\n\n#{'__' if lng}**#{k[ii2][0]} #{'+' if k[ii2][1].include?('%')}#{k[ii2][1]}**#{'__' if lng}"
           end
+          str="#{str} [Chain]" if k[ii2][2]=='Chain'
           str="#{str}\n*Effect:* #{k[ii2][3]}" if lng
         else
           str="#{str}\n#{"\n__" if lng}**#{'+' if k[ii2][1].include?('%')}#{k[ii2][1]}**#{'__' if lng}"
+          str="#{str} [Chain]" if k[ii2][2]=='Chain'
           str="#{str} - #{k[ii2][3]}" if lng
         end
         checkstr="#{k[ii2][0]} #{'+' if k[ii2][1].include?('%')}#{k[ii2][1]}"
@@ -3970,13 +4005,30 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
             str="#{str}\n*Enemies:* #{m2.join(', ')}" if m2.length>0
           elsif k[ii2][2]=='CoAbility'
             for i in 0...adv.length
-              mx=adv[i][7].split(' ')
+              mx=adv[i][7][0].split(' ')
               mxx=mx[0,mx.length-1].join(' ')
-              mx=mx[-1].split('/').map{|q| "#{mxx} #{q}"}
+              mx=mx[-1].split('/').map{|q| "#{mxx} #{'+' if q.include?('%')}#{q.gsub('+','')}"}
               advemo=element_emote(adv[i][2][1],bot,adv[i][12])
               advemo=element_emote(adv[i][2][1],bot) if ignorefeh
               m2.push("#{advemo}#{adv[i][0]} [Min]") if checkstr==mx[0]
+              m2.push("#{advemo}<:DLKey:692445248407863376>#{adv[i][0]} [Min]") if "(#{adv[i][2][1]}) #{checkstr}"==mx[0]
               m2.push("#{advemo}#{adv[i][0]} [Max]") if checkstr==mx[4]
+              m2.push("#{advemo}<:DLKey:692445248407863376>#{adv[i][0]} [Max]") if "(#{adv[i][2][1]}) #{checkstr}"==mx[4]
+            end
+            str="#{str}\n*Adventurers:* #{m2.join(', ')}" if m2.length>0
+          elsif k[ii2][2]=='Chain'
+            for i in 0...adv.length
+              unless adv[i][7].length<=1
+                mx=adv[i][7][1].split(' ')
+                mxx=mx[0,mx.length-1].join(' ')
+                mx=mx[-1].split('/').map{|q| "#{mxx} #{'+' if q.include?('%')}#{q.gsub('+','')}"}
+                advemo=element_emote(adv[i][2][1],bot,adv[i][12])
+                advemo=element_emote(adv[i][2][1],bot) if ignorefeh
+                m2.push("#{advemo}#{adv[i][0]} [Min]") if checkstr==mx[0]
+                m2.push("#{advemo}<:DLKey:692445248407863376>#{adv[i][0]} [Min]") if "(#{adv[i][2][1]}) #{checkstr}"==mx[0]
+                m2.push("#{advemo}#{adv[i][0]} [Max]") if checkstr==mx[4]
+                m2.push("#{advemo}<:DLKey:692445248407863376>#{adv[i][0]} [Max]") if "(#{adv[i][2][1]}) #{checkstr}"==mx[4]
+              end
             end
             str="#{str}\n*Adventurers:* #{m2.join(', ')}" if m2.length>0
           elsif k[ii2][2]=='Aura'
@@ -4088,12 +4140,25 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
           elsif k[ii2][2]=='CoAbility'
             m2=[]
             for i in 0...adv.length
-              mx=adv[i][7].split(' ')
+              mx=adv[i][7][0].split(' ')
               mxx=mx[0,mx.length-1].join(' ')
-              mx=mx[-1].split('/').map{|q| "#{mxx} #{q}"}
+              mx=mx[-1].split('/').map{|q| "#{mxx} #{'+' if q.include?('%')}#{q.gsub('+','')}"}
               advemo=element_emote(adv[i][2][1],bot,adv[i][12])
               advemo=element_emote(adv[i][2][1],bot) if ignorefeh
               m2.push("#{advemo}#{adv[i][0]}") if checkstr==mx[4]
+              m2.push("#{advemo}<:DLKey:692445248407863376>#{adv[i][0]}") if "(#{adv[i][2][1]}) #{checkstr}"==mx[4]
+            end
+            str="#{str} - #{m2.join(', ')}" if m2.length>0
+          elsif k[ii2][2]=='Chain'
+            m2=[]
+            for i in 0...adv.length
+              mx=adv[i][7][1].split(' ')
+              mxx=mx[0,mx.length-1].join(' ')
+              mx=mx[-1].split('/').map{|q| "#{mxx} #{'+' if q.include?('%')}#{q.gsub('+','')}"}
+              advemo=element_emote(adv[i][2][1],bot,adv[i][12])
+              advemo=element_emote(adv[i][2][1],bot) if ignorefeh
+              m2.push("#{advemo}#{adv[i][0]}") if checkstr==mx[4]
+              m2.push("#{advemo}<:DLKey:692445248407863376>#{adv[i][0]}") if "(#{adv[i][2][1]}) #{checkstr}"==mx[4]
             end
             str="#{str} - #{m2.join(', ')}" if m2.length>0
           elsif k[ii2][2]=='Aura'
@@ -4140,12 +4205,15 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
   else
     emo=''
     emo='<:Element_Null:532106087810334741>' unless @askilities.find_index{|q| q[2]==k[2] && "#{q[0]}#{" #{q[1]}" unless q[1]=='-'}".include?(") #{k[0]}#{" #{k[1]}" unless k[1]=='-'}")}.nil?
-    hdr="__**#{k[0]} #{'+' if k[1].include?('%')}#{k[1]}**__ [#{k[2]}]"
-    hdr="__**#{k[1]} #{k[0]}**__ [#{k[2]}]" if k[0][0,7]=='Hits = '
-    hdr="__**#{k[0]}**__ [#{k[2]}]" if k[1]=='-'
+    atyp="#{k[2]}"
+    atyp='Chain CoAbility' if atyp=='Chain'
+    hdr="__**#{k[0]} #{'+' if k[1].include?('%')}#{k[1]}**__ [#{atyp}]"
+    hdr="__**#{k[1]} #{k[0]}**__ [#{atyp}]" if k[0][0,7]=='Hits = '
+    hdr="__**#{k[0]}**__ [#{atyp}]" if k[1]=='-'
     xcolor=0x555058
     xcolor=0x87817C if k[2]=='Aura'
     xcolor=0x242035 if k[2]=='CoAbility'
+    xcolor=0x342025 if k[2]=='Chain'
     str="**Effect:** #{k[3]}" if k[5]=='y' || k[2]=='Aura'
     str2=''
     flds=[]
@@ -4308,13 +4376,38 @@ def disp_ability_data(bot,event,args=nil,forceaura=false)
       checkstr="#{k[1]} #{k[0]}" if k[0][0,7]=='Hits = '
       checkstr="#{k[0]}" if k[1]=='-'
       for i in 0...adv.length
-        mx=adv[i][7].split(' ')
+        mx=adv[i][7][0].split(' ')
         mxx=mx[0,mx.length-1].join(' ')
         mx=mx[-1].split('/').map{|q| "#{mxx} #{q}"}
         advemo=element_emote(adv[i][2][1],bot,adv[i][12])
         advemo=element_emote(adv[i][2][1],bot) if ignorefeh
         for i2 in 0...mx.length
           m2.push("#{advemo}#{adv[i][0]} (C#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
+        end
+      end
+      if m2.length>0
+        if !s2s || was_embedless_mentioned?(event)
+          str2="#{str2}\n**Adventurers:** #{m2.join(', ')}"
+        else
+          flds.push(['Adventurers',m2.join("\n")])
+        end
+      end
+      ftr='The numbers in parenthesis indicate which CoAbility stage the adventurer needs to have.'
+    elsif k[2]=='Chain'
+      m2=[]
+      checkstr="#{k[0]} #{'+' if k[1].include?('%')}#{k[1]}"
+      checkstr="#{k[1]} #{k[0]}" if k[0][0,7]=='Hits = '
+      checkstr="#{k[0]}" if k[1]=='-'
+      for i in 0...adv.length
+        unless adv[i][7].length<=1
+          mx=adv[i][7][1].split(' ')
+          mxx=mx[0,mx.length-1].join(' ')
+          mx=mx[-1].split('/').map{|q| "#{mxx} #{q}"}
+          advemo=element_emote(adv[i][2][1],bot,adv[i][12])
+          advemo=element_emote(adv[i][2][1],bot) if ignorefeh
+          for i2 in 0...mx.length
+            m2.push("#{advemo}#{adv[i][0]} (C#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
+          end
         end
       end
       if m2.length>0
@@ -5145,9 +5238,12 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
       skl1=sklz[skl1] unless skl1.nil?
       skl2=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6][1]}
       skl2=sklz[skl2] unless skl2.nil?
-      coab=sklz.find_index{|q| q[2]=='CoAbility' && q[0]==char[i][7].split(' ')[0,char[i][7].split(' ').length-1].join(' ')}
+      coab=sklz.find_index{|q| q[2]=='CoAbility' && q[0]==char[i][7][0].split(' ')[0,char[i][7].split(' ').length-1].join(' ')}
       coab=sklz[coab] unless coab.nil?
       coab[6]=[] if !coab.nil? && coab[6].nil?
+      cha=sklz.find_index{|q| q[2]=='Chain' && q[0]==char[i][7][0].split(' ')[0,char[i][7].split(' ').length-1].join(' ')}
+      cha=sklz[cha] unless cha.nil?
+      cha[6]=[] if !cha.nil? && cha[6].nil?
       ab1=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][8][0][-1]}
       ab1=sklz[ab1] unless ab1.nil?
       ab1[6]=[] if !ab1.nil? && ab1[6].nil?
@@ -5157,18 +5253,20 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
       ab3=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][8][2][-1]}
       ab3=sklz[ab3] unless ab3.nil?
       ab3[6]=[] if !ab3.nil? && ab3[6].nil?
-      char[i][20]="#{skl1[10].join("\n") unless skl1.nil?}\n#{skl2[10].join("\n") unless skl2.nil?}\n#{coab[6].join("\n") unless coab.nil?}\n#{ab1[6].join("\n") unless ab1.nil?}\n#{ab2[6].join("\n") unless ab2.nil?}\n#{ab3[6].join("\n") unless ab3.nil?}".split("\n")
+      char[i][20]="#{skl1[10].join("\n") unless skl1.nil?}\n#{skl2[10].join("\n") unless skl2.nil?}\n#{coab[6].join("\n") unless coab.nil?}\n#{cha[6].join("\n") unless cha.nil?}\n#{ab1[6].join("\n") unless ab1.nil?}\n#{ab2[6].join("\n") unless ab2.nil?}\n#{ab3[6].join("\n") unless ab3.nil?}".split("\n")
       if args.include?('any') || tags.length<=1
-        x=[[],[],[]]
+        x=[[],[],[],[]]
         x[0].push('1') if !skl1.nil? && has_any?(tags,skl1[10])
         x[0].push('2') if !skl2.nil? && has_any?(tags,skl2[10])
         x[1].push('o') if !coab.nil? && has_any?(tags,coab[6])
-        x[2].push('1') if !ab1.nil? && has_any?(tags,ab1[6])
-        x[2].push('2') if !ab2.nil? && has_any?(tags,ab2[6])
-        x[2].push('3') if !ab3.nil? && has_any?(tags,ab3[6])
+        x[2].push('o') if !cha.nil? && has_any?(tags,cha[6])
+        x[3].push('1') if !ab1.nil? && has_any?(tags,ab1[6])
+        x[3].push('2') if !ab2.nil? && has_any?(tags,ab2[6])
+        x[3].push('3') if !ab3.nil? && has_any?(tags,ab3[6])
         x[0]="S#{x[0].join('/')}" if x[0].length>0
         x[1]='Co' if x[1].length>0
-        x[2]="A#{x[2].join('/')}" if x[2].length>0
+        x[2]='Ch' if x[2].length>0
+        x[3]="A#{x[2].join('/')}" if x[2].length>0
         x=x.reject{|q| q.length<=0}
         x.compact!
         char[i][0]="#{char[i][0]} *[#{x.join('+')}]*" if x.length>0
@@ -6199,7 +6297,8 @@ def find_in_abilities(bot,event,args=nil,mode=0)
   for i in 0...args.length
     abiltypes.push('Ability') if ['ability','abil','abilitys','abils','abilities'].include?(args[i].downcase)
     abiltypes.push('Aura') if ['aura','auras','drg','dragon'].include?(args[i].downcase)
-    abiltypes.push('CoAbility') if ['coability','coabil','coabilitys','coabils','coabilities','co','team'].include?(args[i].downcase)
+    abiltypes.push('CoAbility') if ['coability','coabil','coab','coabilitys','coabils','coabilities','co','team'].include?(args[i].downcase)
+    abiltypes.push('Chain') if ['chain','chaincoability','chaincoabil','chaincoab','chaincoabilitys','chaincoabils','chaincoabilities','chainco'].include?(args[i].downcase)
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
     elem.push('Water') if ['water','waters'].include?(args[i].downcase)
     elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
@@ -6616,13 +6715,17 @@ def find_abilities(bot,event,args=nil)
     k=m.reject{|q| q[1]=='example' || q[0]!=subchar[i][0] || q[2]!=subchar[i][1]}
     ccc='/'
     ccc=', ' unless k.find_index{|q| q[1].include?('/')}.nil?
+    if k.length>3
+      ccc=' -> '
+      k=[k[0],k[k.length-1]]
+    end
     name="#{k[0][0]} #{'+' if k[0][1].include?('%')}#{k.map{|q| q[1]}.join(ccc)}"
     name="#{k.map{|q| q[1]}.join(ccc)} #{k[0][0]}" if k[0][0][0,7]=='Hits = '
     name="#{k[0][0]}" if k[0][1]=='-'
     char.push([name,k[0][2]])
   end
   flds=nil
-  totals=[0,0,0]
+  totals=[0,0,0,0]
   unless char.length<=0
     flds=[]
     c=char.reject{|q| q[1]!='Ability'}.map{|q| q[0]}.join("\n")
@@ -6634,6 +6737,9 @@ def find_abilities(bot,event,args=nil)
     c=char.reject{|q| q[1]!='CoAbility'}.map{|q| q[0]}.join("\n")
     flds.push(['CoAbilities',c]) if c.length>0
     totals[2]=c.split("\n").length
+    c=char.reject{|q| q[1]!='Chain'}.map{|q| q[0]}.join("\n")
+    flds.push(['Chain CoAbilities',c]) if c.length>0
+    totals[3]=c.split("\n").length
     flds=nil if flds.length<=0
   end
   f=0
@@ -6652,7 +6758,7 @@ def find_abilities(bot,event,args=nil)
   else
     flds=triple_finish(flds[0][1].split("\n")) if !flds.nil? && flds.length==1
     textra="#{textra}\n\n**No materials/items match your search**" if char.length<=0 || flds.nil?
-    create_embed(event,"__**Ability Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total (#{totals[0]} abilities, #{totals[1]} auras, #{totals[2]} coabilities)",nil,flds)
+    create_embed(event,"__**Ability Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total (#{totals[0]} abilities, #{totals[1]} auras, #{totals[2]} coabilities, #{totals[3]} chain coabilities)",nil,flds)
   end
 end
 
@@ -7142,267 +7248,13 @@ def spaceship_order(x)
 end
 
 def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode=0)
-  data_load()
-  nicknames_load()
-  err=false
-  str=''
-  if newname.nil? || unit.nil?
-    str="The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Enemies\n- Skills\n- Abilities\n- Auras\n- CoAbilities\n- Facilities\n- Materials\n\nYou must specify both:\n- one of the above\n- an alias you wish to give that item"
-    err=true
-  elsif event.user.id != 167657750971547648 && event.server.nil?
-    str='Only my developer is allowed to use this command in PM.'
-    err=true
-  elsif (!is_mod?(event.user,event.server,event.channel) && ![368976843883151362,195303206933233665,141260274144509952].include?(event.user.id)) && event.channel.id != 532083509083373583
-    str='You are not a mod.'
-    err=true
-  elsif newname.include?('"') || newname.include?("\n")
-    str='Full stop.  " is not allowed in an alias.'
-    err=true
-  elsif !event.server.nil? && event.server.id==363917126978764801
-    err="You guys revoked your permission to add aliases when you refused to listen to me regarding the Erk alias for Serra.  Even if that was an alias for FEH instead of DL."
-    str=true
+  t=Time.now
+  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
+    puts 'reloading BotanText'
+    load "#{@location}devkit/BotanText.rb"
+    @last_multi_reload[1]=t
   end
-  if err
-    event.respond str if str.length>0 && mode==0
-    args=event.message.text.downcase.split(' ')
-    args.shift
-    disp_aliases(bot,event,args) if mode==1
-    return nil
-  end
-  type=['Alias','Alias']
-  if find_adventurer(newname,event,true).length>0
-    type[0]='Adventurer'
-  elsif find_dragon(newname,event,true).length>0
-    type[0]='Dragon'
-  elsif find_wyrmprint(newname,event,true).length>0
-    type[0]='Wyrmprint'
-  elsif find_weapon(newname,event,true).length>0
-    type[0]='Weapon'
-  elsif find_enemy(newname,event,true).length>0
-    type[0]='Enemy'
-  elsif find_skill(newname,event,true).length>0
-    type[0]='Skill'
-  elsif find_ability(newname,event,true).length>0
-    type[0]='Ability'
-  elsif find_facility(newname,event,true).length>0
-    type[0]='Facility'
-  elsif find_mat(newname,event,true).length>0
-    type[0]='Material'
-  elsif find_adventurer(newname,event).length>0
-    type[0]='Adventurer*'
-  elsif find_dragon(newname,event).length>0
-    type[0]='Dragon*'
-  elsif find_wyrmprint(newname,event).length>0
-    type[0]='Wyrmprint*'
-  elsif find_weapon(newname,event).length>0
-    type[0]='Weapon*'
-  elsif find_enemy(newname,event).length>0
-    type[0]='Enemy*'
-  elsif find_skill(newname,event).length>0
-    type[0]='Skill*'
-  elsif find_ability(newname,event).length>0
-    type[0]='Ability*'
-  elsif find_facility(newname,event).length>0
-    type[0]='Facility*'
-  elsif find_mat(newname,event).length>0
-    type[0]='Material*'
-  end
-  if find_adventurer(unit,event,true).length>0
-    type[1]='Adventurer'
-  elsif find_dragon(unit,event,true).length>0
-    type[1]='Dragon'
-  elsif find_wyrmprint(unit,event,true).length>0
-    type[1]='Wyrmprint'
-  elsif find_weapon(unit,event,true).length>0
-    type[1]='Weapon'
-  elsif find_enemy(unit,event,true).length>0
-    type[1]='Enemy'
-  elsif find_skill(unit,event,true).length>0
-    type[1]='Skill'
-  elsif find_ability(unit,event,true).length>0
-    type[1]='Ability'
-  elsif find_facility(unit,event,true).length>0
-    type[1]='Facility'
-  elsif find_mat(unit,event,true).length>0
-    type[1]='Material'
-  elsif find_adventurer(unit,event).length>0
-    type[1]='Adventurer*'
-  elsif find_dragon(unit,event).length>0
-    type[1]='Dragon*'
-  elsif find_wyrmprint(unit,event).length>0
-    type[1]='Wyrmprint*'
-  elsif find_weapon(unit,event).length>0
-    type[1]='Weapon*'
-  elsif find_enemy(unit,event).length>0
-    type[1]='Enemy*'
-  elsif find_skill(unit,event).length>0
-    type[1]='Skill*'
-  elsif find_ability(unit,event).length>0
-    type[1]='Ability*'
-  elsif find_facility(unit,event).length>0
-    type[1]='Facility*'
-  elsif find_mat(unit,event).length>0
-    type[1]='Material*'
-  end
-  checkstr=normalize(newname,true)
-  if type.reject{|q| q != 'Alias'}.length<=0
-    type[0]='Alias' if type[0].include?('*')
-    type[1]='Alias' if type[1].include?('*') && type[0]!='Alias'
-  end
-  if type.reject{|q| q == 'Alias'}.length<=0
-    alz1=newname
-    alz2=unit
-    alz1='>Censored mention<' if alz1.include?('@')
-    alz2='>Censored mention<' if alz2.include?('@')
-    str="The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Enemies\n- Skills\n- Abilities\n- Auras\n- CoAbilities\n- Facilities\n- Materials\n\nNeither #{alz1} nor #{alz2} fall into any of these categories."
-    err=true
-  elsif type.reject{|q| q != 'Alias'}.length<=0
-    alz1=newname
-    alz2=unit
-    alz1='>Censored mention<' if alz1.include?('@')
-    alz2='>Censored mention<' if alz2.include?('@')
-    event.respond "#{alz1} is a #{type[0].downcase}\n#{alz2} is a #{type[1].downcase}"
-    err=true
-  end
-  if err
-    str=["#{str}\nPlease try again.","#{str}\nTrying to list aliases instead."][mode]
-    event.respond str if str.length>0
-    args=event.message.text.downcase.split(' ')
-    args.shift
-    list_unit_aliases(event,args,bot) if mode==1
-    return nil
-  end
-  if type[1]=='Alias' && type[0]!='Alias'
-    f="#{newname}"
-    newname="#{unit}"
-    unit="#{f}"
-    type=type.reverse.map{|q| q.gsub('*','')}
-  else
-    type=type.map{|q| q.gsub('*','')}
-  end
-  if type[1]=='Adventurer'
-    unit=find_adventurer(unit,event)
-    dispstr=['Adventurer',unit[0],'Adventurer',unit[0]]
-  elsif type[1]=='Dragon'
-    unit=find_dragon(unit,event)
-    dispstr=['Dragon',unit[0],'Dragon',unit[0]]
-  elsif type[1]=='Wyrmprint'
-    unit=find_wyrmprint(unit,event)
-    dispstr=['Wyrmprint',unit[0],'Wyrmprint',unit[0]]
-  elsif type[1]=='Weapon'
-    unit=find_weapon(unit,event)
-    dispstr=['Weapon',unit[0],'Weapon',unit[0]]
-  elsif type[1]=='Enemy'
-    unit=find_enemy(unit,event)
-    dispstr=['Enemy',unit[0],'Enemy',unit[0]]
-  elsif type[1]=='Skill'
-    unit=find_skill(unit,event)
-    dispstr=['Skill',unit[0],'Skill',unit[0]]
-  elsif type[1]=='Ability'
-    unit=find_ability(unit,event)
-    if unit[0].is_a?(Array) && unit.length<=1
-      dispstr=['Ability',"#{unit[0][0]} #{unit[0][1]}",'Ability',"#{unit[0][0]} #{unit[0][1]}"]
-      dispstr=['Ability',"#{unit[0][0]}",'Ability',"#{unit[0][0]}"] if ['-','example'].include?(unit[0][1])
-    elsif unit[0].is_a?(Array)
-      dispstr=['Ability',unit[0][0],'Ability',unit[0][0]]
-    else
-      dispstr=['Ability',"#{unit[0]} #{unit[1]}",'Ability',"#{unit[0]} #{unit[1]}"]
-      dispstr=['Ability',"#{unit[0]}",'Ability',"#{unit[0]}"] if ['-','example'].include?(unit[1])
-    end
-  elsif type[1]=='Facility'
-    unit=find_facility(unit,event)
-    dispstr=['Facility',unit[0][0],'Facility',unit[0][0]]
-  elsif type[1]=='Material'
-    unit=find_mat(unit,event)
-    dispstr=['Material',unit[0],'Item',unit[0]]
-  end
-  logchn=536307117301170187
-  logchn=431862993194582036 if @shardizard==4
-  newname=newname.gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')
-  srv=0
-  srv=event.server.id unless event.server.nil?
-  srv=modifier.to_i if event.user.id==167657750971547648 && modifier.to_i.to_s==modifier
-  srvname='PM with dev'
-  srvname=bot.server(srv).name unless event.server.nil? && srv.zero?
-  checkstr=normalize(newname,true)
-  k=event.message.emoji
-  for i in 0...k.length
-    checkstr=checkstr.gsub("<:#{k[i].name}:#{k[i].id}>",k[i].name)
-  end
-  if checkstr.downcase =~ /(7|t)+?h+?(o|0)+?(7|t)+?/ && !(dispstr[1].include?('thot') && event.channel.id==532083509083373583)
-    event.respond "That name has __***NOT***__ been added to #{dispstr[1]}'s aliases."
-    bot.channel(logchn).send_message("~~**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** #{newname} for #{dispstr[1]}~~\n**Reason for rejection:** Begone, alias.")
-    return nil
-  elsif checkstr.downcase =~ /n+?((i|1)+?|(e|3)+?)(b|g|8)+?(a|4|(e|3)+?r+?)+?/
-    event.respond "That name has __***NOT***__ been added to #{dispstr[1]}'s aliases."
-    bot.channel(logchn).send_message("~~**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** >Censored< for #{dispstr[1]}~~\n**Reason for rejection:** Begone, alias.")
-    return nil
-  end
-  newname=normalize(newname,true)
-  m=nil
-  m=[event.server.id] unless event.server.nil?
-  srv=0
-  srv=event.server.id unless event.server.nil?
-  srv=modifier.to_i if event.user.id==167657750971547648 && modifier.to_i.to_s==modifier
-  srvname='PM with dev'
-  srvname=bot.server(srv).name unless event.server.nil? && srv.zero?
-  if event.user.id==167657750971547648 && modifier.to_i.to_s==modifier
-    m=[modifier.to_i]
-    modifier=nil
-  end
-  chn=event.channel.id
-  chn=modifier2.to_i if event.user.id==167657750971547648 && !modifier2.nil? && modifier2.to_i.to_s==modifier2
-  m=nil if [167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) && !modifier.nil?
-  m=nil if event.channel.id==532083509083373583 && !modifier.nil?
-  double=false
-  for i in 0...@aliases.length
-    if @aliases[i][3].nil?
-    elsif @aliases[i][1].downcase==newname.downcase && @aliases[i][2]==dispstr[3]
-      if ([167657750971547648,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583) && !modifier.nil?
-        @aliases[i][3]=nil
-        @aliases[i][4]=nil
-        @aliases[i].compact!
-        bot.channel(chn).send_message("The alias **#{newname}** for the #{dispstr[2].downcase} *#{dispstr[1]}* exists in a server already.  Making it global now.")
-        event.respond "The alias #{newname} for #{dispstr[1]} exists in a server already.  Making it global now.\nPlease test to be sure that the alias stuck." if event.user.id==167657750971547648 && !modifier2.nil? && modifier2.to_i.to_s==modifier2
-        bot.channel(logchn).send_message("**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** #{newname} for #{dispstr[1]} - gone global.")
-        double=true
-      else
-        @aliases[i][3].push(srv)
-        bot.channel(chn).send_message("The alias **#{newname}** for the #{dispstr[2].downcase} *#{dispstr[1]}* exists in another server already.  Adding this server to those that can use it.")
-        event.respond "The alias #{newname} for #{dispstr[1]} exists in another server already.  Adding this server to those that can use it.\nPlease test to be sure that the alias stuck." if event.user.id==167657750971547648 && !modifier2.nil? && modifier2.to_i.to_s==modifier2
-        metadata_load()
-        bot.user(167657750971547648).pm("The alias **#{@aliases[i][0]}** for the #{type[1]} **#{dispstr[1]}** is used in quite a few servers.  It might be time to make this global") if @aliases[i][3].length >= @server_data[0].inject(0){|sum,x| sum + x } / 20 && @aliases[i][3].length>=5 && @aliases[i][4].nil?
-        bot.channel(logchn).send_message("**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** #{newname} for #{dispstr[1]} - gained a new server that supports it.")
-        double=true
-      end
-    end
-  end
-  unless double
-    @aliases.push([dispstr[0],newname,dispstr[3],m].compact)
-    @aliases.sort! {|a,b| (spaceship_order(a[0]) <=> spaceship_order(b[0])) == 0 ? ((a[2].downcase <=> b[2].downcase) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2].downcase <=> b[2].downcase)) : (spaceship_order(a[0]) <=> spaceship_order(b[0]))}
-    bot.channel(chn).send_message("**#{newname}** has been#{" globally" if ([167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) || event.channel.id==532083509083373583) && !modifier.nil?} added to the aliases for the #{dispstr[2].downcase} *#{dispstr[1]}*.\nPlease test to be sure that the alias stuck.")
-    event.respond "#{newname} has been added to #{dispstr[1]}'s aliases#{" globally" if event.user.id==167657750971547648 && !modifier.nil?}." if event.user.id==167657750971547648 && !modifier2.nil? && modifier2.to_i.to_s==modifier2
-    bot.channel(logchn).send_message("**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** #{newname} for #{dispstr[1]}#{" - global alias" if ([167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) || event.channel.id==532083509083373583) && !modifier.nil?}")
-  end
-  @aliases.uniq!
-  nzzz=@aliases.map{|a| a}
-  open("#{@location}devkit/DLNames.txt", 'w') { |f|
-    for i in 0...nzzz.length
-      f.puts "#{nzzz[i].to_s}#{"\n" if i<nzzz.length-1}"
-    end
-  }
-  nicknames_load()
-  nzz=nicknames_load(2)
-  nzzz=@aliases.map{|a| a}
-  if nzzz[nzzz.length-1].length>1 && nzzz[nzzz.length-1][2]>=nzz[nzz.length-1][2]
-    bot.channel(logchn).send_message('Alias list saved.')
-    open("#{@location}devkit/DLNames2.txt", 'w') { |f|
-      for i in 0...nzzz.length
-        f.puts "#{nzzz[i].to_s}#{"\n" if i<nzzz.length-1}"
-      end
-    }
-    bot.channel(logchn).send_message('Alias list has been backed up.')
-  end
+  return add_a_new_alias(bot,event,newname,unit,modifier,modifier2,mode)
 end
 
 def disp_aliases(bot,event,args=nil,mode=0)
@@ -8188,7 +8040,17 @@ end
 
 bot.command([:aura]) do |event, *args|
   return nil if overlap_prevent(event)
-  disp_ability_data(bot,event,args,true)
+  disp_ability_data(bot,event,args,'Aura')
+end
+
+bot.command([:coability,:coabil,:coab,:co]) do |event, *args|
+  return nil if overlap_prevent(event)
+  disp_ability_data(bot,event,args,'CoAbility')
+end
+
+bot.command([:chain]) do |event, *args|
+  return nil if overlap_prevent(event)
+  disp_ability_data(bot,event,args,'Chain')
 end
 
 bot.command([:facility,:faculty,:fac]) do |event, *args|
