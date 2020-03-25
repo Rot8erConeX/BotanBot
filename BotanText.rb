@@ -91,8 +91,12 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
     create_embed(event,"**#{command.downcase.gsub('faculty','facility')}** __name__","Shows `name`'s size and description.\nIn PM, also shows mats required to promote the facility's level.",0xCE456B)
   elsif ['mat','material','item'].include?(command.downcase)
     create_embed(event,"**#{command.downcase.gsub('faculty','facility')}** __name__","Shows `name`'s in-game description and rarity.\nIn PM, also shows obtainment methods and uses.",0xCE456B)
+  elsif ['coability','coabil','coab'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Shows everything that the co-abilities named `name` does.  Also shows all adventurers that have the co-ability.\nIn PM, will also show the chain co-ability named `name`.",0xCE456B)
   elsif ['aura'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows everything that the aura named `name` does.  Also shows all dragons that have the aura.",0xCE456B)
+  elsif ['chain'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Shows everything that the chain co-ability named `name` does.  Also shows all adventurers that have the chain co-ability.",0xCE456B)
   elsif ['roost'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\n\nYou can include the word \"tomorrow\" to instead show the data for tomorrow.\nYou can also include a day of the week to instead show data on that day of the week.",0xCE456B)
   elsif ['shop','store'].include?(command.downcase)
@@ -181,7 +185,7 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
       w=lookout.reject{|q| q[2]!='Skill'}.map{|q| q[0]}.sort
       create_embed(event,'Tags','',0x40C0F0,nil,nil,triple_finish(w)) if safe_to_spam?(event)
     elsif ['abil','abilities','ability','abils','abilitys'].include?(subcommand.downcase)
-      create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all abilities, dragon auras, and co-abilities that fit `filters`.\n\nYou can search by:\n- Ability Class (ability/aura/coability)\n- Element\n- Tags\n\nIf too many abilities are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all abilities, dragon auras, co-abilities, and chain co-abilities that fit `filters`.\n\nYou can search by:\n- Ability Class (ability/aura/coability/chain)\n- Element\n- Tags\n\nIf too many abilities are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
       lookout=[]
       if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
         lookout=[]
@@ -206,9 +210,9 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
     w=lookout.reject{|q| q[2]!='Skill'}.map{|q| q[0]}.sort
     create_embed(event,'Tags','',0x40C0F0,nil,nil,triple_finish(w)) if safe_to_spam?(event) && !['mat','mats','material','materials','item','items','skill','skills','skls','skl','skil','skils','abil','abilities','ability','abils','abilitys','enemies','boss','enemy','bosses','enemie','enemys','bosss'].include?(subcommand.downcase)
   elsif ['aliases','checkaliases','seealiases','alias'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s aliases.\nIf no name is listed, responds with a list of all aliases and who/what they are for.\n\nAliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Auras\n- Abilities\n- CoAbilities\n- Facilities\n- Materials\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s aliases.\nIf no name is listed, responds with a list of all aliases and who/what they are for.\n\nAliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Abilities\n- Auras\n- CoAbilities\n- Chain CoAbilities\n- Facilities\n- Materials\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
   elsif ['saliases','serveraliases'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s server-specific aliases.\nIf no name is listed, responds with a list of all server-specific aliases and who/what they are for.\n\nAliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Auras\n- Abilities\n- CoAbilities\n- Facilities\n- Materials\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s server-specific aliases.\nIf no name is listed, responds with a list of all server-specific aliases and who/what they are for.\n\nAliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Abilities\n- Auras\n- CoAbilities\n- Chain CoAbilities\n- Facilities\n- Materials\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
   elsif ['tools','links','resources','tool','link','resource'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}**","Responds with a list of links useful to players of *Dragalia Lost*.",0xCE456B)
   elsif ['mats','materials','nodes','node','spiral'].include?(command.downcase)
@@ -252,7 +256,6 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
     str="#{str}\n`status` __name__ - for data on a status ailment"
     str="#{str}\n\n`skill` __name__ - for data on a particular skill"
     str="#{str}\n`ability` __name__ - for data on a particular ability or co-ability"
-    str="#{str}\n`aura` __name__ - for data on a particular aura"
     str="#{str}\n`limits` - for ability stacking limits (*also `stack`*)"
     str="#{str}\n\n`facility` __name__ - for data on a particular facility"
     str="#{str}\n`material` __name__ - for data on a particular material (*also `mat`*)"
@@ -3179,6 +3182,270 @@ def future_events(event,bot,args=nil)
     str=extend_message(str,str2,event,2)
   end
   event.respond str
+end
+
+def add_a_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode=0)
+  data_load()
+  nicknames_load()
+  err=false
+  str=''
+  if newname.nil? || unit.nil?
+    str="The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Enemies\n- Skills\n- Abilities\n- Auras\n- CoAbilities\n- Chain CoAbilities\n- Facilities\n- Materials\n\nYou must specify both:\n- one of the above\n- an alias you wish to give that item"
+    err=true
+  elsif event.user.id != 167657750971547648 && event.server.nil?
+    str='Only my developer is allowed to use this command in PM.'
+    err=true
+  elsif (!is_mod?(event.user,event.server,event.channel) && ![368976843883151362,195303206933233665,141260274144509952].include?(event.user.id)) && event.channel.id != 532083509083373583
+    str='You are not a mod.'
+    err=true
+  elsif newname.include?('"') || newname.include?("\n")
+    str='Full stop.  " is not allowed in an alias.'
+    err=true
+  elsif !event.server.nil? && event.server.id==363917126978764801
+    err="You guys revoked your permission to add aliases when you refused to listen to me regarding the Erk alias for Serra.  Even if that was an alias for FEH instead of DL."
+    str=true
+  end
+  if err
+    event.respond str if str.length>0 && mode==0
+    args=event.message.text.downcase.split(' ')
+    args.shift
+    disp_aliases(bot,event,args) if mode==1
+    return nil
+  end
+  type=['Alias','Alias']
+  if find_adventurer(newname,event,true).length>0
+    type[0]='Adventurer'
+  elsif find_dragon(newname,event,true).length>0
+    type[0]='Dragon'
+  elsif find_wyrmprint(newname,event,true).length>0
+    type[0]='Wyrmprint'
+  elsif find_weapon(newname,event,true).length>0
+    type[0]='Weapon'
+  elsif find_enemy(newname,event,true).length>0
+    type[0]='Enemy'
+  elsif find_skill(newname,event,true).length>0
+    type[0]='Skill'
+  elsif find_ability(newname,event,true).length>0
+    type[0]='Ability'
+  elsif find_facility(newname,event,true).length>0
+    type[0]='Facility'
+  elsif find_mat(newname,event,true).length>0
+    type[0]='Material'
+  elsif find_adventurer(newname,event).length>0
+    type[0]='Adventurer*'
+  elsif find_dragon(newname,event).length>0
+    type[0]='Dragon*'
+  elsif find_wyrmprint(newname,event).length>0
+    type[0]='Wyrmprint*'
+  elsif find_weapon(newname,event).length>0
+    type[0]='Weapon*'
+  elsif find_enemy(newname,event).length>0
+    type[0]='Enemy*'
+  elsif find_skill(newname,event).length>0
+    type[0]='Skill*'
+  elsif find_ability(newname,event).length>0
+    type[0]='Ability*'
+  elsif find_facility(newname,event).length>0
+    type[0]='Facility*'
+  elsif find_mat(newname,event).length>0
+    type[0]='Material*'
+  end
+  if find_adventurer(unit,event,true).length>0
+    type[1]='Adventurer'
+  elsif find_dragon(unit,event,true).length>0
+    type[1]='Dragon'
+  elsif find_wyrmprint(unit,event,true).length>0
+    type[1]='Wyrmprint'
+  elsif find_weapon(unit,event,true).length>0
+    type[1]='Weapon'
+  elsif find_enemy(unit,event,true).length>0
+    type[1]='Enemy'
+  elsif find_skill(unit,event,true).length>0
+    type[1]='Skill'
+  elsif find_ability(unit,event,true).length>0
+    type[1]='Ability'
+  elsif find_facility(unit,event,true).length>0
+    type[1]='Facility'
+  elsif find_mat(unit,event,true).length>0
+    type[1]='Material'
+  elsif find_adventurer(unit,event).length>0
+    type[1]='Adventurer*'
+  elsif find_dragon(unit,event).length>0
+    type[1]='Dragon*'
+  elsif find_wyrmprint(unit,event).length>0
+    type[1]='Wyrmprint*'
+  elsif find_weapon(unit,event).length>0
+    type[1]='Weapon*'
+  elsif find_enemy(unit,event).length>0
+    type[1]='Enemy*'
+  elsif find_skill(unit,event).length>0
+    type[1]='Skill*'
+  elsif find_ability(unit,event).length>0
+    type[1]='Ability*'
+  elsif find_facility(unit,event).length>0
+    type[1]='Facility*'
+  elsif find_mat(unit,event).length>0
+    type[1]='Material*'
+  end
+  checkstr=normalize(newname,true)
+  if type.reject{|q| q != 'Alias'}.length<=0
+    type[0]='Alias' if type[0].include?('*')
+    type[1]='Alias' if type[1].include?('*') && type[0]!='Alias'
+  end
+  if type.reject{|q| q == 'Alias'}.length<=0
+    alz1=newname
+    alz2=unit
+    alz1='>Censored mention<' if alz1.include?('@')
+    alz2='>Censored mention<' if alz2.include?('@')
+    str="The alias system can cover:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Enemies\n- Skills\n- Abilities\n- Auras\n- CoAbilities\n- Chain CoAbilities\n- Facilities\n- Materials\n\nNeither #{alz1} nor #{alz2} fall into any of these categories."
+    err=true
+  elsif type.reject{|q| q != 'Alias'}.length<=0
+    alz1=newname
+    alz2=unit
+    alz1='>Censored mention<' if alz1.include?('@')
+    alz2='>Censored mention<' if alz2.include?('@')
+    event.respond "#{alz1} is a #{type[0].downcase}\n#{alz2} is a #{type[1].downcase}"
+    err=true
+  end
+  if err
+    str=["#{str}\nPlease try again.","#{str}\nTrying to list aliases instead."][mode]
+    event.respond str if str.length>0
+    args=event.message.text.downcase.split(' ')
+    args.shift
+    list_unit_aliases(event,args,bot) if mode==1
+    return nil
+  end
+  if type[1]=='Alias' && type[0]!='Alias'
+    f="#{newname}"
+    newname="#{unit}"
+    unit="#{f}"
+    type=type.reverse.map{|q| q.gsub('*','')}
+  else
+    type=type.map{|q| q.gsub('*','')}
+  end
+  if type[1]=='Adventurer'
+    unit=find_adventurer(unit,event)
+    dispstr=['Adventurer',unit[0],'Adventurer',unit[0]]
+  elsif type[1]=='Dragon'
+    unit=find_dragon(unit,event)
+    dispstr=['Dragon',unit[0],'Dragon',unit[0]]
+  elsif type[1]=='Wyrmprint'
+    unit=find_wyrmprint(unit,event)
+    dispstr=['Wyrmprint',unit[0],'Wyrmprint',unit[0]]
+  elsif type[1]=='Weapon'
+    unit=find_weapon(unit,event)
+    dispstr=['Weapon',unit[0],'Weapon',unit[0]]
+  elsif type[1]=='Enemy'
+    unit=find_enemy(unit,event)
+    dispstr=['Enemy',unit[0],'Enemy',unit[0]]
+  elsif type[1]=='Skill'
+    unit=find_skill(unit,event)
+    dispstr=['Skill',unit[0],'Skill',unit[0]]
+  elsif type[1]=='Ability'
+    unit=find_ability(unit,event)
+    if unit[0].is_a?(Array) && unit.length<=1
+      dispstr=['Ability',"#{unit[0][0]} #{unit[0][1]}",'Ability',"#{unit[0][0]} #{unit[0][1]}"]
+      dispstr=['Ability',"#{unit[0][0]}",'Ability',"#{unit[0][0]}"] if ['-','example'].include?(unit[0][1])
+    elsif unit[0].is_a?(Array)
+      dispstr=['Ability',unit[0][0],'Ability',unit[0][0]]
+    else
+      dispstr=['Ability',"#{unit[0]} #{unit[1]}",'Ability',"#{unit[0]} #{unit[1]}"]
+      dispstr=['Ability',"#{unit[0]}",'Ability',"#{unit[0]}"] if ['-','example'].include?(unit[1])
+    end
+  elsif type[1]=='Facility'
+    unit=find_facility(unit,event)
+    dispstr=['Facility',unit[0][0],'Facility',unit[0][0]]
+  elsif type[1]=='Material'
+    unit=find_mat(unit,event)
+    dispstr=['Material',unit[0],'Item',unit[0]]
+  end
+  logchn=536307117301170187
+  logchn=431862993194582036 if @shardizard==4
+  newname=newname.gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"','')
+  srv=0
+  srv=event.server.id unless event.server.nil?
+  srv=modifier.to_i if event.user.id==167657750971547648 && modifier.to_i.to_s==modifier
+  srvname='PM with dev'
+  srvname=bot.server(srv).name unless event.server.nil? && srv.zero?
+  checkstr=normalize(newname,true)
+  k=event.message.emoji
+  for i in 0...k.length
+    checkstr=checkstr.gsub("<:#{k[i].name}:#{k[i].id}>",k[i].name)
+  end
+  if checkstr.downcase =~ /(7|t)+?h+?(o|0)+?(7|t)+?/ && !(dispstr[1].include?('thot') && event.channel.id==532083509083373583)
+    event.respond "That name has __***NOT***__ been added to #{dispstr[1]}'s aliases."
+    bot.channel(logchn).send_message("~~**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** #{newname} for #{dispstr[1]}~~\n**Reason for rejection:** Begone, alias.")
+    return nil
+  elsif checkstr.downcase =~ /n+?((i|1)+?|(e|3)+?)(b|g|8)+?(a|4|(e|3)+?r+?)+?/
+    event.respond "That name has __***NOT***__ been added to #{dispstr[1]}'s aliases."
+    bot.channel(logchn).send_message("~~**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** >Censored< for #{dispstr[1]}~~\n**Reason for rejection:** Begone, alias.")
+    return nil
+  end
+  newname=normalize(newname,true)
+  m=nil
+  m=[event.server.id] unless event.server.nil?
+  srv=0
+  srv=event.server.id unless event.server.nil?
+  srv=modifier.to_i if event.user.id==167657750971547648 && modifier.to_i.to_s==modifier
+  srvname='PM with dev'
+  srvname=bot.server(srv).name unless event.server.nil? && srv.zero?
+  if event.user.id==167657750971547648 && modifier.to_i.to_s==modifier
+    m=[modifier.to_i]
+    modifier=nil
+  end
+  chn=event.channel.id
+  chn=modifier2.to_i if event.user.id==167657750971547648 && !modifier2.nil? && modifier2.to_i.to_s==modifier2
+  m=nil if [167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) && !modifier.nil?
+  m=nil if event.channel.id==532083509083373583 && !modifier.nil?
+  double=false
+  for i in 0...@aliases.length
+    if @aliases[i][3].nil?
+    elsif @aliases[i][1].downcase==newname.downcase && @aliases[i][2]==dispstr[3]
+      if ([167657750971547648,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583) && !modifier.nil?
+        @aliases[i][3]=nil
+        @aliases[i][4]=nil
+        @aliases[i].compact!
+        bot.channel(chn).send_message("The alias **#{newname}** for the #{dispstr[2].downcase} *#{dispstr[1]}* exists in a server already.  Making it global now.")
+        event.respond "The alias #{newname} for #{dispstr[1]} exists in a server already.  Making it global now.\nPlease test to be sure that the alias stuck." if event.user.id==167657750971547648 && !modifier2.nil? && modifier2.to_i.to_s==modifier2
+        bot.channel(logchn).send_message("**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** #{newname} for #{dispstr[1]} - gone global.")
+        double=true
+      else
+        @aliases[i][3].push(srv)
+        bot.channel(chn).send_message("The alias **#{newname}** for the #{dispstr[2].downcase} *#{dispstr[1]}* exists in another server already.  Adding this server to those that can use it.")
+        event.respond "The alias #{newname} for #{dispstr[1]} exists in another server already.  Adding this server to those that can use it.\nPlease test to be sure that the alias stuck." if event.user.id==167657750971547648 && !modifier2.nil? && modifier2.to_i.to_s==modifier2
+        metadata_load()
+        bot.user(167657750971547648).pm("The alias **#{@aliases[i][0]}** for the #{type[1]} **#{dispstr[1]}** is used in quite a few servers.  It might be time to make this global") if @aliases[i][3].length >= @server_data[0].inject(0){|sum,x| sum + x } / 20 && @aliases[i][3].length>=5 && @aliases[i][4].nil?
+        bot.channel(logchn).send_message("**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** #{newname} for #{dispstr[1]} - gained a new server that supports it.")
+        double=true
+      end
+    end
+  end
+  unless double
+    @aliases.push([dispstr[0],newname,dispstr[3],m].compact)
+    @aliases.sort! {|a,b| (spaceship_order(a[0]) <=> spaceship_order(b[0])) == 0 ? ((a[2].downcase <=> b[2].downcase) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2].downcase <=> b[2].downcase)) : (spaceship_order(a[0]) <=> spaceship_order(b[0]))}
+    bot.channel(chn).send_message("**#{newname}** has been#{" globally" if ([167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) || event.channel.id==532083509083373583) && !modifier.nil?} added to the aliases for the #{dispstr[2].downcase} *#{dispstr[1]}*.\nPlease test to be sure that the alias stuck.")
+    event.respond "#{newname} has been added to #{dispstr[1]}'s aliases#{" globally" if event.user.id==167657750971547648 && !modifier.nil?}." if event.user.id==167657750971547648 && !modifier2.nil? && modifier2.to_i.to_s==modifier2
+    bot.channel(logchn).send_message("**Server:** #{srvname} (#{srv})\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:** #{event.user.distinct} (#{event.user.id})\n**#{dispstr[2]} Alias:** #{newname} for #{dispstr[1]}#{" - global alias" if ([167657750971547648,368976843883151362,195303206933233665].include?(event.user.id) || event.channel.id==532083509083373583) && !modifier.nil?}")
+  end
+  @aliases.uniq!
+  nzzz=@aliases.map{|a| a}
+  open("#{@location}devkit/DLNames.txt", 'w') { |f|
+    for i in 0...nzzz.length
+      f.puts "#{nzzz[i].to_s}#{"\n" if i<nzzz.length-1}"
+    end
+  }
+  nicknames_load()
+  nzz=nicknames_load(2)
+  nzzz=@aliases.map{|a| a}
+  if nzzz[nzzz.length-1].length>1 && nzzz[nzzz.length-1][2]>=nzz[nzz.length-1][2]
+    bot.channel(logchn).send_message('Alias list saved.')
+    open("#{@location}devkit/DLNames2.txt", 'w') { |f|
+      for i in 0...nzzz.length
+        f.puts "#{nzzz[i].to_s}#{"\n" if i<nzzz.length-1}"
+      end
+    }
+    bot.channel(logchn).send_message('Alias list has been backed up.')
+  end
 end
 
 def disp_alias_list(bot,event,args=nil,mode=0)
