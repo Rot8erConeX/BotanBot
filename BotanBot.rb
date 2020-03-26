@@ -5050,6 +5050,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   lookout2=lookout.reject{|q| q[2]!='Race'}
   lookout3=lookout.reject{|q| q[2]!='Cygame'}
   lookout=lookout.reject{|q| q[2]!='Skill' && q[2]!='Ability'}
+  lookout=lookout.reject{|q| ['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Flame','Water','Wind','Light','Shadow','Attack','Defense','Support','Healer'].include?(q[0])}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
     mana=true if ['mana','spiral','manaspiral','70','70node','70mc','70ms'].include?(args[i].downcase)
@@ -5324,6 +5325,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   end
   lookout2=lookout.reject{|q| q[2]!='Cygame'}
   lookout=lookout.reject{|q| q[2]!='Skill' && !q[2]!='Ability'}
+  lookout=lookout.reject{|q| ['Flame','Water','Wind','Light','Shadow'].include?(q[0])}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
@@ -5561,6 +5563,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
     end
   end
   lookout=lookout.reject{|q| q[2]!='Skill' && !q[2]!='Ability'}
+  lookout=lookout.reject{|q| ['Attack','Defense','Support','Healer'].include?(q[0])}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
@@ -5756,6 +5759,7 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
     end
   end
   lookout=lookout.reject{|q| q[2]!='Skill' && q[2]!='Ability'}
+  lookout=lookout.reject{|q| ['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Flame','Water','Wind','Light','Shadow'].include?(q[0])}
   args2=args.map{|q| q}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
