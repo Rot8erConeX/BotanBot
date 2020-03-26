@@ -5267,7 +5267,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
         x[0]="S#{x[0].join('/')}" if x[0].length>0
         x[1]='Co' if x[1].length>0
         x[2]='Ch' if x[2].length>0
-        x[3]="A#{x[2].join('/')}" if x[2].length>0
+        x[3]="A#{x[3].join('/')}" if x[3].length>0
         x=x.reject{|q| q.length<=0}
         x.compact!
         char[i][0]="#{char[i][0]} *[#{x.join('+')}]*" if x.length>0
