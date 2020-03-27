@@ -1940,12 +1940,12 @@ def damage_modifiers(bot,event,args=nil)
       k2=[1,2,3,4,5,6,7]
       k2=[75,80,95,100,150,95,'104% L1, 115% L2'] if k[2][2]=='Sword'
       k2=[97,97,'63% x2',129,'194% uncharged, 143% charged',94,"83% L1, 92% L2"] if k[2][2]=='Blade'
-      k2=[75,'38% x2','54% x2',119,119,89,"43.20% L1, 47% L2"] if k[2][2]=='Dagger'
+      k2=[75,'38% x2','54% x2',119,119,89,"43.2% x3 L1, 47% x3 L2"] if k[2][2]=='Dagger'
       k2=[114,122,204,216,228,73,"173% L1, 192% L2"] if k[2][2]=='Axe'
-      k2=[84,'45% x2',108,150,112,89,"27% L1, 30% L2"] if k[2][2]=='Lance'
-      k2=['29% x3','37% x2','42% x3','63% x2','35% x5','30% x3',"28% L1, 31% L2"] if k[2][2]=='Bow'
-      k2=[98,53,36,78,"61.8% x1 + 36.05% x4",100,"81% L1, 90% L2"] if k[2][2]=='Wand'
-      k2=[69,80,'45% x2',150,196,80,"55% L1, 61% L2"] if k[2][2]=='Staff'
+      k2=[84,'45% x2',108,150,112,89,"27% x5 L1, 30% x5 L2"] if k[2][2]=='Lance'
+      k2=['29% x3','37% x2','42% x3','63% x2','35% x5','30% x3',"28% x8 L1, 31% x8 L2"] if k[2][2]=='Bow'
+      k2=[98,53,36,78,"61.8% x1 + 36.05% x4",100,"81% x2 L1, 90% x2 L2"] if k[2][2]=='Wand'
+      k2=[69,80,'45% x2',150,196,80,"55% x4 L1, 61% x4 L2"] if k[2][2]=='Staff'
       if k[19].length==1
         if ['Dash','DA'].include?(k[19][0][0])
           k2[5]=k[19][0][-1]
@@ -2007,12 +2007,12 @@ def damage_modifiers(bot,event,args=nil)
   elsif wpn.length<=0
     kx=[[75,80,95,100,150,95,"104% L1, 115% L2"],
         [97,97,'63% x2',129,"194% uncharged, 143% charged",94,"83% L1, 92% L2"],
-        [75,'38% x2','54% x2',119,119,89,"43.20% L1, 47% L2"],
+        [75,'38% x2','54% x2',119,119,89,"43.2% x3 L1, 47% x3 L2"],
         [114,122,204,216,228,73,"173% L1, 192% L2"],
-        [84,'45% x2',108,150,112,89,"27% L1, 30% L2"],
-        ['29% x3','37% x2','42% x3','63% x2','35% x5','30% x3',"28% L1, 31% L2"],
-        [98,53,36,78,"61.8% x1 + 36.05% x4",100,"81% L1, 90% L2"],
-        [69,80,'45% x2',150,196,80,"55% L1, 61% L2"]]
+        [84,'45% x2',108,150,112,89,"27% x5 L1, 30% x5 L2"],
+        ['29% x3','37% x2','42% x3','63% x2','35% x5','30% x3',"28% x8 L1, 31% x8 L2"],
+        [98,53,36,78,"61.8% x1 + 36.05% x4",100,"81% x2 L1, 90% x2 L2"],
+        [69,80,'45% x2',150,196,80,"55% x4 L1, 61% x4 L2"]]
     for i in 0...kx.length
       for i2 in 0...kx[i].length
         kx[i][i2]="#{kx[i][i2]}%" unless kx[i][i2].is_a?(String)
@@ -2031,12 +2031,12 @@ def damage_modifiers(bot,event,args=nil)
     k=[1,2,3,4,5,6,7]
     k=[75,80,95,100,150,95,"104% L1, 115% L2"] if wpn[0]=='Sword'
     k=[97,97,'63% x2',129,"194% uncharged, 143% charged",94,"83% L1, 92% L2"] if wpn[0]=='Blade'
-    k=[75,'38% x2','54% x2',119,119,89,"43.20% L1, 47% L2"] if wpn[0]=='Dagger'
+    k=[75,'38% x2','54% x2',119,119,89,"43.2% x3 L1, 47% x3 L2"] if wpn[0]=='Dagger'
     k=[114,122,204,216,228,73,"173% L1, 192% L2"] if wpn[0]=='Axe'
-    k=[84,'45% x2',108,150,112,89,"27% L1, 30% L2"] if wpn[0]=='Lance'
-    k=['29% x3','37% x2','42% x3','63% x2','35% x5','30% x3',"28% L1, 31% L2"] if wpn[0]=='Bow'
-    k=[98,53,36,78,"61.8% x1 + 36.05% x4",100,"81% L1, 90% L2"] if wpn[0]=='Wand'
-    k=[69,80,'45% x2',150,196,80,"55% L1, 61% L2"] if wpn[0]=='Staff'
+    k=[84,'45% x2',108,150,112,89,"27% x5 L1, 30% x5 L2"] if wpn[0]=='Lance'
+    k=['29% x3','37% x2','42% x3','63% x2','35% x5','30% x3',"28% x8 L1, 31% x8 L2"] if wpn[0]=='Bow'
+    k=[98,53,36,78,"61.8% x1 + 36.05% x4",100,"81% x2 L1, 90% x2 L2"] if wpn[0]=='Wand'
+    k=[69,80,'45% x2',150,196,80,"55% x4 L1, 61% x4 L2"] if wpn[0]=='Staff'
     for i in 0...k.length
       k[i]="#{k[i]}%" unless k[i].is_a?(String)
     end
@@ -3182,6 +3182,99 @@ def future_events(event,bot,args=nil)
     str=extend_message(str,str2,event,2)
   end
   event.respond str
+end
+
+def disp_boop_tags()
+  event.channel.send_temporary_message('Please wait...',10)
+  data_load()
+  lookout2=[]
+  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
+    lookout2=[]
+    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
+      lookout2.push(eval line)
+    end
+  end
+  lookout=lookout2.reject{|q| q[2]!='Mat'}.map{|q| q[0]}
+  m=@mats.map{|q| q[8]}.join(', ').split(', ').reject{|q| lookout.include?(q)}.uniq.sort
+  str='__**Mat tags**__'
+  for i in 0...m.length
+    str=extend_message(str,m[i],event)
+  end
+  lookout=lookout2.reject{|q| q[2]!='Skill'}.map{|q| q[0]}
+  m=@askilities.reject{|q| q[2]!='Skill'}.map{|q| q[10]}.join(', ').split(', ').reject{|q| lookout.include?(q) || (q[0,1]=='E' && q[1,1].to_i.to_s==q[1,1])}.uniq.sort
+  str=extend_message(str,'__**Skill tags**__',event,2)
+  for i in 0...m.length
+    str=extend_message(str,m[i],event)
+  end
+  lookout=lookout2.reject{|q| q[2]!='Ability'}.map{|q| q[0]}
+  m=@askilities.reject{|q| !['Ability','Aura','CoAbility'].include?(q[2])}.map{|q| q[6]}.join(', ').split(', ').reject{|q| lookout.include?(q)}.uniq.sort
+  str=extend_message(str,'__**Ability tags**__',event,2)
+  for i in 0...m.length
+    str=extend_message(str,m[i],event)
+  end
+  lookout=lookout2.reject{|q| q[2]!='Banner'}.map{|q| q[0]}
+  m=@banners.map{|q| q[5]}.join(', ').split(', ').reject{|q| lookout.include?(q) || ['Flame','Water','Wind','Light','Shadow','Mixed','fake'].include?(q)}.uniq.sort
+  str=extend_message(str,'__**Banner tags**__',event,2)
+  for i in 0...m.length
+    str=extend_message(str,m[i],event)
+  end
+  event.respond str
+end
+
+def disp_update_list()
+  if ![141260274144509952,167657750971547648].include?(event.user.id)
+    t=Time.now
+    if t.month==10 && t.year==2019 && t.day>23 && t.day<30
+      event.respond "Please note that my developer is away for the weekend, and cannot do updates.  I have code that allows my data collector to update me remotely, but that may take longer than usual."
+    else
+      event.respond "This command is unavailable to you."
+    end
+    return nil
+  end
+  str="1.) Edit [the sheet](https://docs.google.com/spreadsheets/d/1WY83FtDC9ydd2ME-TfGgHfg7Pi9KzUnSq2rfDjkJJNM/edit#gid=246276672) as usual."
+  str="#{str}\n\n2.) If the edits made were to the \"Skills\", \"Abil./Aura\", or \"CoAb.\" sheets, switch to the \"Askillities\" sheet."
+  str="#{str}\n\n3.) Wait for the formulae to finish loading, then grab the BotanBot data column of the sheet you edited.  I generally highlight the lowest entry and CTRL+SHIFT+(up)."
+  str="#{str}\n\n4.) Copy the selection from step 3 to a text file, with the following names based on sheet:"
+  str="#{str}\n- *Adv.* should be copied to **DLAdventurers.txt**"
+  str="#{str}\n- *Drg.* should be copied to **DLDragons.txt**"
+  str="#{str}\n- *Prints* should be copied to **DLWyrmprints.txt**"
+  str="#{str}\n- *Wep.* should be copied to **DLWeapons.txt**"
+  str="#{str}\n- *Enemies* should be copied to **DLEnemies.txt**"
+  str="#{str}\n- *Gauntlet* should be copied to **DLGauntlet.txt**"
+  str="#{str}\n- *NPCs* should be copied to **DL_NPCs.txt**"
+  str="#{str}\n- *Statuses* should be copied to **DLStatuses.txt**"
+  str="#{str}\n- ~~*Void* will need to be edited manually by me.~~"
+  str="#{str}\n- *Banners* should be copied to **DLBanners.txt**"
+  str="#{str}\n- *Facilities* should be copied to **DLFacilities.txt**"
+  str="#{str}\n- *Mats* should be copied to **DLMaterials.txt**"
+  str="#{str}\n- *Askillities* should be copied to **DLSkills.txt**"
+  str="#{str}\n- *Stickers* should be copied to **DLEmotes.txt**"
+  str="#{str}\n\n5.) Upload the text file to [the GitHub page here](https://github.com/Rot8erConeX/BotanBot).  You might need to make a GitHub account to do so."
+  str="#{str}\n\n6.) Wait probably five minutes for the file to settle on GitHub's servers, then use the command `DL!reload` in either my debug server, or in the bot spam channel of Heretic's Lab."
+  str="#{str}\n\n7.) Type the number 2 to select reloading data based on GitHub files."
+  str="#{str}\n\n8.) Double-check that the edited data works.  It is important to remember that I will not be there to guide you to wherever any problems might be based on error codes."
+  str="#{str}\n\n9.) Add any relevant aliases to the new data."
+  create_embed(event,"**How to update Botan's data while Mathoo is unavailable.**",str,0xED619A,nil)
+end
+
+def show_bot_status(event,bot)
+  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
+    event << "Current avatar: #{bot.user(543373018303299585).avatar_url}"
+    event << "Adventurer/Dragon in avatar: #{@avvie_info[0]}"
+    event << ''
+    event << "Current status:"
+    event << "[Playing] #{@avvie_info[1]}"
+    event << ''
+    event << "Reason: #{@avvie_info[2]}" unless @avvie_info[2].length.zero?
+    event << ''
+    event << "__extrachiz, she who made my default avatar__"
+    event << "<https://twitter.com/extrachiz>"
+    event << "<https://ko-fi.com/extrachiz>"
+    event << ''
+    event << "Dev's timezone: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}) | #{'0' if t.hour<10}#{t.hour}:#{'0' if t.min<10}#{t.min}"
+  else
+    create_embed(event,'',"Adventurer/Dragon in avatar: #{@avvie_info[0]}\n\nCurrent status:\n[Playing] #{@avvie_info[1]}#{"\n\nReason: #{@avvie_info[2]}" unless @avvie_info[2].length.zero?}\n\n[For a full calendar of avatars, click here](https://docs.google.com/spreadsheets/d/1j-tdpotMO_DcppRLNnT8DN8Ftau-rdQ-ZmZh5rZkZP0/edit?usp=sharing)\nextrachiz, she who made my default avatar: [Twitter](https://twitter.com/extrachiz)  \u00B7  [Ko-fi](https://ko-fi.com/extrachiz)",(t.day*7+t.month*21*256+(t.year-2000)*10*256*256),"Dev's timezone: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}) | #{'0' if t.hour<10}#{t.hour}:#{'0' if t.min<10}#{t.min}",bot.user(543373018303299585).avatar_url)
+  end
 end
 
 def add_a_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode=0)
