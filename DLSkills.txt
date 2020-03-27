@@ -715,9 +715,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) Critical Damage\example\Aura\If the user is attuned to Flame: adds `x`% to the modifier applied to critical damage.\0\y\Flame, CritDamage
 (Flame) Critical Damage\50%\Aura\If the user is attuned to Flame: adds 50% to the modifier applied to critical damage.\40\y\Flame, CritDamage
 (Flame) Critical Damage\55%\Aura\If the user is attuned to Flame: adds 55% to the modifier applied to critical damage.\40\y\Flame, CritDamage
-(Flame) Force Strike Damage\example\Aura\If the user is attuned to Flame: increases Force Strike damage by 50/60%.\0\y\Flame, ForceStrike
-(Flame) Force Strike Damage\50%\Aura\If the user is attuned to Flame: increases Force Strike damage by 50%.\80\y\Flame, ForceStrike
-(Flame) Force Strike Damage\60%\Aura\If the user is attuned to Flame: increases Force Strike damage by 60%.\100\y\Flame, ForceStrike
+(Flame) Force Strike\example\Aura\If the user is attuned to Flame: increases Force Strike damage by 50/60%.\0\y\Flame, ForceStrike
+(Flame) Force Strike\50%\Aura\If the user is attuned to Flame: increases Force Strike damage by 50%.\80\y\Flame, ForceStrike
+(Flame) Force Strike\60%\Aura\If the user is attuned to Flame: increases Force Strike damage by 60%.\100\y\Flame, ForceStrike
 (Flame) Gauge Decelerator\example\Aura\If the user is attuned to Flame: Slows the rate the mode gauge decreases by `x`%.\0\y\Flame, GaugeAccelerator
 (Flame) Gauge Decelerator\30%\Aura\If the user is attuned to Flame: Slows the rate the mode gauge decreases by 30%.\100\y\Flame, GaugeAccelerator
 (Flame) HP & Strength\example\Aura\If the user is attuned to Flame: increases strength and HP by `x`%.\0\y\HealthSkill, Strength, Flame
