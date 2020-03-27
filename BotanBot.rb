@@ -8044,16 +8044,37 @@ end
 
 bot.command([:aura]) do |event, *args|
   return nil if overlap_prevent(event)
+  if args.nil? || args.length<=0
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+    find_abilities(bot,event,args)
+    return nil
+  end
   disp_ability_data(bot,event,args,'Aura')
 end
 
 bot.command([:coability,:coabil,:coab,:co]) do |event, *args|
   return nil if overlap_prevent(event)
+  if args.nil? || args.length<=0
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+    find_abilities(bot,event,args)
+    return nil
+  end
   disp_ability_data(bot,event,args,'CoAbility')
 end
 
 bot.command([:chain]) do |event, *args|
   return nil if overlap_prevent(event)
+  if args.nil? || args.length<=0
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','aura','auras'].include?(q)}
+    find_abilities(bot,event,args)
+    return nil
+  end
   disp_ability_data(bot,event,args,'Chain')
 end
 
@@ -8238,6 +8259,18 @@ bot.command([:find,:search,:lookup]) do |event, *args|
     return nil
   elsif ['abil','ability','abilitys','abilities','abils'].include?(args[0].downcase)
     args.shift
+    find_abilities(bot,event,args)
+    return nil
+  elsif ['aura','auras'].include?(args[0].downcase)
+    args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+    find_abilities(bot,event,args,1)
+    return nil
+  elsif ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs'].include?(args[0].downcase)
+    args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+    find_abilities(bot,event,args)
+    return nil
+  elsif ['chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(args[0].downcase)
+    args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','aura','auras'].include?(q)}
     find_abilities(bot,event,args)
     return nil
   elsif ['skill','skills','skls','skl','skil','skils'].include?(args[0].downcase)
@@ -8840,21 +8873,13 @@ bot.command(:status) do |event, *args|
     event.respond 'Status set.'
     return nil
   end
-  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
-    event << "No data found.  Showing *my* status instead."
-    event << ''
-    event << "Current avatar: #{bot.user(543373018303299585).avatar_url}"
-    event << "Adventurer/Dragon in avatar: #{@avvie_info[0]}"
-    event << ''
-    event << "Current status:"
-    event << "[Playing] #{@avvie_info[1]}"
-    event << ''
-    event << "Reason: #{@avvie_info[2]}" unless @avvie_info[2].length.zero?
-    event << ''
-    event << "Dev's timezone: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}) | #{'0' if t.hour<10}#{t.hour}:#{'0' if t.min<10}#{t.min}"
-  else
-    create_embed(event,"No data found.  Showing *my* status instead.","Adventurer/Dragon in avatar: #{@avvie_info[0]}\n\nCurrent status:\n[Playing] #{@avvie_info[1]}#{"\n\nReason: #{@avvie_info[2]}" unless @avvie_info[2].length.zero?}\n\n[For a full calendar of avatars, click here](https://docs.google.com/spreadsheets/d/1j-tdpotMO_DcppRLNnT8DN8Ftau-rdQ-ZmZh5rZkZP0/edit?usp=sharing)",(t.day*7+t.month*21*256+(t.year-2000)*10*256*256),"Dev's timezone: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}) | #{'0' if t.hour<10}#{t.hour}:#{'0' if t.min<10}#{t.min}",bot.user(543373018303299585).avatar_url)
+  t=Time.now
+  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
+    puts 'reloading EliseTexts'
+    load "#{@location}devkit/BotanText.rb"
+    @last_multi_reload[1]=t
   end
+  show_bot_status(event,bot)
   return nil
 end
 
@@ -8868,23 +8893,13 @@ bot.command([:avatar, :avvie]) do |event, *args|
     event.respond 'Status set.'
     return nil
   end
-  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
-    event << "Current avatar: #{bot.user(543373018303299585).avatar_url}"
-    event << "Adventurer/Dragon in avatar: #{@avvie_info[0]}"
-    event << ''
-    event << "Current status:"
-    event << "[Playing] #{@avvie_info[1]}"
-    event << ''
-    event << "Reason: #{@avvie_info[2]}" unless @avvie_info[2].length.zero?
-    event << ''
-    event << "__extrachiz, she who made my default avatar__"
-    event << "<https://twitter.com/extrachiz>"
-    event << "<https://ko-fi.com/extrachiz>"
-    event << ''
-    event << "Dev's timezone: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}) | #{'0' if t.hour<10}#{t.hour}:#{'0' if t.min<10}#{t.min}"
-  else
-    create_embed(event,'',"Adventurer/Dragon in avatar: #{@avvie_info[0]}\n\nCurrent status:\n[Playing] #{@avvie_info[1]}#{"\n\nReason: #{@avvie_info[2]}" unless @avvie_info[2].length.zero?}\n\n[For a full calendar of avatars, click here](https://docs.google.com/spreadsheets/d/1j-tdpotMO_DcppRLNnT8DN8Ftau-rdQ-ZmZh5rZkZP0/edit?usp=sharing)\nextrachiz, she who made my default avatar: [Twitter](https://twitter.com/extrachiz)  \u00B7  [Ko-fi](https://ko-fi.com/extrachiz)",(t.day*7+t.month*21*256+(t.year-2000)*10*256*256),"Dev's timezone: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}) | #{'0' if t.hour<10}#{t.hour}:#{'0' if t.min<10}#{t.min}",bot.user(543373018303299585).avatar_url)
+  t=Time.now
+  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
+    puts 'reloading EliseTexts'
+    load "#{@location}devkit/BotanText.rb"
+    @last_multi_reload[1]=t
   end
+  show_bot_status(event,bot)
   return nil
 end
 
@@ -9006,40 +9021,13 @@ bot.command(:boop) do |event|
   return nil if overlap_prevent(event)
   return nil unless event.user.id==167657750971547648
   return nil unless event.channel.id==532083509083373583 || @shardizard==4 # only work when used by the developer
-  event.channel.send_temporary_message('Please wait...',10)
-  data_load()
-  lookout2=[]
-  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
-    lookout2=[]
-    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
-      lookout2.push(eval line)
-    end
+  t=Time.now
+  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
+    puts 'reloading EliseTexts'
+    load "#{@location}devkit/BotanText.rb"
+    @last_multi_reload[1]=t
   end
-  lookout=lookout2.reject{|q| q[2]!='Mat'}.map{|q| q[0]}
-  m=@mats.map{|q| q[8]}.join(', ').split(', ').reject{|q| lookout.include?(q)}.uniq.sort
-  str='__**Mat tags**__'
-  for i in 0...m.length
-    str=extend_message(str,m[i],event)
-  end
-  lookout=lookout2.reject{|q| q[2]!='Skill'}.map{|q| q[0]}
-  m=@askilities.reject{|q| q[2]!='Skill'}.map{|q| q[10]}.join(', ').split(', ').reject{|q| lookout.include?(q) || (q[0,1]=='E' && q[1,1].to_i.to_s==q[1,1])}.uniq.sort
-  str=extend_message(str,'__**Skill tags**__',event,2)
-  for i in 0...m.length
-    str=extend_message(str,m[i],event)
-  end
-  lookout=lookout2.reject{|q| q[2]!='Ability'}.map{|q| q[0]}
-  m=@askilities.reject{|q| !['Ability','Aura','CoAbility'].include?(q[2])}.map{|q| q[6]}.join(', ').split(', ').reject{|q| lookout.include?(q)}.uniq.sort
-  str=extend_message(str,'__**Ability tags**__',event,2)
-  for i in 0...m.length
-    str=extend_message(str,m[i],event)
-  end
-  lookout=lookout2.reject{|q| q[2]!='Banner'}.map{|q| q[0]}
-  m=@banners.map{|q| q[5]}.join(', ').split(', ').reject{|q| lookout.include?(q) || ['Flame','Water','Wind','Light','Shadow','Mixed','fake'].include?(q)}.uniq.sort
-  str=extend_message(str,'__**Banner tags**__',event,2)
-  for i in 0...m.length
-    str=extend_message(str,m[i],event)
-  end
-  event.respond str
+  disp_boop_tags()
 end
 
 bot.command(:reload, from: 167657750971547648) do |event|
@@ -9206,39 +9194,14 @@ bot.command(:reload, from: 167657750971547648) do |event|
 end
 
 bot.command(:update) do |event|
-  if ![141260274144509952,167657750971547648].include?(event.user.id)
-    t=Time.now
-    if t.month==10 && t.year==2019 && t.day>23 && t.day<30
-      event.respond "Please note that my developer is away for the weekend, and cannot do updates.  I have code that allows my data collector to update me remotely, but that may take longer than usual."
-    else
-      event.respond "This command is unavailable to you."
-    end
-    return nil
+  return nil if overlap_prevent(event)
+  t=Time.now
+  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
+    puts 'reloading EliseTexts'
+    load "#{@location}devkit/BotanText.rb"
+    @last_multi_reload[1]=t
   end
-  str="1.) Edit [the sheet](https://docs.google.com/spreadsheets/d/1WY83FtDC9ydd2ME-TfGgHfg7Pi9KzUnSq2rfDjkJJNM/edit#gid=246276672) as usual."
-  str="#{str}\n\n2.) If the edits made were to the \"Skills\", \"Abil./Aura\", or \"CoAb.\" sheets, switch to the \"Askillities\" sheet."
-  str="#{str}\n\n3.) Wait for the formulae to finish loading, then grab the BotanBot data column of the sheet you edited.  I generally highlight the lowest entry and CTRL+SHIFT+(up)."
-  str="#{str}\n\n4.) Copy the selection from step 3 to a text file, with the following names based on sheet:"
-  str="#{str}\n- *Adv.* should be copied to **DLAdventurers.txt**"
-  str="#{str}\n- *Drg.* should be copied to **DLDragons.txt**"
-  str="#{str}\n- *Prints* should be copied to **DLWyrmprints.txt**"
-  str="#{str}\n- *Wep.* should be copied to **DLWeapons.txt**"
-  str="#{str}\n- *Enemies* should be copied to **DLEnemies.txt**"
-  str="#{str}\n- *Gauntlet* should be copied to **DLGauntlet.txt**"
-  str="#{str}\n- *NPCs* should be copied to **DL_NPCs.txt**"
-  str="#{str}\n- *Statuses* should be copied to **DLStatuses.txt**"
-  str="#{str}\n- ~~*Void* will need to be edited manually by me.~~"
-  str="#{str}\n- *Banners* should be copied to **DLBanners.txt**"
-  str="#{str}\n- *Facilities* should be copied to **DLFacilities.txt**"
-  str="#{str}\n- *Mats* should be copied to **DLMaterials.txt**"
-  str="#{str}\n- *Askillities* should be copied to **DLSkills.txt**"
-  str="#{str}\n- *Stickers* should be copied to **DLEmotes.txt**"
-  str="#{str}\n\n5.) Upload the text file to [the GitHub page here](https://github.com/Rot8erConeX/BotanBot).  You might need to make a GitHub account to do so."
-  str="#{str}\n\n6.) Wait probably five minutes for the file to settle on GitHub's servers, then use the command `DL!reload` in either my debug server, or in the bot spam channel of Heretic's Lab."
-  str="#{str}\n\n7.) Type the number 2 to select reloading data based on GitHub files."
-  str="#{str}\n\n8.) Double-check that the edited data works.  It is important to remember that I will not be there to guide you to wherever any problems might be based on error codes."
-  str="#{str}\n\n9.) Add any relevant aliases to the new data."
-  create_embed(event,"**How to update Botan's data while Mathoo is unavailable.**",str,0xED619A,nil)
+  disp_update_list()
 end
 
 bot.server_create do |event|
@@ -9437,6 +9400,15 @@ bot.mention do |event|
       find_banners(bot,event,args)
     elsif ['abil','ability','abilitys','abilities','abils'].include?(args[0].downcase)
       args.shift
+      find_abilities(bot,event,args)
+    elsif ['aura','auras'].include?(args[0].downcase)
+      args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+      find_abilities(bot,event,args,1)
+    elsif ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs'].include?(args[0].downcase)
+      args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+      find_abilities(bot,event,args)
+    elsif ['chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(args[0].downcase)
+      args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','aura','auras'].include?(q)}
       find_abilities(bot,event,args)
     elsif ['skill','skills','skls','skl','skil','skils'].include?(args[0].downcase)
       args.shift
@@ -9658,7 +9630,33 @@ bot.mention do |event|
   elsif ['aura'].include?(args[0].downcase)
     m=false
     args.shift
-    disp_ability_data(bot,event,args,true)
+    if ['find','search'].include?(args[0].downcase)
+      args.shift
+      args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+      find_abilities(bot,event,args)
+    else
+      disp_ability_data(bot,event,args,'Aura')
+    end
+  elsif ['coabil','coability','coab'].include?(args[0].downcase)
+    m=false
+    args.shift
+    if ['find','search'].include?(args[0].downcase)
+      args.shift
+      args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+      find_abilities(bot,event,args)
+    else
+      disp_ability_data(bot,event,args,'Aura')
+    end
+  elsif ['chain'].include?(args[0].downcase)
+    m=false
+    args.shift
+    if ['find','search'].include?(args[0].downcase)
+      args.shift
+      args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','aura','auras'].include?(q)}
+      find_abilities(bot,event,args)
+    else
+      disp_ability_data(bot,event,args,'Aura')
+    end
   elsif ['ability','abil'].include?(args[0].downcase)
     m=false
     args.shift
