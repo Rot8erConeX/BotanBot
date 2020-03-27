@@ -82,7 +82,7 @@ Arctos Monument\31\-\Adventurer, Event Altar\3x3\1\5200\Motivational Log, 1100
 Arctos Monument\32\-\Adventurer, Event Altar\3x3\1\5400\Motivational Log, 1200
 Arctos Monument\33\-\Adventurer, Event Altar\3x3\1\5600\Motivational Log, 1300
 Arctos Monument\34\-\Adventurer, Event Altar\3x3\1\5800\Motivational Log, 1400
-Arctos Monument\45\-\Adventurer, Event Altar\3x3\1\6000\Motivational Log, 1500
+Arctos Monument\35\-\Adventurer, Event Altar\3x3\1\6000\Motivational Log, 1500
 Aqua Slime Statue\1\The Aqua Slime Statue boosts the stats of water-attuned adventurers. It can be obtained from the Void Battles Treasure Trade for Void Seed x1.\Adventurer, Altar\2x2\1\0
 Aqua Slime Statue\2\-\Adventurer, Altar\2x2\1\5000\Iron Ore, 10
 Aqua Slime Statue\3\-\Adventurer, Altar\2x2\1\10000\Iron Ore, 15;; Old Cloth, 2
@@ -1249,6 +1249,11 @@ Wind Shrine\27\-\Adventurer, Event Altar\3x3\1\4400\Windwhistle Grass, 700
 Wind Shrine\28\-\Adventurer, Event Altar\3x3\1\4600\Windwhistle Grass, 800
 Wind Shrine\29\-\Adventurer, Event Altar\3x3\1\4800\Windwhistle Grass, 900
 Wind Shrine\30\-\Adventurer, Event Altar\3x3\1\5000\Windwhistle Grass, 1000
+Wind Shrine\31\-\Adventurer, Event Altar\3x3\1\5200\Windwhistle Grass, 1100
+Wind Shrine\32\-\Adventurer, Event Altar\3x3\1\5400\Windwhistle Grass, 1200
+Wind Shrine\33\-\Adventurer, Event Altar\3x3\1\5600\Windwhistle Grass, 1300
+Wind Shrine\34\-\Adventurer, Event Altar\3x3\1\5800\Windwhistle Grass, 1400
+Wind Shrine\35\-\Adventurer, Event Altar\3x3\1\6000\Windwhistle Grass, 1500
 Wishmill\-\A giant toy windmill. The wind that powers it might contain someone's wishes, too.\Decorative\1x1\4\0
 Yuletree\1\A festive tree erected to serve as the centerpiece of the Dragonyule party, and to bring warmth to everyone's hearts. Use it to boost the stats of water-attuned adventurers.\Adventurer, Event Altar\3x3\1\0
 Yuletree\2\-\Adventurer, Event Altar\3x3\1\100\Astral Ornament, 3
