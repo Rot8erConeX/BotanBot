@@ -1269,7 +1269,7 @@ end
 def find_ability(name,event,fullname=false,ext=false)
   data_load()
   name=normalize(name)
-  romanums=['O','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV',
+  romanums=['Ox0','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV',
             'XXV','XXVI','XXVII','XXVIII','XXIX','XXX','XXXI','XXXII','XXXIII','XXXIV','XXXV','XXXVI','XXXVII','XXXVIII','XXXIX','XL','XLI','XLII','XLII',
             'XLIII','XLIV','XLV','XLVI','XLVII','XLVIII','XLIX','L']
   name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
@@ -3466,7 +3466,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
   k=k.reject{|q| q[2]=='Aura'} if k.is_a?(Array) && k.map{|q| q[2]}.uniq.length>1
   k=k[0] if k[0].is_a?(Array) && k.length<=1
   data_load()
-  if k[0].is_a?(Array) && k.length>1
+  if k[0].is_a?(Array) && k.map{|q| q[1]}.uniq.length>1
     m=@askilities.reject{|q| q[0]!=k[0][0] || !k.map{|q2| q2[2]}.include?(q[2])}
     k=m.map{|q| q}
   end
@@ -3714,14 +3714,6 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
           end
         end
         str="#{str}\n*Enemies:* #{m2.join(', ')}" if m2.length>0
-        f=@abilimits.map{|q| q.split(" \u2192 ")}
-        if f.map{|q| q[0]}.include?(k[0][0])
-          str="#{str}\n\n**Per-adventurer wyrmprint stack limit:** #{f[f.find_index{|q| q[0]==k[0][0]}][1]}"
-        elsif ['Flame Res','Water Res','Wind Res','Light Res','Shadow Res'].include?(k[0][0]) && f.map{|q| q[0]}.include?('Element Res')
-          str="#{str}\n\n**Per-adventurer wyrmprint stack limit:** #{f[f.find_index{|q| q[0]=='Element Res'}][1]}"
-        elsif "Dragon's Claws"==k[0][0]
-          str="#{str}\n\n**You may instead be searching for the skill `Dragon Claw`, which belongs to Gala Mym<:Rarity_5:532086056737177600><:Element_Flame:532106087952810005><:Weapon_Lance:532106114792423448><:Type_Attack:532107867520630784>.**"
-        end
         if k3.length>0
           m=k3[0]
           str="#{str}\n\n__**Co-Ability**__"
@@ -3734,13 +3726,13 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
             advemo=element_emote(adv[i][2][1],bot,adv[i][12])
             advemo=element_emote(adv[i][2][1],bot) if ignorefeh
             for i2 in 0...mx.length
-              m2.push("#{advemo}#{adv[i][0]} (C#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
+              m2.push("#{advemo}#{adv[i][0]} (Co#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
             end
           end
           str="#{str}\n*Adventurers:* #{m2.join(', ')}" if m2.length>0
         end
         if k4.length>0
-          m=k3[0]
+          m=k4[0]
           str="#{str}\n\n__**Chain Co-Ability**__"
           str="#{str}\n*Effect:* #{m[3]}" unless m[5]=='n'
           m2=[]
@@ -3752,13 +3744,21 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
               advemo=element_emote(adv[i][2][1],bot,adv[i][12])
               advemo=element_emote(adv[i][2][1],bot) if ignorefeh
               for i2 in 0...mx.length
-                m2.push("#{advemo}#{adv[i][0]} (C#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
+                m2.push("#{advemo}#{adv[i][0]} (Ch#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
               end
             end
           end
           str="#{str}\n*Adventurers:* #{m2.join(', ')}" if m2.length>0
         end
         ftr='The numbers in parenthesis indicate which CoAbility stage the adventurer needs to have.'
+        f=@abilimits.map{|q| q.split(" \u2192 ")}
+        if f.map{|q| q[0]}.include?(k[0][0])
+          str="#{str}\n\n**Per-adventurer wyrmprint stack limit:** #{f[f.find_index{|q| q[0]==k[0][0]}][1]}"
+        elsif ['Flame Res','Water Res','Wind Res','Light Res','Shadow Res'].include?(k[0][0]) && f.map{|q| q[0]}.include?('Element Res')
+          str="#{str}\n\n**Per-adventurer wyrmprint stack limit:** #{f[f.find_index{|q| q[0]=='Element Res'}][1]}"
+        elsif "Dragon's Claws"==k[0][0]
+          str="#{str}\n\n**You may instead be searching for the skill `Dragon Claw`, which belongs to Gala Mym<:Rarity_5:532086056737177600><:Element_Flame:532106087952810005><:Weapon_Lance:532106114792423448><:Type_Attack:532107867520630784>.**"
+        end
       else
         str=""
         for i in 0...k2.length
@@ -3838,7 +3838,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
           end
         end
         str="#{str}\n\n**CoAbility Levels:** #{k3.map{|q| q[1]}.join(', ')}" if k3.length>0
-        str="#{str}\n**Chain CoAbility Levels:** #{k4.map{|q| q[1]}.join(', ')}" if k4.length>0
+        str="#{str}\n**Chain CoAbility Levels:** #{k4.reject{|q| q[1]=='example'}.map{|q| q[1]}.join(', ')}" if k4.length>0
         f=@abilimits.map{|q| q.split(" \u2192 ")}
         if f.map{|q| q[0]}.include?(k[0][0])
           str="#{str}\n**Per-adventurer wyrmprint stack limit:** #{f[f.find_index{|q| q[0]==k[0][0]}][1]}"
@@ -4382,7 +4382,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         advemo=element_emote(adv[i][2][1],bot,adv[i][12])
         advemo=element_emote(adv[i][2][1],bot) if ignorefeh
         for i2 in 0...mx.length
-          m2.push("#{advemo}#{adv[i][0]} (C#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
+          m2.push("#{advemo}#{adv[i][0]} (Co#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
         end
       end
       if m2.length>0
@@ -4406,7 +4406,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
           advemo=element_emote(adv[i][2][1],bot,adv[i][12])
           advemo=element_emote(adv[i][2][1],bot) if ignorefeh
           for i2 in 0...mx.length
-            m2.push("#{advemo}#{adv[i][0]} (C#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
+            m2.push("#{advemo}#{adv[i][0]} (Ch#{["\u2081","\u2082","\u2083","\u2084","\u2085"][i2]})") if checkstr==mx[i2]
           end
         end
       end
