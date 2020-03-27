@@ -1460,9 +1460,9 @@ Divinity Penetrator\-\Ability\Ignores the effects of divine protection when atta
 Draconic Charge\example\Ability\Fills `x`% of the user's dragon gauge when their HP drops to 30% (once per quest).\0\y\Last, ShapeshiftPrep
 Draconic Charge\I\Ability\Fills 25% of the user's dragon gauge when their HP drops to 30% (once per quest).\80\y\Last, ShapeshiftPrep
 Draconic Charge\II\Ability\Fills 50% of the user's dragon gauge when their HP drops to 30% (once per quest).\100\y\Last, ShapeshiftPrep
-Draconic Dream\example\Ability\Increases defense while shapeshifted by `x`%. When the "Dream Boost" effect is active, adds `x`% to the modifier applied to damage when in dragon form.\0\y\Defense, DragonDamage
-Draconic Dream\80/15%\Ability\Increases defense while shapeshifted by 80%. When the "Dream Boost" effect is active, adds 15% to the modifier applied to damage when in dragon form.\80\y\Defense, DragonDamage
-Draconic Dream\100/20%\Ability\Increases defense while shapeshifted by 100%. When the "Dream Boost" effect is active, adds 20% to the modifier applied to damage when in dragon form.\120\y\Defense, DragonDamage
+Draconic Dream\example\Ability\Increases defense while shapeshifted by 80/100%. When the "Dream Boost" effect is active, adds 15/20% to the modifier applied to damage when in dragon form.\0\y\Defense, DragonDamage
+Draconic Dream\I\Ability\Increases defense while shapeshifted by 80%. When the "Dream Boost" effect is active, adds 15% to the modifier applied to damage when in dragon form.\80\y\Defense, DragonDamage
+Draconic Dream\II\Ability\Increases defense while shapeshifted by 100%. When the "Dream Boost" effect is active, adds 20% to the modifier applied to damage when in dragon form.\120\y\Defense, DragonDamage
 Dragon Damage\example\Ability\Adds `x`% to the modifier applied to damage when in dragon form\0\y\DragonDamage
 Dragon Damage\6%\Ability\Adds 6% to the modifier applied to damage when in dragon form\80\y\DragonDamage
 Dragon Damage\8%\Ability\Adds 8% to the modifier applied to damage when in dragon form\90\y\DragonDamage
