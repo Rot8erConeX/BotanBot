@@ -1485,6 +1485,10 @@ Dragon's Claws\I\Ability\Each shapeshift increases strength for the remainder of
 Dragon's Claws\II\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 5% in total. On second shapeshift strength is increased by 13% in total. On third shapeshift strength is increased by 25% in total.\80\y\Strength, InCombat
 Dragon's Claws\III\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 6% in total. On second shapeshift strength is increased by 15% in total. On third shapeshift strength is increased by 30% in total.\100\y\Strength, InCombat
 Dragon's Claws\IV\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 10% in total. On second shapeshift strength is increased by 25% in total. On third shapeshift strength is increased by 40% in total.\120\y\Strength, InCombat
+Dragon's Skill\example\Ability\Each shapeshift increases attack skill damage by `x`% (up to three times per quest).\0\y\SkillDamage, InCombat
+Dragon's Skill\4%\Ability\Each shapeshift increases attack skill damage by 4% (up to three times per quest).\60\y\SkillDamage, InCombat
+Dragon's Skill\6%\Ability\Each shapeshift increases attack skill damage by 6% (up to three times per quest).\80\y\SkillDamage, InCombat
+Dragon's Skill\8%\Ability\Each shapeshift increases attack skill damage by 8% (up to three times per quest).\100\y\SkillDamage, InCombat
 Dull\-\Ability\The afflicted adventurer's weapon will be dulled, lowering their strength by 40%.\-1\y\Dull, Enemy
 Dull Res\-\Ability\completely prevents dulling.\50\y\DullRes, Resistance
 Ebon Chimera's Bane\example\Ability\Increases damage to the Ebon Chimera by `x`%.\0\y\Bane
