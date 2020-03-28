@@ -3280,6 +3280,7 @@ def disp_adv_chain(event,args,bot)
       str=first_sub(str,k[1],'')
     end
   end
+  args2=str.split(' ')
   k3=[]
   k4=[]
   k5=[]
@@ -3294,7 +3295,7 @@ def disp_adv_chain(event,args,bot)
         limit=true
         str=extend_message(str,"~~#{k2[i][0]}#{adv_emoji(k2[i],bot,true)}~~ - team limit reached",event)
       end
-    elsif k3.include?(k2[i][9][0])
+    elsif k3.include?(k2[i][9][0]) && !has_any?(['altteam','alteam'],args2)
       str=extend_message(str,"~~#{k2[i][0]}#{adv_emoji(k2[i],bot,true)}~~ - #{k2[i][9][0]} already on team",event)
     else
       str=extend_message(str,"**#{k2[i][0]}#{adv_emoji(k2[i],bot,true)}**",event)
@@ -3396,7 +3397,7 @@ def disp_adv_chain(event,args,bot)
           m4=m4.inject(0){|sum,x| sum + x }
           m4+=m2
           m5=m[i][0].split(') ')[0].gsub('(','')
-          xx="#{xx}\n  \u00B7  For #{m5} adventurers, this stacks with #{m3} for a total buff of"
+          xx="#{xx}\n  \u00B7  For #{m5} adventurers, this stacks with *#{m3}* for a total buff of"
           if m[i][2]=='Percent'
             xx="#{xx} **+#{m4}%**"
           elsif m[i][2]=='Roman'
