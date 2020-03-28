@@ -65,6 +65,8 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
     create_embed(event,"**#{command.downcase}** __toggle__","Responds with whether or not the channel the command is invoked in is one in which I can send extremely long replies.\n\nIf the channel does not fill one of the many molds for acceptable channels, server mods can toggle the ability with the words \"on\", \"semi\", and \"off\".",0xCE456B)
   elsif ['affliction','ailment'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows what the status named `name` does.",0xCE456B)
+  elsif ['team'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __\*names__","Creates a team out of the adventurers listed in `names`, and then calculates the totals of that team's coabilities and chaincoabilities.",0xCE456B)
   elsif ['avvie','avatar'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}**","Shows my current avatar, status, and reason for such.\n\nWhen used by my developer with a message following it, sets my status to that message.",0xCE456B)
   elsif ['status'].include?(command.downcase)
@@ -270,6 +272,7 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
     str="#{str}\n`next` - to show data on cyclical events (*also `schedule`*)"
     str="#{str}\n`art` __target__ - to show an adventurer's, dragon's, or wyrmprint's art"
     str="#{str}\n`sp` __types__ - shows SP gains for weapon types"
+    str="#{str}\n`team` __\*names__ - shows collapsed coabilities for teams"
     str="#{str}\n`damage` __types__ - shows damage modifiers for weapon types"
     create_embed([event,x],"Global Command Prefixes: `DL!` `DL?`#{"\nServer Command Prefix: `#{@prefixes[event.server.id]}`" if !event.server.nil? && !@prefixes[event.server.id].nil? && @prefixes[event.server.id].length>0}\nYou can also use `DL!help CommandName` to learn more on a particular command.\n__**Botan Bot help**__",str,0xCE456B)
     str="__**Meta Data**__"
