@@ -3381,13 +3381,32 @@ def disp_adv_chain(event,args,bot)
       x=''
       x='**' if m2.length>1
       m2=m2.inject(0){|sum,x| sum + x }
+      xx=''
       if m[i][2]=='Percent'
-        m[i]="#{m[i][0]} #{x}#{m2}%#{x}"
+        xx="#{m[i][0]} #{x}+#{m2}%#{x}"
       elsif m[i][2]=='Roman'
-        m[i]="#{m[i][0]} #{x}#{romanums[m2]}#{x}"
+        xx="#{m[i][0]} #{x}#{romanums[m2]}#{x}"
       else
-        m[i]="#{m[i][0]} #{x}#{m2}#{x}"
+        xx="#{m[i][0]} #{x}#{m2}#{x}"
       end
+      if m[i][0][0]=='('
+        m3=m[i][0].split(') ')[-1]
+        m4=k5.reject{|q| q[0]!=m3 || q[2]!=m[i][2]}.map{|q| q[1]}
+        unless m4.length<=0
+          m4=m4.inject(0){|sum,x| sum + x }
+          m4+=m2
+          m5=m[i][0].split(') ')[0].gsub('(','')
+          xx="#{xx}\n  \u00B7  For #{m5} adventurers, this stacks with #{m3} for a total buff of"
+          if m[i][2]=='Percent'
+            xx="#{xx} **+#{m4}%**"
+          elsif m[i][2]=='Roman'
+            xx="#{xx} **#{romanums[m4]}**"
+          else
+            xx="#{xx} **#{m4}**"
+          end
+        end
+      end
+      m[i]="#{xx}"
     end
   end
   m.sort!
