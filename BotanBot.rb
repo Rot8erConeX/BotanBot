@@ -153,7 +153,7 @@ def all_commands(include_nil=false,permissions=-1)
      'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias','dmg',
      'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','limit',
      'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol','reload','update','mats','materials','spiral','node','nodes',
-     'damage','coability','coabil','coab','chain']
+     'damage','coability','coabil','coab','chain','team']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -540,26 +540,27 @@ def find_adventurer(name,event,fullname=false,skipnpcs=false)
   data_load()
   name=normalize(name)
   name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  adv=@adventurers.map{|q| q}
   return [] if name.length<2
   return [] if (find_npc(name,event,true).length>0 || name.downcase=='mym') && skipnpcs
-  k=@adventurers.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
-  return @adventurers[k] unless k.nil?
+  k=adv.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
+  return adv[k] unless k.nil?
   nicknames_load()
   alz=@aliases.reject{|q| q[0]!='Adventurer'}.map{|q| [q[1],q[2],q[3]]}
   g=0
   g=event.server.id unless event.server.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
-  return @adventurers[@adventurers.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return adv[adv.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
-  return @adventurers[@adventurers.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return adv[adv.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return [] if fullname || name.length<=2
   return [] if find_npc(name,event).length>0 && skipnpcs
-  k=@adventurers.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
-  return @adventurers[k] unless k.nil?
+  k=adv.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
+  return adv[k] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
-  return @adventurers[@adventurers.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return adv[adv.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
-  return @adventurers[@adventurers.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return adv[adv.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
   return []
 end
 
@@ -5082,6 +5083,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
     fltr.push('NonLimited') if ['summon','summons','summonable','summonables','nonlimited','non-limited'].include?(args[i].downcase)
     fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
     fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
+    fltr.push('Former') if ['former','formerlimited'].include?(args[i].downcase)
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
     crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
@@ -5181,6 +5183,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
     if fltr.include?('NonLimited')
       for i in 0...@max_rarity[0]
         m.push("#{i+1}")
+        m.push("#{i+1}f")
       end
       emo.push('(p)') if fltr.length<2
     end
@@ -5189,6 +5192,12 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
         m.push("#{i+1}c")
       end
       emo.push('(c)') if fltr.length<2
+    end
+    if fltr.include?('Former')
+      for i in 0...@max_rarity[0]
+        m.push("#{i+1}f")
+      end
+      emo.push('(f)') if fltr.length<2
     end
     search.push("*Filters*: #{fltr.join(', ')}")
     if fltr.include?('Limited')
@@ -5353,6 +5362,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
     fltr.push('NonLimited') if ['summon','summons','summonable','summonables','nonlimited','non-limited'].include?(args[i].downcase)
     fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
     fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
+    fltr.push('Former') if ['former','formerlimited'].include?(args[i].downcase)
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
     crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
@@ -5448,6 +5458,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
     if fltr.include?('NonLimited')
       for i in 0...@max_rarity[1]
         m.push("#{i+1}")
+        m.push("#{i+1}f")
       end
       emo.push('(p)') if fltr.length<2
     end
@@ -5456,6 +5467,12 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
         m.push("#{i+1}c")
       end
       emo.push('(c)') if fltr.length<2
+    end
+    if fltr.include?('Former')
+      for i in 0...@max_rarity[0]
+        m.push("#{i+1}f")
+      end
+      emo.push('(f)') if fltr.length<2
     end
     search.push("*Filters*: #{fltr.join(', ')}")
     if fltr.include?('Limited')
@@ -5580,6 +5597,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
     fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
     fltr.push('Treasure Trade') if ['treasure','trade','trades','treasures','treasuretrade','treasuretrades'].include?(args[i].downcase)
     fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
+    fltr.push('Former') if ['former','formerlimited'].include?(args[i].downcase)
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
     crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
@@ -5644,6 +5662,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
     if fltr.include?('NonLimited')
       for i in 0...@max_rarity[2]
         m.push("#{i+1}")
+        m.push("#{i+1}f")
       end
       emo.push('(u)') if fltr.length<2
     end
@@ -5664,6 +5683,12 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
         m.push("#{i+1}p")
       end
       emo.push('(p)') if fltr.length<2
+    end
+    if fltr.include?('Former')
+      for i in 0...@max_rarity[0]
+        m.push("#{i+1}f")
+      end
+      emo.push('(f)') if fltr.length<2
     end
     search.push("*Filters*: #{fltr.join(', ')}")
     if fltr.include?('Limited')
@@ -5860,6 +5885,7 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       fltr.push('Paid') if ['payment','paid','paying','whale'].include?(args[i].downcase)
       fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
       fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
+      fltr.push('Former') if ['former','formerlimited'].include?(args[i].downcase)
       crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
       crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
       crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
@@ -6004,6 +6030,12 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
         m.push("#{i+1}c")
       end
       emo.push('(clb)') if fltr.length<2
+    end
+    if fltr.include?('Former')
+      for i in 0...@max_rarity[0]
+        m.push("#{i+1}f")
+      end
+      emo.push('(f)') if fltr.length<2
     end
     search.push("*Filters*: #{fltr.map{|q| q.gsub('Void','<:Element_Void:548467446734913536> Void')}.join(', ')}")
     if fltr.include?('Limited')
@@ -6716,6 +6748,7 @@ def find_abilities(bot,event,args=nil)
   m=char.map{|q| q}
   char=[]
   for i in 0...subchar.length
+    puts subchar[i].to_s
     k=m.reject{|q| q[1]=='example' || q[0]!=subchar[i][0] || q[2]!=subchar[i][1]}
     ccc='/'
     ccc=', ' unless k.find_index{|q| q[1].include?('/')}.nil?
@@ -6725,7 +6758,7 @@ def find_abilities(bot,event,args=nil)
     end
     name="#{k[0][0]} #{'+' if k[0][1].include?('%')}#{k.map{|q| q[1]}.join(ccc)}"
     name="#{k.map{|q| q[1]}.join(ccc)} #{k[0][0]}" if k[0][0][0,7]=='Hits = '
-    name="#{k[0][0]}" if k[0][1]=='-'
+    name="#{k[0][0]}"
     char.push([name,k[0][2]])
   end
   flds=nil
@@ -7895,6 +7928,22 @@ def disp_adv_mats(event,args,bot,forcespiral=false)
     @last_multi_reload[1]=t
   end
   return adv_mats(event,args,bot,forcespiral)
+end
+
+def adv_chain_list(event,args,bot)
+  t=Time.now
+  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
+    puts 'reloading BotanText'
+    load "#{@location}devkit/BotanText.rb"
+    @last_multi_reload[1]=t
+  end
+  return disp_adv_chain(event,args,bot)
+end
+
+bot.command([:team]) do |event, *args|
+  return nil if overlap_prevent(event)
+  adv_chain_list(event,args,bot)
+  return nil
 end
 
 bot.command([:spiral]) do |event, *args|
