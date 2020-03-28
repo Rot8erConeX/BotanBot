@@ -2403,7 +2403,7 @@ def adv_mats(event,args,bot,forcespiral=false)
       f2.push([5,"#{f[8] if nums[0]<50}#{"\n\n__*Mana Spiral unlock*__\n#{f[9]}" if mana && nums[1]<=49}"]) if nums[0]<=50 && nums[1]>=50
       xcolor=element_color(elem)
       disp="__**#{name}**'s Mana Spiral mats#{" (#{nums_mean})" if nums_mean.length>0}__"
-      if f2.length>0 && !forcespiral
+      if f2.length>0 && !f2[0][1].nil? && f2[0][1].length>0 && !forcespiral
         if f2[0][1].length<=0
         elsif f2[0][1].split("\n").reject{|q| q.length<=0}[0].include?('unbind')
           f2[1][1]="#{f2[0][1]}\n\n#{f2[1][1]}"
@@ -3255,6 +3255,145 @@ def disp_update_list()
   str="#{str}\n\n8.) Double-check that the edited data works.  It is important to remember that I will not be there to guide you to wherever any problems might be based on error codes."
   str="#{str}\n\n9.) Add any relevant aliases to the new data."
   create_embed(event,"**How to update Botan's data while Mathoo is unavailable.**",str,0xED619A,nil)
+end
+
+def disp_adv_chain(event,args,bot)
+  data_load()
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_adventurer,args.join(' '),event,false,false,true)
+  if k.nil? || k.length<=0
+    event.respond 'No matches found.'
+    return nil
+  end
+  event.channel.send_temporary_message('Calculating data, please wait...',2)
+  str=args.join(' ')
+  k2=[]
+  for i in 0...args.length
+    args2=str.split(' ')
+    k=find_data_ex(:find_adventurer,args2.join(' '),event,false,false,true)
+    unless k.nil? || k.length<=0
+      k2.push(k[0])
+      str=first_sub(str,k[1],'')
+    end
+  end
+  k3=[]
+  k4=[]
+  k5=[]
+  k6=[]
+  str='__***Team***__'
+  limit=false
+  for i in 0...k2.length
+    if k4.length>=4
+      if limit
+        str=extend_message(str,"~~#{k2[i][0]}#{adv_emoji(k2[i],bot,true)}~~",event)
+      else
+        limit=true
+        str=extend_message(str,"~~#{k2[i][0]}#{adv_emoji(k2[i],bot,true)}~~ - team limit reached",event)
+      end
+    elsif k3.include?(k2[i][9][0])
+      str=extend_message(str,"~~#{k2[i][0]}#{adv_emoji(k2[i],bot,true)}~~ - #{k2[i][9][0]} already on team",event)
+    else
+      str=extend_message(str,"**#{k2[i][0]}#{adv_emoji(k2[i],bot,true)}**",event)
+      k3.push(k2[i][9][0])
+      k4.push(k2[i][7][0]) # coability
+      k5.push(k2[i][7][1]) # chain coability
+      k6.push(k2[i][2]) # data
+    end
+  end
+  romanums=['Ox0','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV',
+            'XXV','XXVI','XXVII','XXVIII','XXIX','XXX','XXXI','XXXII','XXXIII','XXXIV','XXXV','XXXVI','XXXVII','XXXVIII','XXXIX','XL','XLI','XLII','XLII',
+            'XLIII','XLIV','XLV','XLVI','XLVII','XLVIII','XLIX','L']
+  k4=k4.map{|q| q.split(' & ')}.flatten
+  for i in 0...k4.length
+    k4[i]=k4[i].gsub("(#{k6[0][1]}) ",'') if k6.map{|q| q[1]}.uniq.length<=1
+    k4[i]=k4[i].gsub("(#{k6[0][2]}) ",'') if k6.map{|q| q[2]}.uniq.length<=1
+    k4[i]=k4[i].split(' ')
+    if k4[i][-1].include?('/')
+      k4[i][-1]=k4[i][-1].split('/')[-1].gsub('+','')
+      if k4[i][-1].include?('%')
+        k4[i]=[k4[i][0,k4[i].length-1].join(' '),k4[i][-1].gsub('%','').to_i,'Percent']
+      elsif !romanums.find_index{|q| q==k4[i][-1]}.nil?
+        k4[i]=[k4[i][0,k4[i].length-1].join(' '),romanums.find_index{|q| q==k4[i][-1]},'Roman']
+      elsif k4[i][-1].to_i.to_s==k4[i][-1]
+        k4[i]=[k4[i][0,k4[i].length-1].join(' '),k4[i][-1].to_i,'Number']
+      else
+        k4[i]=[k4[i].join(' '),nil,'']
+      end
+    elsif k4[i][-1].include?('%')
+      k4[i]=[k4[i][0,k4[i].length-1].join(' '),k4[i][-1].gsub('%','').gsub('+','').to_i,'Percent']
+    elsif !romanums.find_index{|q| q==k4[i][-1]}.nil?
+      k4[i]=[k4[i][0,k4[i].length-1].join(' '),romanums.find_index{|q| q==k4[i][-1]},'Roman']
+    elsif k4[i][-1].to_i.to_s==k4[i][-1]
+      k4[i]=[k4[i][0,k4[i].length-1].join(' '),k4[i][-1].to_i,'Number']
+    else
+      k4[i]=[k4[i].join(' '),nil,'']
+    end
+  end
+  k5=k5.map{|q| q.split(' & ')}.flatten
+  for i in 0...k5.length
+    k5[i]=k5[i].gsub("(#{k6[0][1]}) ",'') if k6.map{|q| q[1]}.uniq.length<=1
+    k5[i]=k5[i].gsub("(#{k6[0][2]}) ",'') if k6.map{|q| q[2]}.uniq.length<=1
+    k5[i]=k5[i].split(' ')
+    if k5[i][-1].include?('/')
+      k5[i][-1]=k5[i][-1].split('/')[-1].gsub('+','')
+      if k5[i][-1].include?('%')
+        k5[i]=[k5[i][0,k5[i].length-1].join(' '),k5[i][-1].gsub('%','').to_i,'Percent']
+      elsif !romanums.find_index{|q| q==k5[i][-1]}.nil?
+        k5[i]=[k5[i][0,k5[i].length-1].join(' '),romanums.find_index{|q| q==k5[i][-1]},'Roman']
+      elsif k5[i][-1].to_i.to_s==k5[i][-1]
+        k5[i]=[k5[i][0,k5[i].length-1].join(' '),k5[i][-1].to_i,'Number']
+      else
+        k5[i]=[k5[i].join(' '),nil,'']
+      end
+    elsif k5[i][-1].include?('%')
+      k5[i]=[k5[i][0,k5[i].length-1].join(' '),k5[i][-1].gsub('%','').gsub('+','').to_i,'Percent']
+    elsif !romanums.find_index{|q| q==k5[i][-1]}.nil?
+      k5[i]=[k5[i][0,k5[i].length-1].join(' '),romanums.find_index{|q| q==k5[i][-1]},'Roman']
+    elsif k5[i][-1].to_i.to_s==k5[i][-1]
+      k5[i]=[k5[i][0,k5[i].length-1].join(' '),k5[i][-1].to_i,'Number']
+    else
+      k5[i]=[k5[i].join(' '),nil,'']
+    end
+  end
+  str2=[]
+  str2.push(k6[0][1]) if k6.map{|q| q[1]}.uniq.length<=1
+  str2.push(k6[0][2]) if k6.map{|q| q[2]}.uniq.length<=1
+  str2.push(k6[0][0]) if k6.map{|q| q[0]}.uniq.length<=1
+  str=extend_message(str,"**#{str2.join(' ')} Synergy**",event) if str2.length>0 && k6.length>1
+  m=k4.map{|q| [q[0],0,q[2]]}.uniq
+  for i in 0...m.length
+    if m[i][2].length<=0
+      k5.push([m[i][0],nil,m[i][2]])
+    else
+      k5.push([m[i][0],k4.reject{|q| q[0]!=m[i][0] || q[2]!=m[i][2]}.map{|q| q[1]}.max,m[i][2]])
+    end
+  end
+  m=k5.map{|q| [q[0],0,q[2]]}.uniq
+  for i in 0...m.length
+    if m[i][2].length<=0
+      m[i]=m[i][0]
+    else
+      m2=k5.reject{|q| q[0]!=m[i][0] || q[2]!=m[i][2]}.map{|q| q[1]}
+      x=''
+      x='**' if m2.length>1
+      m2=m2.inject(0){|sum,x| sum + x }
+      if m[i][2]=='Percent'
+        m[i]="#{m[i][0]} #{x}#{m2}%#{x}"
+      elsif m[i][2]=='Roman'
+        m[i]="#{m[i][0]} #{x}#{romanums[m2]}#{x}"
+      else
+        m[i]="#{m[i][0]} #{x}#{m2}#{x}"
+      end
+    end
+  end
+  m.sort!
+  str=extend_message(str,'__***Calculated Chain Abilities***__',event,2)
+  for i in 0...m.length
+    str=extend_message(str,m[i],event)
+  end
+  event.respond str
+  return nil
 end
 
 def show_bot_status(event,bot)
