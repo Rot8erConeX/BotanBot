@@ -415,11 +415,17 @@ def dragon_data(bot,event,args=nil,juststats=false)
   title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**" if !k[16].nil? && k[16]=='MM'
   title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**" if !k[16].nil? && k[16]=='MH'
   title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c' && !(feh || (!k[16].nil? && k[16].length>0 && ['FEH','FGO','MM','MH'].include?(k[16])))
-  title="#{title}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
-  title="#{title}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
+  lookout=get_lookout_tags().reject{|q| q[2]!='Availability' && q[2]!='Availability/Dragon'}
+  for i in 0...lookout.length
+    if k[1].length>1 && k[1][1,1].downcase==lookout[i][3]
+      if !lookout[i][4].nil? && lookout[i][4].include?('<')
+        title="#{title}\n#{lookout[i][4]}**#{lookout[i][0]}**"
+      else
+        title="#{title}\n**#{lookout[i][0]}**"
+      end
+    end
+  end
   title="#{title}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
-  title="#{title}\n**Zodiac Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='z'
-  title="#{title}\n**Treasure Trade**" if k[1].length>1 && k[1][1,1].downcase=='t'
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Speed:573366907357495296>','<:Energize:559629242137051155>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>']
   semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:ProtoShield:642287078943752202>','<:SpeedS:514712247625580555>','<:FEHEnergized:587684963000909845>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>'] if feh
   semoji=['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:Defense:573344832282689567>','<:SpeedS:514712247625580555>','<:Energize:559629242137051155>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>'] if !k[16].nil? && k[16]=='MM'
