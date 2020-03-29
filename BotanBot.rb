@@ -1789,13 +1789,13 @@ end
 def enemy_emoji(k,bot)
   str=''
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][0]}"}
-  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2][0].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Null')}"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
+  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2][0].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Null')}"} if k[2].length>3 && k[2][3][0,11]=='Fire Emblem'
   str="#{str}#{moji[0].mention unless moji.length<=0}"
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Tribe_#{k[2][1]}"}
-  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Infantry"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
-  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Armor"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes' && !k[0].include?('(Enemy)')
+  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Infantry"} if k[2].length>3 && k[2][3][0,11]=='Fire Emblem'
+  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Armor"} if k[2].length>3 && k[2][3][0,11]=='Fire Emblem' && !k[0].include?('(Enemy)')
   sty=''
-  sty='<:Great_Badge_Golden:443704781068959744>' if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
+  sty='<:Great_Badge_Golden:443704781068959744>' if k[2].length>3 && k[2][3][0,11]=='Fire Emblem'
   sty='<:Mega_Man:641484836304846857>' if k[2].length>3 && k[2][3]=='Mega Man: Chaos Protocol'
   sty='<:MH_Rathalos:669319247670804506>' if k[2].length>3 && k[2][3]=='Monster Hunter: Primal Crisis'
   str="#{str}#{moji[0].mention unless moji.length<=0}#{sty}"
@@ -2974,11 +2974,11 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
   title=''
   str=''
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][0].gsub('None','Null')}"}
-  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2][0].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Null')}"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
+  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2][0].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Null')}"} if k[2].length>3 && k[2][3][0,11]=='Fire Emblem'
   title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{k[2][0]}" unless ['High Dragon','Void','Imperial Order'].include?(k[2][2])
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Tribe_#{k[2][1]}"}
-  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Infantry"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
-  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Armor"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes' && !k[0].include?('(Enemy)')
+  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Infantry"} if k[2].length>3 && k[2][3][0,11]=='Fire Emblem'
+  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Armor"} if k[2].length>3 && k[2][3][0,11]=='Fire Emblem' && !k[0].include?('(Enemy)')
   title="#{title}\n#{moji[0].mention unless moji.length<=0} **Tribe:** #{k[2][1]}"
   k[1][1]=[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1] if k[1][1].nil? || k[1][1].length<=0
   if k[1][0].length<2 && k[1][1].length<2
@@ -2994,7 +2994,7 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
     str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][1])}" if k[1][0].length>1 && k[1][0][1]>-1
     str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][1])}" if k[1][1].length>1 && k[1][1][1]>-1
     str="#{str}  **Septenary Increaser**"
-  elsif k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
+  elsif k[2].length>3 && k[2][3][0,11]=='Fire Emblem'
     str="#{str}\n"
     str="#{str}\n*Prologue:*" if (k[1][0].length>0 && k[1][0][0]>-1) || (k[1][1].length>0 && k[1][1][0]>-1)
     str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][0])}" if k[1][0].length>0 && k[1][0][0]>-1
@@ -3108,7 +3108,7 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
   ftr='For information about the enemies that spawn during the fight, they are named "Gift Basket".' if k[0]=="Shishimai" && !s2s
   ftr='For information about the enemies that spawn during the fight, they are named "Astral Gift Basket".' if k[0]=="Astral Shishimai" && !s2s
   hdr="__**#{k[0]}**__"
-  if k[2][2]=='Void' && k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
+  if k[2][2]=='Void' && k[2].length>3 && k[2][3][0,11]=='Fire Emblem'
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2][1].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Null')}"}
     hdr="#{moji[0].mention}<:Current_Tempest_Bonus:498797966740422656> #{hdr}" if moji.length>0
   elsif k[2][2]=='Void'
@@ -3193,12 +3193,12 @@ def disp_gauntlet_data(bot,event,args=nil,name=nil)
   title=''
   str=''
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{gaunt[0][1].gsub('None','Null')}"}
-  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{gaunt[0][1].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Null')}"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
+  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{gaunt[0][1].gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Null')}"} if k[2].length>3 && k[2][3][0,11]=='Fire Emblem'
   title="#{title}\n#{moji[0].mention unless moji.length<=0} **Element:** #{gaunt[0][1]}" unless ['High Dragon','Void','Imperial Order'].include?(k[2][2]) || gaunt.map{|q| q[1]}.uniq.length>1
   title="#{title}\n**Stage:** #{gaunt[0][2]}" unless gaunt.map{|q| q[2]}.uniq.length>1
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Tribe_#{k[2][1]}"}
-  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Infantry"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes'
-  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Armor"} if k[2].length>3 && k[2][3]=='Fire Emblem: Lost Heroes' && !k[0].include?('(Enemy)')
+  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Infantry"} if k[2].length>3 && k[2][3][0,11]=='Fire Emblem'
+  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Armor"} if k[2].length>3 && k[2][3][0,11]=='Fire Emblem' && !k[0].include?('(Enemy)')
   title="#{title}\n#{moji[0].mention unless moji.length<=0} **Tribe:** #{k[2][1]}"
   xcolor=0xE3F78B
   xcolor=0xEF8663 if k[2][1]=='Thaumian'
