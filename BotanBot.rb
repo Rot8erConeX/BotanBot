@@ -1820,6 +1820,18 @@ def energy_emoji(k,pad=false)
   return s
 end
 
+def get_lookout_tags()
+  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
+    lookout=[]
+    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
+      lookout.push(eval line)
+    end
+  else
+    lookout=[]
+  end
+  return lookout
+end
+
 def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
@@ -1963,11 +1975,17 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     title="#{title}\n**Collab**" unless k[12].nil? || k[12].length<=0 || (k[1].length>1 && k[1][1,1].downcase=='c')
     title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c'
   end
-  title="#{title}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
-  title="#{title}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
+  lookout=get_lookout_tags().reject{|q| q[2]!='Availability' && q[2]!='Availability/Adventurer'}
+  for i in 0...lookout.length
+    if k[1].length>1 && k[1][1,1].downcase==lookout[i][3]
+      if !lookout[i][4].nil? && lookout[i][4].include?('<')
+        title="#{title}\n#{lookout[i][4]}**#{lookout[i][0]}**"
+      else
+        title="#{title}\n**#{lookout[i][0]}**"
+      end
+    end
+  end
   title="#{title}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
-  title="#{title}\n**Former Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='f'
-  title="#{title}\n**Zodiac Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='z'
   title="#{title}\n**Unavailable**" if k[1].length>1 && k[1][1,1].downcase=='-'
   flds=nil
   xpic=nil
@@ -2234,13 +2252,17 @@ def disp_wyrmprint_stats(bot,event,args=nil)
   xcolor=0x00205A if k[2]=='Defense'
   xcolor=0x39045A if k[2]=='Support'
   xcolor=0x005918 if k[2]=='Healing'
-  title="#{title}\n**Welfare**" if k[1].length>1 && k[1][1,1].downcase=='w'
-  title="#{title}\n**Story**" if k[1].length>1 && k[1][1,1].downcase=='y'
+  lookout=get_lookout_tags().reject{|q| q[2]!='Availability' && q[2]!='Availability/Wyrmprint'}
+  for i in 0...lookout.length
+    if k[1].length>1 && k[1][1,1].downcase==lookout[i][3]
+      if !lookout[i][4].nil? && lookout[i][4].include?('<')
+        title="#{title}\n#{lookout[i][4]}**#{lookout[i][0]}**"
+      else
+        title="#{title}\n**#{lookout[i][0]}**"
+      end
+    end
+  end
   title="#{title}\n**Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='s'
-  title="#{title}\n**Former Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='f'
-  title="#{title}\n**Zodiac Seasonal**" if k[1].length>1 && k[1][1,1].downcase=='z'
-  title="#{title}\n**Treasure Trade**" if k[1].length>1 && k[1][1,1].downcase=='t'
-  title="#{title}\n**Paid**" if k[1].length>1 && k[1][1,1].downcase=='p'
   f=k[1][0,1].to_i*20
   f-=10 if k[1][0,1].to_i<3
   f2=20*(k[1][0,1].to_i-1)
@@ -2446,32 +2468,23 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     title="#{title}\n**Collab**" if k[2].length>1 && k[2][1,1].downcase=='c' && k[14]!='MM' && k[14]!='MH'
   end
   str="#{str} - T#{k[16]}" unless k[16]==0
-  title="#{title}\n**Welfare**" if k[2].length>1 && k[2][1,1].downcase=='w'
-  title="#{title}\n**Agito**" if k[2].length>1 && k[2][1,1].downcase=='a'
-  title="#{title}\n**Chimera**" if k[2].length>1 && k[2][1,1].downcase=='m'
-  title="#{title}\n**Story**" if k[2].length>1 && k[2][1,1].downcase=='y'
-  title="#{title}\n**Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='s'
-  title="#{title}\n**Former Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='f'
-  title="#{title}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
-  title="#{title}\n**Starter**" if k[2].length>1 && k[2][1,1].downcase=='e'
-  title="#{title}\n**Paid**" if k[2].length>1 && k[2][1,1].downcase=='p'
-  if k[2].length>1 && k[2][1,1].downcase=='v'
-    if !k[14].nil? && k[14]=='FEH'
-      title="#{title}\n<:Current_Tempest_Bonus:498797966740422656> **Void**"
-    elsif !k[14].nil? && k[14]=='FGO'
-      title="#{title}\n<:class_beast_gold:562413138356731905> **Void**"
-    else
-      title="#{title}\n<:Element_Void:548467446734913536> **Void**"
-    end
-  elsif k[2].length>1 && k[2][1,1].downcase=='h'
-    if !k[14].nil? && k[14]=='FEH'
-      title="#{title}\n<:Gold_Dragon:443172811641454592> **High Dragon**"
-    elsif !k[14].nil? && k[14]=='FGO'
-      title="#{title}\n<:class_beast_gold:562413138356731905> **High Dragon**"
-    else
-      title="#{title}\n<:Tribe_Dragon:549947361745567754> **High Dragon**"
+  lookout=get_lookout_tags().reject{|q| q[2]!='Availability' && q[2]!='Availability/Weapon'}
+  for i in 0...lookout.length
+    if k[2].length>1 && k[2][1,1].downcase==lookout[i][3]
+      if !lookout[i][4].nil? && lookout[i][4].include?('<')
+        if !k[14].nil? && k[14]=='FEH' && !lookout[i][5].nil? && lookout[i][5].length>0
+          title="#{title}\n#{lookout[i][5][0]}**#{lookout[i][0]}**"
+        elsif !k[14].nil? && k[14]=='FGO' && !lookout[i][5].nil? && lookout[i][5].length>0
+          title="#{title}\n#{lookout[i][5][1]}**#{lookout[i][0]}**"
+        else
+          title="#{title}\n#{lookout[i][4]}**#{lookout[i][0]}**"
+        end
+      else
+        title="#{title}\n**#{lookout[i][0]}**"
+      end
     end
   end
+  title="#{title}\n**Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='s'
   f=30*k[2][0,1].to_i-50
   f+=40-10*k[2][0,1].to_i if k[2][0,1].to_i<3
   f=200 if k[2][0,1].to_i>5
@@ -2765,32 +2778,23 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     title="#{title}\n**Collab**" if k[2].length>1 && k[2][1,1].downcase=='c' && k[14]!='MM' && k[14]!='MH'
   end
   str="#{str} - T#{k[16]}" unless k[16]==0
-  title="#{title}\n**Welfare**" if k[2].length>1 && k[2][1,1].downcase=='w'
-  title="#{title}\n**Agito**" if k[2].length>1 && k[2][1,1].downcase=='a'
-  title="#{title}\n**Chimera**" if k[2].length>1 && k[2][1,1].downcase=='m'
-  title="#{title}\n**Story**" if k[2].length>1 && k[2][1,1].downcase=='y'
-  title="#{title}\n**Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='s'
-  title="#{title}\n**Former Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='f'
-  title="#{title}\n**Zodiac Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='z'
-  title="#{title}\n**Starter**" if k[2].length>1 && k[2][1,1].downcase=='e'
-  title="#{title}\n**Paid**" if k[2].length>1 && k[2][1,1].downcase=='p'
-  if k[2].length>1 && k[2][1,1].downcase=='v'
-    if !k[14].nil? && k[14]=='FEH'
-      title="#{title}\n<:Current_Tempest_Bonus:498797966740422656> **Void**"
-    elsif !k[14].nil? && k[14]=='FGO'
-      title="#{title}\n<:class_beast_gold:562413138356731905> **Void**"
-    else
-      title="#{title}\n<:Element_Void:548467446734913536> **Void**"
-    end
-  elsif k[2].length>1 && k[2][1,1].downcase=='h'
-    if !k[14].nil? && k[14]=='FEH'
-      title="#{title}\n<:Gold_Dragon:443172811641454592> **High Dragon**"
-    elsif !k[14].nil? && k[14]=='FGO'
-      title="#{title}\n<:class_beast_gold:562413138356731905> **High Dragon**"
-    else
-      title="#{title}\n<:Tribe_Dragon:549947361745567754> **High Dragon**"
+  lookout=get_lookout_tags().reject{|q| q[2]!='Availability' && q[2]!='Availability/Weapon'}
+  for i in 0...lookout.length
+    if k[2].length>1 && k[2][1,1].downcase==lookout[i][3]
+      if !lookout[i][4].nil? && lookout[i][4].include?('<')
+        if !k[14].nil? && k[14]=='FEH' && !lookout[i][5].nil? && lookout[i][5].length>0
+          title="#{title}\n#{lookout[i][5][0]}**#{lookout[i][0]}**"
+        elsif !k[14].nil? && k[14]=='FGO' && !lookout[i][5].nil? && lookout[i][5].length>0
+          title="#{title}\n#{lookout[i][5][1]}**#{lookout[i][0]}**"
+        else
+          title="#{title}\n#{lookout[i][4]}**#{lookout[i][0]}**"
+        end
+      else
+        title="#{title}\n**#{lookout[i][0]}**"
+      end
     end
   end
+  title="#{title}\n**Seasonal**" if k[2].length>1 && k[2][1,1].downcase=='s'
   f=30*k[2][0,1].to_i-50
   f+=20 if k[2][0,1].to_i<3
   f=200 if k[2][0,1].to_i>5
@@ -5035,21 +5039,16 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   clzz=[]
   fltr=[]
   tags=[]
-  lookout=[]
   genders=[]
   races=[]
   crossgames=[]
   cygames=[]
   launch=false
   mana=false
-  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
-    lookout=[]
-    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
-      lookout.push(eval line)
-    end
-  end
+  lookout=get_lookout_tags()
   lookout2=lookout.reject{|q| q[2]!='Race'}
   lookout3=lookout.reject{|q| q[2]!='Cygame'}
+  lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Adventurer'}
   lookout=lookout.reject{|q| q[2]!='Skill' && q[2]!='Ability'}
   lookout=lookout.reject{|q| ['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Flame','Water','Wind','Light','Shadow','Attack','Defense','Support','Healer'].include?(q[0])}
   for i in 0...args.length
@@ -5075,28 +5074,27 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
     clzz.push('Defense') if ['defense','defence','def','defending','defensive','defencive'].include?(args[i].downcase)
     clzz.push('Support') if ['support','supports','supportive','supporting'].include?(args[i].downcase)
     clzz.push('Healer') if ['heal','healing','heals','healer','healers'].include?(args[i].downcase)
-    fltr.push('Welfare') if ['welfare','welfares','free','freebies','f2p'].include?(args[i].downcase)
     fltr.push('Gala') if ['gala','galadragalia'].include?(args[i].downcase)
-    fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
     fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
-    fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons'].include?(args[i].downcase)
     fltr.push('NonLimited') if ['summon','summons','summonable','summonables','nonlimited','non-limited'].include?(args[i].downcase)
     fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
     fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
-    fltr.push('Former') if ['former','formerlimited'].include?(args[i].downcase)
+    for i2 in 0...lookout4.length
+      fltr.push(lookout4[i2][0]) if lookout4[i2][1].include?(args[i].downcase)
+    end
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
     crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
     genders.push('M') if ['male','boy','m','males','boys','man'].include?(args[i].downcase)
     genders.push('F') if ['female','woman','girl','f','females','women','girls'].include?(args[i].downcase)
     for i2 in 0...lookout.length
-      tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
+      tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i].downcase)
     end
     for i2 in 0...lookout2.length
-      races.push(lookout2[i2][0]) if lookout2[i2][1].include?(args[i])
+      races.push(lookout2[i2][0]) if lookout2[i2][1].include?(args[i].downcase)
     end
     for i2 in 0...lookout3.length
-      cygames.push(lookout3[i2][0]) if lookout3[i2][1].include?(args[i])
+      cygames.push(lookout3[i2][0]) if lookout3[i2][1].include?(args[i].downcase)
     end
     tags.push('StrengthSkill') if ['strength','str'].include?(args[i].downcase) && allowstr
   end
@@ -5155,30 +5153,12 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   end
   if fltr.length>0
     m=[]
-    if fltr.include?('Welfare')
-      for i in 0...@max_rarity[0]
-        m.push("#{i+1}w")
-      end
-      emo.push('(w)') if fltr.length<2
-    end
     if fltr.include?('Seasonal')
       for i in 0...@max_rarity[0]
         m.push("#{i+1}s")
         m.push("#{i+1}f")
       end
       emo.push('(s)') if fltr.length<2
-    end
-    if fltr.include?('Zodiac Seasonal')
-      for i in 0...@max_rarity[0]
-        m.push("#{i+1}z")
-      end
-      emo.push('(z)') if fltr.length<2
-    end
-    if fltr.include?('Story')
-      for i in 0...@max_rarity[0]
-        m.push("#{i+1}y")
-      end
-      emo.push('(y)') if fltr.length<2
     end
     if fltr.include?('NonLimited')
       for i in 0...@max_rarity[0]
@@ -5193,11 +5173,20 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
       end
       emo.push('(c)') if fltr.length<2
     end
-    if fltr.include?('Former')
-      for i in 0...@max_rarity[0]
-        m.push("#{i+1}f")
+    for i2 in 0...lookout4.length
+      if fltr.include?(lookout4[i2][0])
+        for i in 0...@max_rarity[0]
+          m.push("#{i+1}#{lookout4[i2][3]}")
+        end
+        if fltr.length<2
+        elsif lookout4[i2][4].nil?
+          emo.push("(#{lookout[i2][3]})")
+        elsif lookout4[i2][4].include?('<')
+          emo.push(lookout[i2][4])
+        else
+          emo.push("(#{lookout[i2][4]})")
+        end
       end
-      emo.push('(f)') if fltr.length<2
     end
     search.push("*Filters*: #{fltr.join(', ')}")
     if fltr.include?('Limited')
@@ -5321,18 +5310,13 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   turn=[]
   ranged=[]
   tags=[]
-  lookout=[]
   genders=[]
   cygames=[]
   crossgames=[]
   launch=false
-  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
-    lookout=[]
-    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
-      lookout.push(eval line)
-    end
-  end
+  lookout=get_lookout_tags()
   lookout2=lookout.reject{|q| q[2]!='Cygame'}
+  lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Dragon'}
   lookout=lookout.reject{|q| q[2]!='Skill' && !q[2]!='Ability'}
   lookout=lookout.reject{|q| ['Flame','Water','Wind','Light','Shadow'].include?(q[0])}
   for i in 0...args.length
@@ -5355,24 +5339,23 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
     turn.push('No') if ['noturn','anchor'].include?(args[i].downcase)
     ranged.push('Yes') if ['long','longrange','ranged'].include?(args[i].downcase)
     ranged.push('no') if ['short','shortrange','melee'].include?(args[i].downcase)
-    fltr.push('Welfare') if ['welfare','welfares','free','freebies','f2p'].include?(args[i].downcase)
-    fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
     fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
-    fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons'].include?(args[i].downcase)
     fltr.push('NonLimited') if ['summon','summons','summonable','summonables','nonlimited','non-limited'].include?(args[i].downcase)
     fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
     fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
-    fltr.push('Former') if ['former','formerlimited'].include?(args[i].downcase)
+    for i2 in 0...lookout4.length
+      fltr.push(lookout4[i2][0]) if lookout4[i2][1].include?(args[i].downcase)
+    end
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
     crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
     genders.push('M') if ['male','boy','m','males','boys','man'].include?(args[i].downcase)
     genders.push('F') if ['female','woman','girl'].include?(args[i].downcase)
     for i2 in 0...lookout.length
-      tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
+      tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i].downcase)
     end
     for i2 in 0...lookout2.length
-      cygames.push(lookout2[i2][0]) if lookout2[i2][1].include?(args[i])
+      cygames.push(lookout2[i2][0]) if lookout2[i2][1].include?(args[i].downcase)
     end
     tags.push('StrengthSkill') if ['strength','str'].include?(args[i].downcase) && allowstr
   end
@@ -5430,12 +5413,6 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   end
   if fltr.length>0
     m=[]
-    if fltr.include?('Welfare')
-      for i in 0...@max_rarity[1]
-        m.push("#{i+1}w")
-      end
-      emo.push('(w)') if fltr.length<2
-    end
     if fltr.include?('Seasonal')
       for i in 0...@max_rarity[1]
         m.push("#{i+1}s")
@@ -5443,24 +5420,12 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
       end
       emo.push('(s)') if fltr.length<2
     end
-    if fltr.include?('Zodiac Seasonal')
-      for i in 0...@max_rarity[1]
-        m.push("#{i+1}z")
-      end
-      emo.push('(z)') if fltr.length<2
-    end
-    if fltr.include?('Story')
-      for i in 0...@max_rarity[1]
-        m.push("#{i+1}y")
-      end
-      emo.push('(y)') if fltr.length<2
-    end
     if fltr.include?('NonLimited')
       for i in 0...@max_rarity[1]
         m.push("#{i+1}")
         m.push("#{i+1}f")
       end
-      emo.push('(p)') if fltr.length<2
+      emo.push('($)') if fltr.length<2
     end
     if fltr.include?('Collab')
       for i in 0...@max_rarity[1]
@@ -5468,11 +5433,20 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
       end
       emo.push('(c)') if fltr.length<2
     end
-    if fltr.include?('Former')
-      for i in 0...@max_rarity[0]
-        m.push("#{i+1}f")
+    for i2 in 0...lookout4.length
+      if fltr.include?(lookout4[i2][0])
+        for i in 0...@max_rarity[0]
+          m.push("#{i+1}#{lookout4[i2][3]}")
+        end
+        if fltr.length<2
+        elsif lookout4[i2][4].nil?
+          emo.push("(#{lookout[i2][3]})")
+        elsif lookout4[i2][4].include?('<')
+          emo.push(lookout[i2][4])
+        else
+          emo.push("(#{lookout[i2][4]})")
+        end
       end
-      emo.push('(f)') if fltr.length<2
     end
     search.push("*Filters*: #{fltr.join(', ')}")
     if fltr.include?('Limited')
@@ -5572,13 +5546,8 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
   crossgames=[]
   launch=false
   tags=[]
-  lookout=[]
-  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
-    lookout=[]
-    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
-      lookout.push(eval line)
-    end
-  end
+  lookout=get_lookout_tags()
+  lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Wyrmprint'}
   lookout=lookout.reject{|q| q[2]!='Skill' && !q[2]!='Ability'}
   lookout=lookout.reject{|q| ['Attack','Defense','Support','Healer'].include?(q[0])}
   for i in 0...args.length
@@ -5589,26 +5558,24 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
     clzz.push('Defense') if ['defense','defence','def','defending','defensive','defencive'].include?(args[i].downcase)
     clzz.push('Support') if ['support','supports','supportive','supporting'].include?(args[i].downcase)
     clzz.push('Healing') if ['heal','healing','heals','healer','healers'].include?(args[i].downcase)
-    fltr.push('Welfare') if ['welfare','welfares','free','freebies','f2p'].include?(args[i].downcase)
-    fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
     fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
-    fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons'].include?(args[i].downcase)
     fltr.push('NonLimited') if ['nonlimited','non-limited'].include?(args[i].downcase)
     fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
-    fltr.push('Treasure Trade') if ['treasure','trade','trades','treasures','treasuretrade','treasuretrades'].include?(args[i].downcase)
     fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
-    fltr.push('Former') if ['former','formerlimited'].include?(args[i].downcase)
+    for i2 in 0...lookout4.length
+      fltr.push(lookout4[i2][0]) if lookout4[i2][1].include?(args[i].downcase)
+    end
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
     crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
-    fltr.push('Paid') if ['payment','paid','paying','whale'].include?(args[i].downcase)
     for i2 in 0...lookout.length
-      tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
+      tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i].downcase)
     end
   end
   textra=''
   rarity.uniq!
   clzz.uniq!
+  fltr.uniq!
   tags.uniq!
   char=@wyrmprints.reject{|q| ['Wily Warriors','Greatwyrm'].include?(q[0])}.uniq
   search=[]
@@ -5634,30 +5601,12 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
   end
   if fltr.length>0
     m=[]
-    if fltr.include?('Welfare')
-      for i in 0...@max_rarity[2]
-        m.push("#{i+1}w")
-      end
-      emo.push('(w)') if fltr.length<2
-    end
     if fltr.include?('Seasonal')
       for i in 0...@max_rarity[2]
         m.push("#{i+1}s")
         m.push("#{i+1}f")
       end
       emo.push('(s)') if fltr.length<2
-    end
-    if fltr.include?('Zodiac Seasonal')
-      for i in 0...@max_rarity[2]
-        m.push("#{i+1}z")
-      end
-      emo.push('(z)') if fltr.length<2
-    end
-    if fltr.include?('Story')
-      for i in 0...@max_rarity[2]
-        m.push("#{i+1}y")
-      end
-      emo.push('(y)') if fltr.length<2
     end
     if fltr.include?('NonLimited')
       for i in 0...@max_rarity[2]
@@ -5666,29 +5615,26 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
       end
       emo.push('(u)') if fltr.length<2
     end
-    if fltr.include?('Treasure Trade')
-      for i in 0...@max_rarity[2]
-        m.push("#{i+1}t")
-      end
-      emo.push('(t)') if fltr.length<2
-    end
     if fltr.include?('Collab')
       for i in 0...@max_rarity[2]
         m.push("#{i+1}c")
       end
       emo.push('(c)') if fltr.length<2
     end
-    if fltr.include?('Paid')
-      for i in 0...@max_rarity[2]
-        m.push("#{i+1}p")
+    for i2 in 0...lookout4.length
+      if fltr.include?(lookout4[i2][0])
+        for i in 0...@max_rarity[0]
+          m.push("#{i+1}#{lookout4[i2][3]}")
+        end
+        if fltr.length<2
+        elsif lookout4[i2][4].nil?
+          emo.push("(#{lookout[i2][3]})")
+        elsif lookout4[i2][4].include?('<')
+          emo.push(lookout[i2][4])
+        else
+          emo.push("(#{lookout[i2][4]})")
+        end
       end
-      emo.push('(p)') if fltr.length<2
-    end
-    if fltr.include?('Former')
-      for i in 0...@max_rarity[0]
-        m.push("#{i+1}f")
-      end
-      emo.push('(f)') if fltr.length<2
     end
     search.push("*Filters*: #{fltr.join(', ')}")
     if fltr.include?('Limited')
@@ -5775,14 +5721,9 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   fltr=[]
   tags=[]
   crossgames=[]
-  lookout=[]
   launch=false
-  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
-    lookout=[]
-    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
-      lookout.push(eval line)
-    end
-  end
+  lookout=get_lookout_tags()
+  lookout3=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Weapon'}
   lookout=lookout.reject{|q| q[2]!='Skill' && q[2]!='Ability'}
   lookout=lookout.reject{|q| ['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Flame','Water','Wind','Light','Shadow'].include?(q[0])}
   args2=args.map{|q| q}
@@ -5856,36 +5797,20 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       args2[i]=nil unless wpn.include?('Staff')
       wpn.push('Staff')
     end
-    if ['void','voids'].include?(args[i].downcase)
-      args2[i]=nil unless fltr.include?('Void')
-      fltr.push('Void')
-    end
-    if ['high','highs','dragon','dragons','drg','drgs','hd','hdt'].include?(args[i].downcase)
-      args2[i]=nil unless fltr.include?('High Dragon')
-      fltr.push('High Dragon')
-    end
-    if ['agito'].include?(args[i].downcase)
-      args2[i]=nil unless fltr.include?('Agito')
-      fltr.push('Agito')
-    end
-    if ['chimera','chimeratech'].include?(args[i].downcase)
-      args2[i]=nil unless fltr.include?('chimera')
-      fltr.push('Chimera')
+    for i2 in 0...lookout3.length
+      if lookout3[i2][1].include?(args[i].downcase)
+        args2[i]=nil unless fltr.include?(lookout3[i2][0])
+        fltr.push(lookout3[i2][0])
+      end
     end
     if ['core','cores'].include?(args[i].downcase)
       args2[i]=nil unless fltr.include?('Core')
       fltr.push('Core')
     end
     unless juststats
-      fltr.push('Welfare') if ['welfare','welfares','free','freebies','f2p'].include?(args[i].downcase)
-      fltr.push('Starter') if ['starter','starters','start','starting'].include?(args[i].downcase)
-      fltr.push('Story') if ['story','stories','storys'].include?(args[i].downcase)
       fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
-      fltr.push('Zodiac Seasonal') if ['zodiac','zodiacs','seazonal','seazonals','seazons','seazons'].include?(args[i].downcase)
-      fltr.push('Paid') if ['payment','paid','paying','whale'].include?(args[i].downcase)
       fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
       fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
-      fltr.push('Former') if ['former','formerlimited'].include?(args[i].downcase)
       crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
       crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
       crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
@@ -5958,12 +5883,6 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   end
   if fltr.length>0
     m=[]
-    if fltr.include?('Welfare')
-      for i in 0...@max_rarity[3]
-        m.push("#{i+1}w")
-      end
-      emo.push('(w)') if fltr.length<2
-    end
     if fltr.include?('Seasonal')
       for i in 0...@max_rarity[3]
         m.push("#{i+1}s")
@@ -5971,53 +5890,20 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       end
       emo.push('(s)') if fltr.length<2
     end
-    if fltr.include?('Zodiac Seasonal')
-      for i in 0...@max_rarity[3]
-        m.push("#{i+1}z")
+    for i2 in 0...lookout3.length
+      if fltr.include?(lookout3[i2][0])
+        for i in 0...@max_rarity[3]
+          m.push("#{i+1}#{lookout3[i2][3]}")
+        end
+        if fltr.length<2
+        elsif lookout3[i2][4].nil?
+          emo.push("(#{lookout[i2][3]})")
+        elsif lookout3[i2][4].include?('<')
+          emo.push(lookout[i2][4])
+        else
+          emo.push("(#{lookout[i2][4]})")
+        end
       end
-      emo.push('(z)') if fltr.length<2
-    end
-    if fltr.include?('Story')
-      for i in 0...@max_rarity[3]
-        m.push("#{i+1}y")
-      end
-      emo.push('(y)') if fltr.length<2
-    end
-    if fltr.include?('Starter')
-      for i in 0...@max_rarity[3]
-        m.push("#{i+1}e")
-      end
-      emo.push('(e)') if fltr.length<2
-    end
-    if fltr.include?('Paid')
-      for i in 0...@max_rarity[3]
-        m.push("#{i+1}p")
-      end
-      emo.push('(p)') if fltr.length<2
-    end
-    if fltr.include?('Agito')
-      for i in 0...@max_rarity[3]
-        m.push("#{i+1}a")
-      end
-      emo.push('(a)') if fltr.length<2
-    end
-    if fltr.include?('Chimera')
-      for i in 0...@max_rarity[3]
-        m.push("#{i+1}m")
-      end
-      emo.push('(ch)') if fltr.length<2
-    end
-    if fltr.include?('Void')
-      for i in 0...@max_rarity[3]
-        m.push("#{i+1}v")
-      end
-      emo.push('<:Element_Void:548467446734913536>') if fltr.length<2
-    end
-    if fltr.include?('High Dragon') || rarity_tier_2.length>0
-      for i in 0...@max_rarity[3]
-        m.push("#{i+1}h")
-      end
-      emo.push('<:Tribe_Dragon:549947361745567754>') if fltr.length<2
     end
     if fltr.include?('Core')
       for i in 0...@max_rarity[3]
@@ -6132,14 +6018,7 @@ def find_in_mats(bot,event,args=nil,mode=0)
   rarity=[]
   pouch=[]
   tags=[]
-  lookout=[]
-  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
-    lookout=[]
-    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
-      lookout.push(eval line)
-    end
-  end
-  lookout=lookout.reject{|q| q[2]!='Mat'}
+  lookout=get_lookout_tags().reject{|q| q[2]!='Mat'}
   for i in 0...args.length
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>1 && args[i].to_i<6
     rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>1 && args[i][0,1].to_i<6
@@ -6194,14 +6073,7 @@ def find_in_banners(bot,event,args=nil,mode=0)
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
   elem=[]
   tags=[]
-  lookout=[]
-  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
-    lookout=[]
-    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
-      lookout.push(eval line)
-    end
-  end
-  lookout=lookout.reject{|q| q[2]!='Banner'}
+  lookout=get_lookout_tags().reject{|q| q[2]!='Banner'}
   for i in 0...args.length
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
     elem.push('Water') if ['water','waters'].include?(args[i].downcase)
@@ -6247,14 +6119,7 @@ def find_in_skills(bot,event,args=nil,mode=0)
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
   elem=[]
   tags=[]
-  lookout=[]
-  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
-    lookout=[]
-    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
-      lookout.push(eval line)
-    end
-  end
-  lookout=lookout.reject{|q| q[2]!='Skill'}
+  lookout=get_lookout_tags().reject{|q| q[2]!='Skill'}
   for i in 0...args.length
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
     elem.push('Water') if ['water','waters'].include?(args[i].downcase)
@@ -6322,14 +6187,7 @@ def find_in_abilities(bot,event,args=nil,mode=0)
   elem=[]
   tags=[]
   abiltypes=[]
-  lookout=[]
-  if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
-    lookout=[]
-    File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
-      lookout.push(eval line)
-    end
-  end
-  lookout=lookout.reject{|q| q[2]!='Ability'}
+  lookout=get_lookout_tags().reject{|q| q[2]!='Ability'}
   for i in 0...args.length
     abiltypes.push('Ability') if ['ability','abil','abilitys','abils','abilities'].include?(args[i].downcase)
     abiltypes.push('Aura') if ['aura','auras','drg','dragon'].include?(args[i].downcase)
@@ -8649,7 +8507,9 @@ end
 
 bot.command([:bugreport, :suggestion, :feedback]) do |event, *args|
   return nil if overlap_prevent(event)
-  bug_report(bot,event,args,@shards,shard_data(0),'Shard',['dl!','dl?'],532083509083373583)
+  x=['dl!','dl?']
+  x.push(@prefixes[event.server.id]) unless event.server.nil? || @prefixes[event.server.id].nil?
+  bug_report(bot,event,args,@shards,shard_data(0),'Shard',x,532083509083373583)
 end
 
 bot.command([:donation, :donate]) do |event, uid|
