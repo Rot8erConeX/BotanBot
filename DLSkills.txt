@@ -953,9 +953,9 @@ Force Strike\example\Aura\Increases force strike damage by `x`%.\0\y\ForceStrike
 Force Strike\50%\Aura\Increases force strike damage by 50%.\80\y\ForceStrike
 Force Strike\60%\Aura\Increases force strike damage by 60%.\100\y\ForceStrike
 Gauge Decelerator\30%\Aura\Slows the rate the mode gauge decreases by 30%.\100\y\
-HP Below 30 = Strength\example\Aura\Increases strength by `x`% when HP is 30% or below.\0\y\HP30, Strength
-HP Below 30 = Strength\30%\Aura\Increases strength by 30% when HP is 30% or below.\80\y\HP30, Strength
-HP Below 30 = Strength\40%\Aura\Increases strength by 40% when HP is 30% or below.\100\y\HP30, Strength
+HP Below 30% = Strength\example\Aura\Increases strength by `x`% when HP is 30% or below.\0\y\HP30, Strength
+HP Below 30% = Strength\30%\Aura\Increases strength by 30% when HP is 30% or below.\80\y\HP30, Strength
+HP Below 30% = Strength\40%\Aura\Increases strength by 40% when HP is 30% or below.\100\y\HP30, Strength
 HP 30% = Strength\example\Aura\Increases strength by `x`% when HP is 30% or above.\0\y\HP30, Strength
 HP 30% = Strength\35%\Aura\Increases strength by 35% when HP is 30% or above.\35\y\HP30, Strength
 HP 30% = Strength\50%\Aura\Increases strength by 50% when HP is 30% or above.\50\y\HP30, Strength
