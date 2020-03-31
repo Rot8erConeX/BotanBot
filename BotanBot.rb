@@ -5243,13 +5243,13 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
       cha=sklz.find_index{|q| q[2]=='Chain' && q[0]==char[i][7][1].split(' ')[0,char[i][7][1].split(' ').length-1].join(' ')}
       cha=sklz[cha] unless cha.nil?
       cha[6]=[] if !cha.nil? && cha[6].nil?
-      ab1=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][8][0][-1]}
+      ab1=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][0][-1]}
       ab1=sklz[ab1] unless ab1.nil?
       ab1[6]=[] if !ab1.nil? && ab1[6].nil?
-      ab2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][8][1][-1]}
+      ab2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][1][-1]}
       ab2=sklz[ab2] unless ab2.nil?
       ab2[6]=[] if !ab2.nil? && ab2[6].nil?
-      ab3=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][8][2][-1]}
+      ab3=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][2][-1]}
       ab3=sklz[ab3] unless ab3.nil?
       ab3[6]=[] if !ab3.nil? && ab3[6].nil?
       char[i][20]="#{skl1[10].join("\n") unless skl1.nil?}\n#{skl2[10].join("\n") unless skl2.nil?}\n#{coab[6].join("\n") unless coab.nil?}\n#{cha[6].join("\n") unless cha.nil?}\n#{ab1[6].join("\n") unless ab1.nil?}\n#{ab2[6].join("\n") unless ab2.nil?}\n#{ab3[6].join("\n") unless ab3.nil?}".split("\n")
@@ -5490,15 +5490,15 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
       skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][5]}
       skl1=sklz[skl1] unless skl1.nil?
       ab1=nil
-      ab1=sklz.find_index{|q| ['Ability','Aura'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][6][0][-1]} unless char[i][6].length<1
+      ab1=sklz.find_index{|q| ['Ability','Aura'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][6][0][-1]} unless char[i][6].length<1
       ab1=sklz[ab1] unless ab1.nil?
       ab1[6]=[] if !ab1.nil? && ab1[6].nil?
       ab2=nil
-      ab2=sklz.find_index{|q| ['Ability','Aura'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][6][1][-1]} unless char[i][6].length<2
+      ab2=sklz.find_index{|q| ['Ability','Aura'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][6][1][-1]} unless char[i][6].length<2
       ab2=sklz[ab2] unless ab2.nil?
       ab2[6]=[] if !ab2.nil? && ab2[6].nil?
       ab3=nil
-      ab3=sklz.find_index{|q| ['Ability','Aura'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][6][2][-1]} unless char[i][6].length<3
+      ab3=sklz.find_index{|q| ['Ability','Aura'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][6][2][-1]} unless char[i][6].length<3
       ab3=sklz[ab3] unless ab3.nil?
       ab3[6]=[] if !ab3.nil? && ab3[6].nil?
       if args.include?('any') || tags.length<=1
@@ -5548,7 +5548,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
   tags=[]
   lookout=get_lookout_tags()
   lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Wyrmprint'}
-  lookout=lookout.reject{|q| q[2]!='Skill' && !q[2]!='Ability'}
+  lookout=lookout.reject{|q| q[2]!='Skill' && q[2]!='Ability'}
   lookout=lookout.reject{|q| ['Attack','Defense','Support','Healer'].include?(q[0])}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
@@ -5663,15 +5663,15 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
     sklz=@askilities.map{|q| q}
     for i in 0...char.length
       ab1=nil
-      ab1=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][5][0][-1]} unless char[i][5].length<1
+      ab1=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][5][0][-1]} unless char[i][5].length<1
       ab1=sklz[ab1] unless ab1.nil?
       ab1[6]=[] if !ab1.nil? && ab1[6].nil?
       ab2=nil
-      ab2=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][5][1][-1]} unless char[i][5].length<2
+      ab2=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][5][1][-1]} unless char[i][5].length<2
       ab2=sklz[ab2] unless ab2.nil?
       ab2[6]=[] if !ab2.nil? && ab2[6].nil?
       ab3=nil
-      ab3=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][5][2][-1]} unless char[i][5].length<3
+      ab3=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][5][2][-1]} unless char[i][5].length<3
       ab3=sklz[ab3] unless ab3.nil?
       ab3[6]=[] if !ab3.nil? && ab3[6].nil?
       if args.include?('any') || tags.length<=1
@@ -5955,13 +5955,13 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       ab2=nil
       ab3=nil
       unless char[i][13].nil?
-        ab1=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][13][0][-1]} unless char[i][13].length<1
+        ab1=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][13][0][-1]} unless char[i][13].length<1
         ab1=sklz[ab1] unless ab1.nil?
         ab1[6]=[] if !ab1.nil? && ab1[6].nil?
-        ab2=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][13][1][-1]} unless char[i][13].length<2
+        ab2=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][13][1][-1]} unless char[i][13].length<2
         ab2=sklz[ab2] unless ab2.nil?
         ab2[6]=[] if !ab2.nil? && ab2[6].nil?
-        ab3=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]} #{'+' if q[1].include?('%')}#{q[1]}"==char[i][13][2][-1]} unless char[i][13].length<3
+        ab3=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][13][2][-1]} unless char[i][13].length<3
         ab3=sklz[ab3] unless ab3.nil?
         ab3[6]=[] if !ab3.nil? && ab3[6].nil?
       end
@@ -6606,7 +6606,6 @@ def find_abilities(bot,event,args=nil)
   m=char.map{|q| q}
   char=[]
   for i in 0...subchar.length
-    puts subchar[i].to_s
     k=m.reject{|q| q[1]=='example' || q[0]!=subchar[i][0] || q[2]!=subchar[i][1]}
     ccc='/'
     ccc=', ' unless k.find_index{|q| q[1].include?('/')}.nil?
