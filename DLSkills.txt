@@ -1296,7 +1296,7 @@ Arcane Tomes\75%\Ability\Increases Arcane Tomes intake for clearing quests by 75
 Arcane Tomes\100%\Ability\Increases Arcane Tomes intake for clearing quests by 100%\0\y\Event, Facility, Materials
 Arcane Tomes\125%\Ability\Increases Arcane Tomes intake for clearing quests by 125%\0\y\Event, Facility, Materials
 Arcane Tomes\150%\Ability\Increases Arcane Tomes intake for clearing quests by 150%\0\y\Event, Facility, Materials
-A Song That Envelops the World\-\Ability\Increases player EXP intake for clearing quests by 10%. Does not stack.\0\y\EXP
+A Song That Envelops the World\-\Ability\Increases player EXP intake for clearing quests by 10%. Does not stack.\0\y\EXP, Unique
 Astral Ornament\example\Ability\Increases Astral Ornaments intake for clearing quests by `x`%.\0\y\Event, Facility, Materials
 Astral Ornament\25%\Ability\Increases Astral Ornaments intake for clearing quests by 25%.\0\y\Event, Facility, Materials
 Astral Ornament\50%\Ability\Increases Astral Ornaments intake for clearing quests by 50%.\0\y\Event, Facility, Materials
@@ -1339,9 +1339,9 @@ Bog Res\55%\Ability\Reduces susceptibility to bog by 55%.\70\y\BogRes, Resistanc
 Bog Res\60%\Ability\Reduces susceptibility to bog by 60%.\80\y\BogRes, Resistance
 Bog Res\75%\Ability\Reduces susceptibility to bog by 75%.\100\y\BogRes, Resistance
 Bog Res\100%\Ability\Reduces susceptibility to bog by 100%.\100\y\BogRes, Resistance
-Bow Expertise\example\Ability\Grants the user a unique force strike, and increases force strike damage by 20/30%. Their force strike has four increasingly powerful charge levels and movement is possible while charging. In addition, it will reduce enemy strength by 15% for 10 seconds. This debuff will not stack.\0\y\
-Bow Expertise\I\Ability\Grants the user a unique force strike, and increases force strike damage by 20%. Their force strike has four increasingly powerful charge levels and movement is possible while charging. In addition, it will reduce enemy strength by 15% for 10 seconds. This debuff will not stack.\80\y\
-Bow Expertise\II\Ability\Grants the user a unique force strike, and increases force strike damage by 30%. Their force strike has four increasingly powerful charge levels and movement is possible while charging. In addition, it will reduce enemy strength by 15% for 10 seconds. This debuff will not stack.\100\y\
+Bow Expertise\example\Ability\Grants the user a unique force strike, and increases force strike damage by 20/30%. Their force strike has four increasingly powerful charge levels and movement is possible while charging. In addition, it will reduce enemy strength by 15% for 10 seconds. This debuff will not stack.\0\y\Unique
+Bow Expertise\I\Ability\Grants the user a unique force strike, and increases force strike damage by 20%. Their force strike has four increasingly powerful charge levels and movement is possible while charging. In addition, it will reduce enemy strength by 15% for 10 seconds. This debuff will not stack.\80\y\Unique
+Bow Expertise\II\Ability\Grants the user a unique force strike, and increases force strike damage by 30%. Their force strike has four increasingly powerful charge levels and movement is possible while charging. In addition, it will reduce enemy strength by 15% for 10 seconds. This debuff will not stack.\100\y\Unique
 Brainwashed Brunhilda's Bane\example\Ability\Increases damage to Brainwashed Brunhilda by `x`%.\0\y\Brainwashed, Bane
 Brainwashed Brunhilda's Bane\40%\Ability\Increases damage to Brainwashed Brunhilda by 40%.\0\y\Brainwashed, Bane
 Brainwashed Brunhilda's Bane\50%\Ability\Increases damage to Brainwashed Brunhilda by 50%.\0\y\Brainwashed, Bane
@@ -1392,15 +1392,15 @@ Chef's Special\example\Ability\Increases Chef's Special intake for clearing ques
 Chef's Special\25%\Ability\Increases Chef's Special intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by 25%.\0\y\Event, Facility
 Chef's Special\35%\Ability\Increases Chef's Special intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by 35%.\0\y\Event, Facility
 Chef's Special\50%\Ability\Increases Chef's Special intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by 50%.\0\y\Event, Facility
-Chicken At Heart\example\Ability\Increases strength by `x`% when HP is 60% or above, but decreases strength by 20% when HP is less than 60%.\0\y\Strength, HP60
-Chicken At Heart\I\Ability\Increases strength by 15% when HP is 60% or above, but decreases strength by 20% when HP is less than 60%.\60\y\Strength, HP60
-Chicken At Heart\II\Ability\Increases strength by 20% when HP is 60% or above, but decreases strength by 20% when HP is less than 60%.\80\y\Strength, HP60
+Chicken At Heart\example\Ability\Increases strength by `x`% when HP is 60% or above, but decreases strength by 20% when HP is less than 60%.\0\y\Strength, HP60, Unique
+Chicken At Heart\I\Ability\Increases strength by 15% when HP is 60% or above, but decreases strength by 20% when HP is less than 60%.\60\y\Strength, HP60, Unique
+Chicken At Heart\II\Ability\Increases strength by 20% when HP is 60% or above, but decreases strength by 20% when HP is less than 60%.\80\y\Strength, HP60, Unique
 Combo Time\example\Ability\Extends the window between hitting an enemy and the combo counter resetting by `x` seconds.\0\y\ComboTime
 Combo Time\+2\Ability\Extends the window between hitting an enemy and the combo counter resetting by two seconds.\80\y\ComboTime
 Combo Time\+4\Ability\Extends the window between hitting an enemy and the combo counter resetting by four seconds.\100\y\ComboTime
-Connecting Call\example\Ability\Increases Luca's critical rate by 3/4% for every buff with a different icon applied to him (up to 21/28%).;; Also applies one of the following buffs every time Luca lands a critical hit: Sylvan Secret Arts, Human Wisdom, and Rokkan Expertise. Each of these buffs increase Luca's critical rate by 3% for 15/20 seconds.;; Only one instance of each buff can be active at the same time. After activating, this ability will not activate again for three seconds.\0\y\CritRate
-Connecting Call\I\Ability\Increases Luca's critical rate by 3% for every buff with a different icon applied to him (up to 21%).;; Also applies one of the following buffs every time Luca lands a critical hit: Sylvan Secret Arts, Human Wisdom, and Rokkan Expertise. Each of these buffs increase Luca's critical rate by 3% for 15 seconds.;; Only one instance of each buff can be active at the same time. After activating, this ability will not activate again for three seconds.\100\y\CritRate
-Connecting Call\II\Ability\Increases Luca's critical rate by 4% for every buff with a different icon applied to him (up to 28%).;; Also applies one of the following buffs every time Luca lands a critical hit: Sylvan Secret Arts, Human Wisdom, and Rokkan Expertise. Each of these buffs increase Luca's critical rate by 3% for 20 seconds.;; Only one instance of each buff can be active at the same time. After activating, this ability will not activate again for three seconds.\120\y\CritRate
+Connecting Call\example\Ability\Increases Luca's critical rate by 3/4% for every buff with a different icon applied to him (up to 21/28%).;; Also applies one of the following buffs every time Luca lands a critical hit: Sylvan Secret Arts, Human Wisdom, and Rokkan Expertise. Each of these buffs increase Luca's critical rate by 3% for 15/20 seconds.;; Only one instance of each buff can be active at the same time. After activating, this ability will not activate again for three seconds.\0\y\CritRate, Unique
+Connecting Call\I\Ability\Increases Luca's critical rate by 3% for every buff with a different icon applied to him (up to 21%).;; Also applies one of the following buffs every time Luca lands a critical hit: Sylvan Secret Arts, Human Wisdom, and Rokkan Expertise. Each of these buffs increase Luca's critical rate by 3% for 15 seconds.;; Only one instance of each buff can be active at the same time. After activating, this ability will not activate again for three seconds.\100\y\CritRate, Unique
+Connecting Call\II\Ability\Increases Luca's critical rate by 4% for every buff with a different icon applied to him (up to 28%).;; Also applies one of the following buffs every time Luca lands a critical hit: Sylvan Secret Arts, Human Wisdom, and Rokkan Expertise. Each of these buffs increase Luca's critical rate by 3% for 20 seconds.;; Only one instance of each buff can be active at the same time. After activating, this ability will not activate again for three seconds.\120\y\CritRate, Unique
 Copy Punisher\-\Ability\Increases damage to copies created by Propagation.\50\y\CopyPunisher
 Critical Damage\example\Ability\Increases the damage critical attacks inflict by `x`%.\0\n\CritDamage
 Critical Damage\8%\Ability\Increases the damage critical attacks inflict by 8%.\20\n\CritDamage
@@ -1422,7 +1422,7 @@ Critical Rate\8%\Ability\Increases critical rate by 8%.\100\n\CritRate
 Critical Rate\10%\Ability\Increases critical rate by 10%.\100\n\CritRate
 Critical Rate\12%\Ability\Increases critical rate by 12%.\100\n\CritRate
 Critical Rate\14%\Ability\Increases critical rate by 14%.\100\n\CritRate
-Cursed Blood\-\Ability\When in dragon form, increases critical rate by 30% but reduces defense by 30%.\60\y\CritRate
+Cursed Blood\-\Ability\When in dragon form, increases critical rate by 30% but reduces defense by 30%.\60\y\CritRate, Unique
 Curse Res\example\Ability\Reduces susceptibility to curses by `x`%.\0\y\CurseRes, Resistance
 Curse Res\15%\Ability\Reduces susceptibility to curses by 15%.\10\y\CurseRes, Resistance
 Curse Res\20%\Ability\Reduces susceptibility to curses by 20%.\20\y\CurseRes, Resistance
@@ -1439,7 +1439,7 @@ Dauntless Strength\15%\Ability\Increases strength by 15% for every 15 seconds th
 Dauntless Strength\20%\Ability\Increases strength by 20% for every 15 seconds that pass without the user being knocked back by an enemy. This buff can stack up to three times. All stacks will be lost upon being knocked back by an enemy.\120\y\Dauntless, Strength
 Defense Reduced = User Shield\I\Ability\Grants the user a one-use shield that nullifies damage less than 15% of the user's maximum HP upon successfully reducing an enemy's defense.;; After activating, this ability will not activate again for five seconds. This does not stack with any other shields.\80\y\Shield
 Defense Reduced = User Shield\II\Ability\Grants the user a one-use shield that nullifies damage less than 20% of the user's maximum HP upon successfully reducing an enemy's defense.;; After activating, this ability will not activate again for five seconds. This does not stack with any other shields.\100\y\Shield
-Defensive Stance\-\Ability\The user's strength is lowered by 10% during quests, but their defense is increased by 20%.\60\y\Defense
+Defensive Stance\-\Ability\The user's strength is lowered by 10% during quests, but their defense is increased by 20%.\60\y\Defense, Unique
 Demihuman's Bane\example\Ability\Increases damage to demihumans by `x`%.\0\y\Demihuman, Bane
 Demihuman's Bane\20%\Ability\Increases damage to demihumans by 20%.\60\y\Demihuman, Bane
 Demihuman's Bane\25%\Ability\Increases damage to demihumans by 25%.\80\y\Demihuman, Bane
@@ -1454,17 +1454,17 @@ Divine Gales\50%\Ability\Increases divine gale intake for clearing quests by 50%
 Divine Gales\100%\Ability\Increases divine gale intake for clearing quests by 100%.\0\y\Event, Facility, Score
 Divine Gales\125%\Ability\Increases divine gale intake for clearing quests by 125%.\0\y\Event, Facility, Score
 Divine Gales\150%\Ability\Increases divine gale intake for clearing quests by 150%.\0\y\Event, Facility, Score
-Divine Oath\example\Ability\Elisanne will gain the "Divine Revelation" effect for `x` seconds if any of the following occur: her force strike connects, she uses a skill, or she executes a 10-hit combo. This effect cannot stack, and when it is active, Elisanne will be immune to knockback.\0\y\KnockbackImmunity
-Divine Oath\I\Ability\Elisanne will gain the "Divine Revelation" effect for 12 seconds if any of the following occur: her force strike connects, she uses a skill, or she executes a 10-hit combo. This effect cannot stack, and when it is active, Elisanne will be immune to knockback.\0\y\KnockbackImmunity
-Divine Oath\II\Ability\Elisanne will gain the "Divine Revelation" effect for 13 seconds if any of the following occur: her force strike connects, she uses a skill, or she executes a 10-hit combo. This effect cannot stack, and when it is active, Elisanne will be immune to knockback.\0\y\KnockbackImmunity
+Divine Oath\example\Ability\Elisanne will gain the "Divine Revelation" effect for `x` seconds if any of the following occur: her force strike connects, she uses a skill, or she executes a 10-hit combo. This effect cannot stack, and when it is active, Elisanne will be immune to knockback.\0\y\KnockbackImmunity, Unique
+Divine Oath\I\Ability\Elisanne will gain the "Divine Revelation" effect for 12 seconds if any of the following occur: her force strike connects, she uses a skill, or she executes a 10-hit combo. This effect cannot stack, and when it is active, Elisanne will be immune to knockback.\0\y\KnockbackImmunity, Unique
+Divine Oath\II\Ability\Elisanne will gain the "Divine Revelation" effect for 13 seconds if any of the following occur: her force strike connects, she uses a skill, or she executes a 10-hit combo. This effect cannot stack, and when it is active, Elisanne will be immune to knockback.\0\y\KnockbackImmunity, Unique
 Divine Protection\-\Ability\Prevents the Overdrive Gauge from decreasing, and significantly increase Void Jeanne d'Arc's defense.\-1\y\DivineProtection, Enemy
 Divinity Penetrator\-\Ability\Ignores the effects of divine protection when attacking enemies.\50\y\DivinityPenetrator
-Draconic Charge\example\Ability\Fills `x`% of the user's dragon gauge when their HP drops to 30% (once per quest).\0\y\Last, ShapeshiftPrep
-Draconic Charge\I\Ability\Fills 25% of the user's dragon gauge when their HP drops to 30% (once per quest).\80\y\Last, ShapeshiftPrep
-Draconic Charge\II\Ability\Fills 50% of the user's dragon gauge when their HP drops to 30% (once per quest).\100\y\Last, ShapeshiftPrep
-Draconic Dream\example\Ability\Increases defense while shapeshifted by 80/100%. When the "Dream Boost" effect is active, adds 15/20% to the modifier applied to damage when in dragon form.\0\y\Defense, DragonDamage
-Draconic Dream\I\Ability\Increases defense while shapeshifted by 80%. When the "Dream Boost" effect is active, adds 15% to the modifier applied to damage when in dragon form.\80\y\Defense, DragonDamage
-Draconic Dream\II\Ability\Increases defense while shapeshifted by 100%. When the "Dream Boost" effect is active, adds 20% to the modifier applied to damage when in dragon form.\120\y\Defense, DragonDamage
+Draconic Charge\example\Ability\Fills `x`% of the user's dragon gauge when their HP drops to 30% (once per quest).\0\y\Last, ShapeshiftPrep, Unique
+Draconic Charge\I\Ability\Fills 25% of the user's dragon gauge when their HP drops to 30% (once per quest).\80\y\Last, ShapeshiftPrep, Unique
+Draconic Charge\II\Ability\Fills 50% of the user's dragon gauge when their HP drops to 30% (once per quest).\100\y\Last, ShapeshiftPrep, Unique
+Draconic Dream\example\Ability\Increases defense while shapeshifted by 80/100%. When the "Dream Boost" effect is active, adds 15/20% to the modifier applied to damage when in dragon form.\0\y\Defense, DragonDamage, Unique
+Draconic Dream\I\Ability\Increases defense while shapeshifted by 80%. When the "Dream Boost" effect is active, adds 15% to the modifier applied to damage when in dragon form.\80\y\Defense, DragonDamage, Unique
+Draconic Dream\II\Ability\Increases defense while shapeshifted by 100%. When the "Dream Boost" effect is active, adds 20% to the modifier applied to damage when in dragon form.\120\y\Defense, DragonDamage, Unique
 Dragon Damage\example\Ability\Adds `x`% to the modifier applied to damage when in dragon form\0\y\DragonDamage
 Dragon Damage\6%\Ability\Adds 6% to the modifier applied to damage when in dragon form\80\y\DragonDamage
 Dragon Damage\8%\Ability\Adds 8% to the modifier applied to damage when in dragon form\90\y\DragonDamage
@@ -1473,16 +1473,16 @@ Dragon Damage\14%\Ability\Adds 14% to the modifier applied to damage when in dra
 Dragon Damage\18%\Ability\Adds 18% to the modifier applied to damage when in dragon form\140\y\DragonDamage
 Dragon Delay\-\Ability\Sets back the Dragon Gauge by 150%.\-1\y\DragonDelay, Enemy
 Dragon Delay Res\-\Ability\completely prevents dragon delaying.\50\y\DelayRes
-Dragonlight's Resolve\example\Ability\Reduces dragon gauge depletion over time by `x`%, and increases attack rate when shapeshifted by 10%.\0\y\
-Dragonlight's Resolve\I\Ability\Reduces dragon gauge depletion over time by 20%, and increases attack rate when shapeshifted by 10%.\80\y\
-Dragonlight's Resolve\II\Ability\Reduces dragon gauge depletion over time by 30%, and increases attack rate when shapeshifted by 10%.\100\y\
+Dragonlight's Resolve\example\Ability\Reduces dragon gauge depletion over time by `x`%, and increases attack rate when shapeshifted by 10%.\0\y\Unique
+Dragonlight's Resolve\I\Ability\Reduces dragon gauge depletion over time by 20%, and increases attack rate when shapeshifted by 10%.\80\y\Unique
+Dragonlight's Resolve\II\Ability\Reduces dragon gauge depletion over time by 30%, and increases attack rate when shapeshifted by 10%.\100\y\Unique
 Dragon Time\example\Ability\Extends shapeshift time by `x`%.\50\n\DragonTime
 Dragon Time\8%\Ability\Extends shapeshift time by 8%.\50\n\DragonTime
 Dragon Time\10%\Ability\Extends shapeshift time by 10%.\60\n\DragonTime
 Dragon Time\15%\Ability\Extends shapeshift time by 15%.\80\n\DragonTime
 Dragon Time\20%\Ability\Extends shapeshift time by 20%.\100\n\DragonTime
 Dragon Time\25%\Ability\Extends shapeshift time by 25%.\120\n\DragonTime
-Dragon's Dominance\-\Ability\Increases player EXP intake for clearing quests by 15%. This ability does not stack with other similar abilities; the highest value will be applied. Normal attacks when in dragon form will dispel one enemy buff.\120\y\EXP, Dispel
+Dragon's Dominance\-\Ability\Increases player EXP intake for clearing quests by 15%. This ability does not stack with other similar abilities; the highest value will be applied. Normal attacks when in dragon form will dispel one enemy buff.\120\y\EXP, Dispel, Unique
 Dragon's Claws\example\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by `x`% in total. On second shapeshift strength is increased by `y`% in total. On third shapeshift strength is increased by `z`% in total.\0\y\Strength, InCombat
 Dragon's Claws\I\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 4% in total. On second shapeshift strength is increased by 10% in total. On third shapeshift strength is increased by 20% in total.\60\y\Strength, InCombat
 Dragon's Claws\II\Ability\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 5% in total. On second shapeshift strength is increased by 13% in total. On third shapeshift strength is increased by 25% in total.\80\y\Strength, InCombat
@@ -1502,10 +1502,10 @@ Eggsploration Points\25%\Ability\Increases eggsploration point intake for cleari
 Eggsploration Points\50%\Ability\Increases eggsploration point intake for clearing quests by 50%\0\y\Event, Facility, Score
 Eggsploration Points\100%\Ability\Increases eggsploration point intake for clearing quests by 100%\0\y\Event, Facility, Score
 Eggsploration Points\150%\Ability\Increases eggsploration point intake for clearing quests by 150%\0\y\Event, Facility, Score
-Electrically Charged\I\Ability\Increases strength by 15% when electrified.\60\y\Strength
-Electrically Charged\II\Ability\Increases strength by 25% when electrified.\80\y\Strength
-Emergency Repairs\I\Ability\Removes all buffs and debuffs on the user, grants them an HP regen buff, healing 20% Max HP every 1.5 seconds for 5 seconds, but renders them unable to move or attack for 5 seconds when HP drops to 30% (once per quest).\60\y\
-Emergency Repairs\II\Ability\Removes all buffs and debuffs on the user, grants them an HP regen buff, healing 25% Max HP every 1.5 seconds for 5 seconds, but renders them unable to move or attack for 5 seconds when HP drops to 30% (once per quest).\80\y\
+Electrically Charged\I\Ability\Increases strength by 15% when electrified.\60\y\Strength, Unique
+Electrically Charged\II\Ability\Increases strength by 25% when electrified.\80\y\Strength, Unique
+Emergency Repairs\I\Ability\Removes all buffs and debuffs on the user, grants them an HP regen buff, healing 20% Max HP every 1.5 seconds for 5 seconds, but renders them unable to move or attack for 5 seconds when HP drops to 30% (once per quest).\60\y\Unique
+Emergency Repairs\II\Ability\Removes all buffs and debuffs on the user, grants them an HP regen buff, healing 25% Max HP every 1.5 seconds for 5 seconds, but renders them unable to move or attack for 5 seconds when HP drops to 30% (once per quest).\80\y\Unique
 Energized: Strength\example\Ability\Increases strength by `x`% for 15 seconds each time the user is energized.\0\y\Strength, Energized
 Energized: Strength\15%\Ability\Increases strength by 15% for 15 seconds each time the user is energized.\80\y\Strength, Energized
 Energized: Strength\20%\Ability\Increases strength by 20% for 15 seconds each time the user is energized.\100\y\Strength, Energized
@@ -1529,21 +1529,21 @@ Extra Energy\I\Ability\Grants a 40% chance that a user's energy level will be in
 Extra Energy\II\Ability\Grants a 50% chance that a user's energy level will be increased by an additional stage upon being increased\70\y\Energy
 Extra Energy\III\Ability\Grants an 80% chance that a user's energy level will be increased by an additional stage upon being increased\80\y\Energy
 Fatalis's Bane\15%\Ability\Increases damage dealt to Fatalis by 15%\60\y\Bane
-Flame Blades' Protection\-\Ability\Fills 100% of skill gauges at the start of quests, and increases defense by 20% while Crystalline Blades Buffed is in effect.\100\y\SkillPrep, Defense
+Flame Blades' Protection\-\Ability\Fills 100% of skill gauges at the start of quests, and increases defense by 20% while Crystalline Blades Buffed is in effect.\100\y\SkillPrep, Defense, Unique
 Flame Res\example\Ability\Reduces flame damage taken by `x`%.\0\y\FlameRes, Resistance
 Flame Res\3%\Ability\Reduces flame damage taken by 3%.\20\y\FlameRes, Resistance
 Flame Res\4%\Ability\Reduces flame damage taken by 4%.\30\y\FlameRes, Resistance
 Flame Res\5%\Ability\Reduces flame damage taken by 5%.\40\y\FlameRes, Resistance
 Flame Res\8%\Ability\Reduces flame damage taken by 8%.\60\y\FlameRes, Resistance
 Flame Res\10%\Ability\Reduces flame damage taken by 10%.\80\y\FlameRes, Resistance
-Flamewyrm's Defiance\I\Ability\Reduces susceptibility to stun by 50%. When Mym is hit by an attack that would have stunned her, the skill gauge for the Dragon Claw skill fills by 25%. After activating, this gauge-filling effect will not activate again for 15 seconds.\70\y\StunRes, Resistance
-Flamewyrm's Defiance\II\Ability\Reduces susceptibility to stun by 100%. When Mym is hit by an attack that would have stunned her, the skill gauge for the Dragon Claw skill fills by 50%. After activating, this gauge-filling effect will not activate again for 15 seconds.\100\y\StunRes, Resistance
-Flamewyrm's Nature\I\Ability\Reduces susceptibility to burning by 50%. When shapeshifting for the first time, Mym will transform into Brunhilda regardless of what dragon she is equipped with, and her strength will increase by 15% for the remainder of the quest. The second time onwards, she will transform into High Brunhilda instead, and her attack rate while shapeshifted will increase by 15%.\70\y\BurnRes, Resistance, Strength, Speed, InCombat
-Flamewyrm's Nature\II\Ability\Reduces susceptibility to burning by 100%. When shapeshifting for the first time, Mym will transform into Brunhilda regardless of what dragon she is equipped with, her strength will increase by 15% for the remainder of the quest, and the skill Flames of Passion will be powered up for the remainder of the quest. The second time onwards, she will transform into High Brunhilda instead, and her attack rate while shapeshifted will increase by 15%.\100\y\BurnRes, Resistance, Strength, Speed, InCombat
-Flamewyrm's Sweet Nature\example\Ability\Reduces susceptibility to burning by `x`%. When shapeshifting, Mym will transform into Brunhilda regardless of what dragon she is equipped with, and her attack rate while shapeshifted will increase by 15%.\0\y\BurnRes, Resistance, Speed, InCombat
-Flamewyrm's Sweet Nature\I\Ability\Reduces susceptibility to burning by 50%. When shapeshifting, Mym will transform into Brunhilda regardless of what dragon she is equipped with, and her attack rate while shapeshifted will increase by 15%.\80\y\BurnRes, Resistance, Speed, InCombat
-Flamewyrm's Sweet Nature\II\Ability\Reduces susceptibility to burning by 100%. When shapeshifting, Mym will transform into Brunhilda regardless of what dragon she is equipped with, and her attack rate while shapeshifted will increase by 15%.\120\y\BurnRes, Resistance, Speed, InCombat
-Flash of Genius\-\Ability\Increases the chances of inflicting debuffs by 20% when the combo count is 15 or higher, and increases the user's critical rate by 20% for seven seconds every time two hits of Howling Meteor connect with an enemy.\100\y\Combo, DebuffChance, Debilitator, Debuff, Flurry
+Flamewyrm's Defiance\I\Ability\Reduces susceptibility to stun by 50%. When Mym is hit by an attack that would have stunned her, the skill gauge for the Dragon Claw skill fills by 25%. After activating, this gauge-filling effect will not activate again for 15 seconds.\70\y\StunRes, Resistance, Unique
+Flamewyrm's Defiance\II\Ability\Reduces susceptibility to stun by 100%. When Mym is hit by an attack that would have stunned her, the skill gauge for the Dragon Claw skill fills by 50%. After activating, this gauge-filling effect will not activate again for 15 seconds.\100\y\StunRes, Resistance, Unique
+Flamewyrm's Nature\I\Ability\Reduces susceptibility to burning by 50%. When shapeshifting for the first time, Mym will transform into Brunhilda regardless of what dragon she is equipped with, and her strength will increase by 15% for the remainder of the quest. The second time onwards, she will transform into High Brunhilda instead, and her attack rate while shapeshifted will increase by 15%.\70\y\BurnRes, Resistance, Strength, Speed, InCombat, Unique
+Flamewyrm's Nature\II\Ability\Reduces susceptibility to burning by 100%. When shapeshifting for the first time, Mym will transform into Brunhilda regardless of what dragon she is equipped with, her strength will increase by 15% for the remainder of the quest, and the skill Flames of Passion will be powered up for the remainder of the quest. The second time onwards, she will transform into High Brunhilda instead, and her attack rate while shapeshifted will increase by 15%.\100\y\BurnRes, Resistance, Strength, Speed, InCombat, Unique
+Flamewyrm's Sweet Nature\example\Ability\Reduces susceptibility to burning by 50%/100%. When shapeshifting, Mym will transform into Brunhilda regardless of what dragon she is equipped with, and her attack rate while shapeshifted will increase by 15%.\0\y\BurnRes, Resistance, Speed, InCombat, Unique
+Flamewyrm's Sweet Nature\I\Ability\Reduces susceptibility to burning by 50%. When shapeshifting, Mym will transform into Brunhilda regardless of what dragon she is equipped with, and her attack rate while shapeshifted will increase by 15%.\80\y\BurnRes, Resistance, Speed, InCombat, Unique
+Flamewyrm's Sweet Nature\II\Ability\Reduces susceptibility to burning by 100%. When shapeshifting, Mym will transform into Brunhilda regardless of what dragon she is equipped with, and her attack rate while shapeshifted will increase by 15%.\120\y\BurnRes, Resistance, Speed, InCombat, Unique
+Flash of Genius\-\Ability\Increases the chances of inflicting debuffs by 20% when the combo count is 15 or higher, and increases the user's critical rate by 20% for seven seconds every time two hits of Howling Meteor connect with an enemy.\100\y\Combo, DebuffChance, Debilitator, Debuff, Flurry, Unique
 Flurry Debilitator\example\Ability\Increases the chances of inflicting debuffs by `x`% when the combo count is 15 or higher.\0\y\Combo, DebuffChance, Debilitator, Debuff, Flurry
 Flurry Debilitator\15%\Ability\Increases the chances of inflicting debuffs by 15% when the combo count is 15 or higher.\80\y\Combo, DebuffChance, Debilitator, Debuff, Flurry
 Flurry Debilitator\20%\Ability\Increases the chances of inflicting debuffs by 20% when the combo count is 15 or higher.\100\y\Combo, DebuffChance, Debilitator, Debuff, Flurry
@@ -1581,9 +1581,9 @@ Force Strike\30%\Ability\Increases force strike damage by 30%.\60\n\ForceStrike
 Force Strike\40%\Ability\Increases force strike damage by 40%.\80\n\ForceStrike
 Force Strike\50%\Ability\Increases force strike damage by 50%.\100\n\ForceStrike
 Force Strike\60%\Ability\Increases force strike damage by 60%.\120\n\ForceStrike
-Force Strike Damage & Charge Rate\example\Ability\Increases force strike damage by 20/25% and charge rate by 15/20%.\0\y\ForceStrike, ChargeRate
-Force Strike Damage & Charge Rate\I\Ability\Increases force strike damage by 20% and charge rate by 15%.\80\y\ForceStrike, ChargeRate
-Force Strike Damage & Charge Rate\II\Ability\Increases force strike damage by 25% and charge rate by 20%.\100\y\ForceStrike, ChargeRate
+Force Strike Damage & Charge Rate\example\Ability\Increases force strike damage by 20/25% and charge rate by 15/20%.\0\y\ForceStrike, ChargeRate, Unique
+Force Strike Damage & Charge Rate\I\Ability\Increases force strike damage by 20% and charge rate by 15%.\80\y\ForceStrike, ChargeRate, Unique
+Force Strike Damage & Charge Rate\II\Ability\Increases force strike damage by 25% and charge rate by 20%.\100\y\ForceStrike, ChargeRate, Unique
 Freeze Res\example\Ability\Reduces susceptibility to freezing by `x`%.\0\y\FreezeRes, Resistance
 Freeze Res\15%\Ability\Reduces susceptibility to freezing by 15%.\10\y\FreezeRes, Resistance
 Freeze Res\20%\Ability\Reduces susceptibility to freezing by 20%.\20\y\FreezeRes, Resistance
@@ -1592,7 +1592,7 @@ Freeze Res\40%\Ability\Reduces susceptibility to freezing by 40%.\50\y\FreezeRes
 Freeze Res\50%\Ability\Reduces susceptibility to freezing by 50%.\60\y\FreezeRes, Resistance
 Freeze Res\75%\Ability\Reduces susceptibility to freezing by 75%.\100\y\FreezeRes, Resistance
 Freeze Res\100%\Ability\Reduces susceptibility to freezing by 100%.\100\y\FreezeRes, Resistance
-Frenzied Dance\-\Ability\Increases the duration of Dance of Rhapsody by 20% while Dragon Dance is in effect, and by 40% while Tiger Dance is in effect.\60\y\
+Frenzied Dance\-\Ability\Increases the duration of Dance of Rhapsody by 20% while Dragon Dance is in effect, and by 40% while Tiger Dance is in effect.\60\y\Unique
 Frenzy\-\Ability\Causes the enemy's strength to gradually increase and damage taken from skills to gradually decrease.\-1\y\Enemy
 Frenzy Res\-\Ability\Ignores the effects of frenzy when attacking and taking damage from enemies.\40\y\Resistance
 Fury\-\Ability\The overdrive guage will stop decreasing\-1\y\Fury, Enemy
@@ -1658,9 +1658,9 @@ Glam Shells\example\Ability\Increases glam shell intake for clearing quests by `
 Glam Shells\25%\Ability\Increases glam shell intake for clearing quests by 25%.\0\y\Event, Facility, Materials
 Glam Shells\35%\Ability\Increases glam shell intake for clearing quests by 35%.\0\y\Event, Facility, Materials
 Glam Shells\50%\Ability\Increases glam shell intake for clearing quests by 50%.\0\y\Event, Facility, Materials
-Great Sword Expertise\example\Ability\Grants the user a unique force strike, and increases force strike damage by 20/30%. Their force strike has three increasingly powerful charge levels and deals 20% increased damage to enemies in break state. In addition, they are immune to knockback while charging their force strike.\0\y\KnockbackImmunity
-Great Sword Expertise\I\Ability\Grants the user a unique force strike, and increases force strike damage by 20%. Their force strike has three increasingly powerful charge levels and deals 20% increased damage to enemies in break state. In addition, they are immune to knockback while charging their force strike.\80\y\KnockbackImmunity
-Great Sword Expertise\II\Ability\Grants the user a unique force strike, and increases force strike damage by 30%. Their force strike has three increasingly powerful charge levels and deals 20% increased damage to enemies in break state. In addition, they are immune to knockback while charging their force strike.\100\y\KnockbackImmunity
+Great Sword Expertise\example\Ability\Grants the user a unique force strike, and increases force strike damage by 20/30%. Their force strike has three increasingly powerful charge levels and deals 20% increased damage to enemies in break state. In addition, they are immune to knockback while charging their force strike.\0\y\KnockbackImmunity, Unique
+Great Sword Expertise\I\Ability\Grants the user a unique force strike, and increases force strike damage by 20%. Their force strike has three increasingly powerful charge levels and deals 20% increased damage to enemies in break state. In addition, they are immune to knockback while charging their force strike.\80\y\KnockbackImmunity, Unique
+Great Sword Expertise\II\Ability\Grants the user a unique force strike, and increases force strike damage by 30%. Their force strike has three increasingly powerful charge levels and deals 20% increased damage to enemies in break state. In addition, they are immune to knockback while charging their force strike.\100\y\KnockbackImmunity, Unique
 Guardian Shadow\example\Ability\Reduces susceptibility to paralysis and blindness by `x`%.\0\y\Resistance, BlindnessRes, ParalysisRes
 Guardian Shadow\I\Ability\Reduces susceptibility to paralysis and blindness by 50%.\80\y\Resistance, BlindnessRes, ParalysisRes
 Guardian Shadow\II\Ability\Reduces susceptibility to paralysis and blindness by 100%.\100\y\Resistance, BlindnessRes, ParalysisRes
@@ -1776,24 +1776,24 @@ Jupiter Res\15%\Ability\Reduces damage taken from Jupiter by 15%.\30\y\JupiterRe
 Jupiter Res\18%\Ability\Reduces damage taken from Jupiter by 18%.\45\y\JupiterRes, Resistance
 Jupiter Res\20%\Ability\Reduces damage taken from Jupiter by 20%.\60\y\JupiterRes, Resistance
 Jupiter Res\25%\Ability\Reduces damage taken from Jupiter by 25%.\90\y\JupiterRes, Resistance
-Kung Fu Mastery\-\Ability\Increases critical rate by 10% when HP is 70% or above. Also increases the user's critical rate by a further 20% when the combo count is 25 or higher, and an additional 20% when the combo count is 50 or higher.\120\y\CritRate
-Lance Expertise\example\Ability\Grants the user a unique force strike, and increases force strike damage by 20/30%. Their force strike has two charge levels. After the first level is charged, damage taken from enemy attacks will be reduced and the user will initiate a counterattack when damaged by certain enemy attacks. Once their force strike is fully charged, it will reduce enemy defense by 5% for 15 seconds. This debuff will not stack.\0\y\DefDown
-Lance Expertise\I\Ability\Grants the user a unique force strike, and increases force strike damage by 20%. Their force strike has two charge levels. After the first level is charged, damage taken from enemy attacks will be reduced and the user will initiate a counterattack when damaged by certain enemy attacks. Once their force strike is fully charged, it will reduce enemy defense by 5% for 15 seconds. This debuff will not stack.\80\y\DefDown
-Lance Expertise\II\Ability\Grants the user a unique force strike, and increases force strike damage by 30%. Their force strike has two charge levels. After the first level is charged, damage taken from enemy attacks will be reduced and the user will initiate a counterattack when damaged by certain enemy attacks. Once their force strike is fully charged, it will reduce enemy defense by 5% for 15 seconds. This debuff will not stack.\100\y\DefDown
-Last Bravery\I\Ability\Increases the entire team's strength by 20% and defense by 30% for 15 seconds when the user's HP drops to 30% (once per quest).\40\y\Last, Strength, Defense, HP30
-Last Bravery\II\Ability\Increases the entire team's strength by 30% and defense by 40% for 15 seconds when the user's HP drops to 30% (once per quest).\60\y\Last, Strength, Defense, HP30
-Last Boost\I\Ability\Fills 50% of the entire team's skill gauges when the user's HP drops to 30% (once per quest).\40\y\Last, SkillPrep, HP30
-Last Boost\II\Ability\Fills 100% of the entire team's skill gauges when the user's HP drops to 30% (once per quest).\60\y\Last, SkillPrep, HP30
-Last Burst\I\Ability\Buffs strength by 40% for 10 seconds when HP drops to 30% (once per quest).\40\y\Last, Strength, HP30
-Last Burst\II\Ability\Buffs strength by 50% for 10 seconds when HP drops to 30% (once per quest).\60\y\Last, Strength, HP30
+Kung Fu Mastery\-\Ability\Increases critical rate by 10% when HP is 70% or above. Also increases the user's critical rate by a further 20% when the combo count is 25 or higher, and an additional 20% when the combo count is 50 or higher.\120\y\CritRate, Unique
+Lance Expertise\example\Ability\Grants the user a unique force strike, and increases force strike damage by 20/30%. Their force strike has two charge levels. After the first level is charged, damage taken from enemy attacks will be reduced and the user will initiate a counterattack when damaged by certain enemy attacks. Once their force strike is fully charged, it will reduce enemy defense by 5% for 15 seconds. This debuff will not stack.\0\y\DefDown, Unique
+Lance Expertise\I\Ability\Grants the user a unique force strike, and increases force strike damage by 20%. Their force strike has two charge levels. After the first level is charged, damage taken from enemy attacks will be reduced and the user will initiate a counterattack when damaged by certain enemy attacks. Once their force strike is fully charged, it will reduce enemy defense by 5% for 15 seconds. This debuff will not stack.\80\y\DefDown, Unique
+Lance Expertise\II\Ability\Grants the user a unique force strike, and increases force strike damage by 30%. Their force strike has two charge levels. After the first level is charged, damage taken from enemy attacks will be reduced and the user will initiate a counterattack when damaged by certain enemy attacks. Once their force strike is fully charged, it will reduce enemy defense by 5% for 15 seconds. This debuff will not stack.\100\y\DefDown, Unique
+Last Bravery\I\Ability\Increases the entire team's strength by 20% and defense by 30% for 15 seconds when the user's HP drops to 30% (once per quest).\40\y\Last, Strength, Defense, HP30, Unique
+Last Bravery\II\Ability\Increases the entire team's strength by 30% and defense by 40% for 15 seconds when the user's HP drops to 30% (once per quest).\60\y\Last, Strength, Defense, HP30, Unique
+Last Boost\I\Ability\Fills 50% of the entire team's skill gauges when the user's HP drops to 30% (once per quest).\40\y\Last, SkillPrep, HP30, Unique
+Last Boost\II\Ability\Fills 100% of the entire team's skill gauges when the user's HP drops to 30% (once per quest).\60\y\Last, SkillPrep, HP30, Unique
+Last Burst\I\Ability\Buffs strength by 40% for 10 seconds when HP drops to 30% (once per quest).\40\y\Last, Strength, HP30, Unique
+Last Burst\II\Ability\Buffs strength by 50% for 10 seconds when HP drops to 30% (once per quest).\60\y\Last, Strength, HP30, Unique
 Last Defense\example\Ability\Buffs defense by `x`% for 15 seconds when HP drops to 30% (once per quest).\0\y\Last, Defense
 Last Defense\30%\Ability\Buffs defense by 30% for 15 seconds when HP drops to 30% (once per quest).\20\y\Last, Defense
 Last Defense\40%\Ability\Buffs defense by 40% for 15 seconds when HP drops to 30% (once per quest).\40\y\Last, Defense
 Last Defense\50%\Ability\Buffs defense by 50% for 15 seconds when HP drops to 30% (once per quest).\60\y\Last, Defense
 Last Defense\60%\Ability\Buffs defense by 60% for 15 seconds when HP drops to 30% (once per quest).\80\y\Last, Defense
 Last Defense\100%\Ability\Buffs defense by 100% for 15 seconds when HP drops to 30% (once per quest).\120\y\Last, Defense
-Last Destruction\I\Ability\Increases the damage of the next attack skill used by each team member by 30% when the user's HP drops to 30% (once per quest).\40\y\Last, Strength
-Last Destruction\II\Ability\Increases the damage of the next attack skill used by each team member by 40% when the user's HP drops to 30% (once per quest).\60\y\Last, Strength
+Last Destruction\I\Ability\Increases the damage of the next attack skill used by each team member by 30% when the user's HP drops to 30% (once per quest).\40\y\Last, Strength, Unique
+Last Destruction\II\Ability\Increases the damage of the next attack skill used by each team member by 40% when the user's HP drops to 30% (once per quest).\60\y\Last, Strength, Unique
 Last Devastation\example\Ability\Increases critical rate by `x`% for 15 seconds when HP drops to 30% (once per quest).\0\y\Last, CritRate
 Last Devastation\10%\Ability\Increases critical rate by 10% for 15 seconds when HP drops to 30% (once per quest).\60\y\Last, CritRate
 Last Devastation\20%\Ability\Increases critical rate by 20% for 15 seconds when HP drops to 30% (once per quest).\80\y\Last, CritRate
@@ -1814,15 +1814,15 @@ Light Res\5%\Ability\Reduces light damage taken by 5%.\40\y\LightRes, Resistance
 Light Res\8%\Ability\Reduces light damage taken by 8%.\60\y\LightRes, Resistance
 Light Res\10%\Ability\Reduces light damage taken by 10%.\80\y\LightRes, Resistance
 Light Res\13%\Ability\Reduces light damage taken by 13%.\100\y\LightRes, Resistance
-Love's Shield\example\Ability\Using Love & Acclaim grants the user a one-use shield that nullifies damage less than 10/20% of the user's maximum HP. This does not stack with any other shields.\0\y\Shield
-Love's Shield\I\Ability\Using Love & Acclaim grants the user a one-use shield that nullifies damage less than 10% of the user's maximum HP. This does not stack with any other shields.\60\y\Shield
-Love's Shield\II\Ability\Using Love & Acclaim grants the user a one-use shield that nullifies damage less than 20% of the user's maximum HP. This does not stack with any other shields.\80\y\Shield
+Love's Shield\example\Ability\Using Love & Acclaim grants the user a one-use shield that nullifies damage less than 10/20% of the user's maximum HP. This does not stack with any other shields.\0\y\Shield, Unique
+Love's Shield\I\Ability\Using Love & Acclaim grants the user a one-use shield that nullifies damage less than 10% of the user's maximum HP. This does not stack with any other shields.\60\y\Shield, Unique
+Love's Shield\II\Ability\Using Love & Acclaim grants the user a one-use shield that nullifies damage less than 20% of the user's maximum HP. This does not stack with any other shields.\80\y\Shield, Unique
 Loving Heart\-\Ability\Increases player EXP intake for clearing quests by 10%.\100\y\EXP
-L.S. Reactor\I\Ability\Boosts damage dealt to boss enemies in "Mega Man: Chaos Protocol" quests by 25%. When shapeshifting, Mega Man will jump onto Rush regardless of what dragon he is equipped with.\130\y\
-L.S. Reactor\II\Ability\Boosts damage dealt to boss enemies in "Mega Man: Chaos Protocol" quests by 30%. When shapeshifting, Mega Man will jump onto Rush regardless of what dragon he is equipped with.\200\y\
-Magical Modification\I\Ability\Using Ancient Ray grants the user the "Altered Strike" effect. When this effect is active, the user's next force strike will create a buff zone that lasts for 10 seconds and increases the strength of adventurers inside it by 20%. This effect cannot stack, and will be consumed on use.\80\y\BuffZone, Zone, Strength, Buff, Team
-Magical Modification\II\Ability\Using Ancient Ray grants the user the "Altered Strike" effect. When this effect is active, the user's next force strike will create a buff zone that lasts for 10 seconds and increases the strength of adventurers inside it by 25%. This effect cannot stack, and will be consumed on use.\100\y\BuffZone, Zone, Strength, Buff, Team
-Magical Reduction\I\Ability\Fills 100% of skill gauges at the start of quests. Using Elder Cure grants the user the "Dispel Strike" effect. When this effect is active, the user's next force strike will dispel one enemy buff. This effect cannot stack, and will be consumed on use.\100\y\Dispel, SkillPrep, Stance
+L.S. Reactor\I\Ability\Boosts damage dealt to boss enemies in "Mega Man: Chaos Protocol" quests by 25%. When shapeshifting, Mega Man will jump onto Rush regardless of what dragon he is equipped with.\130\y\Unique
+L.S. Reactor\II\Ability\Boosts damage dealt to boss enemies in "Mega Man: Chaos Protocol" quests by 30%. When shapeshifting, Mega Man will jump onto Rush regardless of what dragon he is equipped with.\200\y\Unique
+Magical Modification\I\Ability\Using Ancient Ray grants the user the "Altered Strike" effect. When this effect is active, the user's next force strike will create a buff zone that lasts for 10 seconds and increases the strength of adventurers inside it by 20%. This effect cannot stack, and will be consumed on use.\80\y\BuffZone, Zone, Strength, Buff, Team, Unique
+Magical Modification\II\Ability\Using Ancient Ray grants the user the "Altered Strike" effect. When this effect is active, the user's next force strike will create a buff zone that lasts for 10 seconds and increases the strength of adventurers inside it by 25%. This effect cannot stack, and will be consumed on use.\100\y\BuffZone, Zone, Strength, Buff, Team, Unique
+Magical Reduction\I\Ability\Fills 100% of skill gauges at the start of quests. Using Elder Cure grants the user the "Dispel Strike" effect. When this effect is active, the user's next force strike will dispel one enemy buff. This effect cannot stack, and will be consumed on use.\100\y\Dispel, SkillPrep, Stance, Unique
 Mana\example\Ability\Increases mana intake for clearing quests by `x`%.\0\y\
 Mana\3%\Ability\Increases mana intake for clearing quests by 3%.\10\y\
 Mana\5%\Ability\Increases mana intake for clearing quests by 5%.\20\y\
@@ -1850,9 +1850,9 @@ Motivational Logs\example\Ability\Increases motivational log intake for clearing
 Motivational Logs\25%\Ability\Increases motivational log intake for clearing quests by 25%.\0\y\Event, Facility, Score
 Motivational Logs\35%\Ability\Increases motivational log intake for clearing quests by 35%.\0\y\Event, Facility, Score
 Motivational Logs\50%\Ability\Increases motivational log intake for clearing quests by 50%.\0\y\Event, Facility, Score
-Obsessive Love\example\Ability\When the "Obsession" effect is active, increases strength by 20/30%, and decreases defense by 20%.\0\y\Strength
-Obsessive Love\I\Ability\When the "Obsession" effect is active, increases strength by 20%, and decreases defense by 20%.\60\y\Strength
-Obsessive Love\II\Ability\When the "Obsession" effect is active, increases strength by 30%, and decreases defense by 20%.\80\y\Strength
+Obsessive Love\example\Ability\When the "Obsession" effect is active, increases strength by 20/30%, and decreases defense by 20%.\0\y\Strength, Unique
+Obsessive Love\I\Ability\When the "Obsession" effect is active, increases strength by 20%, and decreases defense by 20%.\60\y\Strength, Unique
+Obsessive Love\II\Ability\When the "Obsession" effect is active, increases strength by 30%, and decreases defense by 20%.\80\y\Strength, Unique
 Overdrive Punisher\example\Ability\Increases damage to enemies in overdrive state by `x`%.\0\y\Overdrive, Punisher
 Overdrive Punisher\3%\Ability\Increases damage to enemies in overdrive state by 3%.\20\y\Overdrive, Punisher
 Overdrive Punisher\4%\Ability\Increases damage to enemies in overdrive state by 4%.\30\y\Overdrive, Punisher
@@ -2098,9 +2098,9 @@ Stunned Punisher\15%\Ability\Increases damage to stunned enemies by 15%.\40\y\St
 Stunned Punisher\20%\Ability\Increases damage to stunned enemies by 20%.\60\y\Stun, Punisher
 Stunned Punisher\25%\Ability\Increases damage to stunned enemies by 25%.\80\y\Stun, Punisher
 Stunned Punisher\30%\Ability\Increases damage to stunned enemies by 30%.\100\y\Stun, Punisher
-Sylvan Strength\I\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 25-hit combo.\70\y\CritRate, Strength, Combo
-Sylvan Strength\II\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 20-hit combo.\100\y\CritRate, Strength, Combo
-System Overload\-\Ability\Increases strength by 20% but decreases defense by 50% when HP is 30% or below.\60\y\Strength
+Sylvan Strength\I\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 25-hit combo.\70\y\CritRate, Strength, Combo, Unique
+Sylvan Strength\II\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 20-hit combo.\100\y\CritRate, Strength, Combo, Unique
+System Overload\-\Ability\Increases strength by 20% but decreases defense by 50% when HP is 30% or below.\60\y\Strength, Unique
 Tent Canvas\example\Ability\Increases canvas tent intake for clearing quests by `x`%\0\y\Event, Facility, Materials
 Tent Canvas\25%\Ability\Increases canvas tent intake for clearing quests by 25%\0\y\Event, Facility, Materials
 Tent Canvas\50%\Ability\Increases canvas tent intake for clearing quests by 50%\0\y\Event, Facility, Materials
@@ -2112,10 +2112,10 @@ Thaumian's Bane\20%\Ability\Increases damage to thaumians by 20%.\60\y\Thaumian,
 Thaumian's Bane\25%\Ability\Increases damage to thaumians by 25%.\80\y\Thaumian, Bane
 Thaumian's Bane\35%\Ability\Increases damage to thaumians by 35%.\120\y\Thaumian, Bane
 The Beast Within\-\Ability\When the "Loathsome Power" effect is active, increases strength by 20% and defense by 50%\60\y\Strength, Defense, Unique
-The Faceless God\example\Ability\When shapeshifting, Lathna will transform into Nyarlathotep regardless of what dragon she is equipped with. Grants an HP regen buff healing for `x`% Max HP every 3.9s for 20 seconds each time she shapeshifts.\0\y\Regen
-The Faceless God\I\Ability\When shapeshifting, Lathna will transform into Nyarlathotep regardless of what dragon she is equipped with. Grants an HP regen buff healing for 12% Max HP every 3.9s for 20 seconds each time she shapeshifts.\60\y\Regen
-The Faceless God\II\Ability\When shapeshifting, Lathna will transform into Nyarlathotep regardless of what dragon she is equipped with. Grants an HP regen buff healing for 14% Max HP every 3.9s for 20 seconds each time she shapeshifts.\80\y\Regen
-The Faceless God\III\Ability\When shapeshifting, Lathna will transform into Nyarlathotep regardless of what dragon she is equipped with. Grants an HP regen buff healing for 14%+ Max HP every 3.9s for 20 seconds each time she shapeshifts. Also increases damage to poisoned enemies by 15% when not shapeshifted, and by 215% when shapeshifted.\100\y\Regen, PoisonedPunisher
+The Faceless God\example\Ability\When shapeshifting, Lathna will transform into Nyarlathotep regardless of what dragon she is equipped with. Grants an HP regen buff healing for `x`% Max HP every 3.9s for 20 seconds each time she shapeshifts.\0\y\Regen, Unique
+The Faceless God\I\Ability\When shapeshifting, Lathna will transform into Nyarlathotep regardless of what dragon she is equipped with. Grants an HP regen buff healing for 12% Max HP every 3.9s for 20 seconds each time she shapeshifts.\60\y\Regen, Unique
+The Faceless God\II\Ability\When shapeshifting, Lathna will transform into Nyarlathotep regardless of what dragon she is equipped with. Grants an HP regen buff healing for 14% Max HP every 3.9s for 20 seconds each time she shapeshifts.\80\y\Regen, Unique
+The Faceless God\III\Ability\When shapeshifting, Lathna will transform into Nyarlathotep regardless of what dragon she is equipped with. Grants an HP regen buff healing for 14%+ Max HP every 3.9s for 20 seconds each time she shapeshifts. Also increases damage to poisoned enemies by 15% when not shapeshifted, and by 215% when shapeshifted.\100\y\Regen, PoisonedPunisher, Unique
 Therion's Bane\example\Ability\Increases damage to therions by `x`%.\0\y\Therion, Bane
 Therion's Bane\20%\Ability\Increases damage to therions by 20%.\60\y\Therion, Bane
 Therion's Bane\25%\Ability\Increases damage to therions by 25%.\80\y\Therion, Bane
@@ -2174,12 +2174,12 @@ Wonder Guard\-\Ability\Only adventurers with the proper bane skill can damage th
 Woodland Blessing\example\Ability\Reduces susceptibility to stun and sleep by `x`%.\0\y\StunRes, SleepRes, Resistance
 Woodland Blessing\50%\Ability\Reduces susceptibility to stun and sleep by 50%.\70\y\StunRes, SleepRes, Resistance
 Woodland Blessing\100%\Ability\Reduces susceptibility to stun and sleep by 100%.\100\y\StunRes, SleepRes, Resistance
-World's Dream\example\Ability\Grants the user's force strikes the ability to dispel one enemy buff when the combo count is 20/15 or higher.\0\y\Dispel
-World's Dream\I\Ability\Grants the user's force strikes the ability to dispel one enemy buff when the combo count is 20 or higher.\80\y\Dispel
-World's Dream\II\Ability\Grants the user's force strikes the ability to dispel one enemy buff when the combo count is 15 or higher.\100\y\Dispel
-Wyrmbound\example\Ability\Grants the user a dragondrive gauge, and changes the shapeshift button into a dragondrive button. Pressing this button activates their dragondrive. During dragondrive, standard attacks will fill the user's dragondrive gauge, the user's skill damage will be increased by 25/30%, and defense will be increased by 30/50%.\0\y\Defense, SkillDamage
-Wyrmbound\I\Ability\Grants the user a dragondrive gauge, and changes the shapeshift button into a dragondrive button. Pressing this button activates their dragondrive. During dragondrive, standard attacks will fill the user's dragondrive gauge, the user's skill damage will be increased by 25%, and defense will be increased by 30%.\80\y\Defense, SkillDamage
-Wyrmbound\II\Ability\Grants the user a dragondrive gauge, and changes the shapeshift button into a dragondrive button. Pressing this button activates their dragondrive. During dragondrive, standard attacks will fill the user's dragondrive gauge, the user's skill damage will be increased by 30%, and defense will be increased by 50%.\100\y\Defense, SkillDamage
+World's Dream\example\Ability\Grants the user's force strikes the ability to dispel one enemy buff when the combo count is 20/15 or higher.\0\y\Dispel, Unique
+World's Dream\I\Ability\Grants the user's force strikes the ability to dispel one enemy buff when the combo count is 20 or higher.\80\y\Dispel, Unique
+World's Dream\II\Ability\Grants the user's force strikes the ability to dispel one enemy buff when the combo count is 15 or higher.\100\y\Dispel, Unique
+Wyrmbound\example\Ability\Grants the user a dragondrive gauge, and changes the shapeshift button into a dragondrive button. Pressing this button activates their dragondrive. During dragondrive, standard attacks will fill the user's dragondrive gauge, the user's skill damage will be increased by 25/30%, and defense will be increased by 30/50%.\0\y\Defense, SkillDamage, Unique
+Wyrmbound\I\Ability\Grants the user a dragondrive gauge, and changes the shapeshift button into a dragondrive button. Pressing this button activates their dragondrive. During dragondrive, standard attacks will fill the user's dragondrive gauge, the user's skill damage will be increased by 25%, and defense will be increased by 30%.\80\y\Defense, SkillDamage, Unique
+Wyrmbound\II\Ability\Grants the user a dragondrive gauge, and changes the shapeshift button into a dragondrive button. Pressing this button activates their dragondrive. During dragondrive, standard attacks will fill the user's dragondrive gauge, the user's skill damage will be increased by 30%, and defense will be increased by 50%.\100\y\Defense, SkillDamage, Unique
 Zest\example\Ability\Increases zest intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by `x`%.\0\y\Event, Facility, Score
 Zest\25%\Ability\Increases zest intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by 25%.\0\y\Event, Facility, Score
 Zest\35%\Ability\Increases zest intake for clearing quests in the <:Element_Flame:532106087952810005>A Dash of Disaster Event by 35%.\0\y\Event, Facility, Score
