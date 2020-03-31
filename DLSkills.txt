@@ -812,6 +812,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Shadow) Dragon's Might\example\Aura\If the user is attuned to Shadow: Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\Strength, InCombat, Shadow
 (Shadow) Dragon's Might\I\Aura\If the user is attuned to Shadow: Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\Strength, InCombat, Shadow
 (Shadow) Dragon's Might\II\Aura\If the user is attuned to Shadow: Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\100\y\Strength, InCombat, Shadow
+(Shadow) HP Below 30 = Strength\example\Aura\If the user is attuned to Shadow: increases strength by `x`% when HP is 30% or below.\0\y\HP30, Strength, Shadow
+(Shadow) HP Below 30 = Strength\30%\Aura\If the user is attuned to Shadow: increases strength by 30% when HP is 30% or below.\70\y\HP30, Strength, Shadow
+(Shadow) HP Below 30 = Strength\40%\Aura\If the user is attuned to Shadow: increases strength by 40% when HP is 30% or below.\100\y\HP30, Strength, Shadow
 (Shadow) HP 30% = Strength\example\Aura\If the user is attuned to Shadow: increases strength by `x`% when HP is 30% or above.\0\y\HP30, Strength, Shadow
 (Shadow) HP 30% = Strength\35%\Aura\If the user is attuned to Shadow: increases strength by 35% when HP is 30% or above.\35\y\HP30, Strength, Shadow
 (Shadow) HP 30% = Strength\50%\Aura\If the user is attuned to Shadow: increases strength by 50% when HP is 30% or above.\50\y\HP30, Strength, Shadow
@@ -950,6 +953,9 @@ Force Strike\example\Aura\Increases force strike damage by `x`%.\0\y\ForceStrike
 Force Strike\50%\Aura\Increases force strike damage by 50%.\80\y\ForceStrike
 Force Strike\60%\Aura\Increases force strike damage by 60%.\100\y\ForceStrike
 Gauge Decelerator\30%\Aura\Slows the rate the mode gauge decreases by 30%.\100\y\
+HP Below 30 = Strength\example\Aura\Increases strength by `x`% when HP is 30% or below.\0\y\HP30, Strength
+HP Below 30 = Strength\30%\Aura\Increases strength by 30% when HP is 30% or below.\80\y\HP30, Strength
+HP Below 30 = Strength\40%\Aura\Increases strength by 40% when HP is 30% or below.\100\y\HP30, Strength
 HP 30% = Strength\example\Aura\Increases strength by `x`% when HP is 30% or above.\0\y\HP30, Strength
 HP 30% = Strength\35%\Aura\Increases strength by 35% when HP is 30% or above.\35\y\HP30, Strength
 HP 30% = Strength\50%\Aura\Increases strength by 50% when HP is 30% or above.\50\y\HP30, Strength
