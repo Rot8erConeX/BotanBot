@@ -153,7 +153,7 @@ def all_commands(include_nil=false,permissions=-1)
      'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias','dmg',
      'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','limit',
      'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol','reload','update','mats','materials','spiral','node','nodes',
-     'damage','coability','coabil','coab','chain','team']
+     'damage','coability','coabil','coab','chain','team','backpack']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -2120,8 +2120,8 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     else
       eng=''
       eng=semoji[3] if skl1[7]=='Yes'
-      eng=semoji[4] if skl1[10].include?('Damage')
-      eng=semoji[5] if skl1[7]=='Yes' && skl1[10].include?('Damage')
+      eng=semoji[4] if !skl1[10].nil? && skl1[10].include?('Damage')
+      eng=semoji[5] if skl1[7]=='Yes' && !skl1[10].nil? && skl1[10].include?('Damage')
       strx="#{strx}\n*#{k[6][0]}#{eng}#{energy_emoji(skl1[10])} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP*\n#{x[0]}"
       strx2="#{strx2}\n#{k[6][0]}#{eng}#{energy_emoji(skl1[10])} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP"
     end
@@ -2131,8 +2131,8 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     else
       eng=''
       eng=semoji[3] if skl2[7]=='Yes'
-      eng=semoji[4] if skl2[10].include?('Damage')
-      eng=semoji[5] if skl2[7]=='Yes' && skl2[10].include?('Damage')
+      eng=semoji[4] if !skl2[10].nil? && skl2[10].include?('Damage')
+      eng=semoji[5] if skl2[7]=='Yes' && !skl2[10].nil? && skl2[10].include?('Damage')
       strx="#{strx}\n\n*#{k[6][1]}#{eng}#{energy_emoji(skl2[10])} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP*\n#{x[1]}"
       strx2="#{strx2}\n#{k[6][1]}#{eng}#{energy_emoji(skl2[10])} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP"
     end
@@ -7797,7 +7797,7 @@ def adv_chain_list(event,args,bot)
   return disp_adv_chain(event,args,bot)
 end
 
-bot.command([:team]) do |event, *args|
+bot.command([:team,:backpack]) do |event, *args|
   return nil if overlap_prevent(event)
   adv_chain_list(event,args,bot)
   return nil
@@ -9599,6 +9599,10 @@ bot.mention do |event|
   elsif ['serveraliases','saliases'].include?(args[0].downcase)
     args.shift
     disp_aliases(bot,event,args,1)
+    m=false
+  elsif ['team','backpack'].include?(args[0].downcase)
+    args.shift
+    adv_chain_list(event,args,bot)
     m=false
   elsif ['checkaliases','seealiases','aliases'].include?(args[0].downcase)
     args.shift
