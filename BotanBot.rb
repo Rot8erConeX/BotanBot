@@ -5107,7 +5107,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   genders.uniq!
   races.uniq!
   cygames.uniq!
-  char=@adventurers.map{|q| q}.uniq
+  char=@adventurers.reject{|q| q[0]=='Puppy'}.uniq
   search=[]
   emo=[]
   if rarity.length>0
@@ -5368,7 +5368,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   fltr.uniq!
   tags.uniq!
   cygames.uniq!
-  char=@dragons.map{|q| q}.uniq
+  char=@dragons.reject{|q| q[0]=='Puppy'}.uniq
   search=[]
   emo=[]
   if rarity.length>0
