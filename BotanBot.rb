@@ -6179,7 +6179,7 @@ def find_in_skills(bot,event,args=nil,mode=0)
   end
 end
 
-def find_in_abilities(bot,event,args=nil,mode=0)
+def find_in_abilities(bot,event,args=nil)
   data_load()
   args=normalize(event.message.text.downcase).gsub(',','').split(' ') if args.nil?
   args=args.map{|q| normalize(q.downcase)}
@@ -8169,7 +8169,7 @@ bot.command([:find,:search,:lookup]) do |event, *args|
     return nil
   elsif ['aura','auras'].include?(args[0].downcase)
     args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
-    find_abilities(bot,event,args,1)
+    find_abilities(bot,event,args)
     return nil
   elsif ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs'].include?(args[0].downcase)
     args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
@@ -9311,7 +9311,7 @@ bot.mention do |event|
       find_abilities(bot,event,args)
     elsif ['aura','auras'].include?(args[0].downcase)
       args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
-      find_abilities(bot,event,args,1)
+      find_abilities(bot,event,args)
     elsif ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs'].include?(args[0].downcase)
       args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
       find_abilities(bot,event,args)
