@@ -68,6 +68,7 @@ Phoenix\4\Flame\29, 299\9, 97\Regeneration Flame\(Flame) HP +30%;; (Flame) HP +4
 Poli'ahu\4\Water\30, 301\9, 95\Lilinoe's Mist\(Water) HP & Strength +15%;; (Water) HP & Strength +20%\2000, 2200\1.5, 1.5\2\No\No\Poli'ahu\\\(Water) HP +15%;; (Water) HP +20%;;;; (Water) Strength +15%;; (Water) Strength +20%\\F\KoG\default; 196%; 216%; 82% + 192%
 Poseidon\5\Water\37, 376\11, 119\Poseidon's Trident\(Water) HP & Strength +20%;; (Water) HP & Strength +30%\5000, 8500\1.8, 1\2\No\Yes\Poseidon\\\(Water) HP +20%;; (Water) HP +30%;;;; (Water) Strength +20%;; (Water) Strength +30%\\M\KoG\default; 176%; 194%; 246%
 Prometheus\5\Flame\37, 374\12, 121\Promethean Flame\(Flame) Strength +35% Wind Res +15%;; (Flame) Strength +50% Wind Res +15%\5000, 8500\1.8, 1\5\Yes\Yes\Prometheus\Umehara Yuuichirou\Simon King\(Flame) Strength +35%;; (Flame) Strength +50%;;;; (Flame) Wind Res +15%;; (Flame) Wind Res +15%\\M\\default; 160%; 176%; 224%
+Puppy\5s\Light\37, 371\12, 124\Shining Breath\Player EXP +10%;; Player EXP+15%\5000, 300\1.35, 1\1\No\No\Puppy\\\\\M\\default; Bork; Heck; Sniff; Arf
 Rathalos\5c\Flame\22, 221\7, 76\Firestorm\(Flame) HP & Strength +20%;; (Flame) HP & Strength +30%\5000, 300\0, 0\1\Yes\Yes\Rathalos\\\\MH\M\\default; 167%; 73%; 292% x2
 Roc\4\Wind\29, 296\10, 101\Tactical Vortex\(Wind) Strength +30%;; (Wind) Strength +45%\2000, 2200\1.5, 1.5\5\No\No\Roc\\\\\F\\default; 176%; 194%; 246%
 Rush\5\Flame\-, -\-, -\Rush Buster\-\-, -\4.375, 1.5\5\Yes\Yes\Rush\\\\MM\M\\default; 40% x3, 40% x3, 40% x3
