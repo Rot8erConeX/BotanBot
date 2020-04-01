@@ -823,6 +823,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Shadow) HP Below 30% = Strength\example\Aura\If the user is attuned to Shadow: increases strength by `x`% when HP is 30% or below.\0\y\HP30, Strength, Shadow
 (Shadow) HP Below 30% = Strength\30%\Aura\If the user is attuned to Shadow: increases strength by 30% when HP is 30% or below.\70\y\HP30, Strength, Shadow
 (Shadow) HP Below 30% = Strength\40%\Aura\If the user is attuned to Shadow: increases strength by 40% when HP is 30% or below.\100\y\HP30, Strength, Shadow
+(Shadow) HP Below 30% = Strength & Defense\example\Aura\f the user is attuned to Shadow: increases strength by 30%/40% and defense by 75%/100% when HP is 30% or below.\0\y\HP30, Strength, Defense
+(Shadow) HP Below 30% = Strength & Defense\30%/75%\Aura\f the user is attuned to Shadow: increases strength by 30% and defense by 75% when HP is 30% or below.\80\y\HP30, Strength, Defense
+(Shadow) HP Below 30% = Strength & Defense\40%/100%\Aura\f the user is attuned to Shadow: increases strength by 40% and defense by 100% when HP is 30% or below.\100\y\HP30, Strength, Defense
 (Shadow) HP 30% = Strength\example\Aura\If the user is attuned to Shadow: increases strength by `x`% when HP is 30% or above.\0\y\HP30, Strength, Shadow
 (Shadow) HP 30% = Strength\35%\Aura\If the user is attuned to Shadow: increases strength by 35% when HP is 30% or above.\35\y\HP30, Strength, Shadow
 (Shadow) HP 30% = Strength\50%\Aura\If the user is attuned to Shadow: increases strength by 50% when HP is 30% or above.\50\y\HP30, Strength, Shadow
