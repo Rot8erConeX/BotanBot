@@ -4665,6 +4665,7 @@ def snagstats(event,bot,f=nil,f2=nil)
     adv=@adventurers.map{|q| q}
     adv=find_in_adventurers(bot,event,[f2],2)[1] unless f2.nil? || f2.length<=0
     str="**There are #{adv.length} adventurers, including:**"
+    adv=adv.reject{|q| q[0]=='Puppy'}
     str2=''
     for i in 0...@max_rarity[0]
       m=adv.reject{|q| q[1][0,1].to_i != i+1}
@@ -4735,6 +4736,7 @@ def snagstats(event,bot,f=nil,f2=nil)
       str2="#{str2}\n#{m.length} Zodiac adventurer#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='-'}
       str2="#{str2}\n#{m.length} unavailable adventurer#{'s' unless m.length==1}" if m.length>0
+      str2="#{str2}\n1 good boi"
       str2=str2[1,str2.length-1] if str2[0,1]=="\n"
       str2=str2[2,str2.length-2] if str2[0,2]=="\n"
       str=extend_message(str,str2,event,2)
@@ -4745,6 +4747,7 @@ def snagstats(event,bot,f=nil,f2=nil)
     adv=@dragons.map{|q| q}
     adv=find_in_dragons(bot,event,[f2],2)[1] unless f2.nil?
     str="**There are #{adv.length} dragons, including:**"
+    adv=adv.reject{|q| q[0]=='Puppy'}
     str2=''
     for i in 0...@max_rarity[1]
       m=adv.reject{|q| q[1][0,1].to_i != i+1}
@@ -4803,6 +4806,7 @@ def snagstats(event,bot,f=nil,f2=nil)
       str2="#{str2}\n#{m.length} former-seasonal dragon#{'s' unless m.length==1}" if m.length>0
       m=adv.reject{|q| q[1][1,1]!='z'}
       str2="#{str2}\n#{m.length} Zodiac dragon#{'s' unless m.length==1}" if m.length>0
+      str2="#{str2}\n1 good boi"
       str2=str2[1,str2.length-1] if str2[0,1]=="\n"
       str2=str2[2,str2.length-2] if str2[0,2]=="\n"
       str=extend_message(str,str2,event,2)
