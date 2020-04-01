@@ -65,7 +65,7 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
     create_embed(event,"**#{command.downcase}** __toggle__","Responds with whether or not the channel the command is invoked in is one in which I can send extremely long replies.\n\nIf the channel does not fill one of the many molds for acceptable channels, server mods can toggle the ability with the words \"on\", \"semi\", and \"off\".",0xCE456B)
   elsif ['affliction','ailment'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows what the status named `name` does.",0xCE456B)
-  elsif ['team'].include?(command.downcase)
+  elsif ['team','backpack'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __\*names__","Creates a team out of the adventurers listed in `names`, and then calculates the totals of that team's coabilities and chaincoabilities.",0xCE456B)
   elsif ['avvie','avatar'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}**","Shows my current avatar, status, and reason for such.\n\nWhen used by my developer with a message following it, sets my status to that message.",0xCE456B)
@@ -461,8 +461,8 @@ def dragon_data(bot,event,args=nil,juststats=false)
   else
     eng=''
     eng=semoji[4] if skl1[7]=='Yes'
-    eng=semoji[5] if skl1[10].include?('Damage')
-    eng=semoji[6] if skl1[7]=='Yes' && skl1[10].include?('Damage')
+    eng=semoji[5] if !skl1[10].nil? && skl1[10].include?('Damage')
+    eng=semoji[6] if skl1[7]=='Yes' && !skl1[10].nil? && skl1[10].include?('Damage')
     str="#{str}\n\n**Skill:** *#{k[5]}#{eng}#{energy_emoji(skl1[10])}*;;;;;"
     strx=skl1[4].gsub(';; ',"\n")
   end
@@ -529,8 +529,8 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
           skl1=sklz[skl1]
           eng=''
           eng=", #{semoji[4]}Energizable" if skl1[7]=='Yes'
-          eng=", #{semoji[5]}Inspirable" if skl1[10].include?('Damage')
-          eng=", #{semoji[6]}Energizable/Inspirable" if skl1[7]=='Yes' && skl1[10].include?('Damage')
+          eng=", #{semoji[5]}Inspirable" if !skl1[10].nil? && skl1[10].include?('Damage')
+          eng=", #{semoji[6]}Energizable/Inspirable" if skl1[7]=='Yes' && !skl1[10].nil? && skl1[10].include?('Damage')
           str="#{str}\n**Skill:** *#{skl1[0]}#{eng}#{energy_emoji(skl1[10])}*\n#{skl1[4].gsub(';; ',"\n")}"
         end
       end
@@ -559,8 +559,8 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
     elsif s2s
       eng=''
       eng=", #{semoji[4]}Energizable" if skl1[7]=='Yes'
-      eng=", #{semoji[5]}Inspirable" if skl1[10].include?('Damage')
-      eng=", #{semoji[6]}Energizable/Inspirable" if skl1[7]=='Yes' && skl1[10].include?('Damage')
+      eng=", #{semoji[5]}Inspirable" if !skl1[10].nil? && skl1[10].include?('Damage')
+      eng=", #{semoji[6]}Energizable/Inspirable" if skl1[7]=='Yes' && !skl1[10].nil? && skl1[10].include?('Damage')
       str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__"
       if skl1[9].nil? || skl1[9].length<=0
         str="#{str}\n*Lv.1:* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2:* #{skl1[4].gsub(';; ',"\n")}"
@@ -1944,6 +1944,32 @@ def damage_modifiers(bot,event,args=nil)
         create_embed(event,"__Damage modifiers for **#{k[0]}#{dragon_emoji(k,bot)}**__",disp,element_color(k[2]),nil,xpic,f)
         return nil
       end
+    elsif k[0]=='Puppy'
+      kx=find_data_ex(:find_dragon,args.join(' '),event)
+      if k[19].length==1
+        if k[19][0].length>3
+          ff=[]
+          for i2 in 1...k[19][0].length-2
+            ff.push("*#{m[i2]} Hit:* #{k[19][0][i2]}#{'%' if k[19][0][i2].to_i.to_s==k[19][0][i2]}")
+          end
+          ff.push("\n**Dash Attack:** #{k[19][0][-2]}#{'%' if k[19][0][-2].to_i.to_s==k[19][0][-2]}")
+          ff.push("\n**Force Strike:** #{k[19][0][-1]}#{'%' if k[19][0][-1].to_i.to_s==k[19][0][-1]}")
+          disp=ff.join("\n")
+        else
+          disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike** #{k2[6]}"
+        end
+      else
+        disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike** #{k2[6]}"
+      end
+      for i in 0...kx[19].length
+        for i2 in 1...kx[19][i].length
+          kx[19][i][i2]="#{k[19][i][i2]}%" unless kx[19][i][i2].is_a?(String) && kx[19][i][i2].to_i.to_s != kx[19][i][i2]
+          kx[19][i][i2]="*#{m[i2]} Hit:* #{kx[19][i][i2]}"
+        end
+      end
+      disp2=kx[19][0][1,kx[19][0].length-1].join("\n")
+      create_embed(event,"__Damage modifiers for **#{k[0]}#{adv_emoji(k,bot)}**__",'',element_color(k[2][1]),nil,xpic,[['Adventurer',disp],['Dragon',disp2]])
+      return nil
     elsif !k[19].nil? && k[19].length>0
       f=[]
       k2=[1,2,3,4,5,6,7]
