@@ -5230,6 +5230,21 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
   if tags.length>0
+    if tags.include?('Punisher') && tags.length>1 && !args.include?('any')
+      tags2=[]
+      for i in 0...@punishments.length
+        if tags.include?(@punishments[i][0]) && !tags.include?(@punishments[i][1])
+          tags.push("#{@punishments[i][1]}")
+          tags2.push("#{@punishments[i][0]}")
+        end
+      end
+      if tags2.length>0
+        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
+        mm='those tags'
+        mm="the #{tags2[0]} tag" if tags2.length<2
+        textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
+      end
+    end
     search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
     sklz=@askilities.map{|q| q}
     for i in 0...char.length
@@ -5317,7 +5332,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   lookout=get_lookout_tags()
   lookout2=lookout.reject{|q| q[2]!='Cygame'}
   lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Dragon'}
-  lookout=lookout.reject{|q| q[2]!='Skill' && !q[2]!='Ability'}
+  lookout=lookout.reject{|q| q[2]!='Skill' && q[2]!='Ability'}
   lookout=lookout.reject{|q| ['Flame','Water','Wind','Light','Shadow'].include?(q[0])}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
@@ -5484,6 +5499,21 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
   if tags.length>0
+    if tags.include?('Punisher') && tags.length>1 && !args.include?('any')
+      tags2=[]
+      for i in 0...@punishments.length
+        if tags.include?(@punishments[i][0]) && !tags.include?(@punishments[i][1])
+          tags.push("#{@punishments[i][1]}")
+          tags2.push("#{@punishments[i][0]}")
+        end
+      end
+      if tags2.length>0
+        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
+        mm='those tags'
+        mm="the #{tags2[0]} tag" if tags2.length<2
+        textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
+      end
+    end
     search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
     sklz=@askilities.map{|q| q}
     for i in 0...char.length
@@ -5659,6 +5689,21 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
   if tags.length>0
+    if tags.include?('Punisher') && tags.length>1 && !args.include?('any')
+      tags2=[]
+      for i in 0...@punishments.length
+        if tags.include?(@punishments[i][0]) && !tags.include?(@punishments[i][1])
+          tags.push("#{@punishments[i][1]}")
+          tags2.push("#{@punishments[i][0]}")
+        end
+      end
+      if tags2.length>0
+        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
+        mm='those tags'
+        mm="the #{tags2[0]} tag" if tags2.length<2
+        textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
+      end
+    end
     search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
     sklz=@askilities.map{|q| q}
     for i in 0...char.length
@@ -5946,6 +5991,21 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
   if tags.length>0
+    if tags.include?('Punisher') && tags.length>1 && !args.include?('any')
+      tags2=[]
+      for i in 0...@punishments.length
+        if tags.include?(@punishments[i][0]) && !tags.include?(@punishments[i][1])
+          tags.push("#{@punishments[i][1]}")
+          tags2.push("#{@punishments[i][0]}")
+        end
+      end
+      if tags2.length>0
+        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
+        mm='those tags'
+        mm="the #{tags2[0]} tag" if tags2.length<2
+        textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
+      end
+    end
     search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
     sklz=@askilities.reject{|q| q[2]!='Skill'}
     for i in 0...char.length
@@ -6159,6 +6219,21 @@ def find_in_skills(bot,event,args=nil,mode=0)
     search.push("*Elements*: #{elem.join(', ')}")
   end
   if tags.length>0
+    if tags.include?('Punisher') && tags.length>1 && !args.include?('any')
+      tags2=[]
+      for i in 0...@punishments.length
+        if tags.include?(@punishments[i][0]) && !tags.include?(@punishments[i][1])
+          tags.push("#{@punishments[i][1]}")
+          tags2.push("#{@punishments[i][0]}")
+        end
+      end
+      if tags2.length>0
+        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
+        mm='those tags'
+        mm="the #{tags2[0]} tag" if tags2.length<2
+        textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
+      end
+    end
     search.push("*Tags*: #{tags.join(', ')}")
     if args.include?('any')
       search[-1]="#{search[-1]}\n(searching for skills with any listed tag)" if tags.length>1
@@ -6225,6 +6300,21 @@ def find_in_abilities(bot,event,args=nil)
     search.push("*Categories*: #{abiltypes.join(', ')}")
   end
   if tags.length>0
+    if tags.include?('Punisher') && tags.length>1 && !args.include?('any')
+      tags2=[]
+      for i in 0...@punishments.length
+        if tags.include?(@punishments[i][0]) && !tags.include?(@punishments[i][1])
+          tags.push("#{@punishments[i][1]}")
+          tags2.push("#{@punishments[i][0]}")
+        end
+      end
+      if tags2.length>0
+        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
+        mm='those tags'
+        mm="the #{tags2[0]} tag" if tags2.length<2
+        textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
+      end
+    end
     search.push("*Tags*: #{tags.join(', ')}")
     if args.include?('any')
       search[-1]="#{search[-1]}\n(searching for abilities with any listed tag)" if tags.length>1
@@ -6651,7 +6741,7 @@ def find_abilities(bot,event,args=nil)
     event.respond str
   else
     flds=triple_finish(flds[0][1].split("\n")) if !flds.nil? && flds.length==1
-    textra="#{textra}\n\n**No materials/items match your search**" if char.length<=0 || flds.nil?
+    textra="#{textra}\n\n**No abilities match your search**" if char.length<=0 || flds.nil?
     create_embed(event,"__**Ability Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total (#{totals[0]} abilities, #{totals[1]} auras, #{totals[2]} coabilities, #{totals[3]} chain coabilities)",nil,flds)
   end
 end
@@ -6775,7 +6865,6 @@ def find_all(bot,event,args=nil)
   drg[3]=drg[3].reject{|q| textra.include?(q.gsub('dragons','items'))}
   wrm[3]=wrm[3].reject{|q| textra.include?(q.gsub('wyrmprints','items'))}
   wpn[3]=wpn[3].reject{|q| textra.include?(q.gsub('weapons','items'))}
-  puts textra
   textra="#{textra.join("\n\n")}#{"\n\n#{adv[3].join("\n\n").gsub('adventurers','items')}" unless adv[3].nil? || adv[3].length<=0}#{"\n\n#{drg[3].join("\n\n").gsub('dragons','items')}" unless drg[3].nil? || drg[3].length<=0}#{"\n\n#{wrm[3].join("\n\n").gsub('wyrmprints','items')}" unless wrm[3].nil? || wrm[3].length<=0}#{"\n\n#{wpn[3].join("\n\n").gsub('weapons','items')}" unless wpn[3].nil? || wpn[3].length<=0}"
   textra='' if textra.gsub("\n",'').length<=0
   if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || str.length+adv[1].join("\n").length+drg[1].join("\n").length+wrm[1].join("\n").length+wpn[1].join("\n").length+"Totals: #{adv[1].length} adventurers, #{drg[1].length} dragons, #{wrm[4]} wyrmprints#{' (not shown)' if wrm[4]>wrm[1].length}, #{wpn[1].length} weapons".length+textra.length>=1800
