@@ -1910,7 +1910,9 @@ def damage_modifiers(bot,event,args=nil)
      '39th','40th','41st','42nd','43rd','44th','45th','46th','47th','48th','49th','50th']
   if wpn.length<=0
     k=find_data_ex(:find_adventurer,args.join(' '),event)
-    if k.nil? || k.length<=0
+    kx=find_data_ex(:find_adventurer,args.join(' '),event,true)
+    xk=find_data_ex(:find_dragon,args.join(' '),event,true)
+    if k.nil? || k.length<=0 || (!xk.nil? && xk.length>0 && (kx.nil? || kx.length<=0))
       k=find_data_ex(:find_dragon,args.join(' '),event)
       if k.nil? || k.length<=0
         k=find_data_ex(:find_weapon,args.join(' '),event)
