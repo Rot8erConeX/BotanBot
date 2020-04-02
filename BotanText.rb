@@ -356,6 +356,16 @@ end
             "Striking Haste \u2192 15%",
             "Stun Res \u2192 100%",
             "United Haste \u2192 I (8%)"]
+@punishments=[['Paralysis','ParalyzedPunisher'],
+              ['Poison','PoisonedPunisher'],
+              ['Blind','BlindedPunisher'],
+              ['Stun','StunnedPunisher'],
+              ['Broken','BrokenPunisher'],
+              ['Burn','BurningPunisher'],
+              ['Overdrive','OverdrivePunisher'],
+              ['Sleep','SleepingPunisher'],
+              ['Bleed','BleedingPunisher'],
+              ['ReducedDefense','ReducedDefensePunisher']]
 
 def dragon_data(bot,event,args=nil,juststats=false)
   dispstr=event.message.text.downcase.split(' ')
