@@ -513,7 +513,7 @@ Red Hot Jackpot\\Skill\Deals 1 hit of 506% flame damage to surrounding enemies.\
 Refreshing Flare\\Skill\Deals 7 hits of 117% light damage to surrounding enemies, inflicts paralysis for 13 seconds - dealing 46.7% damage every 3.99 seconds - with 100% base chance, and removes curse and poison from all allies.\Deals 7 hits of 130% light damage to surrounding enemies, inflicts paralysis for 13 seconds - dealing 66% damage every 3.99 seconds - with 110% base chance, and removes curse and poison from all allies.\\50, 50, 50, 50\Yes\3.4\\Damage, Paralysis, Cleanse\
 Regeneration Flame\\Skill\Restores HP to all allies with 45% Recovery Potency and applies Regen for 15 seconds, healing with 36% Regen Potencyevery 2.99 seconds.\Restores HP to all allies with 51% Recovery Potency and applies Regen for 15 seconds, healing with 41% Regen Potencyevery 2.99 seconds.\\30, 30, 30, 30\Yes\1.4\\Buff, HealSkill, Regen, Team\
 Relentless Torrent\\Skill\Deals 3 hits of 138.6% water damage to enemies directly ahead.\Deals 3 hits of 154% water damage to enemies directly ahead.\\50, 50, 50, 50\Yes\1.4\\Damage\
-Renegade Descent\\Skill\Deals 1 hit of 680% shadow damage to the target and nearby enemies. Damage will be increased as the user's HP decreases, up to 1 hit of 1020% shadow damage.;; If this skill is used during dragondrive, a variant called Renegade Dragonfall will be used instead. Renegade Dragonfall deals 5 hits of 163% shadow damage to multiple targets and enemies near those targets, and dispels one buff from each. Damage will be increased as the user's HP decreases, up to 5 hits of 244.5% shadow damage.;; Using this skill will consume 25% of the user's dragondrive gauge, but fills 100% of this skill's skill gauge after use.\Deals 1 hit of 756% shadow damage to the target and nearby enemies. Damage will be increased as the user's HP decreases, up to 1 hit of 1134% shadow damage.;; If this skill is used during dragondrive, a variant called Renegade Dragonfall will be used instead. Renegade Dragonfall deals 5 hits of 181% shadow damage to multiple targets and enemies near those targets, and dispels one buff from each. Damage will be increased as the user's HP decreases, up to 5 hits of 271.5% shadow damage.;; Using this skill will consume 25% of the user's dragondrive gauge, but fills 100% of this skill's skill gauge after use.\Deals 1 hit of 840% shadow damage to the target and nearby enemies. Damage will be increased as the user's HP decreases, up to 1 hit of 1260% shadow damage.;; If this skill is used during dragondrive, a variant called Renegade Dragonfall will be used instead. Renegade Dragonfall deals 5 hits of 202% shadow damage to multiple targets and enemies near those targets, and dispels one buff from each. Damage will be increased as the user's HP decreases, up to 5 hits of 303% shadow damage.;; Using this skill will consume 25% of the user's dragondrive gauge, but fills 100% of this skill's skill gauge after use.\2719, 2719, 2719, 2719\Yes\0\Deals 1 hit of 680%/756%/840% shadow damage to the target and nearby enemies. Damage will be increased as the user's HP decreases, up to 1 hit of 1020%/1134%/1260% shadow damage.;; If this skill is used during dragondrive, a variant called Renegade Dragonfall will be used instead. Renegade Dragonfall deals 5 hits of 163%/181%/202% shadow damage to multiple targets and enemies near those targets, and dispels one buff from each. Damage will be increased as the user's HP decreases, up to 5 hits of 244.5%/271.5%/303% shadow damage.;; Using this skill will consume 25% of the user's dragondrive gauge, but fills 100% of this skill's skill gauge after use.\Damage, Vengeance, SkillPrep\
+Renegade Descent\\Skill\Deals 1 hit of 680% shadow damage to the target and nearby enemies. Damage will be increased as the user's HP decreases, up to 1 hit of 1020% shadow damage.;; If this skill is used during dragondrive, a variant called Renegade Dragonfall will be used instead. Renegade Dragonfall deals 5 hits of 163% shadow damage to multiple targets and enemies near those targets, and dispels one buff from each. Damage will be increased as the user's HP decreases, up to 5 hits of 244.5% shadow damage.;; Using this skill will consume 25% of the user's dragondrive gauge, but fills 100% of this skill's skill gauge after use.\Deals 1 hit of 756% shadow damage to the target and nearby enemies. Damage will be increased as the user's HP decreases, up to 1 hit of 1134% shadow damage.;; If this skill is used during dragondrive, a variant called Renegade Dragonfall will be used instead. Renegade Dragonfall deals 5 hits of 181% shadow damage to multiple targets and enemies near those targets, and dispels one buff from each. Damage will be increased as the user's HP decreases, up to 5 hits of 271.5% shadow damage.;; Using this skill will consume 25% of the user's dragondrive gauge, but fills 100% of this skill's skill gauge after use.\Deals 1 hit of 840% shadow damage to the target and nearby enemies. Damage will be increased as the user's HP decreases, up to 1 hit of 1260% shadow damage.;; If this skill is used during dragondrive, a variant called Renegade Dragonfall will be used instead. Renegade Dragonfall deals 5 hits of 202% shadow damage to multiple targets and enemies near those targets, and dispels one buff from each. Damage will be increased as the user's HP decreases, up to 5 hits of 303% shadow damage.;; Using this skill will consume 25% of the user's dragondrive gauge, but fills 100% of this skill's skill gauge after use.\2719, 2719, 2719, 2719\Yes\0\Deals 1 hit of 680%/756%/840% shadow damage to the target and nearby enemies. Damage will be increased as the user's HP decreases, up to 1 hit of 1020%/1134%/1260% shadow damage.;; If this skill is used during dragondrive, a variant called Renegade Dragonfall will be used instead. Renegade Dragonfall deals 5 hits of 163%/181%/202% shadow damage to multiple targets and enemies near those targets, and dispels one buff from each. Damage will be increased as the user's HP decreases, up to 5 hits of 244.5%/271.5%/303% shadow damage.;; Using this skill will consume 25% of the user's dragondrive gauge, but fills 100% of this skill's skill gauge after use.\Damage, Vengeance, SkillPrep, Dispel\
 Renegade Gambit\\Skill\Fills 30% of the user's dragondrive gauge. If the user's HP is above 30% of max HP, reduces their HP to 30% of max HP and fills the dragondrive gauge relative to the amount of HP that was lost. If this skill is used during dragondrive, a variant called Renegade Shadowblaze will be used instead. If the user's HP is above 30% of max HP, Renegade Shadowblaze reduces their HP to 30% of max HP and deals 1 hit of 1091% shadow damage to enemies directly ahead. Damage will be increased as the user's HP decreases, up to 1 hit of 3273% shadow damage. Using Renegade Shadowblaze will consume all of the user's dragondrive gauge.\Fills 40% of the user's dragondrive gauge. If the user's HP is above 30% of max HP, reduces their HP to 30% of max HP and fills the dragondrive gauge relative to the amount of HP that was lost. If this skill is used during dragondrive, a variant called Renegade Shadowblaze will be used instead. If the user's HP is above 30% of max HP, Renegade Shadowblaze reduces their HP to 30% of max HP and deals 1 hit of 1212% shadow damage to enemies directly ahead. Damage will be increased as the user's HP decreases, up to 1 hit of 3636% shadow damage. Using Renegade Shadowblaze will consume all of the user's dragondrive gauge.\\7338, 7338, 7338, 7338\Yes\0\Fills 30%/40% of the user's dragondrive gauge. If the user's HP is above 30% of max HP, reduces their HP to 30% of max HP and fills the dragondrive gauge relative to the amount of HP that was lost. If this skill is used during dragondrive, a variant called Renegade Shadowblaze will be used instead. If the user's HP is above 30% of max HP, Renegade Shadowblaze reduces their HP to 30% of max HP and deals 1 hit of 1091% / 1212% shadow damage to enemies directly ahead. Damage will be increased as the user's HP decreases, up to 1 hit of 3273% / 3636% shadow damage. Using Renegade Shadowblaze will consume all of the user's dragondrive gauge.\Damage, Vengeance, SkillPrep\
 Rising Circlet\\Skill\Deals 1 hit of 335% light damage to surrounding enemies, and creates a buff zone that lasts for 10 seconds and increases the strength of adventurers inside it by 10%.\Deals 1 hit of 372% light damage to surrounding enemies, and creates a buff zone that lasts for 10 seconds and increases the strength of adventurers inside it by 15%.\Deals 1 hit of 413% light damage to surrounding enemies, and creates a buff zone that lasts for 10 seconds and increases the strength of adventurers inside it by 20%.\3817, 3817, 3817, 3817\Yes\2.4\\Damage, BuffZone, Zone, StrengthSkill\
 Road to Glory\\Skill\Deals 5 hits of 134% flame damage to enemies directly ahead, and inflicts burn for 12 seconds - dealing 51.3% damage every 3.9 seconds - with 100% base chance.\Deals 5 hits of 141% flame damage to enemies directly ahead, and inflicts burn for 12 seconds - dealing 72.7% damage every 3.9 seconds - with 110% base chance.\Deals 5 hits of 148% flame damage to enemies directly ahead, and inflicts burn for 12 seconds - dealing 97% damage every 3.9 seconds - with 120% base chance.\2325, 2325, 2325, 2325\Yes\2.4\\Damage, Burn\
@@ -787,11 +787,11 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Light) HP\40%\Aura\If the user is attuned to Light: increases HP by 40%.\70\y\HealthSkill, Light
 (Light) HP\45%\Aura\If the user is attuned to Light: increases HP by 45%.\80\y\HealthSkill, Light
 (Light) HP\60%\Aura\If the user is attuned to Light: increases HP by 60%.\100\y\HealthSkill, Light
-(Light) Overdrive Punisher\example\Aura\If the user is attuned to Light: Increases damage to enemies in overdrive state by `x`%\0\y\Light, Overdrive, Punisher
-(Light) Overdrive Punisher\20%\Aura\If the user is attuned to Light: Increases damage to enemies in overdrive state by 20%\30\y\Light, Overdrive, Punisher
-(Light) Overdrive Punisher\25%\Aura\If the user is attuned to Light: Increases damage to enemies in overdrive state by 25%\35\y\Light, Overdrive, Punisher
-(Light) Paralyzed Punisher\15%\Ability\If the user is attuned to Light: Increases damage done to Paralyzed enemies by 15%\40\y\Light, Paralyzed, Punisher
-(Light) Paralyzed Punisher\20%\Ability\If the user is attuned to Light: Increases damage done to Paralyzed enemies by 20%\60\y\Light, Paralyzed, Punisher
+(Light) Overdrive Punisher\example\Aura\If the user is attuned to Light: Increases damage to enemies in overdrive state by `x`%\0\y\Light, Punisher, OverdrivePunisher
+(Light) Overdrive Punisher\20%\Aura\If the user is attuned to Light: Increases damage to enemies in overdrive state by 20%\30\y\Light, Punisher, OverdrivePunisher
+(Light) Overdrive Punisher\25%\Aura\If the user is attuned to Light: Increases damage to enemies in overdrive state by 25%\35\y\Light, Punisher, OverdrivePunisher
+(Light) Paralyzed Punisher\15%\Ability\If the user is attuned to Light: Increases damage done to Paralyzed enemies by 15%\40\y\Light, Punisher, ParalyzedPunisher
+(Light) Paralyzed Punisher\20%\Ability\If the user is attuned to Light: Increases damage done to Paralyzed enemies by 20%\60\y\Light, Punisher, ParalyzedPunisher
 (Light) Shadow Res\15%\Aura\If the user is attuned to Light:  grants 15% Shadow resistance.\65\y\ShadowRes, Light, Resistance
 (Light) Strength\example\Aura\If the user is attuned to Light: increases strength by `x`%.\0\y\Strength, Light
 (Light) Strength\5%\Aura\If the user is attuned to Light: increases strength by 5%.\10\y\Strength, Light
@@ -843,9 +843,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Shadow) HP\40%\Aura\If the user is attuned to Shadow: increases HP by 40%.\60\y\HealthSkill, Shadow
 (Shadow) Last Bulwark\I\Aura\if the user is attuned to Shadow: grants the user a one-use shield that nullifies damage less than 45% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\35\y\Shield, Shadow, Last
 (Shadow) Last Bulwark\II\Aura\if the user is attuned to Shadow: grants the user a one-use shield that nullifies damage less than 60% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\50\y\Shield, Shadow, Last
-(Shadow) Poisoned Punisher\example\Aura\if the user is attuned to Shadow: increases damage dealt to poisoned foes by `x`%.\0\y\Shadow, PoisonedPunisher
-(Shadow) Poisoned Punisher\15%\Aura\if the user is attuned to Shadow: increases damage dealt to poisoned foes by 15%.\80\y\Shadow, PoisonedPunisher
-(Shadow) Poisoned Punisher\20%\Aura\if the user is attuned to Shadow: increases damage dealt to poisoned foes by 20%.\100\y\Shadow, PoisonedPunisher
+(Shadow) Poisoned Punisher\example\Aura\if the user is attuned to Shadow: increases damage dealt to poisoned foes by `x`%.\0\y\Shadow, PoisonedPunisher, Punisher
+(Shadow) Poisoned Punisher\15%\Aura\if the user is attuned to Shadow: increases damage dealt to poisoned foes by 15%.\80\y\Shadow, PoisonedPunisher, Punisher
+(Shadow) Poisoned Punisher\20%\Aura\if the user is attuned to Shadow: increases damage dealt to poisoned foes by 20%.\100\y\Shadow, PoisonedPunisher, Punisher
 (Shadow) Skill Damage\example\Aura\If the user is attuned to Shadow: increases skill damage by `x`%.\0\y\SkillDamage, Shadow
 (Shadow) Skill Damage\70%\Aura\If the user is attuned to Shadow: increases skill damage by 70%.\110\y\SkillDamage, Shadow
 (Shadow) Skill Damage\90%\Aura\If the user is attuned to Shadow: increases skill damage by 90%.\120\y\SkillDamage, Shadow
@@ -876,9 +876,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Water) HP\20%\Aura\If the user is attuned to Water: increases HP by 20%.\40\y\HealthSkill, Water
 (Water) HP\30%\Aura\If the user is attuned to Water: increases HP by 30%.\60\y\HealthSkill, Water
 (Water) HP\40%\Aura\If the user is attuned to Water: increases HP by 40%.\80\y\HealthSkill, Water
-(Water) Overdrive Punisher\example\Aura\If the user is attuned to Water: increases damage to enemies in overdrive stats by `x`%\0\y\Overdrive, Punisher, Water
-(Water) Overdrive Punisher\40%\Aura\If the user is attuned to Water: increases damage to enemies in overdrive stats by 40%\40\y\Overdrive, Punisher, Water
-(Water) Overdrive Punisher\60%\Aura\If the user is attuned to Water: increases damage to enemies in overdrive stats by 60%\60\y\Overdrive, Punisher, Water
+(Water) Overdrive Punisher\example\Aura\If the user is attuned to Water: increases damage to enemies in overdrive stats by `x`%\0\y\Punisher, Water, OverdrivePunisher
+(Water) Overdrive Punisher\40%\Aura\If the user is attuned to Water: increases damage to enemies in overdrive stats by 40%\40\y\Punisher, Water, OverdrivePunisher
+(Water) Overdrive Punisher\60%\Aura\If the user is attuned to Water: increases damage to enemies in overdrive stats by 60%\60\y\Punisher, Water, OverdrivePunisher
 (Water) Skill Damage\70%\Aura\If the user is attuned to Water: increases skill damage by 70%.\110\y\SkillDamage, Water
 (Water) Skill Damage\90%\Aura\If the user is attuned to Water: increases skill damage by 90%.\120\y\SkillDamage, Water
 (Water) Strength\example\Aura\If the user is attuned to Water: increases strength by `x`%.\0\y\Strength, Water
@@ -911,9 +911,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Wind) HP\40%\Aura\If the user is attuned to Wind: increases HP by 40%.\70\y\HealthSkill, Wind
 (Wind) HP\45%\Aura\If the user is attuned to Wind: increases HP by 45%.\80\y\HealthSkill, Wind
 (Wind) HP\60%\Aura\If the user is attuned to Wind: increases HP by 60%.\100\y\HealthSkill, Wind
-(Wind) Poisoned Punisher\example\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by `x`%\0\y\Poison, Punisher
-(Wind) Poisoned Punisher\15%\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by 15%\20\y\Poison, Punisher
-(Wind) Poisoned Punisher\20%\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by 20%\40\y\Poison, Punisher
+(Wind) Poisoned Punisher\example\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by `x`%\0\y\Punisher, PoisonedPunisher, Wind
+(Wind) Poisoned Punisher\15%\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by 15%\20\y\Punisher, PoisonedPunisher, Wind
+(Wind) Poisoned Punisher\20%\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by 20%\40\y\Punisher, PoisonedPunisher, Wind
 (Wind) Primed Strength\example\Aura\Increases the strength of the adventurer you are currently controlling by `x`% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\0\y\Primed, Strength, Wind
 (Wind) Primed Strength\10%\Aura\Increases the strength of the adventurer you are currently controlling by 10% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\80\y\Primed, Strength, Wind
 (Wind) Primed Strength\15%\Aura\Increases the strength of the adventurer you are currently controlling by 15% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\100\y\Primed, Strength, Wind
@@ -998,17 +998,17 @@ Mana\50%\Aura\Increases Mana intake for clearing quests by 50%\0\y\Mana
 Moonlit Howl\example\Ability\If the user is attuned to Shadow: grants the user the "Bloody Tongue" effect for 20 seconds when HP drops to 30%. This effect grants the user a one-use shield that nullifies damage less than `x`% of their maximum HP, and increases their strength by `x`%. These effects do not stack, and are lost upon taking damage.\0\y\Shield, Last, Strength
 Moonlit Howl\I\Ability\If the user is attuned to Shadow: grants the user the "Bloody Tongue" effect for 20 seconds when HP drops to 30%. This effect grants the user a one-use shield that nullifies damage less than 50% of their maximum HP, and increases their strength by 20%. These effects do not stack, and are lost upon taking damage.\60\y\Shield, Last, Strength
 Moonlit Howl\II\Ability\If the user is attuned to Shadow: grants the user the "Bloody Tongue" effect for 20 seconds when HP drops to 30%. This effect grants the user a one-use shield that nullifies damage less than 60% of their maximum HP, and increases their strength by 30%. These effects do not stack, and are lost upon taking damage.\80\y\Shield, Last, Strength
-Overdrive Punisher\example\Aura\Increases damage to enemies in overdrive state by `x`%\0\y\Overdrive, Punisher
-Overdrive Punisher\20%\Aura\Increases damage to enemies in overdrive state by 20%\20\y\Overdrive, Punisher
-Overdrive Punisher\25%\Aura\Increases damage to enemies in overdrive state by 25%\30\y\Overdrive, Punisher
-Overdrive Punisher\40%\Aura\Increases damage to enemies in overdrive state by 40%\40\y\Overdrive, Punisher
-Overdrive Punisher\60%\Aura\Increases damage to enemies in overdrive state by 60%\60\y\Overdrive, Punisher
+Overdrive Punisher\example\Aura\Increases damage to enemies in overdrive state by `x`%\0\y\Punisher, OverdrivePunisher
+Overdrive Punisher\20%\Aura\Increases damage to enemies in overdrive state by 20%\20\y\Punisher, OverdrivePunisher
+Overdrive Punisher\25%\Aura\Increases damage to enemies in overdrive state by 25%\30\y\Punisher, OverdrivePunisher
+Overdrive Punisher\40%\Aura\Increases damage to enemies in overdrive state by 40%\40\y\Punisher, OverdrivePunisher
+Overdrive Punisher\60%\Aura\Increases damage to enemies in overdrive state by 60%\60\y\Punisher, OverdrivePunisher
 Player EXP\example\Aura\Increases player EXP intake for clearing quests by 10/15%. This ability does not stack with other similar abilities; the highest value will be applied.\0\y\EXP
 Player EXP\10%\Aura\Increases player EXP intake for clearing quests by 10%. This ability does not stack with other similar abilities; the highest value will be applied.\60\y\EXP
 Player EXP\15%\Aura\Increases player EXP intake for clearing quests by 15%. This ability does not stack with other similar abilities; the highest value will be applied.\80\y\EXP
-Poisoned Punisher\example\Aura\Increases damage to poisoned enemies by `x`%.\0\y\Poison, Punisher
-Poisoned Punisher\15%\Aura\Increases damage to poisoned enemies by 15%.\40\y\Poison, Punisher
-Poisoned Punisher\20%\Aura\Increases damage to poisoned enemies by 20%.\60\y\Poison, Punisher
+Poisoned Punisher\example\Aura\Increases damage to poisoned enemies by `x`%.\0\y\Punisher, PoisonedPunisher
+Poisoned Punisher\15%\Aura\Increases damage to poisoned enemies by 15%.\40\y\Punisher, PoisonedPunisher
+Poisoned Punisher\20%\Aura\Increases damage to poisoned enemies by 20%.\60\y\Punisher, PoisonedPunisher
 Rupies\25%\Aura\Increase rupie intake for clearing quests by 25%\0\y\Rupies
 Rupies\50%\Aura\Increase rupie intake for clearing quests by 50%\0\y\Rupies
 Shadow Res\15%\Aura\Grants 15% Shadow resistance.\65\y\ShadowRes, Resistance
@@ -1078,9 +1078,9 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Flame) Affliction Guard\II\Ability\If the user is attuned to Flame: resists afflictions twice per quest\100\y\AfflictionGuard, Flame
 (Flame) Affliction Guard\III\Ability\If the user is attuned to Flame: resists afflictions thrice per quest\120\y\AfflictionGuard, Flame
 (Flame) Astral's Bane\60%\Ability\If the user is attuned to (Flame): increases damage to wind-attuned Astrals by 60%.\40\y\Flame, Astral, Bane
-(Flame) Blinded Punisher\example\Ability\If the user is attuned to Flame: Increases damage to blinded enemies by `x`%.\0\y\Blind, Punisher, Flame
-(Flame) Blinded Punisher\10%\Ability\If the user is attuned to Flame: Increases damage to blinded enemies by 10%.\20\y\Blind, Punisher, Flame
-(Flame) Blinded Punisher\15%\Ability\If the user is attuned to Flame: Increases damage to blinded enemies by 15%.\40\y\Blind, Punisher, Flame
+(Flame) Blinded Punisher\example\Ability\If the user is attuned to Flame: Increases damage to blinded enemies by `x`%.\0\y\Punisher, Flame, BlindedPunisher
+(Flame) Blinded Punisher\10%\Ability\If the user is attuned to Flame: Increases damage to blinded enemies by 10%.\20\y\Punisher, Flame, BlindedPunisher
+(Flame) Blinded Punisher\15%\Ability\If the user is attuned to Flame: Increases damage to blinded enemies by 15%.\40\y\Punisher, Flame, BlindedPunisher
 (Flame) Dragon Delay Res\-\Ability\If the user is attuned to Flame: completely prevents dragon delaying.\50\y\DelayRes, Flame
 (Flame) Dull Res\-\Ability\If the user is attuned to Flame: completely prevents dulling.\50\y\DullRes, Flame, Resistance
 (Flame) Fatalis's Bane\15%\Ability\If the user is attuned to Flame: Increases damage dealt to Fatalis by 15%\60\y\Bane, Flame
@@ -1125,7 +1125,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Light) Affliction Guard\I\Ability\If the user is attuned to Light: resists afflictions once per quest\80\y\AfflictionGuard, Light
 (Light) Affliction Guard\II\Ability\If the user is attuned to Light: resists afflictions twice per quest\100\y\AfflictionGuard, Light
 (Light) Affliction Guard\III\Ability\If the user is attuned to Light: resists afflictions thrice per quest\120\y\AfflictionGuard, Light
-(Light) Copy Punisher\-\Ability\If the user is attuned to Light: increases damage to copies created by Propagation.\50\y\CopyPunisher, Light
+(Light) Copy Punisher\-\Ability\If the user is attuned to Light: increases damage to copies created by Propagation.\50\y\CopyPunisher, Light, Punisher
 (Light) Curse Res\example\Ability\If the user is attuned to Light: reduces susceptibility to curses by `x`%.\0\y\CurseRes, Light, Resistance
 (Light) Curse Res\25%\Ability\If the user is attuned to Light: reduces susceptibility to curses by 25%.\40\y\CurseRes, Light, Resistance
 (Light) Curse Res\40%\Ability\If the user is attuned to Light: reduces susceptibility to curses by 40%.\50\y\CurseRes, Light, Resistance
@@ -1156,7 +1156,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Light) Skill Prep\example\Ability\If the user is attuned to Light: fills `x`% of skill gauges at the start of quests.\0\y\SkillPrep, Light
 (Light) Skill Prep\25%\Ability\If the user is attuned to Light: fills 25% of skill gauges at the start of quests.\40\y\SkillPrep, Light
 (Light) Skill Prep\50%\Ability\If the user is attuned to Light: fills 50% of skill gauges at the start of quests.\60\y\SkillPrep, Light
-(Light) Stunned Punisher\15%\Ability\If the user is attuned to Light: increases damage to stunned enemies by 15%.\40\y\Stun, Punisher, Light
+(Light) Stunned Punisher\15%\Ability\If the user is attuned to Light: increases damage to stunned enemies by 15%.\40\y\Punisher, Light, StunnedPunisher
 (Light) Thaumian's Bane\example\Ability\If the user is attuned to Light: increases damage to thaumians by `x`%\0\y\Thaumian, Bane, Light
 (Light) Thaumian's Bane\10%\Ability\If the user is attuned to Light: increases damage to thaumians by 10%\20\y\Thaumian, Bane, Light
 (Light) Thaumian's Bane\15%\Ability\If the user is attuned to Light: increases damage to thaumians by 10%\40\y\Thaumian, Bane, Light
@@ -1167,9 +1167,9 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Shadow) Affliction Guard\I\Ability\If the user is attuned to Shadow: resists afflictions once per quest\60\y\AfflictionGuard, Shadow
 (Shadow) Affliction Guard\II\Ability\If the user is attuned to Shadow: resists afflictions twice per quest\80\y\AfflictionGuard, Shadow
 (Shadow) Affliction Guard\III\Ability\If the user is attuned to Shadow: resists afflictions thrice per quest\100\y\AfflictionGuard, Shadow
-(Shadow) Blinded Punisher\example\Ability\If the user is attuned to Shadow: Increases damage to blinded enemies by `x`%.\0\y\Blind, Punisher, Shadow
-(Shadow) Blinded Punisher\10%\Ability\If the user is attuned to Shadow: Increases damage to blinded enemies by 10%.\20\y\Blind, Punisher, Shadow
-(Shadow) Blinded Punisher\15%\Ability\If the user is attuned to Shadow: Increases damage to blinded enemies by 15%.\40\y\Blind, Punisher, Shadow
+(Shadow) Blinded Punisher\example\Ability\If the user is attuned to Shadow: Increases damage to blinded enemies by `x`%.\0\y\Punisher, Shadow, BlindedPunisher
+(Shadow) Blinded Punisher\10%\Ability\If the user is attuned to Shadow: Increases damage to blinded enemies by 10%.\20\y\Punisher, Shadow, BlindedPunisher
+(Shadow) Blinded Punisher\15%\Ability\If the user is attuned to Shadow: Increases damage to blinded enemies by 15%.\40\y\Punisher, Shadow, BlindedPunisher
 (Shadow) Buff Time\example\Ability\If the user is attuned to Shadow: increases duration of buff skills by `x`%.\0\y\BuffTime, Shadow
 (Shadow) Buff Time\15%\Ability\If the user is attuned to Shadow: increases duration of buff skills by 15%.\20\y\BuffTime, Shadow
 (Shadow) Buff Time\20%\Ability\If the user is attuned to Shadow: increases duration of buff skills by 20%.\40\y\BuffTime, Shadow
@@ -1220,9 +1220,9 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Water) Affliction Guard\II\Ability\If the user is attuned to Water: resists afflictions two times per quest\80\y\Water, AfflictionGuard
 (Water) Affliction Guard\III\Ability\If the user is attuned to Water: resists afflictions three times per quest\100\y\Water, AfflictionGuard
 (Water) Astral's Bane\60%\Ability\If the user is attuned to (Water): increases damage to flame-attuned Astrals by 60%.\40\y\Water, Astral, Bane
-(Water) Broken Punisher\example\Ability\If the user is attuned to Water: increases damage to enemies in break state by `x`%.\0\y\Water, BrokenPunisher
-(Water) Broken Punisher\10%\Ability\If the user is attuned to Water: increases damage to enemies in break state by 10%.\20\y\Water, BrokenPunisher
-(Water) Broken Punisher\15%\Ability\If the user is attuned to Water: increases damage to enemies in break state by 15%.\40\y\Water, BrokenPunisher
+(Water) Broken Punisher\example\Ability\If the user is attuned to Water: increases damage to enemies in break state by `x`%.\0\y\Water, BrokenPunisher, Punisher
+(Water) Broken Punisher\10%\Ability\If the user is attuned to Water: increases damage to enemies in break state by 10%.\20\y\Water, BrokenPunisher, Punisher
+(Water) Broken Punisher\15%\Ability\If the user is attuned to Water: increases damage to enemies in break state by 15%.\40\y\Water, BrokenPunisher, Punisher
 (Wind) Buff Time\example\Ability\If the user is attuned to Wind: increases duration of buff skills by `x`%.\0\y\Wind, BuffTime
 (Wind) Buff Time\15%\Ability\If the user is attuned to Wind: increases duration of buff skills by 15%.\20\y\Wind, BuffTime
 (Wind) Buff Time\20%\Ability\If the user is attuned to Wind: increases duration of buff skills by 20%.\40\y\Wind, BuffTime
@@ -1273,18 +1273,18 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Wind) Affliction Guard\II\Ability\If the user is attuned to Wind: resists afflictions two times per quest.\80\y\Water, AfflictionGuard
 (Wind) Affliction Guard\III\Ability\If the user is attuned to Wind: resists afflictions three times per quest.\100\y\Water, AfflictionGuard
 (Wind) Astral's Bane\60%\Ability\If the user is attuned to (Wind): increases damage to water-attuned Astrals by 60%.\40\y\Wind, Astral, Bane
-(Wind) Copy Punisher\-\Ability\If the user is attuned to Wind: increases damage to copies created by Propagation.\50\y\CopyPunisher, Wind
+(Wind) Copy Punisher\-\Ability\If the user is attuned to Wind: increases damage to copies created by Propagation.\50\y\CopyPunisher, Wind, Punisher
 (Wind) HP 70% = Healing\8%\Ability\if the user is attuned to Wind: increases the potency of recovery skills by 8% when HP is 70% or above.\40\y\HP70, RecoveryPotency, Wind
-(Wind) Blinded Punisher\example\Ability\If the user is attuned to Wind: Increases damage to blinded enemies by `x`%.\0\y\Blind, Punisher, Wind
-(Wind) Blinded Punisher\10%\Ability\If the user is attuned to Wind: Increases damage to blinded enemies by 10%.\20\y\Blind, Punisher, Wind
-(Wind) Blinded Punisher\15%\Ability\If the user is attuned to Wind: Increases damage to blinded enemies by 15%.\40\y\Blind, Punisher, Wind
+(Wind) Blinded Punisher\example\Ability\If the user is attuned to Wind: Increases damage to blinded enemies by `x`%.\0\y\Punisher, Wind, BlindedPunisher
+(Wind) Blinded Punisher\10%\Ability\If the user is attuned to Wind: Increases damage to blinded enemies by 10%.\20\y\Punisher, Wind, BlindedPunisher
+(Wind) Blinded Punisher\15%\Ability\If the user is attuned to Wind: Increases damage to blinded enemies by 15%.\40\y\Punisher, Wind, BlindedPunisher
 (Wind) Bog Res\example\Ability\If the user is attuned to Wind: reduces susceptibility to bog by `x`%.\0\y\BogRes, Wind, Resistance
 (Wind) Bog Res\25%\Ability\If the user is attuned to Wind: reduces susceptibility to bog by 25%.\40\y\BogRes, Wind, Resistance
 (Wind) Bog Res\35%\Ability\If the user is attuned to Wind: reduces susceptibility to bog by 35%.\60\y\BogRes, Wind, Resistance
 (Wind) Bog Res\40%\Ability\If the user is attuned to Wind: reduces susceptibility to bog by 40%\80\y\BogRes, Wind, Resistance
-(Wind) Broken Punisher\example\Ability\If the user is attuned to Wind: increases damage to enemies in break state by `x`%.\0\y\Broken, Punisher, Wind
-(Wind) Broken Punisher\15%\Ability\If the user is attuned to Wind: increases damage to enemies in break state by 15%.\20\y\Broken, Punisher, Wind
-(Wind) Broken Punisher\20%\Ability\If the user is attuned to Wind: increases damage to enemies in break state by 20%.\40\y\Broken, Punisher, Wind
+(Wind) Broken Punisher\example\Ability\If the user is attuned to Wind: increases damage to enemies in break state by `x`%.\0\y\Punisher, Wind, BrokenPunisher
+(Wind) Broken Punisher\15%\Ability\If the user is attuned to Wind: increases damage to enemies in break state by 15%.\20\y\Punisher, Wind, BrokenPunisher
+(Wind) Broken Punisher\20%\Ability\If the user is attuned to Wind: increases damage to enemies in break state by 20%.\40\y\Punisher, Wind, BrokenPunisher
 (Wind) Critical Damage\example\Ability\If the user is attuned to Wind: Increases the damage critical attacks inflict by `x`%.\\y\Wind, CritDamage
 (Wind) Critical Damage\10%\Ability\If the user is attuned to Wind: Increases the damage critical attacks inflict by 10%.\\y\Wind, CritDamage
 (Wind) Critical Damage\13%\Ability\If the user is attuned to Wind: Increases the damage critical attacks inflict by 13%.\\y\Wind, CritDamage
@@ -1332,15 +1332,15 @@ Barrage Obliteration\example\Ability\Adds `x`% to the modifier applied to critic
 Barrage Obliteration\5%\Ability\Adds 5% to the modifier applied to critical damage for every 20-hit combo (up to three times per quest)\40\y\CritDamage, Combo
 Barrage Obliteration\6%\Ability\Adds 6% to the modifier applied to critical damage for every 20-hit combo (up to three times per quest)\60\y\CritDamage, Combo
 Battleground\-\Ability\Adventurers do double damage to Kai Yan, but he deals 50% more damage to you.\-1\y\Enemy
-Bleeding Punisher\example\Ability\Increases damage to bleeding enemies by `x`%.\0\y\Bleed, Punisher
-Bleeding Punisher\5%\Ability\Increases damage to bleeding enemies by 5%.\60\y\Bleed, Punisher
-Bleeding Punisher\8%\Ability\Increases damage to bleeding enemies by 8%.\80\y\Bleed, Punisher
-Blinded Punisher\example\Ability\Increases damage to blinded enemies by `x`%.\0\y\Blind, Punisher
-Blinded Punisher\10%\Ability\Increases damage to blinded enemies by 10%.\20\y\Blind, Punisher
-Blinded Punisher\15%\Ability\Increases damage to blinded enemies by 15%.\60\y\Blind, Punisher
-Blinded Punisher\20%\Ability\Increases damage to blinded enemies by 20%.\70\y\Blind, Punisher
-Blinded Punisher\25%\Ability\Increases damage to blinded enemies by 25%.\80\y\Blind, Punisher
-Blinded Punisher\30%\Ability\Increases damage to blinded enemies by 30%.\100\y\Blind, Punisher
+Bleeding Punisher\example\Ability\Increases damage to bleeding enemies by `x`%.\0\y\Punisher, BleedingPunisher
+Bleeding Punisher\5%\Ability\Increases damage to bleeding enemies by 5%.\60\y\Punisher, BleedingPunisher
+Bleeding Punisher\8%\Ability\Increases damage to bleeding enemies by 8%.\80\y\Punisher, BleedingPunisher
+Blinded Punisher\example\Ability\Increases damage to blinded enemies by `x`%.\0\y\Punisher, BlindedPunisher
+Blinded Punisher\10%\Ability\Increases damage to blinded enemies by 10%.\20\y\Punisher, BlindedPunisher
+Blinded Punisher\15%\Ability\Increases damage to blinded enemies by 15%.\60\y\Punisher, BlindedPunisher
+Blinded Punisher\20%\Ability\Increases damage to blinded enemies by 20%.\70\y\Punisher, BlindedPunisher
+Blinded Punisher\25%\Ability\Increases damage to blinded enemies by 25%.\80\y\Punisher, BlindedPunisher
+Blinded Punisher\30%\Ability\Increases damage to blinded enemies by 30%.\100\y\Punisher, BlindedPunisher
 Blindness = Team Strength\example\Ability\Buffs the entire team's strength by `x`% for 10 seconds upon successfully blinding an enemy. After activating, this ability will not activate again for five seconds.\0\y\Blind, Buff, Team, Strength, StatusDoublebuff
 Blindness = Team Strength\8%\Ability\Buffs the entire team's strength by 8% for 10 seconds upon successfully blinding an enemy. After activating, this ability will not activate again for five seconds.\60\y\Blind, Buff, Team, Strength, StatusDoublebuff
 Blindness = Team Strength\10%\Ability\Buffs the entire team's strength by 10% for 10 seconds upon successfully blinding an enemy. After activating, this ability will not activate again for five seconds.\80\y\Blind, Buff, Team, Strength, StatusDoublebuff
@@ -1382,13 +1382,13 @@ Brainwashed Zodiark's Bane\example\Ability\Increases damage to Brainwashed Zodia
 Brainwashed Zodiark's Bane\40%\Ability\Increases damage to Brainwashed Zodiark by 40%.\0\y\Brainwashed, Bane
 Brainwashed Zodiark's Bane\50%\Ability\Increases damage to Brainwashed Zodiark by 50%.\0\y\Brainwashed, Bane
 Brainwashed Zodiark's Bane\60%\Ability\Increases damage to Brainwashed Zodiark by 60%.\0\y\Brainwashed, Bane
-Broken Punisher\example\Ability\Increases damage to enemies in break state by `x`%.\0\y\Broken, Punisher
-Broken Punisher\10%\Ability\Increases damage to enemies in break state by 10%.\20\y\Broken, Punisher
-Broken Punisher\15%\Ability\Increases damage to enemies in break state by 15%.\40\y\Broken, Punisher
-Broken Punisher\20%\Ability\Increases damage to enemies in break state by 20%.\60\y\Broken, Punisher
-Broken Punisher\25%\Ability\Increases damage to enemies in break state by 25%.\80\y\Broken, Punisher
-Broken Punisher\30%\Ability\Increases damage to enemies in break state by 30%.\100\y\Broken, Punisher
-Broken Punisher\35%\Ability\Increases damage to enemies in break state by 35%.\120\y\Broken, Punisher
+Broken Punisher\example\Ability\Increases damage to enemies in break state by `x`%.\0\y\Punisher, BrokenPunisher
+Broken Punisher\10%\Ability\Increases damage to enemies in break state by 10%.\20\y\Punisher, BrokenPunisher
+Broken Punisher\15%\Ability\Increases damage to enemies in break state by 15%.\40\y\Punisher, BrokenPunisher
+Broken Punisher\20%\Ability\Increases damage to enemies in break state by 20%.\60\y\Punisher, BrokenPunisher
+Broken Punisher\25%\Ability\Increases damage to enemies in break state by 25%.\80\y\Punisher, BrokenPunisher
+Broken Punisher\30%\Ability\Increases damage to enemies in break state by 30%.\100\y\Punisher, BrokenPunisher
+Broken Punisher\35%\Ability\Increases damage to enemies in break state by 35%.\120\y\Punisher, BrokenPunisher
 Brunhilda Res\example\Ability\Reduces damage taken from Brunhilda by `x`%.\0\y\BrunhildaRes, Resistance
 Brunhilda Res\15%\Ability\Reduces damage taken from Brunhilda by 15%.\30\y\BrunhildaRes, Resistance
 Brunhilda Res\18%\Ability\Reduces damage taken from Brunhilda by 18%.\45\y\BrunhildaRes, Resistance
@@ -1407,8 +1407,8 @@ Burn Res\25%\Ability\Reduces susceptibility to burning by 25%.\40\n\BurnRes, Res
 Burn Res\50%\Ability\Reduces susceptibility to burning by 50%.\60\n\BurnRes, Resistance
 Burn Res\75%\Ability\Reduces susceptibility to burning by 75%.\100\n\BurnRes, Resistance
 Burn Res\100%\Ability\Reduces susceptibility to burning by 100%.\100\n\BurnRes, Resistance
-Burning Punisher\25%\Ability\Increases damage to burning enemies by 25%\80\y\Burn, Punisher
-Burning Punisher\30%\Ability\Increases damage to burning enemies by 30%\100\y\Burn, Punisher
+Burning Punisher\25%\Ability\Increases damage to burning enemies by 25%\80\y\Punisher, BurningPunisher
+Burning Punisher\30%\Ability\Increases damage to burning enemies by 30%\100\y\Punisher, BurningPunisher
 Charge Rate\example\Ability\Increases force strike charge rate by 15/20%\0\y\ChargeRate
 Charge Rate\15%\Ability\Increases force strike charge rate by 15%\80\y\ChargeRate
 Charge Rate\20%\Ability\Increases force strike charge rate by 20%\100\y\ChargeRate
@@ -1425,7 +1425,7 @@ Combo Time\+4\Ability\Extends the window between hitting an enemy and the combo 
 Connecting Call\example\Ability\Increases Luca's critical rate by 3/4% for every buff with a different icon applied to him (up to 21/28%).;; Also applies one of the following buffs every time Luca lands a critical hit: Sylvan Secret Arts, Human Wisdom, and Rokkan Expertise. Each of these buffs increase Luca's critical rate by 3% for 15/20 seconds.;; Only one instance of each buff can be active at the same time. After activating, this ability will not activate again for three seconds.\0\y\CritRate, Unique
 Connecting Call\I\Ability\Increases Luca's critical rate by 3% for every buff with a different icon applied to him (up to 21%).;; Also applies one of the following buffs every time Luca lands a critical hit: Sylvan Secret Arts, Human Wisdom, and Rokkan Expertise. Each of these buffs increase Luca's critical rate by 3% for 15 seconds.;; Only one instance of each buff can be active at the same time. After activating, this ability will not activate again for three seconds.\100\y\CritRate, Unique
 Connecting Call\II\Ability\Increases Luca's critical rate by 4% for every buff with a different icon applied to him (up to 28%).;; Also applies one of the following buffs every time Luca lands a critical hit: Sylvan Secret Arts, Human Wisdom, and Rokkan Expertise. Each of these buffs increase Luca's critical rate by 3% for 20 seconds.;; Only one instance of each buff can be active at the same time. After activating, this ability will not activate again for three seconds.\120\y\CritRate, Unique
-Copy Punisher\-\Ability\Increases damage to copies created by Propagation.\50\y\CopyPunisher
+Copy Punisher\-\Ability\Increases damage to copies created by Propagation.\50\y\CopyPunisher, Punisher
 Critical Damage\example\Ability\Increases the damage critical attacks inflict by `x`%.\0\n\CritDamage
 Critical Damage\8%\Ability\Increases the damage critical attacks inflict by 8%.\20\n\CritDamage
 Critical Damage\10%\Ability\Increases the damage critical attacks inflict by 10%.\40\n\CritDamage
@@ -1877,14 +1877,14 @@ Motivational Logs\50%\Ability\Increases motivational log intake for clearing que
 Obsessive Love\example\Ability\When the "Obsession" effect is active, increases strength by 20/30%, and decreases defense by 20%.\0\y\Strength, Unique
 Obsessive Love\I\Ability\When the "Obsession" effect is active, increases strength by 20%, and decreases defense by 20%.\60\y\Strength, Unique
 Obsessive Love\II\Ability\When the "Obsession" effect is active, increases strength by 30%, and decreases defense by 20%.\80\y\Strength, Unique
-Overdrive Punisher\example\Ability\Increases damage to enemies in overdrive state by `x`%.\0\y\Overdrive, Punisher
-Overdrive Punisher\3%\Ability\Increases damage to enemies in overdrive state by 3%.\20\y\Overdrive, Punisher
-Overdrive Punisher\4%\Ability\Increases damage to enemies in overdrive state by 4%.\30\y\Overdrive, Punisher
-Overdrive Punisher\5%\Ability\Increases damage to enemies in overdrive state by 5%.\40\y\Overdrive, Punisher
-Overdrive Punisher\8%\Ability\Increases damage to enemies in overdrive state by 8%.\60\y\Overdrive, Punisher
-Overdrive Punisher\10%\Ability\Increases damage to enemies in overdrive state by 10%.\80\y\Overdrive, Punisher
-Overdrive Punisher\13%\Ability\Increases damage to enemies in overdrive state by 13%.\100\y\Overdrive, Punisher
-Overdrive Punisher\15%\Ability\Increases damage to enemies in overdrive state by 15%.\120\y\Overdrive, Punisher
+Overdrive Punisher\example\Ability\Increases damage to enemies in overdrive state by `x`%.\0\y\Punisher, OverdrivePunisher
+Overdrive Punisher\3%\Ability\Increases damage to enemies in overdrive state by 3%.\20\y\Punisher, OverdrivePunisher
+Overdrive Punisher\4%\Ability\Increases damage to enemies in overdrive state by 4%.\30\y\Punisher, OverdrivePunisher
+Overdrive Punisher\5%\Ability\Increases damage to enemies in overdrive state by 5%.\40\y\Punisher, OverdrivePunisher
+Overdrive Punisher\8%\Ability\Increases damage to enemies in overdrive state by 8%.\60\y\Punisher, OverdrivePunisher
+Overdrive Punisher\10%\Ability\Increases damage to enemies in overdrive state by 10%.\80\y\Punisher, OverdrivePunisher
+Overdrive Punisher\13%\Ability\Increases damage to enemies in overdrive state by 13%.\100\y\Punisher, OverdrivePunisher
+Overdrive Punisher\15%\Ability\Increases damage to enemies in overdrive state by 15%.\120\y\Punisher, OverdrivePunisher
 Overgrowth\-\Ability\Causes the enemy's physical size and attack range to increase over time.\-1\y\Enemy
 Paper-Mache\example\Ability\Increases Paper-Mache intake by `x`%\0\y\Event, Facility, Materials
 Paper-Mache\50%\Ability\Increases Paper-Mache intake by 50%\0\y\Event, Facility, Materials
@@ -1904,12 +1904,12 @@ Paralysis Res\50%\Ability\Reduces susceptibility to paralysis by 50%.\60\y\Paral
 Paralysis Res\65%\Ability\Reduces susceptibility to paralysis by 65%.\80\y\ParalysisRes, Resistance
 Paralysis Res\75%\Ability\Reduces susceptibility to paralysis by 75%.\100\y\ParalysisRes, Resistance
 Paralysis Res\100%\Ability\Reduces susceptibility to paralysis by 100%.\100\y\ParalysisRes, Resistance
-Paralyzed Punisher\example\Ability\increases damage done to Paralyzed enemies by `x`%\0\y\Paralyzed, Punisher
-Paralyzed Punisher\10%\Ability\increases damage done to Paralyzed enemies by 10%\20\y\Paralyzed, Punisher
-Paralyzed Punisher\15%\Ability\increases damage done to Paralyzed enemies by 15%\40\y\Paralyzed, Punisher
-Paralyzed Punisher\20%\Ability\increases damage done to Paralyzed enemies by 20%\60\y\Paralyzed, Punisher
-Paralyzed Punisher\25%\Ability\increases damage done to Paralyzed enemies by 25%\80\y\Paralyzed, Punisher
-Paralyzed Punisher\30%\Ability\increases damage done to Paralyzed enemies by 30%\100\y\Paralyzed, Punisher
+Paralyzed Punisher\example\Ability\increases damage done to Paralyzed enemies by `x`%\0\y\Punisher, ParalyzedPunisher
+Paralyzed Punisher\10%\Ability\increases damage done to Paralyzed enemies by 10%\20\y\Punisher, ParalyzedPunisher
+Paralyzed Punisher\15%\Ability\increases damage done to Paralyzed enemies by 15%\40\y\Punisher, ParalyzedPunisher
+Paralyzed Punisher\20%\Ability\increases damage done to Paralyzed enemies by 20%\60\y\Punisher, ParalyzedPunisher
+Paralyzed Punisher\25%\Ability\increases damage done to Paralyzed enemies by 25%\80\y\Punisher, ParalyzedPunisher
+Paralyzed Punisher\30%\Ability\increases damage done to Paralyzed enemies by 30%\100\y\Punisher, ParalyzedPunisher
 Perpetual Protection\I\Ability\Reduces susceptibility to blindness and paralysis by 50%.\80\y\Resistance, BlindnessRes, ParalysisRes
 Perpetual Protection\II\Ability\Reduces susceptibility to blindness and paralysis by 100%.\100\y\Resistance, BlindnessRes, ParalysisRes
 Petrify\-\Ability\~~Freeze on steroids.~~ The afflicted adventurer will be unable to move or act for a set period, and will take damage over time.\-1\y\Petrify
@@ -1939,17 +1939,17 @@ Poison Res\25%\Ability\Reduces susceptibility to poison by 25%.\40\y\PoisonRes, 
 Poison Res\50%\Ability\Reduces susceptibility to poison by 50%.\60\y\PoisonRes, Resistance
 Poison Res\75%\Ability\Reduces susceptibility to poison by 75%.\100\y\PoisonRes, Resistance
 Poison Res\100%\Ability\Reduces susceptibility to poison by 100%.\100\y\PoisonRes, Resistance
-Poisoned & Blinded Punisher\I\Ability\Increases damage to poisoned enemies by 30% and blinded enemies by 40%.\100\y\Poison, Blind, Punisher
-Poisoned & Stunned Punisher\I\Ability\Increases damage to poisoned enemies by 30% and stunned enemies by 40%.\100\y\Poison, Stun, Punisher
-Poisoned Punisher\example\Ability\Increases damage to poisoned enemies by `x`%.\0\y\Poison, Punisher
-Poisoned Punisher\15%\Ability\Increases damage to poisoned enemies by 15%.\40\y\Poison, Punisher
-Poisoned Punisher\20%\Ability\Increases damage to poisoned enemies by 20%.\60\y\Poison, Punisher
-Poisoned Punisher\25%\Ability\Increases damage to poisoned enemies by 25%.\80\y\Poison, Punisher
-Poisoned Punisher\30%\Ability\Increases damage to poisoned enemies by 30%.\100\y\Poison, Punisher
-Poisonous Cage\example\Ability\The user's strength is lowered by `x`% during quests. Using Ruination Cage grants the user the "Poisonous Cage" effect. When this effect is active, the user's next force strike will inflict poison. This effect cannot stack, and will be consumed on use.\0\y\
-Poisonous Cage\I\Ability\The user's strength is lowered by 70% during Quests. Using Ruination Cage *[S1]* grants the user the "Poisonous Cage" effect. When this effect is active, the user's next force strike will deal 3 hits of 47% (52%) Shadow Damage, throw three knives in front of the user dealing 9% (10%) each for Force Strike Lv1 (Lv2) and inflict poison - dealing 270% damage every 2.9 seconds for 24 seconds - with 110% base chance. Bonus OD Damage is reduced to 4.2x for all hits of "Poisonous Cage", from 8.4x on the first two hits. This effect cannot stack, and will be consumed on use.\80\y\
-Poisonous Cage\II\Ability\The user's strength is lowered by 60% during Quests. Using Ruination Cage *[S1]* grants the user the "Poisonous Cage" effect. When this effect is active, the user's next force strike will deal 3 hits of 52% (57%) Shadow Damage, throw three knives in front of the user dealing 10% (11%) each for Force Strike Lv1 (Lv2) and inflict poison - dealing 300% damage every 2.9 seconds for 24 seconds - with 120% base chance. Bonus OD Damage is reduced to 4.2x for all hits of "Poisonous Cage", from 8.4x on the first two hits. This effect cannot stack, and will be consumed on use.\100\y\
-Poisonous Cage\III\Ability\The user's strength is lowered by 55% during Quests. Using Ruination Cage *[S1]* grants the user the "Poisonous Cage" effect. When this effect is active, the user's next force strike will deal 3 hits of 52% (57%) Shadow Damage, throw three knives in front of the user dealing 10% (11%) each for Force Strike Lv1 (Lv2) and inflict poison - dealing 300% damage every 2.9 seconds for 27 seconds - with 120% base chance. Bonus OD Damage is reduced to 4.2x for all hits of "Poisonous Cage", from 8.4x on the first two hits. This effect cannot stack, and will be consumed on use.\120\y\
+Poisoned & Blinded Punisher\I\Ability\Increases damage to poisoned enemies by 30% and blinded enemies by 40%.\100\y\Punisher, BlindedPunisher, PoisonedPunisher
+Poisoned & Stunned Punisher\I\Ability\Increases damage to poisoned enemies by 30% and stunned enemies by 40%.\100\y\Punisher, BlindedPunisher, PoisonedPunisher
+Poisoned Punisher\example\Ability\Increases damage to poisoned enemies by `x`%.\0\y\PoisonedPunisher, Punisher
+Poisoned Punisher\15%\Ability\Increases damage to poisoned enemies by 15%.\40\y\PoisonedPunisher, Punisher
+Poisoned Punisher\20%\Ability\Increases damage to poisoned enemies by 20%.\60\y\PoisonedPunisher, Punisher
+Poisoned Punisher\25%\Ability\Increases damage to poisoned enemies by 25%.\80\y\PoisonedPunisher, Punisher
+Poisoned Punisher\30%\Ability\Increases damage to poisoned enemies by 30%.\100\y\PoisonedPunisher, Punisher
+Poisonous Cage\example\Ability\The user's strength is lowered by `x`% during quests. Using Ruination Cage grants the user the "Poisonous Cage" effect. When this effect is active, the user's next force strike will inflict poison. This effect cannot stack, and will be consumed on use.\0\y\Poison
+Poisonous Cage\I\Ability\The user's strength is lowered by 70% during Quests. Using Ruination Cage *[S1]* grants the user the "Poisonous Cage" effect. When this effect is active, the user's next force strike will deal 3 hits of 47% (52%) Shadow Damage, throw three knives in front of the user dealing 9% (10%) each for Force Strike Lv1 (Lv2) and inflict poison - dealing 270% damage every 2.9 seconds for 24 seconds - with 110% base chance. Bonus OD Damage is reduced to 4.2x for all hits of "Poisonous Cage", from 8.4x on the first two hits. This effect cannot stack, and will be consumed on use.\80\y\Poison
+Poisonous Cage\II\Ability\The user's strength is lowered by 60% during Quests. Using Ruination Cage *[S1]* grants the user the "Poisonous Cage" effect. When this effect is active, the user's next force strike will deal 3 hits of 52% (57%) Shadow Damage, throw three knives in front of the user dealing 10% (11%) each for Force Strike Lv1 (Lv2) and inflict poison - dealing 300% damage every 2.9 seconds for 24 seconds - with 120% base chance. Bonus OD Damage is reduced to 4.2x for all hits of "Poisonous Cage", from 8.4x on the first two hits. This effect cannot stack, and will be consumed on use.\100\y\Poison
+Poisonous Cage\III\Ability\The user's strength is lowered by 55% during Quests. Using Ruination Cage *[S1]* grants the user the "Poisonous Cage" effect. When this effect is active, the user's next force strike will deal 3 hits of 52% (57%) Shadow Damage, throw three knives in front of the user dealing 10% (11%) each for Force Strike Lv1 (Lv2) and inflict poison - dealing 300% damage every 2.9 seconds for 27 seconds - with 120% base chance. Bonus OD Damage is reduced to 4.2x for all hits of "Poisonous Cage", from 8.4x on the first two hits. This effect cannot stack, and will be consumed on use.\120\y\Poison
 Potent Bog Res\100%\Ability\Reduces susceptibility to bog by 100%. When the user is hit by an attack that would have bogged them, their strength is increased by 15% for 10 seconds. After activating, this buff will not activate again for 15 seconds.\100\y\BogRes, Resistance, Potent
 Potent Burn Res\example\Ability\Reduces susceptibility to burn by `x`%. When the user is hit by an attack that would have burned them, their strength is increased by 15% for 10 seconds. After activating, this buff will not activate again for 15 seconds.\0\y\BurnRes, Resistance, Potent
 Potent Burn Res\50%\Ability\Reduces susceptibility to burn by 50%. When the user is hit by an attack that would have burned them, their strength is increased by 15% for 10 seconds. After activating, this buff will not activate again for 15 seconds.\80\y\BurnRes, Resistance, Potent
@@ -1988,12 +1988,12 @@ Recovery Potency\5%\Ability\Increases the potency of recovery skills by 5%.\40\n
 Recovery Potency\8%\Ability\Increases the potency of recovery skills by 8%.\60\n\RecoveryPotency
 Recovery Potency\10%\Ability\Increases the potency of recovery skills by 10%.\80\n\RecoveryPotency
 Recovery Potency\13%\Ability\Increases the potency of recovery skills by 13%.\100\n\RecoveryPotency
-Reduced Defense Devastator\example\Ability\Increases critical rate by 15/20% against enemies with reduced defense.\0\y\DebuffPunisher, CritRate
-Reduced Defense Devastator\15%\Ability\Increases critical rate by 15% against enemies with reduced defense.\80\y\DebuffPunisher, CritRate
-Reduced Defense Devastator\20%\Ability\Increases critical rate by 20% against enemies with reduced defense.\100\y\DebuffPunisher, CritRate
-Reduced Defense Punisher\example\Ability\Increases damage to enemies with reduced defense by `x`%.\0\y\DebuffPunisher
-Reduced Defense Punisher\25%\Ability\Increases damage to enemies with reduced defense by 25%.\80\y\DebuffPunisher
-Reduced Defense Punisher\30%\Ability\Increases damage to enemies with reduced defense by 30%.\100\y\DebuffPunisher
+Reduced Defense Devastator\example\Ability\Increases critical rate by 15/20% against enemies with reduced defense.\0\y\CritRate, Punisher
+Reduced Defense Devastator\15%\Ability\Increases critical rate by 15% against enemies with reduced defense.\80\y\CritRate, Punisher
+Reduced Defense Devastator\20%\Ability\Increases critical rate by 20% against enemies with reduced defense.\100\y\CritRate, Punisher
+Reduced Defense Punisher\example\Ability\Increases damage to enemies with reduced defense by `x`%.\0\y\Punisher, DefDownPunisher
+Reduced Defense Punisher\25%\Ability\Increases damage to enemies with reduced defense by 25%.\80\y\Punisher, DefDownPunisher
+Reduced Defense Punisher\30%\Ability\Increases damage to enemies with reduced defense by 30%.\100\y\Punisher, DefDownPunisher
 Reflection Shield\-\Ability\Blocks Hits - Human Form: 30, Blocks Hits - Demihuman Form: 60. Damage Reflection: 50 (unaffected by Battleground). Dispellable.\-1\y\Enemy
 Relentless Spirit\I\Ability\Reduces susceptibility to freeze and bog by 50%.\0\y\FreezeRes, BogRes
 Relentless Spirit\II\Ability\Reduces susceptibility to freeze and bog by 100%.\0\y\FreezeRes, BogRes
@@ -2078,7 +2078,7 @@ Sleep Res\40%\Ability\Reduces susceptibility to sleep by 40%.\50\y\SleepRes, Res
 Sleep Res\50%\Ability\Reduces susceptibility to sleep by 50%.\60\y\SleepRes, Resistance
 Sleep Res\75%\Ability\Reduces susceptibility to sleep by 75%.\100\y\SleepRes, Resistance
 Sleep Res\100%\Ability\Reduces susceptibility to sleep by 100%.\100\y\SleepRes, Resistance
-Sleeping Punisher\20%\Ability\Increases damage to sleeping enemies by 20%.\60\y\Sleep, Punisher
+Sleeping Punisher\20%\Ability\Increases damage to sleeping enemies by 20%.\60\y\Punisher, SleepingPunisher
 Snack-o'-Lanterns\example\Ability\Increases Snack-o'-Lantern intake for clearing quests by `x`%.\0\y\Event, Facility, Materials
 Snack-o'-Lanterns\25%\Ability\Increases Snack-o'-Lantern intake for clearing quests by 25%.\0\y\Event, Facility, Materials
 Snack-o'-Lanterns\50%\Ability\Increases Snack-o'-Lantern intake for clearing quests by 50%.\0\y\Event, Facility, Materials
@@ -2120,11 +2120,11 @@ Stun Res\25%\Ability\Reduces susceptibility to stun by 25%.\40\y\StunRes, Resist
 Stun Res\50%\Ability\Reduces susceptibility to stun by 50%.\60\y\StunRes, Resistance
 Stun Res\75%\Ability\Reduces susceptibility to stun by 75%.\100\y\StunRes, Resistance
 Stun Res\100%\Ability\Reduces susceptibility to stun by 100%.\100\y\StunRes, Resistance
-Stunned Punisher\example\Ability\Increases damage to stunned enemies by `x`%.\0\y\Stun, Punisher
-Stunned Punisher\15%\Ability\Increases damage to stunned enemies by 15%.\40\y\Stun, Punisher
-Stunned Punisher\20%\Ability\Increases damage to stunned enemies by 20%.\60\y\Stun, Punisher
-Stunned Punisher\25%\Ability\Increases damage to stunned enemies by 25%.\80\y\Stun, Punisher
-Stunned Punisher\30%\Ability\Increases damage to stunned enemies by 30%.\100\y\Stun, Punisher
+Stunned Punisher\example\Ability\Increases damage to stunned enemies by `x`%.\0\y\Punisher, StunnedPunisher
+Stunned Punisher\15%\Ability\Increases damage to stunned enemies by 15%.\40\y\Punisher, StunnedPunisher
+Stunned Punisher\20%\Ability\Increases damage to stunned enemies by 20%.\60\y\Punisher, StunnedPunisher
+Stunned Punisher\25%\Ability\Increases damage to stunned enemies by 25%.\80\y\Punisher, StunnedPunisher
+Stunned Punisher\30%\Ability\Increases damage to stunned enemies by 30%.\100\y\Punisher, StunnedPunisher
 Sylvan Strength\I\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 25-hit combo.\70\y\CritRate, Strength, Combo, Unique
 Sylvan Strength\II\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 20-hit combo.\100\y\CritRate, Strength, Combo, Unique
 System Overload\-\Ability\Increases strength by 20% but decreases defense by 50% when HP is 30% or below.\60\y\Strength, Unique
@@ -2142,7 +2142,7 @@ The Beast Within\-\Ability\When the "Loathsome Power" effect is active, increase
 The Faceless God\example\Ability\When shapeshifting, Lathna will transform into Nyarlathotep regardless of what dragon she is equipped with. Grants an HP regen buff healing for 12/14/14% Max HP every 3.9s for 20 seconds each time she shapeshifts. *Lv3:* Also increases damage to poisoned enemies by 15% when not shapeshifted, and by 215% when shapeshifted.\0\y\Regen, Unique
 The Faceless God\I\Ability\When shapeshifting, Lathna will transform into Nyarlathotep regardless of what dragon she is equipped with. Grants an HP regen buff healing for 12% Max HP every 3.9s for 20 seconds each time she shapeshifts.\60\y\Regen, Unique
 The Faceless God\II\Ability\When shapeshifting, Lathna will transform into Nyarlathotep regardless of what dragon she is equipped with. Grants an HP regen buff healing for 14% Max HP every 3.9s for 20 seconds each time she shapeshifts.\80\y\Regen, Unique
-The Faceless God\III\Ability\When shapeshifting, Lathna will transform into Nyarlathotep regardless of what dragon she is equipped with. Grants an HP regen buff healing for 14% Max HP every 3.9s for 20 seconds each time she shapeshifts. Also increases damage to poisoned enemies by 15% when not shapeshifted, and by 215% when shapeshifted.\100\y\Regen, PoisonedPunisher, Unique
+The Faceless God\III\Ability\When shapeshifting, Lathna will transform into Nyarlathotep regardless of what dragon she is equipped with. Grants an HP regen buff healing for 14% Max HP every 3.9s for 20 seconds each time she shapeshifts. Also increases damage to poisoned enemies by 15% when not shapeshifted, and by 215% when shapeshifted.\100\y\Regen, PoisonedPunisher, Unique, Punisher
 Therion's Bane\example\Ability\Increases damage to therions by `x`%.\0\y\Therion, Bane
 Therion's Bane\20%\Ability\Increases damage to therions by 20%.\60\y\Therion, Bane
 Therion's Bane\25%\Ability\Increases damage to therions by 25%.\80\y\Therion, Bane
