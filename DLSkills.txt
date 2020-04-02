@@ -2579,6 +2579,10 @@ Strength\10%\CoAbility\Increases strength by 10%.\320\n\Strength
 (Shadow) Poison = User Light Res\6%\Chain\If a team member is attuned to Shadow: reduces light damage taken by them by 6% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Shadow, Poison, LightRes, Resistance
 (Shadow) Poison = User Light Res\7%\Chain\If a team member is attuned to Shadow: reduces light damage taken by them by 7% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Shadow, Poison, LightRes, Resistance
 (Shadow) Poison = User Light Res\8%\Chain\If a team member is attuned to Shadow: reduces light damage taken by them by 8% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Shadow, Poison, LightRes, Resistance
+(Shadow) Poison = User Light Res\example\Chain\If a team member is attuned to Shadow: reduces light damage taken by them by `x`% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Shadow, Poison, LightRes, Resistance
+(Shadow) Poison = User Light Res\3%\Chain\If a team member is attuned to Shadow: reduces light damage taken by them by 3% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Shadow, Poison, LightRes, Resistance
+(Shadow) Poison = User Light Res\5%\Chain\If a team member is attuned to Shadow: reduces light damage taken by them by 5% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Shadow, Poison, LightRes, Resistance
+(Shadow) Poison = User Light Res\7%\Chain\If a team member is attuned to Shadow: reduces light damage taken by them by 7% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Shadow, Poison, LightRes, Resistance
 (Shadow) Poison = User Strength\example\Chain\If a team member is attuned to Shadow: increases their strength by `x`% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Shadow, Poison, Strength
 (Shadow) Poison = User Strength\6%\Chain\If a team member is attuned to Shadow: increases their strength by 6% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Shadow, Poison, Strength
 (Shadow) Poison = User Strength\7%\Chain\If a team member is attuned to Shadow: increases their strength by 7% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Shadow, Poison, Strength
@@ -2630,12 +2634,6 @@ Strength\10%\CoAbility\Increases strength by 10%.\320\n\Strength
 (Water) Combo Time\III\Chain\If a team member is attuned to Water: extends the window between them hitting an enemy and the combo counter resetting by 1.5 seconds. Benefits your whole team.\0\y\ComboTime, Water
 (Water) Combo Time\IV\Chain\If a team member is attuned to Water: extends the window between them hitting an enemy and the combo counter resetting by 2 seconds. Benefits your whole team.\0\y\ComboTime, Water
 (Water) Combo Time\VI\Chain\If a team member is attuned to Water: extends the window between them hitting an enemy and the combo counter resetting by 2.5 seconds. Benefits your whole team.\0\y\ComboTime, Water
-(Water) Dragon's Claws\example\Chain\If a team member is attuned to Water: each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by `x`% in total. On second shapeshift strength is increased by `x`% in total. On third shapeshift strength is increased by `x`% in total. Benefits your whole team.\0\y\DragonsClaws, Water
-(Water) Dragon's Claws\I\Chain\If a team member is attuned to Water: each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by 6% in total. On second shapeshift strength is increased by 14% in total. On third shapeshift strength is increased by 29% in total. Benefits your whole team.\0\y\DragonsClaws, Water
-(Water) Dragon's Claws\II\Chain\If a team member is attuned to Water: each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 16% in total. On third shapeshift strength is increased by 31% in total. Benefits your whole team.\0\y\DragonsClaws, Water
-(Water) Dragon's Claws\III\Chain\If a team member is attuned to Water: each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 17% in total. On third shapeshift strength is increased by 32% in total. Benefits your whole team.\0\y\DragonsClaws, Water
-(Water) Dragon's Claws\IV\Chain\If a team member is attuned to Water: each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 18% in total. On third shapeshift strength is increased by 33% in total. Benefits your whole team.\0\y\DragonsClaws, Water
-(Water) Dragon's Claws\VI\Chain\If a team member is attuned to Water: each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by 10% in total. On second shapeshift strength is increased by 20% in total. On third shapeshift strength is increased by 35% in total. Benefits your whole team.\0\y\DragonsClaws, Water
 (Water) Dragon Haste\example\Chain\If a team member is attuned to Water: increases their dragon gauge fill rate by `x`%. Benefits your whole team.\0\y\Dragon'sHaste, Water
 (Water) Dragon Haste\10%\Chain\If a team member is attuned to Water: increases their dragon gauge fill rate by 10%. Benefits your whole team.\0\y\Dragon'sHaste, Water
 (Water) Dragon Haste\12%\Chain\If a team member is attuned to Water: increases their dragon gauge fill rate by 12%. Benefits your whole team.\0\y\Dragon'sHaste, Water
@@ -2643,6 +2641,12 @@ Strength\10%\CoAbility\Increases strength by 10%.\320\n\Strength
 (Water) Dragon Haste\16%\Chain\If a team member is attuned to Water: increases their dragon gauge fill rate by 16%. Benefits your whole team.\0\y\Dragon'sHaste, Water
 (Water) Dragon Haste\18%\Chain\If a team member is attuned to Water: increases their dragon gauge fill rate by 18%. Benefits your whole team.\0\y\Dragon'sHaste, Water
 (Water) Dragon Haste\20%\Chain\If a team member is attuned to Water: increases their dragon gauge fill rate by 20%. Benefits your whole team.\0\y\Dragon'sHaste, Water
+(Water) Dragon's Claws\example\Chain\If a team member is attuned to Water: each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by `x`% in total. On second shapeshift strength is increased by `x`% in total. On third shapeshift strength is increased by `x`% in total. Benefits your whole team.\0\y\DragonsClaws, Water
+(Water) Dragon's Claws\I\Chain\If a team member is attuned to Water: each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by 6% in total. On second shapeshift strength is increased by 14% in total. On third shapeshift strength is increased by 29% in total. Benefits your whole team.\0\y\DragonsClaws, Water
+(Water) Dragon's Claws\II\Chain\If a team member is attuned to Water: each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 16% in total. On third shapeshift strength is increased by 31% in total. Benefits your whole team.\0\y\DragonsClaws, Water
+(Water) Dragon's Claws\III\Chain\If a team member is attuned to Water: each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 17% in total. On third shapeshift strength is increased by 32% in total. Benefits your whole team.\0\y\DragonsClaws, Water
+(Water) Dragon's Claws\IV\Chain\If a team member is attuned to Water: each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 18% in total. On third shapeshift strength is increased by 33% in total. Benefits your whole team.\0\y\DragonsClaws, Water
+(Water) Dragon's Claws\VI\Chain\If a team member is attuned to Water: each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by 10% in total. On second shapeshift strength is increased by 20% in total. On third shapeshift strength is increased by 35% in total. Benefits your whole team.\0\y\DragonsClaws, Water
 (Water) Frostbite = User Flame Res\example\Chain\If a team member is attuned to Water: reduces flame damage taken by them by `x`% for 15 seconds when they successfully inflict an enemy with frostbite. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Water, Frostbite, FlameRes, Resistance
 (Water) Frostbite = User Flame Res\3%\Chain\If a team member is attuned to Water: reduces flame damage taken by them by 3% for 15 seconds when they successfully inflict an enemy with frostbite. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Water, Frostbite, FlameRes, Resistance
 (Water) Frostbite = User Flame Res\4%\Chain\If a team member is attuned to Water: reduces flame damage taken by them by 4% for 15 seconds when they successfully inflict an enemy with frostbite. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Water, Frostbite, FlameRes, Resistance
@@ -2778,14 +2782,197 @@ Strength\10%\CoAbility\Increases strength by 10%.\320\n\Strength
 (Wind) Water Res Doublebuff\6%\Chain\If a team member is attuned to Wind: reduces water damage taken by them by 6% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Wind, WaterRes, Resistance, Doublebuff
 (Wind) Water Res Doublebuff\7%\Chain\If a team member is attuned to Wind: reduces water damage taken by them by 7% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Wind, WaterRes, Resistance, Doublebuff
 (Wind) Water Res Doublebuff\8%\Chain\If a team member is attuned to Wind: reduces water damage taken by them by 8% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Wind, WaterRes, Resistance, Doublebuff
+Above 10 hits = Critical Rate\example\Chain\If a team member is attuned to Flame: increases a team member's critical rate by `x`% when the combo count is 10 or higher. Benefits your whole team.\0\y\CritRate, Combo, Hits10
+Above 10 hits = Critical Rate\7%\Chain\Increases a team member's critical rate by 7% when the combo count is 10 or higher. Benefits your whole team.\0\y\CritRate, Combo, Hits10
+Above 10 hits = Critical Rate\9%\Chain\Increases a team member's critical rate by 9% when the combo count is 10 or higher. Benefits your whole team.\0\y\CritRate, Combo, Hits10
+Above 10 hits = Critical Rate\12%\Chain\Increases a team member's critical rate by 12% when the combo count is 10 or higher. Benefits your whole team.\0\y\CritRate, Combo, Hits10
+Above 10 Hits = Critical Rate\example\Chain\Increases a team member's critical rate by `x`% when the combo count is 10 or higher. Benefits your whole team.\0\y\Hits10, Combo, CritRate
+Above 10 Hits = Critical Rate\7%\Chain\Increases a team member's critical rate by 7% when the combo count is 10 or higher. Benefits your whole team.\0\y\Hits10, Combo, CritRate
+Above 10 Hits = Critical Rate\8%\Chain\Increases a team member's critical rate by 8% when the combo count is 10 or higher. Benefits your whole team.\0\y\Hits10, Combo, CritRate
+Above 10 Hits = Critical Rate\9%\Chain\Increases a team member's critical rate by 9% when the combo count is 10 or higher. Benefits your whole team.\0\y\Hits10, Combo, CritRate
+Above 10 Hits = Critical Rate\example\Chain\Increases a team member's critical rate by `x`% when the combo count is 10 or higher. Benefits your whole team.\0\y\Hits10, Combo, CritRate
+Above 10 Hits = Critical Rate\7%\Chain\Increases a team member's critical rate by 7% when the combo count is 10 or higher. Benefits your whole team.\0\y\Hits10, Combo, CritRate
+Above 10 Hits = Critical Rate\8%\Chain\Increases a team member's critical rate by 8% when the combo count is 10 or higher. Benefits your whole team.\0\y\Hits10, Combo, CritRate
+Above 10 Hits = Critical Rate\9%\Chain\Increases a team member's critical rate by 9% when the combo count is 10 or higher. Benefits your whole team.\0\y\Hits10, Combo, CritRate
+Above 10 Hits = Critical Rate\10%\Chain\Increases a team member's critical rate by 10% when the combo count is 10 or higher. Benefits your whole team.\0\y\Hits10, Combo, CritRate
+Above 10 Hits = Critical Rate\13%\Chain\Increases a team member's critical rate by 13% when the combo count is 10 or higher. Benefits your whole team.\0\y\Hits10, Combo, CritRate
+Above 10 hits = Flame Res\example\Chain\Reduces Flame damage taken by a team member by `x`% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Flame Res\5%\Chain\Reduces Flame damage taken by a team member by 5% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Flame Res\6%\Chain\Reduces Flame damage taken by a team member by 6% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Flame Res\7%\Chain\Reduces Flame damage taken by a team member by 7% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Flame Res\8%\Chain\Reduces Flame damage taken by a team member by 8% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Flame Res\9%\Chain\Reduces Flame damage taken by a team member by 9% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Flame Res\10%\Chain\Reduces Flame damage taken by a team member by 10% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 Hits = Light Res\example\Chain\Reduces Light damage taken by a team member by `x`% when the combo count is 10 or higher. Benefits your whole team.\0\y\ResistanceRes, Hits10, Combo
+Above 10 Hits = Light Res\5%\Chain\Reduces Light damage taken by a team member by 5% when the combo count is 10 or higher. Benefits your whole team.\0\y\ResistanceRes, Hits10, Combo
+Above 10 Hits = Light Res\7%\Chain\Reduces Light damage taken by a team member by 7% when the combo count is 10 or higher. Benefits your whole team.\0\y\ResistanceRes, Hits10, Combo
+Above 10 Hits = Light Res\9%\Chain\Reduces Light damage taken by a team member by 9% when the combo count is 10 or higher. Benefits your whole team.\0\y\ResistanceRes, Hits10, Combo
+Above 10 hits = Shadow Res\example\Chain\Reduces shadow damage taken by a team member by `x`% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Shadow Res\5%\Chain\Reduces shadow damage taken by a team member by 5% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Shadow Res\6%\Chain\Reduces shadow damage taken by a team member by 6% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Shadow Res\7%\Chain\Reduces shadow damage taken by a team member by 7% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Shadow Res\8%\Chain\Reduces shadow damage taken by a team member by 8% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Shadow Res\9%\Chain\Reduces shadow damage taken by a team member by 9% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Shadow Res\10%\Chain\Reduces shadow damage taken by a team member by 10% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Strength\example\Chain\Increases a team member's strength by `x`% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 hits = Strength\6%\Chain\Increases a team member's strength by 6% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 hits = Strength\7%\Chain\Increases a team member's strength by 7% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 hits = Strength\8%\Chain\Increases a team member's strength by 8% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 hits = Strength\9%\Chain\Increases a team member's strength by 9% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 hits = Strength\10%\Chain\Increases a team member's strength by 10% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 hits = Strength\13%\Chain\Increases a team member's strength by 13% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 Hits = Strength\example\Chain\Increases a team member's strength by `x`% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 Hits = Strength\6%\Chain\Increases a team member's strength by 6% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 Hits = Strength\7%\Chain\Increases a team member's strength by 7% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 Hits = Strength\8%\Chain\Increases a team member's strength by 8% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 Hits = Strength\9%\Chain\Increases a team member's strength by 9% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 Hits = Strength\13%\Chain\Increases a team member's strength by 13% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 Hits = Strength\example\Chain\Increases a team member's strength by `x`% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 Hits = Strength\6%\Chain\Increases a team member's strength by 6% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 Hits = Strength\7%\Chain\Increases a team member's strength by 7% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 Hits = Strength\8%\Chain\Increases a team member's strength by 8% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 Hits = Strength\9%\Chain\Increases a team member's strength by 9% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 Hits = Strength\13%\Chain\Increases a team member's strength by 13% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 hits = Strength\example\Chain\Increases a team member's strength by `x`% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 hits = Strength\6%\Chain\Increases a team member's strength by 6% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 hits = Strength\7%\Chain\Increases a team member's strength by 7% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 hits = Strength\8%\Chain\Increases a team member's strength by 8% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 hits = Strength\9%\Chain\Increases a team member's strength by 9% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 hits = Strength\10%\Chain\Increases a team member's strength by 10% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 hits = Strength\13%\Chain\Increases a team member's strength by 13% when the combo count is 10 or higher. Benefits your whole team.\0\y\Strength, Combo, Hits10
+Above 10 hits = Water Res\example\Chain\Reduces Water damage taken by a team member by `x`% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Water Res\5%\Chain\Reduces Water damage taken by a team member by 5% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Water Res\6%\Chain\Reduces Water damage taken by a team member by 6% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Water Res\7%\Chain\Reduces Water damage taken by a team member by 7% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Water Res\8%\Chain\Reduces Water damage taken by a team member by 8% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 hits = Water Res\10%\Chain\Reduces Water damage taken by a team member by 10% when the combo count is 10 or higher. Benefits your whole team.\0\y\Combo, Hits10Res, Resistance
+Above 10 Hits = Wind Res\example\Chain\Reduces wind damage taken by a team member by `x`% when the combo count is 10 or higher. Benefits your whole team.\0\y\ResistanceRes, Hits10, Combo
+Above 10 Hits = Wind Res\5%\Chain\Reduces wind damage taken by a team member by 5% when the combo count is 10 or higher. Benefits your whole team.\0\y\ResistanceRes, Hits10, Combo
+Above 10 Hits = Wind Res\6%\Chain\Reduces wind damage taken by a team member by 6% when the combo count is 10 or higher. Benefits your whole team.\0\y\ResistanceRes, Hits10, Combo
+Above 10 Hits = Wind Res\7%\Chain\Reduces wind damage taken by a team member by 7% when the combo count is 10 or higher. Benefits your whole team.\0\y\ResistanceRes, Hits10, Combo
+Above 10 Hits = Wind Res\9%\Chain\Reduces wind damage taken by a team member by 9% when the combo count is 10 or higher. Benefits your whole team.\0\y\ResistanceRes, Hits10, Combo
+Below 40% HP = Flame Res\example\Chain\Reduces flame damage taken by a team member by `x`% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+Below 40% HP = Flame Res\5%\Chain\Reduces flame damage taken by a team member by 5% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+Below 40% HP = Flame Res\7%\Chain\Reduces flame damage taken by a team member by 7% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+Below 40% HP = Flame Res\9%\Chain\Reduces flame damage taken by a team member by 9% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+Buff Time\example\Chain\Increases duration of a team member's buff skills by `x`%. Benefits your whole team.\0\y\BuffTime
+Buff Time\1%\Chain\Increases duration of a team member's buff skills by 5%. Benefits your whole team.\0\y\BuffTime
+Buff Time\2%\Chain\Increases duration of a team member's buff skills by 2%. Benefits your whole team.\0\y\BuffTime
+Buff Time\3%\Chain\Increases duration of a team member's buff skills by 3%. Benefits your whole team.\0\y\BuffTime
+Buff Time\4%\Chain\Increases duration of a team member's buff skills by 4%. Benefits your whole team.\0\y\BuffTime
+Buff Time\5%\Chain\Increases duration of a team member's buff skills by 5%. Benefits your whole team.\0\y\BuffTime
+Buff Time\6%\Chain\Increases duration of a team member's buff skills by 6%. Benefits your whole team.\0\y\BuffTime
+Buff Time\7%\Chain\Increases duration of a team member's buff skills by 7%. Benefits your whole team.\0\y\BuffTime
+Buff Time\8%\Chain\Increases duration of a team member's buff skills by 8%. Benefits your whole team.\0\y\BuffTime
+Buff Time\9%\Chain\Increases duration of a team member's buff skills by 9%. Benefits your whole team.\0\y\BuffTime
+Burn = Critical Rate\example\Chain\Increases a team member's critical rate by `x`% for 15 seconds when they successfully burn an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\CritRate, Burn
+Burn = Critical Rate\7%\Chain\Increases a team member's critical rate by 7% for 15 seconds when they successfully burn an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\CritRate, Burn
+Burn = Critical Rate\8%\Chain\Increases a team member's critical rate by 8% for 15 seconds when they successfully burn an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\CritRate, Burn
+Burn = Critical Rate\9%\Chain\Increases a team member's critical rate by 9% for 15 seconds when they successfully burn an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\CritRate, Burn
+Burn = User Strength\example\Chain\Increases a team member's strength by `x`% for 15 seconds when they successfully burn an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Strength, Burn
+Burn = User Strength\6%\Chain\Increases a team member's strength by 6% for 15 seconds when they successfully burn an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Strength, Burn
+Burn = User Strength\7%\Chain\Increases a team member's strength by 7% for 15 seconds when they successfully burn an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Strength, Burn
+Burn = User Strength\8%\Chain\Increases a team member's strength by 8% for 15 seconds when they successfully burn an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Strength, Burn
+Burn = User Wind Res\example\Chain\Reduces wind damage taken by a team member by `x`% for 15 seconds when they successfully burn an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Resistance, Burn
+Burn = User Wind Res\3%\Chain\Reduces wind damage taken by a team member by 3% for 15 seconds when they successfully burn an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Resistance, Burn
+Burn = User Wind Res\4%\Chain\Reduces wind damage taken by a team member by 4% for 15 seconds when they successfully burn an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Resistance, Burn
+Burn = User Wind Res\5%\Chain\Reduces wind damage taken by a team member by 5% for 15 seconds when they successfully burn an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Resistance, Burn
+Burn = User Wind Res\6%\Chain\Reduces wind damage taken by a team member by 6% for 15 seconds when they successfully burn an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Resistance, Burn
+Burn = User Wind Res\7%\Chain\Reduces wind damage taken by a team member by 7% for 15 seconds when they successfully burn an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Resistance, Burn
+Burn = User Wind Res\8%\Chain\Reduces wind damage taken by a team member by 8% for 15 seconds when they successfully burn an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Resistance, Burn
+Burning Edge\example\Chain\Increases a team member's chances of inflicting burn by `x`%. Benefits your whole team.\0\y\StatusChance, BurnChance
+Burning Edge\20%\Chain\Increases a team member's chances of inflicting burn by 20%. Benefits your whole team.\0\y\StatusChance, BurnChance
+Burning Edge\25%\Chain\Increases a team member's chances of inflicting burn by 25%. Benefits your whole team.\0\y\StatusChance, BurnChance
+Burning Edge\30%\Chain\Increases a team member's chances of inflicting burn by 30%. Benefits your whole team.\0\y\StatusChance, BurnChance
+Burning Edge\35%\Chain\Increases a team member's chances of inflicting burn by 35%. Benefits your whole team.\0\y\StatusChance, BurnChance
+Burning Edge\40%\Chain\Increases a team member's chances of inflicting burn by 40%. Benefits your whole team.\0\y\StatusChance, BurnChance
+Combo = Energy Level Up\example\Chain\Increases a team member's energy level by one stage for every 25/24/23/22/20-hit combo. Benefits your whole team.\0\y\Energy, Combo
+Combo = Energy Level Up\I\Chain\Increases a team member's energy level by one stage for every 25-hit combo. Benefits your whole team.\0\y\Energy, Combo
+Combo = Energy Level Up\II\Chain\Increases a team member's energy level by one stage for every 24-hit combo. Benefits your whole team.\0\y\Energy, Combo
+Combo = Energy Level Up\III\Chain\Increases a team member's energy level by one stage for every 23-hit combo. Benefits your whole team.\0\y\Energy, Combo
+Combo = Energy Level Up\IV\Chain\Increases a team member's energy level by one stage for every 22-hit combo. Benefits your whole team.\0\y\Energy, Combo
+Combo = Energy Level Up\VI\Chain\Increases a team member's energy level by one stage for every 20-hit combo. Benefits your whole team.\0\y\Energy, Combo
+Combo = Energy Level Up\example\Chain\Increases a team member's energy level by one stage for every 25/24/23/22/20-hit combo. Benefits your whole team.\0\y\Energy, Combo
+Combo = Energy Level Up\I\Chain\Increases a team member's energy level by one stage for every 25-hit combo. Benefits your whole team.\0\y\Energy, Combo
+Combo = Energy Level Up\II\Chain\Increases a team member's energy level by one stage for every 24-hit combo. Benefits your whole team.\0\y\Energy, Combo
+Combo = Energy Level Up\III\Chain\Increases a team member's energy level by one stage for every 23-hit combo. Benefits your whole team.\0\y\Energy, Combo
+Combo = Energy Level Up\IV\Chain\Increases a team member's energy level by one stage for every 22-hit combo. Benefits your whole team.\0\y\Energy, Combo
+Combo = Energy Level Up\VI\Chain\Increases a team member's energy level by one stage for every 20-hit combo. Benefits your whole team.\0\y\Energy, Combo
+Combo Time\example\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by `x` second(s). Benefits your whole team.\0\y\ComboTime
+Combo Time\I\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by 1 second. Benefits your whole team.\0\y\ComboTime
+Combo Time\II\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by 1.2 seconds. Benefits your whole team.\0\y\ComboTime
+Combo Time\III\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by 1.5 seconds. Benefits your whole team.\0\y\ComboTime
+Combo Time\IV\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by 2 seconds. Benefits your whole team.\0\y\ComboTime
+Combo Time\VI\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by 2.5 seconds. Benefits your whole team.\0\y\ComboTime
+Combo Time\example\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by `x` second(s). Benefits your whole team.\0\y\ComboTime
+Combo Time\I\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by 1 second. Benefits your whole team.\0\y\ComboTime
+Combo Time\II\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by 1.2 seconds. Benefits your whole team.\0\y\ComboTime
+Combo Time\III\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by 1.5 seconds. Benefits your whole team.\0\y\ComboTime
+Combo Time\IV\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by 2 seconds. Benefits your whole team.\0\y\ComboTime
+Combo Time\V\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by 2.2 seconds. Benefits your whole team.\0\y\ComboTime
+Combo Time\VI\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by 2.5 seconds. Benefits your whole team.\0\y\ComboTime
+Combo Time\example\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by `x` second(s). Benefits your whole team.\0\y\ComboTime
+Combo Time\I\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by 1 second. Benefits your whole team.\0\y\ComboTime
+Combo Time\II\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by 1.2 seconds. Benefits your whole team.\0\y\ComboTime
+Combo Time\III\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by 1.5 seconds. Benefits your whole team.\0\y\ComboTime
+Combo Time\IV\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by 2 seconds. Benefits your whole team.\0\y\ComboTime
+Combo Time\VI\Chain\Extends the window between a team member hitting an enemy and the combo counter resetting by 2.5 seconds. Benefits your whole team.\0\y\ComboTime
+Critical Rate Doublebuff\example\Chain\Increases a team member's critical rate by `x`% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Doublebuff, CritRate
+Critical Rate Doublebuff\5%\Chain\Increases a team member's critical rate by 5% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Doublebuff, CritRate
+Critical Rate Doublebuff\6%\Chain\Increases a team member's critical rate by 6% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Doublebuff, CritRate
+Critical Rate Doublebuff\7%\Chain\Increases a team member's critical rate by 7% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Doublebuff, CritRate
+Critical Rate Doublebuff\8%\Chain\Increases a team member's critical rate by 8% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Doublebuff, CritRate
+Critical Rate Doublebuff\9%\Chain\Increases a team member's critical rate by 9% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Doublebuff, CritRate
+Critical Rate Doublebuff\10%\Chain\Increases a team member's critical rate by 10% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Doublebuff, CritRate
+Damage Taken = Force Strike Damage\example\Chain\Increases the damage dealt by a team member's next force strike by 15/16/17/18/20% upon taking damage. Benefits your whole team.\0\y\ForceStrikeDamage
+Damage Taken = Force Strike Damage\I\Chain\Increases the damage dealt by a team member's next force strike by 15% upon taking damage. Benefits your whole team.\0\y\ForceStrikeDamage
+Damage Taken = Force Strike Damage\II\Chain\Increases the damage dealt by a team member's next force strike by 16% upon taking damage. Benefits your whole team.\0\y\ForceStrikeDamage
+Damage Taken = Force Strike Damage\III\Chain\Increases the damage dealt by a team member's next force strike by 17% upon taking damage. Benefits your whole team.\0\y\ForceStrikeDamage
+Damage Taken = Force Strike Damage\IV\Chain\Increases the damage dealt by a team member's next force strike by 18% upon taking damage. Benefits your whole team.\0\y\ForceStrikeDamage
+Damage Taken = Force Strike Damage\VI\Chain\Increases the damage dealt by a team member's next force strike by 20% upon taking damage. Benefits your whole team.\0\y\ForceStrikeDamage
 Defense\example\Chain\Increases defense by `x`%. Benefits your whole team.\0\y\Defense
 Defense\1%\Chain\Increases defense by 1%. Benefits your whole team.\0\y\Defense
 Defense\2%\Chain\Increases defense by 2%. Benefits your whole team.\0\y\Defense
 Defense\3%\Chain\Increases defense by 3%. Benefits your whole team.\0\y\Defense
+Defense\example\Chain\Increases defense by `x`%. Benefits your whole team.\0\y\Defense
+Defense\1%\Chain\Increases defense by 1%. Benefits your whole team.\0\y\Defense
+Defense\2%\Chain\Increases defense by 2%. Benefits your whole team.\0\y\Defense
+Defense\3%\Chain\Increases defense by 3%. Benefits your whole team.\0\y\Defense
+Defense\5%\Chain\Increases defense by 5%. Benefits your whole team.\0\y\Defense
+Defense\example\Chain\Increases defense by `x`%. Benefits your whole team.\0\y\Defense
+Defense\1%\Chain\Increases defense by 1%. Benefits your whole team.\0\y\Defense
+Defense\3%\Chain\Increases defense by 3%. Benefits your whole team.\0\y\Defense
+Defense\example\Chain\Increases defense by `x`%. Benefits your whole team.\0\y\Defense
+Defense\1%\Chain\Increases defense by 1%. Benefits your whole team.\0\y\Defense
+Defense\2%\Chain\Increases defense by 2%. Benefits your whole team.\0\y\Defense
+Defense\3%\Chain\Increases defense by 3%. Benefits your whole team.\0\y\Defense
+Defense\4%\Chain\Increases defense by 4%. Benefits your whole team.\0\y\Defense
+Defense\6%\Chain\Increases defense by 6%. Benefits your whole team.\0\y\Defense
 Dragon Haste\example\Chain\Increases dragon gauge fill rate by `x`%. Benefits your whole team.\0\y\DragonHaste
 Dragon Haste\10%\Chain\Increases dragon gauge fill rate by 10%. Benefits your whole team.\0\y\DragonHaste
 Dragon Haste\12%\Chain\Increases dragon gauge fill rate by 12%. Benefits your whole team.\0\y\DragonHaste
 Dragon Haste\14%\Chain\Increases dragon gauge fill rate by 14%. Benefits your whole team.\0\y\DragonHaste
+Dragon Haste\example\Chain\Increases a team member's dragon gauge fill rate by `x`%. Benefits your whole team.\0\y\DragonHaste
+Dragon Haste\10%\Chain\Increases a team member's dragon gauge fill rate by 10%. Benefits your whole team.\0\y\DragonHaste
+Dragon Haste\12%\Chain\Increases a team member's dragon gauge fill rate by 12%. Benefits your whole team.\0\y\DragonHaste
+Dragon Haste\14%\Chain\Increases a team member's dragon gauge fill rate by 14%. Benefits your whole team.\0\y\DragonHaste
+Dragon Haste\16%\Chain\Increases a team member's dragon gauge fill rate by 16%. Benefits your whole team.\0\y\DragonHaste
+Dragon Haste\18%\Chain\Increases a team member's dragon gauge fill rate by 18%. Benefits your whole team.\0\y\DragonHaste
+Dragon Haste\20%\Chain\Increases a team member's dragon gauge fill rate by 20%. Benefits your whole team.\0\y\DragonHaste
+Dragon Haste\example\Chain\Increases a team member's dragon gauge fill rate by `x`%. Benefits your whole team.\0\y\DragonHaste
+Dragon Haste\10%\Chain\Increases a team member's dragon gauge fill rate by 10%. Benefits your whole team.\0\y\DragonHaste
+Dragon Haste\12%\Chain\Increases a team member's dragon gauge fill rate by 12%. Benefits your whole team.\0\y\DragonHaste
+Dragon Haste\14%\Chain\Increases a team member's dragon gauge fill rate by 14%. Benefits your whole team.\0\y\DragonHaste
+Dragon Haste\16%\Chain\Increases a team member's dragon gauge fill rate by 16%. Benefits your whole team.\0\y\DragonHaste
+Dragon Haste\18%\Chain\Increases a team member's dragon gauge fill rate by 18%. Benefits your whole team.\0\y\DragonHaste
+Dragon Haste\20%\Chain\Increases a team member's dragon gauge fill rate by 20%. Benefits your whole team.\0\y\DragonHaste
+Dragon Haste\example\Chain\Increases a team member's dragon gauge fill rate by `x`%. Benefits your whole team.\0\y\Dragon'sHaste
+Dragon Haste\10%\Chain\Increases a team member's dragon gauge fill rate by 10%. Benefits your whole team.\0\y\Dragon'sHaste
+Dragon Haste\12%\Chain\Increases a team member's dragon gauge fill rate by 12%. Benefits your whole team.\0\y\Dragon'sHaste
+Dragon Haste\14%\Chain\Increases a team member's dragon gauge fill rate by 14%. Benefits your whole team.\0\y\Dragon'sHaste
+Dragon Haste\16%\Chain\Increases a team member's dragon gauge fill rate by 16%. Benefits your whole team.\0\y\Dragon'sHaste
+Dragon Haste\18%\Chain\Increases a team member's dragon gauge fill rate by 18%. Benefits your whole team.\0\y\Dragon'sHaste
+Dragon Haste\20%\Chain\Increases a team member's dragon gauge fill rate by 20%. Benefits your whole team.\0\y\Dragon'sHaste
 Dragon's Claws\example\Chain\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by `x`% in total. On second shapeshift strength is increased by `x`% in total. On third shapeshift strength is increased by `x`% in total. Benefits your whole team.\0\y\DragonsClaws
 Dragon's Claws\I\Chain\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 6% in total. On second shapeshift strength is increased by 14% in total. On third shapeshift strength is increased by 29% in total. Benefits your whole team.\0\y\DragonsClaws
 Dragon's Claws\II\Chain\Each shapeshift increases strength for the remainder of the quest (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 16% in total. On third shapeshift strength is increased by 31% in total. Benefits your whole team.\0\y\DragonsClaws
@@ -2793,11 +2980,288 @@ Dragon's Claws\III\Chain\Each shapeshift increases strength for the remainder of
 Dragon's Claws\IV\Chain\Each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 18% in total. On third shapeshift strength is increased by 33% in total. Benefits your whole team.\0\y\DragonsClaws
 Dragon's Claws\V\Chain\Each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by 9% in total. On second shapeshift strength is increased by 19% in total. On third shapeshift strength is increased by 34% in total. Benefits your whole team.\0\y\DragonsClaws
 Dragon's Claws\VI\Chain\Each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by 10% in total. On second shapeshift strength is increased by 20% in total. On third shapeshift strength is increased by 35% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\example\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by `x`% in total. On second shapeshift strength is increased by `x`% in total. On third shapeshift strength is increased by `x`% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\I\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by 6% in total. On second shapeshift strength is increased by 14% in total. On third shapeshift strength is increased by 29% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\II\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 16% in total. On third shapeshift strength is increased by 31% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\III\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 17% in total. On third shapeshift strength is increased by 32% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\IV\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 18% in total. On third shapeshift strength is increased by 33% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\V\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by 9% in total. On second shapeshift strength is increased by 19% in total. On third shapeshift strength is increased by 34% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\VI\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by 10% in total. On second shapeshift strength is increased by 20% in total. On third shapeshift strength is increased by 35% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\example\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by `x`% in total. On second shapeshift strength is increased by `x`% in total. On third shapeshift strength is increased by `x`% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\I\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by 6% in total. On second shapeshift strength is increased by 14% in total. On third shapeshift strength is increased by 29% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\II\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 16% in total. On third shapeshift strength is increased by 31% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\III\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 17% in total. On third shapeshift strength is increased by 32% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\IV\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 18% in total. On third shapeshift strength is increased by 33% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\VI\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by 10% in total. On second shapeshift strength is increased by 20% in total. On third shapeshift strength is increased by 35% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\example\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by `x`% in total. On second shapeshift strength is increased by `x`% in total. On third shapeshift strength is increased by `x`% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\I\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by 6% in total. On second shapeshift strength is increased by 14% in total. On third shapeshift strength is increased by 29% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\II\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 16% in total. On third shapeshift strength is increased by 31% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\III\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 17% in total. On third shapeshift strength is increased by 32% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\IV\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 18% in total. On third shapeshift strength is increased by 33% in total. Benefits your whole team.\0\y\DragonsClaws
+Dragon's Claws\V\Chain\Each shapeshift increases a team member's strength (up to three times per quest). On first shapeshift strength is increased by 9% in total. On second shapeshift strength is increased by 19% in total. On third shapeshift strength is increased by 34% in total. Benefits your whole team.\0\y\DragonsClaws
+Energy = Inspiration\example\Chain\If the user is attuned to Light: when a team member's energy level is increased, grants a `x`% chance for a team member's inspiration level to also increase by one stage. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Energy, Inspiration
+Energy = Inspiration\I\Chain\When a team member's energy level is increased, grants a 50% chance for a team member's inspiration level to also increase by one stage. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Energy, Inspiration
+Energy = Inspiration\II\Chain\When a team member's energy level is increased, grants a 60% chance for a team member's inspiration level to also increase by one stage. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Energy, Inspiration
+Energy = Inspiration\III\Chain\When a team member's energy level is increased, grants a 70% chance for a team member's inspiration level to also increase by one stage. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Energy, Inspiration
+Energy = Inspiration\IV\Chain\When a team member's energy level is increased, grants a 80% chance for a team member's inspiration level to also increase by one stage. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Energy, Inspiration
+Energy = Inspiration\VI\Chain\When a team member's energy level is increased, grants a 100% chance for a team member's inspiration level to also increase by one stage. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Energy, Inspiration
+Energy = Shadow Res\example\Chain\Reduces shadow damage taken by a team member by `x`% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\EnergyRes, Resistance
+Energy = Shadow Res\3%\Chain\Reduces shadow damage taken by a team member by 3% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\EnergyRes, Resistance
+Energy = Shadow Res\4%\Chain\Reduces shadow damage taken by a team member by 4% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\EnergyRes, Resistance
+Energy = Shadow Res\5%\Chain\Reduces shadow damage taken by a team member by 5% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\EnergyRes, Resistance
+Energy = Shadow Res\6%\Chain\Reduces shadow damage taken by a team member by 6% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\EnergyRes, Resistance
+Energy = Shadow Res\7%\Chain\Reduces shadow damage taken by a team member by 7% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\EnergyRes, Resistance
+Energy = Shadow Res\8%\Chain\Reduces shadow damage taken by a team member by 8% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\EnergyRes, Resistance
+Energy = Strength\example\Chain\Increases a team member's strength by `x`% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Energy, Strength
+Energy = Strength\5%\Chain\Increases a team member's strength by 5% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Energy, Strength
+Energy = Strength\6%\Chain\Increases a team member's strength by 6% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Energy, Strength
+Energy = Strength\7%\Chain\Increases a team member's strength by 7% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Energy, Strength
+Energy = Strength\8%\Chain\Increases a team member's strength by 8% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Energy, Strength
+Energy = Strength\9%\Chain\Increases a team member's strength by 9% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Energy, Strength
+Energy = Strength\10%\Chain\Increases a team member's strength by 10% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Energy, Strength
+Frostbite = User Flame Res\example\Chain\Reduces flame damage taken by a team member by `x`% for 15 seconds when they successfully inflict an enemy with frostbite. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\FrostbiteRes, Resistance
+Frostbite = User Flame Res\3%\Chain\Reduces flame damage taken by a team member by 3% for 15 seconds when they successfully inflict an enemy with frostbite. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\FrostbiteRes, Resistance
+Frostbite = User Flame Res\4%\Chain\Reduces flame damage taken by a team member by 4% for 15 seconds when they successfully inflict an enemy with frostbite. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\FrostbiteRes, Resistance
+Frostbite = User Flame Res\5%\Chain\Reduces flame damage taken by a team member by 5% for 15 seconds when they successfully inflict an enemy with frostbite. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\FrostbiteRes, Resistance
+Frostbite = User Flame Res\7%\Chain\Reduces flame damage taken by a team member by 7% for 15 seconds when they successfully inflict an enemy with frostbite. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\FrostbiteRes, Resistance
+Frostbite = User Strength\example\Chain\Increases a team member's strength by `x`% for 15 seconds when they successfully Frostbite an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Frostbite, Strength
+Frostbite = User Strength\6%\Chain\Increases a team member's strength by 6% for 15 seconds when they successfully Frostbite an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Frostbite, Strength
+Frostbite = User Strength\7%\Chain\Increases a team member's strength by 7% for 15 seconds when they successfully Frostbite an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Frostbite, Strength
+Frostbite = User Strength\8%\Chain\Increases a team member's strength by 8% for 15 seconds when they successfully Frostbite an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Frostbite, Strength
+Frostbite = User Strength\9%\Chain\Increases a team member's strength by 9% for 15 seconds when they successfully Frostbite an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Frostbite, Strength
+Frostbite = User Strength\10%\Chain\Increases a team member's strength by 10% for 15 seconds when they successfully Frostbite an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Frostbite, Strength
+Frostbite = User Strength\13%\Chain\Increases a team member's strength by 13% for 15 seconds when they successfully Frostbite an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Frostbite, Strength
+HP\example\Chain\Increases a team member's HP by `x`%. Benefits your whole team.\0\y\HP
+HP\5%\Chain\Increases a team member's HP by 5%. Benefits your whole team.\0\y\HP
+HP\6%\Chain\Increases a team member's HP by 6%. Benefits your whole team.\0\y\HP
+HP\7%\Chain\Increases a team member's HP by 7%. Benefits your whole team.\0\y\HP
+HP\example\Chain\Increases a team member's HP by `x`%. Benefits your whole team.\0\y\HP
+HP\5%\Chain\Increases a team member's HP by 5%. Benefits your whole team.\0\y\HP
+HP\6%\Chain\Increases a team member's HP by 6%. Benefits your whole team.\0\y\HP
+HP\7%\Chain\Increases a team member's HP by 7%. Benefits your whole team.\0\y\HP
+HP\example\Chain\Increases a team member's HP by `x`%. Benefits your whole team.\0\y\HP
+HP\5%\Chain\Increases a team member's HP by 5%. Benefits your whole team.\0\y\HP
+HP\6%\Chain\Increases a team member's HP by 6%. Benefits your whole team.\0\y\HP
+HP\7%\Chain\Increases a team member's HP by 7%. Benefits your whole team.\0\y\HP
+HP\9%\Chain\Increases a team member's HP by 9%. Benefits your whole team.\0\y\HP
+HP\example\Chain\Increases a team member's HP by `x`%. Benefits your whole team.\0\y\HP
+HP\5%\Chain\Increases a team member's HP by 5%. Benefits your whole team.\0\y\HP
+HP\6%\Chain\Increases a team member's HP by 6%. Benefits your whole team.\0\y\HP
+HP\7%\Chain\Increases a team member's HP by 7%. Benefits your whole team.\0\y\HP
+HP\9%\Chain\Increases a team member's HP by 9%. Benefits your whole team.\0\y\HP
+HP 60% = Critical Rate\example\Chain\Increases a team member's critical rate by `x`% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, CritRate
+HP 60% = Critical Rate\3%\Chain\Increases a team member's critical rate by 3% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, CritRate
+HP 60% = Critical Rate\4%\Chain\Increases a team member's critical rate by 4% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, CritRate
+HP 60% = Critical Rate\5%\Chain\Increases a team member's critical rate by 5% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, CritRate
+HP 60% = Critical Rate\6%\Chain\Increases a team member's critical rate by 6% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, CritRate
+HP 60% = Critical Rate\7%\Chain\Increases a team member's critical rate by 7% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, CritRate
+HP 60% = Critical Rate\8%\Chain\Increases a team member's critical rate by 8% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, CritRate
 HP 60% = Strength\example\Chain\Increases strength by `x`% when HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
 HP 60% = Strength\1%\Chain\Increases strength by 1% when HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
 HP 60% = Strength\2%\Chain\Increases strength by 2% when HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
 HP 60% = Strength\3%\Chain\Increases strength by 3% when HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
-(Shadow) Poison = User Light Res\example\Chain\If a team member is attuned to Shadow: reduces light damage taken by them by `x`% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Shadow, Poison, LightRes, Resistance
-(Shadow) Poison = User Light Res\3%\Chain\If a team member is attuned to Shadow: reduces light damage taken by them by 3% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Shadow, Poison, LightRes, Resistance
-(Shadow) Poison = User Light Res\5%\Chain\If a team member is attuned to Shadow: reduces light damage taken by them by 5% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Shadow, Poison, LightRes, Resistance
-(Shadow) Poison = User Light Res\7%\Chain\If a team member is attuned to Shadow: reduces light damage taken by them by 7% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Shadow, Poison, LightRes, Resistance
+HP 60% = Strength\example\Chain\Increases a team member's strength by `x`% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\1%\Chain\Increases a team member's strength by 1% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\2%\Chain\Increases a team member's strength by 2% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\3%\Chain\Increases a team member's strength by 3% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\4%\Chain\Increases a team member's strength by 4% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\5%\Chain\Increases a team member's strength by 5% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\6%\Chain\Increases a team member's strength by 6% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\example\Chain\Increases a team member's strength by `x`% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\1%\Chain\Increases a team member's strength by 1% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\2%\Chain\Increases a team member's strength by 2% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\3%\Chain\Increases a team member's strength by 3% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\4%\Chain\Increases a team member's strength by 4% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\5%\Chain\Increases a team member's strength by 5% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\6%\Chain\Increases a team member's strength by 6% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\example\Chain\Increases a team member's strength by `x`% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\1%\Chain\Increases a team member's strength by 1% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\2%\Chain\Increases a team member's strength by 2% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\3%\Chain\Increases a team member's strength by 3% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\4%\Chain\Increases a team member's strength by 4% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\5%\Chain\Increases a team member's strength by 5% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\6%\Chain\Increases a team member's strength by 6% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\example\Chain\Increases a team member's strength by `x`% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\1%\Chain\Increases a team member's strength by 1% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\2%\Chain\Increases a team member's strength by 2% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\3%\Chain\Increases a team member's strength by 3% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\4%\Chain\Increases a team member's strength by 4% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\5%\Chain\Increases a team member's strength by 5% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\6%\Chain\Increases a team member's strength by 6% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\example\Chain\Increases a team member's strength by `x`% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\1%\Chain\Increases a team member's strength by 1% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\2%\Chain\Increases a team member's strength by 2% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\3%\Chain\Increases a team member's strength by 3% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\4%\Chain\Increases a team member's strength by 4% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\5%\Chain\Increases a team member's strength by 5% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 60% = Strength\6%\Chain\Increases a team member's strength by 6% when a team member's HP is 60% or above. Benefits your whole team.\0\y\HP60, Strength
+HP 80% = Flame Res\example\Chain\Reduces Flame damage taken by a team member by `x`% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Flame Res\1%\Chain\Reduces Flame damage taken by a team member by 1% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Flame Res\2%\Chain\Reduces Flame damage taken by a team member by 2% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Flame Res\3%\Chain\Reduces Flame damage taken by a team member by 3% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Flame Res\4%\Chain\Reduces Flame damage taken by a team member by 4% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Flame Res\5%\Chain\Reduces Flame damage taken by a team member by 5% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Flame Res\6%\Chain\Reduces Flame damage taken by a team member by 6% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Light Res\example\Chain\Reduces Light damage taken by a team member by `x`% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Light Res\1%\Chain\Reduces Light damage taken by a team member by 1% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Light Res\2%\Chain\Reduces Light damage taken by a team member by 2% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Light Res\3%\Chain\Reduces Light damage taken by a team member by 3% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Light Res\4%\Chain\Reduces Light damage taken by a team member by 4% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Light Res\5%\Chain\Reduces Light damage taken by a team member by 5% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Light Res\6%\Chain\Reduces Light damage taken by a team member by 6% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Shadow Res\example\Chain\Reduces Shadow damage taken by a team member by `x`% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Shadow Res\1%\Chain\Reduces Shadow damage taken by a team member by 1% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Shadow Res\2%\Chain\Reduces Shadow damage taken by a team member by 2% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Shadow Res\3%\Chain\Reduces Shadow damage taken by a team member by 3% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Shadow Res\4%\Chain\Reduces Shadow damage taken by a team member by 4% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Shadow Res\5%\Chain\Reduces Shadow damage taken by a team member by 5% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Shadow Res\6%\Chain\Reduces Shadow damage taken by a team member by 6% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Water Res\example\Chain\Reduces Water damage taken by a team member by `x`% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Water Res\1%\Chain\Reduces Water damage taken by a team member by 1% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Water Res\2%\Chain\Reduces Water damage taken by a team member by 2% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Water Res\3%\Chain\Reduces Water damage taken by a team member by 3% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Water Res\4%\Chain\Reduces Water damage taken by a team member by 4% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Water Res\5%\Chain\Reduces Water damage taken by a team member by 5% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Water Res\6%\Chain\Reduces Water damage taken by a team member by 6% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Wind Res\example\Chain\Reduces wind damage taken by a team member by `x`% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Wind Res\1%\Chain\Reduces wind damage taken by a team member by 1% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Wind Res\2%\Chain\Reduces wind damage taken by a team member by 2% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Wind Res\3%\Chain\Reduces wind damage taken by a team member by 3% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Wind Res\4%\Chain\Reduces wind damage taken by a team member by 4% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Wind Res\5%\Chain\Reduces wind damage taken by a team member by 5% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP 80% = Wind Res\6%\Chain\Reduces wind damage taken by a team member by 6% when a team member's HP is 80% or above. Benefits your whole team.\0\y\HP80Res, Resistance
+HP Below 40% = Flame Res\example\Chain\Reduces Flame damage taken by a team member by `x`% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+HP Below 40% = Flame Res\5%\Chain\Reduces Flame damage taken by a team member by 5% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+HP Below 40% = Flame Res\7%\Chain\Reduces Flame damage taken by a team member by 7% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+HP Below 40% = Flame Res\9%\Chain\Reduces Flame damage taken by a team member by 9% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+HP Below 40% = Light Res\example\Chain\Reduces Light damage taken by a team member by `x`% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+HP Below 40% = Light Res\5%\Chain\Reduces Light damage taken by a team member by 5% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+HP Below 40% = Light Res\6%\Chain\Reduces Light damage taken by a team member by 6% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+HP Below 40% = Light Res\7%\Chain\Reduces Light damage taken by a team member by 7% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+HP Below 40% = Light Res\8%\Chain\Reduces Light damage taken by a team member by 8% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+HP Below 40% = Light Res\9%\Chain\Reduces Light damage taken by a team member by 9% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+HP Below 40% = Light Res\10%\Chain\Reduces Light damage taken by a team member by 10% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+HP Below 40% = Shield\example\Chain\Grants a team member a one-use shield that nullifies damage less than 10/15/20/30/50% of a team member's maximum HP when a team member's HP drops to 40%. This does not stack with any other shields. Benefits your whole team.\0\y\HP40, Shield
+HP Below 40% = Shield\I\Chain\Grants a team member a one-use shield that nullifies damage less than 10% of a team member's maximum HP when a team member's HP drops to 40%. This does not stack with any other shields. Benefits your whole team.\0\y\HP40, Shield
+HP Below 40% = Shield\II\Chain\Grants a team member a one-use shield that nullifies damage less than 15% of a team member's maximum HP when a team member's HP drops to 40%. This does not stack with any other shields. Benefits your whole team.\0\y\HP40, Shield
+HP Below 40% = Shield\III\Chain\Grants a team member a one-use shield that nullifies damage less than 20% of a team member's maximum HP when a team member's HP drops to 40%. This does not stack with any other shields. Benefits your whole team.\0\y\HP40, Shield
+HP Below 40% = Shield\IV\Chain\Grants a team member a one-use shield that nullifies damage less than 30% of a team member's maximum HP when a team member's HP drops to 40%. This does not stack with any other shields. Benefits your whole team.\0\y\HP40, Shield
+HP Below 40% = Shield\V\Chain\Grants a team member a one-use shield that nullifies damage less than 50% of a team member's maximum HP when a team member's HP drops to 40%. This does not stack with any other shields. Benefits your whole team.\0\y\HP40, Shield
+HP Below 40% = Strength\example\Chain\Increases a team member's strength by `x`% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40, Strength
+HP Below 40% = Strength\10%\Chain\Increases a team member's strength by 10% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40, Strength
+HP Below 40% = Strength\11%\Chain\Increases a team member's strength by 11% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40, Strength
+HP Below 40% = Strength\12%\Chain\Increases a team member's strength by 12% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40, Strength
+HP Below 40% = Strength\13%\Chain\Increases a team member's strength by 13% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40, Strength
+HP Below 40% = Strength\14%\Chain\Increases a team member's strength by 14% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40, Strength
+HP Below 40% = Strength\15%\Chain\Increases a team member's strength by 15% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40, Strength
+HP Below 40% = Strength\example\Chain\Increases a team member's strength by `x`% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40, Strength
+HP Below 40% = Strength\10%\Chain\Increases a team member's strength by 10% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40, Strength
+HP Below 40% = Strength\11%\Chain\Increases a team member's strength by 11% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40, Strength
+HP Below 40% = Strength\12%\Chain\Increases a team member's strength by 12% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40, Strength
+HP Below 40% = Strength\13%\Chain\Increases a team member's strength by 13% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40, Strength
+HP Below 40% = Strength\14%\Chain\Increases a team member's strength by 14% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40, Strength
+HP Below 40% = Strength\15%\Chain\Increases a team member's strength by 15% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40, Strength
+HP Below 40% = Wind Res\example\Chain\Reduces wind damage taken by a team member by `x`% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+HP Below 40% = Wind Res\5%\Chain\Reduces wind damage taken by a team member by 5% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+HP Below 40% = Wind Res\7%\Chain\Reduces wind damage taken by a team member by 7% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+HP Below 40% = Wind Res\9%\Chain\Reduces wind damage taken by a team member by 9% when a team member's HP is 40% or below. Benefits your whole team.\0\y\HP40Res, Resistance
+HP Below 60% = HP Regen\example\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for `x` seconds. Benefits your whole team.\0\y\HP60, Regen
+HP Below 60% = HP Regen\I\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for 60 seconds. Benefits your whole team.\0\y\HP60, Regen
+HP Below 60% = HP Regen\II\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for 50 seconds. Benefits your whole team.\0\y\HP60, Regen
+HP Below 60% = HP Regen\III\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for 45 seconds. Benefits your whole team.\0\y\HP60, Regen
+HP Below 60% = HP Regen\IV\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for 40 seconds. Benefits your whole team.\0\y\HP60, Regen
+HP Below 60% = HP Regen\VI\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for 30 seconds. Benefits your whole team.\0\y\HP60, Regen
+HP Below 60% = HP Regen\example\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for `x` seconds. Benefits your whole team.\0\y\HP60, Regen
+HP Below 60% = HP Regen\I\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for 60 seconds. Benefits your whole team.\0\y\HP60, Regen
+HP Below 60% = HP Regen\II\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for 50 seconds. Benefits your whole team.\0\y\HP60, Regen
+HP Below 60% = HP Regen\III\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for 45 seconds. Benefits your whole team.\0\y\HP60, Regen
+HP Below 60% = HP Regen\IV\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for 40 seconds. Benefits your whole team.\0\y\HP60, Regen
+HP Below 60% = HP Regen\example\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for `x` seconds. Benefits your whole team.\0\y\HP60, Regen
+HP Below 60% = HP Regen\I\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for 60 seconds. Benefits your whole team.\0\y\HP60, Regen
+HP Below 60% = HP Regen\II\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for 50 seconds. Benefits your whole team.\0\y\HP60, Regen
+HP Below 60% = HP Regen\III\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for 45 seconds. Benefits your whole team.\0\y\HP60, Regen
+HP Below 60% = HP Regen\IV\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for 40 seconds. Benefits your whole team.\0\y\HP60, Regen
+HP Below 60% = HP Regen\VI\Chain\Grants a team member an HP regen buff for 20 seconds when a team member's HP drops to 60%. After activating, this ability will not activate again for 30 seconds. Benefits your whole team.\0\y\HP60, Regen
+Paralysis = User Critical Rate\example\Chain\Increases a team member's critical rate by `x`% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Paralysis, CritRate
+Paralysis = User Critical Rate\7%\Chain\Increases a team member's critical rate by 7% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Paralysis, CritRate
+Paralysis = User Critical Rate\8%\Chain\Increases a team member's critical rate by 8% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Paralysis, CritRate
+Paralysis = User Critical Rate\9%\Chain\Increases a team member's critical rate by 9% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Paralysis, CritRate
+Paralysis = User Critical Rate\10%\Chain\Increases a team member's critical rate by 10% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Paralysis, CritRate
+Paralysis = User Critical Rate\12%\Chain\Increases a team member's critical rate by 12% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Paralysis, CritRate
+Paralysis = User Critical Rate\13%\Chain\Increases a team member's critical rate by 13% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Paralysis, CritRate
+Paralysis = User Shadow Res\example\Chain\Reduces shadow damage taken by a team member by `x`% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\ParalysisRes, Resistance
+Paralysis = User Shadow Res\3%\Chain\Reduces shadow damage taken by a team member by 3% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\ParalysisRes, Resistance
+Paralysis = User Shadow Res\5%\Chain\Reduces shadow damage taken by a team member by 5% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\ParalysisRes, Resistance
+Paralysis = User Shadow Res\7%\Chain\Reduces shadow damage taken by a team member by 7% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\ParalysisRes, Resistance
+Paralysis = User Strength\example\Chain\Increases a team member's strength by `x`% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Paralysis, Strength
+Paralysis = User Strength\6%\Chain\Increases a team member's strength by 6% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Paralysis, Strength
+Paralysis = User Strength\7%\Chain\Increases a team member's strength by 7% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Paralysis, Strength
+Paralysis = User Strength\8%\Chain\Increases a team member's strength by 8% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Paralysis, Strength
+Paralysis = User Strength\9%\Chain\Increases a team member's strength by 9% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Paralysis, Strength
+Paralysis = User Strength\13%\Chain\Increases a team member's strength by 13% for 15 seconds when they successfully paralyze an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Paralysis, Strength
+Paralyzing Edge\example\Chain\Increases a team member's chances of inflicting paralysis by `x`%. Benefits your whole team.\0\y\StatusChance, ParalysisChance
+Paralyzing Edge\20%\Chain\Increases a team member's chances of inflicting paralysis by 20%. Benefits your whole team.\0\y\StatusChance, ParalysisChance
+Paralyzing Edge\25%\Chain\Increases a team member's chances of inflicting paralysis by 25%. Benefits your whole team.\0\y\StatusChance, ParalysisChance
+Paralyzing Edge\30%\Chain\Increases a team member's chances of inflicting paralysis by 30%. Benefits your whole team.\0\y\StatusChance, ParalysisChance
+Paralyzing Edge\35%\Chain\Increases a team member's chances of inflicting paralysis by 35%. Benefits your whole team.\0\y\StatusChance, ParalysisChance
+Paralyzing Edge\40%\Chain\Increases a team member's chances of inflicting paralysis by 40%. Benefits your whole team.\0\y\StatusChance, ParalysisChance
+Poison = User Critical Rate\example\Chain\Increases a team member's critical rate by `x`% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, CritRate
+Poison = User Critical Rate\7%\Chain\Increases a team member's critical rate by 7% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, CritRate
+Poison = User Critical Rate\8%\Chain\Increases a team member's critical rate by 8% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, CritRate
+Poison = User Critical Rate\9%\Chain\Increases a team member's critical rate by 9% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, CritRate
+Poison = User Light Res\example\Chain\Reduces light damage taken by a team member by `x`% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\PoisonRes, Resistance
+Poison = User Light Res\3%\Chain\Reduces light damage taken by a team member by 3% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\PoisonRes, Resistance
+Poison = User Light Res\4%\Chain\Reduces light damage taken by a team member by 4% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\PoisonRes, Resistance
+Poison = User Light Res\5%\Chain\Reduces light damage taken by a team member by 5% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\PoisonRes, Resistance
+Poison = User Light Res\6%\Chain\Reduces light damage taken by a team member by 6% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\PoisonRes, Resistance
+Poison = User Light Res\7%\Chain\Reduces light damage taken by a team member by 7% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\PoisonRes, Resistance
+Poison = User Light Res\8%\Chain\Reduces light damage taken by a team member by 8% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\PoisonRes, Resistance
+Poison = User Strength\example\Chain\Increases a team member's strength by `x`% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, Strength
+Poison = User Strength\6%\Chain\Increases a team member's strength by 6% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, Strength
+Poison = User Strength\7%\Chain\Increases a team member's strength by 7% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, Strength
+Poison = User Strength\8%\Chain\Increases a team member's strength by 8% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, Strength
+Poison = User Strength\9%\Chain\Increases a team member's strength by 9% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, Strength
+Poison = User Strength\13%\Chain\Increases a team member's strength by 13% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, Strength
+Poison = User Strength\example\Chain\Increases a team member's strength by `x`% for 15 seconds when they successfully Poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, Strength
+Poison = User Strength\6%\Chain\Increases a team member's strength by 6% for 15 seconds when they successfully Poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, Strength
+Poison = User Strength\7%\Chain\Increases a team member's strength by 7% for 15 seconds when they successfully Poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, Strength
+Poison = User Strength\8%\Chain\Increases a team member's strength by 8% for 15 seconds when they successfully Poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, Strength
+Poison = User Strength\9%\Chain\Increases a team member's strength by 9% for 15 seconds when they successfully Poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, Strength
+Poison = User Strength\10%\Chain\Increases a team member's strength by 10% for 15 seconds when they successfully Poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, Strength
+Poison = User Strength\13%\Chain\Increases a team member's strength by 13% for 15 seconds when they successfully Poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\Poison, Strength
+Poison = User Water Res\example\Chain\Reduces Water damage taken by a team member by `x`% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\PoisonRes, Resistance
+Poison = User Water Res\3%\Chain\Reduces Water damage taken by a team member by 3% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\PoisonRes, Resistance
+Poison = User Water Res\4%\Chain\Reduces Water damage taken by a team member by 4% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\PoisonRes, Resistance
+Poison = User Water Res\5%\Chain\Reduces Water damage taken by a team member by 5% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\PoisonRes, Resistance
+Poison = User Water Res\6%\Chain\Reduces Water damage taken by a team member by 6% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\PoisonRes, Resistance
+Poison = User Water Res\7%\Chain\Reduces Water damage taken by a team member by 7% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\PoisonRes, Resistance
+Poison = User Water Res\8%\Chain\Reduces Water damage taken by a team member by 8% for 15 seconds when they successfully poison an enemy. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\PoisonRes, Resistance
+Poison Edge\example\Chain\Increases a team member's chances of inflicting poison by `x`%. Benefits your whole team.\0\y\PoisonChance, StatusChance
+Poison Edge\30%\Chain\Increases a team member's chances of inflicting poison by 30%. Benefits your whole team.\0\y\PoisonChance, StatusChance
+Poison Edge\35%\Chain\Increases a team member's chances of inflicting poison by 35%. Benefits your whole team.\0\y\PoisonChance, StatusChance
+Poison Edge\40%\Chain\Increases a team member's chances of inflicting poison by 40%. Benefits your whole team.\0\y\PoisonChance, StatusChance
+Poison Edge\45%\Chain\Increases a team member's chances of inflicting poison by 45%. Benefits your whole team.\0\y\PoisonChance, StatusChance
+Poison Edge\50%\Chain\Increases a team member's chances of inflicting poison by 50%. Benefits your whole team.\0\y\PoisonChance, StatusChance
+Poison Edge\example\Chain\Increases a team member's chances of inflicting paralysis by `x`%. Benefits your whole team.\0\y\StatusChance, ParalysisChance
+Poison Edge\20%\Chain\Increases a team member's chances of inflicting paralysis by 20%. Benefits your whole team.\0\y\StatusChance, ParalysisChance
+Poison Edge\25%\Chain\Increases a team member's chances of inflicting paralysis by 25%. Benefits your whole team.\0\y\StatusChance, ParalysisChance
+Poison Edge\30%\Chain\Increases a team member's chances of inflicting paralysis by 30%. Benefits your whole team.\0\y\StatusChance, ParalysisChance
+Poison Edge\35%\Chain\Increases a team member's chances of inflicting paralysis by 35%. Benefits your whole team.\0\y\StatusChance, ParalysisChance
+Poison Edge\40%\Chain\Increases a team member's chances of inflicting paralysis by 40%. Benefits your whole team.\0\y\StatusChance, ParalysisChance
+Shapeshift = HP Regen\example\Chain\Each shapeshift grants a team member an HP regen buff for 20 seconds. Benefits your whole team.\0\y\Regen
+Shapeshift = HP Regen\I\Chain\Each shapeshift grants a team member an HP regen buff for 20 seconds. Benefits your whole team.\0\y\Regen
+Shapeshift = HP Regen\II\Chain\Each shapeshift grants a team member an HP regen buff for 20 seconds. Benefits your whole team.\0\y\Regen
+Shapeshift = HP Regen\III\Chain\Each shapeshift grants a team member an HP regen buff for 20 seconds. Benefits your whole team.\0\y\Regen
+Shapeshift = HP Regen\IV\Chain\Each shapeshift grants a team member an HP regen buff for 20 seconds. Benefits your whole team.\0\y\Regen
+Shapeshift = HP Regen\VI\Chain\Each shapeshift grants a team member an HP regen buff for 20 seconds. Benefits your whole team.\0\y\Regen
+Strength Doublebuff\example\Chain\Increases a team member's strength by `x`% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Strength, Doublebuff
+Strength Doublebuff\5%\Chain\Increases a team member's strength by 5% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Strength, Doublebuff
+Strength Doublebuff\7%\Chain\Increases a team member's strength by 7% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Strength, Doublebuff
+Strength Doublebuff\9%\Chain\Increases a team member's strength by 9% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Strength, Doublebuff
+Water Res Doublebuff\example\Chain\Reduces water damage taken by a team member by `x`% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Resistance, Doublebuff
+Water Res Doublebuff\3%\Chain\Reduces water damage taken by a team member by 3% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Resistance, Doublebuff
+Water Res Doublebuff\4%\Chain\Reduces water damage taken by a team member by 4% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Resistance, Doublebuff
+Water Res Doublebuff\5%\Chain\Reduces water damage taken by a team member by 5% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Resistance, Doublebuff
+Water Res Doublebuff\6%\Chain\Reduces water damage taken by a team member by 6% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Resistance, Doublebuff
+Water Res Doublebuff\7%\Chain\Reduces water damage taken by a team member by 7% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Resistance, Doublebuff
+Water Res Doublebuff\8%\Chain\Reduces water damage taken by a team member by 8% for 15 seconds each time they receive a defense up buff. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Resistance, Doublebuff
