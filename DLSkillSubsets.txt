@@ -378,7 +378,7 @@
 ["High Dragon", ["high", "highs", "dragon", "dragons", "drg", "drgs", "hd", "hdt"], "Availability/Weapon", "h", "<:Tribe_Dragon:549947361745567754>", ["<:Gold_Dragon:443172811641454592>", "<:class_beast_gold:562413138356731905>"]]
 ["Agito", ["agito"], "Availability/Weapon", "a"]
 ["Chimera", ["chimera", "chimeratech"], "Availability/Weapon", "m", "ch"]
-["DefDownPunisher", ["defdownpunisher", "defensedownpunisher", "defencedownpunisher", "defdownpunish", "defensedownpunish", "defencedownpunish", "defdownpunishment", "defensedownpunishment", "defencedownpunishment", "reduceddefensepunisher", reduceddefensepunish"], "Skill"]
+["DefDownPunisher", ["defdownpunisher", "defensedownpunisher", "defencedownpunisher", "defdownpunish", "defensedownpunish", "defencedownpunish", "defdownpunishment", "defensedownpunishment", "defencedownpunishment", "reduceddefensepunisher", "reduceddefensepunish"], "Skill"]
 ["BleedingPunisher", ["bleedingpunisher", "bleedpunisher", "bleedpunish", "bleedingpunish"], "Skill"]
 ["BlindedPunisher", ["blindedpunisher", "blindpunisher", "blindnesspunish", "blindpunish", "blindnesspunish", "blindnesspunisher"], "Skill"]
 ["BrokenPunisher", ["brokenpunisher", "brokenpunish", "brokenpunishment", "brokepunisher", "brokepunish", "brokepunishment", "breakpunisher", "breakpunishment", "breakpunish"], "Skill"]
