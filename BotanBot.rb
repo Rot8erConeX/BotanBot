@@ -5049,7 +5049,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
   lookout2=lookout.reject{|q| q[2]!='Race'}
   lookout3=lookout.reject{|q| q[2]!='Cygame'}
   lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Adventurer'}
-  lookout=lookout.reject{|q| q[2]!='Skill' && q[2]!='Ability'}
+  lookout=lookout.reject{|q| q[2]!='Askillity'}
   lookout=lookout.reject{|q| ['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Flame','Water','Wind','Light','Shadow','Attack','Defense','Support','Healer'].include?(q[0])}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
@@ -5332,7 +5332,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   lookout=get_lookout_tags()
   lookout2=lookout.reject{|q| q[2]!='Cygame'}
   lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Dragon'}
-  lookout=lookout.reject{|q| q[2]!='Skill' && q[2]!='Ability'}
+  lookout=lookout.reject{|q| q[2]!='Askillity'}
   lookout=lookout.reject{|q| ['Flame','Water','Wind','Light','Shadow'].include?(q[0])}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
@@ -5578,7 +5578,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
   tags=[]
   lookout=get_lookout_tags()
   lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Wyrmprint'}
-  lookout=lookout.reject{|q| q[2]!='Skill' && q[2]!='Ability'}
+  lookout=lookout.reject{|q| q[2]!='Askillity'}
   lookout=lookout.reject{|q| ['Attack','Defense','Support','Healer'].include?(q[0])}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
@@ -5769,7 +5769,7 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   launch=false
   lookout=get_lookout_tags()
   lookout3=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Weapon'}
-  lookout=lookout.reject{|q| q[2]!='Skill' && q[2]!='Ability'}
+  lookout=lookout.reject{|q| q[2]!='Askillity'}
   lookout=lookout.reject{|q| ['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Flame','Water','Wind','Light','Shadow'].include?(q[0])}
   args2=args.map{|q| q}
   for i in 0...args.length
@@ -6178,8 +6178,9 @@ def find_in_skills(bot,event,args=nil,mode=0)
   args=args.map{|q| normalize(q.downcase)}
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
   elem=[]
+  wpn2=[]
   tags=[]
-  lookout=get_lookout_tags().reject{|q| q[2]!='Skill'}
+  lookout=get_lookout_tags().reject{|q| q[2]!='Askillity'}
   for i in 0...args.length
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
     elem.push('Water') if ['water','waters'].include?(args[i].downcase)
@@ -6188,11 +6189,20 @@ def find_in_skills(bot,event,args=nil,mode=0)
     elem.push('Light') if ['light','lights'].include?(args[i].downcase)
     elem.push('Shadow') if ['shadow','dark','shadows','darks'].include?(args[i].downcase)
     elem.push('None') if ['none','no-element','no_element','noelement','elementless'].include?(args[i].downcase)
+    wpn2.push('Sword') if ['sword','swords'].include?(args[i].downcase)
+    wpn2.push('Blade') if ['blade','blades','sabers','saber'].include?(args[i].downcase)
+    wpn2.push('Dagger') if ['dagger','daggers','knife','knifes','knives'].include?(args[i].downcase)
+    wpn2.push('Axe') if ['axes','axe'].include?(args[i].downcase)
+    wpn2.push('Bow') if ['bow','bows','arrow','arrows','archer','archers'].include?(args[i].downcase)
+    wpn2.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
+    wpn2.push('Wand') if ['wand','wands'].include?(args[i].downcase)
+    wpn2.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
     for i2 in 0...lookout.length
       tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
     end
   end
   elem.uniq!
+  wpn2.uniq!
   tags.uniq!
   emo=[]
   search=[]
@@ -6217,6 +6227,21 @@ def find_in_skills(bot,event,args=nil,mode=0)
       elem[i]="#{moji[0].mention}#{elem[i]}" if moji.length>0
     end
     search.push("*Elements*: #{elem.join(', ')}")
+  end
+  if wpn2.length>0
+    for i in 0...char.length
+      m=adv.find_index{|q| q[6].include?(char[i][0])}
+      char[i][10].push(adv[m][2][2]) unless m.nil?
+      m=wpn.find_index{|q| q[6]==char[i][0]}
+      char[i][10].push(wpn[m][1]) unless m.nil?
+    end
+    char=char.reject{|q| !has_any?(wpn2,q[10])}.uniq
+    for i in 0...wpn2.length
+      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn2[i]}"}
+      emo.push(moji[0].mention) if wpn2.length<2 && moji.length>0
+      wpn2[i]="#{moji[0].mention}#{wpn2[i]}" if moji.length>0
+    end
+    search.push("*Weapon*: #{wpn2.join(', ')}")
   end
   if tags.length>0
     if tags.include?('Punisher') && tags.length>1 && !args.include?('any')
@@ -6260,9 +6285,10 @@ def find_in_abilities(bot,event,args=nil)
   args=args.map{|q| normalize(q.downcase)}
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
   elem=[]
+  wpn=[]
   tags=[]
   abiltypes=[]
-  lookout=get_lookout_tags().reject{|q| q[2]!='Ability'}
+  lookout=get_lookout_tags().reject{|q| q[2]!='Askillity'}
   for i in 0...args.length
     abiltypes.push('Ability') if ['ability','abil','abilitys','abils','abilities'].include?(args[i].downcase)
     abiltypes.push('Aura') if ['aura','auras','drg','dragon'].include?(args[i].downcase)
@@ -6275,11 +6301,20 @@ def find_in_abilities(bot,event,args=nil)
     elem.push('Light') if ['light','lights'].include?(args[i].downcase)
     elem.push('Shadow') if ['shadow','dark','shadows','darks'].include?(args[i].downcase)
     elem.push('None') if ['none','no-element','no_element','noelement','elementless'].include?(args[i].downcase)
+    wpn.push('Sword') if ['sword','swords'].include?(args[i].downcase)
+    wpn.push('Blade') if ['blade','blades','sabers','saber'].include?(args[i].downcase)
+    wpn.push('Dagger') if ['dagger','daggers','knife','knifes','knives'].include?(args[i].downcase)
+    wpn.push('Axe') if ['axes','axe'].include?(args[i].downcase)
+    wpn.push('Bow') if ['bow','bows','arrow','arrows','archer','archers'].include?(args[i].downcase)
+    wpn.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
+    wpn.push('Wand') if ['wand','wands'].include?(args[i].downcase)
+    wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
     for i2 in 0...lookout.length
       tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
     end
   end
   elem.uniq!
+  wpn.uniq!
   abiltypes.uniq!
   tags.uniq!
   emo=[]
@@ -6294,6 +6329,15 @@ def find_in_abilities(bot,event,args=nil)
       elem[i]="#{moji[0].mention}#{elem[i]}" if moji.length>0
     end
     search.push("*Elements*: #{elem.join(', ')}")
+  end
+  if wpn.length>0
+    char=char.reject{|q| !has_any?(wpn,q[6])}.uniq
+    for i in 0...wpn.length
+      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn[i]}"}
+      emo.push(moji[0].mention) if wpn.length<2 && moji.length>0
+      wpn[i]="#{moji[0].mention}#{wpn[i]}" if moji.length>0
+    end
+    search.push("*Weapon*: #{wpn.join(', ')}")
   end
   if abiltypes.length>0
     char=char.reject{|q| !abiltypes.include?(q[2])}.uniq
@@ -6667,6 +6711,7 @@ def find_skills(bot,event,args=nil)
   textra=k[1]
   char=k[2]
   char=char.sort{|a,b| a[0]<=>b[0]}.map{|q| q[0]}.uniq
+  #puts k.map{|q| q.to_s}
   if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || char.join("\n").length+search.join("\n").length>=1900
     str="__**Skill Search**__\n#{search.join("\n")}#{"\n\n__**Notes**__\n#{textra}" if textra.length>0}\n\n__**Results**__"
     for i in 0...char.length
@@ -6680,7 +6725,6 @@ def find_skills(bot,event,args=nil)
     textra="#{textra}\n\n**No skills match your search**" if char.length<=0
     create_embed(event,"__**Skill Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total",nil,flds)
   end
-  event.respond "The `DL!find skill` subcommand is new.  Every time you used it before, the bot was actually ignoring the word \"skill\" and showing the generic command.\nFor the results that you would've gotten from the way things worked before, use the generic command ```DL!find #{args.join(' ')}```"
 end
 
 def find_abilities(bot,event,args=nil)
@@ -9024,49 +9068,68 @@ bot.command(:boop) do |event|
     load "#{@location}devkit/BotanText.rb"
     @last_multi_reload[1]=t
   end
-  disp_boop_tags()
+  disp_boop_tags(event)
 end
 
 bot.command(:reload, from: 167657750971547648) do |event|
   return nil if overlap_prevent(event)
   return nil unless [167657750971547648,141260274144509952].include?(event.user.id) || [502288368777035777,532083509083373583].include?(event.channel.id)
-  event.respond "Reload what?\n1.) Aliases, from backups#{"\n2.) Data, from GitHub" if [167657750971547648,141260274144509952].include?(event.user.id)}#{"\n3.) Source code, from GitHub\n4.) Crossover data\n5.) Libraries, from code" if event.user.id==167657750971547648}\nYou can include multiple numbers to load multiple things."
+  event.respond "Reload what?\n1.) Aliases, from backups#{" (unless includes the word \"git\")\n2.) ~~empty slot#{', redirects to 3' if event.user.id==141260274144509952}~~\n3.) Data, from GitHub (include \"subset\" in your message to also reload DLSkillSubsets)" if [167657750971547648,141260274144509952].include?(event.user.id)}#{"\n4.) Source code, from GitHub (include the word \"all\" to also reload rot8er_functs.rb)\n5.) Crossover data\n6.) Libraries, from code" if event.user.id==167657750971547648}\nYou can include multiple numbers to load multiple things."
   event.channel.await(:bob, from: event.user.id) do |e|
     reload=false
     if e.message.text.include?('1')
-      if File.exist?("#{@location}devkit/DLNames2.txt")
-        b=[]
-        File.open("#{@location}devkit/DLNames2.txt").each_line do |line|
-          b.push(eval line)
-        end
-      else
-        b=[]
-      end
-      nzzzzz=b.uniq
-      nz=nzzzzz.reject{|q| q[0]!='Adventurer'}
-      if nz[nz.length-1][2]<'Zethia'
-        e << 'Last backup of the alias list has been corrupted.  Restoring from manually-created backup.'
-        if File.exist?("#{@location}devkit/DLNames3.txt")
+      if e.message.text.include?('git') && [167657750971547648,141260274144509952].include?(event.user.id)
+        download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/DLNames.txt")
+        IO.copy_stream(download, "DLTemp.txt")
+        if File.size("DLTemp.txt")>100
           b=[]
-          File.open("#{@location}devkit/DLNames3.txt").each_line do |line|
+          File.open("DLTemp.txt").each_line.with_index do |line, idx|
+            b.push(line)
+          end
+          open("DLNames.txt", 'w') { |f|
+            f.puts b.join('')
+          }
+          open("DLNames2.txt", 'w') { |f|
+            f.puts b.join('')
+          }
+        end
+        e.respond 'Alias list has been restored from GitHub, and placed in the backup as well.'
+        reload=true
+      else
+        if File.exist?("#{@location}devkit/DLNames2.txt")
+          b=[]
+          File.open("#{@location}devkit/DLNames2.txt").each_line do |line|
             b.push(eval line)
           end
         else
           b=[]
         end
         nzzzzz=b.uniq
-      else
-        e << 'Last backup of the alias list being used.'
-      end
-      open("#{@location}devkit/DLNames.txt", 'w') { |f|
-        for i in 0...nzzzzz.length
-          f.puts "#{nzzzzz[i].to_s}#{"\n" if i<nzzzzz.length-1}"
+        nz=nzzzzz.reject{|q| q[0]!='Adventurer'}
+        if nz[nz.length-1][2]<'Zethia'
+          e.respond 'Last backup of the alias list has been corrupted.  Restoring from manually-created backup.'
+          if File.exist?("#{@location}devkit/DLNames3.txt")
+            b=[]
+            File.open("#{@location}devkit/DLNames3.txt").each_line do |line|
+              b.push(eval line)
+            end
+          else
+            b=[]
+          end
+          nzzzzz=b.uniq
+        else
+          e.respond 'Last backup of the alias list being used.'
         end
-      }
-      e << 'Alias list has been restored from backup.'
-      reload=true
+        open("#{@location}devkit/DLNames.txt", 'w') { |f|
+          for i in 0...nzzzzz.length
+            f.puts "#{nzzzzz[i].to_s}#{"\n" if i<nzzzzz.length-1}"
+          end
+        }
+        e.respond 'Alias list has been restored from backup.'
+        reload=true
+      end
     end
-    if e.message.text.include?('2') && [167657750971547648,141260274144509952].include?(event.user.id)
+    if (e.message.text.include?('3') && [167657750971547648,141260274144509952].include?(event.user.id)) || (e.message.text.include?('2') && [141260274144509952].include?(event.user.id))
       event.channel.send_temporary_message('Loading.  Please wait 5 seconds...',3)
       to_reload=['Adventurers','Dragons','Wyrmprints','Weapons','Skills','Banners','Emotes','Enemies','Gauntlet','SkillSubsets','Facilities','Materials','Status','Void','_NPCs']
       stx=''
@@ -9075,7 +9138,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
         IO.copy_stream(download, "DLTemp.txt")
         if to_reload[i]=='Skills' && File.size("DLTemp.txt")<File.size("DLSkills.txt")*2/3
           stx='Skills were not reloaded because the file was loaded from the wrong sheet.'
-        elsif to_reload[i]=='SkillSubsets' && File.size("DLTemp.txt")<File.size("DLSkillSubsets.txt") && !e.message.text.include?('x')
+        elsif to_reload[i]=='SkillSubsets' && File.size("DLTemp.txt")<File.size("DLSkillSubsets.txt") && !e.message.text.include?('subset')
         elsif File.size("DLTemp.txt")>100
           b=[]
           File.open("DLTemp.txt").each_line.with_index do |line, idx|
@@ -9086,12 +9149,13 @@ bot.command(:reload, from: 167657750971547648) do |event|
           }
         end
       end
+      stx="#{stx}#{"\n" if stx.length>0}DLSkillSubsets also reloaded" if e.message.text.include?('subset')
       e.respond "New data loaded.\n#{stx}"
       reload=true
     end
-    if e.message.text.include?('3') && [167657750971547648].include?(event.user.id)
+    if e.message.text.include?('4') && [167657750971547648].include?(event.user.id)
       download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/rot8er_functs.rb")
-      IO.copy_stream(download, "DLTemp.txt")
+      IO.copy_stream(download, "DLTemp.txt") && e.message.text.include?('all')
       if File.size("DLTemp.txt")>100
         b=[]
         File.open("DLTemp.txt").each_line.with_index do |line, idx|
@@ -9140,7 +9204,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
         end
       end
     end
-    if e.message.text.include?('4') && [167657750971547648].include?(event.user.id)
+    if e.message.text.include?('5') && [167657750971547648].include?(event.user.id)
       download = open("https://raw.githubusercontent.com/Rot8erConeX/LizBot/master/FGOServants.txt")
       IO.copy_stream(download, "DLTemp.txt")
       if File.size("DLTemp.txt")>100
@@ -9177,7 +9241,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
       e.respond 'New cross-data loaded.'
       reload=true
     end
-    if e.message.text.include?('5') && [167657750971547648].include?(event.user.id)
+    if e.message.text.include?('6') && [167657750971547648].include?(event.user.id)
       puts 'reloading BotanText'
       load "#{@location}devkit/BotanText.rb"
       t=Time.now
@@ -9219,7 +9283,7 @@ bot.server_create do |event|
     metadata_load()
     @server_data[0][((event.server.id >> 22) % @shards)] += 1
     metadata_save()
-    chn.send_message("Hello, my name is Botan.  Folks around town call me the \"naginata cutie.\" ...Hey, don't you **dare** laugh at that, jerk!\nWant data on *Dragalia Lost*?  Use commands that with the prefix `DL!`, and leave this to me!") rescue nil
+    chn.send_message("Hello, my name is Botan.  You're the #{longFormattedNumber(@server_data[0].inject(0){|sum,x| sum + x },true)} halidom to ask for my help.  Folks around these parts call me the \"naginata cutie.\" ...Hey, don't you **dare** laugh at that, jerk!\nWant data on *Dragalia Lost*?  Use commands that start with the prefix `DL!`, and leave this to me!") rescue nil
   end
 end
 
