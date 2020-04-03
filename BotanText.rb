@@ -184,8 +184,6 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
           lookout.push(eval line)
         end
       end
-      w=lookout.reject{|q| q[2]!='Skill'}.map{|q| q[0]}.sort
-      create_embed(event,'Tags','',0x40C0F0,nil,nil,triple_finish(w)) if safe_to_spam?(event)
     elsif ['abil','abilities','ability','abils','abilitys'].include?(subcommand.downcase)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all abilities, dragon auras, co-abilities, and chain co-abilities that fit `filters`.\n\nYou can search by:\n- Ability Class (ability/aura/coability/chain)\n- Element\n- Tags\n\nIf too many abilities are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
       lookout=[]
@@ -195,8 +193,6 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
           lookout.push(eval line)
         end
       end
-      w=lookout.reject{|q| q[2]!='Ability'}.map{|q| q[0]}.sort
-      create_embed(event,'Tags','',0x40C0F0,nil,nil,triple_finish(w)) if safe_to_spam?(event)
     elsif ['enemies','boss','enemy','bosses','enemie','enemys','bosss'].include?(subcommand.downcase)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all enemies that fit `filters`.\n\nYou can search by:\n- Element\n- Tribe\n\nIf too many enemies are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
     else
@@ -209,8 +205,8 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
         lookout.push(eval line)
       end
     end
-    w=lookout.reject{|q| q[2]!='Skill'}.map{|q| q[0]}.sort
-    create_embed(event,'Tags','',0x40C0F0,nil,nil,triple_finish(w)) if safe_to_spam?(event) && !['mat','mats','material','materials','item','items','skill','skills','skls','skl','skil','skils','abil','abilities','ability','abils','abilitys','enemies','boss','enemy','bosses','enemie','enemys','bosss'].include?(subcommand.downcase)
+    w=lookout.reject{|q| q[2]!='Askillity'}.map{|q| q[0]}.sort
+    create_embed(event,'Tags','',0x40C0F0,nil,nil,triple_finish(w)) if safe_to_spam?(event) && !['mat','mats','material','materials','item','items','enemies','boss','enemy','bosses','enemie','enemys','bosss'].include?(subcommand.downcase)
   elsif ['aliases','checkaliases','seealiases','alias'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s aliases.\nIf no name is listed, responds with a list of all aliases and who/what they are for.\n\nAliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Abilities\n- Auras\n- CoAbilities\n- Chain CoAbilities\n- Facilities\n- Materials\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
   elsif ['saliases','serveraliases'].include?(command.downcase)
@@ -3231,7 +3227,7 @@ def future_events(event,bot,args=nil)
   event.respond str
 end
 
-def disp_boop_tags()
+def disp_boop_tags(event)
   event.channel.send_temporary_message('Please wait...',10)
   data_load()
   lookout2=[]
@@ -3241,26 +3237,34 @@ def disp_boop_tags()
       lookout2.push(eval line)
     end
   end
+  for i in 0...lookout2.length
+    lookout2[i][1].sort!
+    lookout2[i][2]='Askillity' if ['Skill','Ability'].include?(lookout2[i][2])
+  end
+  lookout2.uniq!
+  lookout2.sort!{|a,b| (a[2]<=>b[2])==0 ? (a[0]<=>b[0]) : (a[2]<=>b[2])}
+  open("#{@location}devkit/DLSkillSubsets.txt", 'w') { |f|
+    f.puts lookout2.map{|q| q.to_s}.join("\n")
+  }
   lookout=lookout2.reject{|q| q[2]!='Mat'}.map{|q| q[0]}
-  m=@mats.map{|q| q[8]}.join(', ').split(', ').reject{|q| lookout.include?(q)}.uniq.sort
+  m=@mats.map{|q| q[8]}.join(', ').split(', ').reject{|q| q.nil? || q.length<=0 || lookout.include?(q)}.uniq.sort
   str='__**Mat tags**__'
   for i in 0...m.length
     str=extend_message(str,m[i],event)
   end
-  lookout=lookout2.reject{|q| q[2]!='Skill'}.map{|q| q[0]}
-  m=@askilities.reject{|q| q[2]!='Skill'}.map{|q| q[10]}.join(', ').split(', ').reject{|q| lookout.include?(q) || (q[0,1]=='E' && q[1,1].to_i.to_s==q[1,1])}.uniq.sort
+  lookout=lookout2.reject{|q| q[2]!='Askillity'}.map{|q| q[0]}
+  m=@askilities.reject{|q| q[2]!='Skill'}.map{|q| q[10]}.join(', ').split(', ').reject{|q| lookout.include?(q) || q.nil? || q.length<=0 || (q[0,1]=='E' && q[1,1].to_i.to_s==q[1,1]) || (q[0,1]=='I' && q[1,1].to_i.to_s==q[1,1]) || ['Flame','Water','Wind','Light','Shadow','Mixed','Null','Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff'].include?(q)}.uniq.sort
   str=extend_message(str,'__**Skill tags**__',event,2)
   for i in 0...m.length
     str=extend_message(str,m[i],event)
   end
-  lookout=lookout2.reject{|q| q[2]!='Ability'}.map{|q| q[0]}
-  m=@askilities.reject{|q| !['Ability','Aura','CoAbility'].include?(q[2])}.map{|q| q[6]}.join(', ').split(', ').reject{|q| lookout.include?(q)}.uniq.sort
+  m=@askilities.reject{|q| !['Ability','Aura','CoAbility','Chain'].include?(q[2])}.map{|q| q[6]}.join(', ').split(', ').reject{|q| q.nil? || q.length<=0 || lookout.include?(q) || ['Flame','Water','Wind','Light','Shadow','Mixed','Null','Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff'].include?(q)}.uniq.sort
   str=extend_message(str,'__**Ability tags**__',event,2)
   for i in 0...m.length
     str=extend_message(str,m[i],event)
   end
   lookout=lookout2.reject{|q| q[2]!='Banner'}.map{|q| q[0]}
-  m=@banners.map{|q| q[5]}.join(', ').split(', ').reject{|q| lookout.include?(q) || ['Flame','Water','Wind','Light','Shadow','Mixed','fake'].include?(q)}.uniq.sort
+  m=@banners.map{|q| q[5]}.join(', ').split(', ').reject{|q| q.nil? || q.length<=0 || lookout.include?(q) || ['Flame','Water','Wind','Light','Shadow','Mixed','Null','fake'].include?(q)}.uniq.sort
   str=extend_message(str,'__**Banner tags**__',event,2)
   for i in 0...m.length
     str=extend_message(str,m[i],event)
