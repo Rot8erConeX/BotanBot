@@ -514,13 +514,17 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
   help_text(event,bot,command,subcommand)
 end
 
-def help_text(event,bot,command=nil,subcommand=nil)
+def reload_library()
   t=Time.now
   if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
     puts 'reloading EliseText'
     load "#{@location}devkit/BotanText.rb"
     @last_multi_reload[1]=t
   end
+end
+
+def help_text(event,bot,command=nil,subcommand=nil)
+  reload_library()
   help_text_disp(event,bot,command,subcommand)
   return nil
 end
@@ -2194,12 +2198,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
 end
 
 def disp_dragon_stats(bot,event,args=nil,juststats=false)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   return dragon_data(bot,event,args,juststats)
 end
 
@@ -3446,12 +3445,7 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
 end
 
 def disp_ability_data(bot,event,args=nil,forceaura='')
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
@@ -4588,12 +4582,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
 end
 
 def disp_facility_data(bot,event,args=nil)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   return fac_stats(bot,event,args)
 end
 
@@ -4698,62 +4687,32 @@ def disp_status_data(bot,event,args=nil)
 end
 
 def disp_adventurer_art(bot,event,args=nil)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   return art_of_adventure(bot,event,args)
 end
 
 def disp_dragon_art(bot,event,args=nil)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   return art_of_dragon(bot,event,args)
 end
 
 def disp_wyrmprint_art(bot,event,args=nil)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   return art_of_printing(bot,event,args)
 end
 
 def disp_boss_art(bot,event,args=nil)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   return art_of_the_boss(bot,event,args)
 end
 
 def disp_emote_art(bot,event,args=nil)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   return art_of_emotion(bot,event,args)
 end
 
 def disp_npc_art(bot,event,args=nil)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   return art_of_the_nobody(bot,event,args)
 end
 
@@ -5009,1065 +4968,33 @@ def disp_banner(bot,event,args=nil)
 end
 
 def disp_sp_table(bot,event,args=nil)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   return sp_table(bot,event,args)
 end
 
 def disp_damage_modifiers(bot,event,args=nil)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   return damage_modifiers(bot,event,args)
 end
 
 def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
-  data_load()
-  args=normalize(event.message.text.downcase).gsub(',','').split(' ') if args.nil?
-  args=args.map{|q| normalize(q.downcase)}
-  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
-  rarity=[]
-  elem=[]
-  wpn=[]
-  clzz=[]
-  fltr=[]
-  tags=[]
-  genders=[]
-  races=[]
-  crossgames=[]
-  cygames=[]
-  launch=false
-  mana=false
-  lookout=get_lookout_tags()
-  lookout2=lookout.reject{|q| q[2]!='Race'}
-  lookout3=lookout.reject{|q| q[2]!='Cygame'}
-  lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Adventurer'}
-  lookout=lookout.reject{|q| q[2]!='Askillity'}
-  lookout=lookout.reject{|q| ['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Flame','Water','Wind','Light','Shadow','Attack','Defense','Support','Healer'].include?(q[0])}
-  for i in 0...args.length
-    launch=true if ['launch'].include?(args[i].downcase)
-    mana=true if ['mana','spiral','manaspiral','70','70node','70mc','70ms'].include?(args[i].downcase)
-    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1 && allowstr
-    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1 && allowstr
-    elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
-    elem.push('Water') if ['water','waters'].include?(args[i].downcase)
-    elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
-    elem.push('Wind') if ['earth','earths'].include?(args[i].downcase) && event.user.id==192821228468305920
-    elem.push('Light') if ['light','lights'].include?(args[i].downcase)
-    elem.push('Shadow') if ['shadow','dark','shadows','darks'].include?(args[i].downcase)
-    wpn.push('Sword') if ['sword','swords'].include?(args[i].downcase)
-    wpn.push('Blade') if ['blade','blades','sabers','saber'].include?(args[i].downcase)
-    wpn.push('Dagger') if ['dagger','daggers','knife','knifes','knives'].include?(args[i].downcase)
-    wpn.push('Axe') if ['axes','axe'].include?(args[i].downcase)
-    wpn.push('Bow') if ['bow','bows','arrow','arrows','archer','archers'].include?(args[i].downcase)
-    wpn.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
-    wpn.push('Wand') if ['wand','wands'].include?(args[i].downcase)
-    wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
-    clzz.push('Attack') if ['attack','atk','att','attacking'].include?(args[i].downcase)
-    clzz.push('Defense') if ['defense','defence','def','defending','defensive','defencive'].include?(args[i].downcase)
-    clzz.push('Support') if ['support','supports','supportive','supporting'].include?(args[i].downcase)
-    clzz.push('Healer') if ['heal','healing','heals','healer','healers'].include?(args[i].downcase)
-    fltr.push('Gala') if ['gala','galadragalia'].include?(args[i].downcase)
-    fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
-    fltr.push('NonLimited') if ['summon','summons','summonable','summonables','nonlimited','non-limited'].include?(args[i].downcase)
-    fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
-    fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
-    for i2 in 0...lookout4.length
-      fltr.push(lookout4[i2][0]) if lookout4[i2][1].include?(args[i].downcase)
-    end
-    crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
-    crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
-    crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
-    genders.push('M') if ['male','boy','m','males','boys','man'].include?(args[i].downcase)
-    genders.push('F') if ['female','woman','girl','f','females','women','girls'].include?(args[i].downcase)
-    for i2 in 0...lookout.length
-      tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i].downcase)
-    end
-    for i2 in 0...lookout2.length
-      races.push(lookout2[i2][0]) if lookout2[i2][1].include?(args[i].downcase)
-    end
-    for i2 in 0...lookout3.length
-      cygames.push(lookout3[i2][0]) if lookout3[i2][1].include?(args[i].downcase)
-    end
-    tags.push('StrengthSkill') if ['strength','str'].include?(args[i].downcase) && allowstr
-  end
-  textra=''
-  rarity.uniq!
-  elem.uniq!
-  wpn.uniq!
-  clzz.uniq!
-  tags.uniq!
-  genders.uniq!
-  races.uniq!
-  cygames.uniq!
-  char=@adventurers.reject{|q| q[0]=='Puppy'}.uniq
-  search=[]
-  emo=[]
-  if rarity.length>0
-    char=char.reject{|q| !rarity.include?(q[1][0,1].to_i)}.uniq
-    search.push("*Rarities*: #{rarity.map{|q| "#{q}#{@rarity_stars[0][q]}"}.join(', ')}")
-    emo.push(@rarity_stars[0][rarity[0]]) if rarity.length<2
-  end
-  if elem.length>0
-    char=char.reject{|q| !elem.include?(q[2][1])}.uniq
-    for i in 0...elem.length
-      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{elem[i].gsub('None','Null')}"}
-      emo.push(moji[0].mention) if elem.length<2 && moji.length>0
-      elem[i]="#{moji[0].mention}#{elem[i]}" if moji.length>0
-    end
-    search.push("*Elements*: #{elem.join(', ')}")
-  end
-  if wpn.length>0
-    char=char.reject{|q| !wpn.include?(q[2][2])}.uniq
-    for i in 0...wpn.length
-      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn[i]}"}
-      emo.push(moji[0].mention) if wpn.length<2 && moji.length>0
-      wpn[i]="#{moji[0].mention}#{wpn[i]}" if moji.length>0
-    end
-    search.push("*Weapon*: #{wpn.join(', ')}")
-  end
-  if clzz.length>0
-    char=char.reject{|q| !clzz.include?(q[2][0])}.uniq
-    for i in 0...clzz.length
-      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{clzz[i].gsub('Healer','Healing')}"}
-      emo.push(moji[0].mention) if clzz.length<2 && moji.length>0
-      clzz[i]="#{moji[0].mention}#{clzz[i]}" if moji.length>0
-    end
-    search.push("*Classes*: #{clzz.join(', ')}")
-  end
-  if launch
-    search.push('*Game Launch*')
-    b=@banners[0]
-    char=char.reject{|q| !b[1].include?(q[0])}
-  end
-  if mana
-    search.push('*<:Rarity_6:660289379520086046>Mana Spiral*')
-    char=char.reject{|q| q[3][1][@max_rarity[0]].nil? || q[3][1][@max_rarity[0]]<=0 || q[4][1][@max_rarity[0]].nil? || q[4][1][@max_rarity[0]]<=0}
-  end
-  if fltr.length>0
-    m=[]
-    if fltr.include?('Seasonal')
-      for i in 0...@max_rarity[0]
-        m.push("#{i+1}s")
-        m.push("#{i+1}f")
-      end
-      emo.push('(s)') if fltr.length<2
-    end
-    if fltr.include?('NonLimited')
-      for i in 0...@max_rarity[0]
-        m.push("#{i+1}")
-        m.push("#{i+1}f")
-      end
-      emo.push('(p)') if fltr.length<2
-    end
-    if fltr.include?('Collab')
-      for i in 0...@max_rarity[0]
-        m.push("#{i+1}c")
-      end
-      emo.push('(c)') if fltr.length<2
-    end
-    for i2 in 0...lookout4.length
-      if fltr.include?(lookout4[i2][0])
-        for i in 0...@max_rarity[0]
-          m.push("#{i+1}#{lookout4[i2][3]}")
-        end
-        if fltr.length<2
-        elsif lookout4[i2][4].nil?
-          emo.push("(#{lookout[i2][3]})")
-        elsif lookout4[i2][4].include?('<')
-          emo.push(lookout[i2][4])
-        else
-          emo.push("(#{lookout[i2][4]})")
-        end
-      end
-    end
-    search.push("*Filters*: #{fltr.join(', ')}")
-    if fltr.include?('Limited')
-      for i in 0...@max_rarity[0]
-        m.push("#{i+1}c")
-        m.push("#{i+1}s")
-        m.push("#{i+1}z")
-      end
-      emo.push('(L)') if fltr.length<2
-      fltr.push('Collab')
-    end
-    emo.push('(g)') if fltr.length<2 && fltr.include?('Gala')
-    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[12].nil? && q[12].length>0) && !(fltr.include?('Gala') && q[0][0,5]=='Gala ')}.uniq
-  end
-  if genders.length>0
-    char=char.reject{|q| !genders.include?(q[13])}.uniq
-    for i in 0...genders.length
-      genders[i]='Male' if genders[i]=='M'
-      genders[i]='Female' if genders[i]=='F'
-      genders[i]='Genderless' if genders[i]=='G'
-    end
-    search.push("*Genders*: #{genders.join(', ')}")
-  end
-  if races.length>0
-    char=char.reject{|q| !races.include?(q[14])}.uniq
-    textra="#{textra}\n\nThis is showing adventurers from the Human race.\nFor enemies from the Human tribe, try `DL!find boss human`." if races.include?('Human')
-    search.push("*Races*: #{races.join(', ')}")
-  end
-  if cygames.length>0
-    char=char.reject{|q| !cygames.map{|q2| q2[0]}.include?(q[16])}.uniq
-    search.push("*Cygames Origin*: #{cygames.map{|q2| q2[1]}.join(', ')}")
-  end
-  if crossgames.length>0
-    char=char.reject{|q| q[12].nil? || !crossgames.include?(q[12])}.uniq
-    for i in 0...crossgames.length
-      crossgames[i]='<:Great_Badge_Golden:443704781068959744>Fire Emblem Heroes' if crossgames[i]=='FEH'
-      crossgames[i]='<:Bond:613804021119189012>Fate/Grand Order' if crossgames[i]=='FGO'
-      crossgames[i]='<:Mega_Man:641484836304846857>Mega Man' if crossgames[i]=='MM'
-      crossgames[i]='<:MH_Rathalos:669319247670804506>Monster Hunter' if crossgames[i]=='MH'
-    end
-    search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
-  end
-  if tags.length>0
-    if tags.include?('Punisher') && tags.length>1 && !args.include?('any')
-      tags2=[]
-      for i in 0...@punishments.length
-        if tags.include?(@punishments[i][0]) && !tags.include?(@punishments[i][1])
-          tags.push("#{@punishments[i][1]}")
-          tags2.push("#{@punishments[i][0]}")
-        end
-      end
-      if tags2.length>0
-        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
-        mm='those tags'
-        mm="the #{tags2[0]} tag" if tags2.length<2
-        textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
-      end
-    end
-    search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
-    sklz=@askilities.map{|q| q}
-    for i in 0...char.length
-      skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6][0]}
-      skl1=sklz[skl1] unless skl1.nil?
-      skl2=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6][1]}
-      skl2=sklz[skl2] unless skl2.nil?
-      coab=sklz.find_index{|q| q[2]=='CoAbility' && q[0]==char[i][7][0].split(' ')[0,char[i][7][0].split(' ').length-1].join(' ')}
-      coab=sklz[coab] unless coab.nil?
-      coab[6]=[] if !coab.nil? && coab[6].nil?
-      cha=sklz.find_index{|q| q[2]=='Chain' && q[0]==char[i][7][1].split(' ')[0,char[i][7][1].split(' ').length-1].join(' ')}
-      cha=sklz[cha] unless cha.nil?
-      cha[6]=[] if !cha.nil? && cha[6].nil?
-      ab1=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][0][-1]}
-      ab1=sklz[ab1] unless ab1.nil?
-      ab1[6]=[] if !ab1.nil? && ab1[6].nil?
-      ab2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][1][-1]}
-      ab2=sklz[ab2] unless ab2.nil?
-      ab2[6]=[] if !ab2.nil? && ab2[6].nil?
-      ab3=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][2][-1]}
-      ab3=sklz[ab3] unless ab3.nil?
-      ab3[6]=[] if !ab3.nil? && ab3[6].nil?
-      char[i][20]="#{skl1[10].join("\n") unless skl1.nil?}\n#{skl2[10].join("\n") unless skl2.nil?}\n#{coab[6].join("\n") unless coab.nil?}\n#{cha[6].join("\n") unless cha.nil?}\n#{ab1[6].join("\n") unless ab1.nil?}\n#{ab2[6].join("\n") unless ab2.nil?}\n#{ab3[6].join("\n") unless ab3.nil?}".split("\n")
-      if args.include?('any') || tags.length<=1
-        x=[[],[],[],[]]
-        x[0].push('1') if !skl1.nil? && has_any?(tags,skl1[10])
-        x[0].push('2') if !skl2.nil? && has_any?(tags,skl2[10])
-        x[1].push('o') if !coab.nil? && has_any?(tags,coab[6])
-        x[2].push('o') if !cha.nil? && has_any?(tags,cha[6])
-        x[3].push('1') if !ab1.nil? && has_any?(tags,ab1[6])
-        x[3].push('2') if !ab2.nil? && has_any?(tags,ab2[6])
-        x[3].push('3') if !ab3.nil? && has_any?(tags,ab3[6])
-        x[0]="S#{x[0].join('/')}" if x[0].length>0
-        x[1]='Co' if x[1].length>0
-        x[2]='Ch' if x[2].length>0
-        x[3]="A#{x[3].join('/')}" if x[3].length>0
-        x=x.reject{|q| q.length<=0}
-        x.compact!
-        char[i][0]="#{char[i][0]} *[#{x.join('+')}]*" if x.length>0
-      end
-    end
-    if args.include?('any')
-      search[-1]="#{search[-1]}\n(searching for adventurers with any listed tag in their skills and abilities)" if tags.length>1
-      char=char.reject{|q| !has_any?(tags,q[20])}.uniq
-    else
-      search[-1]="#{search[-1]}\n(searching for adventurers with all listed tags in their skills and abilities)" if tags.length>1
-      textra="#{textra}\n\nTags searching defaults to searching for adventurers with all listed tags.\nTo search for adventurers with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
-      for i in 0...tags.length
-        char=char.reject{|q| !q[20].include?(tags[i])}.uniq
-      end
-    end
-  end
-  for i in 0...char.length
-    char[i][0]="~~#{char[i][0]}~~" if char[i][1].length>1 && char[i][1][1,1]=='-' && char[i][0].include?('*')
-    char[i][0]="*#{char[i][0]}*" if char[i][1].length>1 && char[i][1][1,1]=='-' && !char[i][0].include?('*')
-  end
-  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
-    event.respond "__**Search**__\n#{search.join("\n")}\n\n__**Note**__\nAt #{char.length} entries, too much data is trying to be displayed.  Please use this command in PM." if mode==0
-    return nil
-  else
-    return [search,char,emo,textra]
-  end
+  reload_library()
+  return find_the_adventure(bot,event,args,mode,allowstr)
 end
 
 def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
-  data_load()
-  args=normalize(event.message.text.downcase).gsub(',','').split(' ') if args.nil?
-  args=args.map{|q| normalize(q.downcase)}
-  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
-  t=Time.now
-  timeshift=7
-  timeshift-=1 unless t.dst?
-  t-=60*60*timeshift
-  rarity=[]
-  elem=[]
-  fltr=[]
-  wday=[]
-  turn=[]
-  ranged=[]
-  tags=[]
-  genders=[]
-  cygames=[]
-  crossgames=[]
-  launch=false
-  lookout=get_lookout_tags()
-  lookout2=lookout.reject{|q| q[2]!='Cygame'}
-  lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Dragon'}
-  lookout=lookout.reject{|q| q[2]!='Askillity'}
-  lookout=lookout.reject{|q| ['Flame','Water','Wind','Light','Shadow'].include?(q[0])}
-  for i in 0...args.length
-    launch=true if ['launch'].include?(args[i].downcase)
-    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
-    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1
-    elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
-    elem.push('Water') if ['water','waters'].include?(args[i].downcase)
-    elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
-    elem.push('Wind') if ['earth','earths'].include?(args[i].downcase) && event.user.id==192821228468305920
-    elem.push('Light') if ['light','lights'].include?(args[i].downcase)
-    elem.push('Shadow') if ['shadow','dark','shadows','darks'].include?(args[i].downcase)
-    wday.push(1) if ['mo','monday','mondae','mon','m','juicymeat','meat'].include?(args[i].downcase)
-    wday.push(2) if ['tu','tuesday','tuesdae','tues','tue','t','kaleidoscope','kscope','k-scope'].include?(args[i].downcase)
-    wday.push(3) if ['we','wednesday','wednesdae','wednes','wed','w','floralcirclet','flower','floral','circlet','circle'].include?(args[i].downcase)
-    wday.push(4) if ['th','thursday','thursdae','thurs','thu','thur','h','r','compellingbook','book'].include?(args[i].downcase)
-    wday.push(5) if ['fr','friday','fridae','fri','fryday','frydae','fry','f','manaessence','mana','essence'].include?(args[i].downcase)
-    wday.push(t.wday) if ['today','now'].include?(args[i].downcase)
-    turn.push('Yes') if ['turn','damage'].include?(args[i].downcase)
-    turn.push('No') if ['noturn','anchor'].include?(args[i].downcase)
-    ranged.push('Yes') if ['long','longrange','ranged'].include?(args[i].downcase)
-    ranged.push('no') if ['short','shortrange','melee'].include?(args[i].downcase)
-    fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
-    fltr.push('NonLimited') if ['summon','summons','summonable','summonables','nonlimited','non-limited'].include?(args[i].downcase)
-    fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
-    fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
-    for i2 in 0...lookout4.length
-      fltr.push(lookout4[i2][0]) if lookout4[i2][1].include?(args[i].downcase)
-    end
-    crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
-    crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
-    crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
-    genders.push('M') if ['male','boy','m','males','boys','man'].include?(args[i].downcase)
-    genders.push('F') if ['female','woman','girl'].include?(args[i].downcase)
-    for i2 in 0...lookout.length
-      tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i].downcase)
-    end
-    for i2 in 0...lookout2.length
-      cygames.push(lookout2[i2][0]) if lookout2[i2][1].include?(args[i].downcase)
-    end
-    tags.push('StrengthSkill') if ['strength','str'].include?(args[i].downcase) && allowstr
-  end
-  textra=''
-  rarity.uniq!
-  elem.uniq!
-  wday.uniq!
-  turn.uniq!
-  ranged.uniq!
-  fltr.uniq!
-  tags.uniq!
-  cygames.uniq!
-  char=@dragons.reject{|q| q[0]=='Puppy'}.uniq
-  search=[]
-  emo=[]
-  if rarity.length>0
-    char=char.reject{|q| !rarity.include?(q[1][0,1].to_i)}.uniq
-    search.push("*Rarities*: #{rarity.map{|q| "#{q}#{@rarity_stars[0][q]}"}.join(', ')}")
-    emo.push(@rarity_stars[0][rarity[0]]) if rarity.length<2
-  end
-  if elem.length>0
-    char=char.reject{|q| !elem.include?(q[2])}.uniq
-    for i in 0...elem.length
-      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{elem[i].gsub('None','Null')}"}
-      emo.push(moji[0].mention) if elem.length<2 && moji.length>0
-      elem[i]="#{moji[0].mention}#{elem[i]}" if moji.length>0
-    end
-    search.push("*Elements*: #{elem.join(', ')}")
-  end
-  if launch
-    search.push('*Game Launch*')
-    b=@banners[0]
-    char=char.reject{|q| !b[2].include?(q[0])}
-  end
-  if wday.length>0
-    char=char.reject{|q| !wday.include?(q[9])}.uniq
-    wday=wday.map{|q| ['Golden Chalice (Sunday)','Juicy Meat (Monday)','Kaleidoscope (Tuesday)','Floral Circlet (Wednesday)','Compelling Book (Thursday)','Mana Essence (Friday)','Golden Chalice (Saturday)'][q]}
-    search.push("*Bond gift preference*: #{wday.join(', ')}")
-  end
-  if turn.length>0
-    char=char.reject{|q| !turn.include?(q[10])}.uniq
-    for i in 0...turn.length
-      turn[i]='Turned to damage direction' if turn[i]=='Yes'
-      turn[i]='Not turned to damage direction' if turn[i]=='No'
-    end
-    search.push("*Turn data*: #{turn.join(', ')}")
-  end
-  if ranged.length>0
-    char=char.reject{|q| !ranged.include?(q[11])}.uniq
-    for i in 0...ranged.length
-      ranged[i]='Long' if ranged[i]=='Yes'
-      ranged[i]='Short' if ranged[i]=='No'
-    end
-    search.push("*Range*: #{ranged.join(', ')}")
-  end
-  if fltr.length>0
-    m=[]
-    if fltr.include?('Seasonal')
-      for i in 0...@max_rarity[1]
-        m.push("#{i+1}s")
-        m.push("#{i+1}f")
-      end
-      emo.push('(s)') if fltr.length<2
-    end
-    if fltr.include?('NonLimited')
-      for i in 0...@max_rarity[1]
-        m.push("#{i+1}")
-        m.push("#{i+1}f")
-      end
-      emo.push('($)') if fltr.length<2
-    end
-    if fltr.include?('Collab')
-      for i in 0...@max_rarity[1]
-        m.push("#{i+1}c")
-      end
-      emo.push('(c)') if fltr.length<2
-    end
-    for i2 in 0...lookout4.length
-      if fltr.include?(lookout4[i2][0])
-        for i in 0...@max_rarity[0]
-          m.push("#{i+1}#{lookout4[i2][3]}")
-        end
-        if fltr.length<2
-        elsif lookout4[i2][4].nil?
-          emo.push("(#{lookout[i2][3]})")
-        elsif lookout4[i2][4].include?('<')
-          emo.push(lookout[i2][4])
-        else
-          emo.push("(#{lookout[i2][4]})")
-        end
-      end
-    end
-    search.push("*Filters*: #{fltr.join(', ')}")
-    if fltr.include?('Limited')
-      for i in 0...@max_rarity[0]
-        m.push("#{i+1}c")
-        m.push("#{i+1}s")
-        m.push("#{i+1}z")
-      end
-      emo.push('(L)') if fltr.length<2
-      fltr.push('Collab')
-    end
-    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[16].nil? && q[16].length>0)}.uniq
-  end
-  if genders.length>0
-    char=char.reject{|q| !genders.include?(q[17])}.uniq
-    for i in 0...genders.length
-      genders[i]='Male' if genders[i]=='M'
-      genders[i]='Female' if genders[i]=='F'
-      genders[i]='Genderless' if genders[i]=='G'
-    end
-    search.push("*Genders*: #{genders.join(', ')}")
-  end
-  if cygames.length>0
-    char=char.reject{|q| !cygames.map{|q2| q2[0]}.include?(q[18])}.uniq
-    search.push("*Cygames Origin*: #{cygames.map{|q2| q2[1]}.join(', ')}")
-  end
-  if crossgames.length>0
-    char=char.reject{|q| q[16].nil? || !crossgames.include?(q[16])}.uniq
-    for i in 0...crossgames.length
-      crossgames[i]='<:Great_Badge_Golden:443704781068959744>Fire Emblem Heroes' if crossgames[i]=='FEH'
-      crossgames[i]='<:Bond:613804021119189012>Fate/Grand Order' if crossgames[i]=='FGO'
-      crossgames[i]='<:Mega_Man:641484836304846857>Mega Man' if crossgames[i]=='MM'
-      crossgames[i]='<:MH_Rathalos:669319247670804506>Monster Hunter' if crossgames[i]=='MH'
-    end
-    search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
-  end
-  if tags.length>0
-    if tags.include?('Punisher') && tags.length>1 && !args.include?('any')
-      tags2=[]
-      for i in 0...@punishments.length
-        if tags.include?(@punishments[i][0]) && !tags.include?(@punishments[i][1])
-          tags.push("#{@punishments[i][1]}")
-          tags2.push("#{@punishments[i][0]}")
-        end
-      end
-      if tags2.length>0
-        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
-        mm='those tags'
-        mm="the #{tags2[0]} tag" if tags2.length<2
-        textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
-      end
-    end
-    search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
-    sklz=@askilities.map{|q| q}
-    for i in 0...char.length
-      skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][5]}
-      skl1=sklz[skl1] unless skl1.nil?
-      ab1=nil
-      ab1=sklz.find_index{|q| ['Ability','Aura'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][6][0][-1]} unless char[i][6].length<1
-      ab1=sklz[ab1] unless ab1.nil?
-      ab1[6]=[] if !ab1.nil? && ab1[6].nil?
-      ab2=nil
-      ab2=sklz.find_index{|q| ['Ability','Aura'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][6][1][-1]} unless char[i][6].length<2
-      ab2=sklz[ab2] unless ab2.nil?
-      ab2[6]=[] if !ab2.nil? && ab2[6].nil?
-      ab3=nil
-      ab3=sklz.find_index{|q| ['Ability','Aura'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][6][2][-1]} unless char[i][6].length<3
-      ab3=sklz[ab3] unless ab3.nil?
-      ab3[6]=[] if !ab3.nil? && ab3[6].nil?
-      if args.include?('any') || tags.length<=1
-        x=[[],[],[]]
-        x[0].push('1') if !skl1.nil? && has_any?(tags,skl1[10])
-        x[2].push('1') if !ab1.nil? && has_any?(tags,ab1[6])
-        x[2].push('2') if !ab2.nil? && has_any?(tags,ab2[6])
-        x[2].push('3') if !ab3.nil? && has_any?(tags,ab3[6])
-        x[0]="S" if x[0].length>0
-        x[1]='Co' if x[1].length>0
-        x[2]="A#{x[2].join('/')}" if x[2].length>0
-        x=x.reject{|q| q.length<=0}
-        x.compact!
-        char[i][0]="#{char[i][0]} *[#{x.join('+')}]*" if x.length>0
-      end
-      char[i][20]="#{skl1[10].join("\n")}\n#{ab1[6].join("\n") unless ab1.nil?}\n#{ab2[6].join("\n") unless ab2.nil?}\n#{ab3[6].join("\n") unless ab3.nil?}".split("\n")
-    end
-    if args.include?('any')
-      search[-1]="#{search[-1]}\n(searching for dragons with any listed tag in their skills and abilities)" if tags.length>1
-      char=char.reject{|q| !has_any?(tags,q[20])}.uniq
-    else
-      search[-1]="#{search[-1]}\n(searching for dragons with all listed tags in their skills and abilities)" if tags.length>1
-      textra="#{textra}\n\nTags searching defaults to searching for dragons with all listed tags.\nTo search for dragons with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
-      for i in 0...tags.length
-        char=char.reject{|q| !q[20].include?(tags[i])}.uniq
-      end
-    end
-  end
-  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
-    event.respond "__**Search**__\n#{search.join("\n")}\n\n__**Note**__\nAt #{char.length} entries, too much data is trying to be displayed.  Please use this command in PM." if mode==0
-    return nil
-  else
-    return [search,char,emo,textra]
-  end
+  reload_library()
+  return find_the_dragon(bot,event,args,mode,allowstr)
 end
 
 def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
-  data_load()
-  args=normalize(event.message.text.downcase).gsub(',','').split(' ') if args.nil?
-  args=args.map{|q| normalize(q.downcase)}
-  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
-  rarity=[]
-  clzz=[]
-  fltr=[]
-  crossgames=[]
-  launch=false
-  tags=[]
-  lookout=get_lookout_tags()
-  lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Wyrmprint'}
-  lookout=lookout.reject{|q| q[2]!='Askillity'}
-  lookout=lookout.reject{|q| ['Attack','Defense','Support','Healer'].include?(q[0])}
-  for i in 0...args.length
-    launch=true if ['launch'].include?(args[i].downcase)
-    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
-    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1
-    clzz.push('Attack') if ['attack','atk','att','attacking'].include?(args[i].downcase)
-    clzz.push('Defense') if ['defense','defence','def','defending','defensive','defencive'].include?(args[i].downcase)
-    clzz.push('Support') if ['support','supports','supportive','supporting'].include?(args[i].downcase)
-    clzz.push('Healing') if ['heal','healing','heals','healer','healers'].include?(args[i].downcase)
-    fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
-    fltr.push('NonLimited') if ['nonlimited','non-limited'].include?(args[i].downcase)
-    fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
-    fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
-    for i2 in 0...lookout4.length
-      fltr.push(lookout4[i2][0]) if lookout4[i2][1].include?(args[i].downcase)
-    end
-    crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
-    crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
-    crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
-    for i2 in 0...lookout.length
-      tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i].downcase)
-    end
-  end
-  textra=''
-  rarity.uniq!
-  clzz.uniq!
-  fltr.uniq!
-  tags.uniq!
-  char=@wyrmprints.reject{|q| ['Wily Warriors','Greatwyrm'].include?(q[0])}.uniq
-  search=[]
-  emo=[]
-  if rarity.length>0
-    char=char.reject{|q| !rarity.include?(q[1][0,1].to_i)}.uniq
-    search.push("*Rarities*: #{rarity.map{|q| "#{q}#{@rarity_stars[0][q]}"}.join(', ')}")
-    emo.push(@rarity_stars[0][rarity[0]]) if rarity.length<2
-  end
-  if clzz.length>0
-    char=char.reject{|q| !clzz.include?(q[2])}.uniq
-    for i in 0...clzz.length
-      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{clzz[i]}"}
-      emo.push(moji[0].mention) if clzz.length<2 && moji.length>0
-      clzz[i]="#{moji[0].mention}#{clzz[i]}" if moji.length>0
-    end
-    search.push("*Amulet Types*: #{clzz.join(', ')}")
-  end
-  if launch
-    search.push('*Game Launch*')
-    b=@banners[0]
-    char=char.reject{|q| !b[3].include?(q[0])}
-  end
-  if fltr.length>0
-    m=[]
-    if fltr.include?('Seasonal')
-      for i in 0...@max_rarity[2]
-        m.push("#{i+1}s")
-        m.push("#{i+1}f")
-      end
-      emo.push('(s)') if fltr.length<2
-    end
-    if fltr.include?('NonLimited')
-      for i in 0...@max_rarity[2]
-        m.push("#{i+1}")
-        m.push("#{i+1}f")
-      end
-      emo.push('(u)') if fltr.length<2
-    end
-    if fltr.include?('Collab')
-      for i in 0...@max_rarity[2]
-        m.push("#{i+1}c")
-      end
-      emo.push('(c)') if fltr.length<2
-    end
-    for i2 in 0...lookout4.length
-      if fltr.include?(lookout4[i2][0])
-        for i in 0...@max_rarity[0]
-          m.push("#{i+1}#{lookout4[i2][3]}")
-        end
-        if fltr.length<2
-        elsif lookout4[i2][4].nil?
-          emo.push("(#{lookout[i2][3]})")
-        elsif lookout4[i2][4].include?('<')
-          emo.push(lookout[i2][4])
-        else
-          emo.push("(#{lookout[i2][4]})")
-        end
-      end
-    end
-    search.push("*Filters*: #{fltr.join(', ')}")
-    if fltr.include?('Limited')
-      for i in 0...@max_rarity[0]
-        m.push("#{i+1}c")
-        m.push("#{i+1}s")
-        m.push("#{i+1}z")
-      end
-      emo.push('(L)') if fltr.length<2
-      fltr.push('Collab')
-    end
-    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[10].nil? && q[10].length>0)}.uniq
-  end
-  if crossgames.length>0
-    char=char.reject{|q| q[10].nil? || !crossgames.include?(q[10])}.uniq
-    for i in 0...crossgames.length
-      crossgames[i]='<:Great_Badge_Golden:443704781068959744>Fire Emblem Heroes' if crossgames[i]=='FEH'
-      crossgames[i]='<:Bond:613804021119189012>Fate/Grand Order' if crossgames[i]=='FGO'
-      crossgames[i]='<:Mega_Man:641484836304846857>Mega Man' if crossgames[i]=='MM'
-      crossgames[i]='<:MH_Rathalos:669319247670804506>Monster Hunter' if crossgames[i]=='MH'
-    end
-    search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
-  end
-  if tags.length>0
-    if tags.include?('Punisher') && tags.length>1 && !args.include?('any')
-      tags2=[]
-      for i in 0...@punishments.length
-        if tags.include?(@punishments[i][0]) && !tags.include?(@punishments[i][1])
-          tags.push("#{@punishments[i][1]}")
-          tags2.push("#{@punishments[i][0]}")
-        end
-      end
-      if tags2.length>0
-        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
-        mm='those tags'
-        mm="the #{tags2[0]} tag" if tags2.length<2
-        textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
-      end
-    end
-    search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
-    sklz=@askilities.map{|q| q}
-    for i in 0...char.length
-      ab1=nil
-      ab1=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][5][0][-1]} unless char[i][5].length<1
-      ab1=sklz[ab1] unless ab1.nil?
-      ab1[6]=[] if !ab1.nil? && ab1[6].nil?
-      ab2=nil
-      ab2=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][5][1][-1]} unless char[i][5].length<2
-      ab2=sklz[ab2] unless ab2.nil?
-      ab2[6]=[] if !ab2.nil? && ab2[6].nil?
-      ab3=nil
-      ab3=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][5][2][-1]} unless char[i][5].length<3
-      ab3=sklz[ab3] unless ab3.nil?
-      ab3[6]=[] if !ab3.nil? && ab3[6].nil?
-      if args.include?('any') || tags.length<=1
-        x=[[],[],[]]
-        x[2].push('1') if !ab1.nil? && has_any?(tags,ab1[6])
-        x[2].push('2') if !ab2.nil? && has_any?(tags,ab2[6])
-        x[2].push('3') if !ab3.nil? && has_any?(tags,ab3[6])
-        x[0]="S" if x[0].length>0
-        x[1]='Co' if x[1].length>0
-        x[2]="A#{x[2].join('/')}" if x[2].length>0
-        x=x.reject{|q| q.length<=0}
-        x.compact!
-        char[i][0]="#{char[i][0]} *[#{x.join('+')}]*" if x.length>0
-      end
-      char[i][20]="#{ab1[6].join("\n") unless ab1.nil?}\n#{ab2[6].join("\n") unless ab2.nil?}\n#{ab3[6].join("\n") unless ab3.nil?}".split("\n")
-    end
-    if args.include?('any')
-      search[-1]="#{search[-1]}\n(searching for wyrmprints with any listed tag in their abilities)" if tags.length>1
-      char=char.reject{|q| !has_any?(tags,q[20])}.uniq
-    else
-      search[-1]="#{search[-1]}\n(searching for wyrmprints with all listed tags in their abilities)" if tags.length>1
-      textra="#{textra}\n\nTags searching defaults to searching for wyrmprints with all listed tags.\nTo search for wyrmprints with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
-      for i in 0...tags.length
-        char=char.reject{|q| !q[20].include?(tags[i])}.uniq
-      end
-    end
-  end
-  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
-    event.respond "__**Search**__\n#{search.join("\n")}\n\n__**Note**__\nAt #{char.length} entries, too much data is trying to be displayed.  Please use this command in PM." if mode==0
-    return nil
-  else
-    return [search,char,emo,textra]
-  end
+  reload_library()
+  return find_the_printer(bot,event,args,mode,allowstr)
 end
 
 def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
-  data_load()
-  args=normalize(event.message.text.downcase).gsub(',','').split(' ') if args.nil?
-  args=args.map{|q| normalize(q.downcase)}
-  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
-  rarity=[]
-  tier=[]
-  rarity_tier=[]
-  rarity_tier_2=[]
-  elem=[]
-  wpn=[]
-  fltr=[]
-  tags=[]
-  crossgames=[]
-  launch=false
-  lookout=get_lookout_tags()
-  lookout3=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Weapon'}
-  lookout=lookout.reject{|q| q[2]!='Askillity'}
-  lookout=lookout.reject{|q| ['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Flame','Water','Wind','Light','Shadow'].include?(q[0])}
-  args2=args.map{|q| q}
-  for i in 0...args.length
-    launch=true if ['launch'].include?(args[i].downcase)
-    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
-    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1
-    tier.push(args[i][1,args[i].length-1].to_i) if args[i][0,1].downcase=='t' && args[i][1,args[i].length-1].to_i.to_s==args[i][1,args[i].length-1] && args[i][1,args[i].length-1].to_i>0 && args[i][1,args[i].length-1].to_i<4
-    tier.push(args[i][4,args[i].length-4].to_i) if ['tier','teir'].include?(args[i][0,4].downcase) && args[i][4,args[i].length-4].to_i.to_s==args[i][4,args[i].length-4] && args[i][4,args[i].length-4].to_i>0 && args[i][4,args[i].length-4].to_i<4
-    rarity_tier.push(args[i].downcase) if args[i][1,1]=='t' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6 && args[i][2,args[i].length-2].to_i.to_s==args[i][2,args[i].length-2] && args[i][2,args[i].length-2].to_i>0 && args[i][2,args[i].length-2].to_i<4
-    rarity_tier_2.push('HDT1') if ['hdt1','hd1'].include?(args[i].downcase)
-    rarity_tier_2.push('HDT2') if ['hdt2','hd2'].include?(args[i].downcase)
-    rarity_tier_2.push('HDT3') if ['hdt3','hd3'].include?(args[i].downcase)
-    if ['flame','fire','flames','fires'].include?(args[i].downcase)
-      args2[i]=nil unless elem.include?('Flame')
-      elem.push('Flame')
-    end
-    if ['water','waters'].include?(args[i].downcase)
-      args2[i]=nil unless elem.include?('Water')
-      elem.push('Water')
-    end
-    if ['wind','air','winds','airs'].include?(args[i].downcase)
-      args2[i]=nil unless elem.include?('Wind')
-      elem.push('Wind')
-    end
-    if ['earth','earths'].include?(args[i].downcase) && event.user.id==192821228468305920
-      args2[i]=nil unless elem.include?('Wind')
-      elem.push('Wind')
-    end
-    if ['light','lights'].include?(args[i].downcase)
-      args2[i]=nil unless elem.include?('Light')
-      elem.push('Light')
-    end
-    if ['shadow','dark','shadows','darks'].include?(args[i].downcase)
-      args2[i]=nil unless elem.include?('Shadow')
-      elem.push('Shadow')
-    end
-    if ['none','no-element','no_element','noelement','elementless','null','neutral'].include?(args[i].downcase)
-      args2[i]=nil unless elem.include?('None')
-      elem.push('None')
-    end
-    if ['sword','swords'].include?(args[i].downcase)
-      args2[i]=nil unless wpn.include?('Sword')
-      wpn.push('Sword')
-    end
-    if ['blade','blades','sabers','saber'].include?(args[i].downcase)
-      args2[i]=nil unless wpn.include?('Blade')
-      wpn.push('Blade')
-    end
-    if ['dagger','daggers','knife','knifes','knives'].include?(args[i].downcase)
-      args2[i]=nil unless wpn.include?('Dagger')
-      wpn.push('Dagger')
-    end
-    if ['axes','axe'].include?(args[i].downcase)
-      args2[i]=nil unless wpn.include?('Axe')
-      wpn.push('Axe')
-    end
-    if ['bow','bows','arrow','arrows','archer','archers'].include?(args[i].downcase)
-      args2[i]=nil unless wpn.include?('Bow')
-      wpn.push('Bow')
-    end
-    if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
-      args2[i]=nil unless wpn.include?('Lance')
-      wpn.push('Lance')
-    end
-    if ['wand','wands'].include?(args[i].downcase)
-      args2[i]=nil unless wpn.include?('Wand')
-      wpn.push('Wand')
-    end
-    if ['staff','staffs','staves'].include?(args[i].downcase)
-      args2[i]=nil unless wpn.include?('Staff')
-      wpn.push('Staff')
-    end
-    for i2 in 0...lookout3.length
-      if lookout3[i2][1].include?(args[i].downcase)
-        args2[i]=nil unless fltr.include?(lookout3[i2][0])
-        fltr.push(lookout3[i2][0])
-      end
-    end
-    if ['core','cores'].include?(args[i].downcase)
-      args2[i]=nil unless fltr.include?('Core')
-      fltr.push('Core')
-    end
-    unless juststats
-      fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
-      fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
-      fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
-      crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
-      crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
-      crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
-      for i2 in 0...lookout.length
-        tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
-      end
-      tags.push('StrengthSkill') if ['strength','str'].include?(args[i].downcase) && allowstr
-    end
-  end
-  args2.compact!
-  textra=''
-  rarity.uniq!
-  tier.uniq!
-  rarity_tier.uniq!
-  elem.uniq!
-  wpn.uniq!
-  fltr.uniq!
-  tags.uniq!
-  char=@weapons.map{|q| q}.uniq
-  search=[]
-  emo=[]
-  if rarity.length>0 || tier.length>0 || rarity_tier.length>0 || rarity_tier_2.length>0
-    if rarity.length>0
-      search.push("*Rarities*: #{rarity.map{|q| "#{q}#{@rarity_stars[0][q]}"}.join(', ')}")
-      emo.push(@rarity_stars[0][rarity[0]]) if rarity.length==1
-    elsif tier.length>0
-      rarity=[1,2,3,4,5]
-    end
-    if tier.length>0
-      search.push("*Crafting Tiers*: #{tier.join(', ')}")
-      emo.push("T#{tier[0]}") if tier.length==1
-    elsif rarity.length>0
-      tier=[0,1,2,3]
-    end
-    search.push("*Combined Rarity/Tiers*: #{rarity_tier.map{|q| "#{q[0,1]}#{@rarity_stars[0][q[0,1].to_i]}-T#{q[2,1]}"}.join(', ') if rarity_tier.length>0}#{', ' if rarity_tier.length>0 && rarity_tier_2.length>0}#{rarity_tier_2.map{|q| "High Dragon-T#{q[3,1]}"}.join(', ')}") if rarity_tier.length>0 || rarity_tier_2.length>0
-    for i in 0...rarity.length
-      for i2 in 0...tier.length
-        rarity_tier.push("#{rarity[i]}t#{tier[i2]}")
-      end
-    end
-    rarity_tier.uniq!
-    char2=[]
-    char2=char.reject{|q| !rarity_tier_2.include?("HDT#{q[16]}") || q[2][1,1]!='h'}.uniq if rarity_tier_2.length>0
-    char=char.reject{|q| !rarity_tier.include?("#{q[2][0,1]}t#{q[16]}")}.uniq
-    for i in 0...char2.length
-      char.push(char2[i])
-    end
-  end
-  if wpn.length>0
-    char=char.reject{|q| !wpn.include?(q[1])}.uniq
-    for i in 0...wpn.length
-      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn[i]}"}
-      emo.push(moji[0].mention) if wpn.length<2 && moji.length>0
-      wpn[i]="#{moji[0].mention}#{wpn[i]}" if moji.length>0
-    end
-    search.push("*Weapon*: #{wpn.join(', ')}")
-  end
-  if elem.length>0
-    char=char.reject{|q| !elem.include?(q[3])}.uniq
-    for i in 0...elem.length
-      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{elem[i].gsub('None','Null')}"}
-      emo.push(moji[0].mention) if elem.length<2 && moji.length>0
-      elem[i]="#{moji[0].mention}#{elem[i]}" if moji.length>0
-    end
-    search.push("*Elements*: #{elem.join(', ')}")
-  end
-  if launch
-    search.push('*Game Launch*')
-    char=char.reject{|q| q[8].to_i<8 || q[8].to_i>211}
-  end
-  if fltr.length>0
-    m=[]
-    if fltr.include?('Seasonal')
-      for i in 0...@max_rarity[3]
-        m.push("#{i+1}s")
-        m.push("#{i+1}f")
-      end
-      emo.push('(s)') if fltr.length<2
-    end
-    for i2 in 0...lookout3.length
-      if fltr.include?(lookout3[i2][0])
-        for i in 0...@max_rarity[3]
-          m.push("#{i+1}#{lookout3[i2][3]}")
-        end
-        if fltr.length<2
-        elsif lookout3[i2][4].nil?
-          emo.push("(#{lookout[i2][3]})")
-        elsif lookout3[i2][4].include?('<')
-          emo.push(lookout[i2][4])
-        else
-          emo.push("(#{lookout[i2][4]})")
-        end
-      end
-    end
-    if fltr.include?('Core')
-      for i in 0...@max_rarity[3]
-        m.push("#{i+1}")
-      end
-      emo.push('(c)') if fltr.length<2
-    end
-    if fltr.include?('Collab')
-      for i in 0...@max_rarity[3]
-        m.push("#{i+1}c")
-      end
-      emo.push('(clb)') if fltr.length<2
-    end
-    if fltr.include?('Former')
-      for i in 0...@max_rarity[0]
-        m.push("#{i+1}f")
-      end
-      emo.push('(f)') if fltr.length<2
-    end
-    search.push("*Filters*: #{fltr.map{|q| q.gsub('Void','<:Element_Void:548467446734913536> Void')}.join(', ')}")
-    if fltr.include?('Limited')
-      for i in 0...@max_rarity[0]
-        m.push("#{i+1}c")
-        m.push("#{i+1}s")
-        m.push("#{i+1}z")
-      end
-      emo.push('(L)') if fltr.length<2
-      fltr.push('Collab')
-    end
-    char=char.reject{|q| !m.include?(q[2]) && !(fltr.include?('Collab') && !q[14].nil? && q[14].length>0)}.uniq
-  end
-  if crossgames.length>0
-    char=char.reject{|q| q[14].nil? || !crossgames.include?(q[14])}.uniq
-    for i in 0...crossgames.length
-      crossgames[i]='<:Great_Badge_Golden:443704781068959744>Fire Emblem Heroes' if crossgames[i]=='FEH'
-      crossgames[i]='<:Bond:613804021119189012>Fate/Grand Order' if crossgames[i]=='FGO'
-      crossgames[i]='<:Mega_Man:641484836304846857>Mega Man' if crossgames[i]=='MM'
-      crossgames[i]='<:MH_Rathalos:669319247670804506>Monster Hunter' if crossgames[i]=='MH'
-    end
-    search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
-  end
-  if tags.length>0
-    if tags.include?('Punisher') && tags.length>1 && !args.include?('any')
-      tags2=[]
-      for i in 0...@punishments.length
-        if tags.include?(@punishments[i][0]) && !tags.include?(@punishments[i][1])
-          tags.push("#{@punishments[i][1]}")
-          tags2.push("#{@punishments[i][0]}")
-        end
-      end
-      if tags2.length>0
-        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
-        mm='those tags'
-        mm="the #{tags2[0]} tag" if tags2.length<2
-        textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
-      end
-    end
-    search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
-    sklz=@askilities.reject{|q| q[2]!='Skill'}
-    for i in 0...char.length
-      skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6]}
-      skl1=sklz[skl1] unless skl1.nil?
-      ab1=nil
-      ab2=nil
-      ab3=nil
-      unless char[i][13].nil?
-        ab1=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][13][0][-1]} unless char[i][13].length<1
-        ab1=sklz[ab1] unless ab1.nil?
-        ab1[6]=[] if !ab1.nil? && ab1[6].nil?
-        ab2=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][13][1][-1]} unless char[i][13].length<2
-        ab2=sklz[ab2] unless ab2.nil?
-        ab2[6]=[] if !ab2.nil? && ab2[6].nil?
-        ab3=sklz.find_index{|q| ['Ability'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][13][2][-1]} unless char[i][13].length<3
-        ab3=sklz[ab3] unless ab3.nil?
-        ab3[6]=[] if !ab3.nil? && ab3[6].nil?
-      end
-      if args.include?('any') || tags.length<=1
-        x=[[],[],[]]
-        x[0].push('3') if !skl1.nil? && has_any?(tags,skl1[10])
-        x[2].push('1') if !ab1.nil? && has_any?(tags,ab1[6])
-        x[2].push('2') if !ab2.nil? && has_any?(tags,ab2[6])
-        x[2].push('3') if !ab3.nil? && has_any?(tags,ab3[6])
-        x[0]="S#{x[0].join('/')}" if x[0].length>0
-        x[1]='Co' if x[1].length>0
-        x[2]="A#{x[2].join('/')}" if x[2].length>0
-        x=x.reject{|q| q.length<=0}
-        x.compact!
-        char[i][0]="#{char[i][0]} *[#{x.join('+')}]*" if x.length>0
-      end
-      char[i][20]="#{skl1[10].join("\n") unless skl1.nil?}\n#{ab1[6].join("\n") unless ab1.nil?}\n#{ab2[6].join("\n") unless ab2.nil?}\n#{ab3[6].join("\n") unless ab3.nil?}".split("\n")
-    end
-    if args.include?('any')
-      search[-1]="#{search[-1]}\n(searching for weapons with any listed tag in their skills and abilities)" if tags.length>1
-      char=char.reject{|q| !has_any?(tags,q[20])}.uniq
-    else
-      search[-1]="#{search[-1]}\n(searching for weapons with all listed tags in their skills and abilities)" if tags.length>1
-      textra="#{textra}\n\nTags searching defaults to searching for weapons with all listed tags.\nTo search for weapons with any of the listed tags, perform the search again with the word \"any\" in your message." if tags.length>1
-      for i in 0...tags.length
-        char=char.reject{|q| !q[20].include?(tags[i])}.uniq
-      end
-    end
-  end
-  if !juststats && find_data_ex(:find_enemy,args2.join(' '),event).length>0 && find_data_ex(:find_enemy,args2.join(' '),event)[0][0,8]!='Mega Man'
-    args2=args2.reject{|q| q.to_i.to_s==q || q.gsub('*','').to_i.to_s==q.gsub('*','')}
-    k2=find_data_ex(:find_enemy,args2.join(' '),event)
-    unless k2.nil? || k2.length<=0
-      search.push("*Uses Mats from:* #{enemy_emoji(k2,bot)}#{k2[0]}")
-      char=char.reject{|q| q[15].nil? || q[15]!=k2[0]}
-    end
-  end
-  if juststats
-    return nil if char.uniq.length>=@weapons.uniq.length
-    return char
-  elsif (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
-    event.respond "__**Search**__\n#{search.join("\n")}\n\n__**Note**__\nAt #{char.length} entries, too much data is trying to be displayed.  Please use this command in PM." if mode==0
-    return nil
-  else
-    return [search,char,emo,textra]
-  end
+  reload_library()
+  return find_the_stick(bot,event,args,mode,allowstr,juststats)
 end
 
 def find_in_mats(bot,event,args=nil,mode=0)
@@ -7275,42 +6202,22 @@ def spaceship_order(x)
 end
 
 def add_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mode=0)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   return add_a_new_alias(bot,event,newname,unit,modifier,modifier2,mode)
 end
 
 def disp_aliases(bot,event,args=nil,mode=0)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   return disp_alias_list(bot,event,args,mode)
 end
 
 def roost(event,bot,args=nil,ignoreinputs=false,mode=0)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   return grab_today(event,bot,args,ignoreinputs,mode)
 end
 
 def next_events(event,bot,args=nil)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   return future_events(event,bot,args)
 end
 
@@ -7911,22 +6818,12 @@ def find_dragon_alts(event,args,bot)
 end
 
 def disp_adv_mats(event,args,bot,forcespiral=false)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   return adv_mats(event,args,bot,forcespiral)
 end
 
 def adv_chain_list(event,args,bot)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading BotanText'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   return disp_adv_chain(event,args,bot)
 end
 
@@ -8914,12 +7811,7 @@ bot.command(:status) do |event, *args|
     event.respond 'Status set.'
     return nil
   end
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading EliseTexts'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   show_bot_status(event,bot)
   return nil
 end
@@ -8934,12 +7826,7 @@ bot.command([:avatar, :avvie]) do |event, *args|
     event.respond 'Status set.'
     return nil
   end
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading EliseTexts'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   show_bot_status(event,bot)
   return nil
 end
@@ -9048,12 +7935,7 @@ end
 
 bot.command(:snagstats) do |event, f, f2|
   return nil if overlap_prevent(event)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading EliseTexts'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   snagstats(event,bot,f,f2)
   return nil
 end
@@ -9062,12 +7944,7 @@ bot.command(:boop) do |event|
   return nil if overlap_prevent(event)
   return nil unless event.user.id==167657750971547648
   return nil unless event.channel.id==532083509083373583 || @shardizard==4 # only work when used by the developer
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading EliseTexts'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   disp_boop_tags(event)
 end
 
@@ -9256,12 +8133,7 @@ end
 
 bot.command(:update) do |event|
   return nil if overlap_prevent(event)
-  t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading EliseTexts'
-    load "#{@location}devkit/BotanText.rb"
-    @last_multi_reload[1]=t
-  end
+  reload_library()
   disp_update_list()
 end
 
