@@ -153,7 +153,7 @@ def all_commands(include_nil=false,permissions=-1)
      'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias','dmg',
      'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','limit',
      'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol','reload','update','mats','materials','spiral','node','nodes',
-     'damage','coability','coabil','coab','chain','team','backpack']
+     'damage','coability','coabil','coab','chain','team','backpack','cca']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -3467,7 +3467,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
   data_load()
   if k[0].is_a?(Array) && k.map{|q| q[1]}.uniq.length>1
     m=@askilities.reject{|q| q[0]!=k[0][0] || !k.map{|q2| q2[2]}.include?(q[2])}
-    k=m.map{|q| q}
+    k=m.map{|q| q}.uniq
   end
   str=''
   hdr=''
@@ -3865,11 +3865,11 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
           else
             str="#{str}\n\n#{'__' if lng}**#{k[ii2][0]} #{'+' if k[ii2][1].include?('%')}#{k[ii2][1]}**#{'__' if lng}"
           end
-          str="#{str} [Chain]" if k[ii2][2]=='Chain'
+          str="#{str} [Chain]" if k[ii2][2]=='Chain' && k.map{|q| q[2]}.uniq.length>1
           str="#{str}\n*Effect:* #{k[ii2][3]}" if lng
         else
           str="#{str}\n#{"\n__" if lng}**#{'+' if k[ii2][1].include?('%')}#{k[ii2][1]}**#{'__' if lng}"
-          str="#{str} [Chain]" if k[ii2][2]=='Chain'
+          str="#{str} [Chain]" if k[ii2][2]=='Chain' && k.map{|q| q[2]}.uniq.length>1
           str="#{str} - #{k[ii2][3]}" if lng
         end
         checkstr="#{k[ii2][0]} #{'+' if k[ii2][1].include?('%')}#{k[ii2][1]}"
@@ -5220,7 +5220,7 @@ def find_in_abilities(bot,event,args=nil)
     abiltypes.push('Ability') if ['ability','abil','abilitys','abils','abilities'].include?(args[i].downcase)
     abiltypes.push('Aura') if ['aura','auras','drg','dragon'].include?(args[i].downcase)
     abiltypes.push('CoAbility') if ['coability','coabil','coab','coabilitys','coabils','coabilities','co','team'].include?(args[i].downcase)
-    abiltypes.push('Chain') if ['chain','chaincoability','chaincoabil','chaincoab','chaincoabilitys','chaincoabils','chaincoabilities','chainco'].include?(args[i].downcase)
+    abiltypes.push('Chain') if ['chain','chaincoability','chaincoabil','chaincoab','chaincoabilitys','chaincoabils','chaincoabilities','chainco','cca'].include?(args[i].downcase)
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
     elem.push('Water') if ['water','waters'].include?(args[i].downcase)
     elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
@@ -5708,7 +5708,7 @@ def find_abilities(bot,event,args=nil)
         str=extend_message(str,flds[i][1][i2],event)
       end
     end
-    str=extend_message(str,"#{char.length} total (#{totals[0]} abilities, #{totals[1]} auras, #{totals[2]} coabilities)",event,2)
+    str=extend_message(str,"#{char.length} total (#{totals[0]} abilities, #{totals[1]} auras, #{totals[2]} coabilities, #{totals[3]} chain coabilities)",event,2)
     event.respond str
   else
     flds=triple_finish(flds[0][1].split("\n")) if !flds.nil? && flds.length==1
@@ -6983,7 +6983,7 @@ bot.command([:aura]) do |event, *args|
   if args.nil? || args.length<=0
   elsif ['find','search'].include?(args[0].downcase)
     args.shift
-    args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+    args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca'].include?(q)}
     find_abilities(bot,event,args)
     return nil
   end
@@ -6995,14 +6995,14 @@ bot.command([:coability,:coabil,:coab,:co]) do |event, *args|
   if args.nil? || args.length<=0
   elsif ['find','search'].include?(args[0].downcase)
     args.shift
-    args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+    args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','cca','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
     find_abilities(bot,event,args)
     return nil
   end
   disp_ability_data(bot,event,args,'CoAbility')
 end
 
-bot.command([:chain]) do |event, *args|
+bot.command([:chain,:cca]) do |event, *args|
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
   elsif ['find','search'].include?(args[0].downcase)
@@ -7198,14 +7198,14 @@ bot.command([:find,:search,:lookup]) do |event, *args|
     find_abilities(bot,event,args)
     return nil
   elsif ['aura','auras'].include?(args[0].downcase)
-    args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+    args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca'].include?(q)}
     find_abilities(bot,event,args)
     return nil
   elsif ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs'].include?(args[0].downcase)
-    args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+    args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','cca','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
     find_abilities(bot,event,args)
     return nil
-  elsif ['chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(args[0].downcase)
+  elsif ['chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca'].include?(args[0].downcase)
     args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','aura','auras'].include?(q)}
     find_abilities(bot,event,args)
     return nil
@@ -8335,12 +8335,12 @@ bot.mention do |event|
       args.shift
       find_abilities(bot,event,args)
     elsif ['aura','auras'].include?(args[0].downcase)
-      args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+      args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','cca','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
       find_abilities(bot,event,args)
     elsif ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs'].include?(args[0].downcase)
-      args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+      args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','cca','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
       find_abilities(bot,event,args)
-    elsif ['chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(args[0].downcase)
+    elsif ['chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca'].include?(args[0].downcase)
       args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','aura','auras'].include?(q)}
       find_abilities(bot,event,args)
     elsif ['skill','skills','skls','skl','skil','skils'].include?(args[0].downcase)
@@ -8565,7 +8565,7 @@ bot.mention do |event|
     args.shift
     if ['find','search'].include?(args[0].downcase)
       args.shift
-      args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+      args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca'].include?(q)}
       find_abilities(bot,event,args)
     else
       disp_ability_data(bot,event,args,'Aura')
@@ -8575,12 +8575,12 @@ bot.mention do |event|
     args.shift
     if ['find','search'].include?(args[0].downcase)
       args.shift
-      args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+      args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca'].include?(q)}
       find_abilities(bot,event,args)
     else
       disp_ability_data(bot,event,args,'Aura')
     end
-  elsif ['chain'].include?(args[0].downcase)
+  elsif ['chain','cca'].include?(args[0].downcase)
     m=false
     args.shift
     if ['find','search'].include?(args[0].downcase)
