@@ -97,7 +97,7 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
     create_embed(event,"**#{command.downcase}** __name__","Shows everything that the co-abilities named `name` does.  Also shows all adventurers that have the co-ability.\nIn PM, will also show the chain co-ability named `name`.",0xCE456B)
   elsif ['aura'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows everything that the aura named `name` does.  Also shows all dragons that have the aura.",0xCE456B)
-  elsif ['chain'].include?(command.downcase)
+  elsif ['chain','cca'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows everything that the chain co-ability named `name` does.  Also shows all adventurers that have the chain co-ability.",0xCE456B)
   elsif ['roost'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\n\nYou can include the word \"tomorrow\" to instead show the data for tomorrow.\nYou can also include a day of the week to instead show data on that day of the week.",0xCE456B)
@@ -6299,6 +6299,7 @@ def snagstats(event,bot,f=nil,f2=nil)
   event << "There are #{longFormattedNumber(@askilities.reject{|q| q[2]!='Aura'}.length)} dragon auras, split into #{longFormattedNumber(@askilities.reject{|q| q[2]!='Aura'}.map{|q| q[0].split(') ')[-1]}.uniq.length)} families."
   event << "There are #{longFormattedNumber(@askilities.reject{|q| q[2]!='Ability'}.length)} abilities, split into #{longFormattedNumber(@askilities.reject{|q| q[2]!='Ability'}.map{|q| q[0].split(') ')[-1]}.uniq.length)} families."
   event << "There are #{longFormattedNumber(@askilities.reject{|q| q[2]!='CoAbility'}.length)} co-abilities, split into #{longFormattedNumber(@askilities.reject{|q| q[2]!='CoAbility'}.map{|q| q[0]}.uniq.length)} families."
+  event << "There are #{longFormattedNumber(@askilities.reject{|q| q[2]!='Chain'}.length)} chain co-abilities, split into #{longFormattedNumber(@askilities.reject{|q| q[2]!='Chain'}.map{|q| q[0]}.uniq.length)} families."
   event << ''
   event << "There are #{longFormattedNumber(@facilities.map{|q| q[0]}.uniq.length)} [unique] facilities with #{@facilities.length} total levels between them."
   event << "There are #{longFormattedNumber(@mats.length)} materials."
