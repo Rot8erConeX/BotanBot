@@ -4675,6 +4675,10 @@ def add_a_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mo
   else
     type=type.map{|q| q.gsub('*','')}
   end
+  if newname.length<=2
+    event.respond "Please note that aliases shorter than three characters long will be rejected."
+    return nil
+  end
   if type[1]=='Adventurer'
     unit=find_adventurer(unit,event)
     dispstr=['Adventurer',unit[0],'Adventurer',unit[0]]
@@ -5402,42 +5406,20 @@ def disp_alias_list(bot,event,args=nil,mode=0)
       mnm.push('Dark') if wpn[3]=='Shadow'
       mnm2=[wpn[1]]
       mnm2.push('Spear') if wpn[1]=='Lance'
+      lists=get_lookout_tags().reject{|q| q[2]!='Availability/Weapon'}.map{|q| [q[3],q[1]]}
       for i in 0...mnm.length
         for i2 in 0...mnm2.length
-          if wpn[2][1,1]!='v' && wpn[2][1,1]!='h' && wpn[3]!='None'
+          if wpn[2][1,1]!='p' && wpn[2][1,1]!='s' && !lists.map{|q| q[0]}.include?(wpn[2][1,1]) && wpn[3]!='None'
             f.push("#{wpn[2][0,1]}\\*#{mnm[i]}#{mnm2[i2]}")
             f.push("#{wpn[2][0,1]}\\*#{mnm2[i2]}#{mnm[i]}")
             f.push("#{mnm[i]}#{wpn[2][0,1]}\\*#{mnm2[i2]}")
             f.push("#{mnm2[i2]}#{wpn[2][0,1]}\\*#{mnm[i]}")
             f.push("#{mnm[i]}#{mnm2[i2]}#{wpn[2][0,1]}\\*")
             f.push("#{mnm2[i2]}#{mnm[i]}#{wpn[2][0,1]}\\*")
-          elsif wpn[2][1,1]=='v' && wpn[3]!='None'
-            f.push("Void#{wpn[2][0,1]}\\*#{mnm[i]}#{mnm2[i2]}")
-            f.push("Void#{wpn[2][0,1]}\\*#{mnm2[i2]}#{mnm[i]}")
-            f.push("Void#{mnm[i]}#{wpn[2][0,1]}\\*#{mnm2[i2]}")
-            f.push("Void#{mnm2[i2]}#{wpn[2][0,1]}\\*#{mnm[i]}")
-            f.push("Void#{mnm[i]}#{mnm2[i2]}#{wpn[2][0,1]}\\*")
-            f.push("Void#{mnm2[i2]}#{mnm[i]}#{wpn[2][0,1]}\\*")
-            f.push("#{wpn[2][0,1]}\\*Void#{mnm[i]}#{mnm2[i2]}")
-            f.push("#{wpn[2][0,1]}\\*Void#{mnm2[i2]}#{mnm[i]}")
-            f.push("#{mnm[i]}Void#{wpn[2][0,1]}\\*#{mnm2[i2]}")
-            f.push("#{mnm2[i2]}Void#{wpn[2][0,1]}\\*#{mnm[i]}")
-            f.push("#{mnm[i]}Void#{mnm2[i2]}#{wpn[2][0,1]}\\*")
-            f.push("#{mnm2[i2]}Void#{mnm[i]}#{wpn[2][0,1]}\\*")
-            f.push("#{wpn[2][0,1]}\\*#{mnm[i]}Void#{mnm2[i2]}")
-            f.push("#{wpn[2][0,1]}\\*#{mnm2[i2]}Void#{mnm[i]}")
-            f.push("#{mnm[i]}#{wpn[2][0,1]}\\*Void#{mnm2[i2]}")
-            f.push("#{mnm2[i2]}#{wpn[2][0,1]}\\*Void#{mnm[i]}")
-            f.push("#{mnm[i]}#{mnm2[i2]}Void#{wpn[2][0,1]}\\*")
-            f.push("#{mnm2[i2]}#{mnm[i]}Void#{wpn[2][0,1]}\\*")
-            f.push("#{wpn[2][0,1]}\\*#{mnm[i]}#{mnm2[i2]}Void")
-            f.push("#{wpn[2][0,1]}\\*#{mnm2[i2]}#{mnm[i]}Void")
-            f.push("#{mnm[i]}#{wpn[2][0,1]}\\*#{mnm2[i2]}Void")
-            f.push("#{mnm2[i2]}#{wpn[2][0,1]}\\*#{mnm[i]}Void")
-            f.push("#{mnm[i]}#{mnm2[i2]}#{wpn[2][0,1]}\\*Void")
-            f.push("#{mnm2[i2]}#{mnm[i]}#{wpn[2][0,1]}\\*Void")
-          elsif wpn[2][1,1]=='h' && wpn[3]!='None'
-            mnm3=['High','Dragon','Drg','HDT','HD']
+          elsif lists.map{|q| q[0]}.include?(wpn[2][1,1]) && wpn[3]!='None'
+            mnm3=lists[lists.find_index{|q| q[0]==wpn[2][1,1]}][1]
+            mnm3=mnm3.reject{|q| q[-1]=='s' && mnm3.include?(q[0,q.length-1])}
+            mnm3=mnm3.map{|q| "#{q[0].upcase}#{q[1,q.length-1].downcase}"}
             for i3 in 0...mnm3.length
               f.push("#{mnm3[i3]}#{wpn[2][0,1]}\\*#{mnm[i]}#{mnm2[i2]}")
               f.push("#{mnm3[i3]}#{wpn[2][0,1]}\\*#{mnm2[i2]}#{mnm[i]}")
@@ -5921,7 +5903,7 @@ def snagstats(event,bot,f=nil,f2=nil)
   elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(f.downcase)
     adv=@weapons.map{|q| q}
     adv=find_in_weapons(bot,event,[f2],2)[1] unless f2.nil?
-    str="**There are #{adv.length} #{'<:Element_Void:548467446734913536> Void' if find_in_weapons(bot,event,[f2],2)[0].include?('*Filters*: <:Element_Void:548467446734913536> Void')} weapons, including:**"
+    str="**There are #{adv.length} #{'<:Element_Void:548467446734913536> Void ' if find_in_weapons(bot,event,[f2],2)[0].include?('*Filters*: <:Element_Void:548467446734913536> Void')}weapons, including:**"
     m=adv.reject{|q| q[1]!='Sword'}
     str2="<:Weapon_Sword:532106114540634113> #{m.length} Sword#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[1]!='Blade'}

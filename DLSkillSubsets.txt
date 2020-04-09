@@ -137,6 +137,7 @@
 ["JupiterRes", ["jupiteres", "jupiteresist", "jupiteresistance", "jupiterres", "jupiterresist", "jupiterresistance"], "Askillity"]
 ["KnockbackImmunity", ["knockbackimmune", "knockbackimmunity", "superarmour", "superaromr"], "Askillity"]
 ["Last", ["final", "last"], "Askillity"]
+["LifeShield", ["lifeshield", "lifesheild"], "Askillity"]
 ["Lifesteal", ["lifesteal", "nosferatu", "vampire"], "Askillity"]
 ["LightBias", ["biaslight", "lightbias"], "Askillity"]
 ["LightRes", ["lightres", "lightresist", "lightresistance"], "Askillity"]
