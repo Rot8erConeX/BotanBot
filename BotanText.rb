@@ -4676,7 +4676,7 @@ def add_a_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mo
   else
     type=type.map{|q| q.gsub('*','')}
   end
-  if newname.length<=2
+  if newname.length<=2 && event.channel.id != 532083509083373583
     event.respond "Please note that aliases shorter than three characters long will be rejected."
     return nil
   end
@@ -5697,13 +5697,13 @@ def snagstats(event,bot,f=nil,f2=nil)
   @server_data[1][@shardizard]=bot.users.size
   metadata_save()
   if ['servers','server','members','member','shard','shards','user','users'].include?(f.downcase)
-    str="**I am in #{longFormattedNumber(@server_data[0].inject(0){|sum,x| sum + x })} servers, reaching #{longFormattedNumber(@server_data[1].inject(0){|sum,x| sum + x })} unique members.**"
+    str="**I am in #{longFormattedNumber(@server_data[0].inject(0){|sum,x| sum + x })} servers.**"
     for i in 0...@shards
       m=i
       m=i+1 if i>3
-      str=extend_message(str,"The #{shard_data(0,true)[i]} Shard is in #{longFormattedNumber(@server_data[0][m])} server#{"s" if @server_data[0][m]!=1}, reaching #{longFormattedNumber(@server_data[1][m])} unique members.",event)
+      str=extend_message(str,"The #{shard_data(0,true)[i]} Shard is in #{longFormattedNumber(@server_data[0][m])} server#{"s" if @server_data[0][m]!=1}.",event)
     end
-    str=extend_message(str,"The #{shard_data(0)[4]} Shard is in #{longFormattedNumber(@server_data[0][4])} server#{"s" if @server_data[0][4]!=1}, reaching #{longFormattedNumber(@server_data[1][4])} unique members.",event,2) if event.user.id==167657750971547648
+    str=extend_message(str,"The #{shard_data(0)[4]} Shard is in #{longFormattedNumber(@server_data[0][4])} server#{"s" if @server_data[0][4]!=1}.",event,2) if event.user.id==167657750971547648
     if bot.profile.id==618979409059119113
       str="This cloned version of Botan is in #{longFormattedNumber(@server_data[0][0])} server#{"s" if @server_data[0][0]!=1}, reaching #{longFormattedNumber(@server_data[1][0])} unique members."
     end
