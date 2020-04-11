@@ -4517,6 +4517,7 @@ def disp_adv_chain(event,args,bot)
 end
 
 def show_bot_status(event,bot)
+  t=Time.now
   if @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
     event << "Current avatar: #{bot.user(543373018303299585).avatar_url}"
     event << "Adventurer/Dragon in avatar: #{@avvie_info[0]}"
