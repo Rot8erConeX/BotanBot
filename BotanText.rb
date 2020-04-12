@@ -359,6 +359,7 @@ end
               ['Broken','BrokenPunisher'],
               ['Burn','BurningPunisher'],
               ['Overdrive','OverdrivePunisher'],
+              ['Frostbite','FrostbitePunisher'],
               ['Sleep','SleepingPunisher'],
               ['Bleed','BleedingPunisher'],
               ['ReducedDefense','ReducedDefensePunisher']]
