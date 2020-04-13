@@ -518,7 +518,7 @@ end
 def reload_library()
   t=Time.now
   if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
-    puts 'reloading EliseText'
+    puts 'reloading BotanText'
     load "#{@location}devkit/BotanText.rb"
     @last_multi_reload[1]=t
   end
