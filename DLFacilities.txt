@@ -357,6 +357,11 @@ Dragonata\27\-\Adventurer, Event Altar\3x3\1\4400\Paper-Mache, 700
 Dragonata\28\-\Adventurer, Event Altar\3x3\1\4600\Paper-Mache, 800
 Dragonata\29\-\Adventurer, Event Altar\3x3\1\4800\Paper-Mache, 900
 Dragonata\30\-\Adventurer, Event Altar\3x3\1\5000\Paper-Mache, 1000
+Dragonata\31\-\Adventurer, Event Altar\3x3\1\5200\Paper-Mache, 1100
+Dragonata\32\-\Adventurer, Event Altar\3x3\1\5400\Paper-Mache, 1200
+Dragonata\33\-\Adventurer, Event Altar\3x3\1\5600\Paper-Mache, 1300
+Dragonata\34\-\Adventurer, Event Altar\3x3\1\5800\Paper-Mache, 1400
+Dragonata\35\-\Adventurer, Event Altar\3x3\1\6000\Paper-Mache, 1500
 Dragontree\1\A tree that produces three varieties of dragonfruit, the preferred snack of dragons the world over.\Production\3x3\1\0
 Dragontree\2\-\Production\3x3\1\100
 Dragontree\3\-\Production\3x3\1\300
