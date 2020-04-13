@@ -1796,10 +1796,12 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
   genders=[]
   cygames=[]
   crossgames=[]
+  races=[]
   launch=false
   lookout=get_lookout_tags()
   lookout2=lookout.reject{|q| q[2]!='Cygame'}
   lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Dragon'}
+  lookout5=lookout.reject{|q| q[2]!='Race'}
   lookout=lookout.reject{|q| q[2]!='Askillity'}
   lookout=lookout.reject{|q| ['Flame','Water','Wind','Light','Shadow'].include?(q[0])}
   for i in 0...args.length
@@ -1837,6 +1839,9 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
     for i2 in 0...lookout.length
       tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i].downcase)
     end
+    for i2 in 0...lookout5.length
+      races.push(lookout5[i2][0]) if lookout5[i2][1].include?(args[i].downcase)
+    end
     for i2 in 0...lookout2.length
       cygames.push(lookout2[i2][0]) if lookout2[i2][1].include?(args[i].downcase)
     end
@@ -1848,6 +1853,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
   wday.uniq!
   turn.uniq!
   ranged.uniq!
+  races.uniq!
   fltr.uniq!
   tags.uniq!
   cygames.uniq!
@@ -2025,6 +2031,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
       end
     end
   end
+  return nil if races.length>0 && search.length<=0 && mode%4>1
   if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
     event.respond "__**Search**__\n#{search.join("\n")}\n\n__**Note**__\nAt #{char.length} entries, too much data is trying to be displayed.  Please use this command in PM." if mode==0
     return nil
