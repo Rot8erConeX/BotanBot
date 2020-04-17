@@ -10,7 +10,7 @@ Affinity Dance\\Skill\Increases the entire team's critical rate by 15% for 10 se
 Agitato Assault\\Skill\Increases the potency of the entire team's recovery skills by 5% for 10 seconds, and increases their energy levels by one stage.\Increases the potency of the entire team's recovery skills by 10% for 10 seconds, and increases their energy level by one stage.\\4819, 4819, 4819, 4819\No\1.6\\Buff, Energy, Potency, Team, E1\
 Air Tackle\\Skill\Deals 1 hit of 466% wind damage to enemies directly ahead.\Deals 1 hit of 518% wind damage to enemies directly ahead.\\30, 30, 30, 30\Yes\1.4\\Damage\
 Akashic Repose\\Skill\Restores HP to all allies with 31% Recovery Potency and applies Regen for 15 seconds, healing with 25% Regen Potency every 2.99 seconds.\Restores HP to all allies with 36% Recovery Potency, and applies Regen for 15 seconds, healing with 29% Regen Potency every 2.99 seconds.\Restores HP to all allies with 44% Recovery Potency, and applies Regen for 15 seconds, healing with 35% Regen Potency every 2.99 seconds.\5916, 5916, 5916, 5916\Yes\1.1\\HealSkill, Burst, Regen\
-Alberian Cleave\\Skill\Deals 2 hits of 276% light damage to enemies directly ahead.\Deals 2 hits of 290% light damage to enemies directly ahead, and inflicts stun for 3-4 seconds with 90% base chance.\\2443, 2443, 2443, 2443\Yes\0.8\\Damage, Stun\
+Alberian Cleave\\Skill\Deals 2 hits of 276% light damage to enemies directly ahead.\Deals 2 hits of 290% light damage to enemies directly ahead, and inflicts stun for 3-4 seconds with 90% base chance.\Deals 2 hits of 305% light damage to enemies directly ahead, and inflicts stun for 4-5 seconds with 100% base chance.\2443, 2443, 2443, 2443\Yes\0.8\\Damage, Stun\
 Alberian Majesty\\Skill\Deals 2 hits of 276% light damage to surrounding enemies.\Deals 2 hits of 307% light damage to surrounding enemies.\\4817, 4817, 4817, 4817\Yes\0.9\\Damage\
 Alchemic Discharge\\Skill\Deals 1 hit of 797% damage to surrounding enemies.\Deals 1 hit of 886% damage to surrounding enemies.\\8453, 8453, 8453, 8453\Yes\1.1\\Damage\
 All-Encompassing Darkness (Yang)\\Skill\Deals 2 hits of 298% shadow damage to enemies directly ahead.  Also inflicts poison to them with 110% base chance.  Poison deals 21.8% damage every 2.9 seconds for 30 seconds.\Deals 2 hits of 331% shadow damage to enemies directly ahead.  Also inflicts poison to them with 110% base chance.  Poison deals 29.1% damage every 2.9 seconds for 30 seconds.\Deals 2 hits of 364% shadow damage to enemies directly ahead.  Also inflicts poison to them with 120% base chance.  Poison deals 29.1% damage every 2.9 seconds for 30 seconds.\30, 30, 30, 30\Yes\2.4\\Damage\
@@ -1909,6 +1909,8 @@ Overdrive Punisher\13%\Ability\Increases damage to enemies in overdrive state by
 Overdrive Punisher\15%\Ability\Increases damage to enemies in overdrive state by 15%.\120\y\Punisher, OverdrivePunisher
 Overgrowth\-\Ability\Causes the enemy's physical size and attack range to increase over time.\-1\y\Enemy
 Paper-Mache\example\Ability\Increases Paper-Mache intake by `x`%\0\y\Event, Facility, Materials
+Paper-Mache\25%\Ability\Increases Paper-Mache intake by 25%\0\y\Event, Facility, Materials
+Paper-Mache\35%\Ability\Increases Paper-Mache intake by 35%\0\y\Event, Facility, Materials
 Paper-Mache\50%\Ability\Increases Paper-Mache intake by 50%\0\y\Event, Facility, Materials
 Paper-Mache\75%\Ability\Increases Paper-Mache intake by 75%\0\y\Event, Facility, Materials
 Paper-Mache\100%\Ability\Increases Paper-Mache intake by 100%\0\y\Event, Facility, Materials
