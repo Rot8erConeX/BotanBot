@@ -1536,8 +1536,11 @@ Ebon Chimera's Bane\20%\Ability\Increases damage to the Ebon Chimera by `x`%.\40
 Ebon Chimera's Bane\30%\Ability\Increases damage to the Ebon Chimera by `x`%.\60\y\Bane
 Eggsploration Points\example\Ability\Increases eggsploration point intake for clearing quests by `x`%\0\y\Event, Facility, Score
 Eggsploration Points\25%\Ability\Increases eggsploration point intake for clearing quests by 25%\0\y\Event, Facility, Score
+Eggsploration Points\35%\Ability\Increases eggsploration point intake for clearing quests by 35%\0\y\Event, Facility, Score
 Eggsploration Points\50%\Ability\Increases eggsploration point intake for clearing quests by 50%\0\y\Event, Facility, Score
+Eggsploration Points\75%\Ability\Increases eggsploration point intake for clearing quests by 75%\0\y\Event, Facility, Score
 Eggsploration Points\100%\Ability\Increases eggsploration point intake for clearing quests by 100%\0\y\Event, Facility, Score
+Eggsploration Points\125%\Ability\Increases eggsploration point intake for clearing quests by 125%\0\y\Event, Facility, Score
 Eggsploration Points\150%\Ability\Increases eggsploration point intake for clearing quests by 150%\0\y\Event, Facility, Score
 Electrically Charged\I\Ability\Increases strength by 15% when electrified.\60\y\StrengthSkill, Unique
 Electrically Charged\II\Ability\Increases strength by 25% when electrified.\80\y\StrengthSkill, Unique
