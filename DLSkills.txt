@@ -1915,6 +1915,7 @@ Paper-Mache\example\Ability\Increases Paper-Mache intake by `x`%\0\y\Event, Faci
 Paper-Mache\25%\Ability\Increases Paper-Mache intake by 25%\0\y\Event, Facility, Materials
 Paper-Mache\35%\Ability\Increases Paper-Mache intake by 35%\0\y\Event, Facility, Materials
 Paper-Mache\50%\Ability\Increases Paper-Mache intake by 50%\0\y\Event, Facility, Materials
+Paper-Mache\60%\Ability\Increases Paper-Mache intake by 60%\0\y\Event, Facility, Materials
 Paper-Mache\75%\Ability\Increases Paper-Mache intake by 75%\0\y\Event, Facility, Materials
 Paper-Mache\100%\Ability\Increases Paper-Mache intake by 100%\0\y\Event, Facility, Materials
 Paralysis = Skill Haste \example\Ability\Increases skill gauge fill rate by `x`% for 20 seconds upon successfully paralyzing an enemy. After activating, this ability will not activate again for five seconds.\0\y\Paralysis, Buff, Team, SkillHaste, StatusDoublebuff
