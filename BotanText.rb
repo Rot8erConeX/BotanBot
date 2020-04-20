@@ -97,7 +97,7 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
     create_embed(event,"**#{command.downcase}** __name__","Shows everything that the co-abilities named `name` does.  Also shows all adventurers that have the co-ability.\nIn PM, will also show the chain co-ability named `name`.",0xCE456B)
   elsif ['aura'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows everything that the aura named `name` does.  Also shows all dragons that have the aura.",0xCE456B)
-  elsif ['chain','cca'].include?(command.downcase)
+  elsif ['chain','cca','cc'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows everything that the chain co-ability named `name` does.  Also shows all adventurers that have the chain co-ability.",0xCE456B)
   elsif ['roost'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\n\nYou can include the word \"tomorrow\" to instead show the data for tomorrow.\nYou can also include a day of the week to instead show data on that day of the week.",0xCE456B)
@@ -4408,8 +4408,19 @@ def disp_adv_chain(event,args,bot)
       k4.push(k2[i][7][0]) # coability
       k5.push(k2[i][7][1]) # chain coability
       k6.push(k2[i][2]) # data
+      k6[-1].push(k2[i][0]) # name
     end
   end
+  xseed=['HP','Strength','Defense']
+  for i in 0...k6.length
+    xseed.push("(#{k6[i][1]}) HP")
+    xseed.push("(#{k6[i][2]}) HP")
+    xseed.push("(#{k6[i][1]}) Strength")
+    xseed.push("(#{k6[i][2]}) Strength")
+    xseed.push("(#{k6[i][1]}) Defense")
+    xseed.push("(#{k6[i][2]}) Defense")
+  end
+  xseed.uniq!
   romanums=['Ox0','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV',
             'XXV','XXVI','XXVII','XXVIII','XXIX','XXX','XXXI','XXXII','XXXIII','XXXIV','XXXV','XXXVI','XXXVII','XXXVIII','XXXIX','XL','XLI','XLII','XLII',
             'XLIII','XLIV','XLV','XLVI','XLVII','XLVIII','XLIX','L']
@@ -4438,6 +4449,7 @@ def disp_adv_chain(event,args,bot)
     else
       k4[i]=[k4[i].join(' '),nil,'']
     end
+    k4[i][0]="#{k4[i][0]} [Coab]" if xseed.include?(k4[i][0])
   end
   k5=k5.map{|q| q.split(' & ')}.flatten
   for i in 0...k5.length
@@ -4464,6 +4476,7 @@ def disp_adv_chain(event,args,bot)
     else
       k5[i]=[k5[i].join(' '),nil,'']
     end
+    k5[i][0]="#{k5[i][0]} [Chain]" if xseed.include?(k5[i][0])
   end
   str2=[]
   str2.push(k6[0][1]) if k6.map{|q| q[1]}.uniq.length<=1
@@ -4487,20 +4500,48 @@ def disp_adv_chain(event,args,bot)
       x=''
       x='**' if m2.length>1
       m2=m2.inject(0){|sum,x| sum + x }
+      m[i][1]=m2*1
+    end
+  end
+  mmm=m.map{|q| q}
+  elem_stats=[['',      0,0,0,0,0,0],
+              ['Flame', 0,0,0,0,0,0],
+              ['Water', 0,0,0,0,0,0],
+              ['Wind',  0,0,0,0,0,0],
+              ['Light', 0,0,0,0,0,0],
+              ['Shadow',0,0,0,0,0,0],
+              ['Sword', 0,0,0,0,0,0],
+              ['Blade', 0,0,0,0,0,0],
+              ['Dagger',0,0,0,0,0,0],
+              ['Axe',   0,0,0,0,0,0],
+              ['Bow',   0,0,0,0,0,0],
+              ['Lance', 0,0,0,0,0,0],
+              ['Wand',  0,0,0,0,0,0],
+              ['Staff', 0,0,0,0,0,0]]
+  for i in 0...m.length
+    m[i][0]=m[i][0].gsub(' [Chain]','') unless mmm.map{|q| q[0].split(') ')[-1]}.include?(m[i][0].split(') ')[-1].gsub('~~','').gsub(' [Chain]',' [Coab]'))
+    m[i][0]=m[i][0].gsub(' [Coab]','') unless mmm.map{|q| q[0].split(') ')[-1]}.include?(m[i][0].split(') ')[-1].gsub('~~','').gsub(' [Coab]',' [Chain]'))
+    skillname=m[i][0].gsub(' [Chain]','').gsub(' [Coab]','')
+    if m[i][2].length<=0
+      m[i]=m[i][0]
+    else
+      m2=k5.reject{|q| q[0]!=m[i][0] || q[2]!=m[i][2]}.map{|q| q[1]}
+      x=''
+      x='**' if m2.length>1
       xx=''
       if m[i][2]=='Percent'
-        xx="#{m[i][0]} #{x}+#{m2}%#{x}"
+        xx="#{m[i][0]} #{x}+#{mmm[i][1]}%#{x}"
       elsif m[i][2]=='Roman'
-        xx="#{m[i][0]} #{x}#{romanums[m2]}#{x}"
+        xx="#{m[i][0]} #{x}#{romanums[mmm[i][1]]}#{x}"
       else
-        xx="#{m[i][0]} #{x}#{m2}#{x}"
+        xx="#{m[i][0]} #{x}#{mmm[i][1]}#{x}"
       end
       if m[i][0][0]=='('
         m3=m[i][0].split(') ')[-1]
         m4=k5.reject{|q| q[0]!=m3 || q[2]!=m[i][2]}.map{|q| q[1]}
-        unless m4.length<=0
+        unless m4.length<=0 || m[i][0].include?(' [Chain]') || m[i][0].include?(' [Coab]')
           m4=m4.inject(0){|sum,x| sum + x }
-          m4+=m2
+          m4+=mmm[i][1]
           m5=m[i][0].split(') ')[0].gsub('(','')
           xx="#{xx}\n  \u00B7  For #{m5} adventurers, this stacks with *#{m3}* for a total buff of"
           if m[i][2]=='Percent'
@@ -4514,11 +4555,87 @@ def disp_adv_chain(event,args,bot)
       end
       m[i]="#{xx}"
     end
+    m[i]="~~#{m[i]}~~" if (m[i].include?(' [Chain]') || m[i].include?(' [Coab]')) && (mmm.map{|q| q[0]}.include?(m[i][0].gsub('~~','').gsub(' [Chain]',' [Coab]')) || mmm.map{|q| q[0]}.include?(m[i][0].gsub('~~','').gsub(' [Coab]',' [Chain]')))
+    if m[i].include?(' [Coab]')
+      mx=mmm.find_index{|q| q[0]=="#{skillname} [Chain]"}
+      my=mmm.find_index{|q| q[0]=="#{skillname} [Coab]"}
+      if mx.nil? || my.nil? || elem_stats.map{|q| q[0]}.include?(m[i].split(') ')[0].gsub('(',''))
+        p=m[i].gsub(' [Coab]','')
+        p=m[i].split(') ')[1].gsub(' [Coab]','') if m[i].include?(') ')
+        p2=0
+        p2=1 if p.include?('HP')
+        p2=2 if p.include?('Strength')
+        p2=3 if p.include?('Defense')
+        if elem_stats.map{|q| q[0]}.include?(m[i].split(') ')[0].gsub('(',''))
+          p1=elem_stats.find_index{|q| q[0]==m[i].split(') ')[0].gsub('(','')}
+          elem_stats[p1][p2]+=mmm[my][1]
+        else
+          elem_stats[0][p2]+=mmm[my][1]
+        end
+      else
+        mx=mmm[mx][1]+100
+        my=mmm[my][1]+100
+        mz=mx*my/100.0-100
+        m[i]="#{m[i]}\nThe above two, due to applying at different times in calculation, combine to effectively produce:\n#{skillname} **+#{'%.2f' % mz}%**"
+      end
+    elsif m[i].include?(' [Chain]')
+      mx=mmm.find_index{|q| q[0]=="#{skillname} [Chain]"}
+      p=m[i].gsub(' [Chain]','')
+      p=m[i].split(') ')[1].gsub(' [Chain]','') if m[i].include?(') ')
+      p2=0
+      p2=4 if p.include?('HP')
+      p2=5 if p.include?('Strength')
+      p2=6 if p.include?('Defense')
+      if elem_stats.map{|q| q[0]}.include?(m[i].split(') ')[0].gsub('(',''))
+        p1=elem_stats.find_index{|q| q[0]==m[i].split(') ')[0].gsub('(','')}
+        elem_stats[p1][p2]+=mmm[mx][1]
+      else
+        elem_stats[0][p2]+=mmm[mx][1]
+      end
+    elsif m[i][0,4]=='HP +'
+      mx=mmm.find_index{|q| q[0]==skillname}
+      elem_stats[0][1]+=mmm[mx][1]
+    elsif m[i][0,10]=='Strength +'
+      mx=mmm.find_index{|q| q[0]==skillname}
+      elem_stats[0][2]+=mmm[mx][1]
+    elsif m[i][0,9]=='Defense +'
+      mx=mmm.find_index{|q| q[0]==skillname}
+      elem_stats[0][3]+=mmm[mx][1]
+    end
   end
-  m.sort!
+  m.sort!{|a,b| a.gsub('~~','')<=>b.gsub('~~','')}
   str=extend_message(str,'__***Calculated Chain Abilities***__',event,2)
   for i in 0...m.length
     str=extend_message(str,m[i],event)
+  end
+  if elem_stats[1,elem_stats.length-1].map{|q| q[1,q.length-1].max}.reject{|q| q<=0}.length>0
+    str=extend_message(str,'__***Calculated Buffs***__',event,2)
+    for i in 0...k6.length
+      str3=[]
+      m1=elem_stats[0].map{|q| q}
+      m2=elem_stats.find_index{|q| q[0]==k6[i][1]}
+      m2=elem_stats[m2].map{|q| q} unless m2.nil?
+      m2=['',0,0,0,0,0,0] if m2.nil?
+      m3=elem_stats.find_index{|q| q[0]==k6[i][2]}
+      m3=elem_stats[m3].map{|q| q} unless m3.nil?
+      m3=['',0,0,0,0,0,0] if m3.nil?
+      for i2 in 1...m1.length
+        m1[i2]+=m2[i2]+m3[i2]
+      end
+      m2=m1[1]+100
+      m3=m1[4]+100
+      m2=m2*m3/100.0-100
+      str3.push("<:HP:573344832307593216>+#{'%.2f' % m2}%") if m2>=1
+      m2=m1[2]+100
+      m3=m1[5]+100
+      m2=m2*m3/100.0-100
+      str3.push("<:Strength:573344931205349376>+#{'%.2f' % m2}%") if m2>=1
+      m2=m1[3]+100
+      m3=m1[6]+100
+      m2=m2*m3/100.0-100
+      str3.push("<:Defense:573344832282689567>+#{'%.2f' % m2}%") if m2>=1
+      str=extend_message(str,"**#{k6[i][3]}** - #{str3.join('  ')}",event) if str3.length>0
+    end
   end
   event.respond str
   return nil
