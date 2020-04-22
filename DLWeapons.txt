@@ -15,14 +15,14 @@ Soldier's Brand\Sword\2\None\4, 8, 15\16, 28, 54\\50, 0\14\0\0\0, 0\\\\\0
 Staff of Affection\Staff\2\None\5, 10, 18\14, 25, 49\\50, 0\15\0\0\0, 0\\\\\0
 Striker\Blade\2\None\3, 7, 13\17, 31, 59\\50, 0\16\0\0\0, 0\\\\\0
 Thief's Dagger\Dagger\2\None\4, 8, 15\15, 27, 53\\50, 0\17\0\0\0, 0\\\\\0
-Knight's Sword\Sword\3\None\7, 16, 24\25, 55, 86\\100, 0\18\0\1\500, 1000\Iron Ore, 1\\\\1
-Broadedge\Sword\3\None\10, 23, 36\42, 90, 140\Broad Cleaver\100, 0\19\18\2\2500, 5000\Iron Ore, 5;; Light Metal, 2\\\\2
-Blazing Edge\Sword\3\Flame\17, 37, 57\66, 142, 222\Blazing Cleaver\100, 0\20\19\3\15000, 30000\Granite, 10;; Light Metal, 5;; Flame Orb, 5\\\\3
-Featherblade\Sword\3\Light\17, 37, 57\66, 142, 222\Merciless Cleaver\100, 0\21\19\3\15000, 30000\Granite, 10;; Light Metal, 5;; Light Orb, 5\\\\3
-Blood Price\Sword\3\Shadow\17, 37, 57\66, 142, 222\Bloody Cleaver\100, 0\22\19\3\15000, 30000\Granite, 10;; Light Metal, 5;; Shadow Orb, 5\\\\3
-Ensorcelled Sword\Sword\3\None\10, 23, 36\42, 90, 140\Ensorcelled Slash\100, 0\23\18\2\2500, 5000\Iron Ore, 5;; Light Metal, 2\\\\2
-Rainbreaker\Sword\3\Water\17, 37, 57\66, 142, 222\Rain Slicer\100, 0\24\23\3\15000, 30000\Granite, 10;; Light Metal, 5;; Water Orb, 5\\\\3
-Grassrunner\Sword\3\Wind\17, 37, 57\66, 142, 222\Grass Slash\100, 0\25\23\3\15000, 30000\Granite, 10;; Light Metal, 5;; Wind Orb, 5\\\\3
+Knight's Sword\Sword\3\None\7, 16, 24\25, 55, 86\\100, 0\18\0\0\500, 1000\Iron Ore, 1\\\\1
+Broadedge\Sword\3\None\10, 23, 36\42, 90, 140\Broad Cleaver\100, 0\19\18\0\2500, 5000\Iron Ore, 5;; Light Metal, 2\\\\2
+Blazing Edge\Sword\3\Flame\17, 37, 57\66, 142, 222\Blazing Cleaver\100, 0\20\19\0\15000, 30000\Granite, 10;; Light Metal, 5;; Flame Orb, 5\\\\3
+Featherblade\Sword\3\Light\17, 37, 57\66, 142, 222\Merciless Cleaver\100, 0\21\19\0\15000, 30000\Granite, 10;; Light Metal, 5;; Light Orb, 5\\\\3
+Blood Price\Sword\3\Shadow\17, 37, 57\66, 142, 222\Bloody Cleaver\100, 0\22\19\0\15000, 30000\Granite, 10;; Light Metal, 5;; Shadow Orb, 5\\\\3
+Ensorcelled Sword\Sword\3\None\10, 23, 36\42, 90, 140\Ensorcelled Slash\100, 0\23\18\0\2500, 5000\Iron Ore, 5;; Light Metal, 2\\\\2
+Rainbreaker\Sword\3\Water\17, 37, 57\66, 142, 222\Rain Slicer\100, 0\24\23\0\15000, 30000\Granite, 10;; Light Metal, 5;; Water Orb, 5\\\\3
+Grassrunner\Sword\3\Wind\17, 37, 57\66, 142, 222\Grass Slash\100, 0\25\23\0\15000, 30000\Granite, 10;; Light Metal, 5;; Wind Orb, 5\\\\3
 Knights' Grace\Sword\4\None\17, 47, 58\62, 166, 208\\500, 0\26\0\4\4000, 8000\Iron Ore, 3;; Granite, 2\\\\1
 Blade of Glory\Sword\4\None\21, 57, 71\83, 222, 278\Glorious Wave\500, 0\27\26\5\20000, 40000\Granite, 20;; Meteorite, 5;; Abyss Stone, 2\\\\2
 Crimson Cry\Sword\4\Flame\27, 74, 92\108, 289, 362\Crimson Wave\500, 0\28\27\6\120000, 240000\Meteorite, 30;; Abyss Stone, 10;; Vermilion Insignia, 50\\\\3
@@ -41,12 +41,12 @@ Durandal\Sword\5\Wind\47, 136, 158\157, 450, 524\Heroic Epic\1500, 0\40\39\9\900
 Dainsleif\Sword\5\Shadow\47, 136, 158\157, 450, 524\Eternal Strife\1500, 0\41\39\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Sword Tablet, 100;; Twinkling Sand, 2;; Royal Violet Insignia, 200\\\\3
 Subjugator\Blade\3\None\6, 13, 20\28, 61, 94\\100, 0\42\0\1\500, 1000\Iron Ore, 1\\\\1
 Fusion Blade\Blade\3\None\9, 21, 33\43, 93, 144\Fusion Wave\100, 0\43\42\2\2500, 5000\Iron Ore, 5;; Light Metal, 2\\\\2
-Valkaheim Blade\Blade\3\Flame\15, 34, 53\68, 147, 229\Valkan Wave\100, 0\44\43\3\15000, 30000\Granite, 10;; Light Metal, 5;; Flame Orb, 5\\\\3
-Alighting Butterfly\Blade\3\Water\15, 34, 53\68, 147, 229\Butterfly Strike\100, 0\45\43\3\15000, 30000\Granite, 10;; Light Metal, 5;; Water Orb, 5\\\\3
-High Shamshir\Blade\3\None\9, 21, 32\44, 96, 149\Shamshir Strike\100, 0\46\42\2\2500, 5000\Iron Ore, 5;; Light Metal, 2\\\\2
-Dragon Commander\Blade\3\Wind\15, 33, 50\70, 151, 236\Commander's Blitz\100, 0\47\46\3\15000, 30000\Granite, 10;; Light Metal, 5;; Wind Orb, 5\\\\3
-Chanzelian Blade\Blade\3\Light\15, 33, 50\70, 151, 236\Chanzelian Strike\100, 0\48\46\3\15000, 30000\Granite, 10;; Light Metal, 5;; Light Orb, 5\\\\3
-Sanguine Rain\Blade\3\Shadow\15, 33, 50\70, 151, 236\Sanguine Blitz\100, 0\49\46\3\15000, 30000\Granite, 10;; Light Metal, 5;; Shadow Orb, 5\\\\3
+Valkaheim Blade\Blade\3\Flame\15, 34, 53\68, 147, 229\Valkan Wave\100, 0\44\43\0\15000, 30000\Granite, 10;; Light Metal, 5;; Flame Orb, 5\\\\3
+Alighting Butterfly\Blade\3\Water\15, 34, 53\68, 147, 229\Butterfly Strike\100, 0\45\43\0\15000, 30000\Granite, 10;; Light Metal, 5;; Water Orb, 5\\\\3
+High Shamshir\Blade\3\None\9, 21, 32\44, 96, 149\Shamshir Strike\100, 0\46\42\0\2500, 5000\Iron Ore, 5;; Light Metal, 2\\\\2
+Dragon Commander\Blade\3\Wind\15, 33, 50\70, 151, 236\Commander's Blitz\100, 0\47\46\0\15000, 30000\Granite, 10;; Light Metal, 5;; Wind Orb, 5\\\\3
+Chanzelian Blade\Blade\3\Light\15, 33, 50\70, 151, 236\Chanzelian Strike\100, 0\48\46\0\15000, 30000\Granite, 10;; Light Metal, 5;; Light Orb, 5\\\\3
+Sanguine Rain\Blade\3\Shadow\15, 33, 50\70, 151, 236\Sanguine Blitz\100, 0\49\46\0\15000, 30000\Granite, 10;; Light Metal, 5;; Shadow Orb, 5\\\\3
 Guardian Seal\Blade\4\None\14, 39, 48\68, 181, 227\\500, 0\50\0\4\4000, 8000\Iron Ore, 3;; Granite, 2\\\\1
 Iron Blade\Blade\4\None\20, 55, 69\83, 222, 278\Iron's Protection\500, 0\51\50\5\20000, 40000\Granite, 20;; Meteorite, 5;; Abyss Stone, 2\\\\2
 Flametongue\Blade\4\Flame\27, 72, 90\108, 288, 361\Flame's Protection\500, 0\52\51\6\120000, 240000\Meteorite, 30;; Abyss Stone, 10;; Vermilion Insignia, 50\\\\3
@@ -64,14 +64,14 @@ Maar Oasis\Blade\5\Water\42, 123, 143\163, 468, 544\Maar's Recovery\1500, 0\63\6
 Heavenwing\Blade\5\Light\42, 123, 143\163, 468, 544\Winged Blessing\1500, 0\64\62\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Blade Tablet, 100;; Twinkling Sand, 2;; Royal Amber Insignia, 200\\\\3
 Souleater\Blade\5\None\30, 89, 103\144, 415, 483\Souleater's Feast\1500, 0\65\58\8\150000, 750000\Granite, 150;; Meteorite, 50;; Crimson Core, 20;; Blade Tablet, 20;; Twinkling Sand, 1\\\\2
 Blackwing\Blade\5\Shadow\37, 108, 125\177, 507, 590\Black Dance\1500, 0\66\65\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Blade Tablet, 100;; Twinkling Sand, 2;; Royal Violet Insignia, 200\\\\3
-Bejeweled Dagger\Dagger\3\None\7, 16, 24\25, 54, 84\\100, 0\67\0\1\500, 1000\Fiend's Claw, 1\\\\1
-Gear Knife\Dagger\3\None\11, 25, 38\39, 85, 133\Ancient Assault\100, 0\68\67\2\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\\\\2
-Cruel Kukri\Dagger\3\Flame\19, 41, 64\61, 132, 205\Cruel Assault\100, 0\69\68\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Flame Orb, 5\\\\3
-Conscience\Dagger\3\Light\19, 41, 64\61, 132, 205\Royal Assault\100, 0\70\68\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Light Orb, 5\\\\3
-Lover's Ally\Dagger\3\None\12, 26, 40\38, 83, 129\Lover's Strike\100, 0\71\67\2\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\\\\2
-Water Dagger\Dagger\3\Water\18, 39, 61\63, 136, 212\Water Chain\100, 0\72\71\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Water Orb, 5\\\\3
-Stormspawn\Dagger\3\Wind\18, 39, 61\63, 136, 212\Storm Chain\100, 0\73\71\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Wind Orb, 5\\\\3
-Assassin's Knife\Dagger\3\Shadow\18, 39, 61\63, 136, 212\Assassin Strike\100, 0\74\71\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Shadow Orb, 5\\\\3
+Bejeweled Dagger\Dagger\3\None\7, 16, 24\25, 54, 84\\100, 0\67\0\0\500, 1000\Fiend's Claw, 1\\\\1
+Gear Knife\Dagger\3\None\11, 25, 38\39, 85, 133\Ancient Assault\100, 0\68\67\0\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\\\\2
+Cruel Kukri\Dagger\3\Flame\19, 41, 64\61, 132, 205\Cruel Assault\100, 0\69\68\0\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Flame Orb, 5\\\\3
+Conscience\Dagger\3\Light\19, 41, 64\61, 132, 205\Royal Assault\100, 0\70\68\0\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Light Orb, 5\\\\3
+Lover's Ally\Dagger\3\None\12, 26, 40\38, 83, 129\Lover's Strike\100, 0\71\67\0\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\\\\2
+Water Dagger\Dagger\3\Water\18, 39, 61\63, 136, 212\Water Chain\100, 0\72\71\0\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Water Orb, 5\\\\3
+Stormspawn\Dagger\3\Wind\18, 39, 61\63, 136, 212\Storm Chain\100, 0\73\71\0\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Wind Orb, 5\\\\3
+Assassin's Knife\Dagger\3\Shadow\18, 39, 61\63, 136, 212\Assassin Strike\100, 0\74\71\0\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Shadow Orb, 5\\\\3
 Hardbreaker\Dagger\4\None\17, 47, 58\61, 163, 204\\500, 0\75\0\4\4000, 8000\Fiend's Claw, 3;; Fiend's Horn, 2\\\\1
 The Dreamer's Greatsword\Dagger\4\None\21, 58, 72\81, 218, 273\Dreamer's Spiral\500, 0\76\75\5\20000, 40000\Fiend's Horn, 20;; Fiend's Eye, 5;; Abyss Stone, 2\\\\2
 Scarlet Talon\Dagger\4\Flame\27, 74, 93\106, 283, 354\Scarlet Spiral\500, 0\77\76\6\120000, 240000\Fiend's Eye, 30;; Abyss Stone, 10;; Vermilion Insignia, 50\\\\3
@@ -88,14 +88,14 @@ Honor Edge\Dagger\5\Shadow\43, 124, 144\163, 468, 545\Unwavering Assault\1500, 0
 Hedgehog\Dagger\5\None\37, 107, 124\130, 373, 434\Hedgehog's Strength\1500, 0\88\83\8\150000, 750000\Fiend's Horn, 150;; Fiend's Eye, 50;; Crimson Core, 20;; Dagger Tablet, 20;; Twinkling Sand, 1\\\\2
 Lux Lamina\Dagger\5\Water\45, 131, 152\158, 455, 529\Cobalt Strength\1500, 0\89\88\9\900000, 4500000\Fiend's Eye, 150;; Crimson Core, 30;; Dagger Tablet, 100;; Twinkling Sand, 2;; Royal Azure Insignia, 200\\\\3
 Thunderblade Sugaar\Dagger\5\Light\45, 131, 152\158, 455, 529\Sugaar's Strength\1500, 0\90\88\9\900000, 4500000\Fiend's Eye, 150;; Crimson Core, 30;; Dagger Tablet, 100;; Twinkling Sand, 2;; Royal Amber Insignia, 200\\\\3
-Warrior's Axe\Axe\3\None\7, 17, 26\26, 56, 87\\100, 0\91\0\1\500, 1000\Iron Ore, 1\\\\1
-Ennobled Axe\Axe\3\None\11, 24, 37\44, 95, 147\Ennobled Impact\100, 0\92\91\2\2500, 5000\Iron Ore, 5;; Light Metal, 2\\\\2
-Argent Battleaxe\Axe\3\Flame\17, 38, 59\70, 150, 234\Argent Impact\100, 0\93\92\3\15000, 30000\Granite, 10;; Light Metal, 5;; Flame Orb, 5\\\\3
-Axe of the Waves\Axe\3\Water\17, 38, 59\70, 150, 234\Torrential Impact\100, 0\94\92\3\15000, 30000\Granite, 10;; Light Metal, 5;; Water Orb, 5\\\\3
-Juggernaut (Weapon)\Axe\3\None\12, 27, 41\41, 89, 139\Juggernaut's Swing\100, 0\95\91\2\2500, 5000\Iron Ore, 5;; Light Metal, 2\\\\2
-Singing Cyclone\Axe\3\Wind\19, 42, 65\66, 142, 220\Cyclonic Swing\100, 0\96\95\3\15000, 30000\Granite, 10;; Light Metal, 5;; Wind Orb, 5\\\\3
-Flash Axe\Axe\3\Light\19, 42, 65\66, 142, 220\Flash Swing\100, 0\97\95\3\15000, 30000\Granite, 10;; Light Metal, 5;; Light Orb, 5\\\\3
-Soulreaver\Axe\3\Shadow\19, 42, 65\66, 142, 220\Reaving Swing\100, 0\98\95\3\15000, 30000\Granite, 10;; Light Metal, 5;; Shadow Orb, 5\\\\3
+Warrior's Axe\Axe\3\None\7, 17, 26\26, 56, 87\\100, 0\91\0\0\500, 1000\Iron Ore, 1\\\\1
+Ennobled Axe\Axe\3\None\11, 24, 37\44, 95, 147\Ennobled Impact\100, 0\92\91\0\2500, 5000\Iron Ore, 5;; Light Metal, 2\\\\2
+Argent Battleaxe\Axe\3\Flame\17, 38, 59\70, 150, 234\Argent Impact\100, 0\93\92\0\15000, 30000\Granite, 10;; Light Metal, 5;; Flame Orb, 5\\\\3
+Axe of the Waves\Axe\3\Water\17, 38, 59\70, 150, 234\Torrential Impact\100, 0\94\92\0\15000, 30000\Granite, 10;; Light Metal, 5;; Water Orb, 5\\\\3
+Juggernaut (Weapon)\Axe\3\None\12, 27, 41\41, 89, 139\Juggernaut's Swing\100, 0\95\91\0\2500, 5000\Iron Ore, 5;; Light Metal, 2\\\\2
+Singing Cyclone\Axe\3\Wind\19, 42, 65\66, 142, 220\Cyclonic Swing\100, 0\96\95\0\15000, 30000\Granite, 10;; Light Metal, 5;; Wind Orb, 5\\\\3
+Flash Axe\Axe\3\Light\19, 42, 65\66, 142, 220\Flash Swing\100, 0\97\95\0\15000, 30000\Granite, 10;; Light Metal, 5;; Light Orb, 5\\\\3
+Soulreaver\Axe\3\Shadow\19, 42, 65\66, 142, 220\Reaving Swing\100, 0\98\95\0\15000, 30000\Granite, 10;; Light Metal, 5;; Shadow Orb, 5\\\\3
 Plain Axe\Axe\4\None\18, 50, 62\63, 169, 212\\500, 0\99\0\4\4000, 8000\Iron Ore, 3;; Granite, 2\\\\1
 The Tyrant\Axe\4\None\21, 58, 73\87, 233, 292\Tyrant Swing\500, 0\100\99\5\20000, 40000\Granite, 20;; Meteorite, 5;; Abyss Stone, 2\\\\2
 Crimsonclaw\Axe\4\Flame\28, 76, 95\114, 303, 380\Crimson Swing\500, 0\101\100\6\120000, 240000\Meteorite, 30;; Abyss Stone, 10;; Vermilion Insignia, 50\\\\3
@@ -112,14 +112,14 @@ Primordial Titan\Axe\5\Shadow\46, 133, 155\170, 487, 567\Primordial Boost\1500, 
 Executioner Axe Strafe\Axe\5\None\36, 104, 120\143, 412, 479\Executioner's Impact\1500, 0\112\107\8\150000, 750000\Granite, 150;; Meteorite, 50;; Crimson Core, 20;; Axe Tablet, 20;; Twinkling Sand, 1\\\\2
 Grand Seadragon\Axe\5\Water\44, 127, 147\175, 502, 584\Seadragon's Impact\1500, 0\113\112\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Axe Tablet, 100;; Twinkling Sand, 2;; Royal Azure Insignia, 200\\\\3
 Axe of the Southern Cross\Axe\5\Wind\44, 127, 147\175, 502, 584\Southern Impact\1500, 0\114\112\9\900000, 4500000\Meteorite, 150;; Crimson Core, 30;; Axe Tablet, 100;; Twinkling Sand, 2;; Royal Jade Insignia, 200\\\\3
-Trident\Lance\3\None\7, 16, 24\26, 56, 87\\100, 0\115\0\1\500, 1000\Fiend's Claw, 1\\\\1
-Drill Lance\Lance\3\None\11, 24, 37\42, 92, 143\Spiralling Descent\100, 0\116\115\2\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\\\\2
-Unsung Hero's Lance\Lance\3\Flame\17, 37, 58\68, 146, 227\Hero's Descent\100, 0\117\116\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Flame Orb, 5\\\\3
-Gale Spear\Lance\3\Wind\17, 37, 58\68, 146, 227\Gale's Descent\100, 0\118\116\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Wind Orb, 5\\\\3
-Mailbreaker\Lance\3\None\11, 25, 39\41, 89, 139\Shattering Whirlwind\100, 0\119\115\2\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\\\\2
-Azure Jewel\Lance\3\Water\18, 39, 61\66, 142, 220\Azure Whirlwind\100, 0\120\119\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Water Orb, 5\\\\3
-Moonpiercer\Lance\3\Light\18, 39, 61\66, 142, 220\Lunar Whirlwind\100, 0\121\119\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Light Orb, 5\\\\3
-Lance of the Dark\Lance\3\Shadow\18, 39, 61\66, 142, 220\Dark Whirlwind\100, 0\122\119\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Shadow Orb, 5\\\\3
+Trident\Lance\3\None\7, 16, 24\26, 56, 87\\100, 0\115\0\0\500, 1000\Fiend's Claw, 1\\\\1
+Drill Lance\Lance\3\None\11, 24, 37\42, 92, 143\Spiralling Descent\100, 0\116\115\0\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\\\\2
+Unsung Hero's Lance\Lance\3\Flame\17, 37, 58\68, 146, 227\Hero's Descent\100, 0\117\116\0\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Flame Orb, 5\\\\3
+Gale Spear\Lance\3\Wind\17, 37, 58\68, 146, 227\Gale's Descent\100, 0\118\116\0\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Wind Orb, 5\\\\3
+Mailbreaker\Lance\3\None\11, 25, 39\41, 89, 139\Shattering Whirlwind\100, 0\119\115\0\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\\\\2
+Azure Jewel\Lance\3\Water\18, 39, 61\66, 142, 220\Azure Whirlwind\100, 0\120\119\0\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Water Orb, 5\\\\3
+Moonpiercer\Lance\3\Light\18, 39, 61\66, 142, 220\Lunar Whirlwind\100, 0\121\119\0\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Light Orb, 5\\\\3
+Lance of the Dark\Lance\3\Shadow\18, 39, 61\66, 142, 220\Dark Whirlwind\100, 0\122\119\0\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Shadow Orb, 5\\\\3
 Strong Halberd\Lance\4\None\17, 47, 59\63, 169, 212\\500, 0\123\0\4\4000, 8000\Fiend's Claw, 3;; Fiend's Horn, 2\\\\1
 Lance of the Innocent\Lance\4\None\22, 61, 76\82, 220, 276\Sharp Focus\500, 0\124\123\5\20000, 40000\Fiend's Horn, 20;; Fiend's Eye, 5;; Abyss Stone, 2\\\\2
 Flameserpent\Lance\4\Flame\29, 79, 99\107, 286, 358\Way of the Serpent\500, 0\125\124\6\120000, 240000\Fiend's Eye, 30;; Abyss Stone, 10;; Vermilion Insignia, 50\\\\3
@@ -136,14 +136,14 @@ Mistilteinn\Lance\5\Shadow\43, 125, 145\170, 487, 567\Heaven's Mistletoe\1500, 0
 Gae Bolg\Lance\5\None\40, 116, 135\128, 369, 429\Accursed Healing\1500, 0\136\131\8\150000, 750000\Fiend's Horn, 150;; Fiend's Eye, 50;; Crimson Core, 20;; Lance Tablet, 20;; Twinkling Sand, 1\\\\2
 Ocean Lord\Lance\5\Water\49, 142, 165\156, 449, 523\Ocean's Healing\1500, 0\137\136\9\900000, 4500000\Fiend's Eye, 150;; Crimson Core, 30;; Lance Tablet, 100;; Twinkling Sand, 2;; Royal Azure Insignia, 200\\\\3
 Spear of the Northern Cross\Lance\5\Wind\49, 142, 165\156, 449, 523\Northern Healing\1500, 0\138\136\9\900000, 4500000\Fiend's Eye, 150;; Crimson Core, 30;; Lance Tablet, 100;; Twinkling Sand, 2;; Royal Jade Insignia, 200\\\\3
-Composite Bow\Bow\3\None\6, 15, 23\24, 53, 82\\100, 0\139\0\1\500, 1000\Fiend's Claw, 1\\\\1
-Machine Bow\Bow\3\None\10, 23, 35\40, 87, 135\Mechanical Volley\100, 0\140\139\2\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\\\\2
-Flightfyre\Bow\3\Flame\16, 36, 56\64, 138, 214\Flare Volley\100, 0\141\140\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Flame Orb, 5\\\\3
-Proof of the Wind\Bow\3\Wind\16, 36, 56\64, 138, 214\Wind Volley\100, 0\142\140\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Wind Orb, 5\\\\3
-Galvanic Bow\Bow\3\Light\16, 36, 56\64, 138, 214\Galvanic Volley\100, 0\143\140\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Light Orb, 5\\\\3
-Hunter's Bow\Bow\3\None\11, 24, 37\39, 84, 131\Hunter's Strength\100, 0\144\139\2\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\\\\2
-Tidal Bow\Bow\3\Water\17, 38, 59\62, 133, 207\Tidal Strength\100, 0\145\144\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Water Orb, 5\\\\3
-Cimmerian Bow\Bow\3\Shadow\17, 38, 59\62, 133, 207\Cimmerian Strength\100, 0\146\144\3\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Shadow Orb, 5\\\\3
+Composite Bow\Bow\3\None\6, 15, 23\24, 53, 82\\100, 0\139\0\0\500, 1000\Fiend's Claw, 1\\\\1
+Machine Bow\Bow\3\None\10, 23, 35\40, 87, 135\Mechanical Volley\100, 0\140\139\0\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\\\\2
+Flightfyre\Bow\3\Flame\16, 36, 56\64, 138, 214\Flare Volley\100, 0\141\140\0\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Flame Orb, 5\\\\3
+Proof of the Wind\Bow\3\Wind\16, 36, 56\64, 138, 214\Wind Volley\100, 0\142\140\0\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Wind Orb, 5\\\\3
+Galvanic Bow\Bow\3\Light\16, 36, 56\64, 138, 214\Galvanic Volley\100, 0\143\140\0\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Light Orb, 5\\\\3
+Hunter's Bow\Bow\3\None\11, 24, 37\39, 84, 131\Hunter's Strength\100, 0\144\139\0\2500, 5000\Fiend's Claw, 5;; Light Metal, 2\\\\2
+Tidal Bow\Bow\3\Water\17, 38, 59\62, 133, 207\Tidal Strength\100, 0\145\144\0\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Water Orb, 5\\\\3
+Cimmerian Bow\Bow\3\Shadow\17, 38, 59\62, 133, 207\Cimmerian Strength\100, 0\146\144\0\15000, 30000\Fiend's Horn, 10;; Light Metal, 5;; Shadow Orb, 5\\\\3
 Executor\Bow\4\None\16, 45, 56\60, 160, 200\\500, 0\147\0\4\4000, 8000\Fiend's Claw, 3;; Fiend's Horn, 2\\\\1
 Faerie Bow\Bow\4\None\21, 56, 70\80, 213, 267\Faerie Smash\500, 0\148\147\5\20000, 40000\Fiend's Horn, 20;; Fiend's Eye, 5;; Abyss Stone, 2\\\\2
 Armored Inferno\Bow\4\Flame\27, 72, 90\104, 277, 347\Infernal Smash\500, 0\149\148\6\120000, 240000\Fiend's Eye, 30;; Abyss Stone, 10;; Vermilion Insignia, 50\\\\3
@@ -161,14 +161,14 @@ Accelerator\Bow\5\None\34, 99, 115\131, 376, 438\Midair Buster\1500, 0\160\155\8
 Thunderbow\Bow\5\Light\42, 121, 140\160, 459, 534\Divine Thunder\1500, 0\161\160\9\900000, 4500000\Fiend's Eye, 150;; Crimson Core, 30;; Bow Tablet, 100;; Twinkling Sand, 2;; Royal Amber Insignia, 200\\\\3
 Starchaser\Bow\5\None\34, 99, 115\131, 376, 438\Star Volley\1500, 0\162\155\8\150000, 750000\Fiend's Horn, 150;; Fiend's Eye, 50;; Crimson Core, 20;; Bow Tablet, 20;; Twinkling Sand, 1\\\\2
 Necro Arcus\Bow\5\Shadow\42, 121, 140\160, 459, 534\Necro Volley\1500, 0\163\162\9\900000, 4500000\Fiend's Eye, 150;; Crimson Core, 30;; Bow Tablet, 100;; Twinkling Sand, 2;; Royal Violet Insignia, 200\\\\3
-Wizard's Rod\Wand\3\None\6, 14, 21\27, 59, 91\\100, 0\164\0\1\500, 1000\Bat's Wing, 1\\\\1
-Conchoidal Rod\Wand\3\None\10, 23, 36\42, 90, 140\Conchoidal Blast\100, 0\165\164\2\2500, 5000\Bat's Wing, 5;; Light Metal, 2\\\\2
-Sunrise Scepter\Wand\3\Flame\16, 36, 56\66, 142, 222\Sunrise Blast\100, 0\166\165\3\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Flame Orb, 5\\\\3
-Oceandweller\Wand\3\Water\16, 36, 56\66, 142, 222\Ocean Blast\100, 0\167\166\3\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Water Orb, 5\\\\3
-Meggidoth Ruiner\Wand\3\Shadow\16, 36, 56\66, 142, 222\Dark Discharge\100, 0\168\166\3\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Shadow Orb, 5\\\\3
-Sorcerer's Cudgel\Wand\3\None\10, 22, 34\43, 93, 144\Sorcerer's Blast\100, 0\169\165\2\2500, 5000\Bat's Wing, 5;; Light Metal, 2\\\\2
-Menace of the Storm\Wand\3\Wind\16, 35, 54\68, 147, 229\Storm Discharge\100, 0\170\169\3\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Wind Orb, 5\\\\3
-Thunder Wand\Wand\3\Light\16, 35, 54\68, 147, 229\Electrical Discharge\100, 0\171\169\3\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Light Orb, 5\\\\3
+Wizard's Rod\Wand\3\None\6, 14, 21\27, 59, 91\\100, 0\164\0\0\500, 1000\Bat's Wing, 1\\\\1
+Conchoidal Rod\Wand\3\None\10, 23, 36\42, 90, 140\Conchoidal Blast\100, 0\165\164\0\2500, 5000\Bat's Wing, 5;; Light Metal, 2\\\\2
+Sunrise Scepter\Wand\3\Flame\16, 36, 56\66, 142, 222\Sunrise Blast\100, 0\166\165\0\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Flame Orb, 5\\\\3
+Oceandweller\Wand\3\Water\16, 36, 56\66, 142, 222\Ocean Blast\100, 0\167\166\0\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Water Orb, 5\\\\3
+Meggidoth Ruiner\Wand\3\Shadow\16, 36, 56\66, 142, 222\Dark Discharge\100, 0\168\166\0\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Shadow Orb, 5\\\\3
+Sorcerer's Cudgel\Wand\3\None\10, 22, 34\43, 93, 144\Sorcerer's Blast\100, 0\169\165\0\2500, 5000\Bat's Wing, 5;; Light Metal, 2\\\\2
+Menace of the Storm\Wand\3\Wind\16, 35, 54\68, 147, 229\Storm Discharge\100, 0\170\169\0\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Wind Orb, 5\\\\3
+Thunder Wand\Wand\3\Light\16, 35, 54\68, 147, 229\Electrical Discharge\100, 0\171\169\0\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Light Orb, 5\\\\3
 Latchkey\Wand\4\None\15, 41, 51\66, 177, 221\\500, 0\172\0\4\4000, 8000\Bat's Wing, 3;; Ancient Bird's Feather, 2\\\\1
 Rod of Alchemy\Wand\4\None\20, 54, 67\86, 229, 287\Alchemic Discharge\500, 0\173\172\5\20000, 40000\Ancient Bird's Feather, 20;; Bewitching Wings, 5;; Abyss Stone, 2\\\\2
 Firefiend's Howl\Wand\4\Flame\26, 70, 87\111, 297, 372\Firefiend's Discharge\500, 0\174\173\6\120000, 240000\Bewitching Wings, 30;; Abyss Stone, 10;; Vermilion Insignia, 50\\\\3
@@ -185,14 +185,14 @@ Underworld Despair\Wand\5\Shadow\45, 131, 152\158, 454, 528\Persephone's Healing
 Welkin Wand\Wand\5\None\33, 95, 110\141, 404, 470\Welkin Blast\1500, 0\185\180\8\150000, 750000\Ancient Bird's Feather, 150;; Bewitching Wings, 50;; Crimson Core, 20;; Wand Tablet, 20;; Twinkling Sand, 1\\\\2
 Ocean Monarch\Wand\5\Water\40, 116, 134\171, 492, 573\Monarch's Blast\1500, 0\186\185\9\900000, 4500000\Bewitching Wings, 150;; Crimson Core, 30;; Wand Tablet, 100;; Twinkling Sand, 2;; Royal Azure Insignia, 200\\\\3
 Twilight Shimmer\Wand\5\Light\40, 116, 134\171, 492, 573\Twilight Blast\1500, 0\187\185\9\900000, 4500000\Bewitching Wings, 150;; Crimson Core, 30;; Wand Tablet, 100;; Twinkling Sand, 2;; Royal Amber Insignia, 200\\\\3
-Staff of Grace\Staff\3\None\8, 18, 28\23, 50, 77\\100, 0\188\0\1\500, 1000\Bat's Wing, 1\\\\1
-Staff of the Horned Snake\Staff\3\None\12, 27, 42\38, 83, 129\Horned Circle\100, 0\189\188\2\2500, 5000\Bat's Wing, 5;; Light Metal, 2\\\\2
-Staff of Punishing Flame\Staff\3\Flame\19, 42, 66\61, 132, 205\Flame Circle\100, 0\190\189\3\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Flame Orb, 5\\\\3
-Scendecipher\Staff\3\Water\19, 42, 66\61, 132, 205\Tidal Circle\100, 0\191\189\3\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Water Orb, 5\\\\3
-Long Ankh\Staff\3\None\13, 29, 44\37, 80, 125\Ankh's Protection\100, 0\192\188\2\2500, 5000\Bat's Wing, 5;; Light Metal, 2\\\\2
-Windreader\Staff\3\Wind\20, 44, 69\59, 128, 199\Wind's Protection\100, 0\193\192\3\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Wind Orb, 5\\\\3
-Astrolabe\Staff\3\Light\20, 44, 69\59, 128, 199\Astro Protection\100, 0\194\192\3\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Light Orb, 5\\\\3
-Meggidoth Wisp\Staff\3\Shadow\20, 44, 69\59, 128, 199\Meggidoth's Protection\100, 0\195\192\3\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Shadow Orb, 5\\\\3
+Staff of Grace\Staff\3\None\8, 18, 28\23, 50, 77\\100, 0\188\0\0\500, 1000\Bat's Wing, 1\\\\1
+Staff of the Horned Snake\Staff\3\None\12, 27, 42\38, 83, 129\Horned Circle\100, 0\189\188\0\2500, 5000\Bat's Wing, 5;; Light Metal, 2\\\\2
+Staff of Punishing Flame\Staff\3\Flame\19, 42, 66\61, 132, 205\Flame Circle\100, 0\190\189\0\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Flame Orb, 5\\\\3
+Scendecipher\Staff\3\Water\19, 42, 66\61, 132, 205\Tidal Circle\100, 0\191\189\0\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Water Orb, 5\\\\3
+Long Ankh\Staff\3\None\13, 29, 44\37, 80, 125\Ankh's Protection\100, 0\192\188\0\2500, 5000\Bat's Wing, 5;; Light Metal, 2\\\\2
+Windreader\Staff\3\Wind\20, 44, 69\59, 128, 199\Wind's Protection\100, 0\193\192\0\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Wind Orb, 5\\\\3
+Astrolabe\Staff\3\Light\20, 44, 69\59, 128, 199\Astro Protection\100, 0\194\192\0\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Light Orb, 5\\\\3
+Meggidoth Wisp\Staff\3\Shadow\20, 44, 69\59, 128, 199\Meggidoth's Protection\100, 0\195\192\0\15000, 30000\Ancient Bird's Feather, 10;; Light Metal, 5;; Shadow Orb, 5\\\\3
 Staff of Life\Staff\4\None\20, 55, 68\56, 150, 188\\500, 0\196\0\4\4000, 8000\Bat's Wing, 3;; Ancient Bird's Feather, 2\\\\1
 Beauty's Balm\Staff\4\None\26, 71, 89\73, 195, 244\Beautiful Healing\500, 0\197\196\5\20000, 40000\Ancient Bird's Feather, 20;; Bewitching Wings, 5;; Abyss Stone, 2\\\\2
 Ark Voyager\Staff\4\Flame\34, 92, 115\95, 253, 317\Ark Healing\500, 0\198\197\6\120000, 240000\Bewitching Wings, 30;; Abyss Stone, 10;; Vermilion Insignia, 50\\\\3
@@ -211,7 +211,7 @@ Light of Judgment\Staff\5\Light\49, 142, 165\153, 441, 513\Judgment Circle\1500,
 Caduceus\Staff\5\Shadow\49, 142, 165\153, 441, 513\Herald's Circle\1500, 0\211\209\9\900000, 4500000\Bewitching Wings, 150;; Crimson Core, 30;; Staff Tablet, 100;; Twinkling Sand, 2;; Royal Violet Insignia, 200\\\\3
 Jack-o'-Lance\Lance\3s\Light\16, 35, 55\59, 127, 198\Pumpkin Barrage\100, 0\212\0\0\0, 0\\\\\
 Vampire's Lantern\Staff\3s\Light\17, 38, 59\55, 119, 185\Vampire's Treat\100, 0\213\0\0\0, 0\\\\\
-Lucky Hanetsuki Paddle\Sword\5$\None\31, 91, 106\105, 302, 351\Happiness Spike\1500, 0\214\0\0\0, 0\\\\\
+Lucky Hanetsuki Paddle\Sword\5\None\31, 91, 106\105, 302, 351\Happiness Spike\1500, 0\214\0\0\0, 0\\\\\
 Ashchant\Staff\4v\Flame\21, 57, 71\58, 156, 195\\500, 0\215\234\2\90000, 180000\Ancient Bird's Feather, 10;; Bewitching Wings, 3;; Golem Core, 1;; Inferno Orb, 2\(Flame) HP 70% = Defense +5%;;;; (Flame) Dull Res\\Steel Golem\3
 Aurachant\Staff\3v\None\7, 17, 26\24, 52, 81\\100, 0\216\0\1\1000, 2000\Bat's Wing, 3;; Ancient Bird's Feather, 1;; Steel Slab, 1\HP 70% = Defense +3%\\\1
 Aureole Apogee\Sword\5v\Light\27, 79, 92\108, 311, 362\\1500, 0\217\251\5\300000, 600000\Granite, 15;; Meteorite, 5;; Zephyr Rune, 2;; Refulgence Orb, 3\(Light) Skill Prep +50%;;;; (Light) Stunned Punisher +15%\\Zephyr\3
@@ -364,7 +364,7 @@ Vermillion Pain\Dagger\5v\Flame\27, 80, 93\106, 304, 354\\1500, 0\363\352\5\3000
 Vulcan\Bow\4v\Flame\23, 62, 77\75, 201, 252\\500, 0\364\336\2\50000, 100000\Fiend's Horn, 7;; Fiend's Eye, 3;; Great Feather, 5;; Inferno Orb, 1\(Flame) Skill Prep +25%;;;; (Flame) High Midgardsormr's Bane +30%\\Void Zephyr\2
 Vulcanrage\Bow\5v\Flame\30, 86, 100\98, 281, 327\\1500, 0\365\364\5\300000, 600000\Fiend's Horn, 15;; Fiend's Eye, 5;; Zephyr Rune, 2;; Inferno Orb, 3\(Flame) Skill Prep +50%;;;; (Flame) High Midgardsormr's Bane +30%\\Void Zephyr\3
 Wildhaze\Blade\4v\None\15, 42, 53\64, 171, 214\\500, 0\366\0\2\8000, 16000\Iron Ore, 5;; Granite, 2;; Blazing Horn, 2\Full HP = Defense +15%\\Void Agni\1
-Folkvangr\Sword\5w\Light\30, 87, 101\108, 311, 362\\0, 0\367\0\3\300, 4000\\HP Below 50% = Strength +15%\FEH\\
+Folkvangr\Sword\5c\Light\30, 87, 101\108, 311, 362\\0, 0\367\0\3\300, 4000\\HP Below 50% = Strength +15%\FEH\\
 Aero Agony\Dagger\4v\Wind\21, 58, 72\81, 218, 273\\500, 0\368\348\4\50000, 100000\Fiend's Horn, 7;; Fiend's Eye, 3;; Great Feather, 5;; Maelstrom Orb, 1\(Wind) Skill Prep +25%;;;; (Wind) Broken Punisher +15%\\Void Zephyr\2
 Balefire Blade\Blade\3v\Flame\9, 21, 32\44, 96, 149\\100, 0\371\310\1\15000, 30000\Granite, 2;; Meteorite, 1;; Old Cloth, 1;; Floating Purple Cloth, 1;; Blaze Orb, 1\(Flame) Blinded Punisher +10%;;;; (Flame) Full HP = Strength +8%\\Violet Ghost\2
 Balefire Votive\Blade\4v\Flame\15, 40, 50\70, 188, 236\\500, 0\372\371\2\30000, 60000\Granite, 5;; Meteorite, 1;; Floating Purple Cloth, 2;; Shadowy Lantern, 1;; Inferno Orb, 1\(Flame) Blinded Punisher +15%;;;; (Flame) Full HP = Strength +8%\\Violet Ghost\3
@@ -615,7 +615,7 @@ Dimension Edge\Blade\4v\None\14, 39, 48\68, 181, 227\\0, 0\616\0\2\8000, 40000\I
 Luminous Blade\Blade\4v\Light\18, 50, 62\88, 235, 295\\0, 0\617\616\4\50000, 250000\Meteorite, 3;; Granite, 7;; Catoblepas's Hoof, 5;; Refulgence Orb, 1\(Light) HP 70% = Strength +5%;;;; (Light) Enervation Res\\Catoblepas Anemos\2
 Radiant Blade\Blade\5v\Light\24, 70, 81\114, 329, 383\\0, 0\618\617\5\300000, 1500000\Meteorite, 5;; Granite, 65;; Catoblepas's Hoof, 50;; Refulgence Orb, 3;; Catoblepas's Stormeye, 2\(Light) HP 70% = Strength +8%;;;; (Light) Enervation Res\\Catoblepas Anemos\3
 Hollow Beginning\Blade\4v\None\14, 39, 48\68, 181, 227\\0, 0\619\0\2\8000, 40000\Iron Ore, 5;; Granite, 2;; Ruinous Horn, 2\HP 70% = Defense +5%\\Void Nidhogg\1
-Hollow Creation\Blade\4v\Light\18, 50, 295\88, 235, 62\\0, 0\620\619\4\50000, 250000\Meteorite, 3;; Granite, 7;; Ruinous Horn, 5;; Refulgence Orb, 1\(Light) HP 70% = Defense +5%;;;; (Light) High Zodiark's Bane +30%\\Void Nidhogg\2
+Hollow Creation\Blade\4v\Light\18, 50, 62\88, 235, 295\\0, 0\620\619\4\50000, 250000\Meteorite, 3;; Granite, 7;; Ruinous Horn, 5;; Refulgence Orb, 1\(Light) HP 70% = Defense +5%;;;; (Light) High Zodiark's Bane +30%\\Void Nidhogg\2
 Hollow Lightning\Blade\5v\Light\24, 70, 81\114, 329, 383\\0, 0\621\620\5\300000, 1500000\Meteorite, 5;; Granite, 65;; Ruinous Horn, 50;; Refulgence Orb, 3;; Ruinous Wing, 2\(Light) HP 70% = Defense +8%;;;; (Light) High Zodiark's Bane +30%\\Void Nidhogg\3
 Spirit Claw\Dagger\4v\None\18, 50, 63\58, 155, 194\\0, 0\622\0\2\8000, 40000\Fiend's Horn, 5;; Fiend's Claw, 2;; Ruinous Horn, 2\HP 70% = Defense +5%\\Void Nidhogg\1
 Restful Claw\Dagger\4v\Light\24, 65, 81\75, 201, 252\\0, 0\623\622\4\50000, 250000\Fiend's Eye, 3;; Fiend's Claw, 7;; Ruinous Horn, 5;; Refulgence Orb, 1\(Light) HP 70% = Defense +5%;;;; (Light) High Zodiark's Bane +30%\\Void Nidhogg\2
@@ -897,3 +897,19 @@ Lance of Starry Skies\Lance\4v\Light\21, 58, 72\85, 227, 284\\500, 0\898\781\4\5
 Lance of Bright Skies\Lance\5v\Light\28, 81, 94\110, 317, 369\\1500, 0\899\898\5\300000, 600000\Fiend's Horn, 15;; Fiend's Eye, 5;; Eolian Soul, 2;; Refulgence Orb, 3\(Light) Ebon Chimera's Bane +30%;;;; (Light) Frenzy Res\\EolianPhantom\3
 Glintray Grudge\Staff\4v\Light\23, 63, 48\79, 211, 264\\500, 0\900\803\4\50000, 100000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Soul Vestiges, 5;; Refulgence Orb, 1\(Light) Ebon Chimera's Bane +20%;;;; (Light) Frenzy Res\\EolianPhantom\2
 Glintshine Grudge\Staff\5v\Light\30, 87, 101\102, 295, 343\\1500, 0\901\900\5\300000, 600000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Eolian Soul, 2;; Refulgence Orb, 3\(Light) Ebon Chimera's Bane +30%;;;; (Light) Frenzy Res\\EolianPhantom\3
+Chimeratech Saffron\Sword\5m\Wind\56, 163, 189\204, 584, 680\\1500, 0\902\0\0\400000, -\Iron Ore, 5;; Granite, 2;; Tempest Mane, 10;; Tempest Claw, 2\(Wind) Unyielding Offense +2%\\VolcanicChimera\1
+Chimeratech Cypress\Sword\5m\Wind\81, 232, 270\291, 835, 972\\1500, 0\903\902\0\900000, -\Granite, 7;; Meteorite, 3;; Tempest Mane, 25;; Tempest Mane, 10;; Tempest Horn, 3\(Wind) Unyielding Offense +2%\\TempestChimera\2
+Chimeratech Camphor\Blade\5m\Wind\28, 82, 95\222, 638, 743\\1500, 0\904\0\0\400000, -\Iron Ore, 5;; Granite, 2;; Tempest Mane, 10;; Tempest Claw, 2\(Wind) Unyielding Offense +2%\\TempestChimera\1
+Chimeratech Benzoin\Blade\5m\Wind\47, 136, 158\318, 911, 1061\\1500, 0\905\904\0\900000, -\Granite, 7;; Meteorite, 3;; Tempest Mane, 25;; Tempest Mane, 10;; Tempest Horn, 3\(Wind) Unyielding Offense +2%\\TempestChimera\2
+Chimeratech Lotus\Dagger\5m\Wind\32, 94, 109\206, 590, 687\\1500, 0\906\0\0\400000, -\Fiend's Claw, 5;; Fiend's Horn, 2;; Tempest Mane, 10;; Tempest Claw, 2\(Wind) Unyielding Offense +2%\\TempestChimera\1
+Chimeratech Tea Tree\Dagger\5m\Wind\54, 156, 181\294, 843, 981\\1500, 0\907\906\0\900000, -\Fiend's Horn, 7;; Fiend's Eye, 3;; Tempest Mane, 25;; Tempest Mane, 10;; Tempest Horn, 3\(Wind) Unyielding Offense +2%\\TempestChimera\2
+Chimeratech Spruce\Axe\5m\Wind\33, 96, 111\220, 632, 736\\1500, 0\908\0\0\400000, -\Iron Ore, 5;; Granite, 2;; Tempest Mane, 10;; Tempest Claw, 2\(Wind) Unyielding Offense +2%\\TempestChimera\1
+Chimeratech Palmarosa\Axe\5m\Wind\55, 159, 185\315, 903, 1051\\1500, 0\909\908\0\900000, -\Granite, 7;; Meteorite, 3;; Tempest Mane, 25;; Tempest Mane, 10;; Tempest Horn, 3\(Wind) Unyielding Offense +2%\\TempestChimera\2
+Chimeratech Neroli\Lance\5m\Wind\36, 104, 121\201, 578, 673\\1500, 0\910\0\0\400000, -\Fiend's Claw, 5;; Fiend's Horn, 2;; Tempest Mane, 10;; Tempest Claw, 2\(Wind) Unyielding Offense +2%\\TempestChimera\1
+Chimeratech Caraway\Lance\5m\Wind\60, 174, 202\288, 826, 962\\1500, 0\911\910\0\900000, -\Fiend's Horn, 7;; Fiend's Eye, 3;; Tempest Mane, 25;; Tempest Mane, 10;; Tempest Horn, 3\(Wind) Unyielding Offense +2%\\TempestChimera\2
+Chimeratech Inula\Bow\5m\Wind\31, 91, 106\201, 578, 673\\1500, 0\912\0\0\400000, -\Fiend's Claw, 5;; Fiend's Horn, 2;; Tempest Mane, 10;; Tempest Claw, 2\(Wind) Unyielding Offense +2%\\TempestChimera\1
+Chimeratech Ajwain\Bow\5m\Wind\52, 151, 176\288, 826, 961\\1500, 0\913\912\0\900000, -\Fiend's Horn, 7;; Fiend's Eye, 3;; Tempest Mane, 25;; Tempest Mane, 10;; Tempest Horn, 3\(Wind) Unyielding Offense +2%\\TempestChimera\2
+Chimeratech Myrrh\Wand\5m\Wind\32, 92, 107\210, 602, 701\\1500, 0\914\0\0\400000, -\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Tempest Mane, 10;; Tempest Claw, 2\(Wind) Unyielding Offense +2%\\TempestChimera\1
+Chimeratech Frankin\Wand\5m\Wind\53, 153, 178\300, 860, 1001\\1500, 0\915\914\0\900000, -\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Tempest Mane, 25;; Tempest Mane, 10;; Tempest Horn, 3\(Wind) Unyielding Offense +2%\\TempestChimera\2
+Chimeratech Sage\Staff\5m\Wind\41, 116, 135\184, 528, 614\\1500, 0\916\0\0\400000, -\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Tempest Mane, 10;; Tempest Claw, 2\(Wind) Unyielding Offense +2%\\TempestChimera\1
+Chimeratech Marjoram\Staff\5m\Wind\67, 194, 225\263, 753, 877\\1500, 0\917\916\0\900000, -\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Tempest Mane, 25;; Tempest Mane, 10;; Tempest Horn, 3\(Wind) Unyielding Offense +2%\\TempestChimera\2
