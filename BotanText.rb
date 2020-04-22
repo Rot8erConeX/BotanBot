@@ -1924,12 +1924,12 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=true)
     elem.push('Light') if ['light','lights'].include?(args[i].downcase)
     elem.push('Shadow') if ['shadow','dark','shadows','darks'].include?(args[i].downcase)
     wpn.push('Sword') if ['sword','swords'].include?(args[i].downcase)
-    wpn.push('Blade') if ['blade','blades','sabers','saber'].include?(args[i].downcase)
+    wpn.push('Blade') if ['blade','blades','sabers','saber','katana','katanas'].include?(args[i].downcase)
     wpn.push('Dagger') if ['dagger','daggers','knife','knifes','knives'].include?(args[i].downcase)
     wpn.push('Axe') if ['axes','axe'].include?(args[i].downcase)
     wpn.push('Bow') if ['bow','bows','arrow','arrows','archer','archers'].include?(args[i].downcase)
     wpn.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
-    wpn.push('Wand') if ['wand','wands'].include?(args[i].downcase)
+    wpn.push('Wand') if ['wand','wands','rod','rods'].include?(args[i].downcase)
     wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
     clzz.push('Attack') if ['attack','atk','att','attacking'].include?(args[i].downcase)
     clzz.push('Defense') if ['defense','defence','def','defending','defensive','defencive'].include?(args[i].downcase)
@@ -2688,7 +2688,7 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       args2[i]=nil unless wpn.include?('Sword')
       wpn.push('Sword')
     end
-    if ['blade','blades','sabers','saber'].include?(args[i].downcase)
+    if ['blade','blades','sabers','saber','katana','katanas'].include?(args[i].downcase)
       args2[i]=nil unless wpn.include?('Blade')
       wpn.push('Blade')
     end
@@ -2708,7 +2708,7 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       args2[i]=nil unless wpn.include?('Lance')
       wpn.push('Lance')
     end
-    if ['wand','wands'].include?(args[i].downcase)
+    if ['wand','wands','rod','rods'].include?(args[i].downcase)
       args2[i]=nil unless wpn.include?('Wand')
       wpn.push('Wand')
     end
@@ -5925,6 +5925,8 @@ def disp_alias_list(bot,event,args=nil,mode=0)
       mnm.push('Dark') if wpn[3]=='Shadow'
       mnm2=[wpn[1]]
       mnm2.push('Spear') if wpn[1]=='Lance'
+      mnm2.push('Katana') if wpn[1]=='Blade'
+      mnm2.push('Rod') if wpn[1]=='Wand'
       lists=get_lookout_tags().reject{|q| q[2]!='Availability/Weapon'}.map{|q| [q[3],q[1]]}
       for i in 0...mnm.length
         for i2 in 0...mnm2.length
