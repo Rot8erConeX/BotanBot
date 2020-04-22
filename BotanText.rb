@@ -2235,6 +2235,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
     for i2 in 0...lookout5.length
       races.push(lookout5[i2][0]) if lookout5[i2][1].include?(args[i].downcase)
     end
+    races.push('Spiralian') if ['mana','spiral','manaspiral','70','70node','70mc','70ms'].include?(args[i].downcase)
     for i2 in 0...lookout2.length
       cygames.push(lookout2[i2][0]) if lookout2[i2][1].include?(args[i].downcase)
     end
