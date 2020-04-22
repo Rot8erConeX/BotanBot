@@ -630,127 +630,127 @@ def find_weapon(name,event,fullname=false,ext=false)
   lists.unshift(['p',['Paid']])
   lists.unshift(['s',['Seasonal']])
   unless ext
-    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[2][0,1]}*#{q[3]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance') && q[14]!='FEH'}
+    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[2][0,1]}*#{q[3]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q[14]!='FEH'}
     return @weapons[k] unless k.nil?
-    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[2][0,1]}#{q[3]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance') && q[14]!='FEH'}
+    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[2][0,1]}#{q[3]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q[14]!='FEH'}
     return @weapons[k] unless k.nil?
-    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[2][0,1]}*#{q[1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance') && q[14]!='FEH'}
+    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[2][0,1]}*#{q[1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q[14]!='FEH'}
     return @weapons[k] unless k.nil?
-    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[2][0,1]}#{q[1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance') && q[14]!='FEH'}
+    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[2][0,1]}#{q[1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q[14]!='FEH'}
     return @weapons[k] unless k.nil?
-    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[3]}#{q[2][0,1]}*#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance') && q[14]!='FEH'}
+    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[3]}#{q[2][0,1]}*#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q[14]!='FEH'}
     return @weapons[k] unless k.nil?
-    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[3]}#{q[2][0,1]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance') && q[14]!='FEH'}
+    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[3]}#{q[2][0,1]}#{q[1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q[14]!='FEH'}
     return @weapons[k] unless k.nil?
-    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[1]}#{q[2][0,1]}*#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance') && q[14]!='FEH'}
+    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[1]}#{q[2][0,1]}*#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q[14]!='FEH'}
     return @weapons[k] unless k.nil?
-    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[1]}#{q[2][0,1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance') && q[14]!='FEH'}
+    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[1]}#{q[2][0,1]}#{q[3]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q[14]!='FEH'}
     return @weapons[k] unless k.nil?
-    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[3]}#{q[1]}#{q[2][0,1]}*".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance') && q[14]!='FEH'}
+    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[3]}#{q[1]}#{q[2][0,1]}*".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q[14]!='FEH'}
     return @weapons[k] unless k.nil?
-    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[3]}#{q[1]}#{q[2][0,1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance') && q[14]!='FEH'}
+    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[3]}#{q[1]}#{q[2][0,1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q[14]!='FEH'}
     return @weapons[k] unless k.nil?
-    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[1]}#{q[3]}#{q[2][0,1]}*".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance') && q[14]!='FEH'}
+    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[1]}#{q[3]}#{q[2][0,1]}*".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q[14]!='FEH'}
     return @weapons[k] unless k.nil?
-    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[1]}#{q[3]}#{q[2][0,1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance') && q[14]!='FEH'}
+    k=@weapons.find_index{|q| !lists.map{|q2| q2[0]}.include?(q[2][1,1]) && q[3]!='None' && "#{q[1]}#{q[3]}#{q[2][0,1]}".downcase==name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q[14]!='FEH'}
     return @weapons[k] unless k.nil?
     for i2 in 2...lists.length
       for i3 in 0...lists[i2][1].length
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[2][0,1]}*#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[2][0,1]}*#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[2][0,1]}#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[2][0,1]}#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[2][0,1]}*#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[2][0,1]}*#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[2][0,1]}#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[2][0,1]}#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[3]}#{q[2][0,1]}*#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[3]}#{q[2][0,1]}*#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[3]}#{q[2][0,1]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[3]}#{q[2][0,1]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[1]}#{q[2][0,1]}*#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[1]}#{q[2][0,1]}*#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[1]}#{q[2][0,1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[1]}#{q[2][0,1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[3]}#{q[1]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[3]}#{q[1]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[3]}#{q[1]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[3]}#{q[1]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[1]}#{q[3]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[1]}#{q[3]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[1]}#{q[3]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{lists[i2][1][i3]}#{q[1]}#{q[3]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}*#{lists[i2][1][i3]}#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}*#{lists[i2][1][i3]}#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}#{lists[i2][1][i3]}#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}#{lists[i2][1][i3]}#{q[3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}*#{lists[i2][1][i3]}#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}*#{lists[i2][1][i3]}#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}#{lists[i2][1][i3]}#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}#{lists[i2][1][i3]}#{q[1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{lists[i2][1][i3]}#{q[2][0,1]}*#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{lists[i2][1][i3]}#{q[2][0,1]}*#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{lists[i2][1][i3]}#{q[2][0,1]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{lists[i2][1][i3]}#{q[2][0,1]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{lists[i2][1][i3]}#{q[2][0,1]}*#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{lists[i2][1][i3]}#{q[2][0,1]}*#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{lists[i2][1][i3]}#{q[2][0,1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{lists[i2][1][i3]}#{q[2][0,1]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{lists[i2][1][i3]}#{q[1]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{lists[i2][1][i3]}#{q[1]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{lists[i2][1][i3]}#{q[1]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{lists[i2][1][i3]}#{q[1]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{lists[i2][1][i3]}#{q[3]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{lists[i2][1][i3]}#{q[3]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{lists[i2][1][i3]}#{q[3]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{lists[i2][1][i3]}#{q[3]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}*#{q[3]}#{lists[i2][1][i3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}*#{q[3]}#{lists[i2][1][i3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}#{q[3]}#{lists[i2][1][i3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}#{q[3]}#{lists[i2][1][i3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}*#{q[1]}#{lists[i2][1][i3]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}*#{q[1]}#{lists[i2][1][i3]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}#{q[1]}#{lists[i2][1][i3]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}#{q[1]}#{lists[i2][1][i3]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{q[2][0,1]}*#{lists[i2][1][i3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{q[2][0,1]}*#{lists[i2][1][i3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{q[2][0,1]}#{lists[i2][1][i3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{q[2][0,1]}#{lists[i2][1][i3]}#{q[1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{q[2][0,1]}*#{lists[i2][1][i3]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{q[2][0,1]}*#{lists[i2][1][i3]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{q[2][0,1]}#{lists[i2][1][i3]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{q[2][0,1]}#{lists[i2][1][i3]}#{q[3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{q[1]}#{lists[i2][1][i3]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{q[1]}#{lists[i2][1][i3]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{q[1]}#{lists[i2][1][i3]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{q[1]}#{lists[i2][1][i3]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{q[3]}#{lists[i2][1][i3]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{q[3]}#{lists[i2][1][i3]}#{q[2][0,1]}*".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{q[3]}#{lists[i2][1][i3]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{q[3]}#{lists[i2][1][i3]}#{q[2][0,1]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}*#{q[3]}#{q[1]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}*#{q[3]}#{q[1]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}#{q[3]}#{q[1]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}#{q[3]}#{q[1]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}*#{q[1]}#{q[3]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}*#{q[1]}#{q[3]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}#{q[1]}#{q[3]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[2][0,1]}#{q[1]}#{q[3]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{q[2][0,1]}*#{q[1]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{q[2][0,1]}*#{q[1]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{q[2][0,1]}#{q[1]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{q[2][0,1]}#{q[1]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{q[2][0,1]}*#{q[3]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{q[2][0,1]}*#{q[3]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{q[2][0,1]}#{q[3]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{q[2][0,1]}#{q[3]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{q[1]}#{q[2][0,1]}*#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{q[1]}#{q[2][0,1]}*#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{q[1]}#{q[2][0,1]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[3]}#{q[1]}#{q[2][0,1]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{q[3]}#{q[2][0,1]}*#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{q[3]}#{q[2][0,1]}*#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{q[3]}#{q[2][0,1]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance')}
+        k=@weapons.reject{|q| q[2][1,1]!=lists[i2][0] || q[3]=='None' || "#{q[1]}#{q[3]}#{q[2][0,1]}#{lists[i2][1][i3]}".downcase != name.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
       end
     end
@@ -4315,12 +4315,12 @@ def find_in_skills(bot,event,args=nil,mode=0)
     elem.push('Shadow') if ['shadow','dark','shadows','darks'].include?(args[i].downcase)
     elem.push('None') if ['none','no-element','no_element','noelement','elementless'].include?(args[i].downcase)
     wpn2.push('Sword') if ['sword','swords'].include?(args[i].downcase)
-    wpn2.push('Blade') if ['blade','blades','sabers','saber'].include?(args[i].downcase)
+    wpn2.push('Blade') if ['blade','blades','sabers','saber','katanas','katana'].include?(args[i].downcase)
     wpn2.push('Dagger') if ['dagger','daggers','knife','knifes','knives'].include?(args[i].downcase)
     wpn2.push('Axe') if ['axes','axe'].include?(args[i].downcase)
     wpn2.push('Bow') if ['bow','bows','arrow','arrows','archer','archers'].include?(args[i].downcase)
     wpn2.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
-    wpn2.push('Wand') if ['wand','wands'].include?(args[i].downcase)
+    wpn2.push('Wand') if ['wand','wands','rod','rods'].include?(args[i].downcase)
     wpn2.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
     for i2 in 0...lookout.length
       tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
@@ -4427,12 +4427,12 @@ def find_in_abilities(bot,event,args=nil,mode=0)
     elem.push('Shadow') if ['shadow','dark','shadows','darks'].include?(args[i].downcase)
     elem.push('None') if ['none','no-element','no_element','noelement','elementless'].include?(args[i].downcase)
     wpn.push('Sword') if ['sword','swords'].include?(args[i].downcase)
-    wpn.push('Blade') if ['blade','blades','sabers','saber'].include?(args[i].downcase)
+    wpn.push('Blade') if ['blade','blades','sabers','saber','katanas','katana'].include?(args[i].downcase)
     wpn.push('Dagger') if ['dagger','daggers','knife','knifes','knives'].include?(args[i].downcase)
     wpn.push('Axe') if ['axes','axe'].include?(args[i].downcase)
     wpn.push('Bow') if ['bow','bows','arrow','arrows','archer','archers'].include?(args[i].downcase)
     wpn.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
-    wpn.push('Wand') if ['wand','wands'].include?(args[i].downcase)
+    wpn.push('Wand') if ['wand','wands','rod','rods'].include?(args[i].downcase)
     wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
     for i2 in 0...lookout.length
       tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
