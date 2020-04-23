@@ -9,6 +9,7 @@ Aeternal Assault\\Skill\Deals 6 hits of 148% flame damage to enemies directly ah
 Affinity Dance\\Skill\Increases the entire team's critical rate by 15% for 10 seconds.\Increases the entire team's critical rate by 20% for 10 seconds.\\30, 30, 30, 30\No\1.9\\Buff, Team, CritRate\
 Agitato Assault\\Skill\Increases the potency of the entire team's recovery skills by 5% for 10 seconds, and increases their energy levels by one stage.\Increases the potency of the entire team's recovery skills by 10% for 10 seconds, and increases their energy level by one stage.\\4819, 4819, 4819, 4819\No\1.6\\Buff, Energy, Potency, Team, E1\
 Air Tackle\\Skill\Deals 1 hit of 466% wind damage to enemies directly ahead.\Deals 1 hit of 518% wind damage to enemies directly ahead.\\30, 30, 30, 30\Yes\1.4\\Damage\
+Alchemical Hellfire\\Skill\Deals flame damage to enemies directly ahead, draws them toward the user, and increases the user's strength by 15% for 20 seconds. It is possible to charge this skill's gauge by attacking, and use it up to twice during one shapeshift.\Deals flame damage to enemies directly ahead, draws them toward the user, and increases the user's strength by 20% for 20 seconds. It is possible to charge this skill's gauge by attacking, and use it up to twice during one shapeshift.\\30, 30, 30, 30\Yes\0\Deals flame damage to enemies directly ahead, draws them toward the user, and increases the user's strength by 15/20% for 20 seconds. It is possible to charge this skill's gauge by attacking, and use it up to twice during one shapeshift.\Damage, StrengthSkill, Buff, User\
 Akashic Repose\\Skill\Restores HP to all allies with 31% Recovery Potency and applies Regen for 15 seconds, healing with 25% Regen Potency every 2.99 seconds.\Restores HP to all allies with 36% Recovery Potency, and applies Regen for 15 seconds, healing with 29% Regen Potency every 2.99 seconds.\Restores HP to all allies with 44% Recovery Potency, and applies Regen for 15 seconds, healing with 35% Regen Potency every 2.99 seconds.\5916, 5916, 5916, 5916\Yes\1.1\\HealSkill, Burst, Regen\
 Alberian Cleave\\Skill\Deals 2 hits of 276% light damage to enemies directly ahead.\Deals 2 hits of 290% light damage to enemies directly ahead, and inflicts stun for 3-4 seconds with 90% base chance.\Deals 2 hits of 305% light damage to enemies directly ahead, and inflicts stun for 4-5 seconds with 100% base chance.\2443, 2443, 2443, 2443\Yes\0.8\\Damage, Stun\
 Alberian Majesty\\Skill\Deals 2 hits of 276% light damage to surrounding enemies.\Deals 2 hits of 307% light damage to surrounding enemies.\\4817, 4817, 4817, 4817\Yes\0.9\\Damage\
@@ -730,6 +731,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) Critical Damage\example\Aura\If the user is attuned to Flame: adds `x`% to the modifier applied to critical damage.\0\y\Flame, CritDamage
 (Flame) Critical Damage\50%\Aura\If the user is attuned to Flame: adds 50% to the modifier applied to critical damage.\40\y\Flame, CritDamage
 (Flame) Critical Damage\55%\Aura\If the user is attuned to Flame: adds 55% to the modifier applied to critical damage.\40\y\Flame, CritDamage
+(Flame) Ending Shapeshift = Skill Gauges\example\Aura\If the user is attuned to Flame: fills `x`% of skill gauges when the user's shapeshift is undone.\0\y\SkillPrep, Flame
+(Flame) Ending Shapeshift = Skill Gauges\50%\Aura\If the user is attuned to Flame: fills 50% of skill gauges when the user's shapeshift is undone.\80\y\SkillPrep, Flame
+(Flame) Ending Shapeshift = Skill Gauges\100%\Aura\If the user is attuned to Flame: fills 100% of skill gauges when the user's shapeshift is undone.\100\y\SkillPrep, Flame
 (Flame) Force Strike\example\Aura\If the user is attuned to Flame: increases Force Strike damage by 50/60%.\0\y\Flame, ForceStrike
 (Flame) Force Strike\50%\Aura\If the user is attuned to Flame: increases Force Strike damage by 50%.\80\y\Flame, ForceStrike
 (Flame) Force Strike\60%\Aura\If the user is attuned to Flame: increases Force Strike damage by 60%.\100\y\Flame, ForceStrike
@@ -745,12 +749,18 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) HP\15%\Aura\If the user is attuned to Flame: increases HP by 15%.\30\y\HealthSkill, Flame
 (Flame) HP\30%\Aura\If the user is attuned to Flame: increases HP by 30%.\60\y\HealthSkill, Flame
 (Flame) HP\45%\Aura\If the user is attuned to Flame: increases HP by 45%.\80\y\HealthSkill, Flame
+(Flame) HP 50% = Strength\example\Aura\If the user is attuned to Flame: increases strength by `x`% when HP is 50% or above.\0\y\HP50, StrengthSkill
+(Flame) HP 50% = Strength\10%\Aura\If the user is attuned to Flame: increases strength by 10% when HP is 50% or above.\60\y\HP50, StrengthSkill
+(Flame) HP 50% = Strength\20%\Aura\If the user is attuned to Flame: increases strength by 20% when HP is 50% or above.\80\y\HP50, StrengthSkill
 (Flame) Primed Strength\example\Aura\Increases the strength of the adventurer you are currently controlling by `x`% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\0\y\Primed, StrengthSkill, Flame
 (Flame) Primed Strength\10%\Aura\Increases the strength of the adventurer you are currently controlling by 10% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\80\y\Primed, StrengthSkill, Flame
 (Flame) Primed Strength\15%\Aura\Increases the strength of the adventurer you are currently controlling by 15% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\100\y\Primed, StrengthSkill, Flame
 (Flame) Skill Damage\example\Aura\If the user is attuned to Flame: increases attack skill damage by `x`%\0\y\Flame, SkillDamage
 (Flame) Skill Damage\70%\Aura\If the user is attuned to Flame: increases attack skill damage by 70%\100\y\Flame, SkillDamage
 (Flame) Skill Damage\90%\Aura\If the user is attuned to Flame: increases attack skill damage by 90%\120\y\Flame, SkillDamage
+(Flame) Strength & HP 50% = Strength\example\Aura\If the user is attuned to Flame: increases strength by 55%/70%, and increases strength by an additional 10%/20% when HP is 50% or above.\0\y\Flame, StrengthSkill, HP50
+(Flame) Strength & HP 50% = Strength\55%/10%\Aura\If the user is attuned to Flame: increases strength by 55%, and increases strength by an additional 10% when HP is 50% or above.\100\y\Flame, StrengthSkill, HP50
+(Flame) Strength & HP 50% = Strength\70%/20%\Aura\If the user is attuned to Flame: increases strength by 70%, and increases strength by an additional 20% when HP is 50% or above.\120\y\Flame, StrengthSkill, HP50
 (Flame) Striking Haste\example\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by `x`% when the user's force strikes connect.\0\y\Flame, StrikingHaste
 (Flame) Striking Haste\20%\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by 20% when the user's force strikes connect.\100\y\Flame, StrikingHaste
 (Flame) Striking Haste\30%\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by 30% when the user's force strikes connect.\120\y\Flame, StrikingHaste
@@ -765,6 +775,7 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) Strength\50%\Aura\If the user is attuned to Flame: increases strength by 50%.\90\y\StrengthSkill, Flame
 (Flame) Strength\55%\Aura\If the user is attuned to Flame: increases strength by 55%.\95\y\StrengthSkill, Flame
 (Flame) Strength\60%\Aura\If the user is attuned to Flame: increases strength by 60%.\100\y\StrengthSkill, Flame
+(Flame) Strength\70%\Aura\If the user is attuned to Flame: increases strength by 70%.\120\y\StrengthSkill, Flame
 (Flame) Strength & Wind Res\example\Aura\If the user is attuned to Flame: increases strength by `x`% and grants `y`% Wind resistance.\0\y\StrengthSkill, WindRes, Flame, Resistance
 (Flame) Strength & Wind Res\35/15%\Aura\If the user is attuned to Flame: increases strength by 35% and grants 15% Wind resistance.\70\y\StrengthSkill, WindRes, Flame, Resistance
 (Flame) Strength & Wind Res\50/15%\Aura\If the user is attuned to Flame: increases strength by 50% and grants 15% Wind resistance.\100\y\StrengthSkill, WindRes, Flame, Resistance
@@ -969,6 +980,9 @@ Dragon's Might\10%\Aura\Increases strength by a further 10% for the remainder of
 Ending Shapeshift = Curse\example\Aura\When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\0\y\Curse
 Ending Shapeshift = Curse\I\Aura\When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\80\y\Curse
 Ending Shapeshift = Curse\II\Aura\When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\100\y\Curse
+Ending Shapeshift = Skill Gauges\example\Aura\Fills `x`% of skill gauges when the user's shapeshift is undone.\0\y\SkillPrep
+Ending Shapeshift = Skill Gauges\50%\Aura\Fills 50% of skill gauges when the user's shapeshift is undone.\80\y\SkillPrep
+Ending Shapeshift = Skill Gauges\100%\Aura\Fills 100% of skill gauges when the user's shapeshift is undone.\100\y\SkillPrep
 Exhilaration\-\Aura\If the user is attuned to Light: increases shapeshift time for the entire team by 3 seconds. The team's shapeshift time can only be increased by a maximum of 5 seconds through this ability.\30\y\DragonTime, Team
 Force Strike\example\Aura\Increases force strike damage by `x`%.\0\y\ForceStrike
 Force Strike\50%\Aura\Increases force strike damage by 50%.\80\y\ForceStrike
@@ -983,6 +997,9 @@ HP Below 30% = Strength\40%\Aura\Increases strength by 40% when HP is 30% or bel
 HP 30% = Strength\example\Aura\Increases strength by `x`% when HP is 30% or above.\0\y\HP30, StrengthSkill
 HP 30% = Strength\35%\Aura\Increases strength by 35% when HP is 30% or above.\35\y\HP30, StrengthSkill
 HP 30% = Strength\50%\Aura\Increases strength by 50% when HP is 30% or above.\50\y\HP30, StrengthSkill
+HP 50% = Strength\example\Aura\Increases strength by `x`% when HP is 50% or above.\0\y\HP50, StrengthSkill
+HP 50% = Strength\10%\Aura\Increases strength by 10% when HP is 50% or above.\60\y\HP50, StrengthSkill
+HP 50% = Strength\20%\Aura\Increases strength by 20% when HP is 50% or above.\80\y\HP50, StrengthSkill
 HP & Strength\example\Aura\Increases strength and HP by `x`%.\0\y\HealthSkill, StrengthSkill
 HP & Strength\5%\Aura\Increases strength and HP by 5%.\20\y\HealthSkill, StrengthSkill
 HP & Strength\8%\Aura\Increases strength and HP by 8%.\30\y\HealthSkill, StrengthSkill
@@ -1044,12 +1061,16 @@ Strength\45%\Aura\Increases strength by 45%.\80\y\StrengthSkill
 Strength\50%\Aura\Increases strength by 50%.\90\y\StrengthSkill
 Strength\55%\Aura\Increases strength by 55%.\100\y\StrengthSkill
 Strength\60%\Aura\Increases strength by 60%.\100\y\StrengthSkill
+Strength\70%\Aura\Increases strength by 70%.\120\y\StrengthSkill
 Strength & Critical Damage\example\Aura\Increases strength by `x`% and adds `y`% to the modifier applied to critical damage.\70\y\StrengthSkill, CritDamage
 Strength & Critical Damage\30/50%\Aura\Increases strength by 30% and adds 50% to the modifier applied to critical damage.\70\y\StrengthSkill, CritDamage
 Strength & Critical Damage\45/55%\Aura\Increases strength by 45% and adds 55% to the modifier applied to critical damage.\100\y\StrengthSkill, CritDamage
 Strength & Ending Shapeshift = Curse\example\Aura\Increases strength by 30/50%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\0\y\StrengthSkill, Curse
 Strength & Ending Shapeshift = Curse\I\Aura\Increases strength by 30%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\100\y\StrengthSkill, Curse
 Strength & Ending Shapeshift = Curse\II\Aura\Increases strength by 50%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\120\y\StrengthSkill, Curse
+Strength & HP 50% = Strength\example\Aura\Increases strength by 55%/70%, and increases strength by an additional 10%/20% when HP is 50% or above.\0\y\StrengthSkill, HP50
+Strength & HP 50% = Strength\55%/10%\Aura\Increases strength by 55%, and increases strength by an additional 10% when HP is 50% or above.\100\y\StrengthSkill, HP50
+Strength & HP 50% = Strength\70%/20%\Aura\Increases strength by 70%, and increases strength by an additional 20% when HP is 50% or above.\120\y\StrengthSkill, HP50
 Strength & Shadow Res\example\Aura\Increases strength by `x`% and grants `y`% Shadow resistance.\0\y\StrengthSkill, ShadowRes, Resistance
 Strength & Shadow Res\35/15%\Aura\Increases strength by 35% and grants 15% Shadow resistance.\70\y\StrengthSkill, ShadowRes, Resistance
 Strength & Shadow Res\50/15%\Aura\Increases strength by 50% and grants 15% Shadow resistance.\100\y\StrengthSkill, ShadowRes, Resistance
