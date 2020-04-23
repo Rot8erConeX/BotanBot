@@ -2413,7 +2413,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
         x.compact!
         char[i][0]="#{char[i][0]} *[#{x.join('+')}]*" if x.length>0
       end
-      char[i][20]="#{skl1[10].join("\n")}\n#{ab1[6].join("\n") unless ab1.nil?}\n#{ab2[6].join("\n") unless ab2.nil?}\n#{ab3[6].join("\n") unless ab3.nil?}".split("\n")
+      char[i][20]="#{skl1[10].join("\n") unless skl1.nil?}\n#{ab1[6].join("\n") unless ab1.nil?}\n#{ab2[6].join("\n") unless ab2.nil?}\n#{ab3[6].join("\n") unless ab3.nil?}".split("\n")
     end
     if args.include?('any')
       search[-1]="#{search[-1]}\n(searching for dragons with any listed tag in their skills and abilities)" if tags.length>1
