@@ -5045,7 +5045,6 @@ def find_all(bot,event,args=nil)
           str[i]=str[i].gsub('__','').gsub("\n",' - ')
         end
       end
-      str[0]="#{str[0]}\n" unless [str[-1],str[-2,2]].include?("\n")
       str=str.join("\n").gsub("\n\n",'')
       str=extend_message(str,"__**Note**__\nToo much data is trying to be displayed.  Please use this command in PM.",event,2)
       str=extend_message(str,"Totals: #{adv[1].length} adventurers, #{drg[1].length} dragons, #{wrm[4]} wyrmprints, #{wpn[1].length} weapons",event,2)
