@@ -2218,6 +2218,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
     ranged.push('Yes') if ['long','longrange','ranged'].include?(args[i].downcase)
     ranged.push('no') if ['short','shortrange','melee'].include?(args[i].downcase)
     fltr.push('Seasonal') if ['seasonal','seasonals','seasons','seasons'].include?(args[i].downcase)
+    fltr.push('Gala') if ['gala','galadragalia'].include?(args[i].downcase)
     fltr.push('NonLimited') if ['summon','summons','summonable','summonables','nonlimited','non-limited'].include?(args[i].downcase)
     fltr.push('Limited') if ['limited','limit'].include?(args[i].downcase)
     fltr.push('Collab') if ['collab','collaboration','collabs','crossover','collaborations','crossovers'].include?(args[i].downcase)
@@ -2341,7 +2342,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
       emo.push('(L)') if fltr.length<2
       fltr.push('Collab')
     end
-    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[16].nil? && q[16].length>0)}.uniq
+    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[16].nil? && q[16].length>0) && !(fltr.include?('Gala') && q[0][0,5]=='Gala ')}.uniq
   end
   if genders.length>0
     char=char.reject{|q| !genders.include?(q[17])}.uniq
