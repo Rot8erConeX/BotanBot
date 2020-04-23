@@ -877,8 +877,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Shadow) Strength\50%\Aura\If the user is attuned to Shadow: increases strength by 50%.\90\y\StrengthSkill, Shadow
 (Shadow) Strength\55%\Aura\If the user is attuned to Shadow: increases strength by 55%.\100\y\StrengthSkill, Shadow
 (Shadow) Strength\60%\Aura\If the user is attuned to Shadow: increases strength by 60%.\100\y\StrengthSkill, Shadow
-(Shadow) Strength & Dragon's Might II\I\Aura\If the user is attuned to Shadow: increases strength by 45%, and increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\StrengthSkill, InCombat, StrengthSkill
-(Shadow) Strength & Dragon's Might II\II\Aura\If the user is attuned to Shadow: increases strength by 55%, and increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\100\y\StrengthSkill, InCombat, StrengthSkill
+(Shadow) Strength & Dragon's Might\example\Aura\If the user is attuned to Shadow: increases strength by 45%/55%, and increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\0\y\StrengthSkill, InCombat, StrengthSkill, Shadow
+(Shadow) Strength & Dragon's Might\I\Aura\If the user is attuned to Shadow: increases strength by 45%, and increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\StrengthSkill, InCombat, StrengthSkill, Shadow
+(Shadow) Strength & Dragon's Might\II\Aura\If the user is attuned to Shadow: increases strength by 55%, and increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\100\y\StrengthSkill, InCombat, StrengthSkill, Shadow
 (Water) Critical Rate\example\Aura\If the user is attuned to Water: increases critical rate by `x`%.\0\y\Water, CritRate
 (Water) Critical Rate\15%\Aura\If the user is attuned to Water: increases critical rate by 15%.\40\y\Water, CritRate
 (Water) Critical Rate\20%\Aura\If the user is attuned to Water: increases critical rate by 20%.\40\y\Water, CritRate
@@ -1065,6 +1066,9 @@ Strength\70%\Aura\Increases strength by 70%.\120\y\StrengthSkill
 Strength & Critical Damage\example\Aura\Increases strength by `x`% and adds `y`% to the modifier applied to critical damage.\70\y\StrengthSkill, CritDamage
 Strength & Critical Damage\30/50%\Aura\Increases strength by 30% and adds 50% to the modifier applied to critical damage.\70\y\StrengthSkill, CritDamage
 Strength & Critical Damage\45/55%\Aura\Increases strength by 45% and adds 55% to the modifier applied to critical damage.\100\y\StrengthSkill, CritDamage
+Strength & Dragon's Might\example\Aura\Increases strength by 45%/55%, and increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\0\y\StrengthSkill, InCombat, StrengthSkill
+Strength & Dragon's Might\I\Aura\Increases strength by 45%, and increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\StrengthSkill, InCombat, StrengthSkill
+Strength & Dragon's Might\II\Aura\Increases strength by 55%, and increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\100\y\StrengthSkill, InCombat, StrengthSkill
 Strength & Ending Shapeshift = Curse\example\Aura\Increases strength by 30/50%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\0\y\StrengthSkill, Curse
 Strength & Ending Shapeshift = Curse\I\Aura\Increases strength by 30%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\100\y\StrengthSkill, Curse
 Strength & Ending Shapeshift = Curse\II\Aura\Increases strength by 50%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\120\y\StrengthSkill, Curse
