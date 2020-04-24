@@ -759,7 +759,7 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) Skill Damage\70%\Aura\If the user is attuned to Flame: increases attack skill damage by 70%\100\y\Flame, SkillDamage
 (Flame) Skill Damage\90%\Aura\If the user is attuned to Flame: increases attack skill damage by 90%\120\y\Flame, SkillDamage
 (Flame) Strength & HP 50% = Strength\example\Aura\If the user is attuned to Flame: increases strength by 55%/70%, and increases strength by an additional 10%/20% when HP is 50% or above.\0\y\Flame, StrengthSkill, HP50
-(Flame) Strength & HP 50% = Strength\55%/10%\Aura\If the user is attuned to Flame: increases strength by 55%, and increases strength by an additional 10% when HP is 50% or above.\100\y\Flame, StrengthSkill, HP50
+(Flame) Strength & HP 50% = Strength\40%/10%\Aura\If the user is attuned to Flame: increases strength by 40%, and increases strength by an additional 10% when HP is 50% or above.\100\y\Flame, StrengthSkill, HP50
 (Flame) Strength & HP 50% = Strength\70%/20%\Aura\If the user is attuned to Flame: increases strength by 70%, and increases strength by an additional 20% when HP is 50% or above.\120\y\Flame, StrengthSkill, HP50
 (Flame) Striking Haste\example\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by `x`% when the user's force strikes connect.\0\y\Flame, StrikingHaste
 (Flame) Striking Haste\20%\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by 20% when the user's force strikes connect.\100\y\Flame, StrikingHaste
@@ -1073,7 +1073,7 @@ Strength & Ending Shapeshift = Curse\example\Aura\Increases strength by 30/50%. 
 Strength & Ending Shapeshift = Curse\I\Aura\Increases strength by 30%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\100\y\StrengthSkill, Curse
 Strength & Ending Shapeshift = Curse\II\Aura\Increases strength by 50%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\120\y\StrengthSkill, Curse
 Strength & HP 50% = Strength\example\Aura\Increases strength by 55%/70%, and increases strength by an additional 10%/20% when HP is 50% or above.\0\y\StrengthSkill, HP50
-Strength & HP 50% = Strength\55%/10%\Aura\Increases strength by 55%, and increases strength by an additional 10% when HP is 50% or above.\100\y\StrengthSkill, HP50
+Strength & HP 50% = Strength\40%/10%\Aura\Increases strength by 40%, and increases strength by an additional 10% when HP is 50% or above.\100\y\StrengthSkill, HP50
 Strength & HP 50% = Strength\70%/20%\Aura\Increases strength by 70%, and increases strength by an additional 20% when HP is 50% or above.\120\y\StrengthSkill, HP50
 Strength & Shadow Res\example\Aura\Increases strength by `x`% and grants `y`% Shadow resistance.\0\y\StrengthSkill, ShadowRes, Resistance
 Strength & Shadow Res\35/15%\Aura\Increases strength by 35% and grants 15% Shadow resistance.\70\y\StrengthSkill, ShadowRes, Resistance
