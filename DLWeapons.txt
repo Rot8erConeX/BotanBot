@@ -913,3 +913,31 @@ Chimeratech Myrrh\Wand\5m\Wind\32, 92, 107\210, 602, 701\\1500, 0\914\0\0\400000
 Chimeratech Frankin\Wand\5m\Wind\53, 153, 178\300, 860, 1001\\1500, 0\915\914\0\900000, -\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Tempest Mane, 25;; Tempest Mane, 10;; Tempest Horn, 3\(Wind) Unyielding Offense +2%\\TempestChimera\2
 Chimeratech Sage\Staff\5m\Wind\41, 116, 135\184, 528, 614\\1500, 0\916\0\0\400000, -\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Tempest Mane, 10;; Tempest Claw, 2\(Wind) Unyielding Offense +2%\\TempestChimera\1
 Chimeratech Marjoram\Staff\5m\Wind\67, 194, 225\263, 753, 877\\1500, 0\917\916\0\900000, -\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Tempest Mane, 25;; Tempest Mane, 10;; Tempest Horn, 3\(Wind) Unyielding Offense +2%\\TempestChimera\2
+Foul Metempsychosis\Sword\4\Water\21, 57, 71\83, 222, 278\\500, 0\918\610\4\50000, 100000\Granite, 7;; Meteorite, 3;; Catoblepas's Hoof, 5;; Deluge Orb, 1\(Water) HP 70% = Strength +5%;;;; (Water) Spectral Shield Penetrator\\CatoblepasFotia\2
+Eternal Metempsychosis\Sword\5\Water\27, 79, 92\108, 311, 362\\1500, 0\919\918\5\300000, 600000\Granite, 15;; Meteorite, 5;; Catoblepas's Heateye, 2;; Deluge Orb, 3\(Water) HP 70% = Strength +8%;;;; (Water) Spectral Shield Penetrator\\CatoblepasFotia\3
+Faerielight Ray\Blade\3\Light\9, 21, 33\43, 93, 144\\, 0\920\310\1\5000, 10000\Granite, 2;; Meteorite, 1;; Old Cloth, 1;; Floating Blue Cloth, 1;; Radiance Orb, 1\\\CeruleanGhost\2
+Faerielight Flash\Blade\4\Light\15, 42, 53\68, 183, 229\\, 0\921\920\2\30000, 60000\Granite, 5;; Meteorite, 1;; Floating Blue Cloth, 2;; Abyssal Lantern, 1;; Refulgence Orb, 1\\\CeruleanGhost\3
+Fountain Blade\Blade\4\Water\20, 55, 69\83, 222, 278\\, 0\922\616\4\50000, 100000\Granite, 7;; Meteorite, 3;; Catoblepas's Hoof, 5;; Deluge Orb, 1\\\CatoblepasFotia\2
+Gush Blade\Blade\5\Water\27, 78, 90\108, 310, 361\\, 0\923\922\5\300000, 600000\Granite, 15;; Meteorite, 5;; Catoblepas's Heateye, 2;; Deluge Orb, 3\\\CatoblepasFotia\3
+Hateblister\Blade\4\Flame\18, 50, 62\88, 235, 295\\, 0\924\884\4\50000, 100000\Granite, 7;; Meteorite, 3;; Soul Vestiges, 5;; Inferno Orb, 1\\\InfernalPhantom\2
+Furyblister\Blade\5\Flame\24, 70, 81\114, 329, 383\\, 0\925\924\5\300000, 600000\Granite, 15;; Meteorite, 5;; Infernal Soul, 2;; Inferno Orb, 3\\\InfernalPhantom\3
+Flaming Necrom\Dagger\4\Flame\21, 58, 72\81, 218, 273\\, 0\926\887\4\50000, 100000\Fiend's Horn, 7;; Fiend's Eye, 3;; Soul Vestiges, 5;; Inferno Orb, 1\\\InfernalPhantom\2
+Blazing Necrom\Dagger\5\Flame\27, 80, 93\106, 304, 354\\, 0\927\926\5\300000, 600000\Fiend's Horn, 15;; Fiend's Eye, 5;; Infernal Soul, 2;; Inferno Orb, 3\\\InfernalPhantom\3
+Hail Destroyer\Axe\4\Water\24, 65, 81\82, 220, 275\\, 0\928\625\4\50000, 100000\Granite, 7;; Meteorite, 3;; Catoblepas's Hoof, 5;; Deluge Orb, 1\\\CatoblepasFotia\2
+Icicle Destroyer\Axe\5\Water\31, 91, 105\107, 307, 357\\, 0\929\928\5\300000, 600000\Granite, 15;; Meteorite, 5;; Catoblepas's Heateye, 2;; Deluge Orb, 3\\\CatoblepasFotia\3
+Fuel Crash\Axe\4\Flame\21, 58, 73\87, 233, 292\\, 0\930\774\4\50000, 100000\Granite, 7;; Meteorite, 3;; Soul Vestiges, 5;; Inferno Orb, 1\\\InfernalPhantom\2
+Hellfire Crash\Axe\5\Flame\28, 82, 95\114, 327, 380\\, 0\931\930\5\300000, 600000\Granite, 15;; Meteorite, 5;; Infernal Soul, 2;; Inferno Orb, 3\\\InfernalPhantom\3
+Dimlight Grimspear\Lance\3\Light\11, 24, 37\42, 92, 143\\, 0\932\294\1\5000, 10000\Fiend's Horn, 2;; Fiend's Eye, 1;; Old Cloth, 1;; Floating Blue Cloth, 1;; Radiance Orb, 1\\\CeruleanGhost\2
+Highbright Grimspear\Lance\4\Light\17, 47, 58\68, 181, 227\\, 0\933\932\2\30000, 60000\Fiend's Horn, 5;; Fiend's Eye, 1;; Floating Blue Cloth, 2;; Abyssal Lantern, 1;; Refulgence Orb, 1\\\CeruleanGhost\3
+Flowing Tidelance\Lance\4\Water\22, 61, 76\82, 220, 276\\, 0\934\631\4\50000, 100000\Fiend's Horn, 7;; Fiend's Eye, 3;; Catoblepas's Hoof, 5;; Deluge Orb, 1\\\CeruleanGhost\2
+Raging Tidelance\Lance\5\Water\29, 85, 99\107, 308, 358\\, 0\935\934\5\300000, 600000\Fiend's Horn, 15;; Fiend's Eye, 5;; Catoblepas's Heateye, 2;; Deluge Orb, 3\\\CatoblepasFotia\3
+Underworld Blazer\Lance\4\Flame\24, 64, 80\80, 213, 267\\, 0\936\781\4\50000, 100000\Fiend's Horn, 7;; Fiend's Eye, 3;; Soul Vestiges, 5;; Inferno Orb, 1\\\InfernalPhantom\2
+Underworld Sinner\Lance\5\Flame\31, 90, 104\104, 298, 347\\, 0\937\936\5\300000, 600000\Fiend's Horn, 15;; Fiend's Eye, 5;; Infernal Soul, 2;; Inferno Orb, 3\\\InfernalPhantom\3
+Phantomflash Bow\Bow\3\Light\10, 23, 35\40, 87, 135\\, 0\938\302\1\5000, 10000\Fiend's Horn, 2;; Fiend's Eye, 1;; Old Cloth, 1;; Floating Blue Cloth, 1;; Radiance Orb, 1\\\CeruleanGhost\2
+Lightshear Bow\Bow\4\Light\16, 45, 56\64, 171, 214\\, 0\939\938\2\30000, 60000\Fiend's Horn, 5;; Fiend's Eye, 1;; Floating Blue Cloth, 2;; Abyssal Lantern, 1;; Refulgence Orb, 1\\\CeruleanGhost\3
+Mind Corrupter\Bow\4\Flame\21, 56, 70\80, 213, 267\\, 0\940\791\4\50000, 100000\Fiend's Horn, 7;; Fiend's Eye, 3;; Soul Vestiges, 5;; Inferno Orb, 1\\\InfernalPhantom\2
+Soul Corrupter\Bow\5\Flame\27, 78, 90\104, 298, 347\\, 0\941\940\5\300000, 600000\Fiend's Horn, 15;; Fiend's Eye, 5;; Infernal Soul, 2;; Inferno Orb, 3\\\InfernalPhantom\3
+Ray of Hope\Wand\3\Light\11, 25, 38\39, 85, 133\\, 0\942\285\1\5000, 10000\Ancient Bird's Feather, 2;; Bewitching Wings, 1;; Old Cloth, 1;; Floating Blue Cloth, 1;; Radiance Orb, 1\\\CeruleanGhost\2
+Dazzling Ray of Hope\Wand\4\Light\18, 49, 61\63, 169, 211\\, 0\943\942\2\30000, 60000\Ancient Bird's Feather, 5;; Bewitching Wings, 1;; Floating Blue Cloth, 2;; Abyssal Lantern, 1;; Refulgence Orb, 1\\\CeruleanGhost\3
+Ruinous Flame\Staff\4\Flame\26, 71, 89\73, 195, 244\\, 0\944\803\4\50000, 100000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Soul Vestiges, 5;; Inferno Orb, 1\\\InfernalPhantom\2
+Ruinous Eruption\Staff\5\Flame\34, 99, 115\95, 273, 317\\, 0\945\944\5\300000, 600000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Infernal Soul, 2;; Inferno Orb, 3\\\InfernalPhantom\3
