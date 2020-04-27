@@ -13,7 +13,6 @@ Guildmaster\1\y\\
 Harle\1\y\\KENN
 Hastur\1\y\\
 Kirin Felyne\3\y\\
-Lazry\1\y\\
 Leif\1\y\\Takahiro Sakurai
 Leonidas\1\y\\Tomokazu Seki
 Loki\1\y\\Satomi Arai
@@ -31,6 +30,7 @@ Saoratorium Gal\4\y\\
 Sarisse\1\n\\Ayaka Asai
 Silver Slime\1\y\\
 Snapper\5\y\\
+The Doctor\1\y\\
 Valentines Slime\1\y\\
 Valyx\1\y\\
 Wu Kong\1\y\\Chihiro Suzuki
