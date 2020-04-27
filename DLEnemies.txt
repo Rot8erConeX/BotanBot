@@ -26,10 +26,10 @@ Void Nidhogg\-1, 450000, 1260000; -1, 3572, 7858\Shadow, Dragon, Void\Poison: **
 Raging Manticore\264856; 2290\Shadow, Therion, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**, Frostbite: **0%**\Curse, Poison\Fury
 Greedy Manticore\264856; 2290\Water, Therion, Void\Poison: **0%**, Burn: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Sleep: **0%**, Frostbite: **0%**\Poison, Freeze\Fury
 Smoldering Manticore\264856; 1450\Flame, Therion, Void\Poison: **0%**, Freeze: **0%**, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Curse: **0%**, Bog: **0%**, Sleep: **0%**, Frostbite: **0%**\Burn, Stun\Fury
-Proud Manticore\264856; 1603\Light, Therion, Void\Ask the wiki team, Frostbite: **0%**\Blind, Paralysis\Fury
+Proud Manticore\264856; 1603\Light, Therion, Void\Poison: **0%**, Burn: **0%**, Freeze: 55%, Paralysis: **0%**, Blind: **0%**, Stun: **0%**, Bog: **0%**, Sleep: **0%**, Frostbite: **0%**\Blind, Paralysis\Fury
 Volcanic Chimera\-1, 311938, 1039797; -1, 1177, 1430\Flame, Therion, Void\Poison: 60%, Freeze: **20%**, Blind: 60%, Bog: **20%**, Frostbite: **0%**\Burn, Poison\Frenzy;; Overgrowth
 Ebon Chimera\-1, 311938, 935817; -1, 1177, 1430\Shadow, Therion, Void\Poison: 60%, Burn: *99%*, Freeze: **20%**, Paralysis: **20%**, Blind: 60%, Bog: **20%**, Frostbite: **0%**\Poison, Blind\Frenzy;; Overgrowth
-Tempest Chimera\0; 0\Wind, Therion, Void\TBA\Burn, Stun\Frenzy;; Overgrowth
+Tempest Chimera\-1, 311938, 1039797; -1, 1177, 1430\Wind, Therion, Void\Poison: 60%, Burn: *99%*, Freeze: **20%**, Paralysis: **20%**, Blind: 60%, Bog: **20%**, Frostbite: **0%**\Burn, Stun\Frenzy;; Overgrowth
 Catoblepas Anemos\262587; 2052\Wind, Therion, Void\Poison: **40%**, Burn: **40%**, Stun: **40%**, Frostbite: **0%**\Stun\Petrify
 Catoblepas Fotia\262587; 2052\Flame, Therion, Void\Poison: **40%**, Burn: *99%*, Freeze: **40%**, Bog: **40%**, Frostbite: **0%**\Burn, Defense Down\Petrify
 Eolian Phantom\291017; 1684\Wind, Undead, Void\Poison: **40%**, Burn: **40%**, Paralysis: **40%**, Stun: **40%**, Frostbite: **0%**\Stun\Soul Eater;; Spectral Shield
