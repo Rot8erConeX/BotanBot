@@ -1259,6 +1259,21 @@ Wind Shrine\32\-\Adventurer, Event Altar\3x3\1\5400\Windwhistle Grass, 1200
 Wind Shrine\33\-\Adventurer, Event Altar\3x3\1\5600\Windwhistle Grass, 1300
 Wind Shrine\34\-\Adventurer, Event Altar\3x3\1\5800\Windwhistle Grass, 1400
 Wind Shrine\35\-\Adventurer, Event Altar\3x3\1\6000\Windwhistle Grass, 1500
+Wind Tree\1\A mystical tree filled with wind mana and granted new power upon defeating Ciella. Use it to boost the stats of *wind-attuned* adventurers.\Adventurer, Tree\3x3\1\0
+Wind Tree\2\-\Adventurer, Tree\3x3\1\10000\Eliminating One's Mask Fragment, 10
+Wind Tree\3\-\Adventurer, Tree\3x3\1\20000\Eliminating One's Mask Fragment, 10
+Wind Tree\4\-\Adventurer, Tree\3x3\1\30000\Eliminating One's Mask Fragment, 20
+Wind Tree\5\-\Adventurer, Tree\3x3\1\40000\Eliminating One's Mask Fragment, 20
+Wind Tree\6\-\Adventurer, Tree\3x3\1\50000\Eliminating One's Mask Fragment, 30
+Wind Tree\7\-\Adventurer, Tree\3x3\1\60000\Eliminating One's Mask Fragment, 30
+Wind Tree\8\-\Adventurer, Tree\3x3\1\70000\Eliminating One's Mask Fragment, 30
+Wind Tree\9\-\Adventurer, Tree\3x3\1\80000\Eliminating One's Mask Fragment, 30
+Wind Tree\10\-\Adventurer, Tree\3x3\1\90000\Eliminating One's Mask Fragment, 30
+Wind Tree\11\-\Adventurer, Tree\3x3\1\100000\Eliminating One's Mask Fragment, 35;; Despairing One's Mask Fragment, 5
+Wind Tree\12\-\Adventurer, Tree\3x3\1\110000\Eliminating One's Mask Fragment, 35;; Despairing One's Mask Fragment, 5
+Wind Tree\13\-\Adventurer, Tree\3x3\1\120000\Eliminating One's Mask Fragment, 35;; Despairing One's Mask Fragment, 5
+Wind Tree\14\-\Adventurer, Tree\3x3\1\130000\Eliminating One's Mask Fragment, 35;; Despairing One's Mask Fragment, 5
+Wind Tree\15\-\Adventurer, Tree\3x3\1\140000\Eliminating One's Mask Fragment, 35;; Despairing One's Mask Fragment, 5
 Wishmill\-\A giant toy windmill. The wind that powers it might contain someone's wishes, too.\Decorative\1x1\4\0
 Yuletree\1\A festive tree erected to serve as the centerpiece of the Dragonyule party, and to bring warmth to everyone's hearts. Use it to boost the stats of water-attuned adventurers.\Adventurer, Event Altar\3x3\1\0
 Yuletree\2\-\Adventurer, Event Altar\3x3\1\100\Astral Ornament, 3
