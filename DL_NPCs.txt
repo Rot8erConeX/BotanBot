@@ -1,5 +1,8 @@
 Alberius\1\y\\
+Angie\5\y\\
 Aurelius\1\y\\
+Bareed\1\y\\
+Cait Sith\1\y\\
 Chelle\1\y\\Saori Onishi
 Chief Researcher\1\y\\
 Christmas Slime\3\y\\
@@ -8,6 +11,7 @@ Elysium\1\y\\
 Emile\1\y\\
 Fa Ming\1\y\\
 Felyne\2\y\\
+Genny\5\y\\
 Gold Slime\1\y\\
 Guildmaster\1\y\\
 Harle\1\y\\KENN
