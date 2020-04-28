@@ -48,6 +48,11 @@ Altar\32\-\Adventurer, Altar\3x3\2\46000\Bronze (Tier 1) Orb, 200;; Silver (Tier
 Altar\33\-\Adventurer, Altar\3x3\2\50000\Bronze (Tier 1) Orb, 200;; Silver (Tier 2) Orb, 15;; Gold (Tier 3) Orb, 5
 Altar\34\-\Adventurer, Altar\3x3\2\54000\Bronze (Tier 1) Orb, 250;; Silver (Tier 2) Orb, 18;; Gold (Tier 3) Orb, 7
 Altar\35\-\Adventurer, Altar\3x3\2\58000\Bronze (Tier 1) Orb, 250;; Silver (Tier 2) Orb, 18;; Gold (Tier 3) Orb, 7
+Altar\36\-\Adventurer, Altar\3x3\2\100000\Bronze (Tier 1) Orb, 300;; Silver (Tier 2) Orb, 36;; Gold (Tier 3) Orb, 15;; Golder (Tier 4), 2;; Rainbow Orb, 6
+Altar\37\-\Adventurer, Altar\3x3\2\140000\Bronze (Tier 1) Orb, 350;; Silver (Tier 2) Orb, 87;; Gold (Tier 3) Orb, 30;; Golder (Tier 4), 4;; Rainbow Orb, 12
+Altar\38\-\Adventurer, Altar\3x3\2\190000\Bronze (Tier 1) Orb, 400;; Silver (Tier 2) Orb, 108;; Gold (Tier 3) Orb, 45;; Golder (Tier 4), 6;; Rainbow Orb, 18
+Altar\39\-\Adventurer, Altar\3x3\2\250000\Bronze (Tier 1) Orb, 450;; Silver (Tier 2) Orb, 144;; Gold (Tier 3) Orb, 60;; Golder (Tier 4), 8;; Rainbow Orb, 24
+Altar\40\-\Adventurer, Altar\3x3\2\320000\Bronze (Tier 1) Orb, 500;; Silver (Tier 2) Orb, 180;; Gold (Tier 3) Orb, 75;; Golder (Tier 4), 10;; Rainbow Orb, 30
 Arctos Monument\1\-\Adventurer, Event Altar\3x3\1\0
 Arctos Monument\2\-\Adventurer, Event Altar\3x3\1\100\Motivational Log, 3
 Arctos Monument\3\-\Adventurer, Event Altar\3x3\1\200\Motivational Log, 5
@@ -606,6 +611,11 @@ Flame Altar\32\-\Adventurer, Altar\3x3\2\46000\Flame Orb, 200;; Blaze Orb, 15;; 
 Flame Altar\33\-\Adventurer, Altar\3x3\2\50000\Flame Orb, 200;; Blaze Orb, 15;; Inferno Orb, 5
 Flame Altar\34\-\Adventurer, Altar\3x3\2\54000\Flame Orb, 250;; Blaze Orb, 18;; Inferno Orb, 7
 Flame Altar\35\-\Adventurer, Altar\3x3\2\58000\Flame Orb, 250;; Blaze Orb, 18;; Inferno Orb, 7
+Flame Altar\36\-\Adventurer, Altar\3x3\2\100000\Flame Orb, 300;; Blaze Orb, 36;; Inferno Orb, 15;; Incandescence Orb, 2;; Rainbow Orb, 6
+Flame Altar\37\-\Adventurer, Altar\3x3\2\140000\Flame Orb, 350;; Blaze Orb, 87;; Inferno Orb, 30;; Incandescence Orb, 4;; Rainbow Orb, 12
+Flame Altar\38\-\Adventurer, Altar\3x3\2\190000\Flame Orb, 400;; Blaze Orb, 108;; Inferno Orb, 45;; Incandescence Orb, 6;; Rainbow Orb, 18
+Flame Altar\39\-\Adventurer, Altar\3x3\2\250000\Flame Orb, 450;; Blaze Orb, 144;; Inferno Orb, 60;; Incandescence Orb, 8;; Rainbow Orb, 24
+Flame Altar\40\-\Adventurer, Altar\3x3\2\320000\Flame Orb, 500;; Blaze Orb, 180;; Inferno Orb, 75;; Incandescence Orb, 10;; Rainbow Orb, 30
 Flame Dracolith\1\A monument made in the likeness of a flame dragon. Increases damage dealt when shapeshifting as a flame-attuned dragon.\Dragon, Dracolith\2x2\1\0
 Flame Dracolith\2\-\Dragon, Dracolith\2x2\1\3000
 Flame Dracolith\3\-\Dragon, Dracolith\2x2\1\4000
@@ -744,6 +754,11 @@ Light Altar\32\-\Adventurer, Altar\3x3\2\46000\Light Orb, 200;; Radiance Orb, 15
 Light Altar\33\-\Adventurer, Altar\3x3\2\50000\Light Orb, 200;; Radiance Orb, 15;; Refulgence Orb, 5
 Light Altar\34\-\Adventurer, Altar\3x3\2\54000\Light Orb, 250;; Radiance Orb, 18;; Refulgence Orb, 7
 Light Altar\35\-\Adventurer, Altar\3x3\2\58000\Light Orb, 250;; Radiance Orb, 18;; Refulgence Orb, 7
+Light Altar\36\-\Adventurer, Altar\3x3\2\100000\Light Orb, 300;; Radiance Orb, 36;; Refulgence Orb, 15;; Resplendence Orb, 2;; Rainbow Orb, 6
+Light Altar\37\-\Adventurer, Altar\3x3\2\140000\Light Orb, 350;; Radiance Orb, 87;; Refulgence Orb, 30;; Resplendence Orb, 4;; Rainbow Orb, 12
+Light Altar\38\-\Adventurer, Altar\3x3\2\190000\Light Orb, 400;; Radiance Orb, 108;; Refulgence Orb, 45;; Resplendence Orb, 6;; Rainbow Orb, 18
+Light Altar\39\-\Adventurer, Altar\3x3\2\250000\Light Orb, 450;; Radiance Orb, 144;; Refulgence Orb, 60;; Resplendence Orb, 8;; Rainbow Orb, 24
+Light Altar\40\-\Adventurer, Altar\3x3\2\320000\Light Orb, 500;; Radiance Orb, 180;; Refulgence Orb, 75;; Resplendence Orb, 10;; Rainbow Orb, 30
 Light Dracolith\1\A monument made in the likeness of a light dragon. Increases damage dealt when shapeshifting as a light-attuned dragon.\Dragon, Dracolith\2x2\1\0
 Light Dracolith\2\-\Dragon, Dracolith\2x2\1\3000
 Light Dracolith\3\-\Dragon, Dracolith\2x2\1\4000
@@ -892,6 +907,11 @@ Shadow Altar\32\-\Adventurer, Altar\3x3\2\46000\Shadow Orb, 200;; Nightfall Orb,
 Shadow Altar\33\-\Adventurer, Altar\3x3\2\50000\Shadow Orb, 200;; Nightfall Orb, 15;; Nether Orb, 5
 Shadow Altar\34\-\Adventurer, Altar\3x3\2\54000\Shadow Orb, 250;; Nightfall Orb, 18;; Nether Orb, 7
 Shadow Altar\35\-\Adventurer, Altar\3x3\2\58000\Shadow Orb, 250;; Nightfall Orb, 18;; Nether Orb, 7
+Shadow Altar\36\-\Adventurer, Altar\3x3\2\100000\Shadow Orb, 300;; Nightfall Orb, 36;; Nether Orb, 15;; Abbadon Orb, 2;; Rainbow Orb, 6
+Shadow Altar\37\-\Adventurer, Altar\3x3\2\140000\Shadow Orb, 350;; Nightfall Orb, 87;; Nether Orb, 30;; Abbadon Orb, 4;; Rainbow Orb, 12
+Shadow Altar\38\-\Adventurer, Altar\3x3\2\190000\Shadow Orb, 400;; Nightfall Orb, 108;; Nether Orb, 45;; Abbadon Orb, 6;; Rainbow Orb, 18
+Shadow Altar\39\-\Adventurer, Altar\3x3\2\250000\Shadow Orb, 450;; Nightfall Orb, 144;; Nether Orb, 60;; Abbadon Orb, 8;; Rainbow Orb, 24
+Shadow Altar\40\-\Adventurer, Altar\3x3\2\320000\Shadow Orb, 500;; Nightfall Orb, 180;; Nether Orb, 75;; Abbadon Orb, 10;; Rainbow Orb, 30
 Shadow Dracolith\1\A monument made in the likeness of a dragon. Increases damage dealt when shapeshifting as a shadow-attuned dragon.\Dragon, Dracolith\2x2\1\0
 Shadow Dracolith\2\-\Dragon, Dracolith\2x2\1\3000
 Shadow Dracolith\3\-\Dragon, Dracolith\2x2\1\4000
@@ -1149,6 +1169,11 @@ Water Altar\32\-\Adventurer, Altar\3x3\2\46000\Water Orb, 200;; Stream Orb, 15;;
 Water Altar\33\-\Adventurer, Altar\3x3\2\50000\Water Orb, 200;; Stream Orb, 15;; Deluge Orb, 5
 Water Altar\34\-\Adventurer, Altar\3x3\2\54000\Water Orb, 250;; Stream Orb, 18;; Deluge Orb, 7
 Water Altar\35\-\Adventurer, Altar\3x3\2\58000\Water Orb, 250;; Stream Orb, 18;; Deluge Orb, 7
+Water Altar\36\-\Adventurer, Altar\3x3\2\100000\Water Orb, 300;; Stream Orb, 36;; Deluge Orb, 15;; Tsunami Orb, 2;; Rainbow Orb, 6
+Water Altar\37\-\Adventurer, Altar\3x3\2\140000\Water Orb, 350;; Stream Orb, 87;; Deluge Orb, 30;; Tsunami Orb, 4;; Rainbow Orb, 12
+Water Altar\38\-\Adventurer, Altar\3x3\2\190000\Water Orb, 400;; Stream Orb, 108;; Deluge Orb, 45;; Tsunami Orb, 6;; Rainbow Orb, 18
+Water Altar\39\-\Adventurer, Altar\3x3\2\250000\Water Orb, 450;; Stream Orb, 144;; Deluge Orb, 60;; Tsunami Orb, 8;; Rainbow Orb, 24
+Water Altar\40\-\Adventurer, Altar\3x3\2\320000\Water Orb, 500;; Stream Orb, 180;; Deluge Orb, 75;; Tsunami Orb, 10;; Rainbow Orb, 30
 Water Dracolith\1\A monument made in the likeness of a water dragon. Increases damage dealt when shapeshifting as a water-attuned dragon.\Dragon, Dracolith\2x2\1\0
 Water Dracolith\2\-\Dragon, Dracolith\2x2\1\3000
 Water Dracolith\3\-\Dragon, Dracolith\2x2\1\4000
@@ -1204,6 +1229,11 @@ Wind Altar\32\-\Adventurer, Altar\3x3\2\46000\Wind Orb, 200;; Storm Orb, 15;; Ma
 Wind Altar\33\-\Adventurer, Altar\3x3\2\50000\Wind Orb, 200;; Storm Orb, 15;; Maelstrom Orb, 5
 Wind Altar\34\-\Adventurer, Altar\3x3\2\54000\Wind Orb, 250;; Storm Orb, 18;; Maelstrom Orb, 7
 Wind Altar\35\-\Adventurer, Altar\3x3\2\58000\Wind Orb, 250;; Storm Orb, 18;; Maelstrom Orb, 7
+Wind Altar\36\-\Adventurer, Altar\3x3\2\100000\Wind Orb, 300;; Storm Orb, 36;; Maelstrom Orb, 15;; Tempest Orb, 2;; Rainbow Orb, 6
+Wind Altar\37\-\Adventurer, Altar\3x3\2\140000\Wind Orb, 350;; Storm Orb, 87;; Maelstrom Orb, 30;; Tempest Orb, 4;; Rainbow Orb, 12
+Wind Altar\38\-\Adventurer, Altar\3x3\2\190000\Wind Orb, 400;; Storm Orb, 108;; Maelstrom Orb, 45;; Tempest Orb, 6;; Rainbow Orb, 18
+Wind Altar\39\-\Adventurer, Altar\3x3\2\250000\Wind Orb, 450;; Storm Orb, 144;; Maelstrom Orb, 60;; Tempest Orb, 8;; Rainbow Orb, 24
+Wind Altar\40\-\Adventurer, Altar\3x3\2\320000\Wind Orb, 500;; Storm Orb, 180;; Maelstrom Orb, 75;; Tempest Orb, 10;; Rainbow Orb, 30
 Wind Dracolith\1\A monument made in the likeness of a wind dragon. Increases damage dealt when shapeshifting as a wind-attuned dragon.\Dragon, Dracolith\2x2\1\0
 Wind Dracolith\2\-\Dragon, Dracolith\2x2\1\3000
 Wind Dracolith\3\-\Dragon, Dracolith\2x2\1\4000
