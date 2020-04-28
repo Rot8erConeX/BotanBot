@@ -915,7 +915,7 @@ Chimeratech Sage\Staff\5m\Wind\41, 116, 135\184, 528, 614\\1500, 0\916\0\0\40000
 Chimeratech Marjoram\Staff\5m\Wind\67, 194, 225\263, 753, 877\\1500, 0\917\916\0\900000, -\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Tempest Mane, 25;; Tempest Mane, 10;; Tempest Horn, 3\(Wind) Unyielding Offense +2%\\TempestChimera\2
 Foul Metempsychosis\Sword\4\Water\21, 57, 71\83, 222, 278\\500, 0\918\610\4\50000, 100000\Granite, 7;; Meteorite, 3;; Catoblepas's Hoof, 5;; Deluge Orb, 1\(Water) HP 70% = Strength +5%;;;; (Water) Spectral Shield Penetrator\\CatoblepasFotia\2
 Eternal Metempsychosis\Sword\5\Water\27, 79, 92\108, 311, 362\\1500, 0\919\918\5\300000, 600000\Granite, 15;; Meteorite, 5;; Catoblepas's Heateye, 2;; Deluge Orb, 3\(Water) HP 70% = Strength +8%;;;; (Water) Spectral Shield Penetrator\\CatoblepasFotia\3
-Faerielight Ray\Blade\3\Light\9, 21, 33\43, 93, 144\\, 0\920\310\1\5000, 10000\Granite, 2;; Meteorite, 1;; Old Cloth, 1;; Floating Blue Cloth, 1;; Radiance Orb, 1\\\CeruleanGhost\2
+Faerielight Ray\Blade\3\Light\9, 21, 33\43, 93, 144\\, 0\920\310\1\5000, 10000\Granite, 2;; Meteorite, 1;; Old Cloth, 1;; Floating Blue Cloth, 1;; Radiance Orb, 1\(Light) Paralyzed Punisher +10%;;;; (Light) Petrify Res\\CeruleanGhost\2
 Faerielight Flash\Blade\4\Light\15, 42, 53\68, 183, 229\\, 0\921\920\2\30000, 60000\Granite, 5;; Meteorite, 1;; Floating Blue Cloth, 2;; Abyssal Lantern, 1;; Refulgence Orb, 1\\\CeruleanGhost\3
 Fountain Blade\Blade\4\Water\20, 55, 69\83, 222, 278\\, 0\922\616\4\50000, 100000\Granite, 7;; Meteorite, 3;; Catoblepas's Hoof, 5;; Deluge Orb, 1\\\CatoblepasFotia\2
 Gush Blade\Blade\5\Water\27, 78, 90\108, 310, 361\\, 0\923\922\5\300000, 600000\Granite, 15;; Meteorite, 5;; Catoblepas's Heateye, 2;; Deluge Orb, 3\\\CatoblepasFotia\3
@@ -941,3 +941,11 @@ Ray of Hope\Wand\3\Light\11, 25, 38\39, 85, 133\\, 0\942\285\1\5000, 10000\Ancie
 Dazzling Ray of Hope\Wand\4\Light\18, 49, 61\63, 169, 211\\, 0\943\942\2\30000, 60000\Ancient Bird's Feather, 5;; Bewitching Wings, 1;; Floating Blue Cloth, 2;; Abyssal Lantern, 1;; Refulgence Orb, 1\\\CeruleanGhost\3
 Ruinous Flame\Staff\4\Flame\26, 71, 89\73, 195, 244\\, 0\944\803\4\50000, 100000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Soul Vestiges, 5;; Inferno Orb, 1\\\InfernalPhantom\2
 Ruinous Eruption\Staff\5\Flame\34, 99, 115\95, 273, 317\\, 0\945\944\5\300000, 600000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Infernal Soul, 2;; Inferno Orb, 3\\\InfernalPhantom\3
+Excalibur\Sword\6a\Wind\71, 154, 237\463, 1001, 1544\Gwiber\2000, 0\946\0\0\2000000, -\Eliminating One's Mask Fragment, 40;; Despairing One's Mask Fragment, 30;; Twinkling Sand, 1\\\Ciella\1
+Arondight\Blade\6a\Wind\62, 136, 209\490, 1061, 1636\Gwiber\2000, 0\947\0\0\2000000, -\Eliminating One's Mask Fragment, 40;; Despairing One's Mask Fragment, 30;; Twinkling Sand, 1\\\Ciella\1
+Carnwennan\Dagger\6a\Wind\71, 155, 239\453, 981, 1513\Gwiber\2000, 0\948\0\0\2000000, -\Eliminating One's Mask Fragment, 40;; Despairing One's Mask Fragment, 30;; Twinkling Sand, 1\\\Ciella\1
+Marmyadose\Axe\6a\Wind\73, 159, 244\486, 1051, 1621\Gwiber\2000, 0\949\0\0\2000000, -\Eliminating One's Mask Fragment, 40;; Despairing One's Mask Fragment, 30;; Twinkling Sand, 1\\\Ciella\1
+Rhongomyniad\Lance\6a\Wind\72, 157, 242\472, 1021, 1575\Gwiber\2000, 0\950\0\0\2000000, -\Eliminating One's Mask Fragment, 40;; Despairing One's Mask Fragment, 30;; Twinkling Sand, 1\\\Ciella\1
+Failnaught\Bow\6a\Wind\69, 151, 232\444, 961, 1482\Gwiber\2000, 0\951\0\0\2000000, -\Eliminating One's Mask Fragment, 40;; Despairing One's Mask Fragment, 30;; Twinkling Sand, 1\\\Ciella\1
+Camelot\Wand\6a\Wind\66, 145, 223\477, 1031, 1590\Gwiber\2000, 0\952\0\0\2000000, -\Eliminating One's Mask Fragment, 40;; Despairing One's Mask Fragment, 30;; Twinkling Sand, 1\\\Ciella\1
+Avalon\Staff\6a\Wind\78, 170, 261\440, 951, 1467\Gwiber\2000, 0\953\0\0\2000000, -\Eliminating One's Mask Fragment, 40;; Despairing One's Mask Fragment, 30;; Twinkling Sand, 1\\\Ciella\1
