@@ -924,7 +924,7 @@ def disp_gauntlet_data(bot,event,args=nil,name=nil)
   flds=nil
   ftr='For more detailed information, look up a single element/stage combination.'
   if gaunt.map{|q| q[1]}.uniq.length<2 && gaunt.map{|q| q[2]}.uniq.length<2
-    str="#{str}\n<:HP:573344832307593216>*Maximum HP*: #{longFormattedNumber(gaunt[0][3].to_i)}\n<:Strength:573344931205349376>*Strength*: #{longFormattedNumber(gaunt[0][4].to_i)}#{" - Reward: #{gaunt[0][11]}" unless gaunt[0][11].nil? || gaunt[0][11].length<=0}"
+    str="#{str}\n<:HP:573344832307593216>*Maximum HP*: #{longFormattedNumber(gaunt[0][3].to_i)}\n<:Strength:573344931205349376>*Strength*: #{longFormattedNumber(gaunt[0][4].to_i)}#{"\n*Reward*: #{gaunt[0][11]}" unless gaunt[0][11].nil? || gaunt[0][11].length<=0}"
     flds=[]
     flds.push(['Resistances',gaunt[0][8].gsub(', ',"\n")]) unless gaunt[0][8].nil? || gaunt[0][8].length<=0
     flds.push(['Afflictions',gaunt[0][9].gsub(', ',"\n")]) unless gaunt[0][9].nil? || gaunt[0][9].length<=0
