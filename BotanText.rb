@@ -924,19 +924,19 @@ def disp_gauntlet_data(bot,event,args=nil,name=nil)
   flds=nil
   ftr='For more detailed information, look up a single element/stage combination.'
   if gaunt.map{|q| q[1]}.uniq.length<2 && gaunt.map{|q| q[2]}.uniq.length<2
-    str="#{str}\n<:HP:573344832307593216>*Maximum HP*: #{longFormattedNumber(gaunt[0][3].to_i)}\n<:Strength:573344931205349376>*Strength*: #{longFormattedNumber(gaunt[0][4].to_i)}"
+    str="#{str}\n<:HP:573344832307593216>*Maximum HP*: #{longFormattedNumber(gaunt[0][3].to_i)}\n<:Strength:573344931205349376>*Strength*: #{longFormattedNumber(gaunt[0][4].to_i)}#{" - Reward: #{gaunt[0][11]}" unless gaunt[0][11].nil? || gaunt[0][11].length<=0}"
     flds=[]
     flds.push(['Resistances',gaunt[0][8].gsub(', ',"\n")]) unless gaunt[0][8].nil? || gaunt[0][8].length<=0
     flds.push(['Afflictions',gaunt[0][9].gsub(', ',"\n")]) unless gaunt[0][9].nil? || gaunt[0][9].length<=0
     ftr=nil
   elsif gaunt.map{|q| q[1]}.uniq.length<2
     for i in 0...gaunt.length
-      str="#{str}\n*Stage #{gaunt[i][2]}*: <:HP:573344832307593216>HP: #{longFormattedNumber(gaunt[i][3].to_i)}  <:Strength:573344931205349376>Str: #{longFormattedNumber(gaunt[i][4].to_i)}" if [0,19,39,59,79,99,gaunt.length-1].include?(i) || safe_to_spam?(event)
+      str="#{str}\n*Stage #{gaunt[i][2]}*: <:HP:573344832307593216>HP: #{longFormattedNumber(gaunt[i][3].to_i)}  <:Strength:573344931205349376>Str: #{longFormattedNumber(gaunt[i][4].to_i)}#{" - Reward: #{gaunt[i][11]}" unless gaunt[i][11].nil? || gaunt[i][11].length<=0}" if [0,19,39,59,79,99,gaunt.length-1].include?(i) || safe_to_spam?(event)
     end
   elsif gaunt.map{|q| q[2]}.uniq.length<2
     for i in 0...gaunt.length
       moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{gaunt[i][1].gsub('None','Null')}"}
-      str="#{str}\n#{moji[0].mention if moji.length>0}*#{gaunt[i][1]}*: <:HP:573344832307593216>HP: #{longFormattedNumber(gaunt[i][3].to_i)}  <:Strength:573344931205349376>Str: #{longFormattedNumber(gaunt[i][4].to_i)}"
+      str="#{str}\n#{moji[0].mention if moji.length>0}*#{gaunt[i][1]}*: <:HP:573344832307593216>HP: #{longFormattedNumber(gaunt[i][3].to_i)}  <:Strength:573344931205349376>Str: #{longFormattedNumber(gaunt[i][4].to_i)}#{" - Reward: #{gaunt[i][11]}" unless gaunt[i][11].nil? || gaunt[i][11].length<=0}"
     end
   else
     flds=[]
@@ -946,7 +946,7 @@ def disp_gauntlet_data(bot,event,args=nil,name=nil)
       f2=gaunt.reject{|q| q[1]!=f[i]}
       f2=f2.sort{|a,b| a[2]<=>b[2]}
       f3="*Stage #{f2[0][2]}*: <:HP:573344832307593216>HP: #{longFormattedNumber(f2[0][3].to_i)}  <:Strength:573344931205349376>Str: #{longFormattedNumber(f2[0][4].to_i)}"
-      f3="#{f3}\n*Stage #{f2[-1][2]}*: <:HP:573344832307593216>HP: #{longFormattedNumber(f2[-1][3].to_i)}  <:Strength:573344931205349376>Str: #{longFormattedNumber(f2[-1][4].to_i)}"
+      f3="#{f3}\n*Stage #{f2[-1][2]}*: <:HP:573344832307593216>HP: #{longFormattedNumber(f2[-1][3].to_i)}  <:Strength:573344931205349376>Str: #{longFormattedNumber(f2[-1][4].to_i)}#{" - Reward: #{f2[-1][11]}" unless f2[-1][11].nil? || f2[-1][11].length<=0}"
       flds.push(["#{moji[0].mention unless moji.length<=0}#{f[i]}",f3])
     end
   end
@@ -5051,9 +5051,9 @@ def show_bot_status(event,bot)
     event << "<https://twitter.com/extrachiz>"
     event << "<https://ko-fi.com/extrachiz>"
     event << ''
-    event << "Dev's timezone: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}) | #{'0' if t.hour<10}#{t.hour}:#{'0' if t.min<10}#{t.min}"
+    event << "#{'Dev' if @shardizard==4}#{'Van' unless @shardizard==4}'s timezone: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}) | #{'0' if t.hour<10}#{t.hour}:#{'0' if t.min<10}#{t.min}"
   else
-    create_embed(event,'',"Adventurer/Dragon in avatar: #{@avvie_info[0]}\n\nCurrent status:\n[Playing] #{@avvie_info[1]}#{"\n\nReason: #{@avvie_info[2]}" unless @avvie_info[2].length.zero?}\n\n[For a full calendar of avatars, click here](https://docs.google.com/spreadsheets/d/1j-tdpotMO_DcppRLNnT8DN8Ftau-rdQ-ZmZh5rZkZP0/edit?usp=sharing)\nextrachiz, she who made my default avatar: [Twitter](https://twitter.com/extrachiz)  \u00B7  [Ko-fi](https://ko-fi.com/extrachiz)",(t.day*7+t.month*21*256+(t.year-2000)*10*256*256),"Dev's timezone: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}) | #{'0' if t.hour<10}#{t.hour}:#{'0' if t.min<10}#{t.min}",bot.user(543373018303299585).avatar_url)
+    create_embed(event,'',"Adventurer/Dragon in avatar: #{@avvie_info[0]}\n\nCurrent status:\n[Playing] #{@avvie_info[1]}#{"\n\nReason: #{@avvie_info[2]}" unless @avvie_info[2].length.zero?}\n\n[For a full calendar of avatars, click here](https://docs.google.com/spreadsheets/d/1j-tdpotMO_DcppRLNnT8DN8Ftau-rdQ-ZmZh5rZkZP0/edit?usp=sharing)\nextrachiz, she who made my default avatar: [Twitter](https://twitter.com/extrachiz)  \u00B7  [Ko-fi](https://ko-fi.com/extrachiz)",(t.day*7+t.month*21*256+(t.year-2000)*10*256*256),"#{'Dev' if @shardizard==4}#{'Van' unless @shardizard==4}'s timezone: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}) | #{'0' if t.hour<10}#{t.hour}:#{'0' if t.min<10}#{t.min}",bot.user(543373018303299585).avatar_url)
   end
 end
 
