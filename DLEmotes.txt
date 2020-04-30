@@ -1,5 +1,6 @@
 Again!\Luca
 Ahoo\Fafnir
+Anything Can Change\Chrom
 Argh\Euden
 Begging For Forgiveness\Dr. Wily
 Boom\Notte
@@ -7,6 +8,7 @@ Bravo\Mym, Sarisse
 Down\
 Eh Eh\Elisanne
 Energy Tank\Mega Man
+Feh\Feh
 Felyne\Felyne
 For Real\Ranzal
 Game Over\
@@ -36,6 +38,7 @@ IT'S UP TO YOU\Luca
 Keep it Up\Melody
 Leave it to me!\Alfonse
 Left\
+Let's Be Friends\Sharena
 Let's Fight Together\Elisanne
 Let's Go!\Fjorm
 Let's Play\Veronica
@@ -53,6 +56,7 @@ Okay\Euden
 OMG\>Unknown<
 On Me!\Euden
 On My Way\Ranzal
+Puppy\Puppy
 Really\Elisanne
 Right\
 See Ya\Luca
@@ -62,6 +66,7 @@ Sorry\Elisanne
 Squishums\Squishum
 Steel Stalwart\Mega Man
 Sup\Sarisse
+Sweet Dreams\Peony
 Take Defense\Euden
 Three Cheers for Me\Mym 
 Time For a Break\Cleo
