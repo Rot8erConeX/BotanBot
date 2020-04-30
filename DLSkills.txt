@@ -2375,6 +2375,11 @@ Overdrive Punisher & Gauge Accelerator\12/10%\CoAbility\Increases damage to enem
 Overdrive Punisher & Gauge Accelerator\13/10%\CoAbility\Increases damage to enemies in overdrive state by 13% and the rate the mode gauge decreases by 10%.\240\y\OverdrivePunisher
 Overdrive Punisher & Gauge Accelerator\14/10%\CoAbility\Increases damage to enemies in overdrive state by 14% and the rate the mode gauge decreases by 10%.\280\y\OverdrivePunisher
 Overdrive Punisher & Gauge Accelerator\15/10%\CoAbility\Increases damage to enemies in overdrive state by 15% and the rate the mode gauge decreases by 10%.\320\y\OverdrivePunisher
+Paralyzed Punisher\4%\CoAbility\Increases damage to paralyzed enemies by 4%.\160\n\ParalyzedPunisher
+Paralyzed Punisher\5%\CoAbility\Increases damage to paralyzed enemies by 5%.\200\n\ParalyzedPunisher
+Paralyzed Punisher\6%\CoAbility\Increases damage to paralyzed enemies by 6%.\240\n\ParalyzedPunisher
+Paralyzed Punisher\7%\CoAbility\Increases damage to paralyzed enemies by 7%.\280\n\ParalyzedPunisher
+Paralyzed Punisher\8%\CoAbility\Increases damage to paralyzed enemies by 8%.\320\n\ParalyzedPunisher
 Recovery Potency\2%\CoAbility\Increases the potency of recovery skills by 2%.\50\n\RecoveryPotency
 Recovery Potency\4%\CoAbility\Increases the potency of recovery skills by 4%.\80\n\RecoveryPotency
 Recovery Potency\6%\CoAbility\Increases the potency of recovery skills by 6%.\110\n\RecoveryPotency
