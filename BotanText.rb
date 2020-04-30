@@ -4806,14 +4806,12 @@ def disp_adv_chain(event,args,bot)
       k6[-1].push(k2[i][0]) # name
     end
   end
-  xseed=['HP','Strength','Defense']
+  xseed=['HP','Strength']
   for i in 0...k6.length
     xseed.push("(#{k6[i][1]}) HP")
     xseed.push("(#{k6[i][2]}) HP")
     xseed.push("(#{k6[i][1]}) Strength")
     xseed.push("(#{k6[i][2]}) Strength")
-    xseed.push("(#{k6[i][1]}) Defense")
-    xseed.push("(#{k6[i][2]}) Defense")
   end
   xseed.uniq!
   romanums=['Ox0','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV',
@@ -4824,7 +4822,10 @@ def disp_adv_chain(event,args,bot)
     if k4[i].include?(' & ')
       k4[i]=k4[i].split(' ')
       k4[i]=[k4[i][0,k4[i].length-1].join(' ').split(' & '),k4[i][-1]]
-      if k4[i][0][0,k4[i][0].length-1].reject{|q| !q.include?('%') && !q.include?('/')}.length>0
+      if k4[i][0].include?('HP') || k4[i][0].include?('Strength') || k4[i][0].include?('Defense')
+        k4[i][0]=k4[i][0].join(' & ')
+        kk4.push(k4[i].join(' '))
+      elsif k4[i][0][0,k4[i][0].length-1].reject{|q| !q.include?('%') && !q.include?('/')}.length>0
         k4[i][0][-1]="#{k4[i][0][-1]} #{k4[i][-1]}"
         kk4.push(k4[i][0])
       elsif k4[i][-1].include?('%') || k4[i][-1].include?('/') || k4[i][-1].to_i.to_s==k4[i][-1]
@@ -4864,7 +4865,25 @@ def disp_adv_chain(event,args,bot)
     end
     k4[i][0]="#{k4[i][0]} [Coab]" if xseed.include?(k4[i][0])
   end
-  k5=k5.map{|q| q.split(' & ')}.flatten
+  kk5=[]
+  for i in 0...k5.length
+    if k5[i].include?(' & ')
+      k5[i]=k5[i].split(' ')
+      k5[i]=[k5[i][0,k5[i].length-1].join(' ').split(' & '),k5[i][-1]]
+      if k5[i][0][0,k5[i][0].length-1].reject{|q| !q.include?('%') && !q.include?('/')}.length>0
+        k5[i][0][-1]="#{k5[i][0][-1]} #{k5[i][-1]}"
+        kk5.push(k5[i][0])
+      elsif k5[i][-1].include?('%') || k5[i][-1].include?('/') || k5[i][-1].to_i.to_s==k5[i][-1]
+        kk5.push(k5[i][0].map{|q| "#{q} #{k5[i][-1]}"})
+      else
+        k5[i][0][-1]="#{k5[i][0][-1]} #{k5[i][-1]}"
+        kk5.push(k5[i][0])
+      end
+    else
+      kk5.push(k5[i])
+    end
+  end
+  k5=kk5.map{|q| q}.flatten
   for i in 0...k5.length
     k5[i]=k5[i].gsub("(#{k6[0][1]}) ",'') if k6.map{|q| q[1]}.uniq.length<=1
     k5[i]=k5[i].gsub("(#{k6[0][2]}) ",'') if k6.map{|q| q[2]}.uniq.length<=1
@@ -4998,7 +5017,7 @@ def disp_adv_chain(event,args,bot)
       p2=0
       p2=4 if p.include?('HP')
       p2=5 if p.include?('Strength')
-      p2=6 if p.include?('Defense')
+      p2=3 if p.include?('Defense')
       if elem_stats.map{|q| q[0]}.include?(m[i].split(') ')[0].gsub('(',''))
         p1=elem_stats.find_index{|q| q[0]==m[i].split(') ')[0].gsub('(','')}
         elem_stats[p1][p2]+=mmm[mx][1]
@@ -5014,6 +5033,26 @@ def disp_adv_chain(event,args,bot)
     elsif m[i][0,9]=='Defense +'
       mx=mmm.find_index{|q| q[0]==skillname}
       elem_stats[0][3]+=mmm[mx][1]
+    elsif m[i].split(') ')[-1][0,4]=='HP +' && elem_stats.map{|q| q[0]}.include?(m[i].split(') ')[0].gsub('(',''))
+      p1=elem_stats.find_index{|q| q[0]==m[i].split(') ')[0].gsub('(','')}
+      mx=mmm.find_index{|q| q[0]==skillname}
+      elem_stats[p1][1]+=mmm[mx][1]
+    elsif m[i].split(') ')[-1][0,10]=='Strength +' && elem_stats.map{|q| q[0]}.include?(m[i].split(') ')[0].gsub('(',''))
+      p1=elem_stats.find_index{|q| q[0]==m[i].split(') ')[0].gsub('(','')}
+      mx=mmm.find_index{|q| q[0]==skillname}
+      elem_stats[p1][2]+=mmm[mx][1]
+    elsif m[i].split(') ')[-1][0,9]=='Defense +' && elem_stats.map{|q| q[0]}.include?(m[i].split(') ')[0].gsub('(',''))
+      p1=elem_stats.find_index{|q| q[0]==m[i].split(') ')[0].gsub('(','')}
+      mx=mmm.find_index{|q| q[0]==skillname}
+      elem_stats[p1][3]+=mmm[mx][1]
+    elsif m[i].include?(' & ')
+      mx=mmm.find_index{|q| q[0]==skillname}
+      mmx=mmm[mx][0].split(' & ')
+      p1=elem_stats.find_index{|q| q[0]==m[i].split(') ')[0].gsub('(','')}
+      p1=0 if p1.nil?
+      elem_stats[p1][1]+=mmm[mx][1] if mmx.include?('HP')
+      elem_stats[p1][2]+=mmm[mx][1] if mmx.include?('Strength')
+      elem_stats[p1][3]+=mmm[mx][1] if mmx.include?('Defense')
     end
   end
   m.sort!{|a,b| a.gsub('~~','')<=>b.gsub('~~','')}
@@ -5021,7 +5060,7 @@ def disp_adv_chain(event,args,bot)
   for i in 0...m.length
     str=extend_message(str,m[i],event)
   end
-  if elem_stats[1,elem_stats.length-1].map{|q| q[1,q.length-1].max}.reject{|q| q<=0}.length>0
+  if elem_stats[1,elem_stats.length-1].map{|q| q[1,q.length-1].max}.reject{|q| q<=0}.length>0 || m.reject{|q| !q.include?(' & ')}.length>0
     str=extend_message(str,'__***Calculated Buffs***__',event,2)
     for i in 0...k6.length
       str3=[]
