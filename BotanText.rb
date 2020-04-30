@@ -4824,7 +4824,7 @@ def disp_adv_chain(event,args,bot)
     if k4[i].include?(' & ')
       k4[i]=k4[i].split(' ')
       k4[i]=[k4[i][0,k4[i].length-1].join(' ').split(' & '),k4[i][-1]]
-      if k4[i][0][0,k4[i][0].length-1].reject{|q| q.include?('%') || q.include?('/')}.length>0
+      if k4[i][0][0,k4[i][0].length-1].reject{|q| !q.include?('%') && !q.include?('/')}.length>0
         k4[i][0][-1]="#{k4[i][0][-1]} #{k4[i][-1]}"
         kk4.push(k4[i][0])
       elsif k4[i][-1].include?('%') || k4[i][-1].include?('/') || k4[i][-1].to_i.to_s==k4[i][-1]
