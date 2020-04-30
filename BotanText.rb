@@ -4819,7 +4819,25 @@ def disp_adv_chain(event,args,bot)
   romanums=['Ox0','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV',
             'XXV','XXVI','XXVII','XXVIII','XXIX','XXX','XXXI','XXXII','XXXIII','XXXIV','XXXV','XXXVI','XXXVII','XXXVIII','XXXIX','XL','XLI','XLII','XLII',
             'XLIII','XLIV','XLV','XLVI','XLVII','XLVIII','XLIX','L']
-  k4=k4.map{|q| q.split(' & ')}.flatten
+  kk4=[]
+  for i in 0...k4.length
+    if k4[i].include?(' & ')
+      k4[i]=k4[i].split(' ')
+      k4[i]=[k4[i][0,k4[i].length-1].join(' ').split(' & '),k4[i][-1]]
+      if k4[i][0][0,k4[i][0].length-1].reject{|q| q.include?('%') || q.include?('/')}.length>0
+        k4[i][0][-1]="#{k4[i][0][-1]} #{k4[i][-1]}"
+        kk4.push(k4[i][0])
+      elsif k4[i][-1].include?('%') || k4[i][-1].include?('/') || k4[i][-1].to_i.to_s==k4[i][-1]
+        kk4.push(k4[i][0].map{|q| "#{q} #{k4[i][-1]}"})
+      else
+        k4[i][0][-1]="#{k4[i][0][-1]} #{k4[i][-1]}"
+        kk4.push(k4[i][0])
+      end
+    else
+      kk4.push(k4[i])
+    end
+  end
+  k4=kk4.map{|q| q}.flatten
   for i in 0...k4.length
     k4[i]=k4[i].gsub("(#{k6[0][1]}) ",'') if k6.map{|q| q[1]}.uniq.length<=1
     k4[i]=k4[i].gsub("(#{k6[0][2]}) ",'') if k6.map{|q| q[2]}.uniq.length<=1
