@@ -2093,6 +2093,10 @@ Resilient Offense\5%\Ability\Increases strength by 5% for the remainder of the q
 Resilient Offense\8%\Ability\Increases strength by 8% for the remainder of the quest when the user's HP drops to 30% (three times per quest).\80\y\StrengthSkill, Resilient
 Resilient Offense\10%\Ability\Increases strength by 10% for the remainder of the quest when the user's HP drops to 30% (three times per quest).\80\y\StrengthSkill, Resilient
 Resilient Offense\15%\Ability\Increases strength by 15% for the remainder of the quest when the user's HP drops to 30% (three times per quest).\100\y\StrengthSkill, Resilient
+Resolve\example\Ability\Increases resolve intake for clearing quests by `x`%.\0\y\Event, Score
+Resolve\30%\Ability\Increases resolve intake for clearing quests by 30%\0\y\Event, Score
+Resolve\45%\Ability\Increases resolve intake for clearing quests by 45%\0\y\Event, Score
+Resolve\60%\Ability\Increases resolve intake for clearing quests by 60%\0\y\Event, Score
 Rightful King\-\Ability\If Aether is used when the user has three stacks of Flames of Awakening, and their skill reservoir is at level three, a variant called Awakening Aether will be used instead. Using Awakening Aether will consume all three stacks of Flames of Awakening and empty the user's skill reservoir.\120\y\Unique
 Sacred Shield\example\Ability\Reduces susceptibility to poison and curses by `x`%.\0\y\Resistance, BlindnessRes, PoisonRes
 Sacred Shield\I\Ability\Reduces susceptibility to poison and curses by 50%.\80\y\Resistance, BlindnessRes, PoisonRes
@@ -2145,6 +2149,10 @@ Skill Prep & Skill Charge\-\Ability\Fills 100% of skill gauges at the start of q
 Skill Resistance\-\Ability\Reduces the damage received from skills by 35%.\-1\y\SkillRes, Enemy
 Skill Resistance Penetrator\-\Ability\Completely negates skill resistance.\50\y\SkillResistancePenetrator
 Slayer's Flurry Strength\I\Ability\Increases strength by 6% for every five enemies defeated (up to five times per quest), and increases strength by 8% when the combo count is 15 or higher.\100\y\StrengthSkill, Slayers, Combo, Flurry
+Slayer's Devastation\example\Ability\Increases critical rate by `x`% for every five enemies defeated (up to three times per quest).\0\y\CritRate, Slayers
+Slayer's Devastation\3%\Ability\Increases critical rate by 3% for every five enemies defeated (up to three times per quest).\60\y\CritRate, Slayers
+Slayer's Devastation\4%\Ability\Increases critical rate by 4% for every five enemies defeated (up to three times per quest).\80\y\CritRate, Slayers
+Slayer's Devastation\5%\Ability\Increases critical rate by 5% for every five enemies defeated (up to three times per quest).\100\y\CritRate, Slayers
 Slayer's Strength\example\Ability\Increases strength by `x`% for every five enemies defeated (up to five times per quest).\0\y\StrengthSkill, Slayers
 Slayer's Strength\2%\Ability\Increases strength by 2% for every five enemies defeated (up to five times per quest).\20\y\StrengthSkill, Slayers
 Slayer's Strength\3%\Ability\Increases strength by 3% for every five enemies defeated (up to five times per quest).\40\y\StrengthSkill, Slayers
