@@ -815,6 +815,10 @@ def find_ability(name,event,fullname=false,ext=false)
   return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   k=sklz.reject{|q| "#{q[0]} +#{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name || q[1].downcase=='example'}
   return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
+  k=sklz.reject{|q| "#{q[1]} #{q[0]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name || q[1].downcase=='example'}
+  return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
+  k=sklz.reject{|q| "#{q[1].gsub('%','')} #{q[0]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name || q[1].downcase=='example'}
+  return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   k=sklz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
   return sklz.reject{|q| q[0]!=sklz[k][0]} unless k.nil?
   k=sklz.reject{|q| q[0].length<7 || q[0][0,7]!='Hits = ' || "#{q[1]} #{q[0]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name || q[1].downcase=='example'}
@@ -866,6 +870,10 @@ def find_ability(name,event,fullname=false,ext=false)
   return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   k=sklz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return sklz.reject{|q| q[0]!=sklz[k][0]} unless k.nil?
+  k=sklz.reject{|q| "#{q[1]} #{q[0]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]!=name || name.length<=q[1].to_s.length || q[1].downcase=='example'}
+  return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
+  k=sklz.reject{|q| "#{q[1].gsub('%','')} #{q[0]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]!=name || name.length<=q[1].to_s.length || q[1].downcase=='example'}
+  return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   k=sklz.reject{|q| q[0].length<7 || q[0][0,7]!='Hits = ' || "#{q[1]} #{q[0]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]!=name || q[1].downcase=='example'}
   return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   k=alz.find_index{|q| q[0][0,name.length]!=q[0][0,name.length].to_i.to_s && q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
@@ -3056,7 +3064,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
       lng=false if k[0][1].downcase=='example'
       for ii2 in 0...k.length
         if k[ii2][1]=='example'
-          str="#{str}\n__**Example Effect**__\n#{k[ii2][3]}\n"
+          str="#{str}\n__**Example #{'Chain ' if k[ii2][2]=='Chain' && k.map{|q| q[2]}.uniq.length>1}Effect**__\n#{k[ii2][3]}\n"
         elsif s2s
           if k[ii2][0][0,7]=='Hits = '
             str="#{str}\n\n#{'__' if lng}**#{k[ii2][1]} #{k[ii2][0]}**#{'__' if lng}"
@@ -3721,6 +3729,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         lne='' if i==0
         lne="\n" if m[2][i][0,1]=='*'
         lne="\n"*m[0] if i>0 && m[2][i-1].include?('__**Example')
+        lne="\n"*m[0] if m[2][i].include?("\n")
         lne="\n"*m[0] if m[2][i][0,2]=='**'
         if "#{str}#{lne}#{m[2][i]}".length>=1900
           if m[1]==0
