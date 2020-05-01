@@ -110,4 +110,4 @@ Aspidochelone\70000, -1, 800000, -1, 4700000, 5200000, 18135000, 1800000; 340, -
 Light Manticore\4200, -1, 17430; 233, -1, 1063\Light, Therion, Boss, Scars of the Syndicate\Poison: **0%**, Burn: **0%**, Paralysis: **0%**, Blind: **0%**, Bog: **0%**, Frostbite: **0%**\Tell us with `DL!feedback`\
 Volk\-1, 1759649, 8711648; -1, 7230, 10064\Wind, Therion, Agito, Agito Uprising\Poison: **0%**, Burn: **0%**, Blind: *99%*, Stun: *99%*, Bog: *99%*, Sleep: *99%*, Frostbite: **0%**\Sleep, Stun, Poison\Plague;; Life Drain
 Kai Yan\-1, 2463508, 9486159; -1, 3615, 6075\Light, Therion, Agito, Agito Uprising\Poison: **0%**, Burn: **0%**, Stun: *99%*, Bog: *99%*, Sleep: *99%*, Frostbite: **0%**\Blind, Paralysis\Reflection Shield;; Battleground
-Ciella\0; 0\Water, Demihuman, Agito, Agito Uprising\TBC please 100% stun res\Freeze, Bog\Veil;; Vulnerability
+Ciella\-1, 1987650, 8114653; -1, 7230, 7230\Water, Demihuman, Agito, Agito Uprising\Poison: **0%**, Burn: **0%**, Frostbite: **0%**, **Standard:** Stun/Bog/Sleep: *99%*\Freeze, Bog\Veil;; Vulnerability
