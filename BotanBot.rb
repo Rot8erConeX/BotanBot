@@ -811,6 +811,8 @@ def find_ability(name,event,fullname=false,ext=false)
   return [] if name.length<2
   k=sklz2.reject{|q| "#{q[0]} #{romanums.find_index{|q2| q2==q[1]}}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name || q[1].downcase=='example'}
   return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
+  k=sklz2.reject{|q| "#{romanums.find_index{|q2| q2==q[1]}} #{q[0]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name || q[1].downcase=='example'}
+  return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   k=sklz.reject{|q| "#{q[0]} #{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name || q[1].downcase=='example'}
   return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   k=sklz.reject{|q| "#{q[0]} +#{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=name || q[1].downcase=='example'}
@@ -864,6 +866,8 @@ def find_ability(name,event,fullname=false,ext=false)
     return sklz2[m] unless m.nil?
   end
   return [] if fullname || name.length<=2
+  k=sklz2.reject{|q| "#{romanums.find_index{|q2| q2==q[1]}} #{q[0]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]!=name || q[1].downcase=='example'}
+  return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   k=sklz.reject{|q| "#{q[0]} #{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]!=name || q[1].downcase=='example'}
   return k.reject{|q| q[0]!=k[0][0]} unless k.nil? || k.length<=0
   k=sklz.reject{|q| "#{q[0]} +#{q[1]}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]!=name || q[1].downcase=='example'}
