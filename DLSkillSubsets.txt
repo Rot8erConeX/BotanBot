@@ -17,7 +17,7 @@
 ["AfflictionPunisher", ["afflictionpunisher", "statuspunisher"], "Askillity"]
 ["Allies", ["allied", "allies", "ally", "allys"], "Askillity"]
 ["Astral", ["astra", "astral"], "Askillity"]
-["AutoAttack", ["autoatk", "autoatt", "autoattack", "automaticatk", "automaticatt", "automaticattack"], "Askillity"]
+["AutoAttack", ["autoatk", "autoatt", "autoattack", "automaticatk", "automaticatt", "automaticattack", "standardattack", "standardattacks", "stdatk", "stdattack", "stdattacks", "stdatks"], "Askillity"]
 ["Bane", ["bane", "banes"], "Askillity"]
 ["Bleed", ["bleed", "bleeding"], "Askillity"]
 ["BleedingPunisher", ["bleedingpunish", "bleedingpunisher", "bleedpunish", "bleedpunisher"], "Askillity"]
