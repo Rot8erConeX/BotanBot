@@ -1156,7 +1156,10 @@ def adv_emoji(k,bot,ignorefeh=false,advheader=false)
     wpn='<:Green_Blade:467122927230386207>' if k[2][2]=='Axe'
     wpn='<:Colorless_Bow:443692132616896512>' if k[2][2]=='Bow'
     wpn='<:Blue_Blade:467112472768151562>' if k[2][2]=='Lance'
-    wpn='<:Green_Tome:467122927666593822>' if k[2][2]=='Wand'
+    wpn='<:Colorless_Tome:443692133317345290>' if k[2][2]=='Wand'
+    wpn='<:Red_Tome:443172811826003968>' if k[2][2]=='Wand' && ['Flame','Shadow'].include?(k[2][1])
+    wpn='<:Blue_Tome:467112472394858508>' if k[2][2]=='Wand' && ['Water','Light'].include?(k[2][1])
+    wpn='<:Green_Tome:467122927666593822>' if k[2][2]=='Wand' && k[2][1]=='Wind'
     wpn='<:Colorless_Staff:443692132323295243>' if k[2][2]=='Staff'
     str="#{str}#{wpn}#{"#{k[2][2]}  " if advheader}"
     clzz='<:Resource_Structure:510774545154572298>'
@@ -1295,7 +1298,10 @@ def weapon_emoji(k,bot,ignorefeh=false)
     wpn='<:Green_Blade:467122927230386207>' if k[1]=='Axe'
     wpn='<:Colorless_Bow:443692132616896512>' if k[1]=='Bow'
     wpn='<:Blue_Blade:467112472768151562>' if k[1]=='Lance'
-    wpn='<:Green_Tome:467122927666593822>' if k[1]=='Wand'
+    wpn='<:Colorless_Tome:443692133317345290>' if k[1]=='Wand'
+    wpn='<:Red_Tome:443172811826003968>' if k[1]=='Wand' && ['Flame','Shadow'].include?(k[3])
+    wpn='<:Blue_Tome:467112472394858508>' if k[1]=='Wand' && ['Water','Light'].include?(k[3])
+    wpn='<:Green_Tome:467122927666593822>' if k[1]=='Wand' && k[3]=='Wind'
     wpn='<:Colorless_Staff:443692132323295243>' if k[1]=='Staff'
     str="#{str}#{wpn}"
     str="#{str}<:Current_Tempest_Bonus:498797966740422656>" if k[2].length>1 && k[2][1,1].downcase=='v'
@@ -1310,7 +1316,7 @@ def weapon_emoji(k,bot,ignorefeh=false)
     wpn='<:Green_Blade:467122927230386207>' if k[1]=='Axe'
     wpn='<:Colorless_Bow:443692132616896512>' if k[1]=='Bow'
     wpn='<:Blue_Blade:467112472768151562>' if k[1]=='Lance'
-    wpn='<:Green_Tome:467122927666593822>' if k[1]=='Wand'
+    wpn='<:Colorless_Tome:443692133317345290>' if k[1]=='Wand'
     wpn='<:Colorless_Staff:443692132323295243>' if k[1]=='Staff'
     str="#{str}#{wpn}"
     str="#{str}<:class_beast_gold:562413138356731905>" if k[2].length>1 && k[2][1,1].downcase=='v'
@@ -1458,7 +1464,10 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     wpn='<:Green_Blade:467122927230386207>' if k[2][2]=='Axe'
     wpn='<:Colorless_Bow:443692132616896512>' if k[2][2]=='Bow'
     wpn='<:Blue_Blade:467112472768151562>' if k[2][2]=='Lance'
-    wpn='<:Green_Tome:467122927666593822>' if k[2][2]=='Wand'
+    wpn='<:Colorless_Tome:443692133317345290>' if k[2][2]=='Wand'
+    wpn='<:Red_Tome:443172811826003968>' if k[2][2]=='Wand' && ['Flame','Shadow'].include?(k[2][1])
+    wpn='<:Blue_Tome:467112472394858508>' if k[2][2]=='Wand' && ['Water','Light'].include?(k[2][1])
+    wpn='<:Green_Tome:467122927666593822>' if k[2][2]=='Wand' && k[2][1]=='Wind'
     wpn='<:Colorless_Staff:443692132323295243>' if k[2][2]=='Staff'
     title="#{title}\n#{wpn}**#{k[2][2]}**  <:DefenseS:514712247461871616>#{longFormattedNumber(k[5])}"
     clzz='<:Resource_Structure:510774545154572298>'
@@ -1970,7 +1979,10 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     wpn='<:Green_Blade:467122927230386207>' if k[1]=='Axe'
     wpn='<:Colorless_Bow:443692132616896512>' if k[1]=='Bow'
     wpn='<:Blue_Blade:467112472768151562>' if k[1]=='Lance'
-    wpn='<:Green_Tome:467122927666593822>' if k[1]=='Wand'
+    wpn='<:Colorless_Tome:443692133317345290>' if k[1]=='Wand'
+    wpn='<:Red_Tome:443172811826003968>' if k[1]=='Wand' && ['Flame','Shadow'].include?(k[3])
+    wpn='<:Blue_Tome:467112472394858508>' if k[1]=='Wand' && ['Water','Light'].include?(k[3])
+    wpn='<:Green_Tome:467122927666593822>' if k[1]=='Wand' && k[3]=='Wind'
     wpn='<:Colorless_Staff:443692132323295243>' if k[1]=='Staff'
     title="#{title}\n#{wpn}**#{k[1]}**"
     title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
@@ -2280,7 +2292,10 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     wpn='<:Green_Blade:467122927230386207>' if k[1]=='Axe'
     wpn='<:Colorless_Bow:443692132616896512>' if k[1]=='Bow'
     wpn='<:Blue_Blade:467112472768151562>' if k[1]=='Lance'
-    wpn='<:Green_Tome:467122927666593822>' if k[1]=='Wand'
+    wpn='<:Colorless_Tome:443692133317345290>' if k[1]=='Wand'
+    wpn='<:Red_Tome:443172811826003968>' if k[1]=='Wand' && ['Flame','Shadow'].include?(k[3])
+    wpn='<:Blue_Tome:467112472394858508>' if k[1]=='Wand' && ['Water','Light'].include?(k[3])
+    wpn='<:Green_Tome:467122927666593822>' if k[1]=='Wand' && k[3]=='Wind'
     wpn='<:Colorless_Staff:443692132323295243>' if k[1]=='Staff'
     title="#{title}\n#{wpn}**#{k[1]}**"
     title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
@@ -2744,7 +2759,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
          ['Axe','<:Weapon_Axe:532106114188443659>','<:Green_Blade:467122927230386207>'],
          ['Bow','<:Weapon_Bow:532106114909732864>','<:Colorless_Bow:443692132616896512>'],
          ['Lance','<:Weapon_Lance:532106114792423448>','<:Blue_Blade:467112472768151562>'],
-         ['Wand','<:Weapon_Wand:532106114985099264>','<:Green_Tome:467122927666593822>'],
+         ['Wand','<:Weapon_Wand:532106114985099264>','<:Colorless_Tome:443692133317345290>'],
          ['Staff','<:Weapon_Staff:532106114733441024>','<:Colorless_Staff:443692132323295243>']]
   elemo=elemo.map{|q| [q[0],q[1],q[1]]} if ignorefeh
   if k[0].is_a?(Array)
@@ -2885,7 +2900,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
               wemo='<:Green_Blade:467122927230386207>' if wep[i][1]=='Axe'
               wemo='<:Colorless_Bow:443692132616896512>' if wep[i][1]=='Bow'
               wemo='<:Blue_Blade:467112472768151562>' if wep[i][1]=='Lance'
-              wemo='<:Green_Tome:467122927666593822>' if wep[i][1]=='Wand'
+              wemo='<:Colorless_Tome:443692133317345290>' if wep[i][1]=='Wand'
               wemo='<:Colorless_Staff:443692132323295243>' if wep[i][1]=='Staff'
             end
             if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
@@ -3025,7 +3040,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
                 wemo='<:Green_Blade:467122927230386207>' if wep[i][1]=='Axe'
                 wemo='<:Colorless_Bow:443692132616896512>' if wep[i][1]=='Bow'
                 wemo='<:Blue_Blade:467112472768151562>' if wep[i][1]=='Lance'
-                wemo='<:Green_Tome:467122927666593822>' if wep[i][1]=='Wand'
+                wemo='<:Colorless_Tome:443692133317345290>' if wep[i][1]=='Wand'
                 wemo='<:Colorless_Staff:443692132323295243>' if wep[i][1]=='Staff'
               end
               m2.push("#{wemo}#{wep[i3][0]}") if wep[i3][13][0][-1]==checkstr
@@ -3174,7 +3189,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
                   wemo='<:Green_Blade:467122927230386207>' if wep[i][1]=='Axe'
                   wemo='<:Colorless_Bow:443692132616896512>' if wep[i][1]=='Bow'
                   wemo='<:Blue_Blade:467112472768151562>' if wep[i][1]=='Lance'
-                  wemo='<:Green_Tome:467122927666593822>' if wep[i][1]=='Wand'
+                  wemo='<:Colorless_Tome:443692133317345290>' if wep[i][1]=='Wand'
                   wemo='<:Colorless_Staff:443692132323295243>' if wep[i][1]=='Staff'
                 end
                 if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
@@ -3324,7 +3339,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
                   wemo='<:Green_Blade:467122927230386207>' if wep[i][1]=='Axe'
                   wemo='<:Colorless_Bow:443692132616896512>' if wep[i][1]=='Bow'
                   wemo='<:Blue_Blade:467112472768151562>' if wep[i][1]=='Lance'
-                  wemo='<:Green_Tome:467122927666593822>' if wep[i][1]=='Wand'
+                  wemo='<:Colorless_Tome:443692133317345290>' if wep[i][1]=='Wand'
                   wemo='<:Colorless_Staff:443692132323295243>' if wep[i][1]=='Staff'
                 end
                 m2.push("#{wemo}#{wep[i][0]}") if wep[i][13][0][-1]==checkstr
@@ -3529,7 +3544,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
             wemo='<:Green_Blade:467122927230386207>' if wep[i][1]=='Axe'
             wemo='<:Colorless_Bow:443692132616896512>' if wep[i][1]=='Bow'
             wemo='<:Blue_Blade:467112472768151562>' if wep[i][1]=='Lance'
-            wemo='<:Green_Tome:467122927666593822>' if wep[i][1]=='Wand'
+            wemo='<:Colorless_Tome:443692133317345290>' if wep[i][1]=='Wand'
             wemo='<:Colorless_Staff:443692132323295243>' if wep[i][1]=='Staff'
           end
           if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
@@ -3692,7 +3707,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
              ['Axes','<:Weapon_Axe:532106114188443659>','<:Green_Blade:467122927230386207>'],
              ['Bows','<:Weapon_Bow:532106114909732864>','<:Colorless_Bow:443692132616896512>'],
              ['Lances','<:Weapon_Lance:532106114792423448>','<:Blue_Blade:467112472768151562>'],
-             ['Wands','<:Weapon_Wand:532106114985099264>','<:Green_Tome:467122927666593822>'],
+             ['Wands','<:Weapon_Wand:532106114985099264>','<:Colorless_Tome:443692133317345290>'],
              ['Staves','<:Weapon_Staff:532106114733441024>','<:Colorless_Staff:443692132323295243>']]
       flds2=[]
       for i in 0...elemo.length
