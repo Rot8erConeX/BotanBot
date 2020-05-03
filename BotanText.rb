@@ -382,6 +382,10 @@ def dragon_data(bot,event,args=nil,juststats=false)
   elsif (has_any?(args2,['mega','rock']) && has_any?(args2,['man'])) || has_any?(args2,['megaman','rockman']) || k[0]=='Rush'
     disp_pseudodragon_stats(bot,event,args,juststats,[['Rush'],['"Rush Coil"'],'Rush Buster'],['Dragons','Rush'],'Rush')
     return nil
+    return nil
+  elsif (has_any?(args2,['tiki','chiki']) && has_any?(args2,['young','child','sprog'])) || has_any?(args2,['tikiyoung','tikichild','tikisprog','chikiyoung','chikichild','chikisprog','youngtiki','childtiki','sprogtiki','youngchiki','childchiki','sprogchiki']) || k[0]=='Tiki(Young)'
+    disp_pseudodragon_stats(bot,event,args,juststats,[['Tiki(Young)','Tiki(Young)'],['',''],['Breath of Fog','Divine Dragon Blow']],['Dragons','Tiki(Young)'],'Tiki(Young)')
+    return nil
   end
   if k.length.zero?
     if args.join('').include?('frostfang')
@@ -508,16 +512,28 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
   end
   s2s=false
   s2s=true if safe_to_spam?(event)
+  feh=false
+  feh=true if !k[0][16].nil? && k[0][16]=='FEH'
   xpic=pic.join('/')
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/#{xpic}.png?raw=true"
   str=generate_rarity_row(5,0,k[0][16],true)
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[0][2]}"}
-  title="#{moji[0].mention unless moji.length<=0}**#{k[0][2]}**\n**Pseudodragon**"
+  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[0][2].gsub('Shadow','Dark').gsub('Flame','Fire')}"} if feh
+  title="#{moji[0].mention unless moji.length<=0}**#{k[0][2]}**"
+  title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**\n~~Pseudodragon~~ **Manakete**" if feh
+  title="#{title}\n<:Bond:613804021119189012>**FGO Collab**" if !k[0][16].nil? && k[0][16]=='FGO'
+  title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**" if !k[0][16].nil? && k[0][16]=='MM'
+  title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**" if !k[0][16].nil? && k[0][16]=='MH'
+  title="#{title}\n**Collab**" if k[0][1].length>1 && k[0][1][1,1].downcase=='c' && !(feh || (!k[0][16].nil? && k[0][16].length>0 && ['FEH','FGO','MM','MH'].include?(k[0][16])))
+  title="#{title}\n**Pseudodragon**" unless feh
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Speed:573366907357495296>','<:Energize:559629242137051155>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>']
+  semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:ProtoShield:642287078943752202>','<:SpeedS:514712247625580555>','<:FEHEnergized:587684963000909845>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>'] if feh
+  semoji=['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:Defense:573344832282689567>','<:SpeedS:514712247625580555>','<:Energize:559629242137051155>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>'] if !k[0][16].nil? && k[0][16]=='MM'
+  semoji=['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','<:FGO_Def:653485374605361162>','<:SpeedS:514712247625580555>','<:Energize:559629242137051155>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>'] if !k[0][16].nil? && k[0][16]=='FGO'
   sklz=@askilities.map{|q| q}
   unless k.map{|q| q[8]}.uniq.length<2 && k.map{|q| q[10]}.uniq.length<2 && k.map{|q| q[11]}.uniq.length<2 && (k2[2].is_a?(String) || k2[2].length==1)
     for i in 0...k.length
-      str="#{str}\n\n__**#{k2[1][i]}**__"
+      str="#{str}\n#{"\n__**#{k2[1][i]}**__" unless k2[1][i].length<=0}"
       if s2s || juststats
         str="#{str}\n#{semoji[3]}**Speed:**  *Dash:*\u00A0\u00A0#{k[i][8][0]}  *Turn:*\u00A0\u00A0#{k[i][8][1]}" unless k.map{|q| q[8]}.uniq.length<2
         str="#{str}\n*Automatically turns to damage direction*" if k[i][10]=='Yes' && k.map{|q| q[10]}.uniq.length>1
@@ -531,30 +547,35 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
       if k2[2].is_a?(Array) && k2[2].length>[i,1].max && !juststats
         skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==k2[2][i]}
         if skl1.nil?
-          str="#{str}\n**Skill:** *#{k2[2][i]}* - LOAD ERROR"
+          str="#{str}\n**Skill#{" #{i+1}" if k.uniq.length<2}:** *#{k2[2][i]}* - LOAD ERROR"
         else
           skl1=sklz[skl1]
           eng=''
           eng=", #{semoji[4]}Energizable" if skl1[7]=='Yes'
           eng=", #{semoji[5]}Inspirable" if !skl1[10].nil? && skl1[10].include?('Damage')
           eng=", #{semoji[6]}Energizable/Inspirable" if skl1[7]=='Yes' && !skl1[10].nil? && skl1[10].include?('Damage')
-          str="#{str}\n**Skill:** *#{skl1[0]}#{eng}#{energy_emoji(skl1[10])}*\n#{skl1[4].gsub(';; ',"\n")}"
+          str="#{str}\n**Skill#{" #{i+1}" if k.uniq.length<2}:** *#{skl1[0]}#{eng}#{energy_emoji(skl1[10])}*\n#{skl1[4].gsub(';; ',"\n")}"
         end
       end
     end
   end
   if k.length==1
   elsif k.map{|q| q[8]}.uniq.length<2 || k.map{|q| q[10]}.uniq.length<2 || k.map{|q| q[11]}.uniq.length<2 || (k2[2].is_a?(Array) && k2[2].length>1)
-    str="#{str}\n\n__**Both**__"
+    str2=''
     if s2s || juststats
-      str="#{str}\n#{semoji[3]}**Speed:**  *Dash:*\u00A0\u00A0#{k[0][8][0]}  *Turn:*\u00A0\u00A0#{k[0][8][1]}" if k.map{|q| q[8]}.uniq.length<2
-      str="#{str}\n*Automatically turns to damage direction*" if k[0][10]=='Yes' && k.map{|q| q[10]}.uniq.length<2
+      str2="#{semoji[3]}**Speed:**  *Dash:*\u00A0\u00A0#{k[0][8][0]}  *Turn:*\u00A0\u00A0#{k[0][8][1]}" if k.map{|q| q[8]}.uniq.length<2
+      str2="#{str2}\n*Automatically turns to damage direction*" if k[0][10]=='Yes' && k.map{|q| q[10]}.uniq.length<2
       if k.map{|q| q[11]}.uniq.length>1
       elsif k[0][11]=='Yes'
-        str="#{str}\n*Long range attacks*"
+        str2="#{str2}\n*Long range attacks*"
       else
-        str="#{str}\n*Short range attacks*"
+        str2="#{str2}\n*Short range attacks*"
       end
+    end
+    if k.uniq.length>1
+      str="#{str}\n\n__**Both**__\n#{str2}"
+    else
+      str="#{generate_rarity_row(5,0,k[0][16],true)}\n\n#{str2}\n\n#{str.gsub("#{generate_rarity_row(5,0,k[0][16],true)}\n\n",'')}"
     end
   end
   if (k2[2].is_a?(String) || k2[2].length==1) && !juststats
@@ -580,6 +601,8 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
     end
   end
   bemoji=['<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
+  bemoji=['<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if !k[0][16].nil? && k[0][16]=='FGO'
+  bemoji=['<:Aether_Stone:510776805746278421>','<:Refining_Stone:453618312165720086>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if feh
   str="#{str}\n\n**Bond gift preference:** #{['Golden Chalice (Sunday)','Juicy Meat (Monday)','Kaleidoscope (Tuesday)','Floral Circlet (Wednesday)','Compelling Book (Thursday)','Mana Essence (Friday)','Golden Chalice (Saturday)'][k[0][9]]}"
   unless s2s
     if str.gsub(';;;;;',"\n#{strx}").length>=1900
