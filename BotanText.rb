@@ -1171,10 +1171,27 @@ def art_of_adventure(bot,event,args=nil)
       else
         b=[]
       end
+      b=b.map{|q| q.gsub("\n",'').split('\\'[0])}
       for i in 0...b.length
-        b[i]=b[i].gsub("\n",'').split('\\'[0])
+        if b[i][0].include?('.')
+          b[i][0]=[b[i][0].to_f,true]
+        else
+          b[i][0]=[b[i][0].to_i,false]
+        end
+      end
+      for i in 0...b.length
+        dispnum="#{b[i][0][0]}#{'.' unless b[i][0][1]}"
+        if b[i][0][1]
+          b2=b.reject{|q| q[0][0].to_i != b[i][0][0].to_i}.map{|q| [q[24],q[25]]}.uniq
+          if b[i][0][0].to_i==b[i][0][0]
+            dispnum="#{b[i][0][0].to_i}." if b2.length<2
+            b[i][0][1]=false
+          else
+            b[i][0][1]=false if b2.length>1
+          end
+        end
         unless nammes[2].nil? || nammes[2].length<=0 || b[i][25].nil? || b[i][25].length<=0
-          charsx[1].push("*[FGO]* Srv-#{b[i][0]}#{"#{'.' if b[i][0].to_i>=2}) #{b[i][1]}" unless @embedless.include?(event.user.id) || was_embedless_mentioned?(event)} *[Japanese]*") if b[i][25].split(' & ').include?(nammes[2])
+          charsx[1].push("*[FGO]* Srv-#{dispnum}) #{b[i][1]} *[Japanese]*") if b[i][25].split(' & ').include?(nammes[2]) && !b[i][0][1]
         end
       end
     end
@@ -4374,14 +4391,20 @@ def future_events(event,bot,args=nil)
     end
     if mmzz.length>10 && !safe_to_spam?(event)
       if !(double || elem.length>0) || mmzz.length>25
-        otheroptions=[]
-        otheroptions.push("an element name") unless elem.length>0
-        otheroptions.push("the word \"double\"") unless double
-        str2="#{str2}\nThere are so many #{'qualifying ' if double || elem.length>0}Void Strikes that I will reduce the list to those available today or tomorrow.\nFor the full list, use this command in PM.#{"\nYou can also include #{otheroptions.join(' or ')} to reduce the list accordingly." if otheroptions.length>0}\n"
-        mmzz=mmzz.reject{|q| q[1]>1}
-        if mmzz.length>25
-          event.respond "Even reduced, the list of Void Strikes is too long for this channel.  Please retry this command in PM."
-          return nil
+        mmzz3=mmzz.reject{|q| ['Scalding Shroom','Wandering Shroom','Gust Shroom','Steel Golem','Obsidian Golem','Amber Golem','Blazing Ghost','Violet Ghost','Lambent Ghost','Cerulean Ghost','Frost Hermit','Twilight Hermit','Raging Manticore','Greedy Manticore','Smoldering Manticore','Proud Manticore','Catoblepas Fotia','Catoblepas Anemos','Eolian Phantom','Infernal Phantom'].include?(q[0].split('>')[-1]) && !mmzz2.map{|q2| q2[0]}.include?(q[0])}
+        if mmzz3.length>16
+          otheroptions=[]
+          otheroptions.push("an element name") unless elem.length>0
+          otheroptions.push("the word \"double\"") unless double
+          str2="#{str2}\nThere are so many #{'qualifying ' if double || elem.length>0}Void Strikes that I will reduce the list to those available today or tomorrow.\nVoid Strikes that are always available but have no Double Drops are also excluded.\nFor the full list, use this command in PM.#{"\nYou can also include #{otheroptions.join(' or ')} to reduce the list accordingly." if otheroptions.length>0}\n"
+          mmzz=mmzz.reject{|q| q[1]>1}
+          if mmzz.length>25
+            event.respond "Even reduced, the list of Void Strikes is too long for this channel.  Please retry this command in PM."
+            return nil
+          end
+        else
+          mmzz=mmzz3.map{|q| q}
+          str2="#{str2}\nVoid Strikes that are always available, but never have Double Drops, have been removed.\n"
         end
       end
     end
@@ -4390,7 +4413,11 @@ def future_events(event,bot,args=nil)
     for i in 0...mmzz.length
       str2="#{"\n" if mode==5 && safe_to_spam?(event)}*#{mmzz[i][0]}* -"
       i2=mmzz2.find_index{|q| q[0]==mmzz[i][0]}
-      if mmzz[i][1]==0
+      spliticon="\n"
+      if ['Scalding Shroom','Wandering Shroom','Gust Shroom','Steel Golem','Obsidian Golem','Amber Golem','Blazing Ghost','Violet Ghost','Lambent Ghost','Cerulean Ghost','Frost Hermit','Twilight Hermit','Raging Manticore','Greedy Manticore','Smoldering Manticore','Proud Manticore','Catoblepas Fotia','Catoblepas Anemos','Eolian Phantom','Infernal Phantom'].include?(mmzz[i][0].split('>')[-1]) && !double
+        spliticon=' - '
+        str2="#{str2.gsub(' -','')} [Always available]"
+      elsif mmzz[i][1]==0
         str2="#{str2} **Today**#{'<:x2:680152943299002370>' if !i2.nil? && shortlist && mmzz2[i2][1]==0}#{' - Next available' unless mmzz[i][3].nil? || mmzz[i][3]<=0}"
         if mmzz[i][3].nil? || mmzz[i][3]<=0
         else
@@ -4429,8 +4456,8 @@ def future_events(event,bot,args=nil)
           str2="#{str2} #{mmzz[i][1]} days from now (#{disp_date(t_d,1)})"
         end
       end
-      unless i2.nil? || shortlist
-        str2="#{str2}\n<:x2:680152943299002370>*Double Drops* - "
+      unless i2.nil? || (shortlist && str2[-1]!=']')
+        str2="#{str2}#{spliticon}<:x2:680152943299002370>#{'*Double Drops* - ' unless spliticon==' - '}"
         if mmzz2[i2][1]==0
           str2="#{str2} **Today**#{' - Next available' unless mmzz2[i2][3].nil? || mmzz2[i2][3]<=0}"
           if mmzz2[i2][3].nil? || mmzz2[i2][3]<=0
@@ -4452,7 +4479,11 @@ def future_events(event,bot,args=nil)
         end
       end
       str2="#{str2}\n~~Available mats: #{matz[mmzz[i][2]]}~~" if mode==5 && safe_to_spam?(event)
-      str=extend_message(str,str2,event,1) unless elem.length>0 && !str2.include?("<:Element_#{elem[0]}:")
+      if elem.length>0 && !str2.include?("<:Element_#{elem[0]}:")
+      elsif !safe_to_spam?(event) && str2[-1]==']'
+      else
+        str=extend_message(str,str2,event,1)
+      end
     end
   end
   if [0,7].include?(mode)
