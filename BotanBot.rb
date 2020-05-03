@@ -126,18 +126,20 @@ system("title loading #{shard_data(2)[@shardizard]} BotanBot")
 @ignored=[]
 @embedless=[]
 @last_multi_reload=[0,0,0]
-@rarity_stars=[['','<:Rarity_1:532086056594440231>',
-                   '<:Rarity_2:532086056254963713>',
-                   '<:Rarity_3:532086056519204864>',
-                   '<:Rarity_4:532086056301101067>',
-                   '<:Rarity_5:532086056737177600>',
-                   '<:Rarity_6:660289379520086046>'],
-               ['','<:Rarity_1_Blank:555459856476274691>',
-                   '<:Rarity_2_Blank:555459856400908299>',
-                   '<:Rarity_3_Blank:555459856568418314>',
-                   '<:Rarity_4_Blank:555459856497246218>',
-                   '<:Rarity_5_Blank:555459856190930955>',
-                   '<:Rarity_6_Blank:660289380807737354>']]
+@rarity_stars=[['<:Rarity_Mana:706612079783575607>',
+                '<:Rarity_1:532086056594440231>',
+                '<:Rarity_2:532086056254963713>',
+                '<:Rarity_3:532086056519204864>',
+                '<:Rarity_4:532086056301101067>',
+                '<:Rarity_5:532086056737177600>',
+                '<:Rarity_6:660289379520086046>'],
+               ['<:Rarity_6_Blank:660289380807737354>',
+                '<:Rarity_1_Blank:555459856476274691>',
+                '<:Rarity_2_Blank:555459856400908299>',
+                '<:Rarity_3_Blank:555459856568418314>',
+                '<:Rarity_4_Blank:555459856497246218>',
+                '<:Rarity_5_Blank:555459856190930955>',
+                '<:Rarity_6_Blank:660289380807737354>']]
 @avvie_info=['Botan','*Dragalia Lost*','N/A']
 @voids=[]
 
@@ -1103,9 +1105,11 @@ end
 
 def generate_rarity_row(rar,blanks=0,feh='',hyperblanks=false)
   blanks=rar*1 if blanks<=0
-  return "#{['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][rar]*([rar,blanks].min)}#{'<:FGO_rarity_inverted:544568437029208094>'*(blanks-rar) if blanks>rar}#{'<:Blank:676220519690928179>'*(6-blanks) if hyperblanks}" if feh=='FGO'
-  return "#{['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][rar]*([rar,blanks].min)}#{'<:Icon_Rarity_Empty:631460895851282433>'*(blanks-rar) if blanks>rar}#{'<:Blank:676220519690928179>'*(6-blanks) if hyperblanks}" if feh=='FEH'
-  return "#{@rarity_stars[0][rar]*([rar,blanks].min)}#{@rarity_stars[1][rar]*(blanks-rar) if blanks>rar}#{'<:Blank:676220519690928179>'*(6-blanks) if hyperblanks}"
+  disprar=rar*1
+  disprar=blanks*1 if rar<=0
+  return "#{['<:FGO_Rarity_S:577774548280147969>','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][rar]*([disprar,blanks].min)}#{'<:FGO_rarity_inverted:544568437029208094>'*(blanks-disprar) if blanks>disprar}#{'<:Blank:676220519690928179>'*(6-blanks) if hyperblanks}" if feh=='FGO'
+  return "#{['<:Icon_Rarity_S:448266418035621888>','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>','<:Icon_Rarity_S:448266418035621888>'][rar]*([disprar,blanks].min)}#{'<:Icon_Rarity_Empty:631460895851282433>'*(blanks-disprar) if blanks>disprar}#{'<:Blank:676220519690928179>'*(6-blanks) if hyperblanks}" if feh=='FEH'
+  return "#{@rarity_stars[0][rar]*([disprar,blanks].min)}#{@rarity_stars[1][rar]*(blanks-disprar) if blanks>disprar}#{'<:Blank:676220519690928179>'*(6-blanks) if hyperblanks}"
 end
 
 def element_color(ele)
@@ -1394,17 +1398,17 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   s2s=false
   s2s=true if safe_to_spam?(event)
   juststats=true if @shardizard != 4 && event.message.text.downcase.split(' ').include?('smol')
-  rar=0
+  rar=-1
   for i in 0...args.length
-    rar=args[i].to_i if rar.zero? && args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<@max_rarity[0]+2
-    rar=args[i].to_i if rar.zero? && args[i][1,1]=='*' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<@max_rarity[0]+2
+    rar=args[i].to_i if rar<0 && args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<@max_rarity[0]+2
+    rar=args[i].to_i if rar<0 && args[i][1,1]=='*' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<@max_rarity[0]+2
   end
   semirar=false
-  if rar.zero?
+  if rar<0
     semirar=true
     rar=k[1][0,1].to_i
     unless juststats || s2s
-      rar=@max_rarity[0]+1
+      rar=0
       rar=@max_rarity[0] unless (!k[3][1][@max_rarity[0]].nil? && k[3][1][@max_rarity[0]]>0) || (!k[4][1][@max_rarity[0]].nil? && k[4][1][@max_rarity[0]]>0)
     end
   elsif rar>k[1][0,1].to_i && s2s
@@ -1565,7 +1569,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       flds.push([generate_rarity_row(i,@max_rarity[0],fehm,true),"**Lv.1**  #{semoji[0]}#{longFormattedNumber(k[3][0][i-3])}  #{semoji[1]}#{longFormattedNumber(k[4][0][i-3])}\n**Lv.#{30+10*i}**  #{semoji[0]}#{longFormattedNumber(k[3][1][i-3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][i-3])}#{"\n**Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]-1])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]-1])}" if i==@max_rarity[0] && (!k[3][1][@max_rarity[0]-1].nil? || !k[4][1][@max_rarity[0]-1].nil?)}"])
     end
     if (!k[3][1][@max_rarity[0]].nil? && k[3][1][@max_rarity[0]]>0) || (!k[4][1][@max_rarity[0]].nil? && k[4][1][@max_rarity[0]]>0)
-      flds.push(["#{generate_rarity_row(@max_rarity[0]+1,@max_rarity[0],fehm,true)}\n**Mana Spiral**","**Lv.100**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]])}\n**Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]-2])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]-2])}"])
+      flds.push(["#{generate_rarity_row(0,@max_rarity[0],fehm,true)}\n**Mana Spiral**","**Lv.100**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]])}\n**Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]-2])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]-2])}"])
       flds[-1].push(true) if flds.length==3
     end
     unless juststats
