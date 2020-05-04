@@ -382,7 +382,6 @@ def dragon_data(bot,event,args=nil,juststats=false)
   elsif (has_any?(args2,['mega','rock']) && has_any?(args2,['man'])) || has_any?(args2,['megaman','rockman']) || k[0]=='Rush'
     disp_pseudodragon_stats(bot,event,args,juststats,[['Rush'],['"Rush Coil"'],'Rush Buster'],['Dragons','Rush'],'Rush')
     return nil
-    return nil
   elsif (has_any?(args2,['tiki','chiki']) && has_any?(args2,['young','child','sprog'])) || has_any?(args2,['tikiyoung','tikichild','tikisprog','chikiyoung','chikichild','chikisprog','youngtiki','childtiki','sprogtiki','youngchiki','childchiki','sprogchiki']) || k[0]=='Tiki(Young)'
     disp_pseudodragon_stats(bot,event,args,juststats,[['Tiki(Young)','Tiki(Young)'],['',''],['Breath of Fog','Divine Dragon Blow']],['Dragons','Tiki(Young)'],'Tiki(Young)')
     return nil
@@ -421,7 +420,12 @@ def dragon_data(bot,event,args=nil,juststats=false)
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2]}"}
   moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2].gsub('Shadow','Dark').gsub('Flame','Fire')}"} if feh
   title="#{moji[0].mention unless moji.length<=0}**#{k[2]}**"
-  title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**" if feh
+  color='Colorless'
+  color='Red' if ['Flame','Shadow'].include?(k[2])
+  color='Blue' if ['Water','Light'].include?(k[2])
+  color='Green' if ['Wind'].include?(k[2])
+  moji=bot.server(443172595580534784).emoji.values.reject{|q| q.name != "#{color}_Dragon"}
+  title="#{title}\n#{"#{moji[0].mention}Dragon" unless moji.length<0}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**" if feh
   title="#{title}\n<:Bond:613804021119189012>**FGO Collab**" if !k[16].nil? && k[16]=='FGO'
   title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**" if !k[16].nil? && k[16]=='MM'
   title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**" if !k[16].nil? && k[16]=='MH'
@@ -520,7 +524,12 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[0][2]}"}
   moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[0][2].gsub('Shadow','Dark').gsub('Flame','Fire')}"} if feh
   title="#{moji[0].mention unless moji.length<=0}**#{k[0][2]}**"
-  title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**\n~~Pseudodragon~~ **Manakete**" if feh
+  color='Colorless'
+  color='Red' if ['Flame','Shadow'].include?(k[0][2])
+  color='Blue' if ['Water','Light'].include?(k[0][2])
+  color='Green' if ['Wind'].include?(k[0][2])
+  moji=bot.server(443172595580534784).emoji.values.reject{|q| q.name != "#{color}_Dragon"}
+  title="#{title}\n#{moji[0].mention unless moji.length<=0}~~Pseudodragon~~ **Manakete**\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**" if feh
   title="#{title}\n<:Bond:613804021119189012>**FGO Collab**" if !k[0][16].nil? && k[0][16]=='FGO'
   title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**" if !k[0][16].nil? && k[0][16]=='MM'
   title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**" if !k[0][16].nil? && k[0][16]=='MH'
@@ -3680,7 +3689,13 @@ def sp_table(bot,event,args=nil)
             end
             ff.push("\n**Dash Attack:** #{k[18][i][-2]}") unless k[18][i][-2].to_i==k2[5]
             ff.push("\n**Force Strike:** #{k[18][i][-1]}") unless k[18][i][-1].to_i==k2[6]
-            f.push([k[18][i][0],ff.join("\n")])
+            if k[18][i][0][0,1]=='*' && i==0
+              disp=ff.join("\n")
+              k2[5]=k[18][i][-2]
+              k2[6]=k[18][i][-1]
+            else
+              f.push([k[18][i][0],ff.join("\n")])
+            end
           end
         end
       else
@@ -4947,7 +4962,7 @@ def disp_adv_chain(event,args,bot)
       if k5[i][-1].include?('%')
         k5[i]=[k5[i][0,k5[i].length-1].join(' '),k5[i][-1].gsub('%','').to_i,'Percent']
       elsif !romanums.find_index{|q| q==k5[i][-1]}.nil?
-        k5[i]=[k5[i][0,k5[i].length-1].join(' '),romanums.find_index{|q| q==k5[i][-1]},'Roman']
+        k5[i]=[k5[i][0,k5[i].length-1].join(' '),k5[i][-1],'Roman']
       elsif k5[i][-1].to_i.to_s==k5[i][-1]
         k5[i]=[k5[i][0,k5[i].length-1].join(' '),k5[i][-1].to_i,'Number']
       else
@@ -4985,7 +5000,7 @@ def disp_adv_chain(event,args,bot)
       m2=k5.reject{|q| q[0]!=m[i][0] || q[2]!=m[i][2]}.map{|q| q[1]}
       x=''
       x='**' if m2.length>1
-      m2=m2.inject(0){|sum,x| sum + x }
+      m2=m2.inject(0){|sum,x| sum + x } unless m[i][2]=='Roman'
       m[i][1]=m2*1
     end
   end
@@ -5018,22 +5033,24 @@ def disp_adv_chain(event,args,bot)
       if m[i][2]=='Percent'
         xx="#{m[i][0]} #{x}+#{mmm[i][1]}%#{x}"
       elsif m[i][2]=='Roman'
-        xx="#{m[i][0]} #{x}#{romanums[mmm[i][1]]}#{x}"
+        xx="#{m[i][0]} #{x}#{mmm[i][1].join('+')}#{x}"
       else
         xx="#{m[i][0]} #{x}#{mmm[i][1]}#{x}"
       end
       if m[i][0][0]=='('
         m3=m[i][0].split(') ')[-1]
         m4=k5.reject{|q| q[0]!=m3 || q[2]!=m[i][2]}.map{|q| q[1]}
-        unless m4.length<=0 || m[i][0].include?(' [Chain]') || m[i][0].include?(' [Coab]')
+        if m4.length<=0 || m[i][0].include?(' [Chain]') || m[i][0].include?(' [Coab]')
+        elsif m[i][2]=='Roman'
+          m5=m[i][0].split(') ')[0].gsub('(','')
+          xx="#{xx}\n  \u00B7  For #{m5} adventurers, this sorta stacks with *#{m3}*"
+        else
           m4=m4.inject(0){|sum,x| sum + x }
           m4+=mmm[i][1]
           m5=m[i][0].split(') ')[0].gsub('(','')
           xx="#{xx}\n  \u00B7  For #{m5} adventurers, this stacks with *#{m3}* for a total buff of"
           if m[i][2]=='Percent'
             xx="#{xx} **+#{m4}%**"
-          elsif m[i][2]=='Roman'
-            xx="#{xx} **#{romanums[m4]}**"
           else
             xx="#{xx} **#{m4}**"
           end
