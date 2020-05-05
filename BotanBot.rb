@@ -228,6 +228,7 @@ def data_load()
     b[i]=b[i].gsub("\n",'').split('\\'[0])
     b[i][3]=b[i][3].split(', ').map{|q| q.to_i}
     b[i][4]=b[i][4].split(', ').map{|q| q.to_i}
+    b[i][5]=b[i][5].split(';; ') unless b[i][5].nil?
     b[i][6]=b[i][6].split(';;; ').map{|q| q.split(';; ')}
     b[i][7]=b[i][7].split(', ').map{|q| q.to_i}
     b[i][8]=b[i][8].split(', ').map{|q| q.to_f}
@@ -553,7 +554,7 @@ def find_adventurer(name,event,fullname=false,skipnpcs=false)
   k=adv.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
   return adv[k] unless k.nil?
   nicknames_load()
-  alz=@aliases.reject{|q| q[0]!='Adventurer'}.map{|q| [q[1],q[2],q[3]]}
+  alz=@aliases.reject{|q| q[0]!='Adventurer' && !(q[0]=='NPC' && @npcs.find_index{|q2| q2[0]==q[1]}.nil?)}.map{|q| [q[1],q[2],q[3]]}
   g=0
   g=event.server.id unless event.server.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
@@ -1009,16 +1010,16 @@ def find_npc(name,event,fullname=false,ext=false)
   g=0
   g=event.server.id unless event.server.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
-  return @npcs[@npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return @npcs[@npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil? || @npcs.find_index{|q| q[0]==alz[k][1]}.nil?
   k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
-  return @npcs[@npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return @npcs[@npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil? || @npcs.find_index{|q| q[0]==alz[k][1]}.nil?
   return [] if fullname || name.length<=2
   k=@npcs.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name}
   return @npcs[k] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
-  return @npcs[@npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return @npcs[@npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil? || @npcs.find_index{|q| q[0]==alz[k][1]}.nil?
   k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,name.length]==name && (q[2].nil? || q[2].include?(g))}
-  return @npcs[@npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil?
+  return @npcs[@npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil? || @npcs.find_index{|q| q[0]==alz[k][1]}.nil?
   return []
 end
 
@@ -1228,11 +1229,16 @@ def dragon_emoji(k,bot,ignorefeh=false)
   if !k[16].nil? && k[16]=='FEH' && !ignorefeh
     str=['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][k[1][0,1].to_i]
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2].gsub('Shadow','Dark').gsub('Flame','Fire')}"}
-    str="#{str}#{moji[0].mention unless moji.length<=0}"
+    color='Colorless'
+    color='Red' if ['Flame','Shadow'].include?(k[0][2])
+    color='Blue' if ['Water','Light'].include?(k[0][2])
+    color='Green' if ['Wind'].include?(k[0][2])
+    moji2=bot.server(443172595580534784).emoji.values.reject{|q| q.name != "#{color}_Dragon"}
+    str="#{str}#{moji[0].mention unless moji.length<=0}#{moji2[0].mention unless moji2.length<=0}<:Great_Badge_Golden:443704781068959744>"
   elsif !k[16].nil? && k[16]=='FGO' && !ignorefeh
     str=['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][k[1][0,1].to_i]
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2]}"}
-    str="#{str}#{moji[0].mention unless moji.length<=0}"
+    str="#{str}#{moji[0].mention unless moji.length<=0}<:Bond:613804021119189012>"
   else
     str=@rarity_stars[0][k[1][0,1].to_i]
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2]}"}
@@ -2530,7 +2536,7 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
       adv=find_data_ex(:find_adventurer,args.join(' '),event)
       p=0
       p=1 if has_any?(args,['s2','2','skill2','skl2'])
-      if adv[6][p].nil? || adv[6][p].length<=0
+      if adv[6].nil? || adv[6].length<=0 || adv[6][p].nil? || adv[6][p].length<=0
         event.respond "#{adv[0]} does not have a #{['1st','2nd'][p]} skill."
         return nil
       end
@@ -2542,13 +2548,16 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
       disp_skill_data(bot,event,adv[6][p].split(' '),forcetags)
     elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
       adv=find_data_ex(:find_dragon,args.join(' '),event)
-      if adv[5].nil? || adv[5].length<=0
-        event.respond "#{adv[0]} does not have a skill."
+      p=0
+      p=1 if has_any?(args,['s2','2','skill2','skl2'])
+      if adv[5].nil? || adv[5].length<=0 || adv[5][p].nil? || adv[5][p].length<=0
+        event.respond "#{adv[0]} does not have a#{[' 1st',' 2nd'][p] if p>0 || (!adv[5].nil? && adv[5].length>1)} skill."
         return nil
       end
-      skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==adv[5]}
+      p=0 if adv[5].length<2
+      skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==adv[5][p]}
       if skl1.nil?
-        event.respond "#{adv[0]}'s skill, #{adv[5]}, has no data."
+        event.respond "#{adv[0]}'s#{[' 1st',' 2nd'][p] if adv[5].length>1} skill, #{adv[5]}, has no data."
         return nil
       end
       disp_skill_data(bot,event,adv[5].split(' '),forcetags)
@@ -2610,7 +2619,9 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   m=[]
   x=@dragons.map{|q| q}
   for i in 0...x.length
-    m.push("#{x[i][0]}") if x[i][5]==k[0]
+    m.push("#{x[i][0]}") if x[i][5][0]==k[0] && x[i][5].length<2
+    m.push("#{x[i][0]} - S1d") if x[i][5][0]==k[0] && x[i][5].length>1
+    m.push("#{x[i][0]} - S2d") if x[i][5][1]==k[0] && x[i][5].length>1
   end
   flds.push(['Dragons',m.join("\n")]) if m.length>0
   m=[]
@@ -2836,18 +2847,22 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
             for ix in 0...drg[i][6].length
               m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2081)") if drg[i][6][ix][0]==checkstr
               m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2082)") if drg[i][6][ix][1]==checkstr
+              m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2083)") if drg[i][6][ix][2]==checkstr
               m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2081)") if drg[i][6][ix][0]==checkstr2
               m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2082)") if drg[i][6][ix][1]==checkstr2
+              m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2083)") if drg[i][6][ix][2]==checkstr2
             end
             for i4 in 0...drg[i][15].length
               if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
                 m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][i4][0]==checkstr
                 m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][i4][1]==checkstr
+                m2.push("#{drgemo}#{drg[i][0]} (HA\u2083)") if drg[i][15][i4][2]==checkstr
                 m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][i4][0]==checkstr2
                 m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][i4][1]==checkstr2
+                m2.push("#{drgemo}#{drg[i][0]} (HA\u2083)") if drg[i][15][i4][2]==checkstr2
               else
-                m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][i4][1]==checkstr
-                m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][i4][1]==checkstr2
+                m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][i4][-1]==checkstr
+                m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][i4][-1]==checkstr2
               end
             end
           end
@@ -3266,11 +3281,13 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
               for ix in 0...drg[i][6].length
                 m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2081)") if drg[i][6][ix][0]==checkstr
                 m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2082)") if drg[i][6][ix][1]==checkstr
+                m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2083)") if drg[i][6][ix][2]==checkstr
               end
               unless drg[i][15].nil? || drg[i][15].length<=0
                 for i4 in 0...drg[i][15].length
                   m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][i4][0]==checkstr
                   m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][i4][1]==checkstr
+                  m2.push("#{drgemo}#{drg[i][0]} (HA\u2083)") if drg[i][15][i4][2]==checkstr
                 end
               end
               for i2 in 0...elemo.length
@@ -3278,12 +3295,15 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
                 for ix in 0...drg[i][6].length
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (A#{ix+1}\u2081)") if drg[i][6][ix][0]==checkstr2
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (A#{ix+1}\u2082)") if drg[i][6][ix][1]==checkstr2
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (A#{ix+1}\u2083)") if drg[i][6][ix][2]==checkstr2
                 end
                 unless drg[i][15].nil? || drg[i][15].length<=0
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr2
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr2
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2083)") if drg[i][15][0][2]==checkstr2
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr2
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2082)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr2
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2083)") if drg[i][15].length>1 && drg[i][15][1][2]==checkstr2
                 end
               end
             end
@@ -3658,15 +3678,19 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         for ix in 0...drg[i][6].length
           m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2081)") if drg[i][6][ix][0]==checkstr
           m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2082)") if drg[i][6][ix][1]==checkstr
+          m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2083)") if drg[i][6][ix][2]==checkstr
           m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2081)") if drg[i][6][ix][0]==checkstr2
           m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2082)") if drg[i][6][ix][1]==checkstr2
+          m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2083)") if drg[i][6][ix][2]==checkstr2
         end
         unless drg[i][15].nil? || drg[i][15].length<=0
           for i4 in 0...drg[i][15].length
             m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][i4][0]==checkstr
             m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][i4][1]==checkstr
+            m2.push("#{drgemo}#{drg[i][0]} (HA\u2083)") if drg[i][15][i4][2]==checkstr
             m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][i4][0]==checkstr2
             m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][i4][1]==checkstr2
+            m2.push("#{drgemo}#{drg[i][0]} (HA\u2083)") if drg[i][15][i4][2]==checkstr2
           end
         end
       end
@@ -5244,8 +5268,8 @@ def sort_dragons(bot,event,args=nil)
   char=char.reject{|q| q[0][0,1]=='*'}
   stats=['Name','','','HP','Strength']
   for i in 0...char.length
-    char[i][3]=char[i][3][1]
-    char[i][4]=char[i][4][1]
+    char[i][3]=char[i][3][-1]
+    char[i][4]=char[i][4][-1]
     m2=[]
     for i2 in 0...srt.length
       m2.push("#{char[i][srt[i2]]} #{stats[srt[i2]]}") unless srt[i2]<3
