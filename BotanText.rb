@@ -447,6 +447,7 @@ def dragon_data(bot,event,args=nil,juststats=false)
   semoji=['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','<:FGO_Def:653485374605361162>','<:SpeedS:514712247625580555>','<:Energize:559629242137051155>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>'] if !k[16].nil? && k[16]=='FGO'
   str="#{str}\n\n**Level 1**  #{semoji[0]}#{longFormattedNumber(k[3][0])}  #{semoji[1]}#{longFormattedNumber(k[4][0])}"
   str="#{str}\n**Level #{k[1][0,1].to_i*20}**  #{semoji[0]}#{longFormattedNumber(k[3][1])}  #{semoji[1]}#{longFormattedNumber(k[4][1])}"
+  str="#{str}\n**Level #{k[1][0,1].to_i*20+15}**  #{semoji[0]}#{longFormattedNumber(k[3][2])}  #{semoji[1]}#{longFormattedNumber(k[4][2])}" if k[3].length>2 || k[4].length>2
   if s2s || juststats
     str="#{str}\n\n#{semoji[3]}**Speed:**  *Dash:*\u00A0\u00A0#{k[8][0]}  *Turn:*\u00A0\u00A0#{k[8][1]}"
     str="#{str}\n*Automatically turns to damage direction*" if k[10]=='Yes'
@@ -457,11 +458,11 @@ def dragon_data(bot,event,args=nil,juststats=false)
     end
   end
   sklz=@askilities.map{|q| q}
-  skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==k[5]}
+  skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==k[5][0]}
   skl1=sklz[skl1] unless skl1.nil?
   if juststats
   elsif skl1.nil?
-    str="#{str}\n\n**Skill:** *#{k[5]}* - LOAD ERROR"
+    str="#{str}\n\n**Skill#{' 1' if k[5].length>1}:** *#{k[5][0]}* - LOAD ERROR"
   elsif s2s
     eng=''
     eng=", #{semoji[4]}Energizable" if skl1[7]=='Yes'
@@ -478,13 +479,40 @@ def dragon_data(bot,event,args=nil,juststats=false)
     eng=semoji[4] if skl1[7]=='Yes'
     eng=semoji[5] if !skl1[10].nil? && skl1[10].include?('Damage')
     eng=semoji[6] if skl1[7]=='Yes' && !skl1[10].nil? && skl1[10].include?('Damage')
-    str="#{str}\n\n**Skill:** *#{k[5]}#{eng}#{energy_emoji(skl1[10])}*;;;;;"
+    str="#{str}\n\n**Skill#{' 1' if k[5].length>1}:** *#{k[5][0]}#{eng}#{energy_emoji(skl1[10])}*;;;;;"
     strx=skl1[4].gsub(';; ',"\n")
+  end
+  if k[5].length>1
+    skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==k[5][1]}
+    skl1=sklz[skl1] unless skl1.nil?
+    if juststats
+    elsif skl1.nil?
+      str="#{str}\n\n**Skill 2:** *#{k[5][1]}* - LOAD ERROR"
+    elsif s2s
+      eng=''
+      eng=", #{semoji[4]}Energizable" if skl1[7]=='Yes'
+      eng=", #{semoji[5]}Inspirable" if skl1[10].include?('Damage')
+      eng=", #{semoji[6]}Energizable/Inspirable" if skl1[7]=='Yes' && skl1[10].include?('Damage')
+      str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__"
+      if skl1[9].nil? || skl1[9].length<=0
+        str="#{str}\n*Lv.1:* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2:* #{skl1[4].gsub(';; ',"\n")}"
+      else
+        str="#{str}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}"
+      end
+    else
+      eng=''
+      eng=semoji[4] if skl1[7]=='Yes'
+      eng=semoji[5] if !skl1[10].nil? && skl1[10].include?('Damage')
+      eng=semoji[6] if skl1[7]=='Yes' && !skl1[10].nil? && skl1[10].include?('Damage')
+      str="#{str}\n\n**Skill 2:** *#{k[5][1]}#{eng}#{energy_emoji(skl1[10])}*;;;;;"
+      strx=skl1[4].gsub(';; ',"\n")
+    end
   end
   bemoji=['<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
   bemoji=['<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if !k[16].nil? && k[16]=='FGO'
   bemoji=['<:Aether_Stone:510776805746278421>','<:Refining_Stone:453618312165720086>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if feh
-  str="#{str}\n\n**Aura:**\n#{bemoji[0]*4}#{k[6].map{|q| q[0]}.join(', ')}\n#{bemoji[1]*4}#{k[6].map{|q| q[1]}.join(', ')}" unless juststats
+  # Mana Spiral Pink = 0xE9438F
+  str="#{str}\n\n**Aura:**\n#{bemoji[0]*4}#{k[6].map{|q| q[0]}.join(', ')}\n#{bemoji[1]*4}#{k[6].map{|q| q[1]}.join(', ')}#{"\n#{bemoji[1]*5}#{k[6].map{|q| q[-1]}.join(', ')}" if k[6].map{|q| q.length}.max>2}" unless juststats
   str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[7][0])}#{bemoji[2]} #{longFormattedNumber(k[7][1])}#{bemoji[3]}" unless juststats
   str="#{str}#{"\n" if juststats}\n**Bond gift preference:** #{['Golden Chalice (Sunday)','Juicy Meat (Monday)','Kaleidoscope (Tuesday)','Floral Circlet (Wednesday)','Compelling Book (Thursday)','Mana Essence (Friday)','Golden Chalice (Saturday)'][k[9]]}"
   unless s2s
@@ -496,10 +524,16 @@ def dragon_data(bot,event,args=nil,juststats=false)
   end
   if str.length>1900 && safe_to_spam?(event)
     str=str.split("\n\n__**")
-    str[1]="__**#{str[1]}".split("\n\n**Sells")
-    str[0]="#{str[0]}\n\n**Sells#{str[1][1]}"
+    str[-1]="__**#{str[-1]}".split("\n\n**Aura")
+    str[0]="#{str[0]}\n\n**Aura#{str[-1][1]}"
+    if str.length>2 && "__**#{str[1]}\n\n#{str[2][0]}".length<=1900
+      str[2][0]="__**#{str[1]}\n\n#{str[2][0]}"
+      str[1]=nil
+      str.compact!
+    end
     create_embed(event,["__**#{k[0]}**__",title],str[0],element_color(k[2]),nil,xpic)
-    create_embed(event,'',str[1][0],element_color(k[2]))
+    create_embed(event,'',"__**#{str[1]}",element_color(k[2])) if str.length>2
+    create_embed(event,'',str[-1][0],element_color(k[2]))
   else
     create_embed(event,["__**#{k[0]}**__",title],str,element_color(k[2]),nil,xpic)
   end
@@ -4917,7 +4951,7 @@ def disp_adv_chain(event,args,bot)
       if k4[i][-1].include?('%')
         k4[i]=[k4[i][0,k4[i].length-1].join(' '),k4[i][-1].gsub('%','').to_i,'Percent']
       elsif !romanums.find_index{|q| q==k4[i][-1]}.nil?
-        k4[i]=[k4[i][0,k4[i].length-1].join(' '),romanums.find_index{|q| q==k4[i][-1]},'Roman']
+        k4[i]=[k4[i][0,k4[i].length-1].join(' '),k4[i][-1],'Roman']
       elsif k4[i][-1].to_i.to_s==k4[i][-1]
         k4[i]=[k4[i][0,k4[i].length-1].join(' '),k4[i][-1].to_i,'Number']
       else
@@ -4926,7 +4960,7 @@ def disp_adv_chain(event,args,bot)
     elsif k4[i][-1].include?('%')
       k4[i]=[k4[i][0,k4[i].length-1].join(' '),k4[i][-1].gsub('%','').gsub('+','').to_i,'Percent']
     elsif !romanums.find_index{|q| q==k4[i][-1]}.nil?
-      k4[i]=[k4[i][0,k4[i].length-1].join(' '),romanums.find_index{|q| q==k4[i][-1]},'Roman']
+      k4[i]=[k4[i][0,k4[i].length-1].join(' '),k4[i][-1],'Roman']
     elsif k4[i][-1].to_i.to_s==k4[i][-1]
       k4[i]=[k4[i][0,k4[i].length-1].join(' '),k4[i][-1].to_i,'Number']
     else
@@ -4971,7 +5005,7 @@ def disp_adv_chain(event,args,bot)
     elsif k5[i][-1].include?('%')
       k5[i]=[k5[i][0,k5[i].length-1].join(' '),k5[i][-1].gsub('%','').gsub('+','').to_i,'Percent']
     elsif !romanums.find_index{|q| q==k5[i][-1]}.nil?
-      k5[i]=[k5[i][0,k5[i].length-1].join(' '),romanums.find_index{|q| q==k5[i][-1]},'Roman']
+      k5[i]=[k5[i][0,k5[i].length-1].join(' '),k5[i][-1],'Roman']
     elsif k5[i][-1].to_i.to_s==k5[i][-1]
       k5[i]=[k5[i][0,k5[i].length-1].join(' '),k5[i][-1].to_i,'Number']
     else
