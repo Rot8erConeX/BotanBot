@@ -32,7 +32,7 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
   elsif ['wxp','wexp','wlevel'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __start__ __end__","Acts simultaneously as the `wyrmprintexp` and `weaponexp`.",0xCE456B)
   elsif ['sp'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __type__","Shows SP gains for adventurers with the weapon type `type`.\nIf an adventurer's name is listed, shows their SP gains.\nIf a weapon's name is listed, shows SP gains for that weapon's type.\nIf no type, adventurer, or weapon is specified, and in PM, shows the entire SP gains table.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __type__","Shows SP gains for adventurers with the weapon type `type`.\nIf an adventurer's or dragon's name is listed, shows their SP gains.\nIf a weapon's name is listed, shows SP gains for that weapon's type.\nIf no type, adventurer, dragon, or weapon is specified, and in PM, shows the entire SP gains table.",0xCE456B)
   elsif ['dmg','damage'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __type__","Shows damage modifiers for adventurers with the weapon type `type`.\nIf an adventurer's name is listed, shows their damage modifiers.\nIf a weapon's name is listed, shows damage modifiers for that weapon's type.\nIf no type, adventurer, or weapon is specified, and in PM, shows the entire damage modifiers table.",0xCE456B)
   elsif ['donation','donate'].include?(command.downcase)
@@ -267,9 +267,9 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
     str="#{str}\n`level` - to show costs of getting certain entities to certain levels."
     str="#{str}\n`next` - to show data on cyclical events (*also `schedule`*)"
     str="#{str}\n`art` __target__ - to show an adventurer's, dragon's, or wyrmprint's art"
-    str="#{str}\n`sp` __types__ - shows SP gains for weapon types"
-    str="#{str}\n`team` __\*names__ - shows collapsed coabilities for teams"
-    str="#{str}\n`damage` __types__ - shows damage modifiers for weapon types"
+    str="#{str}\n`team` __\*names__ - shows collapsed chain/coabilities for teams"
+    str="#{str}\n`sp` __types__ - shows SP gains for weapon types or adventurers/dragons"
+    str="#{str}\n`damage` __types__ - shows damage modifiers for weapon types or adventurers"
     create_embed([event,x],"Global Command Prefixes: `DL!` `DL?`#{"\nServer Command Prefix: `#{@prefixes[event.server.id]}`" if !event.server.nil? && !@prefixes[event.server.id].nil? && @prefixes[event.server.id].length>0}\nYou can also use `DL!help CommandName` to learn more on a particular command.\n__**Botan Bot help**__",str,0xCE456B)
     str="__**Meta Data**__"
     str="#{str}\n`tools` - for a list of tools other than me that can help you"
@@ -512,7 +512,7 @@ def dragon_data(bot,event,args=nil,juststats=false)
   bemoji=['<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if !k[16].nil? && k[16]=='FGO'
   bemoji=['<:Aether_Stone:510776805746278421>','<:Refining_Stone:453618312165720086>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if feh
   # Mana Spiral Pink = 0xE9438F
-  str="#{str}\n\n**Aura:**\n#{bemoji[0]*4}#{k[6].map{|q| q[0]}.join(', ')}\n#{bemoji[1]*4}#{k[6].map{|q| q[1]}.join(', ')}#{"\n#{bemoji[1]*5}#{k[6].map{|q| q[-1]}.join(', ')}" if k[6].map{|q| q.length}.max>2}" unless juststats
+  str="#{str}\n\n**Aura:**\n#{bemoji[0]*4}#{k[6].map{|q| q[0]}.reject{|q| q.nil? || q.length<=0}.join(', ')}\n#{bemoji[1]*4}#{k[6].map{|q| q[1]}.reject{|q| q.nil? || q.length<=0}.join(', ')}#{"\n#{bemoji[1]*5}#{k[6].map{|q| q[-1]}.join(', ')}" if k[6].map{|q| q.length}.max>2}" unless juststats
   str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[7][0])}#{bemoji[2]} #{longFormattedNumber(k[7][1])}#{bemoji[3]}" unless juststats
   str="#{str}#{"\n" if juststats}\n**Bond gift preference:** #{['Golden Chalice (Sunday)','Juicy Meat (Monday)','Kaleidoscope (Tuesday)','Floral Circlet (Wednesday)','Compelling Book (Thursday)','Mana Essence (Friday)','Golden Chalice (Saturday)'][k[9]]}"
   unless s2s
@@ -659,9 +659,9 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
     str[1]="__**#{str[1]}".split("\n\n**Sells")
     str[0]="#{str[0]}\n\n**Sells#{str[1][1]}"
     create_embed(event,["__**#{pseudonym}**__",title],str[0],element_color(k[0][2]),nil,xpic)
-    create_embed(event,'',str[1][0],element_color(k[0][2]),"Any data not dosplayed is taken instead from the user's normal dragon equip.")
+    create_embed(event,'',str[1][0],element_color(k[0][2]),"Any data not displayed is taken instead from the user's normal dragon equip.")
   else
-    create_embed(event,["__**#{pseudonym}**__",title],str,element_color(k[0][2]),"Any data not dosplayed is taken instead from the user's normal dragon equip.",xpic)
+    create_embed(event,["__**#{pseudonym}**__",title],str,element_color(k[0][2]),"Any data not displayed is taken instead from the user's normal dragon equip.",xpic)
   end
 end
 
@@ -2092,7 +2092,7 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=true)
     char=char.reject{|q| !b[1].include?(q[0])}
   end
   if mana
-    search.push('*<:Rarity_6:660289379520086046>Mana Spiral*')
+    search.push('*<:Rarity_Mana:706612079783575607>Mana Spiral*')
     char=char.reject{|q| q[3][1][@max_rarity[0]].nil? || q[3][1][@max_rarity[0]]<=0 || q[4][1][@max_rarity[0]].nil? || q[4][1][@max_rarity[0]]<=0}
   end
   if fltr.length>0
