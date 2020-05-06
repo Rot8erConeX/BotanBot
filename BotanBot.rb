@@ -1106,8 +1106,8 @@ def find_data_ex(callback,name,event,fullname=false,ext=false,includematch=false
 end
 
 def find_best_match(name,bot,event,fullname=false,ext=false,mode=1)
-  functions=[[:find_adventurer,:disp_adventurer_stats,:disp_adventurer_art,:disp_adventurer_stats],
-             [:find_dragon,:disp_dragon_stats,:disp_dragon_art,:disp_dragon_stats],
+  functions=[[:find_adventurer,:disp_adventurer_stats,:disp_adventurer_art,:disp_adventurer_stats,:find_adv_alts],
+             [:find_dragon,:disp_dragon_stats,:disp_dragon_art,:disp_dragon_stats,:find_dragon_alts],
              [:find_wyrmprint,:disp_wyrmprint_stats,:disp_wyrmprint_art,:disp_wyrmprint_stats],
              [:find_weapon,:disp_weapon_stats,nil,:disp_weapon_stats],
              [:find_enemy,:disp_enemy_data,:disp_boss_art],
@@ -3988,32 +3988,32 @@ def disp_status_data(bot,event,args=nil)
   create_embed(event,"__**#{k[0]}**__",str,xcolor,ftr,xpic)
 end
 
-def disp_adventurer_art(bot,event,args=nil)
+def disp_adventurer_art(bot,event,args=nil,justatats=false)
   reload_library()
   return art_of_adventure(bot,event,args)
 end
 
-def disp_dragon_art(bot,event,args=nil)
+def disp_dragon_art(bot,event,args=nil,justatats=false)
   reload_library()
   return art_of_dragon(bot,event,args)
 end
 
-def disp_wyrmprint_art(bot,event,args=nil)
+def disp_wyrmprint_art(bot,event,args=nil,justatats=false)
   reload_library()
   return art_of_printing(bot,event,args)
 end
 
-def disp_boss_art(bot,event,args=nil)
+def disp_boss_art(bot,event,args=nil,juststats=false)
   reload_library()
   return art_of_the_boss(bot,event,args)
 end
 
-def disp_emote_art(bot,event,args=nil)
+def disp_emote_art(bot,event,args=nil,justatats=false)
   reload_library()
   return art_of_emotion(bot,event,args)
 end
 
-def disp_npc_art(bot,event,args=nil)
+def disp_npc_art(bot,event,args=nil,juststats=false)
   reload_library()
   return art_of_the_nobody(bot,event,args)
 end
@@ -5960,7 +5960,7 @@ def show_print_shop(event)
   end
 end
 
-def find_adv_alts(event,args,bot)
+def find_adv_alts(bot,event,args,juststats=false)
   data_load()
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
@@ -6039,7 +6039,7 @@ def find_adv_alts(event,args,bot)
   return nil
 end
 
-def find_dragon_alts(event,args,bot)
+def find_dragon_alts(bot,event,args,justatats=false)
   data_load()
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
@@ -6180,7 +6180,7 @@ bot.command([:adventurer,:adv,:unit]) do |event, *args|
     return nil
   elsif ['alt','alts'].include?(args[0].downcase)
     args.shift
-    find_adv_alts(event,args,bot)
+    find_adv_alts(bot,event,args)
     return nil
   elsif ['mat','mats','material','materials','node','nodes'].include?(args[0].downcase)
     args.shift
@@ -6203,7 +6203,7 @@ bot.command([:dragon,:drg,:drag]) do |event, *args|
     return nil
   elsif ['alt','alts'].include?(args[0].downcase)
     args.shift
-    find_dragon_alts(event,args,bot)
+    find_dragon_alts(bot,event,args)
     return nil
   elsif ['art'].include?(args[0].downcase)
     args.shift
@@ -6410,17 +6410,7 @@ end
 
 bot.command([:alts,:alt]) do |event, *args|
   return nil if overlap_prevent(event)
-  if find_data_ex(:find_adventurer,args.join(' '),event,true).length>0
-    find_adv_alts(event,args,bot)
-  elsif find_data_ex(:find_dragon,args.join(' '),event,true).length>0
-    find_dragon_alts(event,args,bot)
-  elsif find_data_ex(:find_adventurer,args.join(' '),event).length>0
-    find_adv_alts(event,args,bot)
-  elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
-    find_dragon_alts(event,args,bot)
-  else
-    event.respond 'No matches found.'
-  end
+  find_best_match(args.join(' '),bot,event,false,false,4)
   return nil
 end
 
@@ -7606,17 +7596,7 @@ bot.mention do |event|
   elsif ['alts','alt'].include?(args[0].downcase)
     m=false
     args.shift
-    if find_data_ex(:find_adventurer,args.join(' '),event,true).length>0
-      find_adv_alts(event,args,bot)
-    elsif find_data_ex(:find_dragon,args.join(' '),event,true).length>0
-      find_dragon_alts(event,args,bot)
-    elsif find_data_ex(:find_adventurer,args.join(' '),event).length>0
-      find_adv_alts(event,args,bot)
-    elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
-      find_dragon_alts(event,args,bot)
-    else
-      event.respond 'No matches found.'
-    end
+    find_best_match(args.join(' '),bot,event,false,false,4)
   elsif ['banner','banners'].include?(args[0].downcase)
     m=false
     args.shift
@@ -7650,7 +7630,7 @@ bot.mention do |event|
       level(event,bot,args,2)
     elsif ['alt','alts'].include?(args[0].downcase)
       args.shift
-      find_adv_alts(event,args,bot)
+      find_adv_alts(bot,event,args)
     elsif ['art'].include?(args[0].downcase)
       args.shift
       disp_adventurer_art(bot,event,args)
@@ -7671,7 +7651,7 @@ bot.mention do |event|
       level(event,bot,args,3)
     elsif ['alt','alts'].include?(args[0].downcase)
       args.shift
-      find_dragon_alts(event,args,bot)
+      find_dragon_alts(bot,event,args)
     elsif ['art'].include?(args[0].downcase)
       args.shift
       disp_dragon_art(bot,event,args)
