@@ -168,6 +168,7 @@ def safe_to_spam?(event,chn=nil) # determines whether or not it is safe to send 
   return false if event.user.id==213048998678888448
   return false if event.message.text.downcase.split(' ').include?('smol') && @shardizard==4
   return true if @shardizard==4
+  return false if event.message.text.downcase.split(' ').include?('smol') && [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388].include?(event.server.id) # it is safe to spam in the emoji servers
   return true if [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388].include?(event.server.id) # it is safe to spam in the emoji servers
   chn=event.channel if chn.nil?
   return true if ['bots','bot'].include?(chn.name.downcase) # channels named "bots" are safe to spam in
@@ -1104,6 +1105,49 @@ def find_data_ex(callback,name,event,fullname=false,ext=false,includematch=false
   return blank
 end
 
+def find_best_match(name,bot,event,fullname=false,ext=false,mode=1)
+  functions=[[:find_adventurer,:disp_adventurer_stats,:disp_adventurer_art,:disp_adventurer_stats],
+             [:find_dragon,:disp_dragon_stats,:disp_dragon_art,:disp_dragon_stats],
+             [:find_wyrmprint,:disp_wyrmprint_stats,:disp_wyrmprint_art,:disp_wyrmprint_stats],
+             [:find_weapon,:disp_weapon_stats,nil,:disp_weapon_stats],
+             [:find_enemy,:disp_enemy_data,:disp_boss_art],
+             [:find_skill,:disp_skill_data],
+             [:find_ability,:disp_ability_data],
+             [:find_status,:disp_status_data],
+             [:find_facility,:disp_facility_data],
+             [:find_mat,:disp_mat_data],
+             [:find_emote,:disp_emote_art,:disp_emote_art],
+             [:find_npc,:disp_npc_art,:disp_npc_art]]
+  for i3 in 0...functions.length
+    k=method(functions[i3][0]).call(name,event,true,ext)
+    return method(functions[i3][mode]).call(bot,event,name.split(' ')) if !functions[i3][mode].nil? && k.length>0
+  end
+  args=name.split(' ')
+  for i in 0...args.length
+    for i2 in 0...args.length-i
+      for i3 in 0...functions.length
+        k=method(functions[i3][0]).call(args[i,args.length-i-i2].join(' '),event,true,ext)
+        return method(functions[i3][mode]).call(bot,event,args[i,args.length-i-i2]) if !functions[i3][mode].nil? && k.length>0 && args[i,args.length-i-i2].length>0
+      end
+    end
+  end
+  event.respond 'No matches found.' if (fullname || name.length<=2) && mode>1
+  return nil if fullname || name.length<=2
+  for i3 in 0...functions.length
+    k=method(functions[i3][0]).call(name,event,false,ext)
+    return method(functions[i3][mode]).call(bot,event,name.split(' ')) if !functions[i3][mode].nil? && k.length>0
+  end
+  args=name.split(' ')
+  for i in 0...args.length
+    for i2 in 0...args.length-i
+      k=method(functions[i3][0]).call(args[i,args.length-i-i2].join(' '),event,false,ext)
+      return method(functions[i3][mode]).call(bot,event,args[i,args.length-i-i2]) if !functions[i3][mode].nil? && k.length>0 && args[i,args.length-i-i2].length>0
+    end
+  end
+  event.respond 'No matches found.' if mode>1
+  return nil
+end
+
 def generate_rarity_row(rar,blanks=0,feh='',hyperblanks=false)
   blanks=rar*1 if blanks<=0
   disprar=rar*1
@@ -1643,8 +1687,10 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   else
     xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Adventurers/#{dispname}_#{[rar,k[1][0,1].to_i].max}.png?raw=true" unless semirar
     str=''
-    title="#{adv_emoji(k,bot,true,true)}\n**Lv.#{30+10*rar}**  #{semoji[0]}#{longFormattedNumber(k[3][1][rar-3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][rar-3])}"
-    if rar>@max_rarity[0]
+    lvl=30+10*rar
+    lvl=100 if rar==0
+    title="#{adv_emoji(k,bot,true,true)}\n**Lv.#{lvl}**  #{semoji[0]}#{longFormattedNumber(k[3][1][rar-3])}  #{semoji[1]}#{longFormattedNumber(k[4][1][rar-3])}"
+    if rar>@max_rarity[0] || rar==0
       title="#{adv_emoji(k,bot,true,true)}\n**Lv.100 Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]-2])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]-2])}"
     elsif rar==@max_rarity[0] && (!k[3][1][@max_rarity[0]-1].nil? || !k[4][1][@max_rarity[0]-1].nil?)
       title="#{adv_emoji(k,bot,true,true)}\n**Lv.#{30+10*rar} Max**  #{semoji[0]}#{longFormattedNumber(k[3][1][@max_rarity[0]-1])}  #{semoji[1]}#{longFormattedNumber(k[4][1][@max_rarity[0]-1])}"
@@ -1761,7 +1807,7 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false)
   return dragon_data(bot,event,args,juststats)
 end
 
-def disp_wyrmprint_stats(bot,event,args=nil)
+def disp_wyrmprint_stats(bot,event,args=nil,juststats=false)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
@@ -3936,8 +3982,10 @@ def disp_status_data(bot,event,args=nil)
   str="**Effect on player:** #{k[2].gsub(';; ',"\n")}" unless k[2]=='-'
   str="#{str}\n\n**Effect on enemy:** #{k[3].gsub(';; ',"\n")}" unless k[3]=='-'
   m=@statuses.reject{|q| q[1]!=k[1] || q[0]==k[0]}
+  xpic=k[0].gsub(' ','_')
+  xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Status/#{xpic}.png?raw=true"
   ftr="#{list_lift(m.map{|q| q[0]},'and')} will overwrite this status.  All other statuses will stack instead." unless k[1]==0 || m.length<=0
-  create_embed(event,"__**#{k[0]}**__",str,xcolor,ftr)
+  create_embed(event,"__**#{k[0]}**__",str,xcolor,ftr,xpic)
 end
 
 def disp_adventurer_art(bot,event,args=nil)
@@ -6306,24 +6354,8 @@ bot.command([:stats,:stat,:smol]) do |event, *args|
     disp_wyrmprint_stats(bot,event,args)
   elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase)
     disp_weapon_stats(bot,event,args,true)
-  elsif find_data_ex(:find_adventurer,args.join(' '),event,true).length>0
-    disp_adventurer_stats(bot,event,args,true)
-  elsif find_data_ex(:find_dragon,args.join(' '),event,true).length>0
-    disp_dragon_stats(bot,event,args,true)
-  elsif find_data_ex(:find_wyrmprint,args.join(' '),event,true).length>0
-    disp_wyrmprint_stats(bot,event,args)
-  elsif find_data_ex(:find_weapon,args.join(' '),event,true).length>0
-    disp_weapon_stats(bot,event,args,true)
-  elsif find_data_ex(:find_adventurer,args.join(' '),event).length>0
-    disp_adventurer_stats(bot,event,args,true)
-  elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
-    disp_dragon_stats(bot,event,args,true)
-  elsif find_data_ex(:find_wyrmprint,args.join(' '),event).length>0
-    disp_wyrmprint_stats(bot,event,args)
-  elsif find_data_ex(:find_weapon,args.join(' '),event).length>0
-    disp_weapon_stats(bot,event,args,true)
   else
-    event.respond 'No matches found'
+    find_best_match(args.join(' '),bot,event,false,true,3)
   end
   return nil
 end
@@ -6343,32 +6375,8 @@ bot.command([:art]) do |event, *args|
     disp_emote_art(bot,event,args)
   elsif ['npc'].include?(args[0].downcase)
     disp_npc_art(bot,event,args)
-  elsif find_data_ex(:find_adventurer,args.join(' '),event,true,true).length>0
-    disp_adventurer_art(bot,event,args)
-  elsif find_data_ex(:find_dragon,args.join(' '),event,true).length>0
-    disp_dragon_art(bot,event,args)
-  elsif find_data_ex(:find_wyrmprint,args.join(' '),event,true).length>0
-    disp_wyrmprint_art(bot,event,args)
-  elsif find_data_ex(:find_enemy,args.join(' '),event,true).length>0
-    disp_boss_art(bot,event,args)
-  elsif find_data_ex(:find_emote,args.join(' '),event,true).length>0
-    disp_emote_art(bot,event,args)
-  elsif find_data_ex(:find_npc,args.join(' '),event,true).length>0
-    disp_npc_art(bot,event,args)
-  elsif find_data_ex(:find_adventurer,args.join(' '),event,false,true).length>0
-    disp_adventurer_art(bot,event,args)
-  elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
-    disp_dragon_art(bot,event,args)
-  elsif find_data_ex(:find_wyrmprint,args.join(' '),event).length>0
-    disp_wyrmprint_art(bot,event,args)
-  elsif find_data_ex(:find_enemy,args.join(' '),event).length>0
-    disp_boss_art(bot,event,args)
-  elsif find_data_ex(:find_emote,args.join(' '),event).length>0
-    disp_emote_art(bot,event,args)
-  elsif find_data_ex(:find_npc,args.join(' '),event).length>0
-    disp_npc_art(bot,event,args)
   else
-    event.respond 'No matches found'
+    find_best_match(args.join(' '),bot,event,false,false,2)
   end
   return nil
 end
@@ -7484,54 +7492,8 @@ bot.message do |event|
       event.respond "You know the rules and so do I"
     elsif event.message.text.downcase.gsub(' ','').gsub("'",'').include?("peepee") && !event.server.nil? && (event.server.id==393775173095915521)
       event.respond "poopoo"
-    elsif find_data_ex(:find_adventurer,s,event,true).length>0
-      disp_adventurer_stats(bot,event,s.split(' '))
-    elsif find_data_ex(:find_dragon,s,event,true).length>0
-      disp_dragon_stats(bot,event,s.split(' '))
-    elsif find_data_ex(:find_wyrmprint,s,event,true).length>0
-      disp_wyrmprint_stats(bot,event,s.split(' '))
-    elsif find_data_ex(:find_weapon,s,event,true).length>0
-      disp_weapon_stats(bot,event,s.split(' '))
-    elsif find_data_ex(:find_enemy,s,event,true).length>0
-      disp_enemy_data(bot,event,s.split(' '))
-    elsif find_data_ex(:find_skill,s,event,true).length>0
-      disp_skill_data(bot,event,s.split(' '))
-    elsif find_data_ex(:find_ability,s,event,true).length>0
-      disp_ability_data(bot,event,s.split(' '))
-    elsif find_data_ex(:find_status,s,event,true).length>0
-      disp_status_data(bot,event,s.split(' '))
-    elsif find_data_ex(:find_facility,s,event,true).length>0
-      disp_facility_data(bot,event,s.split(' '))
-    elsif find_data_ex(:find_mat,s,event,true).length>0
-      disp_mat_data(bot,event,s.split(' '))
-    elsif find_data_ex(:find_emote,s,event,true).length>0
-      disp_emote_art(bot,event,s.split(' '))
-    elsif find_data_ex(:find_npc,s,event,true).length>0
-      disp_npc_art(bot,event,s.split(' '))
-    elsif find_data_ex(:find_adventurer,s,event).length>0
-      disp_adventurer_stats(bot,event,s.split(' '))
-    elsif find_data_ex(:find_dragon,s,event).length>0
-      disp_dragon_stats(bot,event,s.split(' '))
-    elsif find_data_ex(:find_wyrmprint,s,event).length>0
-      disp_wyrmprint_stats(bot,event,s.split(' '))
-    elsif find_data_ex(:find_weapon,s,event).length>0
-      disp_weapon_stats(bot,event,s.split(' '))
-    elsif find_data_ex(:find_enemy,s,event).length>0
-      disp_enemy_data(bot,event,s.split(' '))
-    elsif find_data_ex(:find_skill,s,event).length>0
-      disp_skill_data(bot,event,s.split(' '))
-    elsif find_data_ex(:find_ability,s,event).length>0
-      disp_ability_data(bot,event,s.split(' '))
-    elsif find_data_ex(:find_status,s,event).length>0
-      disp_status_data(bot,event,s.split(' '))
-    elsif find_data_ex(:find_facility,s,event).length>0
-      disp_facility_data(bot,event,s.split(' '))
-    elsif find_data_ex(:find_mat,s,event).length>0
-      disp_mat_data(bot,event,s.split(' '))
-    elsif find_data_ex(:find_emote,s,event).length>0
-      disp_emote_art(bot,event,s.split(' '))
-    elsif find_data_ex(:find_npc,s,event).length>0
-      disp_npc_art(bot,event,s.split(' '))
+    else
+      find_best_match(s,bot,event,true)
     end
   elsif !event.server.nil? && (above_memes().include?("s#{event.server.id}") || above_memes().include?(event.server.id))
   elsif !event.channel.nil? && above_memes().include?("c#{event.channel.id}")
@@ -7638,32 +7600,8 @@ bot.mention do |event|
       disp_emote_art(bot,event,args)
     elsif ['npc'].include?(args[0].downcase)
       disp_npc_art(bot,event,args)
-    elsif find_data_ex(:find_adventurer,args.join(' '),event,true,true).length>0
-      disp_adventurer_art(bot,event,args)
-    elsif find_data_ex(:find_dragon,args.join(' '),event,true).length>0
-      disp_dragon_art(bot,event,args)
-    elsif find_data_ex(:find_wyrmprint,args.join(' '),event,true).length>0
-      disp_wyrmprint_art(bot,event,args)
-    elsif find_data_ex(:find_enemy,args.join(' '),event,true).length>0
-      disp_boss_art(bot,event,args)
-    elsif find_data_ex(:find_emote,args.join(' '),event,true).length>0
-      disp_emote_art(bot,event,args)
-    elsif find_data_ex(:find_npc,args.join(' '),event,true).length>0
-      disp_npc_art(bot,event,args)
-    elsif find_data_ex(:find_adventurer,args.join(' '),event,false,true).length>0
-      disp_adventurer_art(bot,event,args)
-    elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
-      disp_dragon_art(bot,event,args)
-    elsif find_data_ex(:find_wyrmprint,args.join(' '),event).length>0
-      disp_wyrmprint_art(bot,event,args)
-    elsif find_data_ex(:find_enemy,args.join(' '),event).length>0
-      disp_boss_art(bot,event,args)
-    elsif find_data_ex(:find_emote,args.join(' '),event).length>0
-      disp_emote_art(bot,event,args)
-    elsif find_data_ex(:find_npc,args.join(' '),event).length>0
-      disp_npc_art(bot,event,args)
     else
-      event.respond 'No matches found'
+      find_best_match(args.join(' '),bot,event,false,false,2)
     end
   elsif ['alts','alt'].include?(args[0].downcase)
     m=false
@@ -7698,24 +7636,8 @@ bot.mention do |event|
       disp_wyrmprint_stats(bot,event,args)
     elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase)
       disp_weapon_stats(bot,event,args,true)
-    elsif find_data_ex(:find_adventurer,args.join(' '),event,true).length>0
-      disp_adventurer_stats(bot,event,args,true)
-    elsif find_data_ex(:find_dragon,args.join(' '),event,true).length>0
-      disp_dragon_stats(bot,event,args,true)
-    elsif find_data_ex(:find_wyrmprint,args.join(' '),event,true).length>0
-      disp_wyrmprint_stats(bot,event,args)
-    elsif find_data_ex(:find_weapon,args.join(' '),event,true).length>0
-      disp_weapon_stats(bot,event,args,true)
-    elsif find_data_ex(:find_adventurer,args.join(' '),event).length>0
-      disp_adventurer_stats(bot,event,args,true)
-    elsif find_data_ex(:find_dragon,args.join(' '),event).length>0
-      disp_dragon_stats(bot,event,args,true)
-    elsif find_data_ex(:find_wyrmprint,args.join(' '),event).length>0
-      disp_wyrmprint_stats(bot,event,args)
-    elsif find_data_ex(:find_weapon,args.join(' '),event).length>0
-      disp_weapon_stats(bot,event,args,true)
     else
-      event.respond 'No matches found'
+      find_best_match(args.join(' '),bot,event,false,true,3)
     end
   elsif ['adventurer','adv'].include?(args[0].downcase)
     m=false
@@ -7936,54 +7858,8 @@ bot.mention do |event|
   if m
     if event.message.text.downcase.gsub(' ','').gsub("'",'').include?("werenostrangerstolove")
       event.respond "You know the rules and so do I"
-    elsif find_data_ex(:find_adventurer,name,event,true).length>0
-      disp_adventurer_stats(bot,event,args)
-    elsif find_data_ex(:find_dragon,name,event,true).length>0
-      disp_dragon_stats(bot,event,args)
-    elsif find_data_ex(:find_wyrmprint,name,event,true).length>0
-      disp_wyrmprint_stats(bot,event,args)
-    elsif find_data_ex(:find_weapon,name,event,true).length>0
-      disp_weapon_stats(bot,event,args)
-    elsif find_data_ex(:find_enemy,name,event,true).length>0
-      disp_enemy_data(bot,event,args)
-    elsif find_data_ex(:find_skill,name,event,true).length>0
-      disp_skill_data(bot,event,args)
-    elsif find_data_ex(:find_ability,name,event,true).length>0
-      disp_ability_data(bot,event,args)
-    elsif find_data_ex(:find_status,name,event,true).length>0
-      disp_status_data(bot,event,args)
-    elsif find_data_ex(:find_facility,name,event,true).length>0
-      disp_facility_data(bot,event,args)
-    elsif find_data_ex(:find_mat,name,event,true).length>0
-      disp_mat_data(bot,event,args)
-    elsif find_data_ex(:find_emote,name,event,true).length>0
-      disp_emote_art(bot,event,args)
-    elsif find_data_ex(:find_npc,name,event,true).length>0
-      disp_npc_art(bot,event,args)
-    elsif find_data_ex(:find_adventurer,name,event).length>0
-      disp_adventurer_stats(bot,event,args)
-    elsif find_data_ex(:find_dragon,name,event).length>0
-      disp_dragon_stats(bot,event,args)
-    elsif find_data_ex(:find_wyrmprint,name,event).length>0
-      disp_wyrmprint_stats(bot,event,args)
-    elsif find_data_ex(:find_weapon,name,event).length>0
-      disp_weapon_stats(bot,event,args)
-    elsif find_data_ex(:find_enemy,name,event).length>0
-      disp_enemy_data(bot,event,args)
-    elsif find_data_ex(:find_skill,name,event).length>0
-      disp_skill_data(bot,event,args)
-    elsif find_data_ex(:find_ability,name,event).length>0
-      disp_ability_data(bot,event,args)
-    elsif find_data_ex(:find_status,name,event).length>0
-      disp_status_data(bot,event,args)
-    elsif find_data_ex(:find_facility,name,event).length>0
-      disp_facility_data(bot,event,args)
-    elsif find_data_ex(:find_mat,name,event).length>0
-      disp_mat_data(bot,event,args)
-    elsif find_data_ex(:find_emote,name,event).length>0
-      disp_emote_art(bot,event,args)
-    elsif find_data_ex(:find_npc,name,event).length>0
-      disp_npc_art(bot,event,args)
+    else
+      find_best_match(args.join(' '),bot,event)
     end
   end
 end
