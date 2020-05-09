@@ -1827,6 +1827,7 @@ HP 70% = Defense\3%\Ability\Increases defense by 3% when HP is 70% or above.\20\
 HP 70% = Defense\5%\Ability\Increases defense by 5% when HP is 70% or above.\40\y\HP70, DefenseSkill
 HP 70% = Defense\8%\Ability\Increases defense by 8% when HP is 70% or above.\60\y\HP70, DefenseSkill
 HP 70% = Defense\10%\Ability\Increases defense by 10% when HP is 70% or above.\80\y\HP70, DefenseSkill
+HP 70% = Defense\13%\Ability\Increases defense by 13% when HP is 70% or above.\90\y\HP70, DefenseSkill
 HP 70% = Defense\15%\Ability\Increases defense by 15% when HP is 70% or above.\100\y\HP70, DefenseSkill
 HP 70% = Healing\example\Ability\Increases the potency of recovery skills by `x`% when HP is 70% or above.\60\y\HP70, RecoveryPotency
 HP 70% = Healing\10%\Ability\Increases the potency of recovery skills by 10% when HP is 70% or above.\60\y\HP70, RecoveryPotency
