@@ -1120,6 +1120,7 @@ def find_best_match(name,bot,event,fullname=false,ext=false,mode=1)
              [:find_npc,:disp_npc_art,:disp_npc_art]]
   for i3 in 0...functions.length
     k=method(functions[i3][0]).call(name,event,true,ext)
+        puts k.to_s if k.length>0
     return method(functions[i3][mode]).call(bot,event,name.split(' ')) if !functions[i3][mode].nil? && k.length>0
   end
   args=name.split(' ')
@@ -1127,20 +1128,24 @@ def find_best_match(name,bot,event,fullname=false,ext=false,mode=1)
     for i2 in 0...args.length-i
       for i3 in 0...functions.length
         k=method(functions[i3][0]).call(args[i,args.length-i-i2].join(' '),event,true,ext)
+        puts k.to_s if k.length>0
         return method(functions[i3][mode]).call(bot,event,args[i,args.length-i-i2]) if !functions[i3][mode].nil? && k.length>0 && args[i,args.length-i-i2].length>0
       end
     end
   end
   event.respond 'No matches found.' if (fullname || name.length<=2) && mode>1
   return nil if fullname || name.length<=2
+  puts name
   for i3 in 0...functions.length
     k=method(functions[i3][0]).call(name,event,false,ext)
+        puts k.to_s if k.length>0
     return method(functions[i3][mode]).call(bot,event,name.split(' ')) if !functions[i3][mode].nil? && k.length>0
   end
   args=name.split(' ')
   for i in 0...args.length
     for i2 in 0...args.length-i
       k=method(functions[i3][0]).call(args[i,args.length-i-i2].join(' '),event,false,ext)
+        puts k.to_s if k.length>0
       return method(functions[i3][mode]).call(bot,event,args[i,args.length-i-i2]) if !functions[i3][mode].nil? && k.length>0 && args[i,args.length-i-i2].length>0
     end
   end
@@ -2744,7 +2749,102 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
     k=k.reject{|q| q[2]!=forceaura}
   end
   if k.length.zero?
-    event.respond 'No matches found.'
+    sklz=@askilities.map{|q| q}
+    if forceaura.length>0 && forceaura != 'Ability'
+      if find_data_ex(:find_adventurer,args.join(' '),event).length>0
+      else
+        event.respond 'No matches found.'
+        return nil
+      end
+    end
+    if find_data_ex(:find_adventurer,args.join(' '),event).length>0 && (has_any?(args,['a1','a2','a3','1','2','3','ability1','ability2','ability3','abil1','abil2','abil3','chaincoabil','chaincoability','chaincoab','coabilchain','coabilitychain','chain','coabchain','cca','cc','coabil','coability','coab']) || (forceaura.length>0 && forceaura != 'Ability'))
+      adv=find_data_ex(:find_adventurer,args.join(' '),event)
+      pp=8
+      p=0
+      p=1 if has_any?(args,['a2','2','ability2','abil2'])
+      p=2 if has_any?(args,['a3','3','ability3','abil3'])
+      if forceaura.length>0 && forceaura != 'Ability'
+        pp=7
+        p=0
+        p=1 if forceaura=='Chain'
+      elsif has_any?(args,['chaincoabil','chaincoability','chaincoab','coabilchain','coabilitychain','chain','coabchain','cca','cc','coabil','coability','coab'])
+        pp=7
+        p=0
+        p=1 if has_any?(args,['chaincoabil','chaincoability','chaincoab','coabilchain','coabilitychain','chain','coabchain','cca','cc'])
+      end
+      if adv[pp].nil? || adv[pp].length<=0 || adv[pp][p].nil? || adv[pp][p].length<=0
+        event.respond "#{adv[0]} does not have a #{['1st','2nd','3rd'][p]} ability." if pp==8
+        event.respond "#{adv[0]} does not have a #{['','chain'][p]} coability." if pp==7
+        return nil
+      end
+      skl1=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==adv[pp][p][-1]}
+      if pp==7
+        kk=adv[pp][p].split(' ')
+        kk=[kk[0,kk.length-1].join(' '),kk[-1].split('/')[-1]]
+        kk[1]="+#{kk[1]}" if kk[1].include?('%')
+        skl1=sklz.find_index{|q| q[2]==['Cobility','Chain'][p] && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==kk.join(' ')}
+      end
+      if skl1.nil?
+        event.respond "#{adv[0]}'s #{['1st','2nd','3rd'][p]} ability, #{adv[pp][p][-1]}, has no data." if pp==8
+        event.respond "#{adv[0]}'s #{['','chain'][p]} coability, #{adv[pp][p]}, has no data." if pp==7
+        return nil
+      end
+      disp_ability_data(bot,event,adv[8][p][-1].split(' ')) if pp==8
+      disp_ability_data(bot,event,adv[7][p].split(' '),['Coability','Chain'][p]) if pp==7
+    elsif find_data_ex(:find_dragon,args.join(' '),event).length>0 && has_any?(args,['a1','a2','a3','1','2','3','ability1','ability2','ability3','abil1','abil2','abil3'])
+      adv=find_data_ex(:find_dragon,args.join(' '),event)
+      p=0
+      p=1 if has_any?(args,['s2','2','skill2','skl2'])
+      p=2 if has_any?(args,['a3','3','ability3','abil3'])
+      if adv[6].nil? || adv[6].length<=0 || adv[6][p].nil? || adv[6][p].length<=0
+        event.respond "#{adv[0]} does not have a #{['1st','2nd','3rd'][p]} aura."
+        return nil
+      end
+      p=[adv[6].length-1,p].min
+      skl1=sklz.find_index{|q| q[2]=='Aura' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==adv[6][p][-1]}
+      if skl1.nil?
+        event.respond "#{adv[0]}'s #{['1st','2nd','3rd'][p]} aura, #{adv[6][p][-1]}, has no data."
+        return nil
+      end
+      disp_ability_data(bot,event,adv[6][p][-1].split(' '),'Aura')
+    elsif find_data_ex(:find_wyrmprint,args.join(' '),event).length>0 && has_any?(args,['a1','a2','a3','1','2','3','ability1','ability2','ability3','abil1','abil2','abil3'])
+      adv=find_data_ex(:find_wyrmprint,args.join(' '),event)
+      p=0
+      p=1 if has_any?(args,['s2','2','skill2','skl2'])
+      p=2 if has_any?(args,['a3','3','ability3','abil3'])
+      if adv[5].nil? || adv[5].length<=0 || adv[5][p].nil? || adv[5][p].length<=0
+        event.respond "#{adv[0]} does not have a#{'n' unless p>0 || (!adv[5].nil? && adv[5].length>1)}#{[' 1st',' 2nd',' 3rd'][p] if p>0 || (!adv[5].nil? && adv[5].length>1)} ability."
+        return nil
+      end
+      p=[adv[5].length-1,p].min
+      skl1=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==adv[5][p][-1]}
+      if skl1.nil?
+        event.respond "#{adv[0]}'s#{[' 1st',' 2nd',' 3rd'][p] if p>0 || (!adv[5].nil? && adv[5].length>1)} ability, #{adv[5][p][-1]}, has no data."
+        return nil
+      end
+      disp_ability_data(bot,event,adv[5][p][-1].split(' '))
+    elsif find_data_ex(:find_weapon,args.join(' '),event).length>0 && has_any?(args,['a1','a2','a3','1','2','3','ability1','ability2','ability3','abil1','abil2','abil3'])
+      adv=find_data_ex(:find_weapon,args.join(' '),event)
+      p=0
+      p=1 if has_any?(args,['s2','2','skill2','skl2'])
+      p=2 if has_any?(args,['a3','3','ability3','abil3'])
+      if adv[0].is_a?(Array)
+        event.respond "There are multiple weapons with that criterium, and I won't display an ability for each."
+        return nil
+      elsif adv[13].nil? || adv[13].length<=0 || adv[13][p].nil? || adv[13][p].length<=0
+        event.respond "#{adv[0]} does not have a #{['1st','2nd','3rd'][p]} ability."
+        return nil
+      end
+      p=[adv[13].length-1,p].min
+      skl1=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==adv[13][p][-1]}
+      if skl1.nil?
+        event.respond "#{adv[0]}'s #{['1st','2nd','3rd'][p]} ability, #{adv[13][p][-1]}, has no data."
+        return nil
+      end
+      disp_ability_data(bot,event,adv[13][p][-1].split(' '))
+    else
+      event.respond 'No matches found.'
+    end
     return nil
   end
   evn=event.message.text.downcase.split(' ')
@@ -7483,7 +7583,7 @@ bot.message do |event|
     elsif event.message.text.downcase.gsub(' ','').gsub("'",'').include?("peepee") && !event.server.nil? && (event.server.id==393775173095915521)
       event.respond "poopoo"
     else
-      find_best_match(s,bot,event,true)
+      find_best_match(s,bot,event)
     end
   elsif !event.server.nil? && (above_memes().include?("s#{event.server.id}") || above_memes().include?(event.server.id))
   elsif !event.channel.nil? && above_memes().include?("c#{event.channel.id}")
