@@ -2666,6 +2666,7 @@ Strength\10%\CoAbility\Increases strength by 10%.\320\n\StrengthSkill
 (Shadow) Defense\example\Chain\If a team member is attuned to Shadow: Increases defense by `x`%. Benefits your whole team.\0\y\DefenseSkill, Shadow
 (Shadow) Defense\1%\Chain\If a team member is attuned to Shadow: Increases defense by 1%. Benefits your whole team.\0\n\DefenseSkill, Shadow
 (Shadow) Defense\3%\Chain\If a team member is attuned to Shadow: Increases defense by 3%. Benefits your whole team.\0\n\DefenseSkill, Shadow
+(Shadow) Defense\5%\Chain\If a team member is attuned to Shadow: Increases defense by 5%. Benefits your whole team.\0\n\DefenseSkill, Shadow
 (Shadow) Dragon Haste\example\Chain\If a team member is attuned to Shadow: increases their dragon gauge fill rate by `x`%. Benefits your whole team.\0\y\DragonHaste, Shadow
 (Shadow) Dragon Haste\10%\Chain\If a team member is attuned to Shadow: increases their dragon gauge fill rate by 10%. Benefits your whole team.\0\y\DragonHaste, Shadow
 (Shadow) Dragon Haste\12%\Chain\If a team member is attuned to Shadow: increases their dragon gauge fill rate by 12%. Benefits your whole team.\0\y\DragonHaste, Shadow
