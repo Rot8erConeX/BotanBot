@@ -7302,7 +7302,7 @@ end
 bot.command(:reload, from: 167657750971547648) do |event|
   return nil if overlap_prevent(event)
   return nil unless [167657750971547648,141260274144509952].include?(event.user.id) || [502288368777035777,532083509083373583].include?(event.channel.id)
-  event.respond "Reload what?\n1.) Aliases, from backups#{" (unless includes the word \"git\")\n2.) ~~empty slot#{', redirects to 3' if event.user.id==141260274144509952}~~\n3.) Data, from GitHub (include \"subset\" in your message to also reload DLSkillSubsets)" if [167657750971547648,141260274144509952].include?(event.user.id)}#{"\n4.) Source code, from GitHub (include the word \"all\" to also reload rot8er_functs.rb)\n5.) Crossover data\n6.) Libraries, from code" if event.user.id==167657750971547648}\nYou can include multiple numbers to load multiple things."
+  event.respond "Reload what?\n1.) Aliases, from backups#{" (unless includes the word \"git\")\n2.) ~~empty slot#{', redirects to 3' if event.user.id==141260274144509952}~~\n3.) Data, from GitHub (include \"subset\" in your message to also reload DLSkillSubsets)" if [167657750971547648,141260274144509952].include?(event.user.id)}#{"\n4.) Source code, from GitHub (include the word \"all\" to also reload rot8er_functs.rb)\n5.) Crossover data\n6.) Libraries, from code\n7.) Avatars, from GitHub" if event.user.id==167657750971547648}\nYou can include multiple numbers to load multiple things."
   event.channel.await(:bob, from: event.user.id) do |e|
     reload=false
     if e.message.text.include?('1')
@@ -7475,6 +7475,39 @@ bot.command(:reload, from: 167657750971547648) do |event|
       t=Time.now
       @last_multi_reload[1]=t
       e.respond 'Libraries force-reloaded'
+      reload=true
+    end
+    if e.message.text.include?('7') && [167657750971547648].include?(event.user.id)
+      download = open("https://raw.githubusercontent.com/Rot8erConeX/EliseBot/master/EliseBot/FEHDonorList.txt")
+      IO.copy_stream(download, "DLTemp.txt")
+      if File.size("DLTemp.txt")>100
+        b=[]
+        File.open("DLTemp.txt").each_line.with_index do |line, idx|
+          b.push(line)
+        end
+        open("FEHDonorList.txt", 'w') { |f|
+          f.puts b.join('')
+        }
+      end
+      download = open("https://raw.githubusercontent.com/Rot8erConeX/EliseBot/master/EliseBot/FEHBotArtList.txt")
+      IO.copy_stream(download, "DLTemp.txt")
+      x=[]
+      if File.size("DLTemp.txt")>100
+        b=[]
+        File.open("DLTemp.txt").each_line.with_index do |line, idx|
+          b.push(line)
+        end
+        x=b[2].gsub("\n",'').split('\\'[0])
+        for i in 0...x.length
+          download = open("https://raw.githubusercontent.com/Rot8erConeX/EliseBot/master/EliseBot/EliseImages/#{x[i]}.png")
+          IO.copy_stream(download, "DLTemp#{@shardizard}.png")
+          if File.size("DLTemp#{@shardizard}.png")>100
+            download = open("https://raw.githubusercontent.com/Rot8erConeX/EliseBot/master/EliseBot/EliseImages/#{x[i]}.png")
+            IO.copy_stream(download, "EliseImages/#{x[i]}.png")
+          end
+        end
+      end
+      e.respond 'Avatars reloaded'
       reload=true
     end
     e.respond 'Nothing reloaded.  If you meant to use the command, please try it again.' unless reload
@@ -7948,7 +7981,8 @@ def next_holiday(bot,mode=0)
   return nil if bot.profile.id==618979409059119113
   t=Time.now
   t-=60*60*6
-  holidays=[[0,3,22,'Karina',"with this sweet eyepatch","Info gatherer's birthday"]]
+  holidays=[[0,3,22,'Karina',"with this sweet eyepatch","Info gatherer's birthday"],
+            [0,5,10,'Melody(Maid)','errand-girl for Master','Maid Day']]
   d=get_donor_list().reject{|q| q[2][2]<3 || q[4][2]=='-'}
   for i in 0...d.length
     if d[i][4][2]!='-' && d[i][0]!=141260274144509952
