@@ -468,18 +468,25 @@ def dragon_data(bot,event,args=nil,juststats=false)
     eng=", #{semoji[4]}Energizable" if skl1[7]=='Yes'
     eng=", #{semoji[5]}Inspirable" if skl1[10].include?('Damage')
     eng=", #{semoji[6]}Energizable/Inspirable" if skl1[7]=='Yes' && skl1[10].include?('Damage')
-    str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__"
-    if skl1[9].nil? || skl1[9].length<=0
+    str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min && skl1[6][0]>0}"
+    if (skl1[9].nil? || skl1[9].length<=0) && skl1[6].max != skl1[6].min
+      str="#{str}\n*Lv.1 (#{skl1[6][0]} SP):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (#{skl1[6][1]} SP):* #{skl1[4].gsub(';; ',"\n")}"
+      str="#{str}\n*Lv.3 (#{skl1[6][2]} SP):* #{skl1[5].gsub(';; ',"\n")}" if !skl1[5].nil? && skl1[5].length>0
+    elsif skl1[9].nil? || skl1[9].length<=0
       str="#{str}\n*Lv.1:* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2:* #{skl1[4].gsub(';; ',"\n")}"
+      str="#{str}\n*Lv.3:* #{skl1[5].gsub(';; ',"\n")}" if !skl1[5].nil? && skl1[5].length>0
+    elsif skl1[6].max != skl1[6].min
+      str="#{str}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}\n*Lv.1 (#{skl1[6][0]} SP) \u2192 Lv.2 (#{skl1[6][1]} SP)*"
+      str="#{str} \u2192 *Lv.3 (#{skl1[6][2]} SP)*" if !skl1[5].nil? && skl1[5].length>0
     else
-      str="#{str}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}"
+      str="#{str}\n#{skl1[9].gsub(';; ',"\n")}"
     end
   else
     eng=''
     eng=semoji[4] if skl1[7]=='Yes'
     eng=semoji[5] if !skl1[10].nil? && skl1[10].include?('Damage')
     eng=semoji[6] if skl1[7]=='Yes' && !skl1[10].nil? && skl1[10].include?('Damage')
-    str="#{str}\n\n**Skill#{' 1' if k[5].length>1}:** *#{k[5][0]}#{eng}#{energy_emoji(skl1[10])}*;;;;;"
+    str="#{str}\n\n**Skill#{' 1' if k[5].length>1}:** *#{k[5][0]}#{eng}#{energy_emoji(skl1[10])}#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min && skl1[6][0]>0}*;;;;;"
     strx=skl1[4].gsub(';; ',"\n")
   end
   if k[5].length>1
@@ -493,18 +500,25 @@ def dragon_data(bot,event,args=nil,juststats=false)
       eng=", #{semoji[4]}Energizable" if skl1[7]=='Yes'
       eng=", #{semoji[5]}Inspirable" if skl1[10].include?('Damage')
       eng=", #{semoji[6]}Energizable/Inspirable" if skl1[7]=='Yes' && skl1[10].include?('Damage')
-      str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__"
-      if skl1[9].nil? || skl1[9].length<=0
+      str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min && skl1[6][0]>0}"
+      if (skl1[9].nil? || skl1[9].length<=0) && skl1[6].max != skl1[6].min
+        str="#{str}\n*Lv.1 (#{skl1[6][0]} SP):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (#{skl1[6][1]} SP):* #{skl1[4].gsub(';; ',"\n")}"
+        str="#{str}\n*Lv.3 (#{skl1[6][2]} SP):* #{skl1[5].gsub(';; ',"\n")}" if !skl1[5].nil? && skl1[5].length>0
+      elsif skl1[9].nil? || skl1[9].length<=0
         str="#{str}\n*Lv.1:* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2:* #{skl1[4].gsub(';; ',"\n")}"
+        str="#{str}\n*Lv.3:* #{skl1[5].gsub(';; ',"\n")}" if !skl1[5].nil? && skl1[5].length>0
+      elsif skl1[6].max != skl1[6].min
+        str="#{str}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}\n*Lv.1 (#{skl1[6][0]} SP) \u2192 Lv.2 (#{skl1[6][1]} SP)*"
+        str="#{str} \u2192 *Lv.3 (#{skl1[6][2]} SP)*" if !skl1[5].nil? && skl1[5].length>0
       else
-        str="#{str}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}"
+        str="#{str}\n#{skl1[9].gsub(';; ',"\n")}"
       end
     else
       eng=''
       eng=semoji[4] if skl1[7]=='Yes'
       eng=semoji[5] if !skl1[10].nil? && skl1[10].include?('Damage')
       eng=semoji[6] if skl1[7]=='Yes' && !skl1[10].nil? && skl1[10].include?('Damage')
-      str="#{str}\n\n**Skill 2:** *#{k[5][1]}#{eng}#{energy_emoji(skl1[10])}*;;;;;"
+      str="#{str}\n\n**Skill 2:** *#{k[5][1]}#{eng}#{energy_emoji(skl1[10])}#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min && skl1[6][0]>0}*;;;;;"
       strx=skl1[4].gsub(';; ',"\n")
     end
   end
@@ -597,7 +611,7 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
           eng=", #{semoji[4]}Energizable" if skl1[7]=='Yes'
           eng=", #{semoji[5]}Inspirable" if !skl1[10].nil? && skl1[10].include?('Damage')
           eng=", #{semoji[6]}Energizable/Inspirable" if skl1[7]=='Yes' && !skl1[10].nil? && skl1[10].include?('Damage')
-          str="#{str}\n**Skill#{" #{i+1}" if k.uniq.length<2}:** *#{skl1[0]}#{eng}#{energy_emoji(skl1[10])}*\n#{skl1[4].gsub(';; ',"\n")}"
+          str="#{str}\n**Skill#{" #{i+1}" if k.uniq.length<2}:** *#{skl1[0]}#{eng}#{energy_emoji(skl1[10])}*#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min && skl1[6][0]>0}\n#{skl1[4].gsub(';; ',"\n")}"
         end
       end
     end
@@ -632,7 +646,7 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
       eng=", #{semoji[4]}Energizable" if skl1[7]=='Yes'
       eng=", #{semoji[5]}Inspirable" if !skl1[10].nil? && skl1[10].include?('Damage')
       eng=", #{semoji[6]}Energizable/Inspirable" if skl1[7]=='Yes' && !skl1[10].nil? && skl1[10].include?('Damage')
-      str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__"
+      str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min && skl1[6][0]>0}"
       if skl1[9].nil? || skl1[9].length<=0
         str="#{str}\n*Lv.1:* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2:* #{skl1[4].gsub(';; ',"\n")}"
       else
