@@ -1635,7 +1635,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
         eng=", #{semoji[3]}Energizable" if skl1[7]=='Yes'
         eng=", #{semoji[4]}Inspirable" if skl1[10].include?('Damage')
         eng=", #{semoji[5]}Energizable/Inspirable" if skl1[7]=='Yes' && skl1[10].include?('Damage')
-        str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min}"
+        str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min && skl1[6][0]>0}"
         if (skl1[9].nil? || skl1[9].length<=0) && skl1[6].max != skl1[6].min
           str2="#{str2}\n*Lv.1 (F0, #{skl1[6][0]} SP):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (F3, #{skl1[6][1]} SP):* #{skl1[4].gsub(';; ',"\n")}\n*Lv.3 (F5, #{skl1[6][2]} SP):* #{skl1[5].gsub(';; ',"\n")}"
           str2="#{str2}\n*Lv.4 (F6, #{skl1[6][3]} SP):* #{skl1[11].gsub(';; ',"\n")}" unless skl1[11].nil? || skl1[11].length<=0
@@ -1657,7 +1657,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
         eng=", #{semoji[3]}Energizable" if skl2[7]=='Yes'
         eng=", #{semoji[4]}Inspirable" if skl2[10].include?('Damage')
         eng=", #{semoji[5]}Energizable/Inspirable" if skl2[7]=='Yes' && skl2[10].include?('Damage')
-        str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{eng}#{energy_emoji(skl2[10],true)})__#{" - #{longFormattedNumber(skl2[6][0])} SP" if skl2[6].max===skl2[6].min}"
+        str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{eng}#{energy_emoji(skl2[10],true)})__#{" - #{longFormattedNumber(skl2[6][0])} SP" if skl2[6].max===skl2[6].min && skl2[6][0]>0}"
         if (skl2[9].nil? || skl2[9].length<=0) && skl2[6].max != skl2[6].min
           str2="#{str2}\n*Lv.1 (F2, #{skl2[6][0]} SP):* #{skl2[3].gsub(';; ',"\n")}\n*Lv.2 (F4, #{skl2[6][1]} SP):* #{skl2[4].gsub(';; ',"\n")}"
           str2="#{str2}\n*Lv.3 (F6, #{skl2[6][2]} SP):* #{skl2[5].gsub(';; ',"\n")}" if !skl2[5].nil? && skl2[5].length>0
@@ -2154,7 +2154,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     eng=" - #{semoji[5]}Energizable/Inspirable" if skl[7]=='Yes' && skl[10].include?('Damage')
     str="#{str}\n\n__**#{bemoji[1]*4} Level #{f}**__"
     str="#{str}\n#{semoji[0]}#{longFormattedNumber(k[4][2])}  #{semoji[1]}#{longFormattedNumber(k[5][2])}"
-    str="#{str}\n*#{skl[0]}*#{eng}#{energy_emoji(skl[10],true)} - #{longFormattedNumber(skl[6][1])} SP\n#{skl[4].gsub(';; ',"\n")}"
+    str="#{str}\n*#{skl[0]}*#{eng}#{energy_emoji(skl[10],true)}#{" - #{longFormattedNumber(skl[6][1])} SP" unless skl[6][1]<=0}\n#{skl[4].gsub(';; ',"\n")}"
     str="#{str}\n*#{abl2[0]}#{" #{'+' if abl2[1].include?('%')}#{abl2[1]}" unless abl2[1]=='-'}*" unless abl2.nil?
     str="#{str}\n*#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}*" if abl2.nil? && !abl.nil?
     str="#{str}\n*#{ablx2[0]}#{" #{'+' if ablx2[1].include?('%')}#{ablx2[1]}" unless ablx2[1]=='-'}*" unless ablx2.nil?
@@ -2171,7 +2171,8 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
         eng=" - #{semoji[4]}Inspirable" if skl[10].include?('Damage')
         eng=" - #{semoji[5]}Energizable/Inspirable" if skl[7]=='Yes' && skl[10].include?('Damage')
         str="#{str}\n\n**Skill:** *#{skl[0]}*#{eng}#{energy_emoji(skl[10])}"
-        if skl[6][0]==skl[6][1]
+        if skl[6][0]==skl[6][1] && skl[6][1]<=0
+        elsif skl[6][0]==skl[6][1]
           str="#{str} - #{longFormattedNumber(skl[6][0])} SP;;;;;"
         else
           str="#{str} - #{longFormattedNumber(skl[6][0])} \u2192 #{longFormattedNumber(skl[6][1])} SP;;;;;"
@@ -2643,7 +2644,8 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
     mx.push(k[i]) if !k[i].nil? && k[i].length>0
   end
   str=''
-  title="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min
+  title=''
+  title="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min && k[6][0]>0
   title="#{title}\n**Invulnerability duration:** #{k[8]} seconds"
   title="#{title}\n<:Energize:559629242137051155> **Energizable**" if k[7]=='Yes'
   title="#{title}\n~~Not energizable~~" if k[7]=='No'
@@ -2652,7 +2654,7 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   str2="#{energy_emoji(k[10],true)}".gsub(', ',"\n")
   for i in 0...mx.length
     str2="#{str2}\n\n__**Level #{i+1}**__"
-    str2="#{str2} - #{k[6][i]} SP" unless k[6][0,mx.length].max==k[6][0,mx.length].min
+    str2="#{str2} - #{k[6][i]} SP" unless k[6][0,mx.length].max==k[6][0,mx.length].min || k[6][i]<=0
     if i>=3
       str2="#{str2}\n#{k[i+8].gsub(';; ',"\n")}"
     else
@@ -3651,7 +3653,9 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         end
       end
       if m2.length>0
-        if !s2s || was_embedless_mentioned?(event)
+        if m2.length>25 && !s2s
+          str2="#{str2}\n#{m2.length} total adventurers"
+        elsif !s2s || was_embedless_mentioned?(event)
           str2="#{str2}\n**Adventurers:** #{m2.join(', ')}"
         else
           flds.push(['Adventurers',m2.join("\n")])
@@ -3694,7 +3698,9 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         end
       end
       if m2.length>0
-        if !s2s || was_embedless_mentioned?(event)
+        if m2.length>25 && !s2s
+          str2="#{str2}\n#{m2.length} total wyrmprints"
+        elsif !s2s || was_embedless_mentioned?(event)
           str2="#{str2}\n**Wyrmprints:** #{m2.join(', ')}"
         else
           flds.push(['Wyrmprints',m2.join("\n")])
@@ -3743,7 +3749,9 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         end
       end
       if m2.length>0
-        if !s2s || was_embedless_mentioned?(event)
+        if m2.length>25 && !s2s
+          str2="#{str2}\n#{m2.length} total weapons"
+        elsif !s2s || was_embedless_mentioned?(event)
           str2="#{str2}\n**Weapons:** #{m2.join(', ')}"
         else
           flds.push(['Weapons',m2.join("\n")])
@@ -3758,7 +3766,9 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         end
       end
       if m2.length>0
-        if !s2s || was_embedless_mentioned?(event)
+        if m2.length>25 && !s2s
+          str2="#{str2}\n#{m2.length} total enemies"
+        elsif !s2s || was_embedless_mentioned?(event)
           str2="#{str2}\n**Enemies:** #{m2.join(', ')}"
         else
           flds.push(['Enemies',m2.join("\n")])
@@ -3772,7 +3782,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
       for i in 0...adv.length
         mx=adv[i][7][0].split(' ')
         mxx=mx[0,mx.length-1].join(' ')
-        mx=mx[-1].split('/').map{|q| "#{mxx} #{q}"}
+        mx=mx[-1].split('/').map{|q| "#{mxx} #{'+' if q.include?('%') && !q.include?('+')}#{q}"}
         advemo=element_emote(adv[i][2][1],bot,adv[i][12])
         advemo=element_emote(adv[i][2][1],bot) if ignorefeh
         for i2 in 0...mx.length
@@ -3780,7 +3790,9 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         end
       end
       if m2.length>0
-        if !s2s || was_embedless_mentioned?(event)
+        if m2.length>25 && !s2s
+          str2="#{str2}\n#{m2.length} total adventurers"
+        elsif !s2s || was_embedless_mentioned?(event)
           str2="#{str2}\n**Adventurers:** #{m2.join(', ')}"
         else
           flds.push(['Adventurers',m2.join("\n")])
@@ -3796,7 +3808,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         unless adv[i][7].length<=1
           mx=adv[i][7][1].split(' ')
           mxx=mx[0,mx.length-1].join(' ')
-          mx=mx[-1].split('/').map{|q| "#{mxx} #{q}"}
+          mx=mx[-1].split('/').map{|q| "#{mxx} #{'+' if q.include?('%') && !q.include?('+')}#{q}"}
           advemo=element_emote(adv[i][2][1],bot,adv[i][12])
           advemo=element_emote(adv[i][2][1],bot) if ignorefeh
           for i2 in 0...mx.length
@@ -3805,7 +3817,9 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         end
       end
       if m2.length>0
-        if !s2s || was_embedless_mentioned?(event)
+        if m2.length>25 && !s2s
+          str2="#{str2}\n#{m2.length} total adventurers"
+        elsif !s2s || was_embedless_mentioned?(event)
           str2="#{str2}\n**Adventurers:** #{m2.join(', ')}"
         else
           flds.push(['Adventurers',m2.join("\n")])
@@ -3841,7 +3855,9 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         end
       end
       if m2.length>0
-        if !s2s || was_embedless_mentioned?(event)
+        if m2.length>25 && !s2s
+          str2="#{str2}\n#{m2.length} total dragons"
+        elsif !s2s || was_embedless_mentioned?(event)
           str2="#{str2}\n**Dragons:** #{m2.join(', ')}"
         else
           flds.push(['Dragons',m2.join("\n")])
