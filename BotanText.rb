@@ -536,6 +536,8 @@ def dragon_data(bot,event,args=nil,juststats=false)
       str=str.gsub(';;;;;',"\n#{strx}")
     end
   end
+  ftr=nil
+  ftr=k[20] unless k[20].nil? || k[20].length<=0
   if str.length>1900 && safe_to_spam?(event)
     str=str.split("\n\n__**")
     str[-1]="__**#{str[-1]}".split("\n\n**Aura")
@@ -547,9 +549,9 @@ def dragon_data(bot,event,args=nil,juststats=false)
     end
     create_embed(event,["__**#{k[0]}**__",title],str[0],element_color(k[2]),nil,xpic)
     create_embed(event,'',"__**#{str[1]}",element_color(k[2])) if str.length>2
-    create_embed(event,'',str[-1][0],element_color(k[2]))
+    create_embed(event,'',str[-1][0],element_color(k[2]),ftr)
   else
-    create_embed(event,["__**#{k[0]}**__",title],str,element_color(k[2]),nil,xpic)
+    create_embed(event,["__**#{k[0]}**__",title],str,element_color(k[2]),ftr,xpic)
   end
 end
 
