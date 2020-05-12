@@ -1127,7 +1127,7 @@ def find_best_match(name,bot,event,fullname=false,ext=false,mode=1,ext2=false)
     for i2 in 0...args.length-i
       for i3 in 0...functions.length
         k=method(functions[i3][0]).call(args[i,args.length-i-i2].join(' '),event,true,ext)
-        return method(functions[i3][mode]).call(bot,event,args[i,args.length-i-i2],ext2) if !functions[i3][mode].nil? && k.length>0 && args[i,args.length-i-i2].length>0
+        return method(functions[i3][mode]).call(bot,event,args,ext2) if !functions[i3][mode].nil? && k.length>0 && args[i,args.length-i-i2].length>0
       end
     end
   end
@@ -1142,7 +1142,7 @@ def find_best_match(name,bot,event,fullname=false,ext=false,mode=1,ext2=false)
   for i in 0...args.length
     for i2 in 0...args.length-i
       k=method(functions[i3][0]).call(args[i,args.length-i-i2].join(' '),event,false,ext)
-      return method(functions[i3][mode]).call(bot,event,args[i,args.length-i-i2],ext2) if !functions[i3][mode].nil? && k.length>0 && args[i,args.length-i-i2].length>0
+      return method(functions[i3][mode]).call(bot,event,args,ext2) if !functions[i3][mode].nil? && k.length>0 && args[i,args.length-i-i2].length>0
     end
   end
   event.respond 'No matches found.' if mode>1
