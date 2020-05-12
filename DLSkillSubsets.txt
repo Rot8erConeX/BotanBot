@@ -372,6 +372,7 @@
 ["Zodiark", ["zod", "zodiark", "zoroarc"], "Mat"]
 ["Android", ["android", "droid", "reploid"], "Race"]
 ["Dog", ["dog", "doge", "goodboi", "goodboy", "goodboye"], "Race"]
+["Draph", ["demon", "succubus", "horned", "horny", "thiccassshortgirl"], "Race"]
 ["Fairy", ["fairy", "bug", "faerie", "sprite", "pixie", "wingedmidget", "ljosalfar"], "Race"]
 ["Human", ["human", "humanoid", "humanoids", "humans"], "Race"]
 ["Manakete", ["manakete", "manakite"], "Race"]
