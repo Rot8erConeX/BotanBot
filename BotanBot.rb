@@ -1105,7 +1105,7 @@ def find_data_ex(callback,name,event,fullname=false,ext=false,includematch=false
   return blank
 end
 
-def find_best_match(name,bot,event,fullname=false,ext=false,mode=1)
+def find_best_match(name,bot,event,fullname=false,ext=false,mode=1,ext2=false)
   functions=[[:find_adventurer,:disp_adventurer_stats,:disp_adventurer_art,:disp_adventurer_stats,:find_adv_alts],
              [:find_dragon,:disp_dragon_stats,:disp_dragon_art,:disp_dragon_stats,:find_dragon_alts],
              [:find_wyrmprint,:disp_wyrmprint_stats,:disp_wyrmprint_art,:disp_wyrmprint_stats],
@@ -1120,16 +1120,14 @@ def find_best_match(name,bot,event,fullname=false,ext=false,mode=1)
              [:find_npc,:disp_npc_art,:disp_npc_art]]
   for i3 in 0...functions.length
     k=method(functions[i3][0]).call(name,event,true,ext)
-        puts k.to_s if k.length>0
-    return method(functions[i3][mode]).call(bot,event,name.split(' ')) if !functions[i3][mode].nil? && k.length>0
+    return method(functions[i3][mode]).call(bot,event,name.split(' '),ext2) if !functions[i3][mode].nil? && k.length>0
   end
   args=name.split(' ')
   for i in 0...args.length
     for i2 in 0...args.length-i
       for i3 in 0...functions.length
         k=method(functions[i3][0]).call(args[i,args.length-i-i2].join(' '),event,true,ext)
-        puts k.to_s if k.length>0
-        return method(functions[i3][mode]).call(bot,event,args[i,args.length-i-i2]) if !functions[i3][mode].nil? && k.length>0 && args[i,args.length-i-i2].length>0
+        return method(functions[i3][mode]).call(bot,event,args[i,args.length-i-i2],ext2) if !functions[i3][mode].nil? && k.length>0 && args[i,args.length-i-i2].length>0
       end
     end
   end
@@ -1138,15 +1136,13 @@ def find_best_match(name,bot,event,fullname=false,ext=false,mode=1)
   puts name
   for i3 in 0...functions.length
     k=method(functions[i3][0]).call(name,event,false,ext)
-        puts k.to_s if k.length>0
-    return method(functions[i3][mode]).call(bot,event,name.split(' ')) if !functions[i3][mode].nil? && k.length>0
+    return method(functions[i3][mode]).call(bot,event,name.split(' '),ext2) if !functions[i3][mode].nil? && k.length>0
   end
   args=name.split(' ')
   for i in 0...args.length
     for i2 in 0...args.length-i
       k=method(functions[i3][0]).call(args[i,args.length-i-i2].join(' '),event,false,ext)
-        puts k.to_s if k.length>0
-      return method(functions[i3][mode]).call(bot,event,args[i,args.length-i-i2]) if !functions[i3][mode].nil? && k.length>0 && args[i,args.length-i-i2].length>0
+      return method(functions[i3][mode]).call(bot,event,args[i,args.length-i-i2],ext2) if !functions[i3][mode].nil? && k.length>0 && args[i,args.length-i-i2].length>0
     end
   end
   event.respond 'No matches found.' if mode>1
@@ -4816,7 +4812,7 @@ def find_adventurers(bot,event,args=nil)
       flds=[]
       mrar=[]
       for i in 0...@max_rarity[0]+1
-        flds.push([generate_rarity_row(i,@max_rarity[0]),char.reject{|q| q[1][0,1]!=i.to_s}.map{|q| q[0]}.uniq.join("\n")])
+        flds.push([generate_rarity_row(i,@max_rarity[0],'',true),char.reject{|q| q[1][0,1]!=i.to_s}.map{|q| q[0]}.uniq.join("\n")])
         mrar.push(i.to_s)
       end
       flds.push(['Unknown rarity',char.reject{|q| mrar.include?(q[1][0,1])}.map{|q| q[0]}.uniq.join("\n")])
@@ -4868,7 +4864,7 @@ def find_dragons(bot,event,args=nil)
       flds=[]
       mrar=[]
       for i in 0...@max_rarity[1]+1
-        flds.push([generate_rarity_row(i,0),char.reject{|q| q[1][0,1]!=i.to_s}.map{|q| q[0]}.uniq.join("\n")])
+        flds.push([generate_rarity_row(i,0,'',true),char.reject{|q| q[1][0,1]!=i.to_s}.map{|q| q[0]}.uniq.join("\n")])
         mrar.push(i.to_s)
       end
       flds.push(['Unknown rarity',char.reject{|q| mrar.include?(q[1][0,1])}.map{|q| q[0]}.uniq.join("\n")])
@@ -4905,7 +4901,7 @@ def find_wyrmprints(bot,event,args=nil)
       flds=[]
       mrar=[]
       for i in 0...@max_rarity[2]+1
-        flds.push([generate_rarity_row(i,0),char.reject{|q| q[1][0,1]!=i.to_s}.map{|q| q[0]}.uniq.join("\n")])
+        flds.push([generate_rarity_row(i,0,'',true),char.reject{|q| q[1][0,1]!=i.to_s}.map{|q| q[0]}.uniq.join("\n")])
         mrar.push(i.to_s)
       end
       flds.push(['Unknown rarity',char.reject{|q| mrar.include?(q[1][0,1])}.map{|q| q[0]}.uniq.join("\n")])
@@ -4968,7 +4964,7 @@ def find_weapons(bot,event,args=nil)
       flds=[]
       mrar=[]
       for i in 0...@max_rarity[3]+1
-        flds.push([generate_rarity_row(i,0),char.reject{|q| q[1][0,1]!=i.to_s}.map{|q| q[0]}.uniq.join("\n")])
+        flds.push([generate_rarity_row(i,0,'',true),char.reject{|q| q[1][0,1]!=i.to_s}.map{|q| q[0]}.uniq.join("\n")])
         mrar.push(i.to_s)
       end
       flds.push(['Unknown rarity',char.reject{|q| mrar.include?(q[1][0,1])}.map{|q| q[0]}.uniq.join("\n")])
@@ -6471,7 +6467,7 @@ bot.command([:stats,:stat,:smol]) do |event, *args|
   elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase)
     disp_weapon_stats(bot,event,args,true)
   else
-    find_best_match(args.join(' '),bot,event,false,true,3)
+    find_best_match(args.join(' '),bot,event,false,false,3,true)
   end
   return nil
 end
@@ -7766,7 +7762,7 @@ bot.mention do |event|
     elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase)
       disp_weapon_stats(bot,event,args,true)
     else
-      find_best_match(args.join(' '),bot,event,false,true,3)
+      find_best_match(args.join(' '),bot,event,false,false,3,true)
     end
   elsif ['adventurer','adv'].include?(args[0].downcase)
     m=false
