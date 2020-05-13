@@ -519,9 +519,16 @@ bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, comma
   help_text(event,bot,command,subcommand)
 end
 
-def reload_library()
+def reload_library(x='')
   t=Time.now
-  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]<=60)
+  if x.downcase=='joke'
+    if t-@last_multi_reload[0]>10*60
+      @last_multi_reload[0]=t
+      return true
+    end
+    return false
+  end
+  if t-@last_multi_reload[1]>60*60 || (@shardizard==4 && t-@last_multi_reload[1]>60)
     puts 'reloading BotanText'
     load "#{@location}devkit/BotanText.rb"
     @last_multi_reload[1]=t
@@ -6528,6 +6535,24 @@ end
 
 bot.command([:find,:search,:lookup]) do |event, *args|
   return nil if overlap_prevent(event)
+  if args.nil? || args.length<=0 || event.server.nil? || bot.user(141260274144509952).on(event.server.id).nil? || event.user.id==141260274144509952
+  else
+    f=['vanille','van']
+    trig=['love','adventurer','adventurers','adv','advs','unit','units','dragon','dragons','drg','drag','drgs','drags','wyrmprint','wyrm','print','weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap','mat','mats','materials','material','item','items','banner','banners','summon','summoning','summons','summonings','abil','ability','abilitys','abilities','abils','aura','auras','coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca','cc','skill','skills','skls','skl','skil','skils','enemies','boss','enemy','bosses','enemie','enemys','bosss']
+    m=bot.user(141260274144509952).on(event.server.id).display_name.gsub(' ','')
+    f.push(m) unless trig.include?(m)
+    f.push(m[0,args[0].length]) unless args[0].length<=5 || args[0].length>m.length || trig.include?(m[0,args[0].length])
+    if f.include?(args[0].downcase)
+      args.shift
+      if reload_library('joke')
+        event.respond 'I found Van here!  See?  <@141260274144509952>'
+        return nil
+      elsif args.length<=0
+        event.respond "I'm not showing everything, you jerk!"
+        return nil
+      end
+    end
+  end
   if args.nil? || args.length<=0
   elsif ['love'].include?(args[0].downcase) || ['true love'].include?("#{args[0]} #{args[1]}".downcase)
     event.respond "Aren't we all?"
@@ -7660,7 +7685,26 @@ bot.mention do |event|
   elsif ['find','search','lineup'].include?(args[0].downcase)
     m=false
     args.shift
-    if args.length<=0
+    nodisp=false
+    if args.nil? || args.length<=0 || event.server.nil? || bot.user(141260274144509952).on(event.server.id).nil? || event.user.id==141260274144509952
+    else
+      f=['vanille','van']
+      trig=['love','adventurer','adventurers','adv','advs','unit','units','dragon','dragons','drg','drag','drgs','drags','wyrmprint','wyrm','print','weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap','mat','mats','materials','material','item','items','banner','banners','summon','summoning','summons','summonings','abil','ability','abilitys','abilities','abils','aura','auras','coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca','cc','skill','skills','skls','skl','skil','skils','enemies','boss','enemy','bosses','enemie','enemys','bosss']
+      m=bot.user(141260274144509952).on(event.server.id).display_name.gsub(' ','')
+      f.push(m) unless trig.include?(m)
+      f.push(m[0,args[0].length]) unless args[0].length<=5 || args[0].length>m.length || trig.include?(m[0,args[0].length])
+      if f.include?(args[0].downcase)
+        args.shift
+        if reload_library('joke')
+          event.respond 'I found Van here!  See?  <@141260274144509952>'
+          nodisp=true
+        elsif args.length<=0
+          event.respond "I'm not showing everything, you jerk!"
+          nodisp=true
+        end
+      end
+    end
+    if args.length<=0 || nodisp
     elsif ['love'].include?(args[0].downcase) || ['true love'].include?("#{args[0]} #{args[1]}".downcase)
       event.respond "Aren't we all?"
     elsif ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
