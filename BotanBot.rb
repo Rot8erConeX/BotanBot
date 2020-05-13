@@ -562,7 +562,7 @@ def find_adventurer(name,event,fullname=false,skipnpcs=false)
   k=adv.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name}
   return adv[k] unless k.nil?
   nicknames_load()
-  alz=@aliases.reject{|q| q[0]!='Adventurer' && !(q[0]=='NPC' && @npcs.find_index{|q2| q2[0]==q[1]}.nil?)}.map{|q| [q[1],q[2],q[3]]}
+  alz=@aliases.reject{|q| q[0]!='Adventurer' && !(q[0]=='NPC' && @npcs.find_index{|q2| q2[0]==q[2]}.nil?)}.map{|q| [q[1],q[2],q[3]]}
   g=0
   g=event.server.id unless event.server.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==name && (q[2].nil? || q[2].include?(g))}
