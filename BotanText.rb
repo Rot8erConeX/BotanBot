@@ -1786,7 +1786,8 @@ def art_of_the_nobody(bot,event,args=nil)
   end
   rar=nil
   fehm=''
-  fehm='FEH' if k[0]=='Loki'
+  fehm='FEH' if ['Loki','Thorr'].include?(k[0])
+  k[1]/=2 if k[1]>2 && !k[0].include?('Slime') && k[0]!='Snapper'
   disp="#{generate_rarity_row(k[1],0,fehm)}"
   disp="#{generate_rarity_row(k[1],@max_rarity[0],fehm)}" if k[2]=='n'
   lookout=[]
