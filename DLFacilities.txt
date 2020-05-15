@@ -842,15 +842,15 @@ Rupie Mine\27\-\Production\3x3\4\3400\Light Orb, 30;; Radiance Orb, 3;; Refulgen
 Rupie Mine\28\-\Production\3x3\4\3600\Light Orb, 30;; Radiance Orb, 3;; Refulgence Orb, 1
 Rupie Mine\29\-\Production\3x3\4\3800\Light Orb, 40;; Radiance Orb, 3;; Refulgence Orb, 1
 Rupie Mine\30\-\Production\3x3\4\4000\Light Orb, 40;; Radiance Orb, 3;; Refulgence Orb, 1
-Rupie Mine\31\-\Production\3x3\4\4200\Light Orb, 50;; Radiance Orb, 5;; Refulgence Orb, 1;; Resplendence Orb, 1
-Rupie Mine\32\-\Production\3x3\4\4400\Light Orb, 55;; Radiance Orb, 10;; Refulgence Orb, 2;; Resplendence Orb, 2
-Rupie Mine\33\-\Production\3x3\4\4600\Light Orb, 65;; Radiance Orb, 15;; Refulgence Orb, 3;; Resplendence Orb, 3
-Rupie Mine\34\-\Production\3x3\4\4800\Light Orb, 80;; Radiance Orb, 20;; Refulgence Orb, 5;; Resplendence Orb, 5
-Rupie Mine\35\-\Production\3x3\4\5000\Light Orb, 100;; Radiance Orb, 30;; Refulgence Orb, 7;; Resplendence Orb, 7
-Rupie Mine\36\-\Production\3x3\4\5200\Light Orb, 130;; Radiance Orb, 40;; Refulgence Orb, 9;; Resplendence Orb, 9
-Rupie Mine\37\-\Production\3x3\4\5400\Light Orb, 160;; Radiance Orb, 50;; Refulgence Orb, 12;; Resplendence Orb, 12
-Rupie Mine\38\-\Production\3x3\4\5600\Light Orb, 200;; Radiance Orb, 65;; Refulgence Orb, 15;; Resplendence Orb, 15
-Rupie Mine\39\-\Production\3x3\4\5800\Light Orb, 260;; Radiance Orb, 80;; Refulgence Orb, 18;; Resplendence Orb, 18
+Rupie Mine\31\-\Production\3x3\4\4200\Light Orb, 50;; Radiance Orb, 5;; Refulgence Orb, 2;; Resplendence Orb, 1
+Rupie Mine\32\-\Production\3x3\4\4400\Light Orb, 55;; Radiance Orb, 10;; Refulgence Orb, 4;; Resplendence Orb, 2
+Rupie Mine\33\-\Production\3x3\4\4600\Light Orb, 65;; Radiance Orb, 15;; Refulgence Orb, 6;; Resplendence Orb, 3
+Rupie Mine\34\-\Production\3x3\4\4800\Light Orb, 80;; Radiance Orb, 20;; Refulgence Orb, 9;; Resplendence Orb, 5
+Rupie Mine\35\-\Production\3x3\4\5000\Light Orb, 100;; Radiance Orb, 30;; Refulgence Orb, 12;; Resplendence Orb, 7
+Rupie Mine\36\-\Production\3x3\4\5200\Light Orb, 130;; Radiance Orb, 40;; Refulgence Orb, 15;; Resplendence Orb, 9
+Rupie Mine\37\-\Production\3x3\4\5400\Light Orb, 160;; Radiance Orb, 50;; Refulgence Orb, 20;; Resplendence Orb, 12
+Rupie Mine\38\-\Production\3x3\4\5600\Light Orb, 200;; Radiance Orb, 65;; Refulgence Orb, 25;; Resplendence Orb, 15
+Rupie Mine\39\-\Production\3x3\4\5800\Light Orb, 260;; Radiance Orb, 80;; Refulgence Orb, 30;; Resplendence Orb, 18
 Rupie Mine\40\-\Production\3x3\4\6000\Light Orb, 400;; Radiance Orb, 100;; Refulgence Orb, 25;; Resplendence Orb, 25
 Seabed Stage\1\Use it to boost the stats of bow and dagger wielding adventurers.\Adventurer, Event Dual Dojo\3x3\1\0
 Seabed Stage\2\-\Adventurer, Event Dual Dojo\3x3\1\100\Glam Shells, 3
