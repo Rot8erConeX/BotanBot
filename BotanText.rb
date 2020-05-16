@@ -1258,11 +1258,13 @@ def art_of_adventure(bot,event,args=nil)
   end
   wrm=@wyrmprints.reject{|q| q[8].nil? || q[8].length<=0}
   wrmz=[]
+  nme2check="#{k[0]}"
+  nme2check='Mym' if k[0]=='Gala Mym'
   for i in 0...wrm.length
-    wrmz.push("#{wrm[i][0]}") if wrm[i][8][0].include?(k[0]) && !wrm[i][8][1].nil? && wrm[i][8][1].include?(k[0])
-    wrmz.push("#{wrm[i][0]}") if wrm[i][8][0].include?(k[0]) && wrm[i][8][1].nil?
-    wrmz.push("#{wrm[i][0]} *[Base]*") if wrm[i][8][0].include?(k[0]) && !wrm[i][8][1].nil? && !wrm[i][8][1].include?(k[0])
-    wrmz.push("#{wrm[i][0]} *[Refined]*") if !wrm[i][8][0].include?(k[0]) && !wrm[i][8][1].nil? && wrm[i][8][1].include?(k[0])
+    wrmz.push("#{wrm[i][0]}") if wrm[i][8][0].include?(nme2check) && !wrm[i][8][1].nil? && wrm[i][8][1].include?(nme2check)
+    wrmz.push("#{wrm[i][0]}") if wrm[i][8][0].include?(nme2check) && wrm[i][8][1].nil?
+    wrmz.push("#{wrm[i][0]} *[Base]*") if wrm[i][8][0].include?(nme2check) && !wrm[i][8][1].nil? && !wrm[i][8][1].include?(nme2check)
+    wrmz.push("#{wrm[i][0]} *[Refined]*") if !wrm[i][8][0].include?(nme2check) && !wrm[i][8][1].nil? && wrm[i][8][1].include?(nme2check)
   end
   dispx="#{disp}"
   if @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
@@ -1488,7 +1490,7 @@ def art_of_dragon(bot,event,args=nil)
   wrm=@wyrmprints.reject{|q| q[8].nil? || q[8].length<=0}
   wrmz=[]
   nnn="#{k[0]}"
-  nnn="Mym" if k[0]=='Brunhilda' && ['Human','Kimono'].include?(rar)
+  nnn="Mym" if k[0]=='Brunhilda' && ['Human','Kimono','Damaged'].include?(rar)
   for i in 0...wrm.length
     wrmz.push("#{wrm[i][0]}") if wrm[i][8][0].include?(nnn) && !wrm[i][8][1].nil? && wrm[i][8][1].include?(nnn)
     wrmz.push("#{wrm[i][0]}") if wrm[i][8][0].include?(nnn) && wrm[i][8][1].nil?
