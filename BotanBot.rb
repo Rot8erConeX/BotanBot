@@ -1112,7 +1112,7 @@ def find_data_ex(callback,name,event,fullname=false,ext=false,includematch=false
   return blank
 end
 
-def find_best_match(name,bot,event,fullname=false,ext=false,mode=1,ext2=false)
+def find_best_match(name,bot,event,fullname=false,ext=false,mode=1,ext2=nil)
   functions=[[:find_adventurer,:disp_adventurer_stats,:disp_adventurer_art,:disp_adventurer_stats,:find_adv_alts],
              [:find_dragon,:disp_dragon_stats,:disp_dragon_art,:disp_dragon_stats,:find_dragon_alts],
              [:find_wyrmprint,:disp_wyrmprint_stats,:disp_wyrmprint_art,:disp_wyrmprint_stats],
@@ -2748,7 +2748,8 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
   k=find_data_ex(:find_ability,args.join(' '),event)
   s2s=false
   s2s=true if safe_to_spam?(event)
-  if forceaura=='CoAbility' && s2s
+  if forceaura.nil?
+  elsif forceaura=='CoAbility' && s2s
     k=k.reject{|q| q[2]!=forceaura && q[2]!='Chain'}
   elsif forceaura.length>0
     k=k.reject{|q| q[2]!=forceaura}
