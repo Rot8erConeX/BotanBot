@@ -206,7 +206,7 @@ def data_load()
     b[i][2]=b[i][2].split(', ')
     b[i][3]=b[i][3].split('; ').map{|q| q.split(', ').map{|q2| q2.to_i}}
     b[i][4]=b[i][4].split('; ').map{|q| q.split(', ').map{|q2| q2.to_i}}
-    b[i][5]=b[i][5].to_i
+    b[i][5]=b[i][5].split(', ').map{|q| q.to_i}
     b[i][6]=b[i][6].split(';; ')
     b[i][7]=b[i][7].split(';; ')
     b[i][8]=b[i][8].split(';;;; ').map{|q| q.split(';; ')}
@@ -290,6 +290,7 @@ def data_load()
       b[i][6]=b[i][6].split(', ').map{|q| q.to_i}
       b[i][8]=b[i][8].to_f
       b[i][10]=b[i][10].split(', ') unless b[i][10].nil?
+      b[i][12]=b[i][12].to_i
     elsif b[i][2]=='Aura'
       b[i][4]=b[i][4].to_i
       b[i][6]=b[i][6].split(', ') unless b[i][6].nil?
@@ -1486,11 +1487,11 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     end
     titlex=["#{generate_rarity_row(rar,@max_rarity[0],'',false)}"]
     titlex.push("(#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{@rarity_stars[0][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
-    titlex.push("<:Defense:573344832282689567>#{longFormattedNumber(k[5])}")
+    titlex.push("<:Defense:573344832282689567>#{longFormattedNumber(k[5][0])}")
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][1]}**"
     wpn='<:Icon_Weapon_Gear:641466825212821514>'
-    title="#{title}\n#{wpn}[Alt-]**#{k[2][2]}**  <:Defense:573344832282689567>#{longFormattedNumber(k[5])}"
+    title="#{title}\n#{wpn}[Alt-]**#{k[2][2]}**  <:Defense:573344832282689567>#{longFormattedNumber(k[5][0])}"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][0]}**"
     title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**"
@@ -1501,11 +1502,11 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     end
     titlex=["#{generate_rarity_row(rar,@max_rarity[0],'',false)}"]
     titlex.push("(#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{@rarity_stars[0][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
-    titlex.push("<:Defense:573344832282689567>#{longFormattedNumber(k[5])}")
+    titlex.push("<:Defense:573344832282689567>#{longFormattedNumber(k[5][0])}")
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][1]}**"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[2][2]}"}
-    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][2]}**  <:Defense:573344832282689567>#{longFormattedNumber(k[5])}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][2]}**  <:Defense:573344832282689567>#{longFormattedNumber(k[5][0])}"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][0]}**"
     title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**"
@@ -1516,7 +1517,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     end
     titlex=["#{generate_rarity_row(rar,@max_rarity[0],'FEH',false)}"]
     titlex.push("(#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
-    titlex.push("<:DefenseS:514712247461871616>#{longFormattedNumber(k[5])}")
+    titlex.push("<:DefenseS:514712247461871616>#{longFormattedNumber(k[5][0])}")
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2][1].gsub('Shadow','Dark').gsub('Flame','Fire')}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][1]}**"
     wpn='<:Gold_Unknown:443172811499110411>'
@@ -1531,7 +1532,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     wpn='<:Blue_Tome:467112472394858508>' if k[2][2]=='Wand' && ['Water','Light'].include?(k[2][1])
     wpn='<:Green_Tome:467122927666593822>' if k[2][2]=='Wand' && k[2][1]=='Wind'
     wpn='<:Colorless_Staff:443692132323295243>' if k[2][2]=='Staff'
-    title="#{title}\n#{wpn}**#{k[2][2]}**  <:DefenseS:514712247461871616>#{longFormattedNumber(k[5])}"
+    title="#{title}\n#{wpn}**#{k[2][2]}**  <:DefenseS:514712247461871616>#{longFormattedNumber(k[5][0])}"
     clzz='<:Resource_Structure:510774545154572298>'
     clzz='<:Skill_Weapon:444078171114045450>' if k[2][0]=='Attack'
     clzz='<:Skill_Special:444078170665254929>' if k[2][0]=='Support'
@@ -1546,7 +1547,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     end
     titlex=["#{generate_rarity_row(rar,@max_rarity[0],'FGO',false)}"]
     titlex.push("(#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{['','<:FGO_icon_rarity_dark:571937156981981184>','<:FGO_icon_rarity_sickly:571937157095227402>','<:FGO_icon_rarity_rust:523903558928826372>','<:FGO_icon_rarity_mono:523903551144198145>','<:FGO_icon_rarity_gold:523858991571533825>'][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
-    titlex.push("*Def:* #{longFormattedNumber(k[5])}")
+    titlex.push("*Def:* #{longFormattedNumber(k[5][0])}")
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][1]}**"
     clzz='unknown'
@@ -1564,7 +1565,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     clr='silver' if k[1][0,1].to_i==4
     clr='bronze' if k[1][0,1].to_i<4
     moji=bot.server(srv).emoji.values.reject{|q| q.name != "class_#{clzz}_#{clr}"}
-    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][2]}**  *Def:* #{longFormattedNumber(k[5])}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][2]}**  *Def:* #{longFormattedNumber(k[5][0])}"
     clzz=''
     clzz='<:Buster_y:526556105422274580>' if k[2][0]=='Attack'
     clzz='<:support:572315955397394452>' if k[2][0]=='Support'
@@ -1580,11 +1581,11 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     end
     titlex=["#{generate_rarity_row(rar,@max_rarity[0],'',false)}"]
     titlex.push("(#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{@rarity_stars[0][k[1][0,1].to_i]})") unless rar==k[1][0,1].to_i
-    titlex.push("<:Defense:573344832282689567>#{longFormattedNumber(k[5])}")
+    titlex.push("<:Defense:573344832282689567>#{longFormattedNumber(k[5][0])}")
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][1]}**"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{k[2][2]}"}
-    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][2]}**  <:Defense:573344832282689567>#{longFormattedNumber(k[5])}"
+    title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][2]}**  <:Defense:573344832282689567>#{longFormattedNumber(k[5][0])}"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][0]}**"
     title="#{title}\n**Collab**" unless k[12].nil? || k[12].length<=0 || (k[1].length>1 && k[1][1,1].downcase=='c')
@@ -1654,7 +1655,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
         end
       end
       if skl2.nil?
-        str2="**#{k[6][1]}** - LOAD ERROR"
+        str2="#{str2}\n#{"\n" unless skl1.nil?}**#{k[6][1]}** - LOAD ERROR"
       else
         eng=''
         eng=", #{semoji[3]}Energizable" if skl2[7]=='Yes'
@@ -1675,6 +1676,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
           str2="#{str2} \u2192 *Lv.3 (F6)*" if !skl2[5].nil? && skl2[5].length>0
         end
       end
+      str2="#{str2}\n#{"\n" unless skl1.nil? && skl2.nil?}<:Skill_Points:712005170380406796> *Skill Sharing capacity:* #{longFormattedNumber(k[5][1])}" if k[5].length>1 && k[5][1]>0
       flds.push(['Skills',str2,1])
       nde=1
       nde=0 if !k[8][3].nil? && k[8][3].include?('3')
@@ -1716,10 +1718,12 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     lv=[1,1,1,1,0] if rar==2
     lv=[1,1,1,0,0] if rar==1
     x=[skl1[3,3],skl2[3,3]]
-    for i in 11...skl1.length
+    x[0].push(skl1[11])
+    x[1].push(skl2[11])
+    for i in 13...skl1.length
       x[0].push(skl1[i])
     end
-    for i in 11...skl2.length
+    for i in 13...skl2.length
       x[1].push(skl2[i])
     end
     x=x.map{|q| q.reject{|q2| q2.nil? || q2.length<=0}}
@@ -1753,6 +1757,8 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       strx="#{strx}\n\n*#{k[6][1]}#{eng}#{energy_emoji(skl2[10])} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP*\n#{x[1]}"
       strx2="#{strx2}\n#{k[6][1]}#{eng}#{energy_emoji(skl2[10])} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP"
     end
+    strx="#{strx}\n#{"\n" unless skl1.nil? && skl2.nil?}<:Skill_Points:712005170380406796> *Skill Sharing capacity:* #{longFormattedNumber(k[5][1])}" if k[5].length>1 && k[5][1]>0
+    strx2="#{strx2}\n#{"\n" unless skl1.nil? && skl2.nil?}<:Skill_Points:712005170380406796> *Skill Sharing capacity:* #{longFormattedNumber(k[5][1])}" if k[5].length>1 && k[5][1]>0
     m=[]
     for i in 0...3
       m.push(k[8][i][lv[i+2]-1]) if lv[i+2]>0
@@ -1761,7 +1767,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     str="#{str}\n**Co-Ability:** #{k[7][0]}"
     str="#{str}\n**Chain Co-Ability:** #{k[7][1]}" if k[7].length>1
     if str.gsub(';;;;;',strx).length>=1800
-      str=str.gsub(';;;;;',"#{strx2}\n~~Skill descriptions make this data too long.  Please try again in PM.~~")
+      str=str.gsub(';;;;;',"#{strx2}\n~~Skill descriptions make this data too long.  Please try again in PM.~~#{"\n\n<:Skill_Points:712005170380406796> *Skill Sharing capacity:* #{longFormattedNumber(k[5][1])}" if k[5].length>1 && k[5][1]>0}")
     else
       str=str.gsub(';;;;;',strx)
     end
@@ -1794,6 +1800,11 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     create_embed(event,[hdr,title],str,element_color(k[2][1]),ftr,xpic,flds[0,flds.length-2])
     if flds[-2][1].length>=1900
       s1=flds[-2][1].split("\n\n")
+      if s1[-1][0,1]=='<'
+        flds[-1]=['',"#{s1[-1].gsub('*','**')}\n\n__**#{flds[-1][0]}**__\n#{flds[-1][1]}"]
+        s1[-1]=nil
+        s1.compact!
+      end
       for i in 0...s1.length
         s2=s1[i].split("\n")
         ftr3=nil
@@ -1803,7 +1814,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     else
       create_embed(event,"__**#{flds[-2][0]}**__",flds[-2][1],element_color(k[2][1]),ftr2)
     end
-    create_embed(event,"__**#{flds[-1][0]}**__",flds[-1][1],element_color(k[2][1]))
+    create_embed(event,"#{"__**#{flds[-1][0]}**__" unless flds[-1][0].length<=0}",flds[-1][1],element_color(k[2][1]))
   else
     ftr=ftr2 unless ftr2.nil?
     create_embed(event,[hdr,title],str,element_color(k[2][1]),ftr,xpic,flds)
@@ -2643,13 +2654,17 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Skills/#{dispname}.png?raw=true"
   xcolor=0x02010a
   mx=k[3,3].reject{|q| q.nil? || q.length<=0}
-  for i in 11...k.length
-    mx.push(k[i]) if !k[i].nil? && k[i].length>0
+  mx.push(k[11]) if !k[11].nil? && k[11].length>0
+  if k.length>13
+    for i in 13...k.length
+      mx.push(k[i]) if !k[i].nil? && k[i].length>0
+    end
   end
   str=''
   title=''
   title="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min && k[6][0]>0
   title="#{title}\n**Invulnerability duration:** #{k[8]} seconds"
+  title="#{title}\n<:Skill_Points:712005170380406796> **Skill Share cost:** #{k[12]}" if k[12]>0
   title="#{title}\n<:Energize:559629242137051155> **Energizable**" if k[7]=='Yes'
   title="#{title}\n~~Not energizable~~" if k[7]=='No'
   title="#{title}\n<:Inspiring:688916587079663625> **Inspirable**" if k[10].include?('Damage')
@@ -2719,6 +2734,7 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
     unless k[6][0,mx.length].max==k[6][0,mx.length].min
       str2="#{str2}\n\nL1 = #{longFormattedNumber(k[6][0])} SP\nL2 = #{longFormattedNumber(k[6][1])} SP"
       str2="#{str2}\nL3 = #{longFormattedNumber(k[6][2])} SP" if mx.length>2
+      str2="#{str2}\nL4 = #{longFormattedNumber(k[6][3])} SP" if mx.length>3
     end
     if str.length+str2.length+m<1800
       str="#{str}#{str2}"
@@ -5317,7 +5333,7 @@ def sort_adventurers(bot,event,args=nil,mode=0)
   char=k[1]
   char=char.sort{|a,b| a[0].gsub('*','')<=>b[0].gsub('*','')}.uniq
   textra=k[3]
-  srt=[1,1,1,1]
+  srt=[1,1,1,1,1]
   srtt=0
   lvl=-1
   rar=-1
@@ -5335,6 +5351,9 @@ def sort_adventurers(bot,event,args=nil,mode=0)
       srtt+=1
     elsif ['defstat','defensestat','defencestat','def','defense','defence'].include?(args[i].downcase)
       srt[srtt]=5
+      srtt+=1
+    elsif ['skill','skillshare','share','sharing','skl','skills','sklz'].include?(args[i].downcase)
+      srt[srtt]=7
       srtt+=1
     end
   end
@@ -5356,13 +5375,16 @@ def sort_adventurers(bot,event,args=nil,mode=0)
   srt[srtt]=0
   char=char.reject{|q| q[0][0,1]=='*'}
   char=char.reject{|q| q[1][0,1].to_i>rar} unless rar>@max_rarity[0] || args.map{|q| q.downcase}.include?('alladv')
-  stats=['Name','','','HP','Strength','Defense']
+  stats=['Name','','','HP','Strength','Defense','','Capacity']
   for i in 0...char.length
     m=rar-3
     m=char[i][1][0,1].to_i-3 if rar>@max_rarity[0]
     m+=lvl if m==2
     char[i][3]=char[i][3][1][m]
     char[i][4]=char[i][4][1][m]
+    char[i][7]=char[i][5][1]
+    char[i][7]=0 if char[i][5].length<=1
+    char[i][5]=char[i][5][0]
     m2=[]
     for i2 in 0...srt.length
       unless srt[i2]<3
@@ -5378,7 +5400,8 @@ def sort_adventurers(bot,event,args=nil,mode=0)
     char[i][6]="**#{char[i][0]}**#{adv_emoji(char[i],bot,true)}"
     char[i][6]="#{char[i][6]}#{" (Lv#{30+10*char[i][1][0,1].to_i})" if rar==6 && m != 3} - #{m2.join(', ')}" if m2.length>0
   end
-  char.sort!{|b,a| (supersort(a,b,srt[0])==0 ? (supersort(a,b,srt[1])==0 ? (supersort(a,b,srt[2])==0 ? supersort(a,b,srt[3]) : supersort(a,b,srt[2])) : supersort(a,b,srt[1])) : supersort(a,b,srt[0]))}
+  puts char.map{|q|q.to_s}
+  char.sort!{|b,a| (supersort(a,b,srt[0])==0 ? (supersort(a,b,srt[1])==0 ? (supersort(a,b,srt[2])==0 ? (supersort(a,b,srt[3])==0 ? supersort(a,b,srt[4]) : supersort(a,b,srt[3])) : supersort(a,b,srt[2])) : supersort(a,b,srt[1])) : supersort(a,b,srt[0]))}
   tx=0
   bx=0
   for i in 0...args.length
@@ -5400,6 +5423,7 @@ def sort_adventurers(bot,event,args=nil,mode=0)
   fpop=@rarity_stars[0][0,@max_rarity[0]+1]
   fpop[fpop.length-1]="#{fpop[fpop.length-1]}, absolute max stats" if lvl==1
   fpop.push('Default rarity')
+  stats=['Name','','','<:HP:573344832307593216>HP','<:Strength:573344931205349376>Strength','<:Defense:573344832282689567>Defense','','<:Skill_Points:712005170380406796>Skill Share capacity']
   disp="__**Adventurer Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}\n*Sorted at:* #{rar unless rar>@max_rarity[0]}#{fpop[rar]}#{"\n#{@max_rarity[0]}#{@rarity_stars[0][@max_rarity[0]]}s will be shown with absolute max stats" if rar>@max_rarity[1] && lvl==1}"
   disp=extend_message(disp,"__**Notes**__\n#{textra}",event,2) if textra.length>0
   disp=extend_message(disp,"__**Results**__",event,2) if char.length>0
@@ -5464,6 +5488,7 @@ def sort_dragons(bot,event,args=nil)
     textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results.\nYou can also make things easier by making the list shorter with words like `top#{rand(10)+1}` or `bottom#{rand(10)+1}`"
     char=char[0,10]
   end
+  stats=['Name','','','<:HP:573344832307593216>HP','<:Strength:573344931205349376>Strength']
   disp="__**Dragon Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}"
   disp=extend_message(disp,"__**Notes**__\n#{textra}",event,2) if textra.length>0
   disp=extend_message(disp,"__**Results**__",event,2) if char.length>0
@@ -5527,6 +5552,7 @@ def sort_wyrmprints(bot,event,args=nil)
     textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results.\nYou can also make things easier by making the list shorter with words like `top#{rand(10)+1}` or `bottom#{rand(10)+1}`"
     char=char[0,10]
   end
+  stats=['Name','','','<:HP:573344832307593216>HP','<:Strength:573344931205349376>Strength']
   disp="__**Wyrmprint Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}"
   disp=extend_message(disp,"__**Notes**__\n#{textra}",event,2) if textra.length>0
   disp=extend_message(disp,"__**Results**__",event,2) if char.length>0
@@ -5597,6 +5623,7 @@ def sort_weapons(bot,event,args=nil)
     textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results.\nYou can also make things easier by making the list shorter with words like `top#{rand(10)+1}` or `bottom#{rand(10)+1}`"
     char=char[0,10]
   end
+  stats=['Name','','','','<:HP:573344832307593216>HP','<:Strength:573344931205349376>Strength']
   disp="__**Weapon Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}\n*Sorted at:* #{['',"#{'<:NonUnbound:534494090876682264>'*4} 0UB","#{'<:Unbind:534494090969088000>'*4} MUB"][x]}"
   disp=extend_message(disp,"__**Notes**__\n#{textra}",event,2) if textra.length>0
   disp=extend_message(disp,"__**Results**__",event,2) if char.length>0
