@@ -4001,12 +4001,12 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
   end
 end
 
-def disp_facility_data(bot,event,args=nil)
+def disp_facility_data(bot,event,args=nil,extvat=false)
   reload_library()
   return fac_stats(bot,event,args)
 end
 
-def disp_mat_data(bot,event,args=nil)
+def disp_mat_data(bot,event,args=nil,extvat=false)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
@@ -4080,7 +4080,7 @@ def disp_mat_data(bot,event,args=nil)
   end
 end  
 
-def disp_status_data(bot,event,args=nil)
+def disp_status_data(bot,event,args=nil,extvat=false)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
