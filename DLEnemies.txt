@@ -30,10 +30,12 @@ Proud Manticore\264856; 1603\Light, Therion, Void\Poison: **0%**, Burn: **0%**, 
 Volcanic Chimera\-1, 311938, 1039797; -1, 1177, 1430\Flame, Therion, Void\Poison: 60%, Freeze: **20%**, Blind: 60%, Bog: **20%**, Frostbite: **0%**\Burn, Poison\Frenzy;; Overgrowth
 Ebon Chimera\-1, 311938, 935817; -1, 1177, 1430\Shadow, Therion, Void\Poison: 60%, Burn: *99%*, Freeze: **20%**, Paralysis: **20%**, Blind: 60%, Bog: **20%**, Frostbite: **0%**\Poison, Blind\Frenzy;; Overgrowth
 Tempest Chimera\-1, 311938, 1039797; -1, 1177, 1430\Wind, Therion, Void\Poison: 60%, Burn: *99%*, Freeze: **20%**, Paralysis: **20%**, Blind: 60%, Bog: **20%**, Frostbite: **0%**\Burn, Stun\Frenzy;; Overgrowth
-Catoblepas Anemos\262587; 2052\Wind, Therion, Void\Poison: **40%**, Burn: **40%**, Stun: **40%**, Frostbite: **0%**\Stun\Petrify
+Catoblepas Anemos\262587; 2052\Wind, Therion, Void\Poison: **40%**, Burn: **40%**, Stun: **40%**, Frostbite: **0%**\Stun, Defense Down\Petrify
 Catoblepas Fotia\262587; 2052\Flame, Therion, Void\Poison: **40%**, Burn: *99%*, Freeze: **40%**, Bog: **40%**, Frostbite: **0%**\Burn, Defense Down\Petrify
+Catoblepas Skia\262587; 2052\Shadow, Therion, Void\TBA\Poison, Defense Down\Petrify
 Eolian Phantom\291017; 1684\Wind, Undead, Void\Poison: **40%**, Burn: **40%**, Paralysis: **40%**, Stun: **40%**, Frostbite: **0%**\Stun\Soul Eater;; Spectral Shield
-Infernal Phantom\0; 0\Flame, Undead, Void\TBA\Burn\Soul Eater;; Spectral Shield
+Infernal Phantom\291017; 1684\Flame, Undead, Void\Poison: **40%**, Paralysis: **40%**, Stun: **40%**, Frostbite: **0%**\Burn\Soul Eater;; Spectral Shield
+Abyssal Phantom\291017; 1684\Water, Undead, Void\TBA\Bog\Soul Eater;; Spectral Shield
 Midgardsormr (Enemy)\5880, 21060, 64350, 120000; 231, 761, 1205, 1800\Wind, Dragon, Dragon Trial\Burn: **0%**, Frostbite: **0%**\Stun\
 Brunhilda (Enemy)\5880, 19656, 64350, 111540; 231, 766, 1339, 1968\Flame, Dragon, Dragon Trial\Freeze: 55%, Bog: 55%, Frostbite: **0%**\Burn\
 Mercury (Enemy)\5880, 22320, 69300, 121200; 231, 803, 1189, 1747\Water, Dragon, Dragon Trial\Poison: 55%, Sleep: 55%, Frostbite: **0%**\Bog\
