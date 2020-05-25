@@ -290,7 +290,7 @@ def data_load()
       b[i][6]=b[i][6].split(', ').map{|q| q.to_i}
       b[i][8]=b[i][8].to_f
       b[i][10]=b[i][10].split(', ') unless b[i][10].nil?
-      b[i][12]=b[i][12].to_i
+      b[i][12]=b[i][12].split(', ').map{|q| q.to_i}
     elsif b[i][2]=='Aura'
       b[i][4]=b[i][4].to_i
       b[i][6]=b[i][6].split(', ') unless b[i][6].nil?
@@ -1141,7 +1141,6 @@ def find_best_match(name,bot,event,fullname=false,ext=false,mode=1,ext2=nil)
   end
   event.respond 'No matches found.' if (fullname || name.length<=2) && mode>1
   return nil if fullname || name.length<=2
-  puts name
   for i3 in 0...functions.length
     k=method(functions[i3][0]).call(name,event,false,ext)
     return method(functions[i3][mode]).call(bot,event,name.split(' '),ext2) if !functions[i3][mode].nil? && k.length>0
@@ -1639,7 +1638,8 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
         eng=", #{semoji[3]}Energizable" if skl1[7]=='Yes'
         eng=", #{semoji[4]}Inspirable" if skl1[10].include?('Damage')
         eng=", #{semoji[5]}Energizable/Inspirable" if skl1[7]=='Yes' && skl1[10].include?('Damage')
-        str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min && skl1[6][0]>0}"
+        skl1[12][1]=skl1[6][-1] unless skl1[12].nil? || skl1[12].length<=0 || skl1[12].length>1
+        str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP#{" (#{skl1[12][0]}<:Skill_Points:712005170380406796> / #{longFormattedNumber(skl1[12][1])} SP when shared)" unless skl1[12].nil? || skl1[12].length<=0}" if skl1[6].max===skl1[6].min && skl1[6][0]>0}"
         if (skl1[9].nil? || skl1[9].length<=0) && skl1[6].max != skl1[6].min
           str2="#{str2}\n*Lv.1 (F0, #{skl1[6][0]} SP):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (F3, #{skl1[6][1]} SP):* #{skl1[4].gsub(';; ',"\n")}\n*Lv.3 (F5, #{skl1[6][2]} SP):* #{skl1[5].gsub(';; ',"\n")}"
           str2="#{str2}\n*Lv.4 (F6, #{skl1[6][3]} SP):* #{skl1[11].gsub(';; ',"\n")}" unless skl1[11].nil? || skl1[11].length<=0
@@ -1661,7 +1661,8 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
         eng=", #{semoji[3]}Energizable" if skl2[7]=='Yes'
         eng=", #{semoji[4]}Inspirable" if skl2[10].include?('Damage')
         eng=", #{semoji[5]}Energizable/Inspirable" if skl2[7]=='Yes' && skl2[10].include?('Damage')
-        str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{eng}#{energy_emoji(skl2[10],true)})__#{" - #{longFormattedNumber(skl2[6][0])} SP" if skl2[6].max===skl2[6].min && skl2[6][0]>0}"
+        skl2[12][1]=skl2[6][-1] unless skl2[12].nil? || skl2[12].length<=0 || skl2[12].length>1
+        str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{eng}#{energy_emoji(skl2[10],true)})__#{" - #{longFormattedNumber(skl2[6][0])} SP#{" (#{skl2[12][0]}<:Skill_Points:712005170380406796> / #{longFormattedNumber(skl2[12][1])} SP when shared)" unless skl2[12].nil? || skl2[12].length<=0}" if skl2[6].max===skl2[6].min && skl2[6][0]>0}"
         if (skl2[9].nil? || skl2[9].length<=0) && skl2[6].max != skl2[6].min
           str2="#{str2}\n*Lv.1 (F2, #{skl2[6][0]} SP):* #{skl2[3].gsub(';; ',"\n")}\n*Lv.2 (F4, #{skl2[6][1]} SP):* #{skl2[4].gsub(';; ',"\n")}"
           str2="#{str2}\n*Lv.3 (F6, #{skl2[6][2]} SP):* #{skl2[5].gsub(';; ',"\n")}" if !skl2[5].nil? && skl2[5].length>0
@@ -2664,7 +2665,8 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   title=''
   title="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min && k[6][0]>0
   title="#{title}\n**Invulnerability duration:** #{k[8]} seconds"
-  title="#{title}\n<:Skill_Points:712005170380406796> **Skill Share cost:** #{k[12]}" if k[12]>0
+  k[12][1]=k[6][-1] if !k[12].nil? && k[12].length==1
+  title="#{title}\n<:Skill_Points:712005170380406796> **Skill Share:** *Cost:* #{k[12][0]} / #{longFormattedNumber(k[12][1])} SP" if !k[12].nil? && k[12].length>0
   title="#{title}\n<:Energize:559629242137051155> **Energizable**" if k[7]=='Yes'
   title="#{title}\n~~Not energizable~~" if k[7]=='No'
   title="#{title}\n<:Inspiring:688916587079663625> **Inspirable**" if k[10].include?('Damage')
