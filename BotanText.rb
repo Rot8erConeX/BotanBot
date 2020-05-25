@@ -1120,6 +1120,7 @@ def art_of_adventure(bot,event,args=nil)
   fehm='FEH' if feh
   fehm='FGO' if !k[12].nil? && k[12]=='FGO'
   if rar.is_a?(String)
+    m=false
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Adventurers/#{k[0].gsub(' ','_')}_#{rar}.png"
     IO.copy_stream(open(art), "#{@location}devkit/DLTemp#{@shardizard}.png") rescue m=true
     if File.size("#{@location}devkit/DLTemp#{@shardizard}.png")<=100 || m
@@ -3597,8 +3598,8 @@ def damage_modifiers(bot,event,args=nil)
       f=[]
       k2=[1,2,3,4,5,6,7]
       k2=[75,80,95,100,150,95,'104% L1, 115% L2'] if k[2][2]=='Sword'
-      k2=[97,97,'63% x2',129,'194% uncharged, 143% charged',94,"83% L1, 92% L2"] if k[2][2]=='Blade'
-      k2=[75,'38% x2','54% x2',119,119,89,"43.2% x3 L1, 47% x3 L2"] if k[2][2]=='Dagger'
+      k2=[97,97,'63% x2',129,'194% uncharged, 143% x2 charged',94,"83% L1, 92% L2"] if k[2][2]=='Blade'
+      k2=[75,'38% x2','54% x2',119,180,89,"43.2% x3 L1, 47% x3 L2"] if k[2][2]=='Dagger'
       k2=[114,122,204,216,228,73,"173% L1, 192% L2"] if k[2][2]=='Axe'
       k2=[84,'45% x2',108,150,112,89,"27% x5 L1, 30% x5 L2"] if k[2][2]=='Lance'
       k2=['29% x3','37% x2','42% x3','63% x2','35% x5','30% x3',"28% x8 L1, 31% x8 L2"] if k[2][2]=='Bow'
@@ -3664,8 +3665,8 @@ def damage_modifiers(bot,event,args=nil)
     event.respond "The complete table is too large.  Please either specify a weapon type or use this command in PM."
   elsif wpn.length<=0
     kx=[[75,80,95,100,150,95,"104% L1, 115% L2"],
-        [97,97,'63% x2',129,"194% uncharged, 143% charged",94,"83% L1, 92% L2"],
-        [75,'38% x2','54% x2',119,119,89,"43.2% x3 L1, 47% x3 L2"],
+        [97,97,'63% x2',129,"194% uncharged, 143% x2 charged",94,"83% L1, 92% L2"],
+        [75,'38% x2','54% x2',119,180,89,"43.2% x3 L1, 47% x3 L2"],
         [114,122,204,216,228,73,"173% L1, 192% L2"],
         [84,'45% x2',108,150,112,89,"27% x5 L1, 30% x5 L2"],
         ['29% x3','37% x2','42% x3','63% x2','35% x5','30% x3',"28% x8 L1, 31% x8 L2"],
@@ -3688,8 +3689,8 @@ def damage_modifiers(bot,event,args=nil)
   else
     k=[1,2,3,4,5,6,7]
     k=[75,80,95,100,150,95,"104% L1, 115% L2"] if wpn[0]=='Sword'
-    k=[97,97,'63% x2',129,"194% uncharged, 143% charged",94,"83% L1, 92% L2"] if wpn[0]=='Blade'
-    k=[75,'38% x2','54% x2',119,119,89,"43.2% x3 L1, 47% x3 L2"] if wpn[0]=='Dagger'
+    k=[97,97,'63% x2',129,"194% uncharged, 143% x2 charged",94,"83% L1, 92% L2"] if wpn[0]=='Blade'
+    k=[75,'38% x2','54% x2',119,180,89,"43.2% x3 L1, 47% x3 L2"] if wpn[0]=='Dagger'
     k=[114,122,204,216,228,73,"173% L1, 192% L2"] if wpn[0]=='Axe'
     k=[84,'45% x2',108,150,112,89,"27% x5 L1, 30% x5 L2"] if wpn[0]=='Lance'
     k=['29% x3','37% x2','42% x3','63% x2','35% x5','30% x3',"28% x8 L1, 31% x8 L2"] if wpn[0]=='Bow'
@@ -3736,7 +3737,7 @@ def sp_table(bot,event,args=nil)
       k2=[1,2,3,4,5,6,7]
       k2=[150,150,196,265,391,143,345,1152] if k[2][2]=='Sword'
       k2=[130,130,220,360,'660 uncharged, 900 charged',104,200,'1500 uncharged, 1740 charged'] if k[2][2]=='Blade'
-      k2=[144,144,264,288,288,132,288,1128] if k[2][2]=='Dagger'
+      k2=[144,144,264,288,480,132,288,1128] if k[2][2]=='Dagger'
       k2=[200,240,360,380,420,160,300,1600] if k[2][2]=='Axe'
       k2=[120,240,120,480,600,111,400,1560] if k[2][2]=='Lance'
       k2=[184,92,276,414,529,208,460,1495] if k[2][2]=='Bow'
@@ -3819,7 +3820,7 @@ def sp_table(bot,event,args=nil)
     event.respond "The complete table is too large.  Please either specify a weapon type or use this command in PM."
   elsif wpn.length<=0
     kx=[[150,150,196,265,391,143,345,1152],[130,130,220,360,'660 uncharged, 900 charged',104,200,'1500 uncharged, 1740 charged'],
-        [144,144,264,288,288,132,288,1128],[200,240,360,380,420,160,300,1600],[120,240,120,480,600,111,400,1560],[184,92,276,414,529,208,460,1495],
+        [144,144,264,288,480,132,288,1128],[200,240,360,380,420,160,300,1600],[120,240,120,480,600,111,400,1560],[184,92,276,414,529,208,460,1495],
         [130,200,240,430,600,156,400,1600],[232,232,348,464,696,300,580,1972]]
     k=kx.map{|q| "__**Combo:**__\n*First Hit:* #{q[0]}\n*Second Hit:* #{q[1]}\n*Third Hit:* #{q[2]}\n*Fourth Hit:* #{q[3]}\n*Fifth Hit:* #{q[4]}\n~~*Total:* #{q[7]}~~\n\n**Dash Attack:** #{q[5]}\n**Force Strike** #{q[6]}"}
     k2=['<:Weapon_Sword:532106114540634113>Swords','<:Weapon_Blade:532106114628714496>Blades','<:Weapon_Dagger:532106116025286656>Daggers',
@@ -3834,7 +3835,7 @@ def sp_table(bot,event,args=nil)
     k=[1,2,3,4,5,6,7]
     k=[150,150,196,265,391,143,345,1152] if wpn[0]=='Sword'
     k=[130,130,220,360,'660 uncharged, 900 charged',104,200,'1500 uncharged, 1740 charged'] if wpn[0]=='Blade'
-    k=[144,144,264,288,288,132,288,1128] if wpn[0]=='Dagger'
+    k=[144,144,264,288,480,132,288,1128] if wpn[0]=='Dagger'
     k=[200,240,360,380,420,160,300,1600] if wpn[0]=='Axe'
     k=[120,240,120,480,600,111,400,1560] if wpn[0]=='Lance'
     k=[184,92,276,414,529,208,460,1495] if wpn[0]=='Bow'
