@@ -1282,8 +1282,8 @@ def dragon_emoji(k,bot,ignorefeh=false)
     str=['','<:Icon_Rarity_1:448266417481973781>','<:Icon_Rarity_2:448266417872044032>','<:Icon_Rarity_3:448266417934958592>','<:Icon_Rarity_4:448266418459377684>','<:Icon_Rarity_5:448266417553539104>','<:Icon_Rarity_6:491487784650145812>'][k[1][0,1].to_i]
     moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2].gsub('Shadow','Dark').gsub('Flame','Fire')}"}
     color='Colorless'
-    color='Red' if ['Flame','Shadow'].include?(k[0][2])
-    color='Blue' if ['Water','Light'].include?(k[0][2])
+    color='Red' if ['Flame','Shadow'].include?(k[2])
+    color='Blue' if ['Water','Light'].include?(k[2])
     color='Green' if ['Wind'].include?(k[0][2])
     moji2=bot.server(443172595580534784).emoji.values.reject{|q| q.name != "#{color}_Dragon"}
     str="#{str}#{moji[0].mention unless moji.length<=0}#{moji2[0].mention unless moji2.length<=0}<:Great_Badge_Golden:443704781068959744>"
@@ -1607,8 +1607,10 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   sklz=@askilities.map{|q| q}
   skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==k[6][0]}
   skl1=sklz[skl1] unless skl1.nil?
+  skl1[12][1]=skl1[6][-1] unless skl1.nil? || skl1[12].nil? || skl1[12].length<=0 || skl1[12].length>1
   skl2=sklz.find_index{|q| q[2]=='Skill' && q[0]==k[6][1]}
   skl2=sklz[skl2] unless skl2.nil?
+  skl2[12][1]=skl2[6][-1] unless skl2.nil? || skl2[12].nil? || skl2[12].length<=0 || skl2[12].length>1
   ftr=nil
   feh=false
   feh=true if !k[12].nil? && k[12]=='FEH'
@@ -1638,17 +1640,18 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
         eng=", #{semoji[3]}Energizable" if skl1[7]=='Yes'
         eng=", #{semoji[4]}Inspirable" if skl1[10].include?('Damage')
         eng=", #{semoji[5]}Energizable/Inspirable" if skl1[7]=='Yes' && skl1[10].include?('Damage')
-        skl1[12][1]=skl1[6][-1] unless skl1[12].nil? || skl1[12].length<=0 || skl1[12].length>1
-        str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP#{" (#{skl1[12][0]}<:Skill_Points:712005170380406796> / #{longFormattedNumber(skl1[12][1])} SP when shared)" unless skl1[12].nil? || skl1[12].length<=0}" if skl1[6].max===skl1[6].min && skl1[6][0]>0}"
+        str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP#{" (#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])} SP when shared)" unless skl1[12].nil? || skl1[12].length<=0}" if skl1[6].max===skl1[6].min && skl1[6][0]>0}"
         if (skl1[9].nil? || skl1[9].length<=0) && skl1[6].max != skl1[6].min
           str2="#{str2}\n*Lv.1 (F0, #{skl1[6][0]} SP):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (F3, #{skl1[6][1]} SP):* #{skl1[4].gsub(';; ',"\n")}\n*Lv.3 (F5, #{skl1[6][2]} SP):* #{skl1[5].gsub(';; ',"\n")}"
           str2="#{str2}\n*Lv.4 (F6, #{skl1[6][3]} SP):* #{skl1[11].gsub(';; ',"\n")}" unless skl1[11].nil? || skl1[11].length<=0
+          str2="#{str2}\n#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])} SP when shared" unless skl1[12].nil? || skl1[12].length<=0
         elsif skl1[9].nil? || skl1[9].length<=0
           str2="#{str2}\n*Lv.1 (F0):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (F3):* #{skl1[4].gsub(';; ',"\n")}\n*Lv.3 (F5):* #{skl1[5].gsub(';; ',"\n")}"
           str2="#{str2}\n*Lv.4 (F6):* #{skl1[11].gsub(';; ',"\n")}" unless skl1[11].nil? || skl1[11].length<=0
         elsif skl1[6].max != skl1[6].min
           str2="#{str2}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}\n*Lv.1 (F0, #{skl1[6][0]} SP) \u2192 Lv.2 (F3, #{skl1[6][1]} SP) \u2192 Lv.3 (F5, #{skl1[6][2]} SP)*"
           str2="#{str2} \u2192 *Lv.4 (F6, #{skl1[6][3]} SP)*" unless skl1[11].nil? || skl1[11].length<=0
+          str2="#{str2}\n#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])} SP when shared" unless skl1[12].nil? || skl1[12].length<=0
         else
           str2="#{str2}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}\n*Lv.1 (F0) \u2192 Lv.2 (F3) \u2192 Lv.3 (F5)*"
           str2="#{str2} \u2192 *Lv.4 (F6)*" unless skl1[11].nil? || skl1[11].length<=0
@@ -1661,23 +1664,24 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
         eng=", #{semoji[3]}Energizable" if skl2[7]=='Yes'
         eng=", #{semoji[4]}Inspirable" if skl2[10].include?('Damage')
         eng=", #{semoji[5]}Energizable/Inspirable" if skl2[7]=='Yes' && skl2[10].include?('Damage')
-        skl2[12][1]=skl2[6][-1] unless skl2[12].nil? || skl2[12].length<=0 || skl2[12].length>1
-        str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{eng}#{energy_emoji(skl2[10],true)})__#{" - #{longFormattedNumber(skl2[6][0])} SP#{" (#{skl2[12][0]}<:Skill_Points:712005170380406796> / #{longFormattedNumber(skl2[12][1])} SP when shared)" unless skl2[12].nil? || skl2[12].length<=0}" if skl2[6].max===skl2[6].min && skl2[6][0]>0}"
+        str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{eng}#{energy_emoji(skl2[10],true)})__#{" - #{longFormattedNumber(skl2[6][0])} SP#{" (#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])} SP when shared)" unless skl2[12].nil? || skl2[12].length<=0}" if skl2[6].max===skl2[6].min && skl2[6][0]>0}"
         if (skl2[9].nil? || skl2[9].length<=0) && skl2[6].max != skl2[6].min
           str2="#{str2}\n*Lv.1 (F2, #{skl2[6][0]} SP):* #{skl2[3].gsub(';; ',"\n")}\n*Lv.2 (F4, #{skl2[6][1]} SP):* #{skl2[4].gsub(';; ',"\n")}"
           str2="#{str2}\n*Lv.3 (F6, #{skl2[6][2]} SP):* #{skl2[5].gsub(';; ',"\n")}" if !skl2[5].nil? && skl2[5].length>0
+          str2="#{str2}\n#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])} SP when shared" unless skl2[12].nil? || skl2[12].length<=0
         elsif skl2[9].nil? || skl2[9].length<=0
           str2="#{str2}\n*Lv.1 (F2):* #{skl2[3].gsub(';; ',"\n")}\n*Lv.2 (F4):* #{skl2[4].gsub(';; ',"\n")}"
           str2="#{str2}\n*Lv.3 (F6):* #{skl2[5].gsub(';; ',"\n")}" if !skl2[5].nil? && skl2[5].length>0
         elsif skl2[6].max != skl2[6].min
           str2="#{str2}\n*Effect:* #{skl2[9].gsub(';; ',"\n")}\n*Lv.1 (F2, #{skl2[6][0]} SP) \u2192 Lv.2 (F4, #{skl2[6][1]} SP)*"
           str2="#{str2} \u2192 *Lv.3 (F6, #{skl2[6][2]} SP)*" if !skl2[5].nil? && skl2[5].length>0
+          str2="#{str2}\n#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])} SP when shared" unless skl2[12].nil? || skl2[12].length<=0
         else
           str2="#{str2}\n*Effect:* #{skl2[9].gsub(';; ',"\n")}\n*Lv.1 (F2) \u2192 Lv.2 (F4)*"
           str2="#{str2} \u2192 *Lv.3 (F6)*" if !skl2[5].nil? && skl2[5].length>0
         end
       end
-      str2="#{str2}\n#{"\n" unless skl1.nil? && skl2.nil?}<:Skill_Points:712005170380406796> *Skill Sharing capacity:* #{longFormattedNumber(k[5][1])}" if k[5].length>1 && k[5][1]>0
+      str2="#{str2}\n#{"\n" unless skl1.nil? && skl2.nil?}<:SkillShare:714597012733034547> *Skill Sharing capacity:* #{longFormattedNumber(k[5][1])}" if k[5].length>1 && k[5][1]>0
       flds.push(['Skills',str2,1])
       nde=1
       nde=0 if !k[8][3].nil? && k[8][3].include?('3')
@@ -1745,7 +1749,9 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       eng=semoji[4] if !skl1[10].nil? && skl1[10].include?('Damage')
       eng=semoji[5] if skl1[7]=='Yes' && !skl1[10].nil? && skl1[10].include?('Damage')
       strx="#{strx}\n*#{k[6][0]}#{eng}#{energy_emoji(skl1[10])} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP*\n#{x[0]}"
+      strx="#{strx}\n#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])} SP when shared" unless skl1[12].nil? || skl1[12].length<=0
       strx2="#{strx2}\n#{k[6][0]}#{eng}#{energy_emoji(skl1[10])} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP"
+      strx2="#{strx2}\n#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])} SP when shared" unless skl1[12].nil? || skl1[12].length<=0
     end
     if skl2.nil?
       strx="#{strx}\n\n*#{k[6][1]}* - LOAD ERROR"
@@ -1756,10 +1762,12 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       eng=semoji[4] if !skl2[10].nil? && skl2[10].include?('Damage')
       eng=semoji[5] if skl2[7]=='Yes' && !skl2[10].nil? && skl2[10].include?('Damage')
       strx="#{strx}\n\n*#{k[6][1]}#{eng}#{energy_emoji(skl2[10])} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP*\n#{x[1]}"
+      strx="#{strx}\n#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])} SP when shared" unless skl2[12].nil? || skl2[12].length<=0
       strx2="#{strx2}\n#{k[6][1]}#{eng}#{energy_emoji(skl2[10])} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP"
+      strx2="#{strx2}\n#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])} SP when shared" unless skl2[12].nil? || skl2[12].length<=0
     end
-    strx="#{strx}\n#{"\n" unless skl1.nil? && skl2.nil?}<:Skill_Points:712005170380406796> *Skill Sharing capacity:* #{longFormattedNumber(k[5][1])}" if k[5].length>1 && k[5][1]>0
-    strx2="#{strx2}\n#{"\n" unless skl1.nil? && skl2.nil?}<:Skill_Points:712005170380406796> *Skill Sharing capacity:* #{longFormattedNumber(k[5][1])}" if k[5].length>1 && k[5][1]>0
+    strx="#{strx}\n#{"\n" unless skl1.nil? && skl2.nil?}<:SkillShare:714597012733034547> *Skill Sharing capacity:* #{longFormattedNumber(k[5][1])}" if k[5].length>1 && k[5][1]>0
+    strx2="#{strx2}\n#{"\n" unless skl1.nil? && skl2.nil?}<:SkillShare:714597012733034547> *Skill Sharing capacity:* #{longFormattedNumber(k[5][1])}" if k[5].length>1 && k[5][1]>0
     m=[]
     for i in 0...3
       m.push(k[8][i][lv[i+2]-1]) if lv[i+2]>0
@@ -1768,7 +1776,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     str="#{str}\n**Co-Ability:** #{k[7][0]}"
     str="#{str}\n**Chain Co-Ability:** #{k[7][1]}" if k[7].length>1
     if str.gsub(';;;;;',strx).length>=1800
-      str=str.gsub(';;;;;',"#{strx2}\n~~Skill descriptions make this data too long.  Please try again in PM.~~#{"\n\n<:Skill_Points:712005170380406796> *Skill Sharing capacity:* #{longFormattedNumber(k[5][1])}" if k[5].length>1 && k[5][1]>0}")
+      str=str.gsub(';;;;;',"#{strx2}\n~~Skill descriptions make this data too long.  Please try again in PM.~~#{"\n\n<:SkillShare:714597012733034547> *Skill Sharing capacity:* #{longFormattedNumber(k[5][1])}" if k[5].length>1 && k[5][1]>0}")
     else
       str=str.gsub(';;;;;',strx)
     end
@@ -2666,7 +2674,7 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   title="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min && k[6][0]>0
   title="#{title}\n**Invulnerability duration:** #{k[8]} seconds"
   k[12][1]=k[6][-1] if !k[12].nil? && k[12].length==1
-  title="#{title}\n<:Skill_Points:712005170380406796> **Skill Share:** *Cost:* #{k[12][0]} / #{longFormattedNumber(k[12][1])} SP" if !k[12].nil? && k[12].length>0
+  title="#{title}\n<:SkillShare:714597012733034547> **Skill Share:** *Cost:* #{k[12][0]} / #{longFormattedNumber(k[12][1])} SP" if !k[12].nil? && k[12].length>0
   title="#{title}\n<:Energize:559629242137051155> **Energizable**" if k[7]=='Yes'
   title="#{title}\n~~Not energizable~~" if k[7]=='No'
   title="#{title}\n<:Inspiring:688916587079663625> **Inspirable**" if k[10].include?('Damage')
@@ -2685,22 +2693,22 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   m=[]
   x=@adventurers.map{|q| q}
   for i in 0...x.length
-    m.push("#{x[i][0]} - S1") if x[i][6][0]==k[0]
-    m.push("#{x[i][0]} - S2") if x[i][6][1]==k[0]
+    m.push("#{adv_emoji(x[i],bot)}#{x[i][0]} - S1") if x[i][6][0]==k[0]
+    m.push("#{adv_emoji(x[i],bot)}#{x[i][0]} - S2") if x[i][6][1]==k[0]
   end
   flds.push(['Adventurers',m.join("\n")]) if m.length>0
   m=[]
   x=@dragons.map{|q| q}
   for i in 0...x.length
-    m.push("#{x[i][0]}") if x[i][5][0]==k[0] && x[i][5].length<2
-    m.push("#{x[i][0]} - S1d") if x[i][5][0]==k[0] && x[i][5].length>1
-    m.push("#{x[i][0]} - S2d") if x[i][5][1]==k[0] && x[i][5].length>1
+    m.push("#{dragon_emoji(x[i],bot)}#{x[i][0]}") if x[i][5][0]==k[0] && x[i][5].length<2
+    m.push("#{dragon_emoji(x[i],bot)}#{x[i][0]} - S1d") if x[i][5][0]==k[0] && x[i][5].length>1
+    m.push("#{dragon_emoji(x[i],bot)}#{x[i][0]} - S2d") if x[i][5][1]==k[0] && x[i][5].length>1
   end
   flds.push(['Dragons',m.join("\n")]) if m.length>0
   m=[]
   x=@weapons.map{|q| q}
   for i in 0...x.length
-    m.push("#{x[i][0]} - S3") if x[i][6]==k[0]
+    m.push("#{weapon_emoji(x[i],bot)}#{x[i][0]} - S3") if x[i][6]==k[0]
   end
   flds.push(['Weapons',m.join("\n")]) if m.length>0
   if args.include?('tags') || forcetags
@@ -3759,7 +3767,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
             wpemo=elemo[i2][1]
             wpemo=elemo[i2][2] if !wep[i][14].nil? && wep[i][14]=='FEH'
             if evn.include?('sub') || evn.include?('subabilities') || evn.include?('subability') || evn.include?('starter')
-              m2.push("#{wemo}#{wpemp}#{wep[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots || wep[i][13][0].length<2}") if wep[i][13][0][0]==checkstr2
+              m2.push("#{wemo}#{wpemo}#{wep[i][0]}#{" (A1\u2081)" if dispslots}#{' [Min]' unless dispslots || wep[i][13][0].length<2}") if wep[i][13][0][0]==checkstr2
               m2.push("#{wemo}#{wpemo}#{wep[i][0]}#{" (A1\u2082)" if dispslots}#{' [Max]' unless dispslots || wep[i][13][0].length<2}") if wep[i][13][0][1]==checkstr2
               m2.push("#{wemo}#{wpemo}#{wep[i][0]}#{" (A2\u2081)" if dispslots}#{' [Min]' unless dispslots || wep[i][13][1].length<2}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][0]==checkstr2
               m2.push("#{wemo}#{wpemo}#{wep[i][0]}#{" (A2\u2082)" if dispslots}#{' [Max]' unless dispslots || wep[i][13][1].length<2}") if !wep[i][13][1].nil? && wep[i][13][1].length>0 && wep[i][13][1][1]==checkstr2
@@ -5425,7 +5433,7 @@ def sort_adventurers(bot,event,args=nil,mode=0)
   fpop=@rarity_stars[0][0,@max_rarity[0]+1]
   fpop[fpop.length-1]="#{fpop[fpop.length-1]}, absolute max stats" if lvl==1
   fpop.push('Default rarity')
-  stats=['Name','','','<:HP:573344832307593216>HP','<:Strength:573344931205349376>Strength','<:Defense:573344832282689567>Defense','','<:Skill_Points:712005170380406796>Skill Share capacity']
+  stats=['Name','','','<:HP:573344832307593216>HP','<:Strength:573344931205349376>Strength','<:Defense:573344832282689567>Defense','','<:SkillShare:714597012733034547>Skill Share capacity']
   disp="__**Adventurer Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}\n*Sorted at:* #{rar unless rar>@max_rarity[0]}#{fpop[rar]}#{"\n#{@max_rarity[0]}#{@rarity_stars[0][@max_rarity[0]]}s will be shown with absolute max stats" if rar>@max_rarity[1] && lvl==1}"
   disp=extend_message(disp,"__**Notes**__\n#{textra}",event,2) if textra.length>0
   disp=extend_message(disp,"__**Results**__",event,2) if char.length>0
