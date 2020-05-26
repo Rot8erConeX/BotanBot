@@ -32,10 +32,10 @@ Ebon Chimera\-1, 311938, 935817; -1, 1177, 1430\Shadow, Therion, Void\Poison: 60
 Tempest Chimera\-1, 311938, 1039797; -1, 1177, 1430\Wind, Therion, Void\Poison: 60%, Burn: *99%*, Freeze: **20%**, Paralysis: **20%**, Blind: 60%, Bog: **20%**, Frostbite: **0%**\Burn, Stun\Frenzy;; Overgrowth
 Catoblepas Anemos\262587; 2052\Wind, Therion, Void\Poison: **40%**, Burn: **40%**, Stun: **40%**, Frostbite: **0%**\Stun, Defense Down\Petrify
 Catoblepas Fotia\262587; 2052\Flame, Therion, Void\Poison: **40%**, Burn: *99%*, Freeze: **40%**, Bog: **40%**, Frostbite: **0%**\Burn, Defense Down\Petrify
-Catoblepas Skia\262587; 2052\Shadow, Therion, Void\TBA\Poison, Defense Down\Petrify
+Catoblepas Skia\262587; 2052\Shadow, Therion, Void\Poison: **40%**, Paralysis: **40%**, Stun: **40%**, Frostbite: **0%**\Poison, Defense Down\Petrify
 Eolian Phantom\291017; 1684\Wind, Undead, Void\Poison: **40%**, Burn: **40%**, Paralysis: **40%**, Stun: **40%**, Frostbite: **0%**\Stun\Soul Eater;; Spectral Shield
 Infernal Phantom\291017; 1684\Flame, Undead, Void\Poison: **40%**, Paralysis: **40%**, Stun: **40%**, Frostbite: **0%**\Burn\Soul Eater;; Spectral Shield
-Abyssal Phantom\291017; 1684\Water, Undead, Void\TBA\Bog\Soul Eater;; Spectral Shield
+Abyssal Phantom\291017; 1684\Water, Undead, Void\Poison: **40%**, Burn: **40%**, Paralysis: **40%**, Stun: **40%**, Sleep: **40%**, Frostbite: **0%**\Bog\Soul Eater;; Spectral Shield
 Midgardsormr (Enemy)\5880, 21060, 64350, 120000; 231, 761, 1205, 1800\Wind, Dragon, Dragon Trial\Burn: **0%**, Frostbite: **0%**\Stun\
 Brunhilda (Enemy)\5880, 19656, 64350, 111540; 231, 766, 1339, 1968\Flame, Dragon, Dragon Trial\Freeze: 55%, Bog: 55%, Frostbite: **0%**\Burn\
 Mercury (Enemy)\5880, 22320, 69300, 121200; 231, 803, 1189, 1747\Water, Dragon, Dragon Trial\Poison: 55%, Sleep: 55%, Frostbite: **0%**\Bog\
@@ -110,6 +110,6 @@ Chronos Nyx\-1, -1, -1, -1, 6842299, 5165264, 19360178, 2258632; -1, -1, -1, -1,
 Shining Cyclops\3990, 11340, 20580; 240, 630, 1070\Light, Demihuman, Boss, Fractured Futures\Poison: 55%, Burn: 55%, Freeze: *55%, Paralysis: *75%*, Bind: *75%*, Stun: 55%, Curse: 55%, Bog: 55%, Sleep: 55%, Frostbite: **0%**\Paralysis\
 Aspidochelone\70000, -1, 800000, -1, 4700000, 5200000, 18135000, 1800000; 340, -1, 1630, -1, 3920, 4920, 4920, 2585\Light, Thaumian, Raid, Scars of the Syndicate\Poison: **0%**, Burn: **0%**, Blind: *80%*, Bog: *80%*, Frostbite: **0%**\Tell us with `DL!feedback`\
 Light Manticore\4200, -1, 17430; 233, -1, 1063\Light, Therion, Boss, Scars of the Syndicate\Poison: **0%**, Burn: **0%**, Paralysis: **0%**, Blind: **0%**, Bog: **0%**, Frostbite: **0%**\Tell us with `DL!feedback`\
-Volk\-1, 1759649, 8711648; -1, 7230, 10064\Wind, Therion, Agito, Agito Uprising\Poison: **0%**, Burn: **0%**, Blind: *99%*, Stun: *99%*, Bog: *99%*, Sleep: *99%*, Frostbite: **0%**\Sleep, Stun, Poison\Plague;; Life Drain
+Volk\-1, 1759649, 8711648, 13799248; -1, 7230, 10064, 10064\Wind, Therion, Agito, Agito Uprising\Poison: **0%**, Burn: **0%**, Blind: *99%*, Stun: *99%*, Bog: *99%*, Sleep: *99%*, Frostbite: **0%**\Sleep, Stun, Poison\Plague;; Life Drain
 Kai Yan\-1, 2463508, 9486159; -1, 3615, 6075\Light, Therion, Agito, Agito Uprising\Poison: **0%**, Burn: **0%**, Stun: *99%*, Bog: *99%*, Sleep: *99%*, Frostbite: **0%**\Blind, Paralysis\Reflection Shield;; Battleground
 Ciella\-1, 1987650, 8114653; -1, 7230, 7230\Water, Therion, Agito, Agito Uprising\Poison: **0%**, Burn: **0%**, Frostbite: **0%**, **Standard:** Stun/Bog/Sleep: *99%*\Freeze, Bog\Veil;; Vulnerability
