@@ -949,5 +949,13 @@ Rhongomyniad\Lance\6a\Wind\72, 157, 242\472, 1021, 1575\Gwiber\2000, 0\950\0\0\2
 Failnaught\Bow\6a\Wind\69, 151, 232\444, 961, 1482\Gwiber\2000, 0\951\0\0\2000000, -\Eliminating One's Mask Fragment, 40;; Despairing One's Mask Fragment, 30;; Twinkling Sand, 1\\\Ciella\1
 Camelot\Wand\6a\Wind\66, 145, 223\477, 1031, 1590\Gwiber\2000, 0\952\0\0\2000000, -\Eliminating One's Mask Fragment, 40;; Despairing One's Mask Fragment, 30;; Twinkling Sand, 1\\\Ciella\1
 Avalon\Staff\6a\Wind\78, 170, 261\440, 951, 1467\Gwiber\2000, 0\953\0\0\2000000, -\Eliminating One's Mask Fragment, 40;; Despairing One's Mask Fragment, 30;; Twinkling Sand, 1\\\Ciella\1
-Falchion\Sword\5c\Flame\45, 129, 150\162, 464, 540\\1500, 0\953\0\0\0, -\\Primed Recovery\FEH\\1
-Fensalir\Lance\5c\Light\45, 132, 153\165, 474, 551\\1500, 0\953\0\0\0, -\\Attacking Strength Debilitator\FEH\\1
+Falchion\Sword\5c\Flame\45, 129, 150\162, 464, 540\\1500, 0\954\0\0\0, -\\Primed Recovery\FEH\\1
+Fensalir\Lance\5c\Light\45, 132, 153\165, 474, 551\\1500, 0\955\0\0\0, -\\Attacking Strength Debilitator\FEH\\1
+Nothung 2\Sword\6a\Flame\78, 169, 260\508, 1100, 1696\Megingjord\2000, 0\956\816\0\3000000, -\Destitute One's Mask Fragment, 80;; Plagued One's Mask Fragment, 50;; Rebellious One's Insanity, 35;; Orichalcum, 5\(Flame) Jarngreipr;;;; (Flame) Svalinn\\Volk\2
+Tyrfing 2\Blade\6a\Flame\68, 149, 229\539, 1166, 1798\Megingjord\2000, 0\957\817\0\3000000, -\Destitute One's Mask Fragment, 80;; Plagued One's Mask Fragment, 50;; Rebellious One's Insanity, 35;; Orichalcum, 5\(Flame) Jarngreipr;;;; (Flame) Svalinn\\Volk\2
+Hrotti 2\Dagger\6a\Flame\78, 171, 263\498, 1078, 1662\Megingjord\2000, 0\958\818\0\3000000, -\Destitute One's Mask Fragment, 80;; Plagued One's Mask Fragment, 50;; Rebellious One's Insanity, 35;; Orichalcum, 5\(Flame) Jarngreipr;;;; (Flame) Svalinn\\Volk\2
+Mjolnir 2\Axe\6a\Flame\80, 174, 268\534, 1155, 1781\Megingjord\2000, 0\959\819\0\3000000, -\Destitute One's Mask Fragment, 80;; Plagued One's Mask Fragment, 50;; Rebellious One's Insanity, 35;; Orichalcum, 5\(Flame) Jarngreipr;;;; (Flame) Svalinn\\Volk\2
+Gungnir 2\Lance\6a\Flame\79, 173, 266\519, 1122, 1730\Megingjord\2000, 0\960\820\0\3000000, -\Destitute One's Mask Fragment, 80;; Plagued One's Mask Fragment, 50;; Rebellious One's Insanity, 35;; Orichalcum, 5\(Flame) Jarngreipr;;;; (Flame) Svalinn\\Volk\2
+Ichaival\Bow\6a\Flame\76, 166, 255\488, 1056, 1629\Megingjord\2000, 0\961\821\0\3000000, -\Destitute One's Mask Fragment, 80;; Plagued One's Mask Fragment, 50;; Rebellious One's Insanity, 35;; Orichalcum, 5\(Flame) Jarngreipr;;;; (Flame) Svalinn\\Volk\2
+Brisinga\Wand\6a\Flame\73, 159, 245\524, 1133, 1747\Megingjord\2000, 0\962\822\0\3000000, -\Destitute One's Mask Fragment, 80;; Plagued One's Mask Fragment, 50;; Rebellious One's Insanity, 35;; Orichalcum, 5\(Flame) Jarngreipr;;;; (Flame) Svalinn\\Volk\2
+Gjallarhorn 2\Staff\6a\Flame\86, 186, 287\483, 1045, 1612\Megingjord\2000, 0\963\823\0\3000000, -\Destitute One's Mask Fragment, 80;; Plagued One's Mask Fragment, 50;; Rebellious One's Insanity, 35;; Orichalcum, 5\(Flame) Jarngreipr;;;; (Flame) Svalinn\\Volk\2
