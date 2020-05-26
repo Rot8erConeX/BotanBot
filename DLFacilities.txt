@@ -241,6 +241,11 @@ Circus Tent\27\-\Adventurer, Event Altar\3x3\1\4400\Tent Canvas, 700
 Circus Tent\28\-\Adventurer, Event Altar\3x3\1\4600\Tent Canvas, 800
 Circus Tent\29\-\Adventurer, Event Altar\3x3\1\4800\Tent Canvas, 900
 Circus Tent\30\-\Adventurer, Event Altar\3x3\1\5000\Tent Canvas, 1000
+Circus Tent\31\-\Adventurer, Event Altar\3x3\1\5200\Tent Canvas, 1100
+Circus Tent\32\-\Adventurer, Event Altar\3x3\1\5400\Tent Canvas, 1200
+Circus Tent\33\-\Adventurer, Event Altar\3x3\1\5600\Tent Canvas, 1300
+Circus Tent\34\-\Adventurer, Event Altar\3x3\1\5800\Tent Canvas, 1400
+Circus Tent\35\-\Adventurer, Event Altar\3x3\1\6000\Tent Canvas, 1500
 Conifer Tree\-\A tree with needle-thin foliage that stays green throughout the winter and can endure harsh environments.\Decorative\1x1\5\0
 Dagger Dojo\1\A training area built to hone one's skills with a dagger. Use it to boosts the stats of dagger-wielding adventures.\Adventurer, Dojo\3x3\2\0
 Dagger Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10
@@ -651,6 +656,16 @@ Flame Tree\12\-\Adventurer, Tree\3x3\1\110000\Destitute One's Mask Fragment, 35;
 Flame Tree\13\-\Adventurer, Tree\3x3\1\120000\Destitute One's Mask Fragment, 35;; Plagued One's Mask Fragment, 5
 Flame Tree\14\-\Adventurer, Tree\3x3\1\130000\Destitute One's Mask Fragment, 35;; Plagued One's Mask Fragment, 5
 Flame Tree\15\-\Adventurer, Tree\3x3\1\140000\Destitute One's Mask Fragment, 35;; Plagued One's Mask Fragment, 5
+Flame Tree\16\-\Adventurer, Tree\3x3\1\160000\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 10
+Flame Tree\17\-\Adventurer, Tree\3x3\1\180000\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 10
+Flame Tree\18\-\Adventurer, Tree\3x3\1\200000\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 10
+Flame Tree\19\-\Adventurer, Tree\3x3\1\220000\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 10
+Flame Tree\20\-\Adventurer, Tree\3x3\1\240000\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 10
+Flame Tree\21\-\Adventurer, Tree\3x3\1\260000\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 10
+Flame Tree\22\-\Adventurer, Tree\3x3\1\280000\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 10
+Flame Tree\23\-\Adventurer, Tree\3x3\1\300000\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 10
+Flame Tree\24\-\Adventurer, Tree\3x3\1\320000\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 10
+Flame Tree\25\-\Adventurer, Tree\3x3\1\340000\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 10
 Halidom\H\Euden's home base. Raise its level to expand the area in which you can build castle facilities.\General\4x4\1\0
 Iron Weather Vane\-\An iron instrument indicating the direction of the wind. Manufactured using the finest smithing techniques, it moves smoothly in the breeze.\Decorative\1x1\4\0
 Jack-o'-Lantern\-\A lantern made by a sylvan who carved the insides out of a pumpkin, all the while insisting it represented his love of pranks. At least everyone enjoyed eating the filling.\Decorative\1x1\4\0
@@ -851,7 +866,7 @@ Rupie Mine\36\-\Production\3x3\4\5200\Light Orb, 130;; Radiance Orb, 40;; Refulg
 Rupie Mine\37\-\Production\3x3\4\5400\Light Orb, 160;; Radiance Orb, 50;; Refulgence Orb, 20;; Resplendence Orb, 12
 Rupie Mine\38\-\Production\3x3\4\5600\Light Orb, 200;; Radiance Orb, 65;; Refulgence Orb, 25;; Resplendence Orb, 15
 Rupie Mine\39\-\Production\3x3\4\5800\Light Orb, 260;; Radiance Orb, 80;; Refulgence Orb, 30;; Resplendence Orb, 18
-Rupie Mine\40\-\Production\3x3\4\6000\Light Orb, 400;; Radiance Orb, 100;; Refulgence Orb, 25;; Resplendence Orb, 25
+Rupie Mine\40\-\Production\3x3\4\6000\Light Orb, 400;; Radiance Orb, 100;; Refulgence Orb, 40;; Resplendence Orb, 25
 Seabed Stage\1\Use it to boost the stats of bow and dagger wielding adventurers.\Adventurer, Event Dual Dojo\3x3\1\0
 Seabed Stage\2\-\Adventurer, Event Dual Dojo\3x3\1\100\Glam Shells, 3
 Seabed Stage\3\-\Adventurer, Event Dual Dojo\3x3\1\200\Glam Shells, 5
