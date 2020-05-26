@@ -1110,6 +1110,7 @@ def art_of_adventure(bot,event,args=nil)
       rar=lookout[j][0] if rarval.include?(rar) && lookout[j][1].include?(args[i].downcase)
     end
   end
+  rar='Dress_Blue' if args.map{|q| q.downcase}.include?('dress') && !rar.is_a?(String)
   if k[0]=='Xainfried' && rar=='Animal' && has_any?(['christmas','winter','dy','dragonyule','santa'],args.map{|q| q.downcase})
     k=find_data_ex(:find_adventurer,'Xainfried(Dragonyule)',event)
   end
@@ -1131,7 +1132,7 @@ def art_of_adventure(bot,event,args=nil)
       rar=2 if ['Lathna','Nina','Notte'].include?(k[0])
       disp="#{generate_rarity_row(rar,@max_rarity[0],fehm)}"
     else
-      disp="#{rar} design"
+      disp="#{rar.gsub('Dress_Blue','Blue dress').gsub('Dress_Red','Red dress')} design"
     end
   else
     rar=k[1][0,1].to_i if rar<k[1][0,1].to_i || rar>5
