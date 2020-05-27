@@ -141,6 +141,8 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
       event << 'This help window is not in an embed so that people who need this command can see it.'
     end
     return nil
+  elsif ['share','skillshare','skilshare'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Finds all adventurers that fit `filters`, removes any that lack shareable skills, and sorts by their shareable skill(s)' share cost and/or SP when shared.\n\nYou can search by:\n- Element\n- Weapon type\n- Class\n- Availability\n\nIf too many adventurers are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.  I will instead show only the top ten results.",0xCE456B)
   elsif ['sort','list'].include?(command.downcase)
     subcommand='' if subcommand.nil?
     if ['adventurer','adventurers','adv','advs','unit','units'].include?(subcommand.downcase)
@@ -930,6 +932,8 @@ def enemy_data(bot,event,args=nil,ignoresub=false)
     disp_enemy_data(bot,event,"Gift Basket".split(' '),true)
   elsif k[0]=="Astral Shishimai" && s2s
     disp_enemy_data(bot,event,"Astral Gift Basket".split(' '),true)
+  elsif k[0]=="Volk" && s2s
+    disp_enemy_data(bot,event,"Blood Moon".split(' '),true)
   end
 end
 
@@ -1993,7 +1997,7 @@ def art_of_the_nobody(bot,event,args=nil)
   end
 end
 
-def find_the_adventure(bot,event,args=nil,mode=0,allowstr=true)
+def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
   data_load()
   args=normalize(event.message.text.downcase).gsub(',','').split(' ') if args.nil?
   args=args.map{|q| normalize(q.downcase)}
@@ -2010,6 +2014,7 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=true)
   cygames=[]
   launch=false
   mana=false
+  share=false
   lookout=get_lookout_tags()
   lookout2=lookout.reject{|q| q[2]!='Race'}
   lookout3=lookout.reject{|q| q[2]!='Cygame'}
@@ -2019,8 +2024,9 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=true)
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
     mana=true if ['mana','spiral','manaspiral','70','70node','70mc','70ms'].include?(args[i].downcase)
-    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1 && allowstr
-    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1 && allowstr
+    share=true if ['share','skillshare','shareskill'].include?(args[i].downcase) && allowstr%4<2
+    rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1 && allowstr%2==0
+    rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1 && allowstr%2==0
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
     elem.push('Water') if ['water','waters'].include?(args[i].downcase)
     elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
@@ -2194,7 +2200,7 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=true)
     end
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
-  if tags.length>0
+  if tags.length>0 || allowstr%4>1 || share
     if tags.include?('Punisher') && tags.length>1 && !args.include?('any')
       tags2=[]
       for i in 0...@punishments.length
@@ -2210,30 +2216,42 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=true)
         textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
       end
     end
-    search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
+    search.push("<:SkillShare:714597012733034547>*Adventurers with Shareable Skills*") if share
+    search.push("*Skill/Ability Tags*: #{tags.join(', ')}") unless tags.length<=0
     sklz=@askilities.map{|q| q}
     for i in 0...char.length
       skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6][0]}
       skl1=sklz[skl1] unless skl1.nil?
       skl2=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6][1]}
       skl2=sklz[skl2] unless skl2.nil?
-      coab=sklz.find_index{|q| q[2]=='CoAbility' && q[0]==char[i][7][0].split(' ')[0,char[i][7][0].split(' ').length-1].join(' ')}
-      coab=sklz[coab] unless coab.nil?
-      coab[6]=[] if !coab.nil? && coab[6].nil?
-      cha=sklz.find_index{|q| q[2]=='Chain' && q[0]==char[i][7][1].split(' ')[0,char[i][7][1].split(' ').length-1].join(' ')}
-      cha=sklz[cha] unless cha.nil?
-      cha[6]=[] if !cha.nil? && cha[6].nil?
-      ab1=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][0][-1]}
-      ab1=sklz[ab1] unless ab1.nil?
-      ab1[6]=[] if !ab1.nil? && ab1[6].nil?
-      ab2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][1][-1]}
-      ab2=sklz[ab2] unless ab2.nil?
-      ab2[6]=[] if !ab2.nil? && ab2[6].nil?
-      ab3=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][2][-1]}
-      ab3=sklz[ab3] unless ab3.nil?
-      ab3[6]=[] if !ab3.nil? && ab3[6].nil?
+      if allowstr%4<2
+        coab=sklz.find_index{|q| q[2]=='CoAbility' && q[0]==char[i][7][0].split(' ')[0,char[i][7][0].split(' ').length-1].join(' ')}
+        coab=sklz[coab] unless coab.nil?
+        coab[6]=[] if !coab.nil? && coab[6].nil?
+        cha=sklz.find_index{|q| q[2]=='Chain' && q[0]==char[i][7][1].split(' ')[0,char[i][7][1].split(' ').length-1].join(' ')}
+        cha=sklz[cha] unless cha.nil?
+        cha[6]=[] if !cha.nil? && cha[6].nil?
+        ab1=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][0][-1]}
+        ab1=sklz[ab1] unless ab1.nil?
+        ab1[6]=[] if !ab1.nil? && ab1[6].nil?
+        ab2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][1][-1]}
+        ab2=sklz[ab2] unless ab2.nil?
+        ab2[6]=[] if !ab2.nil? && ab2[6].nil?
+        ab3=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][2][-1]}
+        ab3=sklz[ab3] unless ab3.nil?
+        ab3[6]=[] if !ab3.nil? && ab3[6].nil?
+      else
+        coab=nil
+        cha=nil
+        ab1=nil
+        ab2=nil
+        ab3=nil
+        skl1=nil unless !skl1.nil? && !skl1[12].nil? && skl1[12].length>0 && skl1[12].max>0
+        skl2=nil unless !skl2.nil? && !skl2[12].nil? && skl2[12].length>0 && skl2[12].max>0
+      end
       char[i][20]="#{skl1[10].join("\n") unless skl1.nil?}\n#{skl2[10].join("\n") unless skl2.nil?}\n#{coab[6].join("\n") unless coab.nil?}\n#{cha[6].join("\n") unless cha.nil?}\n#{ab1[6].join("\n") unless ab1.nil?}\n#{ab2[6].join("\n") unless ab2.nil?}\n#{ab3[6].join("\n") unless ab3.nil?}".split("\n")
-      if args.include?('any') || tags.length<=1
+      char[i][20]='~~reject me~~' if share && (skl1.nil? || skl1[12].nil? || skl1[12].length<=0 || skl1[12].max<=0) && (skl2.nil? || skl2[12].nil? || skl2[12].length<=0 || skl2[12].max<=0)
+      if (args.include?('any') || tags.length==1) && tags.length>0
         x=[[],[],[],[]]
         x[0].push('1') if !skl1.nil? && has_any?(tags,skl1[10])
         x[0].push('2') if !skl2.nil? && has_any?(tags,skl2[10])
@@ -2249,9 +2267,16 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=true)
         x=x.reject{|q| q.length<=0}
         x.compact!
         char[i][0]="#{char[i][0]} *[#{x.join('+')}]*" if x.length>0
+      elsif share || allowstr%4>1
+        x=[]
+        x.push('1') unless skl1.nil? || skl1[12].nil? || skl1[12].length<=0 || skl1[12].max<=0
+        x.push('2') unless skl2.nil? || skl2[12].nil? || skl2[12].length<=0 || skl2[12].max<=0
+        char[i][0]="#{char[i][0]} *[S#{x.join('/')}]*" if x.length>0
       end
     end
-    if args.include?('any')
+    char=char.reject{|q| q[20]=='~~reject me~~'}
+    if tags.length<=0
+    elsif args.include?('any')
       search[-1]="#{search[-1]}\n(searching for adventurers with any listed tag in their skills and abilities)" if tags.length>1
       char=char.reject{|q| !has_any?(tags,q[20])}.uniq
     else
@@ -2490,8 +2515,10 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
     search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
     sklz=@askilities.map{|q| q}
     for i in 0...char.length
-      skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][5]}
+      skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][5][0]}
       skl1=sklz[skl1] unless skl1.nil?
+      skl2=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][5][1]}
+      skl2=sklz[skl2] unless skl2.nil?
       ab1=nil
       ab1=sklz.find_index{|q| ['Ability','Aura'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][6][0][-1]} unless char[i][6].length<1
       ab1=sklz[ab1] unless ab1.nil?
@@ -2517,7 +2544,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
         x.compact!
         char[i][0]="#{char[i][0]} *[#{x.join('+')}]*" if x.length>0
       end
-      char[i][20]="#{skl1[10].join("\n") unless skl1.nil?}\n#{ab1[6].join("\n") unless ab1.nil?}\n#{ab2[6].join("\n") unless ab2.nil?}\n#{ab3[6].join("\n") unless ab3.nil?}".split("\n")
+      char[i][20]="#{skl1[10].join("\n") unless skl1.nil?}\n#{skl2[10].join("\n") unless skl2.nil?}\n#{ab1[6].join("\n") unless ab1.nil?}\n#{ab2[6].join("\n") unless ab2.nil?}\n#{ab3[6].join("\n") unless ab3.nil?}".split("\n")
     end
     if args.include?('any')
       search[-1]="#{search[-1]}\n(searching for dragons with any listed tag in their skills and abilities)" if tags.length>1
@@ -3737,7 +3764,7 @@ def sp_table(bot,event,args=nil)
          '37th','38th','39th','40th','41st','42nd','43rd','44th','45th','46th','47th','48th','49th','50th']
       k2=[1,2,3,4,5,6,7]
       k2=[150,150,196,265,391,143,345,1152] if k[2][2]=='Sword'
-      k2=[130,130,220,360,'660 uncharged, 900 charged',104,200,'1500 uncharged, 1740 charged'] if k[2][2]=='Blade'
+      k2=[130,130,220,360,900,104,200,1740] if k[2][2]=='Blade'
       k2=[144,144,264,288,480,132,288,1128] if k[2][2]=='Dagger'
       k2=[200,240,360,380,420,160,300,1600] if k[2][2]=='Axe'
       k2=[120,240,120,480,600,111,400,1560] if k[2][2]=='Lance'
@@ -3820,9 +3847,8 @@ def sp_table(bot,event,args=nil)
   if wpn.length<=0 && !safe_to_spam?(event)
     event.respond "The complete table is too large.  Please either specify a weapon type or use this command in PM."
   elsif wpn.length<=0
-    kx=[[150,150,196,265,391,143,345,1152],[130,130,220,360,'660 uncharged, 900 charged',104,200,'1500 uncharged, 1740 charged'],
-        [144,144,264,288,480,132,288,1128],[200,240,360,380,420,160,300,1600],[120,240,120,480,600,111,400,1560],[184,92,276,414,529,208,460,1495],
-        [130,200,240,430,600,156,400,1600],[232,232,348,464,696,300,580,1972]]
+    kx=[[150,150,196,265,391,143,345,1152],[130,130,220,360,900,104,200,1740],[144,144,264,288,480,132,288,1128],[200,240,360,380,420,160,300,1600],
+        [120,240,120,480,600,111,400,1560],[184,92,276,414,529,208,460,1495],[130,200,240,430,600,156,400,1600],[232,232,348,464,696,300,580,1972]]
     k=kx.map{|q| "__**Combo:**__\n*First Hit:* #{q[0]}\n*Second Hit:* #{q[1]}\n*Third Hit:* #{q[2]}\n*Fourth Hit:* #{q[3]}\n*Fifth Hit:* #{q[4]}\n~~*Total:* #{q[7]}~~\n\n**Dash Attack:** #{q[5]}\n**Force Strike** #{q[6]}"}
     k2=['<:Weapon_Sword:532106114540634113>Swords','<:Weapon_Blade:532106114628714496>Blades','<:Weapon_Dagger:532106116025286656>Daggers',
         '<:Weapon_Axe:532106114188443659>Axes','<:Weapon_Lance:532106114792423448>Lances','<:Weapon_Bow:532106114909732864>Bows',
@@ -3835,7 +3861,7 @@ def sp_table(bot,event,args=nil)
   else
     k=[1,2,3,4,5,6,7]
     k=[150,150,196,265,391,143,345,1152] if wpn[0]=='Sword'
-    k=[130,130,220,360,'660 uncharged, 900 charged',104,200,'1500 uncharged, 1740 charged'] if wpn[0]=='Blade'
+    k=[130,130,220,360,900,104,200,1740] if wpn[0]=='Blade'
     k=[144,144,264,288,480,132,288,1128] if wpn[0]=='Dagger'
     k=[200,240,360,380,420,160,300,1600] if wpn[0]=='Axe'
     k=[120,240,120,480,600,111,400,1560] if wpn[0]=='Lance'
