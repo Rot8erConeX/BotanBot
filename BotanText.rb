@@ -755,6 +755,9 @@ def enemy_data(bot,event,args=nil,ignoresub=false)
     str="#{str}\n*Abyssal+ (Raid):*" if (k[1][0].length>8 && k[1][0][8]>-1) || (k[1][1].length>8 && k[1][1][8]>-1)
     str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][8])}" if k[1][0].length>8 && k[1][0][8]>-1
     str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][8])}" if k[1][1].length>8 && k[1][1][8]>-1
+    str="#{str}\n*Abyssal+ (Raid+):*" if (k[1][0].length>9 && k[1][0][9]>-1) || (k[1][1].length>9 && k[1][1][9]>-1)
+    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][9])}" if k[1][0].length>9 && k[1][0][9]>-1
+    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][9])}" if k[1][1].length>9 && k[1][1][9]>-1
   elsif k[0]=='Fatalis'
     str="#{str}\n"
     str="#{str}\n*G\u22C6:*" if (k[1][0].length>0 && k[1][0][0]>-1) || (k[1][1].length>0 && k[1][1][0]>-1)
@@ -784,6 +787,9 @@ def enemy_data(bot,event,args=nil,ignoresub=false)
     str="#{str}\n*Special+:*" if (k[1][0].length>8 && k[1][0][8]>-1) || (k[1][1].length>8 && k[1][1][8]>-1)
     str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][8])}" if k[1][0].length>8 && k[1][0][8]>-1
     str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][8])}" if k[1][1].length>8 && k[1][1][8]>-1
+    str="#{str}\n*Special++:*" if (k[1][0].length>9 && k[1][0][9]>-1) || (k[1][1].length>9 && k[1][1][9]>-1)
+    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][9])}" if k[1][0].length>9 && k[1][0][9]>-1
+    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][9])}" if k[1][1].length>9 && k[1][1][9]>-1
   elsif k[0].include?('Rathalos')
     str="#{str}\n"
     str="#{str}\n*Low Rank:*" if (k[1][0].length>0 && k[1][0][0]>-1) || (k[1][1].length>0 && k[1][1][0]>-1)
@@ -807,12 +813,15 @@ def enemy_data(bot,event,args=nil,ignoresub=false)
     str="#{str}\n*Trial (Co-op):*" if (k[1][0].length>6 && k[1][0][6]>-1) || (k[1][1].length>6 && k[1][1][6]>-1)
     str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][6])}" if k[1][0].length>6 && k[1][0][6]>-1
     str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][6])}" if k[1][1].length>6 && k[1][1][6]>-1
-    str="#{str}\n*Advanced:*" if (k[1][0].length>7 && k[1][0][7]>-1) || (k[1][1].length>7 && k[1][1][7]>-1)
+    str="#{str}\n*Trial (Co-op 2):*" if (k[1][0].length>7 && k[1][0][7]>-1) || (k[1][1].length>7 && k[1][1][7]>-1)
     str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][7])}" if k[1][0].length>7 && k[1][0][7]>-1
     str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][7])}" if k[1][1].length>7 && k[1][1][7]>-1
-    str="#{str}\n*Challenge:*" if (k[1][0].length>8 && k[1][0][8]>-1) || (k[1][1].length>8 && k[1][1][8]>-1)
+    str="#{str}\n*Advanced:*" if (k[1][0].length>8 && k[1][0][8]>-1) || (k[1][1].length>8 && k[1][1][8]>-1)
     str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][8])}" if k[1][0].length>8 && k[1][0][8]>-1
     str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][8])}" if k[1][1].length>8 && k[1][1][8]>-1
+    str="#{str}\n*Challenge:*" if (k[1][0].length>9 && k[1][0][9]>-1) || (k[1][1].length>9 && k[1][1][9]>-1)
+    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][9])}" if k[1][0].length>9 && k[1][0][9]>-1
+    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][9])}" if k[1][1].length>9 && k[1][1][9]>-1
   else
     str="#{str}\n"
     if (k[1][0].length>0 && k[1][0][0]>-1) || (k[1][1].length>0 && k[1][1][0]>-1)
@@ -842,15 +851,18 @@ def enemy_data(bot,event,args=nil,ignoresub=false)
     str="#{str}\n*#{statemotes[2]} (Solo):*" if (k[1][0].length>5 && k[1][0][5]>-1) || (k[1][1].length>5 && k[1][1][5]>-1)
     str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][5])}" if k[1][0].length>5 && k[1][0][5]>-1
     str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][5])}" if k[1][1].length>5 && k[1][1][5]>-1
-    str="#{str}\n*#{statemotes[2]}#{" (#{statemotes[3]})" unless statemotes[3].nil?}:*" if (k[1][0].length>6 && k[1][0][6]>-1) || (k[1][1].length>6 && k[1][1][6]>-1)
+    str="#{str}\n*#{statemotes[2]}#{" (#{statemotes[3]} L1)" unless statemotes[3].nil?}:*" if (k[1][0].length>6 && k[1][0][6]>-1) || (k[1][1].length>6 && k[1][1][6]>-1)
     str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][6])}" if k[1][0].length>6 && k[1][0][6]>-1
     str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][6])}" if k[1][1].length>6 && k[1][1][6]>-1
-    str="#{str}\n*Special:*" if (k[1][0].length>7 && k[1][0][7]>-1) || (k[1][1].length>7 && k[1][1][7]>-1)
+    str="#{str}\n*#{statemotes[2]}#{" (#{statemotes[3]} L2)" unless statemotes[3].nil?}:*" if (k[1][0].length>7 && k[1][0][7]>-1) || (k[1][1].length>7 && k[1][1][7]>-1)
     str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][7])}" if k[1][0].length>7 && k[1][0][7]>-1
     str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][7])}" if k[1][1].length>7 && k[1][1][7]>-1
-    str="#{str}\n*Challenge:*" if (k[1][0].length>8 && k[1][0][8]>-1) || (k[1][1].length>8 && k[1][1][8]>-1)
+    str="#{str}\n*Special:*" if (k[1][0].length>8 && k[1][0][8]>-1) || (k[1][1].length>8 && k[1][1][8]>-1)
     str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][8])}" if k[1][0].length>8 && k[1][0][8]>-1
     str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][8])}" if k[1][1].length>8 && k[1][1][8]>-1
+    str="#{str}\n*Challenge:*" if (k[1][0].length>9 && k[1][0][9]>-1) || (k[1][1].length>9 && k[1][1][9]>-1)
+    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][9])}" if k[1][0].length>9 && k[1][0][9]>-1
+    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][9])}" if k[1][1].length>9 && k[1][1][9]>-1
   end
   if k[2].length>3 && !['Jingu Bang','Mini Dasheng'].include?(k[0])
     m=@enemies.reject{|q| q[0]==k[0] || q[2].length<4 || q[2][3]!=k[2][3] || ['Jingu Bang','Mini Dasheng'].include?(q[0])}
