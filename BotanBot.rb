@@ -155,7 +155,7 @@ def all_commands(include_nil=false,permissions=-1)
      'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias','dmg',
      'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','limit',
      'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol','reload','update','mats','materials','spiral','node','nodes',
-     'damage','coability','coabil','coab','chain','team','backpack','cca','cc']
+     'damage','coability','coabil','coab','chain','team','backpack','cca','cc','skillshare','share','skilshare']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -2229,7 +2229,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
       str2="#{str2}#{"\n" unless m.length==1}\n\n**Promotes from: #{element_emote(wpnz[m2][3],bot)}*#{wpnz[m2][0]}* **#{"\n*Smithy level required:* #{k[10]}" unless k[2][1,1]=='h'}\n*Assembly cost:* #{longFormattedNumber(k[11][0])}#{bemoji[2]}\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}" unless m2.nil?
       if m.length>0
         for i in 0...m.length
-          str2="#{str2}#{"\n" if i==0 && m.length>1}\n\n**#{"Promotion #{i+1}" if m.length>1}#{'Promotes into' if m.length==1}: #{element_emote(m[i][3],bot)}*#{m[i][0]}* **#{"\n*Smithy level required:* #{m[i][10]}" unless k[2][1,1]=='h'}\n*Assembly cost:* #{longFormattedNumber(m[i][11][0])}#{bemoji[2]}\n*Required mats:* #{m[i][12].map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}"
+          str2="#{str2}#{"\n" if i==0 && m.length != 1}\n\n**#{"Promotion #{i+1}" if m.length>1}#{'Promotes into' if m.length==1}: #{element_emote(m[i][3],bot)}*#{m[i][0]}* **#{"\n*Smithy level required:* #{m[i][10]}" unless k[2][1,1]=='h'}\n*Assembly cost:* #{longFormattedNumber(m[i][11][0])}#{bemoji[2]}\n*Required mats:* #{m[i][12].map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}"
         end
       end
     else
@@ -2256,6 +2256,13 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   end
   if str.length+title.length>=1500
     str=str.split("\n\n\n")
+    if str[0].length>=1500
+      str[0]=str[0].split("**Promotes ")
+      for i in 1...str[0].length
+        str[0][i]="**Promotes #{str[0][i]}"
+      end
+      str.flatten!
+    end
     create_embed(event,["__**#{k[0]}**__",title],str[0],element_color(k[3]),nil,xpic)
     create_embed(event,'',str[1,str.length-1].join("\n\n\n"),element_color(k[3])) unless str.length<2 
   else
@@ -4425,7 +4432,7 @@ def disp_damage_modifiers(bot,event,args=nil)
   return damage_modifiers(bot,event,args)
 end
 
-def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=true)
+def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=0)
   reload_library()
   return find_the_adventure(bot,event,args,mode,allowstr)
 end
@@ -5337,7 +5344,7 @@ def sort_adventurers(bot,event,args=nil,mode=0)
   args=normalize(event.message.text.downcase).split(' ') if args.nil?
   args=args.map{|q| normalize(q.downcase)}
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
-  k=find_in_adventurers(bot,event,args,2,false)
+  k=find_in_adventurers(bot,event,args,2,1)
   return nil if k.nil?
   search=k[0]
   char=k[1]
@@ -5407,7 +5414,7 @@ def sort_adventurers(bot,event,args=nil,mode=0)
         end
       end
     end
-    char[i][6]="**#{char[i][0]}**#{adv_emoji(char[i],bot,true)}"
+    char[i][6]="**#{char[i][0]}**#{adv_emoji(char[i],bot)}"
     char[i][6]="#{char[i][6]}#{" (Lv#{30+10*char[i][1][0,1].to_i})" if rar==6 && m != 3} - #{m2.join(', ')}" if m2.length>0
   end
   puts char.map{|q|q.to_s}
@@ -5434,7 +5441,7 @@ def sort_adventurers(bot,event,args=nil,mode=0)
   fpop[fpop.length-1]="#{fpop[fpop.length-1]}, absolute max stats" if lvl==1
   fpop.push('Default rarity')
   stats=['Name','','','<:HP:573344832307593216>HP','<:Strength:573344931205349376>Strength','<:Defense:573344832282689567>Defense','','<:SkillShare:714597012733034547>Skill Share capacity']
-  disp="__**Adventurer Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}\n*Sorted at:* #{rar unless rar>@max_rarity[0]}#{fpop[rar]}#{"\n#{@max_rarity[0]}#{@rarity_stars[0][@max_rarity[0]]}s will be shown with absolute max stats" if rar>@max_rarity[1] && lvl==1}"
+  disp="__**Adventurer Search**__\n#{search.join("\n")}#{"\n" unless search.length<=0}*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}\n*Sorted at:* #{rar unless rar>@max_rarity[0]}#{fpop[rar]}#{"\n#{@max_rarity[0]}#{@rarity_stars[0][@max_rarity[0]]}s will be shown with absolute max stats" if rar>@max_rarity[1] && lvl==1}"
   disp=extend_message(disp,"__**Notes**__\n#{textra}",event,2) if textra.length>0
   disp=extend_message(disp,"__**Results**__",event,2) if char.length>0
   for i in 0...char.length
@@ -5476,7 +5483,7 @@ def sort_dragons(bot,event,args=nil)
     for i2 in 0...srt.length
       m2.push("#{char[i][srt[i2]]} #{stats[srt[i2]]}") unless srt[i2]<3
     end
-    char[i][6]="**#{char[i][0]}**#{dragon_emoji(char[i],bot,true)}"
+    char[i][6]="**#{char[i][0]}**#{dragon_emoji(char[i],bot)}"
     char[i][6]="#{char[i][6]} - #{m2.join(', ')}" if m2.length>0
   end
   char.sort!{|b,a| (supersort(a,b,srt[0])==0 ? (supersort(a,b,srt[1])==0 ? (supersort(a,b,srt[2])==0 ? supersort(a,b,srt[3]) : supersort(a,b,srt[2])) : supersort(a,b,srt[1])) : supersort(a,b,srt[0]))}
@@ -5611,7 +5618,7 @@ def sort_weapons(bot,event,args=nil)
     for i2 in 0...srt.length
       m2.push("#{char[i][srt[i2]]} #{stats[srt[i2]]}") unless srt[i2]<3
     end
-    char[i][6]="**#{char[i][0]}**#{weapon_emoji(char[i],bot,true)}"
+    char[i][6]="**#{char[i][0]}**#{weapon_emoji(char[i],bot)}"
     char[i][6]="#{char[i][6]} - #{m2.join(', ')}" if m2.length>0
   end
   char.sort!{|b,a| (supersort(a,b,srt[0])==0 ? (supersort(a,b,srt[1])==0 ? (supersort(a,b,srt[2])==0 ? supersort(a,b,srt[3]) : supersort(a,b,srt[2])) : supersort(a,b,srt[1])) : supersort(a,b,srt[0]))}
@@ -6285,6 +6292,98 @@ def adv_chain_list(event,args,bot)
   return disp_adv_chain(event,args,bot)
 end
 
+def sort_shareable_skills(event,args,bot)
+  data_load()
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_in_adventurers(bot,event,args,2,2)
+  search=k[0]
+  char=k[1]
+  char=char.sort{|a,b| a[0].gsub('*','')<=>b[0].gsub('*','')}.uniq
+  textra=k[3]
+  textra="**No adventurers match your search**" if char.length<=0
+  char2=[]
+  sklz=@askilities.reject{|q| q[2]!='Skill'}
+  for i in 0...char.length
+    if char[i][0].include?(' *[S1/2]*') || char[i][0].include?(' *[S1]*')
+      skz=sklz.find_index{|q| q[0]==char[i][6][0]}
+      unless skz.nil?
+        skz=sklz[skz].map{|q| q}
+        skz[12][1]=skz[6][-1] if skz[12][1].nil? || skz[12][1]<=0
+        skz[1]="#{char[i][0].split(' *[')[0]} - #{skz[0]}"
+        skz[0]="#{adv_emoji(char[i],bot)}#{char[i][0].split(' *[')[0]} *[S1]*: #{skz[0]} - #{skz[12][0]}<:SkillShare:714597012733034547>, #{skz[12][1]} SP"
+        char2.push(skz.map{|q| q})
+      end
+    end
+    if char[i][0].include?(' *[S1/2]*') || char[i][0].include?(' *[S2]*')
+      skz=sklz.find_index{|q| q[0]==char[i][6][1]}
+      unless skz.nil?
+        skz=sklz[skz].map{|q| q}
+        skz[12][1]=skz[6][-1] if skz[12][1].nil? || skz[12][1]<=0
+        skz[1]="#{char[i][0].split(' *[')[0]} - #{skz[0]}"
+        skz[0]="#{adv_emoji(char[i],bot)}#{char[i][0].split(' *[')[0]} *[S2]*: #{skz[0]} - #{skz[12][0]}<:SkillShare:714597012733034547>, #{skz[12][1]} SP"
+        char2.push(skz.map{|q| q})
+      end
+    end
+  end
+  tx=0
+  bx=0
+  costlimit=[0,100]
+  splimit=[0,10000]
+  sortbysp=false
+  for i in 0...args.length
+    sortbysp=true if ['sp'].include?(args[i].downcase)
+    if args[i].downcase[0,3]=='top' && tx.zero?
+      tx=[args[i][3,args[i].length-3].to_i,char.length].min
+    elsif args[i].downcase[0,6]=='bottom' && bx.zero?
+      bx=[args[i][6,args[i].length-6].to_i,char.length].min
+    elsif args[i].downcase[0,5]=='cost>' && args[i][5,args[i].length-5].to_i.to_s==args[i][5,args[i].length-5] && args[i][5,args[i].length-5].to_i<10
+      costlimit[0]=args[i][5,args[i].length-5].to_i+1
+    elsif args[i].downcase[0,5]=='cost<' && args[i][5,args[i].length-5].to_i.to_s==args[i][5,args[i].length-5] && args[i][5,args[i].length-5].to_i>0
+      costlimit[1]=args[i][5,args[i].length-5].to_i-1
+    elsif args[i].downcase[0,6]=='cost>=' && args[i][6,args[i].length-6].to_i.to_s==args[i][6,args[i].length-6] && args[i][6,args[i].length-6].to_i<10
+      costlimit[0]=args[i][6,args[i].length-6].to_i
+    elsif args[i].downcase[0,6]=='cost<=' && args[i][6,args[i].length-6].to_i.to_s==args[i][6,args[i].length-6] && args[i][6,args[i].length-6].to_i>0
+      costlimit[1]=args[i][6,args[i].length-6].to_i
+    end
+  end
+  costlimit.reverse! if costlimit[0]>costlimit[1]
+  char=char2.map{|q| q}
+  char=char.reject{|q| q[12][0]<costlimit[0] || q[12][0]>costlimit[1]}
+  char=char.sort{|a,b| (supersort(a,b,12,0)==0) ? (supersort(b,a,1)) : (supersort(a,b,12,0))}
+  char=char.sort{|a,b| (supersort(a,b,12,1)==0) ? ((supersort(a,b,12,0)==0) ? (supersort(b,a,1)) : (supersort(a,b,12,0))) : (supersort(a,b,12,1))} if sortbysp
+  if tx>0
+    char=char[0,tx]
+  elsif bx>0
+    char=char[char.length-bx,bx]
+  end
+  if !safe_to_spam?(event) && char.length>10
+    textra="#{textra}#{"\n\n" if textra.length>0}Too much data is trying to be displayed.  Showing top ten results.\nYou can also make things easier by making the list shorter with words like `top#{rand(10)+1}` or `bottom#{rand(10)+1}`"
+    char=char[0,10]
+  end
+  if costlimit[0]!=0 && costlimit[1]!=100
+    search.push("*Cost between #{costlimit.join(' and ')}, inclusive*")
+  elsif costlimit[0]!=0
+    search.push("*Cost >= #{costlimit[0]}*")
+  elsif costlimit[1]!=100
+    search.push("*Cost <= #{costlimit[1]}*")
+  end
+  search.push("*Sorted By:* #{'SP cost, ' if sortbysp}<:SkillShare:714597012733034547>Skill Share cost, Adventurer name")
+  disp="__**Adventurer Search**__\n#{search.join("\n")}"
+  disp=extend_message(disp,"__**Notes**__\n#{textra}",event,2) if textra.length>0
+  disp=extend_message(disp,"__**Results**__",event,2) if char.length>0
+  for i in 0...char.length
+    disp=extend_message(disp,char[i][0],event)
+  end
+  event.respond disp
+end
+
+bot.command([:skillshare,:skilshare,:share]) do |event, *args|
+  return nil if overlap_prevent(event)
+  sort_shareable_skills(event,args,bot)
+  return nil
+end
+
 bot.command([:team,:backpack]) do |event, *args|
   return nil if overlap_prevent(event)
   adv_chain_list(event,args,bot)
@@ -6417,6 +6516,10 @@ bot.command([:skill,:skil]) do |event, *args|
   elsif ['find','search'].include?(args[0].downcase)
     args.shift
     find_skills(bot,event,args)
+    return nil
+  elsif ['share'].include?(args[0].downcase)
+    args.shift
+    sort_shareable_skills(event,args,bot)
     return nil
   end
   disp_skill_data(bot,event,args)
@@ -6665,6 +6768,10 @@ bot.command([:sort,:list]) do |event, *args|
   elsif ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
     args.shift
     sort_adventurers(bot,event,args)
+    return nil
+  elsif ['skill','share','skillshare'].include?(args[0].downcase)
+    args.shift
+    sort_shareable_skills(event,args,bot)
     return nil
   elsif ['dragon','dragons','drg','drag','drgs','drags'].include?(args[0].downcase)
     args.shift
@@ -7790,6 +7897,9 @@ bot.mention do |event|
     elsif ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
       args.shift
       sort_adventurers(bot,event,args)
+    elsif ['skill','share','skillshare'].include?(args[0].downcase)
+      args.shift
+      sort_shareable_skills(event,args,bot)
     elsif ['dragon','dragons','drg','drags'].include?(args[0].downcase)
       args.shift
       sort_dragons(bot,event,args)
@@ -7824,6 +7934,10 @@ bot.mention do |event|
     m=false
     args.shift
     find_best_match(args.join(' '),bot,event,false,false,4)
+  elsif ['skillshare','share','skilshare'].include?(args[0].downcase)
+    args.shift
+    sort_shareable_skills(event,args,bot)
+    m=false
   elsif ['banner','banners'].include?(args[0].downcase)
     m=false
     args.shift
@@ -7936,6 +8050,8 @@ bot.mention do |event|
     if ['find','search'].include?(args[0].downcase)
       args.shift
       find_skills(bot,event,args)
+    elsif ['share'].include?(args[0].downcase)
+      sort_shareable_skills(event,args,bot)
     else
       disp_skill_data(bot,event,args)
     end
