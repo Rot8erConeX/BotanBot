@@ -2087,6 +2087,7 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
   wpn.uniq!
   clzz.uniq!
   tags.uniq!
+  tags=tags.reject{|q| q=='SP'} if allowstr%4>1
   genders.uniq!
   races.uniq!
   cygames.uniq!
