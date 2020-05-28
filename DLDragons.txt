@@ -88,6 +88,7 @@ Snow Drake\3\Water\19, 191\5, 57\Snow Drop\(Water) HP +10%;; (Water) HP +15%\300
 Stribog\4\Wind\30, 306\9, 91\Test of Integrity\(Wind) HP +30%;; (Wind) HP +45%\2000, 2200\1.5, 1\4\No\No\Stribog\\\;;;; \\M\KoG\default; 216%; 238%; 302%\
 Sylvia\5w\Wind\22, 225\7, 72\Hurricane Drive\(Wind) HP +20%;; (Wind) HP +30%\5000, 300\1.5, 1.5\2\No\No\Sylvia\\\;;;; \\F\KoG\default; 125%; 138%; 175%\
 Takemikazuchi\5\Light\37, 371\12, 124\Thunderous Charge\(Light) Strength +30%;; (Light) Strength +40%;;; (Light) Overdrive Punisher +20%;; (Light) Overdrive Punisher +25%\5000, 8500\1.8, 1\4\No\Yes\Takemikazuchi\\\\\M\\default; 153%; 168%; 344%\
+Tie Shan Gongzhu\5\Light\37, 371\12, 124\Energizing Fan\(Light) HP +20%;; (Light) HP +30%;;; (Light) Skill Haste +25%;; (Light) Skill Haste +35%\5000, 8500\0, 0\5\Yes\No\Tie Shan Gongzhu\\\\\F\\default; x; x; x;\
 Tiki(Young)\5\Water\-, -\-, -\Breath of Fog;; Divine Dragon Blast\-\-, -\0, 0\3\Yes\No\Tiki(Young)\Sumire Morohoshi\Mela Lee\\FEH\F\\Dragon; 211%; 252%; 358%; 89%; 43.2% x3 L1, 47% x3 L2\
 Tsumuji\3\Wind\18, 184\6, 63\Air Tackle\(Wind) Strength +10%;; (Wind) Strength +15%\300, 150\1.35, 3.5\3\Yes\No\Tsumuji\\\\\F\\default; 148%; 163% + 62%; 145%\
 Unicorn\4\Light\30, 301\9, 95\Immaculate Light\(Light) HP +30%;; (Light) HP +45%\2000, 2200\1.5, 1.5\3\No\No\Unicorn\\\\\F\KoG\default; 180%; 198%; 252%\
