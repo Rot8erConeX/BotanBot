@@ -2729,10 +2729,12 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
     end
   end
   str="#{str}\n\nYou may instead be searching for the ability family `Dragon's Claws`." if k[0]=='Dragon Claw'
-  advy=[]
-  advy.push("#{longFormattedNumber(23*k[12][1]/20)} SP for Nef archetypes") unless advx.include?('Nefaria')
-  advy.push("#{longFormattedNumber(13*k[12][1]/10)} SP for Hawk archetypes") unless advx.include?('Hawk')
-  str="#{str}\n\n\* #{advy.join(', ')}" if !k[12].nil? && k[12].length>0 && advy.length>0
+  if !k[12].nil? && k[12].length>0 && advy.length>0
+    advy=[]
+    advy.push("#{longFormattedNumber(23*k[12][1]/20)} SP for Nef archetypes") unless advx.include?('Nefaria')
+    advy.push("#{longFormattedNumber(13*k[12][1]/10)} SP for Hawk archetypes") unless advx.include?('Hawk')
+    str="#{str}\n\n\* #{advy.join(', ')}"
+  end
   flds=nil if flds.length<=0
   m=0
   m=flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length unless flds.nil?
