@@ -2681,7 +2681,7 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   title="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min && k[6][0]>0
   title="#{title}\n**Invulnerability duration:** #{k[8]} seconds"
   k[12][1]=k[6][-1] if !k[12].nil? && k[12].length==1
-  title="#{title}\n<:SkillShare:714597012733034547> **Skill Share:** *Cost:* #{k[12][0]} / #{longFormattedNumber(k[12][1])} SP" if !k[12].nil? && k[12].length>0
+  title="#{title}\n<:SkillShare:714597012733034547> **Skill Share:** *Cost:* #{k[12][0]} / #{longFormattedNumber(k[12][1])} SP\*" if !k[12].nil? && k[12].length>0
   title="#{title}\n<:Energize:559629242137051155> **Energizable**" if k[7]=='Yes'
   title="#{title}\n~~Not energizable~~" if k[7]=='No'
   title="#{title}\n<:Inspiring:688916587079663625> **Inspirable**" if k[10].include?('Damage')
@@ -2698,8 +2698,10 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   end
   flds=[]
   m=[]
+  advx=[]
   x=@adventurers.map{|q| q}
   for i in 0...x.length
+    advx.push(x[i][0]) if x[i][6].include?(k[0])
     m.push("#{adv_emoji(x[i],bot)}#{x[i][0]} - S1") if x[i][6][0]==k[0]
     m.push("#{adv_emoji(x[i],bot)}#{x[i][0]} - S2") if x[i][6][1]==k[0]
   end
@@ -2727,6 +2729,10 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
     end
   end
   str="#{str}\n\nYou may instead be searching for the ability family `Dragon's Claws`." if k[0]=='Dragon Claw'
+  advy=[]
+  advy.push("#{longFormattedNumber(23*k[12][1]/20)} SP for Nef archetypes") unless advx.include?('Nefaria')
+  advy.push("#{longFormattedNumber(13*k[12][1]/10)} SP for Hawk archetypes") unless advx.include?('Hawk')
+  str="#{str}\n\n\* #{advy.join(', ')}" if !k[12].nil? && k[12].length>0 && advy.length>0
   flds=nil if flds.length<=0
   m=0
   m=flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length unless flds.nil?
@@ -6329,7 +6335,7 @@ def sort_shareable_skills(event,args,bot)
   tx=0
   bx=0
   costlimit=[0,100]
-  splimit=[0,10000]
+  splimit=[0,100000]
   sortbysp=false
   for i in 0...args.length
     sortbysp=true if ['sp'].include?(args[i].downcase)
@@ -6337,19 +6343,33 @@ def sort_shareable_skills(event,args,bot)
       tx=[args[i][3,args[i].length-3].to_i,char.length].min
     elsif args[i].downcase[0,6]=='bottom' && bx.zero?
       bx=[args[i][6,args[i].length-6].to_i,char.length].min
-    elsif args[i].downcase[0,5]=='cost>' && args[i][5,args[i].length-5].to_i.to_s==args[i][5,args[i].length-5] && args[i][5,args[i].length-5].to_i<10
-      costlimit[0]=args[i][5,args[i].length-5].to_i+1
-    elsif args[i].downcase[0,5]=='cost<' && args[i][5,args[i].length-5].to_i.to_s==args[i][5,args[i].length-5] && args[i][5,args[i].length-5].to_i>0
-      costlimit[1]=args[i][5,args[i].length-5].to_i-1
     elsif args[i].downcase[0,6]=='cost>=' && args[i][6,args[i].length-6].to_i.to_s==args[i][6,args[i].length-6] && args[i][6,args[i].length-6].to_i<10
-      costlimit[0]=args[i][6,args[i].length-6].to_i
+      costlimit[0]=args[i][6,args[i].length-6].to_i unless args[i][6,args[i].length-6].to_i<costlimit[0]
     elsif args[i].downcase[0,6]=='cost<=' && args[i][6,args[i].length-6].to_i.to_s==args[i][6,args[i].length-6] && args[i][6,args[i].length-6].to_i>0
-      costlimit[1]=args[i][6,args[i].length-6].to_i
+      costlimit[1]=args[i][6,args[i].length-6].to_i unless args[i][6,args[i].length-6].to_i>costlimit[1]
+    elsif args[i].downcase[0,5]=='cost>' && args[i][5,args[i].length-5].to_i.to_s==args[i][5,args[i].length-5] && args[i][5,args[i].length-5].to_i<10
+      costlimit[0]=args[i][5,args[i].length-5].to_i+1 unless args[i][5,args[i].length-5].to_i+1<costlimit[0]
+    elsif args[i].downcase[0,5]=='cost<' && args[i][5,args[i].length-5].to_i.to_s==args[i][5,args[i].length-5] && args[i][5,args[i].length-5].to_i>0
+      costlimit[1]=args[i][5,args[i].length-5].to_i-1 unless args[i][5,args[i].length-5].to_i-1>costlimit[1]
+    elsif ['sp>','sp<'].include?(args[i].downcase[0,3])
+      var=args[i].downcase.gsub(',','') # removing commas
+      var=var[2,var.length-2]
+      var="#{var[0,var.length-1]}000" if var[-1]=='k' # adjusting k for thousands
+      if var[0,2]=='>=' && var[2,var.length-2].to_i.to_s==var[2,var.length-2]
+        splimit[0]=var[2,var.length-2].to_i unless var[2,var.length-2].to_i<splimit[0]
+      elsif var[0,2]=='<=' && var[2,var.length-2].to_i.to_s==var[2,var.length-2]
+        splimit[1]=var[2,var.length-2].to_i unless var[2,var.length-2].to_i>splimit[1]
+      elsif var[0,1]=='>' && var[1,var.length-1].to_i.to_s==var[1,var.length-1]
+        splimit[0]=var[1,var.length-1].to_i+1 unless var[1,var.length-1].to_i+1<splimit[0]
+      elsif var[0,1]=='<' && var[1,var.length-1].to_i.to_s==var[1,var.length-1]
+        splimit[1]=var[1,var.length-1].to_i+1 unless var[1,var.length-1].to_i-1>splimit[1]
+      end
     end
   end
   costlimit.reverse! if costlimit[0]>costlimit[1]
+  splimit.reverse! if splimit[0]>splimit[1]
   char=char2.map{|q| q}
-  char=char.reject{|q| q[12][0]<costlimit[0] || q[12][0]>costlimit[1]}
+  char=char.reject{|q| q[12][0]<costlimit[0] || q[12][0]>costlimit[1] || q[12][1]<splimit[0] || q[12][1]>splimit[1]}
   char=char.sort{|a,b| (supersort(a,b,12,0)==0) ? (supersort(b,a,1)) : (supersort(a,b,12,0))}
   char=char.sort{|a,b| (supersort(a,b,12,1)==0) ? ((supersort(a,b,12,0)==0) ? (supersort(b,a,1)) : (supersort(a,b,12,0))) : (supersort(a,b,12,1))} if sortbysp
   if tx>0
@@ -6362,11 +6382,18 @@ def sort_shareable_skills(event,args,bot)
     char=char[0,10]
   end
   if costlimit[0]!=0 && costlimit[1]!=100
-    search.push("*Cost between #{costlimit.join(' and ')}, inclusive*")
+    search.push("*Cost between #{costlimit.map{|q| longFormattedNumber(q)}.join(' and ')} (inclusive)*")
   elsif costlimit[0]!=0
-    search.push("*Cost >= #{costlimit[0]}*")
+    search.push("*Cost >= #{longFormattedNumber(costlimit[0])}*")
   elsif costlimit[1]!=100
-    search.push("*Cost <= #{costlimit[1]}*")
+    search.push("*Cost <= #{longFormattedNumber(costlimit[1])}*")
+  end
+  if splimit[0]!=0 && splimit[1]!=100000
+    search.push("*SP between #{splimit.map{|q| longFormattedNumber(q)}.join(' and ')} (inclusive)*")
+  elsif splimit[0]!=0
+    search.push("*SP >= #{longFormattedNumber(splimit[0])}*")
+  elsif splimit[1]!=100000
+    search.push("*SP <= #{longFormattedNumber(splimit[1])}*")
   end
   search.push("*Sorted By:* #{'SP cost, ' if sortbysp}<:SkillShare:714597012733034547>Skill Share cost, Adventurer name")
   disp="__**Adventurer Search**__\n#{search.join("\n")}"
