@@ -2325,6 +2325,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
   elem=[]
   fltr=[]
   wday=[]
+  wpn=[]
   turn=[]
   ranged=[]
   tags=[]
@@ -2349,6 +2350,14 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
     elem.push('Wind') if ['earth','earths'].include?(args[i].downcase) && event.user.id==192821228468305920
     elem.push('Light') if ['light','lights'].include?(args[i].downcase)
     elem.push('Shadow') if ['shadow','dark','shadows','darks'].include?(args[i].downcase)
+    wpn.push('Sword') if ['sword','swords'].include?(args[i].downcase)
+    wpn.push('Blade') if ['blade','blades','sabers','saber','katana','katanas'].include?(args[i].downcase)
+    wpn.push('Dagger') if ['dagger','daggers','knife','knifes','knives'].include?(args[i].downcase)
+    wpn.push('Axe') if ['axes','axe'].include?(args[i].downcase)
+    wpn.push('Bow') if ['bow','bows','arrow','arrows','archer','archers'].include?(args[i].downcase)
+    wpn.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
+    wpn.push('Wand') if ['wand','wands','rod','rods'].include?(args[i].downcase)
+    wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
     wday.push(1) if ['mo','monday','mondae','mon','m','juicymeat','meat'].include?(args[i].downcase)
     wday.push(2) if ['tu','tuesday','tuesdae','tues','tue','t','kaleidoscope','kscope','k-scope'].include?(args[i].downcase)
     wday.push(3) if ['we','wednesday','wednesdae','wednes','wed','w','floralcirclet','flower','floral','circlet','circle'].include?(args[i].downcase)
@@ -2387,6 +2396,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
   textra=''
   rarity.uniq!
   elem.uniq!
+  wpn.uniq!
   wday.uniq!
   turn.uniq!
   ranged.uniq!
@@ -2411,6 +2421,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
     end
     search.push("*Elements*: #{elem.join(', ')}")
   end
+  char=[] if wpn.length>0 && mode>1
   if launch
     search.push('*Game Launch*')
     b=@banners[0]
