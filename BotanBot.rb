@@ -1719,7 +1719,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     lv[4]=2 if k[0]=='Euden' && rar==5
     lv=[2,2,2,2,0] if rar==4
     lv=[2,1,2,1,0] if rar==3
-    lv[4]=1 if k[1][0,1].to_i==5 && rar<5
+    lv[4]=1 if k[1][0,1].to_i==5 && rar<5 && rar>0
     lv=[1,1,1,1,0] if rar==2
     lv=[1,1,1,0,0] if rar==1
     x=[skl1[3,3],skl2[3,3]]
@@ -2729,11 +2729,11 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
     end
   end
   str="#{str}\n\nYou may instead be searching for the ability family `Dragon's Claws`." if k[0]=='Dragon Claw'
-  if !k[12].nil? && k[12].length>0 && advy.length>0
+  if !k[12].nil? && k[12].length>0
     advy=[]
     advy.push("#{longFormattedNumber(23*k[12][1]/20)} SP for Nef archetypes") unless advx.include?('Nefaria')
     advy.push("#{longFormattedNumber(13*k[12][1]/10)} SP for Hawk archetypes") unless advx.include?('Hawk')
-    str="#{str}\n\n\* #{advy.join(', ')}"
+    str="#{str}\n\n\* #{advy.join(', ')}" if advy.length>0
   end
   flds=nil if flds.length<=0
   m=0
