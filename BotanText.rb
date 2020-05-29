@@ -2358,6 +2358,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
     wpn.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
     wpn.push('Wand') if ['wand','wands','rod','rods'].include?(args[i].downcase)
     wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
+    wpn.push('Share') if ['share','skillshare','shareskill'].include?(args[i].downcase)
     wday.push(1) if ['mo','monday','mondae','mon','m','juicymeat','meat'].include?(args[i].downcase)
     wday.push(2) if ['tu','tuesday','tuesdae','tues','tue','t','kaleidoscope','kscope','k-scope'].include?(args[i].downcase)
     wday.push(3) if ['we','wednesday','wednesdae','wednes','wed','w','floralcirclet','flower','floral','circlet','circle'].include?(args[i].downcase)
@@ -2605,8 +2606,10 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
   lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Wyrmprint'}
   lookout=lookout.reject{|q| q[2]!='Askillity'}
   lookout=lookout.reject{|q| ['Attack','Defense','Support','Healer'].include?(q[0])}
+  ign=false
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
+    ign=true if ['share','skillshare','shareskill'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
     rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1
     clzz.push('Attack') if ['attack','atk','att','attacking'].include?(args[i].downcase)
@@ -2635,6 +2638,7 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
   char=@wyrmprints.reject{|q| ['Wily Warriors','Greatwyrm'].include?(q[0])}.uniq
   search=[]
   emo=[]
+  char=[] if ign
   if rarity.length>0
     char=char.reject{|q| !rarity.include?(q[1][0,1].to_i)}.uniq
     search.push("*Rarities*: #{rarity.map{|q| "#{q}#{@rarity_stars[0][q]}"}.join(', ')}")
@@ -2797,6 +2801,7 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   lookout=lookout.reject{|q| q[2]!='Askillity'}
   lookout=lookout.reject{|q| ['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Flame','Water','Wind','Light','Shadow'].include?(q[0])}
   args2=args.map{|q| q}
+  ign=false
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
@@ -2813,6 +2818,7 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
     rarity_tier_2.push('AGT1') if ['agito1','agt1'].include?(args[i].downcase)
     rarity_tier_2.push('AGT2') if ['agito2','agt2'].include?(args[i].downcase)
     rarity_tier_2.push('AGT3') if ['agito3','agt3'].include?(args[i].downcase)
+    ign=true if ['share','skillshare','shareskill'].include?(args[i].downcase)
     if ['flame','fire','flames','fires'].include?(args[i].downcase)
       args2[i]=nil unless elem.include?('Flame')
       elem.push('Flame')
@@ -2908,6 +2914,7 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   char=@weapons.map{|q| q}.uniq
   search=[]
   emo=[]
+  char=[] if ign
   if rarity.length>0 || tier.length>0 || rarity_tier.length>0 || rarity_tier_2.length>0
     if rarity.length>0
       search.push("*Rarities*: #{rarity.map{|q| "#{q}#{@rarity_stars[0][q]}"}.join(', ')}")
