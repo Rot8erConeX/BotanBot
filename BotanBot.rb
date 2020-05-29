@@ -155,7 +155,7 @@ def all_commands(include_nil=false,permissions=-1)
      'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias','dmg',
      'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','limit',
      'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol','reload','update','mats','materials','spiral','node','nodes',
-     'damage','coability','coabil','coab','chain','team','backpack','cca','cc','skillshare','share','skilshare']
+     'damage','coability','coabil','coab','chain','team','backpack','cca','cc','skillshare','share','skilshare','combo']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -6652,7 +6652,7 @@ bot.command([:sp,:SP]) do |event, *args|
   disp_sp_table(bot,event,args)
 end
 
-bot.command([:dmg,:damage]) do |event, *args|
+bot.command([:dmg,:damage,:combo]) do |event, *args|
   return nil if overlap_prevent(event)
   disp_damage_modifiers(bot,event,args)
 end
