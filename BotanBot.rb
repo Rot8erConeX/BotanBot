@@ -2602,7 +2602,7 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
   return enemy_data(bot,event,args,ignoresub)
 end
 
-def disp_skill_data(bot,event,args=nil,forcetags=false)
+def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
@@ -2669,6 +2669,7 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   dispname=k[0].gsub(' ','_')
   xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Skills/#{dispname}.png?raw=true"
   xcolor=0x02010a
+  xcolor=topstr[1] if topstr.length>0
   mx=k[3,3].reject{|q| q.nil? || q.length<=0}
   mx.push(k[11]) if !k[11].nil? && k[11].length>0
   if k.length>13
@@ -2678,7 +2679,7 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   end
   str=''
   title=''
-  title="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min && k[6][0]>0
+  title="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min && k[6][0]>0 && topstr.length<=0
   title="#{title}\n**Invulnerability duration:** #{k[8]} seconds"
   k[12][1]=k[6][-1] if !k[12].nil? && k[12].length==1
   title="#{title}\n<:SkillShare:714597012733034547> **Skill Share:** *Cost:* #{k[12][0]} / #{longFormattedNumber(k[12][1])} SP\*" if !k[12].nil? && k[12].length>0
@@ -2688,12 +2689,14 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   title="#{title}\n~~Not inspirable~~" unless k[10].include?('Damage')
   str2="#{energy_emoji(k[10],true)}".gsub(', ',"\n")
   for i in 0...mx.length
-    str2="#{str2}\n\n__**Level #{i+1}**__"
-    str2="#{str2} - #{k[6][i]} SP" unless k[6][0,mx.length].max==k[6][0,mx.length].min || k[6][i]<=0
-    if i>=3
-      str2="#{str2}\n#{k[i+8].gsub(';; ',"\n")}"
-    else
-      str2="#{str2}\n#{k[i+3].gsub(';; ',"\n")}"
+    if topstr.length<=0 || i>1
+      str2="#{str2}\n\n__**Level #{i+1}**__"
+      str2="#{str2} - #{k[6][i]} SP" unless k[6][0,mx.length].max==k[6][0,mx.length].min || k[6][i]<=0
+      if i>=3
+        str2="#{str2}\n#{k[i+8].gsub(';; ',"\n")}"
+      else
+        str2="#{str2}\n#{k[i+3].gsub(';; ',"\n")}"
+      end
     end
   end
   flds=[]
@@ -2705,21 +2708,23 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
     m.push("#{adv_emoji(x[i],bot)}#{x[i][0]} - S1") if x[i][6][0]==k[0]
     m.push("#{adv_emoji(x[i],bot)}#{x[i][0]} - S2") if x[i][6][1]==k[0]
   end
-  flds.push(['Adventurers',m.join("\n")]) if m.length>0
-  m=[]
-  x=@dragons.map{|q| q}
-  for i in 0...x.length
-    m.push("#{dragon_emoji(x[i],bot)}#{x[i][0]}") if x[i][5][0]==k[0] && x[i][5].length<2
-    m.push("#{dragon_emoji(x[i],bot)}#{x[i][0]} - S1d") if x[i][5][0]==k[0] && x[i][5].length>1
-    m.push("#{dragon_emoji(x[i],bot)}#{x[i][0]} - S2d") if x[i][5][1]==k[0] && x[i][5].length>1
+  flds.push(['Adventurers',m.join("\n")]) if m.length>0 && topstr.length<=0
+  if topstr.length<=0
+    m=[]
+    x=@dragons.map{|q| q}
+    for i in 0...x.length
+      m.push("#{dragon_emoji(x[i],bot)}#{x[i][0]}") if x[i][5][0]==k[0] && x[i][5].length<2
+      m.push("#{dragon_emoji(x[i],bot)}#{x[i][0]} - S1d") if x[i][5][0]==k[0] && x[i][5].length>1
+      m.push("#{dragon_emoji(x[i],bot)}#{x[i][0]} - S2d") if x[i][5][1]==k[0] && x[i][5].length>1
+    end
+    flds.push(['Dragons',m.join("\n")]) if m.length>0
+    m=[]
+    x=@weapons.map{|q| q}
+    for i in 0...x.length
+      m.push("#{weapon_emoji(x[i],bot)}#{x[i][0]} - S3") if x[i][6]==k[0]
+    end
+    flds.push(['Weapons',m.join("\n")]) if m.length>0
   end
-  flds.push(['Dragons',m.join("\n")]) if m.length>0
-  m=[]
-  x=@weapons.map{|q| q}
-  for i in 0...x.length
-    m.push("#{weapon_emoji(x[i],bot)}#{x[i][0]} - S3") if x[i][6]==k[0]
-  end
-  flds.push(['Weapons',m.join("\n")]) if m.length>0
   if args.include?('tags') || forcetags
     if flds.length<=0
       flds=triple_finish(k[10].reject{|q| ['E','I'].include?(q[0,1]) && q[1,1].to_i.to_s==q[1,1]})
@@ -2728,7 +2733,7 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
       flds.push(['Tags',k[10].reject{|q| ['E','I'].include?(q[0,1]) && q[1,1].to_i.to_s==q[1,1]}.join("\n")])
     end
   end
-  str="#{str}\n\nYou may instead be searching for the ability family `Dragon's Claws`." if k[0]=='Dragon Claw'
+  str="#{str}\n\nYou may instead be searching for the ability family `Dragon's Claws`." if k[0]=='Dragon Claw' && topstr.length<=0
   if !k[12].nil? && k[12].length>0
     advy=[]
     advy.push("#{longFormattedNumber(23*k[12][1]/20)} SP for Nef archetypes") unless advx.include?('Nefaria')
@@ -2738,15 +2743,17 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
   flds=nil if flds.length<=0
   m=0
   m=flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length unless flds.nil?
+  k[0]="__**#{k[0]}**__"
+  k[0]="#{topstr[0]} - #{k[0]}" if topstr.length>0
   if str.length+title.length+str2.length+m<1800 && (s2s || k[9].nil? || k[9].length<=0)
     str="#{str}#{str2}"
-    create_embed(event,["__**#{k[0]}**__",title],str,xcolor,nil,xpic,flds)
+    create_embed(event,["#{k[0]}",title],str,xcolor,nil,xpic,flds)
   elsif str2.length<1800 && (s2s || k[9].nil? || k[9].length<=0)
-    create_embed(event,["__**#{k[0]}**__",title],str,xcolor,nil,xpic)
+    create_embed(event,["#{k[0]}",title],str,xcolor,nil,xpic)
     create_embed(event,'',str2,xcolor)
     create_embed(event,'','',xcolor,nil,nil,flds) unless flds.nil?
   elsif k[9].nil? || k[9].length<=0
-    create_embed(event,["__**#{k[0]}**__",title],str,xcolor,nil,xpic)
+    create_embed(event,["#{k[0]}",title],str,xcolor,nil,xpic)
     m=str2.split("\n\n").reject{|q| q.nil? || q.length<=0}
     s=''
     for i in 0...m.length
@@ -2763,13 +2770,13 @@ def disp_skill_data(bot,event,args=nil,forcetags=false)
     end
     if str.length+str2.length+m<1800
       str="#{str}#{str2}"
-      create_embed(event,["__**#{k[0]}**__",title],str,xcolor,nil,xpic,flds)
+      create_embed(event,["#{k[0]}",title],str,xcolor,nil,xpic,flds)
     elsif str2.length<1800
-      create_embed(event,["__**#{k[0]}**__",title],str,xcolor,nil,xpic)
+      create_embed(event,["#{k[0]}",title],str,xcolor,nil,xpic)
       create_embed(event,'',str2,xcolor)
       create_embed(event,'','',xcolor,nil,nil,flds) unless flds.nil?
     else
-      create_embed(event,["__**#{k[0]}**__",title],str,xcolor,nil,xpic)
+      create_embed(event,["#{k[0]}",title],str,xcolor,nil,xpic)
       m=str2.split("\n").reject{|q| q.nil? || q.length<=0}
       s=''
       for i in 0...m.length
@@ -6304,6 +6311,24 @@ def sort_shareable_skills(event,args,bot)
   data_load()
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k2=args.reject{|q| ['flame','fire','flames','fires','water','waters','wind','air','winds','airs','light','lights','shadow','dark','shadows','darks','sword','swords','blade','blades','sabers','saber','katana','katanas','dagger','daggers','knife','knifes','knives','axes','axe','bow','bows','arrow','arrows','archer','archers','lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears','wand','wands','rod','rods','staff','staffs','staves','attack','atk','att','attacking','defense','defence','def','defending','defensive','defencive','support','supports','supportive','supporting','heal','healing','heals','healer','healers'].include?(q.downcase)}
+  k2=find_data_ex(:find_adventurer,k2.join(' '),event)
+  sklz=@askilities.map{|q| q}
+  unless k2.nil? || k2.length<=0
+    skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==k2[6][0]}
+    skl1=sklz[skl1] unless skl1.nil?
+    skl1[12][1]=skl1[6][-1] unless skl1.nil? || skl1[12].nil? || skl1[12].length<=0 || skl1[12].length>1
+    skl2=sklz.find_index{|q| q[2]=='Skill' && q[0]==k2[6][1]}
+    skl2=sklz[skl2] unless skl2.nil?
+    skl2[12][1]=skl2[6][-1] unless skl2.nil? || skl2[12].nil? || skl2[12].length<=0 || skl2[12].length>1
+    if (skl1.nil? || skl1[12].nil? || skl1[12].length<=0 || skl1[12].max<=0) && (skl2.nil? || skl2[12].nil? || skl2[12].length<=0 || skl2[12].max<=0)
+      event.respond "#{adv_emoji(k2,bot)}*#{k2[0]}* does not have any skills that can be shared."
+      return nil
+    end
+    disp_skill_data(bot,event,k2[6][0].split(' '),false,topstr=["#{adv_emoji(k2,bot)}*#{k2[0]}* [S1]",element_color(k2[2][1])]) unless skl1.nil? || skl1[12].nil? || skl1[12].length<=0 || skl1[12].max<=0
+    disp_skill_data(bot,event,k2[6][1].split(' '),false,topstr=["#{adv_emoji(k2,bot)}*#{k2[0]}* [S2]",element_color(k2[2][1])]) unless skl2.nil? || skl2[12].nil? || skl2[12].length<=0 || skl2[12].max<=0
+    return nil
+  end
   k=find_in_adventurers(bot,event,args,2,2)
   search=k[0]
   char=k[1]
@@ -6311,7 +6336,6 @@ def sort_shareable_skills(event,args,bot)
   textra=k[3]
   textra="**No adventurers match your search**" if char.length<=0
   char2=[]
-  sklz=@askilities.reject{|q| q[2]!='Skill'}
   for i in 0...char.length
     if char[i][0].include?(' *[S1/2]*') || char[i][0].include?(' *[S1]*')
       skz=sklz.find_index{|q| q[0]==char[i][6][0]}
