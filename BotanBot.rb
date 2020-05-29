@@ -2728,7 +2728,7 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
   if args.include?('tags') || forcetags
     if flds.length<=0
       flds=triple_finish(k[10].reject{|q| ['E','I'].include?(q[0,1]) && q[1,1].to_i.to_s==q[1,1]})
-      str="#{str}\n\n__**Tags**__"
+      str2="#{str2}\n\n__**Tags**__"
     else
       flds.push(['Tags',k[10].reject{|q| ['E','I'].include?(q[0,1]) && q[1,1].to_i.to_s==q[1,1]}.join("\n")])
     end
@@ -2750,7 +2750,7 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
     create_embed(event,["#{k[0]}",title],str,xcolor,nil,xpic,flds)
   elsif str2.length<1800 && (s2s || k[9].nil? || k[9].length<=0)
     create_embed(event,["#{k[0]}",title],str,xcolor,nil,xpic)
-    create_embed(event,'',str2,xcolor)
+    create_embed(event,'',str2.gsub('__**Tags**__',''),xcolor)
     create_embed(event,'','',xcolor,nil,nil,flds) unless flds.nil?
   elsif k[9].nil? || k[9].length<=0
     create_embed(event,["#{k[0]}",title],str,xcolor,nil,xpic)
@@ -6325,8 +6325,8 @@ def sort_shareable_skills(event,args,bot)
       event.respond "#{adv_emoji(k2,bot)}*#{k2[0]}* does not have any skills that can be shared."
       return nil
     end
-    disp_skill_data(bot,event,k2[6][0].split(' '),false,topstr=["#{adv_emoji(k2,bot)}*#{k2[0]}* [S1]",element_color(k2[2][1])]) unless skl1.nil? || skl1[12].nil? || skl1[12].length<=0 || skl1[12].max<=0
-    disp_skill_data(bot,event,k2[6][1].split(' '),false,topstr=["#{adv_emoji(k2,bot)}*#{k2[0]}* [S2]",element_color(k2[2][1])]) unless skl2.nil? || skl2[12].nil? || skl2[12].length<=0 || skl2[12].max<=0
+    disp_skill_data(bot,event,k2[6][0].split(' '),(args.include?('tags')),topstr=["#{adv_emoji(k2,bot)}*#{k2[0]}* [S1]",element_color(k2[2][1])]) unless skl1.nil? || skl1[12].nil? || skl1[12].length<=0 || skl1[12].max<=0
+    disp_skill_data(bot,event,k2[6][1].split(' '),(args.include?('tags')),topstr=["#{adv_emoji(k2,bot)}*#{k2[0]}* [S2]",element_color(k2[2][1])]) unless skl2.nil? || skl2[12].nil? || skl2[12].length<=0 || skl2[12].max<=0
     return nil
   end
   k=find_in_adventurers(bot,event,args,2,2)
