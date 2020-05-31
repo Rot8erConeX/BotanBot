@@ -155,7 +155,7 @@ def all_commands(include_nil=false,permissions=-1)
      'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias','dmg',
      'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','limit',
      'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol','reload','update','mats','materials','spiral','node','nodes',
-     'damage','coability','coabil','coab','chain','team','backpack','cca','cc','skillshare','share','skilshare','combo']
+     'damage','coability','coabil','coab','chain','team','backpack','cca','cc','skillshare','share','skilshare','combo','chaincoab']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -6616,7 +6616,7 @@ bot.command([:coability,:coabil,:coab,:co]) do |event, *args|
   disp_ability_data(bot,event,args,'CoAbility')
 end
 
-bot.command([:chain,:cca,:cc]) do |event, *args|
+bot.command([:chain,:cca,:cc,:chaincoab]) do |event, *args|
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
   elsif ['find','search'].include?(args[0].downcase)
@@ -7618,8 +7618,8 @@ bot.command(:reload, from: 167657750971547648) do |event|
     end
     if e.message.text.include?('4') && [167657750971547648].include?(event.user.id)
       download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/rot8er_functs.rb")
-      IO.copy_stream(download, "DLTemp.txt") && e.message.text.include?('all')
-      if File.size("DLTemp.txt")>100
+      IO.copy_stream(download, "DLTemp.txt")
+      if File.size("DLTemp.txt")>100 && e.message.text.include?('all')
         b=[]
         File.open("DLTemp.txt").each_line.with_index do |line, idx|
           b.push(line)
