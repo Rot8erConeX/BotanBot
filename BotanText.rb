@@ -97,7 +97,7 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
     create_embed(event,"**#{command.downcase}** __name__","Shows everything that the co-abilities named `name` does.  Also shows all adventurers that have the co-ability.\nIn PM, will also show the chain co-ability named `name`.",0xCE456B)
   elsif ['aura'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows everything that the aura named `name` does.  Also shows all dragons that have the aura.",0xCE456B)
-  elsif ['chain','cca','cc'].include?(command.downcase)
+  elsif ['chain','cca','cc','chaincoab'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows everything that the chain co-ability named `name` does.  Also shows all adventurers that have the chain co-ability.",0xCE456B)
   elsif ['roost'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows the current day's Dragon Roost Bond gift, as well as all the dragons that get an extra bond increase from the gift.\n\nYou can include the word \"tomorrow\" to instead show the data for tomorrow.\nYou can also include a day of the week to instead show data on that day of the week.",0xCE456B)
@@ -3823,16 +3823,16 @@ def sp_table(bot,event,args=nil)
           if t<0
             ff.push("~~*Total cannot be calculated dynamically*~~")
           else
-            ff.push("~~*Total:* #{t}~~")
+            ff.push("\u30FC *Total:* #{t}")
           end
           ff.push("\n**Dash Attack:** #{k[18][0][-2]}")
           ff.push("\n**Force Strike:** #{k[18][0][-1]}")
           disp=ff.join("\n")
         else
-          disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n~~*Total: #{k2[7]}*~~\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike** #{k2[6]}"
+          disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n\u30FC *Total: #{k2[7]}*\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike** #{k2[6]}"
         end
       else
-        disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n~~*Total: #{k2[7]}*~~\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike** #{k2[6]}"
+        disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n\u30FC *Total: #{k2[7]}*\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike** #{k2[6]}"
       end
       if k[18].length>1
         for i in 0...k[18].length
@@ -3850,7 +3850,7 @@ def sp_table(bot,event,args=nil)
             if t<0
               ff.push("~~*Total cannot be calculated dynamically*~~")
             else
-              ff.push("~~*Total:* #{t}~~")
+              ff.push("\u30FC *Total:* #{t}")
             end
             ff.push("\n**Dash Attack:** #{k[18][i][-2]}") unless k[18][i][-2].to_i==k2[5]
             ff.push("\n**Force Strike:** #{k[18][i][-1]}") unless k[18][i][-1].to_i==k2[6]
@@ -3880,7 +3880,7 @@ def sp_table(bot,event,args=nil)
   elsif wpn.length<=0
     kx=[[150,150,196,265,391,143,345,1152],[130,130,220,360,900,104,200,1740],[144,144,264,288,480,132,288,1128],[200,240,360,380,420,160,300,1600],
         [120,240,120,480,600,111,400,1560],[184,92,276,414,529,208,460,1495],[130,200,240,430,600,156,400,1600],[232,232,348,464,696,300,580,1972]]
-    k=kx.map{|q| "__**Combo:**__\n*First Hit:* #{q[0]}\n*Second Hit:* #{q[1]}\n*Third Hit:* #{q[2]}\n*Fourth Hit:* #{q[3]}\n*Fifth Hit:* #{q[4]}\n~~*Total:* #{q[7]}~~\n\n**Dash Attack:** #{q[5]}\n**Force Strike** #{q[6]}"}
+    k=kx.map{|q| "__**Combo:**__\n*First Hit:* #{q[0]}\n*Second Hit:* #{q[1]}\n*Third Hit:* #{q[2]}\n*Fourth Hit:* #{q[3]}\n*Fifth Hit:* #{q[4]}\n\u30FC *Total:* #{q[7]}\n\n**Dash Attack:** #{q[5]}\n**Force Strike** #{q[6]}"}
     k2=['<:Weapon_Sword:532106114540634113>Swords','<:Weapon_Blade:532106114628714496>Blades','<:Weapon_Dagger:532106116025286656>Daggers',
         '<:Weapon_Axe:532106114188443659>Axes','<:Weapon_Lance:532106114792423448>Lances','<:Weapon_Bow:532106114909732864>Bows',
         '<:Weapon_Wand:532106114985099264>Wands','<:Weapon_Staff:532106114733441024>Staves']
@@ -3902,7 +3902,7 @@ def sp_table(bot,event,args=nil)
     m=''
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn[0]}"}
     m=moji[0].mention unless moji.length<=0
-    disp="__**Combo:**__\n*First Hit:* #{k[0]}\n*Second Hit:* #{k[1]}\n*Third Hit:* #{k[2]}\n*Fourth Hit:* #{k[3]}\n*Fifth Hit:* #{k[4]}\n~~*Total: #{k[7]}*~~\n\n**Dash Attack:** #{k[5]}\n\n**Force Strike** #{k[6]}"
+    disp="__**Combo:**__\n*First Hit:* #{k[0]}\n*Second Hit:* #{k[1]}\n*Third Hit:* #{k[2]}\n*Fourth Hit:* #{k[3]}\n*Fifth Hit:* #{k[4]}\n\u30FC *Total: #{k[7]}*\n\n**Dash Attack:** #{k[5]}\n\n**Force Strike** #{k[6]}"
     create_embed(event,"__SP gains for **#{m}#{wpn[0]}** users__",disp,0xCE456B)
   end
 end
