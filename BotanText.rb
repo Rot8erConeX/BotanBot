@@ -2808,7 +2808,7 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
     rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1
     tier.push(args[i][1,args[i].length-1].to_i) if args[i][0,1].downcase=='t' && args[i][1,args[i].length-1].to_i.to_s==args[i][1,args[i].length-1] && args[i][1,args[i].length-1].to_i>0 && args[i][1,args[i].length-1].to_i<4
     tier.push(args[i][4,args[i].length-4].to_i) if ['tier','teir'].include?(args[i][0,4].downcase) && args[i][4,args[i].length-4].to_i.to_s==args[i][4,args[i].length-4] && args[i][4,args[i].length-4].to_i>0 && args[i][4,args[i].length-4].to_i<4
-    rarity_tier.push(args[i].downcase) if args[i][1,1]=='t' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<6 && args[i][2,args[i].length-2].to_i.to_s==args[i][2,args[i].length-2] && args[i][2,args[i].length-2].to_i>0 && args[i][2,args[i].length-2].to_i<4
+    rarity_tier.push(args[i].downcase) if args[i][1,1]=='t' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1 && args[i][2,args[i].length-2].to_i.to_s==args[i][2,args[i].length-2] && args[i][2,args[i].length-2].to_i>0 && args[i][2,args[i].length-2].to_i<4
     rarity_tier_2.push('HDT1') if ['hdt1','hd1'].include?(args[i].downcase)
     rarity_tier_2.push('HDT2') if ['hdt2','hd2'].include?(args[i].downcase)
     rarity_tier_2.push('HDT3') if ['hdt3','hd3'].include?(args[i].downcase)
@@ -2920,7 +2920,7 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       search.push("*Rarities*: #{rarity.map{|q| "#{q}#{@rarity_stars[0][q]}"}.join(', ')}")
       emo.push(@rarity_stars[0][rarity[0]]) if rarity.length==1
     elsif tier.length>0
-      rarity=[1,2,3,4,5]
+      rarity=[1,2,3,4,5,6]
     end
     if tier.length>0
       search.push("*Crafting Tiers*: #{tier.join(', ')}")
