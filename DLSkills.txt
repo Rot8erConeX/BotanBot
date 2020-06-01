@@ -1171,7 +1171,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Flame) HP 70% = Defense\example\Ability\If the user is attuned to Flame: increases defense by `x`% when HP is 70% or above.\0\y\HP70, DefenseSkill, Flame
 (Flame) HP 70% = Defense\3%\Ability\If the user is attuned to Flame: increases defense by 3% when HP is 70% or above.\20\y\HP70, DefenseSkill, Flame
 (Flame) HP 70% = Defense\5%\Ability\If the user is attuned to Flame: increases defense by 5% when HP is 70% or above.\40\y\HP70, DefenseSkill, Flame
-(Flame) Jarngreipr\-\Ability\If the user is attuned to Flame: extends the window between hitting an enemy and the combo counter resetting by one second after using Megingjörð. This effect will persist until the user uses Iðunn's Apple.\80\y\ComboTime, Flame
+(Flame) Jarngreipr\-\Ability\If the user is attuned to Flame: extends the window between hitting an enemy and the combo counter resetting by one second after using Megingjord. This effect will persist until the user uses Idunn's Apple.\80\y\ComboTime, Flame
 (Flame) Petrify Res\-\Ability\If the user is attuned to Flame: completely prevents petrification.\50\y\Resistance, PetrifyRes, Flame
 (Flame) Physian's Bane\example\Ability\If the user is attuned to Flame: increases damage to physians by `x`%.\0\y\Physian, Bane, Flame
 (Flame) Physian's Bane\10%\Ability\If the user is attuned to Flame: increases damage to physians by 10%.\20\y\Physian, Bane, Flame
@@ -1186,7 +1186,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Flame) Slayer's Strength\3%\Ability\If the user is attuned to Flame: increases strength by 3% for every five enemies defeated (up to five times per quest).\40\y\StrengthSkill, Flame, Slayers
 (Flame) Slayer's Strength\4%\Ability\If the user is attuned to Flame: increases strength by 4% for every five enemies defeated (up to five times per quest).\60\y\StrengthSkill, Flame, Slayers
 (Flame) Spectral Shield Penetrator\-\Ability\If the user is attuned to Flame: ignores the effects of spectral shield when attacking enemies.\40\y\Penetrator, Flame
-(Flame) Svalinn\-\Ability\If the user is attuned to Flame: increases defense by 20% after using Iðunn's Apple. This increase will persist until the user uses Megingjörð.\80\y\DefenseSkill, User, Flame
+(Flame) Svalinn\-\Ability\If the user is attuned to Flame: increases defense by 20% after using Idunn's Apple. This increase will persist until the user uses Megingjord.\80\y\DefenseSkill, User, Flame
 (Flame) Thaumian's Bane\example\Ability\If the user is attuned to Flame: increases damage to thaumians by `x`%.\0\y\Thaumian, Bane, Flame
 (Flame) Thaumian's Bane\10%\Ability\If the user is attuned to Flame: increases damage to thaumians by 10%.\20\y\Thaumian, Bane, Flame
 (Flame) Thaumian's Bane\15%\Ability\If the user is attuned to Flame: increases damage to thaumians by 15%.\40\y\Thaumian, Bane, Flame
@@ -1901,7 +1901,7 @@ Hype\150%\Ability\Increases hype intake for clearing quests by 150%.\0\y\Event, 
 Hypnos's Bane\example\Ability\Increases damage to Hypnos by `x`%.\0\y\Hypnos, Bane
 Hypnos's Bane\30%\Ability\Increases damage to Hypnos by 30%.\0\y\Hypnos, Bane
 Hypnos's Bane\35%\Ability\Increases damage to Hypnos by 35%.\0\y\Hypnos, Bane
-Jarngreipr\-\Ability\Extends the window between hitting an enemy and the combo counter resetting by one second after using Megingjörð. This effect will persist until the user uses Iðunn's Apple.\80\y\ComboTime
+Jarngreipr\-\Ability\Extends the window between hitting an enemy and the combo counter resetting by one second after using Megingjord. This effect will persist until the user uses Idunn's Apple.\80\y\ComboTime
 Jupiter Res\example\Ability\Reduces damage taken from Jupiter by `x`%.\30\y\JupiterRes, Resistance
 Jupiter Res\15%\Ability\Reduces damage taken from Jupiter by 15%.\30\y\JupiterRes, Resistance
 Jupiter Res\18%\Ability\Reduces damage taken from Jupiter by 18%.\45\y\JupiterRes, Resistance
@@ -2273,7 +2273,7 @@ Stunned Punisher\30%\Ability\Increases damage to stunned enemies by 30%.\100\y\P
 Supreme Last Devastation\example\Ability\Increases critical rate by `x`% for 10 seconds when HP drops to 30% (once per quest).\0\y\Last, CritRate, Unique
 Supreme Last Devastation\75%\Ability\Increases critical rate by 75% for 10 seconds when HP drops to 30% (once per quest).\70\y\Last, CritRate, Unique
 Supreme Last Devastation\100%\Ability\Increases critical rate by 100% for 10 seconds when HP drops to 30% (once per quest).\100\y\Last, CritRate, Unique
-Svalinn\-\Ability\Increases defense by 20% after using Iðunn's Apple. This increase will persist until the user uses Megingjörð.\80\y\DefenseSkill, User
+Svalinn\-\Ability\Increases defense by 20% after using Idunn's Apple. This increase will persist until the user uses Megingjord.\80\y\DefenseSkill, User
 Sylvan Strength\I\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 25-hit combo.\70\y\CritRate, StrengthSkill, Combo, Unique
 Sylvan Strength\II\Ability\Increases the user's strength by 2% and critical rate by 1% for 15 seconds for every 20-hit combo.\100\y\CritRate, StrengthSkill, Combo, Unique
 System Overload\-\Ability\Increases strength by 20% but decreases defense by 50% when HP is 30% or below.\60\y\StrengthSkill, Unique
