@@ -2682,14 +2682,18 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
   title="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min && k[6][0]>0 && topstr.length<=0
   title="#{title}\n**Invulnerability duration:** #{k[8]} seconds"
   k[12][1]=k[6][-1] if !k[12].nil? && k[12].length==1
-  title="#{title}\n<:SkillShare:714597012733034547> **Skill Share:** *Cost:* #{k[12][0]} / #{longFormattedNumber(k[12][1])} SP\*" if !k[12].nil? && k[12].length>0
+  title="#{title}\n**Skill Share:** *Cost:* #{k[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(k[12][1])} SP\*" if !k[12].nil? && k[12].length>0
   title="#{title}\n<:Energize:559629242137051155> **Energizable**" if k[7]=='Yes'
-  title="#{title}\n~~Not energizable~~" if k[7]=='No'
+  title="#{title}\n~~Not energizable~~" if k[7]=='No' && k[10].include?('Damage')
   title="#{title}\n<:Inspiring:688916587079663625> **Inspirable**" if k[10].include?('Damage')
-  title="#{title}\n~~Not inspirable~~" unless k[10].include?('Damage')
-  str2="#{energy_emoji(k[10],true)}".gsub(', ',"\n")
+  title="#{title}\n~~Not inspirable~~" if !k[10].include?('Damage') && k[7]!='No'
+  title="#{title}\n~~Not energizable or inspirable~~" if k[7]=='No' && !k[10].include?('Damage')
+  str="#{energy_emoji(k[10],true)}".gsub(', ',"\n")
+  str2=''
+  displvl=0
   for i in 0...mx.length
-    if topstr.length<=0 || i>1
+    if topstr.length<=0 || i>1 || (i==1 && mx.length<3)
+      displvl+=1
       str2="#{str2}\n\n__**Level #{i+1}**__"
       str2="#{str2} - #{k[6][i]} SP" unless k[6][0,mx.length].max==k[6][0,mx.length].min || k[6][i]<=0
       if i>=3
@@ -2738,21 +2742,21 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
     advy=[]
     advy.push("#{longFormattedNumber(23*k[12][1]/20)} SP for Nef archetypes") unless advx.include?('Nefaria')
     advy.push("#{longFormattedNumber(13*k[12][1]/10)} SP for Hawk archetypes") unless advx.include?('Hawk')
-    str="#{str}\n\n\* #{advy.join(', ')}" if advy.length>0
+    str="#{str}\n\* #{advy.join(', ')}" if advy.length>0
   end
   flds=nil if flds.length<=0
   m=0
   m=flds.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length unless flds.nil?
   k[0]="__**#{k[0]}**__"
   k[0]="#{topstr[0]} - #{k[0]}" if topstr.length>0
-  if str.length+title.length+str2.length+m<1800 && (s2s || k[9].nil? || k[9].length<=0)
+  if str.length+title.length+str2.length+m<1800 && (displvl<2 || s2s || k[9].nil? || k[9].length<=0)
     str="#{str}#{str2}"
     create_embed(event,["#{k[0]}",title],str,xcolor,nil,xpic,flds)
-  elsif str2.length<1800 && (s2s || k[9].nil? || k[9].length<=0)
+  elsif str2.length<1800 && (displvl<2 || s2s || k[9].nil? || k[9].length<=0)
     create_embed(event,["#{k[0]}",title],str,xcolor,nil,xpic)
     create_embed(event,'',str2.gsub('__**Tags**__',''),xcolor)
     create_embed(event,'','',xcolor,nil,nil,flds) unless flds.nil?
-  elsif k[9].nil? || k[9].length<=0
+  elsif displvl<2 || k[9].nil? || k[9].length<=0
     create_embed(event,["#{k[0]}",title],str,xcolor,nil,xpic)
     m=str2.split("\n\n").reject{|q| q.nil? || q.length<=0}
     s=''
