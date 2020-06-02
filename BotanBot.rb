@@ -6381,7 +6381,10 @@ def sort_shareable_skills(event,args,bot)
       costlimit[0]=args[i][5,args[i].length-5].to_i+1 unless args[i][5,args[i].length-5].to_i+1<costlimit[0]
     elsif args[i].downcase[0,5]=='cost<' && args[i][5,args[i].length-5].to_i.to_s==args[i][5,args[i].length-5] && args[i][5,args[i].length-5].to_i>0
       costlimit[1]=args[i][5,args[i].length-5].to_i-1 unless args[i][5,args[i].length-5].to_i-1>costlimit[1]
-    elsif ['sp>','sp<'].include?(args[i].downcase[0,3])
+    elsif args[i].downcase[0,5]=='cost=' && args[i][5,args[i].length-5].to_i.to_s==args[i][5,args[i].length-5] && args[i][5,args[i].length-5].to_i>0
+      costlimit[0]=args[i][5,args[i].length-5].to_i unless args[i][5,args[i].length-5].to_i<costlimit[0]
+      costlimit[1]=args[i][5,args[i].length-5].to_i unless args[i][5,args[i].length-5].to_i>costlimit[1]
+    elsif ['sp>','sp<','sp='].include?(args[i].downcase[0,3])
       var=args[i].downcase.gsub(',','') # removing commas
       var=var[2,var.length-2]
       var="#{var[0,var.length-1]}000" if var[-1]=='k' # adjusting k for thousands
@@ -6393,6 +6396,9 @@ def sort_shareable_skills(event,args,bot)
         splimit[0]=var[1,var.length-1].to_i+1 unless var[1,var.length-1].to_i+1<splimit[0]
       elsif var[0,1]=='<' && var[1,var.length-1].to_i.to_s==var[1,var.length-1]
         splimit[1]=var[1,var.length-1].to_i+1 unless var[1,var.length-1].to_i-1>splimit[1]
+      elsif var[0,1]=='=' && var[1,var.length-1].to_i.to_s==var[1,var.length-1]
+        splimit[0]=var[2,var.length-2].to_i unless var[2,var.length-2].to_i<splimit[0]
+        splimit[1]=var[1,var.length-1].to_i unless var[1,var.length-1].to_i>splimit[1]
       end
     end
   end
@@ -6412,14 +6418,22 @@ def sort_shareable_skills(event,args,bot)
     char=char[0,10]
   end
   if costlimit[0]!=0 && costlimit[1]!=100
-    search.push("*Cost between #{costlimit.map{|q| longFormattedNumber(q)}.join(' and ')} (inclusive)*")
+    if costlimit.uniq.length<2
+      search.push("*Cost of #{longFormattedNumber(costlimit[1])}*")
+    else
+      search.push("*Cost between #{costlimit.map{|q| longFormattedNumber(q)}.join(' and ')} (inclusive)*")
+    end
   elsif costlimit[0]!=0
     search.push("*Cost >= #{longFormattedNumber(costlimit[0])}*")
   elsif costlimit[1]!=100
     search.push("*Cost <= #{longFormattedNumber(costlimit[1])}*")
   end
   if splimit[0]!=0 && splimit[1]!=100000
-    search.push("*SP between #{splimit.map{|q| longFormattedNumber(q)}.join(' and ')} (inclusive)*")
+    if splimit.uniq.length<2
+      search.push("*SP of #{longFormattedNumber(splimit[1])}*")
+    else
+      search.push("*SP between #{splimit.map{|q| longFormattedNumber(q)}.join(' and ')} (inclusive)*")
+    end
   elsif splimit[0]!=0
     search.push("*SP >= #{longFormattedNumber(splimit[0])}*")
   elsif splimit[1]!=100000
