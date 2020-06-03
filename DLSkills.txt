@@ -1397,6 +1397,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 Abyssal Dragon\example\Ability\Grants the user a dragondrive gauge, and changes the shapeshift button into a dragondrive button. Tapping this button activates their dragondrive. During dragondrive, the user's skill damage will be increased by 30%/35%, and their skill gauges will fill 20%/30% faster.\0\y\Dragondrive, SkillDamage, SkillHaste, Unique
 Abyssal Dragon\I\Ability\Grants the user a dragondrive gauge, and changes the shapeshift button into a dragondrive button. Tapping this button activates their dragondrive. During dragondrive, the user's skill damage will be increased by 30%, and their skill gauges will fill 20% faster.\80\y\Dragondrive, SkillDamage, SkillHaste, Unique
 Abyssal Dragon\II\Ability\Grants the user a dragondrive gauge, and changes the shapeshift button into a dragondrive button. Tapping this button activates their dragondrive. During dragondrive, the user's skill damage will be increased by 35%, and their skill gauges will fill 30% faster.\100\y\Dragondrive, SkillDamage, SkillHaste, Unique
+Adamantite Shield\-\Ability\Blocks Hits - Human Form: 30, Blocks Hits - Demihuman Form: 60. Damage Reflection: 50 (unaffected by Battleground). Dispellable.\-1\y\Enemy
 Affliction Guard\example\Ability\resists afflictions `x` times per quest\0\y\AfflictionGuard
 Affliction Guard\I\Ability\resists afflictions once per quest\80\y\AfflictionGuard
 Affliction Guard\II\Ability\resists afflictions twice per quest\100\y\AfflictionGuard
@@ -2133,7 +2134,6 @@ Reduced Defense Devastator\20%\Ability\Increases critical rate by 20% against en
 Reduced Defense Punisher\example\Ability\Increases damage to enemies with reduced defense by `x`%.\0\y\Punisher, DefDownPunisher
 Reduced Defense Punisher\25%\Ability\Increases damage to enemies with reduced defense by 25%.\80\y\Punisher, DefDownPunisher
 Reduced Defense Punisher\30%\Ability\Increases damage to enemies with reduced defense by 30%.\100\y\Punisher, DefDownPunisher
-Reflection Shield\-\Ability\Blocks Hits - Human Form: 30, Blocks Hits - Demihuman Form: 60. Damage Reflection: 50 (unaffected by Battleground). Dispellable.\-1\y\Enemy
 Relentless Spirit\I\Ability\Reduces susceptibility to freeze and bog by 50%.\0\y\FreezeRes, BogRes
 Relentless Spirit\II\Ability\Reduces susceptibility to freeze and bog by 100%.\0\y\FreezeRes, BogRes
 Renegade Queen\example\Ability\Grants the user a dragondrive gauge, and changes the shapeshift button into a dragondrive button. Pressing this button activates their dragondrive. During dragondrive, the user's standard attacks and force strikes will be changed, damage will be increased as the user's HP decreases(2x at 1hp, ~1.5x at 30%hp), and standard attacks and force strikes will fill the user's dragondrive gauge. While dragondrive is active, the user's skill damage will be increased by 30%/35%, and defense will be increased by 55%/75%.\0\y\SkillDamage, DefenseSkill, Dragondrive, Unique
