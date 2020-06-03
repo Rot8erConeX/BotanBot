@@ -934,6 +934,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Water) Overdrive Punisher\example\Aura\If the user is attuned to Water: increases damage to enemies in overdrive stats by `x`%\0\y\Punisher, Water, OverdrivePunisher
 (Water) Overdrive Punisher\40%\Aura\If the user is attuned to Water: increases damage to enemies in overdrive stats by 40%\40\y\Punisher, Water, OverdrivePunisher
 (Water) Overdrive Punisher\60%\Aura\If the user is attuned to Water: increases damage to enemies in overdrive stats by 60%\60\y\Punisher, Water, OverdrivePunisher
+(Water) Primed Strength\example\Aura\If the user is attuned to Water: increases the strength of the adventurer you are currently controlling by `x`% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\0\y\Primed, StrengthSkill, Water
+(Water) Primed Strength\10%\Aura\If the user is attuned to Water: increases the strength of the adventurer you are currently controlling by 10% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\80\y\Primed, StrengthSkill, Water
+(Water) Primed Strength\15%\Aura\If the user is attuned to Water: increases the strength of the adventurer you are currently controlling by 15% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\100\y\Primed, StrengthSkill, Water
 (Water) Skill Damage\70%\Aura\If the user is attuned to Water: increases skill damage by 70%.\110\y\SkillDamage, Water
 (Water) Skill Damage\90%\Aura\If the user is attuned to Water: increases skill damage by 90%.\120\y\SkillDamage, Water
 (Water) Skill Recharge\example\Aura\If the user is attuned to Water: fills 25%/35% of a skill's skill gauge after using that skill.\0\y\Water, SkillRecharge
@@ -1073,6 +1076,9 @@ Player EXP\15%\Aura\Increases player EXP intake for clearing quests by 15%. This
 Poisoned Punisher\example\Aura\Increases damage to poisoned enemies by `x`%.\0\y\Punisher, PoisonedPunisher
 Poisoned Punisher\15%\Aura\Increases damage to poisoned enemies by 15%.\40\y\Punisher, PoisonedPunisher
 Poisoned Punisher\20%\Aura\Increases damage to poisoned enemies by 20%.\60\y\Punisher, PoisonedPunisher
+Primed Strength\example\Aura\Increases the strength of the adventurer you are currently controlling by `x`% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\0\y\Primed, StrengthSkill
+Primed Strength\10%\Aura\Increases the strength of the adventurer you are currently controlling by 10% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\80\y\Primed, StrengthSkill
+Primed Strength\15%\Aura\Increases the strength of the adventurer you are currently controlling by 15% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\100\y\Primed, StrengthSkill
 Rupies\25%\Aura\Increase rupie intake for clearing quests by 25%\0\y\Rupies
 Rupies\50%\Aura\Increase rupie intake for clearing quests by 50%\0\y\Rupies
 Shadow Res\15%\Aura\Grants 15% Shadow resistance.\65\y\ShadowRes, Resistance
