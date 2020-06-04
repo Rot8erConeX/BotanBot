@@ -155,7 +155,7 @@ def all_commands(include_nil=false,permissions=-1)
      'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias','dmg',
      'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','limit',
      'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol','reload','update','mats','materials','spiral','node','nodes',
-     'damage','coability','coabil','coab','chain','team','backpack','cca','cc','skillshare','share','skilshare','combo','chaincoab']
+     'damage','coability','coabil','coab','chain','team','backpack','cca','cc','skillshare','share','skilshare','combo','chaincoab','shared']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -5388,7 +5388,7 @@ def sort_adventurers(bot,event,args=nil,mode=0)
     elsif ['defstat','defensestat','defencestat','def','defense','defence'].include?(args[i].downcase)
       srt[srtt]=5
       srtt+=1
-    elsif ['skill','skillshare','share','sharing','skl','skills','sklz'].include?(args[i].downcase)
+    elsif ['skill','skillshare','share','shared','sharing','skl','skills','sklz'].include?(args[i].downcase)
       srt[srtt]=7
       srtt+=1
     end
@@ -6449,7 +6449,7 @@ def sort_shareable_skills(event,args,bot)
   event.respond disp
 end
 
-bot.command([:skillshare,:skilshare,:share]) do |event, *args|
+bot.command([:skillshare,:skilshare,:share,:shared]) do |event, *args|
   return nil if overlap_prevent(event)
   sort_shareable_skills(event,args,bot)
   return nil
@@ -6588,7 +6588,7 @@ bot.command([:skill,:skil]) do |event, *args|
     args.shift
     find_skills(bot,event,args)
     return nil
-  elsif ['share'].include?(args[0].downcase)
+  elsif ['share','shared'].include?(args[0].downcase)
     args.shift
     sort_shareable_skills(event,args,bot)
     return nil
@@ -6840,7 +6840,7 @@ bot.command([:sort,:list]) do |event, *args|
     args.shift
     sort_adventurers(bot,event,args)
     return nil
-  elsif ['skill','share','skillshare'].include?(args[0].downcase)
+  elsif ['skill','share','shared','skillshare'].include?(args[0].downcase)
     args.shift
     sort_shareable_skills(event,args,bot)
     return nil
@@ -7968,7 +7968,7 @@ bot.mention do |event|
     elsif ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
       args.shift
       sort_adventurers(bot,event,args)
-    elsif ['skill','share','skillshare'].include?(args[0].downcase)
+    elsif ['skill','share','shared','skillshare'].include?(args[0].downcase)
       args.shift
       sort_shareable_skills(event,args,bot)
     elsif ['dragon','dragons','drg','drags'].include?(args[0].downcase)
@@ -8005,7 +8005,7 @@ bot.mention do |event|
     m=false
     args.shift
     find_best_match(args.join(' '),bot,event,false,false,4)
-  elsif ['skillshare','share','skilshare'].include?(args[0].downcase)
+  elsif ['skillshare','share','shared','skilshare'].include?(args[0].downcase)
     args.shift
     sort_shareable_skills(event,args,bot)
     m=false
@@ -8121,7 +8121,7 @@ bot.mention do |event|
     if ['find','search'].include?(args[0].downcase)
       args.shift
       find_skills(bot,event,args)
-    elsif ['share'].include?(args[0].downcase)
+    elsif ['share','shared'].include?(args[0].downcase)
       sort_shareable_skills(event,args,bot)
     else
       disp_skill_data(bot,event,args)
