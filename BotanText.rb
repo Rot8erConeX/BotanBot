@@ -141,7 +141,7 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
       event << 'This help window is not in an embed so that people who need this command can see it.'
     end
     return nil
-  elsif ['share','skillshare','skilshare'].include?(command.downcase)
+  elsif ['share','shared','skillshare','skilshare'].include?(command.downcase)
     create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Finds all adventurers that fit `filters`, removes any that lack shareable skills, and sorts by their shareable skill(s)' share cost and/or SP when shared.\n\nYou can search by:\n- Element\n- Weapon type\n- Class\n- Availability\n\nIf too many adventurers are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.  I will instead show only the top ten results.",0xCE456B)
   elsif ['sort','list'].include?(command.downcase)
     subcommand='' if subcommand.nil?
@@ -2036,7 +2036,7 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
     mana=true if ['mana','spiral','manaspiral','70','70node','70mc','70ms'].include?(args[i].downcase)
-    share=true if ['share','skillshare','shareskill'].include?(args[i].downcase) && allowstr%4<2
+    share=true if ['share','shared','skillshare','shareskill'].include?(args[i].downcase) && allowstr%4<2
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1 && allowstr%2==0
     rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1 && allowstr%2==0
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
@@ -2358,7 +2358,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
     wpn.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
     wpn.push('Wand') if ['wand','wands','rod','rods'].include?(args[i].downcase)
     wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
-    wpn.push('Share') if ['share','skillshare','shareskill'].include?(args[i].downcase)
+    wpn.push('Share') if ['share','shared','skillshare','shareskill'].include?(args[i].downcase)
     wday.push(1) if ['mo','monday','mondae','mon','m','juicymeat','meat'].include?(args[i].downcase)
     wday.push(2) if ['tu','tuesday','tuesdae','tues','tue','t','kaleidoscope','kscope','k-scope'].include?(args[i].downcase)
     wday.push(3) if ['we','wednesday','wednesdae','wednes','wed','w','floralcirclet','flower','floral','circlet','circle'].include?(args[i].downcase)
@@ -2609,7 +2609,7 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
   ign=false
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
-    ign=true if ['share','skillshare','shareskill'].include?(args[i].downcase)
+    ign=true if ['share','shared','skillshare','shareskill'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
     rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1
     clzz.push('Attack') if ['attack','atk','att','attacking'].include?(args[i].downcase)
@@ -2818,7 +2818,7 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
     rarity_tier_2.push('AGT1') if ['agito1','agt1'].include?(args[i].downcase)
     rarity_tier_2.push('AGT2') if ['agito2','agt2'].include?(args[i].downcase)
     rarity_tier_2.push('AGT3') if ['agito3','agt3'].include?(args[i].downcase)
-    ign=true if ['share','skillshare','shareskill'].include?(args[i].downcase)
+    ign=true if ['share','shared','skillshare','shareskill'].include?(args[i].downcase)
     if ['flame','fire','flames','fires'].include?(args[i].downcase)
       args2[i]=nil unless elem.include?('Flame')
       elem.push('Flame')
