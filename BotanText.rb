@@ -318,7 +318,9 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
 end
 
 @max_rarity=[5, 5, 5, 6] # adventurer, dragon, print, weapon
-@abilimits=["Affliction Guard \u2192 III (5x)",
+@abilimits=["Affliction Guard \u2192 III (3x)",
+            "*Affliction Punisher* \u2192 30%",
+            "*Affliction Res* \u2192 100%",
             "Blindness Res \u2192 100%",
             "Bog Res \u2192 100%",
             "Broken Punisher \u2192 30%",
@@ -336,11 +338,13 @@ end
             "Facility Material Intake \u2192 125%",
             "Force Strike \u2192 50%",
             "Freeze Res \u2192 100%",
+            "Frostbitten Punisher \u2192 30%",
             "Gauge Accelerator \u2192 35%",
             "Healing Doublebuff \u2192 III (3%)",
             "Last Offense \u2192 60%",
             "Paralysis Res \u2192 100%",
             "Player XP \u2192 10%",
+            "Poison Punisher \u2192 30%",
             "Poison Res \u2192 100%",
             "Recovery Potency \u2192 20%",
             "Shapeshift \u2192 10%",
@@ -3118,6 +3122,61 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   end
 end
 
+def fac_stat_buffs(k,lvl)
+  if ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1])
+    alta=[(lvl+1)/2,lvl/2]
+    alta[0]*=0.3
+    alta[1]*=0.3
+    alta[0]+=0.5
+    alta[1]+=0.5
+    alta[1]+=0.3 if lvl>=29
+    return alta
+  elsif k[3][1]=='Tree'
+    alta=[lvl+2.0,lvl+2.0]
+    if lvl<9
+      x=lvl/4
+      alta=[x*3.0+3.0,x*3.0+3.0]
+      if lvl%4>0
+        alta[0]+=1.0
+        alta[1]+=0.5
+      end
+      if lvl%4>1
+        alta[1]+=1.0
+        alta[0]+=0.5
+      end
+      if lvl%4>2
+        alta[0]+=1.0
+        alta[1]+=0.5
+      end
+    end
+    return alta
+  elsif k[3][1]=='Altar'
+    alta=[(lvl+1)/2,lvl/2]
+    alta=[lvl-17,lvl-17] if lvl>34
+    alta=alta.map{|q| q*0.5+0.5}
+    return alta
+  elsif ['Dojo','Fafnir'].include?(k[3][1])
+    alta=[(lvl+1)/2,lvl/2]
+    alta=alta.map{|q| q*0.5+3.0}
+    for i2 in 0...((lvl+1)/15+1)
+      if lvl>15*i2+14 && i2%2==0
+        alta[0]+=1+i2
+        alta[1]+=1.5+i2
+      elsif lvl>15*i2+14 && i2%2==1
+        alta[0]+=1.5+i2
+        alta[1]+=1+i2
+      end
+    end
+    return alta
+  elsif k[3][1]=='Event Altar'
+    alta=[(lvl+1)/2,lvl/2]
+    alta=alta.map{|q| q*0.5}
+    alta[0]+=1
+    return alta
+  end
+  return []
+end
+
 def fac_stats(bot,event,args=nil)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
@@ -3255,56 +3314,9 @@ def fac_stats(bot,event,args=nil)
         end
         if minmax && i>0
         elsif !s2s && !minmax
-        elsif ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1])
-          alta=[(i+1)/2,i/2]
-          alta[0]*=0.3
-          alta[1]*=0.3
-          alta[0]+=0.5
-          alta[1]+=0.5
-          alta[1]+=0.3 if i>=29
-          str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-        elsif k[3][1]=='Tree'
-          alta=[i+2.0,i+2.0]
-          if i<9
-            x=i/4
-            alta=[x*3.0+3.0,x*3.0+3.0]
-            if i%4>0
-              alta[0]+=1.0
-              alta[1]+=0.5
-            end
-            if i%4>1
-              alta[1]+=1.0
-              alta[0]+=0.5
-            end
-            if i%4>2
-              alta[0]+=1.0
-              alta[1]+=0.5
-            end
-          end
-          str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-        elsif k[3][1]=='Altar'
-          alta=[(i+1)/2,i/2]
-          alta=[i-17,i-17] if i>34
-          alta=alta.map{|q| q*0.5+0.5}
-          str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-        elsif ['Dojo','Fafnir'].include?(k[3][1])
-          alta=[(i+1)/2,i/2]
-          alta=alta.map{|q| q*0.5+3.0}
-          for i2 in 0...((i+1)/15+1)
-            if i>15*i2+14 && i2%2==0
-              alta[0]+=1+i2
-              alta[1]+=1.5+i2
-            elsif i>15*i2+14 && i2%2==1
-              alta[0]+=1.5+i2
-              alta[1]+=1+i2
-            end
-          end
-          str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-        elsif k[3][1]=='Event Altar'
-          alta=[(i+1)/2,i/2]
-          alta=alta.map{|q| q*0.5}
-          alta[0]+=1
-          str="#{str}\nLevel #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+        elsif fac_stat_buffs(k,i).length>0
+          alta=fac_stat_buffs(k,i)
+          str="#{str}\nBuffs at Level #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
         end
       end
       str=str.gsub('Level 1:','**Initial Buff:**') if minmax
@@ -3313,54 +3325,9 @@ def fac_stats(bot,event,args=nil)
       for i in 0...mtzz.length
         str3="#{str3}#{', ' unless i==0}#{mtzz[i]} x#{mtz.reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i*val}.inject(0){|sum,x| sum + x }}"
       end
-      if ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1])
-        alta=[(kxx.length)/2,(kxx.length-1)/2]
-        alta=alta.map{|q| q*0.3+0.5}
-        alta[1]+=0.3 if kxx.length>=30
-        str3="#{str3}**\n**FINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif k[3][1]=='Tree'
-        alta=[kxx.length+1.0,kxx.length+1.0]
-        if (kxx.length-1)<9
-          x=(kxx.length-1)/4
-          alta=[x*3.0+3.0,x*3.0+3.0]
-          if (kxx.length-1)%4>0
-            alta[0]+=1.0
-            alta[1]+=0.5
-          end
-          if (kxx.length-1)%4>1
-            alta[1]+=1.0
-            alta[0]+=0.5
-          end
-          if (kxx.length-1)%4>2
-            alta[0]+=1.0
-            alta[1]+=0.5
-          end
-        end
-        str3="#{str3}**\n**FINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif k[3][1]=='Altar'
-        alta=[kxx.length/2,(kxx.length-1)/2]
-        alta=[kxx.length-18,kxx.length-18] if kxx.length>34
-        alta=alta.map{|q| q*0.5+0.5}
-        str3="#{str3}**\n**FINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif ['Dojo','Fafnir'].include?(k[3][1])
-        alta=[kxx.length/2,(kxx.length-1)/2]
-        alta=alta.map{|q| q*0.5+3.0}
-        for i2 in 0...(kxx.length/15+1)
-          if kxx.length%15==0 && i2*15+15==kxx.length
-          elsif kxx.length>15*i2+14 && i2%2==0
-            alta[0]+=1+i2
-            alta[1]+=1.5+i2
-          elsif kxx.length>15*i2+14 && i2%2==1
-            alta[0]+=1.5+i2
-            alta[1]+=1+i2
-          end
-        end
-        str3="#{str3}**\n**FINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif k[3][1]=='Event Altar'
-        alta=[kxx.length/2,(kxx.length-1)/2]
-        alta=alta.map{|q| q*0.5}
-        alta[0]+=1
-        str3="#{str3}**\n**FINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+      if fac_stat_buffs(k,kxx.length-1).length>0
+        alta=fac_stat_buffs(k,kxx.length-1)
+        str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       end
       str="#{str}\n\n**#{str3}**"
     elsif nums.length==1
@@ -3382,52 +3349,8 @@ def fac_stats(bot,event,args=nil)
       for i in 0...mtzz.length
         str3="#{str3}#{' - ' if i==0}#{', ' unless i==0}#{mtzz[i]} x#{mtz[0].reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i*val}.inject(0){|sum,x| sum + x }}"
       end
-      if ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1])
-        alta=[(n)/2,(n-1)/2]
-        alta.map{|q| q*0.3+0.5}
-        alta[1]+=0.3 if n>=30
-        str3="#{str3}\nBuffs at Level #{n}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif k[3][1]=='Altar'
-        alta=[(n)/2,(n-1)/2]
-        alta=[n-18,n-18] if n>34
-        alta=alta.map{|q| q*0.5+0.5}
-        str3="#{str3}\nBuffs at Level #{n}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif k[3][1]=='Tree'
-        alta=[n+1.0,n+1.0]
-        if (n-1)<9
-          x=(n-1)/4
-          alta=[x*3.0+3.0,x*3.0+3.0]
-          if (n-1)%4>0
-            alta[0]+=1.0
-            alta[1]+=0.5
-          end
-          if (n-1)%4>1
-            alta[1]+=1.0
-            alta[0]+=0.5
-          end
-          if (n-1)%4>2
-            alta[0]+=1.0
-            alta[1]+=0.5
-          end
-        end
-        str3="#{str3}\nBuffs at Level #{n}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif ['Dojo','Fafnir'].include?(k[3][1])
-        alta=[(n)/2,(n-1)/2]
-        alta=alta.map{|q| q*0.5+3.0}
-        for i2 in 0...(kxx.length/15+1)
-          if n>15*i2+14 && i2%2==0
-            alta[0]+=1+i2
-            alta[1]+=1.5+i2
-          elsif n>15*i2+14 && i2%2==1
-            alta[0]+=1.5+i2
-            alta[1]+=1+i2
-          end
-        end
-        str3="#{str3}\nBuffs at Level #{n}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif k[3][1]=='Event Altar'
-        alta=[(n)/2,(n-1)/2]
-        alta=alta.map{|q| q*0.5}
-        alta[0]+=1
+      if fac_stat_buffs(k,n-1).length>0
+        alta=fac_stat_buffs(k,n-1)
         str3="#{str3}\nBuffs at Level #{n}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       end
       str="#{str}\n\n#{str3}" unless n==1
@@ -3436,52 +3359,8 @@ def fac_stats(bot,event,args=nil)
       for i in 0...mtzz.length
         str3="#{str3}#{' - ' if i==0}#{', ' unless i==0}#{mtzz[i]} x#{mtz[1].reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i*val}.inject(0){|sum,x| sum + x }}"
       end
-      if ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1])
-        alta=[(kxx.length)/2,(kxx.length-1)/2]
-        alta.map{|q| q*0.3+0.5}
-        alta[1]+=0.3 if kxx.length>=30
-        str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif k[3][1]=='Altar'
-        alta=[kxx.length/2,(kxx.length-1)/2]
-        alta=[kxx.length-18,kxx.length-18] if kxx.length>34
-        alta=alta.map{|q| q*0.5+0.5}
-        str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif k[3][1]=='Tree'
-        alta=[kxx.length+1.0,kxx.length+1.0]
-        if (kxx.length-1)<9
-          x=(kxx.length-1)/4
-          alta=[x*3.0+3.0,x*3.0+3.0]
-          if (kxx.length-1)%4>0
-            alta[0]+=1.0
-            alta[1]+=0.5
-          end
-          if (kxx.length-1)%4>1
-            alta[1]+=1.0
-            alta[0]+=0.5
-          end
-          if (kxx.length-1)%4>2
-            alta[0]+=1.0
-            alta[1]+=0.5
-          end
-        end
-        str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif ['Dojo','Fafnir'].include?(k[3][1])
-        alta=[kxx.length/2,(kxx.length-1)/2]
-        alta=alta.map{|q| q*0.5+3.0}
-        for i2 in 0...(kxx.length/15+1)
-          if kxx.length>15*i2+14 && i2%2==0
-            alta[0]+=1+i2
-            alta[1]+=1.5+i2
-          elsif kxx.length>15*i2+14 && i2%2==1
-            alta[0]+=1.5+i2
-            alta[1]+=1+i2
-          end
-        end
-        str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif k[3][1]=='Event Altar'
-        alta=[kxx.length/2,(kxx.length-1)/2]
-        alta=alta.map{|q| q*0.5}
-        alta[0]+=1
+      if fac_stat_buffs(k,kxx.length-1).length>0
+        alta=fac_stat_buffs(k,kxx.length-1)
         str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       end
       str="#{str}\n\n#{str3}" unless n==kxx.length
@@ -3494,52 +3373,8 @@ def fac_stats(bot,event,args=nil)
       kxx=kxx[n,n2-n]
       for i in 0...kxx.length
         cost+=kxx[i][6]
-        if ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1])
-          alta=[(n+i)/2,(n+i-1)/2]
-          alta.map{|q| q*0.3+0.5}
-          alta[1]+=0.3 if n+i>=30
-          str="#{str}\nBuffs at Level #{n+i}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-        elsif k[3][1]=='Altar'
-          alta=[(n+i)/2,(n+i-1)/2]
-          alta=[n+i-18,n+i-18] if n+i>34
-          alta=alta.map{|q| q*0.5+0.5}
-          str="#{str}\nBuffs at Level #{n+i}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-        elsif k[3][1]=='Tree'
-          alta=[n+i+1.0,n+i+1.0]
-          if (n+i-1)<9
-            x=(n+i-1)/4
-            alta=[x*3.0+3.0,x*3.0+3.0]
-            if (n+i-1)%4>0
-              alta[0]+=1.0
-              alta[1]+=0.5
-            end
-            if (n+i-1)%4>1
-              alta[1]+=1.0
-              alta[0]+=0.5
-            end
-            if (n+i-1)%4>2
-              alta[0]+=1.0
-              alta[1]+=0.5
-            end
-          end
-          str="#{str}\nBuffs at Level #{n+i}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-        elsif ['Dojo','Fafnir'].include?(k[3][1])
-          alta=[(n+i)/2,(n+i-1)/2]
-          alta=alta.map{|q| q*0.5+3.0}
-          for i2 in 0...(kxx.length/15+1)
-            if n+i>15*i2+14 && i2%2==0
-              alta[0]+=1+i2
-              alta[1]+=1.5+i2
-            elsif n+i>15*i2+14 && i2%2==1
-              alta[0]+=1.5+i2
-              alta[1]+=1+i2
-            end
-          end
-          str="#{str}\nBuffs at Level #{n+i}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-        elsif k[3][1]=='Event Altar'
-          alta=[(n+i)/2,(n+i-1)/2]
-          alta=alta.map{|q| q*0.5}
-          alta[0]+=1
+        if fac_stat_buffs(k,n+i-1).length>0
+          alta=fac_stat_buffs(k,n+i-1)
           str="#{str}\nBuffs at Level #{n+i}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
         end
         str="#{str}\nLevel #{n+i} \u2192 #{n+i+1}: #{longFormattedNumber(kxx[i][6]*val)}<:Resource_Rupies:532104504372363274>" if s2s
@@ -3550,58 +3385,18 @@ def fac_stats(bot,event,args=nil)
           str="#{str} - #{kxx[i][7].map{|q| "#{q[0]} x#{q[1].to_i*val}"}.sort.join(', ')}" if s2s
         end
       end
+      if fac_stat_buffs(k,n2-1).length>0
+        alta=fac_stat_buffs(k,n2-1)
+        str="#{str}\nBuffs at Level #{n2}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+      end
       mtzz=mtz.map{|q| q[0]}.uniq.sort
       str3="TOTAL from level #{n} to #{n2}: #{longFormattedNumber(cost*val)}<:Resource_Rupies:532104504372363274> - "
       for i in 0...mtzz.length
         str3="#{str3}#{', ' unless i==0}#{mtzz[i]} x#{mtz.reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i*val}.inject(0){|sum,x| sum + x }}"
       end
-      if ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1])
-        alta=[(n2)/2,(n2-1)/2]
-        alta.map{|q| q*0.3+0.5}
-        alta[1]+=0.3 if n2>=30
-        str3="#{str3}\nBuffs at Level #{n2}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif k[3][1]=='Altar'
-        alta=[(n2)/2,(n2-1)/2]
-        alta=[n2-18,n2-18] if n2>34
-        alta=alta.map{|q| q*0.5+0.5}
-        str3="#{str3}\nBuffs at Level #{n2}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif k[3][1]=='Tree'
-        alta=[n2+1.0,n2+1.0]
-        if (n2-1)<9
-          x=(n2-1)/4
-          alta=[x*3.0+3.0,x*3.0+3.0]
-          if (n2-1)%4>0
-            alta[0]+=1.0
-            alta[1]+=0.5
-          end
-          if (n2-1)%4>1
-            alta[1]+=1.0
-            alta[0]+=0.5
-          end
-          if (n2-1)%4>2
-            alta[0]+=1.0
-            alta[1]+=0.5
-          end
-        end
-        str3="#{str3}\nBuffs at Level #{n2}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif ['Dojo','Fafnir'].include?(k[3][1])
-        alta=[(n2)/2,(n2-1)/2]
-        alta=alta.map{|q| q*0.5+3.0}
-        for i2 in 0...(kxx.length/15+1)
-          if n2>15*i2+14 && i2%2==0
-            alta[0]+=1+i2
-            alta[1]+=1.5+i2
-          elsif n2>15*i2+14 && i2%2==1
-            alta[0]+=1.5+i2
-            alta[1]+=1+i2
-          end
-        end
-        str3="#{str3}\nBuffs at Level #{n2}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
-      elsif k[3][1]=='Event Altar'
-        alta=[(n2)/2,(n2-1)/2]
-        alta=alta.map{|q| q*0.5}
-        alta[0]+=1
-        str3="#{str3}\nBuffs at Level #{n2}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+      if fac_stat_buffs(k,n2-1).length>0
+        alta=fac_stat_buffs(k,n2-1)
+        str3="#{str3}\nBuffs at level #{n2}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       end
       str="#{str}\n\n**#{str3}**"
     end
