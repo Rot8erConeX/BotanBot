@@ -3219,6 +3219,10 @@ def fac_stats(bot,event,args=nil)
     val=0
     minmax=false
     for i in 0...args.length
+      args[i]=args[i].split('-') if args[i].include?('-') && args[i].split('-').reject{|q| q.to_i.to_s==q}.length<=0
+    end
+    args.flatten!
+    for i in 0...args.length
       if args[i].to_i.to_s==args[i] && args[i].to_i>0
         if nums.length<2
           nums.push(args[i].to_i)
@@ -3490,6 +3494,54 @@ def fac_stats(bot,event,args=nil)
       kxx=kxx[n,n2-n]
       for i in 0...kxx.length
         cost+=kxx[i][6]
+        if ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1])
+          alta=[(n+i)/2,(n+i-1)/2]
+          alta.map{|q| q*0.3+0.5}
+          alta[1]+=0.3 if n+i>=30
+          str="#{str}\nBuffs at Level #{n+i}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+        elsif k[3][1]=='Altar'
+          alta=[(n+i)/2,(n+i-1)/2]
+          alta=[n+i-18,n+i-18] if n+i>34
+          alta=alta.map{|q| q*0.5+0.5}
+          str="#{str}\nBuffs at Level #{n+i}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+        elsif k[3][1]=='Tree'
+          alta=[n+i+1.0,n+i+1.0]
+          if (n+i-1)<9
+            x=(n+i-1)/4
+            alta=[x*3.0+3.0,x*3.0+3.0]
+            if (n+i-1)%4>0
+              alta[0]+=1.0
+              alta[1]+=0.5
+            end
+            if (n+i-1)%4>1
+              alta[1]+=1.0
+              alta[0]+=0.5
+            end
+            if (n+i-1)%4>2
+              alta[0]+=1.0
+              alta[1]+=0.5
+            end
+          end
+          str="#{str}\nBuffs at Level #{n+i}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+        elsif ['Dojo','Fafnir'].include?(k[3][1])
+          alta=[(n+i)/2,(n+i-1)/2]
+          alta=alta.map{|q| q*0.5+3.0}
+          for i2 in 0...(kxx.length/15+1)
+            if n+i>15*i2+14 && i2%2==0
+              alta[0]+=1+i2
+              alta[1]+=1.5+i2
+            elsif n+i>15*i2+14 && i2%2==1
+              alta[0]+=1.5+i2
+              alta[1]+=1+i2
+            end
+          end
+          str="#{str}\nBuffs at Level #{n+i}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+        elsif k[3][1]=='Event Altar'
+          alta=[(n+i)/2,(n+i-1)/2]
+          alta=alta.map{|q| q*0.5}
+          alta[0]+=1
+          str="#{str}\nBuffs at Level #{n+i}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
+        end
         str="#{str}\nLevel #{n+i} \u2192 #{n+i+1}: #{longFormattedNumber(kxx[i][6]*val)}<:Resource_Rupies:532104504372363274>" if s2s
         unless kxx[i][7].nil?
           for i2 in 0...kxx[i][7].length
