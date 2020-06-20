@@ -287,7 +287,10 @@ def data_load()
   for i in 0...b.length
     b[i]=b[i].gsub("\n",'').split('\\'[0])
     if b[i][2]=='Skill'
-      b[i][6]=b[i][6].split(', ').map{|q| q.to_i}
+      b[i][6]=b[i][6].split(', ')
+      for i2 in 0...b[i][6].length
+        b[i][6][i2]=b[i][6][i2].to_i unless i2%7==5
+      end
       b[i][8]=b[i][8].to_f
       b[i][10]=b[i][10].split(', ') unless b[i][10].nil?
       b[i][12]=b[i][12].split(', ').map{|q| q.to_i}
@@ -1636,22 +1639,40 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       if skl1.nil?
         str2="**#{k[6][0]}** - LOAD ERROR"
       else
+        mx=skl1[3,3].reject{|q| q.nil? || q.length<=0}
+        mx.push(skl1[11]) if !skl1[11].nil? && skl1[11].length>0
+        if skl1.length>13
+          for i in 13...skl1.length
+            mx.push(skl1[i]) if !skl1[i].nil? && skl1[i].length>0
+          end
+        end
         eng=''
         eng=", #{semoji[3]}Energizable" if skl1[7]=='Yes'
         eng=", #{semoji[4]}Inspirable" if skl1[10].include?('Damage')
         eng=", #{semoji[5]}Energizable/Inspirable" if skl1[7]=='Yes' && skl1[10].include?('Damage')
-        str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP#{" (#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])} SP when shared)" unless skl1[12].nil? || skl1[12].length<=0}" if skl1[6].max===skl1[6].min && skl1[6][0]>0}"
-        if (skl1[9].nil? || skl1[9].length<=0) && skl1[6].max != skl1[6].min
-          str2="#{str2}\n*Lv.1 (F0, #{skl1[6][0]} SP):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (F3, #{skl1[6][1]} SP):* #{skl1[4].gsub(';; ',"\n")}\n*Lv.3 (F5, #{skl1[6][2]} SP):* #{skl1[5].gsub(';; ',"\n")}"
-          str2="#{str2}\n*Lv.4 (F6, #{skl1[6][3]} SP):* #{skl1[11].gsub(';; ',"\n")}" unless skl1[11].nil? || skl1[11].length<=0
-          str2="#{str2}\n#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])} SP when shared" unless skl1[12].nil? || skl1[12].length<=0
+        smolsp=[skl1[6][mx.length-1]]
+        smolsp=[] if skl1[6][0,mx.length].max != skl1[6][0,mx.length].min
+        smolsp2=[]
+        kk=[]
+        kk=skl1[6][5,skl1[6].length-5] if skl1[6].length>5
+        if kk.length>0
+          for i in 0...kk.length/7
+            smolsp.push(kk[i*7+mx.length]) unless kk[i*7+mx.length]==skl1[6][0]
+            smolsp2.push(kk[i*7+6]) unless kk[i*7+6]==skl1[12][1]
+          end
+        end
+        str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{" - #{smolsp.join("\u2192")} SP#{" (#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])}#{"\u2192#{smolsp2.join("\u2192")}" if smolsp2.length>0} SP when shared)" unless skl1[12].nil? || skl1[12].length<=0}" if skl1[6][0,mx.length].max===skl1[6][0,mx.length].min && skl1[6][0]>0}"
+        if (skl1[9].nil? || skl1[9].length<=0) && skl1[6][0,mx.length].max != skl1[6][0,mx.length].min
+          str2="#{str2}\n*Lv.1 (F0, #{skl1[6][0]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==1} SP):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (F3, #{skl1[6][1]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==2} SP):* #{skl1[4].gsub(';; ',"\n")}\n*Lv.3 (F5, #{skl1[6][2]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==3} SP):* #{skl1[5].gsub(';; ',"\n")}"
+          str2="#{str2}\n*Lv.4 (F6, #{skl1[6][3]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==4} SP):* #{skl1[11].gsub(';; ',"\n")}" unless skl1[11].nil? || skl1[11].length<=0
+          str2="#{str2}\n#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])}#{"\u2192#{smolsp2.join("\u2192")}" if smolsp2.length>0} SP when shared" unless skl1[12].nil? || skl1[12].length<=0
         elsif skl1[9].nil? || skl1[9].length<=0
           str2="#{str2}\n*Lv.1 (F0):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (F3):* #{skl1[4].gsub(';; ',"\n")}\n*Lv.3 (F5):* #{skl1[5].gsub(';; ',"\n")}"
           str2="#{str2}\n*Lv.4 (F6):* #{skl1[11].gsub(';; ',"\n")}" unless skl1[11].nil? || skl1[11].length<=0
-        elsif skl1[6].max != skl1[6].min
-          str2="#{str2}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}\n*Lv.1 (F0, #{skl1[6][0]} SP) \u2192 Lv.2 (F3, #{skl1[6][1]} SP) \u2192 Lv.3 (F5, #{skl1[6][2]} SP)*"
-          str2="#{str2} \u2192 *Lv.4 (F6, #{skl1[6][3]} SP)*" unless skl1[11].nil? || skl1[11].length<=0
-          str2="#{str2}\n#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])} SP when shared" unless skl1[12].nil? || skl1[12].length<=0
+        elsif skl1[6][0,mx.length].max != skl1[6][0,mx.length].min
+          str2="#{str2}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}\n*Lv.1 (F0, #{skl1[6][0]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==1} SP) \u2192 Lv.2 (F3, #{skl1[6][1]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==2} SP) \u2192 Lv.3 (F5, #{skl1[6][2]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==3} SP)*"
+          str2="#{str2} \u2192 *Lv.4 (F6, #{skl1[6][3]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==4} SP)*" unless skl1[11].nil? || skl1[11].length<=0
+          str2="#{str2}\n#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])}#{"\u2192#{smolsp2.join("\u2192")}" if smolsp2.length>0} SP when shared" unless skl1[12].nil? || skl1[12].length<=0
         else
           str2="#{str2}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}\n*Lv.1 (F0) \u2192 Lv.2 (F3) \u2192 Lv.3 (F5)*"
           str2="#{str2} \u2192 *Lv.4 (F6)*" unless skl1[11].nil? || skl1[11].length<=0
@@ -1660,22 +1681,40 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       if skl2.nil?
         str2="#{str2}\n#{"\n" unless skl1.nil?}**#{k[6][1]}** - LOAD ERROR"
       else
+        mx=skl2[3,3].reject{|q| q.nil? || q.length<=0}
+        mx.push(skl2[11]) if !skl2[11].nil? && skl2[11].length>0
+        if skl2.length>13
+          for i in 13...skl2.length
+            mx.push(skl2[i]) if !skl2[i].nil? && skl2[i].length>0
+          end
+        end
         eng=''
         eng=", #{semoji[3]}Energizable" if skl2[7]=='Yes'
         eng=", #{semoji[4]}Inspirable" if skl2[10].include?('Damage')
         eng=", #{semoji[5]}Energizable/Inspirable" if skl2[7]=='Yes' && skl2[10].include?('Damage')
-        str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{eng}#{energy_emoji(skl2[10],true)})__#{" - #{longFormattedNumber(skl2[6][0])} SP#{" (#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])} SP when shared)" unless skl2[12].nil? || skl2[12].length<=0}" if skl2[6].max===skl2[6].min && skl2[6][0]>0}"
-        if (skl2[9].nil? || skl2[9].length<=0) && skl2[6].max != skl2[6].min
-          str2="#{str2}\n*Lv.1 (F2, #{skl2[6][0]} SP):* #{skl2[3].gsub(';; ',"\n")}\n*Lv.2 (F4, #{skl2[6][1]} SP):* #{skl2[4].gsub(';; ',"\n")}"
-          str2="#{str2}\n*Lv.3 (F6, #{skl2[6][2]} SP):* #{skl2[5].gsub(';; ',"\n")}" if !skl2[5].nil? && skl2[5].length>0
-          str2="#{str2}\n#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])} SP when shared" unless skl2[12].nil? || skl2[12].length<=0
+        smolsp=[skl2[6][mx.length-1]]
+        smolsp=[] if skl2[6][0,mx.length].max != skl2[6][0,mx.length].min
+        smolsp2=[]
+        kk=[]
+        kk=skl2[6][5,skl2[6].length-5] if skl2[6].length>5
+        if kk.length>0
+          for i in 0...kk.length/7
+            smolsp.push(kk[i*7+mx.length]) unless kk[i*7+mx.length]==skl2[6][0]
+            smolsp2.push(kk[i*7+6]) unless kk[i*7+6]==skl2[12][1]
+          end
+        end
+        str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{eng}#{energy_emoji(skl2[10],true)})__#{" - #{smolsp.join("\u2192")} SP#{" (#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])}#{"\u2192#{smolsp2.join("\u2192")}" if smolsp2.length>0} SP when shared)" unless skl2[12].nil? || skl2[12].length<=0}" if skl2[6][0,mx.length].max===skl2[6][0,mx.length].min && skl2[6][0]>0}"
+        if (skl2[9].nil? || skl2[9].length<=0) && skl2[6][0,mx.length].max != skl2[6][0,mx.length].min
+          str2="#{str2}\n*Lv.1 (F2, #{skl2[6][0]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==1} SP):* #{skl2[3].gsub(';; ',"\n")}\n*Lv.2 (F4, #{skl2[6][1]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==2} SP):* #{skl2[4].gsub(';; ',"\n")}"
+          str2="#{str2}\n*Lv.3 (F6, #{skl2[6][2]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==3} SP):* #{skl2[5].gsub(';; ',"\n")}" if !skl2[5].nil? && skl2[5].length>0
+          str2="#{str2}\n#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])}#{"\u2192#{smolsp2.join("\u2192")}" if smolsp2.length>0} SP when shared" unless skl2[12].nil? || skl2[12].length<=0
         elsif skl2[9].nil? || skl2[9].length<=0
           str2="#{str2}\n*Lv.1 (F2):* #{skl2[3].gsub(';; ',"\n")}\n*Lv.2 (F4):* #{skl2[4].gsub(';; ',"\n")}"
           str2="#{str2}\n*Lv.3 (F6):* #{skl2[5].gsub(';; ',"\n")}" if !skl2[5].nil? && skl2[5].length>0
-        elsif skl2[6].max != skl2[6].min
-          str2="#{str2}\n*Effect:* #{skl2[9].gsub(';; ',"\n")}\n*Lv.1 (F2, #{skl2[6][0]} SP) \u2192 Lv.2 (F4, #{skl2[6][1]} SP)*"
-          str2="#{str2} \u2192 *Lv.3 (F6, #{skl2[6][2]} SP)*" if !skl2[5].nil? && skl2[5].length>0
-          str2="#{str2}\n#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])} SP when shared" unless skl2[12].nil? || skl2[12].length<=0
+        elsif skl2[6][0,mx.length].max != skl2[6][0,mx.length].min
+          str2="#{str2}\n*Effect:* #{skl2[9].gsub(';; ',"\n")}\n*Lv.1 (F2, #{skl2[6][0]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==1} SP) \u2192 Lv.2 (F4, #{skl2[6][1]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==2} SP)*"
+          str2="#{str2} \u2192 *Lv.3 (F6, #{skl2[6][2]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==3} SP)*" if !skl2[5].nil? && skl2[5].length>0
+          str2="#{str2}\n#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])}#{"\u2192#{smolsp2.join("\u2192")}" if smolsp2.length>0} SP when shared" unless skl2[12].nil? || skl2[12].length<=0
         else
           str2="#{str2}\n*Effect:* #{skl2[9].gsub(';; ',"\n")}\n*Lv.1 (F2) \u2192 Lv.2 (F4)*"
           str2="#{str2} \u2192 *Lv.3 (F6)*" if !skl2[5].nil? && skl2[5].length>0
@@ -1744,26 +1783,60 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       strx="#{strx}\n\n*#{k[6][0]}* - LOAD ERROR"
       strx2="#{strx2}\n*#{k[6][0]}* - LOAD ERROR"
     else
+      mx=skl1[3,3].reject{|q| q.nil? || q.length<=0}
+      mx.push(skl1[11]) if !skl1[11].nil? && skl1[11].length>0
+      if skl1.length>13
+        for i in 13...skl1.length
+          mx.push(skl1[i]) if !skl1[i].nil? && skl1[i].length>0
+        end
+      end
+      smolsp=[longFormattedNumber(skl1[6][lv[0]-1])]
+      smolsp2=[]
+      kk=[]
+      kk=skl1[6][5,skl1[6].length-5] if skl1[6].length>5
+      if kk.length>0
+        for i in 0...kk.length/7
+          smolsp.push(longFormattedNumber(kk[i*7+lv[0]])) unless kk[i*7+lv[0]]==skl1[12][1]
+          smolsp2.push(longFormattedNumber(kk[i*7+6])) unless kk[i*7+6]==skl1[12][1]
+        end
+      end
       eng=''
       eng=semoji[3] if skl1[7]=='Yes'
       eng=semoji[4] if !skl1[10].nil? && skl1[10].include?('Damage')
       eng=semoji[5] if skl1[7]=='Yes' && !skl1[10].nil? && skl1[10].include?('Damage')
-      strx="#{strx}\n*#{k[6][0]}#{eng}#{energy_emoji(skl1[10])} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP*\n#{x[0]}"
-      strx="#{strx}\n#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])} SP when shared" unless skl1[12].nil? || skl1[12].length<=0
-      strx2="#{strx2}\n#{k[6][0]}#{eng}#{energy_emoji(skl1[10])} [Lv.#{lv[0]}] - #{longFormattedNumber(skl1[6][lv[0]-1])} SP"
-      strx2="#{strx2}\n#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])} SP when shared" unless skl1[12].nil? || skl1[12].length<=0
+      strx="#{strx}\n*#{k[6][0]}#{eng}#{energy_emoji(skl1[10])} [Lv.#{lv[0]}] - #{smolsp.join("\u2192")} SP*\n#{x[0]}"
+      strx="#{strx}\n#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])}#{"\u2192#{smolsp2.join("\u2192")}" if smolsp2.length>0} SP when shared" unless skl1[12].nil? || skl1[12].length<=0
+      strx2="#{strx2}\n#{k[6][0]}#{eng}#{energy_emoji(skl1[10])} [Lv.#{lv[0]}] - #{smolsp.join("\u2192")} SP"
+      strx2="#{strx2}\n#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])}#{"\u2192#{smolsp2.join("\u2192")}" if smolsp2.length>0} SP when shared" unless skl1[12].nil? || skl1[12].length<=0
     end
     if skl2.nil?
       strx="#{strx}\n\n*#{k[6][1]}* - LOAD ERROR"
       strx2="#{strx2}\n*#{k[6][1]}* - LOAD ERROR"
     else
+      mx=skl2[3,3].reject{|q| q.nil? || q.length<=0}
+      mx.push(skl2[11]) if !skl2[11].nil? && skl2[11].length>0
+      if skl2.length>13
+        for i in 13...skl2.length
+          mx.push(skl2[i]) if !skl2[i].nil? && skl2[i].length>0
+        end
+      end
+      smolsp=[longFormattedNumber(skl2[6][mx.length-1])]
+      smolsp2=[]
+      kk=[]
+      kk=skl2[6][5,skl2[6].length-5] if skl2[6].length>5
+      if kk.length>0
+        for i in 0...kk.length/7
+          smolsp.push(longFormattedNumber(kk[i*7+mx.length])) unless kk[i*7+mx.length]==skl2[12][1]
+          smolsp2.push(longFormattedNumber(kk[i*7+6])) unless kk[i*7+6]==skl2[12][1]
+        end
+      end
       eng=''
       eng=semoji[3] if skl2[7]=='Yes'
       eng=semoji[4] if !skl2[10].nil? && skl2[10].include?('Damage')
       eng=semoji[5] if skl2[7]=='Yes' && !skl2[10].nil? && skl2[10].include?('Damage')
-      strx="#{strx}\n\n*#{k[6][1]}#{eng}#{energy_emoji(skl2[10])} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP*\n#{x[1]}"
+      strx="#{strx}\n\n*#{k[6][1]}#{eng}#{energy_emoji(skl2[10])} [Lv.#{lv[1]}] - #{smolsp.join("\u2192")} SP*\n#{x[1]}"
       strx="#{strx}\n#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])} SP when shared" unless skl2[12].nil? || skl2[12].length<=0
-      strx2="#{strx2}\n#{k[6][1]}#{eng}#{energy_emoji(skl2[10])} [Lv.#{lv[1]}] - #{longFormattedNumber(skl2[6][lv[1]-1])} SP"
+      strx2="#{strx2}\n#{k[6][1]}#{eng}#{energy_emoji(skl2[10])} [Lv.#{lv[1]}] - #{smolsp.join("\u2192")} SP"
       strx2="#{strx2}\n#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])} SP when shared" unless skl2[12].nil? || skl2[12].length<=0
     end
     strx="#{strx}\n#{"\n" unless skl1.nil? && skl2.nil?}<:SkillShare:714597012733034547> *Skill Sharing capacity:* #{longFormattedNumber(k[5][1])}" if k[5].length>1 && k[5][1]>0
@@ -2682,7 +2755,15 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
   title="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min && k[6][0]>0 && topstr.length<=0
   title="#{title}\n**Invulnerability duration:** #{k[8]} seconds"
   k[12][1]=k[6][-1] if !k[12].nil? && k[12].length==1
-  title="#{title}\n**Skill Share:** *Cost:* #{k[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(k[12][1])} SP\*" if !k[12].nil? && k[12].length>0
+  smolsp=[longFormattedNumber(k[12][1])]
+  kk=[]
+  kk=k[6][5,k[6].length-5] if k[6].length>5
+  if kk.length>0
+    for i in 0...kk.length/7
+      smolsp.push(longFormattedNumber(kk[i*7+6])) unless kk[i*7+6]==k[12][1]
+    end
+  end
+  title="#{title}\n**Skill Share:** *Cost:* #{k[12][0]}<:SkillShare:714597012733034547> / #{smolsp.join("\u2192")} SP\*" if !k[12].nil? && k[12].length>0
   title="#{title}\n<:Energize:559629242137051155> **Energizable**" if k[7]=='Yes'
   title="#{title}\n~~Not energizable~~" if k[7]=='No' && k[10].include?('Damage')
   title="#{title}\n<:Inspiring:688916587079663625> **Inspirable**" if k[10].include?('Damage')
@@ -2740,9 +2821,27 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
   str="#{str}\n\nYou may instead be searching for the ability family `Dragon's Claws`." if k[0]=='Dragon Claw' && topstr.length<=0
   if !k[12].nil? && k[12].length>0
     advy=[]
-    advy.push("#{longFormattedNumber(23*k[12][1]/20)} SP for Nef archetypes") unless advx.include?('Nefaria')
-    advy.push("#{longFormattedNumber(13*k[12][1]/10)} SP for Hawk archetypes") unless advx.include?('Hawk')
-    str="#{str}\n\* #{advy.join(', ')}" if advy.length>0
+    smolsp=[longFormattedNumber(23*k[12][1]/20)]
+    kk=[]
+    kk=k[6][5,k[6].length-5] if k[6].length>5
+    if kk.length>0
+      for i in 0...kk.length/7
+        smolsp.push(longFormattedNumber(23*kk[i*7+6]/20)) unless kk[i*7+6]==k[12][1]
+      end
+    end
+    advy.push("#{smolsp.join("\u2192")} SP for Nef archetypes") unless advx.include?('Nefaria')
+    smolsp=[longFormattedNumber(13*k[12][1]/10)]
+    kk=[]
+    kk=k[6][5,k[6].length-5] if k[6].length>5
+    if kk.length>0
+      for i in 0...kk.length/7
+        smolsp.push(longFormattedNumber(13*kk[i*7+6]/10)) unless kk[i*7+6]==k[12][1]
+      end
+    end
+    advy.push("#{smolsp.join("\u2192")} SP for Hawk archetypes") unless advx.include?('Hawk')
+    ch=', '
+    ch="\n" if kk.length>0
+    str="#{str}\n\* #{advy.join(ch)}" if advy.length>0
   end
   flds=nil if flds.length<=0
   m=0
@@ -2767,10 +2866,22 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
     create_embed(event,'','',xcolor,nil,nil,flds) unless flds.nil?
   else
     str2="\n\n#{k[9].gsub(';; ',"\n")}"
-    unless k[6][0,mx.length].max==k[6][0,mx.length].min
-      str2="#{str2}\n\nL1 = #{longFormattedNumber(k[6][0])} SP\nL2 = #{longFormattedNumber(k[6][1])} SP"
-      str2="#{str2}\nL3 = #{longFormattedNumber(k[6][2])} SP" if mx.length>2
-      str2="#{str2}\nL4 = #{longFormattedNumber(k[6][3])} SP" if mx.length>3
+    if k[6][0,mx.length].max==k[6][0,mx.length].min
+      if kk.length>0
+        for i2 in 0...kk.length/7
+          str2="#{str2}#{"\n" if i2==0}\n#{kk[i2*7]} = #{longFormattedNumber(kk[i2*7+mx.length])} SP" unless kk[i2+mx.length]==k[6][0]
+        end
+      end
+    else
+      kxx=k[6][0,mx.length].reject{|q| q != k[6][0]}.length
+      for i in 0...mx.length
+        str2="#{str2}#{"\n" if i==0}\nL#{i+1}#{"-#{kxx}" if i==0} = #{longFormattedNumber(k[6][i])} SP" unless i>0 && k[6][i]==k[6][0]
+        if kk.length>0 && !(i>0 && k[6][i]==k[6][0])
+          for i2 in 0...kk.length/7
+            str2="#{str2} / *#{kk[i2*7]} = #{longFormattedNumber(kk[i+7*i2+1])} SP*" unless kk[i+7*i2+1]==k[6][i]
+          end
+        end
+      end
     end
     if str.length+str2.length+m<1800
       str="#{str}#{str2}"
