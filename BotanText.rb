@@ -114,7 +114,11 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
   elsif ['limit','limits','stack','stacks'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}**","Shows the limits for ability stacking of all abilities.",0xCE456B)
   elsif ['next','schedule'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __type__","Shows the next time in-game daily events of the type `type` will happen.\nIf in PM and `type` is unspecified, shows the entire schedule.\n\n__*Accepted Inputs*__\nRuin(s)\nMat(s)\nShop, Store\nBond(s), Dragon(s)",0xCE456B)
+    t=Time.now
+    timeshift=7
+    timeshift-=1 unless (t-24*60*60).dst?
+    t-=60*60*timeshift
+    create_embed(event,"**#{command.downcase}** __type__","Shows the next time in-game daily events of the type `type` will happen.\nIf in PM and `type` is unspecified, shows the entire schedule.\n\n__*Accepted Inputs*__#{"\nRuin(s)" unless t.year>2020 || t.month>6 || t.day>24}\nMat(s)\nShop, Store\nBond(s), Dragon(s)",0xCE456B)
   elsif ['art'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __target__","Shows `target`'s art.  Target can be:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Enemies\n- Stickers\n- NPCs",0xCE456B)
     if safe_to_spam?(event)
@@ -3373,7 +3377,7 @@ def fac_stats(bot,event,args=nil)
       kxx=kxx[n,n2-n]
       for i in 0...kxx.length
         cost+=kxx[i][6]
-        if fac_stat_buffs(k,n+i-1).length>0
+        if fac_stat_buffs(k,n+i-1).length>0 && (s2s || i==0)
           alta=fac_stat_buffs(k,n+i-1)
           str="#{str}\nBuffs at Level #{n+i}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
         end
@@ -3385,7 +3389,7 @@ def fac_stats(bot,event,args=nil)
           str="#{str} - #{kxx[i][7].map{|q| "#{q[0]} x#{q[1].to_i*val}"}.sort.join(', ')}" if s2s
         end
       end
-      if fac_stat_buffs(k,n2-1).length>0
+      if fac_stat_buffs(k,n2-1).length>0 && s2s
         alta=fac_stat_buffs(k,n2-1)
         str="#{str}\nBuffs at Level #{n2}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       end
@@ -4210,6 +4214,7 @@ def grab_today(event,bot,args=nil,ignoreinputs=false,mode=0)
       str5="#{str5}\n*Available Orbs:* #{['All','All','Flame, Blaze, Inferno','Water, Stream, Deluge','Wind, Storm, Maelstorm','Light, Radiance, Refulgence','Shadow, Nightfall, Nether'][t.wday]}" if t.wday>1
       str5="#{str5}\n*Other Available Mats:* #{["Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye","Ancient Bird's Feather, Bewitching Wing",'Granite, Meteorite',"Fiend's Claw","Ancient Bird's Feather, Bewitching Wing"][t.wday]}" if t.wday>1
     end
+    str5="All Expert Ruins are available" if t.year>2020 || t.month>6 || t.day>=24
     str=extend_message(str,str5,event,2)
     str5="__**<:Element_Void:548467446734913536> #{"#{str3}'s " if str3.length>0}Void Strikes:**__"
     data_load()
@@ -4302,7 +4307,7 @@ def future_events(event,bot,args=nil)
   str="#{str}\nTime until Void Treasure Trade reset: #{t4.join(', ')}"
   mode=0
   for i in 0...args.length
-    mode=1 if mode<1 && ['ruin','ruins'].include?(args[i])
+    mode=1 if mode<1 && ['ruin','ruins'].include?(args[i]) && !(t.year>2020 || t.month>6 || t.day>24)
     mode=2 if mode<1 && ['mats','mat','material','materials'].include?(args[i])
     mode=3 if mode<1 && ['shop','store'].include?(args[i])
     mode=4 if mode<1 && ['bond','dragon','bonds','dragons'].include?(args[i])
@@ -4316,7 +4321,7 @@ def future_events(event,bot,args=nil)
     event.respond "Please either specify an event type or use this command in PM.\n\nAvailable event types include:\n- Ruins\n- Mats\n- Shop\n- Bond items\n- Void Strikes\n- High Dragon Trials"
     return nil
   end
-  if [1,0].include?(mode)
+  if [1,0].include?(mode) && !(t.year>2020 || t.month>6 || t.day>24)
     ruin=['<:Element_Null:532106087810334741>All','<:Element_Null:532106087810334741>All','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep']
     ruin=ruin.rotate(t.wday)
     matz=["","","Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye","Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing",
