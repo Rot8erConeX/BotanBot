@@ -1359,16 +1359,16 @@ Wind Dracolith\17\-\Dragon, Dracolith\2x2\1\28000\Windwyrm's Sphere, 200;; Windw
 Wind Dracolith\18\-\Dragon, Dracolith\2x2\1\30000\Windwyrm's Sphere, 250;; Windwyrm's Scale, 100;; Talonstone, 10
 Wind Dracolith\19\-\Dragon, Dracolith\2x2\1\32000\Windwyrm's Sphere, 300;; Windwyrm's Scale, 120;; Talonstone, 10
 Wind Dracolith\20\-\Dragon, Dracolith\2x2\1\34000\Windwyrm's Sphere, 350;; Windwyrm's Scale, 140;; Talonstone, 10
-Water Dracolith\21\-\Dragon, Dracolith\2x2\1\50000\Windwyrm's Greatsphere, 10;; Windwyrm's Squallscale, 28;; Talonstone, 14
-Water Dracolith\22\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 14;; Windwyrm's Squallscale, 31;; Talonstone, 19
-Water Dracolith\23\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 20;; Windwyrm's Squallscale, 34;; Talonstone, 26
-Water Dracolith\24\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 29;; Windwyrm's Squallscale, 37;; Talonstone, 35
-Water Dracolith\25\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 41;; Windwyrm's Squallscale, 40;; Talonstone, 48
-Water Dracolith\26\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 60;; Windwyrm's Squallscale, 45;; Talonstone, 66
-Water Dracolith\27\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 86;; Windwyrm's Squallscale, 50;; Talonstone, 91
-Water Dracolith\28\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 122;; Windwyrm's Squallscale, 60;; Talonstone, 124
-Water Dracolith\29\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 174;; Windwyrm's Squallscale, 66;; Talonstone, 170
-Water Dracolith\30\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 250;; Windwyrm's Squallscale, 72;; Talonstone, 233
+Wind Dracolith\21\-\Dragon, Dracolith\2x2\1\50000\Windwyrm's Greatsphere, 10;; Windwyrm's Squallscale, 28;; Talonstone, 14
+Wind Dracolith\22\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 14;; Windwyrm's Squallscale, 31;; Talonstone, 19
+Wind Dracolith\23\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 20;; Windwyrm's Squallscale, 34;; Talonstone, 26
+Wind Dracolith\24\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 29;; Windwyrm's Squallscale, 37;; Talonstone, 35
+Wind Dracolith\25\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 41;; Windwyrm's Squallscale, 40;; Talonstone, 48
+Wind Dracolith\26\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 60;; Windwyrm's Squallscale, 45;; Talonstone, 66
+Wind Dracolith\27\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 86;; Windwyrm's Squallscale, 50;; Talonstone, 91
+Wind Dracolith\28\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 122;; Windwyrm's Squallscale, 60;; Talonstone, 124
+Wind Dracolith\29\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 174;; Windwyrm's Squallscale, 66;; Talonstone, 170
+Wind Dracolith\30\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 250;; Windwyrm's Squallscale, 72;; Talonstone, 233
 Wind Shrine\1\A shrine made using ore that generates wind mana. It gives the wind's blessings to those who need it. Use it to boost the stats of wind-attuned adventurers.\Adventurer, Event Altar\3x3\1\0
 Wind Shrine\2\-\Adventurer, Event Altar\3x3\1\100\Windwhistle Grass, 3
 Wind Shrine\3\-\Adventurer, Event Altar\3x3\1\200\Windwhistle Grass, 5
