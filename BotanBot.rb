@@ -33,11 +33,11 @@ end
 
 # The bot's token is basically their password, so is censored for obvious reasons
 if @shardizard==4
-  bot = Discordrb::Commands::CommandBot.new token: '>Debug Token<', client_id: 431895561193390090, prefix: prefix_proc
+  bot = Discordrb::Commands::CommandBot.new token: 'NDMxODk1NTYxMTkzMzkwMDkw.DalZoA.QQ6Ar8x852aErhYZqBFBx91n4UQ', client_id: 431895561193390090, prefix: prefix_proc
 elsif @shardizard>4
-  bot = Discordrb::Commands::CommandBot.new token: '>Token<', shard_id: (@shardizard-1), num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
+  bot = Discordrb::Commands::CommandBot.new token: 'NTQzMzczMDE4MzAzMjk5NTg1.XkEWCg.zSrFNwnnOSoENlmrXLAPOzL3IZA', shard_id: (@shardizard-1), num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
 else
-  bot = Discordrb::Commands::CommandBot.new token: '>Token<', shard_id: @shardizard, num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
+  bot = Discordrb::Commands::CommandBot.new token: 'NTQzMzczMDE4MzAzMjk5NTg1.XkEWCg.zSrFNwnnOSoENlmrXLAPOzL3IZA', shard_id: @shardizard, num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
 end
 bot.gateway.check_heartbeat_acks = false
 
@@ -2755,12 +2755,15 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
   title="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min && k[6][0]>0 && topstr.length<=0
   title="#{title}\n**Invulnerability duration:** #{k[8]} seconds"
   k[12][1]=k[6][-1] if !k[12].nil? && k[12].length==1
-  smolsp=[longFormattedNumber(k[12][1])]
-  kk=[]
-  kk=k[6][5,k[6].length-5] if k[6].length>5
-  if kk.length>0
-    for i in 0...kk.length/7
-      smolsp.push(longFormattedNumber(kk[i*7+6])) unless kk[i*7+6]==k[12][1]
+  smolsp=[]
+  unless k[12].nil? || k[12].length<=0
+    smolsp=[longFormattedNumber(k[12][1])]
+    kk=[]
+    kk=k[6][5,k[6].length-5] if k[6].length>5
+    if kk.length>0
+      for i in 0...kk.length/7
+        smolsp.push(longFormattedNumber(kk[i*7+6])) unless kk[i*7+6]==k[12][1]
+      end
     end
   end
   title="#{title}\n**Skill Share:** *Cost:* #{k[12][0]}<:SkillShare:714597012733034547> / #{smolsp.join("\u2192")} SP\*" if !k[12].nil? && k[12].length>0
