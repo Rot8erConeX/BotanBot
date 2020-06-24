@@ -17,7 +17,7 @@ Altar\1\An altar to honor an element. The mana housed within instills a fighting
 Altar\2\-\Adventurer, Altar\3x3\2\400
 Altar\3\-\Adventurer, Altar\3x3\2\600
 Altar\4\-\Adventurer, Altar\3x3\2\800\Bronze (Tier 1) Orb, 1
-Altar\5\-\Adventurer, Altar\3x3\2\1000\Bronze (Tier 1) Orb, 3;; DL!f, 
+Altar\5\-\Adventurer, Altar\3x3\2\1000\Bronze (Tier 1) Orb, 3
 Altar\6\-\Adventurer, Altar\3x3\2\1200\Bronze (Tier 1) Orb, 5
 Altar\7\-\Adventurer, Altar\3x3\2\1500\Bronze (Tier 1) Orb, 5
 Altar\8\-\Adventurer, Altar\3x3\2\2000\Bronze (Tier 1) Orb, 5
@@ -337,6 +337,16 @@ Dracolith\17\-\Dragon, Dracolith\2x2\1\28000\Sphere, 200;; Silver Scale, 80;; Ta
 Dracolith\18\-\Dragon, Dracolith\2x2\1\30000\Sphere, 250;; Silver Scale, 100;; Talonstone, 10
 Dracolith\19\-\Dragon, Dracolith\2x2\1\32000\Sphere, 300;; Silver Scale, 120;; Talonstone, 10
 Dracolith\20\-\Dragon, Dracolith\2x2\1\34000\Sphere, 350;; Silver Scale, 140;; Talonstone, 10
+Dracolith\21\-\Dragon, Dracolith\2x2\1\50000\Greatsphere, 10;; Gold Scale, 28;; Talonstone, 14
+Dracolith\22\-\Dragon, Dracolith\2x2\1\0\Greatsphere, 14;; Gold Scale, 31;; Talonstone, 19
+Dracolith\23\-\Dragon, Dracolith\2x2\1\0\Greatsphere, 20;; Gold Scale, 34;; Talonstone, 26
+Dracolith\24\-\Dragon, Dracolith\2x2\1\0\Greatsphere, 29;; Gold Scale, 37;; Talonstone, 35
+Dracolith\25\-\Dragon, Dracolith\2x2\1\0\Greatsphere, 41;; Gold Scale, 40;; Talonstone, 48
+Dracolith\26\-\Dragon, Dracolith\2x2\1\0\Greatsphere, 60;; Gold Scale, 45;; Talonstone, 66
+Dracolith\27\-\Dragon, Dracolith\2x2\1\0\Greatsphere, 86;; Gold Scale, 50;; Talonstone, 91
+Dracolith\28\-\Dragon, Dracolith\2x2\1\0\Greatsphere, 122;; Gold Scale, 60;; Talonstone, 124
+Dracolith\29\-\Dragon, Dracolith\2x2\1\0\Greatsphere, 174;; Gold Scale, 66;; Talonstone, 170
+Dracolith\30\-\Dragon, Dracolith\2x2\1\0\Greatsphere, 250;; Gold Scale, 72;; Talonstone, 233
 Dragonata\1\-\Adventurer, Event Altar\3x3\1\0
 Dragonata\2\-\Adventurer, Event Altar\3x3\1\100\Paper-Mache, 3
 Dragonata\3\-\Adventurer, Event Altar\3x3\1\200\Paper-Mache, 5
@@ -581,6 +591,36 @@ Fafnir Statue (Wind)\27\-\Dragon, Fafnir\3x3\1\380000\Windwyrm's Greatsphere, 60
 Fafnir Statue (Wind)\28\-\Dragon, Fafnir\3x3\1\400000\Windwyrm's Greatsphere, 60;; Windwyrm's Squallscale, 50;; Talonstone, 60
 Fafnir Statue (Wind)\29\-\Dragon, Fafnir\3x3\1\420000\Windwyrm's Greatsphere, 70;; Windwyrm's Squallscale, 50;; Talonstone, 60
 Fafnir Statue (Wind)\30\-\Dragon, Fafnir\3x3\1\440000\Windwyrm's Greatsphere, 70;; Windwyrm's Squallscale, 50;; Talonstone, 60
+Festival Stage\1\Use it to boost the stats of sword and lance wielding adventurers.\Adventurer, Event Dual Dojo\3x3\1\0
+Festival Stage\2\-\Adventurer, Event Dual Dojo\3x3\1\100\Ornate Lantern, 3
+Festival Stage\3\-\Adventurer, Event Dual Dojo\3x3\1\200\Ornate Lantern, 5
+Festival Stage\4\-\Adventurer, Event Dual Dojo\3x3\1\300\Ornate Lantern, 7
+Festival Stage\5\-\Adventurer, Event Dual Dojo\3x3\1\400\Ornate Lantern, 10
+Festival Stage\6\-\Adventurer, Event Dual Dojo\3x3\1\500\Ornate Lantern, 12
+Festival Stage\7\-\Adventurer, Event Dual Dojo\3x3\1\600\Ornate Lantern, 15
+Festival Stage\8\-\Adventurer, Event Dual Dojo\3x3\1\700\Ornate Lantern, 18
+Festival Stage\9\-\Adventurer, Event Dual Dojo\3x3\1\800\Ornate Lantern, 21
+Festival Stage\10\-\Adventurer, Event Dual Dojo\3x3\1\1000\Ornate Lantern, 25
+Festival Stage\11\-\Adventurer, Event Dual Dojo\3x3\1\1200\Ornate Lantern, 30
+Festival Stage\12\-\Adventurer, Event Dual Dojo\3x3\1\1400\Ornate Lantern, 50
+Festival Stage\13\-\Adventurer, Event Dual Dojo\3x3\1\1600\Ornate Lantern, 70
+Festival Stage\14\-\Adventurer, Event Dual Dojo\3x3\1\1800\Ornate Lantern, 90
+Festival Stage\15\-\Adventurer, Event Dual Dojo\3x3\1\2000\Ornate Lantern, 120
+Festival Stage\16\-\Adventurer, Event Dual Dojo\3x3\1\2200\Ornate Lantern, 150
+Festival Stage\17\-\Adventurer, Event Dual Dojo\3x3\1\2400\Ornate Lantern, 180
+Festival Stage\18\-\Adventurer, Event Dual Dojo\3x3\1\2600\Ornate Lantern, 210
+Festival Stage\19\-\Adventurer, Event Dual Dojo\3x3\1\2800\Ornate Lantern, 250
+Festival Stage\20\-\Adventurer, Event Dual Dojo\3x3\1\3000\Ornate Lantern, 300
+Festival Stage\21\-\Adventurer, Event Dual Dojo\3x3\1\3200\Ornate Lantern, 350
+Festival Stage\22\-\Adventurer, Event Dual Dojo\3x3\1\3400\Ornate Lantern, 400
+Festival Stage\23\-\Adventurer, Event Dual Dojo\3x3\1\3600\Ornate Lantern, 450
+Festival Stage\24\-\Adventurer, Event Dual Dojo\3x3\1\3800\Ornate Lantern, 500
+Festival Stage\25\-\Adventurer, Event Dual Dojo\3x3\1\4000\Ornate Lantern, 550
+Festival Stage\26\-\Adventurer, Event Dual Dojo\3x3\1\4200\Ornate Lantern, 600
+Festival Stage\27\-\Adventurer, Event Dual Dojo\3x3\1\4400\Ornate Lantern, 700
+Festival Stage\28\-\Adventurer, Event Dual Dojo\3x3\1\4600\Ornate Lantern, 800
+Festival Stage\29\-\Adventurer, Event Dual Dojo\3x3\1\4800\Ornate Lantern, 900
+Festival Stage\30\-\Adventurer, Event Dual Dojo\3x3\1\5000\Ornate Lantern, 1000
 Flame Altar\1\An altar to honor flame. The mana housed within instills a fighting spirit, boosting the stats of flame-attuned adventurers.\Adventurer, Altar\3x3\2\200
 Flame Altar\2\-\Adventurer, Altar\3x3\2\400
 Flame Altar\3\-\Adventurer, Altar\3x3\2\600
@@ -641,6 +681,16 @@ Flame Dracolith\17\-\Dragon, Dracolith\2x2\1\28000\Flamewyrm's Sphere, 200;; Fla
 Flame Dracolith\18\-\Dragon, Dracolith\2x2\1\30000\Flamewyrm's Sphere, 250;; Flamewyrm's Scale, 100;; Talonstone, 10
 Flame Dracolith\19\-\Dragon, Dracolith\2x2\1\32000\Flamewyrm's Sphere, 300;; Flamewyrm's Scale, 120;; Talonstone, 10
 Flame Dracolith\20\-\Dragon, Dracolith\2x2\1\34000\Flamewyrm's Sphere, 350;; Flamewyrm's Scale, 140;; Talonstone, 10
+Flame Dracolith\21\-\Dragon, Dracolith\2x2\1\50000\Flamewyrm's Greatsphere, 10;; Flamewyrm's Scaldscale, 28;; Talonstone, 14
+Flame Dracolith\22\-\Dragon, Dracolith\2x2\1\0\Flamewyrm's Greatsphere, 14;; Flamewyrm's Scaldscale, 31;; Talonstone, 19
+Flame Dracolith\23\-\Dragon, Dracolith\2x2\1\0\Flamewyrm's Greatsphere, 20;; Flamewyrm's Scaldscale, 34;; Talonstone, 26
+Flame Dracolith\24\-\Dragon, Dracolith\2x2\1\0\Flamewyrm's Greatsphere, 29;; Flamewyrm's Scaldscale, 37;; Talonstone, 35
+Flame Dracolith\25\-\Dragon, Dracolith\2x2\1\0\Flamewyrm's Greatsphere, 41;; Flamewyrm's Scaldscale, 40;; Talonstone, 48
+Flame Dracolith\26\-\Dragon, Dracolith\2x2\1\0\Flamewyrm's Greatsphere, 60;; Flamewyrm's Scaldscale, 45;; Talonstone, 66
+Flame Dracolith\27\-\Dragon, Dracolith\2x2\1\0\Flamewyrm's Greatsphere, 86;; Flamewyrm's Scaldscale, 50;; Talonstone, 91
+Flame Dracolith\28\-\Dragon, Dracolith\2x2\1\0\Flamewyrm's Greatsphere, 122;; Flamewyrm's Scaldscale, 60;; Talonstone, 124
+Flame Dracolith\29\-\Dragon, Dracolith\2x2\1\0\Flamewyrm's Greatsphere, 174;; Flamewyrm's Scaldscale, 66;; Talonstone, 170
+Flame Dracolith\30\-\Dragon, Dracolith\2x2\1\0\Flamewyrm's Greatsphere, 250;; Flamewyrm's Scaldscale, 72;; Talonstone, 233
 Flame Tree\1\A mystical tree filled with flame mana and granted new power upon defeating Volk. Use it to boost the stats of *flame-attuned* adventurers.\Adventurer, Tree\3x3\1\0
 Flame Tree\2\-\Adventurer, Tree\3x3\1\10000\Destitute One's Mask Fragment, 10
 Flame Tree\3\-\Adventurer, Tree\3x3\1\20000\Destitute One's Mask Fragment, 10
@@ -794,6 +844,16 @@ Light Dracolith\17\-\Dragon, Dracolith\2x2\1\28000\Lightwyrm's Sphere, 200;; Lig
 Light Dracolith\18\-\Dragon, Dracolith\2x2\1\30000\Lightwyrm's Sphere, 250;; Lightwyrm's Scale, 100;; Talonstone, 10
 Light Dracolith\19\-\Dragon, Dracolith\2x2\1\32000\Lightwyrm's Sphere, 300;; Lightwyrm's Scale, 120;; Talonstone, 10
 Light Dracolith\20\-\Dragon, Dracolith\2x2\1\34000\Lightwyrm's Sphere, 350;; Lightwyrm's Scale, 140;; Talonstone, 10
+Light Dracolith\21\-\Dragon, Dracolith\2x2\1\50000\Lightwyrm's Greatsphere, 10;; Lightwymr's Glowscale, 28;; Talonstone, 14
+Light Dracolith\22\-\Dragon, Dracolith\2x2\1\0\Lightwyrm's Greatsphere, 14;; Lightwymr's Glowscale, 31;; Talonstone, 19
+Light Dracolith\23\-\Dragon, Dracolith\2x2\1\0\Lightwyrm's Greatsphere, 20;; Lightwymr's Glowscale, 34;; Talonstone, 26
+Light Dracolith\24\-\Dragon, Dracolith\2x2\1\0\Lightwyrm's Greatsphere, 29;; Lightwymr's Glowscale, 37;; Talonstone, 35
+Light Dracolith\25\-\Dragon, Dracolith\2x2\1\0\Lightwyrm's Greatsphere, 41;; Lightwymr's Glowscale, 40;; Talonstone, 48
+Light Dracolith\26\-\Dragon, Dracolith\2x2\1\0\Lightwyrm's Greatsphere, 60;; Lightwymr's Glowscale, 45;; Talonstone, 66
+Light Dracolith\27\-\Dragon, Dracolith\2x2\1\0\Lightwyrm's Greatsphere, 86;; Lightwymr's Glowscale, 50;; Talonstone, 91
+Light Dracolith\28\-\Dragon, Dracolith\2x2\1\0\Lightwyrm's Greatsphere, 122;; Lightwymr's Glowscale, 60;; Talonstone, 124
+Light Dracolith\29\-\Dragon, Dracolith\2x2\1\0\Lightwyrm's Greatsphere, 174;; Lightwymr's Glowscale, 66;; Talonstone, 170
+Light Dracolith\30\-\Dragon, Dracolith\2x2\1\0\Lightwyrm's Greatsphere, 250;; Lightwymr's Glowscale, 72;; Talonstone, 233
 Magma Slime Statue\1\A statue of a magma slime granted to those who are victorious in void battles. The burning flame mana grants vitality. Use it to boost the stats of flame-attuned adventurers.\Adventurer, Void Altar\2x2\1\0
 Magma Slime Statue\2\-\Adventurer, Void Altar\2x2\1\5000\Bat's Wing, 10;; Solid Fungus, 2
 Magma Slime Statue\3\-\Adventurer, Void Altar\2x2\1\10000\Bat's Wing, 15
@@ -957,6 +1017,16 @@ Shadow Dracolith\17\-\Dragon, Dracolith\2x2\1\28000\Shadowwyrm's Sphere, 200;; S
 Shadow Dracolith\18\-\Dragon, Dracolith\2x2\1\30000\Shadowwyrm's Sphere, 250;; Shadowwyrm's Scale, 100;; Talonstone, 10
 Shadow Dracolith\19\-\Dragon, Dracolith\2x2\1\32000\Shadowwyrm's Sphere, 300;; Shadowwyrm's Scale, 120;; Talonstone, 10
 Shadow Dracolith\20\-\Dragon, Dracolith\2x2\1\34000\Shadowwyrm's Sphere, 350;; Shadowwyrm's Scale, 140;; Talonstone, 10
+Shadow Dracolith\21\-\Dragon, Dracolith\2x2\1\50000\Shadowwyrm's Greatsphere, 10;; Shadowwyrm's Darkscale, 28;; Talonstone, 14
+Shadow Dracolith\22\-\Dragon, Dracolith\2x2\1\0\Shadowwyrm's Greatsphere, 14;; Shadowwyrm's Darkscale, 31;; Talonstone, 19
+Shadow Dracolith\23\-\Dragon, Dracolith\2x2\1\0\Shadowwyrm's Greatsphere, 20;; Shadowwyrm's Darkscale, 34;; Talonstone, 26
+Shadow Dracolith\24\-\Dragon, Dracolith\2x2\1\0\Shadowwyrm's Greatsphere, 29;; Shadowwyrm's Darkscale, 37;; Talonstone, 35
+Shadow Dracolith\25\-\Dragon, Dracolith\2x2\1\0\Shadowwyrm's Greatsphere, 41;; Shadowwyrm's Darkscale, 40;; Talonstone, 48
+Shadow Dracolith\26\-\Dragon, Dracolith\2x2\1\0\Shadowwyrm's Greatsphere, 60;; Shadowwyrm's Darkscale, 45;; Talonstone, 66
+Shadow Dracolith\27\-\Dragon, Dracolith\2x2\1\0\Shadowwyrm's Greatsphere, 86;; Shadowwyrm's Darkscale, 50;; Talonstone, 91
+Shadow Dracolith\28\-\Dragon, Dracolith\2x2\1\0\Shadowwyrm's Greatsphere, 122;; Shadowwyrm's Darkscale, 60;; Talonstone, 124
+Shadow Dracolith\29\-\Dragon, Dracolith\2x2\1\0\Shadowwyrm's Greatsphere, 174;; Shadowwyrm's Darkscale, 66;; Talonstone, 170
+Shadow Dracolith\30\-\Dragon, Dracolith\2x2\1\0\Shadowwyrm's Greatsphere, 250;; Shadowwyrm's Darkscale, 72;; Talonstone, 233
 Shadow Tree\1\A mystical tree filled with shadow mana and granted new power upon defeating Kai Yan. Use it to boost the stats of *shadow-attuned* adventurers.\Adventurer, Tree\3x3\1\0
 Shadow Tree\2\-\Adventurer, Tree\3x3\1\10000\Almighty One's Mask Fragment, 10
 Shadow Tree\3\-\Adventurer, Tree\3x3\1\20000\Almighty One's Mask Fragment, 10
@@ -1219,6 +1289,16 @@ Water Dracolith\17\-\Dragon, Dracolith\2x2\1\28000\Waterwyrm's Sphere, 200;; Wat
 Water Dracolith\18\-\Dragon, Dracolith\2x2\1\30000\Waterwyrm's Sphere, 250;; Waterwyrm's Scale, 100;; Talonstone, 10
 Water Dracolith\19\-\Dragon, Dracolith\2x2\1\32000\Waterwyrm's Sphere, 300;; Waterwyrm's Scale, 120;; Talonstone, 10
 Water Dracolith\20\-\Dragon, Dracolith\2x2\1\34000\Waterwyrm's Sphere, 350;; Waterwyrm's Scale, 140;; Talonstone, 10
+Water Dracolith\21\-\Dragon, Dracolith\2x2\1\50000\Waterwyrm's Greatsphere, 10;; Waterwyrm's Glistscale, 28;; Talonstone, 14
+Water Dracolith\22\-\Dragon, Dracolith\2x2\1\0\Waterwyrm's Greatsphere, 14;; Waterwyrm's Glistscale, 31;; Talonstone, 19
+Water Dracolith\23\-\Dragon, Dracolith\2x2\1\0\Waterwyrm's Greatsphere, 20;; Waterwyrm's Glistscale, 34;; Talonstone, 26
+Water Dracolith\24\-\Dragon, Dracolith\2x2\1\0\Waterwyrm's Greatsphere, 29;; Waterwyrm's Glistscale, 37;; Talonstone, 35
+Water Dracolith\25\-\Dragon, Dracolith\2x2\1\0\Waterwyrm's Greatsphere, 41;; Waterwyrm's Glistscale, 40;; Talonstone, 48
+Water Dracolith\26\-\Dragon, Dracolith\2x2\1\0\Waterwyrm's Greatsphere, 60;; Waterwyrm's Glistscale, 45;; Talonstone, 66
+Water Dracolith\27\-\Dragon, Dracolith\2x2\1\0\Waterwyrm's Greatsphere, 86;; Waterwyrm's Glistscale, 50;; Talonstone, 91
+Water Dracolith\28\-\Dragon, Dracolith\2x2\1\0\Waterwyrm's Greatsphere, 122;; Waterwyrm's Glistscale, 60;; Talonstone, 124
+Water Dracolith\29\-\Dragon, Dracolith\2x2\1\0\Waterwyrm's Greatsphere, 174;; Waterwyrm's Glistscale, 66;; Talonstone, 170
+Water Dracolith\30\-\Dragon, Dracolith\2x2\1\0\Waterwyrm's Greatsphere, 250;; Waterwyrm's Glistscale, 72;; Talonstone, 233
 Wind Altar\1\An altar to honor wind. The mana housed within inspires great wisdom, boosting the stats of wind-attuned adventurers.\Adventurer, Altar\3x3\2\200
 Wind Altar\2\-\Adventurer, Altar\3x3\2\400
 Wind Altar\3\-\Adventurer, Altar\3x3\2\600
@@ -1279,6 +1359,16 @@ Wind Dracolith\17\-\Dragon, Dracolith\2x2\1\28000\Windwyrm's Sphere, 200;; Windw
 Wind Dracolith\18\-\Dragon, Dracolith\2x2\1\30000\Windwyrm's Sphere, 250;; Windwyrm's Scale, 100;; Talonstone, 10
 Wind Dracolith\19\-\Dragon, Dracolith\2x2\1\32000\Windwyrm's Sphere, 300;; Windwyrm's Scale, 120;; Talonstone, 10
 Wind Dracolith\20\-\Dragon, Dracolith\2x2\1\34000\Windwyrm's Sphere, 350;; Windwyrm's Scale, 140;; Talonstone, 10
+Water Dracolith\21\-\Dragon, Dracolith\2x2\1\50000\Windwyrm's Greatsphere, 10;; Windwyrm's Squallscale, 28;; Talonstone, 14
+Water Dracolith\22\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 14;; Windwyrm's Squallscale, 31;; Talonstone, 19
+Water Dracolith\23\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 20;; Windwyrm's Squallscale, 34;; Talonstone, 26
+Water Dracolith\24\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 29;; Windwyrm's Squallscale, 37;; Talonstone, 35
+Water Dracolith\25\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 41;; Windwyrm's Squallscale, 40;; Talonstone, 48
+Water Dracolith\26\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 60;; Windwyrm's Squallscale, 45;; Talonstone, 66
+Water Dracolith\27\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 86;; Windwyrm's Squallscale, 50;; Talonstone, 91
+Water Dracolith\28\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 122;; Windwyrm's Squallscale, 60;; Talonstone, 124
+Water Dracolith\29\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 174;; Windwyrm's Squallscale, 66;; Talonstone, 170
+Water Dracolith\30\-\Dragon, Dracolith\2x2\1\0\Windwyrm's Greatsphere, 250;; Windwyrm's Squallscale, 72;; Talonstone, 233
 Wind Shrine\1\A shrine made using ore that generates wind mana. It gives the wind's blessings to those who need it. Use it to boost the stats of wind-attuned adventurers.\Adventurer, Event Altar\3x3\1\0
 Wind Shrine\2\-\Adventurer, Event Altar\3x3\1\100\Windwhistle Grass, 3
 Wind Shrine\3\-\Adventurer, Event Altar\3x3\1\200\Windwhistle Grass, 5
