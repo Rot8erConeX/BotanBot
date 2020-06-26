@@ -1299,6 +1299,21 @@ Water Dracolith\27\-\Dragon, Dracolith\2x2\1\0\Waterwyrm's Greatsphere, 86;; Wat
 Water Dracolith\28\-\Dragon, Dracolith\2x2\1\0\Waterwyrm's Greatsphere, 122;; Waterwyrm's Glistscale, 60;; Talonstone, 124
 Water Dracolith\29\-\Dragon, Dracolith\2x2\1\0\Waterwyrm's Greatsphere, 174;; Waterwyrm's Glistscale, 66;; Talonstone, 170
 Water Dracolith\30\-\Dragon, Dracolith\2x2\1\0\Waterwyrm's Greatsphere, 250;; Waterwyrm's Glistscale, 72;; Talonstone, 233
+Water Tree\1\A mystical tree filled with water mana and granted new power upon defeating The Twins. Use it to boost the stats of *water-attuned* adventurers.\Adventurer, Tree\3x3\1\0
+Water Tree\2\-\Adventurer, Tree\3x3\1\10000\Soaring Ones' Mask Fragment, 10
+Water Tree\3\-\Adventurer, Tree\3x3\1\20000\Soaring Ones' Mask Fragment, 10
+Water Tree\4\-\Adventurer, Tree\3x3\1\30000\Soaring Ones' Mask Fragment, 20
+Water Tree\5\-\Adventurer, Tree\3x3\1\40000\Soaring Ones' Mask Fragment, 20
+Water Tree\6\-\Adventurer, Tree\3x3\1\50000\Soaring Ones' Mask Fragment, 30
+Water Tree\7\-\Adventurer, Tree\3x3\1\60000\Soaring Ones' Mask Fragment, 30
+Water Tree\8\-\Adventurer, Tree\3x3\1\70000\Soaring Ones' Mask Fragment, 30
+Water Tree\9\-\Adventurer, Tree\3x3\1\80000\Soaring Ones' Mask Fragment, 30
+Water Tree\10\-\Adventurer, Tree\3x3\1\90000\Soaring Ones' Mask Fragment, 30
+Water Tree\11\-\Adventurer, Tree\3x3\1\100000\Soaring Ones' Mask Fragment, 35;; Liberated One's Mask Fragment, 5
+Water Tree\12\-\Adventurer, Tree\3x3\1\110000\Soaring Ones' Mask Fragment, 35;; Liberated One's Mask Fragment, 5
+Water Tree\13\-\Adventurer, Tree\3x3\1\120000\Soaring Ones' Mask Fragment, 35;; Liberated One's Mask Fragment, 5
+Water Tree\14\-\Adventurer, Tree\3x3\1\130000\Soaring Ones' Mask Fragment, 35;; Liberated One's Mask Fragment, 5
+Water Tree\15\-\Adventurer, Tree\3x3\1\140000\Soaring Ones' Mask Fragment, 35;; Liberated One's Mask Fragment, 5
 Wind Altar\1\An altar to honor wind. The mana housed within inspires great wisdom, boosting the stats of wind-attuned adventurers.\Adventurer, Altar\3x3\2\200
 Wind Altar\2\-\Adventurer, Altar\3x3\2\400
 Wind Altar\3\-\Adventurer, Altar\3x3\2\600
