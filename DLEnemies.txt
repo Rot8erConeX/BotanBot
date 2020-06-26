@@ -116,4 +116,4 @@ Volk\-1, 1759649, 8711648, 13799248; -1, 7230, 10064, 11573\Wind, Therion, Agito
 Blood Moon\-1, 282958, 353697; -1, 10064, 11573, 11573\Wind, Therion, Agito, Agito Uprising\Immune.\NA\Life Drain
 Kai Yan\-1, 2463508, 9486159; -1, 3615, 6075\Light, Therion, Agito, Agito Uprising\Poison: **0%**, Burn: **0%**, Stun: *99%*, Bog: *99%*, Sleep: *99%*, Frostbite: **0%**\Blind, Paralysis\Adamantite Shield;; Battleground
 Ciella\-1, 1987650, 8114653; -1, 7230, 7230\Water, Therion, Agito, Agito Uprising\Poison: **0%**, Burn: **0%**, Frostbite: **0%**, **Standard:** Stun/Bog/Sleep: *99%*\Freeze, Bog\Veil;; Vulnerability
-Ayaha & Otoha\-1, 2648231, 9120317; -1, 0, 0\Flame, Therion, Agito, Agito Uprising\Burn: **0%**, Posion: *99%*, Frostbite: **0%**, __Bog: **0%**__\Burn (Stun?)\
+Ayaha & Otoha\-1, 2648231, 9120317; -1, 0, 0\Flame, Therion, Agito, Agito Uprising\Poison: **0%**/*99%*, Burn: **0%**, Freeze: *99%*/*100%*, Frostbite: **0%**, __Bog: **0%**__\Burn, Stun\
