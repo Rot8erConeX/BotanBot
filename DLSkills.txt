@@ -2327,6 +2327,8 @@ Therion's Bane\example\Ability\Increases damage to therions by `x`%.\0\y\Therion
 Therion's Bane\20%\Ability\Increases damage to therions by 20%.\60\y\Therion, Bane
 Therion's Bane\25%\Ability\Increases damage to therions by 25%.\80\y\Therion, Bane
 Therion's Bane\35%\Ability\Increases damage to therions by 35%.\100\y\Therion, Bane
+Toryanse\-\Ability\Gradually increases Ayaha & Otoha's strength over time. Dispellable by applying Stun, Blindness, Freeze or Sleep.\-1\y\Enemy
+Tosenbo\-\Ability\Gradually increases Ayaha & Otoha's defense over time. Dispellable by applying Poison, Burn, Bog, Paralysis or Frostbite.\-1\y\Enemy
 Tricker Treats\example\Ability\Increases Tricker Treat intake for clearing quests by `x`%.\0\y\Event, Facility, Score
 Tricker Treats\25%\Ability\Increases Tricker Treat intake for clearing quests by 25%.\0\y\Event, Facility, Score
 Tricker Treats\50%\Ability\Increases Tricker Treat intake for clearing quests by 50%.\0\y\Event, Facility, Score
@@ -2341,6 +2343,7 @@ Undead's Bane\15%\Ability\Increases damage to undead by 15%.\40\y\Undead, Bane
 Unforgettable Promise\example\Ability\Reduces susceptibility to curses by 50/100%. When the user is hit by an attack that would have cursed them, their critical rate is increased by 10/15% for 10 seconds. After activating, this buff will not activate again for 15 seconds.\0\y\CurseRes, CritRate
 Unforgettable Promise\I\Ability\Reduces susceptibility to curses by 50%. When the user is hit by an attack that would have cursed them, their critical rate is increased by 10% for 10 seconds. After activating, this buff will not activate again for 15 seconds.\80\y\CurseRes, CritRate
 Unforgettable Promise\II\Ability\Reduces susceptibility to curses by 100%. When the user is hit by an attack that would have cursed them, their critical rate is increased by 15% for 10 seconds. After activating, this buff will not activate again for 15 seconds.\100\y\CurseRes, CritRate
+Union\-\Ability\Ayaha & Otoha share the same health bar, stats, afflictions and debuffs.\-1\y\Enemy
 Unknown\-\Ability\We don't know. This is a placeholder. Stop challenging my made up abilities <:wrathful:621402788177510453>\0\y\WonderGuard
 Unyielding Offense\example\Ability\Increases strength by `x`% for the remainder of the quest when the user's HP drops to 70% (five times per quest).\0\y\StrengthSkill, Last
 Unyielding Offense\2%\Ability\Increases strength by 2% for the remainder of the quest when the user's HP drops to 70% (five times per quest).\60\y\StrengthSkill, Last
@@ -2355,6 +2358,7 @@ Veil\-\Ability\Completely wastes your time by running in a circle "invisible"(ju
 Volcanic Chimera's Bane\20%\Ability\Increases damage to the Volcanic Chimera by 20%.\40\y\Bane
 Volcanic Chimera's Bane\30%\Ability\Increases damage to the Volcanic Chimera by 30%.\60\y\Bane
 Vulnerability\-\Ability\15% defense down but renamed, stacking up to 3 times. Lasts 90s.\-1\y\Enemy
+Warabe Asobi\-\Ability\This ability changes Ayaha & Otoha's affliction resistances, and activates Tosenbo and Toryanse.\-1\y\Enemy
 Water Res\example\Ability\Reduces water damage taken by `x`%.\0\y\WaterRes, Resistance
 Water Res\3%\Ability\Reduces water damage taken by 3%.\20\y\WaterRes, Resistance
 Water Res\4%\Ability\Reduces water damage taken by 4%.\30\y\WaterRes, Resistance
