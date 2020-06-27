@@ -1440,6 +1440,9 @@ Barrage Obliteration\5%\Ability\Adds 5% to the modifier applied to critical dama
 Barrage Obliteration\6%\Ability\Adds 6% to the modifier applied to critical damage for every 20-hit combo (up to three times per quest)\60\y\CritDamage, Combo
 Battleground\-\Ability\Adventurers do double damage to Kai Yan, but he deals 50% more damage to you.\-1\y\Enemy
 Bleeding Punisher\example\Ability\Increases damage to bleeding enemies by `x`%.\0\y\Punisher, BleedingPunisher
+Bleeding Punisher\2%\Ability\Increases damage to bleeding enemies by 2%.\30\y\Punisher, BleedingPunisher
+Bleeding Punisher\3%\Ability\Increases damage to bleeding enemies by 3%.\40\y\Punisher, BleedingPunisher
+Bleeding Punisher\4%\Ability\Increases damage to bleeding enemies by 4%.\50\y\Punisher, BleedingPunisher
 Bleeding Punisher\5%\Ability\Increases damage to bleeding enemies by 5%.\60\y\Punisher, BleedingPunisher
 Bleeding Punisher\8%\Ability\Increases damage to bleeding enemies by 8%.\80\y\Punisher, BleedingPunisher
 Blinded Punisher\example\Ability\Increases damage to blinded enemies by `x`%.\0\y\Punisher, BlindedPunisher
@@ -1675,6 +1678,14 @@ Extra Energy\I\Ability\Grants a 40% chance that a user's energy level will be in
 Extra Energy\II\Ability\Grants a 50% chance that a user's energy level will be increased by an additional stage upon being increased\70\y\Energy
 Extra Energy\III\Ability\Grants an 80% chance that a user's energy level will be increased by an additional stage upon being increased\80\y\Energy
 Fatalis's Bane\15%\Ability\Increases damage dealt to Fatalis by 15%\60\y\Bane
+Festival Spirit\example\Ability\Increases festival spirit intake for clearing quests by `x`%.\0\y\Event, Score
+Festival Spirit\25%\Ability\Increases festival spirit intake for clearing quests by 25%.\0\y\Event, Score
+Festival Spirit\35%\Ability\Increases festival spirit intake for clearing quests by 35%.\0\y\Event, Score
+Festival Spirit\50%\Ability\Increases festival spirit intake for clearing quests by 50%.\0\y\Event, Score
+Festival Spirit\75%\Ability\Increases festival spirit intake for clearing quests by 75%.\0\y\Event, Score
+Festival Spirit\100%\Ability\Increases festival spirit intake for clearing quests by 100%.\0\y\Event, Score
+Festival Spirit\125%\Ability\Increases festival spirit intake for clearing quests by 125%.\0\y\Event, Score
+Festival Spirit\150%\Ability\Increases festival spirit intake for clearing quests by 150%.\0\y\Event, Score
 Flame Blades' Protection\-\Ability\Fills 100% of skill gauges at the start of quests, and increases defense by 20% while Crystalline Blades Buffed is in effect.\100\y\SkillPrep, DefenseSkill, Unique
 Flame Res\example\Ability\Reduces flame damage taken by `x`%.\0\y\FlameRes, Resistance
 Flame Res\3%\Ability\Reduces flame damage taken by 3%.\20\y\FlameRes, Resistance
@@ -2024,6 +2035,10 @@ Mournful Heart\II\Ability\Grants the user a unique force strike, and increases f
 Obsessive Love\example\Ability\When the "Obsession" effect is active, increases strength by 20/30%, and decreases defense by 20%.\0\y\StrengthSkill, Unique
 Obsessive Love\I\Ability\When the "Obsession" effect is active, increases strength by 20%, and decreases defense by 20%.\60\y\StrengthSkill, Unique
 Obsessive Love\II\Ability\When the "Obsession" effect is active, increases strength by 30%, and decreases defense by 20%.\80\y\StrengthSkill, Unique
+Ornate Lanterns\example\Ability\Increases ornate lantern intake for clearing quests by `x`%.\0\y\Event, Facility, Materials
+Ornate Lanterns\25%\Ability\Increases ornate lantern intake for clearing quests by 25%.\0\y\Event, Facility, Materials
+Ornate Lanterns\35%\Ability\Increases ornate lantern intake for clearing quests by 35%.\0\y\Event, Facility, Materials
+Ornate Lanterns\50%\Ability\Increases ornate lantern intake for clearing quests by 50%.\0\y\Event, Facility, Materials
 Overdrive Punisher\example\Ability\Increases damage to enemies in overdrive state by `x`%.\0\y\Punisher, OverdrivePunisher
 Overdrive Punisher\3%\Ability\Increases damage to enemies in overdrive state by 3%.\20\y\Punisher, OverdrivePunisher
 Overdrive Punisher\4%\Ability\Increases damage to enemies in overdrive state by 4%.\30\y\Punisher, OverdrivePunisher
