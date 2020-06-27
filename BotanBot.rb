@@ -2946,7 +2946,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
       end
       if adv[pp].nil? || adv[pp].length<=0 || adv[pp][p].nil? || adv[pp][p].length<=0
         event.respond "#{adv[0]} does not have a #{['1st','2nd','3rd'][p]} ability." if pp==8
-        event.respond "#{adv[0]} does not have a #{['','chain'][p]} coability." if pp==7
+        event.respond "#{adv[0]} does not have a #{['','chain '][p]}coability." if pp==7
         return nil
       end
       skl1=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==adv[pp][p][-1]}
@@ -2954,15 +2954,15 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         kk=adv[pp][p].split(' ')
         kk=[kk[0,kk.length-1].join(' '),kk[-1].split('/')[-1]]
         kk[1]="+#{kk[1]}" if kk[1].include?('%')
-        skl1=sklz.find_index{|q| q[2]==['Cobility','Chain'][p] && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==kk.join(' ')}
+        skl1=sklz.find_index{|q| q[2]==['CoAbility','Chain'][p] && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==kk.join(' ')}
       end
       if skl1.nil?
         event.respond "#{adv[0]}'s #{['1st','2nd','3rd'][p]} ability, #{adv[pp][p][-1]}, has no data." if pp==8
-        event.respond "#{adv[0]}'s #{['','chain'][p]} coability, #{adv[pp][p]}, has no data." if pp==7
+        event.respond "#{adv[0]}'s #{['','chain '][p]}coability, #{kk.join(' ')}, has no data." if pp==7
         return nil
       end
       disp_ability_data(bot,event,adv[8][p][-1].split(' ')) if pp==8
-      disp_ability_data(bot,event,adv[7][p].split(' '),['Coability','Chain'][p]) if pp==7
+      disp_ability_data(bot,event,kk.join(' ').split(' '),['CoAbility','Chain'][p]) if pp==7
     elsif find_data_ex(:find_dragon,args.join(' '),event).length>0 && has_any?(args,['a1','a2','a3','1','2','3','ability1','ability2','ability3','abil1','abil2','abil3'])
       adv=find_data_ex(:find_dragon,args.join(' '),event)
       p=0
