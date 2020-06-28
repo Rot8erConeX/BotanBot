@@ -874,6 +874,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Shadow) Dragon's Might\example\Aura\If the user is attuned to Shadow: Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\StrengthSkill, InCombat, Shadow
 (Shadow) Dragon's Might\I\Aura\If the user is attuned to Shadow: Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\StrengthSkill, InCombat, Shadow
 (Shadow) Dragon's Might\II\Aura\If the user is attuned to Shadow: Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\100\y\StrengthSkill, InCombat, Shadow
+(Shadow) Ending Shapeshift = Skillful Trickery\example\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next eight skills by `x`% / 180% when the user's shapeshift is undone.\0\y\Skill Damage, Shadow
+(Shadow) Ending Shapeshift = Skillful Trickery\I\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next eight skills by `x`% when the user's shapeshift is undone.\100\y\Skill Damage, Shadow
+(Shadow) Ending Shapeshift = Skillful Trickery\II\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next eight skills by 180% when the user's shapeshift is undone.\120\y\Skill Damage, Shadow
 (Shadow) HP Below 30% = Defense\example\Aura\If the user is attuned to Shadow: increases strength by `x`% when HP is 30% or below.\0\y\HP30, DefenseSkill, Shadow
 (Shadow) HP Below 30% = Defense\75%\Aura\If the user is attuned to Shadow: increases defense by 75% when HP is 30% or below.\70\y\HP30, DefenseSkill, Shadow
 (Shadow) HP Below 30% = Defense\100%\Aura\If the user is attuned to Shadow: increases defense by 100% when HP is 30% or below.\100\y\HP30, DefenseSkill, Shadow
@@ -907,6 +910,9 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Shadow) Skill Damage\example\Aura\If the user is attuned to Shadow: increases skill damage by `x`%.\0\y\SkillDamage, Shadow
 (Shadow) Skill Damage\70%\Aura\If the user is attuned to Shadow: increases skill damage by 70%.\110\y\SkillDamage, Shadow
 (Shadow) Skill Damage\90%\Aura\If the user is attuned to Shadow: increases skill damage by 90%.\120\y\SkillDamage, Shadow
+(Shadow) Skillful Trickery\example\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next 15 skills by `x`% / 180% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by 180%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\0\y\SkillDamage, Shadow
+(Shadow) Skillful Trickery\I\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next 15 skills by 180% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by `x`%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\100\y\SkillDamage, Shadow
+(Shadow) Skillful Trickery\II\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next 15 skills by 180% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by 180%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\120\y\SkillDamage, Shadow
 (Shadow) Skill Haste\example\Aura\If the user is attuned to Shadow: Increases skill gauge fill rate by `x`%.\0\y\SkillHaste, Shadow
 (Shadow) Skill Haste\25%\Aura\If the user is attuned to Shadow: Increases skill gauge fill rate by 25%.\60\y\SkillHaste, Shadow
 (Shadow) Skill Haste\35%\Aura\If the user is attuned to Shadow: Increases skill gauge fill rate by 35%.\80\y\SkillHaste, Shadow
@@ -1027,6 +1033,9 @@ Dragon's Might\10%\Aura\Increases strength by a further 10% for the remainder of
 Ending Shapeshift = Curse\example\Aura\When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\0\y\Curse
 Ending Shapeshift = Curse\I\Aura\When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\80\y\Curse
 Ending Shapeshift = Curse\II\Aura\When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\100\y\Curse
+Ending Shapeshift = Skillful Trickery\example\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next eight skills by `x`% / 180% when the user's shapeshift is undone.\0\y\Skill Damage
+Ending Shapeshift = Skillful Trickery\I\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next eight skills by `x`% when the user's shapeshift is undone.\100\y\Skill Damage
+Ending Shapeshift = Skillful Trickery\II\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next eight skills by 180% when the user's shapeshift is undone.\120\y\Skill Damage
 Ending Shapeshift = Skill Gauges\example\Aura\Fills `x`% of skill gauges when the user's shapeshift is undone.\0\y\SkillPrep
 Ending Shapeshift = Skill Gauges\50%\Aura\Fills 50% of skill gauges when the user's shapeshift is undone.\80\y\SkillPrep
 Ending Shapeshift = Skill Gauges\100%\Aura\Fills 100% of skill gauges when the user's shapeshift is undone.\100\y\SkillPrep
@@ -1092,6 +1101,9 @@ Shadow Res\15%\Aura\Grants 15% Shadow resistance.\65\y\ShadowRes, Resistance
 Skill Damage\example\Aura\Increases attack skill damage by `x`%\0\y\SkillDamage
 Skill Damage\50%\Aura\Increases attack skill damage by 50%\80\y\SkillDamage
 Skill Damage\70%\Aura\Increases attack skill damage by 70%\100\y\SkillDamage
+Skillful Trickery\example\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next 15 skills by `x`% / 180% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by 180%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\0\y\SkillDamage
+Skillful Trickery\I\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next 15 skills by 180% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by `x`%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\100\y\SkillDamage
+Skillful Trickery\II\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next 15 skills by 180% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by 180%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\120\y\SkillDamage
 Skill Recharge\example\Aura\Fills 25%/35% of a skill's skill gauge after using that skill.\0\y\SkillRecharge
 Skill Recharge\I\Aura\Fills 25% of a skill's skill gauge after using that skill.\100\y\SkillRecharge
 Skill Recharge\II\Aura\Fills 35% of a skill's skill gauge after using that skill.\120\y\SkillRecharge

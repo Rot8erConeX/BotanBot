@@ -87,6 +87,7 @@ Siren\5\Water\37, 370\12, 125\Aquatic Melody\(Water) Strength +10%;; (Water) Str
 Siren(Popstar)\5\Light\37, 371\12, 124\Invigorating Harmony\(Light) Strength +30%;; (Light) Strength +40%;;; Exhilaration;; Exhilaration\5000, 8500\1.8, 1\3\Yes\Yes\Siren\Hidaka Rina\Aimee Ayotte\\\F\\default; 80%; 96%; 144%\3 hits to charge skill. Can be charged twice.
 Snow Drake\3\Water\19, 191\5, 57\Snow Drop\(Water) HP +10%;; (Water) HP +15%\300, 150\1.35, 3.5\3\Yes\No\Snow Drake\\\;;;; \\F\\default; 144%; 158%; 202%\
 Stribog\4\Wind\30, 306\9, 91\Test of Integrity\(Wind) HP +30%;; (Wind) HP +45%\2000, 2200\1.5, 1\4\No\No\Stribog\\\;;;; \\M\KoG\default; 216%; 238%; 302%\
+Styx\5\Water\37, 370\12, 125\Frigid Blast\(Water) Compounding Skill Damage I;; (Water) Compounding Skill Damage II\5000, 8500\0, 0\1\Yes\No\Styx\\\\\\\default; x; x; x\
 Sylvia\5w\Wind\22, 225\7, 72\Hurricane Drive\(Wind) HP +20%;; (Wind) HP +30%\5000, 300\1.5, 1.5\2\No\No\Sylvia\\\;;;; \\F\KoG\default; 125%; 138%; 175%\
 Takemikazuchi\5\Light\37, 371\12, 124\Thunderous Charge\(Light) Strength +30%;; (Light) Strength +40%;;; (Light) Overdrive Punisher +20%;; (Light) Overdrive Punisher +25%\5000, 8500\1.8, 1\4\No\Yes\Takemikazuchi\\\\\M\\default; 153%; 168%; 344%\
 Tie Shan Gongzhu\5\Light\37, 371\12, 124\Energizing Fan\(Light) HP +20%;; (Light) HP +30%;;; (Light) Skill Haste +25%;; (Light) Skill Haste +35%\5000, 8500\1.8, 1\2\Yes\No\Tie Shan Gongzhu\Tanaka Atsuko\Rita Yee\\\F\\default; 230%; 252%; 345%\
