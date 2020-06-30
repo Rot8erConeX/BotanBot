@@ -32,6 +32,7 @@ Pigeon\2\y\\
 Purple Slime\1\y\\
 Rolf\1\y\\
 Roy the Third\1\y\\
+Sam\5\y\\
 Saoratorium Gal\4\y\\
 Sarisse\1\n\\Ayaka Asai
 Silver Slime\1\y\\
