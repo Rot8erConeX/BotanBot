@@ -201,6 +201,8 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
       end
     elsif ['enemies','boss','enemy','bosses','enemie','enemys','bosss'].include?(subcommand.downcase)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all enemies that fit `filters`.\n\nYou can search by:\n- Element\n- Tribe\n\nIf too many enemies are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+    elsif ['facility','facilities','facilitys','fac','facs','faculties','faculty','facultys'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all facilities that fit `filters`.\n\nYou can search by:\n- Element\n- Weapon type\n- Facility Type\n\nIf too many facilities are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
     else
       create_embed(event,"**#{command.downcase}** __\*filters__","Displays all adventurers, dragons, wyrmprints, and weapons that fit `filters`.\n\nYou can search by:\n- Rarity\n- Element\n- Weapon type\n- Class / Amulet type\n- Availability\n- Gender (for adventurers and dragons)\n\nIn addition, adventurers can be sorted by:\n- Race\n\nIn addition, dragons can be sorted by:\n- Dragon Roost Bond Gift preference\n- Whether or not the dragon turns to face damage sources\n- Whether or not the dragon is a ranged attacker\n\nIn addition, weapons can be sorted by:\n- Crafting tier\n\nIf too much data is trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
     end
@@ -3126,6 +3128,37 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   end
 end
 
+def find_the_faculty(bot,event,args=nil,mode=0,allowstr=true)
+  data_load()
+  args=normalize(event.message.text.downcase).gsub(',','').split(' ') if args.nil?
+  args=args.map{|q| normalize(q.downcase)}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  elem=[]
+  wpn=[]
+  tags=[]
+  lookout=get_lookout_tags()
+  lookout=lookout.reject{|q| q[2]!='Facility'}
+  for i in 0...args.length
+    elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
+    elem.push('Water') if ['water','waters'].include?(args[i].downcase)
+    elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
+    elem.push('Wind') if ['earth','earths'].include?(args[i].downcase) && event.user.id==192821228468305920
+    elem.push('Light') if ['light','lights'].include?(args[i].downcase)
+    elem.push('Shadow') if ['shadow','dark','shadows','darks'].include?(args[i].downcase)
+    wpn.push('Sword') if ['sword','swords'].include?(args[i].downcase)
+    wpn.push('Blade') if ['blade','blades','sabers','saber','katana','katanas'].include?(args[i].downcase)
+    wpn.push('Dagger') if ['dagger','daggers','knife','knifes','knives'].include?(args[i].downcase)
+    wpn.push('Axe') if ['axes','axe'].include?(args[i].downcase)
+    wpn.push('Bow') if ['bow','bows','arrow','arrows','archer','archers'].include?(args[i].downcase)
+    wpn.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
+    wpn.push('Wand') if ['wand','wands','rod','rods'].include?(args[i].downcase)
+    wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
+  end
+  
+  event.respond "This functionality coming soon.  Please be patient!"
+  return nil
+end
+
 def fac_stat_buffs(k,lvl)
   if ['Dual Altar','Event Dual Altar','Dual Dojo','Event Dual Dojo'].include?(k[3][1])
     alta=[(lvl+1)/2,lvl/2]
@@ -3974,7 +4007,7 @@ def adv_mats(event,args,bot,forcespiral=false)
       f2.push([2,"#{f[2] if nums[0]<20}\n\n__*Floor 3 unbind*__\n#{f[3]}"]) if nums[0]<30 && nums[1]>=20
       f2.push([3,"#{f[4] if nums[0]<30}\n\n__*Floor 4 unbind*__\n#{f[5]}"]) if nums[0]<40 && nums[1]>=30
       f2.push([4,"#{f[6] if nums[0]<40}\n\n__*Floor 5 unbind*__\n#{f[7]}"]) if nums[0]<50 && nums[1]>=40
-      f2.push([5,"#{f[8] if nums[0]<50}#{"\n\n__*Mana Spiral unlock*__\n#{f[9]}" if mana && nums[1]<=49}"]) if nums[0]<=50 && nums[1]>=50
+      f2.push([5,"#{f[8] if nums[0]<50}#{"\n\n__*Mana Spiral unlock*__\n#{f[9]}" if mana && nums[0]<=49}"]) if nums[0]<=50 && nums[1]>=50
       xcolor=element_color(elem)
       disp="__**#{name}**'s Mana Spiral mats#{" (#{nums_mean})" if nums_mean.length>0}__"
       if f2.length>0 && !f2[0][1].nil? && f2[0][1].length>0 && !forcespiral
