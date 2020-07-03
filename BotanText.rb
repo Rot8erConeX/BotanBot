@@ -3825,7 +3825,9 @@ def adv_mats(event,args,bot,forcespiral=false)
     dispname=k[0].gsub(' ','_')
     xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Adventurers/#{dispname}_#{k[1][0,1]}.png?raw=true"
   end
+  rar=-1
   for i in 0...args.length
+    rar=args[i][0,1].to_i if args[i][1,1]=='*' && args[i][0,1].to_i>3 && args[i][0,1].to_i<@max_rarity[0]+1
     elem='Flame' if ['flame','fire','flames','fires'].include?(args[i].downcase) && elem.length<=0
     elem='Water' if ['water','waters'].include?(args[i].downcase) && elem.length<=0
     elem='Wind' if ['wind','air','winds','airs'].include?(args[i].downcase) && elem.length<=0
@@ -3834,14 +3836,13 @@ def adv_mats(event,args,bot,forcespiral=false)
     elem='Shadow' if ['shadow','dark','shadows','darks'].include?(args[i].downcase) && elem.length<=0
     nums.push(args[i].to_i) if args[i].to_i.to_s==args[i]
   end
-  if nums.length<=0 || elem.length<=0
+  if (nums.length<=0 && rar<0) || elem.length<=0
     event.respond "You need either an element and a rarity, or an adventurer name."
     return nil
   elsif forcespiral && !mana
     event.respond "This adventurer does not have a mana spiral."
     return nil
   end
-  rar=-1
   for i in 0...nums.length
     if rar<0 && nums[i]>2 && nums[i]<6
       rar=nums[i]*1
