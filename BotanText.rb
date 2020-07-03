@@ -2783,6 +2783,7 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
       end
     end
   end
+  char=[] if search.length<=1 && search[0]=='*Game Launch*' && mode%4>1
   if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
     event.respond "__**Search**__\n#{search.join("\n")}\n\n__**Note**__\nAt #{char.length} entries, too much data is trying to be displayed.  Please use this command in PM." if mode==0
     return nil
