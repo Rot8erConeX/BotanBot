@@ -265,6 +265,8 @@
 ["Seasonal", ["seasonal", "seasonals"], "Banner"]
 [["KoG", "Knights of Glory"], ["gloryknight", "gloryknights", "glorynight", "glorynights", "glorynite", "glorynites", "knightofglory", "knightsofglory", "kog", "nightofglory", "nightsofglory", "niteofglory", "nitesofglory"], "Cygame"]
 [["RoB", "Rage of Bahamut"], ["bahamut", "bahamut'srage", "bahamutrage", "bahamutsrage", "rage", "rageofbahamut", "rob"], "Cygame"]
+["Slime", ["slime", "slimes", "slimy"], "Facility"]
+["Tree", ["tree", "trees"], "Facility"]
 ["AbyssalPhantom", ["abyssalphantom", "waterphantom", "moistphantom", "wetphantom", "phantomwater", "phantomwet", "phantommoist"], "Mat"]
 ["Adventurers", ["adv", "adventure", "adventurer", "adventurers"], "Mat"]
 ["Agito", ["agito"], "Mat"]
