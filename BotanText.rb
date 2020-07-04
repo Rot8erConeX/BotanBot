@@ -2101,7 +2101,7 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
   genders.uniq!
   races.uniq!
   cygames.uniq!
-  char=@adventurers.reject{|q| q[0]=='Puppy'}.uniq
+  char=@adventurers.uniq
   search=[]
   emo=[]
   if rarity.length>0
@@ -2313,6 +2313,7 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
   for i in 0...char.length
     char[i][0]="~~#{char[i][0]}~~" if char[i][1].length>1 && char[i][1][1,1]=='-' && char[i][0].include?('*')
     char[i][0]="*#{char[i][0]}*" if char[i][1].length>1 && char[i][1][1,1]=='-' && !char[i][0].include?('*')
+    char[i][0]="*#{char[i][0]}*" if char[i][1].length>1 && char[i][0]=='Puppy'
   end
   if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
     event.respond "__**Search**__\n#{search.join("\n")}\n\n__**Note**__\nAt #{char.length} entries, too much data is trying to be displayed.  Please use this command in PM." if mode==0
@@ -2783,7 +2784,8 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
       end
     end
   end
-  char=[] if search.length<=1 && search[0]=='*Game Launch*' && mode%4>1
+  char=[] if search.length==1 && search[0]=='*Game Launch*' && mode%4>1
+  puts "end - #{char.length}"
   if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
     event.respond "__**Search**__\n#{search.join("\n")}\n\n__**Note**__\nAt #{char.length} entries, too much data is trying to be displayed.  Please use this command in PM." if mode==0
     return nil
@@ -3110,9 +3112,9 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       end
     end
   end
-  if !juststats && find_data_ex(:find_enemy,args2.join(' '),event).length>0 && find_data_ex(:find_enemy,args2.join(' '),event)[0][0,8]!='Mega Man'
+  if !juststats && find_data_ex(:find_enemy,args2.join(' '),event,true).length>0 && find_data_ex(:find_enemy,args2.join(' '),event,true)[0][0,8]!='Mega Man'
     args2=args2.reject{|q| q.to_i.to_s==q || q.gsub('*','').to_i.to_s==q.gsub('*','')}
-    k2=find_data_ex(:find_enemy,args2.join(' '),event)
+    k2=find_data_ex(:find_enemy,args2.join(' '),event,true)
     unless k2.nil? || k2.length<=0
       search.push("*Uses Mats from:* #{enemy_emoji(k2,bot)}#{k2[0]}")
       char=char.reject{|q| q[15].nil? || q[15]!=k2[0]}
@@ -3137,9 +3139,14 @@ def find_the_faculty(bot,event,args=nil,mode=0,allowstr=true)
   elem=[]
   wpn=[]
   tags=[]
+  typ1=[]
+  typ2=[]
+  evn=false
   lookout=get_lookout_tags()
   lookout=lookout.reject{|q| q[2]!='Facility'}
   for i in 0...args.length
+    evn=true if ['event','events','limited','limit','limiteds','limits'].include?(args[i].downcase)
+    void=true if ['void','voids'].include?(args[i].downcase)
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
     elem.push('Water') if ['water','waters'].include?(args[i].downcase)
     elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i].downcase)
@@ -3154,10 +3161,72 @@ def find_the_faculty(bot,event,args=nil,mode=0,allowstr=true)
     wpn.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
     wpn.push('Wand') if ['wand','wands','rod','rods'].include?(args[i].downcase)
     wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
+    typ1.push('Adventurer') if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[i].downcase)
+    typ1.push('Dragon') if ['dragon','dragons','drg','drag','drgs','drags'].include?(args[i].downcase)
+    typ1.push('Decorative') if ['decorative','decoration','decor','deco','decoratives','decorations','decors','decos'].include?(args[i].downcase)
+    typ1.push('General') if ['general','denerals','gen'].include?(args[i].downcase)
+    typ1.push('Production') if ['production','produce','productive','productives','producing','producings','produces','productions'].include?(args[i].downcase)
+    typ2.push('Altar') if ['altar','alter','altars','alters'].include?(args[i].downcase)
+    typ2.push('Dojo') if ['dojo','dojos'].include?(args[i].downcase)
+    typ2.push('Dracolith') if ['dracolith','dracoliths'].include?(args[i].downcase)
+    typ2.push('Fafnir') if ['fafnir','fafnirs'].include?(args[i].downcase)
+    for i2 in 0...lookout.length
+      tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
+    end
   end
-  
-  event.respond "This functionality coming soon.  Please be patient!"
-  return nil
+  search=[]
+  char=@facilities.reject{|q| !['1','-','H'].include?(q[1])}
+  ccc=@facilities.map{|q| q}
+  for i in 0...char.length
+    if char[i][1]=='1'
+      k=ccc.reject{|q| q[0]!=char[i][0]}.map{|q| q[1].to_i}
+      char[i][0]="#{char[i][0]} #{k.min}#{"-#{k.max}" unless k.min==k.max}"
+    end
+  end
+  if elem.length>0
+    char=char.reject{|q| !has_any?(q[8],elem)}.uniq
+    for i in 0...elem.length
+      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{elem[i].gsub('None','Null')}"}
+      elem[i]="#{moji[0].mention}#{elem[i]}" if moji.length>0
+    end
+    search.push("*Element*: #{elem.join(', ')}")
+  end
+  if wpn.length>0
+    char=char.reject{|q| !has_any?(q[8],wpn)}.uniq
+    for i in 0...wpn.length
+      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn[i]}"}
+      wpn[i]="#{moji[0].mention}#{wpn[i]}" if moji.length>0
+    end
+    search.push("*Weapon*: #{wpn.join(', ')}")
+  end
+  if typ1.length>0
+    char=char.reject{|q| !typ1.include?(q[3][0])}
+    search.push("*Primary type:* #{typ1.join(', ')}")
+  end
+  if typ2.length>0
+    char=char.reject{|q| q[3][1].nil?}
+    char=char.reject{|q| !typ2.include?(q[3][1]) && !(q[3][1].include?(' ') && typ2.include?(q[3][1].split(' ')[-1]))}
+    search.push("*Secondary type:* #{typ2.join(', ')}")
+  end
+  if tags.length>0
+    char=char.reject{|q| !has_any?(q[8],tags)}
+    search.push("*Additional tags:* #{tags.join(', ')}")
+  end
+  if evn
+    char=char.reject{|q| q[3][1].nil? || !q[3][1].include?('Event ')}
+    search.push('*Event Facilities*')
+  end
+  if void
+    char=char.reject{|q| q[3][1].nil? || !q[3][1].include?('Void ')}
+    search.push('*Void Facilities*')
+  end
+  textra=''
+  if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length>=1900) && !safe_to_spam?(event) && mode<2
+    event.respond "__**Search**__\n#{search.join("\n")}\n\n__**Note**__\nAt #{char.length} entries, too much data is trying to be displayed.  Please use this command in PM." if mode==0
+    return nil
+  else
+    return [search,char,'',textra]
+  end
 end
 
 def fac_stat_buffs(k,lvl)
