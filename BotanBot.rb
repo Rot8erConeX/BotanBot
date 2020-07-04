@@ -322,12 +322,15 @@ def data_load()
     b[i][3]=b[i][3].split(', ')
     b[i][5]=b[i][5].to_i
     b[i][6]=b[i][6].to_i
-    unless b[i][7].nil?
+    if b[i][7]=='0'
+      b[i][7]=nil
+    else
       b[i][7]=b[i][7].split(';; ').map{|q| q.split(', ')}
       for i2 in 0...b[i][7].length
         b[i][7][i2][1]=b[i][7][i2][1].to_i
       end
     end
+    b[i][8]=b[i][8].split(', ') unless b[i][8].nil?
   end
   @facilities=b.map{|q| q}
   if File.exist?("#{@location}devkit/DLMaterials.txt")
@@ -1463,6 +1466,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   for i in 0...args.length
     rar=args[i].to_i if rar<0 && args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<@max_rarity[0]+2
     rar=args[i].to_i if rar<0 && args[i][1,1]=='*' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<@max_rarity[0]+2
+    rar=5 if rar<0 && ['50','50mc'].include?(args[i].downcase)
   end
   semirar=false
   if rar<0
@@ -2442,6 +2446,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     end
   end
   val=1 if val<=0
+  val=1 if val>1 && k[0].include?(" #{val}") && !args.map{|q| q.downcase}.include?(k[0].downcase.gsub(' ','')) && count_in(args.map{|q| q.downcase},val.to_s)<2
   if val%5==0 && !mub
     mub=true
     val/=5
@@ -4950,6 +4955,11 @@ def find_in_enemies(bot,event,args=nil,mode=0)
   end
 end
 
+def find_in_facilities(bot,event,args=nil,mode=0,allowstr=true)
+  reload_library()
+  return find_the_faculty(bot,event,args,mode,allowstr)
+end
+
 def find_adventurers(bot,event,args=nil)
   args=normalize(event.message.text.downcase).split(' ') if args.nil?
   args=args.map{|q| normalize(q.downcase)}
@@ -5005,11 +5015,11 @@ def find_adventurers(bot,event,args=nil)
     for i in 0...char.length
       str=extend_message(str,char[i][0],event)
     end
-    str=extend_message(str,"#{char.length} total",event,2)
+    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}}",event,2)
     event.respond str
   else
     textra="**No adventurers match your search**" if char.length<=0
-    create_embed(event,"__**Adventurer Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total",nil,flds)
+    create_embed(event,"__**Adventurer Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}}",nil,flds)
   end
 end
 
@@ -5050,11 +5060,11 @@ def find_dragons(bot,event,args=nil)
     for i in 0...char.length
       str=extend_message(str,char[i][0],event)
     end
-    str=extend_message(str,"#{char.length} total",event,2)
+    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}}",event,2)
     event.respond str
   else
     textra="**No dragons match your search**" if char.length<=0
-    create_embed(event,"__**Dragon Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total",nil,flds)
+    create_embed(event,"__**Dragon Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}}",nil,flds)
   end
 end
 
@@ -5094,11 +5104,11 @@ def find_wyrmprints(bot,event,args=nil)
     for i in 0...char.length
       str=extend_message(str,char[i][0],event)
     end
-    str=extend_message(str,"#{char.length} total",event,2)
+    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}}",event,2)
     event.respond str
   else
     textra="**No wyrmprints match your search**" if char.length<=0
-    create_embed(event,"__**Wyrmprint Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total",nil,flds)
+    create_embed(event,"__**Wyrmprint Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}}",nil,flds)
   end
 end
 
@@ -5157,11 +5167,11 @@ def find_weapons(bot,event,args=nil)
     for i in 0...char.length
       str=extend_message(str,char[i][0],event)
     end
-    str=extend_message(str,"#{char.length} total",event,2)
+    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}}",event,2)
     event.respond str
   else
     textra="**No weapons match your search**" if char.length<=0
-    create_embed(event,"__**Weapons Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total",nil,flds)
+    create_embed(event,"__**Weapons Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}}",nil,flds)
   end
 end
 
@@ -5353,6 +5363,31 @@ def find_enemies(bot,event,args=nil)
   end
 end
 
+def find_facilities(bot,event,args=nil)
+  args=normalize(event.message.text.downcase).split(' ') if args.nil?
+  args=args.map{|q| normalize(q.downcase)}
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  k=find_in_facilities(bot,event,args)
+  return nil if k.nil? || k.is_a?(String)
+  search=k[0]
+  char=k[1]
+  textra=k[3]
+  char=char.sort{|a,b| a[0]<=>b[0]}.map{|q| q[0]}.uniq
+  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || char.join("\n").length+search.join("\n").length>=1900
+    str="__**Facility Search**__\n#{search.join("\n")}#{"\n\n__**Notes**__\n#{textra}" if textra.length>0}\n\n__**Results**__"
+    for i in 0...char.length
+      str=extend_message(str,char[i],event)
+    end
+    str=extend_message(str,"#{char.length} total",event,2)
+    event.respond str
+  else
+    flds=nil
+    flds=triple_finish(char) unless char.length<=0
+    textra="#{textra}\n\n**No facilities match your search**" if char.length<=0
+    create_embed(event,"__**Facilities Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total",nil,flds)
+  end
+end
+
 def find_all(bot,event,args=nil)
   args=normalize(event.message.text.downcase).split(' ') if args.nil?
   args=args.map{|q| normalize(q.downcase)}
@@ -5437,6 +5472,8 @@ def find_all(bot,event,args=nil)
       end
       str=str.join("\n").gsub("\n\n",'')
       str=extend_message(str,"__**Note**__\nToo much data is trying to be displayed.  Please use this command in PM.",event,2)
+      wrm[4]=@wyrmprints.reject{|q| ['Wily Warriors','Greatwyrm'].include?(q[0])}.uniq.length if wrm[0].length<=0 && wrm[1].length<=0 && search.length<=0
+      wpn[1]=@weapons.uniq if wpn[0].length<=0 && wpn[1].length<=0
       str=extend_message(str,"Totals: #{adv[1].length} adventurers, #{drg[1].length} dragons, #{wrm[4]} wyrmprints, #{wpn[1].length} weapons",event,2)
       event.respond str.gsub("\n\n\n","\n\n")
       return nil
@@ -5457,7 +5494,7 @@ def find_all(bot,event,args=nil)
     for i in 1...wpn[1].length
       str=extend_message(str,wpn[1][i],event,1,', ')
     end
-    str=extend_message(str,"Totals: #{adv[1].length} adventurers, #{drg[1].length} dragons, #{wrm[4]} wyrmprints#{' (not shown)' if wrm[4]>wrm[1].length}, #{wpn[1].length} weapons",event,2)
+    str=extend_message(str,"Totals: #{adv[1].reject{|q| q.include?('*')}.length}#{" (#{adv[1].length})" unless adv[1].reject{|q| !q.include?('*')}.length<=0} adventurers, #{drg[1].reject{|q| q.include?('*')}.length}#{" (#{drg[1].length})" unless drg[1].reject{|q| !q.include?('*')}.length<=0} dragons, #{wrm[4]} wyrmprints#{' (not shown)' if wrm[4]>wrm[1].length}, #{wpn[1].reject{|q| q.include?('*')}.length}#{" (#{wpn[1].length})" unless wpn[1].reject{|q| !q.include?('*')}.length<=0} weapons",event,2)
     str=extend_message(str,"Wyrmprints have been removed from the displayed search results because only the rarity filter applies.",event,2) if wrm[4]>wrm[1].length
     event.respond str
   else
@@ -5469,7 +5506,7 @@ def find_all(bot,event,args=nil)
     flds.push(["**Weapons** #{wpn[2].join('')}",wpn[1].join("\n")]) if wpn[1].length>0
     textra="**No data matches your search**" if adv[1].length<=0 && drg[1].length<=0 && wrm[1].length<=0 && wpn[1].length<=0
     textra="#{textra}\n\nWyrmprints have been removed from the displayed search results because only the rarity filter applies." if wrm[4]>wrm[1].length
-    create_embed(event,str,textra,0xCE456B,"Totals: #{adv[1].length} adventurers, #{drg[1].length} dragons, #{wrm[4]} wyrmprints#{' (not shown)' if wrm[4]>wrm[1].length}, #{wpn[1].length} weapons",nil,flds)
+    create_embed(event,str,textra,0xCE456B,"Totals: #{adv[1].reject{|q| q.include?('*')}.length}#{" (#{adv[1].length})" unless adv[1].reject{|q| !q.include?('*')}.length<=0} adventurers, #{drg[1].reject{|q| q.include?('*')}.length}#{" (#{drg[1].length})" unless drg[1].reject{|q| !q.include?('*')}.length<=0} dragons, #{wrm[4]} wyrmprints#{' (not shown)' if wrm[4]>wrm[1].length}, #{wpn[1].reject{|q| q.include?('*')}.length}#{" (#{wpn[1].length})" unless wpn[1].reject{|q| !q.include?('*')}.length<=0} weapons",nil,flds)
   end
 end
 
@@ -6768,6 +6805,12 @@ end
 
 bot.command([:facility,:faculty,:fac]) do |event, *args|
   return nil if overlap_prevent(event)
+  if args.nil? || args.length<=0
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    find_facilities(bot,event,args)
+    return nil
+  end
   disp_facility_data(bot,event,args)
 end
 
@@ -6870,7 +6913,7 @@ bot.command([:find,:search,:lookup]) do |event, *args|
   if args.nil? || args.length<=0 || event.server.nil? || bot.user(141260274144509952).on(event.server.id).nil? || event.user.id==141260274144509952
   else
     f=['vanille','van']
-    trig=['love','adventurer','adventurers','adv','advs','unit','units','dragon','dragons','drg','drag','drgs','drags','wyrmprint','wyrm','print','weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap','mat','mats','materials','material','item','items','banner','banners','summon','summoning','summons','summonings','abil','ability','abilitys','abilities','abils','aura','auras','coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca','cc','skill','skills','skls','skl','skil','skils','enemies','boss','enemy','bosses','enemie','enemys','bosss']
+    trig=['love','adventurer','adventurers','adv','advs','unit','units','dragon','dragons','drg','drag','drgs','drags','wyrmprint','wyrm','print','weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap','mat','mats','materials','material','item','items','banner','banners','summon','summoning','summons','summonings','abil','ability','abilitys','abilities','abils','aura','auras','coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca','cc','skill','skills','skls','skl','skil','skils','enemies','boss','enemy','bosses','enemie','enemys','bosss','facility','facilities','facilitys','fac','facs','faculties','faculty','facultys']
     m=bot.user(141260274144509952).on(event.server.id).display_name.gsub(' ','')
     f.push(m) unless trig.include?(m)
     f.push(m[0,args[0].length]) unless args[0].length<=5 || args[0].length>m.length || trig.include?(m[0,args[0].length])
@@ -6936,6 +6979,10 @@ bot.command([:find,:search,:lookup]) do |event, *args|
   elsif ['enemies','boss','enemy','bosses','enemie','enemys','bosss'].include?(args[0].downcase)
     args.shift
     find_enemies(bot,event,args)
+    return nil
+  elsif ['facility','facilities','facilitys','fac','facs','faculties','faculty','facultys'].include?(args[0].downcase)
+    args.shift
+    find_facilities(bot,event,args)
     return nil
   end
   find_all(bot,event,args)
@@ -7679,7 +7726,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
   event.channel.await(:bob, from: event.user.id) do |e|
     reload=false
     if e.message.text.include?('1')
-      if e.message.text.include?('git') && [167657750971547648,141260274144509952].include?(event.user.id)
+      if e.message.text.downcase.include?('git') && [167657750971547648,141260274144509952].include?(event.user.id)
         download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/DLNames.txt")
         IO.copy_stream(download, "DLTemp.txt")
         if File.size("DLTemp.txt")>100
@@ -7739,7 +7786,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
         IO.copy_stream(download, "DLTemp.txt")
         if to_reload[i]=='Skills' && File.size("DLTemp.txt")<File.size("DLSkills.txt")*2/3
           stx='Skills were not reloaded because the file was loaded from the wrong sheet.'
-        elsif to_reload[i]=='SkillSubsets' && File.size("DLTemp.txt")<File.size("DLSkillSubsets.txt") && !e.message.text.include?('subset')
+        elsif to_reload[i]=='SkillSubsets' && File.size("DLTemp.txt")<File.size("DLSkillSubsets.txt") && !e.message.text.downcase.include?('subset')
         elsif File.size("DLTemp.txt")>100
           b=[]
           File.open("DLTemp.txt").each_line.with_index do |line, idx|
@@ -8079,6 +8126,9 @@ bot.mention do |event|
     elsif ['enemies','boss','enemy','bosses','enemie','enemys','bosss'].include?(args[0].downcase)
       args.shift
       find_enemies(bot,event,args)
+    elsif ['facility','facilities','facilitys','fac','facs','faculties','faculty','facultys'].include?(args[0].downcase)
+      args.shift
+      find_facilities(bot,event,args)
     else
       find_all(bot,event,args)
     end
@@ -8293,7 +8343,12 @@ bot.mention do |event|
   elsif ['facility','faculty','fac'].include?(args[0].downcase)
     m=false
     args.shift
-    disp_facility_data(bot,event,args)
+    if ['find','search'].include?(args[0].downcase)
+      args.shift
+      find_facilities(bot,event,args)
+    else
+      disp_facility_data(bot,event,args)
+    end
   elsif ['mat','material','item'].include?(args[0].downcase)
     m=false
     args.shift
