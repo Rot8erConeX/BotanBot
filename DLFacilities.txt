@@ -1179,6 +1179,31 @@ The Hungerdome\27\-\Adventurer, Event Dual Dojo\3x3\1\4400\Chef's Special, 700
 The Hungerdome\28\-\Adventurer, Event Dual Dojo\3x3\1\4600\Chef's Special, 800
 The Hungerdome\29\-\Adventurer, Event Dual Dojo\3x3\1\4800\Chef's Special, 900
 The Hungerdome\30\-\Adventurer, Event Dual Dojo\3x3\1\5000\Chef's Special, 1000
+Tree\1\A mystical tree filled with elemental mana and granted new power upon defeating the Agito. Use it to boost the stats of *elementally-attuned* adventurers.\Adventurer, Tree\3x3\1\0
+Tree\2\-\Adventurer, Tree\3x3\1\10000\Silver Mask Fragment, 10
+Tree\3\-\Adventurer, Tree\3x3\1\20000\Silver Mask Fragment, 10
+Tree\4\-\Adventurer, Tree\3x3\1\30000\Silver Mask Fragment, 20
+Tree\5\-\Adventurer, Tree\3x3\1\40000\Silver Mask Fragment, 20
+Tree\6\-\Adventurer, Tree\3x3\1\50000\Silver Mask Fragment, 30
+Tree\7\-\Adventurer, Tree\3x3\1\60000\Silver Mask Fragment, 30
+Tree\8\-\Adventurer, Tree\3x3\1\70000\Silver Mask Fragment, 30
+Tree\9\-\Adventurer, Tree\3x3\1\80000\Silver Mask Fragment, 30
+Tree\10\-\Adventurer, Tree\3x3\1\90000\Silver Mask Fragment, 30
+Tree\11\-\Adventurer, Tree\3x3\1\100000\Silver Mask Fragment, 35;; Gold Mask Fragment, 5
+Tree\12\-\Adventurer, Tree\3x3\1\110000\Silver Mask Fragment, 35;; Gold Mask Fragment, 5
+Tree\13\-\Adventurer, Tree\3x3\1\120000\Silver Mask Fragment, 35;; Gold Mask Fragment, 5
+Tree\14\-\Adventurer, Tree\3x3\1\130000\Silver Mask Fragment, 35;; Gold Mask Fragment, 5
+Tree\15\-\Adventurer, Tree\3x3\1\140000\Silver Mask Fragment, 35;; Gold Mask Fragment, 5
+Tree\16\-\Adventurer, Tree\3x3\1\160000\Silver Mask Fragment, 40;; Gold Mask Fragment, 10
+Tree\17\-\Adventurer, Tree\3x3\1\180000\Silver Mask Fragment, 40;; Gold Mask Fragment, 10
+Tree\18\-\Adventurer, Tree\3x3\1\200000\Silver Mask Fragment, 40;; Gold Mask Fragment, 10
+Tree\19\-\Adventurer, Tree\3x3\1\220000\Silver Mask Fragment, 40;; Gold Mask Fragment, 10
+Tree\20\-\Adventurer, Tree\3x3\1\240000\Silver Mask Fragment, 40;; Gold Mask Fragment, 10
+Tree\21\-\Adventurer, Tree\3x3\1\260000\Silver Mask Fragment, 40;; Gold Mask Fragment, 10
+Tree\22\-\Adventurer, Tree\3x3\1\280000\Silver Mask Fragment, 40;; Gold Mask Fragment, 10
+Tree\23\-\Adventurer, Tree\3x3\1\300000\Silver Mask Fragment, 40;; Gold Mask Fragment, 10
+Tree\24\-\Adventurer, Tree\3x3\1\320000\Silver Mask Fragment, 40;; Gold Mask Fragment, 10
+Tree\25\-\Adventurer, Tree\3x3\1\340000\Silver Mask Fragment, 40;; Gold Mask Fragment, 10
 Twinkling Slime Statue\1\A statue of a twinkling slime granted to those who are victorious in void battles. The still light mana within it sharpens the mind. Use it to boost the stats of light-attuned adventurers.\Adventurer, Void Altar\2x2\1\0
 Twinkling Slime Statue\2\-\Adventurer, Void Altar\2x2\1\5000\Iron Ore, 10
 Twinkling Slime Statue\3\-\Adventurer, Void Altar\2x2\1\10000\Iron Ore, 15;; Solid Fungus, 2
