@@ -347,7 +347,7 @@ Dracolith\27\-\Dragon, Dracolith\2x2\1\0\Greatsphere, 86;; Gold Scale, 50;; Talo
 Dracolith\28\-\Dragon, Dracolith\2x2\1\0\Greatsphere, 122;; Gold Scale, 60;; Talonstone, 124\
 Dracolith\29\-\Dragon, Dracolith\2x2\1\0\Greatsphere, 174;; Gold Scale, 66;; Talonstone, 170\
 Dracolith\30\-\Dragon, Dracolith\2x2\1\0\Greatsphere, 250;; Gold Scale, 72;; Talonstone, 233\
-Dragonata\1\-\Adventurer, Event Altar\3x3\1\0\0\
+Dragonata\1\A figure in the shape of a dragon, used in the Vernal Banquet. Crafted with the hopes of bringing about both victory and peace. Use it to boost the stats of water-attuned adventurers.\Adventurer, Event Altar\3x3\1\0\0\Water
 Dragonata\2\-\Adventurer, Event Altar\3x3\1\100\Paper-Mache, 3\
 Dragonata\3\-\Adventurer, Event Altar\3x3\1\200\Paper-Mache, 5\
 Dragonata\4\-\Adventurer, Event Altar\3x3\1\300\Paper-Mache, 7\
