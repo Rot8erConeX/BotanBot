@@ -2446,7 +2446,7 @@ Windwhistle Grass\35%\Ability\Increases windwhistle grass intake for clearing qu
 Windwhistle Grass\50%\Ability\Increases windwhistle grass intake for clearing quests by 50%.\0\y\Event, Facility, Score
 Windwhistle Grass\60%\Ability\Increases windwhistle grass intake for clearing quests by 60%.\0\y\Event, Facility, Score
 Windwhistle Grass\75%\Ability\Increases wind whistle grass intake for clearing quests by 75%.\0\y\Event, Facility, Score
-Wonder Guard\-\Ability\Only adventurers with the proper bane skill can damage this enemy\-1\y\WonderGuard
+Wonder Guard\-\Ability\Only adventurers with the proper bane skill and more than 423 strength can damage this enemy\-1\y\WonderGuard
 Woodland Blessing\example\Ability\Reduces susceptibility to stun and sleep by `x`%.\0\y\StunRes, SleepRes, Resistance
 Woodland Blessing\50%\Ability\Reduces susceptibility to stun and sleep by 50%.\70\y\StunRes, SleepRes, Resistance
 Woodland Blessing\100%\Ability\Reduces susceptibility to stun and sleep by 100%.\100\y\StunRes, SleepRes, Resistance
