@@ -432,6 +432,7 @@ def dragon_data(bot,event,args=nil,juststats=false)
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2]}"}
   moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k[2].gsub('Shadow','Dark').gsub('Flame','Fire')}"} if feh
   title="#{moji[0].mention unless moji.length<=0}**#{k[2]}**"
+  title="#{title}\n**Essence Dragon**" unless k[21].nil? || k[21].length<=0 || k[21].downcase=='no'
   color='Colorless'
   color='Red' if ['Flame','Shadow'].include?(k[2])
   color='Blue' if ['Water','Light'].include?(k[2])
@@ -538,7 +539,21 @@ def dragon_data(bot,event,args=nil,juststats=false)
   bemoji=['<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if !k[16].nil? && k[16]=='FGO'
   bemoji=['<:Aether_Stone:510776805746278421>','<:Refining_Stone:453618312165720086>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if feh
   # Mana Spiral Pink = 0xE9438F
-  str="#{str}\n\n**Aura:**\n#{bemoji[0]*4}#{k[6].map{|q| q[0]}.reject{|q| q.nil? || q.length<=0}.join(', ')}\n#{bemoji[1]*4}#{k[6].map{|q| q[1]}.reject{|q| q.nil? || q.length<=0}.join(', ')}#{"\n#{bemoji[1]*5}#{k[6].map{|q| q[-1]}.join(', ')}" if k[6].map{|q| q.length}.max>2}" unless juststats
+  unless juststats
+    str="#{str}\n\n**Aura:**\n#{bemoji[0]*4}#{k[6].map{|q| q[0]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
+    if k[6].map{|q| q.length}.max>2
+      if safe_to_spam?(event)
+        str="#{str}\n#{bemoji[1]*1}#{bemoji[0]*3}#{k[6].map{|q| q[[q.length-1,1].min]}.reject{|q| q.nil? || q.length<=0}.join(', ')}" if k[6].map{|q| q.length}.max>3
+        qq=1
+        qq=2 if k[6].map{|q| q.length}.max>3
+        str="#{str}\n#{bemoji[1]*2}#{bemoji[0]*2}#{k[6].map{|q| q[[q.length-1,qq].min]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
+        str="#{str}\n#{bemoji[1]*3}#{bemoji[0]*1}#{k[6].map{|q| q[[q.length-1,3].min]}.reject{|q| q.nil? || q.length<=0}.join(', ')}" if k[6].map{|q| q.length}.max>3
+      end
+      str="#{str}\n#{bemoji[1]*4}#{k[6].map{|q| q[-1]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
+    else
+      str="#{str}\n#{bemoji[1]*4}#{k[6].map{|q| q[1]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
+    end
+  end
   str="#{str}\n\n**Sells for:** #{longFormattedNumber(k[7][0])}#{bemoji[2]} #{longFormattedNumber(k[7][1])}#{bemoji[3]}" unless juststats
   str="#{str}#{"\n" if juststats}\n**Bond gift preference:** #{['Golden Chalice (Sunday)','Juicy Meat (Monday)','Kaleidoscope (Tuesday)','Floral Circlet (Wednesday)','Compelling Book (Thursday)','Mana Essence (Friday)','Golden Chalice (Saturday)'][k[9]]}"
   unless s2s
@@ -2035,6 +2050,7 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
   crossgames=[]
   cygames=[]
   launch=false
+  notlaunch=false
   mana=false
   share=false
   lookout=get_lookout_tags()
@@ -2045,6 +2061,7 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
   lookout=lookout.reject{|q| ['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Flame','Water','Wind','Light','Shadow','Attack','Defense','Support','Healer'].include?(q[0])}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
+    notlaunch=true if ['notlaunch','nonlaunch'].include?(args[i].downcase)
     mana=true if ['mana','spiral','manaspiral','70','70node','70mc','70ms'].include?(args[i].downcase)
     share=true if ['share','shared','skillshare','shareskill'].include?(args[i].downcase) && allowstr%4<2
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1 && allowstr%2==0
@@ -2136,10 +2153,16 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
     end
     search.push("*Classes*: #{clzz.join(', ')}")
   end
-  if launch
+  if notlaunch && launch
+    textra="#{textra}\n\nThe searches for `launch` and `not launch` have cancelled each other out."
+  elsif launch
     search.push('*Game Launch*')
     b=@banners[0]
     char=char.reject{|q| !b[1].include?(q[0])}
+  elsif notlaunch
+    search.push('*Not in game at launch*')
+    b=@banners[0]
+    char=char.reject{|q| b[1].include?(q[0])}
   end
   if mana
     search.push('*<:Rarity_Mana:706612079783575607>Mana Spiral*')
@@ -2345,6 +2368,8 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
   crossgames=[]
   races=[]
   launch=false
+  notlaunch=false
+  ess=false
   lookout=get_lookout_tags()
   lookout2=lookout.reject{|q| q[2]!='Cygame'}
   lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Dragon'}
@@ -2353,6 +2378,8 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
   lookout=lookout.reject{|q| ['Flame','Water','Wind','Light','Shadow'].include?(q[0])}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
+    notlaunch=true if ['notlaunch','nonlaunch'].include?(args[i].downcase)
+    ess=true if ['essence','essance','freemerge','essences','essances','freemerges'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
     rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
@@ -2374,7 +2401,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
     wday.push(2) if ['tu','tuesday','tuesdae','tues','tue','t','kaleidoscope','kscope','k-scope'].include?(args[i].downcase)
     wday.push(3) if ['we','wednesday','wednesdae','wednes','wed','w','floralcirclet','flower','floral','circlet','circle'].include?(args[i].downcase)
     wday.push(4) if ['th','thursday','thursdae','thurs','thu','thur','h','r','compellingbook','book'].include?(args[i].downcase)
-    wday.push(5) if ['fr','friday','fridae','fri','fryday','frydae','fry','f','manaessence','mana','essence'].include?(args[i].downcase)
+    wday.push(5) if ['fr','friday','fridae','fri','fryday','frydae','fry','f','manaessence','manaessance','mana'].include?(args[i].downcase)
     wday.push(t.wday) if ['today','now'].include?(args[i].downcase)
     turn.push('Yes') if ['turn','damagedirection'].include?(args[i].downcase)
     turn.push('No') if ['noturn','anchor'].include?(args[i].downcase)
@@ -2434,10 +2461,20 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
     search.push("*Elements*: #{elem.join(', ')}")
   end
   char=[] if wpn.length>0 && mode>1
-  if launch
+  if notlaunch && launch
+    textra="#{textra}\n\nThe searches for `launch` and `not launch` have cancelled each other out."
+  elsif launch
     search.push('*Game Launch*')
     b=@banners[0]
     char=char.reject{|q| !b[2].include?(q[0])}
+  elsif notlaunch
+    search.push('*Not in game at launch*')
+    b=@banners[0]
+    char=char.reject{|q| b[2].include?(q[0])}
+  end
+  if ess
+    search.push('*Essence Dragons*')
+    char=char.reject{|q| q[21].nil? || q[21].length<=0 || q[21].downcase=='no'}
   end
   if wday.length>0
     char=char.reject{|q| !wday.include?(q[9])}.uniq
@@ -2612,6 +2649,7 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
   fltr=[]
   crossgames=[]
   launch=false
+  notlaunch=false
   tags=[]
   lookout=get_lookout_tags()
   lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Wyrmprint'}
@@ -2620,6 +2658,7 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
   ign=false
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
+    notlaunch=true if ['notlaunch','nonlaunch'].include?(args[i].downcase)
     ign=true if ['share','shared','skillshare','shareskill'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
     rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1
@@ -2664,10 +2703,16 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
     end
     search.push("*Amulet Types*: #{clzz.join(', ')}")
   end
-  if launch
+  if notlaunch && launch
+    textra="#{textra}\n\nThe searches for `launch` and `not launch` have cancelled each other out."
+  elsif launch
     search.push('*Game Launch*')
     b=@banners[0]
     char=char.reject{|q| !b[3].include?(q[0])}
+  elsif notlaunch
+    search.push('*Not in game at launch*')
+    b=@banners[0]
+    char=char.reject{|q| b[3].include?(q[0])}
   end
   if fltr.length>0
     m=[]
@@ -2809,6 +2854,7 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   tags=[]
   crossgames=[]
   launch=false
+  notlaunch=false
   lookout=get_lookout_tags()
   lookout3=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Weapon'}
   lookout=lookout.reject{|q| q[2]!='Askillity'}
@@ -2817,6 +2863,7 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   ign=false
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
+    notlaunch=true if ['notlaunch','nonlaunch'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
     rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1
     tier.push(args[i][1,args[i].length-1].to_i) if args[i][0,1].downcase=='t' && args[i][1,args[i].length-1].to_i.to_s==args[i][1,args[i].length-1] && args[i][1,args[i].length-1].to_i>0 && args[i][1,args[i].length-1].to_i<4
@@ -2983,9 +3030,14 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
     end
     search.push("*Elements*: #{elem.join(', ')}")
   end
-  if launch
+  if launch && notlaunch
+    textra="#{textra}\n\nThe searches for `launch` and `not launch` have cancelled each other out."
+  elsif launch
     search.push('*Game Launch*')
     char=char.reject{|q| q[8].to_i<8 || q[8].to_i>211}
+  elsif notlaunch
+    search.push('*Not in game at launch*')
+    char=char.reject{|q| q[8].to_i<212}
   end
   if fltr.length>0
     m=[]
@@ -3238,7 +3290,7 @@ def fac_stat_buffs(k,lvl)
     alta[1]+=0.5
     alta[1]+=0.3 if lvl>=29
     return alta
-  elsif k[3][1]=='Tree'
+  elsif !k[8].nil? && k[8].include?('Tree')
     alta=[lvl+2.0,lvl+2.0]
     if lvl<9
       x=lvl/4
