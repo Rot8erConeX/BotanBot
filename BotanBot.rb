@@ -2827,10 +2827,10 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
     end
   end
   str="#{str}\n\nYou may instead be searching for the ability family `Dragon's Claws`." if k[0]=='Dragon Claw' && topstr.length<=0
+  kk=[]
   if !k[12].nil? && k[12].length>0
     advy=[]
     smolsp=[longFormattedNumber(23*k[12][1]/20)]
-    kk=[]
     kk=k[6][5,k[6].length-5] if k[6].length>5
     if kk.length>0
       for i in 0...kk.length/7
@@ -3605,12 +3605,16 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
                 m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2081)") if drg[i][6][ix][0]==checkstr
                 m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2082)") if drg[i][6][ix][1]==checkstr
                 m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2083)") if drg[i][6][ix][2]==checkstr
+                m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2084)") if drg[i][6][ix][3]==checkstr
+                m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2085)") if drg[i][6][ix][4]==checkstr
               end
               unless drg[i][15].nil? || drg[i][15].length<=0
                 for i4 in 0...drg[i][15].length
                   m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][i4][0]==checkstr
                   m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][i4][1]==checkstr
                   m2.push("#{drgemo}#{drg[i][0]} (HA\u2083)") if drg[i][15][i4][2]==checkstr
+                  m2.push("#{drgemo}#{drg[i][0]} (HA\u2084)") if drg[i][15][i4][3]==checkstr
+                  m2.push("#{drgemo}#{drg[i][0]} (HA\u2085)") if drg[i][15][i4][4]==checkstr
                 end
               end
               for i2 in 0...elemo.length
@@ -3619,14 +3623,20 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (A#{ix+1}\u2081)") if drg[i][6][ix][0]==checkstr2
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (A#{ix+1}\u2082)") if drg[i][6][ix][1]==checkstr2
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (A#{ix+1}\u2083)") if drg[i][6][ix][2]==checkstr2
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (A#{ix+1}\u2084)") if drg[i][6][ix][3]==checkstr2
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (A#{ix+1}\u2085)") if drg[i][6][ix][4]==checkstr2
                 end
                 unless drg[i][15].nil? || drg[i][15].length<=0
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2081)") if drg[i][15][0][0]==checkstr2
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2082)") if drg[i][15][0][1]==checkstr2
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2083)") if drg[i][15][0][2]==checkstr2
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2084)") if drg[i][15][0][3]==checkstr2
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2085)") if drg[i][15][0][4]==checkstr2
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2081)") if drg[i][15].length>1 && drg[i][15][1][0]==checkstr2
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2082)") if drg[i][15].length>1 && drg[i][15][1][1]==checkstr2
                   m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2083)") if drg[i][15].length>1 && drg[i][15][1][2]==checkstr2
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2084)") if drg[i][15].length>1 && drg[i][15][1][3]==checkstr2
+                  m2.push("#{elemo[i2][1]}#{drg[i][0]} (HA\u2085)") if drg[i][15].length>1 && drg[i][15][1][4]==checkstr2
                 end
               end
             end
@@ -3739,22 +3749,22 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
               drgemo=element_emote(drg[i][2],bot,drg[i][16])
               drgemo=element_emote(drg[i][2],bot) if ignorefeh
               for ix in 0...drg[i][6].length
-                m2.push("#{drgemo}#{drg[i][0]}") if drg[i][6][ix][1]==checkstr
-                m2.push("#{drgemo}#{drg[i][0]}") if drg[i][6][ix][1]==checkstr2
+                m2.push("#{drgemo}#{drg[i][0]}") if drg[i][6][ix][-1]==checkstr
+                m2.push("#{drgemo}#{drg[i][0]}") if drg[i][6][ix][-1]==checkstr2
               end
               unless drg[i][15].nil? || drg[i][15].length<=0
                 for i4 in 0...drg[i][15].length
-                  m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][i4][1]==checkstr
-                  m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][i4][1]==checkstr2
+                  m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][i4][-1]==checkstr
+                  m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][i4][-1]==checkstr2
                 end
               end
               for i2 in 0...elemo.length
                 drgemo=elemo[i2][1]
                 drgemo=elemo[i2][2] if drg[i][16]=='FEH' && !ignorefeh
-                m2.push("#{drgemo}#{drg[i][0]}") if drg[i][6][0][1]=="(#{elemo[i2][0]}) #{checkstr}"
+                m2.push("#{drgemo}#{drg[i][0]}") if drg[i][6][0][-1]=="(#{elemo[i2][0]}) #{checkstr}"
                 unless drg[i][15].nil? || drg[i][15].length<=0
-                  m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][0][1]=="(#{elemo[i2][0]}) #{checkstr}"
-                  m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15].length>1 && drg[i][15][1][1]=="(#{elemo[i2][0]}) #{checkstr}"
+                  m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15][0][-1]=="(#{elemo[i2][0]}) #{checkstr}"
+                  m2.push("#{drgemo}#{drg[i][0]} (HA)") if drg[i][15].length>1 && drg[i][15][1][-1]=="(#{elemo[i2][0]}) #{checkstr}"
                 end
               end
             end
@@ -4014,18 +4024,26 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
           m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2081)") if drg[i][6][ix][0]==checkstr
           m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2082)") if drg[i][6][ix][1]==checkstr
           m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2083)") if drg[i][6][ix][2]==checkstr
+          m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2084)") if drg[i][6][ix][3]==checkstr
+          m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2085)") if drg[i][6][ix][4]==checkstr
           m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2081)") if drg[i][6][ix][0]==checkstr2
           m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2082)") if drg[i][6][ix][1]==checkstr2
           m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2083)") if drg[i][6][ix][2]==checkstr2
+          m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2084)") if drg[i][6][ix][3]==checkstr2
+          m2.push("#{drgemo}#{drg[i][0]} (A#{ix+1}\u2085)") if drg[i][6][ix][4]==checkstr2
         end
         unless drg[i][15].nil? || drg[i][15].length<=0
           for i4 in 0...drg[i][15].length
             m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][i4][0]==checkstr
             m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][i4][1]==checkstr
             m2.push("#{drgemo}#{drg[i][0]} (HA\u2083)") if drg[i][15][i4][2]==checkstr
+            m2.push("#{drgemo}#{drg[i][0]} (HA\u2084)") if drg[i][15][i4][3]==checkstr
+            m2.push("#{drgemo}#{drg[i][0]} (HA\u2085)") if drg[i][15][i4][4]==checkstr
             m2.push("#{drgemo}#{drg[i][0]} (HA\u2081)") if drg[i][15][i4][0]==checkstr2
             m2.push("#{drgemo}#{drg[i][0]} (HA\u2082)") if drg[i][15][i4][1]==checkstr2
             m2.push("#{drgemo}#{drg[i][0]} (HA\u2083)") if drg[i][15][i4][2]==checkstr2
+            m2.push("#{drgemo}#{drg[i][0]} (HA\u2084)") if drg[i][15][i4][3]==checkstr2
+            m2.push("#{drgemo}#{drg[i][0]} (HA\u2085)") if drg[i][15][i4][4]==checkstr2
           end
         end
       end
@@ -5015,11 +5033,11 @@ def find_adventurers(bot,event,args=nil)
     for i in 0...char.length
       str=extend_message(str,char[i][0],event)
     end
-    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}}",event,2)
+    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",event,2)
     event.respond str
   else
     textra="**No adventurers match your search**" if char.length<=0
-    create_embed(event,"__**Adventurer Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}}",nil,flds)
+    create_embed(event,"__**Adventurer Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",nil,flds)
   end
 end
 
@@ -5060,11 +5078,11 @@ def find_dragons(bot,event,args=nil)
     for i in 0...char.length
       str=extend_message(str,char[i][0],event)
     end
-    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}}",event,2)
+    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",event,2)
     event.respond str
   else
     textra="**No dragons match your search**" if char.length<=0
-    create_embed(event,"__**Dragon Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}}",nil,flds)
+    create_embed(event,"__**Dragon Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",nil,flds)
   end
 end
 
@@ -5104,11 +5122,11 @@ def find_wyrmprints(bot,event,args=nil)
     for i in 0...char.length
       str=extend_message(str,char[i][0],event)
     end
-    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}}",event,2)
+    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",event,2)
     event.respond str
   else
     textra="**No wyrmprints match your search**" if char.length<=0
-    create_embed(event,"__**Wyrmprint Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}}",nil,flds)
+    create_embed(event,"__**Wyrmprint Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",nil,flds)
   end
 end
 
@@ -5167,11 +5185,11 @@ def find_weapons(bot,event,args=nil)
     for i in 0...char.length
       str=extend_message(str,char[i][0],event)
     end
-    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}}",event,2)
+    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",event,2)
     event.respond str
   else
     textra="**No weapons match your search**" if char.length<=0
-    create_embed(event,"__**Weapons Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}}",nil,flds)
+    create_embed(event,"__**Weapons Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",nil,flds)
   end
 end
 
@@ -6268,7 +6286,7 @@ end
 
 def show_print_shop(event)
   data_load()
-  prn=@wyrmprints.reject{|q| ['s','z','y','t','w'].include?(q[1][1,1].to_s)}
+  prn=@wyrmprints.reject{|q| ['e','s','z','y','t','w','$','c','p'].include?(q[1][1,1].to_s)}
   args=event.message.text.downcase.split(' ')
   rar=[]
   for i in 0...args.length
@@ -6940,7 +6958,7 @@ bot.command([:find,:search,:lookup]) do |event, *args|
     args.shift
     find_dragons(bot,event,args)
     return nil
-  elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
+  elsif ['wyrmprint','wyrm','print','wyrmprints','wyrms','prints'].include?(args[0].downcase)
     args.shift
     find_wyrmprints(bot,event,args)
     return nil
@@ -6961,14 +6979,14 @@ bot.command([:find,:search,:lookup]) do |event, *args|
     find_abilities(bot,event,args)
     return nil
   elsif ['aura','auras'].include?(args[0].downcase)
-    args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca','cc'].include?(q)}
+    args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca','cc','ccas'].include?(q)}
     find_abilities(bot,event,args)
     return nil
   elsif ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs'].include?(args[0].downcase)
-    args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','cca','cc','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+    args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','cca','cc','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','ccas'].include?(q)}
     find_abilities(bot,event,args)
     return nil
-  elsif ['chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca','cc'].include?(args[0].downcase)
+  elsif ['chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca','cc','ccas'].include?(args[0].downcase)
     args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','aura','auras'].include?(q)}
     find_abilities(bot,event,args)
     return nil
@@ -6980,7 +6998,7 @@ bot.command([:find,:search,:lookup]) do |event, *args|
     args.shift
     find_enemies(bot,event,args)
     return nil
-  elsif ['facility','facilities','facilitys','fac','facs','faculties','faculty','facultys'].include?(args[0].downcase)
+  elsif ['facility','facilities','facilitys','fac','facs','faculties','faculty','facultys','facils','facil'].include?(args[0].downcase)
     args.shift
     find_facilities(bot,event,args)
     return nil
@@ -7015,7 +7033,7 @@ bot.command([:sort,:list]) do |event, *args|
     args.shift
     sort_dragons(bot,event,args)
     return nil
-  elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
+  elsif ['wyrmprint','wyrm','print','wyrmprint','wyrm','print'].include?(args[0].downcase)
     args.shift
     sort_wyrmprints(bot,event,args)
     return nil
@@ -8112,12 +8130,12 @@ bot.mention do |event|
       args.shift
       find_abilities(bot,event,args)
     elsif ['aura','auras'].include?(args[0].downcase)
-      args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','cca','cc','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+      args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','chaincoabil','chaincoability','chaincoabilitys','cca','cc','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','ccas'].include?(q)}
       find_abilities(bot,event,args)
     elsif ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs'].include?(args[0].downcase)
-      args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','cca','cc','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains'].include?(q)}
+      args=args.reject{|q| ['aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','cca','cc','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','ccas'].include?(q)}
       find_abilities(bot,event,args)
-    elsif ['chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca','cc'].include?(args[0].downcase)
+    elsif ['chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca','cc','ccas'].include?(args[0].downcase)
       args=args.reject{|q| ['coabil','coability','coabilitys','coabilities','coabils','coab','coabs','aura','auras'].include?(q)}
       find_abilities(bot,event,args)
     elsif ['skill','skills','skls','skl','skil','skils'].include?(args[0].downcase)
@@ -8126,7 +8144,7 @@ bot.mention do |event|
     elsif ['enemies','boss','enemy','bosses','enemie','enemys','bosss'].include?(args[0].downcase)
       args.shift
       find_enemies(bot,event,args)
-    elsif ['facility','facilities','facilitys','fac','facs','faculties','faculty','facultys'].include?(args[0].downcase)
+    elsif ['facility','facilities','facilitys','fac','facs','faculties','faculty','facultys','facil','facils'].include?(args[0].downcase)
       args.shift
       find_facilities(bot,event,args)
     else
@@ -8144,7 +8162,7 @@ bot.mention do |event|
     elsif ['dragon','dragons','drg','drags'].include?(args[0].downcase)
       args.shift
       sort_dragons(bot,event,args)
-    elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
+    elsif ['wyrmprint','wyrm','print','wyrmprints','wyrms','prints'].include?(args[0].downcase)
       args.shift
       sort_wyrmprints(bot,event,args)
     elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase)
