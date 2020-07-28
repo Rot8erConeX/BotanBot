@@ -212,6 +212,7 @@ Ember Toss\\Skill\Deals 2 hits of 145% flame damage to the target and nearby ene
 Embracing Stream\\Skill\Deals 4 hits of 129% water damage to enemies in a line.\Deals 4 hits of 143% water damage to enemies in a line.\\13684, 13684, 13684, 13684\Yes\1.2\\Damage\\, 
 Empowering Triplet\\Skill\Deals 3 hits of 292% light damage to enemies directly ahead, and increases the entire team's energy levels by one stage.\Deals 3 hits of 307% light damage to enemies directly ahead, and increases the entire team's energy levels by one stage.\Deals 3 hits of 322% light damage to enemies directly ahead, and increases the entire team's energy levels by one stage.\3530, 3530, 3530, 3530\Yes\3.2\\Damage, Buff, Energy, Team, E1\\3, 7766
 Empyreal Levin\\Skill\Deals 2 hits of 399% light damage to the target and nearby enemies.\Deals 2 hits of 443% light damage to the target and nearby enemies.\Deals 2 hits of 492% light damage to the target and nearby enemies.\2711, 2711, 2711, 2711\Yes\1.4\\Damage\\5, 5422
+Empyreal Wind\\Skill\Restores HP to all allies 10% Recovery Potency and continues healing over the next 15 seconds with 8% Recovery Potency every 2.9 seconds.\Restores HP to all allies 12% Recovery Potency and continues healing over the next 15 seconds with 10% Recovery Potency every 2.9 seconds.\Restores HP to all allies 14% Recovery Potency and continues healing over the next 15 seconds with 12% Recovery Potency every 2.9 seconds.\3849, 3849, 3849, 3849\Yes\1.4\\HealSkill, Team, Burst, Regen\\, 
 Empyrean Grace\\Skill\Deals 5 hits of 133% water damage to enemies directly ahead.\Deals 5 hits of 148% water damage to enemies directly ahead.\\4882, 4882, 4882, 4882\Yes\1.4\\Damage\\, 
 Endless Blade\\Skill\Deals 1 hit of 861% wind damage to surrounding enemies.\Deals 1 hit of 957% wind damage to surrounding enemies.\\7582, 7582, 7582, 7582\Yes\1.4\\Damage\\, 
 Endless Nightmare\\Skill\Deals 1 shot of 725% shadow damage to enemies in a line.\Deals 1 shot of 805% shadow damage to enemies in a line.\Deals 1 shot of 895% shadow damage to enemies in a line.\2759, 2759, 2759, 2759\Yes\1\\Damage, Poison\Deals 1 shot of 1484% shadow damage to enemies in a line, and inflicts poison dealing 48.2% damage every 2.9s for 15s, with 100% base chance.\7, 5518
@@ -240,6 +241,7 @@ Faith of the Elders\\Skill\Deals 1 hit of 438% shadow damage to the target and n
 Fanged Recovery\\Skill\Restores the user's HP with 72Recovery Potency.\Restores the user's HP with 90Recovery Potency.\\15976, 15976, 15976, 15976\Yes\1.4\\HealSkill, User, Burst\\, 
 Fatal Blow\\Skill\Deals 4 hits of 137% shadow damage to enemies directly ahead.\Deals 4 hits of 152% shadow damage to enemies directly ahead.\Deals 4 hits of 169% shadow damage to enemies directly ahead.\2257, 2257, 2257, 2257\Yes\1.4\\Damage, PoisonedPunisher\Deals 3 hits of 390% and 1 hit of 414% shadow damage to enemies directly ahead. Poisoned foes take 3 hits of 585% and 1 hits of 621% shadow damage instead.\7, 8125
 Feathered Gale\\Skill\<:Striking:716072035134078976> **Striking Stance:** Deals 1 hit of 308% and 1 hit of 324% wind damage to surrounding enemies, and reduces their defense by 5% for 20s with 100% chance. Does not stack.;; <:Shielding:716072050590089246> **Shielding Stance:** Increases the user's defense by 50% for 15s.\<:Striking:716072035134078976> **Striking Stance:** Deals 1 hit of 386% and 1 hit of 405% wind damage to surrounding enemies, and reduces their defense by 5% for 20s with 100% chance. Does not stack.;; <:Shielding:716072050590089246> **Shielding Stance:** Increases the user's defense by 55% for 15s.\<:Striking:716072035134078976> **Striking Stance:** Deals 1 hit of 429% and 1 hit of 450% wind damage to surrounding enemies, and reduces their defense by 5% for 20s with 100% chance. Does not stack.;; <:Shielding:716072050590089246> **Shielding Stance:** Increases the user's defense by 60% for 15s.\3456, 3456, 3456, 3456\Yes\0\<:Striking:716072035134078976> **Striking Stance:** Deals 1 hit of 308%/386%/429% and 1 hit of 324%/405%/450% wind damage to surrounding enemies, and reduces their defense by 5% for 20s with 100% chance. Does not stack.;; <:Shielding:716072050590089246> **Shielding Stance:** Increases the user's defense by 50%/55%/60% for 15s.\Damage, DefDown, DefenseSkill, User, Conditional\\, 
+Feline Fortuity\\Skill\Increases the entire team's critical rate by 15% for 10 seconds.\Increases the entire team's critical rate by 20% for 10 seconds.\\5217, 5217, 5217, 5217\No\1.4\\Buff, Team, CritRate\\, 
 Ferocious Fulminator\\Skill\Deals 5 hits of 156% light damage to enemies directly ahead.\Deals 5 hits of 173% light damage to enemies directly ahead.\\6145, 6145, 6145, 6145\Yes\2.4\\Damage\\, 
 Ferocious Lightning\\Skill\Deals 5 hits of 156% light damage to enemies directly ahead.\Deals 5 hits of 173% light damage to enemies directly ahead.\\6145, 6145, 6145, 6145\Yes\2.4\\Damage\\, 
 Festival Rush\\Skill\Deals 4 hits of 167% shadow damage to enemies directly ahead, and increases the user's energy level by one stage.;; If this skill is used when the user is energized, a variant called Festival Dance will be used instead, dealing an additional 6 hits of 56% shadow damage.\Deals 4 hits of 186% shadow damage to enemies directly ahead, and increases the user's energy level by one stage.;; If this skill is used when the user is energized, a variant called Festival Dance will be used instead, dealing an additional 6 hits of 62% shadow damage.\Deals 4 hits of 206% shadow damage to enemies directly ahead, and increases the user's energy level by one stage.;; If this skill is used when the user is energized, a variant called Festival Dance will be used instead, dealing an additional 6 hits of 69% shadow damage.\2818, 2818, 2818, 2818\Yes\2.9\\Damage, Energy, E1, Conditional, Buff, Team\\, 
@@ -392,7 +394,7 @@ Last Resort\\Skill\Deals 2 hits of 196% wind damage to the target and nearby ene
 Lava Cascade\\Skill\Deals 1 hit of 226.8% and 1 hit of 340.2% flame damage to enemies directly ahead and inflicts burn for 12 seconds - dealing 66% flame damage every 3.99 seconds - with 100% Base Chance\Deals 1 hit of 252% and 1 hit of 378% flame damage to enemies directly ahead and inflicts burn for 12 seconds - dealing 88.3% flame damage every 3.99 seconds - with 110% Base Chance\\-50, -50, -50, -50\Yes\2.6\\Damage, Burn\\, 
 Leaf Shield\\Skill\Equips Mega Man with the special "Leaf Shield" weapon, allowing him to create a Leaf Shield by tapping the screen once. After a Leaf Shield has been created, tapping the screen again will shoot it in the direction of enemies, or it will be shot automatically after enough time has passed. Leaf Shield deals flame damage to surrounding enemies. While this weapon is equipped, Mega Man's attacks will consume the weapon gauge until it is exhausted, at which point the weapon will be unequipped. While this skill is active, tapping the icon again will switch Mega Man's weapon back to the Mega Buster.;; **This skill is not affected by Skill Prep, Skill Haste, Energy, and Skill Damage.**\Equips Mega Man with the special "Leaf Shield" weapon, allowing him to create a Leaf Shield by tapping the screen once. After a Leaf Shield has been created, tapping the screen again will shoot it in the direction of enemies, or it will be shot automatically after enough time has passed. Leaf Shield deals flame damage to surrounding enemies. While this weapon is equipped, Mega Man's attacks will consume the weapon gauge until it is exhausted, at which point the weapon will be unequipped. While this skill is active, tapping the icon again will switch Mega Man's weapon back to the Mega Buster.;; **This skill is not affected by Skill Prep, Skill Haste, Energy, and Skill Damage.**\\4000, 4000, 4000, 4000\No\1\\Damage, Stance\\, 
 Legato Step\\Skill\Deals 4 hits of 151% water damage to surrounding enemies.\Deals 4 hits of 167% water damage to surrounding enemies.\Deals 4 hits of 186% water damage to surrounding enemies.\2343, 2343, 2343, 2343\Yes\1.1\\Damage, Frostbite\Deals 4 hits of 253% water damage to surrounding enemies, and inflicts frostbite, dealing 41% water damage every 2.9s for 21s, with 120% chance.\3, 8317
-Lethal Edge\\Skill\Deals 2 hits of 275% shadow damage to enemies directly ahead.\Deals 2 hits of 288% shadow damage to enemies directly ahead, and inflicts sleep for 3-4 seconds with 90% base chance.\Deals 1 hit of 812% and 1 hit of 865% shadow damage to enemies directly ahead, and inflicts sleep for 4-5 seconds with 100% base chance. Also, the user's next force strike will deal an extra 3 hits of 11% each and inflict poison dealing 58.2% damage every 2.9s for 15s, with 120% base chance.\4892, 4892, 4892, 4892\Yes\0.5\\Damage, Sleep, Stance, Poison\\, 
+Lethal Edge\\Skill\Deals 2 hits of 275% shadow damage to enemies directly ahead.\Deals 2 hits of 288% shadow damage to enemies directly ahead, and inflicts sleep for 3-4 seconds with 90% base chance.\Deals 1 hit of 812% and 1 hit of 865% shadow damage to enemies directly ahead, and inflicts sleep for 4-5 seconds with 100% base chance. Poisoned foes take 1 hit of 1218% and 1 hit of 1297.5% shadow damage instead.;; Also, the user's next force strike will deal an extra 3 hits of 11% each and inflict poison dealing 58.2% damage every 2.9s for 15s, with 120% base chance.\4892, 4892, 4892, 4892\Yes\0.5\\Damage, Sleep, Stance, Poison\\, 
 Lethal Operation\\Skill\Increases the entire team's strength by 15% for 15 seconds.\Increases the entire team's strength by 20% for 15 seconds.\\8534, 8534, 8534, 8534\No\1.4\\Buff, StrengthSkill, Team\\6, 13654
 Lethal Stratagem\\Skill\Deals 1 hit of 861% wind damage to the target and nearby enemies, and grants all teammates immunity to knockback for 10s.\Deals 1 hit of 957% wind damage to the target and nearby enemies, and grants all teammates immunity to knockback for 15s.\\7500, 7500, 7500, 7500\Yes\1.4\\Damage, KnockbackImmunity\\, 
 Liberty Slash\\Skill\Deals 2 hits of 274% light damage to enemies in a line.\Deals 2 hits of 287% light damage to enemies in a line, and reduces their defense by 5% for 10 seconds with 40% base chance.\Deals 2 hits of 302% light damage to enemies in a line, and reduces their defense by 5% for 10 seconds with 40% base chance.\2503, 2503, 2503, 2503\Yes\0.9\\Damage, Debuff, DefDown\\, 
@@ -773,6 +775,9 @@ Zardin Blade\\Skill\Deals one hit of 552% water damage to enemies directly ahead
 Zardin's Wrath\\Skill\Deals one hit of 552% water damage to enemies in a line.\Deals one hit of 614% water damage to enemies in a line.\Deals one hit of 750% water damage to enemies in a line, and inflicts frostbite, dealing 41% water damage every 2.9s for 21s, with 120% chance.\5225, 5225, 5225, 5225\Yes\0.7\\Damage, Frostbite\\, 
 Zephyr's Wrath\\Skill\Deals 3 hits of 254.1% wind damage to surrounding enemies, and inflicts stun for 5-6 seconds with 160% base chance.\Deals 3 hits of 267.4% wind damage to surrounding enemies, and inflicts stun for 6-7 seconds with 180% base chance.\\-50, -50, -50, -50\Yes\1.7\\Damage, Stun\\, 
 Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\Deals 5 hits of 165% light damage to enemies directly ahead.\\6847, 6847, 6847, 6847\Yes\1.4\\Damage\\, 
+(Flame) Burning Punisher\example\Aura\If the user is attuned to Flame: increases damage to burning enemies by `x`%.\0\y\Flame, Punisher, BurningPunisher
+(Flame) Burning Punisher\15%\Aura\If the user is attuned to Flame: increases damage to burning enemies by 15%.\5\y\Flame, Punisher, BurningPunisher
+(Flame) Burning Punisher\20%\Aura\If the user is attuned to Flame: increases damage to burning enemies by 20%.\15\y\Flame, Punisher, BurningPunisher
 (Flame) Critical Damage\example\Aura\If the user is attuned to Flame: adds `x`% to the modifier applied to critical damage.\0\y\Flame, CritDamage
 (Flame) Critical Damage\50%\Aura\If the user is attuned to Flame: adds 50% to the modifier applied to critical damage.\40\y\Flame, CritDamage
 (Flame) Critical Damage\55%\Aura\If the user is attuned to Flame: adds 55% to the modifier applied to critical damage.\40\y\Flame, CritDamage
@@ -786,18 +791,34 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) Gauge Decelerator\30%\Aura\If the user is attuned to Flame: Slows the rate the mode gauge decreases by 30%.\100\y\Flame, GaugeAccelerator
 (Flame) HP & Strength\example\Aura\If the user is attuned to Flame: increases strength and HP by `x`%.\0\y\HealthSkill, StrengthSkill, Flame
 (Flame) HP & Strength\5%\Aura\If the user is attuned to Flame: increases strength and HP by 5%.\20\y\HealthSkill, StrengthSkill, Flame
+(Flame) HP & Strength\6%\Aura\If the user is attuned to Flame: increases strength and HP by 6%.\24\y\HealthSkill, StrengthSkill, Flame
+(Flame) HP & Strength\7%\Aura\If the user is attuned to Flame: increases strength and HP by 7%.\28\y\HealthSkill, StrengthSkill, Flame
 (Flame) HP & Strength\8%\Aura\If the user is attuned to Flame: increases strength and HP by 8%.\30\y\HealthSkill, StrengthSkill, Flame
 (Flame) HP & Strength\10%\Aura\If the user is attuned to Flame: increases strength and HP by 10%.\40\y\HealthSkill, StrengthSkill, Flame
 (Flame) HP & Strength\20%\Aura\If the user is attuned to Flame: increases strength and HP by 20%.\70\y\HealthSkill, StrengthSkill, Flame
+(Flame) HP & Strength\23%\Aura\If the user is attuned to Flame: increases strength and HP by 23%.\80\y\HealthSkill, StrengthSkill, Flame
+(Flame) HP & Strength\26%\Aura\If the user is attuned to Flame: increases strength and HP by 26%.\90\y\HealthSkill, StrengthSkill, Flame
 (Flame) HP & Strength\30%\Aura\If the user is attuned to Flame: increases strength and HP by 30%.\100\y\HealthSkill, StrengthSkill, Flame
 (Flame) HP & Strength\35%\Aura\If the user is attuned to Flame: increases strength and HP by 35%.\110\y\HealthSkill, StrengthSkill, Flame
 (Flame) HP\example\Aura\If the user is attuned to Flame: increases HP by `x`%.\0\y\HealthSkill, Flame
+(Flame) HP\5%\Aura\If the user is attuned to Flame: increases HP by 5%.\2\y\HealthSkill, Flame
+(Flame) HP\6%\Aura\If the user is attuned to Flame: increases HP by 6%.\5\y\HealthSkill, Flame
+(Flame) HP\7%\Aura\If the user is attuned to Flame: increases HP by 7%.\10\y\HealthSkill, Flame
+(Flame) HP\8%\Aura\If the user is attuned to Flame: increases HP by 8%.\15\y\HealthSkill, Flame
 (Flame) HP\10%\Aura\If the user is attuned to Flame: increases HP by 10%.\20\y\HealthSkill, Flame
+(Flame) HP\11%\Aura\If the user is attuned to Flame: increases HP by 11%.\22\y\HealthSkill, Flame
+(Flame) HP\12%\Aura\If the user is attuned to Flame: increases HP by 12%.\24\y\HealthSkill, Flame
+(Flame) HP\13%\Aura\If the user is attuned to Flame: increases HP by 13%.\26\y\HealthSkill, Flame
 (Flame) HP\15%\Aura\If the user is attuned to Flame: increases HP by 15%.\30\y\HealthSkill, Flame
+(Flame) HP\20%\Aura\If the user is attuned to Flame: increases HP by 20%.\40\y\HealthSkill, Flame
+(Flame) HP\23%\Aura\If the user is attuned to Flame: increases HP by 23%.\46\y\HealthSkill, Flame
+(Flame) HP\26%\Aura\If the user is attuned to Flame: increases HP by 26%.\54\y\HealthSkill, Flame
 (Flame) HP\30%\Aura\If the user is attuned to Flame: increases HP by 30%.\60\y\HealthSkill, Flame
+(Flame) HP\33%\Aura\If the user is attuned to Flame: increases HP by 33%.\63\y\HealthSkill, Flame
+(Flame) HP\35%\Aura\If the user is attuned to Flame: increases HP by 35%.\65\y\HealthSkill, Flame
+(Flame) HP\36%\Aura\If the user is attuned to Flame: increases HP by 36%.\66\y\HealthSkill, Flame
+(Flame) HP\39%\Aura\If the user is attuned to Flame: increases HP by 39%.\69\y\HealthSkill, Flame
 (Flame) HP\45%\Aura\If the user is attuned to Flame: increases HP by 45%.\80\y\HealthSkill, Flame
-(Flame) HP 50% = Strength\example\Aura\If the user is attuned to Flame: increases strength by `x`% when HP is 50% or above.\0\y\HP50, StrengthSkill
-(Flame) HP 50% = Strength\10%\Aura\If the user is attuned to Flame: increases strength by 10% when HP is 50% or above.\60\y\HP50, StrengthSkill
 (Flame) HP 50% = Strength\20%\Aura\If the user is attuned to Flame: increases strength by 20% when HP is 50% or above.\80\y\HP50, StrengthSkill
 (Flame) Primed Strength\example\Aura\Increases the strength of the adventurer you are currently controlling by `x`% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\0\y\Primed, StrengthSkill, Flame
 (Flame) Primed Strength\10%\Aura\Increases the strength of the adventurer you are currently controlling by 10% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\80\y\Primed, StrengthSkill, Flame
@@ -807,55 +828,108 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Flame) Skill Damage\90%\Aura\If the user is attuned to Flame: increases attack skill damage by 90%\120\y\Flame, SkillDamage
 (Flame) Strength & Critical Damage\example\Aura\If the user is attuned to Flame: increases strength by `x`% and adds `y`% to the modifier applied to critical damage.\70\y\StrengthSkill, CritDamage, Flame
 (Flame) Strength & Critical Damage\30/50%\Aura\If the user is attuned to Flame: increases strength by 30% and adds 50% to the modifier applied to critical damage.\70\y\StrengthSkill, CritDamage, Flame
+(Flame) Strength & Critical Damage\33/50%\Aura\If the user is attuned to Flame: increases strength by 33% and adds 50% to the modifier applied to critical damage.\80\y\StrengthSkill, CritDamage, Flame
+(Flame) Strength & Critical Damage\36/50%\Aura\If the user is attuned to Flame: increases strength by 36% and adds 50% to the modifier applied to critical damage.\85\y\StrengthSkill, CritDamage, Flame
+(Flame) Strength & Critical Damage\39/50%\Aura\If the user is attuned to Flame: increases strength by 39% and adds 50% to the modifier applied to critical damage.\90\y\StrengthSkill, CritDamage, Flame
 (Flame) Strength & Critical Damage\45/55%\Aura\If the user is attuned to Flame: increases strength by 45% and adds 55% to the modifier applied to critical damage.\100\y\StrengthSkill, CritDamage, Flame
-(Flame) Strength & HP 50% = Strength\example\Aura\If the user is attuned to Flame: increases strength by 55%/70%, and increases strength by an additional 10%/20% when HP is 50% or above.\0\y\Flame, StrengthSkill, HP50
-(Flame) Strength & HP 50% = Strength\40%/10%\Aura\If the user is attuned to Flame: increases strength by 40%, and increases strength by an additional 10% when HP is 50% or above.\100\y\Flame, StrengthSkill, HP50
+(Flame) Strength & HP 50% = Strength\example\Aura\If the user is attuned to Flame: increases strength by 55%/70%, and increases strength by an additional 20% when HP is 50% or above.\0\y\Flame, StrengthSkill, HP50
+(Flame) Strength & HP 50% = Strength\40%/20%\Aura\If the user is attuned to Flame: increases strength by 40%, and increases strength by an additional 20% when HP is 50% or above.\120\y\Flame, StrengthSkill, HP50
+(Flame) Strength & HP 50% = Strength\45%/20%\Aura\If the user is attuned to Flame: increases strength by 45%, and increases strength by an additional 20% when HP is 50% or above.\120\y\Flame, StrengthSkill, HP50
+(Flame) Strength & HP 50% = Strength\50%/20%\Aura\If the user is attuned to Flame: increases strength by 50%, and increases strength by an additional 20% when HP is 50% or above.\120\y\Flame, StrengthSkill, HP50
+(Flame) Strength & HP 50% = Strength\55%/20%\Aura\If the user is attuned to Flame: increases strength by 55%, and increases strength by an additional 20% when HP is 50% or above.\120\y\Flame, StrengthSkill, HP50
 (Flame) Strength & HP 50% = Strength\70%/20%\Aura\If the user is attuned to Flame: increases strength by 70%, and increases strength by an additional 20% when HP is 50% or above.\120\y\Flame, StrengthSkill, HP50
 (Flame) Striking Haste\example\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by `x`% when the user's force strikes connect.\0\y\Flame, StrikingHaste
 (Flame) Striking Haste\20%\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by 20% when the user's force strikes connect.\100\y\Flame, StrikingHaste
 (Flame) Striking Haste\30%\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by 30% when the user's force strikes connect.\120\y\Flame, StrikingHaste
 (Flame) Strength\example\Aura\If the user is attuned to Flame: increases strength by `x`%.\0\y\StrengthSkill, Flame
+(Flame) Strength\5%\Aura\If the user is attuned to Flame: increases strength by 5%.\10\y\StrengthSkill, Flame
+(Flame) Strength\6%\Aura\If the user is attuned to Flame: increases strength by 6%.\12\y\StrengthSkill, Flame
+(Flame) Strength\7%\Aura\If the user is attuned to Flame: increases strength by 7%.\14\y\StrengthSkill, Flame
+(Flame) Strength\8%\Aura\If the user is attuned to Flame: increases strength by 8%.\16\y\StrengthSkill, Flame
 (Flame) Strength\10%\Aura\If the user is attuned to Flame: increases strength by 10%.\20\y\StrengthSkill, Flame
+(Flame) Strength\11%\Aura\If the user is attuned to Flame: increases strength by 11%.\22\y\StrengthSkill, Flame
+(Flame) Strength\12%\Aura\If the user is attuned to Flame: increases strength by 12%.\24\y\StrengthSkill, Flame
+(Flame) Strength\13%\Aura\If the user is attuned to Flame: increases strength by 13%.\26\y\StrengthSkill, Flame
+(Flame) Strength\14%\Aura\If the user is attuned to Flame: increases strength by 14%.\28\y\StrengthSkill, Flame
 (Flame) Strength\15%\Aura\If the user is attuned to Flame: increases strength by 15%.\30\y\StrengthSkill, Flame
+(Flame) Strength\16%\Aura\If the user is attuned to Flame: increases strength by 16%.\32\y\StrengthSkill, Flame
+(Flame) Strength\17%\Aura\If the user is attuned to Flame: increases strength by 17%.\34\y\StrengthSkill, Flame
+(Flame) Strength\18%\Aura\If the user is attuned to Flame: increases strength by 18%.\36\y\StrengthSkill, Flame
 (Flame) Strength\20%\Aura\If the user is attuned to Flame: increases strength by 20%.\40\y\StrengthSkill, Flame
+(Flame) Strength\25%\Aura\If the user is attuned to Flame: increases strength by 25%.\50\y\StrengthSkill, Flame
 (Flame) Strength\30%\Aura\If the user is attuned to Flame: increases strength by 30%.\60\y\StrengthSkill, Flame
+(Flame) Strength\33%\Aura\If the user is attuned to Flame: increases strength by 33%.\63\y\StrengthSkill, Flame
 (Flame) Strength\35%\Aura\If the user is attuned to Flame: increases strength by 35%.\65\y\StrengthSkill, Flame
+(Flame) Strength\36%\Aura\If the user is attuned to Flame: increases strength by 36%.\66\y\StrengthSkill, Flame
+(Flame) Strength\37%\Aura\If the user is attuned to Flame: increases strength by 37%.\67\y\StrengthSkill, Flame
+(Flame) Strength\38%\Aura\If the user is attuned to Flame: increases strength by 38%.\68\y\StrengthSkill, Flame
+(Flame) Strength\39%\Aura\If the user is attuned to Flame: increases strength by 39%.\69\y\StrengthSkill, Flame
 (Flame) Strength\40%\Aura\If the user is attuned to Flame: increases strength by 40%.\70\y\StrengthSkill, Flame
+(Flame) Strength\41%\Aura\If the user is attuned to Flame: increases strength by 41%.\72\y\StrengthSkill, Flame
+(Flame) Strength\42%\Aura\If the user is attuned to Flame: increases strength by 42%.\74\y\StrengthSkill, Flame
 (Flame) Strength\45%\Aura\If the user is attuned to Flame: increases strength by 45%.\80\y\StrengthSkill, Flame
+(Flame) Strength\47%\Aura\If the user is attuned to Flame: increases strength by 47%.\85\y\StrengthSkill, Flame
+(Flame) Strength\49%\Aura\If the user is attuned to Flame: increases strength by 49%.\89\y\StrengthSkill, Flame
 (Flame) Strength\50%\Aura\If the user is attuned to Flame: increases strength by 50%.\90\y\StrengthSkill, Flame
+(Flame) Strength\52%\Aura\If the user is attuned to Flame: increases strength by 52%.\92\y\StrengthSkill, Flame
 (Flame) Strength\55%\Aura\If the user is attuned to Flame: increases strength by 55%.\95\y\StrengthSkill, Flame
 (Flame) Strength\60%\Aura\If the user is attuned to Flame: increases strength by 60%.\100\y\StrengthSkill, Flame
 (Flame) Strength\70%\Aura\If the user is attuned to Flame: increases strength by 70%.\120\y\StrengthSkill, Flame
-(Flame) Strength & Wind Res\example\Aura\If the user is attuned to Flame: increases strength by `x`% and grants `y`% Wind resistance.\0\y\StrengthSkill, WindRes, Flame, Resistance
-(Flame) Strength & Wind Res\35/15%\Aura\If the user is attuned to Flame: increases strength by 35% and grants 15% Wind resistance.\70\y\StrengthSkill, WindRes, Flame, Resistance
-(Flame) Strength & Wind Res\50/15%\Aura\If the user is attuned to Flame: increases strength by 50% and grants 15% Wind resistance.\100\y\StrengthSkill, WindRes, Flame, Resistance
 (Flame) Striking Haste\example\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by `x` when the user's force strikes connect.\0\y\Flame, StrikingHaste, SkillHaste
 (Flame) Striking Haste\20%\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by 20% when the user's force strikes connect.\80\y\Flame, StrikingHaste, SkillHaste
 (Flame) Striking Haste\30%\Aura\If the user is attuned to Flame: Increases skill gauge fill rate by 30% when the user's force strikes connect.\100\y\Flame, StrikingHaste, SkillHaste
 (Flame) Wind Res\15%\Aura\If the user is attuned to Flame: grants 15% Wind resistance.\65\y\WindRes, Flame, Resistance
 (Light) Critical Damage\example\Aura\If the user is attuned to Light: adds `x`% to the modifier applied to critical damage.\0\y\CritDamage, Light
 (Light) Critical Damage\50%\Aura\If the user is attuned to Light: adds 50% to the modifier applied to critical damage.\40\y\CritDamage, Light
+(Light) Critical Damage\55%\Aura\If the user is attuned to Light: adds 55% to the modifier applied to critical damage.\45\y\CritDamage, Light
+(Light) Critical Damage\60%\Aura\If the user is attuned to Light: adds 60% to the modifier applied to critical damage.\50\y\CritDamage, Light
+(Light) Critical Damage\65%\Aura\If the user is attuned to Light: adds 65% to the modifier applied to critical damage.\55\y\CritDamage, Light
 (Light) Critical Damage\70%\Aura\If the user is attuned to Light: adds 70% to the modifier applied to critical damage.\60\y\CritDamage, Light
 (Light) Critical Rate\example\Aura\If the user is attuned to Light: Increases critical rate by `x`%.\0\y\CritRate, Light
 (Light) Critical Rate\5%\Aura\If the user is attuned to Light: Increases critical rate by 5%.\40\y\CritRate, Light
 (Light) Critical Rate\6%\Aura\If the user is attuned to Light: Increases critical rate by 6%.\40\y\CritRate, Light
 (Light) HP & Strength\example\Aura\If the user is attuned to Light: increases strength and HP by `x`%.\0\y\HealthSkill, StrengthSkill, Light
 (Light) HP & Strength\5%\Aura\If the user is attuned to Light: increases strength and HP by 5%.\20\y\HealthSkill, StrengthSkill, Light
+(Light) HP & Strength\6%\Aura\If the user is attuned to Light: increases strength and HP by 6%.\24\y\HealthSkill, StrengthSkill, Light
+(Light) HP & Strength\7%\Aura\If the user is attuned to Light: increases strength and HP by 7%.\28\y\HealthSkill, StrengthSkill, Light
 (Light) HP & Strength\8%\Aura\If the user is attuned to Light: increases strength and HP by 8%.\30\y\HealthSkill, StrengthSkill, Light
+(Light) HP & Strength\9%\Aura\If the user is attuned to Light: increases strength and HP by 9%.\40\y\HealthSkill, StrengthSkill, Light
 (Light) HP & Strength\10%\Aura\If the user is attuned to Light: increases strength and HP by 10%.\50\y\HealthSkill, StrengthSkill, Light
+(Light) HP & Strength\13%\Aura\If the user is attuned to Light: increases strength and HP by 13%.\56\y\HealthSkill, StrengthSkill, Light
 (Light) HP & Strength\15%\Aura\If the user is attuned to Light: increases strength and HP by 15%.\60\y\HealthSkill, StrengthSkill, Light
+(Light) HP & Strength\16%\Aura\If the user is attuned to Light: increases strength and HP by 16%.\62\y\HealthSkill, StrengthSkill, Light
+(Light) HP & Strength\17%\Aura\If the user is attuned to Light: increases strength and HP by 17%.\64\y\HealthSkill, StrengthSkill, Light
+(Light) HP & Strength\18%\Aura\If the user is attuned to Light: increases strength and HP by 18%.\66\y\HealthSkill, StrengthSkill, Light
 (Light) HP & Strength\20%\Aura\If the user is attuned to Light: increases strength and HP by 20%.\70\y\HealthSkill, StrengthSkill, Light
+(Light) HP & Strength\23%\Aura\If the user is attuned to Light: increases strength and HP by 23%.\80\y\HealthSkill, StrengthSkill, Light
+(Light) HP & Strength\26%\Aura\If the user is attuned to Light: increases strength and HP by 26%.\90\y\HealthSkill, StrengthSkill, Light
 (Light) HP & Strength\30%\Aura\If the user is attuned to Light: increases strength and HP by 30%.\100\y\HealthSkill, StrengthSkill, Light
 (Light) HP & Strength\35%\Aura\If the user is attuned to Light: increases strength and HP by 35%.\110\y\HealthSkill, StrengthSkill, Light
 (Light) HP\example\Aura\If the user is attuned to Light: increases HP by `x`%.\0\y\HealthSkill, Light
-(Light) HP\5%\Aura\If the user is attuned to Light: increases HP by 5%.\10\y\HealthSkill, Light
+(Light) HP\5%\Aura\If the user is attuned to Light: increases HP by 5%.\2\y\HealthSkill, Light
+(Light) HP\6%\Aura\If the user is attuned to Light: increases HP by 6%.\5\y\HealthSkill, Light
+(Light) HP\7%\Aura\If the user is attuned to Light: increases HP by 7%.\10\y\HealthSkill, Light
 (Light) HP\8%\Aura\If the user is attuned to Light: increases HP by 8%.\15\y\HealthSkill, Light
 (Light) HP\10%\Aura\If the user is attuned to Light: increases HP by 10%.\20\y\HealthSkill, Light
+(Light) HP\11%\Aura\If the user is attuned to Light: increases HP by 11%.\22\y\HealthSkill, Light
+(Light) HP\12%\Aura\If the user is attuned to Light: increases HP by 12%.\24\y\HealthSkill, Light
+(Light) HP\13%\Aura\If the user is attuned to Light: increases HP by 13%.\26\y\HealthSkill, Light
 (Light) HP\15%\Aura\If the user is attuned to Light: increases HP by 15%.\30\y\HealthSkill, Light
 (Light) HP\20%\Aura\If the user is attuned to Light: increases HP by 20%.\40\y\HealthSkill, Light
+(Light) HP\22%\Aura\If the user is attuned to Light: increases HP by 22%.\44\y\HealthSkill, Light
+(Light) HP\23%\Aura\If the user is attuned to Light: increases HP by 23%.\46\y\HealthSkill, Light
+(Light) HP\24%\Aura\If the user is attuned to Light: increases HP by 24%.\48\y\HealthSkill, Light
+(Light) HP\26%\Aura\If the user is attuned to Light: increases HP by 26%.\54\y\HealthSkill, Light
+(Light) HP\27%\Aura\If the user is attuned to Light: increases HP by 27%.\56\y\HealthSkill, Light
 (Light) HP\30%\Aura\If the user is attuned to Light: increases HP by 30%.\60\y\HealthSkill, Light
+(Light) HP\33%\Aura\If the user is attuned to Light: increases HP by 33%.\63\y\HealthSkill, Light
+(Light) HP\35%\Aura\If the user is attuned to Light: increases HP by 35%.\65\y\HealthSkill, Light
+(Light) HP\36%\Aura\If the user is attuned to Light: increases HP by 36%.\66\y\HealthSkill, Light
+(Light) HP\39%\Aura\If the user is attuned to Light: increases HP by 39%.\69\y\HealthSkill, Light
 (Light) HP\40%\Aura\If the user is attuned to Light: increases HP by 40%.\70\y\HealthSkill, Light
 (Light) HP\45%\Aura\If the user is attuned to Light: increases HP by 45%.\80\y\HealthSkill, Light
+(Light) HP\50%\Aura\If the user is attuned to Light: increases HP by 50%.\90\y\HealthSkill, Light
+(Light) HP\55%\Aura\If the user is attuned to Light: increases HP by 55%.\95\y\HealthSkill, Light
 (Light) HP\60%\Aura\If the user is attuned to Light: increases HP by 60%.\100\y\HealthSkill, Light
 (Light) Overdrive Punisher\example\Aura\If the user is attuned to Light: Increases damage to enemies in overdrive state by `x`%\0\y\Light, Punisher, OverdrivePunisher
 (Light) Overdrive Punisher\20%\Aura\If the user is attuned to Light: Increases damage to enemies in overdrive state by 20%\30\y\Light, Punisher, OverdrivePunisher
@@ -868,57 +942,107 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Light) Skill Haste\35%\Aura\If the user is attuned to Light: Increases skill gauge fill rate by 35%.\80\y\SkillHaste, Light
 (Light) Strength\example\Aura\If the user is attuned to Light: increases strength by `x`%.\0\y\StrengthSkill, Light
 (Light) Strength\5%\Aura\If the user is attuned to Light: increases strength by 5%.\10\y\StrengthSkill, Light
-(Light) Strength\8%\Aura\If the user is attuned to Light: increases strength by 8%.\15\y\StrengthSkill, Light
+(Light) Strength\6%\Aura\If the user is attuned to Light: increases strength by 6%.\12\y\StrengthSkill, Light
+(Light) Strength\7%\Aura\If the user is attuned to Light: increases strength by 7%.\14\y\StrengthSkill, Light
+(Light) Strength\8%\Aura\If the user is attuned to Light: increases strength by 8%.\16\y\StrengthSkill, Light
 (Light) Strength\10%\Aura\If the user is attuned to Light: increases strength by 10%.\20\y\StrengthSkill, Light
+(Light) Strength\11%\Aura\If the user is attuned to Light: increases strength by 11%.\22\y\StrengthSkill, Light
+(Light) Strength\12%\Aura\If the user is attuned to Light: increases strength by 12%.\24\y\StrengthSkill, Light
+(Light) Strength\13%\Aura\If the user is attuned to Light: increases strength by 13%.\26\y\StrengthSkill, Light
 (Light) Strength\15%\Aura\If the user is attuned to Light: increases strength by 15%.\30\y\StrengthSkill, Light
 (Light) Strength\30%\Aura\If the user is attuned to Light: increases strength by 30%.\60\y\StrengthSkill, Light
+(Light) Strength\32%\Aura\If the user is attuned to Light: increases strength by 32%.\62\y\StrengthSkill, Light
+(Light) Strength\33%\Aura\If the user is attuned to Light: increases strength by 33%.\63\y\StrengthSkill, Light
+(Light) Strength\34%\Aura\If the user is attuned to Light: increases strength by 34%.\64\y\StrengthSkill, Light
 (Light) Strength\35%\Aura\If the user is attuned to Light: increases strength by 35%.\65\y\StrengthSkill, Light
+(Light) Strength\36%\Aura\If the user is attuned to Light: increases strength by 36%.\66\y\StrengthSkill, Light
+(Light) Strength\37%\Aura\If the user is attuned to Light: increases strength by 37%.\67\y\StrengthSkill, Light
+(Light) Strength\38%\Aura\If the user is attuned to Light: increases strength by 38%.\68\y\StrengthSkill, Light
+(Light) Strength\39%\Aura\If the user is attuned to Light: increases strength by 39%.\69\y\StrengthSkill, Light
 (Light) Strength\40%\Aura\If the user is attuned to Light: increases strength by 40%.\70\y\StrengthSkill, Light
+(Light) Strength\41%\Aura\If the user is attuned to Light: increases strength by 41%.\72\y\StrengthSkill, Light
 (Light) Strength\45%\Aura\If the user is attuned to Light: increases strength by 45%.\80\y\StrengthSkill, Light
+(Light) Strength\47%\Aura\If the user is attuned to Light: increases strength by 47%.\87\y\StrengthSkill, Light
+(Light) Strength\49%\Aura\If the user is attuned to Light: increases strength by 49%.\89\y\StrengthSkill, Light
 (Light) Strength\50%\Aura\If the user is attuned to Light: increases strength by 50%.\90\y\StrengthSkill, Light
+(Light) Strength\52%\Aura\If the user is attuned to Light: increases strength by 52%.\94\y\StrengthSkill, Light
 (Light) Strength\55%\Aura\If the user is attuned to Light: increases strength by 55%.\100\y\StrengthSkill, Light
 (Light) Strength\60%\Aura\If the user is attuned to Light: increases strength by 60%.\100\y\StrengthSkill, Light
-(Light) Strength & Shadow Res\example\Aura\If the user is attuned to Light: increases strength by `x`% and grants `y`% Shadow resistance.\0\y\StrengthSkill, ShadowRes, Light, Resistance
-(Light) Strength & Shadow Res\35/15%\Aura\If the user is attuned to Light: increases strength by 35% and grants 15% Shadow resistance.\70\y\StrengthSkill, ShadowRes, Light, Resistance
-(Light) Strength & Shadow Res\50/15%\Aura\If the user is attuned to Light: increases strength by 50% and grants 15% Shadow resistance.\100\y\StrengthSkill, ShadowRes, Light, Resistance
 (Light) Whirlwind Strength\example\Aura\If the user is attuned to Light: increases strength by `x`% when the combo count is 15 or higher.\0\y\Light, Flurry, StrengthSkill
 (Light) Whirlwind Strength\20%\Aura\If the user is attuned to Light: increases strength by 20% when the combo count is 15 or higher.\80\y\Light, Flurry, StrengthSkill
 (Light) Whirlwind Strength\25%\Aura\If the user is attuned to Light: increases strength by 25% when the combo count is 15 or higher.\100\y\Light, Flurry, StrengthSkill
 (Shadow) Critical Damage\example\Aura\if the user is attuned to Shadow: adds 20% to the modifier applied to critical damage.\0\y\Shadow, CritDamage
-(Shadow) Critical Damage\10%\Aura\if the user is attuned to Shadow: adds 20% to the modifier applied to critical damage.\20\y\Shadow, CritDamage
 (Shadow) Critical Damage\20%\Aura\if the user is attuned to Shadow: adds 20% to the modifier applied to critical damage.\40\y\Shadow, CritDamage
+(Shadow) Critical Damage\25%\Aura\if the user is attuned to Shadow: adds 25% to the modifier applied to critical damage.\5\y\Shadow, CritDamage
+(Shadow) Critical Damage\30%\Aura\if the user is attuned to Shadow: adds 30% to the modifier applied to critical damage.\60\y\Shadow, CritDamage
+(Shadow) Critical Damage\35%\Aura\if the user is attuned to Shadow: adds 35% to the modifier applied to critical damage.\70\y\Shadow, CritDamage
+(Shadow) Critical Damage\40%\Aura\if the user is attuned to Shadow: adds 40% to the modifier applied to critical damage.\80\y\Shadow, CritDamage
 (Shadow) Dragon's Might\example\Aura\If the user is attuned to Shadow: Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\StrengthSkill, InCombat, Shadow
 (Shadow) Dragon's Might\I\Aura\If the user is attuned to Shadow: Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\StrengthSkill, InCombat, Shadow
 (Shadow) Dragon's Might\II\Aura\If the user is attuned to Shadow: Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\100\y\StrengthSkill, InCombat, Shadow
-(Shadow) Ending Shapeshift = Skillful Trickery\example\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next five skills by 120% / 180% when the user's shapeshift is undone.\0\y\Skill Damage, Shadow
-(Shadow) Ending Shapeshift = Skillful Trickery\I\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next eight skills by `x`% when the user's shapeshift is undone.\100\y\Skill Damage, Shadow
-(Shadow) Ending Shapeshift = Skillful Trickery\II\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next eight skills by 180% when the user's shapeshift is undone.\120\y\Skill Damage, Shadow
+(Shadow) Ending Shapeshift = Skillful Trickery\example\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next five skills by `x`% when the user's shapeshift is undone.\0\y\Skill Damage, Shadow
+(Shadow) Ending Shapeshift = Skillful Trickery\120%\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next eight skills by 120% when the user's shapeshift is undone.\200\y\Skill Damage, Shadow
+(Shadow) Ending Shapeshift = Skillful Trickery\135%\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next eight skills by 135% when the user's shapeshift is undone.\200\y\Skill Damage, Shadow
+(Shadow) Ending Shapeshift = Skillful Trickery\150%\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next eight skills by 150% when the user's shapeshift is undone.\200\y\Skill Damage, Shadow
+(Shadow) Ending Shapeshift = Skillful Trickery\165%\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next eight skills by 165% when the user's shapeshift is undone.\200\y\Skill Damage, Shadow
+(Shadow) Ending Shapeshift = Skillful Trickery\180%\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next eight skills by 180% when the user's shapeshift is undone.\200\y\Skill Damage, Shadow
 (Shadow) HP Below 30% = Defense\example\Aura\If the user is attuned to Shadow: increases strength by `x`% when HP is 30% or below.\0\y\HP30, DefenseSkill, Shadow
 (Shadow) HP Below 30% = Defense\75%\Aura\If the user is attuned to Shadow: increases defense by 75% when HP is 30% or below.\70\y\HP30, DefenseSkill, Shadow
 (Shadow) HP Below 30% = Defense\100%\Aura\If the user is attuned to Shadow: increases defense by 100% when HP is 30% or below.\100\y\HP30, DefenseSkill, Shadow
 (Shadow) HP Below 30% = Strength\example\Aura\If the user is attuned to Shadow: increases strength by `x`% when HP is 30% or below.\0\y\HP30, StrengthSkill, Shadow
-(Shadow) HP Below 30% = Strength\20%\Aura\If the user is attuned to Shadow: increases strength by 30% when HP is 30% or below.\70\y\HP30, StrengthSkill, Shadow
+(Shadow) HP Below 30% = Strength\20%\Aura\If the user is attuned to Shadow: increases strength by 20% when HP is 30% or below.\70\y\HP30, StrengthSkill, Shadow
+(Shadow) HP Below 30% = Strength\30%\Aura\If the user is attuned to Shadow: increases strength by 30% when HP is 30% or below.\80\y\HP30, StrengthSkill, Shadow
+(Shadow) HP Below 30% = Strength\32%\Aura\If the user is attuned to Shadow: increases strength by 32% when HP is 30% or below.\84\y\HP30, StrengthSkill, Shadow
+(Shadow) HP Below 30% = Strength\34%\Aura\If the user is attuned to Shadow: increases strength by 34% when HP is 30% or below.\86\y\HP30, StrengthSkill, Shadow
+(Shadow) HP Below 30% = Strength\36%\Aura\If the user is attuned to Shadow: increases strength by 36% when HP is 30% or below.\92\y\HP30, StrengthSkill, Shadow
 (Shadow) HP Below 30% = Strength\40%\Aura\If the user is attuned to Shadow: increases strength by 40% when HP is 30% or below.\100\y\HP30, StrengthSkill, Shadow
-(Shadow) HP Below 30% = Strength & Defense\example\Aura\f the user is attuned to Shadow: increases strength by 30%/40% and defense by 75%/100% when HP is 30% or below.\0\y\HP30, StrengthSkill, DefenseSkill
-(Shadow) HP Below 30% = Strength & Defense\20%/75%\Aura\f the user is attuned to Shadow: increases strength by 30% and defense by 75% when HP is 30% or below.\80\y\HP30, StrengthSkill, DefenseSkill
-(Shadow) HP Below 30% = Strength & Defense\40%/100%\Aura\f the user is attuned to Shadow: increases strength by 40% and defense by 100% when HP is 30% or below.\100\y\HP30, StrengthSkill, DefenseSkill
+(Shadow) HP Below 30% = Strength & Defense\example\Aura\f the user is attuned to Shadow: increases strength by `x`% and defense by `y`% when HP is 30% or below.\0\y\HP30, StrengthSkill, DefenseSkill, Shadow
+(Shadow) HP Below 30% = Strength & Defense\20%/75%\Aura\f the user is attuned to Shadow: increases strength by 20% and defense by 75% when HP is 30% or below.\80\y\HP30, StrengthSkill, DefenseSkill, Shadow
+(Shadow) HP Below 30% = Strength & Defense\40%/100%\Aura\f the user is attuned to Shadow: increases strength by 40% and defense by 100% when HP is 30% or below.\100\y\HP30, StrengthSkill, DefenseSkill, Shadow
 (Shadow) HP 30% = Strength\example\Aura\If the user is attuned to Shadow: increases strength by `x`% when HP is 30% or above.\0\y\HP30, StrengthSkill, Shadow
 (Shadow) HP 30% = Strength\35%\Aura\If the user is attuned to Shadow: increases strength by 35% when HP is 30% or above.\35\y\HP30, StrengthSkill, Shadow
+(Shadow) HP 30% = Strength\38%\Aura\If the user is attuned to Shadow: increases strength by 38% when HP is 30% or above.\38\y\HP30, StrengthSkill, Shadow
+(Shadow) HP 30% = Strength\41%\Aura\If the user is attuned to Shadow: increases strength by 41% when HP is 30% or above.\41\y\HP30, StrengthSkill, Shadow
+(Shadow) HP 30% = Strength\45%\Aura\If the user is attuned to Shadow: increases strength by 45% when HP is 30% or above.\45\y\HP30, StrengthSkill, Shadow
 (Shadow) HP 30% = Strength\50%\Aura\If the user is attuned to Shadow: increases strength by 50% when HP is 30% or above.\50\y\HP30, StrengthSkill, Shadow
 (Shadow) HP & Strength\example\Aura\If the user is attuned to Shadow: increases strength and HP by `x`%.\20\y\HealthSkill, StrengthSkill, Shadow
 (Shadow) HP & Strength\5%\Aura\If the user is attuned to Shadow: increases strength and HP by 5%.\20\y\HealthSkill, StrengthSkill, Shadow
+(Shadow) HP & Strength\6%\Aura\If the user is attuned to Shadow: increases strength and HP by 6%.\24\y\HealthSkill, StrengthSkill, Shadow
+(Shadow) HP & Strength\7%\Aura\If the user is attuned to Shadow: increases strength and HP by 7%.\28\y\HealthSkill, StrengthSkill, Shadow
 (Shadow) HP & Strength\8%\Aura\If the user is attuned to Shadow: increases strength and HP by 8%.\30\y\HealthSkill, StrengthSkill, Shadow
 (Shadow) HP & Strength\10%\Aura\If the user is attuned to Shadow: increases strength and HP by 10%.\50\y\HealthSkill, StrengthSkill, Shadow
+(Shadow) HP & Strength\13%\Aura\If the user is attuned to Shadow: increases strength and HP by 13%.\56\y\HealthSkill, StrengthSkill, Shadow
 (Shadow) HP & Strength\15%\Aura\If the user is attuned to Shadow: increases strength and HP by 15%.\60\y\HealthSkill, StrengthSkill, Shadow
+(Shadow) HP & Strength\16%\Aura\If the user is attuned to Shadow: increases strength and HP by 16%.\62\y\HealthSkill, StrengthSkill, Shadow
+(Shadow) HP & Strength\17%\Aura\If the user is attuned to Shadow: increases strength and HP by 17%.\64\y\HealthSkill, StrengthSkill, Shadow
+(Shadow) HP & Strength\18%\Aura\If the user is attuned to Shadow: increases strength and HP by 18%.\66\y\HealthSkill, StrengthSkill, Shadow
 (Shadow) HP & Strength\20%\Aura\If the user is attuned to Shadow: increases strength and HP by 20%.\70\y\HealthSkill, StrengthSkill, Shadow
+(Shadow) HP & Strength\23%\Aura\If the user is attuned to Shadow: increases strength and HP by 23%.\80\y\HealthSkill, StrengthSkill, Shadow
+(Shadow) HP & Strength\26%\Aura\If the user is attuned to Shadow: increases strength and HP by 26%.\90\y\HealthSkill, StrengthSkill, Shadow
 (Shadow) HP & Strength\25%\Aura\If the user is attuned to Shadow: increases strength and HP by 25%.\80\y\HealthSkill, StrengthSkill, Shadow
 (Shadow) HP & Strength\30%\Aura\If the user is attuned to Shadow: increases strength and HP by 30%.\100\y\HealthSkill, StrengthSkill, Shadow
 (Shadow) HP & Strength\35%\Aura\If the user is attuned to Shadow: increases strength and HP by 35%.\110\y\HealthSkill, StrengthSkill, Shadow
 (Shadow) HP\example\Aura\If the user is attuned to Shadow: increases HP by `x`%.\0\y\HealthSkill, Shadow
+(Shadow) HP\5%\Aura\If the user is attuned to Shadow: increases HP by 5%.\2\y\HealthSkill, Shadow
+(Shadow) HP\6%\Aura\If the user is attuned to Shadow: increases HP by 6%.\5\y\HealthSkill, Shadow
+(Shadow) HP\7%\Aura\If the user is attuned to Shadow: increases HP by 7%.\10\y\HealthSkill, Shadow
+(Shadow) HP\8%\Aura\If the user is attuned to Shadow: increases HP by 8%.\15\y\HealthSkill, Shadow
 (Shadow) HP\10%\Aura\If the user is attuned to Shadow: increases HP by 10%.\20\y\HealthSkill, Shadow
+(Shadow) HP\11%\Aura\If the user is attuned to Shadow: increases HP by 11%.\22\y\HealthSkill, Shadow
+(Shadow) HP\12%\Aura\If the user is attuned to Shadow: increases HP by 12%.\24\y\HealthSkill, Shadow
+(Shadow) HP\13%\Aura\If the user is attuned to Shadow: increases HP by 13%.\26\y\HealthSkill, Shadow
 (Shadow) HP\15%\Aura\If the user is attuned to Shadow: increases HP by 15%.\30\y\HealthSkill, Shadow
 (Shadow) HP\20%\Aura\If the user is attuned to Shadow: increases HP by 20%.\40\y\HealthSkill, Shadow
+(Shadow) HP\22%\Aura\If the user is attuned to Shadow: increases HP by 22%.\42\y\HealthSkill, Shadow
+(Shadow) HP\23%\Aura\If the user is attuned to Shadow: increases HP by 23%.\43\y\HealthSkill, Shadow
+(Shadow) HP\24%\Aura\If the user is attuned to Shadow: increases HP by 24%.\44\y\HealthSkill, Shadow
+(Shadow) HP\26%\Aura\If the user is attuned to Shadow: increases HP by 26%.\46\y\HealthSkill, Shadow
+(Shadow) HP\27%\Aura\If the user is attuned to Shadow: increases HP by 27%.\47\y\HealthSkill, Shadow
 (Shadow) HP\30%\Aura\If the user is attuned to Shadow: increases HP by 30%.\50\y\HealthSkill, Shadow
+(Shadow) HP\32%\Aura\If the user is attuned to Shadow: increases HP by 32%.\55\y\HealthSkill, Shadow
+(Shadow) HP\34%\Aura\If the user is attuned to Shadow: increases HP by 34%.\60\y\HealthSkill, Shadow
+(Shadow) HP\35%\Aura\If the user is attuned to Shadow: increases HP by 35%.\65\y\HealthSkill, Shadow
+(Shadow) HP\36%\Aura\If the user is attuned to Shadow: increases HP by 36%.\60\y\HealthSkill, Shadow
 (Shadow) HP\40%\Aura\If the user is attuned to Shadow: increases HP by 40%.\60\y\HealthSkill, Shadow
 (Shadow) Last Bulwark\I\Aura\if the user is attuned to Shadow: grants the user a one-use shield that nullifies damage less than 45% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\35\y\Shield, Shadow, Last
 (Shadow) Last Bulwark\II\Aura\if the user is attuned to Shadow: grants the user a one-use shield that nullifies damage less than 60% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\50\y\Shield, Shadow, Last
@@ -928,45 +1052,97 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Shadow) Skill Damage\example\Aura\If the user is attuned to Shadow: increases skill damage by `x`%.\0\y\SkillDamage, Shadow
 (Shadow) Skill Damage\70%\Aura\If the user is attuned to Shadow: increases skill damage by 70%.\110\y\SkillDamage, Shadow
 (Shadow) Skill Damage\90%\Aura\If the user is attuned to Shadow: increases skill damage by 90%.\120\y\SkillDamage, Shadow
-(Shadow) Skillful Trickery\example\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next 15 skills by 120% / 180% at the start of quests. Every 30 / 25-hit combo will increase the damage dealt by an additional skill by 180%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\0\y\SkillDamage, Shadow
-(Shadow) Skillful Trickery\I\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next 15 skills by 120% at the start of quests. Every 30-hit combo will increase the damage dealt by an additional skill by `x`%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\100\y\SkillDamage, Shadow
-(Shadow) Skillful Trickery\II\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next 15 skills by 180% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by 180%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\120\y\SkillDamage, Shadow
+(Shadow) Skillful Trickery\example\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next 15 skills by `x`% at the start of quests. Every 30 / 25-hit combo will increase the damage dealt by an additional skill by 180%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\0\y\SkillDamage, Shadow
+(Shadow) Skillful Trickery\120%\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next 15 skills by 120% at the start of quests. Every 30-hit combo will increase the damage dealt by an additional skill by `x`%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\200\y\SkillDamage, Shadow
+(Shadow) Skillful Trickery\135%\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next 15 skills by 135% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by 180%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\200\y\SkillDamage, Shadow
+(Shadow) Skillful Trickery\150%\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next 15 skills by 150% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by 180%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\200\y\SkillDamage, Shadow
+(Shadow) Skillful Trickery\165%\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next 15 skills by 165% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by 180%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\200\y\SkillDamage, Shadow
+(Shadow) Skillful Trickery\180%\Aura\If the user is attuned to Shadow: increases the damage dealt by the user's next 15 skills by 135% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by 180%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\200\y\SkillDamage, Shadow
 (Shadow) Skill Haste\example\Aura\If the user is attuned to Shadow: Increases skill gauge fill rate by `x`%.\0\y\SkillHaste, Shadow
 (Shadow) Skill Haste\25%\Aura\If the user is attuned to Shadow: Increases skill gauge fill rate by 25%.\60\y\SkillHaste, Shadow
 (Shadow) Skill Haste\35%\Aura\If the user is attuned to Shadow: Increases skill gauge fill rate by 35%.\80\y\SkillHaste, Shadow
 (Shadow) Strength\example\Aura\If the user is attuned to Shadow: increases strength by `x`%.\0\y\StrengthSkill, Shadow
+(Shadow) Strength\5%\Aura\If the user is attuned to Shadow: increases strength by 5%.\10\y\StrengthSkill, Shadow
+(Shadow) Strength\6%\Aura\If the user is attuned to Shadow: increases strength by 6%.\12\y\StrengthSkill, Shadow
+(Shadow) Strength\7%\Aura\If the user is attuned to Shadow: increases strength by 7%.\14\y\StrengthSkill, Shadow
+(Shadow) Strength\8%\Aura\If the user is attuned to Shadow: increases strength by 8%.\16\y\StrengthSkill, Shadow
 (Shadow) Strength\10%\Aura\If the user is attuned to Shadow: increases strength by 10%.\20\y\StrengthSkill, Shadow
+(Shadow) Strength\11%\Aura\If the user is attuned to Shadow: increases strength by 11%.\22\y\StrengthSkill, Shadow
+(Shadow) Strength\12%\Aura\If the user is attuned to Shadow: increases strength by 12%.\24\y\StrengthSkill, Shadow
+(Shadow) Strength\13%\Aura\If the user is attuned to Shadow: increases strength by 13%.\26\y\StrengthSkill, Shadow
+(Shadow) Strength\14%\Aura\If the user is attuned to Shadow: increases strength by 14%.\28\y\StrengthSkill, Shadow
 (Shadow) Strength\15%\Aura\If the user is attuned to Shadow: increases strength by 15%.\30\y\StrengthSkill, Shadow
+(Shadow) Strength\16%\Aura\If the user is attuned to Shadow: increases strength by 16%.\32\y\StrengthSkill, Shadow
+(Shadow) Strength\17%\Aura\If the user is attuned to Shadow: increases strength by 17%.\34\y\StrengthSkill, Shadow
+(Shadow) Strength\18%\Aura\If the user is attuned to Shadow: increases strength by 18%.\36\y\StrengthSkill, Shadow
 (Shadow) Strength\20%\Aura\If the user is attuned to Shadow: increases strength by 20%.\40\y\StrengthSkill, Shadow
 (Shadow) Strength\25%\Aura\If the user is attuned to Shadow: increases strength by 25%.\50\y\StrengthSkill, Shadow
 (Shadow) Strength\30%\Aura\If the user is attuned to Shadow: increases strength by 30%.\60\y\StrengthSkill, Shadow
+(Shadow) Strength\32%\Aura\If the user is attuned to Shadow: increases strength by 32%.\62\y\StrengthSkill, Shadow
+(Shadow) Strength\33%\Aura\If the user is attuned to Shadow: increases strength by 33%.\63\y\StrengthSkill, Shadow
+(Shadow) Strength\34%\Aura\If the user is attuned to Shadow: increases strength by 34%.\64\y\StrengthSkill, Shadow
+(Shadow) Strength\35%\Aura\If the user is attuned to Shadow: increases strength by 35%.\65\y\StrengthSkill, Shadow
+(Shadow) Strength\36%\Aura\If the user is attuned to Shadow: increases strength by 36%.\66\y\StrengthSkill, Shadow
+(Shadow) Strength\38%\Aura\If the user is attuned to Shadow: increases strength by 38%.\68\y\StrengthSkill, Shadow
+(Shadow) Strength\39%\Aura\If the user is attuned to Shadow: increases strength by 39%.\69\y\StrengthSkill, Shadow
 (Shadow) Strength\40%\Aura\If the user is attuned to Shadow: increases strength by 40%.\70\y\StrengthSkill, Shadow
+(Shadow) Strength\41%\Aura\If the user is attuned to Shadow: increases strength by 41%.\72\y\StrengthSkill, Shadow
 (Shadow) Strength\45%\Aura\If the user is attuned to Shadow: increases strength by 45%.\80\y\StrengthSkill, Shadow
+(Shadow) Strength\47%\Aura\If the user is attuned to Shadow: increases strength by 47%.\84\y\StrengthSkill, Shadow
+(Shadow) Strength\49%\Aura\If the user is attuned to Shadow: increases strength by 49%.\88\y\StrengthSkill, Shadow
 (Shadow) Strength\50%\Aura\If the user is attuned to Shadow: increases strength by 50%.\90\y\StrengthSkill, Shadow
+(Shadow) Strength\52%\Aura\If the user is attuned to Shadow: increases strength by 52%.\94\y\StrengthSkill, Shadow
 (Shadow) Strength\55%\Aura\If the user is attuned to Shadow: increases strength by 55%.\100\y\StrengthSkill, Shadow
 (Shadow) Strength\60%\Aura\If the user is attuned to Shadow: increases strength by 60%.\100\y\StrengthSkill, Shadow
-(Shadow) Strength & Dragon's Might\example\Aura\If the user is attuned to Shadow: increases strength by 45%/55%, and increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\0\y\StrengthSkill, InCombat, StrengthSkill, Shadow
-(Shadow) Strength & Dragon's Might\I\Aura\If the user is attuned to Shadow: increases strength by 45%, and increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\StrengthSkill, InCombat, StrengthSkill, Shadow
-(Shadow) Strength & Dragon's Might\II\Aura\If the user is attuned to Shadow: increases strength by 55%, and increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\100\y\StrengthSkill, InCombat, StrengthSkill, Shadow
 (Water) Compounding Skill Damage\example\Aura\If the user is attuned to Water: increases the damage of the next attack skill by 40% / 50% for every 15 seconds that pass. This buff can stack up to four times. All stacks will be lost upon using an attack skill.\0\y\Compounding, SkillDamage, Water
-(Water) Compounding Skill Damage\I\Aura\If the user is attuned to Water: increases the damage of the next attack skill by 40% for every 15 seconds that pass. This buff can stack up to four times. All stacks will be lost upon using an attack skill.\100\y\Compounding, SkillDamage, Water
-(Water) Compounding Skill Damage\II\Aura\If the user is attuned to Water: increases the damage of the next attack skill by 50% for every 15 seconds that pass. This buff can stack up to four times. All stacks will be lost upon using an attack skill.\120\y\Compounding, SkillDamage, Water
+(Water) Compounding Skill Damage\40%\Aura\If the user is attuned to Water: increases the damage of the next attack skill by 40% for every 15 seconds that pass. This buff can stack up to four times. All stacks will be lost upon using an attack skill.\100\y\Compounding, SkillDamage, Water
+(Water) Compounding Skill Damage\42%\Aura\If the user is attuned to Water: increases the damage of the next attack skill by 42% for every 15 seconds that pass. This buff can stack up to four times. All stacks will be lost upon using an attack skill.\105\y\Compounding, SkillDamage, Water
+(Water) Compounding Skill Damage\44%\Aura\If the user is attuned to Water: increases the damage of the next attack skill by 44% for every 15 seconds that pass. This buff can stack up to four times. All stacks will be lost upon using an attack skill.\110\y\Compounding, SkillDamage, Water
+(Water) Compounding Skill Damage\46%\Aura\If the user is attuned to Water: increases the damage of the next attack skill by 46% for every 15 seconds that pass. This buff can stack up to four times. All stacks will be lost upon using an attack skill.\115\y\Compounding, SkillDamage, Water
+(Water) Compounding Skill Damage\50%\Aura\If the user is attuned to Water: increases the damage of the next attack skill by 50% for every 15 seconds that pass. This buff can stack up to four times. All stacks will be lost upon using an attack skill.\120\y\Compounding, SkillDamage, Water
 (Water) Critical Rate\example\Aura\If the user is attuned to Water: increases critical rate by `x`%.\0\y\Water, CritRate
 (Water) Critical Rate\15%\Aura\If the user is attuned to Water: increases critical rate by 15%.\40\y\Water, CritRate
 (Water) Critical Rate\20%\Aura\If the user is attuned to Water: increases critical rate by 20%.\40\y\Water, CritRate
 (Water) HP & Strength\example\Aura\If the user is attuned to Water: increases strength and HP by `x`%.\0\y\HealthSkill, StrengthSkill, Water
 (Water) HP & Strength\5%\Aura\If the user is attuned to Water: increases strength and HP by 5%.\20\y\HealthSkill, StrengthSkill, Water
+(Water) HP & Strength\6%\Aura\If the user is attuned to Water: increases strength and HP by 6%.\24\y\HealthSkill, StrengthSkill, Water
+(Water) HP & Strength\7%\Aura\If the user is attuned to Water: increases strength and HP by 7%.\28\y\HealthSkill, StrengthSkill, Water
 (Water) HP & Strength\8%\Aura\If the user is attuned to Water: increases strength and HP by 8%.\30\y\HealthSkill, StrengthSkill, Water
+(Water) HP & Strength\9%\Aura\If the user is attuned to Water: increases strength and HP by 9%.\35\y\HealthSkill, StrengthSkill, Water
 (Water) HP & Strength\10%\Aura\If the user is attuned to Water: increases strength and HP by 10%.\40\y\HealthSkill, StrengthSkill, Water
+(Water) HP & Strength\13%\Aura\If the user is attuned to Water: increases strength and HP by 13%.\56\y\HealthSkill, StrengthSkill, Water
 (Water) HP & Strength\15%\Aura\If the user is attuned to Water: increases strength and HP by 15%.\60\y\HealthSkill, StrengthSkill, Water
+(Water) HP & Strength\16%\Aura\If the user is attuned to Water: increases strength and HP by 16%.\62\y\HealthSkill, StrengthSkill, Water
+(Water) HP & Strength\17%\Aura\If the user is attuned to Water: increases strength and HP by 17%.\64\y\HealthSkill, StrengthSkill, Water
+(Water) HP & Strength\18%\Aura\If the user is attuned to Water: increases strength and HP by 18%.\66\y\HealthSkill, StrengthSkill, Water
 (Water) HP & Strength\20%\Aura\If the user is attuned to Water: increases strength and HP by 20%.\70\y\HealthSkill, StrengthSkill, Water
+(Water) HP & Strength\23%\Aura\If the user is attuned to Water: increases strength and HP by 23%.\80\y\HealthSkill, StrengthSkill, Water
+(Water) HP & Strength\26%\Aura\If the user is attuned to Water: increases strength and HP by 26%.\90\y\HealthSkill, StrengthSkill, Water
 (Water) HP & Strength\30%\Aura\If the user is attuned to Water: increases strength and HP by 30%.\100\y\HealthSkill, StrengthSkill, Water
 (Water) HP & Strength\35%\Aura\If the user is attuned to Water: increases strength and HP by 35%.\110\y\HealthSkill, StrengthSkill, Water
 (Water) HP\example\Aura\If the user is attuned to Water: increases HP by `x`%.\0\y\HealthSkill, Water
+(Water) HP\5%\Aura\If the user is attuned to Water: increases HP by 5%.\2\y\HealthSkill, Water
+(Water) HP\6%\Aura\If the user is attuned to Water: increases HP by 6%.\5\y\HealthSkill, Water
+(Water) HP\7%\Aura\If the user is attuned to Water: increases HP by 7%.\10\y\HealthSkill, Water
+(Water) HP\8%\Aura\If the user is attuned to Water: increases HP by 8%.\15\y\HealthSkill, Water
 (Water) HP\10%\Aura\If the user is attuned to Water: increases HP by 10%.\20\y\HealthSkill, Water
+(Water) HP\11%\Aura\If the user is attuned to Water: increases HP by 11%.\22\y\HealthSkill, Water
+(Water) HP\12%\Aura\If the user is attuned to Water: increases HP by 12%.\24\y\HealthSkill, Water
+(Water) HP\13%\Aura\If the user is attuned to Water: increases HP by 13%.\26\y\HealthSkill, Water
 (Water) HP\15%\Aura\If the user is attuned to Water: increases HP by 15%.\30\y\HealthSkill, Water
+(Water) HP\16%\Aura\If the user is attuned to Water: increases HP by 16%.\32\y\HealthSkill, Water
+(Water) HP\17%\Aura\If the user is attuned to Water: increases HP by 17%.\34\y\HealthSkill, Water
+(Water) HP\18%\Aura\If the user is attuned to Water: increases HP by 18%.\36\y\HealthSkill, Water
 (Water) HP\20%\Aura\If the user is attuned to Water: increases HP by 20%.\40\y\HealthSkill, Water
+(Water) HP\22%\Aura\If the user is attuned to Water: increases HP by 22%.\44\y\HealthSkill, Water
+(Water) HP\24%\Aura\If the user is attuned to Water: increases HP by 24%.\48\y\HealthSkill, Water
+(Water) HP\27%\Aura\If the user is attuned to Water: increases HP by 27%.\54\y\HealthSkill, Water
 (Water) HP\30%\Aura\If the user is attuned to Water: increases HP by 30%.\60\y\HealthSkill, Water
+(Water) HP\32%\Aura\If the user is attuned to Water: increases HP by 32%.\61\y\HealthSkill, Water
+(Water) HP\34%\Aura\If the user is attuned to Water: increases HP by 34%.\62\y\HealthSkill, Water
+(Water) HP\35%\Aura\If the user is attuned to Water: increases HP by 35%.\65\y\HealthSkill, Water
+(Water) HP\36%\Aura\If the user is attuned to Water: increases HP by 36%.\68\y\HealthSkill, Water
+(Water) HP\37%\Aura\If the user is attuned to Water: increases HP by 37%.\69\y\HealthSkill, Water
 (Water) HP\40%\Aura\If the user is attuned to Water: increases HP by 40%.\80\y\HealthSkill, Water
 (Water) Overdrive Punisher\example\Aura\If the user is attuned to Water: increases damage to enemies in overdrive stats by `x`%\0\y\Punisher, Water, OverdrivePunisher
 (Water) Overdrive Punisher\40%\Aura\If the user is attuned to Water: increases damage to enemies in overdrive stats by 40%\40\y\Punisher, Water, OverdrivePunisher
@@ -976,43 +1152,89 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Water) Primed Strength\15%\Aura\If the user is attuned to Water: increases the strength of the adventurer you are currently controlling by 15% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\100\y\Primed, StrengthSkill, Water
 (Water) Skill Damage\70%\Aura\If the user is attuned to Water: increases skill damage by 70%.\110\y\SkillDamage, Water
 (Water) Skill Damage\90%\Aura\If the user is attuned to Water: increases skill damage by 90%.\120\y\SkillDamage, Water
-(Water) Skill Recharge\example\Aura\If the user is attuned to Water: fills 25%/35% of a skill's skill gauge after using that skill.\0\y\Water, SkillRecharge
-(Water) Skill Recharge\I\Aura\If the user is attuned to Water: fills 25% of a skill's skill gauge after using that skill.\100\y\Water, SkillRecharge
-(Water) Skill Recharge\II\Aura\If the user is attuned to Water: fills 35% of a skill's skill gauge after using that skill.\120\y\Water, SkillRecharge
+(Water) Skill Recharge\example\Aura\If the user is attuned to Water: fills `x`% of a skill's skill gauge after using that skill.\0\y\Water, SkillRecharge
+(Water) Skill Recharge\25%\Aura\If the user is attuned to Water: fills 25% of a skill's skill gauge after using that skill.\100\y\Water, SkillRecharge
+(Water) Skill Recharge\35%\Aura\If the user is attuned to Water: fills 35% of a skill's skill gauge after using that skill.\120\y\Water, SkillRecharge
 (Water) Strength\example\Aura\If the user is attuned to Water: increases strength by `x`%.\0\y\StrengthSkill, Water
+(Water) Strength\5%\Aura\If the user is attuned to Water: increases strength by 5%.\10\y\StrengthSkill, Water
+(Water) Strength\6%\Aura\If the user is attuned to Water: increases strength by 6%.\12\y\StrengthSkill, Water
+(Water) Strength\7%\Aura\If the user is attuned to Water: increases strength by 7%.\14\y\StrengthSkill, Water
+(Water) Strength\8%\Aura\If the user is attuned to Water: increases strength by 8%.\16\y\StrengthSkill, Water
 (Water) Strength\10%\Aura\If the user is attuned to Water: increases strength by 10%.\20\y\StrengthSkill, Water
+(Water) Strength\11%\Aura\If the user is attuned to Water: increases strength by 11%.\22\y\StrengthSkill, Water
+(Water) Strength\12%\Aura\If the user is attuned to Water: increases strength by 12%.\24\y\StrengthSkill, Water
+(Water) Strength\13%\Aura\If the user is attuned to Water: increases strength by 13%.\26\y\StrengthSkill, Water
+(Water) Strength\14%\Aura\If the user is attuned to Water: increases strength by 14%.\28\y\StrengthSkill, Water
 (Water) Strength\15%\Aura\If the user is attuned to Water: increases strength by 15%.\30\y\StrengthSkill, Water
+(Water) Strength\16%\Aura\If the user is attuned to Water: increases strength by 16%.\34\y\StrengthSkill, Water
 (Water) Strength\30%\Aura\If the user is attuned to Water: increases strength by 30%.\60\y\StrengthSkill, Water
+(Water) Strength\33%\Aura\If the user is attuned to Water: increases strength by 33%.\63\y\StrengthSkill, Water
+(Water) Strength\35%\Aura\If the user is attuned to Water: increases strength by 35%.\65\y\StrengthSkill, Water
+(Water) Strength\36%\Aura\If the user is attuned to Water: increases strength by 36%.\66\y\StrengthSkill, Water
+(Water) Strength\37%\Aura\If the user is attuned to Water: increases strength by 37%.\67\y\StrengthSkill, Water
+(Water) Strength\39%\Aura\If the user is attuned to Water: increases strength by 39%.\69\y\StrengthSkill, Water
 (Water) Strength\40%\Aura\If the user is attuned to Water: increases strength by 40%.\70\y\StrengthSkill, Water
+(Water) Strength\41%\Aura\If the user is attuned to Water: increases strength by 41%.\72\y\StrengthSkill, Water
+(Water) Strength\42%\Aura\If the user is attuned to Water: increases strength by 42%.\74\y\StrengthSkill, Water
+(Water) Strength\43%\Aura\If the user is attuned to Water: increases strength by 43%.\76\y\StrengthSkill, Water
 (Water) Strength\45%\Aura\If the user is attuned to Water: increases strength by 45%.\80\y\StrengthSkill, Water
-(Water) Strength & Critical Rate\example\Aura\If the user is attuned to Water: increases strength by 30%/45% and increases critical rate by 15%/20%.\0\y\Water, StrengthSkill, CritRate
-(Water) Strength & Critical Rate\30/15%\Aura\If the user is attuned to Water: increases strength by `30`% and increases critical rate by `15`%.\70\y\Water, StrengthSkill, CritRate
-(Water) Strength & Critical Rate\45/20%\Aura\If the user is attuned to Water: increases strength by `45`% and increases critical rate by `20`%.\100\y\Water, StrengthSkill, CritRate
+(Water) Strength\50%\Aura\If the user is attuned to Water: increases strength by 50%.\90\y\StrengthSkill, Water
+(Water) Strength\55%\Aura\If the user is attuned to Water: increases strength by 55%.\95\y\StrengthSkill, Water
+(Water) Strength\60%\Aura\If the user is attuned to Water: increases strength by 60%.\100\y\StrengthSkill, Water
 (Water) Strength & Critical Damage\example\Aura\If the user is attuned to Water: increases strength by `x`% and adds `y`% to the modifier applied to critical damage.\70\y\StrengthSkill, CritDamage, Water
 (Water) Strength & Critical Damage\30/50%\Aura\If the user is attuned to Water: increases strength by 30% and adds 50% to the modifier applied to critical damage.\70\y\StrengthSkill, CritDamage, Water
+(Water) Strength & Critical Damage\33/50%\Aura\If the user is attuned to Water: increases strength by 33% and adds 50% to the modifier applied to critical damage.\80\y\StrengthSkill, CritDamage, Water
+(Water) Strength & Critical Damage\36/50%\Aura\If the user is attuned to Water: increases strength by 36% and adds 50% to the modifier applied to critical damage.\85\y\StrengthSkill, CritDamage, Water
+(Water) Strength & Critical Damage\39/50%\Aura\If the user is attuned to Water: increases strength by 39% and adds 50% to the modifier applied to critical damage.\90\y\StrengthSkill, CritDamage, Water
 (Water) Strength & Critical Damage\45/55%\Aura\If the user is attuned to Water: increases strength by 45% and adds 55% to the modifier applied to critical damage.\100\y\StrengthSkill, CritDamage, Water
-(Water) Strength\60%\Aura\If the user is attuned to Water: increases strength by 60%.\100\y\StrengthSkill, Water
 (Wind) Critical Damage\example\Aura\If the user is attuned to Wind: adds `x`% to the modifier applied to critical damage.\0\y\Wind, CritDamage
 (Wind) Critical Damage\50%\Aura\If the user is attuned to Wind: adds 50% to the modifier applied to critical damage.\40\y\Wind, CritDamage
 (Wind) Critical Damage\55%\Aura\If the user is attuned to Wind: adds 55% to the modifier applied to critical damage.\40\y\Wind, CritDamage
 (Wind) Dauntless Rampart\example\Aura\If the user is attuned to Wind: grants them a one-use divergent shield that nullifies damage less than 30%/40% of the user's maximum HP every 15 seconds that pass without the user being knocked back by an enemy. Divergent shields can stack with ordinary shields. Also, the user's strength is increased by 30% while this shield is active.\0\y\Wind, Shield, StrengthSkill
 (Wind) Dauntless Rampart\I\Aura\If the user is attuned to Wind: grants them a one-use divergent shield that nullifies damage less than 30% of the user's maximum HP every 15 seconds that pass without the user being knocked back by an enemy. Divergent shields can stack with ordinary shields. Also, the user's strength is increased by 30% while this shield is active.\0\y\Wind, Shield, StrengthSkill
-(Wind) Dauntless Rampart\II\Aura\If the user is attuned to Wind: grants them a one-use divergent shield that nullifies damage less than 40% of the user's maximum HP every 15 seconds that pass without the user being knocked back by an enemy. Divergent shields can stack with ordinary shields. Also, the user's strength is increased by 30% while this shield is active.\0\y\Wind, Shield, StrengthSkill
+(Wind) Dauntless Rampart\II\Aura\If the user is attuned to Wind: grants them a one-use divergent shield that nullifies damage less than 30% of the user's maximum HP every 15 seconds that pass without the user being knocked back by an enemy. Divergent shields can stack with ordinary shields. Also, the user's strength is increased by 30% while this shield is active.\0\y\Wind, Shield, StrengthSkill
+(Wind) Dauntless Rampart\III\Aura\If the user is attuned to Wind: grants them a one-use divergent shield that nullifies damage less than 30% of the user's maximum HP every 15 seconds that pass without the user being knocked back by an enemy. Divergent shields can stack with ordinary shields. Also, the user's strength is increased by 30% while this shield is active.\0\y\Wind, Shield, StrengthSkill
+(Wind) Dauntless Rampart\IV\Aura\If the user is attuned to Wind: grants them a one-use divergent shield that nullifies damage less than 30% of the user's maximum HP every 15 seconds that pass without the user being knocked back by an enemy. Divergent shields can stack with ordinary shields. Also, the user's strength is increased by 30% while this shield is active.\0\y\Wind, Shield, StrengthSkill
+(Wind) Dauntless Rampart\V\Aura\If the user is attuned to Wind: grants them a one-use divergent shield that nullifies damage less than 40% of the user's maximum HP every 15 seconds that pass without the user being knocked back by an enemy. Divergent shields can stack with ordinary shields. Also, the user's strength is increased by 30% while this shield is active.\0\y\Wind, Shield, StrengthSkill
 (Wind) HP & Strength\example\Aura\If the user is attuned to Wind: increases strength and HP by `x`%.\0\y\HealthSkill, StrengthSkill, Wind
 (Wind) HP & Strength\5%\Aura\If the user is attuned to Wind: increases strength and HP by 5%.\20\y\HealthSkill, StrengthSkill, Wind
+(Wind) HP & Strength\6%\Aura\If the user is attuned to Wind: increases strength and HP by 6%.\24\y\HealthSkill, StrengthSkill, Wind
+(Wind) HP & Strength\7%\Aura\If the user is attuned to Wind: increases strength and HP by 7%.\28\y\HealthSkill, StrengthSkill, Wind
 (Wind) HP & Strength\8%\Aura\If the user is attuned to Wind: increases strength and HP by 8%.\30\y\HealthSkill, StrengthSkill, Wind
 (Wind) HP & Strength\10%\Aura\If the user is attuned to Wind: increases strength and HP by 10%.\50\y\HealthSkill, StrengthSkill, Wind
 (Wind) HP & Strength\15%\Aura\If the user is attuned to Wind: increases strength and HP by 15%.\60\y\HealthSkill, StrengthSkill, Wind
 (Wind) HP & Strength\20%\Aura\If the user is attuned to Wind: increases strength and HP by 20%.\70\y\HealthSkill, StrengthSkill, Wind
+(Wind) HP & Strength\23%\Aura\If the user is attuned to Wind: increases strength and HP by 23%.\80\y\HealthSkill, StrengthSkill, Wind
+(Wind) HP & Strength\26%\Aura\If the user is attuned to Wind: increases strength and HP by 26%.\90\y\HealthSkill, StrengthSkill, Wind
 (Wind) HP & Strength\30%\Aura\If the user is attuned to Wind: increases strength and HP by 30%.\100\y\HealthSkill, StrengthSkill, Wind
 (Wind) HP & Strength\35%\Aura\If the user is attuned to Wind: increases strength and HP by 35%.\110\y\HealthSkill, StrengthSkill, Wind
 (Wind) HP\example\Aura\If the user is attuned to Wind: increases HP by `x`%.\0\y\HealthSkill, Wind
+(Wind) HP\5%\Aura\If the user is attuned to Wind: increases HP by 5%.\2\y\HealthSkill, Wind
+(Wind) HP\6%\Aura\If the user is attuned to Wind: increases HP by 6%.\5\y\HealthSkill, Wind
+(Wind) HP\7%\Aura\If the user is attuned to Wind: increases HP by 7%.\10\y\HealthSkill, Wind
+(Wind) HP\8%\Aura\If the user is attuned to Wind: increases HP by 8%.\15\y\HealthSkill, Wind
 (Wind) HP\10%\Aura\If the user is attuned to Wind: increases HP by 10%.\20\y\HealthSkill, Wind
+(Wind) HP\11%\Aura\If the user is attuned to Wind: increases HP by 11%.\22\y\HealthSkill, Wind
+(Wind) HP\12%\Aura\If the user is attuned to Wind: increases HP by 12%.\24\y\HealthSkill, Wind
+(Wind) HP\13%\Aura\If the user is attuned to Wind: increases HP by 13%.\26\y\HealthSkill, Wind
 (Wind) HP\15%\Aura\If the user is attuned to Wind: increases HP by 15%.\30\y\HealthSkill, Wind
 (Wind) HP\20%\Aura\If the user is attuned to Wind: increases HP by 20%.\40\y\HealthSkill, Wind
+(Wind) HP\22%\Aura\If the user is attuned to Wind: increases HP by 22%.\44\y\HealthSkill, Wind
+(Wind) HP\23%\Aura\If the user is attuned to Wind: increases HP by 23%.\46\y\HealthSkill, Wind
+(Wind) HP\24%\Aura\If the user is attuned to Wind: increases HP by 24%.\48\y\HealthSkill, Wind
+(Wind) HP\26%\Aura\If the user is attuned to Wind: increases HP by 26%.\54\y\HealthSkill, Wind
+(Wind) HP\27%\Aura\If the user is attuned to Wind: increases HP by 27%.\56\y\HealthSkill, Wind
 (Wind) HP\30%\Aura\If the user is attuned to Wind: increases HP by 30%.\60\y\HealthSkill, Wind
+(Wind) HP\32%\Aura\If the user is attuned to Wind: increases HP by 32%.\62\y\HealthSkill, Wind
+(Wind) HP\33%\Aura\If the user is attuned to Wind: increases HP by 33%.\63\y\HealthSkill, Wind
+(Wind) HP\34%\Aura\If the user is attuned to Wind: increases HP by 34%.\64\y\HealthSkill, Wind
+(Wind) HP\35%\Aura\If the user is attuned to Wind: increases HP by 35%.\65\y\HealthSkill, Wind
+(Wind) HP\36%\Aura\If the user is attuned to Wind: increases HP by 36%.\66\y\HealthSkill, Wind
+(Wind) HP\39%\Aura\If the user is attuned to Wind: increases HP by 39%.\69\y\HealthSkill, Wind
 (Wind) HP\40%\Aura\If the user is attuned to Wind: increases HP by 40%.\70\y\HealthSkill, Wind
 (Wind) HP\45%\Aura\If the user is attuned to Wind: increases HP by 45%.\80\y\HealthSkill, Wind
+(Wind) HP\50%\Aura\If the user is attuned to Wind: increases HP by 50%.\90\y\HealthSkill, Wind
+(Wind) HP\55%\Aura\If the user is attuned to Wind: increases HP by 55%.\95\y\HealthSkill, Wind
 (Wind) HP\60%\Aura\If the user is attuned to Wind: increases HP by 60%.\100\y\HealthSkill, Wind
 (Wind) Poisoned Punisher\example\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by `x`%\0\y\Punisher, PoisonedPunisher, Wind
 (Wind) Poisoned Punisher\15%\Aura\If the user is attuned to Wind: increases damage to poisoned enemies by 15%\20\y\Punisher, PoisonedPunisher, Wind
@@ -1029,45 +1251,85 @@ Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\
 (Wind) Skill Haste\30%\Aura\If the user is attuned to Wind: Increases skill gauge fill rate by 30%.\70\y\SkillHaste, Wind
 (Wind) Skill Haste\35%\Aura\If the user is attuned to Wind: Increases skill gauge fill rate by 35%.\80\y\SkillHaste, Wind
 (Wind) Strength\example\Aura\If the user is attuned to Wind: increases strength by `x`%.\0\y\StrengthSkill, Wind
+(Wind) Strength\5%\Aura\If the user is attuned to Wind: increases strength by 5%.\10\y\StrengthSkill, Wind
+(Wind) Strength\6%\Aura\If the user is attuned to Wind: increases strength by 6%.\12\y\StrengthSkill, Wind
+(Wind) Strength\7%\Aura\If the user is attuned to Wind: increases strength by 7%.\14\y\StrengthSkill, Wind
+(Wind) Strength\8%\Aura\If the user is attuned to Wind: increases strength by 8%.\16\y\StrengthSkill, Wind
 (Wind) Strength\10%\Aura\If the user is attuned to Wind: increases strength by 10%.\20\y\StrengthSkill, Wind
+(Wind) Strength\11%\Aura\If the user is attuned to Wind: increases strength by 11%.\22\y\StrengthSkill, Wind
+(Wind) Strength\12%\Aura\If the user is attuned to Wind: increases strength by 12%.\24\y\StrengthSkill, Wind
+(Wind) Strength\13%\Aura\If the user is attuned to Wind: increases strength by 13%.\26\y\StrengthSkill, Wind
+(Wind) Strength\14%\Aura\If the user is attuned to Wind: increases strength by 14%.\28\y\StrengthSkill, Wind
 (Wind) Strength\15%\Aura\If the user is attuned to Wind: increases strength by 15%.\30\y\StrengthSkill, Wind
+(Wind) Strength\16%\Aura\If the user is attuned to Wind: increases strength by 16%.\34\y\StrengthSkill, Wind
 (Wind) Strength\20%\Aura\If the user is attuned to Wind: increases strength by 20%.\40\y\StrengthSkill, Wind
 (Wind) Strength\30%\Aura\If the user is attuned to Wind: increases strength by 30%.\60\y\StrengthSkill, Wind
+(Wind) Strength\33%\Aura\If the user is attuned to Wind: increases strength by 30%.\63\y\StrengthSkill, Wind
 (Wind) Strength\35%\Aura\If the user is attuned to Wind: increases strength by 35%.\65\y\StrengthSkill, Wind
+(Wind) Strength\36%\Aura\If the user is attuned to Wind: increases strength by 30%.\66\y\StrengthSkill, Wind
+(Wind) Strength\37%\Aura\If the user is attuned to Wind: increases strength by 37%.\67\y\StrengthSkill, Wind
+(Wind) Strength\38%\Aura\If the user is attuned to Wind: increases strength by 38%.\68\y\StrengthSkill, Wind
+(Wind) Strength\39%\Aura\If the user is attuned to Wind: increases strength by 39%.\69\y\StrengthSkill, Wind
 (Wind) Strength\40%\Aura\If the user is attuned to Wind: increases strength by 40%.\70\y\StrengthSkill, Wind
+(Wind) Strength\41%\Aura\If the user is attuned to Wind: increases strength by 41%.\71\y\StrengthSkill, Wind
+(Wind) Strength\42%\Aura\If the user is attuned to Wind: increases strength by 42%.\72\y\StrengthSkill, Wind
+(Wind) Strength\44%\Aura\If the user is attuned to Wind: increases strength by 44%.\74\y\StrengthSkill, Wind
 (Wind) Strength\45%\Aura\If the user is attuned to Wind: increases strength by 45%.\80\y\StrengthSkill, Wind
 (Wind) Strength\50%\Aura\If the user is attuned to Wind: increases strength by 45%.\90\y\StrengthSkill, Wind
+(Wind) Strength\55%\Aura\If the user is attuned to Wind: increases strength by 55%.\95\y\StrengthSkill, Wind
 (Wind) Strength\60%\Aura\If the user is attuned to Wind: increases strength by 60%.\100\y\StrengthSkill, Wind
 (Wind) Strength & Critical Damage\example\Aura\If the user is attuned to Wind: increases strength by `x`% and adds `y`% to the modifier applied to critical damage.\70\y\StrengthSkill, CritDamage, Wind
 (Wind) Strength & Critical Damage\30/50%\Aura\If the user is attuned to Wind: increases strength by 30% and adds 50% to the modifier applied to critical damage.\70\y\StrengthSkill, CritDamage, Wind
+(Wind) Strength & Critical Damage\33/50%\Aura\If the user is attuned to Wind: increases strength by 33% and adds 50% to the modifier applied to critical damage.\80\y\StrengthSkill, CritDamage, Wind
+(Wind) Strength & Critical Damage\36/50%\Aura\If the user is attuned to Wind: increases strength by 36% and adds 50% to the modifier applied to critical damage.\85\y\StrengthSkill, CritDamage, Wind
+(Wind) Strength & Critical Damage\39/50%\Aura\If the user is attuned to Wind: increases strength by 39% and adds 50% to the modifier applied to critical damage.\90\y\StrengthSkill, CritDamage, Wind
 (Wind) Strength & Critical Damage\45/55%\Aura\If the user is attuned to Wind: increases strength by 45% and adds 55% to the modifier applied to critical damage.\100\y\StrengthSkill, CritDamage, Wind
 Adventurer EXP\example\Ability\Increases adventurer EXP intake for clearing quests by `x`%\0\y\EXP
 Adventurer EXP\100%\Ability\Increases adventurer EXP intake for clearing quests by 100%\0\y\EXP
+Adventurer EXP\110%\Ability\Increases adventurer EXP intake for clearing quests by 110%\0\y\EXP
+Adventurer EXP\120%\Ability\Increases adventurer EXP intake for clearing quests by 120%\0\y\EXP
+Adventurer EXP\130%\Ability\Increases adventurer EXP intake for clearing quests by 130%\0\y\EXP
 Adventurer EXP\150%\Ability\Increases adventurer EXP intake for clearing quests by 150%\0\y\EXP
+Burning Punisher\example\Aura\Increases damage to burning enemies by `x`%.\0\y\Punisher, BurningPunisher
+Burning Punisher\15%\Aura\Increases damage to burning enemies by 15%.\5\y\Punisher, BurningPunisher
+Burning Punisher\20%\Aura\Increases damage to burning enemies by 20%.\15\y\Punisher, BurningPunisher
 Compounding Skill Damage\example\Aura\Increases the damage of the next attack skill by 40% / 50% for every 15 seconds that pass. This buff can stack up to four times. All stacks will be lost upon using an attack skill.\0\y\Compounding, SkillDamage
-Compounding Skill Damage\I\Aura\Increases the damage of the next attack skill by 40% for every 15 seconds that pass. This buff can stack up to four times. All stacks will be lost upon using an attack skill.\100\y\Compounding, SkillDamage
-Compounding Skill Damage\II\Aura\Increases the damage of the next attack skill by 50% for every 15 seconds that pass. This buff can stack up to four times. All stacks will be lost upon using an attack skill.\120\y\Compounding, SkillDamage
-Critical Damage\example\Aura\If the user is attuned to Light: adds `x`% to the modifier applied to critical damage.\0\y\CritDamage
-Critical Damage\50%\Aura\If the user is attuned to Light: adds 50% to the modifier applied to critical damage.\40\y\CritDamage
-Critical Damage\70%\Aura\If the user is attuned to Light: adds 70% to the modifier applied to critical damage.\60\y\CritDamage
-Critical Rate\example\Aura\If the user is attuned to Light: Increases critical rate by `x`%.\0\y\CritRate
-Critical Rate\15%\Aura\If the user is attuned to Light: Increases critical rate by 15%.\40\y\CritRate
-Critical Rate\20%\Aura\If the user is attuned to Light: Increases critical rate by 20%.\40\y\CritRate
+Compounding Skill Damage\40%\Aura\Increases the damage of the next attack skill by 40% for every 15 seconds that pass. This buff can stack up to four times. All stacks will be lost upon using an attack skill.\100\y\Compounding, SkillDamage
+Compounding Skill Damage\42%\Aura\Increases the damage of the next attack skill by 42% for every 15 seconds that pass. This buff can stack up to four times. All stacks will be lost upon using an attack skill.\105\y\Compounding, SkillDamage
+Compounding Skill Damage\44%\Aura\Increases the damage of the next attack skill by 44% for every 15 seconds that pass. This buff can stack up to four times. All stacks will be lost upon using an attack skill.\110\y\Compounding, SkillDamage
+Compounding Skill Damage\46%\Aura\Increases the damage of the next attack skill by 46% for every 15 seconds that pass. This buff can stack up to four times. All stacks will be lost upon using an attack skill.\115\y\Compounding, SkillDamage
+Compounding Skill Damage\50%\Aura\Increases the damage of the next attack skill by 50% for every 15 seconds that pass. This buff can stack up to four times. All stacks will be lost upon using an attack skill.\120\y\Compounding, SkillDamage
+Critical Damage\example\Aura\Adds `x`% to the modifier applied to critical damage.\0\y\CritDamage
+Critical Damage\20%\Aura\Adds 20% to the modifier applied to critical damage.\5\y\CritDamage
+Critical Damage\25%\Aura\Adds 25% to the modifier applied to critical damage.\10\y\CritDamage
+Critical Damage\30%\Aura\Adds 30% to the modifier applied to critical damage.\15\y\CritDamage
+Critical Damage\35%\Aura\Adds 35% to the modifier applied to critical damage.\20\y\CritDamage
+Critical Damage\40%\Aura\Adds 40% to the modifier applied to critical damage.\30\y\CritDamage
+Critical Damage\50%\Aura\Adds 50% to the modifier applied to critical damage.\40\y\CritDamage
+Critical Damage\55%\Aura\Adds 55% to the modifier applied to critical damage.\45\y\CritDamage
+Critical Damage\60%\Aura\Adds 60% to the modifier applied to critical damage.\50\y\CritDamage
+Critical Damage\65%\Aura\Adds 65% to the modifier applied to critical damage.\55\y\CritDamage
+Critical Damage\70%\Aura\Adds 70% to the modifier applied to critical damage.\60\y\CritDamage
+Critical Rate\example\Aura\Increases critical rate by `x`%.\0\y\CritRate
+Critical Rate\15%\Aura\Increases critical rate by 15%.\40\y\CritRate
+Critical Rate\20%\Aura\Increases critical rate by 20%.\40\y\CritRate
 Dauntless Rampart\example\Aura\Grants them a one-use divergent shield that nullifies damage less than 30%/40% of the user's maximum HP every 15 seconds that pass without the user being knocked back by an enemy. Divergent shields can stack with ordinary shields. Also, the user's strength is increased by 30% while this shield is active.\0\y\Shield, StrengthSkill
 Dauntless Rampart\I\Aura\Grants them a one-use divergent shield that nullifies damage less than 30% of the user's maximum HP every 15 seconds that pass without the user being knocked back by an enemy. Divergent shields can stack with ordinary shields. Also, the user's strength is increased by 30% while this shield is active.\0\y\Shield, StrengthSkill
 Dauntless Rampart\II\Aura\Grants them a one-use divergent shield that nullifies damage less than 40% of the user's maximum HP every 15 seconds that pass without the user being knocked back by an enemy. Divergent shields can stack with ordinary shields. Also, the user's strength is increased by 30% while this shield is active.\0\y\Shield, StrengthSkill
+Dauntless Rampart\III\Aura\Extends shapeshift time by `x`%.\0\y\Shield, StrengthSkill
+Dauntless Rampart\IV\Aura\Extends shapeshift time by 15%.\0\y\Shield, StrengthSkill
+Dauntless Rampart\V\Aura\Extends shapeshift time by 20%.\0\y\Shield, StrengthSkill
 Dragon Time\example\Aura\Extends shapeshift time by `x`%.\0\y\DragonTime
 Dragon Time\15%\Aura\Extends shapeshift time by 15%.\60\y\DragonTime
 Dragon Time\20%\Aura\Extends shapeshift time by 20%.\80\y\DragonTime
-Dragon's Might\example\Aura\Increases strength by a further `x`% for the remainder of the quest upon shapeshifting, up to twice per quest.\0\y\StrengthSkill, InCombat
 Dragon's Might\10%\Aura\Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\StrengthSkill, InCombat
-Dragon's Might\10%\Aura\Increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\100\y\StrengthSkill, InCombat
-Ending Shapeshift = Curse\example\Aura\When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\0\y\Curse
 Ending Shapeshift = Curse\I\Aura\When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\80\y\Curse
-Ending Shapeshift = Curse\II\Aura\When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\100\y\Curse
-Ending Shapeshift = Skillful Trickery\example\Aura\Increases the damage dealt by the user's next five skills by 120% / 180% when the user's shapeshift is undone.\0\y\Skill Damage
-Ending Shapeshift = Skillful Trickery\I\Aura\Increases the damage dealt by the user's next five skills by 120% when the user's shapeshift is undone.\100\y\Skill Damage
-Ending Shapeshift = Skillful Trickery\II\Aura\Increases the damage dealt by the user's next eight skills by 180% when the user's shapeshift is undone.\120\y\Skill Damage
+Ending Shapeshift = Skillful Trickery\example\Aura\Increases the damage dealt by the user's next five skills by `x`% when the user's shapeshift is undone.\0\y\Skill Damage
+Ending Shapeshift = Skillful Trickery\120%\Aura\Increases the damage dealt by the user's next five skills by 120% when the user's shapeshift is undone.\200\y\Skill Damage
+Ending Shapeshift = Skillful Trickery\135%\Aura\Increases the damage dealt by the user's next eight skills by 135% when the user's shapeshift is undone.\200\y\Skill Damage
+Ending Shapeshift = Skillful Trickery\150%\Aura\Increases the damage dealt by the user's next eight skills by 150% when the user's shapeshift is undone.\200\y\Skill Damage
+Ending Shapeshift = Skillful Trickery\165%\Aura\Increases the damage dealt by the user's next eight skills by 165% when the user's shapeshift is undone.\200\y\Skill Damage
+Ending Shapeshift = Skillful Trickery\180%\Aura\Increases the damage dealt by the user's next eight skills by 180% when the user's shapeshift is undone.\200\y\Skill Damage
 Ending Shapeshift = Skill Gauges\example\Aura\Fills `x`% of skill gauges when the user's shapeshift is undone.\0\y\SkillPrep
 Ending Shapeshift = Skill Gauges\50%\Aura\Fills 50% of skill gauges when the user's shapeshift is undone.\80\y\SkillPrep
 Ending Shapeshift = Skill Gauges\100%\Aura\Fills 100% of skill gauges when the user's shapeshift is undone.\100\y\SkillPrep
@@ -1080,36 +1342,78 @@ HP Below 30% = Defense\example\Aura\Increases strength by `x`% when HP is 30% or
 HP Below 30% = Defense\75%\Aura\Increases defense by 75% when HP is 30% or below.\70\y\HP30, DefenseSkill
 HP Below 30% = Defense\100%\Aura\Increases defense by 100% when HP is 30% or below.\100\y\HP30, DefenseSkill
 HP Below 30% = Strength\example\Aura\Increases strength by `x`% when HP is 30% or below.\0\y\HP30, StrengthSkill
+HP Below 30% = Strength\20%\Aura\Increases strength by 20% when HP is 30% or below.\70\y\HP30, StrengthSkill
 HP Below 30% = Strength\30%\Aura\Increases strength by 30% when HP is 30% or below.\80\y\HP30, StrengthSkill
+HP Below 30% = Strength\32%\Aura\Increases strength by 32% when HP is 30% or below.\82\y\HP30, StrengthSkill
+HP Below 30% = Strength\34%\Aura\Increases strength by 34% when HP is 30% or below.\84\y\HP30, StrengthSkill
+HP Below 30% = Strength\36%\Aura\Increases strength by 36% when HP is 30% or below.\86\y\HP30, StrengthSkill
 HP Below 30% = Strength\40%\Aura\Increases strength by 40% when HP is 30% or below.\100\y\HP30, StrengthSkill
+HP Below 30% = Strength & Defense\example\Aura\Increases strength by 30%/40% and defense by 75%/100% when HP is 30% or below.\0\y\HP30, StrengthSkill, DefenseSkill
+HP Below 30% = Strength & Defense\20%/75%\Aura\Increases strength by 20% and defense by 75% when HP is 30% or below.\80\y\HP30, StrengthSkill, DefenseSkill
+HP Below 30% = Strength & Defense\25%/75%\Aura\Increases strength by 25% and defense by 80% when HP is 30% or below.\85\y\HP30, StrengthSkill, DefenseSkill
+HP Below 30% = Strength & Defense\30%/75%\Aura\Increases strength by 30% and defense by 85% when HP is 30% or below.\90\y\HP30, StrengthSkill, DefenseSkill
+HP Below 30% = Strength & Defense\35%/75%\Aura\Increases strength by 35% and defense by 90% when HP is 30% or below.\95\y\HP30, StrengthSkill, DefenseSkill
+HP Below 30% = Strength & Defense\40%/100%\Aura\Increases strength by 40% and defense by 100% when HP is 30% or below.\100\y\HP30, StrengthSkill, DefenseSkill
 HP 30% = Strength\example\Aura\Increases strength by `x`% when HP is 30% or above.\0\y\HP30, StrengthSkill
 HP 30% = Strength\35%\Aura\Increases strength by 35% when HP is 30% or above.\35\y\HP30, StrengthSkill
+HP 30% = Strength\38%\Aura\Increases strength by 38% when HP is 30% or above.\38\y\HP30, StrengthSkill
+HP 30% = Strength\41%\Aura\Increases strength by 41% when HP is 30% or above.\41\y\HP30, StrengthSkill
+HP 30% = Strength\45%\Aura\Increases strength by 45% when HP is 30% or above.\45\y\HP30, StrengthSkill
 HP 30% = Strength\50%\Aura\Increases strength by 50% when HP is 30% or above.\50\y\HP30, StrengthSkill
-HP 50% = Strength\example\Aura\Increases strength by `x`% when HP is 50% or above.\0\y\HP50, StrengthSkill
-HP 50% = Strength\10%\Aura\Increases strength by 10% when HP is 50% or above.\60\y\HP50, StrengthSkill
 HP 50% = Strength\20%\Aura\Increases strength by 20% when HP is 50% or above.\80\y\HP50, StrengthSkill
 HP & Strength\example\Aura\Increases strength and HP by `x`%.\0\y\HealthSkill, StrengthSkill
 HP & Strength\5%\Aura\Increases strength and HP by 5%.\20\y\HealthSkill, StrengthSkill
+HP & Strength\6%\Aura\Increases strength and HP by 6%.\24\y\HealthSkill, StrengthSkill
+HP & Strength\7%\Aura\Increases strength and HP by 7%.\28\y\HealthSkill, StrengthSkill
 HP & Strength\8%\Aura\Increases strength and HP by 8%.\30\y\HealthSkill, StrengthSkill
+HP & Strength\9%\Aura\Increases strength and HP by 9%.\40\y\HealthSkill, StrengthSkill
 HP & Strength\10%\Aura\Increases strength and HP by 10%.\50\y\HealthSkill, StrengthSkill
+HP & Strength\13%\Aura\Increases strength and HP by 13%.\56\y\HealthSkill, StrengthSkill
 HP & Strength\15%\Aura\Increases strength and HP by 15%.\60\y\HealthSkill, StrengthSkill
+HP & Strength\16%\Aura\Increases strength and HP by 16%.\62\y\HealthSkill, StrengthSkill
+HP & Strength\17%\Aura\Increases strength and HP by 17%.\64\y\HealthSkill, StrengthSkill
+HP & Strength\18%\Aura\Increases strength and HP by 18%.\66\y\HealthSkill, StrengthSkill
 HP & Strength\20%\Aura\Increases strength and HP by 20%.\70\y\HealthSkill, StrengthSkill
+HP & Strength\23%\Aura\Increases strength and HP by 23%.\80\y\HealthSkill, StrengthSkill
+HP & Strength\26%\Aura\Increases strength and HP by 26%.\90\y\HealthSkill, StrengthSkill
 HP & Strength\30%\Aura\Increases strength and HP by 30%.\100\y\HealthSkill, StrengthSkill
 HP & Strength\35%\Aura\Increases strength and HP by 35%.\110\y\HealthSkill, StrengthSkill
 HP\example\Aura\Increases HP by `x`%.\0\y\HealthSkill
 HP\5%\Aura\Increases HP by 5%.\10\y\HealthSkill
+HP\6%\Aura\Increases HP by 6%.\12\y\HealthSkill
+HP\7%\Aura\Increases HP by 7%.\14\y\HealthSkill
 HP\8%\Aura\Increases HP by 8%.\15\y\HealthSkill
 HP\10%\Aura\Increases HP by 10%.\20\y\HealthSkill
 HP\15%\Aura\Increases HP by 15%.\30\y\HealthSkill
+HP\16%\Aura\Increases HP by 16%.\32\y\HealthSkill
+HP\17%\Aura\Increases HP by 17%.\34\y\HealthSkill
+HP\18%\Aura\Increases HP by 18%.\36\y\HealthSkill
 HP\20%\Aura\Increases HP by 20%.\40\y\HealthSkill
+HP\22%\Aura\Increases HP by 22%.\44\y\HealthSkill
+HP\23%\Aura\Increases HP by 23%.\46\y\HealthSkill
+HP\24%\Aura\Increases HP by 24%.\48\y\HealthSkill
+HP\26%\Aura\Increases HP by 26%.\52\y\HealthSkill
+HP\27%\Aura\Increases HP by 27%.\54\y\HealthSkill
 HP\30%\Aura\Increases HP by 30%.\60\y\HealthSkill
+HP\32%\Aura\Increases HP by 32%.\62\y\HealthSkill
+HP\33%\Aura\Increases HP by 33%.\63\y\HealthSkill
+HP\34%\Aura\Increases HP by 34%.\64\y\HealthSkill
+HP\35%\Aura\Increases HP by 35%.\65\y\HealthSkill
+HP\36%\Aura\Increases HP by 36%.\66\y\HealthSkill
+HP\37%\Aura\Increases HP by 37%.\67\y\HealthSkill
+HP\39%\Aura\Increases HP by 39%.\69\y\HealthSkill
 HP\40%\Aura\Increases HP by 40%.\70\y\HealthSkill
 HP\45%\Aura\Increases HP by 45%.\80\y\HealthSkill
+HP\50%\Aura\Increases HP by 50%.\90\y\HealthSkill
+HP\55%\Aura\Increases HP by 55%.\95\y\HealthSkill
 HP\60%\Aura\Increases HP by 60%.\100\y\HealthSkill
 Last Bulwark\I\Aura\Grants the user a one-use shield that nullifies damage less than 50% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\35\y\Last, Shield
 Last Bulwark\II\Aura\Grants the user a one-use shield that nullifies damage less than 60% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\50\y\Last, Shield
 Mana\example\Aura\Increases Mana intake for clearing quests by `x`%\0\y\ManaSkill
 Mana\25%\Aura\Increases Mana intake for clearing quests by 25%\0\y\ManaSkill
+Mana\30%\Aura\Increases Mana intake for clearing quests by 30%\0\y\ManaSkill
+Mana\35%\Aura\Increases Mana intake for clearing quests by 35%\0\y\ManaSkill
+Mana\40%\Aura\Increases Mana intake for clearing quests by 40%\0\y\ManaSkill
 Mana\50%\Aura\Increases Mana intake for clearing quests by 50%\0\y\ManaSkill
 Moonlit Howl\example\Ability\If the user is attuned to Shadow: grants the user the "Bloody Tongue" effect for 20 seconds when HP drops to 30%. This effect grants the user a one-use shield that nullifies damage less than `x`% of their maximum HP, and increases their strength by `x`%. These effects do not stack, and are lost upon taking damage.\0\y\Shield, Last, StrengthSkill
 Moonlit Howl\I\Ability\If the user is attuned to Shadow: grants the user the "Bloody Tongue" effect for 20 seconds when HP drops to 30%. This effect grants the user a one-use shield that nullifies damage less than 50% of their maximum HP, and increases their strength by 20%. These effects do not stack, and are lost upon taking damage.\60\y\Shield, Last, StrengthSkill
@@ -1129,56 +1433,81 @@ Primed Strength\example\Aura\Increases the strength of the adventurer you are cu
 Primed Strength\10%\Aura\Increases the strength of the adventurer you are currently controlling by 10% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\80\y\Primed, StrengthSkill
 Primed Strength\15%\Aura\Increases the strength of the adventurer you are currently controlling by 15% for 10 seconds every time their initial skill, displayed at the top of their skill list, becomes available for use, providing they are wind-attuned. After activating, this ability will not activate again for 15 seconds.\100\y\Primed, StrengthSkill
 Rupies\25%\Aura\Increase rupie intake for clearing quests by 25%\0\y\Rupies
+Rupies\30%\Aura\Increase rupie intake for clearing quests by 30%\0\y\Rupies
+Rupies\35%\Aura\Increase rupie intake for clearing quests by 35%\0\y\Rupies
+Rupies\40%\Aura\Increase rupie intake for clearing quests by 40%\0\y\Rupies
 Rupies\50%\Aura\Increase rupie intake for clearing quests by 50%\0\y\Rupies
 Shadow Res\15%\Aura\Grants 15% Shadow resistance.\65\y\ShadowRes, Resistance
 Skill Damage\example\Aura\Increases attack skill damage by `x`%\0\y\SkillDamage
 Skill Damage\50%\Aura\Increases attack skill damage by 50%\80\y\SkillDamage
 Skill Damage\70%\Aura\Increases attack skill damage by 70%\100\y\SkillDamage
 Skillful Trickery\example\Aura\Increases the damage dealt by the user's next 15 skills by 120% / 180% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by 180%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\0\y\SkillDamage
-Skillful Trickery\I\Aura\Increases the damage dealt by the user's next 15 skills by 180% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by `x`%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\100\y\SkillDamage
-Skillful Trickery\II\Aura\Increases the damage dealt by the user's next 15 skills by 180% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by 180%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\120\y\SkillDamage
-Skill Recharge\example\Aura\Fills 25%/35% of a skill's skill gauge after using that skill.\0\y\SkillRecharge
-Skill Recharge\I\Aura\Fills 25% of a skill's skill gauge after using that skill.\100\y\SkillRecharge
-Skill Recharge\II\Aura\Fills 35% of a skill's skill gauge after using that skill.\120\y\SkillRecharge
+Skillful Trickery\120%\Aura\Increases the damage dealt by the user's next 15 skills by 120% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by `x`%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\200\y\SkillDamage
+Skillful Trickery\135%\Aura\Increases the damage dealt by the user's next 15 skills by 135% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by `x`%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\200\y\SkillDamage
+Skillful Trickery\150%\Aura\Increases the damage dealt by the user's next 15 skills by 150% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by `x`%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\200\y\SkillDamage
+Skillful Trickery\165%\Aura\Increases the damage dealt by the user's next 15 skills by 165% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by `x`%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\200\y\SkillDamage
+Skillful Trickery\180%\Aura\Increases the damage dealt by the user's next 15 skills by 180% at the start of quests. Every 25-hit combo will increase the damage dealt by an additional skill by `x`%. A maximum of 15 of this skill damage increasing effect can be stored for use, and any excess will be discarded.\200\y\SkillDamage
+Skill Recharge\example\Aura\Fills `x`% of a skill's skill gauge after using that skill.\0\y\SkillRecharge
+Skill Recharge\25%\Aura\Fills 25% of a skill's skill gauge after using that skill.\100\y\SkillRecharge
+Skill Recharge\35%\Aura\Fills 35% of a skill's skill gauge after using that skill.\120\y\SkillRecharge
 Skill Haste\example\Aura\Increases skill gauge fill rate by `x`%.\0\y\SkillHaste
 Skill Haste\25%\Aura\Increases skill gauge fill rate by 25%.\60\y\SkillHaste
+Skill Haste\27%\Aura\Increases skill gauge fill rate by 27%.\64\y\SkillHaste
+Skill Haste\29%\Aura\Increases skill gauge fill rate by 29%.\68\y\SkillHaste
+Skill Haste\30%\Aura\Increases skill gauge fill rate by 30%.\75\y\SkillHaste
 Skill Haste\35%\Aura\Increases skill gauge fill rate by 35%.\80\y\SkillHaste
 Strength\example\Aura\Increases strength by `x`%.\0\y\StrengthSkill
 Strength\5%\Aura\Increases strength by 5%.\10\y\StrengthSkill
+Strength\6%\Aura\Increases strength by 6%.\12\y\StrengthSkill
+Strength\7%\Aura\Increases strength by 7%.\14\y\StrengthSkill
 Strength\8%\Aura\Increases strength by 8%.\15\y\StrengthSkill
 Strength\10%\Aura\Increases strength by 10%.\20\y\StrengthSkill
+Strength\11%\Aura\Increases strength by 11%.\22\y\StrengthSkill
+Strength\12%\Aura\Increases strength by 12%.\24\y\StrengthSkill
+Strength\13%\Aura\Increases strength by 13%.\26\y\StrengthSkill
+Strength\14%\Aura\Increases strength by 14%.\28\y\StrengthSkill
 Strength\15%\Aura\Increases strength by 15%.\30\y\StrengthSkill
+Strength\16%\Aura\Increases strength by 16%.\32\y\StrengthSkill
+Strength\17%\Aura\Increases strength by 17%.\34\y\StrengthSkill
+Strength\18%\Aura\Increases strength by 18%.\36\y\StrengthSkill
 Strength\20%\Aura\Increases strength by 20%.\40\y\StrengthSkill
 Strength\25%\Aura\Increases strength by 25%.\50\y\StrengthSkill
 Strength\30%\Aura\Increases strength by 30%.\60\y\StrengthSkill
+Strength\32%\Aura\Increases strength by 32%.\62\y\StrengthSkill
+Strength\33%\Aura\Increases strength by 33%.\63\y\StrengthSkill
+Strength\34%\Aura\Increases strength by 34%.\64\y\StrengthSkill
 Strength\35%\Aura\Increases strength by 35%.\65\y\StrengthSkill
+Strength\36%\Aura\Increases strength by 36%.\66\y\StrengthSkill
+Strength\37%\Aura\Increases strength by 37%.\67\y\StrengthSkill
+Strength\38%\Aura\Increases strength by 38%.\68\y\StrengthSkill
+Strength\39%\Aura\Increases strength by 39%.\69\y\StrengthSkill
 Strength\40%\Aura\Increases strength by 40%.\70\y\StrengthSkill
+Strength\41%\Aura\Increases strength by 41%.\71\y\StrengthSkill
+Strength\42%\Aura\Increases strength by 42%.\72\y\StrengthSkill
+Strength\44%\Aura\Increases strength by 44%.\74\y\StrengthSkill
 Strength\45%\Aura\Increases strength by 45%.\80\y\StrengthSkill
 Strength\50%\Aura\Increases strength by 50%.\90\y\StrengthSkill
 Strength\55%\Aura\Increases strength by 55%.\100\y\StrengthSkill
 Strength\60%\Aura\Increases strength by 60%.\100\y\StrengthSkill
 Strength\70%\Aura\Increases strength by 70%.\120\y\StrengthSkill
-Strength & Critical Rate\example\Aura\Increases strength by 30%/45% and increases critical rate by 15%/20%.\0\y\StrengthSkill, CritRate
-Strength & Critical Rate\30/15%\Aura\Increases strength by `30`% and increases critical rate by `15`%.\70\y\StrengthSkill, CritRate
-Strength & Critical Rate\45/20%\Aura\Increases strength by `45`% and increases critical rate by `20`%.\100\y\StrengthSkill, CritRate
 Strength & Critical Damage\example\Aura\Increases strength by `x`% and adds `y`% to the modifier applied to critical damage.\70\y\StrengthSkill, CritDamage
 Strength & Critical Damage\30/50%\Aura\Increases strength by 30% and adds 50% to the modifier applied to critical damage.\70\y\StrengthSkill, CritDamage
 Strength & Critical Damage\45/55%\Aura\Increases strength by 45% and adds 55% to the modifier applied to critical damage.\100\y\StrengthSkill, CritDamage
-Strength & Dragon's Might\example\Aura\Increases strength by 45%/55%, and increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\0\y\StrengthSkill, InCombat, StrengthSkill
-Strength & Dragon's Might\I\Aura\Increases strength by 45%, and increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\70\y\StrengthSkill, InCombat, StrengthSkill
-Strength & Dragon's Might\II\Aura\Increases strength by 55%, and increases strength by a further 10% for the remainder of the quest upon shapeshifting, up to twice per quest.\100\y\StrengthSkill, InCombat, StrengthSkill
-Strength & Ending Shapeshift = Curse\example\Aura\Increases strength by 30/50%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\0\y\StrengthSkill, Curse
-Strength & Ending Shapeshift = Curse\I\Aura\Increases strength by 30%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\100\y\StrengthSkill, Curse
-Strength & Ending Shapeshift = Curse\II\Aura\Increases strength by 50%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\120\y\StrengthSkill, Curse
-Strength & HP 50% = Strength\example\Aura\Increases strength by 55%/70%, and increases strength by an additional 10%/20% when HP is 50% or above.\0\y\StrengthSkill, HP50
-Strength & HP 50% = Strength\40%/10%\Aura\Increases strength by 40%, and increases strength by an additional 10% when HP is 50% or above.\100\y\StrengthSkill, HP50
-Strength & HP 50% = Strength\70%/20%\Aura\Increases strength by 70%, and increases strength by an additional 20% when HP is 50% or above.\120\y\StrengthSkill, HP50
+Strength & Ending Shapeshift = Curse\example\Aura\Increases strength by `x`%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\0\y\StrengthSkill, Curse
+Strength & Ending Shapeshift = Curse\45%\Aura\Increases strength by 45%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\100\y\StrengthSkill, Curse
+Strength & Ending Shapeshift = Curse\46%\Aura\Increases strength by 46%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\105\y\StrengthSkill, Curse
+Strength & Ending Shapeshift = Curse\47%\Aura\Increases strength by 47%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\110\y\StrengthSkill, Curse
+Strength & Ending Shapeshift = Curse\48%\Aura\Increases strength by 48%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\115\y\StrengthSkill, Curse
+Strength & Ending Shapeshift = Curse\50%\Aura\Increases strength by 50%. When the user's shapeshift is undone, they will be cursed for the rest of the quest, irrespective of their element.\120\y\StrengthSkill, Curse
+Strength & HP 50% = Strength\example\Aura\Increases strength by 55%/70%, and increases strength by an additional 20% when HP is 50% or above.\0\y\Flame, StrengthSkill, HP50
+Strength & HP 50% = Strength\40%/20%\Aura\Increases strength by 40%, and increases strength by an additional 20% when HP is 50% or above.\120\y\Flame, StrengthSkill, HP50
+Strength & HP 50% = Strength\45%/20%\Aura\Increases strength by 45%, and increases strength by an additional 20% when HP is 50% or above.\120\y\Flame, StrengthSkill, HP50
+Strength & HP 50% = Strength\50%/20%\Aura\Increases strength by 50%, and increases strength by an additional 20% when HP is 50% or above.\120\y\Flame, StrengthSkill, HP50
+Strength & HP 50% = Strength\55%/20%\Aura\Increases strength by 55%, and increases strength by an additional 20% when HP is 50% or above.\120\y\Flame, StrengthSkill, HP50
+Strength & HP 50% = Strength\70%/20%\Aura\Increases strength by 70%, and increases strength by an additional 20% when HP is 50% or above.\120\y\Flame, StrengthSkill, HP50
 Strength & Shadow Res\example\Aura\Increases strength by `x`% and grants `y`% Shadow resistance.\0\y\StrengthSkill, ShadowRes, Resistance
 Strength & Shadow Res\35/15%\Aura\Increases strength by 35% and grants 15% Shadow resistance.\70\y\StrengthSkill, ShadowRes, Resistance
 Strength & Shadow Res\50/15%\Aura\Increases strength by 50% and grants 15% Shadow resistance.\100\y\StrengthSkill, ShadowRes, Resistance
-Strength & Wind Res\example\Aura\Increases strength by `x`% and grants `y`% Wind resistance.\0\y\StrengthSkill, WindRes, Resistance
-Strength & Wind Res\35/15%\Aura\Increases strength by 35% and grants 15% Wind resistance.\70\y\StrengthSkill, WindRes, Resistance
-Strength & Wind Res\50/15%\Aura\Increases strength by 50% and grants 15% Wind resistance.\100\y\StrengthSkill, WindRes, Resistance
 Striking Haste\example\Aura\Increases skill gauge fill rate by `x`% when the user's force strikes connect.\0\y\StrikingHaste
 Striking Haste\20%\Aura\Increases skill gauge fill rate by 20% when the user's force strikes connect.\100\y\StrikingHaste
 Striking Haste\30%\Aura\Increases skill gauge fill rate by 30% when the user's force strikes connect.\120\y\StrikingHaste
@@ -1305,6 +1634,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Shadow) Affliction Guard\I\Ability\If the user is attuned to Shadow: resists afflictions once per quest\60\y\AfflictionGuard, Shadow
 (Shadow) Affliction Guard\II\Ability\If the user is attuned to Shadow: resists afflictions twice per quest\80\y\AfflictionGuard, Shadow
 (Shadow) Affliction Guard\III\Ability\If the user is attuned to Shadow: resists afflictions thrice per quest\100\y\AfflictionGuard, Shadow
+(Shadow) Bai Zhan Qi Lue\-\Ability\If the user is attuned to Shadow: increases critical rate by 5% after using Qimen Dunjia. This effect will persist until the user uses Shibing Bazhen.\80\y\CritRate
 (Shadow) Blinded Punisher\example\Ability\If the user is attuned to Shadow: Increases damage to blinded enemies by `x`%.\0\y\Punisher, Shadow, BlindedPunisher
 (Shadow) Blinded Punisher\10%\Ability\If the user is attuned to Shadow: Increases damage to blinded enemies by 10%.\20\y\Punisher, Shadow, BlindedPunisher
 (Shadow) Blinded Punisher\15%\Ability\If the user is attuned to Shadow: Increases damage to blinded enemies by 15%.\40\y\Punisher, Shadow, BlindedPunisher
@@ -1343,6 +1673,7 @@ Dragonyule Blessing\II\Aura\If the user is attuned to Water: increases strength 
 (Shadow) Skill Haste\4%\Ability\If the user is attuned to Shadow: Increases skill gauge fill rate by 4%.\30\y\SkillHaste, Shadow
 (Shadow) Skill Haste\5%\Ability\If the user is attuned to Shadow: Increases skill gauge fill rate by 5%.\50\y\SkillHaste, Shadow
 (Shadow) Skill Haste\6%\Ability\If the user is attuned to Shadow: Increases skill gauge fill rate by 6%.\70\y\SkillHaste, Shadow
+(Shadow) Tai Yi Shen Shu\-\Ability\If the user is attuned to Shadow: grants an HP regen buff of 1% Recovery Potency every 2.9 seconds after using Shibing Bazhen. This effect will persist until the user uses Qimen Dunjia.\80\y\Regen, HealSkill, User
 (Shadow) Undead's Bane\example\Ability\If the user is attuned to Shadow: increases damage to undead by `x`%\0\y\Bane, Undead, Shadow
 (Shadow) Undead's Bane\10%\Ability\If the user is attuned to Shadow: increases damage to undead by 10%\20\y\Bane, Undead, Shadow
 (Shadow) Undead's Bane\15%\Ability\If the user is attuned to Shadow: increases damage to undead by 15%\40\y\Bane, Undead, Shadow

@@ -1042,6 +1042,16 @@ Shadow Tree\12\-\Adventurer, Altar\3x3\1\110000\Almighty One's Mask Fragment, 35
 Shadow Tree\13\-\Adventurer, Altar\3x3\1\120000\Almighty One's Mask Fragment, 35;; Uprooting One's Mask Fragment, 5\
 Shadow Tree\14\-\Adventurer, Altar\3x3\1\130000\Almighty One's Mask Fragment, 35;; Uprooting One's Mask Fragment, 5\
 Shadow Tree\15\-\Adventurer, Altar\3x3\1\140000\Almighty One's Mask Fragment, 35;; Uprooting One's Mask Fragment, 5\
+Shadow Tree\16\-\Adventurer, Altar\3x3\1\160000\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 10\
+Shadow Tree\17\-\Adventurer, Altar\3x3\1\180000\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 10\
+Shadow Tree\18\-\Adventurer, Altar\3x3\1\200000\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 10\
+Shadow Tree\19\-\Adventurer, Altar\3x3\1\220000\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 10\
+Shadow Tree\20\-\Adventurer, Altar\3x3\1\240000\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 10\
+Shadow Tree\21\-\Adventurer, Altar\3x3\1\260000\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 10\
+Shadow Tree\22\-\Adventurer, Altar\3x3\1\280000\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 10\
+Shadow Tree\23\-\Adventurer, Altar\3x3\1\300000\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 10\
+Shadow Tree\24\-\Adventurer, Altar\3x3\1\320000\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 10\
+Shadow Tree\25\-\Adventurer, Altar\3x3\1\340000\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 10\
 Smithy\H\The smithy run by Ramona. Raise its level to expand the selection of weapons you can craft or enhance.\General\3x3\1\0\0\
 Snowdrake\-\An adorable drake made from snow. It's so cute, in fact, that someone cast a spell on it to make sure it doesn't melt.\Decorative\1x1\4\0\0\
 Staff Dojo\1\A training area built to hone one's skills with a staff. Use it to boosts the stats of staff-wielding adventures.\Adventurer, Dojo\3x3\2\0\0\Staff
