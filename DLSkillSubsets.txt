@@ -375,6 +375,7 @@
 ["Tier4", ["t4", "tier4"], "Mat"]
 ["Trials", ["trial", "trials"], "Mat"]
 ["TwilightHermit", ["darkghost", "darkhermit", "hermit", "shadowghost", "shadowhermit", "twilighthermit"], "Mat"]
+["Twins", ["twins", "twin", "ayahaandotoha", "ayaha&otoha", "thetwins"], "Mat"]
 ["Unbinding", ["unbind", "unbinding", "unbound"], "Mat"]
 ["Vermilion", ["red", "vermilion"], "Mat"]
 ["Violet", ["purple", "violet"], "Mat"]
