@@ -256,7 +256,7 @@
 ["WonderGuard", ["wonderguard"], "Askillity"]
 ["ZodiarkRes", ["zodiarcres", "zodiarcresist", "zodiarcresistance", "zodiarkres", "zodiarkresist", "zodiarkresistance"], "Askillity"]
 ["Zone", ["bonezone", "bonezone", "zone", "zones"], "Askillity"]
-["Former", ["former", "formerlimited"], "Availability", "f"]
+["Formerly Limited", ["former", "formerlimited"], "Availability", "f"]
 ["Paid", ["paid", "paying", "payment", "whale"], "Availability", "$"]
 ["Starter", ["start", "starter", "starters", "starting"], "Availability", "e"]
 ["Story", ["stories", "story", "storys"], "Availability", "y"]
