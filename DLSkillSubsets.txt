@@ -273,6 +273,7 @@
 ["Dream", ["dream", "dreams", "dreamsummon", "dreamsummons", "dreamy"], "Banner"]
 ["Gala", ["gala", "galadragalia"], "Banner"]
 ["Plat", ["plat", "platinum", "platinumshowcase"], "Banner"]
+["Remix", ["remix"], "Banner"]
 ["Rerun", ["repeat", "rerun"], "Banner"]
 ["Seasonal", ["seasonal", "seasonals"], "Banner"]
 [["KoG", "Knights of Glory"], ["gloryknight", "gloryknights", "glorynight", "glorynights", "glorynite", "glorynites", "knightofglory", "knightsofglory", "kog", "nightofglory", "nightsofglory", "niteofglory", "nitesofglory"], "Cygame"]
