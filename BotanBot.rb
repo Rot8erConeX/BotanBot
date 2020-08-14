@@ -145,17 +145,16 @@ system("title loading #{shard_data(2)[@shardizard]} BotanBot")
 
 def all_commands(include_nil=false,permissions=-1)
   return all_commands(include_nil)-all_commands(false,1)-all_commands(false,2) if permissions==0
-  k=['reboot','adventurer','adv','addalias','checkaliases','aliases','seealiases','saliases','serveraliases','deletealias','removealias','channellist','long',
-     'channelist','spamlist','spamchannels','bugreport','suggestion','feedback','donation','donate','shard','attribute','safe','spam','safetospam','safe2spam',
-     'longreplies','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','find',
-     'search','dragon','help','wyrmprint','wyrm','print','weapon','wep','weap','wpn','skill','skil','ability','abil','aura','roost','today','ruin','ruins','drg',
-     'daily','now','dailies','todayindl','today_in_dl','tomorrow','tommorrow','tomorow','tommorow','shop','store','exp','level','xp','plxp','plexp','pllevel',
-     'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','dbxp','sp',
-     'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp',
-     'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias','dmg',
-     'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','limit',
-     'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol','reload','update','mats','materials','spiral','node','nodes',
-     'damage','coability','coabil','coab','chain','team','backpack','cca','cc','skillshare','share','skilshare','combo','chaincoab','shared']
+  k=['reboot','adventurer','adv','addalias','checkaliases','aliases','seealiases','saliases','serveraliases','deletealias','removealias','channellist','long','group','groups','find',
+     'channelist','spamlist','spamchannels','bugreport','suggestion','feedback','donation','donate','shard','attribute','safe','spam','safetospam','safe2spam','seegroups','drg','sp',
+     'longreplies','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','combo','chaincoab','dmg',
+     'search','dragon','help','wyrmprint','wyrm','print','weapon','wep','weap','wpn','skill','skil','ability','abil','aura','roost','today','ruin','ruins','share','skilshare','dbxp',
+     'daily','now','dailies','todayindl','today_in_dl','tomorrow','tommorrow','tomorow','tommorow','shop','store','exp','level','xp','plxp','plexp','pllevel','cca','cc','skillshare',
+     'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','team','backpack','coab','chain',
+     'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp','coability','coabil',
+     'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias','nodes','damage','limit',
+     'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','materials','spiral','node','mats',
+     'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol','reload','update','shared']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -1665,18 +1664,16 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
             smolsp2.push(kk[i*7+6]) unless kk[i*7+6]==skl1[12][1]
           end
         end
-        str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{" - #{smolsp.join("\u2192")} SP#{" (#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])}#{"\u2192#{smolsp2.join("\u2192")}" if smolsp2.length>0} SP when shared)" unless skl1[12].nil? || skl1[12].length<=0}" if skl1[6][0,mx.length].max===skl1[6][0,mx.length].min && skl1[6][0]>0}"
+        str2="__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{' -' if (skl1[6][0,mx.length].max===skl1[6][0,mx.length].min && skl1[6][0]>0) || !(skl1[12].nil? || skl1[12].length<=0)}#{" #{smolsp.join("\u2192")} SP" if skl1[6][0,mx.length].max===skl1[6][0,mx.length].min && skl1[6][0]>0}#{" (#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])}#{"\u2192#{smolsp2.join("\u2192")}" if smolsp2.length>0} SP when shared)" unless skl1[12].nil? || skl1[12].length<=0}"
         if (skl1[9].nil? || skl1[9].length<=0) && skl1[6][0,mx.length].max != skl1[6][0,mx.length].min
           str2="#{str2}\n*Lv.1 (F0, #{skl1[6][0]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==1} SP):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (F3, #{skl1[6][1]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==2} SP):* #{skl1[4].gsub(';; ',"\n")}\n*Lv.3 (F5, #{skl1[6][2]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==3} SP):* #{skl1[5].gsub(';; ',"\n")}"
           str2="#{str2}\n*Lv.4 (F6, #{skl1[6][3]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==4} SP):* #{skl1[11].gsub(';; ',"\n")}" unless skl1[11].nil? || skl1[11].length<=0
-          str2="#{str2}\n#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])}#{"\u2192#{smolsp2.join("\u2192")}" if smolsp2.length>0} SP when shared" unless skl1[12].nil? || skl1[12].length<=0
         elsif skl1[9].nil? || skl1[9].length<=0
           str2="#{str2}\n*Lv.1 (F0):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (F3):* #{skl1[4].gsub(';; ',"\n")}\n*Lv.3 (F5):* #{skl1[5].gsub(';; ',"\n")}"
           str2="#{str2}\n*Lv.4 (F6):* #{skl1[11].gsub(';; ',"\n")}" unless skl1[11].nil? || skl1[11].length<=0
         elsif skl1[6][0,mx.length].max != skl1[6][0,mx.length].min
           str2="#{str2}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}\n*Lv.1 (F0, #{skl1[6][0]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==1} SP) \u2192 Lv.2 (F3, #{skl1[6][1]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==2} SP) \u2192 Lv.3 (F5, #{skl1[6][2]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==3} SP)*"
           str2="#{str2} \u2192 *Lv.4 (F6, #{skl1[6][3]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==4} SP)*" unless skl1[11].nil? || skl1[11].length<=0
-          str2="#{str2}\n#{skl1[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl1[12][1])}#{"\u2192#{smolsp2.join("\u2192")}" if smolsp2.length>0} SP when shared" unless skl1[12].nil? || skl1[12].length<=0
         else
           str2="#{str2}\n*Effect:* #{skl1[9].gsub(';; ',"\n")}\n*Lv.1 (F0) \u2192 Lv.2 (F3) \u2192 Lv.3 (F5)*"
           str2="#{str2} \u2192 *Lv.4 (F6)*" unless skl1[11].nil? || skl1[11].length<=0
@@ -1707,18 +1704,16 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
             smolsp2.push(kk[i*7+6]) unless kk[i*7+6]==skl2[12][1]
           end
         end
-        str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{eng}#{energy_emoji(skl2[10],true)})__#{" - #{smolsp.join("\u2192")} SP#{" (#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])}#{"\u2192#{smolsp2.join("\u2192")}" if smolsp2.length>0} SP when shared)" unless skl2[12].nil? || skl2[12].length<=0}" if skl2[6][0,mx.length].max===skl2[6][0,mx.length].min && skl2[6][0]>0}"
+        str2="#{str2}\n\n__**#{skl2[0]}** (#{skl2[8]} sec invul#{eng}#{energy_emoji(skl2[10],true)})__#{' -' if (skl2[6][0,mx.length].max===skl2[6][0,mx.length].min && skl2[6][0]>0) || !(skl2[12].nil? || skl2[12].length<=0)}#{" #{smolsp.join("\u2192")} SP" if skl2[6][0,mx.length].max===skl2[6][0,mx.length].min && skl2[6][0]>0}#{" (#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])}#{"\u2192#{smolsp2.join("\u2192")}" if smolsp2.length>0} SP when shared)" unless skl2[12].nil? || skl2[12].length<=0}"
         if (skl2[9].nil? || skl2[9].length<=0) && skl2[6][0,mx.length].max != skl2[6][0,mx.length].min
           str2="#{str2}\n*Lv.1 (F2, #{skl2[6][0]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==1} SP):* #{skl2[3].gsub(';; ',"\n")}\n*Lv.2 (F4, #{skl2[6][1]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==2} SP):* #{skl2[4].gsub(';; ',"\n")}"
           str2="#{str2}\n*Lv.3 (F6, #{skl2[6][2]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==3} SP):* #{skl2[5].gsub(';; ',"\n")}" if !skl2[5].nil? && skl2[5].length>0
-          str2="#{str2}\n#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])}#{"\u2192#{smolsp2.join("\u2192")}" if smolsp2.length>0} SP when shared" unless skl2[12].nil? || skl2[12].length<=0
         elsif skl2[9].nil? || skl2[9].length<=0
           str2="#{str2}\n*Lv.1 (F2):* #{skl2[3].gsub(';; ',"\n")}\n*Lv.2 (F4):* #{skl2[4].gsub(';; ',"\n")}"
           str2="#{str2}\n*Lv.3 (F6):* #{skl2[5].gsub(';; ',"\n")}" if !skl2[5].nil? && skl2[5].length>0
         elsif skl2[6][0,mx.length].max != skl2[6][0,mx.length].min
           str2="#{str2}\n*Effect:* #{skl2[9].gsub(';; ',"\n")}\n*Lv.1 (F2, #{skl2[6][0]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==1} SP) \u2192 Lv.2 (F4, #{skl2[6][1]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==2} SP)*"
           str2="#{str2} \u2192 *Lv.3 (F6, #{skl2[6][2]}#{"\u2192#{smolsp.join("\u2192")}" if smolsp.length>0 && mx.length==3} SP)*" if !skl2[5].nil? && skl2[5].length>0
-          str2="#{str2}\n#{skl2[12][0]}<:SkillShare:714597012733034547> / #{longFormattedNumber(skl2[12][1])}#{"\u2192#{smolsp2.join("\u2192")}" if smolsp2.length>0} SP when shared" unless skl2[12].nil? || skl2[12].length<=0
         else
           str2="#{str2}\n*Effect:* #{skl2[9].gsub(';; ',"\n")}\n*Lv.1 (F2) \u2192 Lv.2 (F4)*"
           str2="#{str2} \u2192 *Lv.3 (F6)*" if !skl2[5].nil? && skl2[5].length>0
@@ -2207,7 +2202,27 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   sklz=@askilities.map{|q| q}
   skl=nil
   skl=sklz.find_index{|q| q[2]=='Skill' && q[0]==k[6]} if !k[6].nil? && k[6].length>0
-  skl=sklz[skl] unless skl.nil?
+  unless skl.nil?
+    skl=sklz[skl]
+    mx=skl[3,3].reject{|q| q.nil? || q.length<=0}
+    mx.push(skl[11]) if !skl[11].nil? && skl[11].length>0
+    if skl.length>13
+      for i in 13...skl.length
+        mx.push(skl[i]) if !skl[i].nil? && skl[i].length>0
+      end
+    end
+    smolsp=[skl[6][mx.length-1]]
+    smolsp=[] if skl[6][0,mx.length].max != skl[6][0,mx.length].min
+    smolsp2=[]
+    kk=[]
+    kk=skl[6][5,skl[6].length-5] if skl[6].length>5
+    if kk.length>0
+      for i in 0...kk.length/7
+        smolsp.push(kk[i*7+mx.length]) unless kk[i*7+mx.length]==skl[6][0]
+        smolsp2.push(kk[i*7+6]) unless kk[i*7+6]==skl[12][1]
+      end
+    end
+  end
   abl=nil
   abl2=nil
   ablx=nil
@@ -2254,7 +2269,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     eng=" - #{semoji[5]}Energizable/Inspirable" if skl[7]=='Yes' && skl[10].include?('Damage')
     str="#{str}\n\n__**#{bemoji[1]*4} Level #{f}**__"
     str="#{str}\n#{semoji[0]}#{longFormattedNumber(k[4][2])}  #{semoji[1]}#{longFormattedNumber(k[5][2])}"
-    str="#{str}\n*#{skl[0]}*#{eng}#{energy_emoji(skl[10],true)}#{" - #{longFormattedNumber(skl[6][1])} SP" unless skl[6][1]<=0}\n#{skl[4].gsub(';; ',"\n")}"
+    str="#{str}\n*#{skl[0]}*#{eng}#{energy_emoji(skl[10],true)}#{" - #{smolsp2.join("\u2192")} SP" unless skl[6][1]<=0}\n#{skl[4].gsub(';; ',"\n")}"
     str="#{str}\n*#{abl2[0]}#{" #{'+' if abl2[1].include?('%')}#{abl2[1]}" unless abl2[1]=='-'}*" unless abl2.nil?
     str="#{str}\n*#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}*" if abl2.nil? && !abl.nil?
     str="#{str}\n*#{ablx2[0]}#{" #{'+' if ablx2[1].include?('%')}#{ablx2[1]}" unless ablx2[1]=='-'}*" unless ablx2.nil?
@@ -2273,9 +2288,9 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
         str="#{str}\n\n**Skill:** *#{skl[0]}*#{eng}#{energy_emoji(skl[10])}"
         if skl[6][0]==skl[6][1] && skl[6][1]<=0
         elsif skl[6][0]==skl[6][1]
-          str="#{str} - #{longFormattedNumber(skl[6][0])} SP;;;;;"
+          str="#{str} - #{smolsp2.join("\u2192")} SP;;;;;"
         else
-          str="#{str} - #{longFormattedNumber(skl[6][0])} \u2192 #{longFormattedNumber(skl[6][1])} SP;;;;;"
+          str="#{str} - #{longFormattedNumber(skl[6][0])} (L1) \u2192 #{longFormattedNumber(skl[6][1])} (L2) SP;;;;;"
         end
         strx=skl[4].gsub(';; ',"\n")
       end
@@ -2757,7 +2772,27 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
   end
   str=''
   title=''
-  title="**SP Cost:** #{longFormattedNumber(k[6][0])}" if k[6][0,mx.length].max==k[6][0,mx.length].min && k[6][0]>0 && topstr.length<=0
+  smolsp=[longFormattedNumber(k[6][0])]
+  smolsp2=k[6][0,5].map{|q| [q]}
+  kk=[]
+  kk=k[6][5,k[6].length-5] if k[6].length>5
+  if kk.length>0
+    for i in 0...kk.length/7
+      smolsp.push(longFormattedNumber(kk[i*7+1])) unless kk[i*7+1]==k[6][0]
+      for i2 in 0...mx.length
+        smolsp2[i2].push(kk[i*7+i2+1])
+      end
+    end
+  end
+  smolsp2=smolsp2[0,mx.length]
+  for i in 0...smolsp2.length
+    if smolsp2[i].uniq.length==1
+      smolsp2[i]=longFormattedNumber(smolsp2[i][0])
+    else
+      smolsp2[i]=smolsp2[i].map{|q| longFormattedNumber(q)}.join("\u2192")
+    end
+  end
+  title="**SP Cost:** #{smolsp.join("\u2192")}" if smolsp2.uniq.length<=1 && k[6][0]>0 && topstr.length<=0
   title="#{title}\n**Invulnerability duration:** #{k[8]} seconds"
   k[12][1]=k[6][-1] if !k[12].nil? && k[12].length==1
   smolsp=[]
@@ -2784,7 +2819,7 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
     if topstr.length<=0 || i>1 || (i==1 && mx.length<3)
       displvl+=1
       str2="#{str2}\n\n__**Level #{i+1}**__"
-      str2="#{str2} - #{k[6][i]} SP" unless k[6][0,mx.length].max==k[6][0,mx.length].min || k[6][i]<=0
+      str2="#{str2} - #{smolsp2[i]} SP" unless smolsp2.uniq.length<=1 || k[6][i]<=0
       if i>=3
         str2="#{str2}\n#{k[i+8].gsub(';; ',"\n")}"
       else
@@ -3121,7 +3156,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         hdr="__**#{k[0][1]} #{k[0][0]}**__ [Ability family]" if k[0][0][0,5]=='Hits '
         m=k2[0]
         str="__**Ability**__"
-        str="#{str}\n*Effect:* #{m[3]}" unless m[5]=='n'
+        str="#{str}\n*Effect:* #{m[3].gsub(';;',"\n")}" unless m[5]=='n'
         m2=[]
         checkstr="#{k[0][0]} #{'+' if k[0][1].include?('%')}#{k[0][1]}"
         checkstr="#{k[0][1]} #{k[0][0]}" if k[0][0][0,7]=='Hits = '
@@ -3331,7 +3366,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
           checkstr="#{k2[i][0]} #{'+' if k2[i][1].include?('%')}#{k2[i][1]}"
           checkstr="#{k2[i][1]} #{k2[i][0]}" if k2[i][0][0,7]=='Hits = '
           checkstr="#{k2[i][0]}" if k2[i][1]=='-'
-          str="#{str}\n**Example effect:** #{k2[i][3]}\n" if k2[i][1].downcase=='example'
+          str="#{str}\n**Example effect:** #{k2[i][3].gsub(';;',"\n")}\n" if k2[i][1].downcase=='example'
           str="#{str}\n**#{k2[i][1]}**" unless k2[i][1].downcase=='example'
           brk=false
           m2=[]
@@ -3425,7 +3460,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
       lng=false if k[0][1].downcase=='example'
       for ii2 in 0...k.length
         if k[ii2][1]=='example'
-          str="#{str}\n__**Example #{'Chain ' if k[ii2][2]=='Chain' && k.map{|q| q[2]}.uniq.length>1}Effect**__\n#{k[ii2][3]}\n"
+          str="#{str}\n__**Example #{'Chain ' if k[ii2][2]=='Chain' && k.map{|q| q[2]}.uniq.length>1}Effect**__\n#{k[ii2][3].gsub(';;',"\n")}\n"
         elsif s2s
           if k[ii2][0][0,7]=='Hits = '
             str="#{str}\n\n#{'__' if lng}**#{k[ii2][1]} #{k[ii2][0]}**#{'__' if lng}"
@@ -3795,7 +3830,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
     xcolor=0x87817C if k[2]=='Aura'
     xcolor=0x242035 if k[2]=='CoAbility'
     xcolor=0x342025 if k[2]=='Chain'
-    str="**Effect:** #{k[3]}" if k[5]=='y' || k[2]=='Aura'
+    str="**Effect:** #{k[3].gsub(';;',"\n")}" if k[5]=='y' || k[2]=='Aura'
     str2=''
     flds=[]
     if k[2]=='Ability'
@@ -4350,7 +4385,7 @@ def current_banner(bot,event,args=nil,msg='',showerr=true)
       unless b[1]=='-' || b[1][0]=='-'
         for i in 0...b[1].length
           a=adv.find_index{|q| q[0]==b[1][i].gsub('*','')}
-          if b[1].length+b[2].length+b[3].length<=16
+          if b[1].length+b[2].length+b[3].length<=10
             b[1][i]="#{b[1][i]}#{adv_emoji(adv[a],bot)}" unless a.nil?
           elsif a.nil?
             b[1][i]="~~#{b[1][i]}~~"
@@ -4360,7 +4395,7 @@ def current_banner(bot,event,args=nil,msg='',showerr=true)
       unless b[2]=='-' || b[2][0]=='-'
         for i in 0...b[2].length
           a=drg.find_index{|q| q[0]==b[2][i].gsub('*','')}
-          if b[1].length+b[2].length+b[3].length<=16
+          if b[1].length+b[2].length+b[3].length<=10
             b[2][i]="#{b[2][i]}#{dragon_emoji(drg[a],bot)}" unless a.nil?
           elsif a.nil?
             b[2][i]="~~#{b[2][i]}~~"
@@ -4370,7 +4405,7 @@ def current_banner(bot,event,args=nil,msg='',showerr=true)
       unless b[3]=='-' || b[3][0]=='-'
         for i in 0...b[3].length
           a=wrm.find_index{|q| q[0]==b[3][i].gsub('*','')}
-          if b[1].length+b[2].length+b[3].length<=16
+          if b[1].length+b[2].length+b[3].length<=10
             b[3][i]="#{b[3][i]}#{print_emoji(wrm[a],bot)}" unless a.nil?
           elsif a.nil?
             b[3][i]="~~#{b[3][i]}~~"
@@ -4569,8 +4604,8 @@ def disp_banner(bot,event,args=nil)
   if "__**#{k[0]}**'s Banners__".length+bnr.join("#{"\n" if s2s}\n").length>=1900
     str="__**#{k[0]}**'s Banners__"
     for i in 0...bnr.length
-      str=extend_message(event,str,bnr[i],2) if s2s
-      str=extend_message(event,str,bnr[i]) unless s2s
+      str=extend_message(str,bnr[i],event,2) if s2s
+      str=extend_message(str,bnr[i],event) unless s2s
     end
     event.respond str
   else
@@ -4797,6 +4832,21 @@ def find_in_skills(bot,event,args=nil,mode=0)
         textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
       end
     end
+    if tags.include?('Cleanse') && tags.length>1 && !args.include?('any')
+      tags2=[]
+      for i in 0...@cleaning.length
+        if tags.include?(@cleaning[i][0]) && !tags.include?(@cleaning[i][1])
+          tags.push("#{@cleaning[i][1]}")
+          tags2.push("#{@cleaning[i][0]}")
+        end
+      end
+      if tags2.length>0
+        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
+        mm='those tags'
+        mm="the #{tags2[0]} tag" if tags2.length<2
+        textra="#{textra}\n\nThe Cleanse tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Cleanse tag, remove #{mm}.\nTo search for just #{mm}, remove the Cleanse tag."
+      end
+    end
     search.push("*Tags*: #{tags.join(', ')}")
     if args.include?('any')
       search[-1]="#{search[-1]}\n(searching for skills with any listed tag)" if tags.length>1
@@ -4895,6 +4945,21 @@ def find_in_abilities(bot,event,args=nil,mode=0)
         mm='those tags'
         mm="the #{tags2[0]} tag" if tags2.length<2
         textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
+      end
+    end
+    if tags.include?('Cleanse') && tags.length>1 && !args.include?('any')
+      tags2=[]
+      for i in 0...@cleaning.length
+        if tags.include?(@cleaning[i][0]) && !tags.include?(@cleaning[i][1])
+          tags.push("#{@cleaning[i][1]}")
+          tags2.push("#{@cleaning[i][0]}")
+        end
+      end
+      if tags2.length>0
+        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
+        mm='those tags'
+        mm="the #{tags2[0]} tag" if tags2.length<2
+        textra="#{textra}\n\nThe Cleanse tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Cleanse tag, remove #{mm}.\nTo search for just #{mm}, remove the Cleanse tag."
       end
     end
     search.push("*Tags*: #{tags.join(', ')}")
@@ -5033,11 +5098,11 @@ def find_adventurers(bot,event,args=nil)
     for i in 0...char.length
       str=extend_message(str,char[i][0],event)
     end
-    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",event,2)
+    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].gsub('*[','').gsub(']*','').include?('*')}.length<=0}",event,2)
     event.respond str
   else
     textra="**No adventurers match your search**" if char.length<=0
-    create_embed(event,"__**Adventurer Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",nil,flds)
+    create_embed(event,"__**Adventurer Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].gsub('*[','').gsub(']*','').include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",nil,flds)
   end
 end
 
@@ -5078,11 +5143,11 @@ def find_dragons(bot,event,args=nil)
     for i in 0...char.length
       str=extend_message(str,char[i][0],event)
     end
-    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",event,2)
+    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].gsub('*[','').gsub(']*','').include?('*')}.length<=0}",event,2)
     event.respond str
   else
     textra="**No dragons match your search**" if char.length<=0
-    create_embed(event,"__**Dragon Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",nil,flds)
+    create_embed(event,"__**Dragon Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].gsub('*[','').gsub(']*','').include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",nil,flds)
   end
 end
 
@@ -5122,11 +5187,11 @@ def find_wyrmprints(bot,event,args=nil)
     for i in 0...char.length
       str=extend_message(str,char[i][0],event)
     end
-    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",event,2)
+    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].gsub('*[','').gsub(']*','').include?('*')}.length<=0}",event,2)
     event.respond str
   else
     textra="**No wyrmprints match your search**" if char.length<=0
-    create_embed(event,"__**Wyrmprint Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",nil,flds)
+    create_embed(event,"__**Wyrmprint Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].gsub('*[','').gsub(']*','').include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",nil,flds)
   end
 end
 
@@ -5185,11 +5250,11 @@ def find_weapons(bot,event,args=nil)
     for i in 0...char.length
       str=extend_message(str,char[i][0],event)
     end
-    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",event,2)
+    str=extend_message(str,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].gsub('*[','').gsub(']*','').include?('*')}.length<=0}",event,2)
     event.respond str
   else
     textra="**No weapons match your search**" if char.length<=0
-    create_embed(event,"__**Weapons Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",nil,flds)
+    create_embed(event,"__**Weapons Search**__\n#{search.join("\n")}\n\n__**Results**__",textra,0xCE456B,"#{char.length} total#{", #{char.reject{|q| q[0].gsub('*[','').gsub(']*','').include?('*')}.length} available to players" unless char.reject{|q| !q[0].include?('*')}.length<=0}",nil,flds)
   end
 end
 
@@ -5415,7 +5480,7 @@ def find_all(bot,event,args=nil)
   wrm=find_in_wyrmprints(bot,event,args,2)
   wpn=find_in_weapons(bot,event,args,2)
   adv=nil if !adv.nil? && adv[1].length>=@adventurers.length
-  drg=nil if !drg.nil? && drg[1].length>=@dragons.length
+  drg=nil if !drg.nil? && drg[1].length>=@dragons.reject{|q| q[0]=='Puppy'}.length
   wrm=nil if !wrm.nil? && wrm[1].length>=@wyrmprints.reject{|q| ['Wily Warriors','Greatwyrm'].include?(q[0])}.uniq.length
   wpn=nil if !wpn.nil? && wpn[1].length>=@weapons.length
   if adv.nil? && drg.nil? && wrm.nil? && wpn.nil?
@@ -5512,7 +5577,7 @@ def find_all(bot,event,args=nil)
     for i in 1...wpn[1].length
       str=extend_message(str,wpn[1][i],event,1,', ')
     end
-    str=extend_message(str,"Totals: #{adv[1].reject{|q| q.include?('*')}.length}#{" (#{adv[1].length})" unless adv[1].reject{|q| !q.include?('*')}.length<=0} adventurers, #{drg[1].reject{|q| q.include?('*')}.length}#{" (#{drg[1].length})" unless drg[1].reject{|q| !q.include?('*')}.length<=0} dragons, #{wrm[4]} wyrmprints#{' (not shown)' if wrm[4]>wrm[1].length}, #{wpn[1].reject{|q| q.include?('*')}.length}#{" (#{wpn[1].length})" unless wpn[1].reject{|q| !q.include?('*')}.length<=0} weapons",event,2)
+    str=extend_message(str,"Totals: #{adv[1].reject{|q| q.gsub('*[','').gsub(']*','').include?('*')}.length}#{" (#{adv[1].length})" unless adv[1].reject{|q| !q.gsub('*[','').gsub(']*','').include?('*')}.length<=0} adventurers, #{drg[1].reject{|q| q.gsub('*[','').gsub(']*','').include?('*')}.length}#{" (#{drg[1].length})" unless drg[1].reject{|q| !q.gsub('*[','').gsub(']*','').include?('*')}.length<=0} dragons, #{wrm[4]} wyrmprints#{' (not shown)' if wrm[4]>wrm[1].length}, #{wpn[1].reject{|q| q.gsub('*[','').gsub(']*','').include?('*')}.length}#{" (#{wpn[1].length})" unless wpn[1].reject{|q| !q.gsub('*[','').gsub(']*','').include?('*')}.length<=0} weapons",event,2)
     str=extend_message(str,"Wyrmprints have been removed from the displayed search results because only the rarity filter applies.",event,2) if wrm[4]>wrm[1].length
     event.respond str
   else
@@ -5524,7 +5589,7 @@ def find_all(bot,event,args=nil)
     flds.push(["**Weapons** #{wpn[2].join('')}",wpn[1].join("\n")]) if wpn[1].length>0
     textra="**No data matches your search**" if adv[1].length<=0 && drg[1].length<=0 && wrm[1].length<=0 && wpn[1].length<=0
     textra="#{textra}\n\nWyrmprints have been removed from the displayed search results because only the rarity filter applies." if wrm[4]>wrm[1].length
-    create_embed(event,str,textra,0xCE456B,"Totals: #{adv[1].reject{|q| q.include?('*')}.length}#{" (#{adv[1].length})" unless adv[1].reject{|q| !q.include?('*')}.length<=0} adventurers, #{drg[1].reject{|q| q.include?('*')}.length}#{" (#{drg[1].length})" unless drg[1].reject{|q| !q.include?('*')}.length<=0} dragons, #{wrm[4]} wyrmprints#{' (not shown)' if wrm[4]>wrm[1].length}, #{wpn[1].reject{|q| q.include?('*')}.length}#{" (#{wpn[1].length})" unless wpn[1].reject{|q| !q.include?('*')}.length<=0} weapons",nil,flds)
+    create_embed(event,str,textra,0xCE456B,"Totals: #{adv[1].reject{|q| q.gsub('*[','').gsub(']*','').include?('*')}.length}#{" (#{adv[1].length})" unless adv[1].reject{|q| !q.gsub('*[','').gsub(']*','').include?('*')}.length<=0} adventurers, #{drg[1].reject{|q| q.gsub('*[','').gsub(']*','').include?('*')}.length}#{" (#{drg[1].length})" unless drg[1].reject{|q| !q.gsub('*[','').gsub(']*','').include?('*')}.length<=0} dragons, #{wrm[4]} wyrmprints#{' (not shown)' if wrm[4]>wrm[1].length}, #{wpn[1].reject{|q| q.gsub('*[','').gsub(']*','').include?('*')}.length}#{" (#{wpn[1].length})" unless wpn[1].reject{|q| !q.gsub('*[','').gsub(']*','').include?('*')}.length<=0} weapons",nil,flds)
   end
 end
 
@@ -6622,6 +6687,78 @@ def sort_shareable_skills(event,args,bot)
     disp=extend_message(disp,char[i][0],event)
   end
   event.respond disp
+end
+
+def display_groups(event)
+  grps=get_group_data().sort{|a,b| a[0]<=>b[0]}
+  for i in 0...grps.length
+    grps[i][2].sort! unless grps[i][2].nil?
+    grps[i][3].sort! unless grps[i][3].nil?
+    grps[i][4].sort! unless grps[i][4].nil?
+    grps[i][5].sort! unless grps[i][5].nil?
+  end
+  str=''
+  for i in 0...grps.length
+    str2=grps[i][0]
+    if safe_to_spam?(event)
+      str=extend_message(str,"__**#{str2}**__",event,2)
+      unless grps[i][2].nil? || grps[i][2].length<=0
+        if "*Adventurers:* #{grps[i][2].join(', ')}".length>1900
+          str=extend_message(str,"*Adventurers:* #{grps[i][2][0]}",event)
+          for i2 in 1...grps[i][2].length
+            str=extend_message(str,grps[i][2][i2],event,1,', ')
+          end
+        else
+          str=extend_message(str,"*Adventurers:* #{grps[i][2].join(', ')}",event)
+        end
+      end
+      unless grps[i][3].nil? || grps[i][3].length<=0
+        if "*Dragons:* #{grps[i][3].join(', ')}".length>1900
+          str=extend_message(str,"*Dragons:* #{grps[i][3][0]}",event)
+          for i2 in 1...grps[i][3].length
+            str=extend_message(str,grps[i][3][i2],event,1,', ')
+          end
+        else
+          str=extend_message(str,"*Dragons:* #{grps[i][3].join(', ')}",event)
+        end
+      end
+      unless grps[i][4].nil? || grps[i][4].length<=0
+        if "*Weapons:* #{grps[i][4].join(', ')}".length>1900
+          str=extend_message(str,"*Weapons:* #{grps[i][4][0]}",event)
+          for i2 in 1...grps[i][4].length
+            str=extend_message(str,grps[i][4][i2],event,1,', ')
+          end
+        else
+          str=extend_message(str,"*Weapons:* #{grps[i][4].join(', ')}",event)
+        end
+      end
+      unless grps[i][5].nil? || grps[i][5].length<=0
+        if "*Wyrmprints:* #{grps[i][5].join(', ')}".length>1900
+          str=extend_message(str,"*Wyrmprints:* #{grps[i][5][0]}",event)
+          for i2 in 1...grps[i][5].length
+            str=extend_message(str,grps[i][5][i2],event,1,', ')
+          end
+        else
+          str=extend_message(str,"*Wyrmprints:* #{grps[i][5].join(', ')}",event)
+        end
+      end
+    else
+      str2="*#{str2}*"
+      x=[]
+      x.push("#{grps[i][2].length} adventurer#{'s' unless grps[i][2].length==1}") unless grps[i][2].nil? || grps[i][2].length<=0
+      x.push("#{grps[i][3].length} dragon#{'s' unless grps[i][3].length==1}") unless grps[i][3].nil? || grps[i][3].length<=0
+      x.push("#{grps[i][4].length} weapon#{'s' unless grps[i][4].length==1}") unless grps[i][4].nil? || grps[i][4].length<=0
+      x.push("#{grps[i][5].length} wyrmprint#{'s' unless grps[i][5].length==1}") unless grps[i][5].nil? || grps[i][5].length<=0
+      str=extend_message(str,"#{str2} - #{list_lift(x,'and')}",event)
+    end
+  end
+  event.respond str
+end
+
+bot.command([:seegroups,:checkgroups,:groups]) do |event|
+  return nil if overlap_prevent(event)
+  display_groups(event)
+  return nil
 end
 
 bot.command([:skillshare,:skilshare,:share,:shared]) do |event, *args|
@@ -7740,7 +7877,7 @@ end
 bot.command(:reload, from: 167657750971547648) do |event|
   return nil if overlap_prevent(event)
   return nil unless [167657750971547648,141260274144509952].include?(event.user.id) || [502288368777035777,532083509083373583].include?(event.channel.id)
-  event.respond "Reload what?\n1.) Aliases, from backups#{" (unless includes the word \"git\")\n2.) ~~empty slot#{', redirects to 3' if event.user.id==141260274144509952}~~\n3.) Data, from GitHub (include \"subset\" in your message to also reload DLSkillSubsets)" if [167657750971547648,141260274144509952].include?(event.user.id)}#{"\n4.) Source code, from GitHub (include the word \"all\" to also reload rot8er_functs.rb)\n5.) Crossover data\n6.) Libraries, from code\n7.) Avatars, from GitHub" if event.user.id==167657750971547648}\nYou can include multiple numbers to load multiple things."
+  event.respond "Reload what?\n1.) Aliases, from backups#{" (unless includes the word \"git\")\n2.) Groups, from GitHub\n3.) Data, from GitHub (include \"subset\" in your message to also reload DLSkillSubsets)" if [167657750971547648,141260274144509952].include?(event.user.id)}#{"\n4.) Source code, from GitHub (include the word \"all\" to also reload rot8er_functs.rb)\n5.) Crossover data\n6.) Libraries, from code\n7.) Avatars, from GitHub" if event.user.id==167657750971547648}\nYou can include multiple numbers to load multiple things."
   event.channel.await(:bob, from: event.user.id) do |e|
     reload=false
     if e.message.text.include?('1')
@@ -7795,9 +7932,24 @@ bot.command(:reload, from: 167657750971547648) do |event|
         reload=true
       end
     end
-    if (e.message.text.include?('3') && [167657750971547648,141260274144509952].include?(event.user.id)) || (e.message.text.include?('2') && [141260274144509952].include?(event.user.id))
+    if e.message.text.include?('2')
+      download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/DLGroups.txt")
+      IO.copy_stream(download, "DLTemp.txt")
+      if File.size("DLTemp.txt")>100
+        b=[]
+        File.open("DLTemp.txt").each_line.with_index do |line, idx|
+          b.push(line)
+        end
+        open("DLGroups.txt", 'w') { |f|
+          f.puts b.join('')
+        }
+      end
+      e.respond 'Group list has been restored from GitHub, and placed in the backup as well.'
+      reload=true
+    end
+    if e.message.text.include?('3') && [167657750971547648,141260274144509952].include?(event.user.id)
       event.channel.send_temporary_message('Loading.  Please wait 5 seconds...',3)
-      to_reload=['Adventurers','Dragons','Wyrmprints','Weapons','Skills','Banners','Emotes','Enemies','Gauntlet','SkillSubsets','Facilities','Materials','Status','Void','_NPCs']
+      to_reload=['Adventurers','Dragons','Wyrmprints','Weapons','Skills','Banners','Emotes','Enemies','Gauntlet','SkillSubsets','Facilities','Materials','Status','Void','_NPCs','Groups']
       stx=''
       for i in 0...to_reload.length
         download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/DL#{to_reload[i]}.txt")
@@ -8059,6 +8211,29 @@ bot.message do |event|
   elsif !event.server.nil? && (above_memes().include?("s#{event.server.id}") || above_memes().include?(event.server.id))
   elsif !event.channel.nil? && above_memes().include?("c#{event.channel.id}")
   elsif above_memes().include?("u#{event.user.id}") || above_memes().include?(event.user.id)
+  elsif event.message.text.downcase.gsub('?','').split(' ').include?('who') && event.message.text.downcase.gsub('?','').split(' ').include?('luca') && !event.user.bot_account?
+    s=event.message.text.downcase.gsub('?','')
+    s=remove_format(s,'```')              # remove large code blocks
+    s=remove_format(s,'`')                # remove small code blocks
+    s=remove_format(s,'~~')               # remove crossed-out text
+    s=remove_format(s,'||')               # remove spoiler tags
+    if s.include?('who is luca')
+      event.respond "> Who is Luca?\n#{"#{event.user.mention} " unless event.server.nil?}Nobody knows.  He just...exists.  Sometimes."
+    elsif s.split(' ').include?('who') && s.split(' ').include?('luca')
+      event.respond "#{"#{event.user.mention} " unless event.server.nil?}Nobody knows who Luca is, he just...exists?  Sometimes."
+    end
+  elsif event.message.text.downcase.split(' ').include?('luca') && !event.user.bot_account?
+    s=event.message.text.downcase.gsub('?','')
+    s=remove_format(s,'```')              # remove large code blocks
+    s=remove_format(s,'`')                # remove small code blocks
+    s=remove_format(s,'~~')               # remove crossed-out text
+    s=remove_format(s,'||')               # remove spoiler tags
+    if s.split(' ').include?('luca') && rand(1000)<13
+      puts "Luca is Kellam'd"
+      event.respond "who?"
+    elsif s.split(' ').include?('luca')
+      puts "Saw mention of Luca, didn't bother to respond."
+    end
   elsif event.message.text.include?('0x4') && !event.user.bot_account? && @shardizard==4
     s=event.message.text
     s=remove_format(s,'```')              # remove large code blocks
