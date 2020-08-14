@@ -147,6 +147,8 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
     return nil
   elsif ['share','shared','skillshare','skilshare'].include?(command.downcase)
     create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Finds all adventurers that fit `filters`, removes any that lack shareable skills, and sorts by their shareable skill(s)' share cost and/or SP when shared.\n\nYou can search by:\n- Element\n- Weapon type\n- Class\n- Availability\n\nIf too many adventurers are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.  I will instead show only the top ten results.",0xCE456B)
+  elsif ['seegroups','groups','checkgroups'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}**",'Shows all the existing groups, and their members.',0xCE456B)
   elsif ['sort','list'].include?(command.downcase)
     subcommand='' if subcommand.nil?
     if ['adventurer','adventurers','adv','advs','unit','units'].include?(subcommand.downcase)
@@ -239,10 +241,12 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}**",'Returns the number of adventurers and dragons within each type of alt, as well as specifics about adventurers and dragons with the most alts.',0xCE456B)
     elsif ['alias','aliases','name','names','nickname','nicknames'].include?(subcommand.downcase)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}**","Returns the number of aliases in each of the two categories - global single-servant, and server-specific single-servant.\nAlso returns specifics about the most frequent instances of each category",0xCE456B)
+    elsif ['group','groups'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}**","Returns the number of groups, as well as the specifics of the semi-dynamic ones",0xCE456B)
     elsif ['code','lines','line','sloc'].include?(subcommand.downcase)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}**","Returns the specifics about my code, including number of commands and functions, as well as - if in PM - loops, statements, and conditionals.",0xCE456B)
     else
-      create_embed(event,"**#{command.downcase}**","Returns:\n- the number of servers I'm in\n- the numbers of servants in the game\n- the numbers of aliases I keep track of\n- how long of a file I am.\n\nYou can also include the following words to get more specialized data:\nServer(s), Member(s), Shard(s), User(s)\nAdventurer(s), Unit(s)\nDragon(s)\nWyrmprint(s), Print(s)\nWeapon(s)\nAlt(s)\nAlias(es), Name(s), Nickname(s)\nCode, Line(s), SLOC#{"\n\nAs the bot developer, you can also include a server ID number to snag the shard number, owner, and my nickname in the specified server." if event.user.id==167657750971547648}",0xCE456B)
+      create_embed(event,"**#{command.downcase}**","Returns:\n- the number of servers I'm in\n- the numbers of servants in the game\n- the numbers of aliases I keep track of\n- how long of a file I am.\n\nYou can also include the following words to get more specialized data:\nServer(s), Member(s), Shard(s), User(s)\nAdventurer(s), Unit(s)\nDragon(s)\nWyrmprint(s), Print(s)\nWeapon(s)\nAlt(s)\nAlias(es), Name(s), Nickname(s)\nGroup(s)\nCode, Line(s), SLOC#{"\n\nAs the bot developer, you can also include a server ID number to snag the shard number, owner, and my nickname in the specified server." if event.user.id==167657750971547648}",0xCE456B)
     end
   else
     x=0
@@ -285,6 +289,7 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
     str="#{str}\n`snagstats` __type__ - to receive relevant bot stats"
     str="#{str}\n`spam` - to determine if the current location is safe for me to send long replies to (*also `safetospam` or `safe2spam`*)"
     str="#{str}\n`shard`"
+    str="#{str}\n`groups`"
     str="#{str}\n\n__**Developer Information**__"
     str="#{str}\n`bugreport` __\\*message__ - to send my developer a bug report"
     str="#{str}\n`suggestion` __\\*message__ - to send my developer a feature suggestion"
@@ -372,9 +377,23 @@ end
               ['Burn','BurningPunisher'],
               ['Overdrive','OverdrivePunisher'],
               ['Frostbite','FrostbitePunisher'],
+              ['Freeze','FrozenPunisher'],
               ['Sleep','SleepingPunisher'],
               ['Bleed','BleedingPunisher'],
+              ['Bog','BogPunisher'],
               ['ReducedDefense','ReducedDefensePunisher']]
+@cleaning=[['Paralysis','ParalysisCleanse'],
+           ['Poison','PoisonCleanse','Antidote'],
+           ['Blind','BlindnessCleanse','Glasses'],
+           ['Stun','StunCleanse'],
+           ['Bog','BogCleanse'],
+           ['Broken','BrokenCleanse','Fixer'],
+           ['Burn','BurnCleanse','Water'],
+           ['Overdrive','OverdriveCleanse','Underdrive'],
+           ['Frostbite','FrostbiteCleanse'],
+           ['Freeze','FreezeCleanse','Defrosting'],
+           ['Sleep','SleepCleanse','WakeUpSlap'],
+           ['Bleed','BleedCleanse','Bandage']]
 
 def dragon_data(bot,event,args=nil,juststats=false)
   dispstr=event.message.text.downcase.split(' ')
@@ -481,7 +500,25 @@ def dragon_data(bot,event,args=nil,juststats=false)
     eng=", #{semoji[4]}Energizable" if skl1[7]=='Yes'
     eng=", #{semoji[5]}Inspirable" if skl1[10].include?('Damage')
     eng=", #{semoji[6]}Energizable/Inspirable" if skl1[7]=='Yes' && skl1[10].include?('Damage')
-    str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min && skl1[6][0]>0}"
+    mx=skl1[3,3].reject{|q| q.nil? || q.length<=0}
+    mx.push(skl1[11]) if !skl1[11].nil? && skl1[11].length>0
+    if skl1.length>13
+      for i in 13...skl1.length
+        mx.push(skl1[i]) if !skl1[i].nil? && skl1[i].length>0
+      end
+    end
+    smolsp=[skl1[6][mx.length-1]]
+    smolsp=[] if skl1[6][0,mx.length].max != skl1[6][0,mx.length].min
+    smolsp2=[]
+    kk=[]
+    kk=skl1[6][5,skl1[6].length-5] if skl1[6].length>5
+    if kk.length>0
+      for i in 0...kk.length/7
+        smolsp.push(kk[i*7+mx.length]) unless kk[i*7+mx.length]==skl1[6][0]
+        smolsp2.push(kk[i*7+6]) unless kk[i*7+6]==skl1[12][1]
+      end
+    end
+    str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{" - #{smolsp2.join("\u2192")} SP" if skl1[6].max===skl1[6].min && skl1[6][0]>0}"
     if (skl1[9].nil? || skl1[9].length<=0) && skl1[6].max != skl1[6].min
       str="#{str}\n*Lv.1 (#{skl1[6][0]} SP):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (#{skl1[6][1]} SP):* #{skl1[4].gsub(';; ',"\n")}"
       str="#{str}\n*Lv.3 (#{skl1[6][2]} SP):* #{skl1[5].gsub(';; ',"\n")}" if !skl1[5].nil? && skl1[5].length>0
@@ -513,7 +550,25 @@ def dragon_data(bot,event,args=nil,juststats=false)
       eng=", #{semoji[4]}Energizable" if skl1[7]=='Yes'
       eng=", #{semoji[5]}Inspirable" if skl1[10].include?('Damage')
       eng=", #{semoji[6]}Energizable/Inspirable" if skl1[7]=='Yes' && skl1[10].include?('Damage')
-      str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{" - #{longFormattedNumber(skl1[6][0])} SP" if skl1[6].max===skl1[6].min && skl1[6][0]>0}"
+      mx=skl1[3,3].reject{|q| q.nil? || q.length<=0}
+      mx.push(skl1[11]) if !skl1[11].nil? && skl1[11].length>0
+      if skl1.length>13
+        for i in 13...skl1.length
+          mx.push(skl1[i]) if !skl1[i].nil? && skl1[i].length>0
+        end
+      end
+      smolsp=[skl1[6][mx.length-1]]
+      smolsp=[] if skl1[6][0,mx.length].max != skl1[6][0,mx.length].min
+      smolsp2=[]
+      kk=[]
+      kk=skl1[6][5,skl1[6].length-5] if skl1[6].length>5
+      if kk.length>0
+        for i in 0...kk.length/7
+          smolsp.push(kk[i*7+mx.length]) unless kk[i*7+mx.length]==skl1[6][0]
+          smolsp2.push(kk[i*7+6]) unless kk[i*7+6]==skl1[12][1]
+        end
+      end
+      str="#{str}\n\n__**#{skl1[0]}** (#{skl1[8]} sec invul#{eng}#{energy_emoji(skl1[10],true)})__#{" - #{smolsp2.join("\u2192")} SP" if skl1[6].max===skl1[6].min && skl1[6][0]>0}"
       if (skl1[9].nil? || skl1[9].length<=0) && skl1[6].max != skl1[6].min
         str="#{str}\n*Lv.1 (#{skl1[6][0]} SP):* #{skl1[3].gsub(';; ',"\n")}\n*Lv.2 (#{skl1[6][1]} SP):* #{skl1[4].gsub(';; ',"\n")}"
         str="#{str}\n*Lv.3 (#{skl1[6][2]} SP):* #{skl1[5].gsub(';; ',"\n")}" if !skl1[5].nil? && skl1[5].length>0
@@ -2034,6 +2089,37 @@ def art_of_the_nobody(bot,event,args=nil)
   end
 end
 
+def get_group_data(x=false)
+  if File.exist?("#{@location}devkit/DLGroups.txt")
+    b2=[]
+    File.open("#{@location}devkit/DLGroups.txt").each_line do |line|
+      b2.push(line)
+    end
+    b=[]
+    for i in 0...b2.length/7
+      b.push(eval b2[7*i,7].map{|q| q.gsub("\n",'').split(' # ')[0]}.join(''))
+    end
+  else
+    b=[]
+  end
+  unless x
+    b2=get_group_data(true)
+    for i in 0...b.length
+      if ["Valentine's",'Wedding','Summer','Halloween','Dragonyule'].include?(b[i][0])
+        b[i][2]=@adventurers.reject{|q| !q[0].include?("(#{b[i][0].gsub("'",'')})")}.map{|q| q[0]}
+        for i2 in 0...b2[i][2].length
+          b[i][2].push(b2[i][2][i2])
+        end
+        b[i][3]=@dragons.reject{|q| !q[0].include?("(#{b[i][0].gsub("'",'')})")}.map{|q| q[0]}
+        for i2 in 0...b2[i][3].length
+          b[i][3].push(b2[i][3][i2])
+        end
+      end
+    end
+  end
+  return b
+end
+
 def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
   data_load()
   args=normalize(event.message.text.downcase).gsub(',','').split(' ') if args.nil?
@@ -2053,6 +2139,8 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
   notlaunch=false
   mana=false
   share=false
+  groups=get_group_data().reject{|q| !has_any?(q[1],args.map{|q2| q2.downcase})}
+  puts groups.map{|q| q.to_s}
   lookout=get_lookout_tags()
   lookout2=lookout.reject{|q| q[2]!='Race'}
   lookout3=lookout.reject{|q| q[2]!='Cygame'}
@@ -2164,6 +2252,10 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
     b=@banners[0]
     char=char.reject{|q| b[1].include?(q[0])}
   end
+  if groups.length>0
+    char=char.reject{|q| !groups.map{|q2| q2[2]}.flatten.include?(q[0])}.uniq
+    search.push("*Groups*: #{groups.map{|q| q[0]}.join(', ')}")
+  end
   if mana
     search.push('*<:Rarity_Mana:706612079783575607>Mana Spiral*')
     char=char.reject{|q| q[3][1][@max_rarity[0]].nil? || q[3][1][@max_rarity[0]]<=0 || q[4][1][@max_rarity[0]].nil? || q[4][1][@max_rarity[0]]<=0}
@@ -2260,6 +2352,21 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
         mm='those tags'
         mm="the #{tags2[0]} tag" if tags2.length<2
         textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
+      end
+    end
+    if tags.include?('Cleanse') && tags.length>1 && !args.include?('any')
+      tags2=[]
+      for i in 0...@cleaning.length
+        if tags.include?(@cleaning[i][0]) && !tags.include?(@cleaning[i][1])
+          tags.push("#{@cleaning[i][1]}")
+          tags2.push("#{@cleaning[i][0]}")
+        end
+      end
+      if tags2.length>0
+        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
+        mm='those tags'
+        mm="the #{tags2[0]} tag" if tags2.length<2
+        textra="#{textra}\n\nThe Cleanse tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Cleanse tag, remove #{mm}.\nTo search for just #{mm}, remove the Cleanse tag."
       end
     end
     search.push("<:SkillShare:714597012733034547>*Adventurers with Shareable Skills*") if share
@@ -2376,6 +2483,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
   lookout5=lookout.reject{|q| q[2]!='Race'}
   lookout=lookout.reject{|q| q[2]!='Askillity'}
   lookout=lookout.reject{|q| ['Flame','Water','Wind','Light','Shadow'].include?(q[0])}
+  groups=get_group_data().reject{|q| !has_any?(q[1],args.map{|q2| q2.downcase})}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
     notlaunch=true if ['notlaunch','nonlaunch'].include?(args[i].downcase)
@@ -2471,6 +2579,10 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
     search.push('*Not in game at launch*')
     b=@banners[0]
     char=char.reject{|q| b[2].include?(q[0])}
+  end
+  if groups.length>0
+    char=char.reject{|q| !groups.map{|q2| q2[3]}.flatten.include?(q[0])}.uniq
+    search.push("*Groups*: #{groups.map{|q| q[0]}.join(', ')}")
   end
   if ess
     search.push('*Essence Dragons*')
@@ -2585,6 +2697,21 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
         textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
       end
     end
+    if tags.include?('Cleanse') && tags.length>1 && !args.include?('any')
+      tags2=[]
+      for i in 0...@cleaning.length
+        if tags.include?(@cleaning[i][0]) && !tags.include?(@cleaning[i][1])
+          tags.push("#{@cleaning[i][1]}")
+          tags2.push("#{@cleaning[i][0]}")
+        end
+      end
+      if tags2.length>0
+        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
+        mm='those tags'
+        mm="the #{tags2[0]} tag" if tags2.length<2
+        textra="#{textra}\n\nThe Cleanse tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Cleanse tag, remove #{mm}.\nTo search for just #{mm}, remove the Cleanse tag."
+      end
+    end
     search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
     sklz=@askilities.map{|q| q}
     for i in 0...char.length
@@ -2655,6 +2782,7 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
   lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Wyrmprint'}
   lookout=lookout.reject{|q| q[2]!='Askillity'}
   lookout=lookout.reject{|q| ['Attack','Defense','Support','Healer'].include?(q[0])}
+  groups=get_group_data().reject{|q| !has_any?(q[1],args.map{|q2| q2.downcase})}
   ign=false
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
@@ -2713,6 +2841,10 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
     search.push('*Not in game at launch*')
     b=@banners[0]
     char=char.reject{|q| b[3].include?(q[0])}
+  end
+  if groups.length>0
+    char=char.reject{|q| !groups.map{|q2| q2[5]}.flatten.include?(q[0])}.uniq
+    search.push("*Groups*: #{groups.map{|q| q[0]}.join(', ')}")
   end
   if fltr.length>0
     m=[]
@@ -2789,6 +2921,21 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
         textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
       end
     end
+    if tags.include?('Cleanse') && tags.length>1 && !args.include?('any')
+      tags2=[]
+      for i in 0...@cleaning.length
+        if tags.include?(@cleaning[i][0]) && !tags.include?(@cleaning[i][1])
+          tags.push("#{@cleaning[i][1]}")
+          tags2.push("#{@cleaning[i][0]}")
+        end
+      end
+      if tags2.length>0
+        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
+        mm='those tags'
+        mm="the #{tags2[0]} tag" if tags2.length<2
+        textra="#{textra}\n\nThe Cleanse tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Cleanse tag, remove #{mm}.\nTo search for just #{mm}, remove the Cleanse tag."
+      end
+    end
     search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
     sklz=@askilities.map{|q| q}
     for i in 0...char.length
@@ -2859,6 +3006,7 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   lookout3=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Weapon'}
   lookout=lookout.reject{|q| q[2]!='Askillity'}
   lookout=lookout.reject{|q| ['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Flame','Water','Wind','Light','Shadow'].include?(q[0])}
+  groups=get_group_data().reject{|q| !has_any?(q[1],args.map{|q2| q2.downcase})}
   args2=args.map{|q| q}
   ign=false
   for i in 0...args.length
@@ -2875,9 +3023,9 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
     rarity_tier_2.push('ChT1') if ['ct1','chm1','cht1'].include?(args[i].downcase)
     rarity_tier_2.push('ChT2') if ['ct2','chm2','cht2'].include?(args[i].downcase)
     rarity_tier_2.push('ChT3') if ['ct3','chm3','cht3'].include?(args[i].downcase)
-    rarity_tier_2.push('AGT1') if ['agito1','agt1'].include?(args[i].downcase)
-    rarity_tier_2.push('AGT2') if ['agito2','agt2'].include?(args[i].downcase)
-    rarity_tier_2.push('AGT3') if ['agito3','agt3'].include?(args[i].downcase)
+    rarity_tier_2.push('AGT1') if ['agito1','agt1','at1'].include?(args[i].downcase)
+    rarity_tier_2.push('AGT2') if ['agito2','agt2','at2'].include?(args[i].downcase)
+    rarity_tier_2.push('AGT3') if ['agito3','agt3','at3'].include?(args[i].downcase)
     ign=true if ['share','shared','skillshare','shareskill'].include?(args[i].downcase)
     if ['flame','fire','flames','fires'].include?(args[i].downcase)
       args2[i]=nil unless elem.include?('Flame')
@@ -3039,6 +3187,10 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
     search.push('*Not in game at launch*')
     char=char.reject{|q| q[8].to_i<212}
   end
+  if groups.length>0
+    char=char.reject{|q| !groups.map{|q2| q2[4]}.flatten.include?(q[0])}.uniq
+    search.push("*Groups*: #{groups.map{|q| q[0]}.join(', ')}")
+  end
   if fltr.length>0
     m=[]
     if fltr.include?('Seasonal')
@@ -3117,6 +3269,21 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
         mm='those tags'
         mm="the #{tags2[0]} tag" if tags2.length<2
         textra="#{textra}\n\nThe Punisher tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Punisher tag, remove #{mm}.\nTo search for just #{mm}, remove the Punisher tag."
+      end
+    end
+    if tags.include?('Cleanse') && tags.length>1 && !args.include?('any')
+      tags2=[]
+      for i in 0...@cleaning.length
+        if tags.include?(@cleaning[i][0]) && !tags.include?(@cleaning[i][1])
+          tags.push("#{@cleaning[i][1]}")
+          tags2.push("#{@cleaning[i][0]}")
+        end
+      end
+      if tags2.length>0
+        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
+        mm='those tags'
+        mm="the #{tags2[0]} tag" if tags2.length<2
+        textra="#{textra}\n\nThe Cleanse tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Cleanse tag, remove #{mm}.\nTo search for just #{mm}, remove the Cleanse tag."
       end
     end
     search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
@@ -4995,7 +5162,7 @@ def disp_update_list()
   str="#{str}\n- *Stickers* should be copied to **DLEmotes.txt**"
   str="#{str}\n\n5.) Upload the text file to [the GitHub page here](https://github.com/Rot8erConeX/BotanBot).  You might need to make a GitHub account to do so."
   str="#{str}\n\n6.) Wait probably five minutes for the file to settle on GitHub's servers, then use the command `DL!reload` in either my debug server, or in the bot spam channel of Heretic's Lab."
-  str="#{str}\n\n7.) Type the number 2 to select reloading data based on GitHub files."
+  str="#{str}\n\n7.) Type the number 3 to select reloading data based on GitHub files."
   str="#{str}\n\n8.) Double-check that the edited data works.  It is important to remember that I will not be there to guide you to wherever any problems might be based on error codes."
   str="#{str}\n\n9.) Add any relevant aliases to the new data."
   create_embed(event,"**How to update Botan's data while Mathoo is unavailable.**",str,0xED619A,nil)
@@ -6907,6 +7074,22 @@ def snagstats(event,bot,f=nil,f2=nil)
     str=extend_message(str,str3,event,2)
     event.respond str
     return nil
+  elsif ['groups','group','groupings','grouping'].include?(f.downcase)
+    event.channel.send_temporary_message('Calculating data, please wait...',3)
+    grps=get_group_data(true)
+    grps2=get_group_data()
+    str="**There are #{grps.length} groups, including the following semi-dynamic ones:**"
+    grps=grps.reject{|q| !q[6]}
+    grps2=grps2.reject{|q| !q[6]}
+    for i in 0...grps2.length
+      m=[]
+      m.push("#{grps2[i][4].length} weapons") unless grps2[i][4].nil? || grps2[i][4].length<=0
+      m.push("#{grps2[i][5].length} wyrmprints") unless grps2[i][5].nil? || grps2[i][5].length<=0
+      str=extend_message(str,"*#{grps2[i][0]}*, with #{"#{grps2[i][2].length-grps[i][2].length}#{"(+#{grps[i][2].length})" unless grps[i][2].length<=0} adventurers" unless grps2[i][2].nil?}#{' and ' unless grps2[i][2].nil? || grps2[i][3].nil?}#{"#{grps2[i][3].length-grps[i][3].length}#{"(+#{grps[i][3].length})" unless grps[i][3].length<=0} dragons" unless grps2[i][3].nil?}#{" (as well as #{list_lift(m,'and')})" unless m.length<=0}",event)
+    end
+    str=extend_message(str,"Parenthetical additions are not dynamic",event) if str.include?('(') || str.include?(')')
+    event.respond str
+    return nil
   elsif ['code','lines','line','sloc'].include?(f.downcase)
     event.channel.send_temporary_message('Calculating data, please wait...',3)
     b=[[],[],[],[],[]]
@@ -7109,7 +7292,9 @@ def snagstats(event,bot,f=nil,f2=nil)
   event << "There are #{longFormattedNumber(@facilities.map{|q| q[0]}.uniq.length)} [unique] facilities with #{@facilities.length} total levels between them."
   event << "There are #{longFormattedNumber(@mats.length)} materials."
   event << ''
+  grps=get_group_data(true)
   event << "**There are #{longFormattedNumber(glbl.length)} global and #{longFormattedNumber(srv_spec.length)} server-specific *aliases*.**"
+  event << "There are "
   event << ''
   event << "**I am #{longFormattedNumber(File.foreach("#{@location}devkit/BotanBot.rb").inject(0) {|c, line| c+1})} lines of *code* long.**"
   event << "Of those, #{longFormattedNumber(b.length)} are SLOC (non-empty)."
