@@ -3,160 +3,187 @@
   ["Addis", "Botan", "Chitose", "Hanabusa", "Ieyasu", "Mitsuhide", "Nobunaga", "Sazanka"], # adventurers
   ["Ebisu", "Daikokuten", "Marishiten", "Shishimai"],                                      # dragons
   ["Catspaw Rod","Evilsbane Kadomatsu","The Big Cheese","Triumphal Breamblade"],           # weapons
-  ["A Game of Cat and Boar", "A New Year's Battle", "Blossoms in a New Year's Sky", "Hanetsuki Rally", "Happy New Year", "Heralds of Hinomoto", "Luck of the Draw", "The Wyrmclan Duo"]]                                                                                      # wyrmprints
+  ["A Game of Cat and Boar", "A New Year's Battle", "Blossoms in a New Year's Sky", "Hanetsuki Rally", "Happy New Year", "Heralds of Hinomoto", "Luck of the Draw", "The Wyrmclan Duo"],                                                                                   # wyrmprints
+  false]
 ["Valentine's", 
   ["valentines","valentine's","valentine","vday","v-day"], 
   [], 
   [], 
   [], 
-  ["A Heartfelt Gift", "An Indelible Date", "Elegant Escort", "Honest Repose", "Take my Hand", "The Chocolatiers", "The Fires of Hate", "The Maid Crusade", "The Petal Queen", "The Rose Prince", "To My Beloved"]]
+  ["A Heartfelt Gift", "An Indelible Date", "Elegant Escort", "Honest Repose", "Take my Hand", "The Chocolatiers", "The Fires of Hate", "The Maid Crusade", "The Petal Queen", "The Rose Prince", "To My Beloved"],
+  true]
 ["Wedding", 
   ['brides','grooms','bride','groom','wedding',"bridal"], 
   [], 
+  ["Freyja"], 
   [], 
-  [], 
-  ["Halidom Grooms", "The Bridal Dragon"]]
+  ["Halidom Grooms", "The Bridal Dragon"],
+  true]
 ["Summer", 
   ["summer","swimsuit","beach"], 
   [], 
+  ["Siren","Siren(Popstar)"], 
   [], 
-  [], 
-  ["Beach Battle", "Blossoms on the Water's Edge", "Fun in the Sun", "Preacher's Vacation", "Seaside Memory", "Seaside Princess", "Such High Spirits", "Summer Paladyns", "Summertime, Feeling Feline", "Surfing Siblings", "The Bustling Hut"]]
+  ["Beach Battle", "Blossoms on the Water's Edge", "Fun in the Sun", "Preacher's Vacation", "Seaside Memory", "Seaside Princess", "Such High Spirits", "Summer Paladyns", "Summertime, Feeling Feline", "Surfing Siblings", "The Bustling Hut"],
+  true]
 ["Halloween", 
   ["halloween"], 
   [], 
   [], 
   ["Jack-o'-Lance","Vampire's Lantern"], 
-  ["Candy Couriers", "Masquerade Mission", "Of Tricks and Treats", "Plunder Pals", "Pumpkin Pail", "Silke Lends a Hand", "Witch's Kitchen"]]
+  ["Candy Couriers", "Masquerade Mission", "Of Tricks and Treats", "Plunder Pals", "Pumpkin Pail", "Silke Lends a Hand", "Witch's Kitchen"],
+  true]
 ["Dragonyule", 
   ["christmas","xmas","x-mas","holiday","winter","dragonyule","dy"], 
   [], 
   [], 
   ["Ringing Wand","Wishing Knife"], 
-  ["A Slice of Dragonyule", "A Wish Upon the Yuletree", "Glittering Dragonyule", "Roast Feast", "Saintly Delivery", "Spirit of the Season", "The Greatest Gift", "The Prince of Dragonyule", "Valentine's Ventures"]]
+  ["A Slice of Dragonyule", "A Wish Upon the Yuletree", "Glittering Dragonyule", "Roast Feast", "Saintly Delivery", "Spirit of the Season", "The Greatest Gift", "The Prince of Dragonyule", "Valentine's Ventures"],
+  true]
 ["Custom Combo", 
   ["custom","customcombo","combo"], 
   ["Bellina", "Catherine", "Gala Alex", "Gala Laxi", "Gala Leif", "Lily", "Mega Man", "Mitsuba", "Nadine", "Pipple", "Tiki(Young)", "Tobias", "Valerio"], 
   nil, 
   nil, 
-  nil]
+  nil,
+  false]
 ["Custom Force Strike", 
-  ["customforcestrike","customfs","changedfs"], 
-  ["Bellina", "Berserker(Hunter)", "Catherine", "Gala Laxi", "Grace", "Linnea", "Lin You", "Mega Man", "Melody", "Nadine", "Patia(Summer)", "Peony", "Sarisse(Hunter)", "Vanessa(Hunter)", "Xander", "Xuan Zang(Radiant)", "Zena", "Zhu Bajie"],
+  ["customforcestrike","customfs","changedfs", "uniquefs", "uniqueforcestrike"], 
+  ["Albert", "Bellina", "Berserker(Hunter)", "Catherine", "Gala Laxi", "Grace", "Linnea", "Lin You", "Mega Man", "Melody", "Nadine", "Patia(Summer)", "Peony", "Sarisse(Hunter)", "Vanessa(Hunter)", "Xander", "Xuan Zang(Radiant)", "Zena", "Zhu Bajie"],
   nil,
   nil,
-  nil]
+  nil,
+  false]
 ["Custom Shapeshift", 
   ["customshapeshift","forceddragon","forcedtransform", "customtransform"], 
   ["Lathna", "Gala Mym", "Mega Man", "Mym(Halloween)", "Tiki(Young)"], 
   nil, 
   nil, 
-  nil]
+  nil,
+  false]
 ["Hinomotoans", 
   ["hinomotoans","hinomotoan","hinomotoa"], 
   ["Addis", "Addis(Valentines)", "Aoi", "Botan", "Chitose", "Hanabusa", "Ieyasu", "Mitsuba", "Mitsuhide", "Musashi", "Nobunaga", "Sazanka", "Taro", "Yachiyo"], 
   ["Ebisu", "Daikokuten", "Konohana Sakuya", "Konohana Sakuya(Summer)", "Marishiten", "Shinobi", "Shishimai"], 
   nil, 
-  nil]
+  nil,
+  false]
 ["NorthGrasteans", 
   ["northgrasteans","notherngrasteans","northgrastea"], 
   ["Joachim", "Kirsty", "Noelle", "Valerio", "Victor"], 
   ["AC-011 Garland"], 
   nil, 
-  nil]
+  nil,
+  false]
 ["Taiwuse", 
   ["taiwuse","taiwunian","taiwunians","taiwu"], 
   ["Jiang Ziya", "Ku Hai", "Lin You", "Sha Wujing", "Su Fang", "Wu Kong", "Xiao Lei", "Xuan Zang", "Xuan Zang(Radiant)", "Zhu Bajie"], 
   ["Long Long", "Peng Lai", "Tie Shan Gongzhu", "Yu Long"], 
   nil, 
-  nil]
+  nil,
+  false]
 ["Arabia", 
   ["arabia","sandtown","sandland","desert", "agraba"], 
   ["Naveed", "Verica", "Verica(Summer)"], 
   nil, 
   nil, 
-  nil]
+  nil,
+  false]
 ["HarmoniaChoir", 
   ["harmoniachoir","choir","chorus"], 
   ["Elias", "Lucretia", "Pia", "Vixel"], 
   ["Maritimus", "Maritimus(Halloween)"], 
   nil, 
-  nil]
+  nil,
+  false]
 ["Smiths", 
   ["smiths","smith","smithsisters","forge","forgesisters","forgers"], 
   ["Lazry", "Malka", "Ramona", "Rena", "Renee"], 
   ["Arctos", "Gaibhne & Creidhne"], 
   nil, 
-  nil]
+  nil,
+  false]
 ["Chaos Family", 
   ["chaosfamily","chaosgroup","chaos"], 
   ["Akasha", "Curran", "Heinwald", "Lathna"], 
   ["Hastur", "Nyarlathotep"], 
   nil, 
-  nil]
+  nil,
+  false]
 ["Church", 
   ["church","ilianchurch"], 
   ["Alex", "Cibella", "Curran", "Elisanne", "Estelle", "Hildegarde", "Hope", "Hope(Templar)", "Julietta", "Tobias"], 
   nil, 
   nil, 
-  nil]
+  nil,
+  false]
 ["Ninjas / Assassins", 
   ["ninjas","assassins"], 
   ["Alex", "Aoi", "Hawk", "Jurota", "Vice"], 
   ["Shinobi"], 
   nil, 
-  nil]
+  nil,
+  false]
 ["Circus", 
   ["clowns","circus"], 
   ["Annelie", "Fritz"], 
   ["Liger"], 
   nil, 
-  nil]
+  nil,
+  false]
 ["Paladyns", 
   ["paladyns","paladins"], 
   ["Elisanne", "Julietta", "Tobias"], 
   nil, 
   nil, 
-  nil]
+  nil,
+  false]
 ["Old Alberia", 
   ["oldalberia","pastalberia"], 
   ["Audric", "Cassandra", "Delphi", "Lea", "Raemond"], 
   ["Chthonius"], 
   nil, 
-  nil]
+  nil,
+  false]
 ["New Alberia", 
   ["newalberia","thecooleralberia", "maingang", "goonsquad", "thegoonsquad", "maincharacters", "mainstory"], 
   ["Alex", "Cleo", "Elisanne", "Euden", "Luca", "Gala Mym", "Laxi", "Ranzal", "Zena"], 
   [], 
   nil, 
-  nil]
+  nil,
+  false]
 ["Greatwyrms", 
   ["greatwyrms","greatwyrm"], 
   ["Gala Mym"], 
   ["Brunhilda", "Chthonius", "Jupiter", "Mercury", "Midgardsormr", "Zodiark"], 
   nil, 
-  nil]
+  nil,
+  false]
 ["Researchers", 
   ["researchers","scholars","students"], 
   ["Althemia", "Kleimann", "Nicolas", "Sinoa", "Sophie"], 
   nil, 
   nil, 
-  nil]
+  nil,
+  false]
 ["Sparrows", 
   ["sparrows","whitesparrows","greysparrows"], 
   ["Gala Leif", "Patia"], 
   nil, 
   nil, 
-  nil]
+  nil,
+  false]
 ["Knights", 
   ["knights","tincans","armours","armors"], 
   ["Aeleen", "Alain", "Celliera", "Gala Leif", "Gala Ranzal", "Hope(Templar)", "Lea", "Malka", "Patia", "Raemond", "Valerio", "Zardin"], 
   nil, 
   nil, 
-  nil]
+  nil,
+  false]
 ["Dancers", 
   ["dancers","dancer"], 
   ["Felicia", "Hanabusa", "Luther", "Orsem"], 
   ["Siren", "Siren(Popstar)"], 
   nil, 
-  nil]
+  nil,
+  false]

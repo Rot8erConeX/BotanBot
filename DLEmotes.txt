@@ -53,6 +53,7 @@ No Worries\Elisanne
 Nope\Cleo
 Now\Cleo
 Offense Please\Cleo
+Ohmigosh Besties\Nadine
 Okay\Euden
 OMG\>Unknown<
 On Me!\Euden
@@ -69,6 +70,7 @@ Steel Stalwart\Mega Man
 Sup\Sarisse
 Sweet Dreams\Peony
 Take Defense\Euden
+This Ends Now\Linnea
 Three Cheers for Me\Mym 
 Time For a Break\Cleo
 Together\Marth
@@ -80,6 +82,7 @@ Victory Will Be Ours\Midgardsormr
 Wait\Slime
 Want to Join Up\Euden
 Well Aren't You Sweet\Malora
+Well Done Dearie\Cassandra
 Well Well\Addis
 We've Got a Case!\Curran
 What You Said!\Elisanne
