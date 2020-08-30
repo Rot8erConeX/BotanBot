@@ -747,8 +747,8 @@ Creeping Death\Staff\5h\Shadow\73, 211, 245\201, 576, 670\Night Devourer\1500, 0
 Dark Hunger\Staff\5h\Shadow\88, 253, 294\402, 1151, 1340\Despair Devourer\1500, 0\749\748\0\1500000, 7500000\High Shadowwyrm's Tail, 40;; High Shadowwyrm's Horn, 30;; Ebony Heart, 10;; Shadowwyrm's Greatsphere, 50;; Orichalcum, 3\\\\2
 Fiercetail\Sword\4v\None\16, 0, 55\64, 0, 214\\0, 0\750\0\4\8000, 16000\Iron Ore, 5;; Granite, 2;; Raging Fang, 2\Slayer's Strength +3%\\Manticore\1
 Searing Savagetail\Sword\4v\Flame\21, 0, 71\83, 0, 278\\0, 0\751\750\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Inferno Orb, 1\(Flame) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\2
-Flaming Savagetail\Sword\5v\Flame\27, 0, 92\108, 0, 362\\0, 0\752\751\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Water) Slayer's Strength +3%;;;; (Flame) Astral's Bane +60%\\Manticore\3
-Angry Aquatail\Sword\4v\Water\21, 0, 71\83, 0, 278\\0, 0\753\750\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Deluge Orb, 1\(Water) Slayer's Strength +4%;;;; (Water) Astral's Bane +60%\\Manticore\2
+Flaming Savagetail\Sword\5v\Flame\27, 0, 92\108, 0, 362\\0, 0\752\751\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Smoldering Tail, 2;; Inferno Orb, 3\(Flame) Slayer's Strength +4%;;;; (Flame) Astral's Bane +60%\\Manticore\3
+Angry Aquatail\Sword\4v\Water\21, 0, 71\83, 0, 278\\0, 0\753\750\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Deluge Orb, 1\(Water) Slayer's Strength +3%;;;; (Water) Astral's Bane +60%\\Manticore\2
 Raging Aquatail\Sword\5v\Water\27, 0, 92\108, 0, 362\\0, 0\754\753\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Raging Tail, 2;; Deluge Orb, 3\(Water) Slayer's Strength +4%;;;; (Water) Astral's Bane +60%\\Manticore\3
 Slicing Stormtail\Sword\4v\Wind\22, 0, 75\81, 0, 270\\0, 0\755\750\4\50000, 250000\Granite, 7;; Meteorite, 3;; Raging Fang, 5;; Maelstrom Orb, 1\(Wind) Slayer's Strength +3%;;;; (Wind) Astral's Bane +60%\\Manticore\2
 Slaughtering Stormtail\Sword\5v\Wind\29, 0, 97\105, 0, 351\\0, 0\756\755\5\300000, 1500000\Granite, 15;; Meteorite, 5;; Greedy Tail, 2;; Maelstrom Orb, 3\(Wind) Slayer's Strength +4%;;;; (Wind) Astral's Bane +60%\\Manticore\3
@@ -801,7 +801,7 @@ Whirlwind Staff\Staff\5v\Wind\34, 0, 115\95, 0, 317\\0, 0\802\801\5\300000, 1500
 Rancor Staff\Staff\4v\None\20, 0, 68\56, 0, 188\\0, 0\803\0\4\8000, 16000\Bat's Wing, 5;; Ancient Bird's Feather, 2;; Soul Vestiges, 2\Therion's Bane +15%\\Eolian\1
 Air Fouler\Staff\4v\Water\26, 0, 89\73, 0, 244\\0, 0\804\803\4\50000, 250000\Ancient Bird's Feather, 7;; Bewitching Wings, 3;; Soul Vestiges, 5;; Deluge Orb, 1\(Water) Volcanic Chimera's Bane +20%;;;; (Water) Frenzy Res\\Eolian\2
 Breath Snuffer\Staff\5v\Water\34, 0, 115\95, 0, 317\\0, 0\805\804\5\300000, 1500000\Ancient Bird's Feather, 15;; Bewitching Wings, 5;; Eolian Soul, 2;; Deluge Orb, 3\(Water) Volcanic Chimera's Bane +30%;;;; (Water) Frenzy Res\\Eolian\3
-Mega Axe\Axe\5c\None\30, 94, 101\108, 337, 362\Mega Buster(Axe)\1500, 0\806\0\0\, 0\\\MM\\1
+Mega Axe\Axe\5c\None\31, 97, 104\114, 354, 380\Mega Buster(Axe)\1500, 0\806\0\0\, 0\\\MM\\1
 Mega Blade\Blade\5c\None\26, 82, 88\115, 357, 384\Mega Buster(Blade)\1500, 0\807\0\0\, 0\\\MM\\1
 Mega Bow\Bow\5c\None\29, 92, 98\104, 323, 347\Mega Buster(Bow)\1500, 0\808\0\0\, 0\\\MM\\1
 Mega Dagger\Dagger\5c\None\30, 95, 102\106, 330, 355\Mega Buster(Dagger)\1500, 0\809\0\0\, 0\\\MM\\1
@@ -991,3 +991,11 @@ Qinglong Yanyuedo 2\Lance\6a\Shadow\79, 173, 266\519, 1122, 1730\Qimen Dunjia\20
 Longshe Gong 2\Bow\6a\Shadow\76, 166, 255\488, 1056, 1629\Qimen Dunjia\2000, 0\993\881\0\3000000, -\Almighty One's Mask Fragment, 80;; Uprooting One's Mask Fragment, 50;; Rebellious One's Arrogance, 35;; Orichalcum, 5\(Shadow) Bai Zhan Qi Lue;;;; (Shadow) Tai Yi Shen Shu\\KaiYan\2
 Jiu Ci 2\Wand\6a\Shadow\73, 159, 245\524, 1133, 1747\Qimen Dunjia\2000, 0\994\882\0\3000000, -\Almighty One's Mask Fragment, 80;; Uprooting One's Mask Fragment, 50;; Rebellious One's Arrogance, 35;; Orichalcum, 5\(Shadow) Bai Zhan Qi Lue;;;; (Shadow) Tai Yi Shen Shu\\KaiYan\2
 Goosefoot Staff 2 \Staff\6a\Shadow\86, 186, 287\483, 1045, 1612\Qimen Dunjia\2000, 0\995\883\0\3000000, -\Almighty One's Mask Fragment, 80;; Uprooting One's Mask Fragment, 50;; Rebellious One's Arrogance, 35;; Orichalcum, 5\(Shadow) Bai Zhan Qi Lue;;;; (Shadow) Tai Yi Shen Shu\\KaiYan\2
+Caladbolg\Sword\6a\Light\71, 154, 237\463, 1001, 1544\Mag Mell (Sword)\2000, 0\996\0\0\2000000, -\Remaining One's Mask Fragment, 40;; Vengeful One's Mask Fragment, 30;; Twinkling Sand, 1\\\Tartarus\1
+Fragarach\Blade\6a\Light\62, 136, 209\490, 1061, 1636\Mag Mell (Blade)\2000, 0\997\0\0\2000000, -\Remaining One's Mask Fragment, 40;; Vengeful One's Mask Fragment, 30;; Twinkling Sand, 1\\\Tartarus\1
+Claiomh Solais\Dagger\6a\Light\71, 155, 239\453, 981, 1513\Mag Mell (Dagger)\2000, 0\998\0\0\2000000, -\Remaining One's Mask Fragment, 40;; Vengeful One's Mask Fragment, 30;; Twinkling Sand, 1\\\Tartarus\1
+Rog Mol\Axe\6a\Light\73, 159, 244\486, 1051, 1621\Mag Mell (Axe)\2000, 0\999\0\0\2000000, -\Remaining One's Mask Fragment, 40;; Vengeful One's Mask Fragment, 30;; Twinkling Sand, 1\\\Tartarus\1
+Areadbhar\Lance\6a\Light\72, 157, 242\472, 1021, 1575\Mag Mell (Lance)\2000, 0\1000\0\0\2000000, -\Remaining One's Mask Fragment, 40;; Vengeful One's Mask Fragment, 30;; Twinkling Sand, 1\\\Tartarus\1
+Tathlum\Bow\6a\Light\69, 151, 232\444, 961, 1482\Mag Mell (Bow)\2000, 0\1001\0\0\2000000, -\Remaining One's Mask Fragment, 40;; Vengeful One's Mask Fragment, 30;; Twinkling Sand, 1\\\Tartarus\1
+Brionac\Wand\6a\Light\66, 145, 223\477, 1031, 1590\Mag Mell (Wand)\2000, 0\1002\0\0\2000000, -\Remaining One's Mask Fragment, 40;; Vengeful One's Mask Fragment, 30;; Twinkling Sand, 1\\\Tartarus\1
+Del Frith\Staff\6a\Light\78, 170, 261\440, 951, 1467\Mag Mell (Staff)\2000, 0\1003\0\0\2000000, -\Remaining One's Mask Fragment, 40;; Vengeful One's Mask Fragment, 30;; Twinkling Sand, 1\\\Tartarus\1

@@ -8,6 +8,7 @@ Chelle\1\y\\Saori Onishi
 Chief Researcher\1\y\\
 Christmas Slime\3\y\\
 Cloud\5\y\\
+Doctor\1\y\\
 Dove\1\y\\
 Elysium\1\y\\
 Emile\1\y\\
@@ -38,7 +39,6 @@ Saoratorium Gal\4\y\\
 Sarisse\1\n\\Ayaka Asai
 Silver Slime\1\y\\
 Snapper\5\y\\
-The Doctor\1\y\\
 Thorr\5\y\\
 Valentines Slime\1\y\\
 Valyx\1\y\\

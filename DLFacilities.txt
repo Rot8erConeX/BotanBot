@@ -854,6 +854,21 @@ Light Dracolith\27\-\Dragon, Dracolith\2x2\1\0\Lightwyrm's Greatsphere, 86;; Lig
 Light Dracolith\28\-\Dragon, Dracolith\2x2\1\0\Lightwyrm's Greatsphere, 122;; Lightwymr's Glowscale, 60;; Talonstone, 124\
 Light Dracolith\29\-\Dragon, Dracolith\2x2\1\0\Lightwyrm's Greatsphere, 174;; Lightwymr's Glowscale, 66;; Talonstone, 170\
 Light Dracolith\30\-\Dragon, Dracolith\2x2\1\0\Lightwyrm's Greatsphere, 250;; Lightwymr's Glowscale, 72;; Talonstone, 233\
+Light Tree\1\A mystical tree filled with light mana and granted new power upon defeating Tartarus. Use it to boost the stats of *light-attuned* adventurers.\Adventurer, Altar\3x3\1\0\0\Water, Tree
+Light Tree\2\-\Adventurer, Altar\3x3\1\10000\Remaining Ones' Mask Fragment, 10\
+Light Tree\3\-\Adventurer, Altar\3x3\1\20000\Remaining Ones' Mask Fragment, 10\
+Light Tree\4\-\Adventurer, Altar\3x3\1\30000\Remaining Ones' Mask Fragment, 20\
+Light Tree\5\-\Adventurer, Altar\3x3\1\40000\Remaining Ones' Mask Fragment, 20\
+Light Tree\6\-\Adventurer, Altar\3x3\1\50000\Remaining Ones' Mask Fragment, 30\
+Light Tree\7\-\Adventurer, Altar\3x3\1\60000\Remaining Ones' Mask Fragment, 30\
+Light Tree\8\-\Adventurer, Altar\3x3\1\70000\Remaining Ones' Mask Fragment, 30\
+Light Tree\9\-\Adventurer, Altar\3x3\1\80000\Remaining Ones' Mask Fragment, 30\
+Light Tree\10\-\Adventurer, Altar\3x3\1\90000\Remaining Ones' Mask Fragment, 30\
+Light Tree\11\-\Adventurer, Altar\3x3\1\100000\Remaining Ones' Mask Fragment, 35;; Vengeful One's Mask Fragment, 5\
+Light Tree\12\-\Adventurer, Altar\3x3\1\110000\Remaining Ones' Mask Fragment, 35;; Vengeful One's Mask Fragment, 5\
+Light Tree\13\-\Adventurer, Altar\3x3\1\120000\Remaining Ones' Mask Fragment, 35;; Vengeful One's Mask Fragment, 5\
+Light Tree\14\-\Adventurer, Altar\3x3\1\130000\Remaining Ones' Mask Fragment, 35;; Vengeful One's Mask Fragment, 5\
+Light Tree\15\-\Adventurer, Altar\3x3\1\140000\Remaining Ones' Mask Fragment, 35;; Vengeful One's Mask Fragment, 5\
 Magma Slime Statue\1\A statue of a magma slime granted to those who are victorious in void battles. The burning flame mana grants vitality. Use it to boost the stats of flame-attuned adventurers.\Adventurer, Void Altar\2x2\1\0\0\Flame, Slime
 Magma Slime Statue\2\-\Adventurer, Void Altar\2x2\1\5000\Bat's Wing, 10;; Solid Fungus, 2\
 Magma Slime Statue\3\-\Adventurer, Void Altar\2x2\1\10000\Bat's Wing, 15\
@@ -934,29 +949,34 @@ Seabed Stage\4\-\Adventurer, Event Dual Dojo\3x3\1\300\Glam Shells, 7\
 Seabed Stage\5\-\Adventurer, Event Dual Dojo\3x3\1\400\Glam Shells, 10\
 Seabed Stage\6\-\Adventurer, Event Dual Dojo\3x3\1\500\Glam Shells, 12\
 Seabed Stage\7\-\Adventurer, Event Dual Dojo\3x3\1\600\Glam Shells, 15\
-Seabed Stage\8\-\Adventurer, Event Dual Dojo\3x3\1\700\Glam Shells, 18\
-Seabed Stage\9\-\Adventurer, Event Dual Dojo\3x3\1\800\Glam Shells, 21\
-Seabed Stage\10\-\Adventurer, Event Dual Dojo\3x3\1\1000\Glam Shells, 25\
-Seabed Stage\11\-\Adventurer, Event Dual Dojo\3x3\1\1200\Glam Shells, 30\
-Seabed Stage\12\-\Adventurer, Event Dual Dojo\3x3\1\1400\Glam Shells, 50\
-Seabed Stage\13\-\Adventurer, Event Dual Dojo\3x3\1\1600\Glam Shells, 70\
-Seabed Stage\14\-\Adventurer, Event Dual Dojo\3x3\1\1800\Glam Shells, 90\
-Seabed Stage\15\-\Adventurer, Event Dual Dojo\3x3\1\2000\Glam Shells, 120\
-Seabed Stage\16\-\Adventurer, Event Dual Dojo\3x3\1\2200\Glam Shells, 150\
-Seabed Stage\17\-\Adventurer, Event Dual Dojo\3x3\1\2400\Glam Shells, 180\
-Seabed Stage\18\-\Adventurer, Event Dual Dojo\3x3\1\2600\Glam Shells, 210\
-Seabed Stage\19\-\Adventurer, Event Dual Dojo\3x3\1\2800\Glam Shells, 250\
-Seabed Stage\20\-\Adventurer, Event Dual Dojo\3x3\1\3000\Glam Shells, 300\
-Seabed Stage\21\-\Adventurer, Event Dual Dojo\3x3\1\3200\Glam Shells, 350\
-Seabed Stage\22\-\Adventurer, Event Dual Dojo\3x3\1\3400\Glam Shells, 400\
-Seabed Stage\23\-\Adventurer, Event Dual Dojo\3x3\1\3600\Glam Shells, 450\
-Seabed Stage\24\-\Adventurer, Event Dual Dojo\3x3\1\3800\Glam Shells, 500\
-Seabed Stage\25\-\Adventurer, Event Dual Dojo\3x3\1\4000\Glam Shells, 550\
-Seabed Stage\26\-\Adventurer, Event Dual Dojo\3x3\1\4200\Glam Shells, 600\
-Seabed Stage\27\-\Adventurer, Event Dual Dojo\3x3\1\4400\Glam Shells, 700\
-Seabed Stage\28\-\Adventurer, Event Dual Dojo\3x3\1\4600\Glam Shells, 800\
-Seabed Stage\29\-\Adventurer, Event Dual Dojo\3x3\1\4800\Glam Shells, 900\
-Seabed Stage\30\-\Adventurer, Event Dual Dojo\3x3\1\5000\Glam Shells, 1000\
+Seabed Stage\8\-\Adventurer, Event Dual Dojo\3x3\1\800\Glam Shells, 18\
+Seabed Stage\9\-\Adventurer, Event Dual Dojo\3x3\1\1000\Glam Shells, 21\
+Seabed Stage\10\-\Adventurer, Event Dual Dojo\3x3\1\1200\Glam Shells, 25\
+Seabed Stage\11\-\Adventurer, Event Dual Dojo\3x3\1\1400\Glam Shells, 30\
+Seabed Stage\12\-\Adventurer, Event Dual Dojo\3x3\1\1600\Glam Shells, 50\
+Seabed Stage\13\-\Adventurer, Event Dual Dojo\3x3\1\1800\Glam Shells, 70\
+Seabed Stage\14\-\Adventurer, Event Dual Dojo\3x3\1\2000\Glam Shells, 90\
+Seabed Stage\15\-\Adventurer, Event Dual Dojo\3x3\1\2200\Glam Shells, 120\
+Seabed Stage\16\-\Adventurer, Event Dual Dojo\3x3\1\2400\Glam Shells, 150\
+Seabed Stage\17\-\Adventurer, Event Dual Dojo\3x3\1\2700\Glam Shells, 180\
+Seabed Stage\18\-\Adventurer, Event Dual Dojo\3x3\1\3000\Glam Shells, 210\
+Seabed Stage\19\-\Adventurer, Event Dual Dojo\3x3\1\3300\Glam Shells, 250\
+Seabed Stage\20\-\Adventurer, Event Dual Dojo\3x3\1\3600\Glam Shells, 300\
+Seabed Stage\21\-\Adventurer, Event Dual Dojo\3x3\1\3900\Glam Shells, 350\
+Seabed Stage\22\-\Adventurer, Event Dual Dojo\3x3\1\4200\Glam Shells, 400\
+Seabed Stage\23\-\Adventurer, Event Dual Dojo\3x3\1\4500\Glam Shells, 450\
+Seabed Stage\24\-\Adventurer, Event Dual Dojo\3x3\1\5000\Glam Shells, 500\
+Seabed Stage\25\-\Adventurer, Event Dual Dojo\3x3\1\5500\Glam Shells, 550\
+Seabed Stage\26\-\Adventurer, Event Dual Dojo\3x3\1\6000\Glam Shells, 600\
+Seabed Stage\27\-\Adventurer, Event Dual Dojo\3x3\1\6500\Glam Shells, 700\
+Seabed Stage\28\-\Adventurer, Event Dual Dojo\3x3\1\7000\Glam Shells, 800\
+Seabed Stage\29\-\Adventurer, Event Dual Dojo\3x3\1\7500\Glam Shells, 900\
+Seabed Stage\30\-\Adventurer, Event Dual Dojo\3x3\1\8000\Glam Shells, 1000\
+Seabed Stage\31\-\Adventurer, Event Dual Dojo\3x3\1\8500\Glam Shells, 1100\
+Seabed Stage\32\-\Adventurer, Event Dual Dojo\3x3\1\9000\Glam Shells, 1200\
+Seabed Stage\33\-\Adventurer, Event Dual Dojo\3x3\1\9500\Glam Shells, 1300\
+Seabed Stage\34\-\Adventurer, Event Dual Dojo\3x3\1\10000\Glam Shells, 1400\
+Seabed Stage\35\-\Adventurer, Event Dual Dojo\3x3\1\10500\Glam Shells, 1500\
 Shadow Altar\1\An altar to honor shadow. The mana housed within reveals hidden strengths, boosting the stats of shadow-attuned adventurers.\Adventurer, Altar\3x3\2\200\0\Shadow
 Shadow Altar\2\-\Adventurer, Altar\3x3\2\400\0\
 Shadow Altar\3\-\Adventurer, Altar\3x3\2\600\0\
