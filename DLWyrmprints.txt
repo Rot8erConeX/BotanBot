@@ -138,7 +138,7 @@ Nightstalker\5\Attack, Trident\27, 136, 183\8, 43, 57\Force Strike +30%;; Force 
 Odd Sparrows\4\Support, Hatchet\21, 96, 141\7, 35, 51\Healing Doublebuff I;; Healing Doublebuff II;; Healing Doublebuff III\2000, 1000\benitama\Leif, Patia;; Leif, Patia\<:Wyrmprint:560542319636381725> Wyrmprint Shop\
 Of Tricks and Treats\5s\Support, None\27, 137, 184\8, 42, 56\Shadow Res +5%;; Shadow Res +8%;; Shadow Res +10%;;;; Tricker Treats +50%;; Tricker Treats +100%;; Tricker Treats +100%\5000, 3000\Naoki Saito\Luca, Ranzal;; Luca, Ranzal\<:Element_Light:532106088129101834> Halloween Fantasia Banner\
 Old Harp\2\Healing, None\5, 26, 36\1, 9, 12\Recovery Potency +2%;; Recovery Potency +3%\50, 0\mstk\\\
-#REF!
+Once in a Lifetime\5\Attack, None\26, 132, 177\9, 48, 64\(Water) Skill Haste +4%;; (Water) Skill Haste +5%;; (Water) Skill Haste +6%;;;; Festival Spirit +100%;; Festival Spirit +125%;; Festival Spirit +150%\5000, 3000\usugumo nezu\Natalie, Yaten;; Natalie, Yaten\<:Wyrmprint:560542319636381725> Wyrmprint Shop\
 One With the Shadows\4\Attack, None\21, 96, 141\7, 35, 51\Critical Rate +4%;; Critical Rate +5%;; Critical Rate +6%\2000, 1000\ell\Jurota;; Jurota\Story (Normal)\
 Paladyn Defender\4w\Defense, None\18, 83, 122\4, 22, 33\Burn Res +15%;; Burn Res +20%;; Burn Res +25%;;;; Phraeganoth's Bane +20%;; Phraeganoth's Bane +25%\2000, 100\Usi\Cibella, Elisanne;; Cibella, Elisanne\<:Element_Flame:532106087952810005> Loyalty's Requiem Event\
 Partners in Truth\5\Support, None\29, 145, 195\6, 34, 46\Bog Res +50%;; Bog Res +55%;; Bog Res +60%\5000, 3000\u-u-zan\Curran, Heinwald;; Curran, Heinwald\<:Wyrmprint:560542319636381725> Wyrmprint Shop\
