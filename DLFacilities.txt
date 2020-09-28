@@ -411,6 +411,76 @@ Dragontree\26\-\Production\3x3\1\160000\Talonstone, 25\
 Dragontree\27\-\Production\3x3\1\180000\Talonstone, 26\
 Eggy Luca\-\A colorful painted egg. Its defiant eyes resemble the ever-mischievous Luca, planning his next prank.;; Obtained from <:Element_Water:532106088221376522> The Hunt for Harmony Event\Decorative\1x1\4\\0\
 Eggy Sarisse\-\A colorful painted egg. The face has the same charming, energetic eyes as the real Sarisse.;; Obtained from <:Element_Water:532106088221376522> The Hunt for Harmony Event\Decorative\1x1\4\\0\
+Event Altar\1\-\Adventurer, Event Altar\3x3\1\0\0\
+Event Altar\2\-\Adventurer, Event Altar\3x3\1\100\Bronze (Tier 1) Material, 3\
+Event Altar\3\-\Adventurer, Event Altar\3x3\1\200\Bronze (Tier 1) Material, 5\
+Event Altar\4\-\Adventurer, Event Altar\3x3\1\300\Bronze (Tier 1) Material, 7\
+Event Altar\5\-\Adventurer, Event Altar\3x3\1\400\Bronze (Tier 1) Material, 10\
+Event Altar\6\-\Adventurer, Event Altar\3x3\1\500\Bronze (Tier 1) Material, 12\
+Event Altar\7\-\Adventurer, Event Altar\3x3\1\600\Bronze (Tier 1) Material, 15\
+Event Altar\8\-\Adventurer, Event Altar\3x3\1\700\Bronze (Tier 1) Material, 18\
+Event Altar\9\-\Adventurer, Event Altar\3x3\1\800\Bronze (Tier 1) Material, 21\
+Event Altar\10\-\Adventurer, Event Altar\3x3\1\1000\Bronze (Tier 1) Material, 25\
+Event Altar\11\-\Adventurer, Event Altar\3x3\1\1200\Bronze (Tier 1) Material, 30\
+Event Altar\12\-\Adventurer, Event Altar\3x3\1\1400\Bronze (Tier 1) Material, 50\
+Event Altar\13\-\Adventurer, Event Altar\3x3\1\1600\Bronze (Tier 1) Material, 70\
+Event Altar\14\-\Adventurer, Event Altar\3x3\1\1800\Bronze (Tier 1) Material, 90\
+Event Altar\15\-\Adventurer, Event Altar\3x3\1\2000\Bronze (Tier 1) Material, 120\
+Event Altar\16\-\Adventurer, Event Altar\3x3\1\2200\Bronze (Tier 1) Material, 150\
+Event Altar\17\-\Adventurer, Event Altar\3x3\1\2400\Bronze (Tier 1) Material, 180\
+Event Altar\18\-\Adventurer, Event Altar\3x3\1\2600\Bronze (Tier 1) Material, 210\
+Event Altar\19\-\Adventurer, Event Altar\3x3\1\2800\Bronze (Tier 1) Material, 250\
+Event Altar\20\-\Adventurer, Event Altar\3x3\1\3000\Bronze (Tier 1) Material, 300\
+Event Altar\21\-\Adventurer, Event Altar\3x3\1\3200\Bronze (Tier 1) Material, 350\
+Event Altar\22\-\Adventurer, Event Altar\3x3\1\3400\Bronze (Tier 1) Material, 400\
+Event Altar\23\-\Adventurer, Event Altar\3x3\1\3600\Bronze (Tier 1) Material, 450\
+Event Altar\24\-\Adventurer, Event Altar\3x3\1\3800\Bronze (Tier 1) Material, 500\
+Event Altar\25\-\Adventurer, Event Altar\3x3\1\4000\Bronze (Tier 1) Material, 550\
+Event Altar\26\-\Adventurer, Event Altar\3x3\1\4200\Bronze (Tier 1) Material, 600\
+Event Altar\27\-\Adventurer, Event Altar\3x3\1\4400\Bronze (Tier 1) Material, 700\
+Event Altar\28\-\Adventurer, Event Altar\3x3\1\4600\Bronze (Tier 1) Material, 800\
+Event Altar\29\-\Adventurer, Event Altar\3x3\1\4800\Bronze (Tier 1) Material, 900\
+Event Altar\30\-\Adventurer, Event Altar\3x3\1\5000\Bronze (Tier 1) Material, 1000\
+Event Altar\31\-\Adventurer, Event Altar\3x3\1\5200\Bronze (Tier 1) Material, 1100\
+Event Altar\32\-\Adventurer, Event Altar\3x3\1\5400\Bronze (Tier 1) Material, 1200\
+Event Altar\33\-\Adventurer, Event Altar\3x3\1\5600\Bronze (Tier 1) Material, 1300\
+Event Altar\34\-\Adventurer, Event Altar\3x3\1\5800\Bronze (Tier 1) Material, 1400\
+Event Altar\35\-\Adventurer, Event Altar\3x3\1\6000\Bronze (Tier 1) Material, 1500\
+Event Dual Dojo\1\Use it to boost the stats of `x` and `x` wielding adventurers.\Adventurer, Event Dual Dojo\3x3\1\0\0\
+Event Dual Dojo\2\-\Adventurer, Event Dual Dojo\3x3\1\100\Bronze (Tier 1) Materials, 3\
+Event Dual Dojo\3\-\Adventurer, Event Dual Dojo\3x3\1\200\Bronze (Tier 1) Materials, 5\
+Event Dual Dojo\4\-\Adventurer, Event Dual Dojo\3x3\1\300\Bronze (Tier 1) Materials, 7\
+Event Dual Dojo\5\-\Adventurer, Event Dual Dojo\3x3\1\400\Bronze (Tier 1) Materials, 10\
+Event Dual Dojo\6\-\Adventurer, Event Dual Dojo\3x3\1\500\Bronze (Tier 1) Materials, 12\
+Event Dual Dojo\7\-\Adventurer, Event Dual Dojo\3x3\1\600\Bronze (Tier 1) Materials, 15\
+Event Dual Dojo\8\-\Adventurer, Event Dual Dojo\3x3\1\800\Bronze (Tier 1) Materials, 18\
+Event Dual Dojo\9\-\Adventurer, Event Dual Dojo\3x3\1\1000\Bronze (Tier 1) Materials, 21\
+Event Dual Dojo\10\-\Adventurer, Event Dual Dojo\3x3\1\1200\Bronze (Tier 1) Materials, 25\
+Event Dual Dojo\11\-\Adventurer, Event Dual Dojo\3x3\1\1400\Bronze (Tier 1) Materials, 30\
+Event Dual Dojo\12\-\Adventurer, Event Dual Dojo\3x3\1\1600\Bronze (Tier 1) Materials, 50\
+Event Dual Dojo\13\-\Adventurer, Event Dual Dojo\3x3\1\1800\Bronze (Tier 1) Materials, 70\
+Event Dual Dojo\14\-\Adventurer, Event Dual Dojo\3x3\1\2000\Bronze (Tier 1) Materials, 90\
+Event Dual Dojo\15\-\Adventurer, Event Dual Dojo\3x3\1\2200\Bronze (Tier 1) Materials, 120\
+Event Dual Dojo\16\-\Adventurer, Event Dual Dojo\3x3\1\2400\Bronze (Tier 1) Materials, 150\
+Event Dual Dojo\17\-\Adventurer, Event Dual Dojo\3x3\1\2700\Bronze (Tier 1) Materials, 180\
+Event Dual Dojo\18\-\Adventurer, Event Dual Dojo\3x3\1\3000\Bronze (Tier 1) Materials, 210\
+Event Dual Dojo\19\-\Adventurer, Event Dual Dojo\3x3\1\3300\Bronze (Tier 1) Materials, 250\
+Event Dual Dojo\20\-\Adventurer, Event Dual Dojo\3x3\1\3600\Bronze (Tier 1) Materials, 300\
+Event Dual Dojo\21\-\Adventurer, Event Dual Dojo\3x3\1\3900\Bronze (Tier 1) Materials, 350\
+Event Dual Dojo\22\-\Adventurer, Event Dual Dojo\3x3\1\4200\Bronze (Tier 1) Materials, 400\
+Event Dual Dojo\23\-\Adventurer, Event Dual Dojo\3x3\1\4500\Bronze (Tier 1) Materials, 450\
+Event Dual Dojo\24\-\Adventurer, Event Dual Dojo\3x3\1\5000\Bronze (Tier 1) Materials, 500\
+Event Dual Dojo\25\-\Adventurer, Event Dual Dojo\3x3\1\5500\Bronze (Tier 1) Materials, 550\
+Event Dual Dojo\26\-\Adventurer, Event Dual Dojo\3x3\1\6000\Bronze (Tier 1) Materials, 600\
+Event Dual Dojo\27\-\Adventurer, Event Dual Dojo\3x3\1\6500\Bronze (Tier 1) Materials, 700\
+Event Dual Dojo\28\-\Adventurer, Event Dual Dojo\3x3\1\7000\Bronze (Tier 1) Materials, 800\
+Event Dual Dojo\29\-\Adventurer, Event Dual Dojo\3x3\1\7500\Bronze (Tier 1) Materials, 900\
+Event Dual Dojo\30\-\Adventurer, Event Dual Dojo\3x3\1\8000\Bronze (Tier 1) Materials, 1000\
+Event Dual Dojo\31\-\Adventurer, Event Dual Dojo\3x3\1\8500\Bronze (Tier 1) Materials, 1100\
+Event Dual Dojo\32\-\Adventurer, Event Dual Dojo\3x3\1\9000\Bronze (Tier 1) Materials, 1200\
+Event Dual Dojo\33\-\Adventurer, Event Dual Dojo\3x3\1\9500\Bronze (Tier 1) Materials, 1300\
+Event Dual Dojo\34\-\Adventurer, Event Dual Dojo\3x3\1\10000\Bronze (Tier 1) Materials, 1400\
+Event Dual Dojo\35\-\Adventurer, Event Dual Dojo\3x3\1\10500\Bronze (Tier 1) Materials, 1500\
 Fafnir Statue\1\Proof of overcoming a Highwyrm's trial. A elementally-imbued statue that boosts the HP and strength of dragons.\Dragon, Fafnir\3x3\1\0\0\
 Fafnir Statue\2\\Dragon, Fafnir\3x3\1\10000\Highwyrm's Greatsphere, 3\
 Fafnir Statue\3\\Dragon, Fafnir\3x3\1\20000\Highwyrm's Greatsphere, 3\
@@ -884,6 +954,41 @@ Magma Slime Statue\12\-\Adventurer, Void Altar\2x2\1\70000\Bat's Wing, 60;; Anci
 Magma Slime Statue\13\-\Adventurer, Void Altar\2x2\1\80000\Bat's Wing, 65;; Ancient Bird's Feather, 40;; Bewitching Wings, 15;; Great Feather, 5\
 Magma Slime Statue\14\-\Adventurer, Void Altar\2x2\1\90000\Bat's Wing, 70;; Ancient Bird's Feather, 45;; Bewitching Wings, 20\
 Magma Slime Statue\15\-\Adventurer, Void Altar\2x2\1\100000\Bat's Wing, 75;; Ancient Bird's Feather, 50;; Bewitching Wings, 30;; Great Feather, 8\
+Manacaster Dojo\1\A training area built to hone one's skills with a manacaster. Use it to boosts the stats of manacaster-wielding adventures.\Adventurer, Dojo\3x3\2\0\0\Manacaster
+Manacaster Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10\
+Manacaster Dojo\3\-\Adventurer, Dojo\3x3\2\3500\Dyrenell Aes, 10\
+Manacaster Dojo\4\-\Adventurer, Dojo\3x3\2\4000\Dyrenell Aes, 10\
+Manacaster Dojo\5\-\Adventurer, Dojo\3x3\2\4500\Dyrenell Aes, 10\
+Manacaster Dojo\6\-\Adventurer, Dojo\3x3\2\5000\Dyrenell Aes, 20\
+Manacaster Dojo\7\-\Adventurer, Dojo\3x3\2\6000\Dyrenell Aes, 20\
+Manacaster Dojo\8\-\Adventurer, Dojo\3x3\2\7000\Dyrenell Aes, 20\
+Manacaster Dojo\9\-\Adventurer, Dojo\3x3\2\8000\Dyrenell Aes, 20\
+Manacaster Dojo\10\-\Adventurer, Dojo\3x3\2\9000\Dyrenell Aes, 20\
+Manacaster Dojo\11\-\Adventurer, Dojo\3x3\2\10000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Violet Insignia, 10\
+Manacaster Dojo\12\-\Adventurer, Dojo\3x3\2\12000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Violet Insignia, 10\
+Manacaster Dojo\13\-\Adventurer, Dojo\3x3\2\14000\Dyrenell Aes, 30;; Dyrenell Argenteus, 5;; Violet Insignia, 10\
+Manacaster Dojo\14\-\Adventurer, Dojo\3x3\2\16000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Violet Insignia, 20\
+Manacaster Dojo\15\-\Adventurer, Dojo\3x3\2\18000\Dyrenell Aes, 30;; Dyrenell Argenteus, 10;; Violet Insignia, 20\
+Manacaster Dojo\16\-\Adventurer, Dojo\3x3\2\20000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Violet Insignia, 40\
+Manacaster Dojo\17\-\Adventurer, Dojo\3x3\2\25000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Violet Insignia, 40\
+Manacaster Dojo\18\-\Adventurer, Dojo\3x3\2\30000\Dyrenell Aes, 50;; Dyrenell Argenteus, 20;; Violet Insignia, 40\
+Manacaster Dojo\19\-\Adventurer, Dojo\3x3\2\35000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Violet Insignia, 60\
+Manacaster Dojo\20\-\Adventurer, Dojo\3x3\2\40000\Dyrenell Aes, 70;; Dyrenell Argenteus, 30;; Violet Insignia, 60\
+Manacaster Dojo\21\-\Adventurer, Dojo\3x3\2\50000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Violet Insignia, 80;; Dyrenell Aureus, 20\
+Manacaster Dojo\22\-\Adventurer, Dojo\3x3\2\60000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Violet Insignia, 80;; Dyrenell Aureus, 30\
+Manacaster Dojo\23\-\Adventurer, Dojo\3x3\2\70000\Dyrenell Aes, 100;; Dyrenell Argenteus, 40;; Violet Insignia, 80;; Dyrenell Aureus, 40\
+Manacaster Dojo\24\-\Adventurer, Dojo\3x3\2\80000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Violet Insignia, 100;; Dyrenell Aureus, 50\
+Manacaster Dojo\25\-\Adventurer, Dojo\3x3\2\90000\Dyrenell Aes, 150;; Dyrenell Argenteus, 50;; Violet Insignia, 100;; Dyrenell Aureus, 60\
+Manacaster Dojo\26\-\Adventurer, Dojo\3x3\2\100000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Violet Insignia, 120;; Dyrenell Aureus, 70;; Royal Violet Insignia, 20\
+Manacaster Dojo\27\-\Adventurer, Dojo\3x3\2\110000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Violet Insignia, 120;; Dyrenell Aureus, 80;; Royal Violet Insignia, 30\
+Manacaster Dojo\28\-\Adventurer, Dojo\3x3\2\120000\Dyrenell Aes, 200;; Dyrenell Argenteus, 60;; Violet Insignia, 120;; Dyrenell Aureus, 90;; Royal Violet Insignia, 40\
+Manacaster Dojo\29\-\Adventurer, Dojo\3x3\2\130000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Violet Insignia, 160;; Dyrenell Aureus, 100;; Royal Violet Insignia, 50\
+Manacaster Dojo\30\-\Adventurer, Dojo\3x3\2\140000\Dyrenell Aes, 300;; Dyrenell Argenteus, 80;; Violet Insignia, 160;; Dyrenell Aureus, 110;; Royal Violet Insignia, 60\
+Manacaster Dojo\31\-\Adventurer, Dojo\3x3\2\160000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Violet Insignia, 200;; Dyrenell Aureus, 120;; Royal Violet Insignia, 80\
+Manacaster Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Violet Insignia, 200;; Dyrenell Aureus, 130;; Royal Violet Insignia, 80\
+Manacaster Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Violet Insignia, 200;; Dyrenell Aureus, 140;; Royal Violet Insignia, 80\
+Manacaster Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Violet Insignia, 240;; Dyrenell Aureus, 150;; Royal Violet Insignia, 100\
+Manacaster Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Violet Insignia, 240;; Dyrenell Aureus, 160;; Royal Violet Insignia, 100\
 Palm Tree\-\A majestic palm tree. Plant a bunch and create your own tropical paradise!\Decorative\1x1\4\0\0\
 Poison Slime Statue\1\A statue of a poison slime granted to those who are victorious in void battles. The still shadow mana within it sharpens the mind. Use it to boost the stats of shadow-attuned adventurers.\Adventurer, Void Altar\2x2\1\0\0\Shadow, Slime
 Poison Slime Statue\2\-\Adventurer, Void Altar\2x2\1\5000\Iron Ore, 10\
@@ -1109,6 +1214,36 @@ Staff Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argen
 Staff Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Amber Insignia, 200;; Dyrenell Aureus, 140;; Royal Amber Insignia, 80\
 Staff Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Amber Insignia, 240;; Dyrenell Aureus, 150;; Royal Amber Insignia, 100\
 Staff Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Amber Insignia, 240;; Dyrenell Aureus, 160;; Royal Amber Insignia, 100\
+Statue of Ilia\1\A statue of the Goddess, which charms all who behold it, filled with holy mana capable of purifying miasma. Use it to boost the stats of axe- and staff-wielding adventurers.\Adventurer, Event Dual Dojo\3x3\1\0\0\Axe, Staff
+Statue of Ilia\2\-\Adventurer, Event Dual Dojo\3x3\1\100\Holy Ore, 3\
+Statue of Ilia\3\-\Adventurer, Event Dual Dojo\3x3\1\200\Holy Ore, 5\
+Statue of Ilia\4\-\Adventurer, Event Dual Dojo\3x3\1\300\Holy Ore, 7\
+Statue of Ilia\5\-\Adventurer, Event Dual Dojo\3x3\1\400\Holy Ore, 10\
+Statue of Ilia\6\-\Adventurer, Event Dual Dojo\3x3\1\500\Holy Ore, 12\
+Statue of Ilia\7\-\Adventurer, Event Dual Dojo\3x3\1\600\Holy Ore, 15\
+Statue of Ilia\8\-\Adventurer, Event Dual Dojo\3x3\1\700\Holy Ore, 18\
+Statue of Ilia\9\-\Adventurer, Event Dual Dojo\3x3\1\800\Holy Ore, 21\
+Statue of Ilia\10\-\Adventurer, Event Dual Dojo\3x3\1\1000\Holy Ore, 25\
+Statue of Ilia\11\-\Adventurer, Event Dual Dojo\3x3\1\1200\Holy Ore, 30\
+Statue of Ilia\12\-\Adventurer, Event Dual Dojo\3x3\1\1400\Holy Ore, 50\
+Statue of Ilia\13\-\Adventurer, Event Dual Dojo\3x3\1\1600\Holy Ore, 70\
+Statue of Ilia\14\-\Adventurer, Event Dual Dojo\3x3\1\1800\Holy Ore, 90\
+Statue of Ilia\15\-\Adventurer, Event Dual Dojo\3x3\1\2000\Holy Ore, 120\
+Statue of Ilia\16\-\Adventurer, Event Dual Dojo\3x3\1\2200\Holy Ore, 150\
+Statue of Ilia\17\-\Adventurer, Event Dual Dojo\3x3\1\2400\Holy Ore, 180\
+Statue of Ilia\18\-\Adventurer, Event Dual Dojo\3x3\1\2600\Holy Ore, 210\
+Statue of Ilia\19\-\Adventurer, Event Dual Dojo\3x3\1\2800\Holy Ore, 250\
+Statue of Ilia\20\-\Adventurer, Event Dual Dojo\3x3\1\3000\Holy Ore, 300\
+Statue of Ilia\21\-\Adventurer, Event Dual Dojo\3x3\1\3200\Holy Ore, 350\
+Statue of Ilia\22\-\Adventurer, Event Dual Dojo\3x3\1\3400\Holy Ore, 400\
+Statue of Ilia\23\-\Adventurer, Event Dual Dojo\3x3\1\3600\Holy Ore, 450\
+Statue of Ilia\24\-\Adventurer, Event Dual Dojo\3x3\1\3800\Holy Ore, 500\
+Statue of Ilia\25\-\Adventurer, Event Dual Dojo\3x3\1\4000\Holy Ore, 550\
+Statue of Ilia\26\-\Adventurer, Event Dual Dojo\3x3\1\4200\Holy Ore, 600\
+Statue of Ilia\27\-\Adventurer, Event Dual Dojo\3x3\1\4400\Holy Ore, 700\
+Statue of Ilia\28\-\Adventurer, Event Dual Dojo\3x3\1\4600\Holy Ore, 800\
+Statue of Ilia\29\-\Adventurer, Event Dual Dojo\3x3\1\4800\Holy Ore, 900\
+Statue of Ilia\30\-\Adventurer, Event Dual Dojo\3x3\1\5000\Holy Ore, 1000\
 Sweet Retreat\1\A candy house made to be the centerpiece of the Halidom's Halloween party, and bound to liven up the event. Use it to boost the stats of light-attuned adventurers.\Adventurer, Event Altar\3x3\1\0\0\Light
 Sweet Retreat\2\-\Adventurer, Event Altar\3x3\1\100\Snack-o'-Lantern, 3\
 Sweet Retreat\3\-\Adventurer, Event Altar\3x3\1\200\Snack-o'-Lantern, 5\

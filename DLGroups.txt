@@ -49,7 +49,7 @@
   false]
 ["Custom Force Strike", 
   ["customforcestrike","customfs","changedfs", "uniquefs", "uniqueforcestrike"], 
-  ["Albert", "Bellina", "Berserker(Hunter)", "Catherine", "Gala Laxi", "Grace", "Linnea", "Lin You", "Mega Man", "Melody", "Nadine", "Nevin", "Patia(Summer)", "Peony", "Pinon", "Sarisse(Hunter)", "Vanessa(Hunter)", "Xander", "Xuan Zang(Radiant)", "Zena", "Zhu Bajie"],
+  ["Albert", "Bellina", "Berserker(Hunter)", "Catherine", "Gala Laxi", "Grace", "Linnea", "Lin You", "Mega Man", "Melody", "Nadine", "Nevin", "Patia(Summer)", "Peony", "Pinon", "Sarisse(Hunter)", "Vanessa", "Vanessa(Hunter)", "Xander", "Xuan Zang(Radiant)", "Zena", "Zhu Bajie"],
   nil,
   nil,
   nil,
@@ -64,7 +64,7 @@
 ["Hinomotoans", 
   ["hinomotoans","hinomotoan","hinomotoa"], 
   ["Addis", "Addis(Valentines)", "Aoi", "Botan", "Chitose", "Hanabusa", "Ieyasu", "Mitsuba", "Mitsuhide", "Musashi", "Nobunaga", "Sazanka", "Taro", "Yachiyo"], 
-  ["Ebisu", "Daikokuten", "Konohana Sakuya", "Konohana Sakuya(Summer)", "Marishiten", "Shinobi", "Shishimai"], 
+  ["Ebisu", "Daikokuten", "Kagutsuchi", "Konohana Sakuya", "Konohana Sakuya(Summer)", "Marishiten", "Shinobi", "Shishimai"], 
   nil, 
   nil,
   false]
@@ -85,6 +85,13 @@
 ["Arabia", 
   ["arabia","sandtown","sandland","desert", "agraba"], 
   ["Naveed", "Verica", "Verica(Summer)"], 
+  nil, 
+  nil, 
+  nil,
+  false]
+["Sandreach", 
+  ["sandreach","egypt"], 
+  ["Nadine", "Nefaria"], 
   nil, 
   nil, 
   nil,

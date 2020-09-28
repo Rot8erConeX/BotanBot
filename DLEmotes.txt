@@ -70,6 +70,7 @@ Steel Stalwart\Mega Man
 Sup\Sarisse
 Sweet Dreams\Peony
 Take Defense\Euden
+The Adventure Continues\Zena, Zethia
 This Ends Now\Linnea
 Three Cheers for Me\Mym 
 Time For a Break\Cleo
@@ -90,3 +91,4 @@ Whew\Notte
 Yes\Luca
 You Called\Lathna
 You Got This!\Notte
+You're The Best\Euden
