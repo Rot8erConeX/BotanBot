@@ -71,6 +71,8 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
     create_embed(event,"**#{command.downcase}**","Shows my current avatar, status, and reason for such.\n\nWhen used by my developer with a message following it, sets my status to that message.",0xCE456B)
   elsif ['status'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows what the status named `name` does.\n\nWhen given invalid inputs, shows my current avatar, status, and reason for such.\nWhen used by my developer with a message following it, sets my status to that message.",0xCE456B)
+  elsif ['enemy','boss'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}** __name__","Shows the stats of the enemy named `name`, any skills or abilities they may have, and other bosses from the same event.",0xCE456B)
   elsif ['stats','stat','smol'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","If `name` is an adventurer or a weapon, shows `name`'s stats at all possible rarities.\nIf `name` is a dragon or wyrmprint, shows default data.",0xCE456B)
   elsif ['adventurer','adv','unit'].include?(command.downcase)
@@ -80,15 +82,15 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
   elsif ['wyrmprint','wyrm','print'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows `name`'s stats and abilities.",0xCE456B)
   elsif ['weapon','weap','wep','wpn'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","Shows `name`'s stats and skills.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __name__","Shows `name`'s stats and skills.\n\nAlternatively, you can look a weapon up by the complete list of:\n- Rarity\n- Element\n- Weapon type\n- Upgrade tier\n- Additional modifier (Agito, Chimera, etc.)\nIf looked up in this way, all applicable weapons will be displayed as long as the list is short enough.",0xCE456B)
   elsif ['lineage','craft','crafting'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Shows the weapons that `name` directly promotes from, as well as the materials required to craft this weapon from it.",0xCE456B)
   elsif command.downcase=='invite'
     create_embed(event,'**invite**','PMs the invoker with a link to invite me to their server.',0xCE456B)
   elsif ['skill','skil'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","Shows everything that the skill named `name` does.  Also shows all adventurers and dragons that know the skill, and any weapons that have it imbued.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __name__","Shows everything that the skill named `name` does.  Also shows all adventurers and dragons that know the skill, and any weapons that have it imbued.\n\nAlternatively, you can look a skill up by listing the name of the adventurer or dragon that knows the skill, or the weapon that has it imbued, and the skill slot that the skill is in.",0xCE456B)
   elsif ['ability','abil'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","Shows everything that the ability named `name` does.  Also shows all adventurers and dragons that know the ability, and any wyrmprints that have it imbued.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __name__","Shows everything that the ability named `name` does.  Also shows all adventurers and dragons that have the ability, and any wyrmprints that have it imbued.\n\nAlternatively, you can look an ability up by listing the name of the adventurer or dragon that has it, or the wyrmprint that has it imbued, and the ability slot that the ability is in.",0xCE456B)
   elsif ['facility','faculty','fac'].include?(command.downcase)
     create_embed(event,"**#{command.downcase.gsub('faculty','facility')}** __name__","Shows `name`'s size and description.\nIn PM, also shows mats required to promote the facility's level.",0xCE456B)
   elsif ['mat','material','item'].include?(command.downcase)
@@ -168,6 +170,17 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all adventurers that fit `filters`.\n\nYou can search by:\n- Rarity\n- Element\n- Weapon type\n- Class\n- Availability\n- Gender\n- Race\n\nIf too many adventurers are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
     elsif ['dragon','dragons','drg','drgs'].include?(subcommand.downcase)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all dragons that fit `filters`.\n\nYou can search by:\n- Rarity\n- Element\n- Dragon Roost Bond Gift preference\n- Whether or not the dragon turns to face damage sources\n- Whether or not the dragon is a ranged attacker\n- Availability\n- Gender\n\nIf too many dragons are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+    elsif ['banner','banners','summon','summoning','summons','summonings'].include?(subcommand.downcase)
+      create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all banners that fit `filters`.\n\nYou can search by:\n- Element\n- Tags\n\nIf too many banners are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
+      lookout=[]
+      if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
+        lookout=[]
+        File.open("#{@location}devkit/DLSkillSubsets.txt").each_line do |line|
+          lookout.push(eval line)
+        end
+      end
+      w=lookout.reject{|q| q[2]!='Banner'}.map{|q| q[0]}.sort
+      create_embed(event,'Tags','',0x40C0F0,nil,nil,triple_finish(w)) if safe_to_spam?(event)
     elsif ['wyrmprint','wyrm','print'].include?(subcommand.downcase)
       create_embed(event,"**#{command.downcase} #{subcommand.downcase}** __\*filters__","Displays all wyrmprints that fit `filters`.\n\nYou can search by:\n- Rarity\n- Amulet type\n- Availability\n\nIf too many wyrmprints are trying to be displayed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
     elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(subcommand.downcase)
@@ -216,7 +229,7 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
       end
     end
     w=lookout.reject{|q| q[2]!='Askillity'}.map{|q| q[0]}.sort
-    create_embed(event,'Tags','',0x40C0F0,nil,nil,triple_finish(w)) if safe_to_spam?(event) && !['mat','mats','material','materials','item','items','enemies','boss','enemy','bosses','enemie','enemys','bosss'].include?(subcommand.downcase)
+    create_embed(event,'Tags','',0x40C0F0,nil,nil,triple_finish(w)) if safe_to_spam?(event) && !['banner','banners','summon','summoning','summons','summonings','mat','mats','material','materials','item','items','enemies','boss','enemy','bosses','enemie','enemys','bosss'].include?(subcommand.downcase)
   elsif ['aliases','checkaliases','seealiases','alias'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}** __name__","Responds with a list of all `name`'s aliases.\nIf no name is listed, responds with a list of all aliases and who/what they are for.\n\nAliases can be added to:\n- Adventurers\n- Dragons\n- Wyrmprints\n- Weapons\n- Skills\n- Abilities\n- Auras\n- CoAbilities\n- Chain CoAbilities\n- Facilities\n- Materials\n\nPlease note that if more than 50 aliases are to be listed, I will - for the sake of the sanity of other server members - only allow you to use the command in PM.",0xCE456B)
   elsif ['saliases','serveraliases'].include?(command.downcase)
@@ -224,7 +237,9 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
   elsif ['tools','links','resources','tool','link','resource'].include?(command.downcase)
     create_embed(event,"**#{command.downcase}**","Responds with a list of links useful to players of *Dragalia Lost*.",0xCE456B)
   elsif ['mats','materials','nodes','node','spiral'].include?(command.downcase)
-    create_embed(event,"**#{command.downcase}** __name__","Displays all of the mats required for `name`'s mana nodes.",0xCE456B)
+    create_embed(event,"**#{command.downcase}** __name__","If `name` is an adventurer, displays all of the mats required for their mana nodes.\nIf `name` is a weapon, displays all the mats for its various features.\nIf `name` is a rariy + element combo, treats it as an adventurer.",0xCE456B)
+  elsif ['affinity','resonance'].include?(command.downcase)
+    create_embed(event,"**#{command.downcase}**","Displays the effects of using multiple wyrmprints with the same affinity.",0xCE456B)
   elsif command.downcase=='snagstats'
     subcommand='' if subcommand.nil?
     if ['server','servers','member','members','shard','shards','users','user'].include?(subcommand.downcase)
@@ -262,15 +277,17 @@ def help_text_disp(event,bot,command=nil,subcommand=nil)
     str="#{str}\n`dragon` __name__ - for data on a dragon (*also `drg`*)"
     str="#{str}\n`wyrmprint` __name__ - for data on a wyrmprint (*also `wyrm` or `print`*)"
     str="#{str}\n`weapon` __name__ - for data on a weapon (*also `weap` or `wep`*)"
-    str="#{str}\n`craft` __name__ - for data on a weapon's crafting materials"
+    str="#{str}\n`enemy` __name__ - for data on an enemy (*also `boss`*)"
     str="#{str}\n`status` __name__ - for data on a status ailment"
     str="#{str}\n\n`skill` __name__ - for data on a particular skill"
     str="#{str}\n`ability` __name__ - for data on a particular ability or co-ability"
     str="#{str}\n`limits` - for ability stacking limits (*also `stack`*)"
+    str="#{str}\n`affinity` - for abilities gained from wyrmprint affinities"
     str="#{str}\n\n`facility` __name__ - for data on a particular facility"
     str="#{str}\n`material` __name__ - for data on a particular material (*also `mat`*)"
     str="#{str}\n\n`stats` __target__ - for only an entity's stats"
     str="#{str}\n`alts` __target__ - to show all alts of a particular character"
+    str="#{str}\n`craft` __name__ - for data on a weapon's crafting materials"
     str="#{str}\n`aliases` __target__ - to show all aliases of a particular entity (*also `checkaliases` or `seealiases`*)"
     str="#{str}\n`serveraliases` __target__- to show all server-specific aliases of a particular entity (*also `saliases`*)"
     str="#{str}\n\n`find` __\*filters__ - to find specific adventurers, dragons, wyrmprints, or weapons (*also `search`*)"
@@ -381,7 +398,8 @@ end
               ['Sleep','SleepingPunisher'],
               ['Bleed','BleedingPunisher'],
               ['Bog','BogPunisher'],
-              ['ReducedDefense','ReducedDefensePunisher']]
+              ['ReducedDefense','ReducedDefensePunisher'],
+              ['Zone','ZonePunisher']]
 @cleaning=[['Paralysis','ParalysisCleanse'],
            ['Poison','PoisonCleanse','Antidote'],
            ['Blind','BlindnessCleanse','Glasses'],
@@ -393,7 +411,19 @@ end
            ['Frostbite','FrostbiteCleanse'],
            ['Freeze','FreezeCleanse','Defrosting'],
            ['Sleep','SleepCleanse','WakeUpSlap'],
-           ['Bleed','BleedCleanse','Bandage']]
+           ['Bleed','BleedCleanse','Bandage'],
+           ['Curse','CurseCleanse']]
+@resonance=[['Queen',nil,nil,'Skill Damage +10%'],
+            ['Hatchet',nil,nil,'Broken Punisher +10%'],
+            ['Duel',nil,nil,'Strength +8%'],
+            ['Barrage',nil,'Skill Haste +6%','Skill Haste +10%'],
+            ['Trident','Force Strike +5%','Force Strike +8%','Force Strike +15%'],
+            ['Draco','Dragon Damage +10%','Dragon Damage +18%','Dragon Damage +30%'],
+            ['Phoenix','Burn Res +100%'],
+            ['Wolf','Stun Res +100%'],
+            ['Bull','Paralysis Res +100%'],
+            ['Serpent','Curse Res +100%'],
+            ['Divinity','Buff Skill Time +5%','Buff Skill Time +8%','Buff Skill Time +15%']]
 
 def dragon_data(bot,event,args=nil,juststats=false)
   dispstr=event.message.text.downcase.split(' ')
@@ -1183,6 +1213,11 @@ def art_of_adventure(bot,event,args=nil)
   elsif k[0]=='Lathna' && has_any?(args,['dragon','drg'])
     disp_dragon_art(bot,event,['nyarlathotep','alt'])
     return nil
+  elsif event.user.id==224870997390524416 && k[9][0].gsub('*','')=='Noelle'
+    puts 'Noelleshift for Dan.'
+    x=@adventurers.reject{|q| q[9][0].gsub('*','')!='Melody'}
+    art_of_adventure(bot,event,x.sample[0].split(' '))
+    return nil
   end
   s2s=false
   s2s=true if safe_to_spam?(event)
@@ -1689,10 +1724,14 @@ def art_of_printing(bot,event,args=nil)
   fehm=''
   fehm='FGO' if feh
   xcolor=0x313439
-  xcolor=0x5A0408 if k[2]=='Attack'
-  xcolor=0x00205A if k[2]=='Defense'
-  xcolor=0x39045A if k[2]=='Support'
-  xcolor=0x005918 if k[2]=='Healing'
+  xcolor=0x5A0408 if k[2][0]=='Attack'
+  xcolor=0x00205A if k[2][0]=='Defense'
+  xcolor=0x39045A if k[2][0]=='Support'
+  xcolor=0x005918 if k[2][0]=='Healing'
+  xcolor=0x944CCD if ['Phoenix','Wolf','Bull','Serpent'].include?(k[2][1])
+  xcolor=0xFF0031 if ['Duel','Hatchet','Barrage','Queen','Trident'].include?(k[2][1])
+  xcolor=0xF68D10 if ['Draco'].include?(k[2][1])
+  xcolor=0x188931 if ['Divinity'].include?(k[2][1])
   halfemote="\u200B  \u200B  \u200B  \u200B"
   disp="#{halfemote*(4-k[1][0,1].to_i) if k[1][0,1].to_i<4}#{" \u200B" if k[1][0,1].to_i<3}#{generate_rarity_row(k[1][0,1].to_i,0,fehm)}\n#{"#{halfemote} \u200B" if k[1][0,1].to_i==5}#{emote*4}"
   nammes=['','','']
@@ -2140,13 +2179,12 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
   mana=false
   share=false
   groups=get_group_data().reject{|q| !has_any?(q[1],args.map{|q2| q2.downcase})}
-  puts groups.map{|q| q.to_s}
   lookout=get_lookout_tags()
   lookout2=lookout.reject{|q| q[2]!='Race'}
   lookout3=lookout.reject{|q| q[2]!='Cygame'}
   lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Adventurer'}
   lookout=lookout.reject{|q| q[2]!='Askillity'}
-  lookout=lookout.reject{|q| ['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Flame','Water','Wind','Light','Shadow','Attack','Defense','Support','Healer'].include?(q[0])}
+  lookout=lookout.reject{|q| ['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Manacaster','Flame','Water','Wind','Light','Shadow','Attack','Defense','Support','Healer'].include?(q[0])}
   for i in 0...args.length
     launch=true if ['launch'].include?(args[i].downcase)
     notlaunch=true if ['notlaunch','nonlaunch'].include?(args[i].downcase)
@@ -2168,6 +2206,7 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
     wpn.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
     wpn.push('Wand') if ['wand','wands','rod','rods'].include?(args[i].downcase)
     wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
+    wpn.push('Manacaster') if ['manacaster','manacasters','caster','casters','gun','guns','managun','managuns','manchester','manchesters','gunner','gunners'].include?(args[i].downcase)
     clzz.push('Attack') if ['attack','atk','att','attacking'].include?(args[i].downcase)
     clzz.push('Defense') if ['defense','defence','def','defending','defensive','defencive'].include?(args[i].downcase)
     clzz.push('Support') if ['support','supports','supportive','supporting'].include?(args[i].downcase)
@@ -2363,7 +2402,7 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
         end
       end
       if tags2.length>0
-        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
+        tags=tags.reject{|q| tags2.include?(q) || q=='Cleanse'}
         mm='those tags'
         mm="the #{tags2[0]} tag" if tags2.length<2
         textra="#{textra}\n\nThe Cleanse tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Cleanse tag, remove #{mm}.\nTo search for just #{mm}, remove the Cleanse tag."
@@ -2504,6 +2543,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
     wpn.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
     wpn.push('Wand') if ['wand','wands','rod','rods'].include?(args[i].downcase)
     wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
+    wpn.push('Manacaster') if ['manacaster','manacasters','caster','casters','gun','guns','managun','managuns','manchester','manchesters','gunner','gunners'].include?(args[i].downcase)
     wpn.push('Share') if ['share','shared','skillshare','shareskill'].include?(args[i].downcase)
     wday.push(1) if ['mo','monday','mondae','mon','m','juicymeat','meat'].include?(args[i].downcase)
     wday.push(2) if ['tu','tuesday','tuesdae','tues','tue','t','kaleidoscope','kscope','k-scope'].include?(args[i].downcase)
@@ -2706,7 +2746,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
         end
       end
       if tags2.length>0
-        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
+        tags=tags.reject{|q| tags2.include?(q) || q=='Cleanse'}
         mm='those tags'
         mm="the #{tags2[0]} tag" if tags2.length<2
         textra="#{textra}\n\nThe Cleanse tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Cleanse tag, remove #{mm}.\nTo search for just #{mm}, remove the Cleanse tag."
@@ -2772,6 +2812,7 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
   args=args.map{|q| normalize(q.downcase)}
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
   rarity=[]
+  affinity=[]
   clzz=[]
   fltr=[]
   crossgames=[]
@@ -2790,6 +2831,18 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
     ign=true if ['share','shared','skillshare','shareskill'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
     rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1
+    affinity.push('Queen') if ['queen','crown','queens','crowns','crowned'].include?(args[i].downcase)
+    affinity.push('Hatchet') if ['hatchet','axs','axes','hatchets'].include?(args[i].downcase)
+    affinity.push('Duel') if ['duel','dual','swords'].include?(args[i].downcase)
+    affinity.push('Barrage') if ['barrage','arrows','bows'].include?(args[i].downcase)
+    affinity.push('Draco') if ['draco','dragon','draco','dragons','draconic'].include?(args[i].downcase)
+    affinity.push('Trident') if ['trident','tridents','fork','forks','aether'].include?(args[i].downcase)
+    affinity.push('Phoenix') if ['phoenix','pheonix','wright','eagle','eagles','bird','birds','phoenixes','pheonixes','phoenixs','pheonixs'].include?(args[i].downcase)
+    affinity.push('Wolf') if ['wolf','wolfs','wolves','unicorn','unicorns'].include?(args[i].downcase)
+    affinity.push('Bull') if ['bull','bulls','cow','cows','minotaur','minotaurs'].include?(args[i].downcase)
+    affinity.push('Serpent') if ['serpent','serpents','snake','snakes','snek','sneks','serpentine'].include?(args[i].downcase)
+    affinity.push('Divinity') if ['divinity','divine','eclipse','eclipse','holy'].include?(args[i].downcase)
+    affinity.push('None') if ['noaffinity','empty','affinityless'].include?(args[i].downcase)
     clzz.push('Attack') if ['attack','atk','att','attacking'].include?(args[i].downcase)
     clzz.push('Defense') if ['defense','defence','def','defending','defensive','defencive'].include?(args[i].downcase)
     clzz.push('Support') if ['support','supports','supportive','supporting'].include?(args[i].downcase)
@@ -2810,6 +2863,7 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
   end
   textra=''
   rarity.uniq!
+  affinity.uniq!
   clzz.uniq!
   fltr.uniq!
   tags.uniq!
@@ -2822,8 +2876,18 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
     search.push("*Rarities*: #{rarity.map{|q| "#{q}#{@rarity_stars[0][q]}"}.join(', ')}")
     emo.push(@rarity_stars[0][rarity[0]]) if rarity.length<2
   end
+  if affinity.length>0
+    aff=['Queen','Hatchet','Duel','Barrage','Draco','Trident','Phoenix','Wolf','Bull','Serpent','Divinity']
+    char=char.reject{|q| !affinity.include?(q[2][1]) && !(!aff.include?(q[2][1]) && affinity.include?('None'))}.uniq
+    for i in 0...affinity.length
+      moji=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "Affinity_#{affinity[i]}"}
+      emo.push(moji[0].mention) if affinity.length<2 && moji.length>0
+      affinity[i]="#{moji[0].mention}#{affinity[i]}" if moji.length>0
+    end
+    search.push("*Affinities*: #{affinity.join(', ')}")
+  end
   if clzz.length>0
-    char=char.reject{|q| !clzz.include?(q[2])}.uniq
+    char=char.reject{|q| !clzz.include?(q[2][0])}.uniq
     for i in 0...clzz.length
       moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{clzz[i]}"}
       emo.push(moji[0].mention) if clzz.length<2 && moji.length>0
@@ -2930,7 +2994,7 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
         end
       end
       if tags2.length>0
-        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
+        tags=tags.reject{|q| tags2.include?(q) || q=='Cleanse'}
         mm='those tags'
         mm="the #{tags2[0]} tag" if tags2.length<2
         textra="#{textra}\n\nThe Cleanse tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Cleanse tag, remove #{mm}.\nTo search for just #{mm}, remove the Cleanse tag."
@@ -2977,7 +3041,6 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
     end
   end
   char=[] if search.length==1 && search[0]=='*Game Launch*' && mode%4>1
-  puts "end - #{char.length}"
   if (char.length>50 || char.map{|q| q[0]}.join("\n").length+search.join("\n").length+emo.join('').length>=1900) && !safe_to_spam?(event) && mode<2
     event.respond "__**Search**__\n#{search.join("\n")}\n\n__**Note**__\nAt #{char.length} entries, too much data is trying to be displayed.  Please use this command in PM." if mode==0
     return nil
@@ -3005,7 +3068,7 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   lookout=get_lookout_tags()
   lookout3=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Weapon'}
   lookout=lookout.reject{|q| q[2]!='Askillity'}
-  lookout=lookout.reject{|q| ['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Flame','Water','Wind','Light','Shadow'].include?(q[0])}
+  lookout=lookout.reject{|q| ['Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Manacaster','Flame','Water','Wind','Light','Shadow'].include?(q[0])}
   groups=get_group_data().reject{|q| !has_any?(q[1],args.map{|q2| q2.downcase})}
   args2=args.map{|q| q}
   ign=false
@@ -3086,6 +3149,10 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
     if ['staff','staffs','staves'].include?(args[i].downcase)
       args2[i]=nil unless wpn.include?('Staff')
       wpn.push('Staff')
+    end
+    if ['manacaster','manacasters','caster','casters','gun','guns','managun','managuns','manchester','manchesters','gunner','gunners'].include?(args[i].downcase)
+      args2[i]=nil unless wpn.include?('Manacaster')
+      wpn.push('Manacaster') 
     end
     for i2 in 0...lookout3.length
       if lookout3[i2][1].include?(args[i].downcase)
@@ -3280,7 +3347,7 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
         end
       end
       if tags2.length>0
-        tags=tags.reject{|q| tags2.include?(q) || q=='Punisher'}
+        tags=tags.reject{|q| tags2.include?(q) || q=='Cleanse'}
         mm='those tags'
         mm="the #{tags2[0]} tag" if tags2.length<2
         textra="#{textra}\n\nThe Cleanse tag is being hybridized with the #{list_lift(tags2,'and')} tag#{'s' if tags2.length>1}.\nTo search for just the Cleanse tag, remove #{mm}.\nTo search for just #{mm}, remove the Cleanse tag."
@@ -3380,6 +3447,7 @@ def find_the_faculty(bot,event,args=nil,mode=0,allowstr=true)
     wpn.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
     wpn.push('Wand') if ['wand','wands','rod','rods'].include?(args[i].downcase)
     wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
+    wpn.push('Manacaster') if ['manacaster','manacasters','caster','casters','gun','guns','managun','managuns','manchester','manchesters','gunner','gunners'].include?(args[i].downcase)
     typ1.push('Adventurer') if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[i].downcase)
     typ1.push('Dragon') if ['dragon','dragons','drg','drag','drgs','drags'].include?(args[i].downcase)
     typ1.push('Decorative') if ['decorative','decoration','decor','deco','decoratives','decorations','decors','decos'].include?(args[i].downcase)
@@ -3455,7 +3523,14 @@ def fac_stat_buffs(k,lvl)
     alta[1]*=0.3
     alta[0]+=0.5
     alta[1]+=0.5
-    alta[1]+=0.3 if lvl>=29
+    if lvl>=29
+      x=lvl-29
+      alta=[5.0+(x/5).to_i,5.0+(x/5).to_i]
+      alta[1]+=0.3 if x%5>=1
+      alta[0]+=0.3 if x%5>=2
+      alta[1]+=0.4 if x%5>=3
+      alta[0]+=0.4 if x%5>=4
+    end
     return alta
   elsif !k[8].nil? && k[8].include?('Tree')
     alta=[lvl+2.0,lvl+2.0]
@@ -3530,7 +3605,7 @@ def fac_stats(bot,event,args=nil)
   m='Azure' if ['Blade Dojo','Lance Dojo'].include?(k[0])
   m='Jade' if ['Axe Dojo','Wand Dojo'].include?(k[0])
   m='Vermillion' if ['Sword Dojo','Bow Dojo'].include?(k[0])
-  m='Violet' if ['Dagger Dojo'].include?(k[0])
+  m='Violet' if ['Dagger Dojo','Manacaster Dojo'].include?(k[0])
   str="#{str}\n\n**First Dojo cost:** Dyrenell Aes x10\n**Second Dojo cost:** Dyrenell Aes x30, Dyrenell Argenteus x10, #{k[0].split(' ')[0]} Tablet x2" if k[3]==['Adventurer', 'Dojo']
   if k[3]==['Adventurer', 'Altar']
     if k[0]=='Flame Altar'
@@ -3580,15 +3655,15 @@ def fac_stats(bot,event,args=nil)
     str="#{str}\n*Level 2 \u2192 3:* 5,000<:Resource_Rupies:532104504372363274> - Light Metal x3"
     str="#{str}\n\n__**Can craft #{generate_rarity_row(4)} weapons**__"
     str="#{str}\n*Level 3 \u2192 4:* 20,000<:Resource_Rupies:532104504372363274> - Iron Ore x10, Fiend's Claw x10, Bat's Wing x10"
+    str="#{str}\n\n__**Can craft <:Element_Null:532106087810334741>elementless #{generate_rarity_row(5)} weapons**__"
     str="#{str}\n*Level 4 \u2192 5:* 40,000<:Resource_Rupies:532104504372363274> - Iron Ore x15, Fiend's Claw x15, Bat's Wing x15, Light Metal x15"
+    str="#{str}\n\n__**Can craft Elemental #{generate_rarity_row(5)} weapons**__"
     str="#{str}\n*Level 5 \u2192 6:* 60,000<:Resource_Rupies:532104504372363274> - Granite x10, Fiend's Horn x10, Ancient Bird's Feather x10"
-    str="#{str}\n\n__**Can craft #{generate_rarity_row(5)} weapons**__"
+    str="#{str}\n\n__**Can craft <:Element_Void:548467446734913536>Void and High Dragon weapons**__"
     str="#{str}\n*Level 6 \u2192 7:* 80,000<:Resource_Rupies:532104504372363274> - Granite x15, Fiend's Horn x15, Ancient Bird's Feather x15, Abyss Stone x15"
+    str="#{str}\n\n__**Can craft Chimeratech and #{generate_rarity_row(6)} weapons**__"
     str="#{str}\n*Level 7 \u2192 8:* 100,000<:Resource_Rupies:532104504372363274> - Meteorite x10, Fiend's Eye x10, Bewitching Wings x10"
     str="#{str}\n*Level 8 \u2192 9:* 120,000<:Resource_Rupies:532104504372363274> - Meteorite x15, Fiend's Eye x15, Bewitching Wings x15, Crimson Core x15"
-    str="#{str}\n\n__**Can craft #{generate_rarity_row(6)} weapons**__"
-    str="#{str}\n*Level 9*"
-    ftr='Each new level of smithy allows you to craft higher-tier weapons within the newest-allowed rarity bracket.'
   elsif k[0]=='Halidom'
     str="__*Level 1 \u2192 2*__\nRequires Facility level of 5\n5,000<:Resource_Rupies:532104504372363274>"
     str="#{str}\n\n__*Level 2 \u2192 3*__\nRequires Facility level of 40\n20,000<:Resource_Rupies:532104504372363274>\n<:Element_Wind:532106087948746763>Wind Orb x10, Storm Orb x1, Talonstone x3"
@@ -3730,6 +3805,11 @@ def fac_stats(bot,event,args=nil)
   str=str.gsub("\n\n","\n") if minmax
   if str.length>=1900
     str=str.split("\n")
+    if str[-2][0,2]=='**' && str[-1][-2,2]=='**'
+      str[-2]="#{str[-2]}\n#{str[-1]}"
+      str[-1]=nil
+      str.compact!
+    end
     str2=''
     for i in 0...str.length
       if "#{str2}\n#{str[i]}".length>=1900
@@ -3758,6 +3838,7 @@ def damage_modifiers(bot,event,args=nil)
     wpn.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
     wpn.push('Wand') if ['wand','wands'].include?(args[i].downcase)
     wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
+    wpn.push('Manacaster') if ['manacaster','manacasters','caster','casters','gun','guns','managun','managuns','manchester','manchesters','gunner','gunners'].include?(args[i].downcase)
   end
   m=[0,'First','Second','Third','Fourth','Fifth','Sixth','Seventh','Eighth','Ninth','Tenth','Eleventh','Twelfth','Thirteenth','Fourteenth','Fifteenth','16th',
      '17th','18th','19th','20th','21st','22nd','23rd','24th','25th','26th','27th','28th','29th','30th','31st','32nd','33rd','34th','35th','36th','37th','38th',
@@ -3826,17 +3907,53 @@ def damage_modifiers(bot,event,args=nil)
       disp2=kx[19][0][1,kx[19][0].length-1].join("\n")
       create_embed(event,"__Damage modifiers for **#{k[0]}#{adv_emoji(k,bot)}**__",'',element_color(k[2][1]),nil,xpic,[['Adventurer',disp],['Dragon',disp2]])
       return nil
+    elsif !k[19].nil? && k[19].length>0 && k[2][2]=='Manacaster'
+      f=[]
+      k2=[1,2,3,4,5,6,7]
+      k2=['67% x5','67% x5'] if k[2][3]=='Rifle'
+      k2=['150% x5','150% x5'] if k[2][3]=='Shotgun'
+      k2=['45% x3','150% x3','150% x5'] if k[2][3]=='Machine Gun'
+      if k[19].length==1
+        ff=[]
+        for i2 in 1...k[19][0].length
+          ff.push("*#{m[i2]} Hit:* #{k[19][0][i2]}#{'%' if k[19][0][i2].to_i.to_s==k[19][0][i2]}")
+        end
+        disp=ff.join("\n")
+      else
+        ff=[]
+        for i2 in 0...k2.length
+          ff.push("*#{m[i2]} Hit:* #{k2[i2]}#{'%' if k2[i2].to_i.to_s==k2[i2]}")
+        end
+        disp=ff.join("\n")
+      end
+      if k[19].length>1
+        for i in 0...k[19].length
+          if k[19][i].length>1
+            ff=["__**Combo**__"]
+            for i2 in 1...k[19][i].length
+              ff.push("*#{m[i2]} Hit:* #{k[19][i][i2]}#{'%' if k[19][i][i2].to_i.to_s==k[19][i][i2]}")
+            end
+            f.push([k[19][i][0],ff.join("\n")])
+          end
+        end
+      else
+        f=nil
+      end
+      dispname=k[0].gsub(' ','_')
+      xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Adventurers/#{dispname}_#{k[1][0,1]}.png?raw=true"
+      create_embed(event,"__Damage modifiers for **#{k[0]}#{adv_emoji(k,bot)}**__",disp,element_color(k[2][1]),nil,xpic,f)
+      return nil
     elsif !k[19].nil? && k[19].length>0
       f=[]
       k2=[1,2,3,4,5,6,7]
-      k2=[90,95,114,120,180,95,'104% L1, 115% L2'] if k[2][2]=='Sword'
-      k2=[106.7,106.7,'69.3% x2',141.9,'157.3% x2',94,"83% L1, 92% L2"] if k[2][2]=='Blade'
-      k2=[90,'45.5% x2','64.8% x2',142.8,180,85,"43.2% x3 L1, 47% x3 L2"] if k[2][2]=='Dagger'
-      k2=[125.4,134.2,224.4,237.6,250.8,73,"173% L1, 192% L2"] if k[2][2]=='Axe'
-      k2=[92.4,'49.5% x2',118.8,165,123.2,89,"27% x5 L1, 30% x5 L2"] if k[2][2]=='Lance'
-      k2=['36.35% x3','46.25% x2','52.5% x3','78.75% x2','42.75% x5','30% x3',"28% x8 L1, 31% x8 L2"] if k[2][2]=='Bow'
-      k2=[112.7,'60.95% x2','41.4% x3','89.7% x2','71.07% x1 + 41.4575% x4',100,"81% x2 L1, 90% x2 L2"] if k[2][2]=='Wand'
-      k2=[82.8,96,'54% x2',180,235.2,80,"55% x4 L1, 61% x4 L2"] if k[2][2]=='Staff'
+      k2=[108,115,137,144,'216% x2',95,'104% L1, 115% L2'] if k[2][2]=='Sword'
+      k2=[128,128,'75% x2',155,'172% x2',94,"83% L1, 92% L2"] if k[2][2]=='Blade'
+      k2=[108,'56% x2','78% x2',171,216,85,"43.2% x3 L1, 47% x3 L2"] if k[2][2]=='Dagger'
+      k2=[151,161,270,285,301,73,"173% L1, 192% L2"] if k[2][2]=='Axe'
+      k2=[111,'59% x2',143,198,147,89,"27% x5 L1, 30% x5 L2"] if k[2][2]=='Lance'
+      k2=['44% x3','55% x2','63% x3','95% x2','53% x5','30% x3',"28% x8 L1, 31% x8 L2"] if k[2][2]=='Bow'
+      k2=[136,'74% x2','49% x3','108% x2','85% x1 + 49% x4',100,"81% x2 L1, 90% x2 L2"] if k[2][2]=='Wand'
+      k2=[124,144,'81% x2',270,353,80,"55% x4 L1, 61% x4 L2"] if k[2][2]=='Staff'
       if k[19].length==1
         if ['Dash','DA'].include?(k[19][0][0])
           k2[5]=k[19][0][-1]
@@ -3889,21 +4006,25 @@ def damage_modifiers(bot,event,args=nil)
       create_embed(event,"__Damage modifiers for **#{k[0]}#{adv_emoji(k,bot)}**__",disp,element_color(k[2][1]),nil,xpic,f)
       return nil
     else
-      wpn.push(k[2][2])
+      if k[2][2]=='Manacaster'
+        wpn.push(k[2][3])
+      else
+        wpn.push(k[2][2])
+      end
       k=nil
     end
   end
   if wpn.length<=0 && !safe_to_spam?(event)
     event.respond "The complete table is too large.  Please either specify a weapon type or use this command in PM."
   elsif wpn.length<=0
-    kx=[[90,95,114,120,180,95,"104% L1, 115% L2"],
-        [106.7,106.7,'69.3% x2',141.9,'157.3% x2',94,"83% L1, 92% L2"],
-        [90,'45.5% x2','64.8% x2',142.8,180,85,"43.2% x3 L1, 47% x3 L2"],
-        [125.4,134.2,224.4,237.6,250.8,73,"173% L1, 192% L2"],
-        [92.4,'49.5% x2',118.8,165,123.2,89,"27% x5 L1, 30% x5 L2"],
-        ['36.35% x3','46.25% x2','52.5% x3','78.75% x2','42.75% x5','30% x3',"28% x8 L1, 31% x8 L2"],
-        [112.7,'60.95% x2','41.4% x3','89.7% x2','71.07% x1 + 41.4575% x4',100,"81% x2 L1, 90% x2 L2"],
-        [82.8,96,'54% x2',180,235.2,80,"55% x4 L1, 61% x4 L2"]]
+    kx=[[108,115,137,144,'216% x2',95,'104% L1, 115% L2'],
+        [128,128,'75% x2',155,'172% x2',94,"83% L1, 92% L2"],
+        [108,'56% x2','78% x2',171,216,85,"43.2% x3 L1, 47% x3 L2"],
+        [151,161,270,285,301,73,"173% L1, 192% L2"],
+        [111,'59% x2',143,198,147,89,"27% x5 L1, 30% x5 L2"],
+        ['44% x3','55% x2','63% x3','95% x2','53% x5','30% x3',"28% x8 L1, 31% x8 L2"],
+        [136,'74% x2','49% x3','108% x2','85% x1 + 49% x4',100,"81% x2 L1, 90% x2 L2"],
+        [124,144,'81% x2',270,353,80,"55% x4 L1, 61% x4 L2"]]
     for i in 0...kx.length
       for i2 in 0...kx[i].length
         kx[i][i2]="#{kx[i][i2]}%" unless kx[i][i2].is_a?(String)
@@ -3917,17 +4038,42 @@ def damage_modifiers(bot,event,args=nil)
     for i in 0...k.length
       f.push([k2[i],k[i]])
     end
+    f2=[]
+    f2.push("__**Rifle**__\n*First Hit:* 67% x5\n*Second Hit:* 67% x5")
+    f2.push("__**Shotgun**__\n*First Hit:* 150% x5\n*Second Hit:* 150% x5")
+    f2.push("__**Machine Gun**__\n*First Hit:* 45% x3\n*Second Hit:* 150% x3\n*Third Hit:* 150% x5")
+    f.push(['<:Weapon_Manacaster:758905122448867338>Manacaster',f2.join("\n\n")])
     create_embed(event,"__**Damage modifiers**__",'',0xCE456B,nil,nil,f)
+  elsif wpn[0]=='Manacaster'
+    f=[]
+    f.push(['Rifle',"*First Hit:* 67% x5\n*Second Hit:* 67% x5"])
+    f.push(['Shotgun',"*First Hit:* 150% x5\n*Second Hit:* 150% x5"])
+    f.push(['Machine Gun',"*First Hit:* 45% x3\n*Second Hit:* 150% x3\n*Third Hit:* 150% x5"])
+    m=''
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn[0]}"}
+    m=moji[0].mention unless moji.length<=0
+    create_embed(event,"__Damage modifiers for **#{m}#{wpn[0]}** users__",'',0xCE456B,nil,nil,f)
+  elsif ['Rifle','Shotgun','Machine Gun'].include?(wpn[0])
+    k=[1,2,3,4,5,6,7]
+    k=['67% x5','67% x5'] if wpn[0]=='Rifle'
+    k=['150% x5','150% x5'] if wpn[0]=='Shotgun'
+    k=['45% x3','150% x3','150% x5'] if wpn[0]=='Machine Gun'
+    for i in 0...k.length
+      k[i]="#{k[i]}%" unless k[i].is_a?(String)
+    end
+    disp="__**Combo:**__\n*First Hit:* #{k[0]}\n*Second Hit:* #{k[1]}"
+    disp="#{disp}\n*Third Hit:* #{k[2]}" unless k[2].nil?
+    create_embed(event,"__Damage modifiers for **#{wpn[0]} [Manacaster]** users__",disp,0xCE456B)
   else
     k=[1,2,3,4,5,6,7]
-    k=[90,95,114,120,180,95,"104% L1, 115% L2"] if wpn[0]=='Sword'
-    k=[106.7,106.7,'69.3% x2',141.9,'157.3% x2',94,"83% L1, 92% L2"] if wpn[0]=='Blade'
-    k=[90,'45.5% x2','64.8% x2',142.8,180,85,"43.2% x3 L1, 47% x3 L2"] if wpn[0]=='Dagger'
-    k=[125.4,134.2,224.4,237.6,250.8,73,"173% L1, 192% L2"] if wpn[0]=='Axe'
-    k=[92.4,'49.5% x2',118.8,165,123.2,89,"27% x5 L1, 30% x5 L2"] if wpn[0]=='Lance'
-    k=['36.35% x3','46.25% x2','52.5% x3','78.75% x2','42.75% x5','30% x3',"28% x8 L1, 31% x8 L2"] if wpn[0]=='Bow'
-    k=[112.7,'60.95% x2','41.4% x3','89.7% x2','71.07% x1 + 41.4575% x4',100,"81% x2 L1, 90% x2 L2"] if wpn[0]=='Wand'
-    k=[82.8,96,'54% x2',180,235.2,80,"55% x4 L1, 61% x4 L2"] if wpn[0]=='Staff'
+    k=[108,115,137,144,'216% x2',95,'104% L1, 115% L2'] if wpn[0]=='Sword'
+    k=[128,128,'75% x2',155,'172% x2',94,"83% L1, 92% L2"] if wpn[0]=='Blade'
+    k=[108,'56% x2','78% x2',171,216,85,"43.2% x3 L1, 47% x3 L2"] if wpn[0]=='Dagger'
+    k=[151,161,270,285,301,73,"173% L1, 192% L2"] if wpn[0]=='Axe'
+    k=[111,'59% x2',143,198,147,89,"27% x5 L1, 30% x5 L2"] if wpn[0]=='Lance'
+    k=['44% x3','55% x2','63% x3','95% x2','53% x5','30% x3',"28% x8 L1, 31% x8 L2"] if wpn[0]=='Bow'
+    k=[136,'74% x2','49% x3','108% x2','85% x1 + 49% x4',100,"81% x2 L1, 90% x2 L2"] if wpn[0]=='Wand'
+    k=[124,144,'81% x2',270,353,80,"55% x4 L1, 61% x4 L2"] if wpn[0]=='Staff'
     for i in 0...k.length
       k[i]="#{k[i]}%" unless k[i].is_a?(String)
     end
@@ -3952,6 +4098,7 @@ def sp_table(bot,event,args=nil)
     wpn.push('Lance') if ['lance','lances','pitchfork','pitchforks','trident','tridents','spear','spears'].include?(args[i].downcase)
     wpn.push('Wand') if ['wand','wands'].include?(args[i].downcase)
     wpn.push('Staff') if ['staff','staffs','staves'].include?(args[i].downcase)
+    wpn.push('Manacaster') if ['manacaster','manacasters','caster','casters','gun','guns','managun','managuns','manchester','manchesters','gunner','gunners'].include?(args[i].downcase)
   end
   if wpn.length<=0
     k=find_data_ex(:find_adventurer,args.join(' '),event)
@@ -3961,6 +4108,71 @@ def sp_table(bot,event,args=nil)
         wpn.push(k[1])
         k=nil
       end
+    elsif !k[18].nil? && k[18].length>0 && k[2][2]=='Manacaster'
+      f=[]
+      m=[0,'First','Second','Third','Fourth','Fifth','Sixth','Seventh','Eighth','Ninth','Tenth','Eleventh','Twelfth','Thirteenth','Fourteenth','Fifteenth',
+         '16th','17th','18th','19th','20th','21st','22nd','23rd','24th','25th','26th','27th','28th','29th','30th','31st','32nd','33rd','34th','35th','36th',
+         '37th','38th','39th','40th','41st','42nd','43rd','44th','45th','46th','47th','48th','49th','50th']
+      k2=[1,2,3,4,5,6,7]
+      k2=[545,545] if k[2][3]=='Rifle'
+      k2=[464,464] if k[2][3]=='Shotgun'
+      k2=[300,464,464] if k[2][3]=='Machine Gun'
+      ff=[]
+      t=0
+      if k[18].length==1
+        for i2 in 1...k[18][0].length
+          ff.push("*#{m[i2]} Hit:* #{k[18][0][i2]}")
+          if k[18][0][i2].to_i.to_s==k[18][0][i2] && t>=0
+            t+=k[18][0][i2].to_i
+          else
+            t=-1
+          end
+        end
+        f=nil
+      else
+        for i2 in 0...k2.length
+          ff.push("*#{m[i2]} Hit:* #{k2[i2]}")
+          if k2[i2].to_i.to_s==k2[i2] && t>=0
+            t+=k2[i2].to_i
+          else
+            t=-1
+          end
+        end
+      end
+      if t<0
+        ff.push("~~*Total cannot be calculated dynamically*~~")
+      else
+        ff.push("\u30FC *Total:* #{t}")
+      end
+      disp=ff.join("\n")
+      if k[18].length>1
+        for i in 0...k[18].length
+          if k[18][i].length>1
+            ff=["__**Combo**__"]
+            t=0
+            for i2 in 1...k[18][i].length
+              ff.push("*#{m[i2]} Hit:* #{k[18][i][i2]}")
+              if k[18][i][i2].to_i.to_s==k[18][i][i2] && t>=0
+                t+=k[18][i][i2].to_i
+              else
+                t=-1
+              end
+            end
+            if t<0
+              ff.push("~~*Total cannot be calculated dynamically*~~")
+            else
+              ff.push("\u30FC *Total:* #{t}")
+            end
+            f.push([k[19][i][0],ff.join("\n")])
+          end
+        end
+      else
+        f=nil
+      end
+      dispname=k[0].gsub(' ','_')
+      xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Adventurers/#{dispname}_#{k[1][0,1]}.png?raw=true"
+      create_embed(event,"__SP gains for **#{k[0]}#{adv_emoji(k,bot)}**__",disp,element_color(k[2][1]),nil,xpic,f)
+      return nil
     elsif !k[18].nil? && k[18].length>0
       f=[]
       m=[0,'First','Second','Third','Fourth','Fifth','Sixth','Seventh','Eighth','Ninth','Tenth','Eleventh','Twelfth','Thirteenth','Fourteenth','Fifteenth',
@@ -4044,7 +4256,11 @@ def sp_table(bot,event,args=nil)
       create_embed(event,"__SP gains for **#{k[0]}#{adv_emoji(k,bot)}**__",disp,element_color(k[2][1]),nil,xpic,f)
       return nil
     else
-      wpn.push(k[2][2])
+      if k[2][2]=='Manacaster'
+        wpn.push(k[2][3])
+      else
+        wpn.push(k[2][2])
+      end
       k=nil
     end
   end
@@ -4056,12 +4272,30 @@ def sp_table(bot,event,args=nil)
     k=kx.map{|q| "__**Combo:**__\n*First Hit:* #{q[0]}\n*Second Hit:* #{q[1]}\n*Third Hit:* #{q[2]}\n*Fourth Hit:* #{q[3]}\n*Fifth Hit:* #{q[4]}\n\u30FC *Total:* #{q[7]}\n\n**Dash Attack:** #{q[5]}\n**Force Strike** #{q[6]}"}
     k2=['<:Weapon_Sword:532106114540634113>Swords','<:Weapon_Blade:532106114628714496>Blades','<:Weapon_Dagger:532106116025286656>Daggers',
         '<:Weapon_Axe:532106114188443659>Axes','<:Weapon_Lance:532106114792423448>Lances','<:Weapon_Bow:532106114909732864>Bows',
-        '<:Weapon_Wand:532106114985099264>Wands','<:Weapon_Staff:532106114733441024>Staves']
+        '<:Weapon_Wand:532106114985099264>Wands','<:Weapon_Staff:532106114733441024>Staves','<:Weapon_Manacaster:758905122448867338>Manacasters']
     f=[]
     for i in 0...k.length
       f.push([k2[i],k[i]])
     end
     create_embed(event,"__**SP gains**__",'',0xCE456B,nil,nil,f)
+  elsif wpn[0]=='Manacaster'
+    f=[]
+    f.push(['Rifle',"*First Hit:* 545\n*Second Hit:* 545\n\u30FC *Total: 1090*"])
+    f.push(['Shotgun',"*First Hit:* 464\n*Second Hit:* 464\n\u30FC *Total: 928*"])
+    f.push(['Machine Gun',"*First Hit:* 300\n*Second Hit:* 464\n*Third Hit:* 1228"])
+    m=''
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn[0]}"}
+    m=moji[0].mention unless moji.length<=0
+    create_embed(event,"__SP gains for **#{m}#{wpn[0]}** users__",'',0xCE456B,nil,nil,f)
+  elsif ['Rifle','Shotgun','Machine Gun'].include?(wpn[0])
+    k=[1,2,3,4,5,6,7]
+    k=[545,545] if wpn[0]=='Rifle'
+    k=[464,464] if wpn[0]=='Shotgun'
+    k=[300,464,464] if wpn[0]=='Machine Gun'
+    disp="__**Combo:**__\n*First Hit:* #{k[0]}\n*Second Hit:* #{k[1]}"
+    disp="#{disp}\n*Third Hit:* #{k[2]}" unless k[2].nil?
+    disp="#{disp}\n\n\u30FC *Total: #{k.inject(0){|sum,x| sum + x }}*"
+    create_embed(event,"__SP gains for **#{wpn[0]} [Manacaster]** users__",disp,0xCE456B)
   else
     k=[1,2,3,4,5,6,7]
     k=[150,150,196,265,391,143,345,1152] if wpn[0]=='Sword'
@@ -4096,6 +4330,35 @@ def adv_mats(event,args,bot,forcespiral=false)
     else
       k=k[0]
     end
+  else
+    k=find_data_ex(:find_weapon,args.join(' '),event,false,false,true)
+    if k.length>0
+      k=k[0]
+      dispname=k[0].gsub(' ','_')
+      xpic="https://github.com/Rot8erConeX/BotanBot/blob/master/Weapons/#{dispname}.png?raw=true"
+      f=[]
+      m=k[11].map{|q| q}
+      m.push(0); m.push(0); m.push(0); m.push(0); m.push(0); m.push(0); m.push(0)
+      f.push(['Crafting Materials',"#{k[12].map{|q| q.join(' x')}.join("\n")}\n\nCost: #{longFormattedNumber(m[0])}<:Resource_Rupies:532104504372363274>"]) unless k[12].nil? || k[12].length<=0
+      if k[24].nil? || k[24].length<=0
+        f.push(['Unbind Materials',"#{k[18].map{|q| q.join(' x')}.join("\n")}\n\nCost: #{longFormattedNumber(m[1])}<:Resource_Rupies:532104504372363274>"]) unless k[18].nil? || k[18].length<=0
+      elsif k[18].nil? || k[18].length<=0
+        f.push(["Unbind Materials\nAfter refinement","#{k[24].map{|q| q.join(' x')}.join("\n")}\n\nCost: #{longFormattedNumber(m[7])}<:Resource_Rupies:532104504372363274>"]) unless k[24].nil? || k[24].length<=0
+      else
+        b="#{k[18].map{|q| q.join(' x')}.join("\n")}\n\nCost: #{longFormattedNumber(m[1])}<:Resource_Rupies:532104504372363274>"
+        a="#{k[24].map{|q| q.join(' x')}.join("\n")}\n\nCost: #{longFormattedNumber(m[7])}<:Resource_Rupies:532104504372363274>"
+        f.push(['Unbind Materials',"__*Before Refinement*__\n#{b}\n\n__*After Refinement*__\n#{a}"])
+      end
+      f.push(['Slot Materials',"#{k[19].map{|q| q.join(' x')}.join("\n")}\n\nCost: #{longFormattedNumber(m[2])}<:Resource_Rupies:532104504372363274>"]) unless k[19].nil? || k[19].length<=0
+      f.push(['Copy Materials',"#{k[20].map{|q| q.join(' x')}.join("\n")}\n\nCost: #{longFormattedNumber(m[3])}<:Resource_Rupies:532104504372363274>"]) unless k[20].nil? || k[20].length<=0
+      f.push(['Ability Materials',"#{k[21].map{|q| q.join(' x')}.join("\n")}\n\nCost: #{longFormattedNumber(m[4])}<:Resource_Rupies:532104504372363274>"]) unless k[21].nil? || k[21].length<=0
+      f.push(['WeaponBonus Materials',"#{k[22].map{|q| q.join(' x')}.join("\n")}\n\nCost: #{longFormattedNumber(m[5])}<:Resource_Rupies:532104504372363274>"]) unless k[22].nil? || k[22].length<=0
+      f.push(['Refinement Materials',"#{k[23].map{|q| q.join(' x')}.join("\n")}\n\nCost: #{longFormattedNumber(m[6])}<:Resource_Rupies:532104504372363274>"]) unless k[23].nil? || k[23].length<=0
+      str=''
+      str='No materials required' if f.length<=0
+      create_embed(event,"__**#{k[0]}**#{weapon_emoji(k,bot)}'s materials__",str,element_color(k[3]),nil,xpic,f)
+      return nil
+    end
   end
   elem=''
   name=''
@@ -4106,7 +4369,7 @@ def adv_mats(event,args,bot,forcespiral=false)
   if k.length.zero?
     mana=true if forcespiral
   else
-    name=k[0]
+    name="#{k[0]}#{adv_emoji(k,bot)}"
     elem=k[2][1]
     nums.push(k[1][0,1].to_i)
     mana=true unless k[3][1][@max_rarity[0]].nil? || k[3][1][@max_rarity[0]]<=0 || k[4][1][@max_rarity[0]].nil? || k[4][1][@max_rarity[0]]<=0
@@ -4295,8 +4558,8 @@ def adv_mats(event,args,bot,forcespiral=false)
       f2=[]
       f2.push([1,"#{f[0] if nums[0]<10}\n\n__*Floor 2 unbind*__\n#{f[1]}"]) if nums[0]<20 && nums[1]>=10
       f2.push([2,"#{f[2] if nums[0]<20}\n\n__*Floor 3 unbind*__\n#{f[3]}"]) if nums[0]<30 && nums[1]>=20
-      f2.push([3,"#{f[4] if nums[0]<30}\n\n__*Floor 4 unbind*__\n#{f[5]}"]) if nums[0]<40 && nums[1]>=30
-      f2.push([4,"#{f[6] if nums[0]<40}\n\n__*Floor 5 unbind*__\n#{f[7]}"]) if nums[0]<50 && nums[1]>=40
+      f2.push([3,"#{f[4] if nums[0]<30}#{"\n\n__*Promotion to 4<:Rarity_4:532086056301101067>*__\n2,500<:Resource_Eldwater:532104503777034270>" if rar<4}\n\n__*Floor 4 unbind*__\n#{f[5]}"]) if nums[0]<40 && nums[1]>=30
+      f2.push([4,"#{f[6] if nums[0]<40}#{"\n\n__*Promotion to 5<:Rarity_5:532086056737177600>*__\n25,000<:Resource_Eldwater:532104503777034270>" if rar<5}\n\n__*Floor 5 unbind*__\n#{f[7]}"]) if nums[0]<50 && nums[1]>=40
       f2.push([5,"#{f[8] if nums[0]<50}#{"\n\n__*Mana Spiral unlock*__\n#{f[9]}" if mana && nums[0]<=49}"]) if nums[0]<=50 && nums[1]>=50
       xcolor=element_color(elem)
       disp="__**#{name}**'s Mana Spiral mats#{" (#{nums_mean})" if nums_mean.length>0}__"
@@ -4335,6 +4598,8 @@ def adv_mats(event,args,bot,forcespiral=false)
         f4=f2.reject{|q| q[0]!=f3[i][0]}
         for i2 in 0...f4.length
           f3[i][1]+=f4[i2][1]
+          f3[i][1]+=2500 if rar<4 && f3[i][0]=='Eldwater' 
+          f3[i][1]+=25000 if rar<5 && f3[i][0]=='Eldwater' 
         end
         if f3[i][0]=='Mana'
           f3[i]="\u00B7  #{longFormattedNumber(f3[i][1])}<:Resource_Mana:532104503852400640>"
@@ -4350,6 +4615,34 @@ def adv_mats(event,args,bot,forcespiral=false)
     return nil
   end
   event.respond "**Element:** #{element_emote(elem,bot)}\n**Rarity:** #{generate_rarity_row(rar)}#{"\n**Mana Spiral**" if mana}#{"\n**Additional Numbers:** #{nums[0,[nums.length,2].min].join(', ')}" if nums.length>0}"
+end
+
+def affinity_resonance(event,bot)
+  f=[]
+  str=''
+  for i in 0...@resonance.length
+    k=@resonance[i].map{|q| q}
+    moji2=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "Affinity_#{k[0]}"}
+    m=[]
+    if safe_to_spam?(event)
+      m.push("*2 prints:* #{k[1]}") unless k[1].nil?
+      m.push("*3 prints:* #{k[2]}") unless k[2].nil?
+      m.push("*4 prints:* #{k[3]}") unless k[3].nil?
+      f.push(["#{moji2[0].mention unless moji2.length<=0} #{k[0]}",m.join("\n")])
+    else
+      m.push(2) unless k[1].nil?
+      m.push(3) unless k[2].nil?
+      m.push(4) unless k[3].nil?
+      str="#{str}\n#{moji2[0].mention unless moji2.length<=0}**#{k[0]}** x#{m.join('/')} = "
+      m=k[1,3].compact
+      m2=m[0].split(' ')
+      m2.pop
+      m2=m2.join(' ')
+      str="#{str}#{m2} +#{m.map{|q| q.split(' ')[-1].gsub('+','')}.join('/')}"
+    end
+  end
+  create_embed(event,"__**Affinity effects**__",str,0xED619A,nil,nil,f)
+  return nil
 end
 
 def grab_today(event,bot,args=nil,ignoreinputs=false,mode=0)
@@ -5113,12 +5406,12 @@ def disp_boop_tags(event)
     str=extend_message(str,m[i],event)
   end
   lookout=lookout2.reject{|q| q[2]!='Askillity'}.map{|q| q[0]}
-  m=@askilities.reject{|q| q[2]!='Skill'}.map{|q| q[10]}.join(', ').split(', ').reject{|q| lookout.include?(q) || q.nil? || q.length<=0 || (q[0,1]=='E' && q[1,1].to_i.to_s==q[1,1]) || (q[0,1]=='I' && q[1,1].to_i.to_s==q[1,1]) || ['Flame','Water','Wind','Light','Shadow','Mixed','Null','Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff'].include?(q)}.uniq.sort
+  m=@askilities.reject{|q| q[2]!='Skill'}.map{|q| q[10]}.join(', ').split(', ').reject{|q| lookout.include?(q) || q.nil? || q.length<=0 || (q[0,1]=='E' && q[1,1].to_i.to_s==q[1,1]) || (q[0,1]=='I' && q[1,1].to_i.to_s==q[1,1]) || ['Flame','Water','Wind','Light','Shadow','Mixed','Null','Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Manacaster'].include?(q)}.uniq.sort
   str=extend_message(str,'__**Skill tags**__',event,2)
   for i in 0...m.length
     str=extend_message(str,m[i],event)
   end
-  m=@askilities.reject{|q| !['Ability','Aura','CoAbility','Chain'].include?(q[2])}.map{|q| q[6]}.join(', ').split(', ').reject{|q| q.nil? || q.length<=0 || lookout.include?(q) || ['Flame','Water','Wind','Light','Shadow','Mixed','Null','Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff'].include?(q)}.uniq.sort
+  m=@askilities.reject{|q| !['Ability','Aura','CoAbility','Chain'].include?(q[2])}.map{|q| q[6]}.join(', ').split(', ').reject{|q| q.nil? || q.length<=0 || lookout.include?(q) || ['Flame','Water','Wind','Light','Shadow','Mixed','Null','Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Manacaster'].include?(q)}.uniq.sort
   str=extend_message(str,'__**Ability tags**__',event,2)
   for i in 0...m.length
     str=extend_message(str,m[i],event)
@@ -5129,7 +5422,88 @@ def disp_boop_tags(event)
   for i in 0...m.length
     str=extend_message(str,m[i],event)
   end
+  abil=[]; skl=[]
+  a=@adventurers.map{|q| q}
+  skl.push(a.reject{|q| q[6].nil?}.map{|q| q[6]}.flatten)
+  abil.push(a.reject{|q| q[8].nil?}.map{|q| q[8]}.flatten)
+  abil.push(a.reject{|q| q[8].nil?}.map{|q| q[8]}.flatten.map{|q| q.split(') ')[-1]})
+  abil.push(a.reject{|q| q[15].nil?}.map{|q| q[15]}.flatten)
+  abil.push(a.reject{|q| q[15].nil?}.map{|q| q[15]}.flatten.map{|q| q.split(') ')[-1]})
+  a=@dragons.map{|q| q}
+  skl.push(a.reject{|q| q[5].nil?}.map{|q| q[5]}.flatten)
+  abil.push(a.reject{|q| q[6].nil?}.map{|q| q[6]}.flatten)
+  abil.push(a.reject{|q| q[6].nil?}.map{|q| q[6]}.flatten.map{|q| q.split(') ')[-1]})
+  abil.push(a.reject{|q| q[15].nil?}.map{|q| q[15]}.flatten)
+  abil.push(a.reject{|q| q[15].nil?}.map{|q| q[15]}.flatten.map{|q| q.split(') ')[-1]})
+  a=@wyrmprints.map{|q| q}
+  abil.push(a.reject{|q| q[5].nil?}.map{|q| q[5]}.flatten)
+  abil.push(a.reject{|q| q[5].nil?}.map{|q| q[5]}.flatten.map{|q| q.split(') ')[-1]})
+  a=@weapons.reject{|q| q}
+  skl.push(a.reject{|q| q[6].nil?}.map{|q| q[6]}.flatten)
+  abil.push(a.reject{|q| q[13].nil?}.map{|q| q[13]}.flatten)
+  abil.push(a.reject{|q| q[13].nil?}.map{|q| q[13]}.flatten.map{|q| q.split(') ')[-1]})
+  a=@enemies.map{|q| q}
+  abil.push(a.reject{|q| q[5].nil?}.map{|q| q[5]}.flatten)
+  abil.push(a.reject{|q| q[5].nil?}.map{|q| q[5]}.flatten.map{|q| q.split(') ')[-1]})
+  skil=skl.flatten.uniq
+  abil=abil.flatten.uniq
+  str=extend_message(str,'__**Depreciated skills**__',event,2)
+  m=@askilities.reject{|q| q[2]!='Skills' || skl.include?(q[0])}
+  for i in 0...m.length
+    str=extend_message(str,m[i],event)
+  end
+  str=extend_message(str,'__**Depreciated abilities**__',event,2)
+  m=@askilities.reject{|q| q[2]!='Ability' || q[1]=='example' || q[1].nil?}
+  romanums=['Ox0','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV',
+            'XXV','XXVI','XXVII','XXVIII','XXIX','XXX','XXXI','XXXII','XXXIII','XXXIV','XXXV','XXXVI','XXXVII','XXXVIII','XXXIX','XL','XLI','XLII','XLII',
+            'XLIII','XLIV','XLV','XLVI','XLVII','XLVIII','XLIX','L']
+  for i in 0...m.length
+    checkstr="#{m[i][0]} #{'+' if m[i][1].include?('%')}#{m[i][1]}"
+    checkstr="#{m[i][1]} #{m[i][0]}" if m[i][0][0,7]=='Hits = '
+    checkstr="#{m[i][0]}" if m[i][1]=='-'
+    canpost=true
+    canpost=false if abil.include?(checkstr)
+    if romanums.include?(m[i][1])
+      n=m.reject{|q| q[0]!=m[i][0]}
+      canpost=false if abil.include?("#{n[-1][0]} #{n[-1][1]}")
+    end
+    str=extend_message(str,checkstr,event) if canpost
+  end
   event.respond str
+end
+
+def show_print_shop(event)
+  data_load()
+  prn=@wyrmprints.reject{|q| ['e','s','z','y','t','w','$','c','p'].include?(q[1][1,1].to_s)}
+  args=event.message.text.downcase.split(' ')
+  rar=[]
+  for i in 0...args.length
+    rar.push(args[i].to_i) if args[i].to_i.to_s==args[i]
+    rar.push(args[i][0,1].to_i) if args[i][1,1]=='*' && args[i][0,1].to_i.to_s==args[i][0,1]
+  end
+  rar=rar.reject{|q| q<3 || q>@max_rarity[2]}
+  if rar.length<=0 && !safe_to_spam?(event)
+    event.respond "Too much data is trying to be displayed.  Please either specify a rarity or use this command in PM."
+    return nil
+  end
+  rar=rar[0,1] unless safe_to_spam?(event)
+  flds=[]
+  flds.push(["#{generate_rarity_row(3)}\n3,600<:Resource_Eldwater:532104503777034270> per 2UB\n17,000<:Resource_Eldwater:532104503777034270> per MUB\n\n200 purchase, 1700 per unbind",prn.reject{|q| q[1][0,1]!='3'}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(3)
+  flds.push(["#{generate_rarity_row(4)}\n36,000<:Resource_Eldwater:532104503777034270> per 2UB\n70,000<:Resource_Eldwater:532104503777034270> per MUB\n\n2000 purchase, 17000 per unbind",prn.reject{|q| q[1][0,1]!='4'}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(4)
+  flds.push(["#{generate_rarity_row(5)}\n58,000<:Resource_Eldwater:532104503777034270> per 2UB\n152,000<:Resource_Eldwater:532104503777034270> per MUB\n\n4000 purchase, 37000 per unbind",prn.reject{|q| q[1][0,1]!='5'}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(5)
+  flds.push(["#{generate_rarity_row(6)}\n122,000<:Resource_Eldwater:532104503777034270> per 2UB\n236,000<:Resource_Eldwater:532104503777034270> per MUB\n\n8000 purchase, 57000 per unbind",prn.reject{|q| q[1][0,1]!='6'}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(6)
+  flds=flds.map{|q| [q[0],q[1].join("\n"),q[1].length]}
+  flds=flds.reject{|q| q[2]<=0}
+  flds=flds.map{|q| [q[0],q[1]]}
+  if flds.map{|q| "**#{q[0]}**\n#{q[1]}"}.join("\n\n").length>=1500 || flds.length<2
+    for i in 0...flds.length
+      hdr=flds[i][0].split("\n\n")
+      create_embed(event,"**#{hdr[0].gsub("\n",' - ')}**\n__#{hdr[1]}__",'',0xCE456B,nil,nil,triple_finish(flds[i][1].split("\n")))
+    end
+  else
+    flds.map{|q| [q[0].gsub("\n\n","\n"),q[1]]}
+    create_embed(event,'__**Wyrmprint Shop**__','',0xCE456B,nil,nil,flds)
+  end
 end
 
 def disp_update_list()
@@ -5344,20 +5718,21 @@ def disp_adv_chain(event,args,bot)
     end
   end
   mmm=m.map{|q| q}
-  elem_stats=[['',      0,0,0,0,0,0],
-              ['Flame', 0,0,0,0,0,0],
-              ['Water', 0,0,0,0,0,0],
-              ['Wind',  0,0,0,0,0,0],
-              ['Light', 0,0,0,0,0,0],
-              ['Shadow',0,0,0,0,0,0],
-              ['Sword', 0,0,0,0,0,0],
-              ['Blade', 0,0,0,0,0,0],
-              ['Dagger',0,0,0,0,0,0],
-              ['Axe',   0,0,0,0,0,0],
-              ['Bow',   0,0,0,0,0,0],
-              ['Lance', 0,0,0,0,0,0],
-              ['Wand',  0,0,0,0,0,0],
-              ['Staff', 0,0,0,0,0,0]]
+  elem_stats=[['',           0,0,0,0,0,0],
+              ['Flame',      0,0,0,0,0,0],
+              ['Water',      0,0,0,0,0,0],
+              ['Wind',       0,0,0,0,0,0],
+              ['Light',      0,0,0,0,0,0],
+              ['Shadow',     0,0,0,0,0,0],
+              ['Sword',      0,0,0,0,0,0],
+              ['Blade',      0,0,0,0,0,0],
+              ['Dagger',     0,0,0,0,0,0],
+              ['Axe',        0,0,0,0,0,0],
+              ['Bow',        0,0,0,0,0,0],
+              ['Lance',      0,0,0,0,0,0],
+              ['Wand',       0,0,0,0,0,0],
+              ['Staff',      0,0,0,0,0,0],
+              ['Manacaster', 0,0,0,0,0,0]]
   for i in 0...m.length
     m[i][0]=m[i][0].gsub(' [Chain]','') unless mmm.map{|q| q[0].split(') ')[-1]}.include?(m[i][0].split(') ')[-1].gsub('~~','').gsub(' [Chain]',' [Coab]'))
     m[i][0]=m[i][0].gsub(' [Coab]','') unless mmm.map{|q| q[0].split(') ')[-1]}.include?(m[i][0].split(') ')[-1].gsub('~~','').gsub(' [Coab]',' [Chain]'))
@@ -6576,7 +6951,7 @@ def disp_alias_list(bot,event,args=nil,mode=0)
       f.push("__**#{abl[0]} #{'+' if abl[1].include?('%')}#{abl[1]}**__#{"'s server-specific aliases" if mode==1}")
       unless mode==1
         f.push("#{abl[0]}#{abl[1]}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
-        if abl[i2][1].include?('%')
+        if abl[1].include?('%')
           f.push("#{abl[0]}#{abl[1]}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
           f.push("#{abl[0]}#{abl[1].gsub('%','')}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
           f.push("#{abl[0]}+#{abl[1].gsub('%','')}".gsub(' ','').gsub('(','').gsub(')','').gsub('_','').gsub('!','').gsub('?','').gsub("'",'').gsub('"',''))
@@ -6685,14 +7060,17 @@ def snagstats(event,bot,f=nil,f2=nil)
   @server_data[0][@shardizard]=k
   @server_data[1][@shardizard]=bot.users.size
   metadata_save()
-  if ['servers','server','members','member','shard','shards','user','users'].include?(f.downcase)
+  if ['servers','server','members','member','shard','shards','user','users'].include?(f.downcase) && @shardizard>=0
+    mx=@shards*1
+    mx=f2.to_i if f2.to_i.to_s==f2 && event.user.id==167657750971547648
     str="**I am in #{longFormattedNumber(@server_data[0].inject(0){|sum,x| sum + x })} servers.**"
-    for i in 0...@shards
+    for i in 0...mx
       m=i
       m=i+1 if i>3
-      str=extend_message(str,"The #{shard_data(0,true)[i]} Shard is in #{longFormattedNumber(@server_data[0][m])} server#{"s" if @server_data[0][m]!=1}.",event)
+      m=4 if m>@server_data[0].length-1
+      str=extend_message(str,"The #{shard_data(0,true,mx)[i]} Shard is in #{longFormattedNumber(@server_data[0][m])} server#{"s" if @server_data[0][m]!=1}.",event)
     end
-    str=extend_message(str,"The #{shard_data(0)[4]} Shard is in #{longFormattedNumber(@server_data[0][4])} server#{"s" if @server_data[0][4]!=1}.",event,2) if event.user.id==167657750971547648
+    str=extend_message(str,"The #{shard_data(0,false,mx)[4]} Shard is in #{longFormattedNumber(@server_data[0][4])} server#{"s" if @server_data[0][4]!=1}.",event,2) if event.user.id==167657750971547648
     if bot.profile.id==618979409059119113
       str="This cloned version of Botan is in #{longFormattedNumber(@server_data[0][0])} server#{"s" if @server_data[0][0]!=1}, reaching #{longFormattedNumber(@server_data[1][0])} unique members."
     end
@@ -6742,6 +7120,8 @@ def snagstats(event,bot,f=nil,f2=nil)
     str2="#{str2}\n<:Weapon_Wand:532106114985099264> #{m.length} Wand-using adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[2][2]!='Staff'}
     str2="#{str2}\n<:Weapon_Staff:532106114733441024> #{m.length} Staff-using adventurer#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][2]!='Manacaster'}
+    str2="#{str2}\n<:Weapon_Manacaster:758905122448867338> #{m.length} Manacaster-using adventurer#{'s' unless m.length==1}" if m.length>0
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
@@ -6863,18 +7243,46 @@ def snagstats(event,bot,f=nil,f2=nil)
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     str2=''
-    m=adv.reject{|q| q[2]!='Attack'}
-    str2="<:Type_Attack:532107867520630784> #{m.length} Attack-amulet print#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2]!='Defense'}
-    str2="#{str2}\n<:Type_Defense:532107867264909314> #{m.length} Defense-amulet print#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2]!='Support'}
-    str2="#{str2}\n<:Type_Support:532107867575156747> #{m.length} Support-amulet print#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2]!='Healing'}
-    str2="#{str2}\n<:Type_Healing:532107867348533249> #{m.length} Healing-amulet print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Queen'}
+    str2="<:Affinity_Queen:758912216115314690> #{m.length} Queen-affinity print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Hatchet'}
+    str2="#{str2}\n<:Affinity_Hatchet:758912216413241354> #{m.length} Hatchet-affinity print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Duel'}
+    str2="#{str2}\n<:Affinity_Duel:758912216052269076> #{m.length} Duel-affinity print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Barrage'}
+    str2="#{str2}\n<:Affinity_Barrage:758912216401051720> #{m.length} Barrage-affinity print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Draco'}
+    str2="#{str2}\n<:Affinity_Draco:758912216048205824> #{m.length} Draco-affinity print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Trident'}
+    str2="#{str2}\n<:Affinity_Trident:758912216333549619> #{m.length} Trident-affinity print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Phoenix'}
+    str2="#{str2}\n<:Affinity_Phoenix:758912216073240677> #{m.length} Phoenix-affinity print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Wolf'}
+    str2="#{str2}\n<:Affinity_Wolf:758912216274567189> #{m.length} Wolf-affinity print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Bull'}
+    str2="#{str2}\n<:Affinity_Bull:758912215733895169> #{m.length} Bull-affinity print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Serpent'}
+    str2="#{str2}\n<:Affinity_Serpent:758912216304189471> #{m.length} Serpent-affinity print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Divinity'}
+    str2="#{str2}\n<:Affinity_Divinity:758912216031952907> #{m.length} Divinity-affinity print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| ['Queen','Hatchet','Duel','Barrage','Draco','Trident','Phoenix','Wolf','Bull','Serpent','Divinity'].include?(q[2][1])}
+    str2="#{str2}\n#{m.length} print#{'s' unless m.length==1} with no affinity" if m.length>0
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     if safe_to_spam?(event)
+      str2=''
+      m=adv.reject{|q| q[2][0]!='Attack'}
+      str2="<:Type_Attack:532107867520630784> #{m.length} Attack-amulet print#{'s' unless m.length==1}" if m.length>0
+      m=adv.reject{|q| q[2][0]!='Defense'}
+      str2="#{str2}\n<:Type_Defense:532107867264909314> #{m.length} Defense-amulet print#{'s' unless m.length==1}" if m.length>0
+      m=adv.reject{|q| q[2][0]!='Support'}
+      str2="#{str2}\n<:Type_Support:532107867575156747> #{m.length} Support-amulet print#{'s' unless m.length==1}" if m.length>0
+      m=adv.reject{|q| q[2][0]!='Healing'}
+      str2="#{str2}\n<:Type_Healing:532107867348533249> #{m.length} Healing-amulet print#{'s' unless m.length==1}" if m.length>0
+      str2=str2[1,str2.length-1] if str2[0,1]=="\n"
+      str2=str2[2,str2.length-2] if str2[0,2]=="\n"
+      str=extend_message(str,str2,event,2)
       str2=''
       m=adv.reject{|q| q[1].length>1}
       str2="#{m.length} summonable print#{'s' unless m.length==1}" if m.length>0
@@ -6910,6 +7318,8 @@ def snagstats(event,bot,f=nil,f2=nil)
     str2="#{str2}\n<:Weapon_Wand:532106114985099264> #{m.length} Wand#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q[1]!='Staff'}
     str2="#{str2}\n<:Weapon_Staff:532106114733441024> #{m.length} #{'Staff' if m.length==1}#{'Staves' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[1]!='Manacaster'}
+    str2="#{str2}\n<:Weapon_Manacaster:758905122448867338> #{m.length} Manacaster#{'s' unless m.length==1}" if m.length>0
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
@@ -7268,16 +7678,18 @@ def snagstats(event,bot,f=nil,f2=nil)
     event.respond s2
     return nil
   end
-  glbl=@aliases.reject{|q| q[0]!='Adventurer' || !q[3].nil?}
-  srv_spec=@aliases.reject{|q| q[0]!='Adventurer' || q[3].nil?}
+  glbl=@aliases.reject{|q| !q[3].nil?}
+  srv_spec=@aliases.reject{|q| q[3].nil?}
   b=[]
   File.open("#{@location}devkit/BotanBot.rb").each_line do |line|
     l=line.gsub(' ','').gsub("\n",'')
     b.push(l) unless l.length<=0
   end
-  event << "**I am in #{longFormattedNumber(@server_data[0].inject(0){|sum,x| sum + x })} *servers*, reaching #{longFormattedNumber(@server_data[1].inject(0){|sum,x| sum + x })} unique members.**"
-  event << "This shard is in #{longFormattedNumber(@server_data[0][@shardizard])} server#{"s" unless @server_data[0][@shardizard]==1}, reaching #{longFormattedNumber(bot.users.size)} unique members."
-  event << ''
+  unless @shardizard<0
+    event << "**I am in #{longFormattedNumber(@server_data[0].inject(0){|sum,x| sum + x })} *servers*, reaching #{longFormattedNumber(@server_data[1].inject(0){|sum,x| sum + x })} unique members.**"
+    event << "This shard is in #{longFormattedNumber(@server_data[0][@shardizard])} server#{"s" unless @server_data[0][@shardizard]==1}, reaching #{longFormattedNumber(bot.users.size)} unique members."
+    event << ''
+  end
   event << "**There are #{longFormattedNumber(@adventurers.length)} *adventurers*.**"
   event << "**There are #{longFormattedNumber(@dragons.length)} *dragons*.**"
   event << "**There are #{longFormattedNumber(@wyrmprints.length)} *wyrmprints*.**"
