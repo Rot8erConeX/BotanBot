@@ -1997,7 +1997,7 @@ def disp_wyrmprint_stats(bot,event,args=nil,juststats=false)
   else
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0]}"}
     moji2=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "Affinity_#{k[2][1]}"}
-    title="#{moji2[0].mention unless moji2.length<=0}**#{k[2][1]}**"
+    title="#{moji2[0].mention unless moji2.length<=0}**#{k[2][1]}'s Boon**"
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][0]}**"
     if !k[10].nil? && k[10]=='MM'
       title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**"
@@ -2013,10 +2013,10 @@ def disp_wyrmprint_stats(bot,event,args=nil,juststats=false)
   xcolor=0x00205A if k[2][0]=='Defense'
   xcolor=0x39045A if k[2][0]=='Support'
   xcolor=0x005918 if k[2][0]=='Healing'
-  xcolor=0x944CCD if ['Phoenix','Wolf','Bull','Serpent'].include?(k[2][1])
-  xcolor=0xFF0031 if ['Duel','Hatchet','Barrage','Queen','Trident'].include?(k[2][1])
-  xcolor=0xF68D10 if ['Draco'].include?(k[2][1])
-  xcolor=0x188931 if ['Divinity'].include?(k[2][1])
+  xcolor=0x944CCD if ['Eagle','Wolf','Bull','Serpent'].include?(k[2][1])
+  xcolor=0xFF0031 if ['Sword','Axe','Bow','Crown','Lance'].include?(k[2][1])
+  xcolor=0xF68D10 if ['Dragon'].include?(k[2][1])
+  xcolor=0x188931 if ['Staff'].include?(k[2][1])
   lookout=get_lookout_tags().reject{|q| q[2]!='Availability' && q[2]!='Availability/Wyrmprint'}
   for i in 0...lookout.length
     if k[1].length>1 && k[1][1,1].downcase==lookout[i][3]
