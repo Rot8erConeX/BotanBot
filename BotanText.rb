@@ -413,17 +413,17 @@ end
            ['Sleep','SleepCleanse','WakeUpSlap'],
            ['Bleed','BleedCleanse','Bandage'],
            ['Curse','CurseCleanse']]
-@resonance=[['Queen',nil,nil,'Skill Damage +10%'],
-            ['Hatchet',nil,nil,'Broken Punisher +10%'],
-            ['Duel',nil,nil,'Strength +8%'],
-            ['Barrage',nil,'Skill Haste +6%','Skill Haste +10%'],
-            ['Trident','Force Strike +5%','Force Strike +8%','Force Strike +15%'],
-            ['Draco','Dragon Damage +10%','Dragon Damage +18%','Dragon Damage +30%'],
-            ['Phoenix','Burn Res +100%'],
+@resonance=[['Crown',nil,nil,'Skill Damage +10%'],
+            ['Axe',nil,nil,'Broken Punisher +10%'],
+            ['Sword',nil,nil,'Strength +8%'],
+            ['Bow',nil,'Skill Haste +6%','Skill Haste +10%'],
+            ['Lance','Force Strike +5%','Force Strike +8%','Force Strike +15%'],
+            ['Dragon','Dragon Damage +10%','Dragon Damage +18%','Dragon Damage +30%'],
+            ['Eagle','Burn Res +100%'],
             ['Wolf','Stun Res +100%'],
             ['Bull','Paralysis Res +100%'],
             ['Serpent','Curse Res +100%'],
-            ['Divinity','Buff Skill Time +5%','Buff Skill Time +8%','Buff Skill Time +15%']]
+            ['Staff','Buff Skill Time +5%','Buff Skill Time +8%','Buff Skill Time +15%']]
 
 def dragon_data(bot,event,args=nil,juststats=false)
   dispstr=event.message.text.downcase.split(' ')
@@ -1728,10 +1728,10 @@ def art_of_printing(bot,event,args=nil)
   xcolor=0x00205A if k[2][0]=='Defense'
   xcolor=0x39045A if k[2][0]=='Support'
   xcolor=0x005918 if k[2][0]=='Healing'
-  xcolor=0x944CCD if ['Phoenix','Wolf','Bull','Serpent'].include?(k[2][1])
-  xcolor=0xFF0031 if ['Duel','Hatchet','Barrage','Queen','Trident'].include?(k[2][1])
-  xcolor=0xF68D10 if ['Draco'].include?(k[2][1])
-  xcolor=0x188931 if ['Divinity'].include?(k[2][1])
+  xcolor=0x944CCD if ['Eagle','Wolf','Bull','Serpent'].include?(k[2][1])
+  xcolor=0xFF0031 if ['Sword','Axe','Bow','Crown','Lance'].include?(k[2][1])
+  xcolor=0xF68D10 if ['Dragon'].include?(k[2][1])
+  xcolor=0x188931 if ['Staff'].include?(k[2][1])
   halfemote="\u200B  \u200B  \u200B  \u200B"
   disp="#{halfemote*(4-k[1][0,1].to_i) if k[1][0,1].to_i<4}#{" \u200B" if k[1][0,1].to_i<3}#{generate_rarity_row(k[1][0,1].to_i,0,fehm)}\n#{"#{halfemote} \u200B" if k[1][0,1].to_i==5}#{emote*4}"
   nammes=['','','']
@@ -2831,17 +2831,17 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
     ign=true if ['share','shared','skillshare','shareskill'].include?(args[i].downcase)
     rarity.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<@max_rarity.max+1
     rarity.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<@max_rarity.max+1
-    affinity.push('Queen') if ['queen','crown','queens','crowns','crowned'].include?(args[i].downcase)
-    affinity.push('Hatchet') if ['hatchet','axs','axes','hatchets'].include?(args[i].downcase)
-    affinity.push('Duel') if ['duel','dual','swords'].include?(args[i].downcase)
-    affinity.push('Barrage') if ['barrage','arrows','bows'].include?(args[i].downcase)
-    affinity.push('Draco') if ['draco','dragon','draco','dragons','draconic'].include?(args[i].downcase)
-    affinity.push('Trident') if ['trident','tridents','fork','forks','aether'].include?(args[i].downcase)
-    affinity.push('Phoenix') if ['phoenix','pheonix','wright','eagle','eagles','bird','birds','phoenixes','pheonixes','phoenixs','pheonixs'].include?(args[i].downcase)
+    affinity.push('Crown') if ['queen','crown','queens','crowns','crowned'].include?(args[i].downcase)
+    affinity.push('Axe') if ['hatchet','axs','axes','hatchets','ax','axe'].include?(args[i].downcase)
+    affinity.push('Sword') if ['duel','dual','swords','sword'].include?(args[i].downcase)
+    affinity.push('Bow') if ['barrage','arrows','bows','bow'].include?(args[i].downcase)
+    affinity.push('Dragon') if ['draco','dragon','draco','dragons','draconic'].include?(args[i].downcase)
+    affinity.push('Lance') if ['trident','tridents','fork','forks','aether','lance','lances','spear','spears'].include?(args[i].downcase)
+    affinity.push('Eagle') if ['phoenix','pheonix','wright','eagle','eagles','bird','birds','phoenixes','pheonixes','phoenixs','pheonixs'].include?(args[i].downcase)
     affinity.push('Wolf') if ['wolf','wolfs','wolves','unicorn','unicorns'].include?(args[i].downcase)
     affinity.push('Bull') if ['bull','bulls','cow','cows','minotaur','minotaurs'].include?(args[i].downcase)
     affinity.push('Serpent') if ['serpent','serpents','snake','snakes','snek','sneks','serpentine'].include?(args[i].downcase)
-    affinity.push('Divinity') if ['divinity','divine','eclipse','eclipse','holy'].include?(args[i].downcase)
+    affinity.push('Staff') if ['divinity','divine','eclipse','eclipse','holy','staff','staffs','staves'].include?(args[i].downcase)
     affinity.push('None') if ['noaffinity','empty','affinityless'].include?(args[i].downcase)
     clzz.push('Attack') if ['attack','atk','att','attacking'].include?(args[i].downcase)
     clzz.push('Defense') if ['defense','defence','def','defending','defensive','defencive'].include?(args[i].downcase)
@@ -2877,7 +2877,7 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
     emo.push(@rarity_stars[0][rarity[0]]) if rarity.length<2
   end
   if affinity.length>0
-    aff=['Queen','Hatchet','Duel','Barrage','Draco','Trident','Phoenix','Wolf','Bull','Serpent','Divinity']
+    aff=['Crown','Axe','Sword','Bow','Dragon','Lance','Eagle','Wolf','Bull','Serpent','Staff']
     char=char.reject{|q| !affinity.include?(q[2][1]) && !(!aff.include?(q[2][1]) && affinity.include?('None'))}.uniq
     for i in 0...affinity.length
       moji=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "Affinity_#{affinity[i]}"}
@@ -7243,29 +7243,29 @@ def snagstats(event,bot,f=nil,f2=nil)
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     str2=''
-    m=adv.reject{|q| q[2][1]!='Queen'}
-    str2="<:Affinity_Queen:758912216115314690> #{m.length} Queen-affinity print#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Hatchet'}
-    str2="#{str2}\n<:Affinity_Hatchet:758912216413241354> #{m.length} Hatchet-affinity print#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Duel'}
-    str2="#{str2}\n<:Affinity_Duel:758912216052269076> #{m.length} Duel-affinity print#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Barrage'}
-    str2="#{str2}\n<:Affinity_Barrage:758912216401051720> #{m.length} Barrage-affinity print#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Draco'}
-    str2="#{str2}\n<:Affinity_Draco:758912216048205824> #{m.length} Draco-affinity print#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Trident'}
-    str2="#{str2}\n<:Affinity_Trident:758912216333549619> #{m.length} Trident-affinity print#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Phoenix'}
-    str2="#{str2}\n<:Affinity_Phoenix:758912216073240677> #{m.length} Phoenix-affinity print#{'s' unless m.length==1}" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Crown'}
+    str2="<:Affinity_Queen:758912216115314690> #{m.length} print#{'s' unless m.length==1} with Crown's Boon" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Axe'}
+    str2="#{str2}\n<:Affinity_Hatchet:758912216413241354> #{m.length} print#{'s' unless m.length==1} with Axe's Boon" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Sword'}
+    str2="#{str2}\n<:Affinity_Duel:758912216052269076> #{m.length} print#{'s' unless m.length==1} with Sword's Boon" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Bow'}
+    str2="#{str2}\n<:Affinity_Barrage:758912216401051720> #{m.length} print#{'s' unless m.length==1} with Bow's Boon" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Dragon'}
+    str2="#{str2}\n<:Affinity_Draco:758912216048205824> #{m.length} print#{'s' unless m.length==1} with Dragon's Boon" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Lance'}
+    str2="#{str2}\n<:Affinity_Trident:758912216333549619> #{m.length} print#{'s' unless m.length==1} with Lance's Boon" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Eagle'}
+    str2="#{str2}\n<:Affinity_Phoenix:758912216073240677> #{m.length} print#{'s' unless m.length==1} with Eagle's Boon" if m.length>0
     m=adv.reject{|q| q[2][1]!='Wolf'}
-    str2="#{str2}\n<:Affinity_Wolf:758912216274567189> #{m.length} Wolf-affinity print#{'s' unless m.length==1}" if m.length>0
+    str2="#{str2}\n<:Affinity_Wolf:758912216274567189> #{m.length} print#{'s' unless m.length==1} with Wolf's Boon" if m.length>0
     m=adv.reject{|q| q[2][1]!='Bull'}
-    str2="#{str2}\n<:Affinity_Bull:758912215733895169> #{m.length} Bull-affinity print#{'s' unless m.length==1}" if m.length>0
+    str2="#{str2}\n<:Affinity_Bull:758912215733895169> #{m.length} print#{'s' unless m.length==1} with Bull's Boon" if m.length>0
     m=adv.reject{|q| q[2][1]!='Serpent'}
-    str2="#{str2}\n<:Affinity_Serpent:758912216304189471> #{m.length} Serpent-affinity print#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Divinity'}
-    str2="#{str2}\n<:Affinity_Divinity:758912216031952907> #{m.length} Divinity-affinity print#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| ['Queen','Hatchet','Duel','Barrage','Draco','Trident','Phoenix','Wolf','Bull','Serpent','Divinity'].include?(q[2][1])}
+    str2="#{str2}\n<:Affinity_Serpent:758912216304189471> #{m.length} print#{'s' unless m.length==1} with Serpent's Boon" if m.length>0
+    m=adv.reject{|q| q[2][1]!='Staff'}
+    str2="#{str2}\n<:Affinity_Divinity:758912216031952907> #{m.length} print#{'s' unless m.length==1} with Staff's Boon" if m.length>0
+    m=adv.reject{|q| ['Crown','Axe','Sword','Bow','Dragon','Lance','Eagle','Wolf','Bull','Serpent','Staff'].include?(q[2][1])}
     str2="#{str2}\n#{m.length} print#{'s' unless m.length==1} with no affinity" if m.length>0
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
