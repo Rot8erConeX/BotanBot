@@ -1981,7 +1981,7 @@ def disp_wyrmprint_stats(bot,event,args=nil,juststats=false)
     clzz='<:Defense_Shield:570987444309196835>' if k[2][0]=='Defense'
     clzz='<:Healing_Rod:570991014894895104>' if k[2][0]=='Healer'
     moji2=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "Affinity_#{k[2][1]}"}
-    title="#{moji2[0].mention unless moji2.length<=0}**#{k[2][1]}**"
+    title="#{moji2[0].mention unless moji2.length<=0}**#{k[2][1]}'s Boon**".gsub("None's Boon",'No affinity')
     title="#{title}\n#{clzz}**#{k[2][0]}**"
     title="#{title}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
   elsif !k[10].nil? && k[10]=='FGO'
@@ -1991,13 +1991,13 @@ def disp_wyrmprint_stats(bot,event,args=nil,juststats=false)
     clzz='<:Arts_y:526556105489252352>' if k[2][0]=='Defense'
     clzz='<:healing:572342852420501506>' if k[2][0]=='Healer'
     moji2=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "Affinity_#{k[2][1]}"}
-    title="#{moji2[0].mention unless moji2.length<=0}**#{k[2][1]}**"
+    title="#{moji2[0].mention unless moji2.length<=0}**#{k[2][1]}'s Boon**".gsub("None's Boon",'No affinity')
     title="#{title}\n#{clzz}**#{k[2][0]}**"
     title="#{title}\n<:Bond:613804021119189012>**FGO Collab**"
   else
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0]}"}
     moji2=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "Affinity_#{k[2][1]}"}
-    title="#{moji2[0].mention unless moji2.length<=0}**#{k[2][1]}'s Boon**"
+    title="#{moji2[0].mention unless moji2.length<=0}**#{k[2][1]}'s Boon**".gsub("None's Boon",'No affinity')
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][0]}**"
     if !k[10].nil? && k[10]=='MM'
       title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**"
