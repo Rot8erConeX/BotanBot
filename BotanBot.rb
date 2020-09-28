@@ -2391,7 +2391,8 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
         eng=" - #{semoji[4]}Inspirable" if skl[10].include?('Damage')
         eng=" - #{semoji[5]}Energizable/Inspirable" if skl[7]=='Yes' && skl[10].include?('Damage')
         str="#{str}\n\n**Skill:** *#{skl[0]}*#{eng}#{energy_emoji(skl[10])}"
-        if skl[6][0]==skl[6][1] && skl[6][1]<=0
+        if skl[6][0]==skl[6][1] || skl[6][1]<=0
+          str="#{str}#{" - #{longFormattedNumber(skl[6][0])} SP" unless skl[6][0]<=0};;;;;"
         else
           str="#{str} - #{longFormattedNumber(skl[6][0])} (L1) \u2192 #{longFormattedNumber(skl[6][1])} (L2) SP;;;;;"
         end
@@ -2454,19 +2455,19 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   ftr='Try using the mats command on this weapon!'
   ftl=0
   ftl=ftr.length unless ftr.nil?
-  if str.length+title.length+ftl>=1500
+  if str.length+title.length+ftl>=1900
     str=str.split("\n\n\n")
-    if str[0].length>=1500
+    if str[0].length>=1900
       str[0]=str[0].split("**Promotes ")
       for i in 1...str[0].length
         str[0][i]="**Promotes #{str[0][i]}"
       end
       str.flatten!
-      if str[0].length>=1500
+      if str[0].length>=1900
         str[0]=str[0].split("\n\n")
         stp=0
         for i in 1...str[0].length
-          if "#{str[0][stp]}\n\n#{str[0][i]}".length<1500
+          if "#{str[0][stp]}\n\n#{str[0][i]}".length<1900
             str[0][stp]="#{str[0][stp]}\n\n#{str[0][i]}"
             str[0][i]=nil
           else
@@ -2478,7 +2479,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
       end
     end
     create_embed(event,["__**#{k[0]}**__",title],str[0],element_color(k[3]),nil,xpic)
-    if str[1,str.length-1].join("\n\n\n").length<1500
+    if str[1,str.length-1].join("\n\n\n").length<1900
       create_embed(event,'',str[1,str.length-1].join("\n\n\n"),element_color(k[3])) unless str.length<2
     else
       for i in 1...str.length
