@@ -42,14 +42,14 @@
   true]
 ["Custom Combo", 
   ["custom","customcombo","combo"], 
-  ["Bellina", "Catherine", "Gala Alex", "Gala Laxi", "Gala Leif", "Lily", "Mega Man", "Mitsuba", "Nadine", "Pipple", "Tiki(Young)", "Tobias", "Valerio"], 
+  ["Bellina", "Catherine", "Gala Alex", "Gala Laxi", "Gala Leif", "Gala Zena", "Lily", "Meene", "Mega Man", "Mitsuba", "Nadine", "Nevin", "Pinon", "Pipple", "Tiki(Young)", "Tobias", "Valerio"], 
   nil, 
   nil, 
   nil,
   false]
 ["Custom Force Strike", 
   ["customforcestrike","customfs","changedfs", "uniquefs", "uniqueforcestrike"], 
-  ["Albert", "Bellina", "Berserker(Hunter)", "Catherine", "Gala Laxi", "Grace", "Linnea", "Lin You", "Mega Man", "Melody", "Nadine", "Nevin", "Patia(Summer)", "Peony", "Pinon", "Sarisse(Hunter)", "Vanessa", "Vanessa(Hunter)", "Xander", "Xuan Zang(Radiant)", "Zena", "Zhu Bajie"],
+  ["Albert", "Bellina", "Berserker(Hunter)", "Catherine", "Gala Laxi", "Gala Zena", "Grace", "Linnea", "Lin You", "Meene", "Mega Man", "Melody", "Nadine", "Nevin", "Patia(Summer)", "Peony", "Pinon", "Sarisse(Hunter)", "Vanessa", "Vanessa(Hunter)", "Xander", "Xuan Zang(Radiant)", "Zena", "Zhu Bajie"],
   nil,
   nil,
   nil,
