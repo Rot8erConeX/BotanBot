@@ -10,7 +10,7 @@ require 'tzinfo/data'                  # Downloaded with active_support below, b
 require 'rufus-scheduler'              # Download link: https://github.com/jmettraux/rufus-scheduler
 require 'active_support/core_ext/time' # Download link: https://rubygems.org/gems/activesupport/versions/5.0.0
 require_relative 'rot8er_functs'       # functions I use commonly in bots
-@location="C:/Users/#{@mash}/Desktop/"
+@location=">Location<"
 
 load "#{@location}devkit/BotanText.rb"
 
@@ -177,7 +177,7 @@ def safe_to_spam?(event,chn=nil) # determines whether or not it is safe to send 
   return false if event.user.id==213048998678888448
   return false if event.message.text.downcase.split(' ').include?('smol') && @shardizard==4
   return true if @shardizard==4
-  return false if event.message.text.downcase.split(' ').include?('smol') && [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388].include?(event.server.id) # it is safe to spam in the emoji servers
+  return false if event.message.text.downcase.split(' ').include?('xsmol') && [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388].include?(event.server.id) # it is safe to spam in the emoji servers
   return true if [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388].include?(event.server.id) # it is safe to spam in the emoji servers
   chn=event.channel if chn.nil?
   return true if ['bots','bot'].include?(chn.name.downcase) # channels named "bots" are safe to spam in
@@ -2258,6 +2258,13 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
   end
   str="#{str} - T#{k[16]}" unless k[16]==0
   str="#{str}\n**Wyrmprint slots:** #{k[17][0]}<:Weapon_Slot_Gold:758940716427902996>, #{k[17][1]}<:Weapon_Slot_Silver:758940716436815872>" unless k[17].nil?
+  if ['a','h'].include?(k[2][1,1])
+    str="#{str}\n**Weapon Bonus:** <:HP:573344832307593216>+1.5% <:Strength:573344931205349376>+1.5%"
+  elsif ['m'].include?(k[2][1,1])
+    str="#{str}\n**Weapon Bonus:** <:HP:573344832307593216>+0.5% <:Strength:573344931205349376>+0.5%"
+  elsif k[2].to_i.to_s==k[2] && ![nil,'',' ','-','None','Null'].include?(k[3])
+    str="#{str}\n**Weapon Bonus:** <:HP:573344832307593216>+0.5% <:Strength:573344931205349376>+0.5%"
+  end
   lookout=get_lookout_tags().reject{|q| q[2]!='Availability' && q[2]!='Availability/Weapon'}
   for i in 0...lookout.length
     if k[2].length>1 && k[2][1,1].downcase==lookout[i][3]
@@ -2651,6 +2658,17 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   end
   str="#{str} - T#{k[16]}" unless k[16]==0
   str="#{str}\n**Wyrmprint slots:** #{k[17][0]}<:Weapon_Slot_Gold:758940716427902996>, #{k[17][1]}<:Weapon_Slot_Silver:758940716436815872>" unless k[17].nil?
+  bftr=false
+  if ['a','h'].include?(k[2][1,1])
+    str="#{str}\n**Weapon Bonus:** <:HP:573344832307593216>+1.5% <:Strength:573344931205349376>+1.5%"
+    bftr=true
+  elsif ['m'].include?(k[2][1,1])
+    str="#{str}\n**Weapon Bonus:** <:HP:573344832307593216>+0.5% <:Strength:573344931205349376>+0.5%"
+    bftr=true
+  elsif k[2].to_i.to_s==k[2] && ![nil,'',' ','-','None','Null'].include?(k[3])
+    str="#{str}\n**Weapon Bonus:** <:HP:573344832307593216>+0.5% <:Strength:573344931205349376>+0.5%"
+    bftr=true
+  end
   lookout=get_lookout_tags().reject{|q| q[2]!='Availability' && q[2]!='Availability/Weapon'}
   for i in 0...lookout.length
     if k[2].length>1 && k[2][1,1].downcase==lookout[i][3]
@@ -2748,7 +2766,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   val*=5 if mub
   ftr=nil
   str="#{str}#{"\n\n**Crafting shown for #{'<:Unbind:534494090969088000>'*([val-1,4].min)}#{'<:NonUnbound:534494090876682264>'*([5-val,0].max)}**" if val>1 && !mub}\n\n**This weapon#{" (x#{val})" unless val==1}**"
-  str="#{str}\n*Smithy level required:* #{k[10]}" unless ['a','m'].include?(k[2][1,1])
+  str="#{str}\n*Smithy level required:* #{k[10]}" unless k[10].to_i<=0
   str="#{str}\n*Assembly cost:* #{longFormattedNumber(val*k[11][0])}#{bemoji[2]}#{"\n*Required mats:* #{k[12].map{|q| "#{q[0]} x#{val*q[1].to_i}"}.join(', ')}" unless k[12].nil?}"
   m2=wpnz.find_index{|q| q[8]==k[9] && !['','0',0].include?(q[8])}
   mmm2=nil
@@ -2799,6 +2817,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   end
   ftr='Include the word "Unbound" to show the data for MUB versions of these weapons.' unless mub || !s2s
   ftr="This is multiplying all crafts by #{val}.  For crafts for a #{val}UB weapon, include \"#{val}UB\" in your message instead." if val>1 && val<5 && !unbindnum
+  ftr="Weapon bonus is applied to all #{k[1]}-using adventurers, after this weapon is fully upgraded."
   unless s2s
     str2=''
     unless m2.nil? && mmm2.nil?
@@ -2821,7 +2840,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
   end
   str="#{str}#{str2}" if str2.length>0
   unless s2s
-    if str.gsub(';;;;;',"\n#{strx}").length>=1900
+    if str.gsub(';;;;;',"\n#{strx}").length>=1200
       str=str.gsub(';;;;;',"\n~~The description makes this data too long.  Please try again in PM.~~")
     else
       str=str.gsub(';;;;;',"\n#{strx}")
@@ -5877,7 +5896,7 @@ def sort_adventurers(bot,event,args=nil,mode=0)
     char[i][3]=char[i][3][1][m]
     char[i][4]=char[i][4][1][m]
     char[i][7]=char[i][5][1]
-    char[i][7]=0 if char[i][5].length<=1
+    char[i][7]=10 if char[i][5].length<=1
     char[i][5]=char[i][5][0]
     m2=[]
     for i2 in 0...srt.length
@@ -8217,7 +8236,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
           b=[]
           File.open("DLTemp.txt").each_line.with_index do |line, idx|
             if idx<100
-              b.push(line.gsub('>Token<',b2[3]).gsub('>Debug Token<',b2[-1]).gsub('>Smol Token<',b2[-3]))
+              b.push(line.gsub('>Token<',b2[3]).gsub('>Debug Token<',b2[-1]).gsub('>Smol Token<',b2[-3]).gsub('>Location<',@location))
             else
               b.push(line)
             end
