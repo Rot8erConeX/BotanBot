@@ -42,6 +42,7 @@
 ["BrokenPunisher", ["breakpunish", "breakpunisher", "breakpunishment", "brokenpunish", "brokenpunisher", "brokenpunishment", "brokepunish", "brokepunisher", "brokepunishment"], "Askillity"]
 ["BrunhildaRes", ["brunhildares", "brunhildaresistance", "brunres", "brunresistance", "mymres", "mymresistance"], "Askillity"]
 ["Buff", ["buff", "buffed", "buffs"], "Askillity"]
+["BuffPunisher", ["buffpunisher", "buffpunish"], "Askillity"]
 ["BuffTime", ["buffedtime", "buffstime", "bufftime"], "Askillity"]
 ["BuffZone", ["buffedzone", "buffszone", "buffzone"], "Askillity"]
 ["Burn", ["burn", "burned", "burning", "burnt"], "Askillity"]
