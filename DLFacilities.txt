@@ -854,6 +854,11 @@ Library Obscura\27\-\Adventurer, Event Altar\3x3\1\4400\Arcane Tome, 700\
 Library Obscura\28\-\Adventurer, Event Altar\3x3\1\4600\Arcane Tome, 800\
 Library Obscura\29\-\Adventurer, Event Altar\3x3\1\4800\Arcane Tome, 900\
 Library Obscura\30\-\Adventurer, Event Altar\3x3\1\5000\Arcane Tome, 1000\
+Library Obscura\31\-\Adventurer, Event Altar\3x3\1\5200\Arcane Tome, 1100\
+Library Obscura\32\-\Adventurer, Event Altar\3x3\1\5400\Arcane Tome, 1200\
+Library Obscura\33\-\Adventurer, Event Altar\3x3\1\5600\Arcane Tome, 1300\
+Library Obscura\34\-\Adventurer, Event Altar\3x3\1\5800\Arcane Tome, 1400\
+Library Obscura\35\-\Adventurer, Event Altar\3x3\1\6000\Arcane Tome, 1500\
 Light Altar\1\An altar to honor light. The mana housed within illuminates the soul, boosting the stats of light-attuned adventurers.\Adventurer, Altar\3x3\2\200\0\Light
 Light Altar\2\-\Adventurer, Altar\3x3\2\400\0\
 Light Altar\3\-\Adventurer, Altar\3x3\2\600\0\
@@ -989,6 +994,36 @@ Manacaster Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell 
 Manacaster Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Violet Insignia, 200;; Dyrenell Aureus, 140;; Royal Violet Insignia, 80\
 Manacaster Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Violet Insignia, 240;; Dyrenell Aureus, 150;; Royal Violet Insignia, 100\
 Manacaster Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Violet Insignia, 240;; Dyrenell Aureus, 160;; Royal Violet Insignia, 100\
+Opera House\1\Use it to boost the stats of bow and manacaster wielding adventurers.\Adventurer, Event Dual Dojo\3x3\1\0\0\Bow, Manacaster
+Opera House\2\-\Adventurer, Event Dual Dojo\3x3\1\100\Libretto, 3\
+Opera House\3\-\Adventurer, Event Dual Dojo\3x3\1\200\Libretto, 5\
+Opera House\4\-\Adventurer, Event Dual Dojo\3x3\1\300\Libretto, 7\
+Opera House\5\-\Adventurer, Event Dual Dojo\3x3\1\400\Libretto, 10\
+Opera House\6\-\Adventurer, Event Dual Dojo\3x3\1\500\Libretto, 12\
+Opera House\7\-\Adventurer, Event Dual Dojo\3x3\1\600\Libretto, 15\
+Opera House\8\-\Adventurer, Event Dual Dojo\3x3\1\800\Libretto, 18\
+Opera House\9\-\Adventurer, Event Dual Dojo\3x3\1\1000\Libretto, 21\
+Opera House\10\-\Adventurer, Event Dual Dojo\3x3\1\1200\Libretto, 25\
+Opera House\11\-\Adventurer, Event Dual Dojo\3x3\1\1400\Libretto, 30\
+Opera House\12\-\Adventurer, Event Dual Dojo\3x3\1\1600\Libretto, 50\
+Opera House\13\-\Adventurer, Event Dual Dojo\3x3\1\1800\Libretto, 70\
+Opera House\14\-\Adventurer, Event Dual Dojo\3x3\1\2000\Libretto, 90\
+Opera House\15\-\Adventurer, Event Dual Dojo\3x3\1\2200\Libretto, 120\
+Opera House\16\-\Adventurer, Event Dual Dojo\3x3\1\2400\Libretto, 150\
+Opera House\17\-\Adventurer, Event Dual Dojo\3x3\1\2700\Libretto, 180\
+Opera House\18\-\Adventurer, Event Dual Dojo\3x3\1\3000\Libretto, 210\
+Opera House\19\-\Adventurer, Event Dual Dojo\3x3\1\3300\Libretto, 250\
+Opera House\20\-\Adventurer, Event Dual Dojo\3x3\1\3600\Libretto, 300\
+Opera House\21\-\Adventurer, Event Dual Dojo\3x3\1\3900\Libretto, 350\
+Opera House\22\-\Adventurer, Event Dual Dojo\3x3\1\4200\Libretto, 400\
+Opera House\23\-\Adventurer, Event Dual Dojo\3x3\1\4500\Libretto, 450\
+Opera House\24\-\Adventurer, Event Dual Dojo\3x3\1\5000\Libretto, 500\
+Opera House\25\-\Adventurer, Event Dual Dojo\3x3\1\5500\Libretto, 550\
+Opera House\26\-\Adventurer, Event Dual Dojo\3x3\1\6000\Libretto, 600\
+Opera House\27\-\Adventurer, Event Dual Dojo\3x3\1\6500\Libretto, 700\
+Opera House\28\-\Adventurer, Event Dual Dojo\3x3\1\7000\Libretto, 800\
+Opera House\29\-\Adventurer, Event Dual Dojo\3x3\1\7500\Libretto, 900\
+Opera House\30\-\Adventurer, Event Dual Dojo\3x3\1\8000\Libretto, 1000\
 Palm Tree\-\A majestic palm tree. Plant a bunch and create your own tropical paradise!\Decorative\1x1\4\0\0\
 Poison Slime Statue\1\A statue of a poison slime granted to those who are victorious in void battles. The still shadow mana within it sharpens the mind. Use it to boost the stats of shadow-attuned adventurers.\Adventurer, Void Altar\2x2\1\0\0\Shadow, Slime
 Poison Slime Statue\2\-\Adventurer, Void Altar\2x2\1\5000\Iron Ore, 10\
@@ -1504,6 +1539,16 @@ Water Tree\12\-\Adventurer, Altar\3x3\1\110000\Soaring Ones' Mask Fragment, 35;;
 Water Tree\13\-\Adventurer, Altar\3x3\1\120000\Soaring Ones' Mask Fragment, 35;; Liberated One's Mask Fragment, 5\
 Water Tree\14\-\Adventurer, Altar\3x3\1\130000\Soaring Ones' Mask Fragment, 35;; Liberated One's Mask Fragment, 5\
 Water Tree\15\-\Adventurer, Altar\3x3\1\140000\Soaring Ones' Mask Fragment, 35;; Liberated One's Mask Fragment, 5\
+Water Tree\16\-\Adventurer, Altar\3x3\1\160000\Soaring Ones' Mask Fragment, 40;; Liberated One's Mask Fragment, 10\
+Water Tree\17\-\Adventurer, Altar\3x3\1\180000\Soaring Ones' Mask Fragment, 40;; Liberated One's Mask Fragment, 10\
+Water Tree\18\-\Adventurer, Altar\3x3\1\200000\Soaring Ones' Mask Fragment, 40;; Liberated One's Mask Fragment, 10\
+Water Tree\19\-\Adventurer, Altar\3x3\1\220000\Soaring Ones' Mask Fragment, 40;; Liberated One's Mask Fragment, 10\
+Water Tree\20\-\Adventurer, Altar\3x3\1\240000\Soaring Ones' Mask Fragment, 40;; Liberated One's Mask Fragment, 10\
+Water Tree\21\-\Adventurer, Altar\3x3\1\260000\Soaring Ones' Mask Fragment, 40;; Liberated One's Mask Fragment, 10\
+Water Tree\22\-\Adventurer, Altar\3x3\1\280000\Soaring Ones' Mask Fragment, 40;; Liberated One's Mask Fragment, 10\
+Water Tree\23\-\Adventurer, Altar\3x3\1\300000\Soaring Ones' Mask Fragment, 40;; Liberated One's Mask Fragment, 10\
+Water Tree\24\-\Adventurer, Altar\3x3\1\320000\Soaring Ones' Mask Fragment, 40;; Liberated One's Mask Fragment, 10\
+Water Tree\25\-\Adventurer, Altar\3x3\1\340000\Soaring Ones' Mask Fragment, 40;; Liberated One's Mask Fragment, 10\
 Wind Altar\1\An altar to honor wind. The mana housed within inspires great wisdom, boosting the stats of wind-attuned adventurers.\Adventurer, Altar\3x3\2\200\0\Wind
 Wind Altar\2\-\Adventurer, Altar\3x3\2\400\0\
 Wind Altar\3\-\Adventurer, Altar\3x3\2\600\0\

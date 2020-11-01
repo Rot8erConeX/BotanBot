@@ -41,7 +41,7 @@
   ["A Slice of Dragonyule", "A Wish Upon the Yuletree", "Glittering Dragonyule", "Roast Feast", "Saintly Delivery", "Spirit of the Season", "The Greatest Gift", "The Prince of Dragonyule", "Valentine's Ventures"],
   true]
 ["Custom Combo", 
-  ["custom","customcombo","combo"], 
+  ["customcombo","combo"], 
   ["Bellina", "Catherine", "Gala Alex", "Gala Laxi", "Gala Leif", "Gala Zena", "Lily", "Meene", "Mega Man", "Mitsuba", "Nadine", "Nevin", "Pinon", "Pipple", "Tiki(Young)", "Tobias", "Valerio"], 
   nil, 
   nil, 
@@ -55,8 +55,8 @@
   nil,
   false]
 ["Custom Shapeshift", 
-  ["customshapeshift","forceddragon","forcedtransform", "customtransform"], 
-  ["Lathna", "Gala Mym", "Mega Man", "Mym(Halloween)", "Tiki(Young)"], 
+  ["customshapeshift","forceddragon","forcedtransform", "customtransform", "uniqueshapeshift", "uniquetransform", "uniquedragon"], 
+  ["Chelle", "Lathna", "Gala Mym", "Mega Man", "Mym(Halloween)", "Tiki(Young)"], 
   nil, 
   nil, 
   nil,

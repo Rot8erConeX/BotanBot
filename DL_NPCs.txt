@@ -3,12 +3,15 @@ Angie\5\y\\
 Aurelius\1\y\\
 Bareed\1\y\\
 Becky\5\y\\
+Beren\1\y\\
 Cait Sith\1\y\\
-Chelle\1\y\\Saori Onishi
+Carmen\1\y\\
 Chief Researcher\1\y\\
 Christmas Slime\3\y\\
 Cloud\5\y\\
 Doctor\1\y\\
+Domingo\1\y\\
+Douleur\2\y\\
 Dove\1\y\\
 Elysium\1\y\\
 Emile\1\y\\
@@ -22,21 +25,28 @@ Hastur\1\y\\
 Kirin Felyne\3\y\\
 Leif\1\y\\Takahiro Sakurai
 Leonidas\1\y\\Tomokazu Seki
-Loki\1\y\\Satomi Arai
+Loki\1\y\\Arai Satomi
 Magma Slime\1\y\\
 Mars\1\y\\
+Marvelous Naoto\1\y\\
 Mei Hou Wang\2\y\\
 Morsayati\1\y\\Takehito Koyasu
+Nedrick\1\y\\
 Nina\2\y\\Natsumi Hioka
 Notte\2\y\\Yukana
 Phares\1\y\\
 Pigeon\2\y\\
+Presenter\10\y\\
+Primia\2\y\\
 Purple Slime\1\y\\
+Red Champ\5\y\\
 Rolf\1\y\\
 Roy the Third\1\y\\
 Sam\5\y\\
+Sandy\1\y\\
 Saoratorium Gal\4\y\\
 Sarisse\1\n\\Ayaka Asai
+Shion\1\y\\
 Silver Slime\1\y\\
 Snapper\5\y\\
 Thorr\5\y\\

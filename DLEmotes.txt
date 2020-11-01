@@ -34,6 +34,7 @@ Intriguing!\Heinwald
 I'll Lead The Charge\Euden
 I'll Tag Along\Sarisse
 I'm On Defense\Ranzal
+It's Super Zombie Time\Melsa
 IT'S UP TO YOU\Luca
 Keep it Up\Melody
 Leave it to me!\Alfonse
@@ -62,6 +63,7 @@ Puppy\Puppy
 Really\Elisanne
 Right\
 See Ya\Luca
+Shall We\Akasha
 Shapeshift Now\Euden
 Splendid\Xander
 Sorry\Elisanne
