@@ -56,7 +56,7 @@
   false]
 ["Custom Shapeshift", 
   ["customshapeshift","forceddragon","forcedtransform", "customtransform", "uniqueshapeshift", "uniquetransform", "uniquedragon"], 
-  ["Chelle", "Lathna", "Gala Mym", "Mega Man", "Mym(Halloween)", "Tiki(Young)"], 
+  ["Chelle", "Lathna", "Gala Leonidas", "Gala Mym", "Mega Man", "Mym(Halloween)", "Tiki(Young)"], 
   nil, 
   nil, 
   nil,
