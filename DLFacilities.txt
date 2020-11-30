@@ -786,6 +786,11 @@ Flame Tree\22\-\Adventurer, Altar\3x3\1\280000\Destitute One's Mask Fragment, 40
 Flame Tree\23\-\Adventurer, Altar\3x3\1\300000\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 10\
 Flame Tree\24\-\Adventurer, Altar\3x3\1\320000\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 10\
 Flame Tree\25\-\Adventurer, Altar\3x3\1\340000\Destitute One's Mask Fragment, 40;; Plagued One's Mask Fragment, 10\
+Flame Tree\26\\Adventurer, Altar\3x3\1\360000\Destitute One's Mask Fragment, 45;; Plagued One's Mask Fragment, 15\
+Flame Tree\27\\Adventurer, Altar\3x3\1\380000\Destitute One's Mask Fragment, 45;; Plagued One's Mask Fragment, 15\
+Flame Tree\28\\Adventurer, Altar\3x3\1\400000\Destitute One's Mask Fragment, 45;; Plagued One's Mask Fragment, 15\
+Flame Tree\29\\Adventurer, Altar\3x3\1\420000\Destitute One's Mask Fragment, 45;; Plagued One's Mask Fragment, 15\
+Flame Tree\30\\Adventurer, Altar\3x3\1\440000\Destitute One's Mask Fragment, 50;; Plagued One's Mask Fragment, 20\
 Halidom\H\Euden's home base. Raise its level to expand the area in which you can build castle facilities.\General\4x4\1\0\0\
 Iron Weather Vane\-\An iron instrument indicating the direction of the wind. Manufactured using the finest smithing techniques, it moves smoothly in the breeze.\Decorative\1x1\4\0\0\
 Jack-o'-Lantern\-\A lantern made by a sylvan who carved the insides out of a pumpkin, all the while insisting it represented his love of pranks. At least everyone enjoyed eating the filling.\Decorative\1x1\4\0\0\
