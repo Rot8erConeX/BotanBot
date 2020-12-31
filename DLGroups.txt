@@ -38,7 +38,7 @@
   [], 
   [], 
   ["Ringing Wand","Wishing Knife"], 
-  ["A Slice of Dragonyule", "A Wish Upon the Yuletree", "Glittering Dragonyule", "Roast Feast", "Saintly Delivery", "Spirit of the Season", "The Greatest Gift", "The Prince of Dragonyule", "Valentine's Ventures"],
+  ["A Slice of Dragonyule", "A Wish Upon the Yuletree", "Dragonyule Dreaming", "Glittering Dragonyule", "Roast Feast", "Saintly Delivery", "Spirit of the Season", "The Greatest Gift", "The Prince of Dragonyule", "Valentine's Ventures"],
   true]
 ["Custom Combo", 
   ["customcombo","combo"], 
@@ -49,7 +49,7 @@
   false]
 ["Custom Force Strike", 
   ["customforcestrike","customfs","changedfs", "uniquefs", "uniqueforcestrike"], 
-  ["Albert", "Bellina", "Berserker(Hunter)", "Catherine", "Cleo(Forager)", "Gala Laxi", "Gala Zena", "Grace", "Ilia", "Linnea", "Lin You", "Meene", "Mega Man", "Melody", "Mitsuba(Forager)", "Nadine", "Nevin", "Patia(Summer)", "Pecorine", "Peony", "Pinon", "Sarisse(Hunter)", "Vanessa", "Vanessa(Hunter)", "Xander", "Xuan Zang(Radiant)", "Zena", "Zhu Bajie"],
+  ["Albert", "Bellina", "Berserker(Hunter)", "Catherine", "Cleo(Forager)", "Gala Laxi", "Gala Zena", "Grace", "Ilia", "Lily(Dragonyule)", "Linnea", "Lin You", "Meene", "Mega Man", "Melody", "Mitsuba(Forager)", "Nadine", "Nevin", "Patia(Summer)", "Pecorine", "Peony", "Pinon", "Sarisse(Hunter)", "Seimei", "Vanessa", "Vanessa(Hunter)", "Xander", "Xuan Zang(Radiant)", "Zena", "Zhu Bajie"],
   nil,
   nil,
   nil,
@@ -63,8 +63,8 @@
   false]
 ["Hinomotoans", 
   ["hinomotoans","hinomotoan","hinomotoa"], 
-  ["Addis", "Addis(Valentines)", "Aoi", "Botan", "Chitose", "Hanabusa", "Ieyasu", "Mitsuba", "Mitsuhide", "Musashi", "Nobunaga", "Sazanka", "Taro", "Yachiyo"], 
-  ["Ebisu", "Daikokuten", "Kagutsuchi", "Konohana Sakuya", "Konohana Sakuya(Summer)", "Marishiten", "Shinobi", "Shishimai"], 
+  ["Addis", "Addis(Valentines)", "Aoi", "Botan", "Chitose", "Hanabusa", "Ieyasu", "Kuzunoha", "Mitsuba", "Mitsuhide", "Musashi", "Nobunaga", "Sazanka", "Seimei", "Taro", "Yachiyo", "Yoshitsune"], 
+  ["Ebisu", "Daikokuten", "Gozu Tenno", "Kagutsuchi", "Konohana Sakuya", "Konohana Sakuya(Summer)", "Marishiten", "Shinobi", "Shishimai"], 
   nil, 
   nil,
   false]
@@ -191,6 +191,13 @@
   ["dancers","dancer"], 
   ["Felicia", "Hanabusa", "Luther", "Orsem"], 
   ["Siren", "Siren(Popstar)"], 
+  nil, 
+  nil,
+  false]
+["Reborn", 
+  ["reborn"], 
+  nil, 
+  ["Gala Reborn Poseidon", "Gala Reborn Zephyr"], 
   nil, 
   nil,
   false]
