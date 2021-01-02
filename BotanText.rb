@@ -399,7 +399,8 @@ end
               ['Bleed','BleedingPunisher'],
               ['Bog','BogPunisher'],
               ['ReducedDefense','ReducedDefensePunisher'],
-              ['Zone','ZonePunisher']]
+              ['Zone','ZonePunisher'],
+              ['Scorchrend','ScorchrentPunisher']]
 @cleaning=[['Paralysis','ParalysisCleanse'],
            ['Poison','PoisonCleanse','Antidote'],
            ['Blind','BlindnessCleanse','Glasses'],
@@ -412,7 +413,8 @@ end
            ['Freeze','FreezeCleanse','Defrosting'],
            ['Sleep','SleepCleanse','WakeUpSlap'],
            ['Bleed','BleedCleanse','Bandage'],
-           ['Curse','CurseCleanse']]
+           ['Curse','CurseCleanse'],
+           ['Scorchrend','ScorchrendCleaner']]
 @resonance=[['Crown',nil,nil,'Skill Damage +10%'],
             ['Axe',nil,nil,'Broken Punisher +10%'],
             ['Sword',nil,nil,'Strength +8%'],
