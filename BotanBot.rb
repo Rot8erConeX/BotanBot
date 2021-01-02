@@ -131,10 +131,11 @@ system("title loading Smol BotanBot") if @shardizard<0
 @npcs=[]
 
 @aliases=[]
-@spam_channels=[]
-@server_data=[[],[]]
-@ignored=[]
+
 @embedless=[]
+@ignored=[]
+@server_data=[[],[]]
+@spam_channels=[]
 @last_multi_reload=[0,0,0]
 @rarity_stars=[['<:Rarity_Mana:706612079783575607>',
                 '<:Rarity_1:532086056594440231>',
@@ -177,8 +178,8 @@ def safe_to_spam?(event,chn=nil) # determines whether or not it is safe to send 
   return false if event.user.id==213048998678888448
   return false if event.message.text.downcase.split(' ').include?('smol') && @shardizard==4
   return true if @shardizard==4
-  return false if event.message.text.downcase.split(' ').include?('xsmol') && [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388].include?(event.server.id) # it is safe to spam in the emoji servers
-  return true if [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388].include?(event.server.id) # it is safe to spam in the emoji servers
+  return false if event.message.text.downcase.split(' ').include?('xsmol') && [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,620710758841450529].include?(event.server.id) # it is safe to spam in the emoji servers
+  return true if [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,620710758841450529].include?(event.server.id) # it is safe to spam in the emoji servers
   chn=event.channel if chn.nil?
   return true if ['bots','bot'].include?(chn.name.downcase) # channels named "bots" are safe to spam in
   return true if chn.name.downcase.include?('bot') && chn.name.downcase.include?('spam') # it is safe to spam in any bot spam channel
@@ -534,14 +535,14 @@ def nicknames_load(mode=1)
   @aliases=b.reject{|q| q.nil? || q[1].nil? || q[2].nil?}.uniq
 end
 
-bot.command(:reboot, from: 167657750971547648) do |event| # reboots Botan
+bot.command(:reboot, from: 167657750971547648) do |event| # reboots Botan - TRANSFERRED
   return nil if overlap_prevent(event)
   return nil unless event.user.id==167657750971547648 # only work when used by the developer
   puts 'DL!reboot'
   exec "cd #{@location}devkit && BotanBot.rb #{@shardizard}"
 end
 
-bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, command, subcommand|
+bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, command, subcommand| # TRANSFERRED
   return nil if overlap_prevent(event)
   help_text(event,bot,command,subcommand)
 end
@@ -571,11 +572,11 @@ end
 def overlap_prevent(event,egg=true) # used to prevent servers with both Botan and her debug form from receiving two replies
   if event.server.nil? # failsafe code catching PMs as not a server
     return false
-  elsif event.message.text.downcase.split(' ').include?('debug') && [443172595580534784,443704357335203840,443181099494146068,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,572792502159933440].include?(event.server.id)
+  elsif event.message.text.downcase.split(' ').include?('debug') && [443172595580534784,443704357335203840,443181099494146068,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,620710758841450529,572792502159933440].include?(event.server.id)
     return ![4].include?(@shardizard) # the debug bot can be forced to be used in the emoji servers by including the word "debug" in your message
-  elsif event.message.text.downcase.split(' ').include?('smol') && [443172595580534784,443704357335203840,443181099494146068,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,572792502159933440].include?(event.server.id)
+  elsif event.message.text.downcase.split(' ').include?('smol') && [443172595580534784,443704357335203840,443181099494146068,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,620710758841450529,572792502159933440].include?(event.server.id)
     return ![-1].include?(@shardizard) # the debug bot can be forced to be used in the emoji servers by including the word "debug" in your message
-  elsif [443172595580534784,443704357335203840,443181099494146068,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,572792502159933440].include?(event.server.id) # emoji servers will use default Botan otherwise
+  elsif [443172595580534784,443704357335203840,443181099494146068,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,620710758841450529,572792502159933440].include?(event.server.id) # emoji servers will use default Botan otherwise
     return [4,-1].include?(@shardizard)
   end
   return false
@@ -7002,7 +7003,7 @@ bot.command([:mats,:materials,:node,:nodes]) do |event, *args|
   return nil
 end
 
-bot.command([:embeds,:embed]) do |event|
+bot.command([:embeds,:embed]) do |event| # TRANSFERRED
   return nil if overlap_prevent(event)
   metadata_load()
   if @embedless.include?(event.user.id)
@@ -7491,7 +7492,7 @@ bot.command([:tomorrow,:tommorrow,:tomorow,:tommorow]) do |event, *args|
   roost(event,bot,args,-1)
 end
 
-bot.command(:prefix) do |event, prefix|
+bot.command(:prefix) do |event, prefix| # TRANSFERRED
   return nil if overlap_prevent(event)
   if prefix.nil?
     event.respond 'No prefix was defined.  Try again'
@@ -7661,7 +7662,7 @@ bot.command([:deletealias,:removealias]) do |event, name|
   return nil
 end
 
-bot.command([:channellist,:chanelist,:spamchannels,:spamlist]) do |event|
+bot.command([:channellist,:chanelist,:spamchannels,:spamlist]) do |event| # TRANSFERRED
   return nil if overlap_prevent(event)
   if event.server.nil?
     event.respond "Yes, it is safe to spam here."
@@ -7679,14 +7680,14 @@ bot.command([:channellist,:chanelist,:spamchannels,:spamlist]) do |event|
   event << 'In PM with any user'
 end
 
-bot.command([:bugreport, :suggestion, :feedback]) do |event, *args|
+bot.command([:bugreport, :suggestion, :feedback]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   x=['dl!','dl?']
   x.push(@prefixes[event.server.id]) unless event.server.nil? || @prefixes[event.server.id].nil?
   bug_report(bot,event,args,@shards,shard_data(0),'Shard',x,532083509083373583)
 end
 
-bot.command([:donation, :donate]) do |event, uid|
+bot.command([:donation, :donate]) do |event, uid| # TRANSFERRED
   return nil if overlap_prevent(event)
   uid="#{event.user.id}" if uid.nil? || uid.length.zero?
   if /<@!?(?:\d+)>/ =~ uid
@@ -7743,7 +7744,7 @@ bot.command([:donation, :donate]) do |event, uid|
   donor_embed(bot,event)
 end
 
-bot.command([:shard,:attribute]) do |event, i, j|
+bot.command([:shard,:attribute]) do |event, i, j| # TRANSFERRED
   return nil if overlap_prevent(event)
   if @shardizard<0
     event.respond "This is the Smol Shard."
@@ -7808,13 +7809,13 @@ bot.command([:shard,:attribute]) do |event, i, j|
   event.respond "This server uses #{shard_data(0,true,j)[(event.server.id >> 22) % j]} Shards." unless event.server.nil? || @shardizard==4 || j != @shards
 end
 
-bot.command([:safe,:spam,:safetospam,:safe2spam,:long,:longreplies]) do |event, f|
+bot.command([:safe,:spam,:safetospam,:safe2spam,:long,:longreplies]) do |event, f| # TRANSFERRED
   return nil if overlap_prevent(event)
   f='' if f.nil?
   metadata_load()
   if event.server.nil?
     event.respond 'It is safe for me to send long replies here because this is my PMs with you.'
-  elsif [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388].include?(event.server.id)
+  elsif [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,620710758841450529].include?(event.server.id)
     event.respond 'It is safe for me to send long replies here because this is one of my emoji servers.'
   elsif @shardizard==4
     event.respond 'It is safe for me to send long replies here because this is my debug mode.'
@@ -7853,7 +7854,7 @@ bot.command([:safe,:spam,:safetospam,:safe2spam,:long,:longreplies]) do |event, 
   end
 end
 
-bot.command(:invite) do |event, user|
+bot.command(:invite) do |event, user| # TRANSFERRED
   return nil if overlap_prevent(event)
   usr=event.user
   txt="**You can invite me to your server with this link: <https://goo.gl/mp77kQ>**\nTo look at my source code: <https://github.com/Rot8erConeX/BotanBot/blob/master/BotanBot.rb>\nTo follow my coder's development Twitter and learn of updates: <https://twitter.com/EliseBotDev>\nIf you suggested me to server mods and they ask what I do, show them this image: https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/MarketingBotan.png"
@@ -7874,7 +7875,7 @@ bot.command(:invite) do |event, user|
   event.respond "A PM was sent to #{user_to_name}." unless event.server.nil? && user_to_name=="you"
 end
 
-bot.command(:sortaliases, from: 167657750971547648) do |event, *args|
+bot.command(:sortaliases, from: 167657750971547648) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   return nil unless event.user.id==167657750971547648
   data_load()
@@ -7889,7 +7890,7 @@ bot.command(:sortaliases, from: 167657750971547648) do |event, *args|
   event.respond 'The alias list has been sorted alphabetically'
 end
 
-bot.command([:tools,:links,:tool,:link,:resources,:resources]) do |event|
+bot.command([:tools,:links,:tool,:link,:resources,:resources]) do |event| # TRANSFERRED
   return nil if overlap_prevent(event)
   if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || event.message.text.downcase.include?('mobile') || event.message.text.downcase.include?('phone')
     event << '**Useful tools for players of** ***Dragalia Lost***'
@@ -7969,7 +7970,7 @@ bot.command(:status) do |event, *args|
   return nil
 end
 
-bot.command([:avatar, :avvie]) do |event, *args|
+bot.command([:avatar, :avvie]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   t=Time.now
   timeshift=6
@@ -7984,7 +7985,7 @@ bot.command([:avatar, :avvie]) do |event, *args|
   return nil
 end
 
-bot.command(:backupaliases, from: 167657750971547648) do |event|
+bot.command(:backupaliases, from: 167657750971547648) do |event| # TRANSFERRED
   return nil if overlap_prevent(event)
   return nil unless event.user.id==167657750971547648 || event.channel.id==386658080257212417
   nicknames_load()
@@ -8000,7 +8001,7 @@ bot.command(:backupaliases, from: 167657750971547648) do |event|
   event.respond 'Alias list has been backed up.'
 end
 
-bot.command(:restorealiases, from: 167657750971547648) do |event|
+bot.command(:restorealiases, from: 167657750971547648) do |event| # TRANSFERRED
   return nil if overlap_prevent(event)
   return nil unless [167657750971547648,bot.profile.id].include?(event.user.id) || event.channel.id==502288368777035777
   if File.exist?("#{@location}devkit/DLNames2.txt")
@@ -8035,27 +8036,27 @@ bot.command(:restorealiases, from: 167657750971547648) do |event|
   event << 'Alias list has been restored from backup.'
 end
 
-bot.command(:sendmessage, from: 167657750971547648) do |event, channel_id, *args| # sends a message to a specific channel
+bot.command(:sendmessage, from: 167657750971547648) do |event, channel_id, *args| # sends a message to a specific channel - TRANSFERRED
   return nil if overlap_prevent(event)
   dev_message(bot,event,channel_id,[141260274144509952])
 end
 
-bot.command(:sendpm, from: 167657750971547648) do |event, user_id, *args| # sends a PM to a specific user
+bot.command(:sendpm, from: 167657750971547648) do |event, user_id, *args| # sends a PM to a specific user - TRANSFERRED
   return nil if overlap_prevent(event)
   dev_pm(bot,event,user_id,[141260274144509952])
 end
 
-bot.command(:ignoreuser, from: 167657750971547648) do |event, user_id| # causes Botan to ignore the specified user
+bot.command(:ignoreuser, from: 167657750971547648) do |event, user_id| # causes Botan to ignore the specified user - TRANSFERRED
   return nil if overlap_prevent(event)
   bliss_mode(bot,event,user_id)
 end
 
-bot.command(:leaveserver, from: 167657750971547648) do |event, server_id| # forces Botan to leave a server
+bot.command(:leaveserver, from: 167657750971547648) do |event, server_id| # forces Botan to leave a server - TRANFERRED
   return nil if overlap_prevent(event)
   walk_away(bot,event,server_id)
 end
 
-bot.command(:cleanupaliases, from: 167657750971547648) do |event|
+bot.command(:cleanupaliases, from: 167657750971547648) do |event| # TRANSFERRED
   return nil if overlap_prevent(event)
   return nil unless event.user.id==167657750971547648 # only work when used by the developer
   event.channel.send_temporary_message('Please wait...',10)
@@ -8086,14 +8087,14 @@ bot.command(:cleanupaliases, from: 167657750971547648) do |event|
   event << "#{k2} aliases were removed due to being identical to the servant's name."
 end
 
-bot.command(:snagstats) do |event, f, f2|
+bot.command(:snagstats) do |event, f, f2| # TRANSFERRED
   return nil if overlap_prevent(event)
   reload_library()
   snagstats(event,bot,f,f2)
   return nil
 end
 
-bot.command(:boop) do |event|
+bot.command(:boop) do |event| # NO NEED TO TRANSFERRED
   return nil if overlap_prevent(event)
   return nil unless event.user.id==167657750971547648 || event.user.id==141260274144509952
   return nil unless event.channel.id==532083509083373583 || @shardizard==4 # only work when used by the developer
@@ -8101,7 +8102,7 @@ bot.command(:boop) do |event|
   disp_boop_tags(event)
 end
 
-bot.command(:reload, from: 167657750971547648) do |event|
+bot.command(:reload, from: 167657750971547648) do |event| # TRANSFERRED
   return nil if overlap_prevent(event)
   return nil unless [167657750971547648,141260274144509952].include?(event.user.id) || [502288368777035777,532083509083373583].include?(event.channel.id)
   event.respond "Reload what?\n1.) Aliases, from backups#{" (unless includes the word \"git\")\n2.) Groups, from GitHub\n3.) Data, from GitHub (include \"subset\" in your message to also reload DLSkillSubsets)" if [167657750971547648,141260274144509952].include?(event.user.id)}#{"\n4.) Source code, from GitHub (include the word \"all\" to also reload rot8er_functs.rb)\n5.) Crossover data\n6.) Libraries, from code\n7.) Avatars, from GitHub" if event.user.id==167657750971547648}\nYou can include multiple numbers to load multiple things."
@@ -8332,7 +8333,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
   return nil
 end
 
-bot.command(:update) do |event|
+bot.command(:update) do |event| # TRANSFERRED
   return nil if overlap_prevent(event)
   reload_library()
   disp_update_list()
@@ -8347,7 +8348,7 @@ bot.server_create do |event|
     end
     chn=chnn[0] if chnn.length>0
   end
-  if ![620710758841450529,285663217261477889,443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,572792502159933440].include?(event.server.id) && @shardizard==4
+  if ![620710758841450529,285663217261477889,443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,620710758841450529,572792502159933440].include?(event.server.id) && @shardizard==4
     (chn.send_message(get_debug_leave_message()) rescue nil)
     event.server.leave
   else
@@ -8980,7 +8981,7 @@ def next_holiday(bot,mode=0)
         # ...set avatar properly and set check for the beginning of the next chunk of the day
         bot.game=k[j][4]
         if @shardizard.zero?
-          bot.profile.avatar=(File.open("#{@location}devkit/BotanImages/#{k[j][3]}.png",'r')) rescue nil
+          bot.profile.avatar=(File.open("#{@location}devkit/EliseImages/#{k[j][3]}.png",'r')) rescue nil
         end
         @avvie_info=[k[j][3],k[j][4],k[j][5]]
         t=Time.now
@@ -9006,7 +9007,7 @@ end
 bot.ready do |event|
   if @shardizard==4
     for i in 0...bot.servers.values.length
-      if ![620710758841450529,285663217261477889,443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,572792502159933440].include?(bot.servers.values[i].id)
+      if ![620710758841450529,285663217261477889,443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,620710758841450529,572792502159933440].include?(bot.servers.values[i].id)
         bot.servers.values[i].general_channel.send_message(get_debug_leave_message()) rescue nil
         bot.servers.values[i].leave
       end
