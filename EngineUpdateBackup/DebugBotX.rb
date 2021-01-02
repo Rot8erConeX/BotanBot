@@ -35,13 +35,13 @@ end
 
 # The bot's token is basically their password, so is censored for obvious reasons
 if Shardizard==4
-  bot = Discordrb::Commands::CommandBot.new token: 'NDMxODk1NTYxMTkzMzkwMDkw.WsfIFg.oPyV-lWiKYokvS7Sy_hb7ArVFu4', client_id: 431895561193390090, prefix: prefix_proc
+  bot = Discordrb::Commands::CommandBot.new token: '>Debug Token<', client_id: 431895561193390090, prefix: prefix_proc
 elsif Shardizard<0
-  bot = Discordrb::Commands::CommandBot.new token: 'NjI3NTExNTM3MjM3NDkxNzE1.XY9t5Q.P_WC0cKVBBllCvLMvyNsepUDgj8', client_id: 759369481305718806, prefix: prefix_proc
+  bot = Discordrb::Commands::CommandBot.new token: '>Smol Token<', client_id: 759369481305718806, prefix: prefix_proc
 elsif Shardizard>4
-  bot = Discordrb::Commands::CommandBot.new token: 'NTQzMzczMDE4MzAzMjk5NTg1.XF1Vjg.Qr0Mafh4kYg3PjvUBg1Db_Xul08', shard_id: (Shardizard-1), num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
+  bot = Discordrb::Commands::CommandBot.new token: '>Token<', shard_id: (Shardizard-1), num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
 else
-  bot = Discordrb::Commands::CommandBot.new token: 'NTQzMzczMDE4MzAzMjk5NTg1.XF1Vjg.Qr0Mafh4kYg3PjvUBg1Db_Xul08', shard_id: Shardizard, num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
+  bot = Discordrb::Commands::CommandBot.new token: '>Token<', shard_id: Shardizard, num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
 end
 bot.gateway.check_heartbeat_acks = false
 
