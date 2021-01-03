@@ -162,6 +162,76 @@ $rarity_stars=[['<:Rarity_Mana:706612079783575607>',
 $avvie_info=['Botan','*Dragalia Lost*','N/A']
 $voids=[]
 
+class DLAdventurer
+  attr_accessor :name
+  attr_accessor :rarity,:availability
+  attr_accessor :clzz,:element,:weapon,:weapon2
+  attr_accessor :hp,:atk,:defense,:skill_points
+  attr_accessor :skills,:coability,:chain,:abilities
+  attr_accessor :hidden_abilities,:abiltags
+  attr_accessor :voice_na,:voice_jp
+  attr_accessor :alts
+  attr_accessor :gender,:games,:cygame
+  attr_accessor :footer
+  attr_accessor :sp_override,:damage_override
+  attr_accessor :sort_data
+  
+  def initialize(val)
+    @name=val
+    @skill_points=10
+  end
+  
+  def name=(val); @name=val; end
+  
+  def rarity=(val)
+    if !val.is_a?(String)
+      @rarity=val
+    elsif val.length>1
+      @rarity=val[0,1].to_i
+      @availability=val[1,val.length-1]
+    else
+      @rarity=val.to_i
+    end
+  end
+  
+  def data=(val)
+    val=val.split(', ') if val.is_a?(String)
+    @clzz=val[0]
+    @element=val[1]
+    @weapon=val[2]
+    @weapon2=val[3] if val.length>3
+  end
+  
+  def hp=(val); @hp=val.split('; ').map{|q| q.split(', ').map{|q2| q2.to_i}}; end
+  def atk=(val); @atk=val.split('; ').map{|q| q.split(', ').map{|q2| q2.to_i}}; end
+  def defense=(val)
+    val=val.split(', ').map{|q| q.to_i} if val.is_a?(String)
+    @defense=val[0]
+    @skill_points=val[1] unless val.length<2
+  end
+  
+  def skills=(val); @skills=val.split(';; ').reject{|q| q.length<=0 || q=='-'}; end
+  def abilities=(val); @abilities=val.split(';;;; ')[0,3].map{|q| q.split(';; ')}; @abiltags=val.split(';;;; ')[3] if val.split(';;;; ').length>3; end
+  def coability=(val); @coability=val.split(';; ')[0]; @chain=val.split(';; ')[1] if val.split(';; ').length>1; end
+  def chain=(val); @chain=val; end
+  def hidden_abilities=(val); @hidden_abilities=nil; @hidden_abilities=val.split(';;;; ').map{|q| q.split(';; ')} unless val=='-'; end
+  
+  def voice_na=(val); @voice_na=val; end
+  def voice_jp=(val); @voice_jp=val; end
+  def gender=(val); @gender=val; end
+  def race=(val); @race=val; end
+  def games=(val); @games=val.split(', '); end
+  def alts=(val); @alts=val.split(', '); end
+  def cygame=(val); @cygame=val; end
+  
+  def footer=(val); @footer=val; end
+  def sp_override=(val); @sp_override=val.split(';; ').map{|q| q.split('; ')} end
+  
+  def sort_data=(val); @sort_data=val; end
+  
+  
+end
+
 
 
 class FEHUnit
@@ -220,6 +290,39 @@ end
 def data_load(to_reload=[])
   to_reload=[] if to_reload.is_a?(String)
   if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['adventurer','adventurers','adv','advs'])
+    if File.exist?("#{$location}devkit/DLAdventurers.txt")
+      b=[]
+      File.open("#{$location}devkit/DLAdventurers.txt").each_line do |line|
+        b.push(line)
+      end
+    else
+      b=[]
+    end
+    $adventurers=[]
+    for i in 0...b.length
+      b[i]=b[i].gsub("\n",'').split('\\'[0])
+      bob4=DLAdventurer.new(b[i][0])
+      bob4.rarity=b[i][1]
+      bob4.data=b[i][2]
+      bob4.hp=b[i][3]
+      bob4.atk=b[i][4]
+      bob4.defense=b[i][5]
+      bob4.skills=b[i][6]
+      bob4.coability=b[i][7]
+      bob4.abilities=b[i][8]
+      bob4.alts=b[i][9]
+      bob4.voice_jp=b[i][10] unless b[i][10].nil? || b[i][10].length<=0
+      bob4.voice_na=b[i][11] unless b[i][11].nil? || b[i][11].length<=0
+      bob4.games=b[i][12] unless b[i][11].nil? || b[i][11].length<=0
+      bob4.gender=b[i][13]
+      bob4.race=b[i][14]
+      bob4.hidden_abilities=b[i][15] unless b[i][15].nil? || b[i][15].length<=0
+      bob4.cygame=b[i][16] unless b[i][16].nil? || b[i][16].length<=0
+      bob4.footer=b[i][17] unless b[i][17].nil? || b[i][17].length<=0
+      bob4.sp_override=b[i][18] unless b[i][18].nil? || b[i][18].length<=0
+      bob4.damage_override=b[i][19] unless b[i][19].nil? || b[i][19].length<=0
+      $adventurers.push(bob4)
+    end
   end
   if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['libraries','library','librarys'])
     t=Time.now
@@ -377,25 +480,6 @@ def remove_prefix(s,event)
   return s
 end
 
-def all_commands(include_nil=false,permissions=-1)
-  return all_commands(include_nil)-all_commands(false,1)-all_commands(false,2) if permissions==0
-  k=['reboot','adventurer','adv','addalias','checkaliases','aliases','seealiases','saliases','serveraliases','deletealias','removealias','channellist','long','group','groups','find',
-     'channelist','spamlist','spamchannels','bugreport','suggestion','feedback','donation','donate','shard','attribute','safe','spam','safetospam','safe2spam','seegroups','drg','sp',
-     'longreplies','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','combo','chaincoab','dmg',
-     'search','dragon','help','wyrmprint','wyrm','print','weapon','wep','weap','wpn','skill','skil','ability','abil','aura','roost','today','ruin','ruins','share','skilshare','dbxp',
-     'daily','now','dailies','todayindl','today_in_dl','tomorrow','tommorrow','tomorow','tommorow','shop','store','exp','level','xp','plxp','plexp','pllevel','cca','cc','skillshare',
-     'plevel','pxp','pexp','advxp','advexp','advlevel','alevel','axp','aexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','bxp','bexp','blevel','team','backpack','coab','chain',
-     'dbexp','dblevel','bondlevel','bondxp','bondexp','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp','coability','coabil',
-     'weaponlevel','wxp','wexp','wlevel','facility','faculty','fac','mat','material','item','list','lookup','invite','boop','alts','alt','lineage','alias','nodes','damage','limit',
-     'craft','crafting','tools','tool','links','link','resources','resource','next','enemy','boss','banners','banner','prefix','art','stats','reset','materials','spiral','node','mats',
-     'limits','stack','stacks','sort','list','unit','avvie','avatar','affliction','ailment','smol','reload','update','shared','affinity','resonance']
-  k=['addalias','deletealias','removealias','prefix'] if permissions==1
-  k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
-  k=k.uniq
-  k.push(nil) if include_nil
-  return k
-end
-
 def safe_to_spam?(event,chn=nil) # determines whether or not it is safe to send extremely long messages
   return true if event.server.nil? # it is safe to spam in PM
   return false if event.user.id==213048998678888448
@@ -437,6 +521,18 @@ def is_mod?(user,server,channel,mode=0)
   return true if user.id==80565838670725120 && Shardizard<0
   return true if user.id==141260274144509952 && !server.nil?
   return false
+end
+
+def all_commands(include_nil=false,permissions=-1)
+  return all_commands(include_nil)-all_commands(false,1)-all_commands(false,2) if permissions==0
+  k=['reboot','help','commands','commandlist','command_list','embeds','embed','prefix','channelist','channellist','spamchannels','spamlist','bugreport','suggestion','feedback',
+     'donate','donation','shard','attribute','safe','spam','safetospam','safe2spam','long','longreplies','invite','sortaliases','tools','links','tool','link','resources','resource',
+     'avatar','avvie','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','reload','update']
+  k=['addalias','deletealias','removealias','prefix'] if permissions==1
+  k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
+  k=k.uniq
+  k.push(nil) if include_nil
+  return k
 end
 
 bot.command(:reboot, from: 167657750971547648) do |event| # reboots Botan
