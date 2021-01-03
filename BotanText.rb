@@ -2414,24 +2414,24 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
     search.push("*Skill/Ability Tags*: #{tags.join(', ')}") unless tags.length<=0
     sklz=@askilities.map{|q| q}
     for i in 0...char.length
-      skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6][0]}
+      skl1=(sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6][0]} rescue nil)
       skl1=sklz[skl1] unless skl1.nil?
-      skl2=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6][1]}
+      skl2=(sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][6][1]} rescue nil)
       skl2=sklz[skl2] unless skl2.nil?
       if allowstr%4<2
-        coab=sklz.find_index{|q| q[2]=='CoAbility' && q[0]==char[i][7][0].split(' ')[0,char[i][7][0].split(' ').length-1].join(' ')}
+        coab=(sklz.find_index{|q| q[2]=='CoAbility' && q[0]==char[i][7][0].split(' ')[0,char[i][7][0].split(' ').length-1].join(' ')} rescue nil)
         coab=sklz[coab] unless coab.nil?
         coab[6]=[] if !coab.nil? && coab[6].nil?
-        cha=sklz.find_index{|q| q[2]=='Chain' && q[0]==char[i][7][1].split(' ')[0,char[i][7][1].split(' ').length-1].join(' ')}
+        cha=(sklz.find_index{|q| q[2]=='Chain' && q[0]==char[i][7][1].split(' ')[0,char[i][7][1].split(' ').length-1].join(' ')} rescue nil)
         cha=sklz[cha] unless cha.nil?
         cha[6]=[] if !cha.nil? && cha[6].nil?
-        ab1=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][0][-1]}
+        ab1=(sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][0][-1]} rescue nil)
         ab1=sklz[ab1] unless ab1.nil?
         ab1[6]=[] if !ab1.nil? && ab1[6].nil?
-        ab2=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][1][-1]}
+        ab2=(sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][1][-1]} rescue nil)
         ab2=sklz[ab2] unless ab2.nil?
         ab2[6]=[] if !ab2.nil? && ab2[6].nil?
-        ab3=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][2][-1]}
+        ab3=(sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][8][2][-1]} rescue nil)
         ab3=sklz[ab3] unless ab3.nil?
         ab3[6]=[] if !ab3.nil? && ab3[6].nil?
       else
@@ -2757,9 +2757,9 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
     search.push("*Skill/Ability Tags*: #{tags.join(', ')}")
     sklz=@askilities.map{|q| q}
     for i in 0...char.length
-      skl1=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][5][0]}
+      skl1=(sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][5][0]} rescue nil)
       skl1=sklz[skl1] unless skl1.nil?
-      skl2=sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][5][1]}
+      skl2=(sklz.find_index{|q| q[2]=='Skill' && q[0]==char[i][5][1]} rescue nil)
       skl2=sklz[skl2] unless skl2.nil?
       ab1=nil
       ab1=sklz.find_index{|q| ['Ability','Aura'].include?(q[2]) && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==char[i][6][0][-1]} unless char[i][6].length<1
