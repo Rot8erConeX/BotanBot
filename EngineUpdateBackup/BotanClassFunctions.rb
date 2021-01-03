@@ -427,6 +427,20 @@ $resonance=[['Crown',nil,nil,'Skill Damage +10%'],
             ['Serpent','Curse Res +100%'],
             ['Staff','Buff Skill Time +5%','Buff Skill Time +8%','Buff Skill Time +15%']]
 
+class DLAdventurer
+  def pronoun(possessive=nil)
+    return 'he' if @gender=='M' && possessive==false
+    return 'she' if @gender=='F' && possessive==false
+    return 'his' if @gender=='M' && possessive==true
+    return 'him' if @gender=='M'
+    return 'her' if @gender=='F'
+    return 'their' if possessive==true
+    return 'they' if possessive==false
+    return 'them'
+  end
+  
+end
+
 
 
 def show_tools(event,bot)
