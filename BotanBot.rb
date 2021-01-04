@@ -1296,6 +1296,8 @@ def adv_emoji(k,bot,ignorefeh=false,advheader=false)
     str="#{str}<:Mega_Man:641484836304846857>" if !k[12].nil? && k[12]=='MM' && !advheader
     str="#{str}<:Great_Badge_Golden:443704781068959744>" if !k[12].nil? && k[12]=='FEH' && !advheader
     str="#{str}<:Bond:613804021119189012>" if !k[12].nil? && k[12]=='FGO' && !advheader
+    str="#{str}<:Priconne:782554046887493652>" if !k[12].nil? && k[12]=='PC' && !advheader
+    str="#{str}<:Take_Your_Heart:782553893204262923>" if !k[12].nil? && k[12]=='P5S' && !advheader
   end
   return str
 end
@@ -1330,6 +1332,8 @@ def dragon_emoji(k,bot,ignorefeh=false)
     str="#{str}<:MH_Rathalos:669319247670804506>" if !k[16].nil? && k[16]=='MH'
     str="#{str}<:Mega_Man:641484836304846857>" if !k[16].nil? && k[16]=='MM'
     str="#{str}<:Bond:613804021119189012>" if !k[16].nil? && k[16]=='FGO'
+    str="#{str}<:Priconne:782554046887493652>" if !k[16].nil? && k[16]=='PC' && !advheader
+    str="#{str}<:Take_Your_Heart:782553893204262923>" if !k[16].nil? && k[16]=='P5S' && !advheader
   end
   return str
 end
@@ -1368,6 +1372,8 @@ def print_emoji(k,bot,ignorefeh=false)
     str="#{str}<:MH_Rathalos:669319247670804506>" if !k[10].nil? && k[10]=='MH'
     str="#{str}<:Mega_Man:641484836304846857>" if !k[10].nil? && k[10]=='MM'
     str="#{str}<:Bond:613804021119189012>" if !k[10].nil? && k[10]=='FGO'
+    str="#{str}<:Priconne:782554046887493652>" if !k[10].nil? && k[10]=='PC' && !advheader
+    str="#{str}<:Take_Your_Heart:782553893204262923>" if !k[10].nil? && k[10]=='P5S' && !advheader
   end
   return str
 end
@@ -1435,6 +1441,8 @@ def weapon_emoji(k,bot,ignorefeh=false)
     str="#{str}<:Mega_Man:641484836304846857>" if !k[14].nil? && k[14]=='MM'
     str="#{str}<:MH_Rathalos:669319247670804506>" if !k[14].nil? && k[14]=='MH'
     str="#{str}<:Bond:613804021119189012>" if !k[14].nil? && k[14]=='FGO'
+    str="#{str}<:Priconne:782554046887493652>" if !k[14].nil? && k[14]=='PC' && !advheader
+    str="#{str}<:Take_Your_Heart:782553893204262923>" if !k[14].nil? && k[14]=='P5S' && !advheader
   end
   return str
 end
@@ -1537,11 +1545,11 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k[2][1]}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][1]}**"
     wpn='<:Icon_Weapon_Gear:641466825212821514>'
-    title="#{title}\n#{wpn}[Alt-]**#{k[2][2]}**  <:Defense:573344832282689567>#{longFormattedNumber(k[5][0])}"
+    title="#{title}\n#{wpn}[Alt-]**#{k[2][2]}**  <:ProtoShield:642287078943752202>#{longFormattedNumber(k[5][0])}"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][0]}**"
     title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**"
-  elsif !k[12].nil? && k[12]=='MH'
+  elsif !k[12].nil? && ['MH','PC','P5S'].include?(k[12])
     unless s2s || juststats
       str="#{generate_rarity_row(rar,@max_rarity[0],'',false)}"
       str="#{str} (#{"Mana Spiral, " if rar>@max_rarity[0]}from #{k[1][0,1].to_i}#{@rarity_stars[0][k[1][0,1].to_i]})" unless rar==k[1][0,1].to_i
@@ -1556,7 +1564,9 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     title="#{title}\n #{k[2][3]}" unless k[2][3].nil?
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k[2][0].gsub('Healer','Healing')}"}
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[2][0]}**"
-    title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**"
+    title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**" if k[12]=='MH'
+    title="#{title}\n<:Priconne:782554046887493652>**Princess Connect Re:Dive Collab**" if k[12]=='PC'
+    title="#{title}\n<:Take_Your_Heart:782553893204262923>**Persona 5 Strikers Collab**" if k[12]=='P5S'
   elsif !k[12].nil? && k[12]=='FEH'
     unless s2s || juststats
       str="#{generate_rarity_row(rar,@max_rarity[0],'FEH',false)}"
@@ -2004,6 +2014,10 @@ def disp_wyrmprint_stats(bot,event,args=nil,juststats=false)
       title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**"
     elsif !k[10].nil? && k[10]=='MH'
       title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**"
+    elsif !k[10].nil? && k[10]=='PC'
+      title="#{title}\n<:Priconne:782554046887493652>**Princess Connect Re:Dive Collab**"
+    elsif !k[10].nil? && k[10]=='P5S'
+      title="#{title}\n<:Take_Your_Heart:782553893204262923>**Persona 5 Strikers Collab**"
     else
       title="#{title}\n**Collab**" unless k[10].nil? || k[10].length<=0
       title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c'
@@ -2254,8 +2268,10 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false)
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[1]}**"
     title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**" if !k[14].nil? && k[14]=='MH'
     title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**" if !k[14].nil? && k[14]=='MM'
-    title="#{title}\n**Collab**" unless k[14].nil? || k[14].length<=0 || k[14]=='MM' || k[14]=='MH'
-    title="#{title}\n**Collab**" if k[2].length>1 && k[2][1,1].downcase=='c' && k[14]!='MM' && k[14]!='MH'
+    title="#{title}\n<:Priconne:782554046887493652>**Princess Connect Re:Dive Collab**" if !k[14].nil? && k[14]=='PC'
+    title="#{title}\n<:Take_Your_Heart:782553893204262923>**Persona 5 Strikers Collab**" if !k[14].nil? && k[14]=='P5S'
+    title="#{title}\n**Collab**" unless k[14].nil? || k[14].length<=0 || ['MM','MH','PC','P5S'].include?(k[14])
+    title="#{title}\n**Collab**" if k[2].length>1 && k[2][1,1].downcase=='c' && !['MM','MH','PC','P5S'].include?(k[14])
   end
   str="#{str} - T#{k[16]}" unless k[16]==0
   str="#{str}\n**Wyrmprint slots:** #{k[17][0]}<:Weapon_Slot_Gold:758940716427902996>, #{k[17][1]}<:Weapon_Slot_Silver:758940716436815872>" unless k[17].nil?
@@ -2654,8 +2670,10 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil)
     title="#{title}\n#{moji[0].mention unless moji.length<=0}**#{k[1]}**"
     title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**" if !k[14].nil? && k[14]=='MM'
     title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**" if !k[14].nil? && k[14]=='MH'
-    title="#{title}\n**Collab**" unless k[14].nil? || k[14].length<=0 || k[14]=='MM' || k[14]=='MH'
-    title="#{title}\n**Collab**" if k[2].length>1 && k[2][1,1].downcase=='c' && k[14]!='MM' && k[14]!='MH'
+    title="#{title}\n<:Priconne:782554046887493652>**Princess Connect Re:Dive Collab**" if !k[14].nil? && k[14]=='PC'
+    title="#{title}\n<:Take_Your_Heart:782553893204262923>**Persona 5 Strikers Collab**" if !k[14].nil? && k[14]=='P5S'
+    title="#{title}\n**Collab**" unless k[14].nil? || k[14].length<=0 || ['MM','MH','PC','P5S'].include?(k[14])
+    title="#{title}\n**Collab**" if k[2].length>1 && k[2][1,1].downcase=='c' && !['MM','MH','PC','P5S'].include?(k[14])
   end
   str="#{str} - T#{k[16]}" unless k[16]==0
   str="#{str}\n**Wyrmprint slots:** #{k[17][0]}<:Weapon_Slot_Gold:758940716427902996>, #{k[17][1]}<:Weapon_Slot_Silver:758940716436815872>" unless k[17].nil?
