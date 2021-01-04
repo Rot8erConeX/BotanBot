@@ -493,7 +493,9 @@ def dragon_data(bot,event,args=nil,juststats=false)
   title="#{title}\n<:Bond:613804021119189012>**FGO Collab**" if !k[16].nil? && k[16]=='FGO'
   title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**" if !k[16].nil? && k[16]=='MM'
   title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**" if !k[16].nil? && k[16]=='MH'
-  title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c' && !(feh || (!k[16].nil? && k[16].length>0 && ['FEH','FGO','MM','MH'].include?(k[16])))
+  title="#{title}\n<:Priconne:782554046887493652>**Princess Connect Re:Dive Collab**" if !k[16].nil? && k[16]=='PC'
+  title="#{title}\n<:Take_Your_Heart:782553893204262923>**Persona 5 Strikers Collab**" if !k[16].nil? && k[16]=='P5S'
+  title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c' && !(feh || (!k[16].nil? && k[16].length>0 && ['FEH','FGO','MM','MH','PC','P5S'].include?(k[16])))
   lookout=get_lookout_tags().reject{|q| q[2]!='Availability' && q[2]!='Availability/Dragon'}
   for i in 0...lookout.length
     if k[1].length>1 && k[1][1,1].downcase==lookout[i][3]
@@ -697,7 +699,9 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
   title="#{title}\n<:Bond:613804021119189012>**FGO Collab**" if !k[0][16].nil? && k[0][16]=='FGO'
   title="#{title}\n<:Mega_Man:641484836304846857>**Mega Man Collab**" if !k[0][16].nil? && k[0][16]=='MM'
   title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**" if !k[0][16].nil? && k[0][16]=='MH'
-  title="#{title}\n**Collab**" if k[0][1].length>1 && k[0][1][1,1].downcase=='c' && !(feh || (!k[0][16].nil? && k[0][16].length>0 && ['FEH','FGO','MM','MH'].include?(k[0][16])))
+  title="#{title}\n<:Priconne:782554046887493652>**Princess Connect Re:Dive Collab**" if !k[16].nil? && k[16]=='PC'
+  title="#{title}\n<:Take_Your_Heart:782553893204262923>**Persona 5 Strikers Collab**" if !k[16].nil? && k[16]=='P5S'
+  title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c' && !(feh || (!k[16].nil? && k[16].length>0 && ['FEH','FGO','MM','MH','PC','P5S'].include?(k[16])))
   title="#{title}\n**Pseudodragon**" unless feh
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Speed:573366907357495296>','<:Energize:559629242137051155>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>']
   semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:ProtoShield:642287078943752202>','<:SpeedS:514712247625580555>','<:FEHEnergized:587684963000909845>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>'] if feh
@@ -2224,6 +2228,8 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
     crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
+    crossgames.push('PC') if ['princessconnect','princess_connect','pcrd','redive','re_dive','re:dive','priconne'].include?(args[i].downcase)
+    crossgames.push('P5S') if ['persona5','p5','strikers','p5s','scramble'].include?(args[i].downcase)
     genders.push('M') if ['male','boy','m','males','boys','man'].include?(args[i].downcase)
     genders.push('F') if ['female','woman','girl','f','females','women','girls'].include?(args[i].downcase)
     for i2 in 0...lookout.length
@@ -2376,6 +2382,8 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
       crossgames[i]='<:Bond:613804021119189012>Fate/Grand Order' if crossgames[i]=='FGO'
       crossgames[i]='<:Mega_Man:641484836304846857>Mega Man' if crossgames[i]=='MM'
       crossgames[i]='<:MH_Rathalos:669319247670804506>Monster Hunter' if crossgames[i]=='MH'
+      crossgames[i]='<:Priconne:782554046887493652>Princess Connect Re:Dive' if crossgames[i]=='PC'
+      crossgames[i]='<:Take_Your_Heart:782553893204262923>Persona 5 Strikers' if crossgames[i]=='P5S'
     end
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
@@ -2568,6 +2576,8 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
     crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
+    crossgames.push('PC') if ['princessconnect','princess_connect','pcrd','redive','re_dive','re:dive','priconne'].include?(args[i].downcase)
+    crossgames.push('P5S') if ['persona5','p5','strikers','p5s','scramble'].include?(args[i].downcase)
     genders.push('M') if ['male','boy','m','males','boys','man'].include?(args[i].downcase)
     genders.push('F') if ['female','woman','girl'].include?(args[i].downcase)
     for i2 in 0...lookout.length
@@ -2720,6 +2730,8 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
       crossgames[i]='<:Bond:613804021119189012>Fate/Grand Order' if crossgames[i]=='FGO'
       crossgames[i]='<:Mega_Man:641484836304846857>Mega Man' if crossgames[i]=='MM'
       crossgames[i]='<:MH_Rathalos:669319247670804506>Monster Hunter' if crossgames[i]=='MH'
+      crossgames[i]='<:Priconne:782554046887493652>Princess Connect Re:Dive' if crossgames[i]=='PC'
+      crossgames[i]='<:Take_Your_Heart:782553893204262923>Persona 5 Strikers' if crossgames[i]=='P5S'
     end
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
@@ -2859,6 +2871,8 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
     crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
     crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
+    crossgames.push('PC') if ['princessconnect','princess_connect','pcrd','redive','re_dive','re:dive','priconne'].include?(args[i].downcase)
+    crossgames.push('P5S') if ['persona5','p5','strikers','p5s','scramble'].include?(args[i].downcase)
     for i2 in 0...lookout.length
       tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i].downcase)
     end
@@ -2968,6 +2982,8 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
       crossgames[i]='<:Bond:613804021119189012>Fate/Grand Order' if crossgames[i]=='FGO'
       crossgames[i]='<:Mega_Man:641484836304846857>Mega Man' if crossgames[i]=='MM'
       crossgames[i]='<:MH_Rathalos:669319247670804506>Monster Hunter' if crossgames[i]=='MH'
+      crossgames[i]='<:Priconne:782554046887493652>Princess Connect Re:Dive' if crossgames[i]=='PC'
+      crossgames[i]='<:Take_Your_Heart:782553893204262923>Persona 5 Strikers' if crossgames[i]=='P5S'
     end
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
@@ -3173,6 +3189,8 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       crossgames.push('FEH') if ['feh','fe'].include?(args[i].downcase)
       crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
       crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
+      crossgames.push('PC') if ['princessconnect','princess_connect','pcrd','redive','re_dive','re:dive','priconne'].include?(args[i].downcase)
+      crossgames.push('P5S') if ['persona5','p5','strikers','p5s','scramble'].include?(args[i].downcase)
       for i2 in 0...lookout.length
         tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
       end
@@ -3321,6 +3339,8 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       crossgames[i]='<:Bond:613804021119189012>Fate/Grand Order' if crossgames[i]=='FGO'
       crossgames[i]='<:Mega_Man:641484836304846857>Mega Man' if crossgames[i]=='MM'
       crossgames[i]='<:MH_Rathalos:669319247670804506>Monster Hunter' if crossgames[i]=='MH'
+      crossgames[i]='<:Priconne:782554046887493652>Princess Connect Re:Dive' if crossgames[i]=='PC'
+      crossgames[i]='<:Take_Your_Heart:782553893204262923>Persona 5 Strikers' if crossgames[i]=='P5S'
     end
     search.push("*Crossover Specifics*: #{crossgames.join(', ')}")
   end
