@@ -439,6 +439,28 @@ class DLAdventurer
     return 'them'
   end
   
+  def isManakete?
+    return true if ['Mega Man','Lathna','Gala Mym','Mym(Halloween)'].include?(@name)
+    return true if ['Gala Leonidas','Chelle'].include?(@name)
+    return false if ['Reginn','Fafnir(FE)','Otr'].include?(@name)
+    m=$dragons.reject{|q| q.name != @name || !q.isPseudodragon?}
+    return true if m.length>0
+    return false
+  end
+end
+
+class DLDragon
+  def pronoun(possessive=nil)
+    return 'he' if @gender=='M' && possessive==false
+    return 'she' if @gender=='F' && possessive==false
+    return 'his' if @gender=='M' && possessive==true
+    return 'him' if @gender=='M'
+    return 'her' if @gender=='F'
+    return 'their' if possessive==true
+    return 'they' if possessive==false
+    return 'them'
+  end
+  
 end
 
 
