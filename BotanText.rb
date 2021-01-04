@@ -701,7 +701,8 @@ def disp_pseudodragon_stats(bot,event,args=nil,juststats=false,k2=[[],[],[]],pic
   title="#{title}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**" if !k[0][16].nil? && k[0][16]=='MH'
   title="#{title}\n<:Priconne:782554046887493652>**Princess Connect Re:Dive Collab**" if !k[16].nil? && k[16]=='PC'
   title="#{title}\n<:Take_Your_Heart:782553893204262923>**Persona 5 Strikers Collab**" if !k[16].nil? && k[16]=='P5S'
-  title="#{title}\n**Collab**" if k[1].length>1 && k[1][1,1].downcase=='c' && !(feh || (!k[16].nil? && k[16].length>0 && ['FEH','FGO','MM','MH','PC','P5S'].include?(k[16])))
+  puts k.to_s
+  title="#{title}\n**Collab**" if k[0][1].length>1 && k[0][1][1,1].downcase=='c' && !(feh || (!k[0][16].nil? && k[0][16].length>0 && ['FEH','FGO','MM','MH','PC','P5S'].include?(k[0][16])))
   title="#{title}\n**Pseudodragon**" unless feh
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Speed:573366907357495296>','<:Energize:559629242137051155>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>']
   semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:ProtoShield:642287078943752202>','<:SpeedS:514712247625580555>','<:FEHEnergized:587684963000909845>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>'] if feh
