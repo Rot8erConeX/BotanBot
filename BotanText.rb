@@ -400,6 +400,8 @@ end
               ['Bog','BogPunisher'],
               ['ReducedDefense','ReducedDefensePunisher'],
               ['Zone','ZonePunisher'],
+              ['Shadowblight','ShadowblightPunisher'],
+              ['Stormlash','StormlashedPunisher'],
               ['Scorchrend','ScorchrentPunisher']]
 @cleaning=[['Paralysis','ParalysisCleanse'],
            ['Poison','PoisonCleanse','Antidote'],
@@ -414,7 +416,9 @@ end
            ['Sleep','SleepCleanse','WakeUpSlap'],
            ['Bleed','BleedCleanse','Bandage'],
            ['Curse','CurseCleanse'],
-           ['Scorchrend','ScorchrendCleaner']]
+           ['Shadowblight','ShadowblightCleanse'],
+           ['Stormlash','StormlashedCleanse'],
+           ['Scorchrend','ScorchrendCleanse']]
 @resonance=[['Crown',nil,nil,'Skill Damage +10%'],
             ['Axe',nil,nil,'Broken Punisher +10%'],
             ['Sword',nil,nil,'Strength +8%'],
@@ -437,7 +441,7 @@ def dragon_data(bot,event,args=nil,juststats=false)
     disp_pseudodragon_stats(bot,event,args,juststats,[['Brunhilda','High Brunhilda'],['"Mymhilda"','"Super Mym"'],'Infernal Ray'],['Adventurers','Gala_Mym_5'],'Gala Brunhilda')
     return nil
   elsif (has_any?(args2,['halloween','spooky','spoopy','scary']) && has_any?(args2,['mym','brunhilda'])) || has_any?(args2,['halloweenmym','halloweenbrunhilda','brunhildahalloween','mymhalloween','spookymym','spookybrunhilda','brunhildaspooky','mymspooky','spoopymym','spoopybrunhilda','brunhildaspoopy','mymspoopy','scarymym','scarybrunhilda','brunhildascary','mymscary','mymhilda'])
-    disp_pseudodragon_stats(bot,event,args,juststats,[['Brunhilda'],['"Halloween Mymhilda"'],'Muspelheim'],['Adventurers','Mym(Halloween)_5'],'Halloween Brunhilda')
+    disp_pseudodragon_stats(bot,event,args,juststats,[['Brunhilda'],['"Halloween Mymhilda"'],'Muspelheim(Halloween)'],['Adventurers','Mym(Halloween)_5'],'Halloween Brunhilda')
     return nil
   elsif (has_any?(args2,['shiny']) && has_any?(args2,['nyarlathotep'])) || has_any?(args2,['shinynyarlathotep','lathna'])
     disp_pseudodragon_stats(bot,event,args,juststats,[['Nyarlathotep'],['"Shiny Nyarlathotep"'],'All-Encompassing Darkness (Yang)'],['Dragons','Shiny_Nyarlathotep_5'],'Shiny Nyarlathotep')
@@ -829,157 +833,25 @@ def enemy_data(bot,event,args=nil,ignoresub=false)
   moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Infantry"} if k[2].length>3 && k[2][3][0,11]=='Fire Emblem'
   moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Armor"} if k[2].length>3 && k[2][3][0,11]=='Fire Emblem' && !k[0].include?('(Enemy)')
   title="#{title}\n#{moji[0].mention unless moji.length<=0} **Tribe:** #{k[2][1]}"
-  k[1][1]=[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1] if k[1][1].nil? || k[1][1].length<=0
-  if k[1][0].length<2 && k[1][1].length<2
-    str="#{str}\n<:HP:573344832307593216>**Maximum HP:** #{longFormattedNumber(k[1][0][0])}"
-    str="#{str}\n<:Strength:573344931205349376>**Strength:** #{longFormattedNumber(k[1][1][0])}"
-  elsif k[0]=='Cube'
-    str="#{str}\n"
-    str="#{str}\n*Normal:*" if (k[1][0].length>0 && k[1][0][0]>-1) || (k[1][1].length>0 && k[1][1][0]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][0])}" if k[1][0].length>0 && k[1][0][0]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][0])}" if k[1][1].length>0 && k[1][1][0]>-1
-    str="#{str}  **Binary Subtractor**"
-    str="#{str}\n*Hard:*" if (k[1][0].length>1 && k[1][0][1]>-1) || (k[1][1].length>1 && k[1][1][1]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][1])}" if k[1][0].length>1 && k[1][0][1]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][1])}" if k[1][1].length>1 && k[1][1][1]>-1
-    str="#{str}  **Septenary Increaser**"
-  elsif k[2].length>3 && k[2][3][0,11]=='Fire Emblem'
-    str="#{str}\n"
-    str="#{str}\n*Prologue:*" if (k[1][0].length>0 && k[1][0][0]>-1) || (k[1][1].length>0 && k[1][1][0]>-1)
-    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][0])}" if k[1][0].length>0 && k[1][0][0]>-1
-    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][0])}" if k[1][1].length>0 && k[1][1][0]>-1
-    str="#{str}\n*Normal:*" if (k[1][0].length>1 && k[1][0][1]>-1) || (k[1][1].length>1 && k[1][1][1]>-1)
-    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][1])}" if k[1][0].length>1 && k[1][0][1]>-1
-    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][1])}" if k[1][1].length>1 && k[1][1][1]>-1
-    str="#{str}\n*Hard:*" if (k[1][0].length>2 && k[1][0][2]>-1) || (k[1][1].length>2 && k[1][1][2]>-1)
-    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][2])}" if k[1][0].length>2 && k[1][0][2]>-1
-    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][2])}" if k[1][1].length>2 && k[1][1][2]>-1
-    str="#{str}\n*Lunatic:*" if (k[1][0].length>3 && k[1][0][3]>-1) || (k[1][1].length>3 && k[1][1][3]>-1)
-    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][3])}" if k[1][0].length>3 && k[1][0][3]>-1
-    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][3])}" if k[1][1].length>3 && k[1][1][3]>-1
-    str="#{str}\n*Maddening:*" if (k[1][0].length>4 && k[1][0][4]>-1) || (k[1][1].length>4 && k[1][1][4]>-1)
-    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][4])}" if k[1][0].length>4 && k[1][0][4]>-1
-    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][4])}" if k[1][1].length>4 && k[1][1][4]>-1
-    str="#{str}\n*Infernal:*" if (k[1][0].length>5 && k[1][0][5]>-1) || (k[1][1].length>5 && k[1][1][5]>-1)
-    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][5])}" if k[1][0].length>5 && k[1][0][5]>-1
-    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][5])}" if k[1][1].length>5 && k[1][1][5]>-1
-    str="#{str}\n*Abyssal:*" if (k[1][0].length>6 && k[1][0][6]>-1) || (k[1][1].length>6 && k[1][1][6]>-1)
-    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][6])}" if k[1][0].length>6 && k[1][0][6]>-1
-    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][6])}" if k[1][1].length>6 && k[1][1][6]>-1
-    str="#{str}\n*Abyssal+ (Solo):*" if (k[1][0].length>7 && k[1][0][7]>-1) || (k[1][1].length>7 && k[1][1][7]>-1)
-    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][7])}" if k[1][0].length>7 && k[1][0][7]>-1
-    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][7])}" if k[1][1].length>7 && k[1][1][7]>-1
-    str="#{str}\n*Abyssal+ (Raid):*" if (k[1][0].length>8 && k[1][0][8]>-1) || (k[1][1].length>8 && k[1][1][8]>-1)
-    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][8])}" if k[1][0].length>8 && k[1][0][8]>-1
-    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][8])}" if k[1][1].length>8 && k[1][1][8]>-1
-    str="#{str}\n*Abyssal+ (Raid+):*" if (k[1][0].length>9 && k[1][0][9]>-1) || (k[1][1].length>9 && k[1][1][9]>-1)
-    str="#{str}  <:HP_S:514712247503945739>HP: #{longFormattedNumber(k[1][0][9])}" if k[1][0].length>9 && k[1][0][9]>-1
-    str="#{str}  <:StrengthS:514712248372166666>Str: #{longFormattedNumber(k[1][1][9])}" if k[1][1].length>9 && k[1][1][9]>-1
-  elsif k[0]=='Fatalis'
-    str="#{str}\n"
-    str="#{str}\n*G\u22C6:*" if (k[1][0].length>0 && k[1][0][0]>-1) || (k[1][1].length>0 && k[1][1][0]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][0])}" if k[1][0].length>0 && k[1][0][0]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][0])}" if k[1][1].length>0 && k[1][1][0]>-1
-    str="#{str}\n*G\u2605:*" if (k[1][0].length>1 && k[1][0][1]>-1) || (k[1][1].length>1 && k[1][1][1]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][1])}" if k[1][0].length>1 && k[1][0][1]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][1])}" if k[1][1].length>1 && k[1][1][1]>-1
-    str="#{str}\n*G\u2605\u2605:*" if (k[1][0].length>2 && k[1][0][2]>-1) || (k[1][1].length>2 && k[1][1][2]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][2])}" if k[1][0].length>2 && k[1][0][2]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][2])}" if k[1][1].length>2 && k[1][1][2]>-1
-    str="#{str}\n*G\u2605\u2605\u2605:*" if (k[1][0].length>3 && k[1][0][3]>-1) || (k[1][1].length>3 && k[1][1][3]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][3])}" if k[1][0].length>3 && k[1][0][3]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][3])}" if k[1][1].length>3 && k[1][1][3]>-1
-    str="#{str}\n*G\u2605\u2605\u2605\u22C6:*" if (k[1][0].length>4 && k[1][0][4]>-1) || (k[1][1].length>4 && k[1][1][4]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][4])}" if k[1][0].length>4 && k[1][0][4]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][4])}" if k[1][1].length>4 && k[1][1][4]>-1
-    str="#{str}\n*G\u2605\u2605\u2605\u2605 (Solo):*" if (k[1][0].length>5 && k[1][0][5]>-1) || (k[1][1].length>5 && k[1][1][5]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][5])}" if k[1][0].length>5 && k[1][0][5]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][5])}" if k[1][1].length>5 && k[1][1][5]>-1
-    str="#{str}\n*G\u2605\u2605\u2605\u2605 (Raid):*" if (k[1][0].length>6 && k[1][0][6]>-1) || (k[1][1].length>6 && k[1][1][6]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][6])}" if k[1][0].length>6 && k[1][0][6]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][6])}" if k[1][1].length>6 && k[1][1][6]>-1
-    str="#{str}\n*Special:*" if (k[1][0].length>7 && k[1][0][7]>-1) || (k[1][1].length>7 && k[1][1][7]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][7])}" if k[1][0].length>7 && k[1][0][7]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][7])}" if k[1][1].length>7 && k[1][1][7]>-1
-    str="#{str}\n*Special+:*" if (k[1][0].length>8 && k[1][0][8]>-1) || (k[1][1].length>8 && k[1][1][8]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][8])}" if k[1][0].length>8 && k[1][0][8]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][8])}" if k[1][1].length>8 && k[1][1][8]>-1
-    str="#{str}\n*Special++:*" if (k[1][0].length>9 && k[1][0][9]>-1) || (k[1][1].length>9 && k[1][1][9]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][9])}" if k[1][0].length>9 && k[1][0][9]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][9])}" if k[1][1].length>9 && k[1][1][9]>-1
-  elsif k[0].include?('Rathalos')
-    str="#{str}\n"
-    str="#{str}\n*Low Rank:*" if (k[1][0].length>0 && k[1][0][0]>-1) || (k[1][1].length>0 && k[1][1][0]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][0])}" if k[1][0].length>0 && k[1][0][0]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][0])}" if k[1][1].length>0 && k[1][1][0]>-1
-    str="#{str}\n*High Rank:*" if (k[1][0].length>1 && k[1][0][1]>-1) || (k[1][1].length>1 && k[1][1][1]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][1])}" if k[1][0].length>1 && k[1][0][1]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][1])}" if k[1][1].length>1 && k[1][1][1]>-1
-    str="#{str}\n*Expert Rank:*" if (k[1][0].length>2 && k[1][0][2]>-1) || (k[1][1].length>2 && k[1][1][2]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][2])}" if k[1][0].length>2 && k[1][0][2]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][2])}" if k[1][1].length>2 && k[1][1][2]>-1
-    str="#{str}\n*Master Rank:*" if (k[1][0].length>3 && k[1][0][3]>-1) || (k[1][1].length>3 && k[1][1][3]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][3])}" if k[1][0].length>3 && k[1][0][3]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][3])}" if k[1][1].length>3 && k[1][1][3]>-1
-    str="#{str}\n*Nightmare Rank:*" if (k[1][0].length>4 && k[1][0][4]>-1) || (k[1][1].length>4 && k[1][1][4]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][4])}" if k[1][0].length>4 && k[1][0][4]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][4])}" if k[1][1].length>4 && k[1][1][4]>-1
-    str="#{str}\n*Trial (Solo):*" if (k[1][0].length>5 && k[1][0][5]>-1) || (k[1][1].length>5 && k[1][1][5]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][5])}" if k[1][0].length>5 && k[1][0][5]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][5])}" if k[1][1].length>5 && k[1][1][5]>-1
-    str="#{str}\n*Trial (Co-op):*" if (k[1][0].length>6 && k[1][0][6]>-1) || (k[1][1].length>6 && k[1][1][6]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][6])}" if k[1][0].length>6 && k[1][0][6]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][6])}" if k[1][1].length>6 && k[1][1][6]>-1
-    str="#{str}\n*Trial (Co-op 2):*" if (k[1][0].length>7 && k[1][0][7]>-1) || (k[1][1].length>7 && k[1][1][7]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][7])}" if k[1][0].length>7 && k[1][0][7]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][7])}" if k[1][1].length>7 && k[1][1][7]>-1
-    str="#{str}\n*Advanced:*" if (k[1][0].length>8 && k[1][0][8]>-1) || (k[1][1].length>8 && k[1][1][8]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][8])}" if k[1][0].length>8 && k[1][0][8]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][8])}" if k[1][1].length>8 && k[1][1][8]>-1
-    str="#{str}\n*Challenge:*" if (k[1][0].length>9 && k[1][0][9]>-1) || (k[1][1].length>9 && k[1][1][9]>-1)
-    str="#{str}  <:HP:573344832307593216>HP: #{longFormattedNumber(k[1][0][9])}" if k[1][0].length>9 && k[1][0][9]>-1
-    str="#{str}  <:Strength:573344931205349376>Str: #{longFormattedNumber(k[1][1][9])}" if k[1][1].length>9 && k[1][1][9]>-1
+  semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','Strength']
+  unless k[2].nil? || k[2].length<=3 || k[2][3].nil?
+    semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','Strength'] if k[2][3][0,11]=='Fire Emblem'
+    semoji=['<:HP_S:514712247503945739>','<:MagicS:514712247289774111>','Magic'] if k[2][3][0,11]=='Fire Emblem' && k[0].split(' ')[0]=='Veronica'
+  end
+  if k[1].nil? || k[1].length<=0
+    str="~~Stats currently unknown~~"
+  elsif k[1].length<2
+    str="#{str}\n#{semoji[0]}**HP:** #{longFormattedNumber(k[1][0][1])}" if k[1][0][1]>-1
+    str="#{str}\n#{semoji[1]}**#{semoji[2]}:** #{longFormattedNumber(k[1][0][2])}" if k[1][0][2]>-1
   else
-    str="#{str}\n"
-    if (k[1][0].length>0 && k[1][0][0]>-1) || (k[1][1].length>0 && k[1][1][0]>-1)
-      if k[2][2]=='High Dragon'
-        str="#{str}\n*Prelude:*"
-      else
-        str="#{str}\n*Beginner:*"
+    for i in 0...k[1].length
+      kx=k[1][i].map{|q| q}
+      if kx[1]>-1 || kx[2]>-1
+        str="#{str}\n**#{kx[0].gsub("/empty","\u22C6").gsub("/star","\u2605")}:**"
+        str="#{str}  #{semoji[0]}*HP:* #{longFormattedNumber(kx[1])}" if kx[1]>-1
+        str="#{str}  #{semoji[1]}*#{semoji[2]}:* #{longFormattedNumber(kx[2])}" if kx[2]>-1
       end
     end
-    statemotes=['<:HP:573344832307593216>','<:Strength:573344931205349376>','Omega','Raid']
-    statemotes=['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','Singularity','Raid'] if k[2][3]=='Fate/Grand Order'
-    statemotes=['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','Superhero'] if k[2][3]=='Mega Man: Chaos Protocol'
-    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][0])}" if k[1][0].length>0 && k[1][0][0]>-1
-    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][0])}" if k[1][1].length>0 && k[1][1][0]>-1
-    str="#{str}\n*Standard:*" if (k[1][0].length>1 && k[1][0][1]>-1) || (k[1][1].length>1 && k[1][1][1]>-1)
-    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][1])}" if k[1][0].length>1 && k[1][0][1]>-1
-    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][1])}" if k[1][1].length>1 && k[1][1][1]>-1
-    str="#{str}\n*Expert:*" if (k[1][0].length>2 && k[1][0][2]>-1) || (k[1][1].length>2 && k[1][1][2]>-1)
-    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][2])}" if k[1][0].length>2 && k[1][0][2]>-1
-    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][2])}" if k[1][1].length>2 && k[1][1][2]>-1
-    str="#{str}\n*Master:*" if (k[1][0].length>3 && k[1][0][3]>-1) || (k[1][1].length>3 && k[1][1][3]>-1)
-    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][3])}" if k[1][0].length>3 && k[1][0][3]>-1
-    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][3])}" if k[1][1].length>3 && k[1][1][3]>-1
-    str="#{str}\n*Nightmare:*" if (k[1][0].length>4 && k[1][0][4]>-1) || (k[1][1].length>4 && k[1][1][4]>-1)
-    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][4])}" if k[1][0].length>4 && k[1][0][4]>-1
-    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][4])}" if k[1][1].length>4 && k[1][1][4]>-1
-    str="#{str}\n*#{statemotes[2]} (Solo):*" if (k[1][0].length>5 && k[1][0][5]>-1) || (k[1][1].length>5 && k[1][1][5]>-1)
-    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][5])}" if k[1][0].length>5 && k[1][0][5]>-1
-    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][5])}" if k[1][1].length>5 && k[1][1][5]>-1
-    str="#{str}\n*#{statemotes[2]}#{" (#{statemotes[3]} L1)" unless statemotes[3].nil?}:*" if (k[1][0].length>6 && k[1][0][6]>-1) || (k[1][1].length>6 && k[1][1][6]>-1)
-    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][6])}" if k[1][0].length>6 && k[1][0][6]>-1
-    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][6])}" if k[1][1].length>6 && k[1][1][6]>-1
-    str="#{str}\n*#{statemotes[2]}#{" (#{statemotes[3]} L2)" unless statemotes[3].nil?}:*" if (k[1][0].length>7 && k[1][0][7]>-1) || (k[1][1].length>7 && k[1][1][7]>-1)
-    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][7])}" if k[1][0].length>7 && k[1][0][7]>-1
-    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][7])}" if k[1][1].length>7 && k[1][1][7]>-1
-    str="#{str}\n*Special:*" if (k[1][0].length>8 && k[1][0][8]>-1) || (k[1][1].length>8 && k[1][1][8]>-1)
-    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][8])}" if k[1][0].length>8 && k[1][0][8]>-1
-    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][8])}" if k[1][1].length>8 && k[1][1][8]>-1
-    str="#{str}\n*Challenge:*" if (k[1][0].length>9 && k[1][0][9]>-1) || (k[1][1].length>9 && k[1][1][9]>-1)
-    str="#{str}  #{statemotes[0]}HP: #{longFormattedNumber(k[1][0][9])}" if k[1][0].length>9 && k[1][0][9]>-1
-    str="#{str}  #{statemotes[1]}Str: #{longFormattedNumber(k[1][1][9])}" if k[1][1].length>9 && k[1][1][9]>-1
   end
   if k[2].length>3 && !['Jingu Bang','Mini Dasheng'].include?(k[0])
     m=@enemies.reject{|q| q[0]==k[0] || q[2].length<4 || q[2][3]!=k[2][3] || ['Jingu Bang','Mini Dasheng'].include?(q[0])}
@@ -1933,7 +1805,8 @@ def art_of_the_nobody(bot,event,args=nil)
   rar=nil
   fehm=''
   fehm='FEH' if ['Loki','Thorr'].include?(k[0])
-  k[1]/=2 if k[1]>2 && !k[0].include?('Slime') && k[0]!='Snapper'
+  k[1]/=2 if k[1]>2 && !k[0].include?('Slime') && !k[0].include?('Champ') && k[0]!='Snapper' && k[0]!='Cloud' && k[0]!='Sam'
+  k[1]=2 if k[1]>2 && !k[0].include?('Slime') && !k[0].include?('Champ') && k[0]!='Snapper' && k[0]!='Cloud' && k[0]!='Sam'
   disp="#{generate_rarity_row(k[1],0,fehm,true)}"
   disp="#{generate_rarity_row(k[1],@max_rarity[0],fehm,true)}" if k[2]=='n'
   lookout=[]
@@ -2230,7 +2103,7 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
     crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
     crossgames.push('PC') if ['princessconnect','princess_connect','pcrd','redive','re_dive','re:dive','priconne'].include?(args[i].downcase)
-    crossgames.push('P5S') if ['persona5','p5','strikers','p5s','scramble'].include?(args[i].downcase)
+    crossgames.push('P5S') if ['persona5','p5','strikers','p5s','scramble','persona5scramble','persona5strikers'].include?(args[i].downcase)
     genders.push('M') if ['male','boy','m','males','boys','man'].include?(args[i].downcase)
     genders.push('F') if ['female','woman','girl','f','females','women','girls'].include?(args[i].downcase)
     for i2 in 0...lookout.length
@@ -2353,10 +2226,10 @@ def find_the_adventure(bot,event,args=nil,mode=0,allowstr=0)
         m.push("#{i+1}z")
       end
       emo.push('(L)') if fltr.length<2
-      fltr.push('Collab')
+      fltr.push('PseudoCollab')
     end
     emo.push('(g)') if fltr.length<2 && fltr.include?('Gala')
-    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[12].nil? && q[12].length>0) && !(fltr.include?('Gala') && q[0][0,5]=='Gala ')}.uniq
+    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[12].nil? && q[12].length>0) && !(fltr.include?('PseudoCollab') && q[1][1,1]!='u' && !q[12].nil? && q[12].length>0) && !(fltr.include?('Gala') && q[0][0,5]=='Gala ')}.uniq
   end
   if genders.length>0
     char=char.reject{|q| !genders.include?(q[13])}.uniq
@@ -2578,7 +2451,7 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
     crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
     crossgames.push('PC') if ['princessconnect','princess_connect','pcrd','redive','re_dive','re:dive','priconne'].include?(args[i].downcase)
-    crossgames.push('P5S') if ['persona5','p5','strikers','p5s','scramble'].include?(args[i].downcase)
+    crossgames.push('P5S') if ['persona5','p5','strikers','p5s','scramble','persona5scramble','persona5strikers'].include?(args[i].downcase)
     genders.push('M') if ['male','boy','m','males','boys','man'].include?(args[i].downcase)
     genders.push('F') if ['female','woman','girl'].include?(args[i].downcase)
     for i2 in 0...lookout.length
@@ -2707,9 +2580,9 @@ def find_the_dragon(bot,event,args=nil,mode=0,allowstr=true)
         m.push("#{i+1}z")
       end
       emo.push('(L)') if fltr.length<2
-      fltr.push('Collab')
+      fltr.push('PseudoCollab')
     end
-    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[16].nil? && q[16].length>0) && !(fltr.include?('Gala') && q[0][0,5]=='Gala ')}.uniq
+    char=char.reject{|q| !m.include?(q[1]) && !(fltr.include?('Collab') && !q[16].nil? && q[16].length>0) && !(fltr.include?('PseudoCollab') && q[1][1,1]!='u' && !q[12].nil? && q[12].length>0) && !(fltr.include?('Gala') && q[0][0,5]=='Gala ')}.uniq
   end
   if genders.length>0
     char=char.reject{|q| !genders.include?(q[17])}.uniq
@@ -2873,7 +2746,7 @@ def find_the_printer(bot,event,args=nil,mode=0,allowstr=true)
     crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
     crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
     crossgames.push('PC') if ['princessconnect','princess_connect','pcrd','redive','re_dive','re:dive','priconne'].include?(args[i].downcase)
-    crossgames.push('P5S') if ['persona5','p5','strikers','p5s','scramble'].include?(args[i].downcase)
+    crossgames.push('P5S') if ['persona5','p5','strikers','p5s','scramble','persona5scramble','persona5strikers'].include?(args[i].downcase)
     for i2 in 0...lookout.length
       tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i].downcase)
     end
@@ -3191,7 +3064,7 @@ def find_the_stick(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
       crossgames.push('MM') if ['megaman','rockman','mega'].include?(args[i].downcase)
       crossgames.push('MH') if ['monster','hunter','monsterhunter','monhun'].include?(args[i].downcase)
       crossgames.push('PC') if ['princessconnect','princess_connect','pcrd','redive','re_dive','re:dive','priconne'].include?(args[i].downcase)
-      crossgames.push('P5S') if ['persona5','p5','strikers','p5s','scramble'].include?(args[i].downcase)
+      crossgames.push('P5S') if ['persona5','p5','strikers','p5s','scramble','persona5scramble','persona5strikers'].include?(args[i].downcase)
       for i2 in 0...lookout.length
         tags.push(lookout[i2][0]) if lookout[i2][1].include?(args[i])
       end
@@ -3574,6 +3447,9 @@ def fac_stat_buffs(k,lvl)
       end
     end
     return alta
+  elsif k[3][1]=='Dracolith'
+    return [lvl+1.0] if lvl<20
+    return [20.0+3*(lvl-19)]
   elsif k[3][1]=='Altar'
     alta=[(lvl+1)/2,lvl/2]
     alta=[lvl-17,lvl-17] if lvl>34
@@ -3738,6 +3614,9 @@ def fac_stats(bot,event,args=nil)
         end
         if minmax && i>0
         elsif !s2s && !minmax
+        elsif fac_stat_buffs(k,i).length==1
+          alta=fac_stat_buffs(k,i)
+          str="#{str}\nBuff at Level #{i+1}: Damage+#{'%.1f' % alta[0]}%"
         elsif fac_stat_buffs(k,i).length>0
           alta=fac_stat_buffs(k,i)
           str="#{str}\nBuffs at Level #{i+1}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
@@ -3749,7 +3628,10 @@ def fac_stats(bot,event,args=nil)
       for i in 0...mtzz.length
         str3="#{str3}#{', ' unless i==0}#{mtzz[i]} x#{mtz.reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i*val}.inject(0){|sum,x| sum + x }}"
       end
-      if fac_stat_buffs(k,kxx.length-1).length>0
+      if fac_stat_buffs(k,kxx.length-1).length==1
+        alta=fac_stat_buffs(k,kxx.length-1)
+        str3="#{str3}\nFINAL BUFF: Damage+#{'%.1f' % alta[0]}%"
+      elsif fac_stat_buffs(k,kxx.length-1).length>1
         alta=fac_stat_buffs(k,kxx.length-1)
         str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       end
@@ -3773,7 +3655,10 @@ def fac_stats(bot,event,args=nil)
       for i in 0...mtzz.length
         str3="#{str3}#{' - ' if i==0}#{', ' unless i==0}#{mtzz[i]} x#{mtz[0].reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i*val}.inject(0){|sum,x| sum + x }}"
       end
-      if fac_stat_buffs(k,n-1).length>0
+      if fac_stat_buffs(k,n-1).length==1
+        alta=fac_stat_buffs(k,n-1)
+        str3="#{str3}\nBuff at Level #{n}: Damage+#{'%.1f' % alta[0]}%"
+      elsif fac_stat_buffs(k,n-1).length>0
         alta=fac_stat_buffs(k,n-1)
         str3="#{str3}\nBuffs at Level #{n}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       end
@@ -3783,7 +3668,10 @@ def fac_stats(bot,event,args=nil)
       for i in 0...mtzz.length
         str3="#{str3}#{' - ' if i==0}#{', ' unless i==0}#{mtzz[i]} x#{mtz[1].reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i*val}.inject(0){|sum,x| sum + x }}"
       end
-      if fac_stat_buffs(k,kxx.length-1).length>0
+      if fac_stat_buffs(k,kxx.length-1).length==1
+        alta=fac_stat_buffs(k,kxx.length-1)
+        str3="#{str3}\nFINAL BUFF: Damage+#{'%.1f' % alta[0]}%"
+      elsif fac_stat_buffs(k,kxx.length-1).length>1
         alta=fac_stat_buffs(k,kxx.length-1)
         str3="#{str3}\nFINAL BUFF: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       end
@@ -3797,7 +3685,11 @@ def fac_stats(bot,event,args=nil)
       kxx=kxx[n,n2-n]
       for i in 0...kxx.length
         cost+=kxx[i][6]
-        if fac_stat_buffs(k,n+i-1).length>0 && (s2s || i==0)
+        if !s2s && i != 0
+        elsif fac_stat_buffs(k,n+i-1).length==1
+          alta=fac_stat_buffs(k,n+i-1)
+          str="#{str}\nBuffs at Level #{n+i}: Damage+#{'%.1f' % alta[0]}%"
+        elsif fac_stat_buffs(k,n+i-1).length>0
           alta=fac_stat_buffs(k,n+i-1)
           str="#{str}\nBuffs at Level #{n+i}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
         end
@@ -3809,7 +3701,11 @@ def fac_stats(bot,event,args=nil)
           str="#{str} - #{kxx[i][7].map{|q| "#{q[0]} x#{q[1].to_i*val}"}.sort.join(', ')}" if s2s
         end
       end
-      if fac_stat_buffs(k,n2-1).length>0 && s2s
+      if !s2s
+      elsif fac_stat_buffs(k,n2-1).length==1
+        alta=fac_stat_buffs(k,n2-1)
+        str="#{str}\nBuff at Level #{n2}: Damage+#{'%.1f' % alta[0]}%"
+      elsif fac_stat_buffs(k,n2-1).length>1
         alta=fac_stat_buffs(k,n2-1)
         str="#{str}\nBuffs at Level #{n2}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       end
@@ -3818,7 +3714,10 @@ def fac_stats(bot,event,args=nil)
       for i in 0...mtzz.length
         str3="#{str3}#{', ' unless i==0}#{mtzz[i]} x#{mtz.reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i*val}.inject(0){|sum,x| sum + x }}"
       end
-      if fac_stat_buffs(k,n2-1).length>0
+      if fac_stat_buffs(k,n2-1).length==1
+        alta=fac_stat_buffs(k,n2-1)
+        str3="#{str3}\nBuff at level #{n2}: Damage+#{'%.1f' % alta[0]}%"
+      elsif fac_stat_buffs(k,n2-1).length>1
         alta=fac_stat_buffs(k,n2-1)
         str3="#{str3}\nBuffs at level #{n2}: <:HP:573344832307593216>+#{'%.1f' % alta[0]}% <:Strength:573344931205349376>+#{'%.1f' % alta[1]}%"
       end
@@ -3934,18 +3833,22 @@ def damage_modifiers(bot,event,args=nil)
       f=[]
       k2=[1,2,3,4,5,6,7]
       k2=['67% x5','67% x5',0,180] if k[2][3]=='Rifle'
-      k2=['150% x5','150% x5',0,90] if k[2][3]=='Shotgun'
+      k2=['48% x8','48% x8','40% x8','35% x10 + 40%'] if k[2][3]=='Shotgun'
       k2=['45% x3','150% x3','150% x5',0,90] if k[2][3]=='Machine Gun'
       for i in 0...k2.length
         k2[i]="#{k2[i]}%" unless k2[i].is_a?(String) && k2[i].to_i.to_s != k2[i]
       end
       ff=[]
       if k[19].length==1
-        for i2 in 1...k[19][0].length-2
-          ff.push("*#{m[i2]} Hit:* #{k[19][0][i2]}#{'%' if k[19][0][i2].to_i.to_s==k[19][0][i2]}")
+        if k[19][0].length>3
+          for i2 in 1...k[19][0].length-2
+            ff.push("*#{m[i2]} Hit:* #{k[19][0][i2]}#{'%' if k[19][0][i2].to_i.to_s==k[19][0][i2]}")
+          end
+          disp=ff.join("\n")
+          disp="#{disp}\n\n**Dash Attack:** #{k[19][0][-2]}#{'%' if k[19][0][-2].to_i.to_s==k[19][0][-2]}\n**Force Strike:** #{k[19][0][-1]}#{'%' if k[19][0][-1].to_i.to_s==k[19][0][-1]}"
+        else
+          disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}#{"\n*Third Hit:* #{k2[2]}" if k2.length>4 && k2[2].to_i>0}\n\n**Dash Attack:** #{k2[-2]}\n\n**Force Strike:** #{k2[-1]}"
         end
-        disp=ff.join("\n")
-        disp="#{disp}\n\n**Dash Attack:** #{k[19][0][-2]}#{'%' if k[19][0][-2].to_i.to_s==k[19][0][-2]}\n**Force Strike:** #{k[19][0][-1]}#{'%' if k[19][0][-1].to_i.to_s==k[19][0][-1]}"
       else
         for i2 in 0...k2.length-2
           ff.push("*#{m[i2]} Hit:* #{k2[i2]}#{'%' if k2[i2].to_i.to_s==k2[i2]}")
@@ -4073,15 +3976,15 @@ def damage_modifiers(bot,event,args=nil)
     for i in 0...k.length
       f.push([k2[i],k[i]])
     end
-    f.push(['<:Weapon_Manacaster:758905122448867338>Manacaster Rifles',"*First Hit:* 67% x5\n*Second Hit:* 67% x5\n\n**Dash Attack:** \n**Force Strike:** 180%"])
-    f.push(['<:Weapon_Manacaster:758905122448867338>Manacaster Shotguns',"*First Hit:* 150% x5\n*Second Hit:* 150% x5\n\n**Dash Attack:** \n**Force Strike:** 90%"])
-    f.push(['<:Weapon_Manacaster:758905122448867338>Manacaster Machine Guns',"*First Hit:* 45% x3\n*Second Hit:* 150% x3\n*Third Hit:* 150% x5\n\n**Dash Attack:** \n**Force Strike:** 90%"])
+    f.push(['<:Weapon_Manacaster:758905122448867338>Manacaster <:MC_Rifle:772800760068046859>Rifles',"*First Hit:* 67% x5\n*Second Hit:* 67% x5\n\n**Dash Attack:** \n**Force Strike:** 180%"])
+    f.push(['<:Weapon_Manacaster:758905122448867338>Manacaster <:MC_Shotgun:772800760055726080>Shotguns',"*First Hit:* 48% x8\n*Second Hit:* 48% x8\n\n**Dash Attack:** 40% x8\n**Force Strike:** 35% x10 + 40% x1"])
+    f.push(['<:Weapon_Manacaster:758905122448867338>Manacaster <:MC_Machine_Gun:772800760081023017>Machine Guns',"*First Hit:* 45% x3\n*Second Hit:* 150% x3\n*Third Hit:* 150% x5\n\n**Dash Attack:** \n**Force Strike:** 90%"])
     create_embed(event,"__**Damage modifiers**__",'',0xCE456B,nil,nil,f)
   elsif wpn[0]=='Manacaster'
     f=[]
-    f.push(['Rifle',"*First Hit:* 67% x5\n*Second Hit:* 67% x5\n\n**Dash Attack:** \n**Force Strike:** 180%"])
-    f.push(['Shotgun',"*First Hit:* 150% x5\n*Second Hit:* 150% x5\n\n**Dash Attack:** \n**Force Strike:** 90%"])
-    f.push(['Machine Gun',"*First Hit:* 45% x3\n*Second Hit:* 150% x3\n*Third Hit:* 150% x5\n\n**Dash Attack:** \n**Force Strike:** 90%"])
+    f.push(['<:MC_Rifle:772800760068046859>Rifle',"*First Hit:* 67% x5\n*Second Hit:* 67% x5\n\n**Dash Attack:** \n**Force Strike:** 180%"])
+    f.push(['<:MC_Shotgun:772800760055726080>Shotgun',"*First Hit:* 48% x8\n*Second Hit:* 48% x8\n\n**Dash Attack:** 40% x8\n**Force Strike:** 35% x10 + 40% x1"])
+    f.push(['<:MC_Machine_Gun:772800760081023017>Machine Gun',"*First Hit:* 45% x3\n*Second Hit:* 150% x3\n*Third Hit:* 150% x5\n\n**Dash Attack:** \n**Force Strike:** 90%"])
     m=''
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn[0]}"}
     m=moji[0].mention unless moji.length<=0
@@ -4089,7 +3992,7 @@ def damage_modifiers(bot,event,args=nil)
   elsif ['Rifle','Shotgun','Machine Gun'].include?(wpn[0])
     k=[1,2,3,4,5,6,7]
     k=['67% x5','67% x5',0,180] if wpn[0]=='Rifle'
-    k=['150% x5','150% x5',0,90] if wpn[0]=='Shotgun'
+    k=['48% x8','48% x8','40% x8','35% x10 + 40%'] if wpn[0]=='Shotgun'
     k=['45% x3','150% x3','150% x5',0,90] if wpn[0]=='Machine Gun'
     for i in 0...k.length
       k[i]="#{k[i]}%" unless k[i].is_a?(String)
@@ -4098,7 +4001,8 @@ def damage_modifiers(bot,event,args=nil)
     disp="#{disp}\n*Third Hit:* #{k[2]}" unless k[4].nil?
     disp="#{disp}\n\n**Dash Attack:** #{k[-2]}"
     disp="#{disp}\n**Force Strike:** #{k[-1]}"
-    create_embed(event,"__Damage modifiers for **#{wpn[0]} [Manacaster]** users__",disp,0xCE456B)
+    moji=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "MC_#{wpn[0].gsub(' ','_')}"}
+    create_embed(event,"__Damage modifiers for #{moji[0].mention unless moji.length<=0}**#{wpn[0]} [Manacaster]** users__",disp,0xCE456B)
   else
     k=[1,2,3,4,5,6,7]
     k=[108,115,137,144,'216% x2',95,'104% L1, 115% L2'] if wpn[0]=='Sword'
@@ -4155,22 +4059,34 @@ def sp_table(bot,event,args=nil)
       ff=[]
       t=0
       if k[18].length==1
-        for i2 in 1...k[18][0].length-2
-          ff.push("*#{m[i2]} Hit:* #{k[18][0][i2]}")
-          if k[18][0][i2].to_i.to_s==k[18][0][i2] && t>=0
-            t+=k[18][0][i2].to_i
-          else
-            t=-1
-          end
-        end
-        if t<0
-          ff.push("~~*Total cannot be calculated dynamically*~~")
+        if ['Dash','DA'].include?(k[18][0][0])
+          k2[-2]=k[18][0][-1]
         else
-          ff.push("\u30FC *Total:* #{t}")
+          k2[-1]=k[18][0][-1]
+          k2[-2]=k[18][0][-2] if k[18][0].length>2
         end
-        ff.push("\n**Dash Attack:** #{k[18][0][-2]}")
-        ff.push("\n**Force Strike:** #{k[18][0][-1]}")
-        f=nil
+        if k[18][0].length>3
+         for i2 in 1...k[18][0].length-2
+           ff.push("*#{m[i2]} Hit:* #{k[18][0][i2]}")
+           if k[18][0][i2].to_i.to_s==k[18][0][i2] && t>=0
+             t+=k[18][0][i2].to_i
+           else
+             t=-1
+           end
+         end
+         if t<0
+           ff.push("~~*Total cannot be calculated dynamically*~~")
+         else
+           ff.push("\u30FC *Total:* #{t}")
+         end
+         ff.push("\n**Dash Attack:** #{k[18][0][-2]}")
+         ff.push("\n**Force Strike:** #{k[18][0][-1]}")
+         f=nil
+          disp=ff.join("\n")
+        else
+          puts k2.to_s
+          disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}#{"\n*Third Hit:* #{k2[2]}" if k2.length>4 && k2[2]>0}\n\u30FC *Total:* #{k2[0,k2.length-2].inject(0){|sum,x| sum + x }}\n\n**Dash Attack:** #{k2[-2]}\n**Force Strike** #{k2[-1]}"
+        end
       else
         for i2 in 0...k2.length-2
           ff.push("*#{m[i2]} Hit:* #{k2[i2]}")
@@ -4187,8 +4103,8 @@ def sp_table(bot,event,args=nil)
         end
         ff.push("\n**Dash Attack:** #{k2[-2]}")
         ff.push("\n**Force Strike:** #{k2[-1]}")
+        disp=ff.join("\n")
       end
-      disp=ff.join("\n")
       if k[18].length>1
         for i in 0...k[18].length-2
           if k[18][i].length>1
@@ -4323,33 +4239,34 @@ def sp_table(bot,event,args=nil)
     for i in 0...k.length
       f.push([k2[i],k[i]])
     end
-    kx=[[545,545,0,400],[464,464,0,400],[300,464,464,0,400]]
+    kx=[[545,545,300,400],[464,464,300,400],[200,200,200,300,'90 per hit']]
     k=kx.map{|q| "__**Combo:**__\n*First Hit:* #{q[0]}\n*Second Hit:* #{q[1]}#{"\n*Third Hit:* #{q[2]}" if q.length>4}\n\u30FC *Total:* #{q[0,q.length-2].inject(0){|sum,x| sum + x }}\n\n**Dash Attack:** #{q[-2]}\n**Force Strike** #{q[-1]}"}
-    k2=['<:Weapon_Manacaster:758905122448867338>Rifle Manacasters','<:Weapon_Manacaster:758905122448867338>Shotgun Manacasters','<:Weapon_Manacaster:758905122448867338>Machine Gun Manacasters']
+    k2=['<:Weapon_Manacaster:758905122448867338>Manacaster <:MC_Rifle:772800760068046859>Rifles','<:Weapon_Manacaster:758905122448867338>Manacaster <:MC_Shotgun:772800760055726080>Shotguns','<:Weapon_Manacaster:758905122448867338>Manacaster <:MC_Machine_Gun:772800760081023017>Machine Guns']
     for i in 0...k.length
       f.push([k2[i],k[i]])
     end
     create_embed(event,"__**SP gains**__",'',0xCE456B,nil,nil,f)
   elsif wpn[0]=='Manacaster'
     f=[]
-    f.push(['Rifle',"*First Hit:* 545\n*Second Hit:* 545\n\u30FC *Total: 1090*\n\n**Dash Attack:** \n**Force Strike:** 400"])
-    f.push(['Shotgun',"*First Hit:* 464\n*Second Hit:* 464\n\u30FC *Total: 928*\n\n**Dash Attack:** \n**Force Strike:** 400"])
-    f.push(['Machine Gun',"*First Hit:* 300\n*Second Hit:* 464\n*Third Hit:* 1228\n\u30FC *Total: 1228\n\n**Dash Attack:** \n**Force Strike:** 400"])
+    f.push(['<:MC_Rifle:772800760068046859>Rifle',"*First Hit:* 545\n*Second Hit:* 545\n\u30FC *Total: 1090*\n\n**Dash Attack:** 300\n**Force Strike:** 400"])
+    f.push(['<:MC_Shotgun:772800760055726080>Shotgun',"*First Hit:* 464\n*Second Hit:* 464\n\u30FC *Total: 928*\n\n**Dash Attack:** 300\n**Force Strike:** 400"])
+    f.push(['<:MC_Machine_Gun:772800760081023017>Machine Gun',"*First Hit:* 200\n*Second Hit:* 200\n*Third Hit:* 200\n\u30FC *Total: 600*\n\n**Dash Attack:** 300\n**Force Strike:** 90 per hit"])
     m=''
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{wpn[0]}"}
     m=moji[0].mention unless moji.length<=0
     create_embed(event,"__SP gains for **#{m}#{wpn[0]}** users__",'',0xCE456B,nil,nil,f)
   elsif ['Rifle','Shotgun','Machine Gun'].include?(wpn[0])
     k=[1,2,3,4,5,6,7]
-    k=[545,545,0,400] if wpn[0]=='Rifle'
-    k=[464,464,0,400] if wpn[0]=='Shotgun'
-    k=[300,464,464,0,400] if wpn[0]=='Machine Gun'
+    k=[545,545,300,400] if wpn[0]=='Rifle'
+    k=[464,464,300,400] if wpn[0]=='Shotgun'
+    k=[200,200,200,300,'90 per hit'] if wpn[0]=='Machine Gun'
     disp="__**Combo:**__\n*First Hit:* #{k[0]}\n*Second Hit:* #{k[1]}"
     disp="#{disp}\n*Third Hit:* #{k[2]}" unless k[4].nil?
     disp="#{disp}\n\u30FC *Total: #{k.inject(0){|sum,x| sum + x }}*"
     disp="#{disp}\n\n**Dash Attack:** #{k[-2]}"
     disp="#{disp}\n**Force Strike:** #{k[-1]}"
-    create_embed(event,"__SP gains for **#{wpn[0]} [Manacaster]** users__",disp,0xCE456B)
+    moji=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "MC_#{wpn[0].gsub(' ','_')}"}
+    create_embed(event,"__SP gains for **#{moji[0].mention unless moji.length<=0}#{wpn[0]} [Manacaster]** users__",disp,0xCE456B)
   else
     k=[1,2,3,4,5,6,7]
     k=[150,150,196,265,391,143,345,1152] if wpn[0]=='Sword'
@@ -5542,10 +5459,10 @@ def show_print_shop(event)
   end
   rar=rar[0,1] unless safe_to_spam?(event)
   flds=[]
-  flds.push(["#{generate_rarity_row(3)}\n3,600<:Resource_Eldwater:532104503777034270> per 2UB\n17,000<:Resource_Eldwater:532104503777034270> per MUB\n\n200 purchase, 1700 per unbind",prn.reject{|q| q[1][0,1]!='3'}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(3)
-  flds.push(["#{generate_rarity_row(4)}\n36,000<:Resource_Eldwater:532104503777034270> per 2UB\n70,000<:Resource_Eldwater:532104503777034270> per MUB\n\n2000 purchase, 17000 per unbind",prn.reject{|q| q[1][0,1]!='4'}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(4)
-  flds.push(["#{generate_rarity_row(5)}\n58,000<:Resource_Eldwater:532104503777034270> per 2UB\n152,000<:Resource_Eldwater:532104503777034270> per MUB\n\n4000 purchase, 37000 per unbind",prn.reject{|q| q[1][0,1]!='5'}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(5)
-  flds.push(["#{generate_rarity_row(6)}\n122,000<:Resource_Eldwater:532104503777034270> per 2UB\n236,000<:Resource_Eldwater:532104503777034270> per MUB\n\n8000 purchase, 57000 per unbind",prn.reject{|q| q[1][0,1]!='6'}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(6)
+  flds.push(["#{generate_rarity_row(3)}\n900<:Resource_Eldwater:532104503777034270> per 2UB\n17,000<:Resource_Eldwater:532104503777034270> per MUB\n\n200 purchase, 300-400 per unbind",prn.reject{|q| q[1][0,1]!='3'}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(3)
+  flds.push(["#{generate_rarity_row(4)}\n9,000<:Resource_Eldwater:532104503777034270> per 2UB\n17,000<:Resource_Eldwater:532104503777034270> per MUB\n\n2000 purchase, 3000-4000 per unbind",prn.reject{|q| q[1][0,1]!='4'}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(4)
+  flds.push(["#{generate_rarity_row(5)}\n19,000<:Resource_Eldwater:532104503777034270> per 2UB\n37,000<:Resource_Eldwater:532104503777034270> per MUB\n\n4000 purchase, 6000-9000 per unbind",prn.reject{|q| q[1][0,1]!='5'}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(5)
+  flds.push(["#{generate_rarity_row(6)}\n25,000<:Resource_Eldwater:532104503777034270> per 2UB\n53,000<:Resource_Eldwater:532104503777034270> per MUB\n\n8000 purchase, 9000-12000 per unbind",prn.reject{|q| q[1][0,1]!='6'}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(6)
   flds=flds.map{|q| [q[0],q[1].join("\n"),q[1].length]}
   flds=flds.reject{|q| q[2]<=0}
   flds=flds.map{|q| [q[0],q[1]]}
