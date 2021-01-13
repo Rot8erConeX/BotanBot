@@ -868,17 +868,20 @@ def enemy_data(bot,event,args=nil,ignoresub=false)
     str="#{str}\n\n**Afflictions:** #{k[4].join(', ')}"
   end
   unless k[5].nil? || k[5].length<=0
-    str2=''
+    str2=''; str3='__**Abilities**__'
     for i in 0...k[5].length
       abl=sklz.find_index{|q| q[2]=='Ability' && "#{q[0]}#{" #{'+' if q[1].include?('%')}#{q[1]}" unless q[1]=='-'}"==k[5][i]}
       unless abl.nil?
         abl=sklz[abl]
         str2="#{str2}\n\n**#{abl[0]}#{" #{'+' if abl[1].include?('%')}#{abl[1]}" unless abl[1]=='-'}**#{"\n#{abl[3]}" if abl[5]=='y'}"
+        str3="#{str3}\n*#{abl[0]}*"
       end
     end
     unless str2.length<=0
       if s2s
         flds.push(['Abilities',str2,1])
+      elsif "#{str}#{str2}".length>1500
+        str="#{str}\n\n#{str3}"
       else
         str="#{str}#{str2}"
       end
