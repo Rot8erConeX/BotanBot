@@ -3976,7 +3976,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
             brk=false
             m2=[]
             for i3 in 0...adv.length
-              unless adv[i][8].nil? || adv[i][8].length<=0 || adv[i][8][0].nil? || adv[i][8][0].length<=0
+              unless adv[i3][8].nil? || adv[i3][8].length<=0 || adv[i3][8][0].nil? || adv[i3][8][0].length<=0
                 advabils=[adv[i3][8][0][-1],adv[i3][8][1][-1],adv[i3][8][2][-1]]
                 advabils.push(adv[i3][8][3][-1]) if adv[i3][8].length>3
                 advemo=element_emote(adv[i3][2][1],bot,adv[i3][12])
