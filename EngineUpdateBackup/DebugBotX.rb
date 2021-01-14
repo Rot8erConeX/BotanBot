@@ -200,6 +200,7 @@ class DLAdventurer
   def name=(val); @name=val; end
   
   def rarity=(val)
+    @availability=''
     if !val.is_a?(String)
       @rarity=val
     elsif val.length>1
@@ -279,22 +280,16 @@ class DLAdventurer
     moji=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "Weapon_#{@weapon2}"} unless @weapon2.nil?
     if @games[0]=='FEH'
       color='Colorless'; wpn='Unknown'; srv=443172595580534784
-      color='Red' if ['Flame','Shadow'].include?(@element)
-      color='Blue' if ['Water','Light'].include?(@element)
-      color='Gold' if ['Light'].include?(@element) && false
+      color='Red' if ['Flame'].include?(@element)
+      color='Blue' if ['Water'].include?(@element)
       color='Green' if ['Wind'].include?(@element)
-      if @weapon=='Sword'
-        color='Red'
+      color='Gold' if ['Light'].include?(@element) && false
+      if ['Sword','Lance','Axe','Blade'].include?(@weapon)
         wpn='Blade'
-      elsif @weapon=='Lance'
-        color='Blue'
-        wpn='Blade'
-      elsif @weapon=='Axe'
-        color='Green'
-        wpn='Blade'
-      elsif @weapon=='Blade'
-        color='Gold'
-        wpn='Blade'
+        color='Red' if @weapon=='Sword'
+        color='Blue' if @weapon=='Lance'
+        color='Green' if @weapon=='Axe'
+        color='Gold' if @weapon=='Blade'
       elsif @weapon=='Wand'
         wpn='Tome'; srv=497429938471829504
         srv=575426885048336388 if @element=='Water'
@@ -387,6 +382,71 @@ class DLAdventurer
   end
   
   def emotes(bot,includerarity=true); return self.class_header(bot,1,includerarity); end
+  
+  def disp_color(chain=0)
+    f=[]
+    xcolor=0x849294
+    xcolor=0xE73031 if @element=='Flame'
+    xcolor=0x1890DE if @element=='Water'
+    xcolor=0x00D771 if @element=='Wind'
+    xcolor=0xFFB90F if @element=='Light'
+    xcolor=0xA637DE if @element=='Shadow'
+    f.push(xcolor)
+    xcolor=nil
+    xcolor=0x5A0408 if @clzz=='Attack'
+    xcolor=0x00205A if @clzz=='Defense'
+    xcolor=0x39045A if @clzz=='Support'
+    xcolor=0x005918 if @clzz=='Healing'
+    f.push(xcolor) unless xcolor.nil?
+    return f[0] if chain>=f.length
+    return f[chain]
+  end
+  
+  def thumbnail(rar=0)
+    rar=@rarity if rar<=0 || rar>$max_rarity[0]
+    dispname=@name.gsub(' ','_')
+    return "https://github.com/Rot8erConeX/BotanBot/blob/master/Adventurers/#{dispname}_#{@rarity}.png?raw=true"
+  end
+  
+  def hasManaSpiral?
+    return false if @hp[1][$max_rarity[0]].nil?
+    return false if @str[1][$max_rarity[0]].nil?
+    return false if @hp[1][$max_rarity[0]]<=0
+    return false if @str[1][$max_rarity[0]]<=0
+    return true
+  end
+  
+  def disp_stats(rar=0,level=10)
+    rar=@rarity if rar<=0 || rar>$max_rarity[0]
+    if level==1
+      return [@hp[0][rar-3],@str[0][rar-3],self.dispDefense]
+    elsif level==10 || rar<5
+      return [@hp[1][rar-3],@str[1][rar-3],self.dispDefense]
+    elsif level==11
+      return [@hp[1][rar],@str[1][rar],self.dispDefense]
+    elsif level==100
+      return [@hp[1][rar-1],@str[1][rar-1],self.dispDefense]
+    elsif level==101
+      return [@hp[1][rar-2],@str[1][rar-2],self.dispDefense]
+    end
+  end
+  
+  def stat_grid(rar=0)
+    rar=@rarity if rar<=0 || rar>$max_rarity[0]+1
+    s=self.stat_emotes.map{|q| q}
+    m=self.disp_stats(rar,1)
+    str="**Lv.1**  #{s[0]}#{m[0]}  #{s[1]}#{m[1]}"
+    m=self.disp_stats(rar,10)
+    str="#{str}\n**Lv.#{30+10*rar}**  #{s[0]}#{m[0]}  #{s[1]}#{m[1]}"
+    m=self.disp_stats(rar,11)
+    str="#{str}\n**Max**  #{s[0]}#{m[0]}  #{s[1]}#{m[1]}" if rar==$max_rarity[0]
+    return str unless rar==$max_rarity[0]+1
+    m=self.disp_stats(rar,100)
+    str="**Lv.100**  #{s[0]}#{m[0]}  #{s[1]}#{m[1]}"
+    m=self.disp_stats(rar,101)
+    str="#{str}\n**Max**  #{s[0]}#{m[0]}  #{s[1]}#{m[1]}"
+    return str
+  end
   
   
 end
@@ -988,16 +1048,43 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     rar=k.rarity*1
     unless juststats || s2s
       rar=0
-      rar=$max_rarity[0] unless (!k.hp[1][$max_rarity[0]].nil? && k.hp[1][$max_rarity[0]]>0) || (!k.atk[1][$max_rarity[0]].nil? && k.atk[1][$max_rarity[0]]>0)
+      rar=$max_rarity[0] unless k.hasManaSpiral?
     end
   elsif rar>k.rarity && s2s
     semirar=true
     rar=k.rarity*1
-  elsif rar>k.rarity && !((!k.hp[1][$max_rarity[0]].nil? && k.hp[1][$max_rarity[0]]>0) || (!k.atk[1][$max_rarity[0]].nil? && k.atk[1][$max_rarity[0]]>0))
+  elsif rar>k.rarity && !k.hasManaSpiral?
     rar=k.rarity*1
     rar=$max_rarity[0] unless juststats || s2s
   end
-  event.respond "#{k.name}\n\n#{k.class_header(bot)}"
+  hdr="__**#{k.name}**__"
+  unless s2s || juststats
+    hdr="#{hdr} #{generate_rarity_row(rar,$max_rarity[0],k.games[0])}"
+    hdr="#{hdr} (from #{k.rarity}#{k.class_header(bot,2,true)[0]})" unless k.rarity==rar
+  end
+  title=k.class_header(bot)
+  if title.length>250
+    h=title.split("\n")
+    title=[h[0],'']
+    j=0
+    for i in 1...h.length
+      if "#{title[j]}\n#{h[i]}".length>250 && j==0
+        j+=1
+        title[j]="#{h[i]}"
+      else
+        title[j]="#{title[j]}\n#{h[i]}"
+      end
+    end
+  end
+  f=nil
+  if s2s || juststats
+    f=[]
+    for i in rar...$max_rarity[0]+1
+      f.push([generate_rarity_row(i,$max_rarity[0],k.games[0]),k.stat_grid(i)])
+    end
+    f.push(["#{generate_rarity_row(0,$max_rarity[0],k.games[0])}\nMana Unbind",k.stat_grid($max_rarity[0]+1)]) if k.hasManaSpiral?
+  end
+  create_embed(event,[hdr,title],'',k.disp_color,k.footer,k.thumbnail(rar),f)
 end
 
 bot.command([:adventurer,:adv,:unit]) do |event, *args|
