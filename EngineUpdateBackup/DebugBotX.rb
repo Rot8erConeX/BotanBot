@@ -247,6 +247,7 @@ class DLAdventurer
   def damage_override=(val); @damage_override=val.split(';; ').map{|q| q.split('; ')} end
   
   def sort_data=(val); @sort_data=val; end
+  def objt; return 'Adventurer'; end
   
   def dispDefense
     return @defense unless @defense.nil?
@@ -405,7 +406,7 @@ class DLAdventurer
   def thumbnail(rar=0)
     rar=@rarity if rar<=0 || rar>$max_rarity[0]
     dispname=@name.gsub(' ','_')
-    return "https://github.com/Rot8erConeX/BotanBot/blob/master/Adventurers/#{dispname}_#{@rarity}.png?raw=true"
+    return "https://github.com/Rot8erConeX/BotanBot/blob/master/Adventurers/#{dispname}_#{rar}.png?raw=true"
   end
   
   def hasManaSpiral?
@@ -445,6 +446,38 @@ class DLAdventurer
     str="**Lv.100**  #{s[0]}#{m[0]}  #{s[1]}#{m[1]}"
     m=self.disp_stats(rar,101)
     str="#{str}\n**Max**  #{s[0]}#{m[0]}  #{s[1]}#{m[1]}"
+    return str
+  end
+  
+  def mini_header(bot,rar=0)
+    rar=@rarity if rar<0 || rar>$max_rarity[0]+1
+    c=self.class_header(bot,2)
+    str="#{c[0]}**#{@element}  #{c[1]}#{@weapon}  #{c[2]}#{@clzz}**"
+    str="#{c[0]}**#{@element}**  #{c[1]}#{@weapon2} **#{@weapon}  #{c[2]}#{@clzz}**" unless @weapon2.nil?
+    c=self.stat_emotes.map{|q| q}
+    m=self.disp_stats(rar,10)
+    m=self.disp_stats(rar,11) if rar>=5
+    m=self.disp_stats(rar,101) if rar>$max_rarity[0] || rar==0
+    lvl=30+10*rar
+    lvl=100 if rar>$max_rarity[0] || rar==0
+    lvl="#{lvl} Max" if rar>=5 || rar==0
+    str="#{str}\n**Lv.#{lvl}**  #{c[0]}#{m[0]}  #{c[1]}#{m[1]}  #{c[2]}#{m[2]}"
+    if @games[0]=='FEH'
+      str="#{str}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
+      str="#{str}  <:Colorless_Dragon:443692132415438849>**Manakete**" if self.isManakete?
+    elsif @games[0]=='FGO'
+      str="#{str}\n<:Bond:613804021119189012>**FGO Collab**"
+    elsif @games[0]=='MM'
+      str="#{str}\n<:Mega_Man:641484836304846857>**Mega Man Collab**"
+    elsif @games[0]=='MH'
+      str="#{str}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**"
+    elsif @games[0]=='PC'
+      str="#{str}\n<:Priconne:782554046887493652>**Princess Connect Re:Dive Collab**"
+    elsif @games[0]=='P5S'
+      str="#{str}\n<:Take_Your_Heart:782553893204262923>**Persona 5 Strikers Collab**"
+    elsif @availability.include?('c') || @games.length>0
+      str="#{str}\n**Collab**"
+    end
     return str
   end
   
@@ -531,6 +564,86 @@ class DLDragon
   end
   
   
+end
+
+
+
+class DLSkill
+  attr_accessor :name
+  attr_accessor :description
+  attr_accessor :mass_description
+  attr_accessor :sp_cost,:sp_oddity
+  attr_accessor :sharing
+  attr_accessor :energize
+  attr_accessor :invulnerability
+  attr_accessor :tags
+  
+  def initialize(val)
+    @name=val
+  end
+  
+  def name=(val); @name=val; end
+  def description=(val); @description=val; end
+  def mass_description=(val); @mass_description=val; end
+  def sharing=(val); @sharing=val.split(', ').map{|q| q.to_i}; end
+  def energize=(val); @energize=false; @energize=true if val=='Yes'; end
+  def invulnerability=(val); @invulnerability=val.to_f; end
+  def tags=(val); @tags=val.split(', '); end
+  def objt; return 'Skill'; end
+  
+  def sp_cost=(val)
+    val=val.split(', ')
+    @sp_cost=val[0,5].map{|q| q.to_i}
+    @sp_oddity=[]
+    if val.length>5
+      val=val[5,val.length-5]
+      for i in 0...val.length/7
+        m=val[7*i,7].map{|q| q.to_i}
+        m[0]=val[7*i]
+        @sp_oddity.push(m.map{|q| q})
+      end
+    end
+  end
+  
+  def inspirable?
+    return false unless @tags.include?('Damage')
+    return true
+  end
+  
+  def energy_display(full=true)
+    e=''; txt=[]
+    if @energize
+      e='<:Energize:559629242137051155>'
+      txt.push('Energizable')
+    end
+    if self.inspirable?
+      e='<:Inspiring:688916587079663625>'
+      txt.push('Inspirable')
+    end
+    e='<:Energation:688920529771692078>' if @energize && self.inspirable?
+    e="#{e}#{txt.join('/')}" if full
+    return e
+  end
+  
+  def sp_display(level=0)
+    return [self.sp_display(1),self.sp_display(2),self.sp_display(3),self.sp_display(4),self.sp_display(5)] if level==0
+    return '' if level<0 && (@sharing.nil? || @sharing.length<=0)
+    level=-1 if level<0
+    x=@sp_cost[level-1]*1
+    x=@sharing[1]*1 if level<0
+    m=[x*1]
+    unless @sp_oddity.nil? || @sp_oddity.length<=0 || (@sp_oddity.map{|q| q[level]}.uniq.length<=1 && @sp_oddity[0][level]==x)
+      for i in 0...@sp_oddity.length
+        m.push(@sp_oddity[i][level]*1)
+      end
+    end
+    return m.map{|q| longFormattedNumber(q)}.join("\u2192")
+  end
+  
+  def share_text
+    return '' if @sharing.nil? || @sharing.length<=0
+    return "#{@sharing[0]}<:SkillShare:714597012733034547> / #{self.sp_display(-1)} SP when shared"
+  end
 end
 
 
@@ -660,6 +773,37 @@ def data_load(to_reload=[])
       bob4.footer=b[i][20] unless b[i][20].nil? || b[i][20].length<=0
       bob4.essence=b[i][21]
       $dragons.push(bob4)
+    end
+  end
+  if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['abil','ability','abilitys','abilities','abils','coabil','coability','coabilitys','coabilities','coabils','coab','coabs','aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca','cc','ccas','skill','skills','skls','skl','skil','skils'])
+    if File.exist?("#{$location}devkit/DLSkills.txt")
+      b=[]
+      File.open("#{$location}devkit/DLSkills.txt").each_line do |line|
+        b.push(line)
+      end
+    else
+      b=[]
+    end
+    $skills=[]; $abilities=[]
+    for i in 0...b.length
+      b[i]=b[i].gsub("\n",'').split('\\'[0])
+      if b[i][2]=='Skill'
+        bob4=DLSkill.new(b[i][0])
+        m=[]
+        m.push(b[i][3].gsub(';; ',"\n"))
+        m.push(b[i][4].gsub(';; ',"\n")) unless b[i][4].nil? || b[i][4].length<=0 || b[i][4]=='-'
+        m.push(b[i][5].gsub(';; ',"\n")) unless b[i][5].nil? || b[i][5].length<=0 || b[i][5]=='-'
+        m.push(b[i][11].gsub(';; ',"\n")) unless b[i][11].nil? || b[i][11].length<=0 || b[i][11]=='-'
+        bob4.description=m.map{|q| q}
+        bob4.sp_cost=b[i][6]
+        bob4.energize=b[i][7]
+        bob4.invulnerability=b[i][8]
+        bob4.mass_description=b[i][9].gsub(';; ',"\n") unless b[i][9].nil? || b[i][9].length<=0 || b[i][9]=='-'
+        bob4.tags=b[i][10]
+        bob4.sharing=b[i][12] unless b[i][12].nil? || b[i][12].length<=0 || b[i][12]==', '
+        $skills.push(bob4)
+      else
+      end
     end
   end
   if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['tags','tag'])
@@ -873,7 +1017,8 @@ def all_commands(include_nil=false,permissions=-1)
   return all_commands(include_nil)-all_commands(false,1)-all_commands(false,2) if permissions==0
   k=['reboot','help','commands','commandlist','command_list','embeds','embed','prefix','channelist','channellist','spamchannels','spamlist','bugreport','suggestion','feedback','adv',
      'donate','donation','shard','attribute','safe','spam','safetospam','safe2spam','long','longreplies','invite','sortaliases','tools','links','tool','link','resources','resource',
-     'avatar','avvie','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','reload','update','adventurer','unit']
+     'avatar','avvie','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','reload','update','adventurer','unit','stats',
+     'stat','smol']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -1063,6 +1208,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     hdr="#{hdr} (from #{k.rarity}#{k.class_header(bot,2,true)[0]})" unless k.rarity==rar
   end
   title=k.class_header(bot)
+  title=k.mini_header(bot,rar) unless s2s || juststats
   if title.length>250
     h=title.split("\n")
     title=[h[0],'']
@@ -1084,12 +1230,78 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     end
     f.push(["#{generate_rarity_row(0,$max_rarity[0],k.games[0])}\nMana Unbind",k.stat_grid($max_rarity[0]+1)]) if k.hasManaSpiral?
   end
-  create_embed(event,[hdr,title],'',k.disp_color,k.footer,k.thumbnail(rar),f)
+  str=''
+  sklz=$skills.map{|q| q}
+  unless juststats || k.skills.nil? || k.skills.length<=0
+    skl1=sklz.find_index{|q| q.name==k.skills[0]}
+    skl1=sklz[skl1] unless skl1.nil?
+    skl2=sklz.find_index{|q| q.name==k.skills[1]}
+    skl2=sklz[skl2] unless skl2.nil?
+    str2=''
+    if k.skills[0].nil? || k.skills[0].length<=0 || k.skills[0]=='-'
+      str2='~~Skill 1 does not exist~~'
+    elsif skl1.nil?
+      str2="**#{k.skills[0]}** - LOAD ERROR"
+    elsif s2s
+      str2="__**#{skl1.name}** (#{'%.1f' % skl1.invulnerability} sec. invul#{", #{skl1.energy_display}" if skl1.energy_display.length>0})__"
+      str2="#{str2} - #{skl1.sp_display(1)} SP" unless skl1.sp_display(0).uniq.length>1
+      str2="#{str2} (#{skl1.share_text})" unless skl1.share_text.length<=0
+      
+    else
+      lvl=skl1.description.length
+      lvl=(rar+1)/2 if rar>0
+      str2="*#{skl1.name}#{skl1.energy_display(false)} [Lv.#{lvl}]* - #{skl1.sp_display(lvl)} SP"
+      
+      str2="#{str2}\n#{skl1.share_text}" unless skl1.share_text.length<=0
+    end
+    if k.skills[1].nil? || k.skills[1].length<=0 || k.skills[1]=='-'
+      str2="#{str2}\n#{"\n" unless str2[0,2]=='~~'}~~Skill 2 does not exist~~"
+    elsif skl2.nil?
+      str2="#{str2}\n\n**#{k.skills[1]}** - LOAD ERROR"
+    elsif s2s
+      str2="#{str2}\n\n__**#{skl2.name}** (#{'%.1f' % skl2.invulnerability} sec. invul#{", #{skl2.energy_display}" if skl2.energy_display.length>0})__"
+      str2="#{str2} - #{skl2.sp_display(1)} SP" unless skl2.sp_display(0).uniq.length>1
+      str2="#{str2} (#{skl2.share_text})" unless skl2.share_text.length<=0
+      
+    else
+      lvl=2
+      lvl=1 if rar<4
+      lvl=skl2.description.length if rar<=0
+      str2="#{str2}\n\n*#{skl2.name}#{skl2.energy_display(false)} [Lv.#{lvl}]* - #{skl2.sp_display(lvl)} SP"
+      
+      str2="#{str2}\n#{skl2.share_text}" unless skl2.share_text.length<=0
+    end
+    if s2s
+      f.push(['Skills',str2,1])
+    else
+      str="#{str2}"
+    end
+  end
+  create_embed(event,[hdr,title],str,k.disp_color,k.footer,k.thumbnail(rar),f)
 end
 
 bot.command([:adventurer,:adv,:unit]) do |event, *args|
   return nil if overlap_prevent(event)
   disp_adventurer_stats(bot,event,args)
+end
+
+
+
+
+bot.command([:stats,:stat,:smol]) do |event, *args|
+  return nil if overlap_prevent(event)
+  if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
+    disp_adventurer_stats(bot,event,args,true)
+  elsif ['dragon','dragons','drg'].include?(args[0].downcase)
+    disp_dragon_stats(bot,event,args,true)
+  elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
+    disp_wyrmprint_stats(bot,event,args)
+  elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase)
+    disp_weapon_stats(bot,event,args,true)
+  else
+    find_best_match(args.join(' '),bot,event,false,false,3,true)
+  end
+  return nil
 end
 
 
@@ -1883,6 +2095,19 @@ bot.mention do |event|
     m=false
     args.shift
     disp_adventurer_stats(bot,event,args)
+  elsif ['stats','stat'].include?(args[0].downcase)
+    m=false
+    if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
+      disp_adventurer_stats(bot,event,args,true)
+    elsif ['dragon','dragons','drg','drag'].include?(args[0].downcase)
+      disp_dragon_stats(bot,event,args,true)
+    elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
+      disp_wyrmprint_stats(bot,event,args)
+    elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(args[0].downcase)
+      disp_weapon_stats(bot,event,args,true)
+    else
+      find_best_match(args.join(' '),bot,event,false,false,3,true)
+    end
   end
   if m
     if event.message.text.downcase.gsub(' ','').gsub("'",'').include?("werenostrangerstolove")
