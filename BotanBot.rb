@@ -1702,7 +1702,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   semoji=['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>','<:Energize:559629242137051155>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>']
   semoji=['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','<:FGO_Def:653485374605361162>','<:Energize:559629242137051155>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>'] if !k[12].nil? && k[12]=='FGO'
   semoji=['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:ProtoShield:642287078943752202>','<:Energize:559629242137051155>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>'] if !k[12].nil? && k[12]=='MM'
-  semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:DefenseS:514712247461871616>','<:FEHEnergized:587684963000909845>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>'] if feh
+  semoji=['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:DefenseS:514712247461871616>','<:Energize:559629242137051155>','<:Inspiring:688916587079663625>','<:Energation:688920529771692078>'] if feh
   if s2s || juststats
     flds=[]
     fehm=''
@@ -7097,7 +7097,7 @@ bot.command([:embeds,:embed]) do |event| # TRANSFERRED
   return nil
 end
 
-bot.command([:adventurer,:adv,:unit]) do |event, *args|
+bot.command([:adventurer,:adv,:unit]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
   elsif ['find','search'].include?(args[0].downcase)
@@ -8142,7 +8142,7 @@ end
 bot.command(:cleanupaliases, from: 167657750971547648) do |event| # TRANSFERRED
   return nil if overlap_prevent(event)
   return nil unless event.user.id==167657750971547648 # only work when used by the developer
-  event.channel.send_temporary_message('Please wait...',10)
+  event.channel.send_temporary_message('Please wait...',10) rescue nil
   nicknames_load()
   nmz=@aliases.map{|q| q}
   k=0
@@ -8259,7 +8259,7 @@ bot.command(:reload, from: 167657750971547648) do |event| # TRANSFERRED
       reload=true
     end
     if e.message.text.include?('3') && [167657750971547648,141260274144509952].include?(event.user.id)
-      event.channel.send_temporary_message('Loading.  Please wait 5 seconds...',3)
+      event.channel.send_temporary_message('Loading.  Please wait 5 seconds...',3) rescue nil
       to_reload=['Adventurers','Dragons','Wyrmprints','Weapons','Skills','Banners','Emotes','Enemies','Gauntlet','SkillSubsets','Facilities','Materials','Status','Void','_NPCs','Groups']
       stx=''
       for i in 0...to_reload.length
