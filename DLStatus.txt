@@ -1,5 +1,6 @@
 Blind\0\Causes the afflicted player to miss attacks and skills with a base chance of 80%.\Causes regular attacks to miss on lower tier enemies.;; Resistance grows by 10% per infliction.
 Bleed\0\Causes damage for 30 seconds every 4.99 seconds that can stack up to three times, increasing damage by 50% with each stack. Cannot deal lethal damage.\Causes damage for 30 seconds every 4.99 seconds that can stack up to three times, increasing damage by 50% with each stack
+Blelele\0\<a:blelele:418725370515292160>\<a:blelele:418725370515292160>
 Bog\0\Reduces movement speed by 50%, and damage received is increased by 50% for the entire duration.\Reduces movement speed, and causes all incoming attacks to deal 50% more damage.
 Burn\0\Deals damage over time equal to a fixed % of the afflicted player's HP.\Deals damage over time (usually 12s when afflicted by adventurers), and can stack up with itself. Resistance grows by 5% per infliction.
 Curse\0\Cause's the afflicted player's attacks to generate no SP, and also disables skills\Curse cannot be inflicted by players as of yet.
