@@ -5364,7 +5364,7 @@ def future_events(event,bot,args=nil)
 end
 
 def disp_boop_tags(event)
-  event.channel.send_temporary_message('Please wait...',10)
+  event.channel.send_temporary_message('Please wait...',10) rescue nil
   data_load()
   lookout2=[]
   if File.exist?("#{@location}devkit/DLSkillSubsets.txt")
@@ -5525,7 +5525,7 @@ def disp_adv_chain(event,args,bot)
     event.respond 'No matches found.'
     return nil
   end
-  event.channel.send_temporary_message('Calculating data, please wait...',2)
+  event.channel.send_temporary_message('Calculating data, please wait...',2) rescue nil
   str=args.join(' ')
   k2=[]
   for i in 0...args.length
@@ -6142,7 +6142,7 @@ def add_a_new_alias(bot,event,newname=nil,unit=nil,modifier=nil,modifier2=nil,mo
 end
 
 def disp_alias_list(bot,event,args=nil,mode=0)
-  event.channel.send_temporary_message('Calculating data, please wait...',2)
+  event.channel.send_temporary_message('Calculating data, please wait...',2) rescue nil
   args=event.message.text.downcase.split(' ') if args.nil?
   args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
   data_load()
@@ -7344,7 +7344,7 @@ def snagstats(event,bot,f=nil,f2=nil)
     event.respond str
     return nil
   elsif ['alts','alt','alternate','alternates','alternative','alternatives'].include?(f.downcase)
-    event.channel.send_temporary_message('Calculating data, please wait...',3)
+    event.channel.send_temporary_message('Calculating data, please wait...',3) rescue nil
     data_load()
     nicknames_load()
     untz=@adventurers.map{|q| q}
@@ -7459,7 +7459,7 @@ def snagstats(event,bot,f=nil,f2=nil)
     event.respond str
     return nil
   elsif ['groups','group','groupings','grouping'].include?(f.downcase)
-    event.channel.send_temporary_message('Calculating data, please wait...',3)
+    event.channel.send_temporary_message('Calculating data, please wait...',3) rescue nil
     grps=get_group_data(true)
     grps2=get_group_data()
     str="**There are #{grps.length} groups, including the following semi-dynamic ones:**"
@@ -7475,7 +7475,7 @@ def snagstats(event,bot,f=nil,f2=nil)
     event.respond str
     return nil
   elsif ['code','lines','line','sloc'].include?(f.downcase)
-    event.channel.send_temporary_message('Calculating data, please wait...',3)
+    event.channel.send_temporary_message('Calculating data, please wait...',3) rescue nil
     b=[[],[],[],[],[]]
     File.open("#{@location}devkit/BotanBot.rb").each_line do |line|
       l=line.gsub("\n",'')
@@ -7532,7 +7532,7 @@ def snagstats(event,bot,f=nil,f2=nil)
     end
     return nil
   elsif ['alias','aliases','name','names','nickname','nicknames'].include?(f.downcase)
-    event.channel.send_temporary_message('Calculating data, please wait...',1)
+    event.channel.send_temporary_message('Calculating data, please wait...',1) rescue nil
     glbl=@aliases.reject{|q| q[0]!='Adventurer' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
     srv_spec=@aliases.reject{|q| q[0]!='Adventurer' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
     all_units=@adventurers.map{|q| [q[0],0,0,0]}
