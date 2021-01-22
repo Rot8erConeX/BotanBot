@@ -644,6 +644,14 @@ class DLSkill
     return '' if @sharing.nil? || @sharing.length<=0
     return "#{@sharing[0]}<:SkillShare:714597012733034547> / #{self.sp_display(-1)} SP when shared"
   end
+  
+  def level_text(l,f,long=false)
+    return "Lv.#{l}/Floor #{f}" if long
+    str="Lv.#{l} (F#{f}"
+    str="#{str}, #{self.sp_display(l)} SP" if self.sp_display(0).uniq.length>1
+    str="#{str})"
+    return str
+  end
 end
 
 
@@ -1183,8 +1191,8 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   juststats=true if Shardizard != 4 && event.message.text.downcase.split(' ').include?('smol')
   rar=-1
   for i in 0...args.length
-    rar=args[i].to_i if rar<0 && args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<$max_rarity[0]+2
-    rar=args[i].to_i if rar<0 && args[i][1,1]=='*' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<$max_rarity[0]+2
+    rar=args[i].to_i if rar<0 && args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<$max_rarity[0]+1
+    rar=args[i].to_i if rar<0 && args[i][1,1]=='*' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<$max_rarity[0]+1
     rar=5 if rar<0 && ['50','50mc'].include?(args[i].downcase)
   end
   semirar=false
@@ -1209,6 +1217,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   end
   title=k.class_header(bot)
   title=k.mini_header(bot,rar) unless s2s || juststats
+  lng=title.length
   if title.length>250
     h=title.split("\n")
     title=[h[0],'']
@@ -1223,13 +1232,19 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     end
   end
   f=nil
+  ftr=nil
   if s2s || juststats
     f=[]
     for i in rar...$max_rarity[0]+1
       f.push([generate_rarity_row(i,$max_rarity[0],k.games[0]),k.stat_grid(i)])
     end
     f.push(["#{generate_rarity_row(0,$max_rarity[0],k.games[0])}\nMana Unbind",k.stat_grid($max_rarity[0]+1)]) if k.hasManaSpiral?
+  elsif rar==0
+    ftr="Data shown is for an adventurer whose mana spiral has been unlocked.  To show data for a #{$max_rarity[0]}-star#{" or #{k.rarity}-star" unless $max_rarity[0]==k.rarity} version, please include the number in your message."
+  elsif rar != k.rarity
+    ftr="Data shown is for a #{rar}-star adventurer.  To show data for a #{k.rarity}-star version, please include #{k.rarity}* in your message."
   end
+  ftr=k.footer unless k.footer.nil?
   str=''
   sklz=$skills.map{|q| q}
   unless juststats || k.skills.nil? || k.skills.length<=0
@@ -1237,47 +1252,110 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     skl1=sklz[skl1] unless skl1.nil?
     skl2=sklz.find_index{|q| q.name==k.skills[1]}
     skl2=sklz[skl2] unless skl2.nil?
-    str2=''
+    str2=''; str3=''
+    lll=[0,3,5,6]
     if k.skills[0].nil? || k.skills[0].length<=0 || k.skills[0]=='-'
-      str2='~~Skill 1 does not exist~~'
+      str2='~~Skill 1 does not exist~~'; str3='~~Skill 1 does not exist~~'
     elsif skl1.nil?
-      str2="**#{k.skills[0]}** - LOAD ERROR"
+      str2="**#{k.skills[0]}** - LOAD ERROR"; str3="**#{k.skills[0]}** - LOAD ERROR"
     elsif s2s
       str2="__**#{skl1.name}** (#{'%.1f' % skl1.invulnerability} sec. invul#{", #{skl1.energy_display}" if skl1.energy_display.length>0})__"
       str2="#{str2} - #{skl1.sp_display(1)} SP" unless skl1.sp_display(0).uniq.length>1
       str2="#{str2} (#{skl1.share_text})" unless skl1.share_text.length<=0
-      
+      if skl1.mass_description.nil?
+        for i in 0...skl1.description.length
+          str2="#{str2}\n*#{skl1.level_text(i+1,lll[i])}:* #{skl1.description[i]}"
+        end
+      else
+        str2="#{str2}\n#{skl1.mass_description}"
+        str2="#{str2}\n#{skl1.level_text(1,lll[0])}"
+        for i in 1...skl1.description.length
+          str2="#{str2} \u2192 #{skl1.level_text(i+1,lll[i])}"
+        end
+      end
     else
       lvl=skl1.description.length
       lvl=(rar+1)/2 if rar>0
-      str2="*#{skl1.name}#{skl1.energy_display(false)} [Lv.#{lvl}]* - #{skl1.sp_display(lvl)} SP"
-      
+      str2="*#{skl1.name}#{skl1.energy_display(false)} [#{skl1.level_text(lvl,lll[lvl-1],true)}]* - #{skl1.sp_display(lvl)} SP"
+      str3="*#{skl1.name}#{skl1.energy_display(false)} [#{skl1.level_text(lvl,lll[lvl-1],true)}]* - #{skl1.sp_display(lvl)} SP"
+      str2="#{str2}\n#{skl1.description[lvl-1]}"
       str2="#{str2}\n#{skl1.share_text}" unless skl1.share_text.length<=0
+      str3="#{str3}\n#{skl1.share_text}" unless skl1.share_text.length<=0
     end
+    lll=[2,4,6]
     if k.skills[1].nil? || k.skills[1].length<=0 || k.skills[1]=='-'
-      str2="#{str2}\n#{"\n" unless str2[0,2]=='~~'}~~Skill 2 does not exist~~"
+      str2="#{str2}\n#{"\n" unless str2[0,2]=='~~'}~~Skill 2 does not exist~~"; str3="#{str3}\n#{"\n" unless str3[0,2]=='~~'}~~Skill 2 does not exist~~"
     elsif skl2.nil?
-      str2="#{str2}\n\n**#{k.skills[1]}** - LOAD ERROR"
+      str2="#{str2}\n\n**#{k.skills[1]}** - LOAD ERROR"; str3="#{str3}\n\n**#{k.skills[1]}** - LOAD ERROR"
     elsif s2s
       str2="#{str2}\n\n__**#{skl2.name}** (#{'%.1f' % skl2.invulnerability} sec. invul#{", #{skl2.energy_display}" if skl2.energy_display.length>0})__"
       str2="#{str2} - #{skl2.sp_display(1)} SP" unless skl2.sp_display(0).uniq.length>1
       str2="#{str2} (#{skl2.share_text})" unless skl2.share_text.length<=0
-      
+      if skl2.mass_description.nil?
+        for i in 0...skl2.description.length
+          str2="#{str2}\n*#{skl2.level_text(i+1,lll[i])}:* #{skl2.description[i]}"
+        end
+      else
+        str2="#{str2}\n#{skl2.mass_description}"
+        str2="#{str2}\n#{skl2.level_text(1,lll[0])}"
+        for i in 1...skl2.description.length
+          str2="#{str2} \u2192 #{skl2.level_text(i+1,lll[i])}"
+        end
+      end
     else
       lvl=2
       lvl=1 if rar<4
       lvl=skl2.description.length if rar<=0
-      str2="#{str2}\n\n*#{skl2.name}#{skl2.energy_display(false)} [Lv.#{lvl}]* - #{skl2.sp_display(lvl)} SP"
-      
+      str2="#{str2}\n\n*#{skl2.name}#{skl2.energy_display(false)} [#{skl2.level_text(lvl,lll[lvl-1],true)}]* - #{skl2.sp_display(lvl)} SP"
+      str3="#{str3}\n\n*#{skl2.name}#{skl2.energy_display(false)} [#{skl2.level_text(lvl,lll[lvl-1],true)}]* - #{skl2.sp_display(lvl)} SP"
+      str2="#{str2}\n#{skl2.description[lvl-1]}"
       str2="#{str2}\n#{skl2.share_text}" unless skl2.share_text.length<=0
+      str3="#{str3}\n#{skl2.share_text}" unless skl2.share_text.length<=0
     end
     if s2s
       f.push(['Skills',str2,1])
+    elsif str2.length>1500
+      str="#{str3}\n\n~~Skill descriptions make this data too long.  Please try again in PM.~~"
     else
       str="#{str2}"
     end
   end
-  create_embed(event,[hdr,title],str,k.disp_color,k.footer,k.thumbnail(rar),f)
+  # abilities
+  f2=nil; f3=nil
+  lng+=hdr.length+str.length
+  lng+=ftr.length unless ftr.nil?
+  lng+=f.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length unless f.nil?
+  if lng>1950
+    f2=f[-1].map{|q| q}
+    if f[-1][0]!='Skills'
+      f3=f[-1].map{|q| q}
+      f2=f[-2].map{|q| q}
+      f.pop
+    end
+    f.pop
+  end
+  create_embed(event,[hdr,title],str,k.disp_color,ftr,k.thumbnail(rar),f)
+  unless f2.nil?
+    if f2[1].length>1950
+      f=f2[1].split("\n\n").map{|q| q.split("\n")}
+      textform=false; str=''
+      for i in 0...f.length
+        if f[i][1,f[i].length-1].join("\n").length>1900 || textform
+          textform=true
+          str=extend_message(str,"Skill #{i+1}: #{f[i][0]}",event,2)
+          for i2 in 1...f[i].length
+            str=extend_message(str,f[i][i2],event)
+          end
+        else
+          create_embed(event,"Skill #{i+1}: #{f[i][0]}",f[i][1,f[i].length-1].join("\n"),k.disp_color)
+        end
+      end
+      event.respond str if str.length>0
+    else
+      create_embed(event,"__**Skills**__",f2[1],k.disp_color)
+    end
+  end
+  create_embed(event,"__**#{f3[0]}**__",f3[1],k.disp_color) unless f3.nil?
 end
 
 bot.command([:adventurer,:adv,:unit]) do |event, *args|
