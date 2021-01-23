@@ -1307,6 +1307,7 @@ def art_of_adventure(bot,event,args=nil)
     event.respond "#{disp}\n\n#{art}"
   else
     flds=[]
+    charsx=charsx.map{|q| q.reject{|q2| q2.nil? || q2.length<=0}}
     flds.push(['Same Artist',charsx[0].join("\n")]) if charsx[0].length>0
     if charsx[1].length>0
       if charsx[1].length==charsx[1].reject{|q| !q.include?('*[English]*')}.length
