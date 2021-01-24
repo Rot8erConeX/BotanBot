@@ -461,6 +461,209 @@ class DLDragon
     return 'them'
   end
   
+  def rar_row
+    str=generate_rarity_row(@rarity,0,@games[0])
+    if ['Bronze Fafnir','Silver Fafnir','Gold Fafnir'].include?(@name)
+      m=0
+      m=3 if @name=='Bronze Fafnir'
+      m=4 if @name=='Silver Fafnir'
+      m=5 if @name=='Gold Fafnir'
+      emt=$rarity_stars[0][m]
+      emt=FEH_rarity_stars[m] if @games[0]=='FEH'
+      emt=FGO_rarity_stars[m] if @games[0]=='FGO'
+      str=emt*@rarity
+    end
+    return str
+  end
+end
+
+
+
+def disp_dragon_stats(bot,event,args=nil,juststats=false,preload=nil)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  drg=$dragons.map{|q| q}; adv=$adventurers.map{|q| q}
+  mym=nil
+  mym='Gala' if (has_any?(args,['super','gala']) && has_any?(args,['mym','brunhilda'])) || has_any?(args,['supermym','superbrunhilda','brunhildasuper','mymsuper','galamym','galabrunhilda','brunhildagala','mymgala','mymhilda'])
+  mym='Halloween' if (has_any?(args,['halloween','spooky','spoopy','scary']) && has_any?(args,['mym','brunhilda'])) || has_any?(args,['halloweenmym','halloweenbrunhilda','brunhildahalloween','mymhalloween','spookymym','spookybrunhilda','brunhildaspooky','mymspooky','spoopymym','spoopybrunhilda','brunhildaspoopy','mymspoopy','scarymym','scarybrunhilda','brunhildascary','mymscary','mymhilda'])
+  if preload.nil? || !preload.is_a?(DLDragon)
+    if !mym.nil?
+      d=drg.find_index{|q| q.name=='Brunhilda'}
+      d=drg[d].clone
+      a=adv.find_index{|q| q.name=="Mym(#{mym})"}
+      a=adv.find_index{|q| q.name=="Gala Mym"} if mym=='Gala'
+      d.rarity="#{adv[a].rarity}#{adv[a].availability}"
+      d.name="#{mym} Brunhilda"
+      d.hp='0, 0'; d.str='0, 0'; d.sell_price='0, 0'
+      d.skills="Muspelheim(#{mym})"
+      d.skills='Infernal Ray' if mym=='Gala'
+      d.auras=''
+      d.thumbforce="Adventurers/Mym(#{mym})_5"
+      d.thumbforce="Adventurers/Gala_Mym_5" if mym=='Gala'
+      disp_dragon_stats(bot,event,args,juststats,d)
+      return nil
+    elsif (has_any?(args,['shiny']) && has_any?(args,['nyarlathotep'])) || has_any?(args,['shinynyarlathotep','lathna'])
+      d=drg.find_index{|q| q.name=='Nyarlathotep'}
+      d=drg[d].clone
+      a=adv.find_index{|q| q.name=='Lathna'}
+      d.rarity="#{adv[a].rarity}#{adv[a].availability}"
+      d.name='Shiny Nyarlathotep'
+      d.hp='0, 0'; d.str='0, 0'; d.sell_price='0, 0'
+      d.skills='All-Encompassing Darkness (Yang)'
+      d.auras=''
+      d.thumbforce='Dragons/Shiny_Nyarlathotep_5'
+      disp_dragon_stats(bot,event,args,juststats,d)
+      return nil
+    elsif (has_any?(args,['mega','rock']) && has_any?(args,['man'])) || has_any?(args,['megaman','rockman'])
+      args=['rush']
+    end
+    k=find_data_ex(:find_dragon,args.join(' '),event)
+  else
+    k=preload.clone
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  hdr="__**#{k.name}**__"
+  title=k.class_header(bot,0,true)
+  str=''
+  if s2s || juststats
+    c=k.stat_emotes.map{|q| q}
+    unless k.isPseudodragon?
+      str="**Lv.1:**  #{c[0]}#{k.hp[0]}  #{c[1]}#{k.str[0]}"
+      str="#{str}\n**Lv.#{k.rarity*20}:**  #{c[0]}#{k.hp[1]}  #{c[1]}#{k.str[1]}"
+      str="#{str}\n**Lv.#{k.rarity*20+15}:**  #{c[0]}#{k.hp[2]}  #{c[1]}#{k.str[2]}" if k.hp.length>2 && k.str.length>2
+    end
+  else
+    title=k.mini_header(bot)
+    hdr="#{hdr} #{k.rar_row}"
+  end
+  if title.length>250
+    h=title.split("\n")
+    title=[h[0],'']
+    j=0
+    for i in 1...h.length
+      if "#{title[j]}\n#{h[i]}".length>250 && j==0
+        j+=1
+        title[j]="#{h[i]}"
+      else
+        title[j]="#{title[j]}\n#{h[i]}"
+      end
+    end
+  end
+  unless k.speed.nil? || k.speed.length<=1 || !(s2s || juststats)
+    str="#{str}\n\n#{k.stat_emotes[2]}**Speed:**  *Dash:*\u00A0\u00A0#{k.speed[0]}  *Turn:*\u00A0\u00A0#{k.speed[1]}"
+    str="#{str}\n*Automatically turns to damage direction*" if k.dmg_turn
+    if k.longrange
+      str="#{str}\n*Long range attacks*"
+    else
+      str="#{str}\n*Short range attacks*"
+    end
+  end
+  sklz=$skills.map{|q| q}
+  unless juststats || k.skills.nil? || k.skills.length<=0
+    skl1=sklz.find_index{|q| q.name==k.skills[0]}
+    skl1=sklz[skl1] unless skl1.nil?
+    skl2=sklz.find_index{|q| q.name==k.skills[1]}
+    skl2=sklz[skl2] unless skl2.nil?
+    str2=''
+    if k.skills[0].nil? || k.skills[0].length<=0 || k.skills[0]=='-'
+    elsif skl1.nil?
+      str2="**#{k.skills[0]}** - LOAD ERROR"
+    elsif s2s
+      str2="__**#{skl1.name}** (#{'%.1f' % skl1.invulnerability} sec. invul#{", #{skl1.energy_display}" if skl1.energy_display.length>0})__"
+      str2="#{str2} - #{skl1.sp_display(1)} SP" unless skl1.sp_display(0).uniq.length>1 || skl1.sp_display(1)[0]=='-'
+      if skl1.mass_description.nil?
+        for i in 0...skl1.description.length
+          str2="#{str2}\n*#{skl1.level_text(i+1,-1)}:* #{skl1.description[i]}"
+        end
+      else
+        str2="#{str2}\n#{skl1.mass_description}"
+        if skl1.sp_display(0).uniq.length>1
+          str2="#{str2}\n#{skl1.level_text(1,-1)}"
+          for i in 1...skl1.description.length
+            str2="#{str2} \u2192 #{skl1.level_text(i+1,-1)}"
+          end
+        end
+      end
+    else
+      lvl=skl1.description.length
+      str2="*#{skl1.name}#{skl1.energy_display(false)} [#{skl1.level_text(lvl,-1,true)}]* - #{skl1.sp_display(lvl)} SP"
+      str2="#{str2}\n#{skl1.description[lvl-1]}"
+    end
+    if k.skills[1].nil? || k.skills[1].length<=0 || k.skills[1]=='-'
+    elsif skl2.nil?
+      str2="#{str2}\n\n**#{k.skills[1]}** - LOAD ERROR"
+    elsif s2s
+      str2="#{str2}\n\n__**#{skl2.name}** (#{'%.1f' % skl2.invulnerability} sec. invul#{", #{skl2.energy_display}" if skl2.energy_display.length>0})__"
+      str2="#{str2} - #{skl2.sp_display(1)} SP" unless skl2.sp_display(0).uniq.length>1 || skl2.sp_display(1)[0]=='-'
+      if skl2.mass_description.nil?
+        for i in 0...skl2.description.length
+          str2="#{str2}\n*#{skl2.level_text(i+1,-1)}:* #{skl2.description[i]}"
+        end
+      else
+        str2="#{str2}\n#{skl2.mass_description}"
+        if skl2.sp_display(0).uniq.length>1
+          str2="#{str2}\n#{skl2.level_text(1,-1)}"
+          for i in 1...skl2.description.length
+            str2="#{str2} \u2192 #{skl2.level_text(i+1,-1)}"
+          end
+        end
+      end
+    else
+      lvl=skl2.description.length
+      str2="#{str2}\n\n*#{skl2.name}#{skl2.energy_display(false)} [#{skl2.level_text(lvl,-1,true)}]* - #{skl2.sp_display(lvl)} SP"
+      str2="#{str2}\n#{skl2.description[lvl-1]}"
+    end
+    str2=str2["\n".length,str2.length-"\n".length] if str2[0,"\n".length]=="\n"
+    str2=str2["\n".length,str2.length-"\n".length] if str2[0,"\n".length]=="\n"
+    str="#{str}\n;;;;;"
+  end
+  bemoji=['<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
+  bemoji=['<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if k.games[0]=='FGO'
+  bemoji=['<:Aether_Stone:510776805746278421>','<:Refining_Stone:453618312165720086>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if k.games[0]=='FEH'
+  # Mana Spiral Pink = 0xE9438F
+  unless juststats || k.auras.nil? || k.auras.length<=0
+    str="#{str}\n\n**Aura:**\n#{bemoji[0]*4}#{k.auras.map{|q| q[0]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
+    if k.auras.map{|q| q.length}.max>2
+      if safe_to_spam?(event)
+        str="#{str}\n#{bemoji[1]*1}#{bemoji[0]*3}#{k.auras.map{|q| q[[q.length-1,1].min]}.reject{|q| q.nil? || q.length<=0}.join(', ')}" if k.auras.map{|q| q.length}.max>3
+        qq=1
+        qq=2 if k.auras.map{|q| q.length}.max>3
+        str="#{str}\n#{bemoji[1]*2}#{bemoji[0]*2}#{k.auras.map{|q| q[[q.length-1,qq].min]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
+        str="#{str}\n#{bemoji[1]*3}#{bemoji[0]*1}#{k.auras.map{|q| q[[q.length-1,3].min]}.reject{|q| q.nil? || q.length<=0}.join(', ')}" if k.auras.map{|q| q.length}.max>3
+      end
+      str="#{str}\n#{bemoji[1]*4}#{k.auras.map{|q| q[-1]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
+    else
+      str="#{str}\n#{bemoji[1]*4}#{k.auras.map{|q| q[1]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
+    end
+  end
+  str="#{str}\n\n**Sells for:** #{longFormattedNumber(k.sell_price[0])}#{bemoji[2]} #{longFormattedNumber(k.sell_price[1])}#{bemoji[3]}" unless juststats || k.sell_price.nil? || k.sell_price.length<=0 || k.sell_price.max<=0
+  str="#{str}\n\n**Bond gift preference:** #{['Golden Chalice (Sunday)','Juicy Meat (Monday)','Kaleidoscope (Tuesday)','Floral Circlet (Wednesday)','Compelling Book (Thursday)','Mana Essence (Friday)','Golden Chalice (Saturday)'][k.favorite]}"
+  if str.gsub(';;;;;',"\n#{str2}").length>=1900 && !s2s
+    str=str.gsub(';;;;;',"\n~~The description makes this data too long.  Please try again in PM.~~")
+  else
+    str=str.gsub(';;;;;',"\n#{str2}")
+  end
+  str=str["\n".length,str.length-"\n".length] if str[0,"\n".length]=="\n"
+  str=str["\n".length,str.length-"\n".length] if str[0,"\n".length]=="\n"
+  ftr=k.footer
+  f=nil
+  if str.length>1900 && safe_to_spam?(event)
+    str=str.split("\n\n__**")
+    str[-1]="__**#{str[-1]}".split("\n\n**Aura")
+    str[0]="#{str[0]}\n\n**Aura#{str[-1][1]}"
+    if str.length>2 && "__**#{str[1]}\n\n#{str[2][0]}".length<=1900
+      str[2][0]="__**#{str[1]}\n\n#{str[2][0]}"
+      str[1]=nil
+      str.compact!
+    end
+    create_embed(event,["__**#{k.name}**__",title],str[0],k.disp_color,nil,k.thumbnail)
+    create_embed(event,'',"__**#{str[1]}",k.disp_color) if str.length>2
+    create_embed(event,'',str[-1][0],k.disp_color,ftr)
+  else
+    create_embed(event,[hdr,title],str,k.disp_color,ftr,k.thumbnail)
+  end
 end
 
 
@@ -605,117 +808,113 @@ def snagstats(event,bot,f=nil,f2=nil)
     event.respond str
     return nil
   elsif ['adventurer','adventurers','adv','advs','unit','units'].include?(f.downcase)
-    str='This command is not yet ready'
-=begin
-    adv=@adventurers.map{|q| q}
-    adv=find_in_adventurers(bot,event,[f2],2)[1] unless f2.nil? || f2.length<=0
+    adv=$adventurers.map{|q| q}
+   # adv=find_in_adventurers(bot,event,[f2],2)[1] unless f2.nil? || f2.length<=0
     str="**There are #{adv.length} adventurers, including:**"
-    adv=adv.reject{|q| q[0]=='Puppy'}
+    adv=adv.reject{|q| q.name=='Puppy'}
     str2=''
-    for i in 0...@max_rarity[0]
-      m=adv.reject{|q| q[1][0,1].to_i != i+1}
-      str2="#{str2}\n#{@rarity_stars[0][i+1]} #{m.length} #{['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'][i]}-star adventurer#{'s' unless m.length==1}" if m.length>0
+    for i in 0...$max_rarity[0]
+      m=adv.reject{|q| q.rarity != i+1}
+      str2="#{str2}\n#{$rarity_stars[0][i+1]} #{m.length} #{['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'][i]}-star adventurer#{'s' unless m.length==1}" if m.length>0
     end
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     str2=''
-    m=adv.reject{|q| q[2][1]!='Flame'}
+    m=adv.reject{|q| q.element !='Flame'}
     str2="<:Element_Flame:532106087952810005> #{m.length} Flame-element adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Water'}
+    m=adv.reject{|q| q.element !='Water'}
     str2="#{str2}\n<:Element_Water:532106088221376522> #{m.length} Water-element adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Wind'}
+    m=adv.reject{|q| q.element !='Wind'}
     str2="#{str2}\n<:Element_Wind:532106087948746763> #{m.length} Wind-element adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Light'}
+    m=adv.reject{|q| q.element !='Light'}
     str2="#{str2}\n<:Element_Light:532106088129101834> #{m.length} Light-element adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Shadow'}
+    m=adv.reject{|q| q.element !='Shadow'}
     str2="#{str2}\n<:Element_Shadow:532106088154267658> #{m.length} Shadow-element adventurer#{'s' unless m.length==1}" if m.length>0
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     str2=''
-    m=adv.reject{|q| q[2][2]!='Sword'}
+    m=adv.reject{|q| q.weapon !='Sword'}
     str2="<:Weapon_Sword:532106114540634113> #{m.length} Sword-using adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][2]!='Blade'}
+    m=adv.reject{|q| q.weapon !='Blade'}
     str2="#{str2}\n<:Weapon_Blade:532106114628714496> #{m.length} Blade-using adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][2]!='Dagger'}
+    m=adv.reject{|q| q.weapon !='Dagger'}
     str2="#{str2}\n<:Weapon_Dagger:532106116025286656> #{m.length} Dagger-using adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][2]!='Axe'}
+    m=adv.reject{|q| q.weapon !='Axe'}
     str2="#{str2}\n<:Weapon_Axe:532106114188443659> #{m.length} Axe-using adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][2]!='Bow'}
+    m=adv.reject{|q| q.weapon !='Bow'}
     str2="#{str2}\n<:Weapon_Bow:532106114909732864> #{m.length} Bow-using adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][2]!='Lance'}
+    m=adv.reject{|q| q.weapon !='Lance'}
     str2="#{str2}\n<:Weapon_Lance:532106114792423448> #{m.length} Lance-using adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][2]!='Wand'}
+    m=adv.reject{|q| q.weapon !='Wand'}
     str2="#{str2}\n<:Weapon_Wand:532106114985099264> #{m.length} Wand-using adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][2]!='Staff'}
+    m=adv.reject{|q| q.weapon !='Staff'}
     str2="#{str2}\n<:Weapon_Staff:532106114733441024> #{m.length} Staff-using adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][2]!='Manacaster'}
+    m=adv.reject{|q| q.weapon !='Manacaster'}
     str2="#{str2}\n<:Weapon_Manacaster:758905122448867338> #{m.length} Manacaster-using adventurer#{'s' unless m.length==1}" if m.length>0
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     str2=''
-    m=adv.reject{|q| q[2][0]!='Attack'}
+    m=adv.reject{|q| q.clzz !='Attack'}
     str2="<:Type_Attack:532107867520630784> #{m.length} Attack-class adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][0]!='Defense'}
+    m=adv.reject{|q| q.clzz !='Defense'}
     str2="#{str2}\n<:Type_Defense:532107867264909314> #{m.length} Defense-class adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][0]!='Support'}
+    m=adv.reject{|q| q.clzz !='Support'}
     str2="#{str2}\n<:Type_Support:532107867575156747> #{m.length} Support-class adventurer#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2][0]!='Healer'}
+    m=adv.reject{|q| q.clzz !='Healer'}
     str2="#{str2}\n<:Type_Healing:532107867348533249> #{m.length} Healing-class adventurer#{'s' unless m.length==1}" if m.length>0
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     if safe_to_spam?(event)
       str2=''
-      m=adv.reject{|q| q[1][1,1]!='y'}
+      m=adv.reject{|q| q.availability.nil? || !q.availability.include?('y')}
       str2="#{m.length} story adventurer#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[1].length>1}
+      m=adv.reject{|q| !q.availability.nil? && q.availability.length>1}
       str2="#{str2}\n#{m.length} summonable adventurer#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[1][1,1]!='w'}
+      m=adv.reject{|q| q.availability.nil? || !q.availability.include?('w')}
       str2="#{str2}\n#{m.length} welfare adventurer#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[1][1,1]!='s'}
+      m=adv.reject{|q| q.availability.nil? || !q.availability.include?('s')}
       str2="#{str2}\n#{m.length} seasonal adventurer#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[1][1,1]!='f'}
+      m=adv.reject{|q| q.availability.nil? || !q.availability.include?('f')}
       str2="#{str2}\n#{m.length} former-seasonal adventurer#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[1][1,1]!='z'}
+      m=adv.reject{|q| q.availability.nil? || !q.availability.include?('z')}
       str2="#{str2}\n#{m.length} Zodiac adventurer#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[1][1,1]!='-'}
+      m=adv.reject{|q| q.availability.nil? || !q.availability.include?('-')}
       str2="#{str2}\n#{m.length} unavailable adventurer#{'s' unless m.length==1}" if m.length>0
       str2="#{str2}\n1 good boi"
       str2=str2[1,str2.length-1] if str2[0,1]=="\n"
       str2=str2[2,str2.length-2] if str2[0,2]=="\n"
       str=extend_message(str,str2,event,2)
     end
-=end
     event.respond str
     return nil
   elsif ['dragon','dragons','drag','drags','drg','drgs'].include?(f.downcase)
     str='This command is not yet ready'
-=begin
-    adv=@dragons.map{|q| q}
-    adv=find_in_dragons(bot,event,[f2],2)[1] unless f2.nil?
+    adv=$dragons.map{|q| q}
+   # adv=find_in_dragons(bot,event,[f2],2)[1] unless f2.nil?
     str="**There are #{adv.length} dragons, including:**"
-    adv=adv.reject{|q| q[0]=='Puppy'}
+    adv=adv.reject{|q| q.name=='Puppy'}
     str2=''
-    for i in 0...@max_rarity[1]
-      m=adv.reject{|q| q[1][0,1].to_i != i+1}
-      str2="#{str2}\n#{@rarity_stars[0][i+1]} #{m.length} #{['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'][i]}-star dragon#{'s' unless m.length==1}" if m.length>0
+    for i in 0...$max_rarity[1]
+      m=adv.reject{|q| q.rarity != i+1}
+      str2="#{str2}\n#{$rarity_stars[0][i+1]} #{m.length} #{['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'][i]}-star dragon#{'s' unless m.length==1}" if m.length>0
     end
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     str2=''
-    m=adv.reject{|q| q[2]!='Flame'}
+    m=adv.reject{|q| q.element !='Flame'}
     str2="<:Element_Flame:532106087952810005> #{m.length} Flame-element dragon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2]!='Water'}
+    m=adv.reject{|q| q.element !='Water'}
     str2="#{str2}\n<:Element_Water:532106088221376522> #{m.length} Water-element dragon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2]!='Wind'}
+    m=adv.reject{|q| q.element !='Wind'}
     str2="#{str2}\n<:Element_Wind:532106087948746763> #{m.length} Wind-element dragon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2]!='Light'}
+    m=adv.reject{|q| q.element !='Light'}
     str2="#{str2}\n<:Element_Light:532106088129101834> #{m.length} Light-element dragon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[2]!='Shadow'}
+    m=adv.reject{|q| q.element !='Shadow'}
     str2="#{str2}\n<:Element_Shadow:532106088154267658> #{m.length} Shadow-element dragon#{'s' unless m.length==1}" if m.length>0
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
@@ -723,45 +922,44 @@ def snagstats(event,bot,f=nil,f2=nil)
     str2=''
     x=['','Juicy Meat/Monday','Kaleidoscope/Tuesday','Floral Circlet/Wednesday','Compelling Book/Thursday','Mana Essence/Friday','']
     for i in 1...6
-      m=adv.reject{|q| q[9]!=i}
+      m=adv.reject{|q| q.favorite !=i}
       str2="#{str2}\n#{m.length} dragon#{'s' unless m.length==1} that prefer #{x[i].split('/')[0]}s, which are available on #{x[i].split('/')[1]}" if m.length>0
     end
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
-    m=adv.reject{|q| q[10]!='Yes'}
+    m=adv.reject{|q| !q.dmg_turn}
     str2=''
     str2="#{m.length} dragon#{'s' unless m.length==1} that turn towards the source of damage they receive" if m.length>0
-    m=adv.reject{|q| q[10]!='No'}
+    m=adv.reject{|q| q.dmg_turn}
     str2="#{str2}\n#{m.length} dragon#{'s' unless m.length==1} that remain in position when damaged" if m.length>0
     str=extend_message(str,str2,event,2)
-    m=adv.reject{|q| q[11]!='Yes'}
+    m=adv.reject{|q| !q.longrange}
     str2="#{m.length} long-range dragon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[11]!='No'}
+    m=adv.reject{|q| q.longrange}
     str2="#{str2}\n#{m.length} short-range dragon#{'s' unless m.length==1}" if m.length>0
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     if safe_to_spam?(event)
       str2=''
-      m=adv.reject{|q| q[1][1,1]!='y'}
+      m=adv.reject{|q| q.availability.nil? || !q.availability.include?('y')}
       str2="#{m.length} story dragon#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[1].length>1}
+      m=adv.reject{|q| !q.availability.nil? && q.availability.length>1}
       str2="#{str2}\n#{m.length} summonable dragon#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[1][1,1]!='w'}
+      m=adv.reject{|q| q.availability.nil? || !q.availability.include?('w')}
       str2="#{str2}\n#{m.length} welfare dragon#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[1][1,1]!='s'}
+      m=adv.reject{|q| q.availability.nil? || !q.availability.include?('s')}
       str2="#{str2}\n#{m.length} seasonal dragon#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[1][1,1]!='f'}
+      m=adv.reject{|q| q.availability.nil? || !q.availability.include?('f')}
       str2="#{str2}\n#{m.length} former-seasonal dragon#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[1][1,1]!='z'}
+      m=adv.reject{|q| q.availability.nil? || !q.availability.include?('z')}
       str2="#{str2}\n#{m.length} Zodiac dragon#{'s' unless m.length==1}" if m.length>0
       str2="#{str2}\n1 good boi"
       str2=str2[1,str2.length-1] if str2[0,1]=="\n"
       str2=str2[2,str2.length-2] if str2[0,2]=="\n"
       str=extend_message(str,str2,event,2)
     end
-=end
     event.respond str
     return nil
   elsif ['wyrmprint','wyrm','print','wyrmprints','wyrms','prints'].include?(f.downcase)
@@ -910,27 +1108,25 @@ def snagstats(event,bot,f=nil,f2=nil)
     event.respond str
     return nil
   elsif ['alts','alt','alternate','alternates','alternative','alternatives'].include?(f.downcase)
-    str='This command is not yet ready'
-=begin
     event.channel.send_temporary_message('Calculating data, please wait...',3)
     data_load()
     nicknames_load()
-    untz=@adventurers.map{|q| q}
+    untz=$adventurers.map{|q| q}
     untz2=[]
     for i in 0...untz.length
       m=[]
-      m.push('default') if untz[i][0]==untz[i][9][0] || untz[i][9][0][untz[i][9][0].length-1,1]=='*'
-      m.push('faceted') if untz[i][9][0][0,1]=='*' && untz[i][9].length>1
-      m.push('sensible') if untz[i][9][0][0,1]=='*' && untz[i][9].length<2
-      m.push('Gala') if untz[i][0]=="Gala #{untz[i][9][0]}"
-      m.push('seasonal') if untz[i][1][1,1]=='s'
+      m.push('default') if untz[i].name==untz[i].alts[0] || untz[i].alts[0][untz[i].alts[0].length-1,1]=='*'
+      m.push('faceted') if untz[i].alts[0][0,1]=='*' && untz[i].alts.length>1
+      m.push('sensible') if untz[i].alts[0][0,1]=='*' && untz[i].alts.length<2
+      m.push('Gala') if untz[i].name=="Gala #{untz[i].alts[0]}"
+      m.push('seasonal') if !untz[i].availability.nil? && untz[i].availability.include?('s')
       m.push('out-of-left-field') if m.length<=0
       n=''
-      unless untz[i][0]==untz[i][9][0] || untz[i][9][0][untz[i][9][0].length-1,1]=='*'
-        k=untz.reject{|q| q[9][0].gsub('*','')[0]!=untz[i][9][0].gsub('*','')[0] || q[0]==untz[i][0] || !(q[0]==q[9][0] || q[9][0].include?('*'))}
+      unless untz[i].name==untz[i].alts[0] || untz[i].alts[0][untz[i].alts[0].length-1,1]=='*'
+        k=untz.reject{|q| q.alts[0].gsub('*','')[0]!=untz[i].alts[0].gsub('*','')[0] || q.name==untz[i].name || !(q.name==q.alts[0] || q.alts[0].include?('*'))}
         n="x" if k.length<=0
       end
-      untz2.push([untz[i][0],untz[i][9].map{|q| q.gsub('*','')},m,n,untz[i][13]])
+      untz2.push([untz[i].name,untz[i].alts.map{|q| q.gsub('*','')},m,n,untz[i].gender])
     end
     untz2.uniq!
     all_units=untz2.map{|q| q}
@@ -938,7 +1134,8 @@ def snagstats(event,bot,f=nil,f2=nil)
     a2=all_units.reject{|q| q[1][1].nil?}.map{|q| q[1][0]}.uniq
     l2=legal_units.reject{|q| q[1][1].nil?}.map{|q| q[1][0]}.uniq
     str="There are #{untz2.reject{|q| !q[2].include?('default')}.length} adventurers in their default form"
-    str="#{str}\nThere are #{untz2.reject{|q| !q[2].include?('sensible')}.length} sensible alts of adventurers"
+    m=untz2.reject{|q| !q[2].include?('sensible')}.length
+    str="#{str}\nThere are #{m} sensible alts of adventurers" unless m<=0
     str="#{str}\nThere are #{untz2.reject{|q| !q[2].include?('Gala')}.length} Gala alts of adventurers"
     str="#{str}\nThere are #{untz2.reject{|q| !q[2].include?('seasonal')}.length} seasonal alts of adventurers"
     str="#{str}\nThere are #{untz2.reject{|q| !q[2].include?('out-of-left-field')}.length} out-of-left-field alts of adventurers"
@@ -970,21 +1167,22 @@ def snagstats(event,bot,f=nil,f2=nil)
     k=k.reject{|q| q[1]!=k[0][1]}
     str2="#{str2}\n#{list_lift(k.map{|q| "*#{q[0]}*"},'and')} #{"is" if k.length==1}#{"are" unless k.length==1} the adventurer facet#{"s" unless k.length==1} with the most alts, with #{k[0][1]} alts (including the default)#{" each" unless k.length==1}." if k.length>0 && k != k2
     str="#{str}#{str2}"
-    untz=@dragons.map{|q| q}
+    untz=$dragons.map{|q| q}
     untz2=[]
     for i in 0...untz.length
       m=[]
-      m.push('default') if untz[i][0]==untz[i][12][0] || untz[i][12][0][untz[i][12][0].length-1,1]=='*'
-      m.push('faceted') if untz[i][12][0][0,1]=='*' && untz[i][12].length>1
-      m.push('sensible') if untz[i][12][0][0,1]=='*' && untz[i][12].length<2
-      m.push('seasonal') if untz[i][1][1,1]=='s'
+      m.push('default') if untz[i].name==untz[i].alts[0] || untz[i].alts[0][untz[i].alts[0].length-1,1]=='*'
+      m.push('faceted') if untz[i].alts[0][0,1]=='*' && untz[i].alts.length>1
+      m.push('sensible') if untz[i].alts[0][0,1]=='*' && untz[i].alts.length<2
+      m.push('Gala') if untz[i].name=="Gala #{untz[i].alts[0]}"
+      m.push('seasonal') if !untz[i].availability.nil? && untz[i].availability.include?('s')
       m.push('out-of-left-field') if m.length<=0
       n=''
-      unless untz[i][0]==untz[i][12][0] || untz[i][12][0][untz[i][12][0].length-1,1]=='*'
-        k=untz.reject{|q| q[12][0].gsub('*','')[0]!=untz[i][12][0].gsub('*','')[0] || q[0]==untz[i][0] || !(q[0]==q[12][0] || q[12][0].include?('*'))}
+      unless untz[i].name==untz[i].alts[0] || untz[i].alts[0][untz[i].alts[0].length-1,1]=='*'
+        k=untz.reject{|q| q.alts[0].gsub('*','')[0]!=untz[i].alts[0].gsub('*','')[0] || q.name==untz[i].name || !(q.name==q.alts[0] || q.alts[0].include?('*'))}
         n="x" if k.length<=0
       end
-      untz2.push([untz[i][0],untz[i][12].map{|q| q.gsub('*','')},m,n,untz[i][13]])
+      untz2.push([untz[i].name,untz[i].alts.map{|q| q.gsub('*','')},m,n,untz[i].gender])
     end
     untz2.uniq!
     all_units=untz2.map{|q| q}
@@ -992,7 +1190,8 @@ def snagstats(event,bot,f=nil,f2=nil)
     a2=all_units.reject{|q| q[1][1].nil?}.map{|q| q[1][0]}.uniq
     l2=legal_units.reject{|q| q[1][1].nil?}.map{|q| q[1][0]}.uniq
     str3="There are #{untz2.reject{|q| !q[2].include?('default')}.length} dragons in their default form, alongside #{l2.length} sets of dragon facets (High Dragons)"
-    str3="#{str3}\nThere are #{untz2.reject{|q| !q[2].include?('sensible')}.length} sensible alts of dragons"
+    m=untz2.reject{|q| !q[2].include?('sensible')}.length
+    str3="#{str3}\nThere are #{m} sensible alts of dragons" unless m<=0
     str3="#{str3}\nThere are #{untz2.reject{|q| !q[2].include?('seasonal')}.length} seasonal alts of dragons"
     str3="#{str3}\nThere are #{untz2.reject{|q| !q[2].include?('out-of-left-field')}.length} out-of-left-field alts of dragons"
     k=[]
@@ -1024,16 +1223,13 @@ def snagstats(event,bot,f=nil,f2=nil)
     str2="#{str2}\n#{list_lift(k.map{|q| "*#{q[0]}*"},'and')} #{"is" if k.length==1}#{"are" unless k.length==1} the dragon facet#{"s" unless k.length==1} with the most alts, with #{k[0][1]} alts (including the default)#{" each" unless k.length==1}." if k.length>0 && k != k2
     str3="#{str3}#{str2}"
     str=extend_message(str,str3,event,2)
-=end
     event.respond str
     return nil
   elsif ['alias','aliases','name','names','nickname','nicknames'].include?(f.downcase)
-    str='This command is not yet ready'
-=begin
     event.channel.send_temporary_message('Calculating data, please wait...',1)
-    glbl=@aliases.reject{|q| q[0]!='Adventurer' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
-    srv_spec=@aliases.reject{|q| q[0]!='Adventurer' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
-    all_units=@adventurers.map{|q| [q[0],0,0,0]}
+    glbl=$aliases.reject{|q| q[0]!='Adventurer' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    srv_spec=$aliases.reject{|q| q[0]!='Adventurer' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    all_units=$adventurers.map{|q| [q.name,0,0,0]}
     for j in 0...all_units.length
       all_units[j][2]+=glbl.reject{|q| q[1]!=all_units[j][0]}.length
       all_units[j][3]+=srv_spec.reject{|q| q[1]!=all_units[j][0]}.length
@@ -1048,97 +1244,114 @@ def snagstats(event,bot,f=nil,f2=nil)
     if event.server.nil? && Shardizard==4
       str2="#{str2}\nDue to being the debug version, I cannot show more information."
     elsif event.server.nil?
-      str2="#{str2}\nServers you and I share account for #{@aliases.reject{|q| q[0]!='Adventurer' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those."
+      str2="#{str2}\nServers you and I share account for #{$aliases.reject{|q| q[0]!='Adventurer' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those."
     else
-      str2="#{str2}\nThis server accounts for #{@aliases.reject{|q| q[0]!='Adventurer' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
+      str2="#{str2}\nThis server accounts for #{$aliases.reject{|q| q[0]!='Adventurer' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
     end
     k=all_units.reject{|q| q[3]!=all_units.map{|q2| q2[3]}.max}.map{|q| q[0]}
     k=all_units.reject{|q| q[3]!=all_units.map{|q2| q2[3]}.max}.map{|q| q[0]} if k.length>8 && !safe_to_spam?(event)
     str2="#{str2}\nThe adventurer#{"s" unless k.length==1} with the most server-specific aliases #{"is" if k.length==1}#{"are" unless k.length==1} #{list_lift(k,"and")}, with #{all_units.map{|q2| q2[3]}.max} server-specific aliases#{" each" unless k.length==1}." unless all_units.map{|q2| q2[3]}.max<=0
     k=srv_spec.map{|q| q[2].length}.inject(0){|sum,x| sum + x }
-    str2="#{str2}\nCounting each alias/server combo as a unique alias, there are #{longFormattedNumber(k)} server-specific aliases"
+    str2="#{str2}\nCounting each alias/server combo as a unique alias, there are #{longFormattedNumber(k)} server-specific adventurer aliases"
     str=extend_message(str,str2,event,2)
-    glbl=@aliases.reject{|q| q[0]!='Dragon' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
-    srv_spec=@aliases.reject{|q| q[0]!='Dragon' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
-    str2="**There are #{longFormattedNumber(glbl.length)} global dragon aliases.**\n**There are #{longFormattedNumber(srv_spec.length)} server-specific dragon aliases.**"
-    if event.server.nil? && Shardizard==4
-    elsif event.server.nil?
-      str2="#{str2} - Servers you and I share account for #{@aliases.reject{|q| q[0]!='Dragon' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
-    else
-      str2="#{str2} - This server accounts for #{@aliases.reject{|q| q[0]!='Dragon' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
+    glbl=$aliases.reject{|q| q[0]!='Dragon' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    srv_spec=$aliases.reject{|q| q[0]!='Dragon' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    all_units=$dragons.map{|q| [q.name,0,0,0]}
+    for j in 0...all_units.length
+      all_units[j][2]+=glbl.reject{|q| q[1]!=all_units[j][0]}.length
+      all_units[j][3]+=srv_spec.reject{|q| q[1]!=all_units[j][0]}.length
     end
+    k=all_units.reject{|q| q[2]!=all_units.map{|q2| q2[2]}.max}.map{|q| q[0]}
+    k=all_units.reject{|q| q[2]!=all_units.map{|q2| q2[2]}.max}.map{|q| q[0]} if k.length>8 && !safe_to_spam?(event)
+    str2="**There are #{longFormattedNumber(glbl.length)} global dragon aliases.**\nThe dragon#{"s" unless k.length==1} with the most global aliases #{"is" if k.length==1}#{"are" unless k.length==1} #{list_lift(k,"and")}, with #{all_units.map{|q2| q2[2]}.max} global aliases#{" each" unless k.length==1}."
+    k=all_units.reject{|q| q[2]>0}.map{|q| q[0]}
+    k=all_units.reject{|q| q[2]>0}.map{|q| q[0]} if k.length>8 && !safe_to_spam?(event) 
+    str2="#{str2}\nThe following dragon#{"s" unless k.length==1} have no global aliases: #{list_lift(k,"and")}." if k.length>0
     str=extend_message(str,str2,event,2)
-    glbl=@aliases.reject{|q| q[0]!='Wyrmprint' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
-    srv_spec=@aliases.reject{|q| q[0]!='Wyrmprint' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    str2="**There are #{longFormattedNumber(srv_spec.length)} server-specific dragon aliases.**"
+    if event.server.nil? && Shardizard==4
+      str2="#{str2}\nDue to being the debug version, I cannot show more information."
+    elsif event.server.nil?
+      str2="#{str2}\nServers you and I share account for #{$aliases.reject{|q| q[0]!='Dragon' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those."
+    else
+      str2="#{str2}\nThis server accounts for #{$aliases.reject{|q| q[0]!='Dragon' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
+    end
+    k=all_units.reject{|q| q[3]!=all_units.map{|q2| q2[3]}.max}.map{|q| q[0]}
+    k=all_units.reject{|q| q[3]!=all_units.map{|q2| q2[3]}.max}.map{|q| q[0]} if k.length>8 && !safe_to_spam?(event)
+    str2="#{str2}\nThe dragon#{"s" unless k.length==1} with the most server-specific aliases #{"is" if k.length==1}#{"are" unless k.length==1} #{list_lift(k,"and")}, with #{all_units.map{|q2| q2[3]}.max} server-specific aliases#{" each" unless k.length==1}." unless all_units.map{|q2| q2[3]}.max<=0
+    k=srv_spec.map{|q| q[2].length}.inject(0){|sum,x| sum + x }
+    str2="#{str2}\nCounting each alias/server combo as a unique alias, there are #{longFormattedNumber(k)} server-specific dragon aliases"
+    str=extend_message(str,str2,event,2)
+    glbl=$aliases.reject{|q| q[0]!='Wyrmprint' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    srv_spec=$aliases.reject{|q| q[0]!='Wyrmprint' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
     str2="**There are #{longFormattedNumber(glbl.length)} global Wyrmprint aliases.**\n**There are #{longFormattedNumber(srv_spec.length)} server-specific Wyrmprint aliases.**"
     if event.server.nil? && Shardizard==4
     elsif event.server.nil?
-      str2="#{str2} - Servers you and I share account for #{@aliases.reject{|q| q[0]!='Wyrmprint' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
+      str2="#{str2} - Servers you and I share account for #{$aliases.reject{|q| q[0]!='Wyrmprint' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
     else
-      str2="#{str2} - This server accounts for #{@aliases.reject{|q| q[0]!='Wyrmprint' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
+      str2="#{str2} - This server accounts for #{$aliases.reject{|q| q[0]!='Wyrmprint' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
     end
     str=extend_message(str,str2,event,2)
-    glbl=@aliases.reject{|q| q[0]!='Weapon' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
-    srv_spec=@aliases.reject{|q| q[0]!='Weapon' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    glbl=$aliases.reject{|q| q[0]!='Weapon' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    srv_spec=$aliases.reject{|q| q[0]!='Weapon' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
     str2="**There are #{longFormattedNumber(glbl.length)} global weapon aliases.**\n**There are #{longFormattedNumber(srv_spec.length)} server-specific weapon aliases.**"
     if event.server.nil? && Shardizard==4
     elsif event.server.nil?
-      str2="#{str2} - Servers you and I share account for #{@aliases.reject{|q| q[0]!='Weapon' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
+      str2="#{str2} - Servers you and I share account for #{$aliases.reject{|q| q[0]!='Weapon' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
     else
-      str2="#{str2} - This server accounts for #{@aliases.reject{|q| q[0]!='Weapon' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
+      str2="#{str2} - This server accounts for #{$aliases.reject{|q| q[0]!='Weapon' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
     end
     str=extend_message(str,str2,event,2)
-    glbl=@aliases.reject{|q| q[0]!='Enemy' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
-    srv_spec=@aliases.reject{|q| q[0]!='Enemy' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    glbl=$aliases.reject{|q| q[0]!='Enemy' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    srv_spec=$aliases.reject{|q| q[0]!='Enemy' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
     str2="**There are #{longFormattedNumber(glbl.length)} global enemy aliases.**\n**There are #{longFormattedNumber(srv_spec.length)} server-specific enemy aliases.**"
     if event.server.nil? && Shardizard==4
     elsif event.server.nil?
-      str2="#{str2} - Servers you and I share account for #{@aliases.reject{|q| q[0]!='Weapon' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
+      str2="#{str2} - Servers you and I share account for #{$aliases.reject{|q| q[0]!='Weapon' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
     else
-      str2="#{str2} - This server accounts for #{@aliases.reject{|q| q[0]!='Weapon' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
+      str2="#{str2} - This server accounts for #{$aliases.reject{|q| q[0]!='Weapon' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
     end
     str=extend_message(str,str2,event,2)
-    glbl=@aliases.reject{|q| q[0]!='Skill' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
-    srv_spec=@aliases.reject{|q| q[0]!='Skill' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    glbl=$aliases.reject{|q| q[0]!='Skill' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    srv_spec=$aliases.reject{|q| q[0]!='Skill' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
     str2="**There are #{longFormattedNumber(glbl.length)} global skill aliases.**\n**There are #{longFormattedNumber(srv_spec.length)} server-specific skill aliases.**"
     if event.server.nil? && Shardizard==4
     elsif event.server.nil?
-      str2="#{str2} - Servers you and I share account for #{@aliases.reject{|q| q[0]!='Skill' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
+      str2="#{str2} - Servers you and I share account for #{$aliases.reject{|q| q[0]!='Skill' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
     else
-      str2="#{str2} - This server accounts for #{@aliases.reject{|q| q[0]!='Skill' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
+      str2="#{str2} - This server accounts for #{$aliases.reject{|q| q[0]!='Skill' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
     end
     str=extend_message(str,str2,event,2)
-    glbl=@aliases.reject{|q| q[0]!='Ability' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
-    srv_spec=@aliases.reject{|q| q[0]!='Ability' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    glbl=$aliases.reject{|q| q[0]!='Ability' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    srv_spec=$aliases.reject{|q| q[0]!='Ability' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
     str2="**There are #{longFormattedNumber(glbl.length)} global ability aliases.**\n**There are #{longFormattedNumber(srv_spec.length)} server-specific ability aliases.**"
     if event.server.nil? && Shardizard==4
     elsif event.server.nil?
-      str2="#{str2} - Servers you and I share account for #{@aliases.reject{|q| q[0]!='Ability' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
+      str2="#{str2} - Servers you and I share account for #{$aliases.reject{|q| q[0]!='Ability' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
     else
-      str2="#{str2} - This server accounts for #{@aliases.reject{|q| q[0]!='Ability' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
+      str2="#{str2} - This server accounts for #{$aliases.reject{|q| q[0]!='Ability' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
     end
     str=extend_message(str,str2,event,2)
-    glbl=@aliases.reject{|q| q[0]!='Facility' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
-    srv_spec=@aliases.reject{|q| q[0]!='Facility' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    glbl=$aliases.reject{|q| q[0]!='Facility' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    srv_spec=$aliases.reject{|q| q[0]!='Facility' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
     str2="**There are #{longFormattedNumber(glbl.length)} global facility aliases.**\n**There are #{longFormattedNumber(srv_spec.length)} server-specific facility aliases.**"
     if event.server.nil? && Shardizard==4
     elsif event.server.nil?
-      str2="#{str2} - Servers you and I share account for #{@aliases.reject{|q| q[0]!='Facility' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
+      str2="#{str2} - Servers you and I share account for #{$aliases.reject{|q| q[0]!='Facility' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
     else
-      str2="#{str2} - This server accounts for #{@aliases.reject{|q| q[0]!='Facility' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
+      str2="#{str2} - This server accounts for #{$aliases.reject{|q| q[0]!='Facility' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
     end
     str=extend_message(str,str2,event,2)
-    glbl=@aliases.reject{|q| q[0]!='Material' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
-    srv_spec=@aliases.reject{|q| q[0]!='Material' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    glbl=$aliases.reject{|q| q[0]!='Material' || !q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
+    srv_spec=$aliases.reject{|q| q[0]!='Material' || q[3].nil?}.map{|q| [q[1],q[2],q[3]]}
     str2="**There are #{longFormattedNumber(glbl.length)} global material aliases.**\n**There are #{longFormattedNumber(srv_spec.length)} server-specific material aliases.**"
     if event.server.nil? && Shardizard==4
     elsif event.server.nil?
-      str2="#{str2} - Servers you and I share account for #{@aliases.reject{|q| q[0]!='Material' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
+      str2="#{str2} - Servers you and I share account for #{$aliases.reject{|q| q[0]!='Material' || q[3].nil? || q[3].reject{|q2| q2==285663217261477889 || bot.user(event.user.id).on(q2).nil?}.length<=0}.length} of those"
     else
-      str2="#{str2} - This server accounts for #{@aliases.reject{|q| q[0]!='Material' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
+      str2="#{str2} - This server accounts for #{$aliases.reject{|q| q[0]!='Material' || q[3].nil? || !q[3].include?(event.server.id)}.length} of those."
     end
     str=extend_message(str,str2,event,2)
-=end
     event.respond str
     return nil
   elsif ['groups','group','groupings','grouping'].include?(f.downcase)
