@@ -177,6 +177,8 @@ $rarity_stars=[['<:Rarity_Mana:706612079783575607>',
 $avvie_info=['Botan','*Dragalia Lost*','N/A']
 $voids=[]
 
+# primary entities
+
 class DLAdventurer
   attr_accessor :name
   attr_accessor :rarity,:availability
@@ -248,6 +250,11 @@ class DLAdventurer
   
   def sort_data=(val); @sort_data=val; end
   def objt; return 'Adventurer'; end
+  
+  def fullName(format=nil)
+    return @name if format.nil?
+    return "#{format}#{@name}#{format.reverse}"
+  end
   
   def dispDefense
     return @defense unless @defense.nil?
@@ -424,9 +431,9 @@ class DLAdventurer
     elsif level==10 || rar<5
       return [@hp[1][rar-3],@str[1][rar-3],self.dispDefense]
     elsif level==11
-      return [@hp[1][rar],@str[1][rar],self.dispDefense]
-    elsif level==100
       return [@hp[1][rar-1],@str[1][rar-1],self.dispDefense]
+    elsif level==100
+      return [@hp[1][rar],@str[1][rar],self.dispDefense]
     elsif level==101
       return [@hp[1][rar-2],@str[1][rar-2],self.dispDefense]
     end
@@ -452,6 +459,7 @@ class DLAdventurer
   def mini_header(bot,rar=0)
     rar=@rarity if rar<0 || rar>$max_rarity[0]+1
     c=self.class_header(bot,2)
+    c=[c[0],c[1],c[3]] if @games[0]=='FEH' && self.isManakete?
     str="#{c[0]}**#{@element}  #{c[1]}#{@weapon}  #{c[2]}#{@clzz}**"
     str="#{c[0]}**#{@element}**  #{c[1]}#{@weapon2} **#{@weapon}  #{c[2]}#{@clzz}**" unless @weapon2.nil?
     c=self.stat_emotes.map{|q| q}
@@ -478,10 +486,56 @@ class DLAdventurer
     elsif @availability.include?('c') || @games.length>0
       str="#{str}\n**Collab**"
     end
+    lookout=$skilltags.reject{|q| q[2]!='Availability' && q[2]!='Availability/Adventurer'}.map{|q| [q[0],q[1],'x',q[3],q[4]]}.uniq
+    for i in 0...lookout.length
+      if @availability.include?(lookout[i][3])
+        if !lookout[i][4].nil? && lookout[i][4].include?('<')
+          str="#{str}\n#{lookout[i][4]}**#{lookout[i][0]}**"
+        else
+          str="#{str}\n**#{lookout[i][0]}**"
+        end
+      end
+    end
     return str
   end
   
-  
+  def ability_display(rar=0,fulltext=true)
+    str=''
+    lv=@abilities.map{|q| q.length}
+    lv=[2,2,1] if rar==5
+    lv[2]=2 if (@name=='Euden' || @rarity>=5) && rar==5
+    lv=[2,2,0] if rar==4
+    lv=[2,1,0] if rar==3
+    lv[2]=1 if @rarity>=5 && rar<5 && rar>0
+    lv=[1,1,0] if rar==2
+    lv=[1,0,0] if rar==1
+    m=[]
+    if fulltext
+      a=[[1,3,6],[1,4,6],[5,6,6]]
+      a[2]=[3,5,6] if @rarity>=5; a[2]=[2,5,6] if @name=='Euden'
+      unless @abiltags.nil?
+        for i in 0...3
+          a[i][0]=0 if @abiltags.include?("#{i+1}")
+        end
+      end
+      for i in 0...3
+        n=[]
+        for i2 in 0...lv[i]+1
+          n.push("#{@abilities[i][i2]} (F#{a[i][i2]})")
+        end
+        m.push(n.join(" \u2192 "))
+      end
+      str=m.join("\n")
+    else
+      for i in 0...3
+        m.push("#{abilities[i][lv[i]-1]}") unless lv[i]<=0
+      end
+      str="**Abilities:** #{m.join(', ')}"
+    end
+    str="#{str}#{"\n" if fulltext}\n**Co-Ability:** #{@coability}"
+    str="#{str}#{"\n" if fulltext}\n**Chain Co-Ability:** #{@chain}"
+    return str
+  end
 end
 
 class DLDragon
@@ -500,7 +554,7 @@ class DLDragon
   attr_accessor :footer,:essence
   attr_accessor :damage_override
   attr_accessor :pseudodragon
-  attr_accessor :sort_data
+  attr_accessor :sort_data,:thumbforce
   
   def initialize(val)
     @name=val
@@ -510,6 +564,7 @@ class DLDragon
   def element=(val); @element=val; end
   
   def rarity=(val)
+    @availability=''
     if !val.is_a?(String)
       @rarity=val
     elsif val.length>1
@@ -547,12 +602,18 @@ class DLDragon
   def damage_override=(val); @damage_override=val.split(';; ').map{|q| q.split('; ')} end
   
   def sort_data=(val); @sort_data=val; end
+  def objt; return 'Dragon'; end
+  
+  def fullName(format=nil)
+    return @name if format.nil?
+    return "#{format}#{@name}#{format.reverse}"
+  end
   
   def stat_emotes
-    return ['<:HP_S:514712247503945739>','<:FreezeS:514712247474585610>'] if @games[0]=='FEH'
-    return ['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>'] if @games[0]=='FGO'
-    return ['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>'] if @games[0]=='MM'
-    return ['<:HP:573344832307593216>','<:Strength:573344931205349376>']
+    return ['<:HP_S:514712247503945739>','<:FreezeS:514712247474585610>','<:SpeedS:514712247625580555>'] if @games[0]=='FEH'
+    return ['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','<:Speed:573366907357495296>'] if @games[0]=='FGO'
+    return ['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:Speed:573366907357495296>'] if @games[0]=='MM'
+    return ['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Speed:573366907357495296>']
   end
   
   def isPseudodragon?
@@ -563,10 +624,174 @@ class DLDragon
     return false
   end
   
+  def class_header(bot,emotesonly=0,includerarity=false)
+    emtz=[]; str=''
+    if includerarity
+      rar=$rarity_stars[0][@rarity]
+      rar=FEH_rarity_stars[@rarity] if @games[0]=='FEH'
+      rar=FGO_rarity_stars[@rarity] if @games[0]=='FGO'
+      emtz.push(rar)
+      str=self.rar_row
+    end
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{@element}"}
+    moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{@element.gsub('Shadow','Dark').gsub('Flame','Fire')}"} if @games[0]=='FEH'
+    emtz.push(moji[0].mention) unless moji.length<=0
+    str="#{str}#{"\n" if str.length>0}#{moji[0].mention unless moji.length<=0} **#{@element}**"
+    if self.isPseudodragon?
+      if @games[0]=='FEH'
+        m=$adventurers.reject{|q| q.name != @name}
+        if m.length>0
+          color='Colorless'; wpn='Unknown'; srv=443172595580534784
+          if ['Sword','Lance','Axe','Blade'].include?(m[0].weapon)
+            wpn='Blade'
+          elsif m[0].weapon=='Wand'
+            wpn='Tome'
+          elsif m[0].weapon=='Manacaster'
+            color='Summon'; wpn='Gun'
+          else
+            wpn="#{m[0].weapon}"
+          end
+          moji=bot.server(srv).emoji.values.reject{|q| q.name != "#{color}_#{wpn}"}
+        end
+        color='Colorless'; wpn='Dragon'; srv=443172595580534784
+        color='Red' if ['Flame','Shadow'].include?(@element)
+        color='Blue' if ['Water','Light'].include?(@element)
+        color='Green' if ['Wind'].include?(@element)
+        moji2=bot.server(srv).emoji.values.reject{|q| q.name != "#{color}_#{wpn}"}
+        str="#{str}\n#{moji2[0].mention unless moji2.length<=0}~~Pseudodragon~~"
+        emtz.push(moji2[0].mention) unless moji2.length<=0
+        emtz.push(moji[0].mention) unless moji.length<=0
+      else
+        str="#{str}\n**Pseudodragon**"
+      end
+    end
+    if @games[0]=='FEH'
+      str="#{str}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
+      str="#{str}  #{moji[0].mention unless moji.length<=0}**Manakete**" if self.isPseudodragon?
+      emtz.push('<:Great_Badge_Golden:443704781068959744>')
+    elsif @games[0]=='FGO'
+      str="#{str}\n<:Bond:613804021119189012>**FGO Collab**"
+      emtz.push('<:Bond:613804021119189012>')
+    elsif @games[0]=='MM'
+      str="#{str}\n<:Mega_Man:641484836304846857>**Mega Man Collab**"
+      emtz.push('<:Mega_Man:641484836304846857>')
+    elsif @games[0]=='MH'
+      str="#{str}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**"
+      emtz.push('<:MH_Rathalos:669319247670804506>')
+    elsif @games[0]=='PC'
+      str="#{str}\n<:Priconne:782554046887493652>**Princess Connect Re:Dive Collab**"
+      emtz.push('<:Priconne:782554046887493652>')
+    elsif @games[0]=='P5S'
+      str="#{str}\n<:Take_Your_Heart:782553893204262923>**Persona 5 Strikers Collab**"
+      emtz.push('<:Take_Your_Heart:782553893204262923>')
+    elsif @availability.include?('c') || @games.length>0
+      str="#{str}\n**Collab**"
+    end
+    lookout=$skilltags.reject{|q| q[2]!='Availability' && q[2]!='Availability/Dragon'}.map{|q| [q[0],q[1],'x',q[3],q[4]]}.uniq
+    for i in 0...lookout.length
+      if @availability.include?(lookout[i][3])
+        if !lookout[i][4].nil? && lookout[i][4].include?('<')
+          str="#{str}\n#{lookout[i][4]}**#{lookout[i][0]}**"
+        else
+          str="#{str}\n**#{lookout[i][0]}**"
+        end
+      end
+    end
+    return emtz if emotesonly==2
+    return emtz.join('') if emotesonly==1
+    return str
+  end
+  
+  def emotes(bot,includerarity=true); return self.class_header(bot,1,includerarity); end
+  
+  def disp_color(chain=0)
+    f=[]
+    xcolor=0x849294
+    xcolor=0xE73031 if @element=='Flame'
+    xcolor=0x1890DE if @element=='Water'
+    xcolor=0x00D771 if @element=='Wind'
+    xcolor=0xFFB90F if @element=='Light'
+    xcolor=0xA637DE if @element=='Shadow'
+    f.push(xcolor)
+    return f[0] if chain>=f.length
+    return f[chain]
+  end
+  
+  def thumbnail
+    return "https://github.com/Rot8erConeX/BotanBot/blob/master/#{@thumbforce}.png?raw=true" unless @thumbforce.nil?
+    dispname=@name.gsub(' ','_')
+    return "https://github.com/Rot8erConeX/BotanBot/blob/master/Dragons/#{dispname}.png?raw=true"
+  end
+  
+  def mini_header(bot)
+    c=self.class_header(bot,2)
+    str="#{c[0]}**#{@element}**"; str2=''
+    c=self.stat_emotes.map{|q| q}
+    if self.isPseudodragon?
+      if @games[0]=='FEH'
+        color='Colorless'; wpn='Dragon'; srv=443172595580534784
+        color='Red' if ['Flame','Shadow'].include?(@element)
+        color='Blue' if ['Water','Light'].include?(@element)
+        color='Green' if ['Wind'].include?(@element)
+        moji=bot.server(srv).emoji.values.reject{|q| q.name != "#{color}_#{wpn}"}
+        str2="#{moji[0].mention unless moji.length<=0}~~Pseudodragon~~"
+      else
+        str="#{str}  **Pseudodragon**"
+      end
+    else
+      str2="**Lv.#{@rarity*20}**  #{c[0]}#{@hp[1]}  #{c[1]}#{@str[1]}"
+      str2="**Lv.#{@rarity*20+15}**  #{c[0]}#{@hp[2]}  #{c[1]}#{@str[2]}" if @hp.length>2 && @str.length>2
+    end
+    if @games[0]=='FEH'
+      str2="#{str2}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
+      if self.isPseudodragon?
+        m=$adventurers.reject{|q| q.name != @name}
+        color='Colorless'; wpn='Dragon'; srv=443172595580534784
+        if m.length>0
+          if ['Sword','Lance','Axe','Blade'].include?(m[0].weapon)
+            wpn='Blade'
+          elsif m[0].weapon=='Wand'
+            wpn='Tome'
+          elsif m[0].weapon=='Manacaster'
+            color='Summon'; wpn='Gun'
+          else
+            wpn="#{m[0].weapon}"
+          end
+        end
+        moji=bot.server(srv).emoji.values.reject{|q| q.name != "#{color}_#{wpn}"}
+        str2="#{str2}  #{moji[0].mention unless moji.length<=0}**Manakete**"
+      end
+    elsif @games[0]=='FGO'
+      str2="#{str2}\n<:Bond:613804021119189012>**FGO Collab**"
+    elsif @games[0]=='MM'
+      str2="#{str2}\n<:Mega_Man:641484836304846857>**Mega Man Collab**"
+    elsif @games[0]=='MH'
+      str2="#{str2}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**"
+    elsif @games[0]=='PC'
+      str2="#{str2}\n<:Priconne:782554046887493652>**Princess Connect Re:Dive Collab**"
+    elsif @games[0]=='P5S'
+      str2="#{str2}\n<:Take_Your_Heart:782553893204262923>**Persona 5 Strikers Collab**"
+    elsif @availability.include?('c') || @games.length>0
+      str="#{str}  **Collab**"
+    end
+    lookout=$skilltags.reject{|q| q[2]!='Availability' && q[2]!='Availability/Dragon'}.map{|q| [q[0],q[1],'x',q[3],q[4]]}.uniq
+    for i in 0...lookout.length
+      if @availability.include?(lookout[i][3])
+        if !lookout[i][4].nil? && lookout[i][4].include?('<')
+          str2="#{str2}\n#{lookout[i][4]}**#{lookout[i][0]}**"
+        else
+          str="#{str}  **#{lookout[i][0]}**"
+        end
+      end
+    end
+    str="#{str}\n#{str2}".gsub("\n\n","\n") if str2.length>0
+    return str
+  end
+  
   
 end
 
-
+# secondary entities
 
 class DLSkill
   attr_accessor :name
@@ -603,6 +828,11 @@ class DLSkill
         @sp_oddity.push(m.map{|q| q})
       end
     end
+  end
+  
+  def fullName(format=nil)
+    return @name if format.nil?
+    return "#{format}#{@name}#{format.reverse}"
   end
   
   def inspirable?
@@ -646,15 +876,55 @@ class DLSkill
   end
   
   def level_text(l,f,long=false)
+    return "Lv.#{l}" if long && f<0
     return "Lv.#{l}/Floor #{f}" if long
-    str="Lv.#{l} (F#{f}"
-    str="#{str}, #{self.sp_display(l)} SP" if self.sp_display(0).uniq.length>1
-    str="#{str})"
+    str="Lv.#{l}"
+    m=[]
+    m.push("F#{f}") if f>=0
+    m.push("#{self.sp_display(l)} SP") if self.sp_display(0).uniq.length>1
+    str="#{str} (#{m.join(', ')})" if m.length>0
     return str
   end
 end
 
+class DLAbility
+  attr_accessor :name,:level
+  attr_accessor :type
+  attr_accessor :description
+  attr_accessor :weight,:show
+  attr_accessor :tags
+  
+  def initialize(val,val2)
+    @name=val
+    @level=val2
+  end
+  
+  def name=(val); @name=val; end
+  def level=(val); @level=val; end
+  def description=(val); @description=val; end
+  def weight=(val); @weight=val.to_i; end
+  def show=(val); @show=false; @show=true if ['y','yes'].include?(val.downcase); end
+  def tags=(val); @tags=[]; @tags=val.split(', ') unless val.nil? || val.length<=0 || val=='-'; end
+  def objy; return 'Ability'; end
+  
+  def fullName(format=nil,justlast=false,sklz=nil)
+    x="#{@name}"
+    x="#{format}#{x}#{format.reverse}" unless format.nil?
+    return x if ['-'].include?(@level) || @level.nil?
+    return x if ['example'].include?(@level) && format.nil? && !justlast
+    x="#{x} " unless @name[-1]=='+'
+    return "#{x}#{@level}" unless @level=='example'
+    skz=$abilities.reject{|q| q.name != @name || q.type != @type || q.level=='example'}
+    skz=sklz.reject{|q| q.name != @name || q.type != @type || q.level=='example'} unless sklz.nil?
+    return "#{x}" if justlast && skz.length<=0
+    return "#{x}#{skz[-1].level}" if justlast
+    return "#{x}#{skz.map{|q| q.level}.join('/')}"
+  end
+  
+  
+end
 
+# crossover crossreference entities
 
 class FEHUnit
   attr_accessor :name
@@ -774,6 +1044,7 @@ def data_load(to_reload=[])
       bob4.voice_jp=b[i][13] unless b[i][13].nil? || b[i][13].length<=0
       bob4.voice_na=b[i][14] unless b[i][14].nil? || b[i][14].length<=0
       bob4.hidden_abilities=b[i][15] unless b[i][15].nil? || b[i][15].length<=0
+      bob4.games=''
       bob4.games=b[i][16] unless b[i][16].nil? || b[i][16].length<=0
       bob4.gender=b[i][17]
       bob4.cygame=b[i][18] unless b[i][18].nil? || b[i][18].length<=0
@@ -811,6 +1082,13 @@ def data_load(to_reload=[])
         bob4.sharing=b[i][12] unless b[i][12].nil? || b[i][12].length<=0 || b[i][12]==', '
         $skills.push(bob4)
       else
+        bob4=DLAbility.new(b[i][0],b[i][1])
+        bob4.type=b[i][2]
+        bob4.description=b[i][3]
+        bob4.weight=b[i][4]
+        bob4.show=b[i][5]
+        bob4.tags=b[i][6]
+        $abilities.push(bob4)
       end
     end
   end
@@ -1026,7 +1304,7 @@ def all_commands(include_nil=false,permissions=-1)
   k=['reboot','help','commands','commandlist','command_list','embeds','embed','prefix','channelist','channellist','spamchannels','spamlist','bugreport','suggestion','feedback','adv',
      'donate','donation','shard','attribute','safe','spam','safetospam','safe2spam','long','longreplies','invite','sortaliases','tools','links','tool','link','resources','resource',
      'avatar','avvie','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','reload','update','adventurer','unit','stats',
-     'stat','smol']
+     'stat','smol','dragon','drg','drag']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -1172,6 +1450,31 @@ def find_adventurer(xname,event,fullname=false,skipnpcs=false)
   return nil
 end
 
+def find_dragon(xname,event,fullname=false,ext=false)
+  data_load()
+  xname=normalize(xname)
+  xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  return nil if xname.length<2
+  k=$dragons.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
+  return $dragons[k] unless k.nil?
+  nicknames_load()
+  alz=$aliases.reject{|q| q[0]!='Dragon'}.map{|q| [q[1],q[2],q[3]]}
+  g=0
+  g=event.server.id unless event.server.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
+  return $dragons[$dragons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
+  return $dragons[$dragons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return nil if fullname || xname.length<=2
+  k=$dragons.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
+  return $dragons[k] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  return $dragons[$dragons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  return $dragons[$dragons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return nil
+end
+
 def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   dispstr=event.message.text.downcase.split(' ')
   args=event.message.text.downcase.split(' ') if args.nil?
@@ -1213,7 +1516,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   hdr="__**#{k.name}**__"
   unless s2s || juststats
     hdr="#{hdr} #{generate_rarity_row(rar,$max_rarity[0],k.games[0])}"
-    hdr="#{hdr} (from #{k.rarity}#{k.class_header(bot,2,true)[0]})" unless k.rarity==rar
+    hdr="#{hdr} (#{'Mana Spiral, ' if rar<=0}from #{k.rarity}#{k.class_header(bot,2,true)[0]})" unless k.rarity==rar
   end
   title=k.class_header(bot)
   title=k.mini_header(bot,rar) unless s2s || juststats
@@ -1320,7 +1623,13 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       str="#{str2}"
     end
   end
-  # abilities
+  unless juststats
+    if s2s
+      f.push(['Abilities',k.ability_display(rar)])
+    else
+      str="#{str}\n\n#{k.ability_display(rar,false)}"
+    end
+  end
   f2=nil; f3=nil
   lng+=hdr.length+str.length
   lng+=ftr.length unless ftr.nil?
@@ -1360,9 +1669,58 @@ end
 
 bot.command([:adventurer,:adv,:unit]) do |event, *args|
   return nil if overlap_prevent(event)
+=begin
+  if args.nil? || args.length<=0
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    find_adventurers(bot,event,args)
+    return nil
+  elsif ['level','xp','exp'].include?(args[0].downcase)
+    args.shift
+    level(event,bot,args,2)
+    return nil
+  elsif ['art'].include?(args[0].downcase)
+    args.shift
+    disp_adventurer_art(bot,event,args)
+    return nil
+  elsif ['alt','alts'].include?(args[0].downcase)
+    args.shift
+    find_adv_alts(bot,event,args)
+    return nil
+  elsif ['mat','mats','material','materials','node','nodes'].include?(args[0].downcase)
+    args.shift
+    disp_adv_mats(event,args,bot)
+    return nil
+  end
+=end
   disp_adventurer_stats(bot,event,args)
 end
 
+bot.command([:dragon,:drg,:drag]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+=begin
+  if args.nil? || args.length<=0
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    find_dragons(bot,event,args)
+    return nil
+  elsif ['level','xp','exp'].include?(args[0].downcase)
+    args.shift
+    level(event,bot,args,3)
+    return nil
+  elsif ['alt','alts'].include?(args[0].downcase)
+    args.shift
+    find_dragon_alts(bot,event,args)
+    return nil
+  elsif ['art'].include?(args[0].downcase)
+    args.shift
+    disp_dragon_art(bot,event,args)
+    return nil
+  end
+=end
+  disp_dragon_stats(bot,event,args)
+end
 
 
 
@@ -1966,7 +2324,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
     end
     if e.message.text.include?('6') && [167657750971547648].include?(event.user.id)
       puts 'reloading BotanText'
-      load "#{$location}devkit/BotanText.rb"
+      load "#{$location}devkit/BotanClassFunctions.rb"
       t=Time.now
       $last_multi_reload[1]=t
       e.respond 'Libraries force-reloaded'
@@ -2164,6 +2522,7 @@ bot.mention do |event|
   name=args.join(' ')
   m=true
   m=false if event.user.bot_account?
+  data_load('library')
   if !m || args.nil? || args.length<=0
   elsif ['help','commands','command_list','commandlist'].include?(args[0].downcase)
     args.shift
@@ -2173,6 +2532,10 @@ bot.mention do |event|
     m=false
     args.shift
     disp_adventurer_stats(bot,event,args)
+  elsif ['dragon','drg','drag'].include?(args[0].downcase)
+    m=false
+    args.shift
+    disp_dragon_stats(bot,event,args)
   elsif ['stats','stat'].include?(args[0].downcase)
     m=false
     if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
