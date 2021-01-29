@@ -1224,6 +1224,7 @@ class DLWeapon
     end
     cha="\n"
     cha='   ' if emotesonly<0
+    emtz.push(moji[0].mention) unless moji.length<=0
     str="#{str}#{cha}#{moji[0].mention unless moji.length<=0}**#{@type}**"
     if @games[0]=='FEH'
       str="#{str}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
@@ -1293,7 +1294,7 @@ class DLWeapon
     return f[chain]
   end
   
-  def stat_grid(bot,fullsize=2)
+  def stat_grid(bot,fullsize=2,mub=false)
     c=self.stat_emotes.map{|q| q}
     l=[1,30*@rarity-70,30*@rarity-50]
     l=[1,5*@rarity,20*@rarity-10] if @rarity<3
@@ -1310,7 +1311,7 @@ class DLWeapon
         s=[@hp[1]*1,@str[1]*1]
         s[0]=@hp[0]+(@hp[2]-@hp[0])*(l[1]-1)/(l[2]-1) if s[0]<=0
         s[1]=@str[0]+(@str[2]-@str[0])*(l[1]-1)/(l[2]-1) if s[1]<=0
-        str="#{str}\n\n__#{c[3]*2}#{c[2]*2} **Level #{l[1]}**__"
+        str="#{str}\n\n__#{c[2]*4} **Level #{l[1]}**__"
         str="#{str}\n*#{skl1.name}#{skl1.energy_display(false)} [#{skl1.level_text(1,-1,true)}]* - #{skl1.sp_display(1)} SP"
         str="#{str}\n#{c[0]}*HP:*\u00A0\u00A0#{s[0]} #{c[1]}*Str:*\u00A0\u00A0#{s[1]}"
         str="#{str}\n#{@abilities.map{|q| q[1]}.join("\n")}" unless @abilities.length<=0
@@ -1323,34 +1324,41 @@ class DLWeapon
       str="#{str}\n#{@abilities.map{|q| q[-1]}.join("\n")}" unless @abilities.length<=0
     else
       unless fullsize==1
-        str="#{c[2]*4} **Level #{l[0]}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[0]}  #{c[1]}*Str:*\u00A0\u00A0#{@str[0]}"
-        str="#{str}\n#{c[3]*2}#{c[2]*2} **Level #{l[1]}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[1]} #{c[1]}*Str:*\u00A0\u00A0#{@str[1]}" unless @hp.length<3 || @str.length<3 || (@hp[1]<=0 && @str[1]<=0)
-        str="#{str}\n#{c[3]*4} **Level #{l[2]}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[-1]} #{c[1]}*Str:*\u00A0\u00A0#{@str[-1]}"
+        unless fullsize<0 && mub
+          str="#{c[2]*4} **Level #{l[0]}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[0]}  #{c[1]}*Str:*\u00A0\u00A0#{@str[0]}"
+          str="#{str}\n#{c[2]*4} **Level #{l[1]}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[1]} #{c[1]}*Str:*\u00A0\u00A0#{@str[1]}" unless @hp.length<3 || @str.length<3 || (@hp[1]<=0 && @str[1]<=0)
+        end
+        str="#{str}#{"\n" unless fullsize<0 && mub}#{c[3]*4} **Level #{l[2]}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[-1]} #{c[1]}*Str:*\u00A0\u00A0#{@str[-1]}" unless fullsize<0 && !mub
       end
       if fullsize>0
+        str=''
         unless skl1.nil?
           str="#{str}#{"\n" unless fullsize==1}*#{skl1.name}* (#{'%.1f' % skl1.invulnerability} sec. invul#{", #{skl1.energy_display}" if skl1.energy_display.length>0})"
           str="#{str} - #{skl1.sp_display(1)} SP" unless skl1.sp_display(0).uniq.length>1
           str="#{str}\n#{skl1.description[-1]}"
         end
-        str="#{str}\n**Abilities:** #{@abilities.map{|q| q[-1]}.join(', ')}" unless @abilities.length<=0
+        str="#{str}#{"\n" unless str.length<=0}**Abilities:** #{@abilities.map{|q| q[-1]}.join(', ')}" unless @abilities.length<=0
       end
     end
     return str
   end
   
-  def mini_header(bot)
+  def mini_header(bot,substats=false)
     str=self.class_header(bot,3,false)
-    l=30*@rarity-50
-    l=20*@rarity-10 if @rarity<3
-    l=200 if @rarity>5
+    l=[1,30*@rarity-70,30*@rarity-50]
+    l=[1,5*@rarity,20*@rarity-10] if @rarity<3
+    l=[1,100,200] if @rarity>5
     str=str.split("\n").reject{|q| q.length<=0}
     c=self.stat_emotes.map{|q| q}
     unless str[0].include?('   ') || str.length<=1 || str[1].include?('   ') || str[1].include?('Wyrmprint') || str[1].include?('Weapon')
       str[1]="#{str[0]}   #{str[1]}"
       str=str[1,str.length-1]
     end
-    str="#{str[0]}\n**Lv.#{l}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[-1]} #{c[1]}*Str:*\u00A0\u00A0#{@str[-1]}#{"\n#{str[1,str.length-1].join("\n")}" unless str.length<=1}"
+    if substats
+      str="#{str[0]}\n**Lv.#{l[1]}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[1]} #{c[1]}*Str:*\u00A0\u00A0#{@str[1]}#{"\n#{str[1,str.length-1].join("\n")}" unless str.length<=1}"
+    else
+      str="#{str[0]}\n**Lv.#{l[2]}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[-1]} #{c[1]}*Str:*\u00A0\u00A0#{@str[-1]}#{"\n#{str[1,str.length-1].join("\n")}" unless str.length<=1}"
+    end
     return str
   end
   
@@ -1947,7 +1955,7 @@ def all_commands(include_nil=false,permissions=-1)
   k=['reboot','help','commands','commandlist','command_list','embeds','embed','prefix','channelist','channellist','spamchannels','spamlist','bugreport','suggestion','feedback','adv',
      'donate','donation','shard','attribute','safe','spam','safetospam','safe2spam','long','longreplies','invite','sortaliases','tools','links','tool','link','resources','resource',
      'avatar','avvie','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','reload','update','adventurer','unit','stats',
-     'stat','smol','dragon','drg','drag','wyrmprint','wyrm','print','weapon','wep','weap','wpn']
+     'stat','smol','dragon','drg','drag','wyrmprint','wyrm','print','weapon','wep','weap','wpn','lineage','craft','crafting']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -2635,11 +2643,12 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false,x=nil)
       end
     else
       str2="#{str2}\n**Promotes from:** #{m2.class_header(bot,2,false)[0]}#{m2.name}" unless m2.nil?
-      str2="#{str2}\n**Crafting requirements:** #{mm2.class_header(bot,2,false)[0]}#{mm2.name}" unless mm2.nil?
+      str2="#{str2}\n**Crafting requirements:** #{mmm2.class_header(bot,2,false)[0]}#{mmm2.name}" unless mmm2.nil?
       str2="#{str2}\n**Promotes into:** #{m.map{|q| "#{q.class_header(bot,2,false)[0]}#{q.name}"}.join(', ')}" unless m.length<=0
     end
     str="#{str}#{"\n" unless s2s}#{str2}" if str2.length>0
-    str="#{str}\n**Assembles for:** #{longFormattedNumber(k.costs[0])}#{k.stat_emotes[4]}"
+    k.costs='0' if k.costs.nil? || k.costs.length<=0
+    str="#{str}\n\n**Assembles for:** #{longFormattedNumber(k.costs[0])}#{k.stat_emotes[4]}" unless k.costs[0]<=0
   end
   if str.length>1900 && !s2s
     sklz=$skills.map{|q| q}
@@ -2647,7 +2656,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false,x=nil)
     skl1=sklz[skl1] unless skl1.nil?
     str=str.gsub(skl1.description[-1],'~~The description makes this data too long.  Please try again in PM.~~')
   end
-  if str.length+lng>=1900
+  if str.length+hdr.length+lng>=1900
     str=str.split("\n\n\n")
     if str[0].length>=1900
       str[0]=str[0].split("**Promotes ")
@@ -2670,7 +2679,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false,x=nil)
         str.flatten!
       end
     end
-    create_embed(event,["__**#{k.name}**__",title],str[0],k.disp_color,nil,k.thumbnail)
+    create_embed(event,[hdr,title],str[0],k.disp_color,nil,k.thumbnail)
     if str[1,str.length-1].join("\n\n\n").length<1900
       create_embed(event,'',str[1,str.length-1].join("\n\n\n"),k.disp_color) unless str.length<2
     else
@@ -2681,6 +2690,245 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false,x=nil)
     end
     event.respond ftr unless ftr.nil?
   else
+    create_embed(event,[hdr,title],str,k.disp_color,ftr,k.thumbnail)
+  end
+  return nil
+end
+
+def disp_weapon_lineage(bot,event,args=nil,comparedata=nil,x=nil)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  if x.nil?
+    k=find_data_ex(:find_weapon,args.join(' '),event,true)
+    # find_in_weapons
+    k=find_data_ex(:find_weapon,args.join(' '),event) if k.nil?
+  else
+    k=x.clone
+  end
+  if k.nil?
+    event.respond 'No matches found.'
+    return nil
+  elsif k.is_a?(Array)
+    args2=args.map{|q| q}
+    args2=args2.reject{|q| q.to_i.to_s==q || q.gsub('*','').to_i.to_s==q}
+    args2=args2.join(' ')
+    args2=first_sub(args2,k[0].element.downcase,'')
+    args2=first_sub(args2,'fire','') if k[0].element=='Flame'
+    args2=first_sub(args2,'dark','') if k[0].element=='Shadow'
+    args2=first_sub(args2,k[0].type.downcase,'')
+    args2=first_sub(args2,'spear','') if k[0].type=='Lance'
+    args2=first_sub(args2,'void','')
+=begin
+    k2=find_data_ex(:find_enemy,args2,event)
+    if k2.length>0 && k2[2][2]=='Void'
+      k3=k.reject{|q| q.boss_tags.nil? || !q.boss_tags.include?(k2.name)}
+      k=k3.map{|q| q} if k3.length>0
+    end
+=end
+    k2=[]
+    if k.length>5
+      event.respond "Too many weapons qualify.  I will not display them all."
+      return nil
+    end
+    if kx.length<=0
+      kx=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+    elsif !kx[0].is_a?(Array)
+      kx=[kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx,kx]
+    elsif k.length>k2.length
+      for i in 0...k.length-k2.length+1
+        k2.push(k2[i])
+      end
+    end
+    for i in 0...k.length
+      disp_weapon_lineage(bot,event,args,kx[i],k[i].clone)
+    end
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  evn=event.message.text.downcase.split(' ')
+  kx=comparedata.map{|q| q} unless comparedata.nil?
+  mub=false
+  mub=true if has_any?(['mub','unbind','unbound','refined','refine','refinement'],evn)
+  val=0
+  unbindnum=false
+  for i in 0...args.length
+    if count_in(args,args[i])<2 && args[i].to_i==k.rarity && k != kx && !args.include?("#{args[i]}*")
+    elsif args[i].to_i.to_s==args[i] && args[i].to_i>0
+      val=args[i].to_i unless unbindnum || val>0
+    elsif args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<5 && ['ub','unbind','unbound','unbinds','unbounds'].include?(args[i][1,args[i].length-1].downcase)
+      val=args[i].to_i+1 unless val>0
+      unbindnum=true
+    end
+  end
+  val=1 if val<=0
+  val=1 if val>1 && k[0].include?(" #{val}") && !args.map{|q| q.downcase}.include?(k[0].downcase.gsub(' ','')) && count_in(args.map{|q| q.downcase},val.to_s)<2
+  if val%5==0 && !mub
+    mub=true
+    val/=5
+  end
+  hdr="__**#{k.name}**__"
+  title=k.class_header(bot,0,true)
+  str=k.stat_grid(bot,-1,mub)
+  str=k.stat_grid(bot,1) unless s2s
+  unless s2s
+    hdr="#{hdr}#{generate_rarity_row(k.rarity,0,k.games[0])}"
+    hdr="#{hdr}-T#{k.tier}" unless k.tier.nil? || k.tier<=0
+    hdr="#{hdr} / "
+    if mub
+      hdr="#{hdr}#{k.stat_emotes[3]*4}"
+    else
+      hdr="#{hdr}#{k.stat_emotes[2]*4}"
+    end
+    hdr="#{hdr} x#{val}" if val>1
+    title=k.mini_header(bot,!mub)
+  end
+  ftr=nil
+  ftr="Weapon bonus is applied to all #{k.type}-using adventurers, after this weapon is fully upgraded." if has_any?(['a','h','m'],k.availability) || ((k.availability.nil? || k.availability.length<=0) && ![nil,'',' ','-','None','Null'].include?(k.element))
+  ftr='Include the word "Unbound" to show the data for MUB versions of these weapons.' unless mub || !s2s
+  ftr="This is multiplying all crafts by #{val}.  For crafts for a #{val}UB weapon, include \"#{val}UB\" in your message instead." if val>1 && val<5 && !unbindnum
+  lng=title.length
+  lng+=ftr.length unless ftr.nil?
+  if title.length>250
+    h=title.split("\n")
+    title=[h[0],'']
+    j=0
+    for i in 1...h.length
+      if "#{title[j]}\n#{h[i]}".length>250 && j==0
+        j+=1
+        title[j]="#{h[i]}"
+      else
+        title[j]="#{title[j]}\n#{h[i]}"
+      end
+    end
+  end
+  str="#{str}#{"\n\n**Crafting shown for #{'<:Unbind:534494090969088000>'*([val-1,4].min)}#{'<:NonUnbound:534494090876682264>'*([5-val,0].max)}**" if val>1 && !mub}\n\n**This weapon#{" (x#{val})" unless val==1}**"
+  str="#{str}\n*Smithy level required:* #{k.smith_level}" unless k.smith_level<=0
+  k.costs='0' if k.costs.nil? || k.costs.length<=0
+  str="#{str}\n*Assembly cost:* #{longFormattedNumber(val*k.costs[0])}#{k.stat_emotes[4]}#{"\n*Required mats:* #{k.craft_mats.map{|q| "#{q[0]} x#{val*q[1].to_i}"}.join(', ')}" unless k.craft_mats.nil?}"
+  m2=k.promoted_from
+  mmm2=nil
+  mmm2=wpnz.find_index{|q| q.type==k.type && q.element==k.element && q.availability.inculde?('m')} if k.availability.include?('a')
+  mmm2=wpnz.find_index{|q| q.type==k.type && q.element==k.element && q.rarity==5} if k.availability.include?('h')
+  cost=0
+  cost+=val*k.costs[0]
+  mtz=[]
+  unless k.craft_mats.nil?
+    for i in 0...k.craft_mats.length
+      mtz.push([k.craft_mats[i][0],k.craft_mats[i][1].to_i*val])
+    end
+  end
+  str2=''
+  unless m2.nil? && mmm2.nil?
+    ptype='Promotes from'
+    if m2.nil?
+      ptype='Crafting requirements'
+      m2=wpnz[mmm2].clone
+      val/=5.0
+    end
+    m2.costs='0' if m2.costs.nil? || m2.costs.length<=0
+    str2="#{str2}\n\n**#{ptype}: #{m2.emotes(bot)}*#{m2.name}* (x#{(5*val).to_i})**\n*Assembly cost:* #{longFormattedNumber((val*5*m2.costs[0]).to_i)}#{k.stat_emotes[4]}\n#{"*Required mats:* #{m2.craft_mats.map{|q| "#{q[0]} x#{(val*5*q[1].to_i).to_i}"}.join(', ')}" unless m2.craft_mats.nil?}"
+    cost+=val*5*m2.costs[0]
+    unless m2.craft_mats.nil?
+      for i in 0...m2.craft_mats.length
+        mtz.push([m2.craft_mats[i][0],m2.craft_mats[i][1].to_i*5*val])
+      end
+    end
+    m22=m2.promoted_from
+    unless m22.nil?
+      m22.costs='0' if m22.costs.nil? || m22.costs.length<=0
+      str2="#{str2}\n\n**Which promotes from: #{m22.emotes(bot)}*#{m22.name}* (x#{(25*val).to_i})**\n*Assembly cost:* #{longFormattedNumber((val*25*m22.costs[0]).to_i)}#{k.stat_emotes[4]}\n#{"*Required mats:* #{m22.craft_mats.map{|q| "#{q[0]} x#{(val*25*q[1].to_i).to_i}"}.join(', ')}" unless m22.craft_mats.nil?}"
+      cost+=val*25*m22.costs[0]
+      unless m22.craft_mats.nil?
+        for i in 0...m22.craft_mats.length
+          mtz.push([m22.craft_mats[i][0],m22.craft_mats[i][1].to_i*25*val])
+        end
+      end
+      m222=m22.promoted_from
+      unless m222.nil?
+        m222.costs='0' if m222.costs.nil? || m222.costs.length<=0
+        str2="#{str2}\n\n**Which promotes from: #{m222.emotes(bot)}*#{m222.name}* (x#{(125*val).to_i})**\n*Assembly cost:* #{longFormattedNumber((val*125*m222.costs[0]).to_i)}#{k.stat_emotes[4]}\n#{"*Required mats:* #{m222.craft_mats.map{|q| "#{q[0]} x#{(val*125*q[1].to_i).to_i}"}.join(', ')}" unless m222.craft_mats.nil?}"
+        cost+=val*125*m222.costs[0]
+        unless m222.craft_mats.nil?
+          for i in 0...m222.craft_mats.length
+            mtz.push([m222.craft_mats[i][0],m222.craft_mats[i][1].to_i*125*val])
+          end
+        end
+        m2222=m222.promoted_from
+        unless m2222.nil?
+          m2222.costs='0' if m2222.costs.nil? || m2222.costs.length<=0
+          str2="#{str2}\n\n**Which promotes from: #{m2222.emotes(bot)}*#{m2222.name}* (x#{(625*val).to_i})**\n*Assembly cost:* #{longFormattedNumber((val*625*m2222.costs[0]).to_i)}#{k.stat_emotes[4]}\n#{"*Required mats:* #{m2222.craft_mats.map{|q| "#{q[0]} x#{(val*625*q[1].to_i).to_i}"}.join(', ')}" unless m2222.craft_mats.nil?}"
+          cost+=val*625*m2222.costs[0]
+          unless m2222.craft_mats.nil?
+            for i in 0...m2222.craft_mats.length
+              mtz.push([m2222.craft_mats[i][0],m2222.craft_mats[i][1].to_i*625*val])
+            end
+          end
+          m22222=m2222.promoted_from
+          unless m22222.nil?
+            m22222.costs='0' if m22222.costs.nil? || m22222.costs.length<=0
+            str2="#{str2}\n\n**Which promotes from: #{m22222.emotes(bot)}*#{m22222.name}* (x#{(5*625*val).to_i})**\n*Assembly cost:* #{longFormattedNumber((val*5*625*m22222.costs[0]).to_i)}#{k.stat_emotes[4]}\n#{"*Required mats:* #{m22222.craft_mats.map{|q| "#{q[0]} x#{(val*5*625*q[1].to_i).to_i}"}.join(', ')}" unless m22222.craft_mats.nil?}"
+            cost+=val*5*625*m22222.costs[0]
+            unless m22222.craft_mats.nil?
+              for i in 0...m22222.craft_mats.length
+                mtz.push([m22222.craft_mats[i][0],m22222.craft_mats[i][1].to_i*5*625*val])
+              end
+            end
+            m222222=m22222.promoted_from
+          end
+        end
+      end
+    end
+  end
+  unless s2s
+    str2=''
+    unless m2.nil? && mmm2.nil?
+      str2="#{str2}\n\n**#{ptype}:** #{m2.name}"
+      unless m22.nil?
+        str2="#{str2}\n**Which promotes from:** #{m22.name}"
+        str2="#{str2}\n**Which promotes from:** #{m222.name}" unless m222.nil?
+        str2="#{str2}\n**Which promotes from:** #{m2222.name}" unless m2222.nil?
+        str2="#{str2}\n**Which promotes from:** #{m22222.name}" unless m22222.nil?
+      end
+    end
+  end
+  str3=''
+  unless m2.nil?
+    str3="**TOTALS**\n*Assembly cost:* #{longFormattedNumber(cost.to_i)}#{k.stat_emotes[4]}\n*Required Mats:* "
+    mtzz=mtz.map{|q| q[0]}.uniq
+    for i in 0...mtzz.length
+      str3="#{str3}#{', ' unless i==0}#{mtzz[i]} x#{mtz.reject{|q| q[0]!=mtzz[i]}.map{|q| q[1].to_i}.inject(0){|sum,x| sum + x }}"
+    end
+  end
+  str="#{str}#{str2}" if str2.length>0
+  if str.length+str3.length>1900 && !s2s
+    sklz=$skills.map{|q| q}
+    skl1=sklz.find_index{|q| q.name==k.skills[0]}
+    skl1=sklz[skl1] unless skl1.nil?
+    str=str.gsub(skl1.description[-1],'~~The description makes this data too long.  Please try again in PM.~~')
+  end
+  if str.length>1900
+    str=str.split("\n\n")
+    m=0
+    for i in 1...str.length
+      if "#{str[m]}\n\n#{str[i]}".length>1900
+        m=i*1
+      else
+        str[m]="#{str[m]}\n\n#{str[i]}"
+        str[i]=nil
+      end
+    end
+    str=str.compact!
+    str3="#{str[1]}\n\n\n#{str3}"
+    str=str[0]
+  end
+  if str.length+str3.length+hdr.length+lng>=1900
+    create_embed(event,[hdr,title],str,k.disp_color,nil,k.thumbnail)
+    create_embed(event,'',str3,k.disp_color,ftr) unless str3.length<=0
+    event.respond ftr if str3.length<=0
+  else
+    str="#{str}\n\n#{str3}" unless str3.length<=0
     create_embed(event,[hdr,title],str,k.disp_color,ftr,k.thumbnail)
   end
   return nil
@@ -2803,6 +3051,11 @@ bot.command([:stats,:stat,:smol]) do |event, *args|
     find_best_match(args.join(' '),bot,event,false,false,3,true)
   end
   return nil
+end
+
+bot.command([:lineage,:craft,:crafting]) do |event, *args|
+  return nil if overlap_prevent(event)
+  disp_weapon_lineage(bot,event,args)
 end
 
 
