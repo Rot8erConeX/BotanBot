@@ -477,6 +477,22 @@ class DLDragon
   end
 end
 
+class DLWyrmprint
+  def isMultiprint?
+    return true if @name=='Wily Warriors'
+    return true if @name=='Greatwyrm'
+    return false
+  end
+  
+  def multiprintText
+    return nil unless self.isMultiprint?
+    pr=$wyrmprints.reject{|q| !q.name.include?("#{@name} ")}.map{|q| q.name.gsub("#{@name} ",'')}.uniq
+    str="This print entry only exists to contain the combined art of the #{@name} series of wyrmprints.  For individual pieces of this series, use their subtitles:\n#{pr.join("\n")}"
+    str="\n#{str}" if !@obtain.nil? && @obtain.length>0
+    return str
+  end
+end
+
 
 
 def disp_dragon_stats(bot,event,args=nil,juststats=false,preload=nil)
@@ -621,7 +637,7 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false,preload=nil)
   end
   bemoji=['<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
   bemoji=['<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if k.games[0]=='FGO'
-  bemoji=['<:Aether_Stone:510776805746278421>','<:Refining_Stone:453618312165720086>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if k.games[0]=='FEH'
+  bemoji=['<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if k.games[0]=='FEH'
   # Mana Spiral Pink = 0xE9438F
   unless juststats || k.auras.nil? || k.auras.length<=0
     str="#{str}\n\n**Aura:**\n#{bemoji[0]*4}#{k.auras.map{|q| q[0]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
