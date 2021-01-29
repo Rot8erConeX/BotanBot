@@ -240,7 +240,7 @@ class DLAdventurer
   def voice_jp=(val); @voice_jp=val; end
   def gender=(val); @gender=val; end
   def race=(val); @race=val; end
-  def games=(val); @games=val.split(', '); end
+  def games=(val); @games=[]; @games=val.split(', ') unless val.nil?; end
   def alts=(val); @alts=val.split(', '); end
   def cygame=(val); @cygame=val; end
   
@@ -271,7 +271,7 @@ class DLAdventurer
     return ['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Defense:573344832282689567>']
   end
   
-  def class_header(bot,emotesonly=0,includerarity=false)
+  def class_header(bot,emotesonly=0,includerarity=false,includeobjt=false)
     emtz=[]; str=''
     if includerarity
       rar=$rarity_stars[0][@rarity]
@@ -389,7 +389,7 @@ class DLAdventurer
     return str
   end
   
-  def emotes(bot,includerarity=true); return self.class_header(bot,1,includerarity); end
+  def emotes(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
   
   def disp_color(chain=0)
     f=[]
@@ -532,10 +532,12 @@ class DLAdventurer
       end
       str="**Abilities:** #{m.join(', ')}"
     end
-    str="#{str}#{"\n" if fulltext}\n**Co-Ability:** #{@coability}"
-    str="#{str}#{"\n" if fulltext}\n**Chain Co-Ability:** #{@chain}"
+    str="#{str}#{"\n" if fulltext}\n**Co-Ability:** #{@coability}" unless @coability.nil? || @coability.length<=0
+    str="#{str}#{"\n" if fulltext}\n**Chain Co-Ability:** #{@chain}" unless @chain.nil? || @chain.length<=0
     return str
   end
+  
+  
 end
 
 class DLDragon
@@ -593,7 +595,7 @@ class DLDragon
   def voice_na=(val); @voice_na=val; end
   def voice_jp=(val); @voice_jp=val; end
   def gender=(val); @gender=val; end
-  def games=(val); @games=val.split(', '); end
+  def games=(val); @games=[]; @games=val.split(', ') unless val.nil?; end
   def alts=(val); @alts=val.split(', '); end
   def cygame=(val); @cygame=val; end
   
@@ -624,7 +626,7 @@ class DLDragon
     return false
   end
   
-  def class_header(bot,emotesonly=0,includerarity=false)
+  def class_header(bot,emotesonly=0,includerarity=false,includeobjt=false)
     emtz=[]; str=''
     if includerarity
       rar=$rarity_stars[0][@rarity]
@@ -665,6 +667,10 @@ class DLDragon
         str="#{str}\n**Pseudodragon**"
       end
     end
+    if includeobjt
+      str="#{str}\n<:Tribe_Dragon:549947361745567754>**Dragon**"
+      emtz.push('<:Tribe_Dragon:549947361745567754>')
+    end
     if @games[0]=='FEH'
       str="#{str}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
       str="#{str}  #{moji[0].mention unless moji.length<=0}**Manakete**" if self.isPseudodragon?
@@ -702,7 +708,7 @@ class DLDragon
     return str
   end
   
-  def emotes(bot,includerarity=true); return self.class_header(bot,1,includerarity); end
+  def emotes(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
   
   def disp_color(chain=0)
     f=[]
@@ -717,7 +723,7 @@ class DLDragon
     return f[chain]
   end
   
-  def thumbnail
+  def thumbnail(ext=0)
     return "https://github.com/Rot8erConeX/BotanBot/blob/master/#{@thumbforce}.png?raw=true" unless @thumbforce.nil?
     dispname=@name.gsub(' ','_')
     return "https://github.com/Rot8erConeX/BotanBot/blob/master/Dragons/#{dispname}.png?raw=true"
@@ -786,6 +792,577 @@ class DLDragon
     end
     str="#{str}\n#{str2}".gsub("\n\n","\n") if str2.length>0
     return str
+  end
+  
+  
+end
+
+class DLWyrmprint
+  attr_accessor :name
+  attr_accessor :rarity,:availability
+  attr_accessor :amulet,:affinity
+  attr_accessor :hp,:str
+  attr_accessor :abilities
+  attr_accessor :sell_price
+  attr_accessor :artist
+  attr_accessor :charas
+  attr_accessor :obtain
+  attr_accessor :games
+  attr_accessor :sort_data
+  
+  def initialize(val)
+    @name=val
+  end
+  
+  def name=(val); @name=val; end
+  def sell_price=(val); @sell_price=val.split(', ').map{|q| q.to_i}; end
+  def artist=(val); @artist=val; end
+  def charas=(val); @charas=val.split(';; ').map{|q| q.split(', ')}; end
+  def obtain=(val); @obtain=val.gsub(';; ',"\n"); end
+  def games=(val); @games=[]; @games=val.split(', ') unless val.nil?; end
+  
+  def rarity=(val)
+    @availability=''
+    if !val.is_a?(String)
+      @rarity=val
+    elsif val.length>1
+      @rarity=val[0,1].to_i
+      @availability=val[1,val.length-1]
+    else
+      @rarity=val.to_i
+    end
+  end
+  
+  def amulet=(val)
+    @affinity=nil
+    val=val.split(', ')
+    @amulet=val[0]
+    @affinity=val[1] unless val.length<=1 || ['None','','-'].include?(val[1])
+  end
+  
+  def hp=(val); @hp=val.split(', ').map{|q| q.to_i}; end
+  def str=(val); @str=val.split(', ').map{|q| q.to_i}; end
+  
+  def abilities=(val); @abilities=val.split(';;;; ').map{|q| q.split(';; ')}; end
+  
+  def sort_data=(val); @sort_data=val; end
+  def objt; return 'Wyrmprint'; end
+  
+  def fullName(format=nil)
+    return @name if format.nil?
+    return "#{format}#{@name}#{format.reverse}"
+  end
+  
+  def stat_emotes
+    return ['<:HP_S:514712247503945739>','<:GenericAttackS:514712247587569664>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if @games[0]=='FEH'
+    return ['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if @games[0]=='FGO'
+    return ['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if @games[0]=='MM'
+    return ['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
+  end
+  
+  def class_header(bot,emotesonly=0,includerarity=false,includeobjt=false)
+    emtz=[]; str=''
+    if includerarity
+      rar=$rarity_stars[0][@rarity]
+      rar=FEH_rarity_stars[@rarity] if @games[0]=='FEH'
+      rar=FGO_rarity_stars[@rarity] if @games[0]=='FGO'
+      emtz.push(rar)
+      str=generate_rarity_row(@rarity,0,@games[0])
+      if @rarity>4
+        str="#{str} - <:Fill_Gold:759999913962110978>"
+      else
+        str="#{str} - <:Fill_Silver:759999914062774302>"
+      end
+    end
+    if @affinity.nil?
+      str="#{str}\nNo affinity"
+    else
+      moji=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "Affinity_#{@affinity}"}
+      str="#{str}\n#{moji[0].mention unless moji.length<=0}**#{@affinity}**'s Boon"
+      emtz.push(moji[0].mention) unless moji.length<=0
+    end
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{@amulet.gsub('Healer','Healing')}"}
+    if @games[0]=='FEH'
+      emo='<:Resource_Structure:510774545154572298>'
+      emo='<:Skill_Weapon:444078171114045450>' if @amulet=='Attack'
+      emo='<:Skill_Special:444078170665254929>' if @amulet=='Support'
+      emo='<:Defense_Shield:570987444309196835>' if @amulet=='Defense'
+      emo='<:Healing_Rod:570991014894895104>' if @amulet=='Healer'
+    elsif @games[0]=='FGO'
+      emo='<:Buster_y:526556105422274580>' if @amulet=='Attack'
+      emo='<:support:572315955397394452>' if @amulet=='Support'
+      emo='<:Arts_y:526556105489252352>' if @amulet=='Defense'
+      emo='<:healing:572342852420501506>' if @amulet=='Healer'
+    else
+      emo=moji[0].mention unless moji.length<=0
+    end
+    str="#{str}\n#{emo}**#{@amulet}**"
+    emtz.push(emo) unless emo.nil?
+    if includeobjt
+      str="#{str}\n<:Wyrmprint:560542319636381725>**Wyrmprint**"
+      emtz.push('<:Wyrmprint:560542319636381725>')
+    end
+    if @games[0]=='FEH'
+      str="#{str}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
+      emtz.push('<:Great_Badge_Golden:443704781068959744>')
+    elsif @games[0]=='FGO'
+      str="#{str}\n<:Bond:613804021119189012>**FGO Collab**"
+      emtz.push('<:Bond:613804021119189012>')
+    elsif @games[0]=='MM'
+      str="#{str}\n<:Mega_Man:641484836304846857>**Mega Man Collab**"
+      emtz.push('<:Mega_Man:641484836304846857>')
+    elsif @games[0]=='MH'
+      str="#{str}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**"
+      emtz.push('<:MH_Rathalos:669319247670804506>')
+    elsif @games[0]=='PC'
+      str="#{str}\n<:Priconne:782554046887493652>**Princess Connect Re:Dive Collab**"
+      emtz.push('<:Priconne:782554046887493652>')
+    elsif @games[0]=='P5S'
+      str="#{str}\n<:Take_Your_Heart:782553893204262923>**Persona 5 Strikers Collab**"
+      emtz.push('<:Take_Your_Heart:782553893204262923>')
+    elsif @availability.include?('c') || @games.length>0
+      str="#{str}\n**Collab**"
+    end
+    lookout=$skilltags.reject{|q| q[2]!='Availability' && q[2]!='Availability/Wyrmprint'}.map{|q| [q[0],q[1],'x',q[3],q[4]]}.uniq
+    for i in 0...lookout.length
+      if @availability.include?(lookout[i][3])
+        if !lookout[i][4].nil? && lookout[i][4].include?('<')
+          str="#{str}\n#{lookout[i][4]}**#{lookout[i][0]}**"
+        else
+          str="#{str}\n**#{lookout[i][0]}**"
+        end
+      end
+    end
+    return emtz if emotesonly==2
+    return emtz.join('') if emotesonly==1
+    return str
+  end
+  
+  def emotes(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
+  
+  def disp_color(chain=0)
+    f=[]
+    xcolor=0x944CCD if ['Eagle','Wolf','Bull','Serpent'].include?(@affinity)
+    xcolor=0xFF0031 if ['Sword','Axe','Bow','Crown','Lance'].include?(@affinity)
+    xcolor=0xF68D10 if ['Dragon'].include?(@affinity)
+    xcolor=0x188931 if ['Staff'].include?(@affinity)
+    f.push(xcolor) unless xcolor.nil?
+    xcolor=0x313439
+    xcolor=0x5A0408 if @amulet=='Attack'
+    xcolor=0x00205A if @amulet=='Defense'
+    xcolor=0x39045A if @amulet=='Support'
+    xcolor=0x005918 if @amulet=='Healing'
+    f.push(xcolor) unless xcolor.nil?
+    return f[0] if chain>=f.length
+    return f[chain]
+  end
+  
+  def thumbnail(mub=0)
+    dispname=@name.gsub(' ','_')
+    mub=0 if mub<=0
+    mub=1 if mub>=1
+    return "https://github.com/Rot8erConeX/BotanBot/blob/master/Wyrmprints/#{dispname}_#{mub+1}.png?raw=true"
+  end
+  
+  def mini_header(bot)
+    c=self.class_header(bot,2)
+    if @affinity.nil?
+      str="#{c[0]}**#{@amulet}**"
+    else
+      str="#{c[0]}**#{@affinity}**'s Boon   #{c[1]}**#{@amulet}**"
+    end
+    if @games[0]=='FEH'
+      str="#{str}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
+    elsif @games[0]=='FGO'
+      str="#{str}\n<:Bond:613804021119189012>**FGO Collab**"
+    elsif @games[0]=='MM'
+      str="#{str}\n<:Mega_Man:641484836304846857>**Mega Man Collab**"
+    elsif @games[0]=='MH'
+      str="#{str}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**"
+    elsif @games[0]=='PC'
+      str="#{str}\n<:Priconne:782554046887493652>**Princess Connect Re:Dive Collab**"
+    elsif @games[0]=='P5S'
+      str="#{str}\n<:Take_Your_Heart:782553893204262923>**Persona 5 Strikers Collab**"
+    elsif @availability.include?('c') || @games.length>0
+      str="#{str}\n**Collab**"
+    end
+    lookout=$skilltags.reject{|q| q[2]!='Availability' && q[2]!='Availability/Wyrmprint'}.map{|q| [q[0],q[1],'x',q[3],q[4]]}.uniq
+    x="\n"
+    x="   " if str.include?("\n")
+    for i in 0...lookout.length
+      if @availability.include?(lookout[i][3])
+        if !lookout[i][4].nil? && lookout[i][4].include?('<')
+          str="#{str}#{x}#{lookout[i][4]}**#{lookout[i][0]}**"
+        else
+          str="#{str}#{x}**#{lookout[i][0]}**"
+        end
+      end
+    end
+    return str
+  end
+  
+  def stat_grid(bot,fullsize=true)
+    c=self.stat_emotes.map{|q| q}
+    l=[1,@rarity*10-10,@rarity*10]
+    l=[1,@rarity*10-24,@rarity*10-10] if @rarity<4
+    l[2]=5 if @rarity==1
+    l[1]=l[2]-2 if @rarity<3
+    if self.isMultiprint? || !fullsize
+      str="#{c[2]*4} **Level #{l[0]}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[0]}  #{c[1]}*Str:*\u00A0\u00A0#{@str[0]}"
+      str="#{str}\n#{c[3]*2}#{c[2]*2} **Level #{l[1]}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[1]} #{c[1]}*Str:*\u00A0\u00A0#{@str[1]}" unless @hp.length<3 || @str.length<3 || (@hp[1]<=0 && @str[1]<=0)
+      str="#{str}\n#{c[3]*4} **Level #{l[2]}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[-1]} #{c[1]}*Str:*\u00A0\u00A0#{@str[-1]}"
+      unless self.isMultiprint?
+        m=@abilities.map{|q| q}
+        for i in 0...m.length
+          if m[i].length<3
+            if m[i][0]==m[i][1]
+              m[i]=m[i][0]
+            elsif m[i][0].split(' ')[0,m[i][0].split(' ').length-1].join(' ')==m[i][1].split(' ')[0,m[i][1].split(' ').length-1].join(' ')
+              m[i]="#{m[i][0]}/#{m[i][1].split(' ')[-1]}"
+            else
+              m[i]=m[i][0,2].join(" \u2192 ")
+            end
+          elsif m[i][0]==m[i][1] && m[i][0]==m[i][2]
+            m[i]=m[i][0]
+          elsif m[i][0]==m[i][1] || m[i][1]==m[i][2]
+            if m[i][0].split(' ')[0,m[i][0].split(' ').length-1].join(' ')==m[i][1].split(' ')[0,m[i][2].split(' ').length-1].join(' ')
+              m[i]="#{m[i][0]}/#{m[i][2].split(' ')[-1]}"
+            else
+              m[i]="#{m[i][0]} \u2192 #{m[i][2]}"
+            end
+          elsif m[i][0].split(' ')[0,m[i][0].split(' ').length-1].join(' ')==m[i][1].split(' ')[0,m[i][1].split(' ').length-1].join(' ')
+            m[i]="#{m[i][0]}/#{m[i][1].split(' ')[-1]}/#{m[i][2].split(' ')[-1]}"
+          else
+            m[i]=m[i][0,3].join(" \u2192 ")
+          end
+        end
+        if m.length<=0
+          str="#{str}\n\n__**Abilities**__" if !@affinity.nil? && $resonance.map{|q| q[0]}.include?(@affinity)
+        else
+          str="#{str}\n\n__**Abilities**__\n#{m.join("\n")}"
+        end
+      end
+    else
+      str="__#{c[2]*4} **Level #{l[0]}**__"
+      str="#{str}\n#{c[0]}*HP:*\u00A0\u00A0#{@hp[0]}  #{c[1]}*Str:*\u00A0\u00A0#{@str[0]}"
+      str="#{str}\n#{@abilities.map{|q| q[0]}.join("\n")}" unless @abilities.length<=0
+      unless @hp.length<3 || @str.length<3
+        s=[@hp[1]*1,@str[1]*1]
+        s[0]=@hp[0]+(@hp[2]-@hp[0])*(l[1]-1)/(l[2]-1) if s[0]<=0
+        s[1]=@str[0]+(@str[2]-@str[0])*(l[1]-1)/(l[2]-1) if s[1]<=0
+        str="#{str}\n\n__#{c[3]*2}#{c[2]*2} **Level #{l[1]}**__"
+        str="#{str}\n#{c[0]}*HP:*\u00A0\u00A0#{s[0]} #{c[1]}*Str:*\u00A0\u00A0#{s[1]}"
+        str="#{str}\n#{@abilities.map{|q| q[1]}.join("\n")}" unless @abilities.length<=0
+      end
+      str="#{str}\n\n__#{c[3]*4} **Level #{l[2]}**__"
+      str="#{str}\n#{c[0]}*HP:*\u00A0\u00A0#{@hp[-1]} #{c[1]}*Str:*\u00A0\u00A0#{@str[-1]}"
+      str="#{str}\n#{@abilities.map{|q| q[-1]}.join("\n")}" unless @abilities.length<=0
+    end
+    ftr=nil
+    if !self.isMultiprint? && !@affinity.nil? && $resonance.map{|q| q[0]}.include?(@affinity)
+      kk2=$resonance.find_index{|q| q[0]==@affinity}
+      unless kk2.nil?
+        kk2=$resonance[kk2]
+        if fullsize
+          str="#{str}\n" unless @abilities.length<=0
+          str="#{str}\nPair with another #{kk2[0]} affinity print to gain #{kk2[1]}" unless kk2[1].nil?
+          str="#{str}\nPair with two more #{kk2[0]} affinity prints to gain #{kk2[2]}" unless kk2[2].nil?
+          str="#{str}\nPair with three more #{kk2[0]} affinity prints to gain #{kk2[3]}" unless kk2[3].nil?
+        else
+          m=[]
+          m.push(1) unless kk2[1].nil?
+          m.push(2) unless kk2[2].nil?
+          m.push(3) unless kk2[3].nil?
+          c2=self.class_header(bot,2)
+          str="#{str}\n#{c2[0]}+#{m.join('/')} (Affinity) = "
+          m=kk2[1,3].compact
+          m2=m[0].split(' ')
+          m2.pop
+          m2=m2.join(' ')
+          str="#{str}#{m2} +#{m.map{|q| q.split(' ')[-1].gsub('+','')}.join('/')}"
+          ftr='Affinity counts displayed are not including this print, so are off by one.'
+        end
+      end
+    end
+    return [str,ftr]
+  end
+  
+  
+end
+
+class DLWeapon
+  attr_accessor :name
+  attr_accessor :rarity,:availability
+  attr_accessor :type,:element
+  attr_accessor :hp,:str
+  attr_accessor :skills,:abilities
+  attr_accessor :sell_price
+  attr_accessor :id
+  attr_accessor :promotes_from,:tier
+  attr_accessor :smith_level
+  attr_accessor :costs
+  attr_accessor :craft_mats,:unbind_mats,:slot_mats,:copy_mats,:ability_mats,:bonus_mats,:refinement_mats,:post_refine_unbind_mats
+  attr_accessor :boss_tags
+  attr_accessor :print_slots
+  attr_accessor :obtain
+  attr_accessor :games
+  
+  def initialize(val)
+    @name=val
+  end
+  
+  def name=(val); @name=val; end
+  def type=(val); @type=val; end
+  def element=(val); @element=val; end
+  def sell_price=(val); @sell_price=val.split(', ').map{|q| q.to_i}; end
+  def id=(val); @id=val.to_i; end
+  def promotes_from=(val); @promotes_from=val.to_i; end
+  def tier=(val); @tier=val.to_i; end
+  def smith_level=(val); @smith_level=val.to_i; end
+  def boss_tags=(val); @boss_tags=val.split(', '); end
+  def print_slots=(val); @print_slots=val.split(', ').map{|q| q.to_i}; end
+  def obtain=(val); @obtain=val.gsub(';; ',"\n"); end
+  def games=(val); @games=[]; @games=val.split(', ') unless val.nil?; end
+  
+  def rarity=(val)
+    @availability=''
+    if !val.is_a?(String)
+      @rarity=val
+    elsif val.length>1
+      @rarity=val[0,1].to_i
+      @availability=val[1,val.length-1]
+    else
+      @rarity=val.to_i
+    end
+  end
+  
+  def hp=(val); @hp=val.split(', ').map{|q| q.to_i}; end
+  def str=(val); @str=val.split(', ').map{|q| q.to_i}; end
+  
+  def skills=(val); @skills=val.split(';; ').reject{|q| q.length<=0 || q=='-'}; end
+  def abilities=(val); @abilities=val.split(';;;; ').map{|q| q.split(';; ')}; end
+  
+  def costs=(val); @costs=val.split(', ').map{|q| q.to_i}; end
+  def craft_mats=(val); @craft_mats=[]; @craft_mats=val.split(';; ').map{|q| q.split(', ')}.map{|q| [q[0],q[1].to_i]} unless val.nil? || val.length<=0 || val=='-'; end
+  def unbind_mats=(val); @unbind_mats=[]; @unbind_mats=val.split(';; ').map{|q| q.split(', ')}.map{|q| [q[0],q[1].to_i]} unless val.nil? || val.length<=0 || val=='-'; end
+  def slot_mats=(val); @slot_mats=[]; @slot_mats=val.split(';; ').map{|q| q.split(', ')}.map{|q| [q[0],q[1].to_i]} unless val.nil? || val.length<=0 || val=='-'; end
+  def copy_mats=(val); @copy_mats=[]; @copy_mats=val.split(';; ').map{|q| q.split(', ')}.map{|q| [q[0],q[1].to_i]} unless val.nil? || val.length<=0 || val=='-'; end
+  def ability_mats=(val); @ability_mats=[]; @ability_mats=val.split(';; ').map{|q| q.split(', ')}.map{|q| [q[0],q[1].to_i]} unless val.nil? || val.length<=0 || val=='-'; end
+  def bonus_mats=(val); @bonus_mats=[]; @bonus_mats=val.split(';; ').map{|q| q.split(', ')}.map{|q| [q[0],q[1].to_i]} unless val.nil? || val.length<=0 || val=='-'; end
+  def refinement_mats=(val); @refinement_mats=[]; @refinement_mats=val.split(';; ').map{|q| q.split(', ')}.map{|q| [q[0],q[1].to_i]} unless val.nil? || val.length<=0 || val=='-'; end
+  def post_refine_unbind_mats=(val); @post_refine_unbind_mats=[]; @post_refine_unbind_mats=val.split(';; ').map{|q| q.split(', ')}.map{|q| [q[0],q[1].to_i]} unless val.nil? || val.length<=0 || val=='-'; end
+  
+  def sort_data=(val); @sort_data=val; end
+  def objt; return 'Weapon'; end
+  
+  def fullName(format=nil)
+    return @name if format.nil?
+    return "#{format}#{@name}#{format.reverse}"
+  end
+  
+  def stat_emotes
+    return ['<:HP_S:514712247503945739>','<:GenericAttackS:514712247587569664>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if @games[0]=='FEH'
+    return ['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if @games[0]=='FGO'
+    return ['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if @games[0]=='MM'
+    return ['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
+  end
+  
+  def class_header(bot,emotesonly=0,includerarity=false,includeobjt=false)
+    emtz=[]; str=''
+    if includerarity
+      rar=$rarity_stars[0][@rarity]
+      rar=FEH_rarity_stars[@rarity] if @games[0]=='FEH'
+      rar=FGO_rarity_stars[@rarity] if @games[0]=='FGO'
+      emtz.push(rar)
+      str=generate_rarity_row(@rarity,0,@games[0])
+      str="#{str} - T#{@tier}" unless @tier.nil? || @tier<=0
+    end
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{@element.gsub('None','Null')}"}
+    moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{@element.gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Anima')}"} if @games[0]=='FEH'
+    emtz.push(moji[0].mention) unless moji.length<=0
+    str="#{str}#{"\n" if str.length>0}#{moji[0].mention unless moji.length<=0} **#{@element}**" unless @element.nil? || @element.length<=0 || @element=='None'
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{@type}"}
+    if @games[0]=='FEH'
+      color='Colorless'; wpn='Unknown'; srv=443172595580534784
+      color='Red' if ['Flame'].include?(@element)
+      color='Blue' if ['Water'].include?(@element)
+      color='Green' if ['Wind'].include?(@element)
+      color='Gold' if ['Light'].include?(@element) && false
+      if ['Sword','Lance','Axe','Blade'].include?(@type)
+        wpn='Blade'
+        color='Red' if @type=='Sword'
+        color='Blue' if @type=='Lance'
+        color='Green' if @type=='Axe'
+        color='Gold' if @type=='Blade'
+      elsif @type=='Wand'
+        wpn='Tome'; srv=497429938471829504
+        srv=575426885048336388 if @element=='Water'
+        color=@element.gsub('Shadow','Dark').gsub('Flame','Fire')
+      elsif @type=='Manacaster'
+        color='Summon'; wpn='Gun'
+      else
+        wpn="#{@type}"
+      end
+      moji=bot.server(srv).emoji.values.reject{|q| q.name != "#{color}_#{wpn}"}
+    elsif @games[0]=='FGO'
+      c='unknown'
+      c='saber' if @type=='Sword'
+      c='blade' if @type=='Blade'
+      c='extra' if @type=='Dagger'
+      c='berserker' if @type=='Axe'
+      c='archer' if @type=='Bow'
+      c='lancer' if @type=='Lance'
+      c='caster' if @type=='Wand'
+      c='healer' if @type=='Staff'
+      c='mooncancer' if @type=='Manacaster'
+      srv=523821178670940170
+      srv=523825319916994564 if ['Staff','Blade'].include?(@type)
+      clr='gold'
+      clr='silver' if @rarity==4
+      clr='bronze' if @rarity<4
+      moji=bot.server(srv).emoji.values.reject{|q| q.name != "class_#{c}_#{clr}"}
+    end
+    cha="\n"
+    cha='   ' if emotesonly<0
+    str="#{str}#{cha}#{moji[0].mention unless moji.length<=0}**#{@type}**"
+    if @games[0]=='FEH'
+      str="#{str}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
+      emtz.push('<:Great_Badge_Golden:443704781068959744>')
+    elsif @games[0]=='FGO'
+      str="#{str}\n<:Bond:613804021119189012>**FGO Collab**"
+      emtz.push('<:Bond:613804021119189012>')
+    elsif @games[0]=='MM'
+      str="#{str}\n<:Mega_Man:641484836304846857>**Mega Man Collab**"
+      emtz.push('<:Mega_Man:641484836304846857>')
+    elsif @games[0]=='MH'
+      str="#{str}\n<:MH_Rathalos:669319247670804506>**Monster Hunter Collab**"
+      emtz.push('<:MH_Rathalos:669319247670804506>')
+    elsif @games[0]=='PC'
+      str="#{str}\n<:Priconne:782554046887493652>**Princess Connect Re:Dive Collab**"
+      emtz.push('<:Priconne:782554046887493652>')
+    elsif @games[0]=='P5S'
+      str="#{str}\n<:Take_Your_Heart:782553893204262923>**Persona 5 Strikers Collab**"
+      emtz.push('<:Take_Your_Heart:782553893204262923>')
+    elsif @availability.include?('c') || @games.length>0
+      str="#{str}\n**Collab**"
+    else
+      cha="\n"
+    end
+    lookout=$skilltags.reject{|q| q[2]!='Availability' && q[2]!='Availability/Weapon'}.map{|q| [q[0],q[1],'x',q[3],q[4]]}.uniq
+    for i in 0...lookout.length
+      if @availability.include?(lookout[i][3])
+        if !lookout[i][4].nil? && lookout[i][4].include?('<')
+          str="#{str}#{cha}#{lookout[i][4]}**#{lookout[i][0]}**"
+        else
+          str="#{str}#{cha}**#{lookout[i][0]}**"
+        end
+        cha='   ' if emotesonly<0
+      end
+    end
+    str="#{str}#{cha}**Seasonal**" if !@availability.nil? && @availability.include?('s')
+    str="#{str}\n**Wyrmprint slots:** #{@print_slots[0]}<:Weapon_Slot_Gold:758940716427902996>, #{@print_slots[1]}<:Weapon_Slot_Silver:758940716436815872>" unless @print_slots.nil?
+    if has_any?(['a','h'],@availability)
+      str="#{str}\n**Weapon Bonus:** #{self.stat_emotes[0]}+1.5% #{self.stat_emotes[1]}+1.5%"
+    elsif @availability.include?('m')
+      str="#{str}\n**Weapon Bonus:** #{self.stat_emotes[0]}+0.5% #{self.stat_emotes[1]}+0.5%"
+    elsif (@availability.nil? || @availability.length<=0) && ![nil,'',' ','-','None','Null'].include?(@element)
+      str="#{str}\n**Weapon Bonus:** #{self.stat_emotes[0]}+0.5% #{self.stat_emotes[1]}+0.5%"
+    end
+    return emtz if emotesonly==2
+    return emtz.join('') if emotesonly==1
+    return str
+  end
+  
+  def emotes(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
+  
+  def thumbnail(ext=0)
+    dispname=@name.gsub(' ','_')
+    return "https://github.com/Rot8erConeX/BotanBot/blob/master/Weapons/#{dispname}.png?raw=true"
+  end
+  
+  def disp_color(chain=0)
+    f=[]
+    xcolor=0x849294
+    xcolor=0xE73031 if @element=='Flame'
+    xcolor=0x1890DE if @element=='Water'
+    xcolor=0x00D771 if @element=='Wind'
+    xcolor=0xFFB90F if @element=='Light'
+    xcolor=0xA637DE if @element=='Shadow'
+    f.push(xcolor)
+    return f[0] if chain>=f.length
+    return f[chain]
+  end
+  
+  def stat_grid(bot,fullsize=2)
+    c=self.stat_emotes.map{|q| q}
+    l=[1,30*@rarity-70,30*@rarity-50]
+    l=[1,5*@rarity,20*@rarity-10] if @rarity<3
+    l=[1,100,200] if @rarity>5
+    sklz=$skills.map{|q| q}
+    skl1=sklz.find_index{|q| q.name==@skills[0]}
+    skl1=sklz[skl1] unless skl1.nil?
+    if fullsize>1 && !skl1.nil?
+      str="__#{c[2]*4} **Level #{l[0]}**__"
+      str="#{str}\n#{c[0]}*HP:*\u00A0\u00A0#{@hp[0]}  #{c[1]}*Str:*\u00A0\u00A0#{@str[0]}"
+      str="#{str}\n*#{skl1.name}#{skl1.energy_display(false)} [#{skl1.level_text(1,-1,true)}]* - #{skl1.sp_display(1)} SP"
+      str="#{str}\n#{@abilities.map{|q| q[0]}.join("\n")}" unless @abilities.length<=0
+      unless @hp.length<3 || @str.length<3
+        s=[@hp[1]*1,@str[1]*1]
+        s[0]=@hp[0]+(@hp[2]-@hp[0])*(l[1]-1)/(l[2]-1) if s[0]<=0
+        s[1]=@str[0]+(@str[2]-@str[0])*(l[1]-1)/(l[2]-1) if s[1]<=0
+        str="#{str}\n\n__#{c[3]*2}#{c[2]*2} **Level #{l[1]}**__"
+        str="#{str}\n*#{skl1.name}#{skl1.energy_display(false)} [#{skl1.level_text(1,-1,true)}]* - #{skl1.sp_display(1)} SP"
+        str="#{str}\n#{c[0]}*HP:*\u00A0\u00A0#{s[0]} #{c[1]}*Str:*\u00A0\u00A0#{s[1]}"
+        str="#{str}\n#{@abilities.map{|q| q[1]}.join("\n")}" unless @abilities.length<=0
+      end
+      str="#{str}\n\n__#{c[3]*4} **Level #{l[2]}**__"
+      str="#{str}\n#{c[0]}*HP:*\u00A0\u00A0#{@hp[-1]} #{c[1]}*Str:*\u00A0\u00A0#{@str[-1]}"
+      str="#{str}\n*#{skl1.name}* (#{'%.1f' % skl1.invulnerability} sec. invul#{", #{skl1.energy_display}" if skl1.energy_display.length>0})"
+      str="#{str} - #{skl1.sp_display(1)} SP" unless skl1.sp_display(0).uniq.length>1
+      str="#{str}\n#{skl1.description[-1]}"
+      str="#{str}\n#{@abilities.map{|q| q[-1]}.join("\n")}" unless @abilities.length<=0
+    else
+      unless fullsize==1
+        str="#{c[2]*4} **Level #{l[0]}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[0]}  #{c[1]}*Str:*\u00A0\u00A0#{@str[0]}"
+        str="#{str}\n#{c[3]*2}#{c[2]*2} **Level #{l[1]}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[1]} #{c[1]}*Str:*\u00A0\u00A0#{@str[1]}" unless @hp.length<3 || @str.length<3 || (@hp[1]<=0 && @str[1]<=0)
+        str="#{str}\n#{c[3]*4} **Level #{l[2]}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[-1]} #{c[1]}*Str:*\u00A0\u00A0#{@str[-1]}"
+      end
+      if fullsize>0
+        unless skl1.nil?
+          str="#{str}#{"\n" unless fullsize==1}*#{skl1.name}* (#{'%.1f' % skl1.invulnerability} sec. invul#{", #{skl1.energy_display}" if skl1.energy_display.length>0})"
+          str="#{str} - #{skl1.sp_display(1)} SP" unless skl1.sp_display(0).uniq.length>1
+          str="#{str}\n#{skl1.description[-1]}"
+        end
+        str="#{str}\n**Abilities:** #{@abilities.map{|q| q[-1]}.join(', ')}" unless @abilities.length<=0
+      end
+    end
+    return str
+  end
+  
+  def mini_header(bot)
+    str=self.class_header(bot,3,false)
+    l=30*@rarity-50
+    l=20*@rarity-10 if @rarity<3
+    l=200 if @rarity>5
+    str=str.split("\n").reject{|q| q.length<=0}
+    c=self.stat_emotes.map{|q| q}
+    unless str[0].include?('   ') || str.length<=1 || str[1].include?('   ') || str[1].include?('Wyrmprint') || str[1].include?('Weapon')
+      str[1]="#{str[0]}   #{str[1]}"
+      str=str[1,str.length-1]
+    end
+    str="#{str[0]}\n**Lv.#{l}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[-1]} #{c[1]}*Str:*\u00A0\u00A0#{@str[-1]}#{"\n#{str[1,str.length-1].join("\n")}" unless str.length<=1}"
+    return str
+  end
+  
+  def promotions
+    return $weapons.reject{|q| q.promotes_from != @id}
+  end
+  
+  def promoted_from
+    return nil if @promotes_from<=0
+    x=$weapons.find_index{|q| q.id==@promotes_from}
+    return nil if x.nil?
+    return $weapons[x]
   end
   
   
@@ -980,7 +1557,7 @@ class FGO_CE
 end
 
 def data_load(to_reload=[])
-  to_reload=[] if to_reload.is_a?(String)
+  to_reload=[to_reload] if to_reload.is_a?(String)
   if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['adventurer','adventurers','adv','advs'])
     if File.exist?("#{$location}devkit/DLAdventurers.txt")
       b=[]
@@ -1052,6 +1629,72 @@ def data_load(to_reload=[])
       bob4.footer=b[i][20] unless b[i][20].nil? || b[i][20].length<=0
       bob4.essence=b[i][21]
       $dragons.push(bob4)
+    end
+  end
+  if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['wyrmprint','wyrm','print','wyrmprints','wyrms','prints'])
+    if File.exist?("#{$location}devkit/DLWyrmprints.txt")
+      b=[]
+      File.open("#{$location}devkit/DLWyrmprints.txt").each_line do |line|
+        b.push(line)
+      end
+    else
+      b=[]
+    end
+    $wyrmprints=[]
+    for i in 0...b.length
+      b[i]=b[i].gsub("\n",'').split('\\'[0])
+      bob4=DLWyrmprint.new(b[i][0])
+      bob4.rarity=b[i][1]
+      bob4.amulet=b[i][2]
+      bob4.hp=b[i][3]
+      bob4.str=b[i][4]
+      bob4.abilities=b[i][5]
+      bob4.sell_price=b[i][6]
+      bob4.artist=b[i][7] unless b[i][7].nil? || b[i][7].length<=0 || b[i][7]=='-'
+      bob4.charas=b[i][8] unless b[i][8].nil? || b[i][8].length<=0 || b[i][8]=='-'
+      bob4.obtain=b[i][9] unless b[i][9].nil? || b[i][9].length<=0 || b[i][9]=='-'
+      bob4.games=b[i][10]
+      $wyrmprints.push(bob4)
+    end
+  end
+  if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'])
+    if File.exist?("#{$location}devkit/DLWeapons.txt")
+      b=[]
+      File.open("#{$location}devkit/DLWeapons.txt").each_line do |line|
+        b.push(line)
+      end
+    else
+      b=[]
+    end
+    $weapons=[]
+    for i in 0...b.length
+      b[i]=b[i].gsub("\n",'').split('\\'[0])
+      bob4=DLWeapon.new(b[i][0])
+      bob4.type=b[i][1]
+      bob4.rarity=b[i][2]
+      bob4.element=b[i][3]
+      bob4.hp=b[i][4]
+      bob4.str=b[i][5]
+      bob4.skills=b[i][6]
+      bob4.sell_price=b[i][7]
+      bob4.id=b[i][8]
+      bob4.promotes_from=b[i][9]
+      bob4.smith_level=b[i][10]
+      bob4.costs=b[i][11]
+      bob4.craft_mats=b[i][12]
+      bob4.abilities=b[i][13]
+      bob4.games=b[i][14]
+      bob4.boss_tags=b[i][15]
+      bob4.tier=b[i][16]
+      bob4.print_slots=b[i][17]
+      bob4.unbind_mats=b[i][18]
+      bob4.slot_mats=b[i][19]
+      bob4.copy_mats=b[i][20]
+      bob4.ability_mats=b[i][21]
+      bob4.bonus_mats=b[i][22]
+      bob4.refinement_mats=b[i][23]
+      bob4.post_refine_unbind_mats=b[i][24]
+      $weapons.push(bob4)
     end
   end
   if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['abil','ability','abilitys','abilities','abils','coabil','coability','coabilitys','coabilities','coabils','coab','coabs','aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca','cc','ccas','skill','skills','skls','skl','skil','skils'])
@@ -1304,7 +1947,7 @@ def all_commands(include_nil=false,permissions=-1)
   k=['reboot','help','commands','commandlist','command_list','embeds','embed','prefix','channelist','channellist','spamchannels','spamlist','bugreport','suggestion','feedback','adv',
      'donate','donation','shard','attribute','safe','spam','safetospam','safe2spam','long','longreplies','invite','sortaliases','tools','links','tool','link','resources','resource',
      'avatar','avvie','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','reload','update','adventurer','unit','stats',
-     'stat','smol','dragon','drg','drag']
+     'stat','smol','dragon','drg','drag','wyrmprint','wyrm','print','weapon','wep','weap','wpn']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -1422,7 +2065,7 @@ def find_best_match(name,bot,event,fullname=false,ext=false,mode=1,ext2=nil)
 end
 
 def find_adventurer(xname,event,fullname=false,skipnpcs=false)
-  data_load()
+  data_load(['adventurer','npc'])
   xname=normalize(xname)
   xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   adv=$adventurers.map{|q| q}
@@ -1451,7 +2094,7 @@ def find_adventurer(xname,event,fullname=false,skipnpcs=false)
 end
 
 def find_dragon(xname,event,fullname=false,ext=false)
-  data_load()
+  data_load(['dragon'])
   xname=normalize(xname)
   xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   return nil if xname.length<2
@@ -1472,6 +2115,185 @@ def find_dragon(xname,event,fullname=false,ext=false)
   return $dragons[$dragons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
   return $dragons[$dragons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return nil
+end
+
+def find_wyrmprint(xname,event,fullname=false,ext=false)
+  data_load(['print'])
+  xname=normalize(xname)
+  xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  return nil if xname.length<2
+  k=$wyrmprints.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
+  return $wyrmprints[k] unless k.nil?
+  nicknames_load()
+  alz=$aliases.reject{|q| q[0]!='Wyrmprint'}.map{|q| [q[1],q[2],q[3]]}
+  g=0
+  g=event.server.id unless event.server.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
+  return $wyrmprints[$wyrmprints.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
+  return $wyrmprints[$wyrmprints.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return nil if fullname || xname.length<=2
+  k=$wyrmprints.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
+  return $wyrmprints[k] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  return $wyrmprints[$wyrmprints.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  return $wyrmprints[$wyrmprints.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return nil
+end
+
+def find_weapon(xname,event,fullname=false,ext=false)
+  data_load()
+  xname=normalize(xname)
+  xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  return nil if xname.length<2
+  k=$weapons.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
+  return $weapons[k] unless k.nil?
+  lists=$skilltags.reject{|q| q[2]!='Availability/Weapon'}.map{|q| [q[3],q[1]]}.uniq
+  lists.unshift(['$',['Paid']])
+  lists.unshift(['s',['Seasonal']])
+  unless ext
+    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.rarity}*#{q.element}#{q.type}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return $weapons[k] unless k.nil?
+    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.rarity}#{q.element}#{q.type}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return $weapons[k] unless k.nil?
+    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.rarity}*#{q.type}#{q.element}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return $weapons[k] unless k.nil?
+    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.rarity}#{q.type}#{q.element}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return $weapons[k] unless k.nil?
+    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.element}#{q.rarity}*#{q.type}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return $weapons[k] unless k.nil?
+    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.element}#{q.rarity}#{q.type}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return $weapons[k] unless k.nil?
+    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.type}#{q.rarity}*#{q.element}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return $weapons[k] unless k.nil?
+    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.type}#{q.rarity}#{q.element}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return $weapons[k] unless k.nil?
+    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.element}#{q.type}#{q.rarity}*".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return $weapons[k] unless k.nil?
+    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.element}#{q.type}#{q.rarity}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return $weapons[k] unless k.nil?
+    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.type}#{q.element}#{q.rarity}*".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return $weapons[k] unless k.nil?
+    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.type}#{q.element}#{q.rarity}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return $weapons[k] unless k.nil?
+    for i2 in 2...lists.length
+      for i3 in 0...lists[i2][1].length
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.rarity}*#{q.element}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.rarity}#{q.element}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.rarity}*#{q.type}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.rarity}#{q.type}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.element}#{q.rarity}*#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.element}#{q.rarity}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.type}#{q.rarity}*#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.type}#{q.rarity}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.element}#{q.type}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.element}#{q.type}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.type}#{q.element}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.type}#{q.element}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}*#{lists[i2][1][i3]}#{q.element}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}#{lists[i2][1][i3]}#{q.element}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}*#{lists[i2][1][i3]}#{q.type}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}#{lists[i2][1][i3]}#{q.type}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{lists[i2][1][i3]}#{q.rarity}*#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{lists[i2][1][i3]}#{q.rarity}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{lists[i2][1][i3]}#{q.rarity}*#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{lists[i2][1][i3]}#{q.rarity}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{lists[i2][1][i3]}#{q.type}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{lists[i2][1][i3]}#{q.type}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{lists[i2][1][i3]}#{q.element}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{lists[i2][1][i3]}#{q.element}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}*#{q.element}#{lists[i2][1][i3]}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}#{q.element}#{lists[i2][1][i3]}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}*#{q.type}#{lists[i2][1][i3]}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}#{q.type}#{lists[i2][1][i3]}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{q.rarity}*#{lists[i2][1][i3]}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{q.rarity}#{lists[i2][1][i3]}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{q.rarity}*#{lists[i2][1][i3]}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{q.rarity}#{lists[i2][1][i3]}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{q.type}#{lists[i2][1][i3]}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{q.type}#{lists[i2][1][i3]}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{q.element}#{lists[i2][1][i3]}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{q.element}#{lists[i2][1][i3]}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}*#{q.element}#{q.type}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}#{q.element}#{q.type}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}*#{q.type}#{q.element}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}#{q.type}#{q.element}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{q.rarity}*#{q.type}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{q.rarity}#{q.type}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{q.rarity}*#{q.element}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{q.rarity}#{q.element}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{q.type}#{q.rarity}*#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{q.type}#{q.rarity}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{q.element}#{q.rarity}*#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{q.element}#{q.rarity}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        return k if k.length>0
+      end
+    end
+  end
+  nicknames_load()
+  alz=$aliases.reject{|q| q[0]!='Weapon'}.map{|q| [q[1],q[2],q[3]]}
+  g=0
+  g=event.server.id unless event.server.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
+  return $weapons[$weapons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
+  return $weapons[$weapons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return nil if fullname || xname.length<=2
+  k=$weapons.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
+  return $weapons[k] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  return $weapons[$weapons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  return $weapons[$weapons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
   return nil
 end
 
@@ -1667,6 +2489,203 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   create_embed(event,"__**#{f3[0]}**__",f3[1],k.disp_color) unless f3.nil?
 end
 
+def disp_wyrmprint_stats(bot,event,args=nil,juststats=false)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_wyrmprint,args.join(' '),event)
+  if k.nil?
+    event.respond 'No matches found.'
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  evn=event.message.text.downcase.split(' ')
+  hdr="__**#{k.name}**__"
+  title=k.class_header(bot,0,true)
+  unless s2s
+    title=k.mini_header(bot)
+    hdr="#{hdr}#{generate_rarity_row(k.rarity,0,k.games[0])}"
+    if k.rarity>4
+      hdr="#{hdr} - <:Fill_Gold:759999913962110978>"
+    else
+      hdr="#{hdr} - <:Fill_Silver:759999914062774302>"
+    end
+  end
+  f=nil
+  mub=0
+  mub=1 if has_any?(['mub','unbind','unbound','refined','refine','refinement','2ub','3ub'],evn)
+  if title.length>250
+    h=title.split("\n")
+    title=[h[0],'']
+    j=0
+    for i in 1...h.length
+      if "#{title[j]}\n#{h[i]}".length>250 && j==0
+        j+=1
+        title[j]="#{h[i]}"
+      else
+        title[j]="#{title[j]}\n#{h[i]}"
+      end
+    end
+  end
+  c=k.stat_grid(bot,s2s)
+  str=c[0]; ftr=c[1]
+  str="#{str}\n"
+  str="#{str}\n**Obtained:** #{k.obtain}" if !k.obtain.nil? && k.obtain.length>0
+  if k.isMultiprint?
+    str="#{str}\n#{k.multiprintText}"
+  elsif !k.availability.nil? || !has_any?(['s','z','y','t','w'],k.availability)
+    c=k.stat_emotes.map{|q| q}
+    str="#{str}\n**Shop Price:** 900#{c[4]} per 2UB, 1,700#{c[4]} per MUB" if k.rarity==3
+    str="#{str}\n**Shop Price:** 9,000#{c[4]} per 2UB, 17,000#{c[4]} per MUB" if k.rarity==4
+    str="#{str}\n**Shop Price:** 19,000#{c[4]} per 2UB, 37,000#{c[4]} per MUB" if k.rarity==5
+    str="#{str}\n**Shop Price:** 25,000#{c[4]} per 2UB, 53,000#{c[4]} per MUB" if k.rarity==6
+    str="#{str}\nThese include the cost of buying, and the cost of unbinding." if k.rarity>2
+  end
+  create_embed(event,[hdr,title],str,k.disp_color,ftr,k.thumbnail(mub))
+end
+
+def disp_weapon_stats(bot,event,args=nil,juststats=false,x=nil)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  if x.nil?
+    k=find_data_ex(:find_weapon,args.join(' '),event,true)
+    # find_in_weapons
+    k=find_data_ex(:find_weapon,args.join(' '),event) if k.nil?
+  else
+    k=x.clone
+  end
+  if k.nil?
+    event.respond 'No matches found.'
+    return nil
+  elsif k.is_a?(Array)
+    args2=args.map{|q| q}
+    args2=args2.reject{|q| q.to_i.to_s==q || q.gsub('*','').to_i.to_s==q}
+    args2=args2.join(' ')
+    args2=first_sub(args2,k[0].element.downcase,'')
+    args2=first_sub(args2,'fire','') if k[0].element=='Flame'
+    args2=first_sub(args2,'dark','') if k[0].element=='Shadow'
+    args2=first_sub(args2,k[0].type.downcase,'')
+    args2=first_sub(args2,'spear','') if k[0].type=='Lance'
+    args2=first_sub(args2,'void','')
+=begin
+    k2=find_data_ex(:find_enemy,args2,event)
+    if k2.length>0 && k2[2][2]=='Void'
+      k3=k.reject{|q| q.boss_tags.nil? || !q.boss_tags.include?(k2.name)}
+      k=k3.map{|q| q} if k3.length>0
+    end
+=end
+    if k.length>5
+      event.respond "Too many weapons qualify.  I will not display them all."
+      return nil
+    end
+    for i in 0...k.length
+      disp_weapon_stats(bot,event,args,juststats,k[i].clone)
+    end
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  evn=event.message.text.downcase.split(' ')
+  juststats=true if Shardizard != 4 && evn.include?('smol')
+  hdr="__**#{k.name}**__"
+  title=k.class_header(bot,0,true)
+  unless s2s || juststats
+    hdr="#{hdr}#{generate_rarity_row(k.rarity,0,k.games[0])}"
+    hdr="#{hdr} - T#{k.tier}" unless k.tier.nil? || k.tier<=0
+    title=k.mini_header(bot)
+  end
+  l=2
+  l=1 unless s2s
+  l=0 if juststats
+  str=k.stat_grid(bot,l)
+  ftr=nil
+  ftr='Try using the mats command on this weapon!' if rand(10)==0
+  lng=title.length
+  lng+=ftr.length unless ftr.nil?
+  if title.length>250
+    h=title.split("\n")
+    title=[h[0],'']
+    j=0
+    for i in 1...h.length
+      if "#{title[j]}\n#{h[i]}".length>250 && j==0
+        j+=1
+        title[j]="#{h[i]}"
+      else
+        title[j]="#{title[j]}\n#{h[i]}"
+      end
+    end
+  end
+  unless juststats
+    str2=''
+    m=k.promotions.map{|q| q}
+    m2=k.promoted_from
+    mmm2=nil
+    mmm2=wpnz.find_index{|q| q.type==k.type && q.element==k.element && q.availability.inculde?('m')} if k.availability.include?('a')
+    mmm2=wpnz.find_index{|q| q.type==k.type && q.element==k.element && q.rarity==5} if k.availability.include?('h')
+    if s2s
+      str2="#{str2}#{"\n" unless m.length<=1}\n\n**Promotes from: #{m2.emotes(bot)}*#{m2.name}* **#{"\n*Smithy level required:* #{k.smith_level}" unless k.availability.include?('h')}\n*Assembly cost:* #{longFormattedNumber(k.costs[0])}#{k.stat_emotes[4]}\n*Required mats:* #{k.craft_mats.map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}" unless m2.nil?
+      str2="#{str2}#{"\n" unless m.length==1}\n\n**Crafting requirements: #{mm2.emotes(bot)}*#{mm2.name}* **" unless mmm2.nil?
+      if m.length>0
+        for i in 0...m.length
+          m[i].costs='0' if m[i].costs.nil? || m[i].costs.length<=0
+          str2="#{str2}#{"\n" if i==0 && m.length != 1}\n\n**#{"Promotion #{i+1}" if m.length>1}#{'Promotes into' if m.length==1}: #{m[i].class_header(bot,2,false)[0]}*#{m[i].name}* **#{"\n*Smithy level required:* #{m[i].smith_level}" unless k.availability.include?('h')}\n*Assembly cost:* #{longFormattedNumber(m[i].costs[0])}#{k.stat_emotes[4]}\n*Required mats:* #{m[i].craft_mats.map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}"
+        end
+      end
+    else
+      str2="#{str2}\n**Promotes from:** #{m2.class_header(bot,2,false)[0]}#{m2.name}" unless m2.nil?
+      str2="#{str2}\n**Crafting requirements:** #{mm2.class_header(bot,2,false)[0]}#{mm2.name}" unless mm2.nil?
+      str2="#{str2}\n**Promotes into:** #{m.map{|q| "#{q.class_header(bot,2,false)[0]}#{q.name}"}.join(', ')}" unless m.length<=0
+    end
+    str="#{str}#{"\n" unless s2s}#{str2}" if str2.length>0
+    str="#{str}\n**Assembles for:** #{longFormattedNumber(k.costs[0])}#{k.stat_emotes[4]}"
+  end
+  if str.length>1900 && !s2s
+    sklz=$skills.map{|q| q}
+    skl1=sklz.find_index{|q| q.name==k.skills[0]}
+    skl1=sklz[skl1] unless skl1.nil?
+    str=str.gsub(skl1.description[-1],'~~The description makes this data too long.  Please try again in PM.~~')
+  end
+  if str.length+lng>=1900
+    str=str.split("\n\n\n")
+    if str[0].length>=1900
+      str[0]=str[0].split("**Promotes ")
+      for i in 1...str[0].length
+        str[0][i]="**Promotes #{str[0][i]}"
+      end
+      str.flatten!
+      if str[0].length>=1900
+        str[0]=str[0].split("\n\n")
+        stp=0
+        for i in 1...str[0].length
+          if "#{str[0][stp]}\n\n#{str[0][i]}".length<1900
+            str[0][stp]="#{str[0][stp]}\n\n#{str[0][i]}"
+            str[0][i]=nil
+          else
+            stp=i*1
+          end
+        end
+        str[0].compact!
+        str.flatten!
+      end
+    end
+    create_embed(event,["__**#{k.name}**__",title],str[0],k.disp_color,nil,k.thumbnail)
+    if str[1,str.length-1].join("\n\n\n").length<1900
+      create_embed(event,'',str[1,str.length-1].join("\n\n\n"),k.disp_color) unless str.length<2
+    else
+      for i in 1...str.length
+        puts str[i]
+        create_embed(event,'',str[i],k.disp_color)
+      end
+    end
+    event.respond ftr unless ftr.nil?
+  else
+    create_embed(event,[hdr,title],str,k.disp_color,ftr,k.thumbnail)
+  end
+  return nil
+end
+
 bot.command([:adventurer,:adv,:unit]) do |event, *args|
   return nil if overlap_prevent(event)
 =begin
@@ -1720,6 +2739,52 @@ bot.command([:dragon,:drg,:drag]) do |event, *args|
   end
 =end
   disp_dragon_stats(bot,event,args)
+end
+
+bot.command([:wyrmprint,:wyrm,:print]) do |event, *args|
+  return nil if overlap_prevent(event)
+=begin
+  if args.nil? || args.length<=0
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    find_wyrmprints(bot,event,args)
+    return nil
+  elsif ['shop','store'].include?(args[0].downcase)
+    reload_library()
+    show_print_shop(event)
+    return nil
+  elsif ['level','xp','exp'].include?(args[0].downcase)
+    args.shift
+    level(event,bot,args,5)
+    return nil
+  elsif ['art'].include?(args[0].downcase)
+    args.shift
+    disp_wyrmprint_art(bot,event,args)
+    return nil
+  end
+=end
+  disp_wyrmprint_stats(bot,event,args)
+end
+
+bot.command([:weapon,:wep,:weap,:wpn]) do |event, *args|
+  return nil if overlap_prevent(event)
+=begin
+  if args.nil? || args.length<=0
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    find_weapons(bot,event,args)
+    return nil
+  elsif ['level','xp','exp'].include?(args[0].downcase)
+    args.shift
+    level(event,bot,args,6)
+    return nil
+  elsif ['lineage','craft','crafting'].include?(args[0].downcase)
+    args.shift
+    disp_weapon_lineage(bot,event,args)
+    return nil
+  end
+=end
+  disp_weapon_stats(bot,event,args)
 end
 
 
@@ -2323,7 +3388,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
       reload=true
     end
     if e.message.text.include?('6') && [167657750971547648].include?(event.user.id)
-      puts 'reloading BotanText'
+      puts 'reloading BotanClassFunction'
       load "#{$location}devkit/BotanClassFunctions.rb"
       t=Time.now
       $last_multi_reload[1]=t
@@ -2536,6 +3601,14 @@ bot.mention do |event|
     m=false
     args.shift
     disp_dragon_stats(bot,event,args)
+  elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
+    m=false
+    args.shift
+    disp_wyrmprint_stats(bot,event,args)
+  elsif ['weapon','weap','wep','wpn'].include?(args[0].downcase)
+    m=false
+    args.shift
+    disp_weapon_stats(bot,event,args)
   elsif ['stats','stat'].include?(args[0].downcase)
     m=false
     if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
