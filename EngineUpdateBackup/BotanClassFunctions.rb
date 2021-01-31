@@ -493,6 +493,32 @@ class DLWyrmprint
   end
 end
 
+class DLEnemy
+  def isBaby?
+    return true if ['Wandering Shroom, Clone Wave 1','Wandering Shroom, Clone Wave 2'].include?(@name)
+    return true if ['Gust Shroom, Clone Wave 1','Gust Shroom, Clone Wave 2'].include?(@name)
+    return true if ['Scalding Shroom, Clone Wave 1','Scalding Shroom, Clone Wave 2'].include?(@name)
+    return true if ['Jingu Bang','Mini Dasheng'].include?(@name)
+    return true if ['Gift Basket','Astral Gift Basket'].include?(@name)
+    return true if ['Blood Moon'].include?(@name)
+    return false
+  end
+  
+  def babies
+    x=[]
+    x=['Wandering Shroom, Clone Wave 1','Wandering Shroom, Clone Wave 2'] if @name=='Wandering Shroom'
+    x=['Gust Shroom, Clone Wave 1','Gust Shroom, Clone Wave 2'] if @name=='Gust Shroom'
+    x=['Scalding Shroom, Clone Wave 1','Scalding Shroom, Clone Wave 2'] if @name=='Scalding Shroom'
+    x=['Jingu Bang','Mini Dasheng'] if @name=='Qitian Dasheng'
+    x=['Gift Basket'] if @name=='Shishimai'
+    x=['Astral Gift Basket'] if @name=='Astral Shishimai'
+    x=['Blood Moon'] if @name=='Volk'
+    return [] if x.length<=0
+    m=$enemies.reject{|q| !x.include?(q.name)}.map{|q| q.clone}
+    return m
+  end
+end
+
 
 
 def disp_dragon_stats(bot,event,args=nil,juststats=false,preload=nil)
@@ -682,7 +708,297 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false,preload=nil)
   end
 end
 
+def disp_enemy_data(bot,event,args=nil,ignoresub=false)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_enemy,args.join(' '),event)
+  if k.nil?
+    event.respond 'No matches found.'
+    return nil
+  elsif k.name=='Manticore'
+    disp_enemy_data(bot,event,['Manticore(Refrain)'])
+    disp_enemy_data(bot,event,['Manticore(BigTop)'])
+    return nil
+  elsif k.subdata=='Gauntlet'
+    disp_gauntlet_data(bot,event,args,k.name)
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  evn=event.message.text.downcase.split(' ')
+  title=k.class_header(bot)
+  lng=title.length
+  if title.length>250
+    h=title.split("\n")
+    title=[h[0],'']
+    j=0
+    for i in 1...h.length
+      if "#{title[j]}\n#{h[i]}".length>250 && j==0
+        j+=1
+        title[j]="#{h[i]}"
+      else
+        title[j]="#{title[j]}\n#{h[i]}"
+      end
+    end
+  end
+  str=''
+  if k.stats.nil? || k.stats.length<=0
+    str="~~Stats currently unknown~~"
+  elsif k.stats.length<2
+    str="#{k.stat_emotes[0]}**HP:** #{longFormattedNumber(k.stats[0][1])}" if k.stats[0][1]>-1
+    str="#{str}#{"\n" unless str.length<=0}#{k.stat_emotes[1]}**#{k.stat_emotes[2]}:** #{longFormattedNumber(k.stats[0][2])}" if k.stats[0][2]>-1
+  else
+    for i in 0...k.stats.length
+      kx=k.stats[i].map{|q| q}
+      if kx[1]>-1 || kx[2]>-1
+        str="#{str}\n**#{kx[0].gsub("/empty","\u22C6").gsub("/star","\u2605")}:**"
+        str="#{str}  #{k.stat_emotes[0]}*HP:* #{longFormattedNumber(kx[1])}" if kx[1]>-1
+        str="#{str}  #{k.stat_emotes[1]}*#{semoji[2]}:* #{longFormattedNumber(kx[2])}" if kx[2]>-1
+      end
+    end
+  end
+  if !k.event.nil? && !k.isBaby?
+    m=$enemies.reject{|q| q.name==k.name || q.event.nil? || q.event != k.event || q.isBaby?}
+    str="#{str}#{"\n" if k.stats.length>1 || m.length>0}\n**Event Name:** #{k.event}"
+    str="#{str}\n*Other bosses from this event:* #{m.map{|q| "#{q.emotes(bot)}#{q.name}"}.join(', ')}" if m.length>0 && !ignoresub
+  end
+  flds=nil
+  if s2s
+    flds=[]
+    flds.push(['Resistances',"#{k.weaknesses.gsub(', ',"\n")}"])
+    flds.push(['Afflictions',"#{k.afflictions.gsub(', ',"\n")}"])
+  else
+    str="#{str}\n\n**Resistances:** #{k.weaknesses}"
+    str="#{str}\n\n**Afflictions:** #{k.afflictions}"
+  end
+  unless k.abilities.nil? || k.abilities.length<=0
+    str2=''; str3='__**Abilities**__'
+    for i in 0...k.abilities.length
+      abl=$abilities.find_index{|q| q.fullName==k.abilities[i]}
+      unless abl.nil?
+        abl=$abilities[abl]
+        str2="#{str2}\n\n**#{abl.fullName}**#{"\n#{abl.description}" if abl.show}"
+        str3="#{str3}\n*#{abl.fullName}*"
+      end
+    end
+    unless str2.length<=0
+      if s2s
+        flds.push(['Abilities',str2,1])
+      elsif "#{str}#{str2}".length>1500
+        str="#{str}\n\n#{str3}"
+      else
+        str="#{str}#{str2}"
+      end
+    end
+  end
+  ftr=nil
+  if !s2s && k.babies.length>0
+    if ['Wandering Shroom','Gust Shroom'].include?(k.name)
+      ftr='For information about the enemies that spawn during the fight, try adding "Clone Wave 1" or "Clone Wave 2" to your message.'
+    elsif k.babies.length>1
+      ftr="For information about the enemies that spawn during the fight, they are named #{list_lift(k.babies.map{|q| "\"#{q.name}\""},'and')}."
+    else
+      ftr="For information about the enemies that spawn during the fight, they are named \"#{k.babies[0].name}\"."
+    end
+    if ftr.length>100
+      str="#{str}\n\n#{ftr}"
+      ftr=nil
+    end
+  end
+  hdr="__**#{k.name}**__"
+  if k.subdata=='Void' && !k.event.nil? && k.event[0,11]=='Fire Emblem'
+    moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{k.element.gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Anima')}"}
+    hdr="#{moji[0].mention}<:Current_Tempest_Bonus:498797966740422656> #{hdr}" if moji.length>0
+  elsif k.subdata=='Void'
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k.element.gsub('None','Null')}"}
+    hdr="#{moji[0].mention}<:Element_Void:548467446734913536> #{hdr}" if moji.length>0
+  elsif k.subdata=='High Dragon'
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k.element.gsub('None','Null')}"}
+    hdr="#{moji[0].mention} #{hdr}" if moji.length>0
+  elsif k.subdata=='Imperial Order'
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{k.element.gsub('None','Null')}"}
+    hdr="#{moji[0].mention} #{hdr}" if moji.length>0
+  end
+  create_embed(event,[hdr,title],str,k.disp_color,ftr,k.thumbnail,flds)
+  if s2s && k.babies.length>0
+    for i in 0...k.babies.length
+      disp_enemy_data(bot,event,k.babies[i].name.split(' '),true)
+    end
+  end
+  return nil
+end
 
+def disp_gauntlet_data(bot,event,args=nil,name=nil)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  if name.nil?
+    k=find_data_ex(:find_enemy,args.join(' '),event)
+  else
+    k=find_data_ex(:find_enemy,name,event)
+  end
+  if k.nil?
+    event.respond 'No matches found.'
+    return nil
+  end
+  gaunt=$gauntlets.reject{|q| q.name != k.name}
+  xelement=''
+  level=0
+  for i in 0...args.length
+    xelement='Flame' if ['flame','fire','flames','fires'].include?(args[i].downcase) && xelement.length<=0
+    xelement='Water' if ['water','waters'].include?(args[i].downcase) && xelement.length<=0
+    xelement='Wind' if ['wind','air','winds','airs'].include?(args[i].downcase) && xelement.length<=0
+    xelement='Wind' if ['earth','earths'].include?(args[i].downcase) && event.user.id==192821228468305920 && xelement.length<=0
+    xelement='Light' if ['light','lights'].include?(args[i].downcase) && xelement.length<=0
+    xelement='Shadow' if ['shadow','dark','shadows','darks'].include?(args[i].downcase) && xelement.length<=0
+  end
+  gaunt=gaunt.reject{|q| q.element != xelement} if xelement.length>0
+  for i in 0...args.length
+    level=args[i].to_i if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<=gaunt.map{|q| q.stage}.max && level<=0
+  end
+  gaunt=gaunt.reject{|q| q.stage != level} if level>0
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  evn=event.message.text.downcase.split(' ')
+  title=''; str=''; flds=nil
+  ftr='For more detailed information, look up a single element/stage combination.'
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{gaunt[0].element.gsub('None','Null')}"}
+  moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{gaunt[0].element.gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Null')}"} if !k.event.nil? && k.event[0,11]=='Fire Emblem'
+  title="#{moji[0].mention unless moji.length<=0} **Element:** #{gaunt[0].element}" unless ['High Dragon','Void','Imperial Order'].include?(k.subdata) || gaunt.map{|q| q.element}.uniq.length>1
+  title="#{moji[0].mention unless moji.length<=0} **#{gaunt[0].element}**" unless ['High Dragon','Void','Imperial Order'].include?(k.subdata) || gaunt.map{|q| q.element}.uniq.length>1 || s2s
+  if gaunt.map{|q| q.element}.uniq.length<2 && gaunt.map{|q| q.stage}.uniq.length<2 && !s2s
+    title="#{title}   Stage **#{gaunt[0].stage}**" unless gaunt.map{|q| q.stage}.uniq.length>1
+  else
+    title="#{title}\n**Stage:** #{gaunt[0].stage}" unless gaunt.map{|q| q.stage}.uniq.length>1
+  end
+  title=title.gsub("\n",'') if title[0,"\n".length]=="\n"
+  moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Tribe_#{k.tribe}"}
+  if !k.event.nil? && k.event[0,11]=='Fire Emblem'
+    moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Infantry"}
+    moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Armor"} if !k.name.include?('(Enemy)')
+  end
+  title="#{title}#{"\n **Tribe:**" if s2s && title.length>0}#{'  ' unless s2s || title.length<=0}#{moji[0].mention unless moji.length<=0} #{k.tribe}"
+  lng=title.length
+  if title.length>250
+    h=title.split("\n")
+    title=[h[0],'']
+    j=0
+    for i in 1...h.length
+      if "#{title[j]}\n#{h[i]}".length>250 && j==0
+        j+=1
+        title[j]="#{h[i]}"
+      else
+        title[j]="#{title[j]}\n#{h[i]}"
+      end
+    end
+  end
+  if !k.event.nil? && !k.isBaby?
+    m=$enemies.reject{|q| q.name==k.name || q.event.nil? || q.event != k.event || q.isBaby?}
+    str="#{str}#{"\n" if k.stats.length>1 || m.length>0}\n**Event Name:** #{k.event}"
+    str="#{str}\n*Other bosses from this event:* #{m.map{|q| "#{q.emotes(bot)}#{q.name}"}.join(', ')}" if m.length>0 && !ignoresub
+  end
+  str="#{str}\n"
+  if gaunt.map{|q| q.element}.uniq.length<2 && gaunt.map{|q| q.stage}.uniq.length<2
+    if s2s
+      str="#{str}\n#{k.stat_emotes[0]}*Maximum HP*: #{longFormattedNumber(gaunt[0].hp.to_i)}\n#{k.stat_emotes[1]}*#{k.stat_emotes[2]}*: #{longFormattedNumber(gaunt[0].str.to_i)}#{"\n*Reward*: #{gaunt[0].reward}" unless gaunt[0].reward.nil? || gaunt[0].reward.length<=0}"
+      flds=[]
+      flds.push(['Resistances',gaunt[0].weaknesses.gsub(', ',"\n")]) unless gaunt[0].weaknesses.nil? || gaunt[0].weaknesses.length<=0
+      flds.push(['Afflictions',gaunt[0].afflictions.gsub(', ',"\n")]) unless gaunt[0].afflictions.nil? || gaunt[0].afflictions.length<=0
+    else
+      title="#{title}\n#{k.stat_emotes[0]}*HP*: #{longFormattedNumber(gaunt[0].hp.to_i)}   #{k.stat_emotes[1]}*#{k.stat_emotes[2]}*: #{longFormattedNumber(gaunt[0].str.to_i)}"
+      str="#{str}\n*Reward*: #{gaunt[0].reward}" unless gaunt[0].reward.nil? || gaunt[0].reward.length<=0
+      str="#{str}\n**Resistances:** #{gaunt[0].weaknesses}"
+      str="#{str}\n**Afflictions:** #{gaunt[0].afflictions}"
+    end
+    ftr=nil
+  elsif gaunt.map{|q| q.element}.uniq.length<2
+    for i in 0...gaunt.length
+      str="#{str}\n*Stage #{gaunt[i].stage}*: #{k.stat_emotes[0]}HP: #{longFormattedNumber(gaunt[i].hp.to_i)}  #{k.stat_emotes[1]}#{k.stat_emotes[2][0,3]}: #{longFormattedNumber(gaunt[i].str.to_i)}#{" - Reward: #{gaunt[i].reward}" unless gaunt[i].reward.nil? || gaunt[i].reward.length<=0}" if [0,19,39,59,79,99,gaunt.length-1].include?(i) || s2s
+    end
+  elsif gaunt.map{|q| q.stage}.uniq.length<2
+    for i in 0...gaunt.length
+      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{gaunt[i].element.gsub('None','Null')}"}
+      moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{gaunt[i].element.gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Null')}"} if !k.event.nil? && k.event[0,11]=='Fire Emblem'
+      str="#{str}\n#{moji[0].mention if moji.length>0}*#{gaunt[i].element}*: #{k.stat_emotes[0]}HP: #{longFormattedNumber(gaunt[i].hp.to_i)}  #{k.stat_emotes[1]}#{k.stat_emotes[2][0,3]}: #{longFormattedNumber(gaunt[i].str.to_i)}#{" - Reward: #{gaunt[i].reward}" unless gaunt[i].reward.nil? || gaunt[i].reward.length<=0}"
+    end
+  else
+    flds=[]
+    f=gaunt.map{|q| q.element}.uniq
+    for i in 0...f.length
+      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{f[i].gsub('None','Null')}"}
+      moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{f[i].element.gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Null')}"} if !k.event.nil? && k.event[0,11]=='Fire Emblem'
+      f2=gaunt.reject{|q| q.element != f[i]}
+      f2=f2.sort{|a,b| a.stage<=>b.stage}
+      f3="*Stage #{f2[0].stage}*: #{k.stat_emotes[0]}HP: #{longFormattedNumber(f2[0].hp.to_i)}  #{k.stat_emotes[1]}#{k.stat_emotes[2][0,3]}: #{longFormattedNumber(f2[0].str.to_i)}"
+      f3="#{f3}\n*Stage #{f2[-1].stage}*: #{k.stat_emotes[0]}HP: #{longFormattedNumber(f2[-1].hp.to_i)}  #{k.stat_emotes[1]}#{k.stat_emotes[2][0,3]}: #{longFormattedNumber(f2[-1].str.to_i)}#{" - Reward: #{f2[-1].reward}" unless f2[-1].reward.nil? || f2[-1].reward.length<=0}"
+      flds.push(["#{moji[0].mention unless moji.length<=0}#{f[i]}",f3])
+    end
+    lng+=flds.map{|q| "__#{q[0]}__\n#{q[1]}"}.join("\n\n").length
+  end
+  hdr="__**#{k.name}**__"
+  if lng+hdr.length+str.length>1900
+    m=[0,str.split("\n\n")]
+    for i in 0...m[1].length
+      m[1][i]=m[1][i].split("\n") if m[1][i].length>=1900
+    end
+    m[1]=m[1].flatten
+    str=''
+    for i in 0...m[1].length
+      if "#{str}\n\n#{m[1][i]}".length>=1900
+        if m[0]==0
+          create_embed(event,[name,title],str,k.disp_color,nil,k.thumbnail)
+        else
+          create_embed(event,'',str,k.disp_color)
+        end
+        m[0]+=1
+        str="#{m[1][i]}"
+      else
+        str="#{str}#{"\n" unless !str.split("\n")[-1].nil? && str.split("\n")[-1][0,7]=='*Stage '}\n#{m[1][i]}"
+      end
+    end
+    if m[0]==0
+      create_embed(event,[hdr,title],str,k.disp_color,nil,k.thumbnail)
+    elsif flds.nil?
+      create_embed(event,'',str,k.disp_color,ftr)
+    else
+      create_embed(event,'',str,k.disp_color)
+    end
+    create_embed(event,'','',k.disp_color,ftr,nil,flds) unless flds.nil?
+  else
+    create_embed(event,[hdr,title],str,k.disp_color,ftr,k.thumbnail,flds)
+  end
+end
+
+
+
+def affinity_resonance(event,bot)
+  f=[]
+  str=''
+  for i in 0...$resonance.length
+    k=$resonance[i].map{|q| q}
+    moji2=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "Affinity_#{k[0]}"}
+    m=[]
+    if safe_to_spam?(event)
+      m.push("*2 prints:* #{k[1]}") unless k[1].nil?
+      m.push("*3 prints:* #{k[2]}") unless k[2].nil?
+      m.push("*4 prints:* #{k[3]}") unless k[3].nil?
+      f.push(["#{moji2[0].mention unless moji2.length<=0} #{k[0]}",m.join("\n")])
+    else
+      m.push(2) unless k[1].nil?
+      m.push(3) unless k[2].nil?
+      m.push(4) unless k[3].nil?
+      str="#{str}\n#{moji2[0].mention unless moji2.length<=0}**#{k[0]}** x#{m.join('/')} = "
+      m=k[1,3].compact
+      m2=m[0].split(' ')
+      m2.pop
+      m2=m2.join(' ')
+      str="#{str}#{m2} +#{m.map{|q| q.split(' ')[-1].gsub('+','')}.join('/')}"
+    end
+  end
+  create_embed(event,"__**Affinity effects**__",str,0xED619A,nil,nil,f)
+  return nil
+end
 
 def show_tools(event,bot)
   return nil if overlap_prevent(event)
@@ -868,7 +1184,12 @@ def snagstats(event,bot,f=nil,f2=nil)
     m=adv.reject{|q| q.weapon !='Staff'}
     str2="#{str2}\n<:Weapon_Staff:532106114733441024> #{m.length} Staff-using adventurer#{'s' unless m.length==1}" if m.length>0
     m=adv.reject{|q| q.weapon !='Manacaster'}
-    str2="#{str2}\n<:Weapon_Manacaster:758905122448867338> #{m.length} Manacaster-using adventurer#{'s' unless m.length==1}" if m.length>0
+    if m.length>0
+      m2=adv.reject{|q| q.weapon !='Manacaster' || q.weapon2 != 'Rifle'}
+      m3=adv.reject{|q| q.weapon !='Manacaster' || q.weapon2 != 'Shotgun'}
+      m4=adv.reject{|q| q.weapon !='Manacaster' || q.weapon2 != 'Machine Gun'}
+      str2="#{str2}\n<:Weapon_Manacaster:758905122448867338> #{m.length} Manacaster-using adventurer#{'s' unless m.length==1}:   <:MC_Rifle:772800760068046859>#{m2.length} rifle#{'s' unless m2.length==1}, <:MC_Shotgun:772800760055726080>#{m3.length} shotgun#{'s' unless m3.length==1}, <:MC_Machine_Gun:772800760081023017>#{m4.length} machine gun#{'s' unless m4.length==1}"
+    end
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
@@ -979,148 +1300,143 @@ def snagstats(event,bot,f=nil,f2=nil)
     event.respond str
     return nil
   elsif ['wyrmprint','wyrm','print','wyrmprints','wyrms','prints'].include?(f.downcase)
-    str='This command is not yet ready'
-=begin
-    adv=@wyrmprints.map{|q| q}
-    adv=find_in_wyrmprints(bot,event,[f2],2)[1] unless f2.nil?
+    adv=$wyrmprints.map{|q| q}
+  #  adv=find_in_wyrmprints(bot,event,[f2],2)[1] unless f2.nil?
     str="**There are #{adv.length} Wyrmprints, including:**"
     str2=''
-    for i in 0...@max_rarity[2]
-      m=adv.reject{|q| q[1][0,1].to_i != i+1}
-      str2="#{str2}\n#{@rarity_stars[0][i+1]} #{m.length} #{['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'][i]}-star wyrmprint#{'s' unless m.length==1}" if m.length>0
+    for i in 0...$max_rarity[2]
+      m=adv.reject{|q| q.rarity != i+1}
+      str2="#{str2}\n#{$rarity_stars[0][i+1]} #{m.length} #{['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'][i]}-star wyrmprint#{'s' unless m.length==1}" if m.length>0
     end
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     str2=''
-    m=adv.reject{|q| q[2][1]!='Crown'}
+    m=adv.reject{|q| q.affinity !='Crown'}
     str2="<:Affinity_Queen:758912216115314690> #{m.length} print#{'s' unless m.length==1} with Crown's Boon" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Axe'}
+    m=adv.reject{|q| q.affinity !='Axe'}
     str2="#{str2}\n<:Affinity_Hatchet:758912216413241354> #{m.length} print#{'s' unless m.length==1} with Axe's Boon" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Sword'}
+    m=adv.reject{|q| q.affinity !='Sword'}
     str2="#{str2}\n<:Affinity_Duel:758912216052269076> #{m.length} print#{'s' unless m.length==1} with Sword's Boon" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Bow'}
+    m=adv.reject{|q| q.affinity !='Bow'}
     str2="#{str2}\n<:Affinity_Barrage:758912216401051720> #{m.length} print#{'s' unless m.length==1} with Bow's Boon" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Dragon'}
+    m=adv.reject{|q| q.affinity !='Dragon'}
     str2="#{str2}\n<:Affinity_Draco:758912216048205824> #{m.length} print#{'s' unless m.length==1} with Dragon's Boon" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Lance'}
+    m=adv.reject{|q| q.affinity !='Lance'}
     str2="#{str2}\n<:Affinity_Trident:758912216333549619> #{m.length} print#{'s' unless m.length==1} with Lance's Boon" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Eagle'}
+    m=adv.reject{|q| q.affinity !='Eagle'}
     str2="#{str2}\n<:Affinity_Phoenix:758912216073240677> #{m.length} print#{'s' unless m.length==1} with Eagle's Boon" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Wolf'}
+    m=adv.reject{|q| q.affinity !='Wolf'}
     str2="#{str2}\n<:Affinity_Wolf:758912216274567189> #{m.length} print#{'s' unless m.length==1} with Wolf's Boon" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Bull'}
+    m=adv.reject{|q| q.affinity !='Bull'}
     str2="#{str2}\n<:Affinity_Bull:758912215733895169> #{m.length} print#{'s' unless m.length==1} with Bull's Boon" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Serpent'}
+    m=adv.reject{|q| q.affinity !='Serpent'}
     str2="#{str2}\n<:Affinity_Serpent:758912216304189471> #{m.length} print#{'s' unless m.length==1} with Serpent's Boon" if m.length>0
-    m=adv.reject{|q| q[2][1]!='Staff'}
+    m=adv.reject{|q| q.affinity !='Staff'}
     str2="#{str2}\n<:Affinity_Divinity:758912216031952907> #{m.length} print#{'s' unless m.length==1} with Staff's Boon" if m.length>0
-    m=adv.reject{|q| ['Crown','Axe','Sword','Bow','Dragon','Lance','Eagle','Wolf','Bull','Serpent','Staff'].include?(q[2][1])}
+    m=adv.reject{|q| ['Crown','Axe','Sword','Bow','Dragon','Lance','Eagle','Wolf','Bull','Serpent','Staff'].include?(q.affinity )}
     str2="#{str2}\n#{m.length} print#{'s' unless m.length==1} with no affinity" if m.length>0
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     if safe_to_spam?(event)
       str2=''
-      m=adv.reject{|q| q[2][0]!='Attack'}
+      m=adv.reject{|q| q.amulet !='Attack'}
       str2="<:Type_Attack:532107867520630784> #{m.length} Attack-amulet print#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[2][0]!='Defense'}
+      m=adv.reject{|q| q.amulet !='Defense'}
       str2="#{str2}\n<:Type_Defense:532107867264909314> #{m.length} Defense-amulet print#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[2][0]!='Support'}
+      m=adv.reject{|q| q.amulet !='Support'}
       str2="#{str2}\n<:Type_Support:532107867575156747> #{m.length} Support-amulet print#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[2][0]!='Healing'}
+      m=adv.reject{|q| q.amulet !='Healing'}
       str2="#{str2}\n<:Type_Healing:532107867348533249> #{m.length} Healing-amulet print#{'s' unless m.length==1}" if m.length>0
       str2=str2[1,str2.length-1] if str2[0,1]=="\n"
       str2=str2[2,str2.length-2] if str2[0,2]=="\n"
       str=extend_message(str,str2,event,2)
       str2=''
-      m=adv.reject{|q| q[1].length>1}
+      m=adv.reject{|q| !q.availability.nil? && q.availability.length>0}
       str2="#{m.length} summonable print#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[1][1,1]!='w'}
+      m=adv.reject{|q| !q.availability.nil? && !q.availability.include?('w')}
       str2="#{str2}\n#{m.length} welfare print#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[1][1,1]!='s'}
+      m=adv.reject{|q| !q.availability.nil? && !q.availability.include?('s')}
       str2="#{str2}\n#{m.length} seasonal print#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[1][1,1]!='f'}
+      m=adv.reject{|q| !q.availability.nil? && !q.availability.include?('f')}
       str2="#{str2}\n#{m.length} former-seasonal print#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[1][1,1]!='z'}
+      m=adv.reject{|q| !q.availability.nil? && !q.availability.include?('z')}
       str2="#{str2}\n#{m.length} Zodiac print#{'s' unless m.length==1}" if m.length>0
       str=extend_message(str,str2,event,2)
     end
-=end
     event.respond str
     return nil
   elsif ['weapon','weapons','wpns','wpnz','wpn','weps','wepz','wep','weaps','weapz','weap'].include?(f.downcase)
-    str='This command is not yet ready'
-=begin
-    adv=@weapons.map{|q| q}
-    adv=find_in_weapons(bot,event,[f2],2)[1] unless f2.nil?
-    str="**There are #{adv.length} #{'<:Element_Void:548467446734913536> Void ' if find_in_weapons(bot,event,[f2],2)[0].include?('*Filters*: <:Element_Void:548467446734913536> Void')}weapons, including:**"
-    m=adv.reject{|q| q[1]!='Sword'}
+    adv=$weapons.map{|q| q}
+  #  adv=find_in_weapons(bot,event,[f2],2)[1] unless f2.nil?
+  #  str="**There are #{adv.length} #{'<:Element_Void:548467446734913536> Void ' if find_in_weapons(bot,event,[f2],2)[0].include?('*Filters*: <:Element_Void:548467446734913536> Void')}weapons, including:**"
+    str="**There are #{adv.length} weapons, including:**"
+    m=adv.reject{|q| q.type !='Sword'}
     str2="<:Weapon_Sword:532106114540634113> #{m.length} Sword#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[1]!='Blade'}
+    m=adv.reject{|q| q.type !='Blade'}
     str2="#{str2}\n<:Weapon_Blade:532106114628714496> #{m.length} Blade#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[1]!='Dagger'}
+    m=adv.reject{|q| q.type !='Dagger'}
     str2="#{str2}\n<:Weapon_Dagger:532106116025286656> #{m.length} Dagger#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[1]!='Axe'}
+    m=adv.reject{|q| q.type !='Axe'}
     str2="#{str2}\n<:Weapon_Axe:532106114188443659> #{m.length} Axe#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[1]!='Bow'}
+    m=adv.reject{|q| q.type !='Bow'}
     str2="#{str2}\n<:Weapon_Bow:532106114909732864> #{m.length} Bow#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[1]!='Lance'}
+    m=adv.reject{|q| q.type !='Lance'}
     str2="#{str2}\n<:Weapon_Lance:532106114792423448> #{m.length} Lance#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[1]!='Wand'}
+    m=adv.reject{|q| q.type !='Wand'}
     str2="#{str2}\n<:Weapon_Wand:532106114985099264> #{m.length} Wand#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[1]!='Staff'}
+    m=adv.reject{|q| q.type !='Staff'}
     str2="#{str2}\n<:Weapon_Staff:532106114733441024> #{m.length} #{'Staff' if m.length==1}#{'Staves' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[1]!='Manacaster'}
+    m=adv.reject{|q| q.type !='Manacaster'}
     str2="#{str2}\n<:Weapon_Manacaster:758905122448867338> #{m.length} Manacaster#{'s' unless m.length==1}" if m.length>0
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     str2=''
-    for i in 0...@max_rarity[3]
-      m=adv.reject{|q| q[2][0,1].to_i != i+1}
-      str2="#{str2}\n#{@rarity_stars[0][i+1]} #{m.length} #{['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'][i]}-star weapon#{'s' unless m.length==1}" if m.length>0
+    for i in 0...$max_rarity[3]
+      m=adv.reject{|q| q.rarity != i+1}
+      str2="#{str2}\n#{$rarity_stars[0][i+1]} #{m.length} #{['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'][i]}-star weapon#{'s' unless m.length==1}" if m.length>0
     end
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     str2=''
-    m=adv.reject{|q| q[3]!='None'}
+    m=adv.reject{|q| !['Flame','Water','Wind','Light','Shadow'].include?(q.element)}
     str2="<:Element_Null:532106087810334741> #{m.length} weapon#{'s' unless m.length==1} without an element" if m.length>0
-    m=adv.reject{|q| q[3]!='Flame'}
+    m=adv.reject{|q| q.element !='Flame'}
     str2="#{str2}\n<:Element_Flame:532106087952810005> #{m.length} Flame-element weapon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[3]!='Water'}
+    m=adv.reject{|q| q.element !='Water'}
     str2="#{str2}\n<:Element_Water:532106088221376522> #{m.length} Water-element weapon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[3]!='Wind'}
+    m=adv.reject{|q| q.element !='Wind'}
     str2="#{str2}\n<:Element_Wind:532106087948746763> #{m.length} Wind-element weapon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[3]!='Light'}
+    m=adv.reject{|q| q.element !='Light'}
     str2="#{str2}\n<:Element_Light:532106088129101834> #{m.length} Light-element weapon#{'s' unless m.length==1}" if m.length>0
-    m=adv.reject{|q| q[3]!='Shadow'}
+    m=adv.reject{|q| q.element !='Shadow'}
     str2="#{str2}\n<:Element_Shadow:532106088154267658> #{m.length} Shadow-element weapon#{'s' unless m.length==1}" if m.length>0
     str2=str2[1,str2.length-1] if str2[0,1]=="\n"
     str2=str2[2,str2.length-2] if str2[0,2]=="\n"
     str=extend_message(str,str2,event,2)
     if safe_to_spam?(event)
       str2=''
-      m=adv.reject{|q| q[2].length>1}
+      m=adv.reject{|q| !q.availability.nil? && q.availability.length>0}
       str2="#{m.length} craftable weapon#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[2][1,1]!='w'}
+      m=adv.reject{|q| !q.availability.nil? && !q.availability.include?('w')}
       str2="#{str2}\n#{m.length} welfare weapon#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[2][1,1]!='s'}
+      m=adv.reject{|q| !q.availability.nil? && !q.availability.include?('s')}
       str2="#{str2}\n#{m.length} seasonal weapon#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[2][1,1]!='f'}
+      m=adv.reject{|q| !q.availability.nil? && !q.availability.include?('f')}
       str2="#{str2}\n#{m.length} former-seasonal weapon#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[2][1,1]!='z'}
+      m=adv.reject{|q| !q.availability.nil? && !q.availability.include?('z')}
       str2="#{str2}\n#{m.length} Zodiac weapon#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[2][1,1]!='e'}
+      m=adv.reject{|q| !q.availability.nil? && !q.availability.include?('e')}
       str2="#{str2}\n#{m.length} starter weapon#{'s' unless m.length==1}" if m.length>0
-      m=adv.reject{|q| q[2][1,1]!='p'}
+      m=adv.reject{|q| !q.availability.nil? && !q.availability.include?('$')}
       str2="#{str2}\n#{m.length} paid weapon#{'s' unless m.length==1}" if m.length>0
       str2=str2[1,str2.length-1] if str2[0,1]=="\n"
       str2=str2[2,str2.length-2] if str2[0,2]=="\n"
       str=extend_message(str,str2,event,2)
     end
-=end
     event.respond str
     return nil
   elsif ['alts','alt','alternate','alternates','alternative','alternatives'].include?(f.downcase)
@@ -1437,6 +1753,7 @@ def snagstats(event,bot,f=nil,f2=nil)
       event << 'There are:'
       event << "#{longFormattedNumber(b.reject{|q| q[0,4]!='for '}.length)} `for` loops."
       event << "#{longFormattedNumber(b.reject{|q| q[0,6]!='while '}.length)} `while` loops."
+      event << "#{longFormattedNumber(b.reject{|q| q[0,6]!='class '}.map{|q| q.split(' < ')[0]}.uniq.length)} `class` definitions invoked a total of #{longFormattedNumber(b.reject{|q| q[0,6]!='class '}.length)} times."
       event << "#{longFormattedNumber(b.reject{|q| q[0,3]!='if '}.length)} `if` trees, along with #{longFormattedNumber(b.reject{|q| q[0,6]!='elsif '}.length)} `elsif` branches and #{longFormattedNumber(b.reject{|q| q[0,4]!='else'}.length)} `else` branches."
       event << "#{longFormattedNumber(b.reject{|q| q[0,7]!='unless '}.length)} `unless` trees."
       event << "#{longFormattedNumber(b.reject{|q| count_in(q,'[')<=count_in(q,']')}.length)} multi-line arrays."
