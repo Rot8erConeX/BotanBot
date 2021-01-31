@@ -112,9 +112,13 @@ def shard_data(mode=0,ignoredebug=false,s=nil)
   return k
 end
 
-system("color 0#{shard_data(3)[Shardizard,1]}")
-system("title loading #{shard_data(2)[Shardizard]} BotanBot")
-system("title loading Smol BotanBot") if Shardizard<0
+if Shardizard<0
+  system("color 09")
+  system("title loading Smol BotanBot")
+else
+  system("color 0#{shard_data(3)[Shardizard,1]}")
+  system("title loading #{shard_data(2)[Shardizard]} BotanBot")
+end
 
 $adventurers=[]
 $dragons=[]
@@ -125,6 +129,7 @@ $enemies=[]
 $skills=[]
 $abilities=[]
 
+$gauntlets=[]
 $facilities=[]
 $mats=[]
 $banners=[]
@@ -1161,7 +1166,8 @@ class DLWeapon
   end
   
   def stat_emotes
-    return ['<:HP_S:514712247503945739>','<:GenericAttackS:514712247587569664>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if @games[0]=='FEH'
+    return ['<:HP_S:514712247503945739>','<:MagicS:514712247289774111>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if @games[0]=='FEH' && ['Staff','Wand'].include?(@type)
+    return ['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if @games[0]=='FEH'
     return ['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if @games[0]=='FGO'
     return ['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if @games[0]=='MM'
     return ['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
@@ -1376,6 +1382,157 @@ class DLWeapon
   
 end
 
+class DLEnemy
+  attr_accessor :name
+  attr_accessor :stats
+  attr_accessor :element,:tribe,:subdata,:event
+  attr_accessor :weaknesses,:afflictions
+  attr_accessor :abilities
+  attr_accessor :sort_data
+  
+  def initialize(val)
+    @name=val
+    @abilities=[]
+  end
+  
+  def name=(val); @name=val; end
+  def weaknesses=(val); @weaknesses=val; end
+  def afflictions=(val); @afflictions=val; end
+  def abilities=(val); @abilities=[]; @abilities=val.split(';; ') unless val.nil? || val.length<=0 || val=='-'; end
+  
+  def stats=(val)
+    val=val.split('; ').map{|q| q.split(', ')}
+    for i in 0...val.length
+      val[i][1]=val[i][1].to_i
+      val[i][2]=val[i][2].to_i
+    end
+    @stats=val.map{|q| q}
+  end
+  
+  def data=(val)
+    val=val.split(', ')
+    @element=val[0]
+    @tribe=val[1]
+    @subdata=val[2]
+    @event=val[3] unless val.length<4
+  end
+  
+  def sort_data=(val); @sort_data=val; end
+  def objt; return 'Enemy'; end
+  
+  def stat_emotes
+    return ['<:HP_S:514712247503945739>','<:MagicS:514712247289774111>','Magic'] if !@event.nil? && @event[0,11]=='Fire Emblem'
+    return ['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','Strength'] if !@event.nil? && @event[0,11]=='Fire Emblem'
+    return ['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','Attack'] if !@event.nil? && false
+    return ['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','Strength'] if !@event.nil? && @event[0,8]=='Mega Man'
+    return ['<:HP:573344832307593216>','<:Strength:573344931205349376>','Strength']
+  end
+  
+  def class_header(bot,emotesonly=0,includerarity=false,includeobjt=false)
+    emtz=[]; str=''
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{@element.gsub('None','Null')}"}
+    moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{@element.gsub('Shadow','Dark').gsub('Flame','Fire').gsub('None','Null')}"} if !@event.nil? && @event[0,11]=='Fire Emblem'
+    emtz.push(moji[0].mention) unless moji.length<=0
+    str="#{moji[0].mention unless moji.length<=0} **Element:** #{@element}" unless ['High Dragon','Void','Imperial Order'].include?(@subdata)
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Tribe_#{@tribe}"}
+    if !@event.nil? && @event[0,11]=='Fire Emblem'
+      moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Infantry"}
+      moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Icon_Move_Armor"}unless @name.include?('(Enemy)')
+    end
+    emtz.push(moji[0].mention) unless moji.length<=0
+    str="#{str}#{"\n" if str.length>0}#{moji[0].mention unless moji.length<=0} **Tribe:** #{@tribe}"
+    if @event.nil?
+    elsif @event[0,11]=='Fire Emblem'
+      emtz.push('<:Great_Badge_Golden:443704781068959744>')
+    elsif false
+      emtz.push('<:Bond:613804021119189012>')
+    elsif @event[0,8]=='Mega Man'
+      emtz.push('<:Mega_Man:641484836304846857>')
+    elsif @event[0,14]=='Monster Hunter'
+      emtz.push('<:MH_Rathalos:669319247670804506>')
+    elsif @event[0,24]=='Princess Connect Re:Dive' || @event[0,8].downcase=='priconne'
+      emtz.push('<:Priconne:782554046887493652>')
+    elsif @event[0,9]=='Persona 5'
+      emtz.push('<:Take_Your_Heart:782553893204262923>')
+    end
+    return emtz if emotesonly==2
+    return emtz.join('') if emotesonly==1
+    return str
+  end
+  
+  def emotes(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
+  
+  def thumbnail(ext=0)
+    return 'https://github.com/Rot8erConeX/BotanBot/blob/master/FightBanners/Matilda_5.png?raw=true' if @name=='Matilda'
+    dispname=@name.gsub(' ','_')
+    m=false
+    IO.copy_stream(open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/FightBanners/Banner_#{dispname}.png"), "#{$location}devkit/DLTemp#{Shardizard}.png") rescue m=true
+    if File.size("#{$location}devkit/DLTemp#{Shardizard}.png")<=100 || m
+      dispname="#{dispname.gsub('_(Enemy)','')}"
+    end
+    return [nil,"https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/FightBanners/Banner_#{dispname}.png"]
+  end
+  
+  def disp_color(chain=0)
+    f=[]
+    xcolor=0xE3F78B
+    xcolor=0xEF8663 if @tribe=='Thaumian'
+    xcolor=0x5AD363 if @tribe=='Physian'
+    xcolor=0xAD9087 if @tribe=='Therion'
+    xcolor=0x271B2F if @tribe=='Dragon'
+    xcolor=0x3B4DBB if @tribe=='Demon'
+    xcolor=0x495218 if @tribe=='Demihuman'
+    xcolor=0xFFDC5D if @tribe=='Human'
+    xcolor=0xAD82DE if @tribe=='Undead'
+    f.push(xcolor)
+    xcolor=nil
+    xcolor=0xE73031 if @element=='Flame'
+    xcolor=0x1890DE if @element=='Water'
+    xcolor=0x00D771 if @element=='Wind'
+    xcolor=0xFFB90F if @element=='Light'
+    xcolor=0xA637DE if @element=='Shadow'
+    f.push(xcolor) unless xcolor.nil?
+    return f[0] if chain>=f.length
+    return f[chain]
+  end
+  
+  
+end
+
+class DLGauntlet
+  attr_accessor :name
+  attr_accessor :element,:stage
+  attr_accessor :hp,:str
+  attr_accessor :tribe,:subdata,:event
+  attr_accessor :weaknesses,:afflictions
+  attr_accessor :abilities
+  attr_accessor :reward
+  attr_accessor :sort_data
+  
+  def initialize(val)
+    @name=val
+  end
+  
+  def name=(val); @name=val; end
+  def element=(val); @element=val; end
+  def stage=(val); @stage=val.to_i; end
+  def tribe=(val); @tribe=val; end
+  def subdata=(val); @subdata=val; end
+  def event=(val); @event=val; end
+  def weaknesses=(val); @weaknesses=val; end
+  def afflictions=(val); @afflictions=val; end
+  def abilities=(val); @abilities=val.split(';; '); end
+  def reward=(val); @reward=val; end
+  
+  def hp=(val); @hp=val.to_i; end
+  def str=(val); @str=val.to_i; end
+  
+  def sort_data=(val); @sort_data=val; end
+  def objt; return 'Gauntlet'; end
+  
+  
+end
+
 # secondary entities
 
 class DLSkill
@@ -1507,6 +1664,9 @@ class DLAbility
   end
   
   
+end
+
+class DLStatus
 end
 
 # crossover crossreference entities
@@ -1703,6 +1863,52 @@ def data_load(to_reload=[])
       bob4.refinement_mats=b[i][23]
       bob4.post_refine_unbind_mats=b[i][24]
       $weapons.push(bob4)
+    end
+  end
+  if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['enemies','boss','enemy','bosses','enemie','enemys','bosss','gauntlet'])
+    if File.exist?("#{$location}devkit/DLEnemies.txt")
+      b=[]
+      File.open("#{$location}devkit/DLEnemies.txt").each_line do |line|
+        b.push(line)
+      end
+    else
+      b=[]
+    end
+    $enemies=[]
+    for i in 0...b.length
+      b[i]=b[i].gsub("\n",'').split('\\'[0])
+      bob4=DLEnemy.new(b[i][0])
+      bob4.stats=b[i][1]
+      bob4.data=b[i][2]
+      bob4.weaknesses=b[i][3]
+      bob4.afflictions=b[i][4]
+      bob4.abilities=b[i][5] unless b[i][5].nil? || b[i][5].length<=0 || b[i][5]=='-'
+      $enemies.push(bob4)
+    end
+    if File.exist?("#{$location}devkit/DLGauntlet.txt")
+      b=[]
+      File.open("#{$location}devkit/DLGauntlet.txt").each_line do |line|
+        b.push(line)
+      end
+    else
+      b=[]
+    end
+    $gauntlets=[]
+    for i in 0...b.length
+      b[i]=b[i].gsub("\n",'').split('\\'[0])
+      bob4=DLGauntlet.new(b[i][0])
+      bob4.element=b[i][1]
+      bob4.stage=b[i][2]
+      bob4.hp=b[i][3]
+      bob4.str=b[i][4]
+      bob4.tribe=b[i][5]
+      bob4.subdata=b[i][6] unless b[i][6].nil? || b[i][6].length<=0 || b[i][6]=='-'
+      bob4.event=b[i][7] unless b[i][7].nil? || b[i][7].length<=0 || b[i][7]=='-'
+      bob4.weaknesses=b[i][8]
+      bob4.afflictions=b[i][9]
+      bob4.abilities=b[i][10] unless b[i][10].nil? || b[i][10].length<=0 || b[i][10]=='-'
+      bob4.reward=b[i][11] unless b[i][11].nil? || b[i][11].length<=0 || b[i][11]=='-'
+      $gauntlets.push(bob4)
     end
   end
   if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['abil','ability','abilitys','abilities','abils','coabil','coability','coabilitys','coabilities','coabils','coab','coabs','aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca','cc','ccas','skill','skills','skls','skl','skil','skils'])
@@ -1955,7 +2161,7 @@ def all_commands(include_nil=false,permissions=-1)
   k=['reboot','help','commands','commandlist','command_list','embeds','embed','prefix','channelist','channellist','spamchannels','spamlist','bugreport','suggestion','feedback','adv',
      'donate','donation','shard','attribute','safe','spam','safetospam','safe2spam','long','longreplies','invite','sortaliases','tools','links','tool','link','resources','resource',
      'avatar','avvie','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','reload','update','adventurer','unit','stats',
-     'stat','smol','dragon','drg','drag','wyrmprint','wyrm','print','weapon','wep','weap','wpn','lineage','craft','crafting']
+     'stat','smol','dragon','drg','drag','wyrmprint','wyrm','print','weapon','wep','weap','wpn','lineage','craft','crafting','enemy','boss','affinity','resonance']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -2302,6 +2508,31 @@ def find_weapon(xname,event,fullname=false,ext=false)
   return $weapons[$weapons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
   return $weapons[$weapons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return nil
+end
+
+def find_enemy(xnam,event,fullname=false,ext=false)
+  data_load()
+  xnam=normalize(xnam)
+  xnam=xnam.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  return nil if xnam.length<2
+  k=$enemies.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xnam}
+  return $enemies[k] unless k.nil?
+  nicknames_load()
+  alz=$aliases.reject{|q| q[0]!='Enemy'}.map{|q| [q[1],q[2],q[3]]}
+  g=0
+  g=event.server.id unless event.server.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xnam && (q[2].nil? || q[2].include?(g))}
+  return $enemies[$enemies.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xnam && (q[2].nil? || q[2].include?(g))}
+  return $enemies[$enemies.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return nil if fullname || xnam.length<=2
+  k=$enemies.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xnam.length]==xnam}
+  return $enemies[k] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xnam.length]==xnam && (q[2].nil? || q[2].include?(g))}
+  return $enemies[$enemies.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xnam.length]==xnam && (q[2].nil? || q[2].include?(g))}
+  return $enemies[$enemies.find_index{|q| q.name==alz[k][1]}] unless k.nil?
   return nil
 end
 
@@ -3035,6 +3266,20 @@ bot.command([:weapon,:wep,:weap,:wpn]) do |event, *args|
   disp_weapon_stats(bot,event,args)
 end
 
+bot.command([:enemy,:boss]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+=begin
+  if args.nil? || args.length<=0
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    find_enemies(bot,event,args)
+    return nil
+  end
+=end
+  disp_enemy_data(bot,event,args)
+end
+
 
 
 bot.command([:stats,:stat,:smol]) do |event, *args|
@@ -3059,6 +3304,12 @@ bot.command([:lineage,:craft,:crafting]) do |event, *args|
 end
 
 
+
+bot.command([:affinity,:resonance]) do |event|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  affinity_resonance(event,bot)
+end
 
 bot.command([:embeds,:embed]) do |event|
   return nil if overlap_prevent(event)
@@ -3861,7 +4112,15 @@ bot.mention do |event|
   elsif ['weapon','weap','wep','wpn'].include?(args[0].downcase)
     m=false
     args.shift
-    disp_weapon_stats(bot,event,args)
+    if ['lineage','craft','crafting'].include?(args[0].downcase)
+      args.shift
+      disp_weapon_lineage(bot,event,args)
+    else
+      disp_weapon_stats(bot,event,args)
+    end
+  elsif ['affinity','resonance'].include?(args[0].downcase)
+    m=false
+    affinity_resonance(event,bot)
   elsif ['stats','stat'].include?(args[0].downcase)
     m=false
     if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
