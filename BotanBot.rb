@@ -1346,8 +1346,8 @@ def dragon_emoji(k,bot,ignorefeh=false)
     str="#{str}<:MH_Rathalos:669319247670804506>" if !k[16].nil? && k[16]=='MH'
     str="#{str}<:Mega_Man:641484836304846857>" if !k[16].nil? && k[16]=='MM'
     str="#{str}<:Bond:613804021119189012>" if !k[16].nil? && k[16]=='FGO'
-    str="#{str}<:Priconne:782554046887493652>" if !k[16].nil? && k[16]=='PC' && !advheader
-    str="#{str}<:Take_Your_Heart:782553893204262923>" if !k[16].nil? && k[16]=='P5S' && !advheader
+    str="#{str}<:Priconne:782554046887493652>" if !k[16].nil? && k[16]=='PC'
+    str="#{str}<:Take_Your_Heart:782553893204262923>" if !k[16].nil? && k[16]=='P5S'
   end
   return str
 end
@@ -1798,9 +1798,9 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       end
       str2="#{str2}\n#{"\n" unless skl1.nil? && skl2.nil?}<:SkillShare:714597012733034547> *Skill Sharing capacity:* #{longFormattedNumber(k[5][1])}" if k[5].length>1 && k[5][1]>0
       flds.push(['Skills',str2,1])
-      nde=1
-      nde=0 if !k[8][3].nil? && k[8][3].include?('3')
       unless k[8].nil? || k[8].length<=0
+        nde=1
+        nde=0 if !k[8][3].nil? && k[8][3].include?('3')
         a3="#{k[8][2][0]} (F#{5*nde})"
         a3="#{k[8][2][0]} (F#{3*nde}) \u2192 #{k[8][2][1]} (F5)" if k[1][0,1].to_i==5
         a3="#{k[8][2][0]} (F#{2*nde}) \u2192 #{k[8][2][1]} (F5)" if k[0]=='Euden'
@@ -7124,7 +7124,7 @@ bot.command([:adventurer,:adv,:unit]) do |event, *args| # TRANSFERRED
   disp_adventurer_stats(bot,event,args)
 end
 
-bot.command([:dragon,:drg,:drag]) do |event, *args|
+bot.command([:dragon,:drg,:drag]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
   elsif ['find','search'].include?(args[0].downcase)
@@ -7147,7 +7147,7 @@ bot.command([:dragon,:drg,:drag]) do |event, *args|
   disp_dragon_stats(bot,event,args)
 end
 
-bot.command([:wyrmprint,:wyrm,:print]) do |event, *args|
+bot.command([:wyrmprint,:wyrm,:print]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
   elsif ['find','search'].include?(args[0].downcase)
@@ -7170,7 +7170,7 @@ bot.command([:wyrmprint,:wyrm,:print]) do |event, *args|
   disp_wyrmprint_stats(bot,event,args)
 end
 
-bot.command([:weapon,:wep,:weap,:wpn]) do |event, *args|
+bot.command([:weapon,:wep,:weap,:wpn]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
   elsif ['find','search'].include?(args[0].downcase)
@@ -7289,7 +7289,7 @@ bot.command([:dmg,:damage,:combo]) do |event, *args|
   disp_damage_modifiers(bot,event,args)
 end
 
-bot.command([:stats,:stat,:smol]) do |event, *args|
+bot.command([:stats,:stat,:smol]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
     disp_adventurer_stats(bot,event,args,true)
@@ -7326,7 +7326,7 @@ bot.command([:art]) do |event, *args|
   return nil
 end
 
-bot.command([:enemy,:boss]) do |event, *args|
+bot.command([:enemy,:boss]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
   elsif ['find','search'].include?(args[0].downcase)
