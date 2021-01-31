@@ -1829,8 +1829,8 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     end
     title="#{title}  #{titlex[-1]}"
     lv=[3,3,k[8][0].length,k[8][1].length,k[8][2].length]
-    lv[0]=4 unless skl1[11].nil? || skl1[11].length<=0
-    lv[1]=2 if skl2[5].nil? || skl2[5].length<=0
+    lv[0]=4 unless skl1.nil? || skl1[11].nil? || skl1[11].length<=0
+    lv[1]=2 if skl2.nil? || skl2[5].nil? || skl2[5].length<=0
     lv=[3,2,2,2,1] if rar==5
     lv[4]=2 if k[1][0,1].to_i==5 && rar==5
     lv[4]=2 if k[0]=='Euden' && rar==5
