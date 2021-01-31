@@ -426,6 +426,7 @@
 ["WindIO", ["windimperialonslaught", "windio", "windonslaught"], "Mat"]
 ["Wyrmprints", ["print", "prints", "wyrmprint", "wyrmprints"], "Mat"]
 ["Zodiark", ["zod", "zodiark", "zoroarc"], "Mat"]
+["AI", ["ai", "artificalintelligence", "computerbrain", "computer", "smartphone", "phone", "iphone"], "Race"]
 ["Android", ["android", "droid", "reploid"], "Race"]
 ["Crystalian", ["crystalian", "crystalia", "gnome", "gnomes"], "Race"]
 ["Dog", ["dog", "doge", "goodboi", "goodboy", "goodboye"], "Race"]
