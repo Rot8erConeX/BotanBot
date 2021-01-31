@@ -272,6 +272,7 @@
 ["Whirlwind", ["whirlwind", "creepflurry", "betterflurry", "flurry10", "10flurry", "hits10"], "Askillity"]
 ["WhirlwindRes", ["whirlwindres", "whirlwindresist", "whirlwindresistance"], "Askillity"]
 ["WindBias", ["biaswind", "windbias"], "Askillity"]
+["WindDamage", ["winddamage", "winddmg"], "Askillity"]
 ["WindRes", ["windres", "windresistance"], "Askillity"]
 ["WindPunisher", ["windpunisher", "windpunish"], "Askillity"]
 ["WonderGuard", ["wonderguard"], "Askillity"]
