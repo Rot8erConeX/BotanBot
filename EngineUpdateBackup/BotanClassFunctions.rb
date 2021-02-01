@@ -447,6 +447,58 @@ class DLAdventurer
     return true if m.length>0
     return false
   end
+  
+  def rar_row(r=0)
+    r=@rarity if rar<=@rarity
+    return generate_rarity_row(r,$max_rarity[0],@games[0])
+  end
+  
+  def portrait(event,forcerar=nil)
+    args=event.message.text.downcase.split(' ')
+    rar=0
+    lookout=$skilltags.lookout.reject{|q| q[2]!='Art' && q[2]!='Art/Adventurer'}
+    rarval=[]
+    for i in 0...$max_rarity[0]+1
+      rarval.push(i)
+    end
+    for i in 0...args.length
+      rar=args[i].to_i if rar==0 && args[i].to_i.to_s==args[i] && args[i].to_i>2 && args[i].to_i<$max_rarity[0]+1
+      rar=args[i].to_i if rar==0 && args[i][1,1]=='*' && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>2 && args[i][0,1].to_i<$max_rarity[0]+1
+      for j in 0...lookout.length
+        rar=lookout[j][0] if rarval.include?(rar) && lookout[j][1].include?(args[i].downcase)
+      end
+    end
+    rar=forcerar unless forcerar.nil?
+    rar='Dress_Blue' if args.map{|q| q.downcase}.include?('dress') && !rar.is_a?(String)
+    if @name=='Xainfried' && rar=='Animal' && has_any?(['christmas','winter','dy','dragonyule','santa'],args.map{|q| q.downcase})
+      k=$adventurers.find_index{|q| q.name=='Xainfried(Dragonyule)'}
+      unless k.nil?
+        k=$adventurers[k].clone
+        m=k.portrait(event,'Animal')
+        return [m[0],'Animals dressed for Dragonyule']
+      end
+    end
+    rar=@rarity if rar==0
+    dispname=@name.gsub(' ','_')
+    if rar.is_a?(String)
+      m=false
+      art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Adventurers/#{dispname}_#{rar}.png"
+      IO.copy_stream(open(art), "#{$location}devkit/DLTemp#{Shardizard}.png") rescue m=true
+      if File.size("#{$location}devkit/DLTemp#{Shardizard}.png")<=100 || m
+        disp="#{self.rar_row}"
+      elsif rar=='NPC'
+        rar=1
+        disp="#{self.rar_row(1)}"
+      else
+        disp="#{rar.gsub('Dress_Blue','Blue dress').gsub('Dress_Red','Red dress')} design"
+      end
+    else
+      rar=@rarity if rar<@rarity || rar>$max_rarity[0]
+      disp="#{self.rar_row(rar)}"
+    end
+    art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Adventurers/#{dispname}_#{rar}.png"
+    return [art,disp]
+  end
 end
 
 class DLDragon
@@ -461,7 +513,7 @@ class DLDragon
     return 'them'
   end
   
-  def rar_row
+  def rar_row(r=0)
     str=generate_rarity_row(@rarity,0,@games[0])
     if ['Bronze Fafnir','Silver Fafnir','Gold Fafnir'].include?(@name)
       m=0
@@ -474,6 +526,33 @@ class DLDragon
       str=emt*@rarity
     end
     return str
+  end
+  
+  def portrait(event,forcerar=nil)
+    args=event.message.text.downcase.split(' ')
+    lookout=$skilltags.lookout.reject{|q| q[2]!='Art' && q[2]!='Art/Dragon'}
+    for i in 0...args.length
+      for j in 0...lookout.length
+        rar=lookout[j][0] if rar.nil? && lookout[j][1].include?(args[i].downcase)
+      end
+    end
+    dispname=@name.gsub(' ','_')
+    if rar.nil? && @name=='Brunhilda' && args.include?('mym')
+      rar='Human'
+      disp="#{self.rar_row}"
+    end
+    if !rar.nil? && rar.is_a?(String)
+      art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Dragons/#{dispname}#{"_#{rar}" unless rar.nil?}.png"
+      m=false
+      IO.copy_stream(open(art), "#{$location}devkit/DLTemp#{Shardizard}.png") rescue m=true
+      if File.size("#{$location}devkit/DLTemp#{Shardizard}.png")<=100 || m
+        rar=nil
+      else
+        disp="#{disp}\n#{rar} design\n"
+      end
+    end
+    art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Dragons/#{dispname}#{"_#{rar}" unless rar.nil?}.png"
+    return[art,disp]
   end
 end
 
@@ -490,6 +569,29 @@ class DLWyrmprint
     str="This print entry only exists to contain the combined art of the #{@name} series of wyrmprints.  For individual pieces of this series, use their subtitles:\n#{pr.join("\n")}"
     str="\n#{str}" if !@obtain.nil? && @obtain.length>0
     return str
+  end
+  
+  def rar_row(r=0)
+    return generate_rarity_row(@rarity,0,@games[0])
+  end
+  
+  def portrait(event,forcerar=nil)
+    dispname=@name.gsub(' ','_')
+    l=1
+    l=2 if has_any?(['mub','unbind','unbound','refined','refine','refinement','2ub','3ub'],event.message.text.downcase.split(' '))
+    art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Wyrmprints/#{dispname}_#{l}.png"
+    emtz=['','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>']
+    emtz=['','<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>'] if @games[0]=='FEH'
+    halfemote="\u200B  \u200B  \u200B  \u200B"
+    disp="#{halfemote*(4-@rarity) if @rarity<4}#{" \u200B" if @rarity<3}#{self.rar_row}"
+    disp="#{disp}\n#{"#{halfemote} \u200B" if @rarity==5}#{emtz[l]*4}"
+    return [art,disp]
+  end
+end
+
+class DLWeapon
+  def rar_row(r=0)
+    return generate_rarity_row(@rarity,0,@games[0])
   end
 end
 
@@ -516,6 +618,99 @@ class DLEnemy
     return [] if x.length<=0
     m=$enemies.reject{|q| !x.include?(q.name)}.map{|q| q.clone}
     return m
+  end
+  
+  def rar_row(r=0)
+    return ''
+  end
+  
+  def portrait(event,forcerar=nil)
+    args=event.message.text.downcase.split(' ')
+    lookout=$skilltags.lookout.reject{|q| q[2]!='Art' && q[2]!='Art/Enemy'}
+    dispname=@name.gsub(' ','_')
+    for i in 0...args.length
+      for j in 0...lookout.length
+        rar=lookout[j][0] if rar.nil? && lookout[j][1].include?(args[i].downcase)
+      end
+    end
+    disp=''
+    if !rar.nil? && rar.is_a?(String)
+      art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Bosses/#{dispname}#{"_#{rar}" unless rar.nil?}.png"
+      IO.copy_stream(open(art), "#{$location}devkit/DLTemp#{Shardizard}.png") rescue m=true
+      if File.size("#{$location}devkit/DLTemp#{Shardizard}.png")<=100 || m
+        rar=nil
+      else
+        disp="#{disp}\n#{rar} design\n"
+      end
+    end
+    art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Bosses/#{dispname}#{"_#{rar}" unless rar.nil?}.png"
+    return [art,disp]
+  end
+end
+
+class DL_NPC
+  def rar_row(r=0)
+    g=''
+    g='FEH' if ['Loki','Thorr'].include?(@name)
+    r=@rarity*1
+    unless @rarity<3
+      r/=2
+      r=2 if r>2
+    end
+    r=6 if @name=='Notte'
+    m=$max_rarity[0,2].max
+    str=generate_rarity_row(r,m,g)
+    str=generate_rarity_row(r,0,g) if @lock
+    unless r==@rarity
+      x=$rarity_stars[0].map{|q| q}
+      x=FEH_rarity_stars.map{|q| q} if g=='FEH'
+      x=FGO_rarity_stars.map{|q| q} if g=='FGO'
+      str=x[r]*@rarity
+      unless @lock
+        x=$rarity_stars[1][r]
+        x='<:Icon_Rarity_Empty:631460895851282433>' if g=='FEH'
+        x='<:FGO_rarity_inverted:544568437029208094>' if g=='FGO'
+        str="#{str}#{x*(m-@rarity)}"
+      end
+    end
+    return str
+  end
+  
+  def portrait(event,forcerar=nil)
+    args=event.message.text.downcase.split(' ')
+    lookout=$skilltags.lookout.reject{|q| q[2]!='Art' && q[2]!='Art/NPC'}
+    dispname=@name.gsub(' ','_')
+    for i in 0...args.length
+      for j in 0...lookout.length
+        rar=lookout[j][0] if rar.nil? && lookout[j][1].include?(args[i].downcase)
+      end
+    end
+    if !rar.nil? && rar.is_a?(String)
+      art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Misc/#{dispname}#{"_#{rar}" unless rar.nil?}.png"
+      m=false
+      IO.copy_stream(open(art), "#{$location}devkit/DLTemp#{Shardizard}.png") rescue m=true
+      if File.size("#{$location}devkit/FGOTemp#{Shardizard}.png")<=100 || m
+        rar=nil
+      else
+        disp="#{disp}\n#{rar} design\n"
+      end
+    end
+    art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Misc/#{dispname}#{"_#{rar}" unless rar.nil?}.png"
+    return [art,disp]
+  end
+end
+
+class DLSticker
+  def rar_row(r=0)
+    return ''
+  end
+  
+  def portrait(event,forcerar=nil)
+    args=event.message.text.downcase.split(' ')
+    nme=@name.gsub(' ','_').gsub('!','').gsub('?','')
+    nme="#{nme}(JP)" if has_any?(args,['jp','japan'])
+    art="https://github.com/Rot8erConeX/BotanBot/blob/master/Art/Stickers/#{nme}.png?raw=true"
+    return [art,'']
   end
 end
 
