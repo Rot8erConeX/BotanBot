@@ -135,7 +135,7 @@ $mats=[]
 $banners=[]
 $statuses=[]
 
-$emotes=[]
+$stickers=[]
 $npcs=[]
 
 $aliases=[]
@@ -1420,6 +1420,11 @@ class DLEnemy
   def sort_data=(val); @sort_data=val; end
   def objt; return 'Enemy'; end
   
+  def fullName(format=nil)
+    return @name if format.nil?
+    return "#{format}#{@name}#{format.reverse}"
+  end
+  
   def stat_emotes
     return ['<:HP_S:514712247503945739>','<:MagicS:514712247289774111>','Magic'] if !@event.nil? && @event[0,11]=='Fire Emblem'
     return ['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','Strength'] if !@event.nil? && @event[0,11]=='Fire Emblem'
@@ -1530,6 +1535,40 @@ class DLGauntlet
   def sort_data=(val); @sort_data=val; end
   def objt; return 'Gauntlet'; end
   
+  def fullName(format=nil)
+    return @name if format.nil?
+    return "#{format}#{@name}#{format.reverse}"
+  end
+  
+  
+end
+
+class DL_NPC
+  attr_accessor :name
+  attr_accessor :rarity,:lock
+  attr_accessor :voice_na,:voice_jp
+  
+  def initialize(val)
+    @name=val
+  end
+  
+  def name=(val); @name=val; end
+  def rarity=(val); @rarity=[val.to_i,6].min; end
+  def lock=(val); @lock=false; @lock=true if val=='y'; end
+  
+  def voice_na=(val); @voice_na=val; end
+  def voice_jp=(val); @voice_jp=val; end
+  def objt; return 'NPC'; end
+  
+  def fullName(format=nil)
+    return @name if format.nil?
+    return "#{format}#{@name}#{format.reverse}"
+  end
+  
+  def emotes(bot,includerarity=true,includeobjt=false); return ''; end
+  
+  def disp_color(chain=0); return 0xCE456B; end
+  
   
 end
 
@@ -1544,6 +1583,7 @@ class DLSkill
   attr_accessor :energize
   attr_accessor :invulnerability
   attr_accessor :tags
+  attr_accessor :sort_data
   
   def initialize(val)
     @name=val
@@ -1556,6 +1596,8 @@ class DLSkill
   def energize=(val); @energize=false; @energize=true if val=='Yes'; end
   def invulnerability=(val); @invulnerability=val.to_f; end
   def tags=(val); @tags=val.split(', '); end
+  
+  def sort_data=(val); @sort_data=val; end
   def objt; return 'Skill'; end
   
   def sp_cost=(val)
@@ -1600,13 +1642,23 @@ class DLSkill
   def sp_display(level=0)
     return [self.sp_display(1),self.sp_display(2),self.sp_display(3),self.sp_display(4),self.sp_display(5)] if level==0
     return '' if level<0 && (@sharing.nil? || @sharing.length<=0)
+    xlevel=level*1
     level=-1 if level<0
     x=@sp_cost[level-1]*1
     x=@sharing[1]*1 if level<0
-    m=[x*1]
+    x2=x*1
+    x2=23*x/20 if xlevel==-2
+    x2=13*x/10 if xlevel==-3
+    m=[x2]
     unless @sp_oddity.nil? || @sp_oddity.length<=0 || (@sp_oddity.map{|q| q[level]}.uniq.length<=1 && @sp_oddity[0][level]==x)
       for i in 0...@sp_oddity.length
-        m.push(@sp_oddity[i][level]*1)
+        if xlevel==-2
+          m.push(@sp_oddity[i][level]*23/20)
+        elsif xlevel==-3
+          m.push(@sp_oddity[i][level]*13/10)
+        else
+          m.push(@sp_oddity[i][level]*1)
+        end
       end
     end
     return m.map{|q| longFormattedNumber(q)}.join("\u2192")
@@ -1618,6 +1670,13 @@ class DLSkill
   end
   
   def level_text(l,f,long=false)
+    if l<=0
+      m=[]
+      for i in 0...@description.length
+        m.push(self.level_text(i+1,-1,long))
+      end
+      return m.join(" \u2192 ")
+    end
     return "Lv.#{l}" if long && f<0
     return "Lv.#{l}/Floor #{f}" if long
     str="Lv.#{l}"
@@ -1627,6 +1686,62 @@ class DLSkill
     str="#{str} (#{m.join(', ')})" if m.length>0
     return str
   end
+  
+  def thumbnail(ext=0)
+    dispname=@name.gsub(' ','_')
+    return "https://github.com/Rot8erConeX/BotanBot/blob/master/Skills/#{dispname}.png?raw=true"
+  end
+  
+  def disp_color(chain=0)
+    f=[]
+    xcolor=0x02010a
+    xcolor=0xE73031 if self.element=='Flame'
+    xcolor=0x1890DE if self.element=='Water'
+    xcolor=0x00D771 if self.element=='Wind'
+    xcolor=0xFFB90F if self.element=='Light'
+    xcolor=0xA637DE if self.element=='Shadow'
+    f.push(xcolor) unless xcolor.nil?
+    return f[0] if chain>=f.length
+    return f[chain]
+  end
+  
+  def element
+    m=[]
+    m.push('Flame') if @description[0].downcase.include?('flame damage')
+    m.push('Water') if @description[0].downcase.include?('water damage')
+    m.push('Wind') if @description[0].downcase.include?('wind damage')
+    m.push('Light') if @description[0].downcase.include?('light damage')
+    m.push('Shadow') if @description[0].downcase.include?('shadow damage')
+    return m[0] if m.length==1
+    return 'None'
+  end
+  
+  def energy_emoji(pad=false)
+    e=[]; ins=[]
+    k=@tags.map{|q| q}
+    for i in 0...k.length
+      e.push(k[i][1,k[i].length-1].to_i) if k[i][0,1]=='E' && k[i][1,k[i].length-1].to_i.to_s==k[i][1,k[i].length-1]
+      ins.push(k[i][1,k[i].length-1].to_i) if k[i][0,1]=='I' && k[i][1,k[i].length-1].to_i.to_s==k[i][1,k[i].length-1]
+    end
+    s=''
+    if pad
+      s=", <:Energy:534451856286679040>#{e.sort.map{|q|micronumber(q)}.join(' ')} Energy increase" if e.length>0
+      s="#{s}, <:Inspiration:688916574643421283>#{ins.sort.map{|q|micronumber(q)}.join(' ')} Inspiration increase" if ins.length>0
+    else
+      s="<:Energy:534451856286679040>#{e.sort.map{|q|micronumber(q)}.join(' ')}" if e.length>0
+      s="#{s}<:Inspiration:688916574643421283>#{ins.sort.map{|q|micronumber(q)}.join(' ')}" if ins.length>0
+    end
+    return s
+  end
+  
+  def emotes(bot,includerarity=true,includeobjt=false)
+    return '' if self.element=='None'
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{self.element}"}
+    return moji[0].mention unless moji.length<=0
+    return ''
+  end
+  
+  
 end
 
 class DLAbility
@@ -1667,6 +1782,69 @@ class DLAbility
 end
 
 class DLStatus
+  attr_accessor :name
+  attr_accessor :slot
+  attr_accessor :player_effect
+  attr_accessor :enemy_effect
+  
+  def initialize(val)
+    @name=val
+  end
+  
+  def name=(val); @name=val; end
+  def slot=(val); @slot=val.to_i; end
+  def player_effect=(val); @player_effect=val.gsub(';; ',"\n"); end
+  def enemy_effect=(val); @enemy_effect=val.gsub(';; ',"\n"); end
+  def objy; return 'Status'; end
+  
+  def fullName(format=nil)
+    return @name if format.nil?
+    return "#{format}#{@name}#{format.reverse}"
+  end
+  
+  def thumbnail(ext=0)
+    dispname=@name.gsub(' ','_')
+    return "https://github.com/Rot8erConeX/BotanBot/blob/master/Status/#{dispname}.png?raw=true"
+  end
+  
+  def disp_color(chain=0)
+    f=[]
+    xcolor=0xE3F78B
+    xcolor=0xE73031 if @name=='Burn'
+    xcolor=0x1890DE if @name=='Freeze'
+    xcolor=0x00D771 if @name=='Sleep'
+    xcolor=0xFFB90F if @name=='Blind'
+    xcolor=0xA637DE if @name=='Curse'
+    f.push(xcolor)
+    return f[0] if chain>=f.length
+    return f[chain]
+  end
+  
+  
+end
+
+class DLSticker
+  attr_accessor :name
+  attr_accessor :charas
+  
+  def initialize(val)
+    @name=val
+  end
+  
+  def name=(val); @name=val; end
+  def charas=(val); @charas=val.split(', '); end
+  def objt; return 'Sticker'; end
+  
+  def fullName(format=nil)
+    return @name if format.nil?
+    return "#{format}#{@name}#{format.reverse}"
+  end
+  
+  def emotes(bot,includerarity=true,includeobjt=false); return ''; end
+  
+  def disp_color(chain=0); return 0xCE456B; end
+  
+  
 end
 
 # crossover crossreference entities
@@ -1911,6 +2089,43 @@ def data_load(to_reload=[])
       $gauntlets.push(bob4)
     end
   end
+  if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['npc','npcs'])
+    if File.exist?("#{$location}devkit/DL_NPCs.txt")
+      b=[]
+      File.open("#{$location}devkit/DL_NPCs.txt").each_line do |line|
+        b.push(line)
+      end
+    else
+      b=[]
+    end
+    $npcs=[]
+    for i in 0...b.length
+      b[i]=b[i].gsub("\n",'').split('\\'[0])
+      bob4=DL_NPC.new(b[i][0])
+      bob4.rarity=b[i][1]
+      bob4.lock=b[i][2]
+      bob4.voice_na=b[i][3] unless b[i][3].nil? || b[i][3].length<=0 || b[i][3]=='-'
+      bob4.voice_jp=b[i][4] unless b[i][4].nil? || b[i][4].length<=0 || b[i][4]=='-'
+      $npcs.push(bob4)
+    end
+  end
+  if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['emote','emotes','sticker','stickers'])
+    if File.exist?("#{$location}devkit/DLEmotes.txt")
+      b=[]
+      File.open("#{$location}devkit/DLEmotes.txt").each_line do |line|
+        b.push(line)
+      end
+    else
+      b=[]
+    end
+    $stickers=[]
+    for i in 0...b.length
+      b[i]=b[i].gsub("\n",'').split('\\'[0])
+      bob4=DLSticker.new(b[i][0])
+      bob4.charas=b[i][1]
+      $stickers.push(bob4)
+    end
+  end
   if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['abil','ability','abilitys','abilities','abils','coabil','coability','coabilitys','coabilities','coabils','coab','coabs','aura','auras','chaincoabil','chaincoability','chaincoabilitys','chaincoabilities','chaincoabils','chaincoab','chaincoabs','coabilchain','coabilitychain','coabilitychains','chain','coabilchains','coabchain','coabchains','cca','cc','ccas','skill','skills','skls','skl','skil','skils'])
     if File.exist?("#{$location}devkit/DLSkills.txt")
       b=[]
@@ -1947,6 +2162,25 @@ def data_load(to_reload=[])
         bob4.tags=b[i][6]
         $abilities.push(bob4)
       end
+    end
+  end
+  if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['status','ailment','affliction'])
+    if File.exist?("#{$location}devkit/DLStatus.txt")
+      b=[]
+      File.open("#{$location}devkit/DLStatus.txt").each_line do |line|
+        b.push(line)
+      end
+    else
+      b=[]
+    end
+    $statuses=[]
+    for i in 0...b.length
+      b[i]=b[i].gsub("\n",'').split('\\'[0])
+      bob4=DLStatus.new(b[i][0])
+      bob4.slot=b[i][1]
+      bob4.player_effect=b[i][2] unless b[i][2].nil? || b[i][2].length<=0 || b[i][2]=='-'
+      bob4.enemy_effect=b[i][3] unless b[i][3].nil? || b[i][3].length<=0 || b[i][3]=='-'
+      $statuses.push(bob4)
     end
   end
   if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['tags','tag'])
@@ -2161,7 +2395,8 @@ def all_commands(include_nil=false,permissions=-1)
   k=['reboot','help','commands','commandlist','command_list','embeds','embed','prefix','channelist','channellist','spamchannels','spamlist','bugreport','suggestion','feedback','adv',
      'donate','donation','shard','attribute','safe','spam','safetospam','safe2spam','long','longreplies','invite','sortaliases','tools','links','tool','link','resources','resource',
      'avatar','avvie','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','reload','update','adventurer','unit','stats',
-     'stat','smol','dragon','drg','drag','wyrmprint','wyrm','print','weapon','wep','weap','wpn','lineage','craft','crafting','enemy','boss','affinity','resonance']
+     'stat','smol','dragon','drg','drag','wyrmprint','wyrm','print','weapon','wep','weap','wpn','lineage','craft','crafting','enemy','boss','affinity','resonance','affliction','skil',
+     'status','ailment','skill']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -2199,12 +2434,12 @@ def spaceship_order(x)
   return 1300
 end
 
-def generate_rarity_row(rar,blanks=0,feh='')
+def generate_rarity_row(rar,blanks=0,game='')
   blanks=rar*1 if blanks<=0
   disprar=rar*1
   disprar=blanks*1 if rar<=0
-  return "#{FGO_rarity_stars[rar]*([disprar,blanks].min)}#{'<:FGO_rarity_inverted:544568437029208094>'*(blanks-disprar) if blanks>disprar}" if feh=='FGO'
-  return "#{FEH_rarity_stars[rar]*([disprar,blanks].min)}#{'<:Icon_Rarity_Empty:631460895851282433>'*(blanks-disprar) if blanks>disprar}" if feh=='FEH'
+  return "#{FGO_rarity_stars[rar]*([disprar,blanks].min)}#{'<:FGO_rarity_inverted:544568437029208094>'*(blanks-disprar) if blanks>disprar}" if game=='FGO'
+  return "#{FEH_rarity_stars[rar]*([disprar,blanks].min)}#{'<:Icon_Rarity_Empty:631460895851282433>'*(blanks-disprar) if blanks>disprar}" if game=='FEH'
   return "#{$rarity_stars[0][rar]*([disprar,blanks].min)}#{$rarity_stars[1][rar]*(blanks-disprar) if blanks>disprar}"
 end
 
@@ -2236,20 +2471,22 @@ def find_data_ex(callback,name,event,fullname=false,ext=false,includematch=false
 end
 
 def find_best_match(name,bot,event,fullname=false,ext=false,mode=1,ext2=nil)
-  functions=[[:find_adventurer,:disp_adventurer_stats,:disp_adventurer_art,:disp_adventurer_stats,:find_adv_alts],
-             [:find_dragon,:disp_dragon_stats,:disp_dragon_art,:disp_dragon_stats,:find_dragon_alts],
-             [:find_wyrmprint,:disp_wyrmprint_stats,:disp_wyrmprint_art,:disp_wyrmprint_stats],
-             [:find_weapon,:disp_weapon_stats,nil,:disp_weapon_stats],
-             [:find_enemy,:disp_enemy_data,:disp_boss_art],
-             [:find_skill,:disp_skill_data],
-             [:find_ability,:disp_ability_data],
-             [:find_status,:disp_status_data],
-             [:find_facility,:disp_facility_data],
-             [:find_mat,:disp_mat_data],
-             [:find_emote,:disp_emote_art,:disp_emote_art],
-             [:find_npc,:disp_npc_art,:disp_npc_art]]
+  functions=[[:find_adventurer,:disp_adventurer_stats,'', :disp_adventurer_stats,:find_adv_alts],
+             [:find_dragon,    :disp_dragon_stats,    '', :disp_dragon_stats,    :find_dragon_alts],
+             [:find_wyrmprint, :disp_wyrmprint_stats, '', :disp_wyrmprint_stats],
+             [:find_weapon,    :disp_weapon_stats,    nil,                 :disp_weapon_stats],
+             [:find_enemy,     :disp_enemy_data,      ''],
+             [:find_skill,     :disp_skill_data],
+             [:find_ability,   :disp_ability_data],
+             [:find_status,    :disp_status_data],
+             [:find_facility,  :disp_facility_data],
+             [:find_mat,       :disp_mat_data],
+             [:find_sticker,   :disp_emote_art,       ''],
+             [:find_npc,       :disp_npc_art,         '']]
+  functions=functions.reject{|q| q[mode].nil?} if mode>0
   for i3 in 0...functions.length
     k=method(functions[i3][0]).call(name,event,true,ext)
+    return k if [0,2].include?(mode) && !k.nil?
     return method(functions[i3][mode]).call(bot,event,name.split(' '),ext2) if !functions[i3][mode].nil? && !k.nil?
   end
   args=name.split(' ')
@@ -2257,6 +2494,7 @@ def find_best_match(name,bot,event,fullname=false,ext=false,mode=1,ext2=nil)
     for i2 in 0...args.length-i
       for i3 in 0...functions.length
         k=method(functions[i3][0]).call(args[i,args.length-i-i2].join(' '),event,true,ext)
+        return k if [0,2].include?(mode) && !k.nil?
         return method(functions[i3][mode]).call(bot,event,args,ext2) if !functions[i3][mode].nil? && !k.nil? && args[i,args.length-i-i2].length>0
       end
     end
@@ -2265,12 +2503,14 @@ def find_best_match(name,bot,event,fullname=false,ext=false,mode=1,ext2=nil)
   return nil if fullname || name.length<=2
   for i3 in 0...functions.length
     k=method(functions[i3][0]).call(name,event,false,ext)
+    return k if [0,2].include?(mode) && !k.nil?
     return method(functions[i3][mode]).call(bot,event,name.split(' '),ext2) if !functions[i3][mode].nil? && !k.nil?
   end
   args=name.split(' ')
   for i in 0...args.length
     for i2 in 0...args.length-i
       k=method(functions[i3][0]).call(args[i,args.length-i-i2].join(' '),event,false,ext)
+      return k if [0,2].include?(mode) && !k.nil?
       return method(functions[i3][mode]).call(bot,event,args,ext2) if !functions[i3][mode].nil? && !k.nil? && args[i,args.length-i-i2].length>0
     end
   end
@@ -2284,11 +2524,11 @@ def find_adventurer(xname,event,fullname=false,skipnpcs=false)
   xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   adv=$adventurers.map{|q| q}
   return nil if xname.length<2
- # return [] if (find_npc(xname,event,true).length>0 || xname.downcase=='mym') && skipnpcs
+  return nil if (!find_npc(xname,event,true).nil? || xname.downcase=='mym') && skipnpcs
   k=adv.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
   return adv[k] unless k.nil?
   nicknames_load()
- # alz=$aliases.reject{|q| q[0]!='Adventurer' && !(q[0]=='NPC' && @npcs.find_index{|q2| q2[0]==q[2]}.nil?)}.map{|q| [q[1],q[2],q[3]]}
+  alz=$aliases.reject{|q| q[0]!='Adventurer' && !(q[0]=='NPC' && $npcs.find_index{|q2| q2[0]==q[2]}.nil?)}.map{|q| [q[1],q[2],q[3]]}
   alz=$aliases.reject{|q| q[0]!='Adventurer'}.map{|q| [q[1],q[2],q[3]]}
   g=0
   g=event.server.id unless event.server.nil?
@@ -2297,10 +2537,10 @@ def find_adventurer(xname,event,fullname=false,skipnpcs=false)
   k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
   return adv[adv.find_index{|q| q.name==alz[k][1]}] unless k.nil?
   return nil if fullname || xname.length<=2
- # return nil if find_npc(xname,event).length>0 && skipnpcs
+  return nil if !find_npc(xname,event).nil? && skipnpcs
   k=adv.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
   return adv[k] unless k.nil?
-  k=alz.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
   return adv[adv.find_index{|q| q.name==alz[k][1]}] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
   return adv[adv.find_index{|q| q.name==alz[k][1]}] unless k.nil?
@@ -2358,7 +2598,7 @@ def find_wyrmprint(xname,event,fullname=false,ext=false)
 end
 
 def find_weapon(xname,event,fullname=false,ext=false)
-  data_load()
+  data_load(['weapon'])
   xname=normalize(xname)
   xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   return nil if xname.length<2
@@ -2512,7 +2752,7 @@ def find_weapon(xname,event,fullname=false,ext=false)
 end
 
 def find_enemy(xnam,event,fullname=false,ext=false)
-  data_load()
+  data_load(['enemy'])
   xnam=normalize(xnam)
   xnam=xnam.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   return nil if xnam.length<2
@@ -2533,6 +2773,107 @@ def find_enemy(xnam,event,fullname=false,ext=false)
   return $enemies[$enemies.find_index{|q| q.name==alz[k][1]}] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xnam.length]==xnam && (q[2].nil? || q[2].include?(g))}
   return $enemies[$enemies.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return nil
+end
+
+def find_skill(xname,event,fullname=false,ext=false)
+  data_load(['skill'])
+  xname=normalize(xname)
+  xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  return nil if xname.length<2
+  sklz=$skills.map{|q| q}
+  k=sklz.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
+  return sklz[k] unless k.nil?
+  nicknames_load()
+  alz=$aliases.reject{|q| q[0]!='Skill'}.map{|q| [q[1],q[2],q[3]]}
+  g=0
+  g=event.server.id unless event.server.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
+  return sklz[sklz.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
+  return sklz[sklz.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return nil if fullname || xname.length<=2
+  k=sklz.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
+  return sklz[k] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  return sklz[sklz.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  return sklz[sklz.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return nil
+end
+
+def find_npc(xname,event,fullname=false,ext=false)
+  data_load()
+  xname=normalize(xname)
+  xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  return nil if xname.length<2
+  k=$npcs.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
+  return $npcs[k] unless k.nil?
+  nicknames_load()
+  alz=$aliases.reject{|q| q[0]!='NPC'}.map{|q| [q[1],q[2],q[3]]}
+  g=0
+  g=event.server.id unless event.server.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
+  return $npcs[$npcs.find_index{|q| q.name==alz[k][1]}] unless k.nil? || $npcs.find_index{|q| q.name==alz[k][1]}.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
+  return $npcs[$npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil? || $npcs.find_index{|q| q.name==alz[k][1]}.nil?
+  return nil if fullname || xname.length<=2
+  k=$npcs.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
+  return $npcs[k] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  return $npcs[$npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil? || $npcs.find_index{|q| q.name==alz[k][1]}.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  return $npcs[$npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil? || $npcs.find_index{|q| q.name==alz[k][1]}.nil?
+  return nil
+end
+
+def find_sticker(xname,event,fullname=false,ext=false)
+  data_load()
+  xname=normalize(xname)
+  xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  return nil if xname.length<2
+  k=$stickers.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
+  return $stickers[k] unless k.nil?
+  nicknames_load()
+  alz=$aliases.reject{|q| q[0]!='Sticker'}.map{|q| [q[1],q[2],q[3]]}
+  g=0
+  g=event.server.id unless event.server.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
+  return $stickers[$stickers.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
+  return $stickers[$stickers.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return nil if fullname || xname.length<=2
+  k=$stickers.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
+  return $stickers[k] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  return $stickers[$stickers.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  return $stickers[$stickers.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return nil
+end
+
+def find_status(xname,event,fullname=false,ext=false)
+  data_load(['status'])
+  xname=normalize(xname)
+  xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
+  return nil if xname.length<2
+  k=$statuses.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
+  return $statuses[k] unless k.nil?
+  nicknames_load()
+  alz=$aliases.reject{|q| q[0]!='Status'}.map{|q| [q[1],q[2],q[3]]}
+  g=0
+  g=event.server.id unless event.server.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
+  return $statuses[$statuses.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
+  return $statuses[$statuses.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return nil if fullname || xname.length<=2
+  k=$statuses.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
+  return $statuses[k] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  return $statuses[$statuses.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  return $statuses[$statuses.find_index{|q| q.name==alz[k][1]}] unless k.nil?
   return nil
 end
 
@@ -2600,7 +2941,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   if s2s || juststats
     f=[]
     for i in rar...$max_rarity[0]+1
-      f.push([generate_rarity_row(i,$max_rarity[0],k.games[0]),k.stat_grid(i)])
+      f.push([k.rar_row(i),k.stat_grid(i)])
     end
     f.push(["#{generate_rarity_row(0,$max_rarity[0],k.games[0])}\nMana Unbind",k.stat_grid($max_rarity[0]+1)]) if k.hasManaSpiral?
   elsif rar==0
@@ -2744,7 +3085,7 @@ def disp_wyrmprint_stats(bot,event,args=nil,juststats=false)
   title=k.class_header(bot,0,true)
   unless s2s
     title=k.mini_header(bot)
-    hdr="#{hdr}#{generate_rarity_row(k.rarity,0,k.games[0])}"
+    hdr="#{hdr}#{k.rar_row}"
     if k.rarity>4
       hdr="#{hdr} - <:Fill_Gold:759999913962110978>"
     else
@@ -2831,7 +3172,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false,x=nil)
   hdr="__**#{k.name}**__"
   title=k.class_header(bot,0,true)
   unless s2s || juststats
-    hdr="#{hdr}#{generate_rarity_row(k.rarity,0,k.games[0])}"
+    hdr="#{hdr}#{k.rar_row}"
     hdr="#{hdr} - T#{k.tier}" unless k.tier.nil? || k.tier<=0
     title=k.mini_header(bot)
   end
@@ -3004,7 +3345,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil,x=nil)
   str=k.stat_grid(bot,-1,mub)
   str=k.stat_grid(bot,1) unless s2s
   unless s2s
-    hdr="#{hdr}#{generate_rarity_row(k.rarity,0,k.games[0])}"
+    hdr="#{hdr}#{k.rar_row}"
     hdr="#{hdr}-T#{k.tier}" unless k.tier.nil? || k.tier<=0
     hdr="#{hdr} / "
     if mub
@@ -3165,6 +3506,215 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil,x=nil)
   return nil
 end
 
+def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_skill,args.join(' '),event)
+  forcetags=true if args.include?('tags')
+  if k.nil?
+    skz=$skills.map{|q| q}
+    if args.join('').include?('shift')
+      disp_status_data(bot,event,['skill','shift'])
+    elsif args.join('').downcase.gsub('s','').include?('dragonclaw')
+      disp_skill_data(bot,event,['dragon','claw'])
+    elsif !find_data_ex(:find_adventurer,args.join(' '),event).nil? && has_any?(args,['s1','s2','1','2','skill1','skill2','skl1','skl2'])
+      adv=find_data_ex(:find_adventurer,args.join(' '),event)
+      p=0
+      p=1 if has_any?(args,['s2','2','skill2','skl2'])
+      if adv.skills.nil? || adv.skills.length<=0 || adv.skills[p].nil? || adv.skills[p].length<=0
+        event.respond "#{adv.name}#{adv.emotes(bot)} does not have a #{['1st','2nd'][p]} skill."
+        return nil
+      end
+      skl1=skz.find_index{|q| q.name==adv.skills[p]}
+      if skl1.nil?
+        event.respond "#{adv.name}#{adv.emotes(bot)}'s #{['1st','2nd'][p]} skill, #{adv.skills[p]}, has no data."
+        return nil
+      end
+      disp_skill_data(bot,event,adv.skills[p].split(' '),forcetags)
+    elsif !find_data_ex(:find_dragon,args.join(' '),event).nil?
+      adv=find_data_ex(:find_dragon,args.join(' '),event)
+      p=0
+      p=1 if has_any?(args,['s2','2','skill2','skl2'])
+      if adv.skills.nil? || adv.skills.length<=0 || adv.skills[p].nil? || adv.skills[p].length<=0
+        event.respond "#{adv.name}#{adv.emotes(bot)} does not have a#{[' 1st',' 2nd'][p] if p>0 || (!adv.skills.nil? && adv.skills.length>1)} skill."
+        return nil
+      end
+      p=0 if adv.skills.length<2
+      skl1=skz.find_index{|q| q.name==adv.skills[p]}
+      if skl1.nil?
+        event.respond "#{adv.name}#{adv.emotes(bot)}'s#{[' 1st',' 2nd'][p] if adv.skills.length>1} skill, #{adv.skills[p]}, has no data."
+        return nil
+      end
+      disp_skill_data(bot,event,adv.skills[p].split(' '),forcetags)
+    elsif !find_data_ex(:find_weapon,args.join(' '),event).nil? && has_any?(args,['s3','skill3','skl3'])
+      adv=find_data_ex(:find_weapon,args.join(' '),event)
+      if adv.is_a?(Array)
+        event.respond "There are multiple weapons with that criterium, and I won't display a skill for each."
+        return nil
+      elsif adv.skills.nil? || adv.skills.length<=0
+        event.respond "#{adv.name}#{adv.emotes(bot)} does not have a skill."
+        return nil
+      end
+      skl1=skz.find_index{|q| q.name==adv.skills[0]}
+      if skl1.nil?
+        event.respond "#{adv.name}#{adv.emotes(bot)}'s skill, #{adv.skills[0]}, has no data."
+        return nil
+      end
+      disp_skill_data(bot,event,adv.skills[0].split(' '),forcetags)
+    else
+      event.respond 'No matches found.'
+    end
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  evn=event.message.text.downcase.split(' ')
+  xcolor=k.disp_color
+  xcolor=topstr[1] if topstr.length>0
+  str=''; title=''; str2=''
+  title="**SP Cost:** #{k.sp_display(1)}" if k.sp_display(0).uniq.length<=1 && k.sp_cost[0]>0 && topstr.length<=0
+  title="#{title}\n**Invulnerability duration:** #{k.invulnerability} seconds"
+  title="#{title}\n**Skill Share:** *Cost:* #{k.sharing[0]}<:SkillShare:714597012733034547> / #{k.sp_display(-1)} SP\*" if !k.sharing.nil? && k.sharing.length>0
+  title="#{title}\n<:Energize:559629242137051155> **Energizable**" if k.energize
+  title="#{title}\n~~Not energizable~~" if !k.energize && k.inspirable?
+  title="#{title}\n<:Inspiring:688916587079663625> **Inspirable**" if k.inspirable?
+  title="#{title}\n~~Not inspirable~~" if !k.inspirable? && k.energize
+  title="#{title}\n~~Not energizable or inspirable~~" if !k.energize && !k.inspirable?
+  lng=title.length
+  if title.length>250
+    h=title.split("\n")
+    title=[h[0],'']
+    j=0
+    for i in 1...h.length
+      if "#{title[j]}\n#{h[i]}".length>250 && j==0
+        j+=1
+        title[j]="#{h[i]}"
+      else
+        title[j]="#{title[j]}\n#{h[i]}"
+      end
+    end
+  end
+  ftr=nil
+  hdr="__**#{k.name}**__"
+  if topstr.length>0
+    hdr="#{topstr[0]} - #{hdr}"
+  else
+    hdr="#{hdr}#{k.emotes(bot)}"
+  end
+  str="#{k.energy_emoji(true)}".gsub(', ',"\n")
+  displvl=0
+  for i in 0...k.description.length
+    if topstr.length<=0 || i>1 || (i==1 && k.description.length<3)
+      str2="#{str2}\n\n__**Level #{i+1}**__"
+      str2="#{str2} - #{k.sp_display(i+1)} SP" unless k.sp_display(0).uniq.length<=1 || k.sp_cost[i]<=0
+      str2="#{str2}\n#{k.description[i]}"
+    end
+  end
+  flds=[]; m=[]; advx=[]
+  x=$adventurers.map{|q| q}
+  for i in 0...x.length
+    advx.push(x[i].name) if x[i].skills.include?(k.name)
+    m.push("#{x[i].emotes(bot)}#{x[i].name} - S1") if x[i].skills[0]==k.name
+    m.push("#{x[i].emotes(bot)}#{x[i].name} - S2") if x[i].skills[1]==k.name
+  end
+  flds.push(['Adventurers',m.join("\n")]) if m.length>0 && topstr.length<=0
+  if topstr.length<=0
+    m=[]
+    x=$dragons.map{|q| q}
+    for i in 0...x.length
+      advx.push(x[i].name) if x[i].skills.include?(k.name)
+      m.push("#{x[i].emotes(bot)}#{x[i].name} - S1") if x[i].skills[0]==k.name
+      m.push("#{x[i].emotes(bot)}#{x[i].name} - S2") if x[i].skills[1]==k.name
+    end
+    flds.push(['Dragons',m.join("\n")]) if m.length>0
+    m=[]
+    x=$weapons.map{|q| q}
+    for i in 0...x.length
+      m.push("#{x[i].emotes(bot)}#{x[i].name} - S3") if x[i].skills[0]==k.name
+      m.push("#{x[i].emotes(bot)}#{x[i].name} - refined S3") if x[i].skills[1]==k.name
+    end
+    flds.push(['Weapons',m.join("\n")]) if m.length>0
+  end
+  if args.include?('tags') || forcetags
+    if flds.length<=0
+      flds=triple_finish(k.tags.reject{|q| ['E','I'].include?(q[0,1]) && q[1,1].to_i.to_s==q[1,1]})
+      str2="#{str2}\n\n__**Tags**__"
+    else
+      flds.push(['Tags',k.tags.reject{|q| ['E','I'].include?(q[0,1]) && q[1,1].to_i.to_s==q[1,1]}.join("\n")])
+    end
+  end
+  str="#{str}\n\nYou may instead be searching for the ability family `Dragon's Claws`." if k.name=='Dragon Claw' && topstr.length<=0
+  if !k.sharing.nil? && k.sharing.length>0
+    advy=[]
+    advy.push("#{k.sp_display(-2)} SP for Nef archetypes") unless advx.include?('Nefaria')
+    advy.push("#{k.sp_display(-3)} SP for Hawk archetypes") unless advx.include?('Hawk')
+    ch=', '
+    ch="\n" if !k.sp_oddity.nil? && k.sp_oddity.length>0
+    str="#{str}\n\* #{advy.join(ch)}" if advy.length>0
+  end
+  flds=nil if flds.length<=0
+  lng+=flds.map{|q| "__#{q[0]}__\n#{q[1]}"}.join("\n\n").length unless flds.nil?
+  if str.length+title.length+str2.length+lng<1800 && (displvl<2 || s2s || k.mass_description.nil? || k.mass_description.length<=0)
+    str="#{str}#{str2}"
+    create_embed(event,[hdr,title],str,xcolor,ftr,k.thumbnail)
+  elsif str2.length<1800 && (displvl<2 || s2s || k.mass_description.nil? || k.mass_description.length<=0)
+    create_embed(event,[hdr,title],str,xcolor,nil,k.thumbnail)
+    create_embed(event,'',str2.gsub('__**Tags**__',''),xcolor)
+    create_embed(event,'','',xcolor,nil,nil,flds) unless flds.nil?
+  elsif displvl<2 || k.mass_description.nil? || k.mass_description.length<=0
+    create_embed(event,[hdr,title],str,xcolor,nil,k.thumbnail)
+    m=str2.split("\n\n").reject{|q| q.nil? || q.length<=0}
+    s=''
+    for i in 0...m.length
+      s=extend_message(s,m[i],event,2)
+    end
+    event.respond s
+    create_embed(event,'','',xcolor,nil,nil,flds) unless flds.nil?
+  else
+    str2="\n\n#{k.mass_description}#{"\n#{k.level_text(0)}" unless k.sp_display(0).uniq.length<=1 || k.sp_cost[i]<=0}"
+    if str.length+str2.length+m<1800
+      str="#{str}#{str2}"
+      create_embed(event,[hdr,title],str,xcolor,nil,k.thumbnail,flds)
+    elsif str2.length<1800
+      create_embed(event,[hdr,title],str,xcolor,nil,k.thumbnail)
+      create_embed(event,'',str2,xcolor)
+      create_embed(event,'','',xcolor,nil,nil,flds) unless flds.nil?
+    else
+      create_embed(event,[hdr,title],str,xcolor,nil,k.thumbnail)
+      m=str2.split("\n").reject{|q| q.nil? || q.length<=0}
+      s=''
+      for i in 0...m.length
+        s=extend_message(s,m[i],event,2)
+      end
+      event.respond s
+      create_embed(event,'','',xcolor,nil,nil,flds) unless flds.nil?
+    end
+  end
+  return nil
+end
+
+def disp_status_data(bot,event,args=nil,extvat=false)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  k=find_data_ex(:find_status,args.join(' '),event)
+  if k.nil?
+    event.respond 'No matches found.'
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  evn=event.message.text.downcase.split(' ')
+  ftr=nil
+  str="**Effect on player:** #{k.player_effect}" unless k.player_effect.nil?
+  str="#{str}\n\n**Effect on enemy:** #{k.enemy_effect}" unless k.enemy_effect.nil?
+  m=$statuses.reject{|q| q.slot != k.slot || q.name==k.name}
+  ftr="#{list_lift(m.map{|q| q.name},'and')} will overwrite this status.  All other statuses will stack instead." unless k.slot==0 || m.length<=0
+  ftr="If you meant to set a status, please include the word \"set\" as the first argument in this command." if event.user.id==167657750971547648 && evn[0]=='dl!status'
+  create_embed(event,"__**#{k.name}**__",str,k.disp_color,ftr,k.thumbnail)
+end
+
 bot.command([:adventurer,:adv,:unit]) do |event, *args|
   return nil if overlap_prevent(event)
 =begin
@@ -3266,6 +3816,23 @@ bot.command([:weapon,:wep,:weap,:wpn]) do |event, *args|
   disp_weapon_stats(bot,event,args)
 end
 
+bot.command([:skill,:skil]) do |event, *args|
+  return nil if overlap_prevent(event)
+=begin
+  if args.nil? || args.length<=0
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    find_skills(bot,event,args)
+    return nil
+  elsif ['share','shared'].include?(args[0].downcase)
+    args.shift
+    sort_shareable_skills(event,args,bot)
+    return nil
+  end
+=end
+  disp_skill_data(bot,event,args)
+end
+
 bot.command([:enemy,:boss]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
@@ -3301,6 +3868,11 @@ end
 bot.command([:lineage,:craft,:crafting]) do |event, *args|
   return nil if overlap_prevent(event)
   disp_weapon_lineage(bot,event,args)
+end
+
+bot.command([:ailment,:affliction]) do |event, *args|
+  return nil if overlap_prevent(event)
+  disp_status_data(bot,event,args)
 end
 
 
@@ -3366,14 +3938,14 @@ bot.command([:channellist,:chanelist,:spamchannels,:spamlist]) do |event|
   event << 'In PM with any user'
 end
 
-bot.command([:bugreport, :suggestion, :feedback]) do |event, *args|
+bot.command([:bugreport,:suggestion,:feedback]) do |event, *args|
   return nil if overlap_prevent(event)
   x=['dl!','dl?']
   x.push(@prefixes[event.server.id]) unless event.server.nil? || @prefixes[event.server.id].nil?
   bug_report(bot,event,args,Shards,shard_data(0),'Shard',x,532083509083373583)
 end
 
-bot.command([:donation, :donate]) do |event, uid|
+bot.command([:donation,:donate]) do |event, uid|
   return nil if overlap_prevent(event)
   uid="#{event.user.id}" if uid.nil? || uid.length.zero?
   if /<@!?(?:\d+)>/ =~ uid
@@ -3561,6 +4133,25 @@ bot.command(:invite) do |event, user|
   event.respond "A PM was sent to #{user_to_name}." unless event.server.nil? && user_to_name=="you"
 end
 
+bot.command(:status) do |event, *args|
+  return nil if overlap_prevent(event)
+  t=Time.now
+  timeshift=6
+  t-=60*60*timeshift
+  if event.user.id==167657750971547648 && !args.nil? && args.length>0 && args[0]=='set' # only work when used by the developer
+    args.shift
+    bot.game=args.join(' ')
+    event.respond 'Status set.'
+    return nil
+  elsif !find_data_ex(:find_status,args.join(' '),event,true).nil?
+    disp_status_data(bot,event,args)
+    return nil
+  end
+  data_load('library')
+  show_bot_status(event,bot)
+  return nil
+end
+
 bot.command(:sortaliases, from: 167657750971547648) do |event, *args|
   return nil if overlap_prevent(event)
   return nil unless event.user.id==167657750971547648
@@ -3582,7 +4173,7 @@ bot.command([:tools,:links,:tool,:link,:resources,:resources]) do |event|
   show_tools(event,bot)
 end
 
-bot.command([:avatar, :avvie]) do |event, *args|
+bot.command([:avatar,:avvie]) do |event, *args|
   return nil if overlap_prevent(event)
   t=Time.now
   timeshift=6
@@ -4134,6 +4725,14 @@ bot.mention do |event|
     else
       find_best_match(args.join(' '),bot,event,false,false,3,true)
     end
+  elsif ['skill','skil'].include?(args[0].downcase)
+    m=false
+    args.shift
+    disp_skill_data(bot,event,args)
+  elsif ['status'].include?(args[0].downcase)
+    m=false
+    args.shift
+    disp_status_data(bot,event,args)
   end
   if m
     if event.message.text.downcase.gsub(' ','').gsub("'",'').include?("werenostrangerstolove")
