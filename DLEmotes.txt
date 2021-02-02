@@ -11,6 +11,7 @@ Energy Tank\Mega Man
 Feh\Feh
 Felyne\Felyne
 For Real\Ranzal
+Fortune Smiles\Seimei
 Game Over\
 Good Job\Notte
 Goodnight\Euden
@@ -36,6 +37,8 @@ Intriguing!\Heinwald
 I'll Lead The Charge\Euden
 I'll Tag Along\Sarisse
 I'm On Defense\Ranzal
+I'm Relying on You\Mona
+It's Showtime\Joker
 It's Super Zombie Time\Melsa
 IT'S UP TO YOU\Luca
 Keep it Up\Melody
@@ -45,6 +48,7 @@ Let's Be Friends\Sharena
 Let's Fight Together\Elisanne
 Let's Go!\Fjorm
 Let's Play\Veronica
+Let Us Bring Victory\Victor
 Look Out\Elisanne
 Lovely!\Loki
 Lower Left\
@@ -52,6 +56,7 @@ Lower Right\
 Mar Mar\Tiki
 Mmm, So Tasty\Vanessa
 Nice\Ranzal
+No Problem\Sophie(Scramble)
 No Worries\Elisanne
 Nope\Cleo
 Now\Cleo
@@ -61,9 +66,11 @@ Okay\Euden
 OMG\>Unknown<
 On Me!\Euden
 On My Way\Ranzal
+Persona!\Joker
 Puppy\Puppy
 Really\Elisanne
 Right\
+Ring-a-Ling\Lily
 See Ya\Luca
 Shall We\Akasha
 Shapeshift Now\Euden
@@ -78,8 +85,10 @@ The Adventure Continues\Zena, Zethia
 This Ends Now\Linnea
 Three Cheers for Me\Mym 
 Time For a Break\Cleo
+To a Bold New Year\Yoshitsune
 Together\Marth
 Thanks\Notte
+Thanks(Panther)\Panther
 Up\
 Upper Left\
 Upper Right\

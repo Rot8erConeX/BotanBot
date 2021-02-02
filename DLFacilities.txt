@@ -53,6 +53,11 @@ Altar\37\-\Adventurer, Altar\3x3\2\140000\Bronze (Tier 1) Orb, 350;; Silver (Tie
 Altar\38\-\Adventurer, Altar\3x3\2\190000\Bronze (Tier 1) Orb, 400;; Silver (Tier 2) Orb, 108;; Gold (Tier 3) Orb, 45;; Golder (Tier 4), 6;; Rainbow Orb, 18\
 Altar\39\-\Adventurer, Altar\3x3\2\250000\Bronze (Tier 1) Orb, 450;; Silver (Tier 2) Orb, 144;; Gold (Tier 3) Orb, 60;; Golder (Tier 4), 8;; Rainbow Orb, 24\
 Altar\40\-\Adventurer, Altar\3x3\2\320000\Bronze (Tier 1) Orb, 500;; Silver (Tier 2) Orb, 180;; Gold (Tier 3) Orb, 75;; Golder (Tier 4), 10;; Rainbow Orb, 30\
+Altar\41\-\Adventurer, Altar\3x3\2\400000\Silver (Tier 2) Orb, 300;; Gold (Tier 3) Orb, 125;; Golder (Tier 4), 14;; Rainbow Orb, 45;; Nature's Blessing, 2\
+Altar\42\-\Adventurer, Altar\3x3\2\500000\Silver (Tier 2) Orb, 350;; Gold (Tier 3) Orb, 150;; Golder (Tier 4), 18;; Rainbow Orb, 55;; Nature's Blessing, 2\
+Altar\43\-\Adventurer, Altar\3x3\2\620000\Silver (Tier 2) Orb, 400;; Gold (Tier 3) Orb, 175;; Golder (Tier 4), 22;; Rainbow Orb, 65;; Nature's Blessing, 3\
+Altar\44\-\Adventurer, Altar\3x3\2\760000\Silver (Tier 2) Orb, 450;; Gold (Tier 3) Orb, 200;; Golder (Tier 4), 26;; Rainbow Orb, 75;; Nature's Blessing, 3\
+Altar\45\-\Adventurer, Altar\3x3\2\920000\Silver (Tier 2) Orb, 500;; Gold (Tier 3) Orb, 225;; Golder (Tier 4), 30;; Rainbow Orb, 85;; Nature's Blessing, 4\
 Arctos Monument\1\-\Adventurer, Event Altar\3x3\1\0\0\
 Arctos Monument\2\-\Adventurer, Event Altar\3x3\1\100\Motivational Log, 3\
 Arctos Monument\3\-\Adventurer, Event Altar\3x3\1\200\Motivational Log, 5\
@@ -138,6 +143,11 @@ Axe Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argente
 Axe Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Jade Insignia, 200;; Dyrenell Aureus, 140;; Royal Jade Insignia, 80\
 Axe Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Jade Insignia, 240;; Dyrenell Aureus, 150;; Royal Jade Insignia, 100\
 Axe Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Jade Insignia, 240;; Dyrenell Aureus, 160;; Royal Jade Insignia, 100\
+Axe Dojo\36\-\Adventurer, Dojo\3x3\2\400000\Dyrenell Argenteus, 150;; Dyrenell Aureus, 175;; Jade Insignia, 260;; Royal Jade Insignia, 100;; Nature's Blessing, 2\
+Axe Dojo\37\-\Adventurer, Dojo\3x3\2\500000\Dyrenell Argenteus, 175;; Dyrenell Aureus, 200;; Jade Insignia, 280;; Royal Jade Insignia, 120;; Nature's Blessing, 2\
+Axe Dojo\38\-\Adventurer, Dojo\3x3\2\620000\Dyrenell Argenteus, 200;; Dyrenell Aureus, 225;; Jade Insignia, 300;; Royal Jade Insignia, 140;; Nature's Blessing, 3\
+Axe Dojo\39\-\Adventurer, Dojo\3x3\2\760000\Dyrenell Argenteus, 225;; Dyrenell Aureus, 250;; Jade Insignia, 320;; Royal Jade Insignia, 160;; Nature's Blessing, 3\
+Axe Dojo\40\-\Adventurer, Dojo\3x3\2\920000\Dyrenell Argenteus, 250;; Dyrenell Aureus, 275;; Jade Insignia, 340;; Royal Jade Insignia, 180;; Nature's Blessing, 4\
 Battle Standard\-\A large flag with intricate embroidery. Soldiers have long rallied under this symbol to fight for what they believe in.\Decorative\1x1\5\0\0\
 Blade Dojo\1\A training area built to hone one's skills with a blade. Use it to boosts the stats of blade-wielding adventures.\Adventurer, Dojo\3x3\2\0\0\Blade
 Blade Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10\
@@ -174,6 +184,11 @@ Blade Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argen
 Blade Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Azure Insignia, 200;; Dyrenell Aureus, 140;; Royal Azure Insignia, 80\
 Blade Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Azure Insignia, 240;; Dyrenell Aureus, 150;; Royal Azure Insignia, 100\
 Blade Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Azure Insignia, 240;; Dyrenell Aureus, 160;; Royal Azure Insignia, 100\
+Blade Dojo\36\-\Adventurer, Dojo\3x3\2\400000\Dyrenell Argenteus, 150;; Dyrenell Aureus, 175;; Azure Insignia, 260;; Royal Azure Insignia, 100;; Nature's Blessing, 2\
+Blade Dojo\37\-\Adventurer, Dojo\3x3\2\500000\Dyrenell Argenteus, 175;; Dyrenell Aureus, 200;; Azure Insignia, 280;; Royal Azure Insignia, 120;; Nature's Blessing, 2\
+Blade Dojo\38\-\Adventurer, Dojo\3x3\2\620000\Dyrenell Argenteus, 200;; Dyrenell Aureus, 225;; Azure Insignia, 300;; Royal Azure Insignia, 140;; Nature's Blessing, 3\
+Blade Dojo\39\-\Adventurer, Dojo\3x3\2\760000\Dyrenell Argenteus, 225;; Dyrenell Aureus, 250;; Azure Insignia, 320;; Royal Azure Insignia, 160;; Nature's Blessing, 3\
+Blade Dojo\40\-\Adventurer, Dojo\3x3\2\920000\Dyrenell Argenteus, 250;; Dyrenell Aureus, 275;; Azure Insignia, 340;; Royal Azure Insignia, 180;; Nature's Blessing, 4\
 Blue Flowers\-\A bed of blooming blue flowers. Once thought to be a myth, these beauties are now symbolic of hope and miracles.\Decorative\1x1\5\0\0\
 Bow Dojo\1\A training area built to hone one's skills with a bow. Use it to boosts the stats of bow-wielding adventures.\Adventurer, Dojo\3x3\2\0\0\Bow
 Bow Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10\
@@ -210,6 +225,11 @@ Bow Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argente
 Bow Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Vermilion Insignia, 200;; Dyrenell Aureus, 140;; Royal Vermilion Insignia, 80\
 Bow Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Vermilion Insignia, 240;; Dyrenell Aureus, 150;; Royal Vermilion Insignia, 100\
 Bow Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Vermilion Insignia, 240;; Dyrenell Aureus, 160;; Royal Vermilion Insignia, 100\
+Bow Dojo\36\-\Adventurer, Dojo\3x3\2\400000\Dyrenell Argenteus, 150;; Dyrenell Aureus, 175;; Vermilion Insignia, 260;; Royal Vermilion Insignia, 100;; Nature's Blessing, 2\
+Bow Dojo\37\-\Adventurer, Dojo\3x3\2\500000\Dyrenell Argenteus, 175;; Dyrenell Aureus, 200;; Vermilion Insignia, 280;; Royal Vermilion Insignia, 120;; Nature's Blessing, 2\
+Bow Dojo\38\-\Adventurer, Dojo\3x3\2\620000\Dyrenell Argenteus, 200;; Dyrenell Aureus, 225;; Vermilion Insignia, 300;; Royal Vermilion Insignia, 140;; Nature's Blessing, 3\
+Bow Dojo\39\-\Adventurer, Dojo\3x3\2\760000\Dyrenell Argenteus, 225;; Dyrenell Aureus, 250;; Vermilion Insignia, 320;; Royal Vermilion Insignia, 160;; Nature's Blessing, 3\
+Bow Dojo\40\-\Adventurer, Dojo\3x3\2\920000\Dyrenell Argenteus, 250;; Dyrenell Aureus, 275;; Vermilion Insignia, 340;; Royal Vermilion Insignia, 180;; Nature's Blessing, 4\
 Broadleaf Tree\-\An iconic tree with broad leaves. A standard of any garden, its placement and health are indicative of its gardener's skills.\Decorative\1x1\5\0\0\
 Circus Tent\1\Use it to boost the stats of light-attuned adventurers.\Adventurer, Event Altar\3x3\1\0\0\Light
 Circus Tent\2\-\Adventurer, Event Altar\3x3\1\100\Tent Canvas, 3\
@@ -282,6 +302,11 @@ Dagger Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Arge
 Dagger Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Violet Insignia, 200;; Dyrenell Aureus, 140;; Royal Violet Insignia, 80\
 Dagger Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Violet Insignia, 240;; Dyrenell Aureus, 150;; Royal Violet Insignia, 100\
 Dagger Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Violet Insignia, 240;; Dyrenell Aureus, 160;; Royal Violet Insignia, 100\
+Dagger Dojo\36\-\Adventurer, Dojo\3x3\2\400000\Dyrenell Argenteus, 150;; Dyrenell Aureus, 175;; Violet Insignia, 260;; Royal Violet Insignia, 100;; Nature's Blessing, 2\
+Dagger Dojo\37\-\Adventurer, Dojo\3x3\2\500000\Dyrenell Argenteus, 175;; Dyrenell Aureus, 200;; Violet Insignia, 280;; Royal Violet Insignia, 120;; Nature's Blessing, 2\
+Dagger Dojo\38\-\Adventurer, Dojo\3x3\2\620000\Dyrenell Argenteus, 200;; Dyrenell Aureus, 225;; Violet Insignia, 300;; Royal Violet Insignia, 140;; Nature's Blessing, 3\
+Dagger Dojo\39\-\Adventurer, Dojo\3x3\2\760000\Dyrenell Argenteus, 225;; Dyrenell Aureus, 250;; Violet Insignia, 320;; Royal Violet Insignia, 160;; Nature's Blessing, 3\
+Dagger Dojo\40\-\Adventurer, Dojo\3x3\2\920000\Dyrenell Argenteus, 250;; Dyrenell Aureus, 275;; Violet Insignia, 340;; Royal Violet Insignia, 180;; Nature's Blessing, 4\
 Dojo\1\A training area built to hone one's skills. Use it to boosts the stats of adventures using a certain weapon type.\Adventurer, Dojo\3x3\2\0\0\
 Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10\
 Dojo\3\-\Adventurer, Dojo\3x3\2\3500\Dyrenell Aes, 10\
@@ -317,6 +342,12 @@ Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argenteus, 
 Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Silver Insignia, 200;; Dyrenell Aureus, 140;; Royal Insignia, 80\
 Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Silver Insignia, 240;; Dyrenell Aureus, 150;; Royal Insignia, 100\
 Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Silver Insignia, 240;; Dyrenell Aureus, 160;; Royal Insignia, 100\
+Dojo\36\-\Adventurer, Dojo\3x3\2\400000\Dyrenell Argenteus, 150;; Dyrenell Aureus, 175;; Silver Insignia, 260;; Royal Insignia, 100;; Nature's Blessing, 2\
+Dojo\37\-\Adventurer, Dojo\3x3\2\500000\Dyrenell Argenteus, 175;; Dyrenell Aureus, 200;; Silver Insignia, 280;; Royal Insignia, 120;; Nature's Blessing, 2\
+Dojo\38\-\Adventurer, Dojo\3x3\2\620000\Dyrenell Argenteus, 200;; Dyrenell Aureus, 225;; Silver Insignia, 300;; Royal Insignia, 140;; Nature's Blessing, 3\
+Dojo\39\-\Adventurer, Dojo\3x3\2\760000\Dyrenell Argenteus, 225;; Dyrenell Aureus, 250;; Silver Insignia, 320;; Royal Insignia, 160;; Nature's Blessing, 3\
+Dojo\40\-\Adventurer, Dojo\3x3\2\920000\Dyrenell Argenteus, 250;; Dyrenell Aureus, 275;; Silver Insignia, 340;; Royal Insignia, 180;; Nature's Blessing, 4\
+Double Bass\-\One of the many instruments played by an orchestra. The grandiose low notes produced by its large form may slip by the untrained ear, but are essential to an orchestra's sound.\Decorative\1x1\1\0\0\
 Dracolith\1\A monument made in the likeness of a dragon. Increases damage dealt when shapeshifting as a specific type of elementally-attuned dragon.\Dragon, Dracolith\2x2\1\0\0\
 Dracolith\2\-\Dragon, Dracolith\2x2\1\3000\0\
 Dracolith\3\-\Dragon, Dracolith\2x2\1\4000\0\
@@ -731,6 +762,11 @@ Flame Altar\37\-\Adventurer, Altar\3x3\2\140000\Flame Orb, 350;; Blaze Orb, 87;;
 Flame Altar\38\-\Adventurer, Altar\3x3\2\190000\Flame Orb, 400;; Blaze Orb, 108;; Inferno Orb, 45;; Incandescence Orb, 6;; Rainbow Orb, 18\
 Flame Altar\39\-\Adventurer, Altar\3x3\2\250000\Flame Orb, 450;; Blaze Orb, 144;; Inferno Orb, 60;; Incandescence Orb, 8;; Rainbow Orb, 24\
 Flame Altar\40\-\Adventurer, Altar\3x3\2\320000\Flame Orb, 500;; Blaze Orb, 180;; Inferno Orb, 75;; Incandescence Orb, 10;; Rainbow Orb, 30\
+Flame Altar\41\-\Adventurer, Altar\3x3\2\400000\Blaze Orb, 300;; Inferno Orb, 125;; Incandescence Orb, 14;; Rainbow Orb, 45;; Nature's Blessing, 2\
+Flame Altar\42\-\Adventurer, Altar\3x3\2\500000\Blaze Orb, 350;; Inferno Orb, 150;; Incandescence Orb, 18;; Rainbow Orb, 55;; Nature's Blessing, 2\
+Flame Altar\43\-\Adventurer, Altar\3x3\2\620000\Blaze Orb, 400;; Inferno Orb, 175;; Incandescence Orb, 22;; Rainbow Orb, 65;; Nature's Blessing, 3\
+Flame Altar\44\-\Adventurer, Altar\3x3\2\760000\Blaze Orb, 450;; Inferno Orb, 200;; Incandescence Orb, 26;; Rainbow Orb, 75;; Nature's Blessing, 3\
+Flame Altar\45\-\Adventurer, Altar\3x3\2\920000\Blaze Orb, 500;; Inferno Orb, 225;; Incandescence Orb, 30;; Rainbow Orb, 85;; Nature's Blessing, 4\
 Flame Dracolith\1\A monument made in the likeness of a flame dragon. Increases damage dealt when shapeshifting as a flame-attuned dragon.\Dragon, Dracolith\2x2\1\0\0\Flame
 Flame Dracolith\2\-\Dragon, Dracolith\2x2\1\3000\0\
 Flame Dracolith\3\-\Dragon, Dracolith\2x2\1\4000\0\
@@ -829,6 +865,11 @@ Lance Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argen
 Lance Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Azure Insignia, 200;; Dyrenell Aureus, 140;; Royal Azure Insignia, 80\
 Lance Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Azure Insignia, 240;; Dyrenell Aureus, 150;; Royal Azure Insignia, 100\
 Lance Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Azure Insignia, 240;; Dyrenell Aureus, 160;; Royal Azure Insignia, 100\
+Lance Dojo\36\-\Adventurer, Dojo\3x3\2\400000\Dyrenell Argenteus, 150;; Dyrenell Aureus, 175;; Azure Insignia, 260;; Royal Azure Insignia, 100;; Nature's Blessing, 2\
+Lance Dojo\37\-\Adventurer, Dojo\3x3\2\500000\Dyrenell Argenteus, 175;; Dyrenell Aureus, 200;; Azure Insignia, 280;; Royal Azure Insignia, 120;; Nature's Blessing, 2\
+Lance Dojo\38\-\Adventurer, Dojo\3x3\2\620000\Dyrenell Argenteus, 200;; Dyrenell Aureus, 225;; Azure Insignia, 300;; Royal Azure Insignia, 140;; Nature's Blessing, 3\
+Lance Dojo\39\-\Adventurer, Dojo\3x3\2\760000\Dyrenell Argenteus, 225;; Dyrenell Aureus, 250;; Azure Insignia, 320;; Royal Azure Insignia, 160;; Nature's Blessing, 3\
+Lance Dojo\40\-\Adventurer, Dojo\3x3\2\920000\Dyrenell Argenteus, 250;; Dyrenell Aureus, 275;; Azure Insignia, 340;; Royal Azure Insignia, 180;; Nature's Blessing, 4\
 Library Obscura\1\Use it to boost the stats of shadow-attuned adventurers.\Adventurer, Event Altar\3x3\1\0\0\Shadow
 Library Obscura\2\-\Adventurer, Event Altar\3x3\1\100\Arcane Tome, 3\
 Library Obscura\3\-\Adventurer, Event Altar\3x3\1\200\Arcane Tome, 5\
@@ -904,6 +945,11 @@ Light Altar\37\-\Adventurer, Altar\3x3\2\140000\Light Orb, 350;; Radiance Orb, 8
 Light Altar\38\-\Adventurer, Altar\3x3\2\190000\Light Orb, 400;; Radiance Orb, 108;; Refulgence Orb, 45;; Resplendence Orb, 6;; Rainbow Orb, 18\
 Light Altar\39\-\Adventurer, Altar\3x3\2\250000\Light Orb, 450;; Radiance Orb, 144;; Refulgence Orb, 60;; Resplendence Orb, 8;; Rainbow Orb, 24\
 Light Altar\40\-\Adventurer, Altar\3x3\2\320000\Light Orb, 500;; Radiance Orb, 180;; Refulgence Orb, 75;; Resplendence Orb, 10;; Rainbow Orb, 30\
+Light Altar\41\-\Adventurer, Altar\3x3\2\400000\Radiance Orb, 300;; Refulgence Orb, 125;; Resplendence Orb, 14;; Rainbow Orb, 45;; Nature's Blessing, 2\
+Light Altar\42\-\Adventurer, Altar\3x3\2\500000\Radiance Orb, 350;; Refulgence Orb, 150;; Resplendence Orb, 18;; Rainbow Orb, 55;; Nature's Blessing, 2\
+Light Altar\43\-\Adventurer, Altar\3x3\2\620000\Radiance Orb, 400;; Refulgence Orb, 175;; Resplendence Orb, 22;; Rainbow Orb, 65;; Nature's Blessing, 3\
+Light Altar\44\-\Adventurer, Altar\3x3\2\760000\Radiance Orb, 450;; Refulgence Orb, 200;; Resplendence Orb, 26;; Rainbow Orb, 75;; Nature's Blessing, 3\
+Light Altar\45\-\Adventurer, Altar\3x3\2\920000\Radiance Orb, 500;; Refulgence Orb, 225;; Resplendence Orb, 30;; Rainbow Orb, 85;; Nature's Blessing, 4\
 Light Dracolith\1\A monument made in the likeness of a light dragon. Increases damage dealt when shapeshifting as a light-attuned dragon.\Dragon, Dracolith\2x2\1\0\0\Light
 Light Dracolith\2\-\Dragon, Dracolith\2x2\1\3000\0\
 Light Dracolith\3\-\Dragon, Dracolith\2x2\1\4000\0\
@@ -949,6 +995,16 @@ Light Tree\12\-\Adventurer, Altar\3x3\1\110000\Remaining Ones' Mask Fragment, 35
 Light Tree\13\-\Adventurer, Altar\3x3\1\120000\Remaining Ones' Mask Fragment, 35;; Vengeful One's Mask Fragment, 5\
 Light Tree\14\-\Adventurer, Altar\3x3\1\130000\Remaining Ones' Mask Fragment, 35;; Vengeful One's Mask Fragment, 5\
 Light Tree\15\-\Adventurer, Altar\3x3\1\140000\Remaining Ones' Mask Fragment, 35;; Vengeful One's Mask Fragment, 5\
+Light Tree\16\-\Adventurer, Altar\3x3\1\160000\Remaining Ones' Mask Fragment, 40;; Vengeful One's Mask Fragment, 10\
+Light Tree\17\-\Adventurer, Altar\3x3\1\180000\Remaining Ones' Mask Fragment, 40;; Vengeful One's Mask Fragment, 10\
+Light Tree\18\-\Adventurer, Altar\3x3\1\200000\Remaining Ones' Mask Fragment, 40;; Vengeful One's Mask Fragment, 10\
+Light Tree\19\-\Adventurer, Altar\3x3\1\220000\Remaining Ones' Mask Fragment, 40;; Vengeful One's Mask Fragment, 10\
+Light Tree\20\-\Adventurer, Altar\3x3\1\240000\Remaining Ones' Mask Fragment, 40;; Vengeful One's Mask Fragment, 10\
+Light Tree\21\-\Adventurer, Altar\3x3\1\260000\Remaining Ones' Mask Fragment, 40;; Vengeful One's Mask Fragment, 10\
+Light Tree\22\-\Adventurer, Altar\3x3\1\280000\Remaining Ones' Mask Fragment, 40;; Vengeful One's Mask Fragment, 10\
+Light Tree\23\-\Adventurer, Altar\3x3\1\300000\Remaining Ones' Mask Fragment, 40;; Vengeful One's Mask Fragment, 10\
+Light Tree\24\-\Adventurer, Altar\3x3\1\320000\Remaining Ones' Mask Fragment, 40;; Vengeful One's Mask Fragment, 10\
+Light Tree\25\-\Adventurer, Altar\3x3\1\340000\Remaining Ones' Mask Fragment, 40;; Vengeful One's Mask Fragment, 10\
 Magma Slime Statue\1\A statue of a magma slime granted to those who are victorious in void battles. The burning flame mana grants vitality. Use it to boost the stats of flame-attuned adventurers.\Adventurer, Void Altar\2x2\1\0\0\Flame, Slime
 Magma Slime Statue\2\-\Adventurer, Void Altar\2x2\1\5000\Bat's Wing, 10;; Solid Fungus, 2\
 Magma Slime Statue\3\-\Adventurer, Void Altar\2x2\1\10000\Bat's Wing, 15\
@@ -999,6 +1055,11 @@ Manacaster Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell 
 Manacaster Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Violet Insignia, 200;; Dyrenell Aureus, 140;; Royal Violet Insignia, 80\
 Manacaster Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Violet Insignia, 240;; Dyrenell Aureus, 150;; Royal Violet Insignia, 100\
 Manacaster Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Violet Insignia, 240;; Dyrenell Aureus, 160;; Royal Violet Insignia, 100\
+Manacaster Dojo\36\-\Adventurer, Dojo\3x3\2\400000\Dyrenell Argenteus, 150;; Dyrenell Aureus, 175;; Violet Insignia, 260;; Royal Violet Insignia, 100;; Nature's Blessing, 2\
+Manacaster Dojo\37\-\Adventurer, Dojo\3x3\2\500000\Dyrenell Argenteus, 175;; Dyrenell Aureus, 200;; Violet Insignia, 280;; Royal Violet Insignia, 120;; Nature's Blessing, 2\
+Manacaster Dojo\38\-\Adventurer, Dojo\3x3\2\620000\Dyrenell Argenteus, 200;; Dyrenell Aureus, 225;; Violet Insignia, 300;; Royal Violet Insignia, 140;; Nature's Blessing, 3\
+Manacaster Dojo\39\-\Adventurer, Dojo\3x3\2\760000\Dyrenell Argenteus, 225;; Dyrenell Aureus, 250;; Violet Insignia, 320;; Royal Violet Insignia, 160;; Nature's Blessing, 3\
+Manacaster Dojo\40\-\Adventurer, Dojo\3x3\2\920000\Dyrenell Argenteus, 250;; Dyrenell Aureus, 275;; Violet Insignia, 340;; Royal Violet Insignia, 180;; Nature's Blessing, 4\
 Opera House\1\Use it to boost the stats of bow and manacaster wielding adventurers.\Adventurer, Event Dual Dojo\3x3\1\0\0\Bow, Manacaster
 Opera House\2\-\Adventurer, Event Dual Dojo\3x3\1\100\Libretto, 3\
 Opera House\3\-\Adventurer, Event Dual Dojo\3x3\1\200\Libretto, 5\
@@ -1087,6 +1148,11 @@ Rupie Mine\37\-\Production\3x3\4\5400\Light Orb, 160;; Radiance Orb, 50;; Refulg
 Rupie Mine\38\-\Production\3x3\4\5600\Light Orb, 200;; Radiance Orb, 65;; Refulgence Orb, 25;; Resplendence Orb, 15\
 Rupie Mine\39\-\Production\3x3\4\5800\Light Orb, 260;; Radiance Orb, 80;; Refulgence Orb, 30;; Resplendence Orb, 18\
 Rupie Mine\40\-\Production\3x3\4\6000\Light Orb, 400;; Radiance Orb, 100;; Refulgence Orb, 40;; Resplendence Orb, 25\
+Rupie Mine\41\-\Production\3x3\4\6200\Light Orb, 540;; Radiance Orb, 120;; Refulgence Orb, 50;; Resplendence Orb, 32\
+Rupie Mine\42\-\Production\3x3\4\6400\Light Orb, 680;; Radiance Orb, 140;; Refulgence Orb, 60;; Resplendence Orb, 39\
+Rupie Mine\43\-\Production\3x3\4\6600\Light Orb, 820;; Radiance Orb, 160;; Refulgence Orb, 70;; Resplendence Orb, 46\
+Rupie Mine\44\-\Production\3x3\4\6800\Light Orb, 960;; Radiance Orb, 180;; Refulgence Orb, 80;; Resplendence Orb, 53\
+Rupie Mine\45\-\Production\3x3\4\7000\Light Orb, 1100;; Radiance Orb, 200;; Refulgence Orb, 90;; Resplendence Orb, 60\
 Seabed Stage\1\Use it to boost the stats of bow and dagger wielding adventurers.\Adventurer, Event Dual Dojo\3x3\1\0\0\Bow, Dagger
 Seabed Stage\2\-\Adventurer, Event Dual Dojo\3x3\1\100\Glam Shells, 3\
 Seabed Stage\3\-\Adventurer, Event Dual Dojo\3x3\1\200\Glam Shells, 5\
@@ -1162,6 +1228,11 @@ Shadow Altar\37\-\Adventurer, Altar\3x3\2\140000\Shadow Orb, 350;; Nightfall Orb
 Shadow Altar\38\-\Adventurer, Altar\3x3\2\190000\Shadow Orb, 400;; Nightfall Orb, 108;; Nether Orb, 45;; Abbadon Orb, 6;; Rainbow Orb, 18\
 Shadow Altar\39\-\Adventurer, Altar\3x3\2\250000\Shadow Orb, 450;; Nightfall Orb, 144;; Nether Orb, 60;; Abbadon Orb, 8;; Rainbow Orb, 24\
 Shadow Altar\40\-\Adventurer, Altar\3x3\2\320000\Shadow Orb, 500;; Nightfall Orb, 180;; Nether Orb, 75;; Abbadon Orb, 10;; Rainbow Orb, 30\
+Shadow Altar\41\-\Adventurer, Altar\3x3\2\400000\Nightfall Orb, 300;; Nether Orb, 125;; Abbadon Orb, 14;; Rainbow Orb, 45;; Nature's Blessing, 2\
+Shadow Altar\42\-\Adventurer, Altar\3x3\2\500000\Nightfall Orb, 350;; Nether Orb, 150;; Abbadon Orb, 18;; Rainbow Orb, 55;; Nature's Blessing, 2\
+Shadow Altar\43\-\Adventurer, Altar\3x3\2\620000\Nightfall Orb, 400;; Nether Orb, 175;; Abbadon Orb, 22;; Rainbow Orb, 65;; Nature's Blessing, 3\
+Shadow Altar\44\-\Adventurer, Altar\3x3\2\760000\Nightfall Orb, 450;; Nether Orb, 200;; Abbadon Orb, 26;; Rainbow Orb, 75;; Nature's Blessing, 3\
+Shadow Altar\45\-\Adventurer, Altar\3x3\2\920000\Nightfall Orb, 500;; Nether Orb, 225;; Abbadon Orb, 30;; Rainbow Orb, 85;; Nature's Blessing, 4\
 Shadow Dracolith\1\A monument made in the likeness of a dragon. Increases damage dealt when shapeshifting as a shadow-attuned dragon.\Dragon, Dracolith\2x2\1\0\0\Shadow
 Shadow Dracolith\2\-\Dragon, Dracolith\2x2\1\3000\0\
 Shadow Dracolith\3\-\Dragon, Dracolith\2x2\1\4000\0\
@@ -1217,6 +1288,11 @@ Shadow Tree\22\-\Adventurer, Altar\3x3\1\280000\Almighty One's Mask Fragment, 40
 Shadow Tree\23\-\Adventurer, Altar\3x3\1\300000\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 10\
 Shadow Tree\24\-\Adventurer, Altar\3x3\1\320000\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 10\
 Shadow Tree\25\-\Adventurer, Altar\3x3\1\340000\Almighty One's Mask Fragment, 40;; Uprooting One's Mask Fragment, 10\
+Shadow Tree\26\\Adventurer, Altar\3x3\1\360000\Almighty One's Mask Fragment, 45;; Uprooting One's Mask Fragment, 15\
+Shadow Tree\27\\Adventurer, Altar\3x3\1\380000\Almighty One's Mask Fragment, 45;; Uprooting One's Mask Fragment, 15\
+Shadow Tree\28\\Adventurer, Altar\3x3\1\400000\Almighty One's Mask Fragment, 45;; Uprooting One's Mask Fragment, 15\
+Shadow Tree\29\\Adventurer, Altar\3x3\1\420000\Almighty One's Mask Fragment, 45;; Uprooting One's Mask Fragment, 15\
+Shadow Tree\30\\Adventurer, Altar\3x3\1\440000\Almighty One's Mask Fragment, 50;; Uprooting One's Mask Fragment, 20\
 Smithy\H\The smithy run by Ramona. Raise its level to expand the selection of weapons you can craft or enhance.\General\3x3\1\0\0\
 Snowdrake\-\An adorable drake made from snow. It's so cute, in fact, that someone cast a spell on it to make sure it doesn't melt.\Decorative\1x1\4\0\0\
 Staff Dojo\1\A training area built to hone one's skills with a staff. Use it to boosts the stats of staff-wielding adventures.\Adventurer, Dojo\3x3\2\0\0\Staff
@@ -1254,6 +1330,11 @@ Staff Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argen
 Staff Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Amber Insignia, 200;; Dyrenell Aureus, 140;; Royal Amber Insignia, 80\
 Staff Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Amber Insignia, 240;; Dyrenell Aureus, 150;; Royal Amber Insignia, 100\
 Staff Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Amber Insignia, 240;; Dyrenell Aureus, 160;; Royal Amber Insignia, 100\
+Staff Dojo\36\-\Adventurer, Dojo\3x3\2\400000\Dyrenell Argenteus, 150;; Dyrenell Aureus, 175;; Amber Insignia, 260;; Royal Amber Insignia, 100;; Nature's Blessing, 2\
+Staff Dojo\37\-\Adventurer, Dojo\3x3\2\500000\Dyrenell Argenteus, 175;; Dyrenell Aureus, 200;; Amber Insignia, 280;; Royal Amber Insignia, 120;; Nature's Blessing, 2\
+Staff Dojo\38\-\Adventurer, Dojo\3x3\2\620000\Dyrenell Argenteus, 200;; Dyrenell Aureus, 225;; Amber Insignia, 300;; Royal Amber Insignia, 140;; Nature's Blessing, 3\
+Staff Dojo\39\-\Adventurer, Dojo\3x3\2\760000\Dyrenell Argenteus, 225;; Dyrenell Aureus, 250;; Amber Insignia, 320;; Royal Amber Insignia, 160;; Nature's Blessing, 3\
+Staff Dojo\40\-\Adventurer, Dojo\3x3\2\920000\Dyrenell Argenteus, 250;; Dyrenell Aureus, 275;; Amber Insignia, 340;; Royal Amber Insignia, 180;; Nature's Blessing, 4\
 Statue of Ilia\1\A statue of the Goddess, which charms all who behold it, filled with holy mana capable of purifying miasma. Use it to boost the stats of axe- and staff-wielding adventurers.\Adventurer, Event Dual Dojo\3x3\1\0\0\Axe, Staff
 Statue of Ilia\2\-\Adventurer, Event Dual Dojo\3x3\1\100\Holy Ore, 3\
 Statue of Ilia\3\-\Adventurer, Event Dual Dojo\3x3\1\200\Holy Ore, 5\
@@ -1354,6 +1435,11 @@ Sword Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argen
 Sword Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Vermilion Insignia, 200;; Dyrenell Aureus, 140;; Royal Vermilion Insignia, 80\
 Sword Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Vermilion Insignia, 240;; Dyrenell Aureus, 150;; Royal Vermilion Insignia, 100\
 Sword Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Vermilion Insignia, 240;; Dyrenell Aureus, 160;; Royal Vermilion Insignia, 100\
+Sword Dojo\36\-\Adventurer, Dojo\3x3\2\400000\Dyrenell Argenteus, 150;; Dyrenell Aureus, 175;; Vermilion Insignia, 260;; Royal Vermilion Insignia, 100;; Nature's Blessing, 2\
+Sword Dojo\37\-\Adventurer, Dojo\3x3\2\500000\Dyrenell Argenteus, 175;; Dyrenell Aureus, 200;; Vermilion Insignia, 280;; Royal Vermilion Insignia, 120;; Nature's Blessing, 2\
+Sword Dojo\38\-\Adventurer, Dojo\3x3\2\620000\Dyrenell Argenteus, 200;; Dyrenell Aureus, 225;; Vermilion Insignia, 300;; Royal Vermilion Insignia, 140;; Nature's Blessing, 3\
+Sword Dojo\39\-\Adventurer, Dojo\3x3\2\760000\Dyrenell Argenteus, 225;; Dyrenell Aureus, 250;; Vermilion Insignia, 320;; Royal Vermilion Insignia, 160;; Nature's Blessing, 3\
+Sword Dojo\40\-\Adventurer, Dojo\3x3\2\920000\Dyrenell Argenteus, 250;; Dyrenell Aureus, 275;; Vermilion Insignia, 340;; Royal Vermilion Insignia, 180;; Nature's Blessing, 4\
 The Hungerdome\1\Use it to boost the stats of wand and blade wielding adventurers.\Adventurer, Event Dual Dojo\3x3\1\0\0\Wand, Blade
 The Hungerdome\2\-\Adventurer, Event Dual Dojo\3x3\1\100\Chef's Special, 3\
 The Hungerdome\3\-\Adventurer, Event Dual Dojo\3x3\1\200\Chef's Special, 5\
@@ -1409,6 +1495,11 @@ Tree\22\-\Adventurer, Tree\3x3\1\280000\Silver Mask Fragment, 40;; Gold Mask Fra
 Tree\23\-\Adventurer, Tree\3x3\1\300000\Silver Mask Fragment, 40;; Gold Mask Fragment, 10\
 Tree\24\-\Adventurer, Tree\3x3\1\320000\Silver Mask Fragment, 40;; Gold Mask Fragment, 10\
 Tree\25\-\Adventurer, Tree\3x3\1\340000\Silver Mask Fragment, 40;; Gold Mask Fragment, 10\
+Tree\26\-\Adventurer, Tree\3x3\1\360000\Silver Mask Fragment, 45;; Gold Mask Fragment, 15\
+Tree\27\-\Adventurer, Tree\3x3\1\380000\Silver Mask Fragment, 45;; Gold Mask Fragment, 15\
+Tree\28\-\Adventurer, Tree\3x3\1\400000\Silver Mask Fragment, 45;; Gold Mask Fragment, 15\
+Tree\29\-\Adventurer, Tree\3x3\1\420000\Silver Mask Fragment, 45;; Gold Mask Fragment, 15\
+Tree\30\-\Adventurer, Tree\3x3\1\440000\Silver Mask Fragment, 50;; Gold Mask Fragment, 20\
 Twinkling Slime Statue\1\A statue of a twinkling slime granted to those who are victorious in void battles. The still light mana within it sharpens the mind. Use it to boost the stats of light-attuned adventurers.\Adventurer, Void Altar\2x2\1\0\0\Light, Slime
 Twinkling Slime Statue\2\-\Adventurer, Void Altar\2x2\1\5000\Iron Ore, 10\
 Twinkling Slime Statue\3\-\Adventurer, Void Altar\2x2\1\10000\Iron Ore, 15;; Solid Fungus, 2\
@@ -1459,6 +1550,11 @@ Wand Dojo\32\-\Adventurer, Dojo\3x3\2\180000\Dyrenell Aes, 400;; Dyrenell Argent
 Wand Dojo\33\-\Adventurer, Dojo\3x3\2\200000\Dyrenell Aes, 400;; Dyrenell Argenteus, 100;; Jade Insignia, 200;; Dyrenell Aureus, 140;; Royal Jade Insignia, 80\
 Wand Dojo\34\-\Adventurer, Dojo\3x3\2\220000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Jade Insignia, 240;; Dyrenell Aureus, 150;; Royal Jade Insignia, 100\
 Wand Dojo\35\-\Adventurer, Dojo\3x3\2\240000\Dyrenell Aes, 500;; Dyrenell Argenteus, 120;; Jade Insignia, 240;; Dyrenell Aureus, 160;; Royal Jade Insignia, 100\
+Wand Dojo\36\-\Adventurer, Dojo\3x3\2\400000\Dyrenell Argenteus, 150;; Dyrenell Aureus, 175;; Jade Insignia, 260;; Royal Jade Insignia, 100;; Nature's Blessing, 2\
+Wand Dojo\37\-\Adventurer, Dojo\3x3\2\500000\Dyrenell Argenteus, 175;; Dyrenell Aureus, 200;; Jade Insignia, 280;; Royal Jade Insignia, 120;; Nature's Blessing, 2\
+Wand Dojo\38\-\Adventurer, Dojo\3x3\2\620000\Dyrenell Argenteus, 200;; Dyrenell Aureus, 225;; Jade Insignia, 300;; Royal Jade Insignia, 140;; Nature's Blessing, 3\
+Wand Dojo\39\-\Adventurer, Dojo\3x3\2\760000\Dyrenell Argenteus, 225;; Dyrenell Aureus, 250;; Jade Insignia, 320;; Royal Jade Insignia, 160;; Nature's Blessing, 3\
+Wand Dojo\40\-\Adventurer, Dojo\3x3\2\920000\Dyrenell Argenteus, 250;; Dyrenell Aureus, 275;; Jade Insignia, 340;; Royal Jade Insignia, 180;; Nature's Blessing, 4\
 Water Altar\1\An altar to honor water. The mana housed within sharpens the mind, boosting the stats of water-attuned adventurers.\Adventurer, Altar\3x3\2\200\0\Water
 Water Altar\2\-\Adventurer, Altar\3x3\2\400\0\
 Water Altar\3\-\Adventurer, Altar\3x3\2\600\0\
@@ -1499,6 +1595,11 @@ Water Altar\37\-\Adventurer, Altar\3x3\2\140000\Water Orb, 350;; Stream Orb, 87;
 Water Altar\38\-\Adventurer, Altar\3x3\2\190000\Water Orb, 400;; Stream Orb, 108;; Deluge Orb, 45;; Tsunami Orb, 6;; Rainbow Orb, 18\
 Water Altar\39\-\Adventurer, Altar\3x3\2\250000\Water Orb, 450;; Stream Orb, 144;; Deluge Orb, 60;; Tsunami Orb, 8;; Rainbow Orb, 24\
 Water Altar\40\-\Adventurer, Altar\3x3\2\320000\Water Orb, 500;; Stream Orb, 180;; Deluge Orb, 75;; Tsunami Orb, 10;; Rainbow Orb, 30\
+Water Altar\41\-\Adventurer, Altar\3x3\2\400000\Stream Orb, 300;; Deluge Orb, 125;; Tsunami Orb, 14;; Rainbow Orb, 45;; Nature's Blessing, 2\
+Water Altar\42\-\Adventurer, Altar\3x3\2\500000\Stream Orb, 350;; Deluge Orb, 150;; Tsunami Orb, 18;; Rainbow Orb, 55;; Nature's Blessing, 2\
+Water Altar\43\-\Adventurer, Altar\3x3\2\620000\Stream Orb, 400;; Deluge Orb, 175;; Tsunami Orb, 22;; Rainbow Orb, 65;; Nature's Blessing, 3\
+Water Altar\44\-\Adventurer, Altar\3x3\2\760000\Stream Orb, 450;; Deluge Orb, 200;; Tsunami Orb, 26;; Rainbow Orb, 75;; Nature's Blessing, 3\
+Water Altar\45\-\Adventurer, Altar\3x3\2\920000\Stream Orb, 500;; Deluge Orb, 225;; Tsunami Orb, 30;; Rainbow Orb, 85;; Nature's Blessing, 4\
 Water Dracolith\1\A monument made in the likeness of a water dragon. Increases damage dealt when shapeshifting as a water-attuned dragon.\Dragon, Dracolith\2x2\1\0\0\Water
 Water Dracolith\2\-\Dragon, Dracolith\2x2\1\3000\0\
 Water Dracolith\3\-\Dragon, Dracolith\2x2\1\4000\0\
@@ -1594,6 +1695,11 @@ Wind Altar\37\-\Adventurer, Altar\3x3\2\140000\Wind Orb, 350;; Storm Orb, 87;; M
 Wind Altar\38\-\Adventurer, Altar\3x3\2\190000\Wind Orb, 400;; Storm Orb, 108;; Maelstrom Orb, 45;; Tempest Orb, 6;; Rainbow Orb, 18\
 Wind Altar\39\-\Adventurer, Altar\3x3\2\250000\Wind Orb, 450;; Storm Orb, 144;; Maelstrom Orb, 60;; Tempest Orb, 8;; Rainbow Orb, 24\
 Wind Altar\40\-\Adventurer, Altar\3x3\2\320000\Wind Orb, 500;; Storm Orb, 180;; Maelstrom Orb, 75;; Tempest Orb, 10;; Rainbow Orb, 30\
+Wind Altar\41\-\Adventurer, Altar\3x3\2\400000\Storm Orb, 300;; Maelstrom Orb, 125;; Tempest Orb, 14;; Rainbow Orb, 45;; Nature's Blessing, 2\
+Wind Altar\42\-\Adventurer, Altar\3x3\2\500000\Storm Orb, 350;; Maelstrom Orb, 150;; Tempest Orb, 18;; Rainbow Orb, 55;; Nature's Blessing, 2\
+Wind Altar\43\-\Adventurer, Altar\3x3\2\620000\Storm Orb, 400;; Maelstrom Orb, 175;; Tempest Orb, 22;; Rainbow Orb, 65;; Nature's Blessing, 3\
+Wind Altar\44\-\Adventurer, Altar\3x3\2\760000\Storm Orb, 450;; Maelstrom Orb, 200;; Tempest Orb, 26;; Rainbow Orb, 75;; Nature's Blessing, 3\
+Wind Altar\45\-\Adventurer, Altar\3x3\2\920000\Storm Orb, 500;; Maelstrom Orb, 225;; Tempest Orb, 30;; Rainbow Orb, 85;; Nature's Blessing, 4\
 Wind Dracolith\1\A monument made in the likeness of a wind dragon. Increases damage dealt when shapeshifting as a wind-attuned dragon.\Dragon, Dracolith\2x2\1\0\0\Wind
 Wind Dracolith\2\-\Dragon, Dracolith\2x2\1\3000\0\
 Wind Dracolith\3\-\Dragon, Dracolith\2x2\1\4000\0\
