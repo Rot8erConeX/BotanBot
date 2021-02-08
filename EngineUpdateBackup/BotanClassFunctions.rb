@@ -142,7 +142,7 @@ def help_text(event,bot,command=nil,subcommand=nil)
     event << ''
     event << 'Toggles whether I post as embeds or plaintext when the invoker triggers a response from me.  By default, I display embeds for everyone.'
     event << 'This command is useful for people who, in an attempt to conserve phone data, disable the automatic loading of images, as this setting also affects their ability to see embeds.'
-    unless @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
+    unless $embedless.include?(event.user.id) || was_embedless_mentioned?(event)
       event << ''
       event << 'This help window is not in an embed so that people who need this command can see it.'
     end
@@ -449,14 +449,14 @@ class DLAdventurer
   end
   
   def rar_row(r=0)
-    r=@rarity if rar<=@rarity
+    r=@rarity if r<=@rarity
     return generate_rarity_row(r,$max_rarity[0],@games[0])
   end
   
-  def portrait(event,forcerar=nil)
-    args=event.message.text.downcase.split(' ')
+  def portrait(event,args=nil,forcerar=nil)
+    args=event.message.text.downcase.split(' ') if args.nil?
     rar=0
-    lookout=$skilltags.lookout.reject{|q| q[2]!='Art' && q[2]!='Art/Adventurer'}
+    lookout=$skilltags.reject{|q| q[2]!='Art' && q[2]!='Art/Adventurer'}
     rarval=[]
     for i in 0...$max_rarity[0]+1
       rarval.push(i)
@@ -499,6 +499,8 @@ class DLAdventurer
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Adventurers/#{dispname}_#{rar}.png"
     return [art,disp]
   end
+  
+  def artist; return nil; end
 end
 
 class DLDragon
@@ -528,9 +530,9 @@ class DLDragon
     return str
   end
   
-  def portrait(event,forcerar=nil)
-    args=event.message.text.downcase.split(' ')
-    lookout=$skilltags.lookout.reject{|q| q[2]!='Art' && q[2]!='Art/Dragon'}
+  def portrait(event,args=nil,forcerar=nil)
+    args=event.message.text.downcase.split(' ') if args.nil?
+    lookout=$skilltags.reject{|q| q[2]!='Art' && q[2]!='Art/Dragon'}
     for i in 0...args.length
       for j in 0...lookout.length
         rar=lookout[j][0] if rar.nil? && lookout[j][1].include?(args[i].downcase)
@@ -552,8 +554,10 @@ class DLDragon
       end
     end
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Dragons/#{dispname}#{"_#{rar}" unless rar.nil?}.png"
-    return[art,disp]
+    return[art,disp,rar]
   end
+  
+  def artist; return nil; end
 end
 
 class DLWyrmprint
@@ -575,10 +579,11 @@ class DLWyrmprint
     return generate_rarity_row(@rarity,0,@games[0])
   end
   
-  def portrait(event,forcerar=nil)
+  def portrait(event,args=nil,forcerar=nil)
+    args=event.message.text.downcase.split(' ') if args.nil?
     dispname=@name.gsub(' ','_')
     l=1
-    l=2 if has_any?(['mub','unbind','unbound','refined','refine','refinement','2ub','3ub'],event.message.text.downcase.split(' '))
+    l=2 if has_any?(['mub','unbind','unbound','refined','refine','refinement','2ub','3ub'],args)
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Wyrmprints/#{dispname}_#{l}.png"
     emtz=['','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>']
     emtz=['','<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>'] if @games[0]=='FEH'
@@ -587,6 +592,9 @@ class DLWyrmprint
     disp="#{disp}\n#{"#{halfemote} \u200B" if @rarity==5}#{emtz[l]*4}"
     return [art,disp]
   end
+  
+  def voice_na; return nil; end
+  def voice_jp; return nil; end
 end
 
 class DLWeapon
@@ -624,9 +632,9 @@ class DLEnemy
     return ''
   end
   
-  def portrait(event,forcerar=nil)
-    args=event.message.text.downcase.split(' ')
-    lookout=$skilltags.lookout.reject{|q| q[2]!='Art' && q[2]!='Art/Enemy'}
+  def portrait(event,args=nil,forcerar=nil)
+    args=event.message.text.downcase.split(' ') if args.nil?
+    lookout=$skilltags.reject{|q| q[2]!='Art' && q[2]!='Art/Enemy'}
     dispname=@name.gsub(' ','_')
     for i in 0...args.length
       for j in 0...lookout.length
@@ -646,6 +654,10 @@ class DLEnemy
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Bosses/#{dispname}#{"_#{rar}" unless rar.nil?}.png"
     return [art,disp]
   end
+  
+  def artist; return nil; end
+  def voice_na; return nil; end
+  def voice_jp; return nil; end
 end
 
 class DL_NPC
@@ -676,15 +688,16 @@ class DL_NPC
     return str
   end
   
-  def portrait(event,forcerar=nil)
-    args=event.message.text.downcase.split(' ')
-    lookout=$skilltags.lookout.reject{|q| q[2]!='Art' && q[2]!='Art/NPC'}
+  def portrait(event,args=nil,forcerar=nil)
+    args=event.message.text.downcase.split(' ') if args.nil?
+    lookout=$skilltags.reject{|q| q[2]!='Art' && q[2]!='Art/NPC'}
     dispname=@name.gsub(' ','_')
     for i in 0...args.length
       for j in 0...lookout.length
         rar=lookout[j][0] if rar.nil? && lookout[j][1].include?(args[i].downcase)
       end
     end
+    disp=self.rar_row
     if !rar.nil? && rar.is_a?(String)
       art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Misc/#{dispname}#{"_#{rar}" unless rar.nil?}.png"
       m=false
@@ -698,6 +711,8 @@ class DL_NPC
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Misc/#{dispname}#{"_#{rar}" unless rar.nil?}.png"
     return [art,disp]
   end
+  
+  def artist; return nil; end
 end
 
 class DLSticker
@@ -705,12 +720,121 @@ class DLSticker
     return ''
   end
   
-  def portrait(event,forcerar=nil)
-    args=event.message.text.downcase.split(' ')
+  def portrait(event,args=nil,forcerar=nil)
+    args=event.message.text.downcase.split(' ') if args.nil?
     nme=@name.gsub(' ','_').gsub('!','').gsub('?','')
     nme="#{nme}(JP)" if has_any?(args,['jp','japan'])
     art="https://github.com/Rot8erConeX/BotanBot/blob/master/Art/Stickers/#{nme}.png?raw=true"
     return [art,'']
+  end
+  
+  def artist; return nil; end
+  def voice_na; return nil; end
+  def voice_jp; return nil; end
+end
+
+class DLBanner
+  def disp_embed(event,bot,mode=0,msg='')
+    adv=$adventurers.map{|q| q}
+    drg=$dragons.map{|q| q}
+    wrm=$wyrmprints.map{|q| q}
+    aaa=@advs.map{|q| q}
+    f=[]
+    for i in 0...aaa.length
+      a=adv.find_index{|q| q.name==aaa[i].gsub('*','').gsub(' <:Wyrmsigil:759937956672045066>','').gsub('<:Wyrmsigil:759937956672045066>','')}
+      if @advs.length+@drgs.length+@prints.length<=10
+        aaa[i]="#{aaa[i]}#{adv[a].emotes(bot)}" unless a.nil?
+      elsif a.nil?
+        aaa[i]="~~#{aaa[i]}~~"
+      end
+    end
+    f.push(['Adventurers',aaa.join("\n")]) unless aaa.length<=0
+    aaa=@drgs.map{|q| q}
+    for i in 0...aaa.length
+      a=drg.find_index{|q| q.name==aaa[i].gsub('*','').gsub(' <:Wyrmsigil:759937956672045066>','').gsub('<:Wyrmsigil:759937956672045066>','')}
+      if @advs.length+@drgs.length+@prints.length<=10
+        aaa[i]="#{aaa[i]}#{drg[a].emotes(bot)}" unless a.nil?
+      elsif a.nil?
+        aaa[i]="~~#{aaa[i]}~~"
+      end
+    end
+    f.push(['Dragons',aaa.join("\n")]) unless aaa.length<=0
+    aaa=@prints.map{|q| q}
+    for i in 0...aaa.length
+      a=wrm.find_index{|q| q.name==aaa[i].gsub('*','').gsub(' <:Wyrmsigil:759937956672045066>','').gsub('<:Wyrmsigil:759937956672045066>','')}
+      if @advs.length+@drgs.length+@prints.length<=10
+        aaa[i]="#{aaa[i]}#{wrm[a].emotes(bot)}" unless a.nil?
+      elsif a.nil?
+        aaa[i]="~~#{aaa[i]}~~"
+      end
+    end
+    f.push(['Wyrmprints',aaa.join("\n")]) unless aaa.length<=0
+    f=nil if f.length<=0
+    if !@end_date.nil? && mode==1
+      t=Time.now
+      timeshift=7
+      timeshift-=1 unless (t-24*60*60).dst?
+      t-=60*60*timeshift
+      t2=@end_date.map{|q| q}
+      t2=Time.new(t2[2],t2[1],t2[0])+24*60*60
+      t2=t2-t
+      if t2/(24*60*60)>1
+        str2=" - #{(t2/(24*60*60)).floor} days left"
+      elsif t2/(60*60)>1
+        str2=" - #{(t2/(60*60)).floor} hours left"
+      elsif t2/60>1
+        str2=" - #{(t2/60).floor} minutes left"
+      elsif t2>1
+        str2=" - #{(t2).floor} seconds left"
+      end
+    elsif mode==0 && !@start_date.nil? && !@end_date.nil?
+      kk=[@start_date,@end_date].map{|q| "#{q[0]} #{['','Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'][q[1]]} #{q[2]}"}
+      str2="**Real-world date:** #{kk[0]} - #{kk[1]}\n(assuming reset is at midnight)"
+    else
+      str2=''
+    end
+    ftr=nil
+    ftr="Associated Facility: #{@facilities.join(', ')}" unless @facilities.nil? || @facilities.length<=0
+    create_embed(event,"#{msg}__**#{@name}**__",str2,self.disp_color,ftr,[nil,self.thumbnail],f)
+  end
+  
+  def description(event,itm=nil,fulldesc=false)
+    kk=[@start_date,@end_date].map{|q| "#{q[0]}#{['','Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'][q[1]]}#{q[2]}"}
+    if safe_to_spam?(event) || fulldesc
+      str="__*#{@name}*__"
+      str="#{str}\n*Real-world date:* #{kk[0]} - #{kk[1]}"
+      sprk=false
+      a=@advs.map{|q| q.gsub('*','')}
+      d=@drgs.map{|q| q.gsub('*','')}
+      p=@prints.map{|q| q.gsub('*','')}
+      unless itm.nil?
+        sprk=true if itm.is_a?(DLAdventurer) && has_any?(@advs.map{|q| q.gsub('*')},["#{itm.name} <:Wyrmsigil:759937956672045066>","#{itm.name}<:Wyrmsigil:759937956672045066>"])
+        sprk=true if itm.is_a?(DLDragon) && has_any?(@drgs.map{|q| q.gsub('*')},["#{itm.name} <:Wyrmsigil:759937956672045066>","#{itm.name}<:Wyrmsigil:759937956672045066>"])
+        sprk=true if itm.is_a?(DLWyrmprint) && has_any?(@prints.map{|q| q.gsub('*')},["#{itm.name} <:Wyrmsigil:759937956672045066>","#{itm.name}<:Wyrmsigil:759937956672045066>"])
+        str="#{str}\n<:Wyrmsigil:759937956672045066> *#{itm.name} is sparkable*" if sprk
+        a=a.reject{|q| q.gsub(' <:Wyrmsigil:759937956672045066>','').gsub('<:Wyrmsigil:759937956672045066>','')==itm.name} if itm.is_a?(DLAdventurer)
+        d=d.reject{|q| q.gsub(' <:Wyrmsigil:759937956672045066>','').gsub('<:Wyrmsigil:759937956672045066>','')==itm.name} if itm.is_a?(DLDragon)
+        p=p.reject{|q| q.gsub(' <:Wyrmsigil:759937956672045066>','').gsub('<:Wyrmsigil:759937956672045066>','')==itm.name} if itm.is_a?(DLWyrmprint)
+      end
+      str="#{str}\n*Focus Adventurers:* #{a.sort.join(', ')}" unless a.length<=0
+      str="#{str}\n*Focus Dragons:* #{d.sort.join(', ')}" unless d.length<=0
+      str="#{str}\n*Focus Wyrmprints:* #{p.sort.join(', ')}" unless p.length<=0
+      str="#{str}\n*Associated Facility:* #{@facilities.join(', ')}" unless @facilities.nil? || @facilities.length<=0
+    else
+      str="*#{@name}*  (#{kk[0]}-#{kk[1]})"
+    end
+    return str
+  end
+  
+  def hasFocus?(itm)
+    if itm.is_a?(DLAdventurer)
+      return true if @advs.map{|q| q.gsub('*','').gsub(' <:Wyrmsigil:759937956672045066>','').gsub('<:Wyrmsigil:759937956672045066>','')}.include?(itm.name)
+    elsif itm.is_a?(DLDragon)
+      return true if @drgs.map{|q| q.gsub('*','').gsub(' <:Wyrmsigil:759937956672045066>','').gsub('<:Wyrmsigil:759937956672045066>','')}.include?(itm.name)
+    elsif itm.is_a?(DLWyrmprint)
+      return true if @false.map{|q| q.gsub('*','').gsub(' <:Wyrmsigil:759937956672045066>','').gsub('<:Wyrmsigil:759937956672045066>','')}.include?(itm.name)
+    end
+    return false
   end
 end
 
@@ -1165,7 +1289,1573 @@ def disp_gauntlet_data(bot,event,args=nil,name=nil)
   end
 end
 
+def disp_art(bot,event,args=nil)
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
+    args.shift
+    k=find_data_ex(:find_adventurer,args.join(' '),event)
+  elsif ['dragon','dragons','drg'].include?(args[0].downcase) && !(!find_data_ex(:find_wyrmprint,args.join(' '),event,true).nil? && find_data_ex(:find_wyrmprint,args.join(' '),event,true).name[0,7].downcase=='dragon '.downcase)
+    args.shift
+    k=find_data_ex(:find_dragon,args.join(' '),event)
+  elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
+    args.shift
+    k=find_data_ex(:find_wyrmprint,args.join(' '),event)
+  elsif ['enemy','boss'].include?(args[0].downcase)
+    args.shift
+    k=find_data_ex(:find_enemy,args.join(' '),event)
+  elsif ['emote','emoji','sticker'].include?(args[0].downcase)
+    args.shift
+    k=find_data_ex(:find_sticker,args.join(' '),event)
+  elsif ['npc'].include?(args[0].downcase)
+    args.shift
+    k=find_data_ex(:find_npc,args.join(' '),event)
+  else
+    k=find_best_match(args.join(' '),bot,event,false,false,2)
+  end
+  if k.nil?
+    event.respond 'No matches found.'
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  evn=event.message.text.downcase.split(' ')
+  hdr="__**#{k.name}**__#{k.emotes(bot)}"
+  mx=k.portrait(event,args)
+  title=mx[1]
+  xpic=[nil,mx[0]]
+  rar=mx[2]
+  ftr=nil
+  str=''
+  if k.is_a?(DLWyrmprint)
+    title=nil if k.is_a?(DLWyrmprint)
+    str=mx[1]
+    if k.charas.nil?
+    elsif has_any?(['mub','unbind','unbound','refined','refine','refinement','2ub','3ub'],evn)
+      c=k.charas[-1].map{|q| q}
+    else
+      c=k.charas[0].map{|q| q}
+      ftr='Include the word "refined" for MUB art.'
+    end
+  elsif k.is_a?(DLSticker)
+    ftr='Include the word "JP" to show the Japanese version of this emote.' unless has_any?(['jp','japan'],evn)
+    c=k.charas.map{|q| q} unless k.charas.nil?
+  end
+  flds=[]
+  xartist=''; vana=[]; vajp=[]; m=[]
+  m.push("**Artist:** #{k.artist.split(' & ').map{|q| q.split(' as ')[-1]}.join(' & ')}") unless k.artist.nil?
+  m.push("**VA (English):** #{k.voice_na.split(' & ').map{|q| q.split(' as ')[-1]}.join(' & ')}") unless k.voice_na.nil?
+  m.push("**VA (Japanese):** #{k.voice_jp.split(' & ').map{|q| q.split(' as ')[-1]}.join(' & ')}") unless k.voice_jp.nil?
+  xartist=k.artist.split(' as ')[0] unless k.artist.nil?
+  vana=k.voice_na.split(' & ').map{|q| q.split(' as ')[0]} unless k.voice_na.nil? || k.voice_na.length<=0
+  vajp=k.voice_jp.split(' & ').map{|q| q.split(' as ')[0]} unless k.voice_jp.nil? || k.voice_jp.length<=0
+  str="#{str}#{"\n\n" if str.length>0}#{m.join("\n")}"
+  toload=['feh']
+  toload.push('fgo') if event.server.nil? || !bot.user(502288364838322176).on(event.server.id).nil? || Shardizard==4
+  data_load(toload)
+  fehunits=$feh_units.map{|q| q.clone}
+  fgosrv=[]; fgoce=[]
+  if toload.include?('fgo')
+    fgosrv=$fgo_servants.reject{|q| q.id.to_i != q.id.to_f}.map{|q| q.clone}
+    fgoce=$fgo_crafts.map{|q| q.clone}
+  end
+  if k.is_a?(DLSentient)
+    adv=[$adventurers,$dragons,$npcs,fehunits,fgosrv].flatten.map{|q| q.clone}.uniq
+    voices=[]
+    for i in 0...adv.length
+      a=adv[i].clone
+      a.name="*[FEH]* #{a.name}" if a.is_a?(FEHUnit)
+      a.name="*[FGO-Srv #{a.tid}]* #{a.name}" if a.is_a?(FGOServant)
+      vana2=[]; vajp2=[]
+      if a.is_a?(FEHUnit)
+        vana2=a.voice_na unless a.voice_na.nil?
+        if a.id==110 && vana.include?('Sara Beth')
+          a.voice_na='Sara Beth'
+          a.name=a.name.gsub('*[FEH]*','*[FEH-Resplendent]*')
+        elsif vana.include?('Alexis Tipton') && vana2.include?('Laura Bailey')
+          a.voice_na=a.voice_na.map{|q| q.gsub('Laura Bailey','Alexis Tipton')}.join(' & ')
+          a.name=a.name.gsub('*[FEH]*','*[FEH-Resplendent]*')
+        end
+        vajp2=a.voice_jp unless a.voice_jp.nil?
+      else
+        vana2=a.voice_na.split(' & ') unless a.voice_na.nil?
+        vajp2=a.voice_jp.split(' & ') unless a.voice_jp.nil?
+      end
+      if a.name==k.name && (k.objt==a.objt || (k.is_a?(DLDragon) && a.is_a?(DLAdventurer) && k.isPseudodragon?))
+      elsif vana.length<2 && vajp.length<2
+        if !k.voice_na.nil? && !k.voice_jp.nil? && k.voice_na==a.voice_na && k.voice_jp==adv[i].voice_jp
+          a.name="#{a.name} *[Both]*"
+          voices.push(a)
+        elsif !k.voice_na.nil? && k.voice_na==a.voice_na
+          a.name="#{a.name} *[English]*"
+          voices.push(a)
+        elsif !k.voice_jp.nil? && k.voice_jp==a.voice_jp
+          a.name="#{a.name} *[Japanese]*"
+          voices.push(a)
+        end
+      elsif vana2.length<2 && vajp2.length<2
+        vana2=vana2[0]; vajp2=vajp2[0]
+        e=[]; j=[]
+        for i2 in 0...vana.length
+          e.push("#{i2+1}") if vana[i2]==vana2
+        end
+        for i2 in 0...vajp.length
+          j.push("#{i2+1}") if vajp[i2]==vajp2
+        end
+        v=e.reject{|q| !j.include?(q)}
+        e=e.reject{|q| v.include?(q)}
+        j=j.reject{|q| v.include?(q)}
+        m=[]
+        if e.length<=0 && j.length<=0 && v.length>0
+          m.push("Voice #{v.join('+')}")
+        elsif e.length<=0 && j.length>0 && v.length<=0
+          m.push("Japanese #{j.join('+')}")
+        elsif e.length>0 && j.length<=0 && v.length<=0
+          m.push("English #{e.join('+')}")
+        else
+          m.push("voice #{v.join('+').downcase}") if v.length>0
+          m.push("E#{e.join('+').downcase}") if e.length>0
+          m.push("J#{j.join('+').downcase}") if j.length>0
+        end
+        a.name="#{a.name} *[#{m.join(', ')}]*"
+        voices.push(a) if m.length>0
+      end
+    end
+    unless voices.length<=0
+      m='Same VA'
+      if voices.reject{|q| q.name.split('*[')[-1]==voices[0].name.split('*[')[-1]}.length<=0
+        m="Same VA (#{voices[0].name.split('*[')[-1].gsub(']*','')})"
+      end
+      voices=voices.sort{|a,b| (a.objt<=>b.objt)==0 ? ((a.tid<=>b.tid)==0 ? (a.name<=>b.name) : (a.tid<=>b.tid)) : (a.objt<=>b.objt)}
+      voices.uniq!
+      voices=voices.map{|q| q.name}
+      voices=voices.map{|q| q.split('*[')[0]} if m.include?('(')
+      flds.push([m,voices.uniq.join("\n")])
+    end
+    adv=[$wyrmprints.reject{|q| q.isMultiprint?},$stickers].flatten.map{|q| q.clone}.uniq
+    appearances=[]
+    nnn="#{k.name}"
+    nnn="Mym" if k.name=='Brunhilda' && ['Human','Kimono','Damaged'].include?(rar)
+    for i in 0...adv.length
+      a=adv[i].clone
+      if a.charas.nil?
+      elsif a.is_a?(DLSticker)
+        a.name="#{a.name} *[Sticker]*"
+        appearances.push(a) if a.charas.include?(nnn)
+      elsif a.charas[0].include?(nnn) && a.charas[-1].include?(nnn)
+        appearances.push(a)
+      elsif a.charas[0].include?(nnn)
+        a.name="#{a.name} *[Base]*"
+        appearances.push(a)
+      elsif a.charas[-1].include?(nnn)
+        a.name="#{a.name} *[Refined]*"
+        appearances.push(a)
+      end
+    end
+    unless appearances.length<=0
+      m='Appears in the following'
+      if appearances.reject{|q| q.name.include?('*[Sticker]*')}.length<=0
+        m='Appears in the following wyrmprints'
+      elsif appearances.reject{|q| !q.name.include?('*[Sticker]*')}.length<=0
+        m='Appears in the following stickers'
+      end
+      appearances=appearances.sort{|a,b| (a.objt<=>b.objt)==0 ? (a.name<=>b.name) : (b.objt<=>a.objt)}
+      appearances.uniq!
+      appearances=appearances.map{|q| q.name}
+      appearances=appearances.map{|q| q.gsub(' *[Sticker]*','')} if m=='Appears in the following stickers'
+      flds.push([m,appearances.uniq.join("\n")])
+    end
+  elsif k.is_a?(DLWyrmprint) && xartist.length>0
+    adv=[$wyrmprints.reject{|q| q.isMultiprint?},fehunits,fgosrv,fgoce].flatten.map{|q| q.clone}.uniq
+    artists=[]
+    for i in 0...adv.length
+      a=adv[i].clone
+      a.name="*[FGO-Srv #{a.tid}]* #{a.name}" if a.is_a?(FGOServant)
+      a.name="*[FGO-CE #{a.tid}]* #{a.name}" if a.is_a?(FGO_CE)
+      if a.artist.nil? || a.artist.length<=0 || (a.is_a?(DLWyrmprint) && a.name==k.name)
+      elsif a.is_a?(FEHUnit)
+        if a.artist[0].split(' as ')[0]==xartist
+          a.name="*[FEH]* #{a.name}"
+          artists.push(a)
+        elsif a.artist.length>1 && a.artist[1].split(' as ')[0]==xartist
+          a.name="*[FEH-Resplendent]* #{a.name}"
+          artists.push(a)
+        end
+      else
+        artists.push(a) if a.artist.split(' as ')[0]==xartist
+      end
+    end
+    unless artists.length<=0
+      artists=artists.sort{|a,b| (a.objt<=>b.objt)==0 ? ((a.tid<=>b.tid)==0 ? (a.name<=>b.name) : (a.tid<=>b.tid)) : (a.objt<=>b.objt)}.map{|q| q.name}.uniq
+      flds.push(['Same artist',artists.uniq.join("\n")])
+    end
+  end
+  unless c.nil? || c.length<=0
+    flds.push(['Characters in art',c.sort.join("\n")]) unless k.is_a?(DLSticker)
+    str="#{str}#{"\n\n" if str.length>0}**Characters in art:** #{c.sort.join(', ')}" if k.is_a?(DLSticker)
+  end
+  flds=nil if flds.length<=0
+  create_embed(event,[hdr,title],str,k.disp_color,ftr,xpic,flds)
+end
 
+def disp_alts(bot,event,args=nil)
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
+    args.shift
+    kx=find_data_ex(:find_adventurer,args.join(' '),event)
+  elsif ['dragon','dragons','drg'].include?(args[0].downcase)
+    args.shift
+    kx=find_data_ex(:find_dragon,args.join(' '),event)
+  else
+    kx=find_best_match(args.join(' '),bot,event,false,false,4)
+  end
+  if kx.nil?
+    event.respond 'No matches found.'
+    return nil
+  end
+  dname=kx.alts[0].gsub('*','')
+  k=[$adventurers,$dragons].flatten.reject{|q| q.alts.nil? || q.alts[0].nil? || q.alts[0].gsub('*','')!=dname}.uniq
+  untz2=[]
+  color=[]
+  for i in 0...k.length
+    color.push(k[i].disp_color)
+    m=[]
+    m.push('default') if k[i].name==k[i].alts[0] || k[i].alts[0][k[i].alts[0].length-1,1]=='*'
+    m.push('default') if k[i].alts[0][0,1]=='*' && k[i].alts.length>1
+    m.push('sensible') if k[i].alts[0][0,1]=='*' && k[i].alts.length<2
+    m.push('seasonal') if k[i].availability.include?('s')
+    m.push('~~seasonal~~') if k[i].availability.include?('f')
+    m.push('Gala') if k[i].name[0,5]=='Gala ' && m.length<=0
+    m.push('out-of-left-field') if m.length<=0
+    n=''
+    unless k[i].name==k[i].alts[0] || k[i].alts[k[i].alts.length-1,1]=='*'
+      k2=k.reject{|q| q.alts[0].gsub('*','')!=k[i].alts[0].gsub('*','') || q.name==k[i].name || !(q.name==q.alts[0] || q.alts[0].include?('*'))}
+      n='x' if k2.length<=0
+    end
+    if kx.objt==k[i].objt
+      untz2.push(["#{k[i].name}#{k[i].emotes(bot)} - #{m.uniq.join(', ')}",k[i].alts.map{|q| q.gsub('*','')}])
+    elsif k[i].is_a?(DLAdventurer)
+      untz2.push(["*[Adv]* #{k[i].name}#{k[i].emotes(bot)} - #{m.uniq.join(', ')}",k[i].alts.map{|q| q.gsub('*','')}])
+    elsif k[i].is_a?(DLDragon)
+      untz2.push(["*[Drg]* #{k[i].name}#{k[i].emotes(bot)} - #{m.uniq.join(', ')}",k[i].alts.map{|q| q.gsub('*','')}])
+    end
+  end
+  if color.length.zero?
+    color=0xFFD800
+  else
+    color=avg_color(color)
+  end
+  k2=k.map{|q| q.alts.length}
+  k=k.map{|q| q.alts}
+  str=''
+  if k2.max>1
+    k2=k.map{|q| q[1]}.uniq.map{|q| ["#{dname}(#{q})",[],q]}
+    for i in 0...untz2.length
+      for j in 0...k2.length
+        k2[j][1].push(untz2[i][0]) if k2[j][2]==untz2[i][1][1]
+      end
+    end
+    for i in 0...k2.length
+      k2[i][0]="**Facet #{i+1}: #{k2[i][0]}**"
+      k2[i][1]=k2[i][1].join("\n")
+      k2[i][2]=1
+      k2[i].compact!
+      k2[i]=nil if k2[i][1].length<=0
+    end
+    k2.compact!
+  else
+    str=untz2.map{|q| q[0]}.join("\n")
+    k2=nil
+  end
+  create_embed(event,"__**#{dname}**__",str,color,nil,nil,k2,2)
+end
+
+
+
+def disp_banner(bot,event,args=nil)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  data_load()
+  p=[]
+  xcolor=0x849294
+  xpic=nil
+  evn=event.message.text.downcase.split(' ')
+  kx=find_best_match(args.join(' '),bot,event,false,false,5)
+  if kx.nil?
+    current_banner(bot,event,args,"No matches found.  Showing current banner instead.\n\n",false)
+    return nil
+  elsif kx.is_a?(DLBanner)
+    old_banner(bot,event,args,kx)
+    return nil
+  end
+  s2s=false
+  s2s=true if safe_to_spam?(event)
+  bnr=[]
+  bbb=$banners.map{|q| q}
+  bnr.push("*Launch #{kx.objt}*") if bbb[0].hasFocus?(kx)
+  for i in 1...bbb.length
+    bnr.push(bbb[i].description(event,kx,bnr.length<=0)) if bbb[i].hasFocus?(kx)
+  end
+  if bnr.length>16 && !s2s && bnr[0]=="*Launch #{p[1]}*"
+    bnr=[bnr[0],"Has appeared on #{bnr.length-1} banners since"]
+  elsif bnr.length>16 && !s2s
+    bnr[0]="__**Debut Banner**__\n#{bnr[0]}"
+    bnr=[bnr[0],"...as well as #{bnr.length-1} additional banners since then"]
+  elsif bnr.length>0
+    bnr[0]="__**Debut Banner**__\n#{bnr[0]}"
+    bnr[1]="#{"\n" unless s2s}__**Other Banners**__\n#{bnr[1]}" if bnr.length>1
+  else
+    bnr.push('~~None~~')
+  end
+  if "__**#{kx.name}**'s Banners__".length+bnr.join("#{"\n" if s2s}\n").length>=1900 || Shardizard==4
+    hdr="__**#{kx.name}**'s Banners__"
+    xpic=kx.thumbnail
+    j=0; m=0
+    for i in 1...bnr.length
+      if "#{bnr[j]}#{"\n" if s2s || i==1}\n#{bnr[i]}".length>=1900
+        create_embed(event,hdr,bnr[j],kx.disp_color(m),nil,xpic)
+        j=i*1; hdr=nil; xpic=nil; m+=1
+      else
+        bnr[j]="#{bnr[j]}#{"\n" if s2s || i==1}\n#{bnr[i]}"
+        bnr[i]=nil
+      end
+    end
+    create_embed(event,hdr,bnr[j],kx.disp_color(m),'All banners display dates as if reset is at midnight.',xpic)
+  else
+    create_embed(event,"__**#{kx.name}**'s Banners__",bnr.join("#{"\n" if s2s}\n"),kx.disp_color,'All banners display dates as if reset is at midnight.',kx.thumbnail)
+  end
+end
+
+def old_banner(bot,event,args=nil,bnr=nil)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  data_load()
+  if bnr.nil?
+    b=find_data_ex(:find_banner,args.join(' '),event)
+  else
+    b=bnr.clone
+  end
+  if b.nil?
+    event.respond "No matches found."
+  else
+    b.disp_embed(event,bot,0)
+  end
+  return nil
+end
+
+def current_banner(bot,event,args=nil,msg='',showerr=true)
+  dispstr=event.message.text.downcase.split(' ')
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) } # remove any mentions included in the inputs
+  data_load()
+  t=Time.now
+  timeshift=7
+  timeshift-=1 unless (t-24*60*60).dst?
+  t-=60*60*timeshift
+  tm="#{t.year}#{'0' if t.month<10}#{t.month}#{'0' if t.day<10}#{t.day}".to_i
+  bb=$banners.reject{|q| !q.isCurrent?}
+  if bb.length<=0
+    event.respond "No matches found." if showerr
+  else
+    for iq in 0...bb.length
+      bb[iq].disp_embed(event,bot,1,msg) unless !safe_to_spam?(event) && iq>0
+    end
+  end
+  return nil
+end
+
+def today_in_dl(event,bot,args=nil,ignoreinputs=false,mode=0)
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  args=args.map{|q| q.downcase}
+  t=Time.now
+  timeshift=7
+  timeshift-=1 unless (t-24*60*60).dst?
+  t-=60*60*timeshift
+  sftday=-2
+  for i in 0...args.length
+    stfday=t.wday if ['today','now'].include?(args[i]) && sftday<-1
+    sftday=-1 if ['tomorrow','tommorrow','tomorow','tommorow','next'].include?(args[i]) && sftday<-1
+    sftday=0 if ['sunday','sundae','sun','su','sonday','sondae','son','u'].include?(args[i]) && sftday<-1
+    sftday=1 if ['mo','monday','mondae','mon','m'].include?(args[i]) && sftday<-1
+    sftday=2 if ['tu','tuesday','tuesdae','tues','tue','t'].include?(args[i]) && sftday<-1
+    sftday=3 if ['we','wednesday','wednesdae','wednes','wed','w'].include?(args[i]) && sftday<-1
+    sftday=4 if ['th','thursday','thursdae','thurs','thu','thur','h','r'].include?(args[i]) && sftday<-1
+    sftday=5 if ['fr','friday','fridae','fri','fryday','frydae','fry','f'].include?(args[i]) && sftday<-1
+    sftday=6 if ['sa','saturday','saturdae','sat','saturnday','saturndae','saturn','satur'].include?(args[i]) && sftday<-1
+  end
+  sftday=t.wday if sftday<-1 || ignoreinputs
+  sftday=ignoreinputs*1 if ignoreinputs.is_a?(Numeric)
+  str="Time elapsed since #{"today's " if sftday==t.wday}reset: #{"#{t.hour} hours, " if t.hour>0}#{"#{'0' if t.min<10}#{t.min} minutes, " if t.hour>0 || t.min>0}#{'0' if t.sec<10}#{t.sec} seconds"
+  str="#{str}\nTime until #{"tomorrow's " if sftday==t.wday}reset: #{"#{23-t.hour} hours, " if 23-t.hour>0}#{"#{'0' if 59-t.min<10}#{59-t.min} minutes, " if 23-t.hour>0 || 59-t.min>0}#{'0' if 60-t.sec<10}#{60-t.sec} seconds"
+  t2=Time.new(2018,9,27)-60*60
+  t2=t-t2
+  date=(((t2.to_i/60)/60)/24)
+  str="#{str}\n"
+  str="#{str}\n#{'~~' unless sftday==t.wday}Date assuming reset is at midnight: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]})"
+  str="#{str}\nDays since game release: #{longFormattedNumber(date)}"
+  if t.wday==1
+    m=0
+  else
+    m=8-t.wday
+  end
+  t3=t+m*24*60*60
+  t3=Time.new(t3.year,t3.month,t3.day)
+  t3+=60*60 if t3.dst? && !t.dst?
+  t3=(t3-t).to_i
+  t4=[]
+  k=t3/86400
+  kx=k*1
+  kx+=7 if kx<0
+  t4.push("#{longFormattedNumber(kx)} days") if k%7>0
+  t3-=k*86400
+  k=t3/3600
+  t4.push("#{k} hours") if k>0
+  t3-=k*3600
+  k=t3/60
+  t4.push("#{k} minutes") if k>0
+  t3-=k*60
+  t4.push("#{t3} seconds") if t3>0
+  str="#{str}\nTime until High Dragon bonus chest reset: #{t4.join(', ')}" if [4,0].include?(mode)
+  if t.month==12
+    t3=Time.new(t.year+1,1,1)
+  else
+    t3=Time.new(t.year,t.month+1,1)
+  end
+  t3+=60*60 if t3.dst? && !t.dst?
+  t3=(t3-t).to_i
+  t4=[]
+  k=t3/86400
+  t4.push("#{longFormattedNumber(k)} days") if k>0
+  t3-=k*86400
+  k=t3/3600
+  t4.push("#{k} hours") if k>0
+  t3-=k*3600
+  k=t3/60
+  t4.push("#{k} minutes") if k>0
+  t3-=k*60
+  t4.push("#{t3} seconds") if t3>0
+  str="#{str}\nTime until Void Treasure Trade reset: #{t4.join(', ')}" if [3,4,0].include?(mode)
+  str="#{str}~~" unless sftday==t.wday
+  str3=''
+  if sftday<0
+    t+=24*60*60
+    t2=Time.new(2018,9,27)-60*60
+    t2=t-t2
+    date=(((t2.to_i/60)/60)/24)
+    str="#{str}\n\nTomorrow's date: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]})"
+    str="#{str}\nDays since game release, come tomorrow: #{longFormattedNumber(date)}"
+    if t.wday==1
+      m=0
+    else
+      m=8-t.wday
+    end
+    t3=t+m*24*60*60
+    t3=Time.new(t3.year,t3.month,t3.day)
+    t3+=60*60 if t3.dst? && !t.dst?
+    t3=(t3-t).to_i
+    t4=[]
+    k=t3/86400
+    kx=k*1
+    kx+=7 if kx<0
+    t4.push("#{longFormattedNumber(kx)} days") if k%7>0
+    t3-=k*86400
+    k=t3/3600
+    t4.push("#{k} hours") if k>0
+    t3-=k*3600
+    k=t3/60
+    t4.push("#{k} minutes") if k>0
+    t3-=k*60
+    t4.push("#{t3} seconds") if t3>0
+    str="#{str}\nTime until High Dragon bonus chest reset, come tomorrow: #{t4.join(', ')}" if [4,0].include?(mode)
+    if t.month==12
+      t3=Time.new(t.year+1,1,1)
+    else
+      t3=Time.new(t.year,t.month+1,1)
+    end
+    t3+=60*60 if t3.dst? && !t.dst?
+    t3=(t3-t).to_i
+    t4=[]
+    k=t3/86400
+    t4.push("#{longFormattedNumber(k)} days") if k>0
+    t3-=k*86400
+    k=t3/3600
+    t4.push("#{k} hours") if k>0
+    t3-=k*3600
+    k=t3/60
+    t4.push("#{k} minutes") if k>0
+    t3-=k*60
+    t4.push("#{t3} seconds") if t3>0
+    str="#{str}\nTime until Void Treasure Trade reset, come tomorrow: #{t4.join(', ')}" if [3,4,0].include?(mode)
+    str3='Tomorrow'
+  elsif sftday != t.wday
+    tmw=(sftday==t.wday+1)
+    tmw=true if sftday==0 && t.wday==6
+    t+=7*24*60*60 if sftday<t.wday
+    t+=(sftday-t.wday)*24*60*60
+    t2=Time.new(2018,9,27)-60*60
+    t2=t-t2
+    date=(((t2.to_i/60)/60)/24)
+    str3="Next #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]}"
+    str="#{str}\n\n#{str3}'s date: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} #{'(Tomorrow)' if tmw}"
+    str="#{str}\nDays since game release, come next #{str3.split(' ')[1]}: #{longFormattedNumber(date)}"
+    if t.wday==1
+      m=0
+    else
+      m=8-t.wday
+    end
+    t3=t+m*24*60*60
+    t3=Time.new(t3.year,t3.month,t3.day)
+    t3+=60*60 if t3.dst? && !t.dst?
+    t3=(t3-t).to_i
+    t4=[]
+    k=t3/86400
+    kx=k*1
+    kx+=7 if kx<0
+    t4.push("#{longFormattedNumber(kx)} days") if k%7>0
+    t3-=k*86400
+    k=t3/3600
+    t4.push("#{k} hours") if k>0
+    t3-=k*3600
+    k=t3/60
+    t4.push("#{k} minutes") if k>0
+    t3-=k*60
+    t4.push("#{t3} seconds") if t3>0
+    str="#{str}\nTime until High Dragon bonus chest reset, come next #{str3.split(' ')[1]}: #{t4.join(', ')}" if [4,0].include?(mode)
+    if t.month==12
+      t3=Time.new(t.year+1,1,1)
+    else
+      t3=Time.new(t.year,t.month+1,1)
+    end
+    t3+=60*60 if t3.dst? && !t.dst?
+    t3=(t3-t).to_i
+    t4=[]
+    k=t3/86400
+    t4.push("#{longFormattedNumber(k)} days") if k>0
+    t3-=k*86400
+    k=t3/3600
+    t4.push("#{k} hours") if k>0
+    t3-=k*3600
+    k=t3/60
+    t4.push("#{k} minutes") if k>0
+    t3-=k*60
+    t4.push("#{t3} seconds") if t3>0
+    str="#{str}\nTime until Void Treasure Trade reset, come next #{str3.split(' ')[1]}: #{t4.join(', ')}" if [3,4,0].include?(mode)
+  end
+  if [2,0].include?(mode)
+    str5="__**#{"#{str3}'s " if str3.length>0}Expert Ruins:**__"
+    str5="#{str5}\n*Open:* #{['<:Element_Null:532106087810334741>All','<:Element_Null:532106087810334741>All','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep'][t.wday]}"
+    if t.wday>2
+      str5="#{str5}\n*Available Orbs:* #{['All','All','Flame, Blaze, Inferno','Water, Stream, Deluge','Wind, Storm, Maelstorm','Light, Radiance, Refulgence','Shadow, Nightfall, Nether'][t.wday]}" if t.wday>1
+      str5="#{str5}\n*Other Available Mats:* #{["Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye, Fiend's Claw, Ancient Bird's Feather, Bewitching Wing, Granite, Meteorite","Fiend's Horn, Fiend's Eye","Ancient Bird's Feather, Bewitching Wing",'Granite, Meteorite',"Fiend's Claw","Ancient Bird's Feather, Bewitching Wing"][t.wday]}" if t.wday>1
+    end
+    str5="All Expert Ruins are available" if t.year>2020 || t.month>6 || t.day>=24
+    str=extend_message(str,str5,event,2)
+    str5="__**<:Element_Void:548467446734913536> #{"#{str3}'s " if str3.length>0}Void Strikes:**__"
+    data_load(['void'])
+    void=$voids[0,7].map{|q| q}
+    matz=$voids[8,$voids.length-8].map{|q| q}
+    str5="#{str5}\n*Open:* "
+    str5="#{str5}#{void[t.wday].split(', ').reject{|q| q.include?('*')}.join(', ')}"
+    str5="#{str5}, " if void[t.wday].split(', ').reject{|q| q.include?('*')}.length>0 && void[t.wday].split(', ').reject{|q| !q.include?('*')}.length>0
+    str5="#{str5}#{void[t.wday].split(', ').reject{|q| !q.include?('*')}.map{|q| "#{q.gsub('*','')}<:x2:680152943299002370>"}.join(', ')}"
+    voidmats=void[t.wday].split(', ').map{|q| q.gsub('*','')}.join(', ')
+    for i in 0...matz.length
+      matz[i]=matz[i].split(', ')
+      k=matz[i][0]
+      matz[i]=matz[i][1,matz[i].length-1].join(', ')
+      voidmats=voidmats.gsub(k,matz[i])
+    end
+    voidmats=voidmats.split(', ').uniq.sort.join(', ')
+    str5="#{str5}\n*Available Mats:* #{voidmats}"
+    str=extend_message(str,str5,event,2)
+    showhdt=false
+    showhdt=true if Shardizard==4
+    showhdt=true if t.year>2019
+    showhdt=true if t.month>11
+    showhdt=true if t.day>18
+    if showhdt
+      str5="__**<:Tribe_Dragon:549947361745567754> #{"#{str3}'s " if str3.length>0}High Dragon Trials:**__"
+      str5="#{str5}\n*Open:* #{['<:Element_Null:532106087810334741> High All','<:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Water:532106088221376522> High Mercury','<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Shadow:532106088154267658> High Zodiark','<:Element_Water:532106088221376522> High Mercury, <:Element_Light:532106088129101834> High Jupiter','<:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Shadow:532106088154267658> High Zodiark','<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Light:532106088129101834> High Jupiter','<:Element_Null:532106087810334741> High All'][t.wday]}"
+      str=extend_message(str,str5,event,2)
+    end
+  end
+  str=extend_message(str,"**Shop Mats:** #{['Light Metal, Abyss Stone','Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather",'Iron Ore, Granite',"Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather"][t.wday]}",event,2) if t.wday>-1 && [3,0].include?(mode)
+  if [1,0].include?(mode)
+    str=extend_message(str,"**#{"#{str3}'s " if str3.length>0}Bond Gift:** #{['Golden Chalice','Juicy Meat','Kaleidoscope','Floral Circlet','Compelling Book','Mana Essence','Golden Chalice'][t.wday]}",event,2)
+    if t.wday>0 && t.wday<6
+      drg=$dragons.reject{|q| q.favorite !=t.wday}
+      m=[]
+      for i in 0...$max_rarity[1]
+        m.push([generate_rarity_row(i+1),[]])
+      end
+      for i in 0...drg.length
+        f="#{drg[i][0]}#{element_emote(drg[i][2],bot,drg[i][16])}"
+        for i2 in 0...$max_rarity[1]
+          m[i2][1].push(f) if drg[i][1][0,1].to_i==i2+1
+        end
+      end
+      m=m.reject{|q| q[1].length<=0}
+      create_embed(event,str,'',0xCE456B,nil,nil,m.map{|q| [q[0],q[1].join("\n")]})
+    else
+      event.respond str
+    end
+  else
+    event.respond str
+  end
+  current_banner(bot,event,args,'__Current banner:__ ',false) if (safe_to_spam?(event) || has_any?(event.message.text.downcase.split(' '),['banner','banners'])) && str3.length<=0 && mode==0
+end
+
+def next_events(event,bot,args=nil)
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  args=args.map{|q| q.downcase}
+  t=Time.now
+  timeshift=7
+  timeshift-=1 unless (t-24*60*60).dst?
+  t-=60*60*timeshift
+  str="Time elapsed since today's reset: #{"#{t.hour} hours, " if t.hour>0}#{"#{'0' if t.min<10}#{t.min} minutes, " if t.hour>0 || t.min>0}#{'0' if t.sec<10}#{t.sec} seconds"
+  str="#{str}\nTime until tomorrow's reset: #{"#{23-t.hour} hours, " if 23-t.hour>0}#{"#{'0' if 59-t.min<10}#{59-t.min} minutes, " if 23-t.hour>0 || 59-t.min>0}#{'0' if 60-t.sec<10}#{60-t.sec} seconds"
+  t2=Time.new(2018,9,27)-60*60
+  t2=t-t2
+  date=(((t2.to_i/60)/60)/24)
+  str="#{str}\n"
+  str="#{str}\nDate assuming reset is at midnight: #{t.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t.month]} #{t.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t.wday]})"
+  str="#{str}\nDays since game release: #{longFormattedNumber(date)}"
+  if t.month==12
+    t3=Time.new(t.year+1,1,1)
+  else
+    t3=Time.new(t.year,t.month+1,1)
+  end
+  t3=(t3-t).to_i
+  t4=[]
+  k=t3/86400
+  t4.push("#{longFormattedNumber(k)} days") if k>0
+  t3-=k*86400
+  k=t3/3600
+  t4.push("#{k} hours") if k>0
+  t3-=k*3600
+  k=t3/60
+  t4.push("#{k} minutes") if k>0
+  t3-=k*60
+  t4.push("#{t3} seconds") if t3>0
+  str="#{str}\nTime until Void Treasure Trade reset: #{t4.join(', ')}"
+  mode=0
+  for i in 0...args.length
+    mode=1 if mode<1 && ['ruin','ruins'].include?(args[i]) && !(t.year>2020 || t.month>6 || t.day>24)
+    mode=2 if mode<1 && ['mats','mat','material','materials'].include?(args[i])
+    mode=3 if mode<1 && ['shop','store'].include?(args[i])
+    mode=4 if mode<1 && ['bond','dragon','bonds','dragons'].include?(args[i])
+    mode=5 if mode<1 && ['void','strike','voidstrike','voidstrikes','strikes'].include?(args[i])
+    mode=6 if mode<1 && ['voidmat','strikemat','voidstrikemat','voidmats','strikemats','voidstrikemats','voidmaterial','strikematerial','voidstrikematerial','voidmaterials','strikematerials','voidstrikematerials'].include?(args[i])
+    mode=6 if mode==2 && ['void','strike','voidstrike','voidstrikes','strikes'].include?(args[i]) && !safe_to_spam?(event)
+    mode=6 if mode==5 && ['mats','mat','material','materials'].include?(args[i]) && !safe_to_spam?(event)
+    mode=7 if mode<1 && ['high','highdragon','hdt','trial','trials','hd'].include?(args[i])
+  end
+  if mode==0 && !safe_to_spam?(event)
+    event.respond "Please either specify an event type or use this command in PM.\n\nAvailable event types include:\n- Ruins\n- Mats\n- Shop\n- Bond items\n- Void Strikes\n- High Dragon Trials"
+    return nil
+  end
+  if [1,0].include?(mode) && !(t.year>2020 || t.month>6 || t.day>24)
+    ruin=['<:Element_Null:532106087810334741>All','<:Element_Null:532106087810334741>All','<:Element_Flame:532106087952810005>Flamehowl','<:Element_Water:532106088221376522>Waterscour','<:Element_Wind:532106087948746763>Windmaul','<:Element_Light:532106088129101834>Lightsunder','<:Element_Shadow:532106088154267658>Shadowsteep']
+    ruin=ruin.rotate(t.wday)
+    matz=["","","Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye","Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing",
+          "Wind/Storm/Maelstorm Orbs, Granite, Meteorite","Light/Radiance/Refulgence Orbs, Fiend's Claw",
+          "Shadow/Nightfall/Nether Orbs, Ancient Bird's Feather, Bewitching Wing"]
+    matz=matz.rotate(t.wday)
+    str2='__**Expert Ruins**__'
+    for i in 0...ruin.length
+      if i==0
+        t2=t+24*60*60*(i+1)
+        str2="#{str2}#{"\n" if mode==1 && safe_to_spam?(event)}\n#{ruin[i]} - Today#{" - Next available tomorrow (#{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t2.wday]}, #{t2.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t2.month]} #{t2.year})" if ruin[0]==ruin[1]}"
+        str2="#{str2}\n~~Available mats: #{matz[i]}~~" if mode==1 && safe_to_spam?(event)
+      elsif ruin[i]==ruin[i-1]
+      else
+        t2=t+24*60*60*i
+        str2="#{str2}#{"\n" if mode==1 && safe_to_spam?(event)}\n#{ruin[i]} - #{"#{i} days from now" if i>1}#{"Tomorrow" if i==1} - #{t2.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t2.month]} #{t2.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t2.wday]})"
+        str2="#{str2}\n~~Available mats: #{matz[i]}~~" if mode==1 && safe_to_spam?(event)
+      end
+    end
+    t2=t+24*60*60*ruin.length
+    unless [ruin[1],ruin[-1]].include?(ruin[0])
+      str2="#{str2}#{"\n" if mode==1 && safe_to_spam?(event)}\n#{ruin[0]} - #{ruin.length} days from now - #{t2.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t2.month]} #{t2.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t2.wday]})"
+      str2="#{str2}\n~~Available mats: #{matz[0]}~~" if mode==1 && safe_to_spam?(event)
+    end
+    str=extend_message(str,str2,event,2)
+  end
+  data_load(['void'])
+  void=$voids[0,7].map{|q| q.gsub('*','')}
+  void2=$voids[0,7].map{|q| q.split(', ').reject{|q2| !q2.include?('*')}.join(', ').gsub('*','')}
+  void=void.rotate(t.wday)
+  void2=void2.rotate(t.wday)
+  void.push(void[0])
+  void2.push(void2[0])
+  if [0,5].include?(mode)
+    double=false
+    shortlist=false
+    shortlist=true if mode==0
+    shortlist=true if !safe_to_spam?(event)
+    elem=[]
+    for i in 0...args.length
+      double=true if ['double','x2','2'].include?(args[i])
+      elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i])
+      elem.push('Water') if ['water','waters'].include?(args[i])
+      elem.push('Wind') if ['wind','air','winds','airs'].include?(args[i])
+      elem.push('Wind') if ['earth','earths'].include?(args[i]) && event.user.id==192821228468305920
+      elem.push('Light') if ['light','lights'].include?(args[i])
+      elem.push('Shadow') if ['shadow','dark','shadows','darks'].include?(args[i])
+    end
+    mmzz=[]
+    mmzz2=[]
+    matz=$voids[7,$voids.length-7].map{|q| q}
+    for i in 0...void.length
+      m=void[i].split(', ')
+      pos=0
+      for i2 in 0...m.length
+        pos=matz.find_index{|q| m[i2]==q.split(', ')[0]}
+        pos=0 if pos.nil?
+        mmzz.push([m[i2],i,pos])
+      end
+      m=void2[i].split(', ')
+      pos=0
+      for i2 in 0...m.length
+        pos=matz.find_index{|q| m[i2]==q.split(', ')[0]}
+        pos=0 if pos.nil?
+        mmzz2.push([m[i2],i,pos])
+      end
+    end
+    for i in 0...matz.length
+      matz[i]=matz[i].split(', ')
+      matz[i].shift
+      matz[i]=matz[i].join(', ')
+    end
+    mmzz.sort!{|a,b| (a[2]<=>b[2])==0 ? (a[1]<=>b[1]) : (a[2]<=>b[2])}
+    mmzz.reverse!
+    for i in 0...mmzz.length-1
+      if mmzz[i][0]==mmzz[i+1][0]
+        mmzz[i+1][3]=mmzz[i][1]*1 unless mmzz[i+1][1]>0
+        mmzz[i]=nil
+      end
+    end
+    mmzz.compact!
+    mmzz.reverse!
+    mmzz2.sort!{|a,b| (a[2]<=>b[2])==0 ? (a[1]<=>b[1]) : (a[2]<=>b[2])}
+    mmzz2.reverse!
+    for i in 0...mmzz2.length-1
+      if mmzz2[i][0]==mmzz2[i+1][0]
+        mmzz2[i+1][3]=mmzz2[i][1]*1 unless mmzz2[i+1][1]>0
+        mmzz2[i]=nil
+      end
+    end
+    mmzz2.compact!
+    mmzz2.reverse!
+    str2="__**<:Element_Void:548467446734913536> Void Strikes**__"
+    if double
+      mmzz=mmzz2.map{|q| q}
+      mmzz2=[]
+      str2="__**<:Element_Void:548467446734913536><:x2:680152943299002370> Void Strikes: Double Drop**__"
+    end
+    if mmzz.length>10 && !safe_to_spam?(event)
+      if !(double || elem.length>0) || mmzz.length>25
+        mmzz3=mmzz.reject{|q| ['Scalding Shroom','Wandering Shroom','Gust Shroom','Steel Golem','Obsidian Golem','Amber Golem','Blazing Ghost','Violet Ghost','Lambent Ghost','Cerulean Ghost','Frost Hermit','Twilight Hermit','Raging Manticore','Greedy Manticore','Smoldering Manticore','Proud Manticore','Catoblepas Fotia','Catoblepas Anemos','Eolian Phantom','Infernal Phantom'].include?(q[0].split('>')[-1]) && !mmzz2.map{|q2| q2[0]}.include?(q[0])}
+        if mmzz3.length>16
+          otheroptions=[]
+          otheroptions.push("an element name") unless elem.length>0
+          otheroptions.push("the word \"double\"") unless double
+          str2="#{str2}\nThere are so many #{'qualifying ' if double || elem.length>0}Void Strikes that I will reduce the list to those available today or tomorrow.\nVoid Strikes that are always available but have no Double Drops are also excluded.\nFor the full list, use this command in PM.#{"\nYou can also include #{otheroptions.join(' or ')} to reduce the list accordingly." if otheroptions.length>0}\n"
+          mmzz=mmzz.reject{|q| q[1]>1}
+          if mmzz.length>25
+            event.respond "Even reduced, the list of Void Strikes is too long for this channel.  Please retry this command in PM."
+            return nil
+          end
+        else
+          mmzz=mmzz3.map{|q| q}
+          str2="#{str2}\nVoid Strikes that are always available, but never have Double Drops, have been removed.\n"
+        end
+      end
+    end
+    str=extend_message(str,str2,event,2)
+    strpost=false
+    for i in 0...mmzz.length
+      str2="#{"\n" if mode==5 && safe_to_spam?(event)}*#{mmzz[i][0]}* -"
+      i2=mmzz2.find_index{|q| q[0]==mmzz[i][0]}
+      spliticon="\n"
+      if ['Scalding Shroom','Wandering Shroom','Gust Shroom','Steel Golem','Obsidian Golem','Amber Golem','Blazing Ghost','Violet Ghost','Lambent Ghost','Cerulean Ghost','Frost Hermit','Twilight Hermit','Raging Manticore','Greedy Manticore','Smoldering Manticore','Proud Manticore','Catoblepas Fotia','Catoblepas Anemos','Eolian Phantom','Infernal Phantom'].include?(mmzz[i][0].split('>')[-1]) && !double
+        spliticon=' - '
+        str2="#{str2.gsub(' -','')} [Always available]"
+      elsif mmzz[i][1]==0
+        str2="#{str2} **Today**#{'<:x2:680152943299002370>' if !i2.nil? && shortlist && mmzz2[i2][1]==0}#{' - Next available' unless mmzz[i][3].nil? || mmzz[i][3]<=0}"
+        if mmzz[i][3].nil? || mmzz[i][3]<=0
+        else
+          t_d=t+mmzz[i][3]*24*60*60
+          if !i2.nil? && shortlist && [mmzz2[i2][3],mmzz2[i2][1]].include?(mmzz[i][3])
+            str2="#{str2} #{mmzz[i][3]} days from now<:x2:680152943299002370> (#{disp_date(t_d,1)})" unless mmzz[i][3]==1
+            str2="#{str2} tomorrow<:x2:680152943299002370> (#{disp_date(t_d,1)})" if mmzz[i][3]==1
+          elsif !i2.nil? && shortlist
+            str2="#{str2.gsub('Next','~~Next')} #{mmzz[i][3]} days from now (#{disp_date(t_d,2)})~~" unless mmzz[i][3]==1
+            str2="#{str2.gsub('Next','~~Next')} tomorrow (#{disp_date(t_d,2)})~~" if mmzz[i][3]==1
+            if mmzz2[i2][1]==0
+              t_d=t+mmzz2[i2][3]*24*60*60
+            else
+              t_d=t+mmzz2[i2][1]*24*60*60
+            end
+            str2="#{str2} - <:x2:680152943299002370> next available #{mmzz2[i2][3]} days from now (#{disp_date(t_d,2)})"
+          elsif mmzz[i][3]==1
+            str2="#{str2} tomorrow#{'<:x2:680152943299002370>' if !i2.nil? && shortlist && [mmzz2[i2][1],mmzz2[i2][3]].include?(1)} (#{disp_date(t_d,1)})"
+          else
+            str2="#{str2} #{mmzz[i][3]} days from now (#{disp_date(t_d,1)})"
+          end
+        end
+      else
+        t_d=t+mmzz[i][1]*24*60*60
+        if !i2.nil? && shortlist && mmzz2[i2][1]==mmzz[i][1]
+          str2="#{str2} #{mmzz[i][1]} days from now<:x2:680152943299002370> (#{disp_date(t_d,1)})" unless mmzz[i][1]==1
+          str2="#{str2} Tomorrow<:x2:680152943299002370> (#{disp_date(t_d,1)})" if mmzz[i][1]==1
+        elsif !i2.nil? && shortlist
+          str2="#{str2} ~~#{mmzz[i][1]} days from now (#{disp_date(t_d,2)})~~" unless mmzz[i][1]==1
+          str2="#{str2} ~~Tomorrow (#{disp_date(t_d,2)})~~" if mmzz[i][1]==1
+          t_d=t+mmzz2[i2][1]*24*60*60
+          str2="#{str2} - <:x2:680152943299002370> coming #{mmzz2[i2][1]} days from now (#{disp_date(t_d,2)})"
+        elsif mmzz[i][1]==1
+          str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
+        else
+          str2="#{str2} #{mmzz[i][1]} days from now (#{disp_date(t_d,1)})"
+        end
+      end
+      unless i2.nil? || (shortlist && str2[-1]!=']')
+        str2="#{str2}#{spliticon}<:x2:680152943299002370>#{'*Double Drops* - ' unless spliticon==' - '}"
+        if mmzz2[i2][1]==0
+          str2="#{str2} **Today**#{' - Next available' unless mmzz2[i2][3].nil? || mmzz2[i2][3]<=0}"
+          if mmzz2[i2][3].nil? || mmzz2[i2][3]<=0
+          else
+            t_d=t+mmzz2[i2][3]*24*60*60
+            if mmzz2[i2][3]==1
+              str2="#{str2} tomorrow (#{disp_date(t_d,1)})"
+            else
+              str2="#{str2} #{mmzz2[i2][3]} days from now (#{disp_date(t_d,1)})"
+            end
+          end
+        else
+          t_d=t+mmzz2[i2][1]*24*60*60
+          if mmzz2[i2][1]==1
+            str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
+          else
+            str2="#{str2} #{mmzz2[i2][1]} days from now (#{disp_date(t_d,1)})"
+          end
+        end
+      end
+      str2="#{str2}\n~~Available mats: #{matz[mmzz[i][2]]}~~" if mode==5 && safe_to_spam?(event)
+      if elem.length>0 && !str2.include?("<:Element_#{elem[0]}:")
+      elsif !safe_to_spam?(event) && str2[-1]==']'
+      else
+        str=extend_message(str,str2,event,1)
+      end
+    end
+  end
+  if [0,7].include?(mode)
+    str2="__**<:Tribe_Dragon:549947361745567754> High Dragon Trials**__"
+    hdt=['<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Water:532106088221376522> High Mercury, <:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Light:532106088129101834> High Jupiter, <:Element_Shadow:532106088154267658> High Zodiark',
+         '<:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Water:532106088221376522> High Mercury',
+         '<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Shadow:532106088154267658> High Zodiark',
+         '<:Element_Water:532106088221376522> High Mercury, <:Element_Light:532106088129101834> High Jupiter',
+         '<:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Shadow:532106088154267658> High Zodiark',
+         '<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Light:532106088129101834> High Jupiter',
+         '<:Element_Flame:532106087952810005> High Brunhilda, <:Element_Water:532106088221376522> High Mercury, <:Element_Wind:532106087948746763> High Midgardsormr, <:Element_Light:532106088129101834> High Jupiter, <:Element_Shadow:532106088154267658> High Zodiark']
+    hdt=hdt.rotate(t.wday)
+    mmzz=[]
+    for i in 0...hdt.length
+      m=hdt[i].split(', ')
+      pos=0
+      for i2 in 0...m.length
+        pos=1 if m[i2]=='<:Element_Flame:532106087952810005> High Brunhilda'
+        pos=2 if m[i2]=='<:Element_Water:532106088221376522> High Mercury'
+        pos=3 if m[i2]=='<:Element_Wind:532106087948746763> High Midgardsormr'
+        pos=4 if m[i2]=='<:Element_Light:532106088129101834> High Jupiter'
+        pos=5 if m[i2]=='<:Element_Shadow:532106088154267658> High Zodiark'
+        pos=0 if pos.nil?
+        mmzz.push([m[i2],i,pos])
+      end
+    end
+    mmzz.sort!{|a,b| (a[2]<=>b[2])==0 ? (a[1]<=>b[1]) : (a[2]<=>b[2])}
+    mmzz.reverse!
+    for i in 0...mmzz.length-1
+      if mmzz[i][0]==mmzz[i+1][0]
+        mmzz[i+1][3]=mmzz[i][1]*1 unless mmzz[i+1][1]>0
+        mmzz[i]=nil
+      end
+    end
+    mmzz.compact!
+    mmzz.reverse!
+    for i in 0...mmzz.length
+      str2="#{str2}\n*#{mmzz[i][0]}* -"
+      if mmzz[i][1]==0
+        str2="#{str2} **Today**#{' - Next available' unless mmzz[i][3].nil? || mmzz[i][3]<=0}"
+        if mmzz[i][3].nil? || mmzz[i][3]<=0
+        else
+          t_d=t+mmzz[i][3]*24*60*60
+          if mmzz[i][3]==1
+            str2="#{str2} tomorrow (#{disp_date(t_d,1)})"
+          else
+            str2="#{str2} #{mmzz[i][3]} days from now (#{disp_date(t_d,1)})"
+          end
+        end
+      else
+        t_d=t+mmzz[i][1]*24*60*60
+        if mmzz[i][1]==1
+          str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
+        else
+          str2="#{str2} #{mmzz[i][1]} days from now (#{disp_date(t_d,1)})"
+        end
+      end
+    end
+    str=extend_message(str,str2,event,2)
+  end
+  f=[0,2]
+  if f.include?(mode)
+    matz=["Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye, Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing, Wind/Storm/Maelstorm Orbs, Granite, Meteorite, Light/Radiance/Refulgence Orbs, Fiend's Claw, Shadow/Nightfall/Nether Orbs",
+          "Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye, Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing, Wind/Storm/Maelstorm Orbs, Granite, Meteorite, Light/Radiance/Refulgence Orbs, Fiend's Claw, Shadow/Nightfall/Nether Orbs",
+          "Flame/Blaze/Inferno Orbs, Fiend's Horn, Fiend's Eye","Water/Stream/Deluge Orbs, Ancient Bird's Feather, Bewitching Wing",
+          "Wind/Storm/Maelstorm Orbs, Granite, Meteorite","Light/Radiance/Refulgence Orbs, Fiend's Claw",
+          "Shadow/Nightfall/Nether Orbs, Ancient Bird's Feather, Bewitching Wing"]
+    matz=matz.rotate(t.wday)
+    mmzz=[]
+    for i in 0...matz.length
+      m=matz[i].split(', ')
+      for i2 in 0...m.length
+        mmzz.push([m[i2],i])
+        mmzz.push([m[i2],7]) if i==0
+      end
+    end
+    mmzz.sort!{|a,b| (a[0]<=>b[0])==0 ? (a[1]<=>b[1]) : (a[0]<=>b[0])}
+    mmzz.reverse!
+    for i in 0...mmzz.length-1
+      if mmzz[i][0]==mmzz[i+1][0]
+        mmzz[i+1][2]=mmzz[i][1]*1 unless mmzz[i+1][1]>0
+        mmzz[i]=nil
+      end
+    end
+    mmzz.compact!
+    mmzz.reverse!
+    str2="__**Materials** found in the Elemental Ruins__"
+    strpost=false
+    for i in 0...mmzz.length
+      str2="#{str2}\n*#{mmzz[i][0]}* -"
+      if mmzz[i][1]==0
+        str2="#{str2} **Today**#{' - Next available' unless mmzz[i][2].nil? || mmzz[i][2]<=0}"
+        if mmzz[i][2].nil? || mmzz[i][2]<=0
+        else
+          t_d=t+mmzz[i][2]*24*60*60
+          if mmzz[i][2]==1
+            str2="#{str2} tomorrow (#{disp_date(t_d,1)})"
+          else
+            str2="#{str2} #{mmzz[i][2]} days from now (#{disp_date(t_d,1)})"
+          end
+        end
+      else
+        t_d=t+mmzz[i][1]*24*60*60
+        if mmzz[i][1]==1
+          str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
+        else
+          str2="#{str2} #{mmzz[i][1]} days from now (#{disp_date(t_d,1)})"
+        end
+      end
+    end
+  end
+  f.push(6)
+  if f.include?(mode)
+    matz=void.map{|q| q.split(', ').uniq.sort.join(', ')}
+    matzx=$voids[8,$voids.length-8].map{|q| q.split(', ')}
+    for i in 0...matzx.length
+      matzx[i]=[matzx[i][0],matzx[i][1,matzx[i].length-1].join(', ')]
+    end
+    for i in 0...matz.length
+      for i2 in 0...matzx.length
+        matz[i]=matz[i].gsub(matzx[i2][0],matzx[i2][1])
+      end
+    end
+    matz=matz.map{|q| q.split(', ').uniq.sort}
+    mmzz=[]
+    for i in 0...matz.length
+      m=matz[i]
+      for i2 in 0...m.length
+        mmzz.push([m[i2],i])
+        mmzz.push([m[i2],7]) if i==0
+      end
+    end
+    mmzz=mmzz.reject{|q| q[0].nil? || q[0].length<=0}
+    mmzz.sort!{|a,b| (a[0]<=>b[0])==0 ? (a[1]<=>b[1]) : (a[0]<=>b[0])}
+    mmzz.reverse!
+    for i in 0...mmzz.length-1
+      if mmzz[i][0]==mmzz[i+1][0]
+        mmzz[i+1][2]=mmzz[i][1]*1 unless mmzz[i+1][1]>0
+        mmzz[i]=nil
+      end
+    end
+    mmzz.compact!
+    mmzz.reverse!
+    str2="__**Materials** found in the Void Strikes__"
+    if mmzz.length>25 && !safe_to_spam?(event)
+      mmzz=mmzz.reject{|q| q[1]>2} if mmzz.length>50
+      mmzz=mmzz.reject{|q| q[1]>1} if mmzz.length>50
+      for i in 0...mmzz.length
+        mmzz[i][0]="*#{mmzz[i][0]}*" if mmzz[i][1]==1 || mmzz[i][2]==1
+        mmzz[i][0]="**#{mmzz[i][0]}**#{"  (#{mmzz[i][2]})" unless mmzz[i][2]==1}" if mmzz[i][1]==0
+      end
+      create_embed(event,"#{str}\n\n#{str2}","**Bold** mats are available today, and include in parenthesis the number of days for them to become available again.\n*Italic* mats are available tomorrow.",0xCE456B,'For the full list of mats, use this command in PM.',nil,triple_finish(mmzz.map{|q| q[0]}))
+      return nil
+    end
+    strpost=false
+    for i in 0...mmzz.length
+      str2="#{str2}\n*#{mmzz[i][0]}* -"
+      if mmzz[i][1]==0
+        str2="#{str2} **Today**#{' - Next available' unless mmzz[i][2].nil? || mmzz[i][2]<=0}"
+        if mmzz[i][2].nil? || mmzz[i][2]<=0
+        else
+          t_d=t+mmzz[i][2]*24*60*60
+          if mmzz[i][2]==1
+            str2="#{str2} tomorrow (#{disp_date(t_d,1)})"
+          else
+            str2="#{str2} #{mmzz[i][2]} days from now (#{disp_date(t_d,1)})"
+          end
+        end
+      else
+        t_d=t+mmzz[i][1]*24*60*60
+        if mmzz[i][1]==1
+          str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
+        else
+          str2="#{str2} #{mmzz[i][1]} days from now (#{disp_date(t_d,1)})"
+        end
+      end
+    end
+    if str2.length>2000
+      str2=str2.split("\n")
+      str=extend_message(str,str2[0],event,2)
+      for i in 1...str2.length
+        str=extend_message(str,str2[i],event)
+      end
+    else
+      str=extend_message(str,str2,event,2)
+    end
+  end
+  f=[0,3]
+  f.push(2) if safe_to_spam?(event)
+  if f.include?(mode)
+    matz=["Light Metal, Abyss Stone","Iron Ore, Granite","Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather",'Iron Ore, Granite',
+          "Fiend's Claw, Fiend's Horn","Bat Wing, Ancient Bird's Feather"]
+    matz=matz.rotate(t.wday)
+    mmzz=[]
+    for i in 0...matz.length
+      m=matz[i].split(', ')
+      for i2 in 0...m.length
+        mmzz.push([m[i2],i])
+        mmzz.push([m[i2],7]) if i==0
+      end
+    end
+    mmzz.sort!{|a,b| (a[0]<=>b[0])==0 ? (a[1]<=>b[1]) : (a[0]<=>b[0])}
+    mmzz.reverse!
+    for i in 0...mmzz.length-1
+      if mmzz[i][0]==mmzz[i+1][0]
+        mmzz[i+1][2]=mmzz[i][1]*1 unless mmzz[i+1][1]>0
+        mmzz[i]=nil
+      end
+    end
+    mmzz.compact!
+    mmzz.reverse!
+    str2="__Materials sold by the **Shop**__"
+    strpost=false
+    for i in 0...mmzz.length
+      str2="#{str2}\n*#{mmzz[i][0]}* -"
+      if mmzz[i][1]==0
+        str2="#{str2} **Today**#{' - Next available' unless mmzz[i][2].nil? || mmzz[i][2]<=0}"
+        if mmzz[i][2].nil? || mmzz[i][2]<=0
+        else
+          t_d=t+mmzz[i][2]*24*60*60
+          if mmzz[i][2]==1
+            str2="#{str2} tomorrow (#{disp_date(t_d,1)})"
+          else
+            str2="#{str2} #{mmzz[i][2]} days from now (#{disp_date(t_d,1)})"
+          end
+        end
+      else
+        t_d=t+mmzz[i][1]*24*60*60
+        if mmzz[i][1]==1
+          str2="#{str2} Tomorrow (#{disp_date(t_d,1)})"
+        else
+          str2="#{str2} #{mmzz[i][1]} days from now (#{disp_date(t_d,1)})"
+        end
+      end
+    end
+    str=extend_message(str,str2,event,2)
+  end
+  if [0,4].include?(mode)
+    bond=['Golden Chalice','Juicy Meat','Kaleidoscope','Floral Circlet','Compelling Book','Mana Essence','Golden Chalice']
+    bond=bond.rotate(t.wday)
+    str2='__**Dragon Bond items**__'
+    for i in 0...bond.length
+      if i==0
+        t2=t+24*60*60*(i+1)
+        str2="#{str2}\n#{bond[i]} - Today#{" - Next available tomorrow (#{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t2.wday]}, #{t2.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t2.month]} #{t2.year})" if bond[0]==bond[1]}"
+      elsif bond[i]==bond[i-1]
+      else
+        t2=t+24*60*60*i
+        str2="#{str2}\n#{bond[i]} - #{"#{i} days from now" if i>1}#{"Tomorrow" if i==1} - #{t2.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t2.month]} #{t2.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t2.wday]})"
+      end
+    end
+    t2=t+24*60*60*bond.length
+    str2="#{str2}\n#{bond[0]} - #{bond.length} days from now - #{t2.day} #{['','January','February','March','April','May','June','July','August','September','October','November','December'][t2.month]} #{t2.year} (a #{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][t2.wday]})" unless [bond[1],bond[-1]].include?(bond[0])
+    str=extend_message(str,str2,event,2)
+  end
+  event.respond str
+end
+
+def exp_shift(m,mode=0)
+  if mode==2
+    if m==0
+      return '-'
+    elsif m%3500==0
+      return "#{longFormattedNumber(m/3500)} Gold Crystal#{'s' unless m/3500==1}"
+    elsif m>3500
+      return "#{longFormattedNumber(m/3500)} Gold Crystal#{'s' unless m/3500==1}, #{exp_shift(m-(m/3500)*3500,2)}"
+    elsif m%1000==0
+      return "#{longFormattedNumber(m/1000)} Silver Crystal#{'s' unless m/1000==1}"
+    elsif m>1000
+      return "#{longFormattedNumber(m/1000)} Silver Crystal#{'s' unless m/1000==1}, #{exp_shift(m-(m/1000)*1000,2)}"
+    elsif m%150==0
+      return "#{longFormattedNumber(m/150)} Bronze Crystal#{'s' unless m/150==1}"
+    else
+      return "#{longFormattedNumber(m/150+1)} Bronze Crystal#{'s' unless m/150==0}"
+    end
+  elsif mode==3
+    if m==0
+      return '-'
+    elsif m%3500==0
+      return "#{longFormattedNumber(m/3500)} Succulent Dragonfruit#{'s' unless m/3500==1}"
+    elsif m>3500
+      return "#{longFormattedNumber(m/3500)} Succulent Dragonfruit#{'s' unless m/3500==1}, #{exp_shift(m-(m/3500)*3500,3)}"
+    elsif m%1000==0
+      return "#{longFormattedNumber(m/1000)} Ripe Dragonfruit#{'s' unless m/1000==1}"
+    elsif m>1000
+      return "#{longFormattedNumber(m/1000)} Ripe Dragonfruit#{'s' unless m/1000==1}, #{exp_shift(m-(m/1000)*1000,3)}"
+    elsif m%150==0
+      return "#{longFormattedNumber(m/150)} Dragonfruit#{'s' unless m/150==1}"
+    else
+      return "#{longFormattedNumber(m/150+1)} Dragonfruit#{'s' unless m/150==0}"
+    end
+  elsif mode==4
+    if m==0
+      return '-'
+    elsif m%1800==0
+      return "#{longFormattedNumber(m/1800)} Favored Bondfood"
+    elsif m>1800
+      return "#{longFormattedNumber(m/1800)} Favored Bondfood, #{exp_shift(m-(m/1800)*1800,4)}"
+    elsif m%1200==0
+      return "#{longFormattedNumber(m/1200)} Unfavored Bondfood"
+    elsif m>1200
+      return "#{longFormattedNumber(m/1200)} Unfavored Bondfood, #{exp_shift(m-(m/1200)*1200,4)}"
+    elsif m%1000==0
+      return "#{longFormattedNumber(m/1000)} Four-Leaf Clover#{'s' unless m/1000==1}"
+    elsif m>1000
+      return "#{longFormattedNumber(m/1000)} Four-Leaf Clover#{'s' unless m/1000==1}, #{exp_shift(m-(m/1000)*1000,4)}"
+    elsif m%300==0
+      return "#{longFormattedNumber(m/300)} bottle#{'s' unless m/300==1} of Tasty Milk"
+    else
+      return "#{longFormattedNumber(m/300+1)} bottle#{'s' unless m/300==0} of Tasty Milk"
+    end
+  elsif mode==5
+    if m==0
+      return '-'
+    elsif m%3500==0
+      return "#{longFormattedNumber(m/3500)} Consecrated Water"
+    elsif m>3500
+      return "#{longFormattedNumber(m/3500)} Consecrated Water, #{exp_shift(m-(m/3500)*3500,5)}"
+    elsif m%1000==0
+      return "#{longFormattedNumber(m/1000)} Blessed Water"
+    elsif m>1000
+      return "#{longFormattedNumber(m/1000)} Blessed Water, #{exp_shift(m-(m/1000)*1000,5)}"
+    elsif m%500==0
+      return "#{longFormattedNumber(m/500)} Holy Water"
+    else
+      return "#{longFormattedNumber(m/500+1)} Holy Water"
+    end
+  elsif mode==6
+    if m==0
+      return '-'
+    elsif m%3500==0
+      return "#{longFormattedNumber(m/3500)} Gold Whetstone#{'s' unless m/3500==1}"
+    elsif m>3500
+      return "#{longFormattedNumber(m/3500)} Gold Whetstone#{'s' unless m/3500==1}, #{exp_shift(m-(m/3500)*3500,6)}"
+    elsif m%1000==0
+      return "#{longFormattedNumber(m/1000)} Silver Whetstone#{'s' unless m/1000==1}"
+    elsif m>1000
+      return "#{longFormattedNumber(m/1000)} Silver Whetstone#{'s' unless m/1000==1}, #{exp_shift(m-(m/1000)*1000,6)}"
+    elsif m%500==0
+      return "#{longFormattedNumber(m/150)} Bronze Whetstone#{'s' unless m/500==1}"
+    else
+      return "#{longFormattedNumber(m/150+1)} Bronze Whetstone#{'s' unless m/500==0}"
+    end
+  end
+end
+
+def focus_feed(favor,exp_target,loon=false)
+  t=Time.now
+  timeshift=7
+  timeshift-=1 unless t.dst?
+  t-=60*60*timeshift
+  exp=0
+  days=0
+  while exp<exp_target
+    days+=1
+    exp+=100+300+600+1000
+    if t.wday==0 || t.wday==6
+      exp+=2000
+    elsif t.wday==favor
+      exp+=1800
+    elsif loon
+    else
+      exp+=1200
+    end
+    t+=24*60*60
+  end
+  return days
+end
+
+def level(event,bot,args=nil,mode=0)
+  args=event.message.text.downcase.split(' ') if args.nil?
+  args=args.reject{ |a| a.match(/<@!?(?:\d+)>/) }
+  args=args.map{|q| q.downcase}
+  nums=[]
+  for i in 0...args.length
+    nums.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0
+    mode=1 if mode==0 && ['player','pxp','pexp','plxp','plexp','plevel','pllevel'].include?(args[i])
+    mode=2 if mode==0 && ['adventurer','adventurers','adv','axp','aexp','advxp','advexp','alevel','advlevel'].include?(args[i])
+    mode=3 if mode==0 && ['dragon','dragons','drg','dxp','dexp','drgxp','drgexp','dlevel','drglevel'].include?(args[i])
+    mode=4 if mode==0 && ['bond','dragonbond','dbxp','dbexp','bxp','bexp','bondxp','bondexp','blevel','dblevel','bondlevel'].include?(args[i])
+    mode=5 if mode==0 && ['wyrmprint','wyrmprints','wyrm','wyrms','wrxp','wrexp','wrxp','wrlevel','wyrmxp','wyrmexp','wyrmxp','wyrmlevel'].include?(args[i])
+    mode=6 if mode==0 && ['weapon','weapons','wpxp','wpexp','wplevel','weaponxp','weaponexp','weaponlevel'].include?(args[i])
+    mode=7 if mode==0 && ['wxp','wexp','wlevel'].include?(args[i])
+  end
+  if mode==0 && !safe_to_spam?(event)
+    event.respond "Please either specify an EXP type or use this command in PM.\n\nAvailable EXP types include:\n- Player\n- Adventurer\n- Dragon\n- Dragon Bond\n- Wyrmprint\n- Weapon"
+    return nil
+  end
+  nums.uniq!
+  str=''
+  if [1,0].include?(mode)
+    pxp=[[12,18,25],[15,20,26],[24,22,26],[27,24,27],[30,25,27],[33,26,28],[36,27,28],[39,28,29],[42,29,29],[45,30,30],[57,31,30],[60,32,31],[63,33,31],
+         [66,34,32],[69,35,32],[72,36,33],[75,37,33],[78,38,34],[81,39,34],[84,40,35],[87,41,35],[90,42,36],[93,43,36],[96,44,37],[99,45,37],[102,46,38],
+         [105,47,38],[108,48,39],[111,49,39],[114,50,40],[117,51,40],[120,52,41],[123,53,41],[126,54,42],[129,55,42],[132,56,43],[135,57,43],[138,58,44],
+         [141,59,44],[144,60,45],[147,61,45],[150,62,46],[153,63,46],[156,64,47],[159,65,47],[162,66,48],[165,67,48],[168,68,49],[171,69,49],[180,70,50],
+         [190,71,50],[200,72,51],[210,73,51],[220,74,52],[230,75,52],[240,76,53],[250,77,53],[260,78,54],[270,79,54],[280,80,55],[300,80,55],[320,81,56],
+         [340,81,56],[360,82,57],[380,82,57],[400,83,58],[420,83,58],[440,84,59],[460,84,59],[480,85,60],[510,85,60],[540,86,61],[570,86,61],[600,87,62],
+         [630,87,62],[660,88,63],[690,88,63],[720,89,64],[750,89,64],[800,90,65],[850,90,65],[900,91,66],[950,91,66],[1000,92,67],[1050,92,67],[1100,93,68],
+         [1150,93,68],[1200,94,69],[1250,94,69],[1300,95,70],[1350,95,70],[1400,96,71],[1450,96,71],[1500,97,72],[1550,97,72],[1600,98,73],[1650,98,73],
+         [1700,99,74],[1750,99,74],[1800,100,75],[1900,100,75],[2000,101,76],[2100,101,76],[2200,102,77],[2300,102,77],[2400,103,78],[2500,103,78],
+         [2600,104,79],[2700,104,79],[2800,105,80],[2900,105,80],[3000,106,81],[3100,106,81],[3200,107,82],[3300,107,82],[3400,108,83],[3500,108,83],
+         [3600,109,84],[3700,109,84],[3900,110,85],[4100,110,85],[4300,111,86],[4500,111,86],[4700,112,87],[4900,112,87],[5100,113,88],[5300,113,88],
+         [5500,114,89],[5700,114,89],[5900,115,90],[6100,115,90],[6300,115,91],[6500,116,91],[6700,116,92],[6900,116,92],[7100,117,93],[7300,117,93],
+         [7500,117,94],[7700,118,94],[7900,118,95],[8100,118,95],[8300,119,96],[8500,119,96],[8700,119,97],[8900,120,97],[9100,120,98],[9300,120,98],
+         [9500,121,99],[9700,121,99],[9900,121,100],[10100,122,100],[10300,122,101],[10500,122,101],[10700,123,102],[10900,123,102],[11100,123,103],
+         [11300,124,103],[11500,124,104],[11700,124,104],[11900,125,105],[12200,125,105],[12500,125,106],[12800,126,106],[13100,126,107],[13400,126,107],
+         [13700,127,108],[14000,127,108],[14300,127,109],[14600,128,109],[14900,128,110],[15200,128,110],[15500,129,111],[15800,129,111],[16100,129,112],
+         [16400,130,112],[16700,130,113],[17000,130,113],[17300,131,114],[17600,131,114],[17900,131,115],[18200,132,115],[18500,132,116],[18800,132,116],
+         [19100,133,117],[19400,133,117],[19700,133,118],[20000,134,118],[20300,134,119],[20600,134,119],[20900,135,120],[21200,135,120],[21500,135,121],
+         [21800,136,121],[22100,136,122],[22400,136,122],[22700,137,123],[23000,137,123],[23300,137,124],[23600,138,124],[23900,138,125]]
+    pxp[-1][0]=0
+    str2="__**Player EXP**__"
+    if nums.length<=0
+      str2="#{str2}\n*To get from level 1 to level #{pxp.length}:*  \u200B  \u200B  #{longFormattedNumber(pxp.map{|q| q[0]*10}.inject(0){|sum,x| sum + x })} EXP required"
+      str2="#{str2}\n*Resulting stamina increase:*  \u200B  \u200B  #{pxp[pxp.length-1][1]-pxp[0][1]} points of increase ~~(from #{pxp[0][1]} to #{pxp[pxp.length-1][1]})~~"
+      str2="#{str2}\n*Resulting friends list increase:*  \u200B  \u200B  #{pxp[pxp.length-1][2]-pxp[0][2]} more friends ~~(from #{pxp[0][2]} to #{pxp[pxp.length-1][2]})~~"
+    elsif nums.length==1
+      n=[nums[0],pxp.length].min
+      unless n==1
+        str2="#{str2}#{"\n" unless n==pxp.length}\n*To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(pxp[0,n-1].map{|q| q[0]*10}.inject(0){|sum,x| sum + x })} EXP required"
+        str2="#{str2}\n*Resulting stamina increase:*  \u200B  \u200B  #{pxp[n-1][1]-pxp[0][1]} points of increase ~~(from #{pxp[0][1]} to #{pxp[n-1][1]})~~"
+        str2="#{str2}\n*Resulting friends list increase:*  \u200B  \u200B  #{pxp[n-1][2]-pxp[0][2]} more friends ~~(from #{pxp[0][2]} to #{pxp[n-1][2]})~~"
+      end
+      unless n==pxp.length
+        str2="#{str2}#{"\n" unless n==1}\n*To get from level #{n} to level #{pxp.length}:*  \u200B  \u200B  #{longFormattedNumber(pxp[n-1,pxp.length-n].map{|q| q[0]*10}.inject(0){|sum,x| sum + x })} EXP required"
+        str2="#{str2}\n*Resulting stamina increase:*  \u200B  \u200B  #{pxp[pxp.length-1][1]-pxp[n-1][1]} points of increase ~~(from #{pxp[n-1][1]} to #{pxp[pxp.length-1][1]})~~"
+        str2="#{str2}\n*Resulting friends list increase:*  \u200B  \u200B  #{pxp[pxp.length-1][2]-pxp[n-1][2]} more friends ~~(from #{pxp[n-1][2]} to #{pxp[pxp.length-1][2]})~~"
+      end
+    else
+      n=[nums[0,2].min,1].max
+      n=1 if n>pxp.length
+      m=[nums[0,2].max,pxp.length].min
+      str2="#{str2}\n*To get from level #{n} to level #{m}:*  \u200B  \u200B  #{longFormattedNumber(pxp[n-1,m-n].map{|q| q[0]*10}.inject(0){|sum,x| sum + x })} EXP required"
+      str2="#{str2}\n*Resulting stamina increase:*  \u200B  \u200B  #{pxp[m-1][1]-pxp[n-1][1]} points of increase ~~(from #{pxp[n-1][1]} to #{pxp[m-1][1]})~~"
+      str2="#{str2}\n*Resulting friends list increase:*  \u200B  \u200B  #{pxp[m-1][2]-pxp[n-1][2]} more friends ~~(from #{pxp[n-1][2]} to #{pxp[m-1][2]})~~"
+    end
+    str=extend_message(str,str2,event,2)
+  end
+  if [2,0].include?(mode)
+    axp=[3,5,7,9,11,15,19,23,27,31,38,45,52,59,66,78,90,102,114,126,151,176,201,226,251,301,351,401,451,501,576,651,726,801,876,951,1026,1101,1176,1251,1326,
+         1401,1476,1551,1626,1701,1776,1851,1926,2001,2076,2151,2226,2301,2376,2451,2526,2601,2676,2751,3260,3280,3300,3320,3340,3360,3380,3400,3420,3440,3460,
+         3480,3500,3520,3540,3560,3580,3600,3620,20000,21500,23000,24500,26000,27500,29000,30500,32000,33500,35000,38000,41000,44000,47000,50000,54500,59000,
+         63500,68000,0]
+    str2="__**Adventurer EXP**__"
+    if nums.length<=0
+      m=axp[0,60].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level 1 to level 60:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      m=axp[0,70].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level 1 to level 70:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      m=axp[0,80].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level 1 to level 80:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      m=axp[0,1000].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_6:660289379520086046> *To get from level 1 to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+    elsif nums.length==1
+      n=[nums[0],axp.length].min
+      m=axp[0,n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_1_Blank:555459856476274691> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      if n<60
+        m=axp[n-1,60-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level #{n} to level 60:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      end
+      if n<70
+        m=axp[n-1,70-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level #{n} to level 70:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      end
+      if n<80
+        m=axp[n-1,80-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level #{n} to level 80:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      end
+      if n<100
+        m=axp[n-1,100-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_6:660289379520086046> *To get from level #{n} to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+      end
+    else
+      n=[nums[0,2].min,1].max
+      n=1 if n>axp.length
+      n2=[nums[0,2].max,axp.length].min
+      m=axp[n-1,n2-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,2)}"
+    end
+    str=extend_message(str,str2,event,2)
+  end
+  if [3,0].include?(mode)
+    dxp=[24,30,36,42,48,54,60,66,72,78,90,102,114,126,138,150,162,174,186,198,216,234,252,270,288,306,324,342,360,378,402,426,450,474,498,522,546,570,594,618,
+         648,678,708,738,768,798,828,858,888,918,954,990,1026,1062,1098,1134,1170,1206,1242,1278,1323,1368,1413,1458,1503,1548,1593,1638,1683,1728,1788,1848,
+         1908,1968,2028,2088,2148,2208,2268,2328,2403,2478,2553,2628,2703,2778,2853,2928,3003,3078,3168,3258,3348,3438,3528,3618,3708,3798,3888,0]
+    str2="__**Dragon EXP**__"
+    if nums.length<=0
+      m=dxp[0,59].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level 1 to level 60:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+      m=dxp[0,79].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level 1 to level 80:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+      m=dxp[0,99].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level 1 to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+    elsif nums.length==1
+      n=[nums[0],dxp.length].min
+      m=dxp[0,n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_1_Blank:555459856476274691> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+      if n<60
+        m=dxp[n-1,60-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level #{n} to level 60:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+      end
+      if n<80
+        m=dxp[n-1,80-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level #{n} to level 80:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+      end
+      if n<100
+        m=dxp[n-1,100-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level #{n} to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+      end
+    else
+      n=[nums[0,2].min,1].max
+      n=1 if n>dxp.length
+      n2=[nums[0,2].max,dxp.length].min
+      m=dxp[n-1,n2-n].map{|q| q*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,3)}"
+    end
+    str=extend_message(str,str2,event,2)
+    mode=4 if mode==3
+  end
+  if [4,0].include?(mode)
+    bxp=[[8,7.1],[16,7.2],[18,7.3],[20,7.4],[22,7.5],[26,7.6],[30,7.7],[40,7.8],[50,7.9],[60,8.0],[70,8.1],[80,8.2],[90,8.3],[100,8.4],[110,8.5],[120,8.6],
+         [130,8.7],[140,8.8],[150,8.9],[160,9.0],[175,9.1],[190,9.2],[205,9.3],[220,9.4],[240,9.5],[260,9.6],[280,9.7],[300,9.8],[320,9.9],[0,10.0]]
+    str2="__**Dragon Bond**__"
+    k=find_data_ex(:find_dragon,args.reject{|q| q.to_i.to_s==q}.join(' '),event)
+    str2="#{str2}\nFocused feeding time shown for #{k.name}, whose favored bondfood is #{['Golden Chalice (Sunday)','Juicy Meat (Monday)','Kaleidoscope (Tuesday)','Floral Circlet (Wednesday)','Compelling Book (Thursday)','Mana Essence (Friday)','Golden Chalice (Saturday)'][k.favorite]}" unless k.nil?
+    if nums.length<=0
+      m=bxp.map{|q| q[0]*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n*To get from level 1 to level #{bxp.length}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP required"
+      str2="#{str2}\n*Optimal feeding:*  \u200B  \u200B  #{exp_shift(m,4)}"
+      str2="#{str2}\n*Focused feeding time:*  #{focus_feed(k.favorite,m)} days starting from today" unless k.nil?
+      str2="#{str2}\n*Semi-focused feeding time:*  #{focus_feed(k.favorite,m,true)} days starting from today" unless k.nil?
+      str2="#{str2}\n*Resulting shapeshift time increase:*  \u200B  \u200B  #{'%.1f' % (bxp[bxp.length-1][1]-bxp[0][1])} additional seconds ~~(from #{bxp[0][1]} sec to #{bxp[bxp.length-1][1]} sec)~~"
+    elsif nums.length==1
+      n=[nums[0],bxp.length].min
+      unless n==1
+        m=bxp[0,n-1].map{|q| q[0]*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}#{"\n" unless n==bxp.length}\n*To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP required"
+        str2="#{str2}\n*Optimal feeding:*  \u200B  \u200B  #{exp_shift(m,4)}"
+        str2="#{str2}\n*Focused feeding time:*  #{focus_feed(k.favorite,m)} days starting from today" unless k.nil?
+        str2="#{str2}\n*Semi-focused feeding time:*  #{focus_feed(k.favorite,m,true)} days starting from today" unless k.nil?
+        str2="#{str2}\n*Resulting shapeshift time increase:*  \u200B  \u200B  #{'%.1f' % (bxp[n-1][1]-bxp[0][1])} additional seconds ~~(from #{bxp[0][1]} sec to #{bxp[n-1][1]} sec)~~"
+      end
+      unless n==bxp.length
+        m=bxp[n-1,bxp.length-n].map{|q| q[0]*10}.inject(0){|sum,x| sum + x }
+        str2="#{str2}#{"\n" unless n==1}\n*To get from level #{n} to level #{bxp.length}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP required"
+        str2="#{str2}\n*Optimal feeding:*  \u200B  \u200B  #{exp_shift(m,4)}"
+        str2="#{str2}\n*Focused feeding time:*  #{focus_feed(k.favorite,m)} days starting from today" unless k.nil?
+        str2="#{str2}\n*Semi-focused feeding time:*  #{focus_feed(k.favorite,m,true)} days starting from today" unless k.nil?
+        str2="#{str2}\n*Resulting shapeshift time increase:*  \u200B  \u200B  #{'%.1f' % (bxp[bxp.length-1][1]-bxp[n-1][1])} additional seconds ~~(from #{bxp[n-1][1]} sec to #{bxp[bxp.length-1][1]} sec)~~"
+      end
+    else
+      n=[nums[0,2].min,1].max
+      n=1 if n>bxp.length
+      n2=[nums[0,2].max,bxp.length].min
+      m=bxp[n-1,n2-n].map{|q| q[0]*10}.inject(0){|sum,x| sum + x }
+      str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP required"
+      str2="#{str2}\n*Optimal feeding:*  \u200B  \u200B  #{exp_shift(m,4)}"
+      str2="#{str2}\n*Focused feeding time:*  #{focus_feed(k.favorite,m)} days starting from today" unless k.nil?
+      str2="#{str2}\n*Semi-focused feeding time:*  #{focus_feed(k.favorite,m,true)} days starting from today" unless k.nil?
+      str2="#{str2}\n*Resulting shapeshift time increase:*  \u200B  \u200B  #{'%.1f' % (bxp[n2-1][1]-bxp[n-1][1])} additional seconds ~~(from #{bxp[n-1][1]} sec to #{bxp[n2-1][1]} sec)~~"
+    end
+    str2="#{str2}\n\nInclude a dragon's name to show focused feeding times." if k.nil?
+    str=extend_message(str,str2,event,2)
+  end
+  if [5,7,0].include?(mode)
+    str2="__**Wyrmprint EXP**__"
+    if nums.length<=0
+      str2="#{str2}\n<:Rarity_2:532086056254963713> *To get from level 1 to level 10:*  \u200B  \u200B  70 Holy Water"
+      str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level 1 to level 20:*  \u200B  \u200B  40 Consecrated Water, 140 Holy Water"
+      str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level 1 to level 40:*  \u200B  \u200B  120 Consecrated Water, 120 Holy Water"
+      str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level 1 to level 50:*  \u200B  \u200B  250 Consecrated Water, 150 Holy Water"
+    elsif nums.length==1
+      n=[nums[0],50].min
+      if n<10
+        m=10-n
+        str2="#{str2}\n<:Rarity_2_Blank:555459856400908299> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{7*n-7} Holy Water"
+        str2="#{str2}\n<:Rarity_2:532086056254963713> *To get from level #{n} to level 10:*  \u200B  \u200B  #{7*m} Holy Water"
+      end
+      if n<20
+        m=20-n
+        str2="#{str2}\n<:Rarity_3_Blank:555459856568418314> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{2*n-2} Consecrated Water, #{7*n-7} Holy Water"
+        str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level #{n} to level 20:*  \u200B  \u200B  #{2*m} Consecrated Water, #{7*m} Holy Water"
+      end
+      if n<40
+        m=40-n
+        str2="#{str2}\n<:Rarity_4_Blank:555459856497246218> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{3*n-3} Consecrated Water, #{3*n-3} Holy Water"
+        str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level #{n} to level 40:*  \u200B  \u200B  #{3*m} Consecrated Water, #{3*m} Holy Water"
+      end
+      if n<50
+        m=50-n
+        str2="#{str2}\n<:Rarity_5_Blank:555459856190930955> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{5*n-5} Consecrated Water, #{3*n-3} Holy Water"
+        str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level #{n} to level 50:*  \u200B  \u200B  #{5*m} Consecrated Water, #{3*m} Holy Water"
+      end
+    else
+      n=[nums[0,2].min,1].max
+      n=1 if n>50
+      n2=[nums[0,2].max,50].min
+      m=[n2,10].min-n
+      str2="#{str2}\n<:Rarity_2:532086056254963713> *To get from level #{n} to level #{m+n}:*  \u200B  \u200B  #{7*m} Holy Water" if n<10
+      m=[n2,20].min-n
+      str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level #{n} to level #{m+n}:*  \u200B  \u200B  #{2*m} Consecrated Water, #{7*m} Holy Water" if n<20
+      m=[n2,40].min-n
+      str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level #{n} to level #{m+n}:*  \u200B  \u200B  #{3*m} Consecrated Water, #{3*m} Holy Water" if n<40
+      m=[n2,50].min-n
+      str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level #{n} to level #{m+n}:*  \u200B  \u200B  #{5*m} Consecrated Water, #{3*m} Holy Water" if n<50
+    end
+    str=extend_message(str,str2,event,2)
+  end
+  if [6,7,0].include?(mode)
+    wrxp=[50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,155,165,175,185,195,205,215,225,235,245,260,275,290,305,320,335,350,365,380,
+          395,425,455,485,515,545,575,605,635,665,695,730,765,800,835,870,905,940,975,1010,1045,1090,1135,1180,1225,1270,1315,1360,1405,1450,1495,1575,1655,
+          1735,1815,1895,1975,2055,2135,2215,2295,2395,2495,2595,2695,2795,2895,2995,3095,3195,3295,3415,3535,3655,3775,3895,4015,4135,4255,4375,4495,4620,
+          4745,4870,4995,5120,5245,5370,5495,5620,5745,5870,5995,6120,6245,6370,6495,6620,6745,6870,6995,7120,7245,7370,7495,7620,7745,7870,7995,8120,8245,
+          8370,8495,8620,8745,8870,8995,9120,9245,9370,9495,9620,9745,9870,9995,10120,10245,10370,10495,10620,10745,10875,11005,11135,11265,11395,11525,11655,
+          11785,11915,12045,12175,12305,12435,12565,12695,12825,12955,13085,13215,13345,13475,13605,13735,13865,13995,14125,14255,14385,14515,14645,14775,
+          14905,15035,15165,15295,15425,15555,15685,15815,15945,16075,16205,16335,16465,16595,16725,16855,16985,17115,0]
+    str2="__**Weapon EXP**__"
+    if nums.length<=0
+      m=wrxp[0,30].inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_2:532086056254963713> *To get from level 1 to level 30:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      m=wrxp[0,40].inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level 1 to level 40:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      m=wrxp[0,70].inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level 1 to level 70:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      m=wrxp[0,100].inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level 1 to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      m=wrxp[0,200].inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_6:660289379520086046> *To get from level 1 to level 200:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+    elsif nums.length==1
+      n=[nums[0],wrxp.length].min
+      m=wrxp[0,n].inject(0){|sum,x| sum + x }
+      str2="#{str2}\n<:Rarity_1_Blank:555459856476274691> *To get from level 1 to level #{n}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      if n<30
+        m=wrxp[n-1,30-n].inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_2:532086056254963713> *To get from level #{n} to level 30:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      end
+      if n<40
+        m=wrxp[n-1,40-n].inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_3:532086056519204864> *To get from level #{n} to level 40:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      end
+      if n<70
+        m=wrxp[n-1,70-n].inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_4:532086056301101067> *To get from level #{n} to level 70:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      end
+      if n<100
+        m=wrxp[n-1,100-n].inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_5:532086056737177600> *To get from level #{n} to level 100:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      end
+      if n<200
+        m=wrxp[n-1,200-n].inject(0){|sum,x| sum + x }
+        str2="#{str2}\n<:Rarity_6:660289379520086046> *To get from level #{n} to level 200:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+      end
+    else
+      n=[nums[0,2].min,1].max
+      n=1 if n>wrxp.length
+      n2=[nums[0,2].max,wrxp.length].min
+      m=wrxp[n-1,n2-n].inject(0){|sum,x| sum + x }
+      str2="#{str2}\n*To get from level #{n} to level #{n2}:*  \u200B  \u200B  #{longFormattedNumber(m)} EXP  \u200B  \u200B  #{exp_shift(m,6)}"
+    end
+    str2="#{str2}\n**Dragalia v2.0 has messed with weapon leveling mechanics.  These numbers are currently inaccurate, and may be so indefinitely.**"
+    str=extend_message(str,str2,event,2)
+  end
+  event.respond str
+end
+
+def show_print_shop(event)
+  data_load()
+  prn=$wyrmprints.reject{|q| has_any?(['e','s','z','y','t','w','$','c','p'],q.availability)}
+  args=event.message.text.downcase.split(' ')
+  rar=[]
+  for i in 0...args.length
+    rar.push(args[i].to_i) if args[i].to_i.to_s==args[i]
+    rar.push(args[i][0,1].to_i) if args[i][1,1]=='*' && args[i][0,1].to_i.to_s==args[i][0,1]
+  end
+  rar=rar.reject{|q| q<3 || q>$max_rarity[2]}
+  if rar.length<=0 && !safe_to_spam?(event)
+    event.respond "Too much data is trying to be displayed.  Please either specify a rarity or use this command in PM."
+    return nil
+  end
+  rar=rar[0,1] unless safe_to_spam?(event)
+  flds=[]
+  flds.push(["#{generate_rarity_row(3)}\n900<:Resource_Eldwater:532104503777034270> per 2UB\n17,000<:Resource_Eldwater:532104503777034270> per MUB\n\n200 purchase, 300-400 per unbind",prn.reject{|q| q.rarity !=3}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(3)
+  flds.push(["#{generate_rarity_row(4)}\n9,000<:Resource_Eldwater:532104503777034270> per 2UB\n17,000<:Resource_Eldwater:532104503777034270> per MUB\n\n2000 purchase, 3000-4000 per unbind",prn.reject{|q| q.rarity !=4}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(4)
+  flds.push(["#{generate_rarity_row(5)}\n19,000<:Resource_Eldwater:532104503777034270> per 2UB\n37,000<:Resource_Eldwater:532104503777034270> per MUB\n\n4000 purchase, 6000-9000 per unbind",prn.reject{|q| q.rarity !=5}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(5)
+  flds.push(["#{generate_rarity_row(6)}\n25,000<:Resource_Eldwater:532104503777034270> per 2UB\n53,000<:Resource_Eldwater:532104503777034270> per MUB\n\n8000 purchase, 9000-12000 per unbind",prn.reject{|q| q.rarity !=6}.map{|q| q[0]}]) if rar.length<=0 || rar.include?(6)
+  flds=flds.map{|q| [q[0],q[1].join("\n"),q[1].length]}
+  flds=flds.reject{|q| q[2]<=0}
+  flds=flds.map{|q| [q[0],q[1]]}
+  if flds.map{|q| "**#{q[0]}**\n#{q[1]}"}.join("\n\n").length>=1500 || flds.length<2
+    for i in 0...flds.length
+      hdr=flds[i][0].split("\n\n")
+      create_embed(event,"**#{hdr[0].gsub("\n",' - ')}**\n__#{hdr[1]}__",'',0xCE456B,nil,nil,triple_finish(flds[i][1].split("\n")))
+    end
+  else
+    flds.map{|q| [q[0].gsub("\n\n","\n"),q[1]]}
+    create_embed(event,'__**Wyrmprint Shop**__','',0xCE456B,nil,nil,flds)
+  end
+end
+
+def show_abil_limits(event,bot)
+  create_embed(event,'__**Wyrmprint ability stacking limits**__','',0xCE456B,'Limits shown here are for wyrmprint totals per adventurer, not per team or including native adventurer abilities',nil,triple_finish($abilimits,true))
+end
 
 def affinity_resonance(event,bot)
   f=[]
@@ -1197,7 +2887,7 @@ end
 
 def show_tools(event,bot)
   return nil if overlap_prevent(event)
-  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event) || event.message.text.downcase.include?('mobile') || event.message.text.downcase.include?('phone')
+  if $embedless.include?(event.user.id) || was_embedless_mentioned?(event) || event.message.text.downcase.include?('mobile') || event.message.text.downcase.include?('phone')
     event << '**Useful tools for players of** ***Dragalia Lost***'
     event << '__Download the game__'
     event << 'Google Play: <https://play.google.com/store/apps/details?id=com.aniplex.fategrandorder.en&hl=en_US>'
@@ -1251,7 +2941,7 @@ end
 
 def show_bot_status(event,bot)
   t=Time.now
-  if @embedless.include?(event.user.id) || was_embedless_mentioned?(event)
+  if $embedless.include?(event.user.id) || was_embedless_mentioned?(event)
     event << "Current avatar: #{bot.user(543373018303299585).avatar_url}"
     event << "Adventurer/Dragon in avatar: #{$avvie_info[0]}"
     event << ''
