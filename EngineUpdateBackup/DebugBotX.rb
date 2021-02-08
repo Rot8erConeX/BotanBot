@@ -12,8 +12,6 @@ require 'active_support/core_ext/time' # Download link: https://rubygems.org/gem
 require_relative 'rot8er_functs'       # functions I use commonly in bots
 $location="C:/Users/#{@mash}/Desktop/"
 
-load "#{$location}devkit/BotanClassFunctions.rb"
-
 # this is required to get her to change her avatar on certain holidays
 ENV['TZ'] = 'America/Chicago'
 @scheduler = Rufus::Scheduler.new
@@ -130,6 +128,7 @@ $skills=[]
 $abilities=[]
 
 $gauntlets=[]
+$void=[]
 $facilities=[]
 $mats=[]
 $banners=[]
@@ -160,7 +159,7 @@ FGO_rarity_stars=['<:FGO_Rarity_M:577777835041751040>',
                   '<:FGO_icon_rarity_gold:523858991571533825>',
                   '<:FGO_Rarity_S:577774548280147969>']
 
-@embedless=[]
+$embedless=[]
 @ignored=[]
 @server_data=[[],[]]
 $spam_channels=[]
@@ -184,14 +183,30 @@ $voids=[]
 
 # primary entities
 
-class DLAdventurer
+class DLSentient # superclass containing all classes that characters can be.  Used by the art command to know when to invoke the "found in wyrmprints" field
   attr_accessor :name
+  attr_accessor :voice_na,:voice_jp
+  
+  def name=(val); @name=val; end
+  
+  def voice_na=(val); @voice_na=val; end
+  def voice_jp=(val); @voice_jp=val; end
+  def tid; return 0; end
+  
+  def fullName(format=nil)
+    return @name if format.nil?
+    return "#{format}#{@name}#{format.reverse}"
+  end
+  
+  
+end
+
+class DLAdventurer < DLSentient
   attr_accessor :rarity,:availability
   attr_accessor :clzz,:element,:weapon,:weapon2
   attr_accessor :hp,:str,:defense,:skill_points
   attr_accessor :skills,:coability,:chain,:abilities
   attr_accessor :hidden_abilities,:abiltags
-  attr_accessor :voice_na,:voice_jp
   attr_accessor :alts
   attr_accessor :gender,:race
   attr_accessor :games,:cygame
@@ -203,8 +218,6 @@ class DLAdventurer
     @name=val
     @skill_points=10
   end
-  
-  def name=(val); @name=val; end
   
   def rarity=(val)
     @availability=''
@@ -241,8 +254,6 @@ class DLAdventurer
   def chain=(val); @chain=val; end
   def hidden_abilities=(val); @hidden_abilities=nil; @hidden_abilities=val.split(';;;; ').map{|q| q.split(';; ')} unless val=='-'; end
   
-  def voice_na=(val); @voice_na=val; end
-  def voice_jp=(val); @voice_jp=val; end
   def gender=(val); @gender=val; end
   def race=(val); @race=val; end
   def games=(val); @games=[]; @games=val.split(', ') unless val.nil?; end
@@ -255,11 +266,6 @@ class DLAdventurer
   
   def sort_data=(val); @sort_data=val; end
   def objt; return 'Adventurer'; end
-  
-  def fullName(format=nil)
-    return @name if format.nil?
-    return "#{format}#{@name}#{format.reverse}"
-  end
   
   def dispDefense
     return @defense unless @defense.nil?
@@ -545,8 +551,7 @@ class DLAdventurer
   
 end
 
-class DLDragon
-  attr_accessor :name
+class DLDragon < DLSentient
   attr_accessor :rarity,:availability
   attr_accessor :element
   attr_accessor :hp,:str,:speed
@@ -555,7 +560,6 @@ class DLDragon
   attr_accessor :sell_price
   attr_accessor :favorite
   attr_accessor :dmg_turn,:longrange
-  attr_accessor :voice_na,:voice_jp
   attr_accessor :alts
   attr_accessor :gender,:games,:cygame
   attr_accessor :footer,:essence
@@ -567,7 +571,6 @@ class DLDragon
     @name=val
   end
   
-  def name=(val); @name=val; end
   def element=(val); @element=val; end
   
   def rarity=(val)
@@ -597,8 +600,6 @@ class DLDragon
   def essence=(val); @essence=false; @essence=true if val=='Y'; end
   def pseudodragon=(val); @pseudodragon=nil; @pseudodragon=val unless ['','-',' ',false,nil].include?(val); end
   
-  def voice_na=(val); @voice_na=val; end
-  def voice_jp=(val); @voice_jp=val; end
   def gender=(val); @gender=val; end
   def games=(val); @games=[]; @games=val.split(', ') unless val.nil?; end
   def alts=(val); @alts=val.split(', '); end
@@ -610,11 +611,6 @@ class DLDragon
   
   def sort_data=(val); @sort_data=val; end
   def objt; return 'Dragon'; end
-  
-  def fullName(format=nil)
-    return @name if format.nil?
-    return "#{format}#{@name}#{format.reverse}"
-  end
   
   def stat_emotes
     return ['<:HP_S:514712247503945739>','<:FreezeS:514712247474585610>','<:SpeedS:514712247625580555>'] if @games[0]=='FEH'
@@ -1543,27 +1539,16 @@ class DLGauntlet
   
 end
 
-class DL_NPC
-  attr_accessor :name
+class DL_NPC < DLSentient
   attr_accessor :rarity,:lock
-  attr_accessor :voice_na,:voice_jp
   
   def initialize(val)
     @name=val
   end
   
-  def name=(val); @name=val; end
   def rarity=(val); @rarity=[val.to_i,6].min; end
   def lock=(val); @lock=false; @lock=true if val=='y'; end
-  
-  def voice_na=(val); @voice_na=val; end
-  def voice_jp=(val); @voice_jp=val; end
   def objt; return 'NPC'; end
-  
-  def fullName(format=nil)
-    return @name if format.nil?
-    return "#{format}#{@name}#{format.reverse}"
-  end
   
   def emotes(bot,includerarity=true,includeobjt=false); return ''; end
   
@@ -1769,13 +1754,27 @@ class DLAbility
     x="#{format}#{x}#{format.reverse}" unless format.nil?
     return x if ['-'].include?(@level) || @level.nil?
     return x if ['example'].include?(@level) && format.nil? && !justlast
-    x="#{x} " unless @name[-1]=='+'
-    return "#{x}#{@level}" unless @level=='example'
-    skz=$abilities.reject{|q| q.name != @name || q.type != @type || q.level=='example'}
-    skz=sklz.reject{|q| q.name != @name || q.type != @type || q.level=='example'} unless sklz.nil?
-    return "#{x}" if justlast && skz.length<=0
-    return "#{x}#{skz[-1].level}" if justlast
-    return "#{x}#{skz.map{|q| q.level}.join('/')}"
+    skz=$abilities.reject{|q| q.name != @name || q.level=='example'}
+    skz=sklz.reject{|q| q.name != @name || q.level=='example'} unless sklz.nil?
+    char='/'
+    char=' / ' if skz.reject{|q| !q.level.include?('/')}.length>0
+    if skz.length>5
+      skz=[skz[0],skz[-1]]
+      char=" \u2192 "
+    end
+    if @name[0,7]=='Hits = '
+      x=" #{x}"
+      return "#{@level}#{x}" unless @level=='example'
+      return "#{x}" if justlast && skz.length<=0
+      return "#{skz[-1].level}#{x}" if justlast
+      return "#{skz.map{|q| q.level}.join(char)}#{x}"
+    else
+      x="#{x} " unless @name[-1]=='+'
+      return "#{x}#{@level}" unless @level=='example'
+      return "#{x}" if justlast && skz.length<=0
+      return "#{x}#{skz[-1].level}" if justlast
+      return "#{x}#{skz.map{|q| q.level}.join(char)}"
+    end
   end
   
   
@@ -1832,7 +1831,7 @@ class DLSticker
   end
   
   def name=(val); @name=val; end
-  def charas=(val); @charas=val.split(', '); end
+  def charas=(val); @charas=[]; @charas=val.split(', ') unless val.nil?; end
   def objt; return 'Sticker'; end
   
   def fullName(format=nil)
@@ -1843,6 +1842,130 @@ class DLSticker
   def emotes(bot,includerarity=true,includeobjt=false); return ''; end
   
   def disp_color(chain=0); return 0xCE456B; end
+  
+  
+end
+
+class DLTimer
+  attr_accessor :start_date,:end_date
+  
+  def date=(val)
+    x=val.split(', ')
+    @start_date=x[0].split('/').map{|q| q.to_i}
+    @end_date=x[1].split('/').map{|q| q.to_i}
+  end
+  
+  def isCurrent?(includempty=true,shift=false)
+    return false if @start_date.nil?
+    t=Time.now
+    t+=24*60*60 if shift
+    timeshift=8
+    timeshift-=1 unless t.dst?
+    t-=60*60*timeshift
+    return true if @start_date[0]==t.day && @start_date[1]==t.month && @start_date[2]==t.year
+    return false if @end_date.nil?
+    return false if @start_date[2]>t.year
+    return false if @start_date[2]==t.year && @start_date[1]>t.month
+    return false if @start_date[2]==t.year && @start_date[1]==t.month && @start_date[0]>t.day
+    return false if @end_date[2]<t.year
+    return false if @end_date[2]==t.year && @end_date[1]<t.month
+    return false if @end_date[2]==t.year && @end_date[1]==t.month && @end_date[0]<t.day
+    return false if @end_date[2]==t.year && @end_date[1]==t.month && @end_date[0]==t.day && self.is_a?(FEHBonus) && ['Arena','Aether'].include?(@type) && t.hour>15 && !includempty
+    return true
+  end
+  
+  def startsTomorrow?
+    return false if @start_date.nil?
+    t=Time.now
+    t+=24*60*60
+    timeshift=8
+    timeshift-=1 unless t.dst?
+    t-=60*60*timeshift
+    return true if @start_date[0]==t.day && @start_date[1]==t.month && @start_date[2]==t.year
+    return false
+  end
+  
+  def isNext?(includempty=true)
+    return false if @start_date.nil?
+    return false if self.isCurrent?(true)
+    t=Time.now
+    timeshift=8
+    timeshift-=1 unless t.dst?
+    t-=60*60*timeshift
+    t+=7*24*60*60 # shift by a week
+    return true if @start_date[0]==t.day && @start_date[1]==t.month && @start_date[2]==t.year
+    return false if @end_date.nil?
+    return false if @start_date[2]>t.year
+    return false if @start_date[2]==t.year && @start_date[1]>t.month
+    return false if @start_date[2]==t.year && @start_date[1]==t.month && @start_date[0]>t.day
+    return false if @end_date[2]<t.year
+    return false if @end_date[2]==t.year && @end_date[1]<t.month
+    return false if @end_date[2]==t.year && @end_date[1]==t.month && @end_date[0]<t.day
+    return true
+  end
+  
+  def isFuture?
+    return false if self.isCurrent? || @start_date.nil?
+    t=Time.now
+    timeshift=8
+    timeshift-=1 unless t.dst?
+    t-=60*60*timeshift
+    return false if @start_date[2]<t.year
+    return false if @start_date[2]==t.year && @start_date[1]<t.month
+    return false if @start_date[2]==t.year && @start_date[1]==t.month && @start_date[0]<t.day
+    return true
+  end
+  
+  def isPast?(includempty=true)
+    return false if self.isCurrent?(includempty)
+    return false if self.isFuture?
+    return false if @start_date.nil? || @end_date.nil?
+    return true
+  end
+end
+
+class DLBanner < DLTimer
+  attr_accessor :name
+  attr_accessor :advs,:drgs,:prints
+  attr_accessor :tags
+  attr_accessor :facilities
+  attr_accessor :aliases
+  
+  def initialize(val)
+    @name=val
+  end
+  
+  def name=(val); @name=val; end
+  def advs=(val); @advs=[]; @advs=val.split(', ') unless val.nil? || val.length<=0 || val=='-'; end
+  def drgs=(val); @drgs=[]; @drgs=val.split(', ') unless val.nil? || val.length<=0 || val=='-'; end
+  def prints=(val); @prints=[]; @prints=val.split(', ') unless val.nil? || val.length<=0 || val=='-'; end
+  def tags=(val); @tags=[]; @tags=val.split(', ') unless val.nil? || val.length<=0 || val=='-'; end
+  def facilities=(val); @facilities=[]; @facilities=val.split(', ') unless val.nil? || val.length<=0 || val=='-'; end
+  def aliases=(val); @aliases=[]; @aliases=val.split(', ') unless val.nil? || val.length<=0 || val=='-'; end
+  def objt; return 'Banner'; end
+  
+  def fullName(format=nil)
+    return @name if format.nil?
+    return "#{format}#{@name}#{format.reverse}"
+  end
+  
+  def emotes(bot,includerarity=true,includeobjt=false); return ''; end
+  
+  def disp_color(chain=0)
+    xcolor=[]
+    xcolor.push(0xE73031) if @tags.include?('Flame')
+    xcolor.push(0x1890DE) if @tags.include?('Water')
+    xcolor.push(0x00D771) if @tags.include?('Wind')
+    xcolor.push(0xFFB90F) if @tags.include?('Light')
+    xcolor.push(0xA637DE) if @tags.include?('Shadow')
+    return 0x849294 unless xcolor.length==1
+    return xcolor[0]
+  end
+  
+  def thumbnail
+    dispname=@name.gsub(' ','_').gsub(':','')
+    return "https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/SummonBanners/#{dispname}.png"
+  end
   
   
 end
@@ -1862,6 +1985,8 @@ class FEHUnit
   def name=(val); @name=val; end
   def artist=(val); @artist=val; end
   def id=(val); @id=val; end
+  def tid; return 0; end
+  def objt; return 'Z-FEH-Unit'; end
   
   def voice=(val)
     @voice_na=val[0].split(' & ') unless val[0].nil? || val[0].length<=0
@@ -1873,7 +1998,7 @@ class FGOServant
   attr_accessor :id
   attr_accessor :name
   attr_accessor :artist
-  attr_accessor :voice_jp
+  attr_accessor :voice_jp,:voice_na
   
   def initialize(val)
     @id=val
@@ -1882,6 +2007,7 @@ class FGOServant
   def name=(val); @name=val; end
   def artist=(val); @artist=val; end
   def voice_jp=(val); @voice_jp=val; end
+  def objt; return 'Z-FGO1-Servant'; end
   
   def tid
     return @id.to_f if @id.to_i<2
@@ -1900,6 +2026,8 @@ class FGO_CE
   
   def name=(val); @name=val; end
   def artist=(val); @artist=val; end
+  def objt; return 'Z-FGO2-CE'; end
+  def tid; return @id.to_i; end
 end
 
 def data_load(to_reload=[])
@@ -2183,6 +2311,29 @@ def data_load(to_reload=[])
       $statuses.push(bob4)
     end
   end
+  if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['banner','banners'])
+    if File.exist?("#{$location}devkit/DLBanners.txt")
+      b=[]
+      File.open("#{$location}devkit/DLBanners.txt").each_line do |line|
+        b.push(line)
+      end
+    else
+      b=[]
+    end
+    $banners=[]
+    for i in 0...b.length
+      b[i]=b[i].gsub("\n",'').split('\\'[0])
+      bob4=DLBanner.new(b[i][0])
+      bob4.advs=b[i][1]
+      bob4.drgs=b[i][2]
+      bob4.prints=b[i][3]
+      bob4.date=b[i][4] unless b[i][4].nil? || b[i][4].length<=0 || b[i][4]=='-'
+      bob4.tags=b[i][5]
+      bob4.facilities=b[i][6]
+      bob4.aliases=b[i][7]
+      $banners.push(bob4)
+    end
+  end
   if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['tags','tag'])
     $skilltags=[]
     if File.exist?("#{$location}devkit/DLSkillSubsets.txt")
@@ -2194,10 +2345,24 @@ def data_load(to_reload=[])
   if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['libraries','library','librarys'])
     t=Time.now
     if t-$last_multi_reload[0]>5*60 || (Shardizard==4 && t-$last_multi_reload[0]>60)
-      puts 'reloading BotanClasses'
+      puts 'reloading BotanClassFunctions'
       load "#{$location}devkit/BotanClassFunctions.rb"
       $last_multi_reload[0]=t
     end
+  end
+  if has_any?(to_reload.map{|q| q.downcase},['void','voids'])
+    if File.exist?("#{$location}devkit/DLVoid.txt")
+      b=[]
+      File.open("#{$location}devkit/DLVoid.txt").each_line do |line|
+        b.push(line)
+      end
+    else
+      b=[]
+    end
+    for i in 0...b.length
+      b[i]=b[i].gsub("\n",'')
+    end
+    $voids=b.map{|q| q}
   end
   if has_any?(to_reload.map{|q| q.downcase},['feh','unit','units'])
     # UNIT DATA
@@ -2277,8 +2442,8 @@ def metadata_load()
   else
     b=[[168592191189417984, 256379815601373184],[],[],[]]
   end
-  @embedless=b[0]
-  @embedless=[168592191189417984, 256379815601373184] if @embedless.nil?
+  $embedless=b[0]
+  $embedless=[168592191189417984, 256379815601373184] if $embedless.nil?
   @ignored=b[1]
   @ignored=[] if @ignored.nil?
   @server_data=b[2]
@@ -2308,7 +2473,7 @@ def metadata_save()
       @server_data[1][i]=0 if @server_data[1][i].nil?
     end
   end
-  x=[@embedless.map{|q| q}, @ignored.map{|q| q}, @server_data.map{|q| q}, $spam_channels.map{|q| q}]
+  x=[$embedless.map{|q| q}, @ignored.map{|q| q}, @server_data.map{|q| q}, $spam_channels.map{|q| q}]
   open("#{$location}devkit/DLSave.txt", 'w') { |f|
     f.puts x[0].to_s
     f.puts x[1].to_s
@@ -2396,7 +2561,10 @@ def all_commands(include_nil=false,permissions=-1)
      'donate','donation','shard','attribute','safe','spam','safetospam','safe2spam','long','longreplies','invite','sortaliases','tools','links','tool','link','resources','resource',
      'avatar','avvie','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','reload','update','adventurer','unit','stats',
      'stat','smol','dragon','drg','drag','wyrmprint','wyrm','print','weapon','wep','weap','wpn','lineage','craft','crafting','enemy','boss','affinity','resonance','affliction','skil',
-     'status','ailment','skill']
+     'status','ailment','skill','art','limit','limits','stack','stacks','wxp','wexp','wlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp','weaponlevel','wrxp','wrexp','wrlevel',
+     'wyrmxp','wyrmexp','wyrmxp','wyrmlevel','bxp','bexp','blevel','dbxp','dbexp','dblevel','bondlevel','bondxp','bondexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','advxp',
+     'advexp','advlevel','alevel','axp','aexp','plxp','plexp','pllevel','plevel','pxp','pexp','xp','exp','level','next','schedule','tomorrow','tommorrow','tomorow','tommorow','today',
+     'now','todayindl','today_in_dl,daily','dailies','reset','shop','store','ruin','ruins','roost','alt','alts','banners','banner']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -2471,22 +2639,24 @@ def find_data_ex(callback,name,event,fullname=false,ext=false,includematch=false
 end
 
 def find_best_match(name,bot,event,fullname=false,ext=false,mode=1,ext2=nil)
-  functions=[[:find_adventurer,:disp_adventurer_stats,'', :disp_adventurer_stats,:find_adv_alts],
-             [:find_dragon,    :disp_dragon_stats,    '', :disp_dragon_stats,    :find_dragon_alts],
-             [:find_wyrmprint, :disp_wyrmprint_stats, '', :disp_wyrmprint_stats],
-             [:find_weapon,    :disp_weapon_stats,    nil,                 :disp_weapon_stats],
-             [:find_enemy,     :disp_enemy_data,      ''],
+  #           just item        default item behavior   art   stats                  alts   banners
+  functions=[[:find_adventurer,:disp_adventurer_stats, '',   :disp_adventurer_stats,'',    ''],
+             [:find_dragon,    :disp_dragon_stats,     '',   :disp_dragon_stats,    '',    ''],
+             [:find_wyrmprint, :disp_wyrmprint_stats,  '',   :disp_wyrmprint_stats, nil,   ''],
+             [:find_weapon,    :disp_weapon_stats,     nil,  :disp_weapon_stats],
+             [:find_enemy,     :disp_enemy_data,       ''],
              [:find_skill,     :disp_skill_data],
              [:find_ability,   :disp_ability_data],
              [:find_status,    :disp_status_data],
              [:find_facility,  :disp_facility_data],
              [:find_mat,       :disp_mat_data],
-             [:find_sticker,   :disp_emote_art,       ''],
-             [:find_npc,       :disp_npc_art,         '']]
+             [:find_sticker,   :disp_art,              ''],
+             [:find_npc,       :disp_art,              ''],
+             [:find_banner,    nil,                    nil,  nil,                   nil,   '']]
   functions=functions.reject{|q| q[mode].nil?} if mode>0
   for i3 in 0...functions.length
     k=method(functions[i3][0]).call(name,event,true,ext)
-    return k if [0,2].include?(mode) && !k.nil?
+    return k if (mode==0 || functions[i3][mode].is_a?(String)) && !k.nil?
     return method(functions[i3][mode]).call(bot,event,name.split(' '),ext2) if !functions[i3][mode].nil? && !k.nil?
   end
   args=name.split(' ')
@@ -2494,387 +2664,321 @@ def find_best_match(name,bot,event,fullname=false,ext=false,mode=1,ext2=nil)
     for i2 in 0...args.length-i
       for i3 in 0...functions.length
         k=method(functions[i3][0]).call(args[i,args.length-i-i2].join(' '),event,true,ext)
-        return k if [0,2].include?(mode) && !k.nil?
+        return k if (mode==0 || functions[i3][mode].is_a?(String)) && !k.nil?
         return method(functions[i3][mode]).call(bot,event,args,ext2) if !functions[i3][mode].nil? && !k.nil? && args[i,args.length-i-i2].length>0
       end
     end
   end
-  event.respond 'No matches found.' if (fullname || name.length<=2) && mode>1
+  event.respond 'No matches found.' if (fullname || name.length<=2) && mode>1 && !functions[0][mode].is_a?(String)
   return nil if fullname || name.length<=2
   for i3 in 0...functions.length
     k=method(functions[i3][0]).call(name,event,false,ext)
-    return k if [0,2].include?(mode) && !k.nil?
+    return k if (mode==0 || functions[i3][mode].is_a?(String)) && !k.nil?
     return method(functions[i3][mode]).call(bot,event,name.split(' '),ext2) if !functions[i3][mode].nil? && !k.nil?
   end
   args=name.split(' ')
   for i in 0...args.length
     for i2 in 0...args.length-i
       k=method(functions[i3][0]).call(args[i,args.length-i-i2].join(' '),event,false,ext)
-      return k if [0,2].include?(mode) && !k.nil?
+      return k if (mode==0 || functions[i3][mode].is_a?(String)) && !k.nil?
       return method(functions[i3][mode]).call(bot,event,args,ext2) if !functions[i3][mode].nil? && !k.nil? && args[i,args.length-i-i2].length>0
     end
   end
-  event.respond 'No matches found.' if mode>1
+  event.respond 'No matches found.' unless functions[0][mode].is_a?(String) || mode==0
   return nil
 end
 
-def find_adventurer(xname,event,fullname=false,skipnpcs=false)
-  data_load(['adventurer','npc'])
-  xname=normalize(xname)
-  xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
-  adv=$adventurers.map{|q| q}
-  return nil if xname.length<2
-  return nil if (!find_npc(xname,event,true).nil? || xname.downcase=='mym') && skipnpcs
-  k=adv.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
-  return adv[k] unless k.nil?
-  nicknames_load()
-  alz=$aliases.reject{|q| q[0]!='Adventurer' && !(q[0]=='NPC' && $npcs.find_index{|q2| q2[0]==q[2]}.nil?)}.map{|q| [q[1],q[2],q[3]]}
-  alz=$aliases.reject{|q| q[0]!='Adventurer'}.map{|q| [q[1],q[2],q[3]]}
-  g=0
-  g=event.server.id unless event.server.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
-  return adv[adv.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
-  return adv[adv.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  return nil if fullname || xname.length<=2
-  return nil if !find_npc(xname,event).nil? && skipnpcs
-  k=adv.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
-  return adv[k] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
-  return adv[adv.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
-  return adv[adv.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  return nil
-end
-
-def find_dragon(xname,event,fullname=false,ext=false)
-  data_load(['dragon'])
+def find_thing(thing,xname,event,fullname=false,ext=false)
+  data_load([thing])
   xname=normalize(xname)
   xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   return nil if xname.length<2
-  k=$dragons.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
-  return $dragons[k] unless k.nil?
-  nicknames_load()
-  alz=$aliases.reject{|q| q[0]!='Dragon'}.map{|q| [q[1],q[2],q[3]]}
-  g=0
-  g=event.server.id unless event.server.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
-  return $dragons[$dragons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
-  return $dragons[$dragons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  return nil if fullname || xname.length<=2
-  k=$dragons.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
-  return $dragons[k] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
-  return $dragons[$dragons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
-  return $dragons[$dragons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  return nil
-end
-
-def find_wyrmprint(xname,event,fullname=false,ext=false)
-  data_load(['print'])
-  xname=normalize(xname)
-  xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
-  return nil if xname.length<2
-  k=$wyrmprints.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
-  return $wyrmprints[k] unless k.nil?
-  nicknames_load()
-  alz=$aliases.reject{|q| q[0]!='Wyrmprint'}.map{|q| [q[1],q[2],q[3]]}
-  g=0
-  g=event.server.id unless event.server.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
-  return $wyrmprints[$wyrmprints.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
-  return $wyrmprints[$wyrmprints.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  return nil if fullname || xname.length<=2
-  k=$wyrmprints.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
-  return $wyrmprints[k] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
-  return $wyrmprints[$wyrmprints.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
-  return $wyrmprints[$wyrmprints.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  return nil
-end
-
-def find_weapon(xname,event,fullname=false,ext=false)
-  data_load(['weapon'])
-  xname=normalize(xname)
-  xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
-  return nil if xname.length<2
-  k=$weapons.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
-  return $weapons[k] unless k.nil?
-  lists=$skilltags.reject{|q| q[2]!='Availability/Weapon'}.map{|q| [q[3],q[1]]}.uniq
-  lists.unshift(['$',['Paid']])
-  lists.unshift(['s',['Seasonal']])
-  unless ext
-    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.rarity}*#{q.element}#{q.type}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
-    return $weapons[k] unless k.nil?
-    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.rarity}#{q.element}#{q.type}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
-    return $weapons[k] unless k.nil?
-    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.rarity}*#{q.type}#{q.element}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
-    return $weapons[k] unless k.nil?
-    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.rarity}#{q.type}#{q.element}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
-    return $weapons[k] unless k.nil?
-    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.element}#{q.rarity}*#{q.type}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
-    return $weapons[k] unless k.nil?
-    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.element}#{q.rarity}#{q.type}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
-    return $weapons[k] unless k.nil?
-    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.type}#{q.rarity}*#{q.element}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
-    return $weapons[k] unless k.nil?
-    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.type}#{q.rarity}#{q.element}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
-    return $weapons[k] unless k.nil?
-    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.element}#{q.type}#{q.rarity}*".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
-    return $weapons[k] unless k.nil?
-    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.element}#{q.type}#{q.rarity}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
-    return $weapons[k] unless k.nil?
-    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.type}#{q.element}#{q.rarity}*".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
-    return $weapons[k] unless k.nil?
-    k=$weapons.find_index{|q| !has_any?(lists.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.type}#{q.element}#{q.rarity}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
-    return $weapons[k] unless k.nil?
-    for i2 in 2...lists.length
-      for i3 in 0...lists[i2][1].length
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.rarity}*#{q.element}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+  return nil if thing=='Adventurer' && ext && (!find_npc(xname,event,true).nil? || xname.downcase=='mym')
+  list=[]
+  list=$adventurers.map{|q| q} if thing=='Adventurer'
+  list=$dragons.map{|q| q} if thing=='Dragon'
+  list=$wyrmprints.map{|q| q} if thing=='Wyrmprint'
+  list=$weapons.map{|q| q} if thing=='Weapon'
+  list=$enemies.map{|q| q} if thing=='Enemy'
+  list=$skills.map{|q| q} if thing=='Skill'
+  list=$stickers.map{|q| q} if thing=='Sticker'
+  list=$statuses.map{|q| q} if thing=='Status'
+  list=$mats.map{|q| q} if thing=='Mat'
+  list=$facilities.map{|q| q} if thing=='Facility'
+  list=$banners.map{|q| q} if thing=='Banner'
+  list=$npcs.map{|q| q} if thing=='NPC'
+  k=list.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
+  return list.reject{|q| q.name != k.name} if thing=='Facility' && !k.nil?
+  return list[k] unless k.nil?
+  if thing=='Weapon' && !ext
+    xtags=$skilltags.reject{|q| q[2]!='Availability/Weapon'}.map{|q| [q[3],q[1]]}.uniq
+    xtags.unshift(['$',['Paid']])
+    xtags.unshift(['s',['Seasonal']])
+    k=list.find_index{|q| !has_any?(xtags.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.rarity}*#{q.element}#{q.type}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return list[k] unless k.nil?
+    k=list.find_index{|q| !has_any?(xtags.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.rarity}#{q.element}#{q.type}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return list[k] unless k.nil?
+    k=list.find_index{|q| !has_any?(xtags.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.rarity}*#{q.type}#{q.element}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return list[k] unless k.nil?
+    k=list.find_index{|q| !has_any?(xtags.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.rarity}#{q.type}#{q.element}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return list[k] unless k.nil?
+    k=list.find_index{|q| !has_any?(xtags.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.element}#{q.rarity}*#{q.type}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return list[k] unless k.nil?
+    k=list.find_index{|q| !has_any?(xtags.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.element}#{q.rarity}#{q.type}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return list[k] unless k.nil?
+    k=list.find_index{|q| !has_any?(xtags.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.type}#{q.rarity}*#{q.element}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return list[k] unless k.nil?
+    k=list.find_index{|q| !has_any?(xtags.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.type}#{q.rarity}#{q.element}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return list[k] unless k.nil?
+    k=list.find_index{|q| !has_any?(xtags.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.element}#{q.type}#{q.rarity}*".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return list[k] unless k.nil?
+    k=list.find_index{|q| !has_any?(xtags.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.element}#{q.type}#{q.rarity}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return list[k] unless k.nil?
+    k=list.find_index{|q| !has_any?(xtags.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.type}#{q.element}#{q.rarity}*".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return list[k] unless k.nil?
+    k=list.find_index{|q| !has_any?(xtags.map{|q2| q2[0]},q.availability) && q.element !='None' && "#{q.type}#{q.element}#{q.rarity}".downcase==xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand') && q.games.length<=0}
+    return list[k] unless k.nil?
+    for i2 in 2...xtags.length
+      for i3 in 0...xtags[i2][1].length
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{xtags[i2][1][i3]}#{q.rarity}*#{q.element}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.rarity}#{q.element}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{xtags[i2][1][i3]}#{q.rarity}#{q.element}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.rarity}*#{q.type}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{xtags[i2][1][i3]}#{q.rarity}*#{q.type}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.rarity}#{q.type}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{xtags[i2][1][i3]}#{q.rarity}#{q.type}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.element}#{q.rarity}*#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{xtags[i2][1][i3]}#{q.element}#{q.rarity}*#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.element}#{q.rarity}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{xtags[i2][1][i3]}#{q.element}#{q.rarity}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.type}#{q.rarity}*#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{xtags[i2][1][i3]}#{q.type}#{q.rarity}*#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.type}#{q.rarity}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{xtags[i2][1][i3]}#{q.type}#{q.rarity}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.element}#{q.type}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{xtags[i2][1][i3]}#{q.element}#{q.type}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.element}#{q.type}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{xtags[i2][1][i3]}#{q.element}#{q.type}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.type}#{q.element}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{xtags[i2][1][i3]}#{q.type}#{q.element}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{lists[i2][1][i3]}#{q.type}#{q.element}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{xtags[i2][1][i3]}#{q.type}#{q.element}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}*#{lists[i2][1][i3]}#{q.element}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.rarity}*#{xtags[i2][1][i3]}#{q.element}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}#{lists[i2][1][i3]}#{q.element}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.rarity}#{xtags[i2][1][i3]}#{q.element}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}*#{lists[i2][1][i3]}#{q.type}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.rarity}*#{xtags[i2][1][i3]}#{q.type}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}#{lists[i2][1][i3]}#{q.type}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.rarity}#{xtags[i2][1][i3]}#{q.type}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{lists[i2][1][i3]}#{q.rarity}*#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.element}#{xtags[i2][1][i3]}#{q.rarity}*#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{lists[i2][1][i3]}#{q.rarity}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.element}#{xtags[i2][1][i3]}#{q.rarity}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{lists[i2][1][i3]}#{q.rarity}*#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.type}#{xtags[i2][1][i3]}#{q.rarity}*#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{lists[i2][1][i3]}#{q.rarity}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.type}#{xtags[i2][1][i3]}#{q.rarity}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{lists[i2][1][i3]}#{q.type}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.element}#{xtags[i2][1][i3]}#{q.type}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{lists[i2][1][i3]}#{q.type}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.element}#{xtags[i2][1][i3]}#{q.type}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{lists[i2][1][i3]}#{q.element}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.type}#{xtags[i2][1][i3]}#{q.element}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{lists[i2][1][i3]}#{q.element}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.type}#{xtags[i2][1][i3]}#{q.element}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}*#{q.element}#{lists[i2][1][i3]}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.rarity}*#{q.element}#{xtags[i2][1][i3]}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}#{q.element}#{lists[i2][1][i3]}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.rarity}#{q.element}#{xtags[i2][1][i3]}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}*#{q.type}#{lists[i2][1][i3]}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.rarity}*#{q.type}#{xtags[i2][1][i3]}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}#{q.type}#{lists[i2][1][i3]}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.rarity}#{q.type}#{xtags[i2][1][i3]}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{q.rarity}*#{lists[i2][1][i3]}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.element}#{q.rarity}*#{xtags[i2][1][i3]}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{q.rarity}#{lists[i2][1][i3]}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.element}#{q.rarity}#{xtags[i2][1][i3]}#{q.type}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{q.rarity}*#{lists[i2][1][i3]}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.type}#{q.rarity}*#{xtags[i2][1][i3]}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{q.rarity}#{lists[i2][1][i3]}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.type}#{q.rarity}#{xtags[i2][1][i3]}#{q.element}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{q.type}#{lists[i2][1][i3]}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.element}#{q.type}#{xtags[i2][1][i3]}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{q.type}#{lists[i2][1][i3]}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.element}#{q.type}#{xtags[i2][1][i3]}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{q.element}#{lists[i2][1][i3]}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.type}#{q.element}#{xtags[i2][1][i3]}#{q.rarity}*".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{q.element}#{lists[i2][1][i3]}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.type}#{q.element}#{xtags[i2][1][i3]}#{q.rarity}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}*#{q.element}#{q.type}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.rarity}*#{q.element}#{q.type}#{xtags[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}#{q.element}#{q.type}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.rarity}#{q.element}#{q.type}#{xtags[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}*#{q.type}#{q.element}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.rarity}*#{q.type}#{q.element}#{xtags[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.rarity}#{q.type}#{q.element}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.rarity}#{q.type}#{q.element}#{xtags[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{q.rarity}*#{q.type}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.element}#{q.rarity}*#{q.type}#{xtags[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{q.rarity}#{q.type}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.element}#{q.rarity}#{q.type}#{xtags[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{q.rarity}*#{q.element}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.type}#{q.rarity}*#{q.element}#{xtags[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{q.rarity}#{q.element}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.type}#{q.rarity}#{q.element}#{xtags[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{q.type}#{q.rarity}*#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.element}#{q.type}#{q.rarity}*#{xtags[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.element}#{q.type}#{q.rarity}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.element}#{q.type}#{q.rarity}#{xtags[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{q.element}#{q.rarity}*#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.type}#{q.element}#{q.rarity}*#{xtags[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
-        k=$weapons.reject{|q| !q.availability.include?(lists[i2][0]) || q.element=='None' || "#{q.type}#{q.element}#{q.rarity}#{lists[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
+        k=list.reject{|q| !q.availability.include?(xtags[i2][0]) || q.element=='None' || "#{q.type}#{q.element}#{q.rarity}#{xtags[i2][1][i3]}".downcase != xname.gsub('fire','flame').gsub('dark','shadow').gsub('spear','lance').gsub('katana','blade').gsub('rod','wand')}
         return k if k.length>0
       end
     end
   end
   nicknames_load()
-  alz=$aliases.reject{|q| q[0]!='Weapon'}.map{|q| [q[1],q[2],q[3]]}
+  alz=$aliases.reject{|q| q[0]!=thing}.map{|q| [q[1],q[2],q[3]]}
+  alz=$aliases.reject{|q| q[0]!='Adventurer' && !(q[0]=='NPC' && $npcs.find_index{|q2| q2.name==q[2]}.nil?)}.map{|q| [q[1],q[2],q[3]]} if thing=='Adventurer'
   g=0
+  if thing=='Banner'
+    alz=[]
+    for i in 0...list.length
+      for i2 in 0...list[i].aliases.length
+        alz.push([list[i].aliases[i2],list[i].name])
+      end
+    end
+  end
   g=event.server.id unless event.server.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
-  return $weapons[$weapons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return list.reject{|q| q.name != alz[k][1]} if thing=='Facility' && !k.nil? && list.reject{|q| q.name != alz[k][1]}.length>0
+  return list[list.find_index{|q| q.name==alz[k][1]}] unless k.nil? || list.find_index{|q| q.name==alz[k][1]}.nil?
   k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
-  return $weapons[$weapons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return list.reject{|q| q.name != alz[k][1]} if thing=='Facility' && !k.nil? && list.reject{|q| q.name != alz[k][1]}.length>0
+  return list[list.find_index{|q| q.name==alz[k][1]}] unless k.nil? || list.find_index{|q| q.name==alz[k][1]}.nil?
   return nil if fullname || xname.length<=2
-  k=$weapons.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
-  return $weapons[k] unless k.nil?
+  return nil if thing=='Adventurer' && ext && !find_npc(xname,event).nil?
+  k=list.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
+  return list.reject{|q| q.name != k.name} if thing=='Facility' && !k.nil?
+  return list[k] unless k.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
-  return $weapons[$weapons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return list.reject{|q| q.name != alz[k][1]} if thing=='Facility' && !k.nil? && list.reject{|q| q.name != alz[k][1]}.length>0
+  return list[list.find_index{|q| q.name==alz[k][1]}] unless k.nil? || list.find_index{|q| q.name==alz[k][1]}.nil?
   k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
-  return $weapons[$weapons.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  return list.reject{|q| q.name != alz[k][1]} if thing=='Facility' && !k.nil? && list.reject{|q| q.name != alz[k][1]}.length>0
+  return list[list.find_index{|q| q.name==alz[k][1]}] unless k.nil? || list.find_index{|q| q.name==alz[k][1]}.nil?
   return nil
 end
 
-def find_enemy(xnam,event,fullname=false,ext=false)
-  data_load(['enemy'])
-  xnam=normalize(xnam)
-  xnam=xnam.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
-  return nil if xnam.length<2
-  k=$enemies.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xnam}
-  return $enemies[k] unless k.nil?
-  nicknames_load()
-  alz=$aliases.reject{|q| q[0]!='Enemy'}.map{|q| [q[1],q[2],q[3]]}
-  g=0
-  g=event.server.id unless event.server.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xnam && (q[2].nil? || q[2].include?(g))}
-  return $enemies[$enemies.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xnam && (q[2].nil? || q[2].include?(g))}
-  return $enemies[$enemies.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  return nil if fullname || xnam.length<=2
-  k=$enemies.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xnam.length]==xnam}
-  return $enemies[k] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xnam.length]==xnam && (q[2].nil? || q[2].include?(g))}
-  return $enemies[$enemies.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xnam.length]==xnam && (q[2].nil? || q[2].include?(g))}
-  return $enemies[$enemies.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  return nil
-end
+def find_adventurer(xname,event,fullname=false,skipnpcs=false); return find_thing('Adventurer',xname,event,fullname,skipnpcs); end
+def find_dragon(xname,event,fullname=false,ext=false); return find_thing('Dragon',xname,event,fullname); end
+def find_wyrmprint(xname,event,fullname=false,ext=false); return find_thing('Wyrmprint',xname,event,fullname); end
+def find_weapon(xname,event,fullname=false,ext=false); return find_thing('Weapon',xname,event,fullname,ext); end
+def find_enemy(xname,event,fullname=false,ext=false); return find_thing('Enemy',xname,event,fullname); end
+def find_skill(xname,event,fullname=false,ext=false); return find_thing('Skill',xname,event,fullname); end
+def find_facility(xname,event,fullname=false,ext=false); return find_thing('Facility',xname,event,fullname); end
+def find_mat(xname,event,fullname=false,ext=false); return find_thing('Mat',xname,event,fullname); end
+def find_sticker(xname,event,fullname=false,ext=false); return find_thing('Sticker',xname,event,fullname); end
+def find_status(xname,event,fullname=false,ext=false); return find_thing('Status',xname,event,fullname); end
+def find_banner(xname,event,fullname=false,ext=false); return find_thing('Banner',xname,event,fullname); end
+def find_npc(xname,event,fullname=false,ext=false); return find_thing('NPC',xname,event,fullname); end
 
-def find_skill(xname,event,fullname=false,ext=false)
-  data_load(['skill'])
+def find_ability(xname,event,fullxname=false,ext=false)
+  data_load()
   xname=normalize(xname)
+  romanums=['Ox0','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV','XXV','XXVI','XXVII',
+            'XXVIII','XXIX','XXX','XXXI','XXXII','XXXIII','XXXIV','XXXV','XXXVI','XXXVII','XXXVIII','XXXIX','XL','XLI','XLII','XLII','XLIII','XLIV','XLV','XLVI','XLVII','XLVIII',
+            'XLIX','L']
   xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
-  return nil if xname.length<2
-  sklz=$skills.map{|q| q}
+  sklz=$abilities.map{|q| q}
+  sklz2=sklz.reject{|q| !romanums.include?(q.level)}
+  return [] if xname.length<2
+  k=sklz2.reject{|q| "#{q.name} #{romanums.find_index{|q2| q2==q.level}}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=xname || q.level.downcase=='example'}
+  return k.reject{|q| q.name != k[0].name} unless k.nil? || k.length<=0
+  k=sklz2.reject{|q| "#{romanums.find_index{|q2| q2==q.level}} #{q.name}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=xname || q.level.downcase=='example'}
+  return k.reject{|q| q.name != k[0].name} unless k.nil? || k.length<=0
+  k=sklz.reject{|q| "#{q.name} #{q.level}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=xname || q.level.downcase=='example'}
+  return k.reject{|q| q.name != k[0].name} unless k.nil? || k.length<=0
+  k=sklz.reject{|q| "#{q.name} +#{q.level}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=xname || q.level.downcase=='example'}
+  return k.reject{|q| q.name != k[0].name} unless k.nil? || k.length<=0
+  k=sklz.reject{|q| "#{q.level} #{q.name}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=xname || q.level.downcase=='example'}
+  return k.reject{|q| q.name != k[0].name} unless k.nil? || k.length<=0
+  k=sklz.reject{|q| "#{q.level.gsub('%','')} #{q.name}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=xname || q.level.downcase=='example'}
+  return k.reject{|q| q.name != k[0].name} unless k.nil? || k.length<=0
   k=sklz.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
-  return sklz[k] unless k.nil?
-  nicknames_load()
-  alz=$aliases.reject{|q| q[0]!='Skill'}.map{|q| [q[1],q[2],q[3]]}
+  return sklz.reject{|q| q.name !=sklz[k].name} unless k.nil?
+  k=sklz.reject{|q| q.name.length<7 || q.name[0,7]!='Hits = ' || "#{q.level} #{q.name}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=xname || q.level.downcase=='example'}
+  return k.reject{|q| q.name != k[0].name} unless k.nil? || k.length<=0
+  data_load('aliases')
+  alz=$aliases.reject{|q| !['Aura','Ability'].include?(q[0])}.map{|q| [q[1],q[2],q[3],q[0]]}
   g=0
   g=event.server.id unless event.server.nil?
   k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
-  return sklz[sklz.find_index{|q| q.name==alz[k][1]}] unless k.nil?
+  unless k.nil?
+    m=sklz.find_index{|q| q.fullName==alz[k][1]}
+    return sklz[m] unless m.nil?
+    return sklz.reject{|q| q.name !=alz[k][1]}
+  end
   k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
-  return sklz[sklz.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  return nil if fullname || xname.length<=2
+  unless k.nil?
+    m=sklz.find_index{|q| q.fullName==alz[k][1]}
+    return sklz[m] unless m.nil?
+    return sklz.reject{|q| q.name !=alz[k][1]}
+  end
+  k=alz.reject{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=xname[0,q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','').length] || !(q[2].nil? || q[2].include?(g))}.sort{|b,a| a[0].length<=>b[0].length}[0]
+  unless k.nil?
+    sklz2=sklz.reject{|q| q.name !=k[1]}
+    m=sklz2.find_index{|q| "#{k[0]}#{q.level}".downcase==xname}
+    return sklz2[m] unless m.nil?
+    m=sklz2.find_index{|q| "#{k[0]}+#{q.level}".downcase==xname}
+    return sklz2[m] unless m.nil?
+    m=sklz2.find_index{|q| "#{k[0]}#{q.level.gsub('%','')}".downcase==xname}
+    return sklz2[m] unless m.nil?
+    m=sklz2.find_index{|q| "#{k[0]}+#{q.level.gsub('%','')}".downcase==xname}
+    return sklz2[m] unless m.nil?
+  end
+  k=alz.reject{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=xname[0,q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','').length] || !(q[2].nil? || q[2].include?(g))}.sort{|b,a| a[0].length<=>b[0].length}[0]
+  unless k.nil?
+    sklz2=sklz.reject{|q| q.name !=k[1]}
+    m=sklz2.find_index{|q| "#{k[0]}#{q.level}".downcase==xname}
+    return sklz2[m] unless m.nil?
+    m=sklz2.find_index{|q| "#{k[0]}+#{q.level}".downcase==xname}
+    return sklz2[m] unless m.nil?
+    m=sklz2.find_index{|q| "#{k[0]}#{q.level.gsub('%','')}".downcase==xname}
+    return sklz2[m] unless m.nil?
+    m=sklz2.find_index{|q| "#{k[0]}+#{q.level.gsub('%','')}".downcase==xname}
+    return sklz2[m] unless m.nil?
+  end
+  return [] if fullxname || xname.length<=2
+  k=sklz2.reject{|q| "#{romanums.find_index{|q2| q2==q.level}} #{q.name}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]!=xname || q.level.downcase=='example'}
+  return k.reject{|q| q.name != k[0].name} unless k.nil? || k.length<=0
+  k=sklz.reject{|q| "#{q.name} #{q.level}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]!=xname || q.level.downcase=='example'}
+  return k.reject{|q| q.name != k[0].name} unless k.nil? || k.length<=0
+  k=sklz.reject{|q| "#{q.name} +#{q.level}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]!=xname || q.level.downcase=='example'}
+  return k.reject{|q| q.name != k[0].name} unless k.nil? || k.length<=0
   k=sklz.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
-  return sklz[k] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
-  return sklz[sklz.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
-  return sklz[sklz.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  return nil
-end
-
-def find_npc(xname,event,fullname=false,ext=false)
-  data_load()
-  xname=normalize(xname)
-  xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
-  return nil if xname.length<2
-  k=$npcs.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
-  return $npcs[k] unless k.nil?
-  nicknames_load()
-  alz=$aliases.reject{|q| q[0]!='NPC'}.map{|q| [q[1],q[2],q[3]]}
-  g=0
-  g=event.server.id unless event.server.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
-  return $npcs[$npcs.find_index{|q| q.name==alz[k][1]}] unless k.nil? || $npcs.find_index{|q| q.name==alz[k][1]}.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
-  return $npcs[$npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil? || $npcs.find_index{|q| q.name==alz[k][1]}.nil?
-  return nil if fullname || xname.length<=2
-  k=$npcs.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
-  return $npcs[k] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
-  return $npcs[$npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil? || $npcs.find_index{|q| q.name==alz[k][1]}.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
-  return $npcs[$npcs.find_index{|q| q[0]==alz[k][1]}] unless k.nil? || $npcs.find_index{|q| q.name==alz[k][1]}.nil?
-  return nil
-end
-
-def find_sticker(xname,event,fullname=false,ext=false)
-  data_load()
-  xname=normalize(xname)
-  xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
-  return nil if xname.length<2
-  k=$stickers.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
-  return $stickers[k] unless k.nil?
-  nicknames_load()
-  alz=$aliases.reject{|q| q[0]!='Sticker'}.map{|q| [q[1],q[2],q[3]]}
-  g=0
-  g=event.server.id unless event.server.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
-  return $stickers[$stickers.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
-  return $stickers[$stickers.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  return nil if fullname || xname.length<=2
-  k=$stickers.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
-  return $stickers[k] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
-  return $stickers[$stickers.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
-  return $stickers[$stickers.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  return nil
-end
-
-def find_status(xname,event,fullname=false,ext=false)
-  data_load(['status'])
-  xname=normalize(xname)
-  xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
-  return nil if xname.length<2
-  k=$statuses.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname}
-  return $statuses[k] unless k.nil?
-  nicknames_load()
-  alz=$aliases.reject{|q| q[0]!='Status'}.map{|q| [q[1],q[2],q[3]]}
-  g=0
-  g=event.server.id unless event.server.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
-  return $statuses[$statuses.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')==xname && (q[2].nil? || q[2].include?(g))}
-  return $statuses[$statuses.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  return nil if fullname || xname.length<=2
-  k=$statuses.find_index{|q| q.name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname}
-  return $statuses[k] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
-  return $statuses[$statuses.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  k=alz.find_index{|q| q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
-  return $statuses[$statuses.find_index{|q| q.name==alz[k][1]}] unless k.nil?
-  return nil
+  return k.reject{|q| q.name != k[0].name} unless k.nil? || k.length<=0
+  k=sklz.reject{|q| "#{q.level} #{q.name}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]!=xname || xname.length<=q.level.to_s.length || q.level.downcase=='example'}
+  return k.reject{|q| q.name != k[0].name} unless k.nil? || k.length<=0
+  k=sklz.reject{|q| "#{q.level.gsub('%','')} #{q.name}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]!=xname || xname.length<=q.level.to_s.length || q.level.downcase=='example'}
+  return k.reject{|q| q.name != k[0].name} unless k.nil? || k.length<=0
+  k=sklz.reject{|q| q.name.length<7 || q.name[0,7]!='Hits = ' || "#{q.level} #{q.name}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]!=xname || q.level.downcase=='example'}
+  return k.reject{|q| q.name != k[0].name} unless k.nil? || k.length<=0
+  k=alz.find_index{|q| q[0][0,xname.length]!=q[0][0,xname.length].to_i.to_s && q[0].downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  unless k.nil?
+    m=sklz.find_index{|q| q.fullName==alz[k][1]}
+    return sklz[m] unless m.nil?
+    return sklz.reject{|q| q[0]!=alz[k][1]}
+  end
+  k=alz.find_index{|q| q[0].gsub('||','')[0,xname.length]!=q[0].gsub('||','')[0,xname.length].to_i.to_s && q[0].downcase.gsub('||','').gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]==xname && (q[2].nil? || q[2].include?(g))}
+  unless k.nil?
+    m=sklz.find_index{|q| q.fullName==alz[k][1]}
+    return sklz[m] unless m.nil?
+    return sklz.reject{|q| q[0]!=alz[k][1]}
+  end
+  return []
 end
 
 def disp_adventurer_stats(bot,event,args=nil,juststats=false)
@@ -3717,67 +3821,64 @@ end
 
 bot.command([:adventurer,:adv,:unit]) do |event, *args|
   return nil if overlap_prevent(event)
-=begin
+  data_load(['library'])
   if args.nil? || args.length<=0
-  elsif ['find','search'].include?(args[0].downcase)
-    args.shift
-    find_adventurers(bot,event,args)
-    return nil
   elsif ['level','xp','exp'].include?(args[0].downcase)
     args.shift
     level(event,bot,args,2)
     return nil
   elsif ['art'].include?(args[0].downcase)
-    args.shift
-    disp_adventurer_art(bot,event,args)
+    args[0]='adventurer'
+    disp_art(bot,event,args)
     return nil
   elsif ['alt','alts'].include?(args[0].downcase)
-    args.shift
+    args[0]='adventurer'
     find_adv_alts(bot,event,args)
+    return nil
+=begin
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    find_adventurers(bot,event,args)
     return nil
   elsif ['mat','mats','material','materials','node','nodes'].include?(args[0].downcase)
     args.shift
     disp_adv_mats(event,args,bot)
     return nil
-  end
 =end
+  end
   disp_adventurer_stats(bot,event,args)
 end
 
 bot.command([:dragon,:drg,:drag]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
-=begin
   if args.nil? || args.length<=0
-  elsif ['find','search'].include?(args[0].downcase)
-    args.shift
-    find_dragons(bot,event,args)
-    return nil
   elsif ['level','xp','exp'].include?(args[0].downcase)
     args.shift
     level(event,bot,args,3)
     return nil
-  elsif ['alt','alts'].include?(args[0].downcase)
-    args.shift
-    find_dragon_alts(bot,event,args)
-    return nil
   elsif ['art'].include?(args[0].downcase)
-    args.shift
-    disp_dragon_art(bot,event,args)
+    args[0]='dragon'
+    disp_art(bot,event,args)
     return nil
-  end
+  elsif ['alt','alts'].include?(args[0].downcase)
+    args[0]='dragon'
+    disp_alts(bot,event,args)
+    return nil
+=begin
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    find_dragons(bot,event,args)
+    return nil
 =end
+  end
   disp_dragon_stats(bot,event,args)
 end
 
 bot.command([:wyrmprint,:wyrm,:print]) do |event, *args|
   return nil if overlap_prevent(event)
-=begin
+  data_load(['library'])
   if args.nil? || args.length<=0
-  elsif ['find','search'].include?(args[0].downcase)
-    args.shift
-    find_wyrmprints(bot,event,args)
-    return nil
   elsif ['shop','store'].include?(args[0].downcase)
     reload_library()
     show_print_shop(event)
@@ -3787,22 +3888,22 @@ bot.command([:wyrmprint,:wyrm,:print]) do |event, *args|
     level(event,bot,args,5)
     return nil
   elsif ['art'].include?(args[0].downcase)
-    args.shift
-    disp_wyrmprint_art(bot,event,args)
+    args[0]='print'
+    disp_art(bot,event,args)
     return nil
-  end
+=begin
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    find_wyrmprints(bot,event,args)
+    return nil
 =end
+  end
   disp_wyrmprint_stats(bot,event,args)
 end
 
 bot.command([:weapon,:wep,:weap,:wpn]) do |event, *args|
   return nil if overlap_prevent(event)
-=begin
   if args.nil? || args.length<=0
-  elsif ['find','search'].include?(args[0].downcase)
-    args.shift
-    find_weapons(bot,event,args)
-    return nil
   elsif ['level','xp','exp'].include?(args[0].downcase)
     args.shift
     level(event,bot,args,6)
@@ -3811,8 +3912,13 @@ bot.command([:weapon,:wep,:weap,:wpn]) do |event, *args|
     args.shift
     disp_weapon_lineage(bot,event,args)
     return nil
-  end
+=begin
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    find_weapons(bot,event,args)
+    return nil
 =end
+  end
   disp_weapon_stats(bot,event,args)
 end
 
@@ -3836,14 +3942,18 @@ end
 bot.command([:enemy,:boss]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
-=begin
   if args.nil? || args.length<=0
+  elsif ['art'].include?(args[0].downcase)
+    args[0]='boss'
+    disp_art(bot,event,args)
+    return nil
+=begin
   elsif ['find','search'].include?(args[0].downcase)
     args.shift
     find_enemies(bot,event,args)
     return nil
-  end
 =end
+  end
   disp_enemy_data(bot,event,args)
 end
 
@@ -3865,6 +3975,12 @@ bot.command([:stats,:stat,:smol]) do |event, *args|
   return nil
 end
 
+bot.command([:alts,:alt]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  disp_alts(bot,event,args)
+end
+
 bot.command([:lineage,:craft,:crafting]) do |event, *args|
   return nil if overlap_prevent(event)
   disp_weapon_lineage(bot,event,args)
@@ -3875,7 +3991,134 @@ bot.command([:ailment,:affliction]) do |event, *args|
   disp_status_data(bot,event,args)
 end
 
+bot.command([:art]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  disp_art(bot,event,args)
+end
 
+bot.command([:banners,:banner]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+=begin
+  if args.nil? || args.length<=0
+  elsif ['find','search'].include?(args[0].downcase)
+    args.shift
+    find_banners(bot,event,args)
+    return nil
+  end
+=end
+  disp_banner(bot,event,args)
+end
+
+
+
+bot.command([:roost]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  today_in_dl(event,bot,args,false,1)
+end
+
+bot.command([:ruin,:ruins]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  today_in_dl(event,bot,args,false,2)
+end
+
+bot.command([:shop,:store]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  if args.nil? || args.length<=0
+  elsif ['wyrmprint','wyrm','print','wyrmprints','wyrms','prints'].include?(args[0].downcase)
+    show_print_shop(event)
+    return nil
+  end
+  today_in_dl(event,bot,args,false,3)
+end
+
+bot.command([:reset]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  today_in_dl(event,bot,args,false,4)
+end
+
+bot.command([:daily,:dailies]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  today_in_dl(event,bot,args)
+end
+
+bot.command([:today,:now,:todayindl,:today_in_dl]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  today_in_dl(event,bot,args,true)
+end
+
+bot.command([:tomorrow,:tommorrow,:tomorow,:tommorow]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  today_in_dl(event,bot,args,-1)
+end
+
+bot.command([:next,:schedule]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  next_events(event,bot,args)
+end
+
+bot.command([:xp,:exp,:level]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  level(event,bot,args)
+end
+
+bot.command([:plxp,:plexp,:pllevel,:plevel,:pxp,:pexp]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  level(event,bot,args,1)
+end
+
+bot.command([:advxp,:advexp,:advlevel,:alevel,:axp,:aexp]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  level(event,bot,args,2)
+end
+
+bot.command([:drgxp,:drgexp,:drglevel,:dlevel,:dxp,:dexp]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  level(event,bot,args,3)
+end
+
+bot.command([:bxp,:bexp,:blevel,:dbxp,:dbexp,:dblevel,:bondlevel,:bondxp,:bondexp]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  level(event,bot,args,4)
+end
+
+bot.command([:wrxp,:wrexp,:wrlevel,:wyrmxp,:wyrmexp,:wyrmxp,:wyrmlevel]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  level(event,bot,args,5)
+end
+
+bot.command([:wpxp,:wpexp,:wplevel,:weaponxp,:weaponexp,:weaponlevel]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  level(event,bot,args,6)
+end
+
+bot.command([:wxp,:wexp,:wlevel]) do |event, *args|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  level(event,bot,args,7)
+end
+
+bot.command([:limit,:limits,:stack,:stacks]) do |event|
+  return nil if overlap_prevent(event)
+  data_load('library')
+  show_abil_limits(event,bot)
+end
 
 bot.command([:affinity,:resonance]) do |event|
   return nil if overlap_prevent(event)
@@ -3886,14 +4129,14 @@ end
 bot.command([:embeds,:embed]) do |event|
   return nil if overlap_prevent(event)
   metadata_load()
-  if @embedless.include?(event.user.id)
-    for i in 0...@embedless.length
-      @embedless[i]=nil if @embedless[i]==event.user.id
+  if $embedless.include?(event.user.id)
+    for i in 0...$embedless.length
+      $embedless[i]=nil if $embedless[i]==event.user.id
     end
-    @embedless.compact!
+    $embedless.compact!
     event.respond 'You will now see my replies as embeds again.'
   else
-    @embedless.push(event.user.id)
+    $embedless.push(event.user.id)
     event.respond 'You will now see my replies as plaintext.'
   end
   metadata_save()
@@ -4406,14 +4649,14 @@ bot.command(:reload, from: 167657750971547648) do |event|
           f.puts b.join('')
         }
       end
-      download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/BotanText.rb")
+      download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/BotanClassFunctions.rb")
       IO.copy_stream(download, "DLTemp.txt")
       if File.size("DLTemp.txt")>100
         b=[]
         File.open("DLTemp.txt").each_line.with_index do |line, idx|
           b.push(line)
         end
-        open("BotanText.rb", 'w') { |f|
+        open("BotanClassFunctions.rb", 'w') { |f|
           f.puts b.join('')
         }
       end
@@ -4691,24 +4934,85 @@ bot.mention do |event|
   elsif ['adventurer','adv'].include?(args[0].downcase)
     m=false
     args.shift
-    disp_adventurer_stats(bot,event,args)
+    if ['level','xp','exp'].include?(args[0].downcase)
+      args.shift
+      level(event,bot,args,2)
+    elsif ['art'].include?(args[0].downcase)
+      args[0]='adventurer'
+      disp_art(bot,event,args)
+    elsif ['alt','alts'].include?(args[0].downcase)
+      args[0]='adventurer'
+      disp_art(bot,event,args)
+    else
+      disp_adventurer_stats(bot,event,args)
+    end
   elsif ['dragon','drg','drag'].include?(args[0].downcase)
     m=false
     args.shift
-    disp_dragon_stats(bot,event,args)
+    if ['level','xp','exp'].include?(args[0].downcase)
+      args.shift
+      level(event,bot,args,3)
+    elsif ['art'].include?(args[0].downcase)
+      args[0]='dragon'
+      disp_art(bot,event,args)
+    elsif ['alt','alts'].include?(args[0].downcase)
+      args[0]='dragon'
+      disp_art(bot,event,args)
+    else
+      disp_dragon_stats(bot,event,args)
+    end
   elsif ['wyrmprint','wyrm','print'].include?(args[0].downcase)
     m=false
     args.shift
-    disp_wyrmprint_stats(bot,event,args)
+    if ['level','xp','exp'].include?(args[0].downcase)
+      args.shift
+      level(event,bot,args,5)
+    elsif ['art'].include?(args[0].downcase)
+      args[0]='print'
+      disp_art(bot,event,args)
+    elsif ['shop','store'].include?(args[0].downcase)
+      reload_library()
+      show_print_shop(event)
+    else
+      disp_wyrmprint_stats(bot,event,args)
+    end
   elsif ['weapon','weap','wep','wpn'].include?(args[0].downcase)
     m=false
     args.shift
     if ['lineage','craft','crafting'].include?(args[0].downcase)
       args.shift
       disp_weapon_lineage(bot,event,args)
+    elsif ['level','xp','exp'].include?(args[0].downcase)
+      args.shift
+      level(event,bot,args,6)
     else
       disp_weapon_stats(bot,event,args)
     end
+  elsif ['enemy','boss'].include?(args[0].downcase)
+    m=false
+    args.shift
+    if ['find','search'].include?(args[0].downcase)
+      args.shift
+      find_enemies(bot,event,args)
+    else
+      disp_enemy_data(bot,event,args)
+    end
+  elsif ['lineage','craft','crafting'].include?(args[0].downcase)
+    m=false
+    args.shift
+    disp_weapon_lineage(bot,event,args)
+  elsif ['alts','alt'].include?(args[0].downcase)
+    m=false
+    args.shift
+    disp_alts(bot,event,args)
+  elsif ['art'].include?(args[0].downcase)
+    m=false
+    args.shift
+    disp_art(bot,event,args)
+  elsif ['banner','banners'].include?(args[0].downcase)
+    m=false
+    args.shift
+    disp_banner(bot,event,args)
   elsif ['affinity','resonance'].include?(args[0].downcase)
     m=false
     affinity_resonance(event,bot)
@@ -4729,10 +5033,51 @@ bot.mention do |event|
     m=false
     args.shift
     disp_skill_data(bot,event,args)
+  elsif ['limit','limits','stack','stacks'].include?(args[0].downcase)
+    m=false
+    show_abil_limits(event,bot)
+  elsif ['xp','exp','level'].include?(args[0].downcase)
+    m=false
+    args.shift
+    level(event,bot,args)
+  elsif ['pxp','pexp','plxp','plexp','plevel','pllevel','axp','aexp','advxp','advexp','alevel','advlevel','dxp','dexp','drgxp','drgexp','dlevel','drglevel','bond','dragonbond','bxp','bexp','dbxp','dbexp','bondxp','bondexp','blevel','dblevel','bondlevel','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp','weaponlevel','wxp','wexp','wlevel'].include?(args[0].downcase)
+    m=false
+    level(event,bot,args)
   elsif ['status'].include?(args[0].downcase)
     m=false
     args.shift
     disp_status_data(bot,event,args)
+  elsif ['next','schedule'].include?(args[0].downcase)
+    args.shift
+    next_events(event,bot,args)
+    m=false
+  elsif ['roost'].include?(args[0].downcase)
+    args.shift
+    today_in_dl(event,bot,args,false,1)
+    m=false
+  elsif ['ruin','ruins'].include?(args[0].downcase)
+    args.shift
+    today_in_dl(event,bot,args,false,2)
+    m=false
+  elsif ['shop','store'].include?(args[0].downcase)
+    args.shift
+    if ['wyrmprint','wyrm','print','wyrmprints','wyrms','prints'].include?(args[0].downcase)
+      show_print_shop(event)
+    else
+      today_in_dl(event,bot,args,false,3)
+    end
+    m=false
+  elsif ['reset'].include?(args[0].downcase)
+    args.shift
+    today_in_dl(event,bot,args,false,4)
+    m=false
+  elsif ['daily','dailies'].include?(args[0].downcase)
+    args.shift
+    today_in_dl(event,bot,args)
+    m=false
+  elsif ['today','now','tomorrow','tommorrow','tomorow','tommorow','sunday','sundae','sun','sonday','sondae','son','monday','mondae','mon','monday','mondae','tuesday','tuesdae','tues','tue','wednesday','wednesdae','wednes','wed','thursday','thursdae','thurs','thu','thur','friday','fridae','fri','fryday','frydae','fry','saturday','saturdae','sat','saturnday','saturndae','saturn','satur'].include?(args[0].downcase)
+    today_in_dl(event,bot,args)
+    m=false
   end
   if m
     if event.message.text.downcase.gsub(' ','').gsub("'",'').include?("werenostrangerstolove")
@@ -4907,7 +5252,7 @@ bot.ready do |event|
   data_load()
   $last_multi_reload[0]=Time.now
   $last_multi_reload[1]=Time.now
-  puts 'reloading BotanText'
+  puts 'reloading BotanClassFunctions'
   load "#{$location}devkit/BotanClassFunctions.rb"
   system("color 1#{shard_data(3)[Shardizard,1]}")
   system("title #{shard_data(2)[Shardizard]} BotanBot")
