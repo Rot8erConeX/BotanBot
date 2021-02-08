@@ -843,9 +843,9 @@ end
 def find_ability(name,event,fullname=false,ext=false)
   data_load()
   name=normalize(name)
-  romanums=['Ox0','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV',
-            'XXV','XXVI','XXVII','XXVIII','XXIX','XXX','XXXI','XXXII','XXXIII','XXXIV','XXXV','XXXVI','XXXVII','XXXVIII','XXXIX','XL','XLI','XLII','XLII',
-            'XLIII','XLIV','XLV','XLVI','XLVII','XLVIII','XLIX','L']
+  romanums=['Ox0','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV','XXV','XXVI','XXVII',
+            'XXVIII','XXIX','XXX','XXXI','XXXII','XXXIII','XXXIV','XXXV','XXXVI','XXXVII','XXXVIII','XXXIX','XL','XLI','XLII','XLII','XLIII','XLIV','XLV','XLVI','XLVII','XLVIII',
+            'XLIX','L']
   name=name.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   sklz=@askilities.reject{|q| q[2]=='Skill' || q[1].nil?}
   sklz2=sklz.reject{|q| !romanums.include?(q[1])}
@@ -4803,7 +4803,7 @@ def old_banner(bot,event,args=nil)
     xcolor=element_color(b[5][0]) if ['Flame','Water','Wind','Light','Shadow'].include?(b[5][0])
     kk=b[4].map{|q| q.split('/')}.map{|q| "#{q[0]} #{['','Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'][q[1].to_i]} #{q[2]}"}
     disp=''
-    disp="**Real-world date:** #{kk[0]} - #{kk[1]}\n(assuming reset is at midnight)" if disp
+    disp="**Real-world date:** #{kk[0]} - #{kk[1]}\n(assuming reset is at midnight)"
     xpic="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/SummonBanners/#{b[0].gsub(' ','_').gsub(':','')}.png"
     create_embed(event,"__**#{b[0]}**__",disp,xcolor,ftr,[nil,xpic],f)
   end
@@ -7043,7 +7043,7 @@ def display_groups(event)
   event.respond str
 end
 
-bot.command([:affinity,:resonance]) do |event|
+bot.command([:affinity,:resonance]) do |event| # TRANSFERRED
   return nil if overlap_prevent(event)
   reload_library()
   affinity_resonance(event,bot)
@@ -7189,7 +7189,7 @@ bot.command([:weapon,:wep,:weap,:wpn]) do |event, *args| # TRANSFERRED
   disp_weapon_stats(bot,event,args)
 end
 
-bot.command([:skill,:skil]) do |event, *args|
+bot.command([:skill,:skil]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
   elsif ['find','search'].include?(args[0].downcase)
@@ -7305,7 +7305,7 @@ bot.command([:stats,:stat,:smol]) do |event, *args| # TRANSFERRED
   return nil
 end
 
-bot.command([:art]) do |event, *args|
+bot.command([:art]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
     disp_adventurer_art(bot,event,args)
@@ -7337,7 +7337,7 @@ bot.command([:enemy,:boss]) do |event, *args| # TRANSFERRED
   disp_enemy_data(bot,event,args)
 end
 
-bot.command([:banners,:banner]) do |event, *args|
+bot.command([:banners,:banner]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
   elsif ['find','search'].include?(args[0].downcase)
@@ -7348,12 +7348,12 @@ bot.command([:banners,:banner]) do |event, *args|
   disp_banner(bot,event,args)
 end
 
-bot.command([:lineage,:craft,:crafting]) do |event, *args|
+bot.command([:lineage,:craft,:crafting]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   disp_weapon_lineage(bot,event,args)
 end
 
-bot.command([:alts,:alt]) do |event, *args|
+bot.command([:alts,:alt]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   find_best_match(args.join(' '),bot,event,false,false,4)
   return nil
@@ -7484,67 +7484,67 @@ bot.command([:sort,:list]) do |event, *args|
   sort_adventurers(bot,event,args,1)
 end
 
-bot.command([:limit,:limits,:stack,:stacks]) do |event|
+bot.command([:limit,:limits,:stack,:stacks]) do |event| # TRANSFERRED
   return nil if overlap_prevent(event)
   show_abil_limits(event,bot)
 end
 
-bot.command([:xp,:exp,:level]) do |event, *args|
+bot.command([:xp,:exp,:level]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   level(event,bot,args)
 end
 
-bot.command([:plxp,:plexp,:pllevel,:plevel,:pxp,:pexp]) do |event, *args|
+bot.command([:plxp,:plexp,:pllevel,:plevel,:pxp,:pexp]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   level(event,bot,args,1)
 end
 
-bot.command([:advxp,:advexp,:advlevel,:alevel,:axp,:aexp]) do |event, *args|
+bot.command([:advxp,:advexp,:advlevel,:alevel,:axp,:aexp]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   level(event,bot,args,2)
 end
 
-bot.command([:drgxp,:drgexp,:drglevel,:dlevel,:dxp,:dexp]) do |event, *args|
+bot.command([:drgxp,:drgexp,:drglevel,:dlevel,:dxp,:dexp]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   level(event,bot,args,3)
 end
 
-bot.command([:bxp,:bexp,:blevel,:dbxp,:dbexp,:dblevel,:bondlevel,:bondxp,:bondexp]) do |event, *args|
+bot.command([:bxp,:bexp,:blevel,:dbxp,:dbexp,:dblevel,:bondlevel,:bondxp,:bondexp]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   level(event,bot,args,4)
 end
 
-bot.command([:wrxp,:wrexp,:wrlevel,:wyrmxp,:wyrmexp,:wyrmxp,:wyrmlevel]) do |event, *args|
+bot.command([:wrxp,:wrexp,:wrlevel,:wyrmxp,:wyrmexp,:wyrmxp,:wyrmlevel]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   level(event,bot,args,5)
 end
 
-bot.command([:wpxp,:wpexp,:wplevel,:weaponxp,:weaponexp,:weaponlevel]) do |event, *args|
+bot.command([:wpxp,:wpexp,:wplevel,:weaponxp,:weaponexp,:weaponlevel]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   level(event,bot,args,6)
 end
 
-bot.command([:wxp,:wexp,:wlevel]) do |event, *args|
+bot.command([:wxp,:wexp,:wlevel]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   level(event,bot,args,7)
 end
 
-bot.command([:next,:schedule]) do |event, *args|
+bot.command([:next,:schedule]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   next_events(event,bot,args)
 end
 
-bot.command([:roost]) do |event, *args|
+bot.command([:roost]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   roost(event,bot,args,false,1)
 end
 
-bot.command([:ruin,:ruins]) do |event, *args|
+bot.command([:ruin,:ruins]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   roost(event,bot,args,false,2)
 end
 
-bot.command([:shop,:store]) do |event, *args|
+bot.command([:shop,:store]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
   elsif ['wyrmprint','wyrm','print','wyrmprints','wyrms','prints'].include?(args[0].downcase)
@@ -7555,22 +7555,22 @@ bot.command([:shop,:store]) do |event, *args|
   roost(event,bot,args,false,3)
 end
 
-bot.command([:reset]) do |event, *args|
+bot.command([:reset]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   roost(event,bot,args,false,4)
 end
 
-bot.command([:daily,:dailies]) do |event, *args|
+bot.command([:daily,:dailies]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   roost(event,bot,args)
 end
 
-bot.command([:today,:now,:todayindl,:todayinDL,:todayInDL,:today_in_dl,:today_In_DL,:today_in_DL,:today_In_dl]) do |event, *args|
+bot.command([:today,:now,:todayindl,:today_in_dl]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   roost(event,bot,args,true)
 end
 
-bot.command([:tomorrow,:tommorrow,:tomorow,:tommorow]) do |event, *args|
+bot.command([:tomorrow,:tommorrow,:tomorow,:tommorow]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   roost(event,bot,args,-1)
 end
@@ -8027,12 +8027,12 @@ bot.command([:tools,:links,:tool,:link,:resources,:resources]) do |event| # TRAN
   event << ''
 end
 
-bot.command([:ailment, :affliction]) do |event, *args|
+bot.command([:ailment, :affliction]) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   disp_status_data(bot,event,args)
 end
 
-bot.command(:status) do |event, *args|
+bot.command(:status) do |event, *args| # TRANSFERRED
   return nil if overlap_prevent(event)
   t=Time.now
   timeshift=6
@@ -8177,7 +8177,7 @@ bot.command(:snagstats) do |event, f, f2| # TRANSFERRED
   return nil
 end
 
-bot.command(:boop) do |event| # NO NEED TO TRANSFERRED
+bot.command(:boop) do |event| # NO NEED TO TRANSFER
   return nil if overlap_prevent(event)
   return nil unless event.user.id==167657750971547648 || event.user.id==141260274144509952
   return nil unless event.channel.id==532083509083373583 || @shardizard==4 # only work when used by the developer
