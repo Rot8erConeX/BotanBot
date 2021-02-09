@@ -2254,8 +2254,8 @@ Curse Res\55%\Ability\Reduces susceptibility to curses by 55%.\65\y\CurseRes, Re
 Curse Res\60%\Ability\Reduces susceptibility to curses by 60%.\70\y\CurseRes, Resistance
 Curse Res\75%\Ability\Reduces susceptibility to curses by 75%.\100\y\CurseRes, Resistance
 Curse Res\100%\Ability\Reduces susceptibility to curses by 100%.\100\y\CurseRes, Resistance
-Dancing Panther\example\Ability\Grants the Persona element Fire to certain attacks. Also grants the user a Persona gauge, and changes the shapeshift button into a Persona button. Tapping this button summons Carmen. While summoned, Carmen will attack together with the user.;;;; Additionally, increases defense by 6%, and grants the user a unique force strike.\0\y\Unique, DefenseSkill
-Dancing Panther\I\Ability\Grants the Persona element Fire to certain attacks. Also grants the user a Persona gauge, and changes the shapeshift button into a Persona button. Tapping this button summons Carmen. While summoned, Carmen will attack together with the user.;;;; Additionally, increases defense by 6%, and grants the user a unique force strike.\100\\Unique, DefenseSkill
+Dancing Panther\example\Ability\Grants the Persona element Fire to certain attacks. Also grants the user a Persona gauge, and changes the shapeshift button into a Persona button. Tapping this button summons Carmen. While summoned, Carmen will attack together with the user.;;;; Additionally, increases defense by 3% / 6%, and grants the user a unique force strike.\0\y\Unique, DefenseSkill
+Dancing Panther\I\Ability\Grants the Persona element Fire to certain attacks. Also grants the user a Persona gauge, and changes the shapeshift button into a Persona button. Tapping this button summons Carmen. While summoned, Carmen will attack together with the user.;;;; Additionally, increases defense by 3%, and grants the user a unique force strike.\100\\Unique, DefenseSkill
 Dancing Panther\II\Ability\Grants the Persona element Fire to certain attacks. Also grants the user a Persona gauge, and changes the shapeshift button into a Persona button. Tapping this button summons Carmen. While summoned, Carmen will attack together with the user.;;;; Additionally, increases defense by 6%, and grants the user a unique force strike.\120\y\Unique, DefenseSkill
 Dauntless Strength\example\Ability\Increases strength by `x`% for every 15 seconds that pass without the user being knocked back by an enemy. This buff can stack up to three times. All stacks will be lost upon being knocked back by an enemy.\0\y\Dauntless, StrengthSkill
 Dauntless Strength\10%\Ability\Increases strength by 10% for every 15 seconds that pass without the user being knocked back by an enemy. This buff can stack up to three times. All stacks will be lost upon being knocked back by an enemy.\80\y\Dauntless, StrengthSkill
@@ -3465,6 +3465,11 @@ Recovery Potency\12%\CoAbility\Increases the potency of recovery skills by 12%.\
 Recovery Potency\14%\CoAbility\Increases the potency of recovery skills by 14%.\230\n\RecoveryPotency
 Recovery Potency\16%\CoAbility\Increases the potency of recovery skills by 16%.\260\n\RecoveryPotency
 Recovery Potency\20%\CoAbility\Increases the potency of recovery skills by 20%.\320\n\RecoveryPotency
+Scorchrend Boost\10%\CoAbility\Increases the chances of inflicting and the duration of scorchrend by 10%. Benefits your whole team.\160\y\Scorchrend, Flame
+Scorchrend Boost\12%\CoAbility\Increases the chances of inflicting and the duration of scorchrend by 12%. Benefits your whole team.\200\y\Scorchrend, Flame
+Scorchrend Boost\14%\CoAbility\Increases the chances of inflicting and the duration of scorchrend by 14%. Benefits your whole team.\240\y\Scorchrend, Flame
+Scorchrend Boost\16%\CoAbility\Increases the chances of inflicting and the duration of scorchrend by 16%. Benefits your whole team.\280\y\Scorchrend, Flame
+Scorchrend Boost\20%\CoAbility\Increases the chances of inflicting and the duration of scorchrend by 20%. Benefits your whole team.\320\y\Scorchrend, Flame
 Shapeshifting Boost\I\CoAbility\When in dragon form, adds 3% to the damage modifier and extends shapeshift time by 5%.\40\y\DragonDamage, DragonTime
 Shapeshifting Boost\II\CoAbility\When in dragon form, adds 4% to the damage modifier and extends shapeshift time by 5%.\80\n\DragonDamage, DragonTime
 Shapeshifting Boost\III\CoAbility\When in dragon form, adds 5% to the damage modifier and extends shapeshift time by 5%.\120\n\DragonDamage, DragonTime
@@ -3601,6 +3606,12 @@ Wind Boost\20%\CoAbility\Increases Wind damage by 20%. Benefits your whole team.
 (Flame) Dragon's Claws\IV\Chain\If a team member is attuned to Flame: each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by 8% in total. On second shapeshift strength is increased by 18% in total. On third shapeshift strength is increased by 33% in total. Benefits your whole team.\0\y\DragonsClaws, Flame
 (Flame) Dragon's Claws\V\Chain\If a team member is attuned to Flame: each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by 9% in total. On second shapeshift strength is increased by 19% in total. On third shapeshift strength is increased by 34% in total. Benefits your whole team.\0\y\DragonsClaws, Flame
 (Flame) Dragon's Claws\VI\Chain\If a team member is attuned to Flame: each shapeshift increases their strength (up to three times per quest). On first shapeshift strength is increased by 10% in total. On second shapeshift strength is increased by 20% in total. On third shapeshift strength is increased by 35% in total. Benefits your whole team.\0\y\DragonsClaws, Flame
+(Flame) Flame Dancer\example\Chain\If a team member is attuned to Flame: extends their shapeshift time by `x`%. Benefits your whole team.\0\y\DragonTime, Flame
+(Flame) Flame Dancer\10%\Chain\If a team member is attuned to Flame: extends their shapeshift time by 10%. Benefits your whole team.\0\y\DragonTime, Flame
+(Flame) Flame Dancer\12%\Chain\If a team member is attuned to Flame: extends their shapeshift time by 12%. Benefits your whole team.\0\y\DragonTime, Flame
+(Flame) Flame Dancer\14%\Chain\If a team member is attuned to Flame: extends their shapeshift time by 14%. Benefits your whole team.\0\y\DragonTime, Flame
+(Flame) Flame Dancer\16%\Chain\If a team member is attuned to Flame: extends their shapeshift time by 16%. Benefits your whole team.\0\y\DragonTime, Flame
+(Flame) Flame Dancer\20%\Chain\If a team member is attuned to Flame: extends their shapeshift time by 20%. Benefits your whole team.\0\y\DragonTime, Flame
 (Flame) HP\example\Chain\If a team member is attuned to Flame: increases their HP by `x`%. Benefits your whole team.\0\y\HealthSkill, Flame
 (Flame) HP\5%\Chain\If a team member is attuned to Flame: increases their HP by 5%. Benefits your whole team.\0\n\HealthSkill, Flame
 (Flame) HP\6%\Chain\If a team member is attuned to Flame: increases their HP by 6%. Benefits your whole team.\0\n\HealthSkill, Flame
@@ -4279,6 +4290,12 @@ Energy = Strength\7%\Chain\Increases a team member's strength by 7% for 15 secon
 Energy = Strength\8%\Chain\Increases a team member's strength by 8% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Energy, StrengthSkill
 Energy = Strength\9%\Chain\Increases a team member's strength by 9% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Energy, StrengthSkill
 Energy = Strength\10%\Chain\Increases a team member's strength by 10% for 15 seconds when a team member's energy level is increased. After activating, this ability will not activate again for 15 seconds. Benefits your whole team.\0\y\Energy, StrengthSkill
+Flame Dancer\example\Chain\Extends a teammate's shapeshift time by `x`%. Benefits your whole team.\0\y\DragonTime
+Flame Dancer\10%\Chain\Extends a teammate's shapeshift time by 10%. Benefits your whole team.\0\y\DragonTime
+Flame Dancer\12%\Chain\Extends a teammate's shapeshift time by 12%. Benefits your whole team.\0\y\DragonTime
+Flame Dancer\14%\Chain\Extends a teammate's shapeshift time by 14%. Benefits your whole team.\0\y\DragonTime
+Flame Dancer\16%\Chain\Extends a teammate's shapeshift time by 16%. Benefits your whole team.\0\y\DragonTime
+Flame Dancer\20%\Chain\Extends a teammate's shapeshift time by 20%. Benefits your whole team.\0\y\DragonTime
 Frostbite = User Flame Res\example\Chain\Reduces flame damage taken by a team member by `x`% for 15 seconds when they successfully inflict an enemy with frostbite. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\FrostbiteRes, Resistance
 Frostbite = User Flame Res\3%\Chain\Reduces flame damage taken by a team member by 3% for 15 seconds when they successfully inflict an enemy with frostbite. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\FrostbiteRes, Resistance
 Frostbite = User Flame Res\4%\Chain\Reduces flame damage taken by a team member by 4% for 15 seconds when they successfully inflict an enemy with frostbite. After activating, this ability will not activate again for 10 seconds. Benefits your whole team.\0\y\FrostbiteRes, Resistance
