@@ -3471,6 +3471,7 @@ def fac_stat_buffs(k,lvl)
         alta[1]+=1+i2
       end
     end
+    alta[1]+=0.5 if lvl>34
     return alta
   elsif k[3][1]=='Event Altar'
     alta=[(lvl+1)/2,lvl/2]
@@ -4129,7 +4130,7 @@ def sp_table(bot,event,args=nil)
             end
             ff.push("\n**Dash Attack:** #{k[18][i][-2]}")
             ff.push("\n**Force Strike:** #{k[18][i][-1]}")
-            f.push([k[19][i][0],ff.join("\n")])
+            f.push([k[18][i][0],ff.join("\n")])
           end
         end
       else
