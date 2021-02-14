@@ -3210,6 +3210,8 @@ Standard Attack Damage\I\Ability\Increases the power of standard attacks.\80\y\A
 Standard Attack Damage\II\Ability\Increases the power of standard attacks.\100\y\AutoAttack
 Steel-Forged Body\-\Ability\Significantly reduces the dragon gauge of adventurers attacked by Tartarus. If an adventurer is shapeshifted or in Dragondrive, this will be undone.\-1\y\Enemy
 Stormlashed Punisher\example\Ability\Increases damage to stormlashed enemies by `x`%.\0\y\StormlashedPunisher, Punisher
+Stormlashed Punisher\15%\Ability\Increases damage to stormlashed enemies by 15%.\80\y\StormlashedPunisher, Punisher
+Stormlashed Punisher\20%\Ability\Increases damage to stormlashed enemies by 20%.\90\y\StormlashedPunisher, Punisher
 Stormlashed Punisher\25%\Ability\Increases damage to stormlashed enemies by 25%.\100\y\StormlashedPunisher, Punisher
 Stormlashed Punisher\30%\Ability\Increases damage to stormlashed enemies by 30%.\120\y\StormlashedPunisher, Punisher
 Strength -10% & Strength Debilitator\example\Ability\The user's strength is lowered by 10% during quests. Grants the user's standard attacks a 10% chance to reduce enemy strength by `x`% for 10 seconds. This strength reduction effect will not stack.\0\y\Debuff, StrengthDown
