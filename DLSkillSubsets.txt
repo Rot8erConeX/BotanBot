@@ -267,6 +267,7 @@
 ["Unique", ["preference", "prf", "unique"], "Askillity"]
 ["User", ["self", "user"], "Askillity"]
 ["Vengeance", ["emnity", "enmity", "vengeance", "crisis"], "Askillity"]
+["Vengeful", ["vengeful", "venge"], "Askillity"]
 ["WaterBias", ["biaswater", "waterbias"], "Askillity"]
 ["WaterRes", ["waterres", "waterresistance"], "Askillity"]
 ["Whirlwind", ["whirlwind", "creepflurry", "betterflurry", "flurry10", "10flurry", "hits10"], "Askillity"]
