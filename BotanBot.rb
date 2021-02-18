@@ -1,6 +1,6 @@
 Shardizard = ARGV.first.to_i # taking a single variable from the command prompt to get the shard value
 system('color 0F')
-Shards = 6                   # total number of shards
+Shards = 4                   # total number of shards
 
 require 'discordrb'                    # Download link: https://github.com/meew0/discordrb
 require 'open-uri'                     # pre-installed with Ruby in Windows
@@ -10,7 +10,7 @@ require 'tzinfo/data'                  # Downloaded with active_support below, b
 require 'rufus-scheduler'              # Download link: https://github.com/jmettraux/rufus-scheduler
 require 'active_support/core_ext/time' # Download link: https://rubygems.org/gems/activesupport/versions/5.0.0
 require_relative 'rot8er_functs'       # functions I use commonly in bots
-$location="C:/Users/#{@mash}/Desktop/"
+$location=">Location<"
 
 # this is required to get her to change her avatar on certain holidays
 ENV['TZ'] = 'America/Chicago'
