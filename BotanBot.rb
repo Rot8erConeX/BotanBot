@@ -923,7 +923,9 @@ class DLWyrmprint
       rar=FGO_rarity_stars[@rarity] if @games[0]=='FGO'
       emtz.push(rar)
       str=generate_rarity_row(@rarity,0,@games[0])
-      if @rarity>4
+      if !@availability.nil? && @availability.include?('x')
+        str="#{str} - (X)"
+      elsif @rarity>4
         str="#{str} - <:Fill_Gold:759999913962110978>"
       else
         str="#{str} - <:Fill_Silver:759999914062774302>"
@@ -5206,7 +5208,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
   str=''; ftr=nil; flds=nil
   k2=k.map{|q| q}.uniq
   k2=k.reject{|q| q.type != 'Ability'}.uniq if k.map{|q| q.type}.uniq.length>1 && !k.find_index{|q| q.type=='Ability'}.nil?
-  if k.map{|q| q.type}.uniq.length>1 && k.map{|q| q.level}.uniq<=1
+  if k.map{|q| q.type}.uniq.length>1 && k.map{|q| q.level}.uniq.length<=1
     hdr="__**#{k[0].fullName}** [Ability Family]__"
     for i in 0...k.length
       str="#{str}#{"\n\n" if str.length>0}__**#{k[i].type}**__\n#{k[i].description}"
@@ -7687,7 +7689,7 @@ bot.ready do |event|
     else
       b=[]
     end
-    bot.channel(285663217261477889).send_message("Hello!") if b[0]!='BotanX'
+    bot.channel(285663217261477889).send_message("Hello!") if b[0]!='Botan'
     open("#{$location}devkit/DebugSav.txt", 'w') { |f|
       f.puts '"Botan"'
     }
