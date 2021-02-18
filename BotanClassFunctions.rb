@@ -4793,9 +4793,9 @@ def disp_art(bot,event,args=nil)
     unless appearances.length<=0
       m='Appears in the following'
       if appearances.reject{|q| q.name.include?('*[Sticker]*')}.length<=0
-        m='Appears in the following wyrmprints'
-      elsif appearances.reject{|q| !q.name.include?('*[Sticker]*')}.length<=0
         m='Appears in the following stickers'
+      elsif appearances.reject{|q| !q.name.include?('*[Sticker]*')}.length<=0
+        m='Appears in the following wyrmprints'
       end
       appearances=appearances.sort{|a,b| (a.objt<=>b.objt)==0 ? (a.name<=>b.name) : (b.objt<=>a.objt)}
       appearances.uniq!
@@ -5416,12 +5416,13 @@ def print_overlap_list(event,args,bot)
   limit=[false,false,false]
   k4=[]
   silvergold=[0,0,0]
-  slots=[$weapons.map{|q| q.print_slots[0]}.max,$weapons.map{|q| q.print_slots[1]}.max]
-  maxslots=$weapons.map{|q| q.print_slots.inject(0){|sum,x| sum + x }}.max
+  slots=[$weapons.map{|q| q.print_slots[0]}.max,$weapons.map{|q| q.print_slots[1]}.max,2]
+  maxslots=$weapons.map{|q| q.print_slots.inject(0){|sum,x| sum + x }}.max+2
   str='__***Wyrmprints***__'
   for i in 0...k.length
     m=1
     m=0 if k[i].rarity>4
+    m=2 if !k[i].availbility.nil? && k[i].availability.include?('x')
     if k4.length>=maxslots
       if limit[0]
         str=extend_message(str,"~~#{k[i].name}#{k[i].emotes(bot)}~~",event)
@@ -5435,12 +5436,12 @@ def print_overlap_list(event,args,bot)
         str=extend_message(str,"~~#{k[i].name}#{k[i].emotes(bot)}~~",event)
       else
         limit[m+1]=true
-        str=extend_message(str,"~~#{k[i].name}#{k[i].emotes(bot)}~~ - #{['gold','silver'][m]} slot limit reached",event)
+        str=extend_message(str,"~~#{k[i].name}#{k[i].emotes(bot)}~~ - #{['gold','silver','extra'][m]} slot limit reached",event)
       end
     else
       silvergold[m]+=1
       k4.push(k[i].clone)
-      str=extend_message(str,"#{['<:Fill_Gold:759999913962110978>','<:Fill_Silver:759999914062774302>'][m]} **#{k[i].name}#{k[i].emotes(bot)}**",event)
+      str=extend_message(str,"#{['<:Fill_Gold:759999913962110978>','<:Fill_Silver:759999914062774302>','(x)'][m]} **#{k[i].name}#{k[i].emotes(bot)}**",event)
     end
   end
   str2=[]
