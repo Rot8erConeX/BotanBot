@@ -4234,7 +4234,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       str2="#{str2}\n#{skl1.share_text}" unless skl1.share_text.length<=0
       str3="#{str3}\n#{skl1.share_text}" unless skl1.share_text.length<=0
     end
-    lll=[2,4,6]
+    lll=[2,4,6,6]
     if k.skills[1].nil? || k.skills[1].length<=0 || k.skills[1]=='-'
       str2="#{str2}\n#{"\n" unless str2[0,2]=='~~'}~~Skill 2 does not exist~~"; str3="#{str3}\n#{"\n" unless str3[0,2]=='~~'}~~Skill 2 does not exist~~"
     elsif skl2.nil?
@@ -5023,7 +5023,7 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
   lng+=flds.map{|q| "__#{q[0]}__\n#{q[1]}"}.join("\n\n").length unless flds.nil?
   if str.length+title.length+str2.length+lng<1800 && (displvl<2 || s2s || k.mass_description.nil? || k.mass_description.length<=0)
     str="#{str}#{str2}"
-    create_embed(event,[hdr,title],str,xcolor,ftr,k.thumbnail)
+    create_embed(event,[hdr,title],str,xcolor,ftr,k.thumbnail,flds)
   elsif str2.length<1800 && (displvl<2 || s2s || k.mass_description.nil? || k.mass_description.length<=0)
     create_embed(event,[hdr,title],str,xcolor,nil,k.thumbnail)
     create_embed(event,'',str2.gsub('__**Tags**__',''),xcolor)
