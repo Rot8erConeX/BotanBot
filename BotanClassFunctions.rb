@@ -315,6 +315,7 @@ def help_text(event,bot,command=nil,subcommand=nil)
     str="#{str}\n`suggestion` __\\*message__ - to send my developer a feature suggestion"
     str="#{str}\n`feedback` __\\*message__ - to send my developer other kinds of feedback"
     str="#{str}\n~~the above three commands are actually identical, merely given unique entries to help people find them~~"
+    str="#{str}\n`whybotan` - for an explanation as to how Botan was chosen as the face of the bot"
     create_embed([event,x],'',str,0xCE456B)
     str="__**Aliases**__"
     str="#{str}\n`addalias` __new alias__ __target__ - Adds a new server-specific alias"
@@ -7436,6 +7437,34 @@ def affinity_resonance(event,bot)
   end
   create_embed(event,"__**Affinity effects**__",str,0xED619A,nil,nil,f)
   return nil
+end
+
+def why_botan(event,bot)
+  if (!event.message.text.downcase.include?('full') && !event.message.text.downcase.include?('long')) && !safe_to_spam?(event)
+    str='"When making the bot, why did you pick Botan, a seasonal character?"'
+    str="#{str}\n\nThe short answer is: Someone had already taken the name NotteBot, and Botan was the character in the game with red-adjacent hair who was the cutest at the time I made the bot."
+    str="#{str}\n\nFor the full story, please use the command `DL!whybotan full` or use the command in PM."
+    create_embed(event,"__A word from my developer__",str,0x008b8b)
+  else
+    str='"When making the bot, why did you pick Botan, a seasonal character?"'
+    str="#{str}\n\nThe short answer is: Someone had already taken the name NotteBot, and Botan was the character in the game with red-adjacent hair who was the cutest at the time I made the bot."
+    str="#{str}\n\nThe long answer is:"
+    str="#{str}\n\nWhen the day-zero players for Dragalia (people who downloaded the game off the APK site before it became officially available) started sending screenshots of the game, and I saw the cute pink-haired fairy, I actually briefly considered playing the game (because fun fact: the person who codes this bot doesn't actually play Dragalia.  The person who does the data entry, on the other hand, does play) and summoning for her."
+    str="#{str}\n\nWhen I learned that she was the game's Navi, which intensified my desire to play - sure, I wouldn't be able to play *as* the tiny redhead, but she would be plot-relevant.  But what ultimately turned me off the game (and kept me from making the mistake of playing a third gacha game) was the fact that it was played in real-time - I can't do real-time action on a phone screen."
+    str="#{str}\n\nBut I made the vague statement that if I ever made a bot for the game, then Notte - as the fairy was named - would be its face.  Which now begs the question of *why **isn't** she the face of your bot?*"
+    create_embed(event,"__A word from my developer__",str,0x008b8b)
+    str="Well, fast forward a few months.  The game's been out for a bit, and is teasing its first New Year's event, though I don't know this yet."
+    str="#{str}\n\nI'm pulled into a server to answer a question about something FEH-related, and I answer it, but I also notice while there that there was a NotteBot, doing the expected thing of showing data relevant to Dragalia.  At first I'm glad that my Dragalia counterpart dev chose the right character to be the face of the bot - though, they likely chose her because she was the game's mascot, not because they had an attraction to pocket-sized redheads like I do."
+    str="#{str}\n\nBut then I notice that - opposite to my usual problem with game bots - the data being displayed was accurate (or at least, no one in the server was claiming it was inaccurate)...but it was *formatted* in a user-unfriendly manner.  It was then that I decided to take matters into my own hands, but I obviously couldn't do NotteBot as that had already been taken."
+    str="#{str}\n\nSo I make my declaration to the server in question, and ask them to show me pictures of any redheads in the game.  The only one I remember being shown was Cleo, and while her seasonal forms released after the bot have been very cute, her default form wasn't doing anything for me.  I think there were others, but again, none of them spoke to me."
+    create_embed(event,'',str,0xFEB3B6)
+    str="And then, an hour later, someone who hadn't been part of the original conversation pops in with a screenshot of the most recent teaser for the New Year's event - including the character we would later know as Botan."
+    str="#{str}\n\n\"Her!\" I say.  \"What's her name?\""
+    str="#{str}\n\"We don't know.  She's part of the upcoming New Year's thing.\""
+    str="#{str}\n\"I'm going with her.  Ping me when she has a name.  In the meantime, I'm gonna start working on the bot.\""
+    str="#{str}\n\nWhen we learned the name, there were some people who really wanted me to name the bot *Bot-an*.  And while I love puns quite a bit more than the average person (though not as much as someone like Chuggaaconroy) that name didn't fit the precident set by my previous gacha bots - and the mold that I retroactively applied to my first resource bot, which was previously named FEIndex and is now known as RobinBot.  So she became BotanBot."
+    create_embed(event,'',str,0xC84563,"And before you ask, no, I do not remember what I had as the source code's filename before we knew her name.  The laptop that would have that info doesn't even turn on anymore.")
+  end
 end
 
 def show_tools(event,bot)
