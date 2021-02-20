@@ -2276,6 +2276,10 @@ class DLAbility
         end
       end
     end
+    unless self.resonance_level(bot).nil? || !onlyone
+      m=DLWyrmprint.new(self.resonance_level(bot))
+      list.push(m)
+    end
     return list
   end
   
@@ -2332,6 +2336,21 @@ class DLAbility
       m[i].name="#{m[i].emotes(bot)}#{m[i].name}"
     end
     return m
+  end
+  
+  def resonance_level(bot)
+    return nil if $resonance.nil? || @type!='Ability'
+    m=$resonance.find_index{|q| q[1,q.length-1].include?(self.fullName)}
+    return nil if m.nil?
+    m=$resonance[m]
+    moji=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "Affinity_#{m[0]}"}
+    if moji.length>0
+      str=moji[0].mention
+    else
+      str="#{m[0]} Affinity "
+    end
+    str="#{str}x#{m.find_index{|q| q==self.fullName}}"
+    return str
   end
 end
 
@@ -3497,7 +3516,7 @@ def all_commands(include_nil=false,permissions=-1)
      'addalias','alias','deletealias','removealias','serveraliases','saliases','aliases','checkaliases','seealiases','seegroups','groups','checkgroups','team','backpack','mats','sp',
      'materials','node','nodes','spiral','dmg','damage','combo','sort','list','skillshare','skilshare','share','shared','prints','weapprints','wepprints','weaponprints','wpnprints',
      'weaprints','weprints','weapprint','wepprint','weaponprint','wpnprint','weaprint','weprint','synergy','synergize','find','search','lookup','ability','abil','aura','coability',
-     'coabil','coab','co','chain','cca','cc','chaincoab']
+     'coabil','coab','co','chain','cca','cc','chaincoab','whybotan']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -5334,6 +5353,10 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
       mevil=[] unless typ.include?('Enemies')
       exlength+=mevil.length
       mprint=k2[i].print_list(bot,event,dispslots,dispsubabils,false,exlength)
+      unless k2[i].resonance_level(bot).nil? || !s2s
+        mres=DLWyrmprint.new(k2[i].resonance_level(bot))
+        mprint.push(mres)
+      end
       mprint=[] unless typ.include?('Wyrmprints')
       exlength+=mprint.length
       if k2[i].level=='example'
@@ -5356,6 +5379,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         m.push("#{mprint.length} prints") if mprint.length>0
         m.push("#{mwep.length} weps") if mwep.length>0
         m.push("#{mevil.length} enemies") if mevil.length>0
+        m.push(k2[i].resonance_level(bot)) unless k2[i].resonance_level(bot).nil?
         str="#{str} - #{m.join(', ')}" if m.length>0
       end
     end
@@ -6407,6 +6431,12 @@ bot.command([:affinity,:resonance]) do |event|
   return nil if overlap_prevent(event)
   data_load('library')
   affinity_resonance(event,bot)
+end
+
+bot.command(:whybotan) do |event|
+  return nil if overlap_prevent(event)
+  data_load(['library'])
+  why_botan(event,bot)
 end
 
 bot.command([:embeds,:embed]) do |event|
