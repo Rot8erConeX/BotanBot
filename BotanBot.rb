@@ -2912,6 +2912,11 @@ end
 
 def data_load(to_reload=[])
   to_reload=[to_reload] if to_reload.is_a?(String)
+  reload_everything=false
+  if has_any?(to_reload.map{|q| q.downcase},['everything','all'])
+    reload_everything=true
+    to_reload=[]
+  end
   if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['adventurer','adventurers','adv','advs'])
     if File.exist?("#{$location}devkit/DLAdventurers.txt")
       b=[]
@@ -3291,8 +3296,11 @@ def data_load(to_reload=[])
     end
   end
   if to_reload.length<=0 || has_any?(to_reload.map{|q| q.downcase},['libraries','library','librarys'])
+    rtime=5
+    rtime=1 if Shardizard==4
+    rtime=60 if to_reload.length<=0
     t=Time.now
-    if t-$last_multi_reload[0]>5*60 || (Shardizard==4 && t-$last_multi_reload[0]>60)
+    if t-$last_multi_reload[0]>rtime*60
       puts 'reloading BotanClassFunctions'
       load "#{$location}devkit/BotanClassFunctions.rb"
       $last_multi_reload[0]=t
@@ -3841,7 +3849,7 @@ def find_banner(xname,event,fullname=false,ext=false); return find_thing('Banner
 def find_npc(xname,event,fullname=false,ext=false); return find_thing('NPC',xname,event,fullname); end
 
 def find_ability(xname,event,fullxname=false,ext=false)
-  data_load()
+  data_load(['ability'])
   xname=normalize(xname)
   romanums=['Ox0','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV','XXV','XXVI','XXVII',
             'XXVIII','XXIX','XXX','XXXI','XXXII','XXXIII','XXXIV','XXXV','XXXVI','XXXVII','XXXVIII','XXXIX','XL','XLI','XLII','XLII','XLIII','XLIV','XLV','XLVI','XLVII','XLVIII',
@@ -6859,7 +6867,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
   event.respond "Reload what?\n1.) Aliases, from backups#{" (unless includes the word \"git\")\n2.) Groups, from GitHub\n3.) Data, from GitHub (include \"subset\" in your message to also reload DLSkillSubsets)" if [167657750971547648,141260274144509952].include?(event.user.id)}#{"\n4.) Source code, from GitHub (include the word \"all\" to also reload rot8er_functs.rb)\n5.) Crossover data\n6.) Libraries, from code\n7.) Avatars, from GitHub" if event.user.id==167657750971547648}\nYou can include multiple numbers to load multiple things."
   event.channel.await(:bob, from: event.user.id) do |e|
     reload=false
-    if e.message.text.include?('1')
+    if e.message.text.include?('1')                                                                    # Aliases
       if e.message.text.downcase.include?('git') && [167657750971547648,141260274144509952].include?(event.user.id)
         download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/DLNames.txt")
         IO.copy_stream(download, "DLTemp.txt")
@@ -6911,7 +6919,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
         reload=true
       end
     end
-    if e.message.text.include?('2')
+    if e.message.text.include?('2') && [167657750971547648,141260274144509952].include?(event.user.id) # Groups
       download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/DLGroups.txt")
       IO.copy_stream(download, "DLTemp.txt")
       if File.size("DLTemp.txt")>100
@@ -6926,7 +6934,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
       e.respond 'Group list has been restored from GitHub, and placed in the backup as well.'
       reload=true
     end
-    if e.message.text.include?('3') && [167657750971547648,141260274144509952].include?(event.user.id)
+    if e.message.text.include?('3') && [167657750971547648,141260274144509952].include?(event.user.id) # Data
       event.channel.send_temporary_message('Loading.  Please wait 5 seconds...',3) rescue nil
       to_reload=['Adventurers','Dragons','Wyrmprints','Weapons','Skills','Banners','Emotes','Enemies','Gauntlet','SkillSubsets','Facilities','Materials','Status','Void','_NPCs','Groups']
       stx=''
@@ -6950,7 +6958,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
       e.respond "New data loaded.\n#{stx}"
       reload=true
     end
-    if e.message.text.include?('4') && [167657750971547648].include?(event.user.id)
+    if e.message.text.include?('4') && [167657750971547648].include?(event.user.id)                    # Source Code
       download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/rot8er_functs.rb")
       IO.copy_stream(download, "DLTemp.txt")
       if File.size("DLTemp.txt")>100 && e.message.text.include?('all')
@@ -7001,7 +7009,7 @@ bot.command(:reload, from: 167657750971547648) do |event|
         end
       end
     end
-    if e.message.text.include?('5') && [167657750971547648].include?(event.user.id)
+    if e.message.text.include?('5') && [167657750971547648].include?(event.user.id)                    # Crossdata
       download = open("https://raw.githubusercontent.com/Rot8erConeX/LizBot/master/FGOServants.txt")
       IO.copy_stream(download, "DLTemp.txt")
       if File.size("DLTemp.txt")>100
@@ -7038,15 +7046,15 @@ bot.command(:reload, from: 167657750971547648) do |event|
       e.respond 'New cross-data loaded.'
       reload=true
     end
-    if e.message.text.include?('6') && [167657750971547648].include?(event.user.id)
+    if e.message.text.include?('6') && [167657750971547648].include?(event.user.id)                    # Library
       puts 'reloading BotanClassFunction'
       load "#{$location}devkit/BotanClassFunctions.rb"
       t=Time.now
-      $last_multi_reload[1]=t
+      $last_multi_reload[0]=t
       e.respond 'Libraries force-reloaded'
       reload=true
     end
-    if e.message.text.include?('7') && [167657750971547648].include?(event.user.id)
+    if e.message.text.include?('7') && [167657750971547648].include?(event.user.id)                    # Avatars
       download = open("https://raw.githubusercontent.com/Rot8erConeX/EliseBot/master/EliseBot/FEHDonorList.txt")
       IO.copy_stream(download, "DLTemp.txt")
       if File.size("DLTemp.txt")>100
@@ -7230,7 +7238,7 @@ bot.mention do |event|
   name=args.join(' ')
   m=true
   m=false if event.user.bot_account?
-  data_load('library')
+  data_load(['everything'])
   if !m || args.nil? || args.length<=0
   elsif ['help','commands','command_list','commandlist'].include?(args[0].downcase)
     args.shift
@@ -7542,7 +7550,7 @@ def next_holiday(bot,mode=0)
   d=get_donor_list().reject{|q| q[2][2]<3 || q[4][2]=='-'}
     for i in 0...d.length
       if d[i][4][2]!='-' && d[i][0]!=141260274144509952
-        holidays.push([0,d[i][3][0],d[i][3][1],d[i][4][2],"in recognition of #{bot.user(d[i][0]).distinct}","Donator's birthday"])
+        holidays.push([0,d[i][3][0],d[i][3][1],d[i][4][2],"in recognition of contributions provided by #{bot.user(d[i][0]).distinct}","Donator's birthday"])
         holidays[-1][5]="Donator's Day" if d[i][0]==189235935563481088
       end
     end
