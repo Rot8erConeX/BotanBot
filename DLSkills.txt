@@ -99,7 +99,7 @@ Brave Bastion\\Skill\Increases the entire team's strength by 10% for 15 seconds.
 Brazier Boost\\Skill\Immediately readies the Roaring Furnace skill for use, and adds 30% to the modifier applied to critical damage for 20 seconds.\Immediately readies the Roaring Furnace skill for use, and adds 50% to the modifier applied to critical damage for 20 seconds.\\6582, 6582, 6582, 6582, 6582\No\1.4\\Buff, Prep, CritDamage\\, 
 Breath of Fog\\Skill\deals 1 hit of 1390% water damage to enemies directly ahead, and inflicts frostbite, dealing 22% water damage every 2.9s for 21s, with 100% base chance.;; Instead deals 1807% water damage to frostbitten foes.\deals 1 hit of 1564% water damage to enemies directly ahead, and inflicts frostbite, dealing 31% water damage every 2.9s for 21s, with 110% base chance.;; Instead deals 2033.2% water damage to frostbitten foes.\deals 1 hit of 1738% water damage to enemies directly ahead, and inflicts frostbite, dealing 41% water damage every 2.9s for 21s, with 120% base chance.;; Instead deals 2259.4% water damage to frostbitten foes.\3480, 3480, 3480, 3480, 3480\Yes\0\\Damage, Frostbite, FrostbitePunisher\\, 
 Breath of Life\\Skill\Restores HP to all allies with 37% Recovery Potency, continues healing over the next 15 seconds with 25% Recovery Potency every 2.9 seconds, and energizes the entire team.\Restores HP to all allies with 42% Recovery Potency, continues healing over the next 20 seconds with 30% Recovery Potency every 2.9 seconds, and energizes the entire team.\\-30, -30, -30, -30, -30\Yes\2.4\\Buff, Team, HealSkill, Burst, Energy, E5\\, 
-Breath of the Yuletide\\Skill\Deals 1 hit of 797% wind damage to enemies directly ahead, and raises the dragon gauge by 5% if the attack connects.\Deals 1 hit of 886% wind damage to enemies directly ahead, and raises the dragon gauge by 5% if the attack connects.\Deals 1 hit of 886% wind damage to enemies directly ahead, and raises the dragon gauge by 5% if the attack connects.\7634, 7634, 7634, 7634, 7634\Yes\0.9\Deals 1 hit of 797/886% wind damage to enemies directly ahead, and raises the dragon gauge by 5% if the attack connects.\Damage, DragonHaste\Deals 1 hit of 889% wind damage to enemies directly ahead, and raises the dragon gauge by 9% if the attack connects.;; After the user has shapeshifted once, this skill will instead raise the dragon gauge by 13%.\, 
+Breath of the Yuletide\\Skill\Deals 1 hit of 797% wind damage to enemies directly ahead, and raises the dragon gauge by 5% if the attack connects.\Deals 1 hit of 886% wind damage to enemies directly ahead, and raises the dragon gauge by 5% if the attack connects.\Deals 1 hit of 889% wind damage to enemies directly ahead, and raises the dragon gauge by 9% if the attack connects.;; After the user has shapeshifted once, this skill will instead raise the dragon gauge by 13%.\7634, 7634, 7634, 7634, 7634\Yes\0.9\Deals 1 hit of 797/886% wind damage to enemies directly ahead, and raises the dragon gauge by 5% (Lv3: 9%) if the attack connects.;; Lv3: After the user has shapeshifted once, this skill will instead raise the dragon gauge by 13%.\Damage, DragonHaste\\, 
 Bright Equinox\\Skill\if the user has a Mochi Master stack:;; Grants wind-attuned adventurers in the team the unstackable "New Year's Mochi" effect. New Year's Mochi's effects are based on the number of Mochi Master stacks consumed.;; **1**: +3% Water Res + HP Regen, for 20 seconds.;; **2**: +5% Water Res + HP Regen, for 30 seconds.;; **3**: +15% Water Res + HP Regen, for 60 seconds.\if the user has a Mochi Master stack:;; Grants wind-attuned adventurers in the team the unstackable "New Year's Mochi" effect. New Year's Mochi's effects are based on the number of Mochi Master stacks consumed.;; **1**: +3% Water Res + HP Regen, for 20 seconds.;; **2**: +5% Water Res + HP Regen, for 30 seconds.;; **3**: +15% Water Res + HP Regen, for 60 seconds.\\6878, 4958, 4958, 4958, 4958\No\1.4\if the user has a Mochi Master stack:;; Grants wind-attuned adventurers in the team the unstackable "New Year's Mochi" effect. New Year's Mochi's effects are based on the number of Mochi Master stacks consumed.;; **1**: +3% Water Res + HP Regen, for 20 seconds.;; **2**: +5% Water Res + HP Regen, for 30 seconds.;; **3**: +15% Water Res + HP Regen, for 60 seconds.\Buff, Team, WaterRes, HealSkill, Regen, WindBias\\, 
 Bright Flames\\Skill\Deals 4 hits of 129% flame damage to enemies in a line.\Deals 4 hits of 143% flame damage to enemies in a line.\\13684, 13684, 13684, 13684, 13684\Yes\1.2\\Damage\\, 
 Brilliant Blade\\Skill\Deals 5 hits of 192% light damage to enemies directly ahead.\Deals 5 hits of 213% light damage to enemies directly ahead.\\6925, 6925, 6925, 6925, 6925\Yes\1.4\\Damage\\, 
@@ -217,7 +217,7 @@ Dragonbrood Demonspear\\Skill\Deals 2 hits of 478% shadow damage to enemies in a
 Dragon Claw\\Skill\Deals 3 hits of 622.5% flame damage to enemies directly ahead, increases the user's strength by 20% for 10 seconds, and raises the dragon gauge by 5% if the attack connects.\Deals 3 hits of 690% flame damage to enemies directly ahead, increases the user's strength by 20% for 10 seconds, and raises the dragon gauge by 5% if the attack connects.\Deals 3 hits of 767% flame damage to enemies directly ahead, increases the user's strength by 20% for 10 seconds, and raises the dragon gauge by 5% if the attack connects.\2914, 2914, 2914, 2914, 2914\Yes\1.65\\DragonHaste, Damage\\4, 12821
 Dragon Drop\\Skill\Deals 1 hit of 540% and 1 hit of 1260% flame damage to enemies directly ahead, and inflicts stun for 5-6 seconds with 160% base chance.\Deals 1 hit of 600% and 1 hit of 1400% flame damage to enemies directly ahead, and inflicts stun for 6-7 seconds with 180% base chance.\\-30, -30, -30, -30, -30\Yes\1.4\\Damage, Stun\\, 
 Dragon Frostfang\\Skill\Deals 4 hits of 386% water damage to the target and nearby enemies.\Deals 4 hits of 428% water damage to the target and nearby enemies.\Deals 4 hits of 476% water damage to the target and nearby enemies.\2450, 2450, 2450, 2450, 2450\Yes\4.5\\Damage, Frostbite, FrostbitePunisher\Deals 4 hits of 529% water damage to the target and nearby enemies, and inflicts frostbite for 21 seconds - dealing 41% damage every 2.9s - with 120% base chance. Frostbitten foes take 4 hits of 687.7% water damage instead.\6, 8085
-Dragon's Gift\\Skill\Increases the critical rate of wind-attuned adventurers in the team by 15%, and strength by 5%, for 15 seconds.\Increases the critical rate of wind-attuned adventurers in the team by 17%, and strength by 5%, for 15 seconds.\Increases the critical rate of wind-attuned adventurers in the team by 20%, and strength by 5%, for 15 seconds.\3817, 3817, 3817, 3817, 3817\No\1.4\Increases the critical rate of wind-attuned adventurers in the team by 15/17/20% for 15 seconds.\Buff, Team, CritRate, WindBias, StrengthSkill\Increases the critical rate of wind-attuned adventurers in the team by 22%, and strength by 5%, for 15 seconds.\6, 11832
+Dragon's Gift\\Skill\Increases the critical rate of wind-attuned adventurers in the team by 15%, and strength by 5%, for 15 seconds.\Increases the critical rate of wind-attuned adventurers in the team by 17%, and strength by 5%, for 15 seconds.\Increases the critical rate of wind-attuned adventurers in the team by 20%, and strength by 5%, for 15 seconds.\3817, 3817, 3817, 3817, 3817\No\1.4\Increases the critical rate of wind-attuned adventurers in the team by 15/17/20%/22% for 15 seconds.\Buff, Team, CritRate, WindBias, StrengthSkill\Increases the critical rate of wind-attuned adventurers in the team by 22%, and strength by 5%, for 15 seconds.\6, 11832
 Dragon Valor\\Skill\Fills the user's Divine Dragon gauge by 600DDP. If this skill is used when in Divine Dragon form, a variant called Divine Dragon Blow will be used instead. Divine Dragon Blow deals 1 hit of 1446% water damage to the target and nearby enemies. Deals 1 hit of 2169% water damage to frostbitten foes instead.\Fills the user's Divine Dragon gauge by 1000DDP.;; *Divine Dragon Blow:*;; deals 1 hit of 1808% water damage to the target and nearby enemies.;; Deals 1 hit of 2712% water damage to frostbitten foes instead.\\7868, 7868, 7868, 7868, 7868\Yes\1.4\\Damage, FrostbitePunisher, Dragondrive\\, 
 Dream Offensive\\Skill\Deals 1 hit of 647% flame damage to enemies in a line, and applies Burning Ambition to enemies with 100% chance for 30 seconds. Enemies will take 1 hit of 1420% flame damage when Burning Ambition's effect ends. Burning Ambition does not stack, and cannot be reapplied to enemies still affected by it. Burning Ambition will be triggered if dispelled.\Deals 1 hit of 680% flame damage to enemies in a line, and applies Burning Ambition to enemies with 100% chance for 30 seconds. Enemies will take 1 hit of 1490% flame damage when Burning Ambition's effect ends. Burning Ambition does not stack, and cannot be reapplied to enemies still affected by it. Burning Ambition will be triggered if dispelled.\Deals 1 hit of 713% flame damage to enemies in a line, and applies Burning Ambition to enemies with 100% chance for 30 seconds. Enemies will take 1 hit of 1565% flame damage when Burning Ambition's effect ends. Burning Ambition does not stack, and cannot be reapplied to enemies still affected by it. Burning Ambition will be triggered if dispelled.\3300, 3300, 3300, 3300, 3300\Yes\1.25\Deals 1 hit of 647%/680%/713% flame damage to enemies in a line, and applies Burning Ambition to enemies with 100% chance for 30 seconds. Enemies will take 1 hit of 1420% / 1490% / 1565% flame damage when Burning Ambition's effect ends. Burning Ambition does not stack, and cannot be reapplied to enemies still affected by it. Burning Ambition will be triggered if dispelled.\Damage, BurningAmbition\\6, 8910
 Dream Wedding\\Skill\Restores HP to all allies with 72% Recovery Potency. Also increases the entire team's strength by 8% for 60 seconds. Does not stack.\Restores HP to all allies with 90% Recovery Potency and removes freeze. Also increases the entire team's strength by 10% for 60 seconds. Does not stack.\Restores HP to all allies with 108% Recovery Potency and removes freeze. Also increases the entire team's strength by 15% for 60 seconds. Does not stack.\7888, 7888, 7888, 7888, 7888\Yes\1.4\\HealSkill, Burst, Team, Cleanse, FreezeCleanse, StrengthSkill\\5, 13409
@@ -581,7 +581,7 @@ Pegasus Shot\\Skill\Increases the user's critical rate by 20% for 10 seconds.\In
 Pep Talk\\Skill\Deals 1 hit of 1077% water damage to surrounding enemies, increases the entire team's defense by 8% for 10 seconds, and activates **Skill Shift**.;; Phase II adds an additional 8% increase to the entire team's strength for 10 seconds.;; Phase III adds an additional 15% increase to the team's attack rate for 10 seconds.\Deals 1 hit of 1197% water damage to surrounding enemies, increases the entire team's defense by 10% for 10 seconds, and activates **Skill Shift**.;; Phase II adds an additional 10% increase to the entire team's strength for 10 seconds.;; Phase III adds an additional 20% increase to the team's attack rate for 10 seconds.\Deals 1 hit of 1330% water damage to surrounding enemies, increases the entire team's defense by 15% for 10 seconds, and activates **Skill Shift**.;; Phase II adds an additional 13% increase to the entire team's strength for 10 seconds.;; Phase III adds an additional 25% increase to the team's attack rate for 10 seconds.\7641, 7641, 7641, 7641, 7641\Yes\1.4\Deals 1 hit of 1077% / 1197% / 1330% water damage to surrounding enemies, increases the entire team's defense by 8% / 10% / 15% for 10 seconds, and activates **Skill Shift**.;; Phase II adds an additional 8% / 10% / 13% increase to the entire team's strength for 10 seconds.;; Phase III adds an additional 15% / 20% / 25% increase to the team's attack rate for 10 seconds.\Buff, Speed, Damage, StrengthSkill, SkillShift, DefenseSkill\\, 
 Peregrine Blade\\Skill\Deals 4 hits of 218% wind damage to enemies directly ahead, and inflicts poison dealing 25.4% damage every 3 seconds for 15 seconds, with 80% base chance.;; Deals 4 hits of 261.6% wind damage to poisoned foes.\Deals 4 hits of 241% wind damage to enemies directly ahead, and inflicts poison dealing 36% damage every 3 seconds for 15 seconds, with 90% base chance.;; Deals 4 hits of 289.2% wind damage to poisoned foes.\Deals 4 hits of 267% wind damage to enemies directly ahead, and inflicts poison dealing 48.2% damage every 3 seconds for 15 seconds, with 100% base chance.;; Deals 4 hits of 320.4% wind damage to poisoned foes.\2257, 2257, 2257, 2257, 2257\Yes\1.4\\Damage, Poison, PoisonedPunisher\\3, 6319
 Perennial Grace\\Skill\Increases the entire team's strength by 10% for 15 seconds.\Increases the entire team's strength by 15% for 15 seconds.\Increases the entire team's strength by 15% for 15 seconds, and increases the critical rate of shadow-attuned adventurers in the team by 10% for 15 seconds.\7634, 7634, 7634, 7634, 7634\No\2.2\\Buff, StrengthSkill, Team\\, 
-Perfect Order\\Skill\Damage will be increased based on the number of Perfect Escort stacks the user has.;; **0:** 46 hits totalling 2024%;; **1:** 58 hits totalling 2552%.;; **2:** 66 hits totalling 2904%.;; **3:** 74 hits totalling 4070%.;; Using this skill will consume all Perfect Escort stacks.;; Using this skill as a **__helper__** will deal 46 hits totalling `x`%.\Damage will be increased based on the number of Perfect Escort stacks the user has.;; **0:** 46 hits totalling 2482%;; **1:** 58 hits totalling 3132%.;; **2:** 66 hits totalling 3564%.;; **3:** 74 hits totalling 6512%.;; Using this skill will consume all Perfect Escort stacks.;; Using this skill as a **__helper__** will deal 46 hits totalling 4048%.\\23400, 23400, 23400, 23400, 23400\Yes\0\Damage will be increased based on the number of Perfect Escort stacks the user has.;; **0:** 46 hits totalling 2024% / 2482%;; **1:** 58 hits totalling 2552% / 3132%.;; **2:** 66 hits totalling 2904% / 3564%.;; **3:** 74 hits totalling 4070% / 6512%.;; Using this skill will consume all Perfect Escort stacks.;; Using this skill as a **__helper__** will deal 46 hits totalling `x`% / `x`%.\Damage, Conditional\\6, 5616
+Perfect Order\\Skill\Damage will be increased based on the number of Perfect Escort stacks the user has.;; **0:** 46 hits totalling 2024%;; **1:** 58 hits totalling 2552%.;; **2:** 66 hits totalling 2904%.;; **3:** 74 hits totalling 4070%.;; Using this skill will consume all Perfect Escort stacks.;; Using this skill as a **__helper__** will deal 46 hits totalling 4048%.\Damage will be increased based on the number of Perfect Escort stacks the user has.;; **0:** 46 hits totalling 2482%;; **1:** 58 hits totalling 3132%.;; **2:** 66 hits totalling 3564%.;; **3:** 74 hits totalling 6512%.;; Using this skill will consume all Perfect Escort stacks.;; Using this skill as a **__helper__** will deal 46 hits totalling 4048%.\\23400, 23400, 23400, 23400, 23400\Yes\0\Damage will be increased based on the number of Perfect Escort stacks the user has.;; **0:** 46 hits totalling 2024% / 2482%;; **1:** 58 hits totalling 2552% / 3132%.;; **2:** 66 hits totalling 2904% / 3564%.;; **3:** 74 hits totalling 4070% / 6512%.;; Using this skill will consume all Perfect Escort stacks.;; Using this skill as a **__helper__** will deal 46 hits totalling 4048%.\Damage, Conditional\\6, 5616
 Persephone's Healing\\Skill\Restores the user's HP with 72% Recovery Potency.\Restores the user's HP with 90% Recovery Potency.\\12668, 12668, 12668, 12668, 12668\Yes\1.1\\HealSkill, Burst, User\\, 
 Petal Piercer\\Skill\Deals 5 hits of 136% shadow damage to enemies directly ahead, and inflicts bleeding for 30 seconds - dealing 71% damage every 4.99 seconds - with 80% base chance.\Deals 5 hits of 142% shadow damage to enemies directly ahead, and inflicts bleeding for 30 seconds - dealing 99% damage every 4.99 seconds - with 80% base chance.\Deals 5 hits of 150% shadow damage to enemies directly ahead, and inflicts bleeding for 30 seconds - dealing 132% damage every 4.99 seconds - with 80% base chance.\2427, 2427, 2427, 2427, 2427\Yes\2.2\\Damage, Bleed\Deals 5 hits of 150% shadow damage to enemies directly ahead, and inflicts bleeding for 30 seconds - dealing 146% damage every 4.99 seconds - with **100%** base chance.\, 
 Phantom Barrage\\Skill\Deals 4 hits of 413% and 3 hits of 276% shadow damage to enemies directly ahead, reduces their strength by 10% for 20 seconds, and fills the Persona Gauge by 300.;; *When Arsene is active:*  Instead deals 1 hit of 2570% and reduces the target's strength by 15%.\Deals 4 hits of 448% and 3 hits of 312% shadow damage to enemies directly ahead, reduces their strength by 15% for 20 seconds, and fills the Persona Gauge by 300.;; *When Arsene is active:*  Instead deals 1 hit of 3030% and reduces the target's strength by 20%.\\5450, 5450, 5450, 5450, 5450\Yes\0\Deals 4 hits of 413% / 448% and 3 hits of 276% / 312% shadow damage to enemies directly ahead, reduces their strength by 10% / 15% for 20 seconds, and fills the Persona Gauge by 300.;; *When Arsene is active:*  Instead deals 1 hit of 2570% / 3030% and reduces the target's strength by 15% / 20%.\Damage, StrengthDown\\5, 9537
@@ -816,7 +816,7 @@ Unblessed Bonds\\Skill\Deals 4 hits of 298% shadow damage to the target and near
 Unbridled Rage\\Skill\Deals 1 hit of 1091% wind damage to enemies directly ahead, and inflicts poison, dealing 28% damage every 3 seconds for 15 seconds, with 90% base chance.;; Deals 1 hit of 1636.5% wind damage to poisoned enemies instead.\Deals 1 hit of 1213% wind damage to enemies directly ahead, and inflicts poison, dealing 39.6% damage every 3 seconds for 15 seconds, with 100% base chance.;; Deals 1 hit of 1819.5% wind damage to poisoned enemies instead.\Deals 1 hit of 1347% wind damage to enemies directly ahead, and inflicts poison, dealing 53% damage every 3 seconds for 15 seconds, with 110% base chance.;; Deals 1 hit of 2020.5% wind damage to poisoned enemies instead.\2904, 2904, 2904, 2904, 2904\Yes\0.5\\Damage, Poison, PoisonedPunisher\\5, 12777
 Unceasing Stream\\Skill\Deals 4 hits of 129% water damage to enemies in a line.\Deals 4 hits of 143% water damage to enemies in a line.\\13684, 13684, 13684, 13684, 13684\Yes\1.2\\Damage\\, 
 Unchained Rage\\Skill\For 20 seconds, increases the user's critical rate by 25%, but decreases their defense by 25%.\For 20 seconds, increases the user's critical rate by 30%, but decreases their defense by 25%.\\4139, 4139, 4139, 4139, 4139\No\1.4\\Buff, User, CritRate, Stance\\, 
-Unknown\\Skill\<:GunterShrug:640351012493721621>\<:GunterShrug:640351012493721621>\<:GunterShrug:640351012493721621>\999999999999999, 999999999999999, 999999999999999, 999999999999999, 999999999999999\Yes\15.2\\Damage\\10, 755000
+Unknown\\Skill\<:GunterShrug:640351012493721621>\<:GunterShrug:640351012493721621>\<:GunterShrug:640351012493721621>\1000000000000000, 1000000000000000, 1000000000000000, 1000000000000000, 1000000000000000\Yes\15.2\\Damage\\10, 755000
 Unknown Order\\Skill\Deals 4 hits of 253% water damage to the target and nearby enemies, increases the user's inspiration by one stage, and raises the user's dragondrive gauge by 530.;; *Dragondrive:*;; Deals 4 hits of 270% water damage to the target and nearby enemies. Frostbitten enemies take 4 hits of 432% water damage instead.\Deals 4 hits of 287% water damage to the target and nearby enemies, increases the user's inspiration by one stage, and raises the user's dragondrive gauge by 530.;; *Dragondrive:*;; Deals 4 hits of 303% water damage to the target and nearby enemies. Frostbitten enemies take 4 hits of 484.8% water damage instead.\Deals 4 hits of 321% water damage to the target and nearby enemies, increases the user's inspiration by one stage, and raises the user's dragondrive gauge by 530.;; *Dragondrive:*;; Deals 4 hits of 337% water damage to the target and nearby enemies. Frostbitten enemies take 4 hits of 539.2% water damage instead.\2711, 2711, 2711, 2711, 2711\Yes\0\\Damage, Inspiriation, I1, Conditional, FrostbitePunisher\\, 
 Unwavering Assault\\Skill\Deals 6 hits of 148% shadow damage to enemies directly ahead.\Deals 6 hits of 164% shadow damage to enemies directly ahead.\\7323, 7323, 7323, 7323, 7323\Yes\1.4\\Damage\\, 
 Upgrade\\Skill\Increases the user's strength by 20%, and area of effect of their auto attacks, for 30 seconds, and fills the Persona Gauge by 240.;; *When Pithos is active:* Instead restores HP to all teammates with 30% recovery potency.\Increases the user's strength by 20%, and area of effect of their auto attacks, for 30 seconds, and fills the Persona Gauge by 420.;; *When Pithos is active:* Instead restores HP to all teammates with 40% recovery potency.\\6356, 6356, 6356, 6356, 6356\No\1.4\Increases the user's strength by 20%, and area of effect of their auto attacks, for 30 seconds, and fills the Persona Gauge by 240 / 420.;; *When Pithos is active:* Instead restores HP to all teammates with 30% / 40% recovery potency.\Buff, Team, HealSkill, StrengthSkill, Burst\\, 
@@ -1589,51 +1589,51 @@ HP 30% = Strength\45%\Aura\Increases strength by 45% when HP is 30% or above.\45
 HP 30% = Strength\50%\Aura\Increases strength by 50% when HP is 30% or above.\50\y\HP30, StrengthSkill
 HP 50% = Strength\20%\Aura\Increases strength by 20% when HP is 50% or above.\80\y\HP50, StrengthSkill
 HP & Strength\example\Aura\Increases strength and HP by `x`%.\0\y\HealthSkill, StrengthSkill
-HP & Strength\5%\Aura\Increases strength and HP by 5%.\20\y\HealthSkill, StrengthSkill
-HP & Strength\6%\Aura\Increases strength and HP by 6%.\24\y\HealthSkill, StrengthSkill
-HP & Strength\7%\Aura\Increases strength and HP by 7%.\28\y\HealthSkill, StrengthSkill
-HP & Strength\8%\Aura\Increases strength and HP by 8%.\30\y\HealthSkill, StrengthSkill
-HP & Strength\9%\Aura\Increases strength and HP by 9%.\40\y\HealthSkill, StrengthSkill
-HP & Strength\10%\Aura\Increases strength and HP by 10%.\50\y\HealthSkill, StrengthSkill
-HP & Strength\13%\Aura\Increases strength and HP by 13%.\56\y\HealthSkill, StrengthSkill
-HP & Strength\15%\Aura\Increases strength and HP by 15%.\60\y\HealthSkill, StrengthSkill
-HP & Strength\16%\Aura\Increases strength and HP by 16%.\62\y\HealthSkill, StrengthSkill
-HP & Strength\17%\Aura\Increases strength and HP by 17%.\64\y\HealthSkill, StrengthSkill
-HP & Strength\18%\Aura\Increases strength and HP by 18%.\66\y\HealthSkill, StrengthSkill
-HP & Strength\20%\Aura\Increases strength and HP by 20%.\70\y\HealthSkill, StrengthSkill
-HP & Strength\23%\Aura\Increases strength and HP by 23%.\80\y\HealthSkill, StrengthSkill
-HP & Strength\26%\Aura\Increases strength and HP by 26%.\90\y\HealthSkill, StrengthSkill
-HP & Strength\30%\Aura\Increases strength and HP by 30%.\100\y\HealthSkill, StrengthSkill
-HP & Strength\35%\Aura\Increases strength and HP by 35%.\110\y\HealthSkill, StrengthSkill
+HP & Strength\5%\Aura\Increases strength and HP by 5%.\20\n\HealthSkill, StrengthSkill
+HP & Strength\6%\Aura\Increases strength and HP by 6%.\24\n\HealthSkill, StrengthSkill
+HP & Strength\7%\Aura\Increases strength and HP by 7%.\28\n\HealthSkill, StrengthSkill
+HP & Strength\8%\Aura\Increases strength and HP by 8%.\30\n\HealthSkill, StrengthSkill
+HP & Strength\9%\Aura\Increases strength and HP by 9%.\40\n\HealthSkill, StrengthSkill
+HP & Strength\10%\Aura\Increases strength and HP by 10%.\50\n\HealthSkill, StrengthSkill
+HP & Strength\13%\Aura\Increases strength and HP by 13%.\56\n\HealthSkill, StrengthSkill
+HP & Strength\15%\Aura\Increases strength and HP by 15%.\60\n\HealthSkill, StrengthSkill
+HP & Strength\16%\Aura\Increases strength and HP by 16%.\62\n\HealthSkill, StrengthSkill
+HP & Strength\17%\Aura\Increases strength and HP by 17%.\64\n\HealthSkill, StrengthSkill
+HP & Strength\18%\Aura\Increases strength and HP by 18%.\66\n\HealthSkill, StrengthSkill
+HP & Strength\20%\Aura\Increases strength and HP by 20%.\70\n\HealthSkill, StrengthSkill
+HP & Strength\23%\Aura\Increases strength and HP by 23%.\80\n\HealthSkill, StrengthSkill
+HP & Strength\26%\Aura\Increases strength and HP by 26%.\90\n\HealthSkill, StrengthSkill
+HP & Strength\30%\Aura\Increases strength and HP by 30%.\100\n\HealthSkill, StrengthSkill
+HP & Strength\35%\Aura\Increases strength and HP by 35%.\110\n\HealthSkill, StrengthSkill
 HP\example\Aura\Increases HP by `x`%.\0\y\HealthSkill
-HP\5%\Aura\Increases HP by 5%.\10\y\HealthSkill
-HP\6%\Aura\Increases HP by 6%.\12\y\HealthSkill
-HP\7%\Aura\Increases HP by 7%.\14\y\HealthSkill
-HP\8%\Aura\Increases HP by 8%.\15\y\HealthSkill
-HP\10%\Aura\Increases HP by 10%.\20\y\HealthSkill
-HP\15%\Aura\Increases HP by 15%.\30\y\HealthSkill
-HP\16%\Aura\Increases HP by 16%.\32\y\HealthSkill
-HP\17%\Aura\Increases HP by 17%.\34\y\HealthSkill
-HP\18%\Aura\Increases HP by 18%.\36\y\HealthSkill
-HP\20%\Aura\Increases HP by 20%.\40\y\HealthSkill
-HP\22%\Aura\Increases HP by 22%.\44\y\HealthSkill
-HP\23%\Aura\Increases HP by 23%.\46\y\HealthSkill
-HP\24%\Aura\Increases HP by 24%.\48\y\HealthSkill
-HP\26%\Aura\Increases HP by 26%.\52\y\HealthSkill
-HP\27%\Aura\Increases HP by 27%.\54\y\HealthSkill
-HP\30%\Aura\Increases HP by 30%.\60\y\HealthSkill
-HP\32%\Aura\Increases HP by 32%.\62\y\HealthSkill
-HP\33%\Aura\Increases HP by 33%.\63\y\HealthSkill
-HP\34%\Aura\Increases HP by 34%.\64\y\HealthSkill
-HP\35%\Aura\Increases HP by 35%.\65\y\HealthSkill
-HP\36%\Aura\Increases HP by 36%.\66\y\HealthSkill
-HP\37%\Aura\Increases HP by 37%.\67\y\HealthSkill
-HP\39%\Aura\Increases HP by 39%.\69\y\HealthSkill
-HP\40%\Aura\Increases HP by 40%.\70\y\HealthSkill
-HP\45%\Aura\Increases HP by 45%.\80\y\HealthSkill
-HP\50%\Aura\Increases HP by 50%.\90\y\HealthSkill
-HP\55%\Aura\Increases HP by 55%.\95\y\HealthSkill
-HP\60%\Aura\Increases HP by 60%.\100\y\HealthSkill
+HP\5%\Aura\Increases HP by 5%.\10\n\HealthSkill
+HP\6%\Aura\Increases HP by 6%.\12\n\HealthSkill
+HP\7%\Aura\Increases HP by 7%.\14\n\HealthSkill
+HP\8%\Aura\Increases HP by 8%.\15\n\HealthSkill
+HP\10%\Aura\Increases HP by 10%.\20\n\HealthSkill
+HP\15%\Aura\Increases HP by 15%.\30\n\HealthSkill
+HP\16%\Aura\Increases HP by 16%.\32\n\HealthSkill
+HP\17%\Aura\Increases HP by 17%.\34\n\HealthSkill
+HP\18%\Aura\Increases HP by 18%.\36\n\HealthSkill
+HP\20%\Aura\Increases HP by 20%.\40\n\HealthSkill
+HP\22%\Aura\Increases HP by 22%.\44\n\HealthSkill
+HP\23%\Aura\Increases HP by 23%.\46\n\HealthSkill
+HP\24%\Aura\Increases HP by 24%.\48\n\HealthSkill
+HP\26%\Aura\Increases HP by 26%.\52\n\HealthSkill
+HP\27%\Aura\Increases HP by 27%.\54\n\HealthSkill
+HP\30%\Aura\Increases HP by 30%.\60\n\HealthSkill
+HP\32%\Aura\Increases HP by 32%.\62\n\HealthSkill
+HP\33%\Aura\Increases HP by 33%.\63\n\HealthSkill
+HP\34%\Aura\Increases HP by 34%.\64\n\HealthSkill
+HP\35%\Aura\Increases HP by 35%.\65\n\HealthSkill
+HP\36%\Aura\Increases HP by 36%.\66\n\HealthSkill
+HP\37%\Aura\Increases HP by 37%.\67\n\HealthSkill
+HP\39%\Aura\Increases HP by 39%.\69\n\HealthSkill
+HP\40%\Aura\Increases HP by 40%.\70\n\HealthSkill
+HP\45%\Aura\Increases HP by 45%.\80\n\HealthSkill
+HP\50%\Aura\Increases HP by 50%.\90\n\HealthSkill
+HP\55%\Aura\Increases HP by 55%.\95\n\HealthSkill
+HP\60%\Aura\Increases HP by 60%.\100\n\HealthSkill
 Last Bulwark\I\Aura\Grants the user a one-use shield that nullifies damage less than 50% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\35\y\Last, Shield
 Last Bulwark\II\Aura\Grants the user a one-use shield that nullifies damage less than 60% of their maximum HP when HP drops to 30%. This does not stack with any other shields.\50\y\Last, Shield
 Mana\example\Aura\Increases Mana intake for clearing quests by `x`%\0\y\ManaSkill
@@ -1693,39 +1693,39 @@ Smoldering Spirit\example\Aura\Using a force strike for three or more seconds, i
 Smoldering Spirit\I\Aura\Using a force strike for three or more seconds, including both charge and attack time, adds 25% to the modifier applied to damage against wind-attuned enemies for 30 seconds. This increase will not stack, and, after activating, this ability will not activate again for 15 seconds.\100\y\WindPunisher
 Smoldering Spirit\II\Aura\Using a force strike for three or more seconds, including both charge and attack time, adds 30% to the modifier applied to damage against wind-attuned enemies for 30 seconds. This increase will not stack, and, after activating, this ability will not activate again for 15 seconds.\120\y\WindPunisher
 Strength\example\Aura\Increases strength by `x`%.\0\y\StrengthSkill
-Strength\5%\Aura\Increases strength by 5%.\10\y\StrengthSkill
-Strength\6%\Aura\Increases strength by 6%.\12\y\StrengthSkill
-Strength\7%\Aura\Increases strength by 7%.\14\y\StrengthSkill
-Strength\8%\Aura\Increases strength by 8%.\15\y\StrengthSkill
-Strength\10%\Aura\Increases strength by 10%.\20\y\StrengthSkill
-Strength\11%\Aura\Increases strength by 11%.\22\y\StrengthSkill
-Strength\12%\Aura\Increases strength by 12%.\24\y\StrengthSkill
-Strength\13%\Aura\Increases strength by 13%.\26\y\StrengthSkill
-Strength\14%\Aura\Increases strength by 14%.\28\y\StrengthSkill
-Strength\15%\Aura\Increases strength by 15%.\30\y\StrengthSkill
-Strength\16%\Aura\Increases strength by 16%.\32\y\StrengthSkill
-Strength\17%\Aura\Increases strength by 17%.\34\y\StrengthSkill
-Strength\18%\Aura\Increases strength by 18%.\36\y\StrengthSkill
-Strength\20%\Aura\Increases strength by 20%.\40\y\StrengthSkill
-Strength\25%\Aura\Increases strength by 25%.\50\y\StrengthSkill
-Strength\30%\Aura\Increases strength by 30%.\60\y\StrengthSkill
-Strength\32%\Aura\Increases strength by 32%.\62\y\StrengthSkill
-Strength\33%\Aura\Increases strength by 33%.\63\y\StrengthSkill
-Strength\34%\Aura\Increases strength by 34%.\64\y\StrengthSkill
-Strength\35%\Aura\Increases strength by 35%.\65\y\StrengthSkill
-Strength\36%\Aura\Increases strength by 36%.\66\y\StrengthSkill
-Strength\37%\Aura\Increases strength by 37%.\67\y\StrengthSkill
-Strength\38%\Aura\Increases strength by 38%.\68\y\StrengthSkill
-Strength\39%\Aura\Increases strength by 39%.\69\y\StrengthSkill
-Strength\40%\Aura\Increases strength by 40%.\70\y\StrengthSkill
-Strength\41%\Aura\Increases strength by 41%.\71\y\StrengthSkill
-Strength\42%\Aura\Increases strength by 42%.\72\y\StrengthSkill
-Strength\44%\Aura\Increases strength by 44%.\74\y\StrengthSkill
-Strength\45%\Aura\Increases strength by 45%.\80\y\StrengthSkill
-Strength\50%\Aura\Increases strength by 50%.\90\y\StrengthSkill
-Strength\55%\Aura\Increases strength by 55%.\100\y\StrengthSkill
-Strength\60%\Aura\Increases strength by 60%.\100\y\StrengthSkill
-Strength\70%\Aura\Increases strength by 70%.\120\y\StrengthSkill
+Strength\5%\Aura\Increases strength by 5%.\10\n\StrengthSkill
+Strength\6%\Aura\Increases strength by 6%.\12\n\StrengthSkill
+Strength\7%\Aura\Increases strength by 7%.\14\n\StrengthSkill
+Strength\8%\Aura\Increases strength by 8%.\15\n\StrengthSkill
+Strength\10%\Aura\Increases strength by 10%.\20\n\StrengthSkill
+Strength\11%\Aura\Increases strength by 11%.\22\n\StrengthSkill
+Strength\12%\Aura\Increases strength by 12%.\24\n\StrengthSkill
+Strength\13%\Aura\Increases strength by 13%.\26\n\StrengthSkill
+Strength\14%\Aura\Increases strength by 14%.\28\n\StrengthSkill
+Strength\15%\Aura\Increases strength by 15%.\30\n\StrengthSkill
+Strength\16%\Aura\Increases strength by 16%.\32\n\StrengthSkill
+Strength\17%\Aura\Increases strength by 17%.\34\n\StrengthSkill
+Strength\18%\Aura\Increases strength by 18%.\36\n\StrengthSkill
+Strength\20%\Aura\Increases strength by 20%.\40\n\StrengthSkill
+Strength\25%\Aura\Increases strength by 25%.\50\n\StrengthSkill
+Strength\30%\Aura\Increases strength by 30%.\60\n\StrengthSkill
+Strength\32%\Aura\Increases strength by 32%.\62\n\StrengthSkill
+Strength\33%\Aura\Increases strength by 33%.\63\n\StrengthSkill
+Strength\34%\Aura\Increases strength by 34%.\64\n\StrengthSkill
+Strength\35%\Aura\Increases strength by 35%.\65\n\StrengthSkill
+Strength\36%\Aura\Increases strength by 36%.\66\n\StrengthSkill
+Strength\37%\Aura\Increases strength by 37%.\67\n\StrengthSkill
+Strength\38%\Aura\Increases strength by 38%.\68\n\StrengthSkill
+Strength\39%\Aura\Increases strength by 39%.\69\n\StrengthSkill
+Strength\40%\Aura\Increases strength by 40%.\70\n\StrengthSkill
+Strength\41%\Aura\Increases strength by 41%.\71\n\StrengthSkill
+Strength\42%\Aura\Increases strength by 42%.\72\n\StrengthSkill
+Strength\44%\Aura\Increases strength by 44%.\74\n\StrengthSkill
+Strength\45%\Aura\Increases strength by 45%.\80\n\StrengthSkill
+Strength\50%\Aura\Increases strength by 50%.\90\n\StrengthSkill
+Strength\55%\Aura\Increases strength by 55%.\100\n\StrengthSkill
+Strength\60%\Aura\Increases strength by 60%.\100\n\StrengthSkill
+Strength\70%\Aura\Increases strength by 70%.\120\n\StrengthSkill
 Strength & Critical Damage\example\Aura\Increases strength by `x`% and adds `y`% to the modifier applied to critical damage.\70\y\StrengthSkill, CritDamage
 Strength & Critical Damage\30/50%\Aura\Increases strength by 30% and adds 50% to the modifier applied to critical damage.\70\y\StrengthSkill, CritDamage
 Strength & Critical Damage\45/55%\Aura\Increases strength by 45% and adds 55% to the modifier applied to critical damage.\100\y\StrengthSkill, CritDamage
@@ -2281,7 +2281,7 @@ Curse Res\60%\Ability\Reduces susceptibility to curses by 60%.\70\y\CurseRes, Re
 Curse Res\75%\Ability\Reduces susceptibility to curses by 75%.\100\y\CurseRes, Resistance
 Curse Res\100%\Ability\Reduces susceptibility to curses by 100%.\100\y\CurseRes, Resistance
 Dancing Panther\example\Ability\Grants the Persona element Fire to certain attacks. Also grants the user a Persona gauge, and changes the shapeshift button into a Persona button. Tapping this button summons Carmen. While summoned, Carmen will attack together with the user.;;;; Additionally, increases defense by 3% / 6%, and grants the user a unique force strike.\0\y\Unique, DefenseSkill
-Dancing Panther\I\Ability\Grants the Persona element Fire to certain attacks. Also grants the user a Persona gauge, and changes the shapeshift button into a Persona button. Tapping this button summons Carmen. While summoned, Carmen will attack together with the user.;;;; Additionally, increases defense by 3%, and grants the user a unique force strike.\100\\Unique, DefenseSkill
+Dancing Panther\I\Ability\Grants the Persona element Fire to certain attacks. Also grants the user a Persona gauge, and changes the shapeshift button into a Persona button. Tapping this button summons Carmen. While summoned, Carmen will attack together with the user.;;;; Additionally, increases defense by 3%, and grants the user a unique force strike.\100\y\Unique, DefenseSkill
 Dancing Panther\II\Ability\Grants the Persona element Fire to certain attacks. Also grants the user a Persona gauge, and changes the shapeshift button into a Persona button. Tapping this button summons Carmen. While summoned, Carmen will attack together with the user.;;;; Additionally, increases defense by 6%, and grants the user a unique force strike.\120\y\Unique, DefenseSkill
 Dauntless Strength\example\Ability\Increases strength by `x`% for every 15 seconds that pass without the user being knocked back by an enemy. This buff can stack up to three times. All stacks will be lost upon being knocked back by an enemy.\0\y\Dauntless, StrengthSkill
 Dauntless Strength\10%\Ability\Increases strength by 10% for every 15 seconds that pass without the user being knocked back by an enemy. This buff can stack up to three times. All stacks will be lost upon being knocked back by an enemy.\80\y\Dauntless, StrengthSkill
@@ -2294,10 +2294,10 @@ Debuff Skill Time\14%\Ability\Increases the duration of bleeding and debuff skil
 Debuff Skill Time\15%\Ability\Increases the duration of bleeding and debuff skills that reduce strength and defense by 15%.\80\y\DebuffTime
 Debuff Skill Time\20%\Ability\Increases the duration of bleeding and debuff skills that reduce strength and defense by 20%.\100\y\DebuffTime
 Defense\example\Ability\Increases the user's defense by `x`%.\0\y\DefenseSkill
-Defense\3%\Ability\Increases the user's defense by 3%.\0\y\DefenseSkill
-Defense\5%\Ability\Increases the user's defense by 5%.\0\y\DefenseSkill
-Defense\20%\Ability\Increases the user's defense by 20%.\0\y\DefenseSkill
-Defense\100%\Ability\Increases the user's defense by 100%.\0\y\DefenseSkill
+Defense\3%\Ability\Increases the user's defense by 3%.\0\n\DefenseSkill
+Defense\5%\Ability\Increases the user's defense by 5%.\0\n\DefenseSkill
+Defense\20%\Ability\Increases the user's defense by 20%.\0\n\DefenseSkill
+Defense\100%\Ability\Increases the user's defense by 100%.\0\n\DefenseSkill
 Defense Reduced = Debuff Edge\example\Ability\Increases the chances of inflicting debuffs by 40% / 50% for five seconds upon successfully reducing an enemy's defense. After activating, this ability will not activate again for five seconds.\0\y\
 Defense Reduced = Debuff Edge\40%\Ability\Increases the chances of inflicting debuffs by 40% for five seconds upon successfully reducing an enemy's defense. After activating, this ability will not activate again for five seconds.\80\y\
 Defense Reduced = Debuff Edge\50%\Ability\Increases the chances of inflicting debuffs by 50% for five seconds upon successfully reducing an enemy's defense. After activating, this ability will not activate again for five seconds.\100\y\
@@ -2673,9 +2673,9 @@ Holy Ore\25%\Ability\Increases Holy Ore intake for clearing quests by 25%.\0\y\E
 Holy Ore\35%\Ability\Increases Holy Ore intake for clearing quests by 35%.\0\y\Event, Facility
 Holy Ore\50%\Ability\Increases Holy Ore intake for clearing quests by 50%.\0\y\Event, Facility
 HP\example\Ability\Increases HP by `x`%\0\y\HealthSkill
-HP\4%\Ability\Increases HP by 4%\20\y\HealthSkill
-HP\6%\Ability\Increases HP by 6%\40\y\HealthSkill
-HP\8%\Ability\Increases HP by 8%\60\y\HealthSkill
+HP\4%\Ability\Increases HP by 4%\20\n\HealthSkill
+HP\6%\Ability\Increases HP by 6%\40\n\HealthSkill
+HP\8%\Ability\Increases HP by 8%\60\n\HealthSkill
 HP 50% = Defense\4%\Ability\Increases defense by 4% when HP is 50% or above.\20\y\HP50, DefenseSkill
 HP 50% = Healing\7%\Ability\Increases the potency of recovery skills by 7% when HP is 50% or above.\20\y\HP50, RecoveryPotency
 HP 70% = Attack Rate\example\Ability\Increases attack rate by `x`% when HP is 70% or above.\0\y\HP70, Speed
