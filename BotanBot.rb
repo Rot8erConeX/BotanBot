@@ -1993,6 +1993,7 @@ class DLAbility
       return "#{skz[-1].level}#{x}" if justlast
       return "#{skz.map{|q| q.level}.join(char)}#{x}"
     else
+      skz=[self.clone] if skz.nil? || skz.length<=0
       x="#{x} #{'+' if skz[-1].level.include?('%')}" unless @name[-1]=='+'
       return "#{x}#{@level}" unless @level=='example'
       return "#{x}" if justlast && skz.length<=0
