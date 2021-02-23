@@ -3870,7 +3870,7 @@ def find_ability(xname,event,fullxname=false,ext=false)
   xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   sklz=$abilities.map{|q| q}
   sklz2=sklz.reject{|q| !romanums.include?(q.level)}
-  return [] if xname.length<2
+  return nil if xname.length<2
   k=sklz2.reject{|q| "#{q.name} #{romanums.find_index{|q2| q2==q.level}}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=xname || q.level.downcase=='example'}
   return k.reject{|q| q.name != k[0].name} unless k.nil? || k.length<=0
   k=sklz2.reject{|q| "#{romanums.find_index{|q2| q2==q.level}} #{q.name}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')!=xname || q.level.downcase=='example'}
@@ -3927,7 +3927,7 @@ def find_ability(xname,event,fullxname=false,ext=false)
     m=sklz2.find_index{|q| "#{k[0]}+#{q.level.gsub('%','')}".downcase==xname}
     return sklz2[m] unless m.nil?
   end
-  return [] if fullxname || xname.length<=2
+  return nil if fullxname || xname.length<=2
   k=sklz2.reject{|q| "#{romanums.find_index{|q2| q2==q.level}} #{q.name}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]!=xname || q.level.downcase=='example'}
   return k.reject{|q| q.name != k[0].name} unless k.nil? || k.length<=0
   k=sklz.reject{|q| "#{q.name} #{q.level}".downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')[0,xname.length]!=xname || q.level.downcase=='example'}
@@ -3954,7 +3954,7 @@ def find_ability(xname,event,fullxname=false,ext=false)
     return sklz[m] unless m.nil?
     return sklz.reject{|q| q[0]!=alz[k][1]}
   end
-  return []
+  return nil
 end
 
 def log_channel
