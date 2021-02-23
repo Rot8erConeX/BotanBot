@@ -1967,11 +1967,11 @@ class DLAbility
   
   def name=(val); @name=val; end
   def level=(val); @level=val; end
-  def description=(val); @description=val; end
+  def description=(val); @description=val.gsub(';; ',"\n"); end
   def weight=(val); @weight=val.to_i; end
   def show=(val); @show=false; @show=true if ['y','yes'].include?(val.downcase); end
   def tags=(val); @tags=[]; @tags=val.split(', ') unless val.nil? || val.length<=0 || val=='-'; end
-  def objy; return 'Ability'; end
+  def objt; return 'Ability'; end
   
   def fullName(format=nil,justlast=false,sklz=nil)
     x="#{@name}"
@@ -3656,6 +3656,12 @@ end
 def find_thing(thing,xname,event,fullname=false,ext=false)
   data_load([thing])
   xname=normalize(xname)
+  if xname.downcase.gsub(' ','').gsub('_','')[0,2]=='<:'
+    buff=xname.split(':')[1]
+    buff=buff[3,buff.length-3] if !event.server.nil? && event.server.id==350067448583553024 && buff[0,3].downcase=='gp_'
+    buff=buff[2,buff.length-2] if !event.server.nil? && event.server.id==350067448583553024 && buff[0,2].downcase=='gp'
+    xname=buff unless find_thing(thing,buff,event,fullname).nil?
+  end
   xname=xname.downcase.gsub(' ','').gsub('(','').gsub(')','').gsub('!','').gsub(',','').gsub('?','').gsub('_','').gsub("'",'').gsub('"','').gsub(':','')
   return nil if xname.length<2
   return nil if thing=='Adventurer' && ext && (!find_npc(xname,event,true).nil? || xname.downcase=='mym')
@@ -3852,6 +3858,12 @@ def find_npc(xname,event,fullname=false,ext=false); return find_thing('NPC',xnam
 def find_ability(xname,event,fullxname=false,ext=false)
   data_load(['ability'])
   xname=normalize(xname)
+  if xname.downcase.gsub(' ','').gsub('_','')[0,2]=='<:'
+    buff=xname.split(':')[1]
+    buff=buff[3,buff.length-3] if !event.server.nil? && event.server.id==350067448583553024 && buff[0,3].downcase=='gp_'
+    buff=buff[2,buff.length-2] if !event.server.nil? && event.server.id==350067448583553024 && buff[0,2].downcase=='gp'
+    xname=buff unless find_ability(buff,event,fullname).nil?
+  end
   romanums=['Ox0','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV','XXV','XXVI','XXVII',
             'XXVIII','XXIX','XXX','XXXI','XXXII','XXXIII','XXXIV','XXXV','XXXVI','XXXVII','XXXVIII','XXXIX','XL','XLI','XLII','XLII','XLIII','XLIV','XLV','XLVI','XLVII','XLVIII',
             'XLIX','L']
@@ -5111,7 +5123,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         return nil
       end
     end
-    if !find_data_ex(:find_adventurer,args.join(' '),event).nil? && (has_any?(args,['a1','a2','a3','1','2','3','ability1','ability2','ability3','abil1','abil2','abil3','chaincoabil','chaincoability','chaincoab','coabilchain','coabilitychain','chain','coabchain','cca','cc','coabil','coability','coab']) || (forceaura.length>0 && forceaura != 'Ability'))
+    if !find_data_ex(:find_adventurer,args.join(' '),event).nil? && (has_any?(args,['a1','a2','a3','1','2','3','ability1','ability2','ability3','abil1','abil2','abil3','chaincoabil','chaincoability','chaincoab','coabilchain','coabilitychain','chain','coabchain','cca','cc','coabil','coability','coab']) || (forceaura.length>0 && !['Ability','Aura'].include?(forceaura)))
       adv=find_data_ex(:find_adventurer,args.join(' '),event)
       p=0
       p=1 if has_any?(args,['a2','2','ability2','abil2'])
@@ -5150,9 +5162,9 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         event.respond "#{adv.name}#{adv.emotes(bot)}'s #{['','chain '][p]}coability, #{m}, has no data." if pp
         return nil
       end
-      disp_ability_data(bot,event,m.split(' ')) unless pp
+      disp_ability_data(bot,event,m.split(' '),'Ability') unless pp
       disp_ability_data(bot,event,kk.join(' ').split(' '),['CoAbility','Chain'][p]) if pp
-    elsif !find_data_ex(:find_dragon,args.join(' '),event).nil? && has_any?(args,['a1','a2','a3','1','2','3','ability1','ability2','ability3','abil1','abil2','abil3'])
+    elsif !find_data_ex(:find_dragon,args.join(' '),event).nil? && (has_any?(args,['a1','a2','a3','1','2','3','ability1','ability2','ability3','abil1','abil2','abil3']) || forceaura=='Aura')
       adv=find_data_ex(:find_dragon,args.join(' '),event)
       p=0
       p=1 if has_any?(args,['s2','2','skill2','skl2'])
@@ -5168,8 +5180,9 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         return nil
       end
       disp_ability_data(bot,event,adv.auras[p][-1].split(' '),'Aura')
-    elsif !find_data_ex(:find_wyrmprint,args.join(' '),event).nil? && has_any?(args,['a1','a2','a3','1','2','3','ability1','ability2','ability3','abil1','abil2','abil3'])
+    elsif !find_data_ex(:find_wyrmprint,args.join(' '),event).nil? && (has_any?(args,['a1','a2','a3','1','2','3','ability1','ability2','ability3','abil1','abil2','abil3']) || forceaura=='Ability')
       adv=find_data_ex(:find_wyrmprint,args.join(' '),event)
+      puts adv.name
       p=0
       p=1 if has_any?(args,['s2','2','skill2','skl2'])
       p=2 if has_any?(args,['a3','3','ability3','abil3'])
@@ -5183,9 +5196,10 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         event.respond "#{adv.name}#{adv.emotes(bot)}'s#{[' 1st',' 2nd',' 3rd'][p] if p>0 || (!adv.abilities.nil? && adv.abilities.length>1)} ability, #{adv.abilities[p][-1]}, has no data."
         return nil
       end
-      disp_ability_data(bot,event,adv.abilities[p][-1].split(' '))
-    elsif !find_data_ex(:find_weapon,args.join(' '),event).nil? && has_any?(args,['a1','a2','a3','1','2','3','ability1','ability2','ability3','abil1','abil2','abil3'])
+      disp_ability_data(bot,event,adv.abilities[p][-1].split(' '),'Ability')
+    elsif !find_data_ex(:find_weapon,args.join(' '),event).nil? && (has_any?(args,['a1','a2','a3','1','2','3','ability1','ability2','ability3','abil1','abil2','abil3']) || forceaura=='Ability')
       adv=find_data_ex(:find_weapon,args.join(' '),event)
+      puts adv.name
       p=0
       p=1 if has_any?(args,['s2','2','skill2','skl2'])
       p=2 if has_any?(args,['a3','3','ability3','abil3'])
@@ -5202,7 +5216,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         event.respond "#{adv.name}#{adv.emotes(bot)}'s #{['1st','2nd','3rd'][p]} ability, #{adv.abilities[p][-1]}, has no data."
         return nil
       end
-      disp_ability_data(bot,event,adv.abilities[p][-1].split(' '))
+      disp_ability_data(bot,event,adv.abilities[p][-1].split(' '),'Ability')
     else
       event.respond 'No matches found.'
     end
@@ -5349,6 +5363,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
     for i in 0...k2.length
       shw=k2[i].show
       shw=false if k2[i].level.include?('%') && k2.map{|q| q.level}.include?('example') && k2.length>5 && i%diiv>0
+      shw=false if k2[i].level != 'example' && k2[i].description.include?("\n")
       madv=k2[i].adv_list(bot,event,dispslots,dispsubabils)
       madv=[] unless typ.include?('Adventurers')
       exlength=madv.length
