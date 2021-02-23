@@ -4323,6 +4323,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   lng+=hdr.length+str.length
   lng+=ftr.length unless ftr.nil?
   lng+=f.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length unless f.nil?
+  lng+=2000 if !f.nil? && f.map{|q| q[1].length}.max>1000
   if lng>1950
     f2=f[-1].map{|q| q}
     if f[-1][0]!='Skills'
@@ -4576,13 +4577,11 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil,x=nil)
     args2=first_sub(args2,k[0].type.downcase,'')
     args2=first_sub(args2,'spear','') if k[0].type=='Lance'
     args2=first_sub(args2,'void','')
-=begin
     k2=find_data_ex(:find_enemy,args2,event)
     if k2.length>0 && k2[2][2]=='Void'
       k3=k.reject{|q| q.boss_tags.nil? || !q.boss_tags.include?(k2.name)}
       k=k3.map{|q| q} if k3.length>0
     end
-=end
     k2=[]
     if k.length>5
       event.respond "Too many weapons qualify.  I will not display them all."
@@ -4837,7 +4836,7 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
       if kx[1]>-1 || kx[2]>-1
         str="#{str}\n**#{kx[0].gsub("/empty","\u22C6").gsub("/star","\u2605")}:**"
         str="#{str}  #{k.stat_emotes[0]}*HP:* #{longFormattedNumber(kx[1])}" if kx[1]>-1
-        str="#{str}  #{k.stat_emotes[1]}*#{semoji[2]}:* #{longFormattedNumber(kx[2])}" if kx[2]>-1
+        str="#{str}  #{k.stat_emotes[1]}*#{k.stat_emotes[2]}:* #{longFormattedNumber(kx[2])}" if kx[2]>-1
       end
     end
   end
@@ -4859,8 +4858,15 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
     str2=''; str3='__**Abilities**__'
     for i in 0...k.abilities.length
       abl=$abilities.find_index{|q| q.fullName==k.abilities[i]}
-      unless abl.nil?
-        abl=$abilities[abl]
+      abl=$abilities[abl] unless abl.nil?
+      if abl.nil?
+        abl=$abilities.find_index{|q| q.name==k.abilities[i]}
+        abl=$abilities[abl] unless abl.nil?
+      end
+      if abl.nil?
+        str2="#{str2}\n\n**#{k.abilities[i]}**"
+        str3="#{str3}\n*#{k.abilities[i]}*"
+      else
         str2="#{str2}\n\n**#{abl.fullName}**#{"\n#{abl.description}" if abl.show}"
         str3="#{str3}\n*#{abl.fullName}*"
       end
