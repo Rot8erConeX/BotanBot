@@ -4304,9 +4304,11 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
       str2="#{str2}\n#{skl2.share_text}" unless skl2.share_text.length<=0
       str3="#{str3}\n#{skl2.share_text}" unless skl2.share_text.length<=0
     end
+    flength=0
+    flength+=ftr.length unless ftr.nil?
     if s2s
       f.push(['Skills',str2,1])
-    elsif str2.length>1500
+    elsif str2.length+(lng+hdr.length+flength)/2>1800
       str="#{str3}\n\n~~Skill descriptions make this data too long.  Please try again in PM.~~"
     else
       str="#{str2}"
@@ -4324,7 +4326,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   lng+=ftr.length unless ftr.nil?
   lng+=f.map{|q| "#{q[0]}\n#{q[1]}"}.join("\n\n").length unless f.nil?
   lng+=2000 if !f.nil? && f.map{|q| q[1].length}.max>1000
-  if lng>1950
+  if lng>1950 && !f.nil?
     f2=f[-1].map{|q| q}
     if f[-1][0]!='Skills'
       f3=f[-1].map{|q| q}
@@ -5021,6 +5023,21 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
       str2="#{str2}\n\n__**Level #{i+1}**__"
       str2="#{str2} - #{k.sp_display(i+1)} SP" unless k.sp_display(0).uniq.length<=1 || k.sp_cost[i]<=0
       str2="#{str2}\n#{k.description[i]}"
+    end
+  end
+  if !s2s && str2.length>1500
+    if k.sp_display(0).uniq.length<=1 || k.sp_cost[i]<=0
+      str2="__**Level #{k.description.length}**__\n#{k.description[-1]}"
+      str2="#{k.mass_description}" unless k.mass_description.nil? || k.mass_description.length<=0
+    else
+      str2=''
+      for i in 0...k.description.length
+        if topstr.length<=0 || i>1 || (i==1 && k.description.length<3)
+          str2="#{str2}\n\n__**Level #{i+1}**__"
+          str2="#{str2} - #{k.sp_display(i+1)} SP"
+          str2="#{str2}\n#{k.description[i]}" if i==k.description.length-1
+        end
+      end
     end
   end
   flds=[]; m=[]; advx=[]
