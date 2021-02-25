@@ -4487,7 +4487,7 @@ def sort_shareable_skills(event,args,bot,forcelist=false)
     skl2=sklz.find_index{|q| q.name==k2.skills[1]}
     skl2=sklz[skl2].clone unless skl2.nil?
     if (skl1.nil? || skl1.sharing.nil? || skl1.sharing.length<=0 || skl1.sharing.max<=0) && (skl2.nil? || skl2.sharing.nil? || skl2.sharing.length<=0 || skl2.sharing.max<=0)
-      event.respond "#{adv_emoji(k2,bot)}*#{k2[0]}* does not have any skills that can be shared."
+      event.respond "#{k2.emotes(bot)}*#{k2.name}* does not have any skills that can be shared."
       return nil
     end
     disp_skill_data(bot,event,k2.skills[0].split(' '),(args.include?('tags')),topstr=["#{k2.emotes(bot)}*#{k2.name}* [S1]",k2.disp_color]) unless skl1.nil? || skl1.sharing.nil? || skl1.sharing.length<=0 || skl1.sharing.max<=0
