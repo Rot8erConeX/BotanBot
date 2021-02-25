@@ -950,7 +950,7 @@ class DLFacility
     elsif @subtype=='Altar'
       alta=[(lvl+1)/2,lvl/2]
       alta=[lvl-17,lvl-17] if lvl>34
-      alta=[lvl/2+2,(lvl+3)/2] if lvl>40
+      alta=[(lvl+1)/2,lvl/2] if lvl>40
       alta=alta.map{|q| q*0.5+0.5}
       return alta
     elsif ['Dojo','Fafnir'].include?(@subtype)
