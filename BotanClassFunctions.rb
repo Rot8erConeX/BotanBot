@@ -949,7 +949,7 @@ class DLFacility
       return [20.0+3*(lvl-19)]
     elsif @subtype=='Altar'
       alta=[(lvl+1)/2,lvl/2]
-      alta=[lvl-17,lvl-17] if lvl>34
+      alta=[lvl-19,lvl-19] if lvl>34
       alta=alta.map{|q| q*0.5+0.5}
       return alta
     elsif ['Dojo','Fafnir'].include?(@subtype)
@@ -5176,6 +5176,8 @@ def adv_chain_list(event,args,bot)
   for i in 0...coabilities.length
     coabilities[i]=coabilities[i].gsub("(#{k4[0].element}) ",'') if k4.map{|q| q.element}.uniq.length<=1
     coabilities[i]=coabilities[i].gsub("(#{k4[0].weapon}) ",'') if k4.map{|q| q.weapon}.uniq.length<=1
+    coabilities[i]=coabilities[i].gsub('Divine Grace ','Recovery Potency ')
+    coabilities[i]=coabilities[i].gsub(' Boost ',' Damage ') if ['Flame Boost','Water Boost','Wind Boost','Light Boost','Shadow Boost'].include?(coabilities[i].split(' ')[0,2].join(' '))
     coabilities[i]=coabilities[i].split(' ')
     if coabilities[i][-1].include?('/')
       coabilities[i][-1]=coabilities[i][-1].split('/')[-1].gsub('+','')
@@ -5202,6 +5204,8 @@ def adv_chain_list(event,args,bot)
   for i in 0...chains.length
     chains[i]=chains[i].gsub("(#{k4[0].element}) ",'') if k4.map{|q| q.element}.uniq.length<=1
     chains[i]=chains[i].gsub("(#{k4[0].weapon}) ",'') if k4.map{|q| q.weapon}.uniq.length<=1
+    chains[i]=chains[i].gsub('Divine Grace ','Recovery Potency ')
+    chains[i]=chains[i].gsub(' Boost ',' Damage ') if ['Flame Boost','Water Boost','Wind Boost','Light Boost','Shadow Boost'].include?(chains[i].split(' ')[0,2].join(' '))
     chains[i]=chains[i].split(' ')
     if chains[i][-1].include?('/')
       chains[i][-1]=chains[i][-1].split('/')[-1].gsub('+','')
