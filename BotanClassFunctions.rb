@@ -4478,7 +4478,7 @@ def sort_shareable_skills(event,args,bot,forcelist=false)
   k=find_in_adventurers(bot,event,args,2,2)
   unless forcelist
     k2=find_data_ex(:find_adventurer,args.join(' '),event,true)
-    k2=find_data_ex(:find_adventurer,args.join(' '),event) if k2.nil? && !(!k.nil? && k.length>0 && k[1].length>0 && k[1].length<@adventurers.length)
+    k2=find_data_ex(:find_adventurer,args.join(' '),event) if k2.nil? && !(!k.nil? && k.length>0 && k[1].length>0 && k[1].length<$adventurers.length)
   end
   sklz=$skills.map{|q| q}
   unless k2.nil?
