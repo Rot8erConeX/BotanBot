@@ -3443,7 +3443,7 @@ end
 def nicknames_load(mode=1) # loads the nickname list
   if mode==2 && File.exist?("#{$location}devkit/DLNames2.txt")
     b=[]
-    File.open("#{$location}devkit/DLNames.txt").each_line do |line|
+    File.open("#{$location}devkit/DLNames2.txt").each_line do |line|
       b.push(eval line)
     end
     return b
@@ -3999,9 +3999,9 @@ def add_new_alias(bot,event,newname,unit,modifier=nil,modifier2=nil,mode=0)
   matchnames=['','']
   newname=newname.gsub('!','').gsub('(','').gsub(')','').gsub('_','')
   k=find_best_match(newname,bot,event,true,false,0)
-  if k.nil? || (k.is_a?(Array) && k[0].nil?) || k.is_a?(DLBanner) || (['Sticker','Status'].include?(k.objt) && ![368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583)
+  if k.nil? || (k.is_a?(Array) && k[0].nil?) || k.is_a?(DLBanner) || (['Sticker','Status'].include?(k.objt) && !([368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583))
     k=find_best_match(newname,bot,event,false,false,0)
-    if k.nil? || (k.is_a?(Array) && k[0].nil?) || k.is_a?(DLBanner) || (['Sticker','Status'].include?(k.objt) && ![368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583)
+    if k.nil? || (k.is_a?(Array) && k[0].nil?) || k.is_a?(DLBanner) || (['Sticker','Status'].include?(k.objt) && !([368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583))
     elsif k.is_a?(Array)
       k=k[0]
       type[0]="#{k.objt}*"
@@ -4024,9 +4024,9 @@ def add_new_alias(bot,event,newname,unit,modifier=nil,modifier2=nil,mode=0)
   end
   unit=unit.gsub('!','').gsub('(','').gsub(')','').gsub('_','')
   k2=find_best_match(unit,bot,event,true,false,0)
-  if k2.nil? || (k2.is_a?(Array) && k2[0].nil?) || k2.is_a?(DLBanner) || (['Sticker','Status'].include?(k2.objt) && ![368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583)
+  if k2.nil? || (k2.is_a?(Array) && k2[0].nil?) || k2.is_a?(DLBanner) || (['Sticker','Status'].include?(k2.objt) && !([368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583))
     k2=find_best_match(unit,bot,event,false,false,0)
-    if k2.nil? || (k2.is_a?(Array) && k2[0].nil?) || k2.is_a?(DLBanner) || (['Sticker','Status'].include?(k2.objt) && ![368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583)
+    if k2.nil? || (k2.is_a?(Array) && k2[0].nil?) || k2.is_a?(DLBanner) || (['Sticker','Status'].include?(k2.objt) && !([368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583))
     elsif k2.is_a?(Array)
       k2=k2[0]
       type[0]="#{k2.objt}*"
@@ -5252,9 +5252,10 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
     k=k.reject{|q| q.name==k[i].name && q.level==k[i].level && q.type==k[i].type && q !=k[i]}
     i+=1
   end
-  dispslots=false; dispsubabils=false
+  dispslots=false; dispsubabils=false; ttags=false
   dispslots=true if has_any?(evn,['slots','slot'])
   dispsubabils=true if has_any?(evn,['sub','subabilities','subability','starter'])
+  ttags=true if evn.include?('tags')
   typ=[]
   for i in 0...evn.length
     unless k[0].fullName.split(' ').include?(evn[i].downcase)
@@ -5296,6 +5297,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
       str="#{str}\n*Wyrmprints:* #{mprint.map{|q| q.name}.join(', ')}" if mprint.length>0
       str="#{str}\n*Weapons:* #{mwep.map{|q| q.name}.join(', ')}" if mwep.length>0
       str="#{str}\n*Enemies:* #{mevil.map{|q| q.name}.join(', ')}" if mevil.length>0
+      str="#{str}\n*Tags:* #{k[i].tags.join(', ')}" if ttags
     end
   elsif k2.length==1
     str=k2[0].description
@@ -5360,6 +5362,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
       flds.push(['Weapons',mwep.map{|q| q.name}.join("\n")]) if mwep.length>0
       flds.push(['Enemies',mevil.map{|q| q.name}.join("\n")]) if mevil.length>0
     end
+    flds.push(['Tags',k2[0].tags.join("\n")]) if ttags
     flds=flds.reject{|q| q[1].nil? || q[1].length<=0}
     if flds.length==1
       str="#{str}\n\n__**#{flds[0][0]}**__"
@@ -5430,6 +5433,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         str="#{str} - #{m.join(', ')}" if m.length>0
       end
     end
+    str="#{str}\n\n**Tags:** #{k2[0].tags.join(', ')}" if ttags
   end
   str="#{str}\n\n**You may instead be searching for the skill `Dragon Claw`, which belongs to Gala Mym<:Rarity_5:532086056737177600><:Element_Flame:532106087952810005><:Weapon_Lance:532106114792423448><:Type_Attack:532107867520630784>.**" if "Dragon's Claws"==k[0].name
   str2=[]
