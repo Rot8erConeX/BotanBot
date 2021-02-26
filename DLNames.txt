@@ -1,6 +1,7 @@
 ["Adventurer", "Adidas", "Addis"]
 ["Adventurer", "Chaddis", "Addis"]
 ["Adventurer", "Chadidas", "Addis"]
+["Adventurer", "Charizard", "Ryszarda"]
 ["Adventurer", "Chuck", "Addis", [610293436028944403]]
 ["Adventurer", "HMCHardCarry", "Addis", [554506311115603968]]
 ["Adventurer", "NobleWarrior", "Addis"]
