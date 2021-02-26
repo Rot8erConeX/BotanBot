@@ -266,6 +266,36 @@ Circus Tent\32\-\Adventurer, Event Altar\3x3\1\5400\Tent Canvas, 1200\
 Circus Tent\33\-\Adventurer, Event Altar\3x3\1\5600\Tent Canvas, 1300\
 Circus Tent\34\-\Adventurer, Event Altar\3x3\1\5800\Tent Canvas, 1400\
 Circus Tent\35\-\Adventurer, Event Altar\3x3\1\6000\Tent Canvas, 1500\
+Cleansing Fount\1\By soaking special ore in the pure waters of this fountain, you can create sanctified water that repels evil. Use it to boost the stats of dagger- and manacaster-wielding adventurers.\Adventurer, Event Dual Dojo\3x3\1\0\0\
+Cleansing Fount\2\-\Adventurer, Event Dual Dojo\3x3\1\100\Sacred Stone, 3\
+Cleansing Fount\3\-\Adventurer, Event Dual Dojo\3x3\1\200\Sacred Stone, 5\
+Cleansing Fount\4\-\Adventurer, Event Dual Dojo\3x3\1\300\Sacred Stone, 7\
+Cleansing Fount\5\-\Adventurer, Event Dual Dojo\3x3\1\400\Sacred Stone, 10\
+Cleansing Fount\6\-\Adventurer, Event Dual Dojo\3x3\1\500\Sacred Stone, 12\
+Cleansing Fount\7\-\Adventurer, Event Dual Dojo\3x3\1\600\Sacred Stone, 15\
+Cleansing Fount\8\-\Adventurer, Event Dual Dojo\3x3\1\700\Sacred Stone, 18\
+Cleansing Fount\9\-\Adventurer, Event Dual Dojo\3x3\1\800\Sacred Stone, 21\
+Cleansing Fount\10\-\Adventurer, Event Dual Dojo\3x3\1\1000\Sacred Stone, 25\
+Cleansing Fount\11\-\Adventurer, Event Dual Dojo\3x3\1\1200\Sacred Stone, 30\
+Cleansing Fount\12\-\Adventurer, Event Dual Dojo\3x3\1\1400\Sacred Stone, 50\
+Cleansing Fount\13\-\Adventurer, Event Dual Dojo\3x3\1\1600\Sacred Stone, 70\
+Cleansing Fount\14\-\Adventurer, Event Dual Dojo\3x3\1\1800\Sacred Stone, 90\
+Cleansing Fount\15\-\Adventurer, Event Dual Dojo\3x3\1\2000\Sacred Stone, 120\
+Cleansing Fount\16\-\Adventurer, Event Dual Dojo\3x3\1\2200\Sacred Stone, 150\
+Cleansing Fount\17\-\Adventurer, Event Dual Dojo\3x3\1\2400\Sacred Stone, 180\
+Cleansing Fount\18\-\Adventurer, Event Dual Dojo\3x3\1\2600\Sacred Stone, 210\
+Cleansing Fount\19\-\Adventurer, Event Dual Dojo\3x3\1\2800\Sacred Stone, 250\
+Cleansing Fount\20\-\Adventurer, Event Dual Dojo\3x3\1\3000\Sacred Stone, 300\
+Cleansing Fount\21\-\Adventurer, Event Dual Dojo\3x3\1\3200\Sacred Stone, 350\
+Cleansing Fount\22\-\Adventurer, Event Dual Dojo\3x3\1\3400\Sacred Stone, 400\
+Cleansing Fount\23\-\Adventurer, Event Dual Dojo\3x3\1\3600\Sacred Stone, 450\
+Cleansing Fount\24\-\Adventurer, Event Dual Dojo\3x3\1\3800\Sacred Stone, 500\
+Cleansing Fount\25\-\Adventurer, Event Dual Dojo\3x3\1\4000\Sacred Stone, 550\
+Cleansing Fount\26\-\Adventurer, Event Dual Dojo\3x3\1\4200\Sacred Stone, 600\
+Cleansing Fount\27\-\Adventurer, Event Dual Dojo\3x3\1\4400\Sacred Stone, 700\
+Cleansing Fount\28\-\Adventurer, Event Dual Dojo\3x3\1\4600\Sacred Stone, 800\
+Cleansing Fount\29\-\Adventurer, Event Dual Dojo\3x3\1\4800\Sacred Stone, 900\
+Cleansing Fount\30\-\Adventurer, Event Dual Dojo\3x3\1\5000\Sacred Stone, 1000\
 Conifer Tree\-\A tree with needle-thin foliage that stays green throughout the winter and can endure harsh environments.\Decorative\1x1\5\0\0\
 Dagger Dojo\1\A training area built to hone one's skills with a dagger. Use it to boosts the stats of dagger-wielding adventures.\Adventurer, Dojo\3x3\2\0\0\Dagger
 Dagger Dojo\2\-\Adventurer, Dojo\3x3\2\3000\Dyrenell Aes, 10\

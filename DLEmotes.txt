@@ -30,7 +30,9 @@ Hey\Euden
 Heyas\Pecorine
 Help\Zethia
 Here Goes\Euden
+Hmph\Zena
 How Crazy Is That\Pecorine
+I Don't Know\Xander
 I Got This\Luca
 I Need Healing\Luca
 Intriguing!\Heinwald
@@ -87,6 +89,7 @@ Three Cheers for Me\Mym
 Time For a Break\Cleo
 To a Bold New Year\Yoshitsune
 Together\Marth
+Thank-You Kiss\Notte
 Thanks\Notte
 Thanks(Panther)\Panther
 Up\
