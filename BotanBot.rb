@@ -4052,7 +4052,7 @@ def add_new_alias(bot,event,newname,unit,modifier=nil,modifier2=nil,mode=0)
     type[0]='Alias' if type[0].include?('*')
     type[1]='Alias' if type[1].include?('*') && type[0]!='Alias'
   end
-  if type.reject{|q| q == 'Alias'}.length<=0
+  if type.reject{|q| q=='Alias'}.length<=0
     alz1=newname
     alz2=unit
     alz1='>Censored mention<' if alz1.include?('@')
@@ -5129,7 +5129,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
   k=find_data_ex(:find_ability,args.join(' '),event)
   s2s=false
   s2s=true if safe_to_spam?(event)
-  if forceaura.nil?
+  if forceaura.nil? || k.nil? || k.length<=0
   elsif forceaura=='CoAbility' && s2s
     k=k.reject{|q| q.type !=forceaura && q.type !='Chain'}
   elsif forceaura.length>0
