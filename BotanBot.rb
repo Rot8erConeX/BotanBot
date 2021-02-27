@@ -561,7 +561,7 @@ class DLAdventurer < DLSentient
       end
       for i in 0...3
         n=[]
-        for i2 in 0...lv[i]+1
+        for i2 in 0...lv[i]
           n.push("#{@abilities[i][i2]} (F#{a[i][i2]})")
         end
         m.push(n.join(" \u2192 "))
@@ -4119,7 +4119,7 @@ def add_new_alias(bot,event,newname,unit,modifier=nil,modifier2=nil,mode=0)
   if event.user.id==167657750971547648 && modifier.to_i.to_s==modifier
     glbl=0
     glbl=modifier.to_i unless bot.server(modifier.to_i).nil? || bot.on(modifier.to_i).nil?
-  elsif [167657750971547648,368976843883151362].include?(event.user.id) && !modifier.nil?
+  elsif [167657750971547648,141260274144509952].include?(event.user.id) && !modifier.nil?
     glbl=0
   end
   alz=$aliases.map{|q| q}
@@ -4178,6 +4178,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     disp_adventurer_stats(bot,event,x.sample.name.split(' '),juststats)
     return nil
   end
+  data_load(['skills'])
   s2s=false
   s2s=true if safe_to_spam?(event)
   juststats=true if Shardizard != 4 && event.message.text.downcase.split(' ').include?('smol')
@@ -4316,7 +4317,9 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   end
   unless juststats
     if s2s
-      f.push(['Abilities',k.ability_display(rar)])
+      xrar=rar*1
+      xrar=0 if semirar
+      f.push(['Abilities',k.ability_display(xrar)])
     else
       str="#{str}\n\n#{k.ability_display(rar,false)}"
     end
@@ -4453,6 +4456,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false,x=nil)
     end
     return nil
   end
+  data_load(['skills'])
   s2s=false
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
@@ -4490,11 +4494,12 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false,x=nil)
     m=k.promotions.map{|q| q}
     m2=k.promoted_from
     mmm2=nil
+    wpnz=$weapons.map{|q| q.clone}
     mmm2=wpnz.find_index{|q| q.type==k.type && q.element==k.element && q.availability.inculde?('m')} if k.availability.include?('a')
     mmm2=wpnz.find_index{|q| q.type==k.type && q.element==k.element && q.rarity==5} if k.availability.include?('h')
     if s2s
       str2="#{str2}#{"\n" unless m.length<=1}\n\n**Promotes from: #{m2.emotes(bot)}*#{m2.name}* **#{"\n*Smithy level required:* #{k.smith_level}" unless k.availability.include?('h')}\n*Assembly cost:* #{longFormattedNumber(k.costs[0])}#{k.stat_emotes[4]}\n*Required mats:* #{k.craft_mats.map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}" unless m2.nil?
-      str2="#{str2}#{"\n" unless m.length==1}\n\n**Crafting requirements: #{mm2.emotes(bot)}*#{mm2.name}* **" unless mmm2.nil?
+      str2="#{str2}#{"\n" unless m.length==1}\n\n**Crafting requirements: #{wpnz[mmm2].emotes(bot)}*#{wpnz[mmm2].name}* **" unless mmm2.nil?
       if m.length>0
         for i in 0...m.length
           m[i].costs='0' if m[i].costs.nil? || m[i].costs.length<=0
@@ -4667,6 +4672,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil,x=nil)
   str="#{str}\n*Assembly cost:* #{longFormattedNumber(val*k.costs[0])}#{k.stat_emotes[4]}#{"\n*Required mats:* #{k.craft_mats.map{|q| "#{q[0]} x#{val*q[1].to_i}"}.join(', ')}" unless k.craft_mats.nil?}"
   m2=k.promoted_from
   mmm2=nil
+  wpnz=$weapons.map{|q| q.clone}
   mmm2=wpnz.find_index{|q| q.type==k.type && q.element==k.element && q.availability.inculde?('m')} if k.availability.include?('a')
   mmm2=wpnz.find_index{|q| q.type==k.type && q.element==k.element && q.rarity==5} if k.availability.include?('h')
   cost=0
