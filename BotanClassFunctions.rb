@@ -759,10 +759,8 @@ class DLDragon
       end
     end
     dispname=@name.gsub(' ','_')
-    if rar.nil? && @name=='Brunhilda' && args.include?('mym')
-      rar='Human'
-      disp="#{self.rar_row}"
-    end
+    disp="#{self.rar_row}"
+    rar='Human' if rar.nil? && @name=='Brunhilda' && args.include?('mym')
     if !rar.nil? && rar.is_a?(String)
       art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Dragons/#{dispname}#{"_#{rar}" unless rar.nil?}.png"
       m=false
@@ -1351,6 +1349,7 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false,preload=nil)
     end
     return nil
   end
+  data_load(['skills'])
   s2s=false
   s2s=true if safe_to_spam?(event)
   hdr="__**#{k.name}**__"
@@ -4667,7 +4666,7 @@ def disp_art(bot,event,args=nil)
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
   hdr="__**#{k.name}**__#{k.emotes(bot)}"
-  mx=k.portrait(event,args)
+  mx=k.portrait(event)
   title=mx[1]
   xpic=[nil,mx[0]]
   rar=mx[2]
@@ -4843,6 +4842,8 @@ def disp_art(bot,event,args=nil)
   end
   m=flds.map{|q| q[1].split("\n").length}
   flds=flds.map{|q| q[0,2]} if flds.length<3
+  titlength=0
+  titlength=title.length unless title.nil?
   if m.inject(0){|sum,x2| sum + x2 }>25 && !safe_to_spam?(event)
     str="#{str}\n\nThere were too many datapoints to display them all.  Please use this command in PM."
     flds=[]
@@ -4853,7 +4854,7 @@ def disp_art(bot,event,args=nil)
   elsif flds.length<=1 && !($embedless.include?(event.user.id) || was_embedless_mentioned?(event))
     str="#{str}\n\n#{flds[0][0]}"
     flds=triple_finish(flds[0][1].split("\n"),true)
-  elsif $embedless.include?(event.user.id) || was_embedless_mentioned?(event) || hdr.length+title.length+str.length+flds.map{|q| "__*#{q[0]}*__\n#{q[1]}"}.join("\n\n").length>1900 || m.max>25
+  elsif $embedless.include?(event.user.id) || was_embedless_mentioned?(event) || hdr.length+titlength+str.length+flds.map{|q| "__*#{q[0]}*__\n#{q[1]}"}.join("\n\n").length>1900 || m.max>25
     str2=''
     for i in 0...flds.length
       if "**#{flds[i][0]}:** #{flds[i][1].gsub("\n",' - ')}".length>1500
@@ -4871,6 +4872,7 @@ def disp_art(bot,event,args=nil)
   end
   flds=nil if flds.length<=0
   create_embed(event,[hdr,title],str,k.disp_color,ftr,xpic,flds)
+  event.respond xpic[1] if $embedless.include?(event.user.id) || was_embedless_mentioned?(event)
 end
 
 def disp_alts(bot,event,args=nil)

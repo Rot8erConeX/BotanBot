@@ -341,7 +341,7 @@ def create_embed(event,header,text,xcolor=nil,xfooter=nil,xpic=nil,xfields=nil,m
   mbd=false
   if !@embedless.nil? 
     mbd=true if @embedless.include?(event.user.id) || (was_embedless_mentioned?(event) && ch_id==0)
-  elsif $embedless.nil?
+  elsif !$embedless.nil?
     mbd=true if $embedless.include?(event.user.id) || (was_embedless_mentioned?(event) && ch_id==0)
   end
   if mbd
