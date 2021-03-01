@@ -4231,7 +4231,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     for i in rar...$max_rarity[0]+1
       f.push([k.rar_row(i),k.stat_grid(i)])
     end
-    f.push(["#{generate_rarity_row(0,$max_rarity[0],k.games[0])}\nMana Unbind",k.stat_grid($max_rarity[0]+1)]) if k.hasManaSpiral?
+    f.push(["#{generate_rarity_row(0,$max_rarity[0],k.games[0])}#{"\n" unless $embedless.include?(event.user.id) || was_embedless_mentioned?(event)}Mana Unbind",k.stat_grid($max_rarity[0]+1)]) if k.hasManaSpiral?
   elsif rar==0
     ftr="Data shown is for an adventurer whose mana spiral has been unlocked.  To show data for a #{$max_rarity[0]}-star#{" or #{k.rarity}-star" unless $max_rarity[0]==k.rarity} version, please include the number in your message."
   elsif rar != k.rarity
