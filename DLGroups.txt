@@ -49,7 +49,7 @@
   false]
 ["Custom Force Strike", 
   ["customforcestrike","customfs","changedfs", "uniquefs", "uniqueforcestrike"], 
-  ["Albert", "Bellina", "Berserker(Hunter)", "Catherine", "Chelsea(Valentines)", "Cleo(Forager)", "Gala Chelle", "Gala Laxi", "Gala Zena", "Grace", "Ilia", "Joker", "Lily(Dragonyule)", "Linnea", "Lin You", "Luca(Kimono)", "Meene", "Mega Man", "Melody", "Mitsuba(Forager)", "Mona", "Nadine", "Nevin", "Panther", "Patia(Summer)", "Pecorine", "Peony", "Pinon", "Sarisse(Hunter)", "Seimei", "Sophie(Scramble)", "Vanessa", "Vanessa(Hunter)", "Xander", "Xuan Zang(Radiant)", "Zena", "Zhu Bajie"],
+  ["Albert", "Bellina", "Berserker(Hunter)", "Catherine", "Chelsea(Valentines)", "Cleo(Forager)", "Faris", "Gala Chelle", "Gala Laxi", "Gala Zena", "Grace", "Ilia", "Joker", "Lily(Dragonyule)", "Linnea", "Lin You", "Luca(Kimono)", "Meene", "Mega Man", "Melody", "Mitsuba(Forager)", "Mona", "Nadine", "Nevin", "Panther", "Patia(Summer)", "Pecorine", "Peony", "Pinon", "Ryszarda", "Sarisse(Hunter)", "Seimei", "Sophie(Scramble)", "Vanessa", "Vanessa(Hunter)", "Xander", "Xuan Zang(Radiant)", "Zena", "Zhu Bajie"],
   nil,
   nil,
   nil,
