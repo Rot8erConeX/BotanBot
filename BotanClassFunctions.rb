@@ -841,6 +841,7 @@ class DLWyrmprint
   
   def voice_na; return nil; end
   def voice_jp; return nil; end
+  def tid; return 0; end
 end
 
 class DLWeapon
