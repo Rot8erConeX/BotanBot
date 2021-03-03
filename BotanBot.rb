@@ -5431,7 +5431,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         str="#{str} - #{k2[i].description}" if shw
         m=[]
         chrrr=', '
-        if madv.length+mdrg.length+mprint.length+mwep.length+mevil.length<6 && [madv,mdrg.mprint,mwep,mevil].map{|q| q.length}.max<4
+        if madv.length+mdrg.length+mprint.length+mwep.length+mevil.length<6 && [madv,mdrg,mprint,mwep,mevil].map{|q| q.length}.max<4
           chrrr=' - '
           m.push(madv.map{|q| q.name}.join(', ')) if madv.length>0
           m.push(mdrg.map{|q| q.name}.join(', ')) if mdrg.length>0
