@@ -5430,13 +5430,23 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         str="#{str}#{"\n" if str.length>0}**#{k2[i].level}**"
         str="#{str} - #{k2[i].description}" if shw
         m=[]
-        m.push("#{madv.length} advs") if madv.length>0
-        m.push("#{mdrg.length} drgs") if mdrg.length>0
-        m.push("#{mprint.length} prints") if mprint.length>0
-        m.push("#{mwep.length} weps") if mwep.length>0
-        m.push("#{mevil.length} enemies") if mevil.length>0
+        chrrr=', '
+        if madv.length+mdrg.length+mprint.length+mwep.length+mevil.length<6 && [madv,mdrg.mprint,mwep,mevil].map{|q| q.length}.max<4
+          chrrr=' - '
+          m.push(madv.map{|q| q.name}.join(', ')) if madv.length>0
+          m.push(mdrg.map{|q| q.name}.join(', ')) if mdrg.length>0
+          m.push(mprint.map{|q| q.name}.join(', ')) if mprint.length>0
+          m.push(mwep.map{|q| q.name}.join(', ')) if mwep.length>0
+          m.push(mevil.map{|q| q.name}.join(', ')) if mevil.length>0
+        else
+          m.push("#{madv.length} adv#{'s' unless madv.length==1}") if madv.length>0
+          m.push("#{mdrg.length} drg#{'s' unless mdrg.length==1}") if mdrg.length>0
+          m.push("#{mprint.length} print#{'s' unless mprint.length==1}") if mprint.length>0
+          m.push("#{mwep.length} wep#{'s' unless mwep.length==1}") if mwep.length>0
+          m.push("#{mevil.length} enem#{'ies' unless mevil.length==1}#{'y' if mevil.length==1}") if mevil.length>0
+        end
         m.push(k2[i].resonance_level(bot)) unless k2[i].resonance_level(bot).nil?
-        str="#{str} - #{m.join(', ')}" if m.length>0
+        str="#{str} - #{m.join(chrrr)}" if m.length>0
       end
     end
     str="#{str}\n\n**Tags:** #{k2[0].tags.join(', ')}" if ttags
