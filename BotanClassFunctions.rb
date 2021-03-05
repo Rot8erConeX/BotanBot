@@ -5520,6 +5520,17 @@ def print_overlap_list(event,args,bot)
   for i in 0...$resonance.length
     if k4.reject{|q| q.affinity != $resonance[i][0]}.length>1
       f=k4.reject{|q| q.affinity != $resonance[i][0]}.length
+      if chains.map{|q| q[0]}.include?("#{$resonance[i][0]}'s Psalm")
+        for i2 in 0...chains.length
+          if chains[i2][0]=="#{$resonance[i][0]}'s Psalm"
+            if chains[i2][2]=='Number'
+              f+=chains[i2][1]
+            elsif chains[i2][2]=='Roman'
+              f+=romanums.find_index{|q| q==chains[i2][1]}
+            end
+          end
+        end
+      end
       f=[$resonance[i].length,f].min
       xx=$resonance[i][1,f-1].compact
       unless xx.length<=0
