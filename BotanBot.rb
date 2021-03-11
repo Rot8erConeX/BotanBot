@@ -1972,6 +1972,7 @@ class DLAbility
   attr_accessor :description
   attr_accessor :weight,:show
   attr_accessor :tags
+  attr_accessor :nihilimmune
   
   def initialize(val,val2)
     @name=val
@@ -1984,6 +1985,7 @@ class DLAbility
   def weight=(val); @weight=val.to_i; end
   def show=(val); @show=false; @show=true if ['y','yes'].include?(val.downcase); end
   def tags=(val); @tags=[]; @tags=val.split(', ') unless val.nil? || val.length<=0 || val=='-'; end
+  def nihilimmune=(val); @nihilimmune=false; @nihilimmune=true if !val.nil? && ['y','yes'].include?(val.downcase); end
   def objt; return 'Ability'; end
   
   def fullName(format=nil,justlast=false,sklz=nil)
@@ -3210,6 +3212,7 @@ def data_load(to_reload=[])
         bob4.weight=b[i][4]
         bob4.show=b[i][5]
         bob4.tags=b[i][6]
+        bob4.nihilimmune=b[i][7]
         $abilities.push(bob4)
       end
     end
@@ -4014,9 +4017,16 @@ def add_new_alias(bot,event,newname,unit,modifier=nil,modifier2=nil,mode=0)
   matchnames=['','']
   newname=newname.gsub('!','').gsub('(','').gsub(')','').gsub('_','')
   k=find_best_match(newname,bot,event,true,false,0)
-  if k.nil? || (k.is_a?(Array) && k[0].nil?) || k.is_a?(DLBanner) || (['Sticker','Status'].include?(k.objt) && !([368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583))
+  ooo=''
+  if k.nil?
+  elsif k.is_a?(Array)
+    ooo=k[0].objt unless k[0].nil?
+  else
+    ooo=k.objt
+  end
+  if k.nil? || (k.is_a?(Array) && k[0].nil?) || k.is_a?(DLBanner) || (['Sticker','Status'].include?(ooo) && !([368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583))
     k=find_best_match(newname,bot,event,false,false,0)
-    if k.nil? || (k.is_a?(Array) && k[0].nil?) || k.is_a?(DLBanner) || (['Sticker','Status'].include?(k.objt) && !([368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583))
+    if k.nil? || (k.is_a?(Array) && k[0].nil?) || k.is_a?(DLBanner) || (['Sticker','Status'].include?(ooo) && !([368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583))
     elsif k.is_a?(Array)
       k=k[0]
       type[0]="#{k.objt}*"
@@ -4039,9 +4049,16 @@ def add_new_alias(bot,event,newname,unit,modifier=nil,modifier2=nil,mode=0)
   end
   unit=unit.gsub('!','').gsub('(','').gsub(')','').gsub('_','')
   k2=find_best_match(unit,bot,event,true,false,0)
-  if k2.nil? || (k2.is_a?(Array) && k2[0].nil?) || k2.is_a?(DLBanner) || (['Sticker','Status'].include?(k2.objt) && !([368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583))
+  ooo=''
+  if k2.nil?
+  elsif k2.is_a?(Array)
+    ooo=k2[0].objt unless k2[0].nil?
+  else
+    ooo=k2.objt
+  end
+  if k2.nil? || (k2.is_a?(Array) && k2[0].nil?) || k2.is_a?(DLBanner) || (['Sticker','Status'].include?(ooo) && !([368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583))
     k2=find_best_match(unit,bot,event,false,false,0)
-    if k2.nil? || (k2.is_a?(Array) && k2[0].nil?) || k2.is_a?(DLBanner) || (['Sticker','Status'].include?(k2.objt) && !([368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583))
+    if k2.nil? || (k2.is_a?(Array) && k2[0].nil?) || k2.is_a?(DLBanner) || (['Sticker','Status'].include?(ooo) && !([368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583))
     elsif k2.is_a?(Array)
       k2=k2[0]
       type[0]="#{k2.objt}*"
@@ -5488,7 +5505,22 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
     str2.push("**Per-adventurer wyrmprint stack limit:** #{f[f.find_index{|q| q[0]=='Element Res'}][1]}")
   end
   str="#{str}\n\n#{str2.join("\n")}" if str2.length>0
-  m=hdr.length+str.length
+  title='~~Not immune to Nihil~~'
+  title='**Immune to Nihil**' if k[0].nihilimmune
+  m=hdr.length+str.length+title.length
+  if title.length>250
+    h=title.split("\n")
+    title=[h[0],'']
+    j=0
+    for i in 1...h.length
+      if "#{title[j]}\n#{h[i]}".length>250 && j==0
+        j+=1
+        title[j]="#{h[i]}"
+      else
+        title[j]="#{title[j]}\n#{h[i]}"
+      end
+    end
+  end
   m+=ftr.length unless ftr.nil?
   m+=flds.map{|q| "__#{q[0]}__\n#{q[1]}"}.join("\n\n").length unless flds.nil?
   if m>1900
@@ -5522,8 +5554,8 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
     j=''
     for i in 0...str.length/2
       if "#{j}#{str[2*i]}#{str[2*i+1]}".length>1900
-        create_embed(event,hdr,j,k[0].disp_color,nil,xpic)
-        j=str[2*i+1]; hdr=''; xpic=nil
+        create_embed(event,[hdr,title],j,k[0].disp_color,nil,xpic)
+        j=str[2*i+1]; hdr=''; title=nil; xpic=nil
       else
         j="#{j}#{str[2*i]}#{str[2*i+1]}"
       end
@@ -5532,23 +5564,23 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
     m+=ftr.length unless ftr.nil?
     m+=flds.map{|q| "__#{q[0]}__\n#{q[1]}"}.join("\n\n").length unless flds.nil?
     if m<1900
-      create_embed(event,hdr,j,k[0].disp_color,ftr,xpic,flds)
+      create_embed(event,[hdr,title],j,k[0].disp_color,ftr,xpic,flds)
     elsif flds.nil?
-      create_embed(event,hdr,j,k[0].disp_color,nil,xpic)
+      create_embed(event,[hdr,title],j,k[0].disp_color,nil,xpic)
       create_embed(event,'','',k[0].disp_color,ftr)
     elsif flds.map{|q| "__#{q[0]}__\n#{q[1]}"}.join("\n\n").length>1900 && flds.length>1
-      create_embed(event,hdr,j,k[0].disp_color,nil,xpic)
+      create_embed(event,[hdr,title],j,k[0].disp_color,nil,xpic)
       for i in 0...flds.length
         m=nil
         m=ftr if i==flds.length-1
         create_embed(event,"__#{flds[i][0]}__",'',k[0].disp_color,m,nil,triple_finish(flds[i][1].split("\n")))
       end
     else
-      create_embed(event,hdr,j,k[0].disp_color,nil,xpic)
+      create_embed(event,[hdr,title],j,k[0].disp_color,nil,xpic)
       create_embed(event,'','',k[0].disp_color,ftr,nil,flds)
     end
   else
-    create_embed(event,hdr,str,k[0].disp_color,ftr,k[0].thumbnail,flds)
+    create_embed(event,[hdr,title],str,k[0].disp_color,ftr,k[0].thumbnail,flds)
   end
 end
 
