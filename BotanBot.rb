@@ -1755,7 +1755,7 @@ class DLSkill
   attr_accessor :mass_description
   attr_accessor :sp_cost,:sp_oddity
   attr_accessor :sharing
-  attr_accessor :energize
+  attr_accessor :energize,:nihilimmune
   attr_accessor :invulnerability
   attr_accessor :tags
   attr_accessor :sort_data
@@ -1768,7 +1768,6 @@ class DLSkill
   def description=(val); @description=val; end
   def mass_description=(val); @mass_description=val; end
   def sharing=(val); @sharing=val.split(', ').map{|q| q.to_i}; end
-  def energize=(val); @energize=false; @energize=true if val=='Yes'; end
   def invulnerability=(val); @invulnerability=val.to_f; end
   def tags=(val); @tags=val.split(', '); end
   
@@ -1783,6 +1782,15 @@ class DLSkill
         m[0]=val[7*i]
         @sp_oddity.push(m.map{|q| q})
       end
+    end
+  end
+  
+  def energize=(val)
+    @energize=false; @energize=true if val.split(', ')[0]=='Yes'
+    @nihilimmune=nil
+    unless val.split(', ').length<1
+      @nihilimmune=false if val.split(', ')[1]=='No'
+      @nihilimmune=true if val.split(', ')[1]=='Yes'
     end
   end
   
@@ -1813,6 +1821,11 @@ class DLSkill
     end
     e='<:Energation:688920529771692078>' if @energize && self.inspirable?
     e="#{e}#{txt.join('/')}" if full
+    if @nihilimmune==true
+      e="#{e} + Nihil-immune"
+    elsif @nihilimmune.nil?
+      e="#{e} + partial Nihil-immune"
+    end
     return e
   end
   
@@ -1978,8 +1991,8 @@ class DLAbility
     x="#{format}#{x}#{format.reverse}" unless format.nil?
     return x if ['-'].include?(@level) || @level.nil?
     return x if ['example'].include?(@level) && format.nil? && !justlast
-    skz=$abilities.reject{|q| q.name != @name || q.level=='example'}
-    skz=sklz.reject{|q| q.name != @name || q.level=='example'} unless sklz.nil?
+    skz=$abilities.reject{|q| q.name != @name || q.level=='example' || q.type != @type}
+    skz=sklz.reject{|q| q.name != @name || q.level=='example' || q.type != @type} unless sklz.nil?
     char='/'
     char=' / ' if skz.reject{|q| !q.level.include?('/')}.length>0
     if skz.length>5
@@ -5003,6 +5016,13 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
   title="#{title}\n<:Inspiring:688916587079663625> **Inspirable**" if k.inspirable?
   title="#{title}\n~~Not inspirable~~" if !k.inspirable? && k.energize
   title="#{title}\n~~Not energizable or inspirable~~" if !k.energize && !k.inspirable?
+  if k.nihilimmune==true
+    title="#{title}\n**Immune to Nihil**"
+  elsif k.nihilimmune.nil?
+    title="#{title}\nPartially immune to Nihil"
+  else
+    title="#{title}\n~~Not immune to Nihil~~"
+  end
   lng=title.length
   if title.length>250
     h=title.split("\n")
