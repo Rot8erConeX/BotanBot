@@ -1417,7 +1417,7 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false,preload=nil)
       end
     else
       lvl=skl1.description.length
-      str2="*#{skl1.name}#{skl1.energy_display(false)} [#{skl1.level_text(lvl,-1,true)}]* - #{skl1.sp_display(lvl)} SP"
+      str2="*#{skl1.name}#{skl1.energy_display(false)} [#{skl1.level_text(lvl,-1,true)}]*#{" - #{skl1.sp_display(lvl)} SP" unless skl1.sp_display(lvl)[0]=='-'}"
       str2="#{str2}\n#{skl1.description[lvl-1]}"
     end
     if k.skills[1].nil? || k.skills[1].length<=0 || k.skills[1]=='-'
@@ -1441,7 +1441,7 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false,preload=nil)
       end
     else
       lvl=skl2.description.length
-      str2="#{str2}\n\n*#{skl2.name}#{skl2.energy_display(false)} [#{skl2.level_text(lvl,-1,true)}]* - #{skl2.sp_display(lvl)} SP"
+      str2="#{str2}\n\n*#{skl2.name}#{skl2.energy_display(false)} [#{skl2.level_text(lvl,-1,true)}]*#{" - #{skl2.sp_display(lvl)} SP" unless skl2.sp_display(lvl)[0]=='-'}"
       str2="#{str2}\n#{skl2.description[lvl-1]}"
     end
     str2=str2["\n".length,str2.length-"\n".length] if str2[0,"\n".length]=="\n"
