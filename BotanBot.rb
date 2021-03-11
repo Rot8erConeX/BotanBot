@@ -3455,7 +3455,9 @@ def nicknames_load(mode=1) # loads the nickname list
   else
     b=[]
   end
-  $aliases=b.reject{|q| q.nil? || q[1].nil?}.uniq
+  b=b.reject{|q| q.nil? || q[1].nil?}.uniq
+  b=b.reject{|q| q[0].include?('*')} if Shardizard<0 && mode>=0
+  $aliases=b.map{|q| q}
   t=Time.now
   $aliases.sort! {|a,b| (spaceship_order(a[0]) <=> spaceship_order(b[0])) == 0 ? (supersort(a,b,2,nil,1) == 0 ? (a[1].downcase <=> b[1].downcase) : supersort(a,b,2,nil,1)) : (spaceship_order(a[0]) <=> spaceship_order(b[0]))}
 end
@@ -5387,14 +5389,14 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
   else
     ftr='For a list of ways to obtain these abilities, look a single one of them up.'
     diiv=k2.length
-    diiv=k2.length/2 if k2.length>5
-    diiv=k2.length/3 if k2.length>16
-    diiv=k2.length/4 if k2.length>25
-    diiv=k2.length/5 if k2.length>32
-    diiv=10 if k2.length>50
+    diiv=k2.length/2 if k2.length>=5
+    diiv=k2.length/3 if k2.length>=16
+    diiv=k2.length/4 if k2.length>=25
+    diiv=k2.length/5 if k2.length>=32
+    diiv=10 if k2.length>=50
     for i in 0...k2.length
       shw=k2[i].show
-      shw=false if k2[i].level.include?('%') && k2.map{|q| q.level}.include?('example') && k2.length>5 && i%diiv>0
+      shw=false if k2[i].level.include?('%') && k2.map{|q| q.level}.include?('example') && k2.length>=5 && i%diiv>0
       shw=false if k2[i].level != 'example' && k2[i].description.include?("\n")
       madv=k2[i].adv_list(bot,event,dispslots,dispsubabils)
       madv=[] unless typ.include?('Adventurers')
@@ -6208,11 +6210,11 @@ bot.command([:sort,:list]) do |event, *args|
   elsif ['aliases','alias'].include?(args[0].downcase) && event.user.id==167657750971547648
     data_load()
     nicknames_load()
-    @aliases.uniq!
-    @aliases.sort! {|a,b| (spaceship_order(a[0]) <=> spaceship_order(b[0])) == 0 ? ((a[2].downcase <=> b[2].downcase) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2].downcase <=> b[2].downcase)) : (spaceship_order(a[0]) <=> spaceship_order(b[0]))}
-    open("#{@location}devkit/DLNames.txt", 'w') { |f|
-      for i in 0...@aliases.length
-        f.puts "#{@aliases[i].to_s}#{"\n" if i<@aliases.length-1}"
+    $aliases.uniq!
+    $aliases.sort! {|a,b| (spaceship_order(a[0]) <=> spaceship_order(b[0])) == 0 ? ((a[2].downcase <=> b[2].downcase) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2].downcase <=> b[2].downcase)) : (spaceship_order(a[0]) <=> spaceship_order(b[0]))}
+    open("#{$location}devkit/DLNames.txt", 'w') { |f|
+      for i in 0...$aliases.length
+        f.puts "#{$aliases[i].to_s}#{"\n" if i<$aliases.length-1}"
       end
     }
     event.respond 'The alias list has been sorted alphabetically'
@@ -6930,7 +6932,27 @@ bot.command(:reload, from: 167657750971547648) do |event|
       if e.message.text.downcase.include?('git') && [167657750971547648,141260274144509952].include?(event.user.id)
         download = open("https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/DLNames.txt")
         IO.copy_stream(download, "DLTemp.txt")
-        if File.size("DLTemp.txt")>100
+        if File.size("DLTemp.txt")>100 && Shardizard<0
+          b=[]
+          File.open("DLTemp.txt").each_line.with_index do |line, idx|
+            b.push(eval line)
+          end
+          nicknames_load(-1)
+          b2=$aliases.reject{|q| !q[0].include?('*')}
+          b=b.reject{|q| b2.map{|q2| [q2[0].gsub('*',''),q2[1],q2[2]]}.include?([q[0],q[1],q[2]])}
+          for i in 0...b2.length
+            b.push(b2[i])
+          end
+          b.sort! {|a,b| (spaceship_order(a[0]) <=> spaceship_order(b[0])) == 0 ? ((a[2].downcase <=> b[2].downcase) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2].downcase <=> b[2].downcase)) : (spaceship_order(a[0]) <=> spaceship_order(b[0]))}
+          b=b.map{|q| "#{q.to_s}\n"}
+          open("DLNames.txt", 'w') { |f|
+            f.puts b.join('')
+          }
+          open("DLNames2.txt", 'w') { |f|
+            f.puts b.join('')
+          }
+          e.respond 'Alias list has been restored from GitHub, and placed in the backup as well.'
+        elsif File.size("DLTemp.txt")>100
           b=[]
           File.open("DLTemp.txt").each_line.with_index do |line, idx|
             b.push(line)
@@ -6941,8 +6963,10 @@ bot.command(:reload, from: 167657750971547648) do |event|
           open("DLNames2.txt", 'w') { |f|
             f.puts b.join('')
           }
+          e.respond 'Alias list has been restored from GitHub, and placed in the backup as well.'
+        else
+          e.respond 'Alias list not loaded.  File too small.'
         end
-        e.respond 'Alias list has been restored from GitHub, and placed in the backup as well.'
         reload=true
       else
         if File.exist?("#{$location}devkit/DLNames2.txt")
