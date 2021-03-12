@@ -917,15 +917,16 @@ class DLWyrmprint
   
   def class_header(bot,emotesonly=0,includerarity=false,includeobjt=false)
     emtz=[]; str=''
-    if includerarity
+    if !@availability.nil? && @availability.include?('x')
+      str='<:Dominion:819854169128435742>' if includerarity
+      emtz.push('<:Dominion:819854169128435742>')
+    elsif includerarity
       rar=$rarity_stars[0][@rarity]
       rar=FEH_rarity_stars[@rarity] if @games[0]=='FEH'
       rar=FGO_rarity_stars[@rarity] if @games[0]=='FGO'
       emtz.push(rar)
       str=generate_rarity_row(@rarity,0,@games[0])
-      if !@availability.nil? && @availability.include?('x')
-        str="#{str} - (X)"
-      elsif @rarity>4
+      if @rarity>4
         str="#{str} - <:Fill_Gold:759999913962110978>"
       else
         str="#{str} - <:Fill_Silver:759999914062774302>"
@@ -953,7 +954,7 @@ class DLWyrmprint
     else
       emo=moji[0].mention unless moji.length<=0
     end
-    str="#{str}\n#{emo}**#{@amulet}**"
+    str="#{str}\n#{emo}**#{@amulet}**" if moji.length>0 || ['Attack','Support','Defense','Healer'].include?(@amulet)
     emtz.push(emo) unless emo.nil?
     if includeobjt
       str="#{str}\n<:Wyrmprint:560542319636381725>**Wyrmprint**"
@@ -1190,7 +1191,7 @@ class DLWeapon
   attr_accessor :promotes_from,:tier
   attr_accessor :smith_level
   attr_accessor :costs
-  attr_accessor :craft_mats,:unbind_mats,:slot_mats,:copy_mats,:ability_mats,:bonus_mats,:refinement_mats,:post_refine_unbind_mats
+  attr_accessor :craft_mats,:unbind_mats,:slot_mats,:copy_mats,:ability_mats,:bonus_mats,:refinement_mats,:post_refine_unbind_mats,:x_mats
   attr_accessor :boss_tags
   attr_accessor :print_slots
   attr_accessor :obtain
@@ -1241,6 +1242,7 @@ class DLWeapon
   def bonus_mats=(val); @bonus_mats=[]; @bonus_mats=val.split(';; ').map{|q| q.split(', ')}.map{|q| [q[0],q[1].to_i]} unless val.nil? || val.length<=0 || val=='-'; end
   def refinement_mats=(val); @refinement_mats=[]; @refinement_mats=val.split(';; ').map{|q| q.split(', ')}.map{|q| [q[0],q[1].to_i]} unless val.nil? || val.length<=0 || val=='-'; end
   def post_refine_unbind_mats=(val); @post_refine_unbind_mats=[]; @post_refine_unbind_mats=val.split(';; ').map{|q| q.split(', ')}.map{|q| [q[0],q[1].to_i]} unless val.nil? || val.length<=0 || val=='-'; end
+  def x_mats=(val); @x_mats=[]; @x_mats=val.split(';; ').map{|q| q.split(', ')}.map{|q| [q[0],q[1].to_i]} unless val.nil? || val.length<=0 || val=='-'; end
   
   def sort_data=(val); @sort_data=val; end
   def objt; return 'Weapon'; end
@@ -3069,6 +3071,7 @@ def data_load(to_reload=[])
       bob4.bonus_mats=b[i][22]
       bob4.refinement_mats=b[i][23]
       bob4.post_refine_unbind_mats=b[i][24]
+      bob4.x_mats=b[i][25]
       $weapons.push(bob4)
     end
   end
@@ -3585,6 +3588,7 @@ def generate_rarity_row(rar,blanks=0,game='')
   blanks=rar*1 if blanks<=0
   disprar=rar*1
   disprar=blanks*1 if rar<=0
+  return "**#{rar}-star**" if rar<0 || rar>$rarity_stars[0].length
   return "#{FGO_rarity_stars[rar]*([disprar,blanks].min)}#{'<:FGO_rarity_inverted:544568437029208094>'*(blanks-disprar) if blanks>disprar}" if game=='FGO'
   return "#{FEH_rarity_stars[rar]*([disprar,blanks].min)}#{'<:Icon_Rarity_Empty:631460895851282433>'*(blanks-disprar) if blanks>disprar}" if game=='FEH'
   return "#{$rarity_stars[0][rar]*([disprar,blanks].min)}#{$rarity_stars[1][rar]*(blanks-disprar) if blanks>disprar}"
@@ -4411,7 +4415,8 @@ def disp_wyrmprint_stats(bot,event,args=nil,juststats=false)
   unless s2s
     title=k.mini_header(bot)
     hdr="#{hdr}#{k.rar_row}"
-    if k.rarity>4
+    if !k.availability.nil? && k.availability.include?('x')
+    elsif k.rarity>4
       hdr="#{hdr} - <:Fill_Gold:759999913962110978>"
     else
       hdr="#{hdr} - <:Fill_Silver:759999914062774302>"
