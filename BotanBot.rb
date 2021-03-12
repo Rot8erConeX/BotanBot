@@ -932,7 +932,15 @@ class DLWyrmprint
         str="#{str} - <:Fill_Silver:759999914062774302>"
       end
     end
-    if @affinity.nil?
+    if self.isMultiprint? && !@availability.nil? && @availability.include?('x') && @affinity.nil?
+      pr=$wyrmprints.reject{|q| !q.name.include?("#{@name} ")}.map{|q| q.affinity}.uniq
+      boons=[]
+      for i in 0...pr.length
+        moji=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "Affinity_#{pr[i]}"}
+        boons.push("#{moji[0].mention unless moji.length<=0}#{pr[i]}")
+      end
+      str="#{str}\n**Possible Boons:** #{boons.join(', ')}"
+    elsif @affinity.nil?
       str="#{str}\nNo affinity"
     else
       moji=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "Affinity_#{@affinity}"}
@@ -1005,12 +1013,13 @@ class DLWyrmprint
     xcolor=0xF68D10 if ['Dragon'].include?(@affinity)
     xcolor=0x188931 if ['Staff'].include?(@affinity)
     f.push(xcolor) unless xcolor.nil?
-    xcolor=0x313439
+    xcolor=nil
     xcolor=0x5A0408 if @amulet=='Attack'
     xcolor=0x00205A if @amulet=='Defense'
     xcolor=0x39045A if @amulet=='Support'
     xcolor=0x005918 if @amulet=='Healing'
     f.push(xcolor) unless xcolor.nil?
+    f.push(0x08B8A9) if !@availability.nil? && @availability.include?('x')
     return f[0] if chain>=f.length
     return f[chain]
   end
@@ -1071,6 +1080,7 @@ class DLWyrmprint
     l=[1,@rarity*10-24,@rarity*10-10] if @rarity<4
     l[2]=5 if @rarity==1
     l[1]=l[2]-2 if @rarity<3
+    l=[1,20,30] if !@availability.nil? && @availability.include?('x')
     if self.isMultiprint? || !fullsize
       str="#{c[2]*4} **Level #{l[0]}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[0]}  #{c[1]}*Str:*\u00A0\u00A0#{@str[0]}"
       str="#{str}\n#{c[3]*2}#{c[2]*2} **Level #{l[1]}:**  #{c[0]}*HP:*\u00A0\u00A0#{@hp[1]} #{c[1]}*Str:*\u00A0\u00A0#{@str[1]}" unless @hp.length<3 || @str.length<3 || (@hp[1]<=0 && @str[1]<=0)
@@ -4450,7 +4460,7 @@ def disp_wyrmprint_stats(bot,event,args=nil,juststats=false)
   str="#{str}\n**Obtained:** #{k.obtain}" if !k.obtain.nil? && k.obtain.length>0
   if k.isMultiprint?
     str="#{str}\n#{k.multiprintText}"
-  elsif !k.availability.nil? || !has_any?(['s','z','y','t','w'],k.availability)
+  elsif !k.availability.nil? || !has_any?(['s','z','y','t','w','x'],k.availability)
     c=k.stat_emotes.map{|q| q}
     str="#{str}\n**Shop Price:** 900#{c[4]} per 2UB, 1,700#{c[4]} per MUB" if k.rarity==3
     str="#{str}\n**Shop Price:** 9,000#{c[4]} per 2UB, 17,000#{c[4]} per MUB" if k.rarity==4
