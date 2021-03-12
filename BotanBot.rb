@@ -1019,7 +1019,7 @@ class DLWyrmprint
     dispname=@name.gsub(' ','_')
     mub=0 if mub<=0
     mub=1 if mub>=1
-    if @name.split(' (')[-1][-9,9]=="'s Boon)"
+    if @name.split(' (')[-1][-8,8]=="'s Boon)"
       art="https://github.com/Rot8erConeX/BotanBot/blob/master/Wyrmprints/#{dispname}_#{mub+1}.png?raw=true"
       m=false
       IO.copy_stream(open(art), "#{$location}devkit/DLTemp#{Shardizard}.png") rescue m=true
