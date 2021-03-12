@@ -1040,7 +1040,7 @@ class DLWyrmprint
   def mini_header(bot)
     c=self.class_header(bot,2)
     str=''
-    if !@availability.nil? && @availability.nil?
+    if !@availability.nil? && @availability.include?('x')
       str="#{c[0]}**#{@affinity}**'s Boon" unless @affinity.nil?
     elsif @affinity.nil?
       str="#{c[0]}**#{@amulet}**"
@@ -2242,7 +2242,7 @@ class DLAbility
   
   def print_list(bot,event,dispslots=false,dispsubabils=false,onlyone=false,exlength=0)
     return [] unless ['Ability'].include?(@type)
-    adv=$wyrmprints.map{|q| q.clone}
+    adv=$wyrmprints.reject{|q| q.isMultiprint?}.map{|q| q.clone}
     s2s=false
     s2s=true if safe_to_spam?(event)
     list=[]
@@ -5517,7 +5517,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
   end
   str="#{str}\n\n**You may instead be searching for the skill `Dragon Claw`, which belongs to Gala Mym<:Rarity_5:532086056737177600><:Element_Flame:532106087952810005><:Weapon_Lance:532106114792423448><:Type_Attack:532107867520630784>.**" if "Dragon's Claws"==k[0].name
   str2=[]
-  if k.map{|q| q.type}.uniq.length>1 && !k.find_index{|q| q.type=='Ability'}.nil?
+  if k.map{|q| q.type}.uniq.length>1 && k.map{|q| q.level}.uniq.length>1 && !k.find_index{|q| q.type=='Ability'}.nil?
     k2=k.reject{|q| q.type != 'CoAbility' || q.level=='example'}
     str2.push("**CoAbility levels:** #{k2.map{|q| q.level}.join(', ')}") if k2.length>0
     k2=k.reject{|q| q.type != 'Chain' || q.level=='example'}
