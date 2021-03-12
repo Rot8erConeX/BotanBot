@@ -2523,7 +2523,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
       ab1=sklz.find_index{|q| q.type=='Ability' && q.fullName==char[i].abilities[0][-1]} unless char[i].abilities.length<1
       ab1=sklz[ab1] unless ab1.nil?
       ab2=nil
-      ab2=sklz.find_index{|q| q.type=='Ability' && q.fullname==char[i].abilities[1][-1]} unless char[i].abilities.length<2
+      ab2=sklz.find_index{|q| q.type=='Ability' && q.fullName==char[i].abilities[1][-1]} unless char[i].abilities.length<2
       ab2=sklz[ab2] unless ab2.nil?
       ab3=nil
       ab3=sklz.find_index{|q| q.type=='Ability' && q.fullName==char[i].abilities[2][-1]} unless char[i].abilities.length<3
