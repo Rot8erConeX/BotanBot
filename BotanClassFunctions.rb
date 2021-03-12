@@ -818,6 +818,7 @@ class DLWyrmprint
   def multiprintText
     return nil unless self.isMultiprint?
     pr=$wyrmprints.reject{|q| !q.name.include?("#{@name} ")}.map{|q| q.name.gsub("#{@name} ",'')}.uniq
+    pr=$wyrmprints.reject{|q| !q.name.include?("#{@name} ")}.map{|q| q.name.gsub("#{@name} ",'').gsub('(','').gsub(')','')}.uniq if ['Her Beloved','Mask of Determination'].include?(@name)
     str="This print entry only exists to contain the combined art of the #{@name} series of wyrmprints.  For individual pieces of this series, use their subtitles:\n#{pr.join("\n")}"
     str="\n#{str}" if !@obtain.nil? && @obtain.length>0
     return str
@@ -834,7 +835,7 @@ class DLWyrmprint
     l=1
     l=2 if has_any?(['mub','unbind','unbound','refined','refine','refinement','2ub','3ub'],args)
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Wyrmprints/#{dispname}_#{l}.png"
-    if @name.split(' (')[-1][-9,9]=="'s Boon)"
+    if @name.split(' (')[-1][-8,8]=="'s Boon)"
       m=false
       IO.copy_stream(open(art), "#{$location}devkit/DLTemp#{Shardizard}.png") rescue m=true
       dispname=@name.split(' (')[0].gsub(' ','_') if File.size("#{$location}devkit/DLTemp#{Shardizard}.png")<=100 || m
