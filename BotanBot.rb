@@ -2313,10 +2313,10 @@ class DLAbility
           list.push(tt)
         end
       end
-      if exlength<=0 && list.reject{|q| q.name.include?('<:Wyrmprint:560542319636381725>')}.length<=0
-        for i in 0...list.length
-          list[i].name=list[i].name.gsub('<:Wyrmprint:560542319636381725>','')
-        end
+    end
+    if exlength<=0 && list.reject{|q| q.name.include?('<:Wyrmprint:560542319636381725>')}.length<=0
+      for i in 0...list.length
+        list[i].name=list[i].name.gsub('<:Wyrmprint:560542319636381725>','')
       end
     end
     unless self.resonance_level(bot).nil? || !onlyone
