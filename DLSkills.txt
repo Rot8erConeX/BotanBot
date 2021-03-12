@@ -2717,6 +2717,7 @@ HP\example\Aura\Increases HP by `x`%\0\y\HealthSkill\
 HP\4%\Aura\Increases HP by 4%\20\n\HealthSkill\
 HP\6%\Aura\Increases HP by 6%\40\n\HealthSkill\
 HP\8%\Aura\Increases HP by 8%\60\n\HealthSkill\
+HP\15%\Aura\Increases HP by 15%\80\n\HealthSkill\
 HP 50% = Defense\4%\Aura\Increases defense by 4% when HP is 50% or above.\20\y\HP50, DefenseSkill\
 HP 50% = Healing\7%\Aura\Increases the potency of recovery skills by 7% when HP is 50% or above.\20\y\HP50, RecoveryPotency\
 HP 70% = Attack Rate\example\Aura\Increases attack rate by `x`% when HP is 70% or above.\0\y\HP70, Speed\
@@ -3276,7 +3277,9 @@ Strength -10% & Strength Debilitator\example\Aura\The user's strength is lowered
 Strength -10% & Strength Debilitator\5%\Aura\The user's strength is lowered by 10% during quests. Grants the user's standard attacks a 10% chance to reduce enemy strength by 5% for 10 seconds. This strength reduction effect will not stack.\60\y\Debuff, StrengthDown\
 Strength -10% & Strength Debilitator\8%\Aura\The user's strength is lowered by 10% during quests. Grants the user's standard attacks a 10% chance to reduce enemy strength by 8% for 10 seconds. This strength reduction effect will not stack.\80\y\Debuff, StrengthDown\
 Strength -10% & Strength Debilitator\10%\Aura\The user's strength is lowered by 10% during quests. Grants the user's standard attacks a 10% chance to reduce enemy strength by 10% for 10 seconds. This strength reduction effect will not stack.\100\y\Debuff, StrengthDown\
+Strength\example\Aura\Increases the user's strength by `x`%.\0\y\StrengthSkill\
 Strength\8%\Aura\Increases the user's strength by 8%.\0\y\StrengthSkill\
+Strength\15%\Aura\Increases the user's strength by 15%.\0\y\StrengthSkill\
 Strength Doublebuff\example\Aura\Increases strength by `x`% for 15 seconds each time a defense up buff is received.\0\y\StrengthSkill, Doublebuff\
 Strength Doublebuff\3%\Aura\Increases strength by 3% for 15 seconds each time a defense up buff is received.\30\y\StrengthSkill, Doublebuff\
 Strength Doublebuff\5%\Aura\Increases strength by 5% for 15 seconds each time a defense up buff is received.\40\y\StrengthSkill, Doublebuff\
