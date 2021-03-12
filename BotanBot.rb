@@ -4445,7 +4445,7 @@ def disp_wyrmprint_stats(bot,event,args=nil,juststats=false)
   f=nil
   mub=0
   mub=1 if has_any?(['mub','unbind','unbound','refined','refine','refinement','2ub','3ub'],evn)
-  if title.length>250
+  if !title.nil? && title.length>250
     h=title.split("\n")
     title=[h[0],'']
     j=0
