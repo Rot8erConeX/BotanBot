@@ -917,8 +917,8 @@ class DLWyrmprint
   
   def class_header(bot,emotesonly=0,includerarity=false,includeobjt=false)
     emtz=[]; str=''
-    if !@availability.nil? && @availability.include?('x')
-      str='<:Dominion:819854169128435742>' if includerarity
+    if !@availability.nil? && @availability.include?('x') && includerarity
+      str='<:Dominion:819854169128435742>'
       emtz.push('<:Dominion:819854169128435742>')
     elsif includerarity
       rar=$rarity_stars[0][@rarity]
@@ -1039,7 +1039,10 @@ class DLWyrmprint
   
   def mini_header(bot)
     c=self.class_header(bot,2)
-    if @affinity.nil?
+    str=''
+    if !@availability.nil? && @availability.nil?
+      str="#{c[0]}**#{@affinity}**'s Boon" unless @affinity.nil?
+    elsif @affinity.nil?
       str="#{c[0]}**#{@amulet}**"
     else
       str="#{c[0]}**#{@affinity}**'s Boon   #{c[1]}**#{@amulet}**"
@@ -1071,6 +1074,7 @@ class DLWyrmprint
         end
       end
     end
+    return nil if str.length<=0
     return str
   end
   
@@ -4466,7 +4470,7 @@ def disp_wyrmprint_stats(bot,event,args=nil,juststats=false)
     str="#{str}\n**Shop Price:** 9,000#{c[4]} per 2UB, 17,000#{c[4]} per MUB" if k.rarity==4
     str="#{str}\n**Shop Price:** 19,000#{c[4]} per 2UB, 37,000#{c[4]} per MUB" if k.rarity==5
     str="#{str}\n**Shop Price:** 25,000#{c[4]} per 2UB, 53,000#{c[4]} per MUB" if k.rarity==6
-    str="#{str}\nThese include the cost of buying, and the cost of unbinding." if k.rarity>2
+    str="#{str}\nThese include the cost of buying, and the cost of unbinding." if k.rarity>2 && !k.availability.include?('x')
   end
   create_embed(event,[hdr,title],str,k.disp_color,ftr,k.thumbnail(mub))
 end
