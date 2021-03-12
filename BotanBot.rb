@@ -2011,10 +2011,8 @@ class DLAbility
   
   def nihilimmune=(val)
     @nihilimmune=nil
-    unless val.split(', ').length<1
-      @nihilimmune=false if val.split(', ')[1]=='No'
-      @nihilimmune=true if val.split(', ')[1]=='Yes'
-    end
+    @nihilimmune=false if val=='No'
+    @nihilimmune=true if val=='Yes'
   end
   
   def fullName(format=nil,justlast=false,sklz=nil)
