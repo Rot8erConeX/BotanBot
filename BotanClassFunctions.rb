@@ -818,12 +818,11 @@ class DLWyrmprint
   def multiprintText
     return nil unless self.isMultiprint?
     pr=$wyrmprints.reject{|q| !q.name.include?("#{@name} ")}.map{|q| q.name.gsub("#{@name} ",'')}.uniq
-    desc='subtitles'
+    str="This print entry only exists to contain the combined art of the #{@name} series of wyrmprints.  For individual pieces of this series, use their subtitles:\n#{pr.join("\n")}"
     if ['Her Beloved','Mask of Determination'].include?(@name)
-      pr=$wyrmprints.reject{|q| !q.name.include?("#{@name} ")}.map{|q| q.name.gsub("#{@name} ",'').gsub('(','').gsub(')','')}.uniq
-      desc='boons'
+      pr=$wyrmprints.reject{|q| !q.name.include?("#{@name} ")}.map{|q| q.name}.uniq
+      str="This print entry only exists as a disambiguation page for the multiple prints of the same name.  For individual prints, use their boons:\n#{pr.join("\n")}"
     end
-    str="This print entry only exists to contain the combined art of the #{@name} series of wyrmprints.  For individual pieces of this series, use their #{desc}:\n#{pr.join("\n")}"
     str="\n#{str}" if !@obtain.nil? && @obtain.length>0
     return str
   end
