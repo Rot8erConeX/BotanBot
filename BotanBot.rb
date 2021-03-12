@@ -2007,8 +2007,15 @@ class DLAbility
   def weight=(val); @weight=val.to_i; end
   def show=(val); @show=false; @show=true if ['y','yes'].include?(val.downcase); end
   def tags=(val); @tags=[]; @tags=val.split(', ') unless val.nil? || val.length<=0 || val=='-'; end
-  def nihilimmune=(val); @nihilimmune=false; @nihilimmune=true if !val.nil? && ['y','yes'].include?(val.downcase); end
   def objt; return 'Ability'; end
+  
+  def nihilimmune=(val)
+    @nihilimmune=nil
+    unless val.split(', ').length<1
+      @nihilimmune=false if val.split(', ')[1]=='No'
+      @nihilimmune=true if val.split(', ')[1]=='Yes'
+    end
+  end
   
   def fullName(format=nil,justlast=false,sklz=nil)
     x="#{@name}"
@@ -5531,7 +5538,8 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
   end
   str="#{str}\n\n#{str2.join("\n")}" if str2.length>0
   title='~~Not immune to Nihil~~'
-  title='**Immune to Nihil**' if k[0].nihilimmune
+  title='**Immune to Nihil**' if k[0].nihilimmune==true
+  title='Partially immune to Nihil' if k[0].nihilimmune.nil?
   m=hdr.length+str.length+title.length
   if title.length>250
     h=title.split("\n")
