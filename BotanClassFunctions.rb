@@ -810,6 +810,8 @@ class DLWyrmprint
   def isMultiprint?
     return true if @name=='Wily Warriors'
     return true if @name=='Greatwyrm'
+    return true if @name=='Her Beloved'
+    return true if @name=='Mask of Determination'
     return false
   end
   
@@ -822,6 +824,7 @@ class DLWyrmprint
   end
   
   def rar_row(r=0)
+    return '<:Dominion:819854169128435742>' if !@availability.nil? && @availability.include?('x')
     return generate_rarity_row(@rarity,0,@games[0])
   end
   
@@ -831,11 +834,19 @@ class DLWyrmprint
     l=1
     l=2 if has_any?(['mub','unbind','unbound','refined','refine','refinement','2ub','3ub'],args)
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Wyrmprints/#{dispname}_#{l}.png"
+    if @name.split(' (')[-1][-9,9]=="'s Boon)"
+      m=false
+      IO.copy_stream(open(art), "#{$location}devkit/DLTemp#{Shardizard}.png") rescue m=true
+      dispname=@name.split(' (')[0].gsub(' ','_') if File.size("#{$location}devkit/DLTemp#{Shardizard}.png")<=100 || m
+    end
+    art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Wyrmprints/#{dispname}_#{l}.png"
     emtz=['','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>']
     emtz=['','<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>'] if @games[0]=='FEH'
     halfemote="\u200B  \u200B  \u200B  \u200B"
-    disp="#{halfemote*(4-@rarity) if @rarity<4}#{" \u200B" if @rarity<3}#{self.rar_row}"
-    disp="#{disp}\n#{"#{halfemote} \u200B" if @rarity==5}#{emtz[l]*4}"
+    disprar=@rarity*1
+    disprar=2 if !@availability.nil? && @availability.include?('x')
+    disp="#{halfemote*(4-disprar) if disprar<4}#{" \u200B" if disprar<3}#{self.rar_row}"
+    disp="#{disp}\n#{"#{halfemote*(disprar-4)} \u200B" if disprar>=5}#{emtz[l]*4}"
     return [art,disp]
   end
   
@@ -2338,6 +2349,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
     ign=true if ['share','shared','skillshare','shareskill'].include?(args[i].downcase)
     rar.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<$max_rarity.max+1
     rar.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<$max_rarity.max+1
+    rar.push('x') if ['x'].include?(args[i].downcase)
     affinities.push('Crown') if ['queen','crown','queens','crowns','crowned'].include?(args[i].downcase)
     affinities.push('Axe') if ['hatchet','axs','axes','hatchets','ax','axe'].include?(args[i].downcase)
     affinities.push('Sword') if ['duel','dual','swords','sword'].include?(args[i].downcase)
@@ -2381,9 +2393,15 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
   emo=[]
   char=[] if ign
   if rar.length>0
-    char=char.reject{|q| !rar.include?(q.rarity)}.uniq
-    search.push("*Rarities*: #{rar.map{|q| "#{q}#{$rarity_stars[0][q]}"}.join(', ')}")
-    emo.push($rarity_stars[0][rar[0]]) if rar.length<2
+    char=char.reject{|q| !rar.include?(q.rarity) && !(rar.include?('x') && !q.availability.nil? && q.availability.include?('x'))}.uniq
+    search.push("*Rarities*: #{rar.map{|q| "#{"#{q}#{$rarity_stars[0][q]}" unless q=='x'}#{'<:Dominion:819854169128435742>' if q=='x'}"}.join(', ')}")
+    if rar.length==1
+      if rar[0]=='x'
+        emo.push('<:Dominion:819854169128435742>')
+      else
+        emo.push($rarity_stars[0][rar[0]]) if rar.length<2
+      end
+    end
   end
   if affinities.length>0
     aff=['Crown','Axe','Sword','Bow','Dragon','Lance','Eagle','Wolf','Bull','Serpent','Staff']
@@ -3676,7 +3694,8 @@ def display_wyrmprints(bot,event,args=nil)
         flds.push([generate_rarity_row(i,0,''),char.reject{|q| q.rarity !=i}.map{|q| q.name}.uniq.join("\n")])
         mrar.push(i)
       end
-      flds.push(['Unknown rarity',char.reject{|q| mrar.include?(q.rarity)}.map{|q| q.name}.uniq.join("\n")])
+      flds.push(['<:Dominion:819854169128435742>',char.reject{|q| q.availability.nil? || !q.availability.include?('x')}.map{|q| q.name}.uniq.join("\n")])
+      flds.push(['Unknown rarity',char.reject{|q| mrar.include?(q.rarity) || (!q.availability.nil? && q.availability.include?('x'))}.map{|q| q.name}.uniq.join("\n")])
     elsif char.map{|q| q.amulet}.uniq.length>1
       flds=[]
       flds.push(['<:Type_Attack:532107867520630784>Attack',char.reject{|q| q.amulet !='Attack'}.map{|q| q.name}.uniq.join("\n")])
@@ -4674,7 +4693,7 @@ def disp_art(bot,event,args=nil)
   ftr=nil
   str=''
   if k.is_a?(DLWyrmprint)
-    title=nil if k.is_a?(DLWyrmprint)
+    title=nil
     str=mx[1]
     if k.charas.nil?
     elsif has_any?(['mub','unbind','unbound','refined','refine','refinement','2ub','3ub'],evn)
@@ -5438,7 +5457,7 @@ def print_overlap_list(event,args,bot)
   for i in 0...k.length
     m=1
     m=0 if k[i].rarity>4
-    m=2 if !k[i].availbility.nil? && k[i].availability.include?('x')
+    m=2 if !k[i].availability.nil? && k[i].availability.include?('x')
     if k4.length>=maxslots
       if limit[0]
         str=extend_message(str,"~~#{k[i].name}#{k[i].emotes(bot)}~~",event)
@@ -5452,16 +5471,20 @@ def print_overlap_list(event,args,bot)
         str=extend_message(str,"~~#{k[i].name}#{k[i].emotes(bot)}~~",event)
       else
         limit[m+1]=true
-        str=extend_message(str,"~~#{k[i].name}#{k[i].emotes(bot)}~~ - #{['gold','silver','extra'][m]} slot limit reached",event)
+        str=extend_message(str,"~~#{k[i].name}#{k[i].emotes(bot)}~~ - #{['gold','silver','X'][m]} slot limit reached",event)
       end
     else
       silvergold[m]+=1
       k4.push(k[i].clone)
-      str=extend_message(str,"#{['<:Fill_Gold:759999913962110978>','<:Fill_Silver:759999914062774302>','(x)'][m]} **#{k[i].name}#{k[i].emotes(bot)}**",event)
+      str=extend_message(str,"#{['<:Fill_Gold:759999913962110978>','<:Fill_Silver:759999914062774302>','<:Dominion:819854169128435742>'][m]} **#{k[i].name}#{k[i].emotes(bot)}**",event)
     end
   end
   str2=[]
-  str2.push("#{k4[0].rarity}#{$rarity_stars[0][k4[0].rarity]}") if k4.map{|q| q.rarity}.uniq.length<=1
+  if k.reject{|q| !q.availability.nil? && q.availability.include?('x')}.length<=0
+    str2.push('<:Dominion:819854169128435742>')
+  elsif k.reject{|q| q.availability.nil? || !q.availability.include?('x')}.length<=0
+    str2.push("#{k4[0].rarity}#{$rarity_stars[0][k4[0].rarity]}") if k4.map{|q| q.rarity}.uniq.length<=1
+  end
   moji=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "Affinity_#{k4[0].affinity}"}
   str2.push("#{moji[0].mention unless moji.length<=0}#{k4[0].affinity}") if k4.map{|q| q.affinity}.uniq.length<=1 && !k4[0].affinity.nil?
   moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Type_#{k4[0].amulet.gsub('Healer','Healing')}"}
@@ -5702,6 +5725,7 @@ def upgrade_mats(event,args,bot,forcespiral=false)
     f.push(['Ability Materials',"#{k.ability_mats.map{|q| q.join(' x')}.join("\n")}\n\nCost: #{m[4]}<:Resource_Rupies:532104504372363274>"]) unless k.ability_mats.nil? || k.ability_mats.length<=0
     f.push(['WeaponBonus Materials',"#{k.bonus_mats.map{|q| q.join(' x')}.join("\n")}\n\nCost: #{m[5]}<:Resource_Rupies:532104504372363274>"]) unless k.bonus_mats.nil? || k.bonus_mats.length<=0
     f.push(['Refinement Materials',"#{k.refinement_mats.map{|q| q.join(' x')}.join("\n")}\n\nCost: #{m[6]}<:Resource_Rupies:532104504372363274>"]) unless k.refinement_mats.nil? || k.refinement_mats.length<=0
+    f.push(['<:Dominion:819854169128435742> Materials',"#{k.x_mats.map{|q| q.join(' x')}.join("\n")}\n\nCost: #{m[7]}<:Resource_Rupies:532104504372363274>"]) unless k.x_mats.nil? || k.x_mats.length<=0
     str=''
     str='No materials required' if f.length<=0
     create_embed(event,"__**#{k.name}**#{k.emotes(bot)}'s materials__",str,k.disp_color,nil,k.thumbnail,f)
