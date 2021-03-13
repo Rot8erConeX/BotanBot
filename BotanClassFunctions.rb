@@ -4546,7 +4546,7 @@ def sort_shareable_skills(event,args,bot,forcelist=false)
     if char[i].name.include?(' *[S1/2]*') || char[i].name.include?(' *[S2]*')
       skz=sklz.find_index{|q| q.name==char[i].skills[1]}
       unless skz.nil?
-        skz=sklz[skz].map{|q| q}
+        skz=sklz[skz].clone
         skz.sort_data=["#{char[i].emotes(bot)}#{char[i].name.split(' *[')[0]} *[S2]*: #{skz.name} - #{skz.sharing[0]}<:SkillShare:714597012733034547>, #{skz.sharing[1]} SP","#{char[i].name.split(' *[')[0]} - #{skz.name}",skz.sharing[0],skz.sharing[1]]
         char2.push(skz)
       end
