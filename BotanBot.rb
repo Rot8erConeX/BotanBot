@@ -1092,8 +1092,11 @@ class DLWyrmprint
       unless self.isMultiprint?
         m=@abilities.map{|q| q}
         for i in 0...m.length
+          m2=''
+          m2="~~(empty)~~ \u2192 " if m[i][0]=='-'
+          m[i]=m[i].reject{|q| q=='-'}
           if m[i].length<3
-            if m[i][0]==m[i][1]
+            if m[i].length<2 || m[i][0]==m[i][1]
               m[i]=m[i][0]
             elsif m[i][0].split(' ')[0,m[i][0].split(' ').length-1].join(' ')==m[i][1].split(' ')[0,m[i][1].split(' ').length-1].join(' ')
               m[i]="#{m[i][0]}/#{m[i][1].split(' ')[-1]}"
@@ -1113,6 +1116,7 @@ class DLWyrmprint
           else
             m[i]=m[i][0,3].join(" \u2192 ")
           end
+          m[i]="#{m2}#{m[i]}"
         end
         if m.length<=0
           str="#{str}\n\n__**Abilities**__" if !@affinity.nil? && $resonance.map{|q| q[0]}.include?(@affinity)
@@ -1123,18 +1127,18 @@ class DLWyrmprint
     else
       str="__#{c[2]*4} **Level #{l[0]}**__"
       str="#{str}\n#{c[0]}*HP:*\u00A0\u00A0#{@hp[0]}  #{c[1]}*Str:*\u00A0\u00A0#{@str[0]}"
-      str="#{str}\n#{@abilities.map{|q| q[0]}.join("\n")}" unless @abilities.length<=0
+      str="#{str}\n#{@abilities.map{|q| q[0]}.reject{|q| q=='-'}.join("\n")}" unless @abilities.length<=0
       unless @hp.length<3 || @str.length<3
         s=[@hp[1]*1,@str[1]*1]
         s[0]=@hp[0]+(@hp[2]-@hp[0])*(l[1]-1)/(l[2]-1) if s[0]<=0
         s[1]=@str[0]+(@str[2]-@str[0])*(l[1]-1)/(l[2]-1) if s[1]<=0
         str="#{str}\n\n__#{c[3]*2}#{c[2]*2} **Level #{l[1]}**__"
         str="#{str}\n#{c[0]}*HP:*\u00A0\u00A0#{s[0]} #{c[1]}*Str:*\u00A0\u00A0#{s[1]}"
-        str="#{str}\n#{@abilities.map{|q| q[1]}.join("\n")}" unless @abilities.length<=0
+        str="#{str}\n#{@abilities.map{|q| q[1]}.reject{|q| q=='-'}.join("\n")}" unless @abilities.length<=0
       end
       str="#{str}\n\n__#{c[3]*4} **Level #{l[2]}**__"
       str="#{str}\n#{c[0]}*HP:*\u00A0\u00A0#{@hp[-1]} #{c[1]}*Str:*\u00A0\u00A0#{@str[-1]}"
-      str="#{str}\n#{@abilities.map{|q| q[-1]}.join("\n")}" unless @abilities.length<=0
+      str="#{str}\n#{@abilities.map{|q| q[-1]}.reject{|q| q=='-'}.join("\n")}" unless @abilities.length<=0
     end
     ftr=nil
     if !self.isMultiprint? && !@affinity.nil? && $resonance.map{|q| q[0]}.include?(@affinity)
