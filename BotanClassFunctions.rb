@@ -570,27 +570,27 @@ class DLAdventurer
           k2[-2]=@sp_override[0][-2] if @sp_override[0].length>2
         end
         if @sp_override[0].length>3
-         for i2 in 1...@sp_override[0].length-2
-           ff.push("*#{m[i2]} Hit:* #{@sp_override[0][i2]}")
-           if @sp_override[0][i2].to_i.to_s==@sp_override[0][i2] && t>=0
-             t+=@sp_override[0][i2].to_i
-           else
-             t=-1
-           end
-         end
-         if t<0
-           ff.push("~~*Total cannot be calculated dynamically*~~")
-         else
-           ff.push("\u30FC *Total:* #{t}")
-         end
-         ff.push("\n**Dash Attack:** #{@sp_override[0][-2]}")
-         ff.push("\n**Force Strike:** #{@sp_override[0][-1]}")
-         f=nil
+          for i2 in 1...@sp_override[0].length-2
+            ff.push("*#{m[i2]} Hit:* #{@sp_override[0][i2]}")
+            if @sp_override[0][i2].to_i.to_s==@sp_override[0][i2] && t>=0
+              t+=@sp_override[0][i2].to_i
+            else
+              t=-1
+            end
+          end
+          if t<0
+            ff.push("~~*Total cannot be calculated dynamically*~~")
+          else
+            ff.push("\u30FC *Total:* #{t}")
+          end
+          ff.push("\n**Dash Attack:** #{@sp_override[0][-2]}")
+          ff.push("**Force Strike:** #{@sp_override[0][-1]}")
+          f=nil
           disp=ff.join("\n")
         elsif @weapon=='Manacaster'
           disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}#{"\n*Third Hit:* #{k2[2]}" if k2.length>4 && k2[2]>0}\n\u30FC *Total:* #{k2[0,k2.length-2].inject(0){|sum,x| sum + x }}\n\n**Dash Attack:** #{k2[-2]}\n**Force Strike** #{k2[-1]}"
         else
-          disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n\u30FC *Total: #{k2[7]}*\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike** #{k2[6]}"
+          disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n\u30FC *Total: #{k2[7]}*\n\n**Dash Attack:** #{k2[5]}\n**Force Strike** #{k2[6]}"
         end
       else
         for i2 in 0...k2.length-2
@@ -629,7 +629,7 @@ class DLAdventurer
               ff.push("\u30FC *Total:* #{t}")
             end
             ff.push("\n**Dash Attack:** #{@sp_override[i][-2]}")
-            ff.push("\n**Force Strike:** #{@sp_override[i][-1]}")
+            ff.push("**Force Strike:** #{@sp_override[i][-1]}")
             if @sp_override[i][0][0,1]=='*' && i==0
               disp=ff.join("\n")
               k2[5]=@sp_override[i][-2]
@@ -687,31 +687,34 @@ class DLAdventurer
             ff.push("*#{m[i2]} Hit:* #{@damage_override[0][i2]}#{'%' if @damage_override[0][i2].to_i.to_s==@damage_override[0][i2]}")
           end
           ff.push("\n**Dash Attack:** #{@damage_override[0][-2]}#{'%' if @damage_override[0][-2].to_i.to_s==@damage_override[0][-2]}")
-          ff.push("\n**Force Strike:** #{@damage_override[0][-1]}#{'%' if @damage_override[0][-1].to_i.to_s==@damage_override[0][-1]}")
+          ff.push("**Force Strike:** #{@damage_override[0][-1]}#{'%' if @damage_override[0][-1].to_i.to_s==@damage_override[0][-1]}")
           disp=ff.join("\n")
         elsif @weapon=='Manacaster'
-          disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}#{"\n*Third Hit:* #{k2[2]}" if k2.length>4 && k2[2].to_i>0}\n\n**Dash Attack:** #{k2[-2]}\n\n**Force Strike:** #{k2[-1]}"
+          disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}#{"\n*Third Hit:* #{k2[2]}" if k2.length>4 && k2[2].to_i>0}\n\n**Dash Attack:** #{k2[-2]}\n**Force Strike:** #{k2[-1]}"
         else
-          disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike:** #{k2[6]}"
+          disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n\n**Dash Attack:** #{k2[5]}\n**Force Strike:** #{k2[6]}"
         end
       elsif @weapon=='Manacaster'
+        ff=[]
         for i2 in 0...k2.length-2
-          ff.push("*#{m[i2]} Hit:* #{k2[i2]}#{'%' if k2[i2].to_i.to_s==k2[i2]}")
+          ff.push("*#{m[i2+1]} Hit:* #{k2[i2]}#{'%' if k2[i2].to_i.to_s==k2[i2]}")
         end
         disp=ff.join("\n")
         disp="#{disp}\n\n**Dash Attack:** #{k2[-2]}#{'%' if k2[-2].to_i.to_s==k2[-2]}\n**Force Strike:** #{k2[-1]}#{'%' if k2[-1].to_i.to_s==k2[-1]}"
       else
-        disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n\n**Dash Attack:** #{k2[5]}\n\n**Force Strike:** #{k2[6]}"
+        disp="__**Combo:**__\n*First Hit:* #{k2[0]}\n*Second Hit:* #{k2[1]}\n*Third Hit:* #{k2[2]}\n*Fourth Hit:* #{k2[3]}\n*Fifth Hit:* #{k2[4]}\n\n**Dash Attack:** #{k2[5]}\n**Force Strike:** #{k2[6]}"
       end
       if @damage_override.length>1
+        sltz=[5,6]
+        sltz=[-2,-1] if @weapon=='Manacaster'
         for i in 0...@damage_override.length
           if @damage_override[i].length>1
             ff=["__**Combo**__"]
             for i2 in 1...@damage_override[i].length-2
               ff.push("*#{m[i2]} Hit:* #{@damage_override[i][i2]}#{'%' if @damage_override[i][i2].to_i.to_s==@damage_override[i][i2]}")
             end
-            ff.push("\n**Dash Attack:** #{@damage_override[i][-2]}#{'%' if @damage_override[i][i2].to_i.to_s==@damage_override[i][i2]}") unless @damage_override[i][-2].to_s.gsub('%','')==k2[5].to_s.gsub('%','')
-            ff.push("\n**Force Strike:** #{@damage_override[i][-1]}#{'%' if @damage_override[i][i2].to_i.to_s==@damage_override[i][i2]}") unless @damage_override[i][-1].to_s.gsub('%','')==k2[6].to_s.gsub('%','')
+            ff.push("\n**Dash Attack:** #{@damage_override[i][-2]}#{'%' if @damage_override[i][i2].to_i.to_s==@damage_override[i][i2]}") unless @damage_override[i][-2].to_s.gsub('%','')==k2[sltz[0]].to_s.gsub('%','')
+            ff.push("#{"\n" if @damage_override[i][-2].to_s.gsub('%','')==k2[sltz[0]].to_s.gsub('%','')}**Force Strike:** #{@damage_override[i][-1]}#{'%' if @damage_override[i][i2].to_i.to_s==@damage_override[i][i2]}") unless @damage_override[i][-1].to_s.gsub('%','')==k2[sltz[1]].to_s.gsub('%','')
             if @damage_override[i][0][0,1]=='*' && i==0
               disp=ff.join("\n")
               k2[5]=@damage_override[i][-2]
