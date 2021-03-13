@@ -326,7 +326,7 @@ class DLAdventurer < DLSentient
     emtz.push(moji[0].mention) unless moji.length<=0
     str="#{str}#{"\n" if str.length>0}#{moji[0].mention unless moji.length<=0} **#{@element}**"
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{@weapon}"}
-    moji=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "Weapon_#{@weapon2}"} unless @weapon2.nil?
+    moji=bot.server(620710758841450529).emoji.values.reject{|q| q.name != "Weapon_#{@weapon2.gsub(' ','_')}"} unless @weapon2.nil?
     if @games[0]=='FEH'
       color='Colorless'; wpn='Unknown'; srv=443172595580534784
       color='Red' if ['Flame'].include?(@element)
