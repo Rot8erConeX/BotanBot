@@ -4165,6 +4165,8 @@ def add_new_alias(bot,event,newname,unit,modifier=nil,modifier2=nil,mode=0)
   str2=''
   if event.server.nil?
     str2="**PM with dev:**"
+  elsif Shardizard<0
+    str2="**Server:** #{event.server.name} (#{event.server.id}) - Smol Shard\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:**"
   else
     str2="**Server:** #{event.server.name} (#{event.server.id}) - #{shard_data(0)[Shardizard]} Shard\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:**"
   end
@@ -6395,6 +6397,8 @@ bot.command([:deletealias,:removealias]) do |event, name|
   str=''
   if event.server.nil?
     str="**PM with dev:**"
+  elsif Shardizard<0
+    str="**Server:** #{event.server.name} (#{event.server.id}) - Smol Shard\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:**"
   else
     str="**Server:** #{event.server.name} (#{event.server.id}) - #{shard_data(0)[Shardizard]} Shard\n**Channel:** #{event.channel.name} (#{event.channel.id})\n**User:**"
   end
@@ -7026,9 +7030,14 @@ bot.command(:reload, from: 167657750971547648) do |event|
           end
           nicknames_load(-1)
           b2=$aliases.reject{|q| !q[0].include?('*')}
+          b3=$aliases.reject{|q| q[3].nil? || !q[3].include?(484574202226147334)}
           b=b.reject{|q| b2.map{|q2| [q2[0].gsub('*',''),q2[1],q2[2]]}.include?([q[0],q[1],q[2]])}
+          b=b.reject{|q| b3.map{|q2| [q2[0],q2[1],q2[2]]}.include?([q[0],q[1],q[2]])}
           for i in 0...b2.length
             b.push(b2[i])
+          end
+          for i in 0...b3.length
+            b.push(b3[i])
           end
           b.sort! {|a,b| (spaceship_order(a[0]) <=> spaceship_order(b[0])) == 0 ? ((a[2].downcase <=> b[2].downcase) == 0 ? (a[1].downcase <=> b[1].downcase) : (a[2].downcase <=> b[2].downcase)) : (spaceship_order(a[0]) <=> spaceship_order(b[0]))}
           b=b.map{|q| "#{q.to_s}\n"}
