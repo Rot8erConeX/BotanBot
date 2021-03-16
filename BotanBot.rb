@@ -1817,6 +1817,7 @@ class DLSkill
     unless val.split(', ').length<1
       @nihilimmune=false if val.split(', ')[1]=='No'
       @nihilimmune=true if val.split(', ')[1]=='Yes'
+      @nihilimmune=0 if val.split(', ')[1]=="Yesn't"
     end
   end
   
@@ -2017,6 +2018,7 @@ class DLAbility
     @nihilimmune=nil
     @nihilimmune=false if val=='No'
     @nihilimmune=true if val=='Yes'
+    @nihilimmune=0 if val=="Yesn't"
   end
   
   def fullName(format=nil,justlast=false,sklz=nil)
@@ -5071,10 +5073,12 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
   title="#{title}\n~~Not energizable or inspirable~~" if !k.energize && !k.inspirable?
   if k.nihilimmune==true
     title="#{title}\n**Immune to Nihil**"
-  elsif k.nihilimmune.nil?
+  elsif k.nihilimmune==false
+    title="#{title}\n~~Not immune to Nihil~~"
+  elsif !k.nihilimmune.nil?
     title="#{title}\nPartially immune to Nihil"
   else
-    title="#{title}\n~~Not immune to Nihil~~"
+    title="#{title}\n(Nihil interaction not yet stored)"
   end
   lng=title.length
   if title.length>250
@@ -5541,9 +5545,15 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
     str2.push("**Per-adventurer wyrmprint stack limit:** #{f[f.find_index{|q| q[0]=='Element Res'}][1]}")
   end
   str="#{str}\n\n#{str2.join("\n")}" if str2.length>0
-  title='~~Not immune to Nihil~~'
-  title='**Immune to Nihil**' if k[0].nihilimmune==true
-  title='Partially immune to Nihil' if k[0].nihilimmune.nil?
+  if k[0].nihilimmune==true
+    title="**Immune to Nihil**"
+  elsif k[0].nihilimmune==false
+    title="~~Not immune to Nihil~~"
+  elsif !k[0].nihilimmune.nil?
+    title="Partially immune to Nihil"
+  else
+    title="(Nihil interaction not yet stored)"
+  end
   m=hdr.length+str.length+title.length
   if title.length>250
     h=title.split("\n")
