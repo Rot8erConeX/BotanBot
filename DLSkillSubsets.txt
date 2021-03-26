@@ -248,6 +248,7 @@
 ["StatusDoublebuff", ["statusdoublebuff"], "Askillity"]
 ["Stormlash", ["stormlash", "crashwind"], "Askillity"]
 ["StrDownPunisher", ["strdownpunisher", "strdownpunish", "defdownpunishment", "strengthdownpunish", "strengthdownpunisher", "strengthdownpunishment", "strengthdownpunish", "strengthdownpunisher", "strengthdownpunishment", "reducedstrengthpunish", "reducedstrengthpunisher"], "Askillity"]
+["StrengthAmp", ["strengthamp", "amp", "ampstrength"], "Askillity"]
 ["StrengthDown", ["atkdown", "attackdown", "attdown", "strdown", "strengthdown"], "Askillity"]
 ["StrengthDown", ["strdown", "strengthdown", "strengthdebuff", "strdebuff"], "Askillity"]
 ["StrengthSkill", ["skillstr", "skillstrength", "strengthskill", "strskill", "strstring"], "Askillity"]
