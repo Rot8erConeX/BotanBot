@@ -4565,7 +4565,7 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false,x=nil)
     m2=k.promoted_from
     mmm2=nil
     wpnz=$weapons.map{|q| q.clone}
-    mmm2=wpnz.find_index{|q| q.type==k.type && q.element==k.element && q.availability.inculde?('m')} if k.availability.include?('a')
+    mmm2=wpnz.find_index{|q| q.type==k.type && q.element==k.element && q.availability.include?('m')} if k.availability.include?('a')
     mmm2=wpnz.find_index{|q| q.type==k.type && q.element==k.element && q.rarity==5} if k.availability.include?('h')
     if s2s
       str2="#{str2}#{"\n" unless m.length<=1}\n\n**Promotes from: #{m2.emotes(bot)}*#{m2.name}* **#{"\n*Smithy level required:* #{k.smith_level}" unless k.availability.include?('h')}\n*Assembly cost:* #{longFormattedNumber(k.costs[0])}#{k.stat_emotes[4]}\n*Required mats:* #{k.craft_mats.map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}" unless m2.nil?
