@@ -3573,11 +3573,11 @@ def all_commands(include_nil=false,permissions=-1)
      'status','ailment','skill','art','limit','limits','stack','stacks','wxp','wexp','wlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp','weaponlevel','wrxp','wrexp','wrlevel',
      'wyrmxp','wyrmexp','wyrmxp','wyrmlevel','bxp','bexp','blevel','dbxp','dbexp','dblevel','bondlevel','bondxp','bondexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','advxp',
      'advexp','advlevel','alevel','axp','aexp','plxp','plexp','pllevel','plevel','pxp','pexp','xp','exp','level','next','schedule','tomorrow','tommorrow','tomorow','tommorow','today',
-     'now','todayindl','today_in_dl','daily','dailies','reset','shop','store','ruin','ruins','roost','alt','alts','banners','banner','facility','faculty','fac','mat','material','item',
+     'now','todayindl','today_in_dl','daily','dailies','reset','shop','store','ruin','ruins','roost','alt','alts','banners','banner','facility','faculty','fac','mat','material',
      'addalias','alias','deletealias','removealias','serveraliases','saliases','aliases','checkaliases','seealiases','seegroups','groups','checkgroups','team','backpack','mats','sp',
      'materials','node','nodes','spiral','dmg','damage','combo','sort','list','skillshare','skilshare','share','shared','prints','weapprints','wepprints','weaponprints','wpnprints',
      'weaprints','weprints','weapprint','wepprint','weaponprint','wpnprint','weaprint','weprint','synergy','synergize','find','search','lookup','ability','abil','aura','coability',
-     'coabil','coab','co','chain','cca','cc','chaincoab','whybotan']
+     'coabil','coab','co','chain','cca','cc','chaincoab','item','whybotan']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -4743,7 +4743,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil,x=nil)
   m2=k.promoted_from
   mmm2=nil
   wpnz=$weapons.map{|q| q.clone}
-  mmm2=wpnz.find_index{|q| q.type==k.type && q.element==k.element && q.availability.inculde?('m')} if k.availability.include?('a')
+  mmm2=wpnz.find_index{|q| q.type==k.type && q.element==k.element && q.availability.include?('m')} if k.availability.include?('a')
   mmm2=wpnz.find_index{|q| q.type==k.type && q.element==k.element && q.rarity==5} if k.availability.include?('h')
   cost=0
   cost+=val*k.costs[0]
