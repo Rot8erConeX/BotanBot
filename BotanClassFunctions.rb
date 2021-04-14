@@ -1350,6 +1350,18 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false,preload=nil)
       d.thumbforce='Dragons/Midgardsormr'
       disp_dragon_stats(bot,event,args,juststats,d)
       return nil
+    elsif (has_any?(args,['human','humanoid','man']) && has_any?(args,['mercury','merc'])) || has_any?(args,['humanoidmercury','humercury','humanmercury','humanmerc','humanoidmerc'])
+      d=drg.find_index{|q| q.name=='Mercury'}
+      d=drg[d].clone
+      a=adv.find_index{|q| q.name=='Humanoid Mercury'}
+      d.rarity="#{adv[a].rarity}#{adv[a].availability}"
+      d.name='Mercury (not-humanoid)'
+      d.hp='0, 0'; d.str='0, 0'; d.sell_price='0, 0'
+      d.skills='Unknown'
+      d.auras=''
+      d.thumbforce="Adventurers/Humanoid_Mercury_5"
+      disp_dragon_stats(bot,event,args,juststats,d)
+      return nil
     elsif (has_any?(args,['shiny']) && has_any?(args,['nyarlathotep'])) || has_any?(args,['shinynyarlathotep','lathna'])
       d=drg.find_index{|q| q.name=='Nyarlathotep'}
       d=drg[d].clone
