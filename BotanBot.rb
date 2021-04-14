@@ -3630,9 +3630,15 @@ def find_data_ex(callback,name,event,fullname=false,ext=false,includematch=false
   return [k,name] if includematch && !k.nil?
   return k unless k.nil?
   args=name.split(' ')
+  skyp=false
+  skyp=true if callback==:find_ability
   for i in 0...args.length
     for i2 in 0...args.length-i
       k=method(callback).call(args[i,args.length-i-i2].join(' '),event,true,ext)
+      intentionalfail=false
+      intentionalfail=true if k.is_a?(Array) && ['Strength','Defense','HP'].include?(k[0].name)
+      intentionalfail=true if k.is_a?(DLAbility) && ['Strength','Defense','HP'].include?(k.name)
+      k=nil if skyp && !fullname && intentionalfail
       return [k,args[i,args.length-i-i2].join(' ')] if includematch && !k.nil? && args[i,args.length-i-i2].length>0
       return k if !k.nil? && args[i,args.length-i-i2].length>0
     end
@@ -3645,6 +3651,13 @@ def find_data_ex(callback,name,event,fullname=false,ext=false,includematch=false
   for i in 0...args.length
     for i2 in 0...args.length-i
       k=method(callback).call(args[i,args.length-i-i2].join(' '),event,false,ext)
+      return [k,args[i,args.length-i-i2].join(' ')] if includematch && !k.nil? && args[i,args.length-i-i2].length>0
+      return k if !k.nil? && args[i,args.length-i-i2].length>0
+    end
+  end
+  for i in 0...args.length
+    for i2 in 0...args.length-i
+      k=method(callback).call(args[i,args.length-i-i2].join(' '),event,true,ext)
       return [k,args[i,args.length-i-i2].join(' ')] if includematch && !k.nil? && args[i,args.length-i-i2].length>0
       return k if !k.nil? && args[i,args.length-i-i2].length>0
     end
