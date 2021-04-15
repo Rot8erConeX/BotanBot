@@ -1357,7 +1357,7 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false,preload=nil)
       d.rarity="#{adv[a].rarity}#{adv[a].availability}"
       d.name='Mercury (not-humanoid)'
       d.hp='0, 0'; d.str='0, 0'; d.sell_price='0, 0'
-      d.skills='Unknown'
+      d.skills='Aqua Spiral'
       d.auras=''
       d.thumbforce="Adventurers/Humanoid_Mercury_5"
       disp_dragon_stats(bot,event,args,juststats,d)
