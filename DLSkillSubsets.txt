@@ -442,3 +442,4 @@
 ["Rokkan", ["rokkan", "rokka", "rock", "rocka", "rocker", "rokker"], "Race"]
 ["Shikigami", ["shikigami", "fox", "kitsune"], "Race"]
 ["Sylvan", ["bun", "bunnies", "bunny", "bunnys", "buns", "sylvan", "sylvans", "sylveon", "sylveons", "sylvian", "sylvians"], "Race"]
+["Vampire", ["vampire", "vamp", "bat", "bloodsucker", "leech", "bloodbank", "actually3000yearsold"], "Race"]
