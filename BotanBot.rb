@@ -2166,11 +2166,11 @@ class DLAbility
           mm=m[0,m.length-1].join(' ')
           m=m[-1].split('/').map{|q| "#{mm} #{'+' if q.include?('%')}#{q.gsub('+','')}"}
           t.push("#{adv[i].class_header(bot,2)[0]}#{adv[i].name} [min]") if m[0]==self.fullName
-          t.push("#{adv[i].class_header(bot,2)[0]}<:DLKey:692445248407863376>#{adv[i].name} [min]") if m[0]=="#{adv[i].element} #{self.fullName}"
-          t.push("#{adv[i].class_header(bot,2)[1]}<:DLKey:692445248407863376>#{adv[i].name} [min]") if m[0]=="#{adv[i].weapon} #{self.fullName}"
+          t.push("#{adv[i].class_header(bot,2)[0]}<:DLKey:692445248407863376>#{adv[i].name} [min]") if m[0]=="(#{adv[i].element}) #{self.fullName}"
+          t.push("#{adv[i].class_header(bot,2)[1]}<:DLKey:692445248407863376>#{adv[i].name} [min]") if m[0]=="(#{adv[i].weapon}) #{self.fullName}"
           t.push("#{adv[i].class_header(bot,2)[0]}#{adv[i].name} [Max]") if m[4]==self.fullName
-          t.push("#{adv[i].class_header(bot,2)[0]}<:DLKey:692445248407863376>#{adv[i].name} [Max]") if m[4]=="#{adv[i].element} #{self.fullName}"
-          t.push("#{adv[i].class_header(bot,2)[1]}<:DLKey:692445248407863376>#{adv[i].name} [Max]") if m[4]=="#{adv[i].weapon} #{self.fullName}"
+          t.push("#{adv[i].class_header(bot,2)[0]}<:DLKey:692445248407863376>#{adv[i].name} [Max]") if m[4]=="(#{adv[i].element}) #{self.fullName}"
+          t.push("#{adv[i].class_header(bot,2)[1]}<:DLKey:692445248407863376>#{adv[i].name} [Max]") if m[4]=="(#{adv[i].weapon}) #{self.fullName}"
         end
         if t.length>0
           for i2 in 0...t.length
@@ -2284,20 +2284,20 @@ class DLAbility
           end
           for i3 in 0...elemo.length
             if adv[i].abilities[i2].length==1
-              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1})" if dispslots}") if adv[i].abilities[i2][0]=="#{elemo[i3][0]} #{self.fullName}"
+              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1})" if dispslots}") if adv[i].abilities[i2][0]=="(#{elemo[i3][0]}) #{self.fullName}"
             elsif adv[i].abilities[i2].length==2
-              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2081)" if dispslots}#{' [min]' unless dispslots}") if adv[i].abilities[i2][0]=="#{elemo[i3][0]} #{self.fullName}"
-              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i].abilities[i2][1]=="#{elemo[i3][0]} #{self.fullName}"
+              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2081)" if dispslots}#{' [min]' unless dispslots}") if adv[i].abilities[i2][0]=="(#{elemo[i3][0]}) #{self.fullName}"
+              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2082)" if dispslots}#{' [Max]' unless dispslots}") if adv[i].abilities[i2][1]=="(#{elemo[i3][0]}) #{self.fullName}"
             elsif adv[i].abilities[i2].length==3
-              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2081)" if dispslots}#{' [min]' unless dispslots}") if adv[i].abilities[i2][0]=="#{elemo[i3][0]} #{self.fullName}"
-              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2082)" if dispslots}#{' [med]' unless dispslots}") if adv[i].abilities[i2][1]=="#{elemo[i3][0]} #{self.fullName}"
-              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2083)" if dispslots}#{' [Max]' unless dispslots}") if adv[i].abilities[i2][2]=="#{elemo[i3][0]} #{self.fullName}"
+              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2081)" if dispslots}#{' [min]' unless dispslots}") if adv[i].abilities[i2][0]=="(#{elemo[i3][0]}) #{self.fullName}"
+              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2082)" if dispslots}#{' [med]' unless dispslots}") if adv[i].abilities[i2][1]=="(#{elemo[i3][0]}) #{self.fullName}"
+              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2083)" if dispslots}#{' [Max]' unless dispslots}") if adv[i].abilities[i2][2]=="(#{elemo[i3][0]}) #{self.fullName}"
             else
-              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2081)" if dispslots}#{' [min]' unless dispslots}") if adv[i].abilities[i2][0]=="#{elemo[i3][0]} #{self.fullName}"
-              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2082)" if dispslots}") if adv[i].abilities[i2][1]=="#{elemo[i3][0]} #{self.fullName}"
-              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2083)" if dispslots}#{' [med]' unless dispslots}") if adv[i].abilities[i2][2]=="#{elemo[i3][0]} #{self.fullName}"
-              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2084)" if dispslots}") if adv[i].abilities[i2].length>4 && adv[i].abilities[i2][3]=="#{elemo[i3][0]} #{self.fullName}"
-              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2085)" if dispslots}#{' [Max]' unless dispslots}") if adv[i].abilities[i2][-1]=="#{elemo[i3][0]} #{self.fullName}"
+              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2081)" if dispslots}#{' [min]' unless dispslots}") if adv[i].abilities[i2][0]=="(#{elemo[i3][0]}) #{self.fullName}"
+              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2082)" if dispslots}") if adv[i].abilities[i2][1]=="(#{elemo[i3][0]}) #{self.fullName}"
+              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2083)" if dispslots}#{' [med]' unless dispslots}") if adv[i].abilities[i2][2]=="(#{elemo[i3][0]}) #{self.fullName}"
+              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2084)" if dispslots}") if adv[i].abilities[i2].length>4 && adv[i].abilities[i2][3]=="(#{elemo[i3][0]}) #{self.fullName}"
+              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}\u2085)" if dispslots}#{' [Max]' unless dispslots}") if adv[i].abilities[i2][-1]=="(#{elemo[i3][0]}) #{self.fullName}"
             end
           end
         end
@@ -2307,7 +2307,7 @@ class DLAbility
           t.push("<:Wyrmprint:560542319636381725>#{adv[i].name}#{" (A#{i2+1}" if dispslots}") if m[i2]==self.fullName
           if m[i2][0,1]=='('
             for i3 in 0...elemo.length
-              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}" if dispslots}") if m[i2]=="#{elemo[i3][0]} #{self.fullName}"
+              t.push("#{elemo[i3][1]}#{adv[i].name}#{" (A#{i2+1}" if dispslots}") if m[i2]=="(#{elemo[i3][0]}) #{self.fullName}"
             end
           end
         end
@@ -5227,6 +5227,7 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
   k=find_data_ex(:find_ability,args.join(' '),event)
   s2s=false
   s2s=true if safe_to_spam?(event)
+  k=[k] if k.is_a?(DLAbility)
   if forceaura.nil? || k.nil? || k.length<=0
   elsif forceaura=='CoAbility' && s2s
     k=k.reject{|q| q.type !=forceaura && q.type !='Chain'}
