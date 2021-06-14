@@ -42,7 +42,7 @@
   true]
 ["Custom Combo", 
   ["customcombo","combo"], 
-  ["Bellina", "Catherine", "Chelsea(Valentines)", "Gala Alex", "Gala Laxi", "Gala Leif", "Gala Zena", "Joker", "Lily", "Meene", "Mega Man", "Mitsuba", "Mona", "Nadine", "Nevin", "Panther", "Pecorine", "Pinon", "Pipple", "Sophie(Scramble)", "Tiki(Young)", "Tobias", "Valerio"], 
+  ["Bellina", "Catherine", "Chelsea(Valentines)", "Gala Alex", "Gala Laxi", "Gala Leif", "Gala Zena", "Joker", "Lily", "Meene", "Mega Man", "Mitsuba", "Mona", "Nadine", "Nevin", "Panther", "Pecorine", "Pinon", "Pipple", "Sophie(Scramble)", "Tiki(Young)", "Tobias", "Tobias(Faeblessed)", "Valerio"], 
   nil, 
   nil, 
   nil,
