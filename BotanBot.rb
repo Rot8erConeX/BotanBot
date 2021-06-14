@@ -4492,10 +4492,10 @@ def disp_wyrmprint_stats(bot,event,args=nil,juststats=false)
     str="#{str}\n#{k.multiprintText}"
   elsif !k.availability.nil? || !has_any?(['s','z','y','t','w','x'],k.availability)
     c=k.stat_emotes.map{|q| q}
-    str="#{str}\n**Shop Price:** 900#{c[4]} per 2UB, 1,700#{c[4]} per MUB" if k.rarity==3
-    str="#{str}\n**Shop Price:** 9,000#{c[4]} per 2UB, 17,000#{c[4]} per MUB" if k.rarity==4
-    str="#{str}\n**Shop Price:** 19,000#{c[4]} per 2UB, 37,000#{c[4]} per MUB" if k.rarity==5
-    str="#{str}\n**Shop Price:** 25,000#{c[4]} per 2UB, 53,000#{c[4]} per MUB" if k.rarity==6
+    str="#{str}\n**Shop Price:** 900#{c[5]} per 2UB, 1,700#{c[5]} per MUB" if k.rarity==3
+    str="#{str}\n**Shop Price:** 9,000#{c[5]} per 2UB, 17,000#{c[5]} per MUB" if k.rarity==4
+    str="#{str}\n**Shop Price:** 19,000#{c[5]} per 2UB, 37,000#{c[5]} per MUB" if k.rarity==5
+    str="#{str}\n**Shop Price:** 25,000#{c[5]} per 2UB, 53,000#{c[5]} per MUB" if k.rarity==6
     str="#{str}\nThese include the cost of buying, and the cost of unbinding." if k.rarity>2 && !k.availability.include?('x')
   end
   create_embed(event,[hdr,title],str,k.disp_color,ftr,k.thumbnail(mub))
