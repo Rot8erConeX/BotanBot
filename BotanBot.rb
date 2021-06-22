@@ -3620,9 +3620,9 @@ def generate_rarity_row(rar,blanks=0,game='')
   disprar=rar*1
   disprar=blanks*1 if rar<=0
   return "**#{rar}-star**" if rar<0 || rar>$rarity_stars[0].length
-  return "#{FGO_rarity_stars[rar]*([disprar,blanks].min)}#{'<:FGO_rarity_inverted:544568437029208094>'*(blanks-disprar) if blanks>disprar}" if game=='FGO'
-  return "#{FEH_rarity_stars[rar]*([disprar,blanks].min)}#{'<:Icon_Rarity_Empty:631460895851282433>'*(blanks-disprar) if blanks>disprar}" if game=='FEH'
-  return "#{$rarity_stars[0][rar]*([disprar,blanks].min)}#{$rarity_stars[1][rar]*(blanks-disprar) if blanks>disprar}"
+  return "\u200B#{FGO_rarity_stars[rar]*([disprar,blanks].min)}\u200B#{'<:FGO_rarity_inverted:544568437029208094>'*(blanks-disprar) if blanks>disprar}\u200B" if game=='FGO'
+  return "\u200B#{FEH_rarity_stars[rar]*([disprar,blanks].min)}\u200B#{'<:Icon_Rarity_Empty:631460895851282433>'*(blanks-disprar) if blanks>disprar}\u200B" if game=='FEH'
+  return "\u200B#{$rarity_stars[0][rar]*([disprar,blanks].min)}\u200B#{$rarity_stars[1][rar]*(blanks-disprar) if blanks>disprar}\u200B"
 end
 
 def find_data_ex(callback,name,event,fullname=false,ext=false,includematch=false)
