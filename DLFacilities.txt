@@ -1,3 +1,33 @@
+Abyssal Bell\1\Use it to boost the stats of axe and wand wielding adventurers.\Adventurer, Event Dual Dojo\3x3\1\0\0\Axe, Wand
+Abyssal Bell\2\-\Adventurer, Event Dual Dojo\3x3\1\100\Tidal Tears, 3\
+Abyssal Bell\3\-\Adventurer, Event Dual Dojo\3x3\1\200\Tidal Tears, 5\
+Abyssal Bell\4\-\Adventurer, Event Dual Dojo\3x3\1\300\Tidal Tears, 7\
+Abyssal Bell\5\-\Adventurer, Event Dual Dojo\3x3\1\400\Tidal Tears, 10\
+Abyssal Bell\6\-\Adventurer, Event Dual Dojo\3x3\1\500\Tidal Tears, 12\
+Abyssal Bell\7\-\Adventurer, Event Dual Dojo\3x3\1\600\Tidal Tears, 15\
+Abyssal Bell\8\-\Adventurer, Event Dual Dojo\3x3\1\800\Tidal Tears, 18\
+Abyssal Bell\9\-\Adventurer, Event Dual Dojo\3x3\1\1000\Tidal Tears, 21\
+Abyssal Bell\10\-\Adventurer, Event Dual Dojo\3x3\1\1200\Tidal Tears, 25\
+Abyssal Bell\11\-\Adventurer, Event Dual Dojo\3x3\1\1400\Tidal Tears, 30\
+Abyssal Bell\12\-\Adventurer, Event Dual Dojo\3x3\1\1600\Tidal Tears, 50\
+Abyssal Bell\13\-\Adventurer, Event Dual Dojo\3x3\1\1800\Tidal Tears, 70\
+Abyssal Bell\14\-\Adventurer, Event Dual Dojo\3x3\1\2000\Tidal Tears, 90\
+Abyssal Bell\15\-\Adventurer, Event Dual Dojo\3x3\1\2200\Tidal Tears, 120\
+Abyssal Bell\16\-\Adventurer, Event Dual Dojo\3x3\1\2400\Tidal Tears, 150\
+Abyssal Bell\17\-\Adventurer, Event Dual Dojo\3x3\1\2700\Tidal Tears, 180\
+Abyssal Bell\18\-\Adventurer, Event Dual Dojo\3x3\1\3000\Tidal Tears, 210\
+Abyssal Bell\19\-\Adventurer, Event Dual Dojo\3x3\1\3300\Tidal Tears, 250\
+Abyssal Bell\20\-\Adventurer, Event Dual Dojo\3x3\1\3600\Tidal Tears, 300\
+Abyssal Bell\21\-\Adventurer, Event Dual Dojo\3x3\1\3900\Tidal Tears, 350\
+Abyssal Bell\22\-\Adventurer, Event Dual Dojo\3x3\1\4200\Tidal Tears, 400\
+Abyssal Bell\23\-\Adventurer, Event Dual Dojo\3x3\1\4500\Tidal Tears, 450\
+Abyssal Bell\24\-\Adventurer, Event Dual Dojo\3x3\1\5000\Tidal Tears, 500\
+Abyssal Bell\25\-\Adventurer, Event Dual Dojo\3x3\1\5500\Tidal Tears, 550\
+Abyssal Bell\26\-\Adventurer, Event Dual Dojo\3x3\1\6000\Tidal Tears, 600\
+Abyssal Bell\27\-\Adventurer, Event Dual Dojo\3x3\1\6500\Tidal Tears, 700\
+Abyssal Bell\28\-\Adventurer, Event Dual Dojo\3x3\1\7000\Tidal Tears, 800\
+Abyssal Bell\29\-\Adventurer, Event Dual Dojo\3x3\1\7500\Tidal Tears, 900\
+Abyssal Bell\30\-\Adventurer, Event Dual Dojo\3x3\1\8000\Tidal Tears, 1000\
 Aero Slime Statue\1\The Aero Slime Statue boosts the stats of wind-attuned adventurers. It can be obtained from the Void Battles Treasure Trade for Void Seed x1.\Adventurer, Altar\2x2\1\0\0\Wind, Slime
 Aero Slime Statue\2\\Adventurer, Altar\2x2\1\5000\Fiend's Claw, 10\
 Aero Slime Statue\3\\Adventurer, Altar\2x2\1\10000\Fiend's Claw, 15;; Solid Fungus, 2\
