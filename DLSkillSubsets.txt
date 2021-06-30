@@ -214,6 +214,7 @@
 ["Resistance", ["res", "resist", "resistance"], "Askillity"]
 ["Revival", ["revival", "revive", "resurrect", "ressurect"], "Askillity"]
 ["Rupies", ["money", "rupie", "rupies", "rupy", "rupys"], "Askillity"]
+["Scorchbloom", ["scorchbloom"], "Askillity"]
 ["SP", ["skillpoints", "sp"], "Askillity"]
 ["ScorchingAir", ["scorchedair", "scorchingair"], "Askillity"]
 ["ScorchingAirRes", ["scorchedaires", "scorchedairesistance", "scorchedairres", "scorchedairresistance", "scorchingaires", "scorchingairesistance", "scorchingairres", "scorchingairresistance"], "Askillity"]
