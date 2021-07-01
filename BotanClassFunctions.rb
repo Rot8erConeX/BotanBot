@@ -7672,17 +7672,17 @@ def snagstats(event,bot,f=nil,f2=nil)
   k=bot.servers.values.length
   k=1 if Shardizard==4 # Debug shard shares the five emote servers with the main account
   @server_data[0][Shardizard]=k
-  @server_data[1][Shardizard]=bot.users.size
+  @server_data[1][Shardizard]=bot.users.length
   metadata_save()
   if ['servers','server','members','member','shard','shards','user','users'].include?(f.downcase) && Shardizard>=0
     mx=Shards*1
     mx=f2.to_i if f2.to_i.to_s==f2 && event.user.id==167657750971547648
-    str="**I am in #{longFormattedNumber(@server_data[0].inject(0){|sum,x| sum + x })} servers.**"
+    str="**I am in #{longFormattedNumber(@server_data[0].inject(0){|sum,x| sum + x })} servers, reaching approximately #{longFormattedNumber(@server_data[1].inject(0){|sum,x| sum + x })} users.**"
     for i in 0...mx
       m=i
       m=i+1 if i>3
       m=4 if m>@server_data[0].length-1
-      str=extend_message(str,"The #{shard_data(0,true,mx)[i]} Shard is in #{longFormattedNumber(@server_data[0][m])} server#{"s" if @server_data[0][m]!=1}.",event)
+      str=extend_message(str,"The #{shard_data(0,true,mx)[i]} Shard is in #{longFormattedNumber(@server_data[0][m])} server#{"s" if @server_data[0][m]!=1}, reaching #{longFormattedNumber(@server_data[1][m])} users.",event)
     end
     str=extend_message(str,"The #{shard_data(0,false,mx)[4]} Shard is in #{longFormattedNumber(@server_data[0][4])} server#{"s" if @server_data[0][4]!=1}.",event,2) if event.user.id==167657750971547648
     if bot.profile.id==618979409059119113
