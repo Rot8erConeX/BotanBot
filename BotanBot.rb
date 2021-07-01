@@ -3592,7 +3592,7 @@ bot.command(:reboot, from: 167657750971547648) do |event| # reboots Botan
   exec "cd #{$location}devkit && BotanBot.rb #{Shardizard}"
 end
 
-bot.command([:help,:commands,:command_list,:commandlist,:Help]) do |event, command, subcommand| # used to show tooltips regarding each command.  If no command name is given, shows a list of all commands
+bot.command(:help, aliases: [:commands,:command_list,:commandlist]) do |event, command, subcommand| # used to show tooltips regarding each command.  If no command name is given, shows a list of all commands
   return nil if overlap_prevent(event)
   data_load('library')
   help_text(event,bot,command,subcommand)
@@ -4056,7 +4056,7 @@ def add_new_alias(bot,event,newname,unit,modifier=nil,modifier2=nil,mode=0)
     event.respond str if str.length>0 && mode==0
     args=event.message.text.downcase.split(' ')
     args.shift
-    list_unit_aliases(event,args,bot) if mode==1
+    list_aliases(event,args,bot) if mode==1
     return nil
   end
   str=''
@@ -4173,7 +4173,7 @@ def add_new_alias(bot,event,newname,unit,modifier=nil,modifier2=nil,mode=0)
     event.respond str if str.length>0
     args=event.message.text.downcase.split(' ')
     args.shift
-    list_unit_aliases(event,args,bot) if mode==1
+    list_aliases(event,args,bot) if mode==1
     return nil
   end
   logchn=log_channel()
@@ -5999,7 +5999,7 @@ def disp_status_data(bot,event,args=nil,extvat=false)
   create_embed(event,"__**#{k.name}**__",str,k.disp_color,ftr,k.thumbnail)
 end
 
-bot.command([:adventurer,:adv,:unit]) do |event, *args|
+bot.command(:adventurer, aliases: [:adv,:unit]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load(['library'])
   if args.nil? || args.length<=0
@@ -6031,7 +6031,7 @@ bot.command([:adventurer,:adv,:unit]) do |event, *args|
   disp_adventurer_stats(bot,event,args)
 end
 
-bot.command([:dragon,:drg,:drag]) do |event, *args|
+bot.command(:dragon, aliases: [:drg,:drag]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   if args.nil? || args.length<=0
@@ -6055,7 +6055,7 @@ bot.command([:dragon,:drg,:drag]) do |event, *args|
   disp_dragon_stats(bot,event,args)
 end
 
-bot.command([:wyrmprint,:wyrm,:print]) do |event, *args|
+bot.command(:wyrmprint, aliases: [:wyrm,:print]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load(['library'])
   if args.nil? || args.length<=0
@@ -6083,7 +6083,7 @@ bot.command([:wyrmprint,:wyrm,:print]) do |event, *args|
   disp_wyrmprint_stats(bot,event,args)
 end
 
-bot.command([:weapon,:wep,:weap,:wpn]) do |event, *args|
+bot.command(:weapon, aliases: [:wep,:weap,:wpn]) do |event, *args|
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
   elsif ['level','xp','exp'].include?(args[0].downcase)
@@ -6110,7 +6110,7 @@ bot.command([:weapon,:wep,:weap,:wpn]) do |event, *args|
   disp_weapon_stats(bot,event,args)
 end
 
-bot.command([:enemy,:boss]) do |event, *args|
+bot.command(:enemy, aliases: [:boss]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   if args.nil? || args.length<=0
@@ -6126,7 +6126,7 @@ bot.command([:enemy,:boss]) do |event, *args|
   disp_enemy_data(bot,event,args)
 end
 
-bot.command([:skill,:skil]) do |event, *args|
+bot.command(:skill, aliases: [:skil]) do |event, *args|
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
   elsif ['find','search'].include?(args[0].downcase)
@@ -6141,7 +6141,7 @@ bot.command([:skill,:skil]) do |event, *args|
   disp_skill_data(bot,event,args)
 end
 
-bot.command([:ability,:abil]) do |event, *args|
+bot.command(:ability, aliases: [:abil]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   if args.nil? || args.length<=0
@@ -6156,7 +6156,7 @@ bot.command([:ability,:abil]) do |event, *args|
   disp_ability_data(bot,event,args)
 end
 
-bot.command([:aura]) do |event, *args|
+bot.command(:aura) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   if args.nil? || args.length<=0
@@ -6169,7 +6169,7 @@ bot.command([:aura]) do |event, *args|
   disp_ability_data(bot,event,args,'Aura')
 end
 
-bot.command([:coability,:coabil,:coab,:co]) do |event, *args|
+bot.command(:coability, aliases: [:coabil,:coab,:co]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   if args.nil? || args.length<=0
@@ -6182,7 +6182,7 @@ bot.command([:coability,:coabil,:coab,:co]) do |event, *args|
   disp_ability_data(bot,event,args,'CoAbility')
 end
 
-bot.command([:chain,:cca,:cc,:chaincoab]) do |event, *args|
+bot.command(:chain, aliases: [:cca,:cc,:chaincoab]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   if args.nil? || args.length<=0
@@ -6195,14 +6195,14 @@ bot.command([:chain,:cca,:cc,:chaincoab]) do |event, *args|
   disp_ability_data(bot,event,args,'Chain')
 end
 
-bot.command([:skillshare,:skilshare,:share,:shared]) do |event, *args|
+bot.command(:skillshare, aliases: [:skilshare,:share,:shared]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load(['library'])
   sort_shareable_skills(event,args,bot)
   return nil
 end
 
-bot.command([:facility,:faculty,:fac]) do |event, *args|
+bot.command(:facility, aliases: [:faculty,:fac]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load(['library'])
   if args.nil? || args.length<=0
@@ -6214,7 +6214,7 @@ bot.command([:facility,:faculty,:fac]) do |event, *args|
   disp_facility_data(bot,event,args)
 end
 
-bot.command([:mat,:material,:item]) do |event, *args|
+bot.command(:mat, aliases: [:material,:item]) do |event, *args|
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
   elsif ['find','search'].include?(args[0].downcase)
@@ -6235,7 +6235,7 @@ end
 
 # direct data ends here
 
-bot.command([:stats,:stat,:smol]) do |event, *args|
+bot.command(:stats, aliases: [:stat,:smol]) do |event, *args|
   return nil if overlap_prevent(event)
   if ['adventurer','adventurers','adv','advs','unit','units'].include?(args[0].downcase)
     disp_adventurer_stats(bot,event,args,true)
@@ -6251,29 +6251,29 @@ bot.command([:stats,:stat,:smol]) do |event, *args|
   return nil
 end
 
-bot.command([:alts,:alt]) do |event, *args|
+bot.command(:alts, aliases: [:alt]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   disp_alts(bot,event,args)
 end
 
-bot.command([:lineage,:craft,:crafting]) do |event, *args|
+bot.command(:craft, aliases: [:lineage,:crafting]) do |event, *args|
   return nil if overlap_prevent(event)
   disp_weapon_lineage(bot,event,args)
 end
 
-bot.command([:ailment,:affliction]) do |event, *args|
+bot.command(:ailment, aliases: [:affliction]) do |event, *args|
   return nil if overlap_prevent(event)
   disp_status_data(bot,event,args)
 end
 
-bot.command([:art]) do |event, *args|
+bot.command(:art) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   disp_art(bot,event,args)
 end
 
-bot.command([:banners,:banner]) do |event, *args|
+bot.command(:banners, aliases: [:banner]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   if args.nil? || args.length<=0
@@ -6285,39 +6285,39 @@ bot.command([:banners,:banner]) do |event, *args|
   disp_banner(bot,event,args)
 end
 
-bot.command([:spiral]) do |event, *args|
+bot.command(:spiral) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   upgrade_mats(event,args,bot,true)
   return nil
 end
 
-bot.command([:mats,:materials,:node,:nodes]) do |event, *args|
+bot.command(:mats, aliases: [:materials,:node,:nodes]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   upgrade_mats(event,args,bot)
   return nil
 end
 
-bot.command([:sp,:SP]) do |event, *args|
+bot.command(:sp) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   disp_sp_table(bot,event,args)
 end
 
-bot.command([:dmg,:damage,:combo]) do |event, *args|
+bot.command(:dmg, aliases: [:damage,:combo]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   disp_damage_modifiers(bot,event,args)
 end
 
-bot.command([:find,:search,:lookup]) do |event, *args|
+bot.command(:find, aliases: [:search,:lookup]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   display_search_results(bot,event,args)
 end
 
-bot.command([:sort,:list]) do |event, *args|
+bot.command(:sort, aliases: [:list]) do |event, *args|
   return nil if overlap_prevent(event)
   if args.nil? || args.length<=0
   elsif ['aliases','alias'].include?(args[0].downcase) && event.user.id==167657750971547648
@@ -6350,7 +6350,7 @@ bot.command(:alias) do |event, newname, unit, modifier, modifier2|
   return nil
 end
 
-bot.command([:deletealias,:removealias]) do |event, name|
+bot.command(:deletealias, aliases: [:removealias]) do |event, name|
   return nil if overlap_prevent(event)
   nicknames_load()
   if name.nil?
@@ -6452,21 +6452,21 @@ bot.command([:deletealias,:removealias]) do |event, name|
   return nil
 end
 
-bot.command([:serveraliases,:saliases]) do |event, *args|
+bot.command(:saliases, aliases: [:serveraliases]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load(['library'])
   list_aliases(bot,event,args,1)
   return nil
 end
 
-bot.command([:checkaliases,:aliases,:seealiases]) do |event, *args|
+bot.command(:aliases, aliases: [:checkaliases,:seealiases]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load(['library'])
   list_aliases(bot,event,args)
   return nil
 end
 
-bot.command([:synergy,:synergize]) do |event, *args|
+bot.command(:synergy, aliases: [:synergize]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load(['library'])
   if args.nil? || args.length<=0
@@ -6483,40 +6483,40 @@ bot.command([:synergy,:synergize]) do |event, *args|
   return nil
 end
 
-bot.command([:prints,:weapprints,:wepprints,:weaponprints,:wpnprints,:weaprints,:weprints,:weapprint,:wepprint,:weaponprint,:wpnprint,:weaprint,:weprint]) do |event, *args|
+bot.command(:prints, aliases: [:weapprints,:wepprints,:weaponprints,:wpnprints,:weaprints,:weprints,:weapprint,:wepprint,:weaponprint,:wpnprint,:weaprint,:weprint]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load(['library'])
   print_overlap_list(event,args,bot)
   return nil
 end
 
-bot.command([:team,:backpack]) do |event, *args|
+bot.command(:team, aliases: [:backpack]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load(['library'])
   adv_chain_list(event,args,bot)
   return nil
 end
 
-bot.command([:seegroups,:checkgroups,:groups]) do |event|
+bot.command(:groups, aliases: [:seegroups,:checkgroups]) do |event|
   return nil if overlap_prevent(event)
   data_load(['library'])
   disp_groups(event)
   return nil
 end
 
-bot.command([:roost]) do |event, *args|
+bot.command(:roost) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   today_in_dl(event,bot,args,false,1)
 end
 
-bot.command([:ruin,:ruins]) do |event, *args|
+bot.command(:ruin, aliases: [:ruins]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   today_in_dl(event,bot,args,false,2)
 end
 
-bot.command([:shop,:store]) do |event, *args|
+bot.command(:shop, aliases: [:store]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   if args.nil? || args.length<=0
@@ -6527,91 +6527,91 @@ bot.command([:shop,:store]) do |event, *args|
   today_in_dl(event,bot,args,false,3)
 end
 
-bot.command([:reset]) do |event, *args|
+bot.command(:reset) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   today_in_dl(event,bot,args,false,4)
 end
 
-bot.command([:daily,:dailies]) do |event, *args|
+bot.command(:daily, aliases: [:dailies]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   today_in_dl(event,bot,args)
 end
 
-bot.command([:today,:now,:todayindl,:today_in_dl]) do |event, *args|
+bot.command(:today, aliases: [:now,:todayindl,:today_in_dl]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   today_in_dl(event,bot,args,true)
 end
 
-bot.command([:tomorrow,:tommorrow,:tomorow,:tommorow]) do |event, *args|
+bot.command(:tomorrow, aliases: [:tommorrow,:tomorow,:tommorow]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   today_in_dl(event,bot,args,-1)
 end
 
-bot.command([:next,:schedule]) do |event, *args|
+bot.command(:next, aliases: [:schedule]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   next_events(event,bot,args)
 end
 
-bot.command([:xp,:exp,:level]) do |event, *args|
+bot.command(:xp, aliases: [:exp,:level]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   level(event,bot,args)
 end
 
-bot.command([:plxp,:plexp,:pllevel,:plevel,:pxp,:pexp]) do |event, *args|
+bot.command(:plxp, aliases: [:plexp,:pllevel,:plevel,:pxp,:pexp]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   level(event,bot,args,1)
 end
 
-bot.command([:advxp,:advexp,:advlevel,:alevel,:axp,:aexp]) do |event, *args|
+bot.command(:advxp, aliases: [:advexp,:advlevel,:alevel,:axp,:aexp]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   level(event,bot,args,2)
 end
 
-bot.command([:drgxp,:drgexp,:drglevel,:dlevel,:dxp,:dexp]) do |event, *args|
+bot.command(:drgxp, aliases: [:drgexp,:drglevel,:dlevel,:dxp,:dexp]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   level(event,bot,args,3)
 end
 
-bot.command([:bxp,:bexp,:blevel,:dbxp,:dbexp,:dblevel,:bondlevel,:bondxp,:bondexp]) do |event, *args|
+bot.command(:bxp, aliases: [:bexp,:blevel,:dbxp,:dbexp,:dblevel,:bondlevel,:bondxp,:bondexp]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   level(event,bot,args,4)
 end
 
-bot.command([:wrxp,:wrexp,:wrlevel,:wyrmxp,:wyrmexp,:wyrmxp,:wyrmlevel]) do |event, *args|
+bot.command(:wrxp, aliases: [:wrexp,:wrlevel,:wyrmxp,:wyrmexp,:wyrmxp,:wyrmlevel]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   level(event,bot,args,5)
 end
 
-bot.command([:wpxp,:wpexp,:wplevel,:weaponxp,:weaponexp,:weaponlevel]) do |event, *args|
+bot.command(:wpxp, aliases: [:wpexp,:wplevel,:weaponxp,:weaponexp,:weaponlevel]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   level(event,bot,args,6)
 end
 
-bot.command([:wxp,:wexp,:wlevel]) do |event, *args|
+bot.command(:wxp, aliases: [:wexp,:wlevel]) do |event, *args|
   return nil if overlap_prevent(event)
   data_load('library')
   level(event,bot,args,7)
 end
 
-bot.command([:limit,:limits,:stack,:stacks]) do |event|
+bot.command(:limit, aliases: [:limits,:stack,:stacks]) do |event|
   return nil if overlap_prevent(event)
   data_load('library')
   show_abil_limits(event,bot)
 end
 
-bot.command([:affinity,:resonance]) do |event|
+bot.command(:affinity, aliases: [:resonance]) do |event|
   return nil if overlap_prevent(event)
   data_load('library')
   affinity_resonance(event,bot)
@@ -6623,7 +6623,7 @@ bot.command(:whybotan) do |event|
   why_botan(event,bot)
 end
 
-bot.command([:embeds,:embed]) do |event|
+bot.command(:embeds, aliases: [:embed]) do |event|
   return nil if overlap_prevent(event)
   metadata_load()
   if $embedless.include?(event.user.id)
@@ -6660,7 +6660,7 @@ bot.command(:prefix) do |event, prefix|
   event.respond "This server's prefix has been saved as **#{prefix}**"
 end
 
-bot.command([:channellist,:chanelist,:spamchannels,:spamlist]) do |event|
+bot.command(:channellist, aliases: [:chanelist,:spamchannels,:spamlist]) do |event|
   return nil if overlap_prevent(event)
   if event.server.nil?
     event.respond "Yes, it is safe to spam here."
@@ -6678,14 +6678,14 @@ bot.command([:channellist,:chanelist,:spamchannels,:spamlist]) do |event|
   event << 'In PM with any user'
 end
 
-bot.command([:bugreport,:suggestion,:feedback]) do |event, *args|
+bot.command(:bugreport, aliases: [:suggestion,:feedback]) do |event, *args|
   return nil if overlap_prevent(event)
   x=['dl!','dl?']
   x.push(@prefixes[event.server.id]) unless event.server.nil? || @prefixes[event.server.id].nil?
   bug_report(bot,event,args,Shards,shard_data(0),'Shard',x,532083509083373583)
 end
 
-bot.command([:donation,:donate]) do |event, uid|
+bot.command(:donation, aliases: [:donate]) do |event, uid|
   return nil if overlap_prevent(event)
   uid="#{event.user.id}" if uid.nil? || uid.length.zero?
   if /<@!?(?:\d+)>/ =~ uid
@@ -6742,7 +6742,7 @@ bot.command([:donation,:donate]) do |event, uid|
   donor_embed(bot,event)
 end
 
-bot.command([:shard,:attribute]) do |event, i, j|
+bot.command(:shard, aliases: [:attribute]) do |event, i, j|
   return nil if overlap_prevent(event)
   if Shardizard<0
     event.respond "This is the Smol Shard."
@@ -6807,7 +6807,7 @@ bot.command([:shard,:attribute]) do |event, i, j|
   event.respond "This server uses #{shard_data(0,true,j)[(event.server.id >> 22) % j]} Shards." unless event.server.nil? || Shardizard==4 || j != Shards
 end
 
-bot.command([:safe,:spam,:safetospam,:safe2spam,:long,:longreplies]) do |event, f|
+bot.command(:safe, aliases: [:spam,:safetospam,:safe2spam,:long,:longreplies]) do |event, f|
   return nil if overlap_prevent(event)
   f='' if f.nil?
   metadata_load()
@@ -6907,13 +6907,13 @@ bot.command(:sortaliases, from: 167657750971547648) do |event, *args|
   event.respond 'The alias list has been sorted alphabetically'
 end
 
-bot.command([:tools,:links,:tool,:link,:resources,:resources]) do |event|
+bot.command(:tools, aliases: [:links,:tool,:link,:resources,:resources]) do |event|
   return nil if overlap_prevent(event)
   data_load('library')
   show_tools(event,bot)
 end
 
-bot.command([:avatar,:avvie]) do |event, *args|
+bot.command(:avatar, aliases: [:avvie]) do |event, *args|
   return nil if overlap_prevent(event)
   t=Time.now
   timeshift=6
