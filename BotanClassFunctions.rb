@@ -8350,9 +8350,8 @@ def snagstats(event,bot,f=nil,f2=nil)
   event << "There are #{longFormattedNumber($facilities.map{|q| q.name}.uniq.length)} [unique] facilities with #{$facilities.length} total levels between them."
   event << "There are #{longFormattedNumber($mats.length)} materials."
   event << ''
-  grps=get_group_data(true)
   event << "**There are #{longFormattedNumber(glbl.length)} global and #{longFormattedNumber(srv_spec.length)} server-specific *aliases*.**"
-  event << "There are "
+  event << "There are #{longFormattedNumber($groups.length)} [global] groups."
   event << ''
   event << "**I am #{longFormattedNumber(File.foreach("#{$location}devkit/BotanBot.rb").inject(0) {|c, line| c+1})} lines of *code* long.**"
   event << "Of those, #{longFormattedNumber(b.length)} are SLOC (non-empty)."
