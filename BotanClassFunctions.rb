@@ -7666,8 +7666,6 @@ def snagstats(event,bot,f=nil,f2=nil)
   nicknames_load()
   data_load()
   metadata_load()
-  system "gem uninstall discordrb"
-  system "gem install discordrb"
   f='' if f.nil?
   f2='' if f2.nil?
   bot.servers.values(&:members)
