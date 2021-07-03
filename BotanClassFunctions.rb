@@ -3725,7 +3725,7 @@ def display_wyrmprints(bot,event,args=nil)
         flds.push([generate_rarity_row(i,0,''),char.reject{|q| q.rarity !=i}.map{|q| q.name}.uniq.join("\n")])
         mrar.push(i)
       end
-      flds.push(['<:Dominion:819854169128435742>',char.reject{|q| q.availability.nil? || !q.availability.include?('x')}.map{|q| q.name}.uniq.join("\n")])
+      flds.push(["\u200B<:Dominion:819854169128435742>",char.reject{|q| q.availability.nil? || !q.availability.include?('x')}.map{|q| q.name}.uniq.join("\n")])
       flds.push(['Unknown rarity',char.reject{|q| mrar.include?(q.rarity) || (!q.availability.nil? && q.availability.include?('x'))}.map{|q| q.name}.uniq.join("\n")])
     elsif char.map{|q| q.amulet}.uniq.length>1
       flds=[]
