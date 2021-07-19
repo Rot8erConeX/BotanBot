@@ -5938,7 +5938,7 @@ def disp_mat_data(bot,event,args=nil,extvat=false)
   s2s=true if safe_to_spam?(event)
   evn=event.message.text.downcase.split(' ')
   title=k.class_header(bot,0,true)
-  title=k.mini_header(bot) unless s2s
+  title=k.mini_header unless s2s
   lng=title.length
   if title.length>250
     h=title.split("\n")
