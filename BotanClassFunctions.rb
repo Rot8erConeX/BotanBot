@@ -4826,7 +4826,7 @@ def disp_art(bot,event,args=nil)
       voices=voices.sort{|a,b| (a.objt<=>b.objt)==0 ? ((a.tid<=>b.tid)==0 ? (a.name<=>b.name) : (a.tid<=>b.tid)) : (a.objt<=>b.objt)}
       voices.uniq!
       voices=voices.map{|q| q.name}
-      voices=voices.map{|q| q.split('*[')[0]} if m.include?('(')
+      voices=voices.map{|q| q.gsub(" *[#{m.split('(')[-1].gsub(')','')}]*",'')} if m.include?('(')
       flds.push([m,voices.uniq.join("\n")])
     end
     adv=[$wyrmprints.reject{|q| q.isMultiprint?},$stickers].flatten.map{|q| q.clone}.uniq
@@ -4921,6 +4921,7 @@ def disp_art(bot,event,args=nil)
     event.respond str2
     flds=[]
   end
+  flds=flds.reject{|q| q[1].length<=0}
   flds=nil if flds.length<=0
   create_embed(event,[hdr,title],str,k.disp_color,ftr,xpic,flds)
   event.respond xpic[1] if $embedless.include?(event.user.id) || was_embedless_mentioned?(event)
@@ -6079,7 +6080,7 @@ def disp_damage_modifiers(bot,event,args=nil)
     wpn.push('Manacaster') if ['manacaster','manacasters','caster','casters','gun','guns','managun','managuns','manchester','manchesters','gunner','gunners'].include?(args[i].downcase)
   end
   if wpn.length<=0
-    k=find_best_match(args.join(' '),bot,event,true,false,7)
+    k=find_best_match(args.join(' '),bot,event,false,false,7)
     if k.nil?
     elsif k.name=='Puppy'
       kn=$dragons[$dragons.find_index{|q| q.name=='Puppy'}]
