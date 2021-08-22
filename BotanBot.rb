@@ -226,7 +226,7 @@ class DLSentient # superclass containing all classes that characters can be.  Us
     end
     k=k.reject{|q| q==@name || q==@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','')}
     k.unshift(@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','')) unless @name==@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','') || saliases
-    k.unshift("__**#{@name}#{self.emotes(bot,true)}**#{"'s server-specific aliases" if saliases}__")
+    k.unshift("__**#{@name}#{self.emoji(bot,true)}**#{"'s server-specific aliases" if saliases}__")
     return k
   end
 end
@@ -430,7 +430,7 @@ class DLAdventurer < DLSentient
     return str
   end
   
-  def emotes(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
+  def emoji(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
   
   def disp_color(chain=0)
     f=[]
@@ -765,7 +765,7 @@ class DLDragon < DLSentient
     return str
   end
   
-  def emotes(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
+  def emoji(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
   
   def disp_color(chain=0)
     f=[]
@@ -1004,7 +1004,7 @@ class DLWyrmprint
     return str
   end
   
-  def emotes(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
+  def emoji(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
   
   def disp_color(chain=0)
     f=[]
@@ -1199,7 +1199,7 @@ class DLWyrmprint
     end
     k=k.reject{|q| q==@name || q==@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','')}
     k.unshift(@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','')) unless @name==@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','') || saliases
-    k.unshift("__**#{@name}#{self.emotes(bot,true)}**#{"'s server-specific aliases" if saliases}__")
+    k.unshift("__**#{@name}#{self.emoji(bot,true)}**#{"'s server-specific aliases" if saliases}__")
     return k
   end
 end
@@ -1391,7 +1391,7 @@ class DLWeapon
     return str
   end
   
-  def emotes(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
+  def emoji(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
   
   def thumbnail(ext=0)
     dispname=@name.gsub(' ','_')
@@ -1577,7 +1577,7 @@ class DLWeapon
       k.flatten!
     end
     k.unshift(@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','')) unless @name==@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','') || saliases
-    k.unshift("__**#{@name}#{self.emotes(bot,true)}**#{"'s server-specific aliases" if saliases}__")
+    k.unshift("__**#{@name}#{self.emoji(bot,true)}**#{"'s server-specific aliases" if saliases}__")
     return k
   end
 end
@@ -1665,7 +1665,7 @@ class DLEnemy
     return str
   end
   
-  def emotes(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
+  def emoji(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
   
   def thumbnail(ext=0)
     return 'https://github.com/Rot8erConeX/BotanBot/blob/master/FightBanners/Matilda_5.png?raw=true' if @name=='Matilda'
@@ -1731,7 +1731,7 @@ class DLEnemy
     end
     k=k.reject{|q| q==@name || q==@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','')}
     k.unshift(@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','')) unless @name==@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','') || saliases
-    k.unshift("__**#{@name}#{self.emotes(bot,true)}**#{"'s server-specific aliases" if saliases}__")
+    k.unshift("__**#{@name}#{self.emoji(bot,true)}**#{"'s server-specific aliases" if saliases}__")
     return k
   end
 end
@@ -1828,8 +1828,6 @@ class DLSkill
     return @name if format.nil?
     return "#{format}#{@name}#{format.reverse}"
   end
-  
-  def emotes(bot,includerarity=true,includeobjt=false); return ''; end
   
   def inspirable?
     return false unless @tags.include?('Damage')
@@ -1951,7 +1949,7 @@ class DLSkill
     return s
   end
   
-  def emotes(bot,includerarity=true,includeobjt=false)
+  def emoji(bot,includerarity=true,includeobjt=false)
     return '' if self.element=='None'
     moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{self.element}"}
     return moji[0].mention unless moji.length<=0
@@ -1988,7 +1986,7 @@ class DLSkill
     end
     k=k.reject{|q| q==@name || q==@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','')}
     k.unshift(@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','')) unless @name==@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','') || saliases
-    k.unshift("__**#{@name}#{self.emotes(bot,true)}**#{"'s server-specific aliases" if saliases}__")
+    k.unshift("__**#{@name}#{self.emoji(bot,true)}**#{"'s server-specific aliases" if saliases}__")
     return k
   end
 end
@@ -2050,7 +2048,7 @@ class DLAbility
     end
   end
   
-  def emotes(bot,includerarity=true,includeobjt=false); return ''; end
+  def emoji(bot,includerarity=true,includeobjt=false); return ''; end
   
   def disp_color(chain=0)
     f=[]
@@ -2382,7 +2380,7 @@ class DLAbility
     m=$enemies.reject{|q| !q.abilities.include?(self.fullName)}.map{|q| q.clone}
     return m unless safe_to_spam?(event)
     for i in 0...m.length
-      m[i].name="#{m[i].emotes(bot)}#{m[i].name}"
+      m[i].name="#{m[i].emoji(bot)}#{m[i].name}"
     end
     return m
   end
@@ -2476,7 +2474,7 @@ class DLFacility
     end
     k=k.reject{|q| q==@name || q==@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','')}
     k.unshift(@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','')) unless @name==@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','') || saliases
-    k.unshift("__**#{@name}#{self.emotes(bot,true)}**#{"'s server-specific aliases" if saliases}__")
+    k.unshift("__**#{@name}#{self.emoji(bot,true)}**#{"'s server-specific aliases" if saliases}__")
     return k
   end
 end
@@ -2557,7 +2555,7 @@ class DLMaterial
     return str
   end
   
-  def emotes(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
+  def emoji(bot,includerarity=true,includeobjt=false); return self.class_header(bot,1,includerarity,includeobjt); end
   
   def disp_color(chain=0); return 0xE3F78B; end
   
@@ -2596,7 +2594,7 @@ class DLMaterial
     end
     k=k.reject{|q| q==@name || q==@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','')}
     k.unshift(@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','')) unless @name==@name.gsub('(','').gsub(')','').gsub(' ','').gsub('_','') || saliases
-    k.unshift("__**#{@name}#{self.emotes(bot,true)}**#{"'s server-specific aliases" if saliases}__")
+    k.unshift("__**#{@name}#{self.emoji(bot,true)}**#{"'s server-specific aliases" if saliases}__")
     return k
   end
 end
@@ -2622,7 +2620,7 @@ class DLStatus
     return "#{format}#{@name}#{format.reverse}"
   end
   
-  def emotes(bot,includerarity=true,includeobjt=false); return ''; end
+  def emoji(bot,includerarity=true,includeobjt=false); return ''; end
   
   def thumbnail(ext=0)
     dispname=@name.gsub(' ','_')
@@ -2688,7 +2686,7 @@ class DL_NPC < DLSentient
   def lock=(val); @lock=false; @lock=true if val=='y'; end
   def objt; return 'NPC'; end
   
-  def emotes(bot,includerarity=true,includeobjt=false); return ''; end
+  def emoji(bot,includerarity=true,includeobjt=false); return ''; end
   
   def disp_color(chain=0); return 0xCE456B; end
 end
@@ -2710,7 +2708,7 @@ class DLSticker
     return "#{format}#{@name}#{format.reverse}"
   end
   
-  def emotes(bot,includerarity=true,includeobjt=false); return ''; end
+  def emoji(bot,includerarity=true,includeobjt=false); return ''; end
   
   def disp_color(chain=0); return 0xCE456B; end
   
@@ -2852,7 +2850,7 @@ class DLBanner < DLTimer
     return "#{format}#{@name}#{format.reverse}"
   end
   
-  def emotes(bot,includerarity=true,includeobjt=false); return ''; end
+  def emoji(bot,includerarity=true,includeobjt=false); return ''; end
   
   def disp_color(chain=0)
     xcolor=[]
@@ -3526,8 +3524,8 @@ def safe_to_spam?(event,chn=nil) # determines whether or not it is safe to send 
   return false if event.user.id==213048998678888448
   return false if event.message.text.downcase.split(' ').include?('smol') && Shardizard==4
   return true if Shardizard==4
-  return false if event.message.text.downcase.split(' ').include?('xsmol') && [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,620710758841450529].include?(event.server.id) # it is safe to spam in the emoji servers
-  return true if [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,620710758841450529].include?(event.server.id) # it is safe to spam in the emoji servers
+  return false if event.message.text.downcase.split(' ').include?('xsmol') && [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,620710758841450529,877171831835066391].include?(event.server.id) # it is safe to spam in the emoji servers
+  return true if [443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,620710758841450529,877171831835066391].include?(event.server.id) # it is safe to spam in the emoji servers
   chn=event.channel if chn.nil?
   return true if ['bots','bot'].include?(chn.name.downcase) # channels named "bots" are safe to spam in
   return true if chn.name.downcase.include?('bot') && chn.name.downcase.include?('spam') # it is safe to spam in any bot spam channel
@@ -3566,18 +3564,17 @@ end
 
 def all_commands(include_nil=false,permissions=-1)
   return all_commands(include_nil)-all_commands(false,1)-all_commands(false,2) if permissions==0
-  k=['reboot','help','commands','commandlist','command_list','embeds','embed','prefix','channelist','channellist','spamchannels','spamlist','bugreport','suggestion','feedback','adv',
-     'donate','donation','shard','attribute','safe','spam','safetospam','safe2spam','long','longreplies','invite','sortaliases','tools','links','tool','link','resources','resource',
-     'avatar','avvie','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','reload','update','adventurer','unit','stats',
-     'stat','smol','dragon','drg','drag','wyrmprint','wyrm','print','weapon','wep','weap','wpn','lineage','craft','crafting','enemy','boss','affinity','resonance','affliction','skil',
-     'status','ailment','skill','art','limit','limits','stack','stacks','wxp','wexp','wlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp','weaponlevel','wrxp','wrexp','wrlevel',
-     'wyrmxp','wyrmexp','wyrmxp','wyrmlevel','bxp','bexp','blevel','dbxp','dbexp','dblevel','bondlevel','bondxp','bondexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','advxp',
-     'advexp','advlevel','alevel','axp','aexp','plxp','plexp','pllevel','plevel','pxp','pexp','xp','exp','level','next','schedule','tomorrow','tommorrow','tomorow','tommorow','today',
-     'now','todayindl','today_in_dl','daily','dailies','reset','shop','store','ruin','ruins','roost','alt','alts','banners','banner','facility','faculty','fac','mat','material',
-     'addalias','alias','deletealias','removealias','serveraliases','saliases','aliases','checkaliases','seealiases','seegroups','groups','checkgroups','team','backpack','mats','sp',
-     'materials','node','nodes','spiral','dmg','damage','combo','sort','list','skillshare','skilshare','share','shared','prints','weapprints','wepprints','weaponprints','wpnprints',
-     'weaprints','weprints','weapprint','wepprint','weaponprint','wpnprint','weaprint','weprint','synergy','synergize','find','search','lookup','ability','abil','aura','coability',
-     'coabil','coab','co','chain','cca','cc','chaincoab','item','whybotan']
+  k=['reboot','help','commands','commandlist','command_list','embeds','embed','prefix','channelist','channellist','spamchannels','spamlist','bugreport','suggestion','feedback','adv','donate','affliction',
+     'shard','attribute','safe','spam','safetospam','safe2spam','long','longreplies','invite','sortaliases','tools','links','tool','link','resources','resource','avatar','avvie','backupaliases','banners',
+     'restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','snagstats','reload','update','adventurer','unit','stats','stat','smol','dragon','drg','drag','wyrmprint','banner',
+     'print','weapon','wep','weap','wpn','lineage','craft','crafting','enemy','boss','affinity','resonance','skil','status','ailment','skill','art','limit','limits','stack','stacks','wxp','wyrm','groups',
+     'next','schedule','tomorrow','tommorrow','tomorow','tommorow','today','now','todayindl','today_in_dl','daily','dailies','reset','shop','store','ruin','ruins','roost','alt','alts','level','coability',
+     'wpnprints','weaprints','weprints','weapprint','wepprint','weaponprint','wpnprint','weaprint','weprint','synergy','synergize','find','search','lookup','ability','abil','aura','coabil','weaponprints',
+     'wexp','wlevel','wpxp','wpexp','wplevel','weaponxp','weaponexp','weaponlevel','wrxp','wrexp','wrlevel','wyrmxp','wyrmexp','wyrmxp','wyrmlevel','bxp','bexp','blevel','dbxp','dbexp','dblevel','prints',
+     'facility','faculty','fac','mat','material','addalias','alias','deletealias','removealias','serveraliases','saliases','aliases','checkaliases','seealiases','seegroups','checkgroups','sp','chaincoab',
+     'bondlevel','bondxp','bondexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','advxp','advexp','advlevel','alevel','axp','aexp','plxp','plexp','pllevel','plevel','pexp','cc','whybotan','backpack',
+     'team','cca','mats','materials','node','spiral','damage','combo','sort','list','skillshare','skilshare','share','shared','weapprints','wepprints','donation','item','coab','exp','pxp','chain','nodes',
+     'co','xp']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -4042,7 +4039,7 @@ def add_new_alias(bot,event,newname,unit,modifier=nil,modifier2=nil,mode=0)
   elsif event.user.id != 167657750971547648 && event.server.nil?
     str='Only my developer is allowed to use this command in PM.'
     err=true
-  elsif (!is_mod?(event.user,event.server,event.channel) && ![368976843883151362,195303206933233665,141260274144509952].include?(event.user.id)) && event.channel.id != 532083509083373583
+  elsif (!is_mod?(event.user,event.server,event.channel) && ![368976843883151362,141260274144509952].include?(event.user.id)) && event.channel.id != 532083509083373583
     str='You are not a mod.'
     err=true
   elsif newname.include?('"') || unit.include?('"')
@@ -4072,28 +4069,28 @@ def add_new_alias(bot,event,newname,unit,modifier=nil,modifier2=nil,mode=0)
   else
     ooo=k.objt
   end
-  if k.nil? || (k.is_a?(Array) && k[0].nil?) || k.is_a?(DLBanner) || (['Sticker','Status'].include?(ooo) && !([368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583))
+  if k.nil? || (k.is_a?(Array) && k[0].nil?) || k.is_a?(DLBanner) || (['Sticker','Status'].include?(ooo) && !([368976843883151362,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583))
     k=find_best_match(newname,bot,event,false,false,0)
-    if k.nil? || (k.is_a?(Array) && k[0].nil?) || k.is_a?(DLBanner) || (['Sticker','Status'].include?(ooo) && !([368976843883151362,195303206933233665,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583))
+    if k.nil? || (k.is_a?(Array) && k[0].nil?) || k.is_a?(DLBanner) || (['Sticker','Status'].include?(ooo) && !([368976843883151362,141260274144509952].include?(event.user.id) || event.channel.id==532083509083373583))
     elsif k.is_a?(Array)
       k=k[0]
       type[0]="#{k.objt}*"
       matches[0]=k.fullName
-      matchnames[0]="#{k.fullName}#{k.emotes(bot,true)}"
+      matchnames[0]="#{k.fullName}#{k.emoji(bot,true)}"
     else
       type[0]="#{k.objt}*"
       matches[0]=k.fullName
-      matchnames[0]="#{k.fullName}#{k.emotes(bot,true)}"
+      matchnames[0]="#{k.fullName}#{k.emoji(bot,true)}"
     end
   elsif k.is_a?(Array)
     k=k[0]
     type[0]="#{k.objt}"
     matches[0]=k.fullName
-    matchnames[0]="#{k.fullName}#{k.emotes(bot,true)}"
+    matchnames[0]="#{k.fullName}#{k.emoji(bot,true)}"
   else
     type[0]="#{k.objt}"
     matches[0]=k.fullName
-    matchnames[0]="#{k.fullName}#{k.emotes(bot,true)}"
+    matchnames[0]="#{k.fullName}#{k.emoji(bot,true)}"
   end
   unit=unit.gsub('!','').gsub('(','').gsub(')','').gsub('_','')
   k2=find_best_match(unit,bot,event,true,false,0)
@@ -4111,21 +4108,21 @@ def add_new_alias(bot,event,newname,unit,modifier=nil,modifier2=nil,mode=0)
       k2=k2[0]
       type[0]="#{k2.objt}*"
       matches[0]=k2.fullName
-      matchnames[0]="#{k2.fullName}#{k2.emotes(bot,false)}"
+      matchnames[0]="#{k2.fullName}#{k2.emoji(bot,false)}"
     else
       type[0]="#{k2.objt}*"
       matches[0]=k2.fullName
-      matchnames[0]="#{k2.fullName}#{k2.emotes(bot,false)}"
+      matchnames[0]="#{k2.fullName}#{k2.emoji(bot,false)}"
     end
   elsif k2.is_a?(Array)
     k2=k2[0]
     type[1]="#{k2.objt}"
     matches[1]=k2.fullName
-    matchnames[1]="#{k2.fullName}#{k2.emotes(bot,false)}"
+    matchnames[1]="#{k2.fullName}#{k2.emoji(bot,false)}"
   else
     type[1]="#{k2.objt}"
     matches[1]=k2.fullName
-    matchnames[1]="#{k2.fullName}#{k2.emotes(bot,false)}"
+    matchnames[1]="#{k2.fullName}#{k2.emoji(bot,false)}"
   end
   checkstr=normalize(newname,true)
   if type.reject{|q| q != 'Alias'}.length<=0
@@ -4581,8 +4578,8 @@ def disp_weapon_stats(bot,event,args=nil,juststats=false,x=nil)
     mmm2=wpnz.find_index{|q| q.type==k.type && q.element==k.element && q.availability.include?('m')} if k.availability.include?('a')
     mmm2=wpnz.find_index{|q| q.type==k.type && q.element==k.element && q.rarity==5} if k.availability.include?('h')
     if s2s
-      str2="#{str2}#{"\n" unless m.length<=1}\n\n**Promotes from: #{m2.emotes(bot)}*#{m2.name}* **#{"\n*Smithy level required:* #{k.smith_level}" unless k.availability.include?('h')}\n*Assembly cost:* #{longFormattedNumber(k.costs[0])}#{k.stat_emotes[4]}\n*Required mats:* #{k.craft_mats.map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}" unless m2.nil?
-      str2="#{str2}#{"\n" unless m.length==1}\n\n**Crafting requirements: #{wpnz[mmm2].emotes(bot)}*#{wpnz[mmm2].name}* **" unless mmm2.nil?
+      str2="#{str2}#{"\n" unless m.length<=1}\n\n**Promotes from: #{m2.emoji(bot)}*#{m2.name}* **#{"\n*Smithy level required:* #{k.smith_level}" unless k.availability.include?('h')}\n*Assembly cost:* #{longFormattedNumber(k.costs[0])}#{k.stat_emotes[4]}\n*Required mats:* #{k.craft_mats.map{|q| "#{q[0]} x#{q[1]}"}.join(', ')}" unless m2.nil?
+      str2="#{str2}#{"\n" unless m.length==1}\n\n**Crafting requirements: #{wpnz[mmm2].emoji(bot)}*#{wpnz[mmm2].name}* **" unless mmm2.nil?
       if m.length>0
         for i in 0...m.length
           m[i].costs='0' if m[i].costs.nil? || m[i].costs.length<=0
@@ -4775,7 +4772,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil,x=nil)
       val/=5.0
     end
     m2.costs='0' if m2.costs.nil? || m2.costs.length<=0
-    str2="#{str2}\n\n**#{ptype}: #{m2.emotes(bot)}*#{m2.name}* (x#{(5*val).to_i})**\n*Assembly cost:* #{longFormattedNumber((val*5*m2.costs[0]).to_i)}#{k.stat_emotes[4]}\n#{"*Required mats:* #{m2.craft_mats.map{|q| "#{q[0]} x#{(val*5*q[1].to_i).to_i}"}.join(', ')}" unless m2.craft_mats.nil?}"
+    str2="#{str2}\n\n**#{ptype}: #{m2.emoji(bot)}*#{m2.name}* (x#{(5*val).to_i})**\n*Assembly cost:* #{longFormattedNumber((val*5*m2.costs[0]).to_i)}#{k.stat_emotes[4]}\n#{"*Required mats:* #{m2.craft_mats.map{|q| "#{q[0]} x#{(val*5*q[1].to_i).to_i}"}.join(', ')}" unless m2.craft_mats.nil?}"
     cost+=val*5*m2.costs[0]
     unless m2.craft_mats.nil?
       for i in 0...m2.craft_mats.length
@@ -4785,7 +4782,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil,x=nil)
     m22=m2.promoted_from
     unless m22.nil?
       m22.costs='0' if m22.costs.nil? || m22.costs.length<=0
-      str2="#{str2}\n\n**Which promotes from: #{m22.emotes(bot)}*#{m22.name}* (x#{(25*val).to_i})**\n*Assembly cost:* #{longFormattedNumber((val*25*m22.costs[0]).to_i)}#{k.stat_emotes[4]}\n#{"*Required mats:* #{m22.craft_mats.map{|q| "#{q[0]} x#{(val*25*q[1].to_i).to_i}"}.join(', ')}" unless m22.craft_mats.nil?}"
+      str2="#{str2}\n\n**Which promotes from: #{m22.emoji(bot)}*#{m22.name}* (x#{(25*val).to_i})**\n*Assembly cost:* #{longFormattedNumber((val*25*m22.costs[0]).to_i)}#{k.stat_emotes[4]}\n#{"*Required mats:* #{m22.craft_mats.map{|q| "#{q[0]} x#{(val*25*q[1].to_i).to_i}"}.join(', ')}" unless m22.craft_mats.nil?}"
       cost+=val*25*m22.costs[0]
       unless m22.craft_mats.nil?
         for i in 0...m22.craft_mats.length
@@ -4795,7 +4792,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil,x=nil)
       m222=m22.promoted_from
       unless m222.nil?
         m222.costs='0' if m222.costs.nil? || m222.costs.length<=0
-        str2="#{str2}\n\n**Which promotes from: #{m222.emotes(bot)}*#{m222.name}* (x#{(125*val).to_i})**\n*Assembly cost:* #{longFormattedNumber((val*125*m222.costs[0]).to_i)}#{k.stat_emotes[4]}\n#{"*Required mats:* #{m222.craft_mats.map{|q| "#{q[0]} x#{(val*125*q[1].to_i).to_i}"}.join(', ')}" unless m222.craft_mats.nil?}"
+        str2="#{str2}\n\n**Which promotes from: #{m222.emoji(bot)}*#{m222.name}* (x#{(125*val).to_i})**\n*Assembly cost:* #{longFormattedNumber((val*125*m222.costs[0]).to_i)}#{k.stat_emotes[4]}\n#{"*Required mats:* #{m222.craft_mats.map{|q| "#{q[0]} x#{(val*125*q[1].to_i).to_i}"}.join(', ')}" unless m222.craft_mats.nil?}"
         cost+=val*125*m222.costs[0]
         unless m222.craft_mats.nil?
           for i in 0...m222.craft_mats.length
@@ -4805,7 +4802,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil,x=nil)
         m2222=m222.promoted_from
         unless m2222.nil?
           m2222.costs='0' if m2222.costs.nil? || m2222.costs.length<=0
-          str2="#{str2}\n\n**Which promotes from: #{m2222.emotes(bot)}*#{m2222.name}* (x#{(625*val).to_i})**\n*Assembly cost:* #{longFormattedNumber((val*625*m2222.costs[0]).to_i)}#{k.stat_emotes[4]}\n#{"*Required mats:* #{m2222.craft_mats.map{|q| "#{q[0]} x#{(val*625*q[1].to_i).to_i}"}.join(', ')}" unless m2222.craft_mats.nil?}"
+          str2="#{str2}\n\n**Which promotes from: #{m2222.emoji(bot)}*#{m2222.name}* (x#{(625*val).to_i})**\n*Assembly cost:* #{longFormattedNumber((val*625*m2222.costs[0]).to_i)}#{k.stat_emotes[4]}\n#{"*Required mats:* #{m2222.craft_mats.map{|q| "#{q[0]} x#{(val*625*q[1].to_i).to_i}"}.join(', ')}" unless m2222.craft_mats.nil?}"
           cost+=val*625*m2222.costs[0]
           unless m2222.craft_mats.nil?
             for i in 0...m2222.craft_mats.length
@@ -4815,7 +4812,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil,x=nil)
           m22222=m2222.promoted_from
           unless m22222.nil?
             m22222.costs='0' if m22222.costs.nil? || m22222.costs.length<=0
-            str2="#{str2}\n\n**Which promotes from: #{m22222.emotes(bot)}*#{m22222.name}* (x#{(5*625*val).to_i})**\n*Assembly cost:* #{longFormattedNumber((val*5*625*m22222.costs[0]).to_i)}#{k.stat_emotes[4]}\n#{"*Required mats:* #{m22222.craft_mats.map{|q| "#{q[0]} x#{(val*5*625*q[1].to_i).to_i}"}.join(', ')}" unless m22222.craft_mats.nil?}"
+            str2="#{str2}\n\n**Which promotes from: #{m22222.emoji(bot)}*#{m22222.name}* (x#{(5*625*val).to_i})**\n*Assembly cost:* #{longFormattedNumber((val*5*625*m22222.costs[0]).to_i)}#{k.stat_emotes[4]}\n#{"*Required mats:* #{m22222.craft_mats.map{|q| "#{q[0]} x#{(val*5*625*q[1].to_i).to_i}"}.join(', ')}" unless m22222.craft_mats.nil?}"
             cost+=val*5*625*m22222.costs[0]
             unless m22222.craft_mats.nil?
               for i in 0...m22222.craft_mats.length
@@ -4934,7 +4931,7 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
   if !k.event.nil? && !k.isBaby?
     m=$enemies.reject{|q| q.name==k.name || q.event.nil? || q.event != k.event || q.isBaby?}
     str="#{str}#{"\n" if k.stats.length>1 || m.length>0}\n**Event Name:** #{k.event}"
-    str="#{str}\n*Other bosses from this event:* #{m.map{|q| "#{q.emotes(bot)}#{q.name}"}.join(', ')}" if m.length>0 && !ignoresub
+    str="#{str}\n*Other bosses from this event:* #{m.map{|q| "#{q.emoji(bot)}#{q.name}"}.join(', ')}" if m.length>0 && !ignoresub
   end
   flds=nil
   if s2s
@@ -5026,12 +5023,12 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
       p=0
       p=1 if has_any?(args,['s2','2','skill2','skl2'])
       if adv.skills.nil? || adv.skills.length<=0 || adv.skills[p].nil? || adv.skills[p].length<=0
-        event.respond "#{adv.name}#{adv.emotes(bot)} does not have a #{['1st','2nd'][p]} skill."
+        event.respond "#{adv.name}#{adv.emoji(bot)} does not have a #{['1st','2nd'][p]} skill."
         return nil
       end
       skl1=skz.find_index{|q| q.name==adv.skills[p]}
       if skl1.nil?
-        event.respond "#{adv.name}#{adv.emotes(bot)}'s #{['1st','2nd'][p]} skill, #{adv.skills[p]}, has no data."
+        event.respond "#{adv.name}#{adv.emoji(bot)}'s #{['1st','2nd'][p]} skill, #{adv.skills[p]}, has no data."
         return nil
       end
       disp_skill_data(bot,event,adv.skills[p].split(' '),forcetags)
@@ -5040,13 +5037,13 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
       p=0
       p=1 if has_any?(args,['s2','2','skill2','skl2'])
       if adv.skills.nil? || adv.skills.length<=0 || adv.skills[p].nil? || adv.skills[p].length<=0
-        event.respond "#{adv.name}#{adv.emotes(bot)} does not have a#{[' 1st',' 2nd'][p] if p>0 || (!adv.skills.nil? && adv.skills.length>1)} skill."
+        event.respond "#{adv.name}#{adv.emoji(bot)} does not have a#{[' 1st',' 2nd'][p] if p>0 || (!adv.skills.nil? && adv.skills.length>1)} skill."
         return nil
       end
       p=0 if adv.skills.length<2
       skl1=skz.find_index{|q| q.name==adv.skills[p]}
       if skl1.nil?
-        event.respond "#{adv.name}#{adv.emotes(bot)}'s#{[' 1st',' 2nd'][p] if adv.skills.length>1} skill, #{adv.skills[p]}, has no data."
+        event.respond "#{adv.name}#{adv.emoji(bot)}'s#{[' 1st',' 2nd'][p] if adv.skills.length>1} skill, #{adv.skills[p]}, has no data."
         return nil
       end
       disp_skill_data(bot,event,adv.skills[p].split(' '),forcetags)
@@ -5056,12 +5053,12 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
         event.respond "There are multiple weapons with that criterium, and I won't display a skill for each."
         return nil
       elsif adv.skills.nil? || adv.skills.length<=0
-        event.respond "#{adv.name}#{adv.emotes(bot)} does not have a skill."
+        event.respond "#{adv.name}#{adv.emoji(bot)} does not have a skill."
         return nil
       end
       skl1=skz.find_index{|q| q.name==adv.skills[0]}
       if skl1.nil?
-        event.respond "#{adv.name}#{adv.emotes(bot)}'s skill, #{adv.skills[0]}, has no data."
+        event.respond "#{adv.name}#{adv.emoji(bot)}'s skill, #{adv.skills[0]}, has no data."
         return nil
       end
       disp_skill_data(bot,event,adv.skills[0].split(' '),forcetags)
@@ -5112,7 +5109,7 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
   if topstr.length>0
     hdr="#{topstr[0]} - #{hdr}"
   else
-    hdr="#{hdr}#{k.emotes(bot)}"
+    hdr="#{hdr}#{k.emoji(bot)}"
   end
   str="#{k.energy_emoji(true)}".gsub(', ',"\n")
   displvl=0
@@ -5142,8 +5139,8 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
   x=$adventurers.map{|q| q}
   for i in 0...x.length
     advx.push(x[i].name) if x[i].skills.include?(k.name)
-    m.push("#{x[i].emotes(bot)}#{x[i].name} - S1") if x[i].skills[0]==k.name
-    m.push("#{x[i].emotes(bot)}#{x[i].name} - S2") if x[i].skills[1]==k.name
+    m.push("#{x[i].emoji(bot)}#{x[i].name} - S1") if x[i].skills[0]==k.name
+    m.push("#{x[i].emoji(bot)}#{x[i].name} - S2") if x[i].skills[1]==k.name
   end
   flds.push(['Adventurers',m.join("\n")]) if m.length>0 && topstr.length<=0
   if topstr.length<=0
@@ -5151,15 +5148,15 @@ def disp_skill_data(bot,event,args=nil,forcetags=false,topstr=[])
     x=$dragons.map{|q| q}
     for i in 0...x.length
       advx.push(x[i].name) if x[i].skills.include?(k.name)
-      m.push("#{x[i].emotes(bot)}#{x[i].name} - S1") if x[i].skills[0]==k.name
-      m.push("#{x[i].emotes(bot)}#{x[i].name} - S2") if x[i].skills[1]==k.name
+      m.push("#{x[i].emoji(bot)}#{x[i].name} - S1") if x[i].skills[0]==k.name
+      m.push("#{x[i].emoji(bot)}#{x[i].name} - S2") if x[i].skills[1]==k.name
     end
     flds.push(['Dragons',m.join("\n")]) if m.length>0
     m=[]
     x=$weapons.map{|q| q}
     for i in 0...x.length
-      m.push("#{x[i].emotes(bot)}#{x[i].name} - S3") if x[i].skills[0]==k.name
-      m.push("#{x[i].emotes(bot)}#{x[i].name} - refined S3") if x[i].skills[1]==k.name
+      m.push("#{x[i].emoji(bot)}#{x[i].name} - S3") if x[i].skills[0]==k.name
+      m.push("#{x[i].emoji(bot)}#{x[i].name} - refined S3") if x[i].skills[1]==k.name
     end
     flds.push(['Weapons',m.join("\n")]) if m.length>0
   end
@@ -5273,15 +5270,15 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         end
       end
       if m.nil?
-        event.respond "#{adv.name}#{adv.emotes(bot)} does not have a #{['1st','2nd','3rd'][p]} ability." unless pp
-        event.respond "#{adv.name}#{adv.emotes(bot)} does not have a #{['','chain '][p]}coability." if pp
+        event.respond "#{adv.name}#{adv.emoji(bot)} does not have a #{['1st','2nd','3rd'][p]} ability." unless pp
+        event.respond "#{adv.name}#{adv.emoji(bot)} does not have a #{['','chain '][p]}coability." if pp
         return nil
       end
       skl1=sklz.find_index{|q| q.type=='Ability' && q.fullName==m}
       skl1=sklz.find_index{|q| q.type==['CoAbility','Chain'][p] && q.fullName==m} if pp
       if skl1.nil?
-        event.respond "#{adv.name}#{adv.emotes(bot)}'s #{['1st','2nd','3rd'][p]} ability, #{m}, has no data." unless pp
-        event.respond "#{adv.name}#{adv.emotes(bot)}'s #{['','chain '][p]}coability, #{m}, has no data." if pp
+        event.respond "#{adv.name}#{adv.emoji(bot)}'s #{['1st','2nd','3rd'][p]} ability, #{m}, has no data." unless pp
+        event.respond "#{adv.name}#{adv.emoji(bot)}'s #{['','chain '][p]}coability, #{m}, has no data." if pp
         return nil
       end
       disp_ability_data(bot,event,m.split(' '),'Ability') unless pp
@@ -5292,13 +5289,13 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
       p=1 if has_any?(args,['s2','2','skill2','skl2'])
       p=2 if has_any?(args,['a3','3','ability3','abil3'])
       if adv.auras.nil? || adv.auras.length<=0 || adv.auras[p].nil? || adv.auras[p].length<=0
-        event.respond "#{adv.name}#{adv.emotes(bot)} does not have a #{['1st','2nd','3rd'][p]} aura."
+        event.respond "#{adv.name}#{adv.emoji(bot)} does not have a #{['1st','2nd','3rd'][p]} aura."
         return nil
       end
       p=[adv.auras.length-1,p].min
       skl1=sklz.find_index{|q| q.type=='Aura' && q.fullName==adv.auras[p][-1]}
       if skl1.nil?
-        event.respond "#{adv.name}#{adv.emotes(bot)}'s #{['1st','2nd','3rd'][p]} aura, #{adv.auras[p][-1]}, has no data."
+        event.respond "#{adv.name}#{adv.emoji(bot)}'s #{['1st','2nd','3rd'][p]} aura, #{adv.auras[p][-1]}, has no data."
         return nil
       end
       disp_ability_data(bot,event,adv.auras[p][-1].split(' '),'Aura')
@@ -5309,13 +5306,13 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
       p=1 if has_any?(args,['s2','2','skill2','skl2'])
       p=2 if has_any?(args,['a3','3','ability3','abil3'])
       if adv.abilities.nil? || adv.abilities.length<=0 || adv.abilities[p].nil? || adv.abilities[p].length<=0
-        event.respond "#{adv.name}#{adv.emotes(bot)} does not have a#{'n' unless p>0 || (!adv.abilities.nil? && adv.abilities.length>1)}#{[' 1st',' 2nd',' 3rd'][p] if p>0 || (!adv.abilities.nil? && adv.abilities.length>1)} ability."
+        event.respond "#{adv.name}#{adv.emoji(bot)} does not have a#{'n' unless p>0 || (!adv.abilities.nil? && adv.abilities.length>1)}#{[' 1st',' 2nd',' 3rd'][p] if p>0 || (!adv.abilities.nil? && adv.abilities.length>1)} ability."
         return nil
       end
       p=[adv.abilities.length-1,p].min
       skl1=sklz.find_index{|q| q.type=='Ability' && q.fullName==adv.abilities[p][-1]}
       if skl1.nil?
-        event.respond "#{adv.name}#{adv.emotes(bot)}'s#{[' 1st',' 2nd',' 3rd'][p] if p>0 || (!adv.abilities.nil? && adv.abilities.length>1)} ability, #{adv.abilities[p][-1]}, has no data."
+        event.respond "#{adv.name}#{adv.emoji(bot)}'s#{[' 1st',' 2nd',' 3rd'][p] if p>0 || (!adv.abilities.nil? && adv.abilities.length>1)} ability, #{adv.abilities[p][-1]}, has no data."
         return nil
       end
       disp_ability_data(bot,event,adv.abilities[p][-1].split(' '),'Ability')
@@ -5329,13 +5326,13 @@ def disp_ability_data(bot,event,args=nil,forceaura='')
         event.respond "There are multiple weapons with that criterium, and I won't display an ability for each."
         return nil
       elsif adv.abilities.nil? || adv.abilities.length<=0 || adv.abilities[p].nil? || adv.abilities[p].length<=0
-        event.respond "#{adv.name}#{adv.emotes(bot)} does not have a #{['1st','2nd','3rd'][p]} ability."
+        event.respond "#{adv.name}#{adv.emoji(bot)} does not have a #{['1st','2nd','3rd'][p]} ability."
         return nil
       end
       p=[adv.abilities.length-1,p].min
       skl1=sklz.find_index{|q| q.type=='Ability' && q.fullName==adv.abilities[p][-1]}
       if skl1.nil?
-        event.respond "#{adv.name}#{adv.emotes(bot)}'s #{['1st','2nd','3rd'][p]} ability, #{adv.abilities[p][-1]}, has no data."
+        event.respond "#{adv.name}#{adv.emoji(bot)}'s #{['1st','2nd','3rd'][p]} ability, #{adv.abilities[p][-1]}, has no data."
         return nil
       end
       disp_ability_data(bot,event,adv.abilities[p][-1].split(' '),'Ability')
@@ -5955,7 +5952,7 @@ def disp_mat_data(bot,event,args=nil,extvat=false)
   end
   ftr=nil
   hdr="__**#{k.name}**__"
-  hdr="#{hdr}#{k.emotes(bot)}" unless s2s
+  hdr="#{hdr}#{k.emoji(bot)}" unless s2s
   str="**Description:** #{k.description}"
   str="#{str}\n**EXP:** #{longFormattedNumber(k.exp)}" unless k.exp<=0
   if k.obtain.length<=0
@@ -6388,7 +6385,7 @@ bot.command(:deletealias, aliases: [:removealias]) do |event, name|
     return nil
   else
     k2="#{k.objt}"
-    baseunt="#{k.fullName}#{k.emotes(bot,true)}"
+    baseunt="#{k.fullName}#{k.emoji(bot,true)}"
     cmpr.push(k.fullName)
   end
   kx=0
@@ -7011,7 +7008,7 @@ bot.command(:cleanupaliases, from: 167657750971547648) do |event|
     unless nmz[i][3].nil?
       for i2 in 0...nmz[i][3].length
         srv=(bot.server(nmz[i][3][i2]) rescue nil)
-        if srv.nil? || bot.user(502288364838322176).on(srv.id).nil?
+        if srv.nil? || bot.user(543373018303299585).on(srv.id).nil?
           k+=1
           nmz[i][3][i2]=nil
         end
@@ -7310,7 +7307,7 @@ bot.server_create do |event|
     end
     chn=chnn[0] if chnn.length>0
   end
-  if ![620710758841450529,285663217261477889,443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,620710758841450529,572792502159933440].include?(event.server.id) && Shardizard==4
+  if ![620710758841450529,285663217261477889,443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,620710758841450529,572792502159933440,877171831835066391].include?(event.server.id) && Shardizard==4
     (chn.send_message(get_debug_leave_message()) rescue nil)
     event.server.leave
   else
@@ -7733,6 +7730,14 @@ bot.mention do |event|
     args.shift
     disp_damage_modifiers(bot,event,args)
     m=false
+  elsif ['aliases','seealiases','checkaliases'].include?(args[0].downcase)
+    args.shift
+    list_aliases(bot,event,args)
+    k=1
+  elsif ['saliases','serveraliases'].include?(args[0].downcase)
+    args.shift
+    list_aliases(bot,event,args,1)
+    k=1
   end
   if m
     if event.message.text.downcase.gsub(' ','').gsub("'",'').include?("werenostrangerstolove")
@@ -7888,7 +7893,7 @@ end
 bot.ready do |event|
   if Shardizard==4
     for i in 0...bot.servers.values.length
-      if ![620710758841450529,285663217261477889,443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,620710758841450529,572792502159933440].include?(bot.servers.values[i].id)
+      if ![620710758841450529,285663217261477889,443172595580534784,443181099494146068,443704357335203840,449988713330769920,497429938471829504,554231720698707979,523821178670940170,523830882453422120,691616574393811004,523824424437415946,523825319916994564,523822789308841985,532083509083373579,575426885048336388,620710758841450529,572792502159933440,877171831835066391].include?(bot.servers.values[i].id)
         bot.servers.values[i].general_channel.send_message(get_debug_leave_message()) rescue nil
         bot.servers.values[i].leave
       end
