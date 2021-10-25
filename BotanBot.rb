@@ -43,14 +43,14 @@ bot.gateway.check_heartbeat_acks = false
 
 def shard_data(mode=0,ignoredebug=false,s=nil)
   s=Shards*1 if s.nil?
+  k=['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null'] if s<=4
+  k=['<:Element_Shadow:532106088154267658> Shadow','<:Element_Flame:532106087952810005> Fire','<:Element_Water:532106088221376522> Water','<:Element_Wind:532106087948746763> Wind','<:Element_Null:532106087810334741> Null','<:Element_Light:532106088129101834> Light','<:Element_Void:548467446734913536> Void'] if s>4 && s<7
+  k=['<:Weapon_Lance:532106114792423448> Lance','<:Weapon_Sword:532106114540634113> Sword','<:Weapon_Blade:532106114628714496> Blade','<:Weapon_Dagger:532106116025286656> Dagger','<:Element_Null:532106087810334741> Null','<:Weapon_Axe:532106114188443659> Axe','<:Weapon_Bow:532106114909732864> Bow','<:Weapon_Wand:532106114985099264> Wand','<:Weapon_Staff:532106114733441024> Staff','<:Weapon_Manacaster:758905122448867338> Manacaster'] if s>6 && s<10
+  k=['<:Affinity_Crown:758912216115314690> Crown','<:Affinity_Axe:758912216413241354> Axe','<:Affinity_Sword:758912216052269076> Sword','<:Affinity_Bow:758912216401051720> Bow','<:Element_Null:532106087810334741> Null','<:Affinity_Lance:758912216333549619> Lance','<:Affinity_Dragon:758912216048205824> Dragon','<:Affinity_Spider:902266533605175347> Spider','<:Affinity_Eagle:758912216073240677> Eagle','<:Affinity_Deer:902266533710028853> Deer','<:Affinity_Wolf:758912216274567189> Wolf','<:Affinity_Bat:902266533898747904> Bat','<:Affinity_Bull:758912215733895169> Bull','<:Affinity_Serpent:758912216304189471> Serpent','<:Affinity_Butterfly:902266533525454849> Butterfly','<:Affinity_Fish:902266533852618843> Fish','<:Affinity_Staff:758912216031952907> Staff'] if s>9
+  k=['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null','<:Element_Flame:532106087952810005> Fire','<:Element_Water:532106088221376522> Water','<:Element_Wind:532106087948746763> Wind','<:Element_Light:532106088129101834> Light','<:Element_Shadow:532106088154267658> Shadow','<:Weapon_Sword:532106114540634113> Sword','<:Weapon_Blade:532106114628714496> Blade','<:Weapon_Dagger:532106116025286656> Dagger','<:Weapon_Axe:532106114188443659> Axe','<:Weapon_Bow:532106114909732864> Bow','<:Weapon_Lance:532106114792423448> Lance','<:Weapon_Wand:532106114985099264> Wand','<:Weapon_Staff:532106114733441024> Staff','<:Weapon_Manacaster:758905122448867338> Manacaster','<:Affinity_Crown:758912216115314690> Crown','<:Affinity_Axe:758912216413241354> Axe','<:Affinity_Sword:758912216052269076> Sword','<:Affinity_Bow:758912216401051720> Bow','<:Affinity_Lance:758912216333549619> Lance','<:Affinity_Dragon:758912216048205824> Dragon','<:Affinity_Spider:902266533605175347> Spider','<:Affinity_Eagle:758912216073240677> Eagle','<:Affinity_Deer:902266533710028853> Deer','<:Affinity_Wolf:758912216274567189> Wolf','<:Affinity_Bat:902266533898747904> Bat','<:Affinity_Bull:758912215733895169> Bull','<:Affinity_Serpent:758912216304189471> Serpent','<:Affinity_Butterfly:902266533525454849> Butterfly','<:Affinity_Fish:902266533852618843> Fish','<:Affinity_Staff:758912216031952907> Staff','<:Element_Void:548467446734913536> Void'] if s>16
+  k2=['<:Type_Attack:532107867520630784> Attack','<:Type_Defense:532107867264909314> Defense','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Flame:532106087952810005> Fire','<:Element_Water:532106088221376522> Water','<:Element_Wind:532106087948746763> Wind','<:Element_Light:532106088129101834> Light','<:Element_Shadow:532106088154267658> Shadow','<:Weapon_Sword:532106114540634113> Sword','<:Weapon_Blade:532106114628714496> Blade','<:Weapon_Dagger:532106116025286656> Dagger','<:Weapon_Axe:532106114188443659> Axe','<:Weapon_Bow:532106114909732864> Bow','<:Weapon_Lance:532106114792423448> Lance','<:Weapon_Wand:532106114985099264> Wand','<:Weapon_Staff:532106114733441024> Staff','<:Weapon_Manacaster:758905122448867338> Manacaster','<:Affinity_Crown:758912216115314690> Crown','<:Affinity_Axe:758912216413241354> Axe','<:Affinity_Sword:758912216052269076> Sword','<:Affinity_Bow:758912216401051720> Bow','<:Affinity_Lance:758912216333549619> Lance','<:Affinity_Dragon:758912216048205824> Dragon','<:Affinity_Spider:902266533605175347> Spider','<:Affinity_Eagle:758912216073240677> Eagle','<:Affinity_Deer:902266533710028853> Deer','<:Affinity_Wolf:758912216274567189> Wolf','<:Affinity_Bat:902266533898747904> Bat','<:Affinity_Bull:758912215733895169> Bull','<:Affinity_Serpent:758912216304189471> Serpent','<:Affinity_Butterfly:902266533525454849> Butterfly','<:Affinity_Fish:902266533852618843> Fish','<:Affinity_Staff:758912216031952907> Staff','<:Element_Void:548467446734913536> Void']
   if mode==0 # shard icons + names
-    k=['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null'] if s<=4
-    k=['<:Element_Shadow:532106088154267658> Shadow','<:Element_Flame:532106087952810005> Fire','<:Element_Water:532106088221376522> Water','<:Element_Wind:532106087948746763> Wind','<:Element_Null:532106087810334741> Null','<:Element_Light:532106088129101834> Light','<:Element_Void:548467446734913536> Void'] if s>4 && s<7
-    k=['<:Weapon_Lance:532106114792423448> Lance','<:Weapon_Sword:532106114540634113> Sword','<:Weapon_Blade:532106114628714496> Blade','<:Weapon_Dagger:532106116025286656> Dagger','<:Element_Null:532106087810334741> Null','<:Weapon_Axe:532106114188443659> Axe','<:Weapon_Bow:532106114909732864> Bow','<:Weapon_Wand:532106114985099264> Wand','<:Weapon_Staff:532106114733441024> Staff','<:Weapon_Manacaster:758905122448867338> Manacaster'] if s>6 && s<10
-    k=['<:Affinity_Queen:758912216115314690> Queen','<:Affinity_Hatchet:758912216413241354> Hatchet','<:Affinity_Duel:758912216052269076> Duel','<:Affinity_Barrage:758912216401051720> Barrage','<:Element_Null:532106087810334741> Null','<:Affinity_Draco:758912216048205824> Draco','<:Affinity_Trident:758912216333549619> Trident','<:Affinity_Phoenix:758912216073240677> Phoenix','<:Affinity_Wolf:758912216274567189> Wolf','<:Affinity_Bull:758912215733895169> Bull','<:Affinity_Serpent:758912216304189471> Serpent','<:Affinity_Divinity:758912216031952907> Divine'] if s>9
-    k=['<:Type_Defense:532107867264909314> Defense','<:Type_Attack:532107867520630784> Attack','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Null:532106087810334741> Null','<:Element_Flame:532106087952810005> Fire','<:Element_Water:532106088221376522> Water','<:Element_Wind:532106087948746763> Wind','<:Element_Light:532106088129101834> Light','<:Element_Shadow:532106088154267658> Shadow','<:Weapon_Sword:532106114540634113> Sword','<:Weapon_Blade:532106114628714496> Blade','<:Weapon_Dagger:532106116025286656> Dagger','<:Weapon_Axe:532106114188443659> Axe','<:Weapon_Bow:532106114909732864> Bow','<:Weapon_Lance:532106114792423448> Lance','<:Weapon_Wand:532106114985099264> Wand','<:Weapon_Staff:532106114733441024> Staff','<:Weapon_Manacaster:758905122448867338> Manacaster','<:Affinity_Queen:758912216115314690> Queen','<:Affinity_Hatchet:758912216413241354> Hatchet','<:Affinity_Duel:758912216052269076> Duel','<:Affinity_Barrage:758912216401051720> Barrage','<:Affinity_Draco:758912216048205824> Draco','<:Affinity_Trident:758912216333549619> Trident','<:Affinity_Phoenix:758912216073240677> Phoenix','<:Affinity_Wolf:758912216274567189> Wolf','<:Affinity_Bull:758912215733895169> Bull','<:Affinity_Serpent:758912216304189471> Serpent','<:Affinity_Divinity:758912216031952907> Divine','<:Element_Void:548467446734913536> Void'] if s>11
     if s>30
-      k2=['<:Type_Attack:532107867520630784> Attack','<:Type_Defense:532107867264909314> Defense','<:Type_Healing:532107867348533249> Healing','<:Type_Support:532107867575156747> Support','<:Element_Flame:532106087952810005> Fire','<:Element_Water:532106088221376522> Water','<:Element_Wind:532106087948746763> Wind','<:Element_Light:532106088129101834> Light','<:Element_Shadow:532106088154267658> Shadow','<:Weapon_Sword:532106114540634113> Sword','<:Weapon_Blade:532106114628714496> Blade','<:Weapon_Dagger:532106116025286656> Dagger','<:Weapon_Axe:532106114188443659> Axe','<:Weapon_Bow:532106114909732864> Bow','<:Weapon_Lance:532106114792423448> Lance','<:Weapon_Wand:532106114985099264> Wand','<:Weapon_Staff:532106114733441024> Staff','<:Weapon_Manacaster:758905122448867338> Manacaster','<:Affinity_Queen:758912216115314690> Queen','<:Affinity_Hatchet:758912216413241354> Hatchet','<:Affinity_Duel:758912216052269076> Duel','<:Affinity_Barrage:758912216401051720> Barrage','<:Affinity_Draco:758912216048205824> Draco','<:Affinity_Trident:758912216333549619> Trident','<:Affinity_Phoenix:758912216073240677> Phoenix','<:Affinity_Wolf:758912216274567189> Wolf','<:Affinity_Bull:758912215733895169> Bull','<:Affinity_Serpent:758912216304189471> Serpent','<:Affinity_Divinity:758912216031952907> Divine','<:Element_Void:548467446734913536> Void']
       i=2
       while k.length<s+1
         k3=k2.map{|q| "#{q}#{i}"}
@@ -61,13 +61,9 @@ def shard_data(mode=0,ignoredebug=false,s=nil)
       end
     end
   elsif mode==1 # shard icons without names
-    k=['<:Type_Defense:532107867264909314>','<:Type_Attack:532107867520630784>','<:Type_Healing:532107867348533249>','<:Type_Support:532107867575156747>','<:Element_Null:532106087810334741>'] if s<=4
-    k=['<:Element_Shadow:532106088154267658>','<:Element_Flame:532106087952810005>','<:Element_Water:532106088221376522>','<:Element_Wind:532106087948746763>','<:Element_Null:532106087810334741>','<:Element_Light:532106088129101834>','<:Element_Void:548467446734913536>'] if s>4 && s<7
-    k=['<:Weapon_Lance:532106114792423448>','<:Weapon_Sword:532106114540634113>','<:Weapon_Blade:532106114628714496>','<:Weapon_Dagger:532106116025286656>','<:Element_Null:532106087810334741>','<:Weapon_Axe:532106114188443659>','<:Weapon_Bow:532106114909732864>','<:Weapon_Wand:532106114985099264>','<:Weapon_Staff:532106114733441024>','<:Weapon_Manacaster:758905122448867338>'] if s>6 && s<10
-    k=['<:Affinity_Queen:758912216115314690>','<:Affinity_Hatchet:758912216413241354>','<:Affinity_Duel:758912216052269076>','<:Affinity_Barrage:758912216401051720>','<:Element_Null:532106087810334741>','<:Affinity_Draco:758912216048205824>','<:Affinity_Trident:758912216333549619>','<:Affinity_Phoenix:758912216073240677>','<:Affinity_Wolf:758912216274567189>','<:Affinity_Bull:758912215733895169>','<:Affinity_Serpent:758912216304189471>','<:Affinity_Divinity:758912216031952907>'] if s>9
-    k=['<:Type_Defense:532107867264909314>','<:Type_Attack:532107867520630784>','<:Type_Healing:532107867348533249>','<:Type_Support:532107867575156747>','<:Element_Null:532106087810334741>','<:Element_Flame:532106087952810005>','<:Element_Water:532106088221376522>','<:Element_Wind:532106087948746763>','<:Element_Light:532106088129101834>','<:Element_Shadow:532106088154267658>','<:Weapon_Sword:532106114540634113>','<:Weapon_Blade:532106114628714496>','<:Weapon_Dagger:532106116025286656>','<:Weapon_Axe:532106114188443659>','<:Weapon_Bow:532106114909732864>','<:Weapon_Lance:532106114792423448>','<:Weapon_Wand:532106114985099264>','<:Weapon_Staff:532106114733441024>','<:Weapon_Manacaster:758905122448867338>','<:Affinity_Queen:758912216115314690>','<:Affinity_Hatchet:758912216413241354>','<:Affinity_Duel:758912216052269076>','<:Affinity_Barrage:758912216401051720>','<:Affinity_Draco:758912216048205824>','<:Affinity_Trident:758912216333549619>','<:Affinity_Phoenix:758912216073240677>','<:Affinity_Wolf:758912216274567189>','<:Affinity_Bull:758912215733895169>','<:Affinity_Serpent:758912216304189471>','<:Affinity_Divinity:758912216031952907>','<:Element_Void:548467446734913536>'] if s>11
+    k=k.map{|q| q.split(' ')[0]}
     if s>30
-      k2=['<:Type_Attack:532107867520630784>','<:Type_Defense:532107867264909314>','<:Type_Healing:532107867348533249>','<:Type_Support:532107867575156747>','<:Element_Flame:532106087952810005>','<:Element_Water:532106088221376522>','<:Element_Wind:532106087948746763>','<:Element_Light:532106088129101834>','<:Element_Shadow:532106088154267658>','<:Weapon_Sword:532106114540634113>','<:Weapon_Blade:532106114628714496>','<:Weapon_Dagger:532106116025286656>','<:Weapon_Axe:532106114188443659>','<:Weapon_Bow:532106114909732864>','<:Weapon_Lance:532106114792423448>','<:Weapon_Wand:532106114985099264>','<:Weapon_Staff:532106114733441024>','<:Weapon_Manacaster:758905122448867338>','<:Affinity_Queen:758912216115314690>','<:Affinity_Hatchet:758912216413241354>','<:Affinity_Duel:758912216052269076>','<:Affinity_Barrage:758912216401051720>','<:Affinity_Draco:758912216048205824>','<:Affinity_Trident:758912216333549619>','<:Affinity_Phoenix:758912216073240677>','<:Affinity_Wolf:758912216274567189>','<:Affinity_Bull:758912215733895169>','<:Affinity_Serpent:758912216304189471>','<:Affinity_Divinity:758912216031952907>','<:Element_Void:548467446734913536>']
+      k2=k2.map{|q| q.split(' ')[0]}
       i=2
       while k.length<s+1
         k3=k2.map{|q| "#{q}*#{i}*"}
@@ -78,13 +74,9 @@ def shard_data(mode=0,ignoredebug=false,s=nil)
       end
     end
   elsif mode==2 # shard names without icons
-    k=['Defense','Attack','Healing','Support','Null'] if s<=4
-    k=['Shadow','Fire','Water','Wind','Null','Light','Void'] if s>4 && s<7
-    k=['Lance','Sword','Blade','Dagger','Null','Axe','Bow','Wand','Staff','Manacaster'] if s>6 && s<10
-    k=['Queen','Hatchet','Duel','Barrage','Null','Draco','Trident','Phoenix','Wolf','Bull','Serpent','Divine'] if s>9
-    k=['Defense','Attack','Healing','Support','Null','Fire','Water','Wind','Light','Shadow','Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Manacaster','Queen','Hatchet','Duel','Barrage','Draco','Trident','Phoenix','Wolf','Bull','Serpent','Divine','Void'] if s>11
+    k=k.map{|q| q.split(' ')[1]}
     if s>30
-      k2=['Attack','Defense','Healing','Support','Fire','Water','Wind','Light','Shadow','Sword','Blade','Dagger','Axe','Bow','Lance','Wand','Staff','Manacaster','Queen','Hatchet','Duel','Barrage','Draco','Trident','Phoenix','Wolf','Bull','Serpent','Divine','Void']
+      k2=k2.map{|q| q.split(' ')[1]}
       i=2
       while k.length<s+1
         k3=k2.map{|q| "#{q}#{i}"}
@@ -803,7 +795,7 @@ class DLDragon < DLSentient
       end
     else
       str2="**Lv.#{@rarity*20}**  #{c[0]}#{@hp[1]}  #{c[1]}#{@str[1]}"
-      str2="**Lv.#{@rarity*20+15}**  #{c[0]}#{@hp[2]}  #{c[1]}#{@str[2]}" if @hp.length>2 && @str.length>2
+      str2="**Lv.#{@rarity*20+20}**  #{c[0]}#{@hp[2]}  #{c[1]}#{@str[2]}" if @hp.length>2 && @str.length>2
     end
     if @games[0]=='FEH'
       str2="#{str2}\n<:Great_Badge_Golden:443704781068959744>**FEH Collab**"
@@ -1856,11 +1848,11 @@ class DLSkill
   
   def sp_display(level=0)
     return [self.sp_display(1),self.sp_display(2),self.sp_display(3),self.sp_display(4),self.sp_display(5)] if level==0
-    return '' if level<0 && (@sharing.nil? || @sharing.length<=0)
+    return '' if level<0 && (@sharing.nil? || @sharing.length<=0 || @sharing[0]==0)
     xlevel=level*1
     level=-1 if level<0
     x=@sp_cost[level-1]*1
-    x=@sharing[1]*1 if level<0
+    x=@sharing[1]*1 if level<0 && !@sharing[1].nil?
     x2=x*1
     x2=23*x/20 if xlevel==-2
     x2=13*x/10 if xlevel==-3
@@ -2207,7 +2199,8 @@ class DLAbility
             t.push("#{adv[i].class_header(bot,2)[0]}#{adv[i].name}#{" (A#{i2+1}\u2082)" if dispslots}") if ename.include?(adv[i].auras[i2][1])
             t.push("#{adv[i].class_header(bot,2)[0]}#{adv[i].name}#{" (A#{i2+1}\u2083)" if dispslots}#{' [med]' unless dispslots}") if ename.include?(adv[i].auras[i2][2])
             t.push("#{adv[i].class_header(bot,2)[0]}#{adv[i].name}#{" (A#{i2+1}\u2084)" if dispslots}") if adv[i].auras[i2].length>4 && ename.include?(adv[i].auras[i2][3])
-            t.push("#{adv[i].class_header(bot,2)[0]}#{adv[i].name}#{" (A#{i2+1}\u2085)" if dispslots}#{' [Max]' unless dispslots}") if ename.include?(adv[i].auras[i2][-1])
+            t.push("#{adv[i].class_header(bot,2)[0]}#{adv[i].name}#{" (A#{i2+1}\u2085)" if dispslots}#{' [Max]' unless dispslots}") if ename.include?(adv[i].auras[i2][[adv[i].auras[i2].length-1,4].min])
+            t.push("#{adv[i].class_header(bot,2)[0]}#{adv[i].name}#{" (A#{i2+1}\u2086)" if dispslots}#{' [Max]' unless dispslots}") if ename.include?(adv[i].auras[i2][5])
           end
         end
         unless adv[i].hidden_abilities.nil?
@@ -2226,7 +2219,8 @@ class DLAbility
               t.push("#{adv[i].class_header(bot,2)[0]}#{adv[i].name} (HA\u2082)") if dispstats && ename.include?(adv[i].hidden_abilities[i2][1])
               t.push("#{adv[i].class_header(bot,2)[0]}#{adv[i].name}#{" (HA\u2083)" if dispslots}#{' [HA-med]' unless dispslots}") if ename.include?(adv[i].hidden_abilities[i2][2])
               t.push("#{adv[i].class_header(bot,2)[0]}#{adv[i].name} (HA\u2084)") if dispstats && adv[i].hidden_abilities[i2].length>4 && ename.include?(adv[i].hidden_abilities[i2][3])
-              t.push("#{adv[i].class_header(bot,2)[0]}#{adv[i].name}#{" (HA\u2085)" if dispslots}#{' [HA-Max]' unless dispslots}") if ename.include?(adv[i].hidden_abilities[i2][-1])
+              t.push("#{adv[i].class_header(bot,2)[0]}#{adv[i].name}#{" (HA\u2085)" if dispslots}#{' [HA-Max]' unless dispslots}") if ename.include?(adv[i].hidden_abilities[i2][[adv[i].hidden_abilities[i2].length-1,4].min])
+              t.push("#{adv[i].class_header(bot,2)[0]}#{adv[i].name}#{" (HA\u2086)" if dispslots}#{' [HA-Max]' unless dispslots}") if ename.include?(adv[i].hidden_abilities[i2][5])
             end
           end
         end
@@ -3574,7 +3568,7 @@ def all_commands(include_nil=false,permissions=-1)
      'facility','faculty','fac','mat','material','addalias','alias','deletealias','removealias','serveraliases','saliases','aliases','checkaliases','seealiases','seegroups','checkgroups','sp','chaincoab',
      'bondlevel','bondxp','bondexp','drgxp','drgexp','drglevel','dlevel','dxp','dexp','advxp','advexp','advlevel','alevel','axp','aexp','plxp','plexp','pllevel','plevel','pexp','cc','whybotan','backpack',
      'team','cca','mats','materials','node','spiral','damage','combo','sort','list','skillshare','skilshare','share','shared','weapprints','wepprints','donation','item','coab','exp','pxp','chain','nodes',
-     'co','xp']
+     'co','xp','dmg']
   k=['addalias','deletealias','removealias','prefix'] if permissions==1
   k=['reboot','sortaliases','status','backupaliases','restorealiases','sendmessage','sendpm','ignoreuser','leaveserver','cleanupaliases','boop','reload','update'] if permissions==2
   k=k.uniq
@@ -4187,7 +4181,7 @@ def add_new_alias(bot,event,newname,unit,modifier=nil,modifier2=nil,mode=0)
     event.respond "#{newname} has __***NOT***__ been added to #{matchnames[1]}'s aliases."
     bot.channel(logchn).send_message("#{str2}\n~~**#{type[1].gsub('*','')} Alias:** #{newname} for #{unit}~~\n**Reason for rejection:** Begone, alias.")
     return nil
-  elsif checkstr.downcase =~ /n+?((i|1)+?|(e|3)+?)(b|g|8)+?(a|4|(e|3)+?r+?)+?/
+  elsif checkstr.downcase.gsub('x','') =~ /n+?((i|1|y)+?|(e|3)+?)(b|g|8)+?(a|4|(e|3)+?r+?)+?/
     event.respond "That name has __***NOT***__ been added to #{matchnames[1]}'s aliases."
     bot.channel(logchn).send_message("#{str2}\n~~**#{type[1].gsub('*','')} Alias:** >CENSORED< for #{unit}~~\n**Reason for rejection:** Begone, alias.")
     return nil
@@ -4327,7 +4321,6 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     str2=''; str3=''
     lll=[0,3,5,6]
     if k.skills[0].nil? || k.skills[0].length<=0 || k.skills[0]=='-'
-      str2='~~Skill 1 does not exist~~'; str3='~~Skill 1 does not exist~~'
     elsif skl1.nil?
       str2="**#{k.skills[0]}** - LOAD ERROR"; str3="**#{k.skills[0]}** - LOAD ERROR"
     elsif s2s
@@ -4356,7 +4349,6 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
     end
     lll=[2,4,6,6]
     if k.skills[1].nil? || k.skills[1].length<=0 || k.skills[1]=='-'
-      str2="#{str2}\n#{"\n" unless str2[0,2]=='~~'}~~Skill 2 does not exist~~"; str3="#{str3}\n#{"\n" unless str3[0,2]=='~~'}~~Skill 2 does not exist~~"
     elsif skl2.nil?
       str2="#{str2}\n\n**#{k.skills[1]}** - LOAD ERROR"; str3="#{str3}\n\n**#{k.skills[1]}** - LOAD ERROR"
     elsif s2s
@@ -7383,7 +7375,7 @@ bot.message do |event|
   elsif (['!weak '].include?(str[0,6]) || ['!weakness '].include?(str[0,10]))
     if event.server.nil? || event.server.id==264445053596991498
     elsif !bot.user(304652483299377182).on(event.server.id).nil? # Robin
-    elsif !bot.user(206147275775279104).on(event.server.id).nil? || Shardizard==4 || event.server.id==330850148261298176 # Pokedex
+    elsif !bot.user(206147275775279104).on(event.server.id).nil? || Shardizard==4 || [256291408598663168,330850148261298176].include?(event.server.id) # Pokedex
       triple_weakness(bot,event)
     end
   elsif overlap_prevent(event,false)
