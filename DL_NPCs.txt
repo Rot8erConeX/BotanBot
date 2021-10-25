@@ -23,7 +23,6 @@ Guildmaster\1\y\\
 Harle\1\y\\KENN
 Hastur\1\y\\
 Kirin Felyne\3\y\\
-Leif\1\y\\Takahiro Sakurai
 Leonidas\1\y\\Tomokazu Seki
 Loki\1\y\\Arai Satomi
 Magma Slime\1\y\\
@@ -36,7 +35,7 @@ Nina\2\y\\Natsumi Hioka
 Notte\2\y\\Yukana
 Phares\1\y\\
 Pigeon\2\y\\
-Presenter\10\y\\
+Presenter\5\y\\
 Primia\2\y\\
 Purple Slime\1\y\\
 Red Champ\5\y\\
