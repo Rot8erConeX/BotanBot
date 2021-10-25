@@ -425,10 +425,15 @@ $resonance=[['Crown',nil,nil,'Skill Damage +10%'],
             ['Bow',nil,'Skill Haste +6%','Skill Haste +10%'],
             ['Lance','Force Strike +5%','Force Strike +8%','Force Strike +15%'],
             ['Dragon','Dragon Damage +10%','Dragon Damage +18%','Dragon Damage +30%'],
+            ['Spider','Poison Res +100%'],
             ['Eagle','Burn Res +100%'],
+            ['Deer','Freeze Res +100%'],
             ['Wolf','Stun Res +100%'],
+            ['Bat','Blindness Res +100%'],
             ['Bull','Paralysis Res +100%'],
             ['Serpent','Curse Res +100%'],
+            ['Butterfly','Sleep Res +100%'],
+            ['Fish','Bog Res +100%'],
             ['Staff','Buff Skill Time +5%','Buff Skill Time +8%','Buff Skill Time +15%']]
 
 class DLSentient
@@ -1376,6 +1381,8 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false,preload=nil)
       return nil
     elsif (has_any?(args,['mega','rock']) && has_any?(args,['man'])) || has_any?(args,['megaman','rockman'])
       args=['rush']
+    elsif has_any?(args,['sandalphon','sandalphone','sandyphone'])
+      args=['heavenly','wings']
     end
     k=find_data_ex(:find_dragon,args.join(' '),event)
   else
@@ -1403,7 +1410,7 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false,preload=nil)
     unless k.isPseudodragon?
       str="**Lv.1:**  #{c[0]}#{k.hp[0]}  #{c[1]}#{k.str[0]}"
       str="#{str}\n**Lv.#{k.rarity*20}:**  #{c[0]}#{k.hp[1]}  #{c[1]}#{k.str[1]}"
-      str="#{str}\n**Lv.#{k.rarity*20+15}:**  #{c[0]}#{k.hp[2]}  #{c[1]}#{k.str[2]}" if k.hp.length>2 && k.str.length>2
+      str="#{str}\n**Lv.#{k.rarity*20+20}:**  #{c[0]}#{k.hp[2]}  #{c[1]}#{k.str[2]}" if k.hp.length>2 && k.str.length>2
     end
   else
     title=k.mini_header(bot)
@@ -1504,7 +1511,8 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false,preload=nil)
         str="#{str}\n#{bemoji[1]*2}#{bemoji[0]*2}#{k.auras.map{|q| q[[q.length-1,qq].min]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
         str="#{str}\n#{bemoji[1]*3}#{bemoji[0]*1}#{k.auras.map{|q| q[[q.length-1,3].min]}.reject{|q| q.nil? || q.length<=0}.join(', ')}" if k.auras.map{|q| q.length}.max>3
       end
-      str="#{str}\n#{bemoji[1]*4}#{k.auras.map{|q| q[-1]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
+      str="#{str}\n#{bemoji[1]*4}#{k.auras.map{|q| q[[q.length-1,4].min]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
+      str="#{str}\n#{bemoji[1]*5}#{k.auras.map{|q| q[-1]}.reject{|q| q.nil? || q.length<=0}.join(', ')}" if k.auras.map{|q| q.length}.max>5
     else
       str="#{str}\n#{bemoji[1]*4}#{k.auras.map{|q| q[1]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
     end
@@ -2387,10 +2395,15 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
     affinities.push('Bow') if ['barrage','arrows','bows','bow'].include?(args[i].downcase)
     affinities.push('Dragon') if ['draco','dragon','draco','dragons','draconic'].include?(args[i].downcase)
     affinities.push('Lance') if ['trident','tridents','fork','forks','aether','lance','lances','spear','spears'].include?(args[i].downcase)
+    affinities.push('Spider') if ['spider','spiders'].include?(args[i].downcase)
     affinities.push('Eagle') if ['phoenix','pheonix','wright','eagle','eagles','bird','birds','phoenixes','pheonixes','phoenixs','pheonixs'].include?(args[i].downcase)
+    affinities.push('Deer') if ['deer','deers','dear','dears','reindeer','reindeers','riendeer','riendeers','raindeer','raindeers'].include?(args[i].downcase)
     affinities.push('Wolf') if ['wolf','wolfs','wolves','unicorn','unicorns'].include?(args[i].downcase)
+    affinities.push('Bat') if ['bat','bats'].include?(args[i].downcase)
     affinities.push('Bull') if ['bull','bulls','cow','cows','minotaur','minotaurs'].include?(args[i].downcase)
     affinities.push('Serpent') if ['serpent','serpents','snake','snakes','snek','sneks','serpentine'].include?(args[i].downcase)
+    affinities.push('Fish') if ['fish','fishs','fishes','fishies','feesh','feeshs','feeshes'].include?(args[i].downcase)
+    affinities.push('Butterfly') if ['butterfly','butterflies','butterflys'].include?(args[i].downcase)
     affinities.push('Staff') if ['divinity','divine','eclipse','eclipse','holy','staff','staffs','staves'].include?(args[i].downcase)
     affinities.push('None') if ['noaffinity','empty','affinityless'].include?(args[i].downcase)
     clzz.push('Attack') if ['attack','atk','att','attacking'].include?(args[i].downcase)
