@@ -4080,9 +4080,11 @@ def display_search_results(bot,event,args=nil)
     return nil
   else
     f=['vanille','van']
-    m=bot.user(141260274144509952).on(event.server.id).display_name.gsub(' ','')
-    f.push(m)
-    f.push(m[0,args[0].length]) unless args[0].length<=5 || args[0].length>m.length
+    unless event.server.nil?
+      m=bot.user(141260274144509952).on(event.server.id).display_name.gsub(' ','')
+      f.push(m)
+      f.push(m[0,args[0].length]) unless args[0].length<=5 || args[0].length>m.length
+    end
     if f.include?(args[0].downcase)
       args.shift
       t=Time.now
