@@ -266,6 +266,7 @@
 ["StunCleanse", ["stuncleanse", "stunnedcleanse", "stunningcleanse", "stuncleaning", "stunnedcleaning", "stunningcleaning", "stunclean", "stunnedclean", "stunningclean", "stunpurify", "stunnedpurify", "stunningpurify"], "Askillity"]
 ["StunRes", ["stunres", "stunresistance"], "Askillity"]
 ["StunnedPunisher", ["stunnedpunish", "stunnedpunisher", "stunpunish", "stunpunisher"], "Askillity"]
+["SurgeOfStrength", ["surgeofstrength", "surge", "strengthsurge", "5ubaura", "flbaura"], "Askillity"]
 ["Target", ["target"], "Askillity"]
 ["Team", ["all", "every1", "everyone", "team", "teamate", "teamates", "teammate", "teammates"], "Askillity"]
 ["Thaumian", ["thaumian"], "Askillity"]

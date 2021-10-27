@@ -969,6 +969,7 @@ Zardin Blade\\Skill\Deals one hit of 920% water damage to enemies directly ahead
 Zardin's Wrath\\Skill\Deals one hit of 1151% water damage to enemies in a line.\Deals one hit of 1278% water damage to enemies in a line.\Deals one hit of 1598% water damage to enemies in a line, and inflicts frostbite, dealing 41% water damage every 2.9s for 21s, with 120% chance.\5225, 5225, 5225, 5225, 5225\Yes, No\0.7\\Damage, Frostbite\\, 
 Zephyr's Wrath\\Skill\Deals 3 hits of 508.2% wind damage to surrounding enemies, and inflicts stun for 5-6 seconds with 160% base chance.\Deals 3 hits of 534.8% wind damage to surrounding enemies, and inflicts stun for 6-7 seconds with 180% base chance.\\-50, -50, -50, -50, -50\Yes, No\1.7\\Damage, Stun\\, 
 Zex's Waltz\\Skill\Deals 5 hits of 149% light damage to enemies directly ahead.\Deals 5 hits of 165% light damage to enemies directly ahead.\\6847, 6847, 6847, 6847, 6847\Yes, No\1.4\\Damage\\, 
+(Element) Surge of Strength\-\Aura\If the user and the dragon have the same elemental attunement: grants the user the "Surge of Strength" effect at the start of quests for 180 seconds. During Surge of Strength, the user's strength is increased by 30%.\0\y\Flame, SurgeofStrength\Yes
 (Flame) Attack Rate\example\Aura\If the user is attuned to Flame: increases attack rate by `x`%.\0\y\Flame, Speed\
 (Flame) Attack Rate\10%\Aura\If the user is attuned to Flame: increases attack rate by 10%.\80\y\Flame, Speed\
 (Flame) Attack Rate\12%\Aura\If the user is attuned to Flame: increases attack rate by 12%.\85\y\Flame, Speed\
