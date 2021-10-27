@@ -901,10 +901,10 @@ class DLWyrmprint
   end
   
   def stat_emotes
-    return ['<:HP_S:514712247503945739>','<:GenericAttackS:514712247587569664>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if @games[0]=='FEH'
+    return ['<:HP_S:514712247503945739>','<:GenericAttackS:514712247587569664>','<:Unbind_Empty:903006726004015144>','<:Unbind:903006726004015215>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if @games[0]=='FEH'
     return ['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if @games[0]=='FGO'
-    return ['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if @games[0]=='MM'
-    return ['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
+    return ['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:Unbind_Empty:903006726004015144>','<:Unbind:903006726004015215>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if @games[0]=='MM'
+    return ['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Unbind_Empty:903006726004015144>','<:Unbind:903006726004015215>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
   end
   
   def class_header(bot,emotesonly=0,includerarity=false,includeobjt=false)
@@ -1269,11 +1269,11 @@ class DLWeapon
   end
   
   def stat_emotes
-    return ['<:HP_S:514712247503945739>','<:MagicS:514712247289774111>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if @games[0]=='FEH' && ['Staff','Wand'].include?(@type)
-    return ['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if @games[0]=='FEH'
+    return ['<:HP_S:514712247503945739>','<:MagicS:514712247289774111>','<:Unbind_Empty:903006726004015144>','<:Unbind:903006726004015215>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if @games[0]=='FEH' && ['Staff','Wand'].include?(@type)
+    return ['<:HP_S:514712247503945739>','<:StrengthS:514712248372166666>','<:Unbind_Empty:903006726004015144>','<:Unbind:903006726004015215>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if @games[0]=='FEH'
     return ['<:FGO_HP:653485372168470528>','<:FGO_Atk:653485372231122944>','<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if @games[0]=='FGO'
-    return ['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if @games[0]=='MM'
-    return ['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
+    return ['<:ETank:641613198755364864>','<:ZSaber:641613201884053504>','<:Unbind_Empty:903006726004015144>','<:Unbind:903006726004015215>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if @games[0]=='MM'
+    return ['<:HP:573344832307593216>','<:Strength:573344931205349376>','<:Unbind_Empty:903006726004015144>','<:Unbind:903006726004015215>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
   end
   
   def class_header(bot,emotesonly=0,includerarity=false,includeobjt=false)
@@ -4738,7 +4738,7 @@ def disp_weapon_lineage(bot,event,args=nil,comparedata=nil,x=nil)
       end
     end
   end
-  str="#{str}#{"\n\n**Crafting shown for #{'<:Unbind:534494090969088000>'*([val-1,4].min)}#{'<:NonUnbound:534494090876682264>'*([5-val,0].max)}**" if val>1 && !mub}\n\n**This weapon#{" (x#{val})" unless val==1}**"
+  str="#{str}#{"\n\n**Crafting shown for #{'<:Unbind:903006726004015215>'*([val-1,4].min)}#{'<:Unbind_Empty:903006726004015144>'*([5-val,0].max)}**" if val>1 && !mub}\n\n**This weapon#{" (x#{val})" unless val==1}**"
   str="#{str}\n*Smithy level required:* #{k.smith_level}" unless k.smith_level<=0
   k.costs='0' if k.costs.nil? || k.costs.length<=0
   str="#{str}\n*Assembly cost:* #{longFormattedNumber(val*k.costs[0])}#{k.stat_emotes[4]}#{"\n*Required mats:* #{k.craft_mats.map{|q| "#{q[0]} x#{val*q[1].to_i}"}.join(', ')}" unless k.craft_mats.nil?}"
@@ -7309,16 +7309,6 @@ bot.server_create do |event|
     @server_data[0][((event.server.id >> 22) % Shards)] += 1
     metadata_save()
     chn.send_message("Hello, my name is Botan.  You're the #{longFormattedNumber(@server_data[0].inject(0){|sum,x| sum + x },true)} halidom to ask for my help.  Folks around these parts call me the \"naginata cutie.\" ...Hey, don't you **dare** laugh at that, jerk!\nWant data on *Dragalia Lost*?  Use commands that start with the prefix `DL!`, and leave this to me!") rescue nil
-  end
-end
-
-bot.server_delete do |event|
-  unless Shardizard==4
-    bot.user(167657750971547648).pm("Left server **#{event.server.name}**\nThis server was using #{shard_data(0,true)[((event.server.id >> 22) % Shards)]} Shards")
-    bot.user(141260274144509952).pm("Left server **#{event.server.name}**\nThis server was using #{shard_data(0,true)[((event.server.id >> 22) % Shards)]} Shards")
-    metadata_load()
-    @server_data[0][((event.server.id >> 22) % Shards)] -= 1
-    metadata_save()
   end
 end
 
