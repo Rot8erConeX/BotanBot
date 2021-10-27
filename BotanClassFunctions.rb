@@ -2473,7 +2473,7 @@ def find_in_wyrmprints(bot,event,args=nil,mode=0,allowstr=true)
   end
   if groups.length>0
     char=char.reject{|q| !groups.map{|q2| q2.wyrmprint_list}.flatten.map{|q| q.name}.include?(q.name)}.uniq
-    search.push("*Groups*: #{groups.map{|q| q.name}.join(', ')}")
+    search.push("*Groups*: #{groups.map{|q| q.fullName}.join(', ')}")
   end
   if fltr.length>0
     m=[]
@@ -2821,7 +2821,7 @@ def find_in_weapons(bot,event,args=nil,mode=0,allowstr=true,juststats=false)
   end
   if groups.length>0
     char=char.reject{|q| !groups.map{|q2| q2.weapon_list}.flatten.map{|q| q.name}.include?(q.name)}.uniq
-    search.push("*Groups*: #{groups.map{|q| q.name}.join(', ')}")
+    search.push("*Groups*: #{groups.map{|q| q.fullName}.join(', ')}")
   end
   if fltr.length>0
     m=[]
