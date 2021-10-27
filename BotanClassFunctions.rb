@@ -812,6 +812,13 @@ class DLDragon
     create_embed(event,"__Damage modifiers for **#{@name}#{self.emoji(bot)}**__",disp,self.disp_color,nil,self.thumbnail,f)
    return nil
   end
+  
+  def is5lb?
+    return true if @hp.length>2 && @str.length>2
+    return false if @auras.nil?
+    return true if @auras.map{|q| q.length}.max>5
+    return false
+  end
 end
 
 class DLWyrmprint
@@ -852,7 +859,7 @@ class DLWyrmprint
       dispname=@name.split(' (')[0].gsub(' ','_') if File.size("#{$location}devkit/DLTemp#{Shardizard}.png")<=100 || m
     end
     art="https://raw.githubusercontent.com/Rot8erConeX/BotanBot/master/Art/Wyrmprints/#{dispname}_#{l}.png"
-    emtz=['','<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>']
+    emtz=['','<:Unbind_Empty:903006726004015144>','<:Unbind:903006726004015215>']
     emtz=['','<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>'] if @games[0]=='FEH'
     halfemote="\u200B  \u200B  \u200B  \u200B"
     disprar=@rarity*1
@@ -1499,24 +1506,24 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false,preload=nil)
     str2=str2["\n".length,str2.length-"\n".length] if str2[0,"\n".length]=="\n"
     str="#{str}\n;;;;;"
   end
-  bemoji=['<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>']
-  bemoji=['<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>'] if k.games[0]=='FGO'
-  bemoji=['<:NonUnbound:534494090876682264>','<:Unbind:534494090969088000>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>'] if k.games[0]=='FEH'
+  bemoji=['<:Unbind_Empty:903006726004015144>','<:Unbind:903006726004015215>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>','<:Unbind5_Empty:903016370306965505>','<:Unbind5:903006726238912552>']
+  bemoji=['<:Limited:574682514585550848>','<:LimitBroken:574682514921095212>','<:Resource_Rupies:532104504372363274>','<:Resource_Eldwater:532104503777034270>','<:Limited:574682514585550848>','<:LimitDestroyed:903008261777813546>'] if k.games[0]=='FGO'
+  bemoji=['<:Unbind_Empty:903006726004015144>','<:Unbind:903006726004015215>','<:Really_Sacred_Coin:571011997609754624>','<:Resource_Structure:510774545154572298>','<:Unbind5_Empty:903016370306965505>','<:Unbind5:903006726238912552>'] if k.games[0]=='FEH'
   # Mana Spiral Pink = 0xE9438F
   unless juststats || k.auras.nil? || k.auras.length<=0
-    str="#{str}\n\n**Aura:**\n#{bemoji[0]*4}#{k.auras.map{|q| q[0]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
+    str="#{str}\n\n**Aura:**\n#{bemoji[0]*4}#{bemoji[4] if k.is5lb?}#{k.auras.map{|q| q[0]}.reject{|q| q.nil? || q.length<=0 || q=='-'}.join(', ')}"
     if k.auras.map{|q| q.length}.max>2
       if safe_to_spam?(event)
-        str="#{str}\n#{bemoji[1]*1}#{bemoji[0]*3}#{k.auras.map{|q| q[[q.length-1,1].min]}.reject{|q| q.nil? || q.length<=0}.join(', ')}" if k.auras.map{|q| q.length}.max>3
+        str="#{str}\n#{bemoji[1]*1}#{bemoji[0]*3}#{bemoji[4] if k.is5lb?}#{k.auras.map{|q| q[[q.length-1,1].min]}.reject{|q| q.nil? || q.length<=0 || q=='-'}.join(', ')}" if k.auras.map{|q| q.length}.max>3
         qq=1
         qq=2 if k.auras.map{|q| q.length}.max>3
-        str="#{str}\n#{bemoji[1]*2}#{bemoji[0]*2}#{k.auras.map{|q| q[[q.length-1,qq].min]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
-        str="#{str}\n#{bemoji[1]*3}#{bemoji[0]*1}#{k.auras.map{|q| q[[q.length-1,3].min]}.reject{|q| q.nil? || q.length<=0}.join(', ')}" if k.auras.map{|q| q.length}.max>3
+        str="#{str}\n#{bemoji[1]*2}#{bemoji[0]*2}#{bemoji[4] if k.is5lb?}#{k.auras.map{|q| q[[q.length-1,qq].min]}.reject{|q| q.nil? || q.length<=0 || q=='-'}.join(', ')}"
+        str="#{str}\n#{bemoji[1]*3}#{bemoji[0]*1}#{bemoji[4] if k.is5lb?}#{k.auras.map{|q| q[[q.length-1,3].min]}.reject{|q| q.nil? || q.length<=0 || q=='-'}.join(', ')}" if k.auras.map{|q| q.length}.max>3
       end
-      str="#{str}\n#{bemoji[1]*4}#{k.auras.map{|q| q[[q.length-1,4].min]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
-      str="#{str}\n#{bemoji[1]*5}#{k.auras.map{|q| q[-1]}.reject{|q| q.nil? || q.length<=0}.join(', ')}" if k.auras.map{|q| q.length}.max>5
+      str="#{str}\n#{bemoji[1]*4}#{bemoji[4] if k.is5lb?}#{k.auras.map{|q| q[[q.length-1,4].min]}.reject{|q| q.nil? || q.length<=0 || q=='-'}.join(', ')}"
+      str="#{str}\n#{bemoji[1]*4}#{bemoji[5]}#{k.auras.map{|q| q[-1]}.reject{|q| q.nil? || q.length<=0 || q=='-'}.join(', ')}" if k.is5lb?
     else
-      str="#{str}\n#{bemoji[1]*4}#{k.auras.map{|q| q[1]}.reject{|q| q.nil? || q.length<=0}.join(', ')}"
+      str="#{str}\n#{bemoji[1]*4}#{bemoji[4] if k.is5lb?}#{k.auras.map{|q| q[1]}.reject{|q| q.nil? || q.length<=0 || q=='-'}.join(', ')}"
     end
   end
   str="#{str}\n\n**Sells for:** #{longFormattedNumber(k.sell_price[0])}#{bemoji[2]} #{longFormattedNumber(k.sell_price[1])}#{bemoji[3]}" unless juststats || k.sell_price.nil? || k.sell_price.length<=0 || k.sell_price.max<=0
@@ -2067,6 +2074,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   races=[]
   launch=false
   ess=false
+  flb=false
   lookout=$skilltags.map{|q| q}
   lookout2=lookout.reject{|q| q[2]!='Cygame'}
   lookout4=lookout.reject{|q| q[2]!='Availability' && q[2]!='Availability/Dragon'}
@@ -2078,6 +2086,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
     launch=true if ['launch'].include?(args[i].downcase)
     notlaunch=true if ['notlaunch','nonlaunch'].include?(args[i].downcase)
     ess=true if ['essence','essance','freemerge','essences','essances','freemerges'].include?(args[i].downcase)
+    flb=true if ['5lb','flb','5ub','fub','pink'].include?(args[i].downcase)
     rar.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<$max_rarity.max+1
     rar.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<$max_rarity.max+1
     elem.push('Flame') if ['flame','fire','flames','fires'].include?(args[i].downcase)
@@ -2174,6 +2183,10 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
   if ess
     search.push('*Essence Dragons*')
     char=char.reject{|q| q.essence.nil? || !q.essence}
+  end
+  if flb
+    search.push('*Dragons with 5 unbinds*')
+    char=char.reject{|q| (q.hp.length<=2 || q.str.length<=2) && (q.auras.nil? || q.auras.map{|q2| q2.length}.max<=5)}
   end
   if wday.length>0
     char=char.reject{|q| !wday.include?(q.favorite)}.uniq
@@ -4537,7 +4550,7 @@ def sort_weapons(bot,event,args=nil)
     char=char[0,10]
   end
   stats=['Name','','','','<:HP:573344832307593216>HP','<:Strength:573344931205349376>Strength']
-  disp="__**Weapon Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}\n*Sorted at:* #{['',"#{'<:NonUnbound:534494090876682264>'*4} 0UB","#{'<:Unbind:534494090969088000>'*4} MUB"][x]}"
+  disp="__**Weapon Search**__\n#{search.join("\n")}\n*Sorted By:* #{srt.map{|q| stats[q]}.reject{|q| q.length<=0}.join(', ')}\n*Sorted at:* #{['',"#{'<:Unbind_Empty:903006726004015144>'*4} 0UB","#{'<:Unbind:903006726004015215>'*4} MUB"][x]}"
   disp=extend_message(disp,"__**Notes**__\n#{textra}",event,2) if textra.length>0
   disp=extend_message(disp,"__**Results**__",event,2) if char.length>0
   for i in 0...char.length
