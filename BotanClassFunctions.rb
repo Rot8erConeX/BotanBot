@@ -1390,9 +1390,11 @@ def disp_dragon_stats(bot,event,args=nil,juststats=false,preload=nil)
   end
   if k.nil?
     args.unshift('dragon')
-    if !find_data_ex(:find_skill,args.join(' '),event).nil?
+    skl=find_data_ex(:find_skill,args.join(' '),event,false,false,true)
+    abil=find_data_ex(:find_ability,args.join(' '),event,false,false,true)
+    if !skl.nil? && skl[1]!='dragon' && skl[1].include?('dragon')
       disp_skill_data(bot,event,args)
-    elsif !find_data_ex(:find_ability,args.join(' '),event).nil?
+    elsif !abil.nil? && abil[1]!='dragon' && abil[1].include?('dragon')
       disp_ability_data(bot,event,args)
     else
       event.respond "No matches found."
