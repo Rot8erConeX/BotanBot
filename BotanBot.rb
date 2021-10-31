@@ -10,7 +10,7 @@ require 'tzinfo/data'                  # Downloaded with active_support below, b
 require 'rufus-scheduler'              # Download link: https://github.com/jmettraux/rufus-scheduler
 require 'active_support/core_ext/time' # Download link: https://rubygems.org/gems/activesupport/versions/5.0.0
 require_relative 'rot8er_functs'       # functions I use commonly in bots
-$location=">Location<"
+$location="C:/Users/#{@mash}/Desktop/"
 
 # this is required to get her to change her avatar on certain holidays
 ENV['TZ'] = 'America/Chicago'
@@ -35,9 +35,9 @@ if Shardizard==4
 elsif Shardizard<0
   bot = Discordrb::Commands::CommandBot.new token: '>Smol Token<', client_id: 759369481305718806, prefix: prefix_proc
 elsif Shardizard>4
-  bot = Discordrb::Commands::CommandBot.new token: '>Token<', shard_id: (Shardizard-1), num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
+  bot = Discordrb::Commands::CommandBot.new token: '>Token<', shard_id: (Shardizard-1), num_shards: Shards, client_id: 543373018303299585, prefix: prefix_proc
 else
-  bot = Discordrb::Commands::CommandBot.new token: '>Token<', shard_id: Shardizard, num_shards: 4, client_id: 543373018303299585, prefix: prefix_proc
+  bot = Discordrb::Commands::CommandBot.new token: '>Token<', shard_id: Shardizard, num_shards: Shards, client_id: 543373018303299585, prefix: prefix_proc
 end
 bot.gateway.check_heartbeat_acks = false
 
@@ -1578,7 +1578,7 @@ end
 class DLEnemy
   attr_accessor :name
   attr_accessor :stats
-  attr_accessor :element,:tribe,:subdata,:event
+  attr_accessor :element,:tribe,:subdata,:event,:limits
   attr_accessor :weaknesses,:afflictions
   attr_accessor :abilities
   attr_accessor :sort_data
@@ -1607,7 +1607,11 @@ class DLEnemy
     @element=val[0]
     @tribe=val[1]
     @subdata=val[2]
-    @event=val[3] unless val.length<4
+    if @subdata=='Trials of the Mighty'
+      @limits=val[3,val.length-3] unless val.length<4
+    else
+      @event=val[3] unless val.length<4
+    end
   end
   
   def sort_data=(val); @sort_data=val; end
@@ -4922,10 +4926,32 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
       end
     end
   end
+  unless k.limits.nil?
+    adv=$adventurers.map{|q| q.clone}.reject{|q| !k.limits.include?(q.element) || !k.limits.include?(q.weapon)}
+  end
   if !k.event.nil? && !k.isBaby?
     m=$enemies.reject{|q| q.name==k.name || q.event.nil? || q.event != k.event || q.isBaby?}
     str="#{str}#{"\n" if k.stats.length>1 || m.length>0}\n**Event Name:** #{k.event}"
     str="#{str}\n*Other bosses from this event:* #{m.map{|q| "#{q.emoji(bot)}#{q.name}"}.join(', ')}" if m.length>0 && !ignoresub
+  elsif !s2s && !k.limits.nil?
+    elem=[]; weap=[]; othr=[]
+    for i in 0...k.limits.length
+      x="#{k.limits[i]}"
+      moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{x}"}
+      moji2=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{x}"}
+      if moji.length>0
+        elem.push("#{moji[0].mention}#{x}")
+      elsif moji2.length>0
+        weap.push("#{moji2[0].mention}#{x}")
+      else
+        othr.push(x)
+      end
+    end
+    perc=adv.length*100.00/$adventurers.reject{|q| q.name=='Puppy'}.length
+    str="#{str}\n\n__**Current Limitations** (#{adv.length} matches, #{'%.2f' % perc}% of playable roster)__"
+    str="#{str}\n*Element:* #{elem.join(', ')}" if elem.length>0
+    str="#{str}\n*Weapon:* #{weap.join(', ')}" if weap.length>0
+    str="#{str}\n*Other:* #{othr.join(', ')}" if othr.length>0
   end
   flds=nil
   if s2s
@@ -4996,6 +5022,9 @@ def disp_enemy_data(bot,event,args=nil,ignoresub=false)
     for i in 0...k.babies.length
       disp_enemy_data(bot,event,k.babies[i].name.split(' '),true)
     end
+  end
+  if s2s && !k.limits.nil?
+    display_the_mighty(bot,event,adv,k.limits)
   end
   return nil
 end
