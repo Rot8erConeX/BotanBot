@@ -275,6 +275,7 @@
 ["Undead", ["undead", "zambie", "zombie"], "Askillity"]
 ["Unhealable", ["unhealable", "noheal", "healblocked", "healblock"], "Askillity"]
 ["Unique", ["preference", "prf", "unique"], "Askillity"]
+["United", ["united"], "Askillity"]
 ["User", ["self", "user"], "Askillity"]
 ["Vengeance", ["emnity", "enmity", "vengeance", "crisis"], "Askillity"]
 ["Vengeful", ["vengeful", "venge"], "Askillity"]
