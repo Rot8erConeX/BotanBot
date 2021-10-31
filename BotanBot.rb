@@ -232,7 +232,7 @@ class DLAdventurer < DLSentient
   attr_accessor :alts
   attr_accessor :gender,:race
   attr_accessor :games,:cygame
-  attr_accessor :footer
+  attr_accessor :footer,:mana_mode
   attr_accessor :sp_override,:damage_override
   attr_accessor :sort_data
   
@@ -283,6 +283,7 @@ class DLAdventurer < DLSentient
   def cygame=(val); @cygame=val; end
   
   def footer=(val); @footer=val; end
+  def mana_mode=(val); @mana_mode=val; end
   def sp_override=(val); @sp_override=val.split(';; ').map{|q| q.split('; ')} end
   def damage_override=(val); @damage_override=val.split(';; ').map{|q| q.split('; ')} end
   
@@ -2990,6 +2991,7 @@ def data_load(to_reload=[])
       bob4.footer=b[i][17] unless b[i][17].nil? || b[i][17].length<=0
       bob4.sp_override=b[i][18] unless b[i][18].nil? || b[i][18].length<=0
       bob4.damage_override=b[i][19] unless b[i][19].nil? || b[i][19].length<=0
+      bob4.mana_mode=b[i][20] unless b[i][20].nil?
       $adventurers.push(bob4)
     end
   end
@@ -4279,7 +4281,7 @@ def disp_adventurer_stats(bot,event,args=nil,juststats=false)
   hdr="__**#{k.name}**__"
   unless s2s || juststats
     hdr="#{hdr} #{generate_rarity_row(rar,$max_rarity[0],k.games[0])}"
-    hdr="#{hdr} (#{'Mana Spiral, ' if rar<=0}from #{k.rarity}#{k.class_header(bot,2,true)[0]})" unless k.rarity==rar
+    hdr="#{hdr} (#{"#{'Trial ' if k.mana_mode=='t'}Mana Spiral, " if rar<=0}from #{k.rarity}#{k.class_header(bot,2,true)[0]})" unless k.rarity==rar
   end
   title=k.class_header(bot)
   title=k.mini_header(bot,rar) unless s2s || juststats
