@@ -447,6 +447,15 @@ class DLSentient
     return 'they' if possessive==false
     return 'them'
   end
+  
+  def elemnum
+    return 1 if @element=='Flame'
+    return 2 if @element=='Water'
+    return 3 if @element=='Wind'
+    return 4 if @element=='Light'
+    return 5 if @element=='Shadow'
+    return 10
+  end
 end
 
 class DLAdventurer
@@ -740,6 +749,19 @@ class DLAdventurer
       return @weapon
     end
   end
+  
+  def weapnum
+    return 1 if @weapon=='Sword'
+    return 2 if @weapon=='Blade'
+    return 3 if @weapon=='Dagger'
+    return 4 if @weapon=='Axe'
+    return 5 if @weapon=='Lance'
+    return 6 if @weapon=='Bow'
+    return 7 if @weapon=='Wand'
+    return 8 if @weapon=='Staff'
+    return 9 if @weapon=='Manacaster'
+    return 100
+  end
 end
 
 class DLDragon
@@ -878,6 +900,28 @@ class DLWeapon
   def rar_row(r=0)
     return generate_rarity_row(@rarity,0,@games[0])
   end
+  
+  def elemnum
+    return 1 if @element=='Flame'
+    return 2 if @element=='Water'
+    return 3 if @element=='Wind'
+    return 4 if @element=='Light'
+    return 5 if @element=='Shadow'
+    return 10
+  end
+  
+  def weapnum
+    return 1 if @type=='Sword'
+    return 2 if @type=='Blade'
+    return 3 if @type=='Dagger'
+    return 4 if @type=='Axe'
+    return 5 if @type=='Lance'
+    return 6 if @type=='Bow'
+    return 7 if @type=='Wand'
+    return 8 if @type=='Staff'
+    return 9 if @type=='Manacaster'
+    return 100
+  end
 end
 
 class DLEnemy
@@ -935,6 +979,15 @@ class DLEnemy
   def artist; return nil; end
   def voice_na; return nil; end
   def voice_jp; return nil; end
+  
+  def elemnum
+    return 1 if @element=='Flame'
+    return 2 if @element=='Water'
+    return 3 if @element=='Wind'
+    return 4 if @element=='Light'
+    return 5 if @element=='Shadow'
+    return 10
+  end
 end
 
 class DLFacility
@@ -4243,6 +4296,41 @@ def display_search_results(bot,event,args=nil)
   end
 end
 
+def display_the_mighty(bot,event,adv=[],limits=[])
+  return nil if limits.nil? || limits.length<=0
+  adv=$adventurers.map{|q| q.clone}.reject{|q| !limits.include?(q.element) || !limits.include?(q.weapon)} if adv.nil? || adv.length<=0
+  elem=[]; weap=[]; othr=[]
+  for i in 0...limits.length
+    x="#{limits[i]}"
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{x}"}
+    moji2=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{x}"}
+    if moji.length>0
+      elem.push("#{moji[0].mention}")
+    elsif moji2.length>0
+      weap.push("#{moji2[0].mention}")
+    else
+      othr.push(x)
+    end
+  end
+  perc=adv.length*100.00/$adventurers.reject{|q| q.name=='Puppy'}.length
+  adv=adv.sort{|a,b| (a.weapnum<=>b.weapnum)==0 ? (a.name<=>b.name) : (a.weapnum<=>b.weapnum)} if elem.length==1 && weap.length != 1
+  adv=adv.sort{|a,b| (a.elemnum<=>b.elemnum)==0 ? (a.name<=>b.name) : (a.elemnum<=>b.elemnum)} if elem.length != 1 && weap.length==1
+  m=[[],[],[],[],[],[],[]]
+  for i in 0...adv.length
+    x=adv[i].clone
+    moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{x.element}"}
+    moji2=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Weapon_#{x.weapon}"}
+    x.name="#{x.name}#{moji[0].mention if moji.length>0 && elem.length != 1}#{moji2[0].mention if moji2.length>0 && weap.length != 1}"
+    m[x.rarity].push(x.name)
+  end
+  flds=[]
+  for i in 0...$max_rarity[0]+1
+    flds.push([generate_rarity_row(i,$max_rarity[0],''),m[i].join("\n")]) if m[i].length>0
+  end
+  puts flds.map{|q| q.to_s}
+  create_embed(event,"__**#{elem[0] if elem.length==1}#{weap[0] if weap.length==1}Current Limitations**__",'',0xCE456B,"#{adv.length} matches, #{'%.2f' % perc}% of playable roster",nil,flds)
+end
+
 # functions for the sort command
 
 def sort_adventurers(bot,event,args=nil,mode=0)
@@ -6595,9 +6683,11 @@ def today_in_dl(event,bot,args=nil,ignoreinputs=false,mode=0)
         m.push([generate_rarity_row(i+1),[]])
       end
       for i in 0...drg.length
-        f="#{drg[i][0]}#{element_emote(drg[i][2],bot,drg[i][16])}"
+        moji=bot.server(532083509083373579).emoji.values.reject{|q| q.name != "Element_#{drg[i].element}"}
+        moji=bot.server(443181099494146068).emoji.values.reject{|q| q.name != "Boost_#{drg[i].element.gsub('Shadow','Dark').gsub('Flame','Fire')}"} if drg[i].games[0]=='FEH'
+        f="#{drg[i].name}#{moji[0].mention if moji.length>0}"
         for i2 in 0...$max_rarity[1]
-          m[i2][1].push(f) if drg[i][1][0,1].to_i==i2+1
+          m[i2][1].push(f) if drg[i].rarity==i2+1
         end
       end
       m=m.reject{|q| q[1].length<=0}
