@@ -1729,6 +1729,7 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=0)
   cygames=[]
   launch=false
   mana=false
+  trial=[]
   share=false
   lookout=$skilltags.map{|q| q}
   lookout2=lookout.reject{|q| q[2]!='Race'}
@@ -1740,6 +1741,8 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=0)
     launch=true if ['launch'].include?(args[i].downcase)
     notlaunch=true if ['notlaunch','nonlaunch'].include?(args[i].downcase)
     mana=true if ['mana','spiral','manaspiral','70','70node','70mc','70ms'].include?(args[i].downcase)
+    trial.push(true) if ['trial','trials','trail','trails'].include?(args[i].downcase)
+    trial.push(false) if ['notrial','notrials','notrail','notrails','nottrial','nottrials','nottrail','nottrails','nontrial','nontrials','nontrail','nontrails'].include?(args[i].downcase)
     share=true if ['share','shared','skillshare','shareskill'].include?(args[i].downcase) && allowstr%4<2
     rar.push(args[i].to_i) if args[i].to_i.to_s==args[i] && args[i].to_i>0 && args[i].to_i<$max_rarity.max+1 && allowstr%2==0
     rar.push(args[i][0,1].to_i) if args[i]=="#{args[i][0,1]}*" && args[i][0,1].to_i.to_s==args[i][0,1] && args[i][0,1].to_i>0 && args[i][0,1].to_i<$max_rarity.max+1 && allowstr%2==0
@@ -1799,6 +1802,11 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=0)
   genders.uniq!
   races.uniq!
   cygames.uniq!
+  if trial.include?(true) && trial.include?(false)
+    trial=[]
+    mana=true
+  end
+  trial=trial[0]
   char=$adventurers.map{|q| q.clone}
   search=[]
   emo=[]
@@ -1843,8 +1851,14 @@ def find_in_adventurers(bot,event,args=nil,mode=0,allowstr=0)
     char=char.reject{|q| !groups.map{|q2| q2.adventurer_list}.flatten.map{|q| q.name}.include?(q.name)}.uniq
     search.push("*Groups*: #{groups.map{|q| q.fullName}.join(', ')}")
   end
-  if mana
-    search.push('*<:Rarity_Mana:706612079783575607>Mana Spiral*')
+  if trial==false
+    search.push('*<:Rarity_Mana:706612079783575607>Mana Spiral - regular only*')
+    char=char.reject{|q| !q.hasManaSpiral? || q.mana_mode != 'm'}
+  elsif trial==true
+    search.push('*<:Rarity_Mana:706612079783575607>Mana Spiral - Trial only*')
+    char=char.reject{|q| !q.hasManaSpiral? || q.mana_mode != 't'}
+  elsif mana
+    search.push('*<:Rarity_Mana:706612079783575607>Mana Spiral - all*')
     char=char.reject{|q| !q.hasManaSpiral?}
   end
   if fltr.length>0
@@ -2185,7 +2199,7 @@ def find_in_dragons(bot,event,args=nil,mode=0,allowstr=true)
     char=char.reject{|q| q.essence.nil? || !q.essence}
   end
   if flb
-    search.push('*Dragons with 5 unbinds*')
+    search.push("<:Unbind5:903006726238912552>*Dragons with 5 unbinds*")
     char=char.reject{|q| (q.hp.length<=2 || q.str.length<=2) && (q.auras.nil? || q.auras.map{|q2| q2.length}.max<=5)}
   end
   if wday.length>0
@@ -5725,11 +5739,12 @@ def upgrade_mats(event,args,bot,forcespiral=false)
   end
   name=''
   nums=[]
-  mana=false
+  mana=false; trial=false
   if k.nil?
     mana=true if forcespiral
     elem=''; rar=-1
     for i in 0...args.length
+      trial=true if ['trial','trials'].include?(args[i].downcase)
       rar=args[i][0,1].to_i if args[i][1,1]=='*' && args[i][0,1].to_i>3 && args[i][0,1].to_i<$max_rarity[0]+1
       elem='Flame' if ['flame','fire','flames','fires'].include?(args[i].downcase) && elem.length<=0
       elem='Water' if ['water','waters'].include?(args[i].downcase) && elem.length<=0
@@ -5798,6 +5813,8 @@ def upgrade_mats(event,args,bot,forcespiral=false)
       nums.push(args[i].to_i) if args[i].to_i.to_s==args[i]
     end
     mana=true if k.hasManaSpiral?
+    trial=false
+    trial=true if k.mana_mode=='t'
   end
   nums_mean=[]
   if nums.length>0
@@ -5844,61 +5861,79 @@ def upgrade_mats(event,args,bot,forcespiral=false)
        "Silver Orb x5, Gold Orb x3, Rainbow Orb x1, Samewyrm's Scale x15, Samewyrm's Superscale x5",
        "Bronze Orb x75, Silver Orb x10, Gold Orb x1, Samewyrm's Scale x13, Samewyrm's Superscale x4, Mana x51400",
        "Gold Orb x4, Rainbow Orb x1, Samewyrm's Scale x10, Samewyrm's Superscale x7, Knight's Testament x2",
-       "Silver Orb x12, Gold Orb x7, Rainbow Orb x2, Samewyrm's Scale x25, Samewyrm's Superscale x7, Knight's Testament x1, Champion's Testament x1, Mana x86000, Eldwater x73000","Gold Orb x8, Rainbow Orb x16, Samewyrm's Superscale x12, Knight's Testament x2, Void Seed x8","Mana x16000",
-       "Gold Orb x8, Incandescence Orb x4, Rainbow Orb x4, Mana x24000","Mana x16000","Mana x16000",
-       "Incandescence Orb x4, Knight's Testament x3, Longing Heart x5, Mana x30000",
-       "Incandescence Orb x3, Samewyrm's Superscale x14, Void Heart x4, Mana x56000","Mana x16000","Mana x16000",
-       "Gold Orb x12, Incandescence Orb x4, Rainbow Orb x4, Mana x36000","Incandescence Orb x4, HighDragon Tail x5, Champion's Testament x1, Mana x60000",
-       "Mana x16000","Mana x16000","Gold Orb x16, Incandescence Orb x4, Rainbow Orb x4, Mana x24000","Mana x16000",
-       "Incandescence Orb x4, Weakwyrm's Greatsphere x4, Champion's Testament x1, Mana x90000","Mana x16000",
-       "Incandescence Orb x4, Rainbow Orb x4, Samewyrm's Superscale x16, Mana x36000","Mana x16000","Mana x16000",
-       "Incandescence Orb x8, Rainbow Orb x4, Weakwyrm's Greatsphere x4, Mana x120000"]
+       "Silver Orb x12, Gold Orb x7, Rainbow Orb x2, Samewyrm's Scale x25, Samewyrm's Superscale x7, Knight's Testament x1, Champion's Testament x1, Mana x86000, Eldwater x73000",
+       "Gold Orb x8, Rainbow Orb x16, Samewyrm's Superscale x12, Knight's Testament x2, Void Seed x8","Mana x16000",
+       "Gold Orb x8, Incandescence Orb x4, Rainbow Orb x4, Mana x24000","Mana x16000","Mana x16000","Incandescence Orb x4, Knight's Testament x3, Longing Heart x5, Mana x30000",
+       "Incandescence Orb x3, Samewyrm's Superscale x14, Void Heart x4, Mana x56000","Mana x16000","Mana x16000","Gold Orb x12, Incandescence Orb x4, Rainbow Orb x4, Mana x36000",
+       "Incandescence Orb x4, HighDragon Tail x5, Champion's Testament x1, Mana x60000","Mana x16000","Mana x16000","Gold Orb x16, Incandescence Orb x4, Rainbow Orb x4, Mana x24000","Mana x16000",
+       "Incandescence Orb x4, Weakwyrm's Greatsphere x4, Champion's Testament x1, Mana x90000","Mana x16000","Incandescence Orb x4, Rainbow Orb x4, Samewyrm's Superscale x16, Mana x36000","Mana x16000",
+       "Mana x16000","Incandescence Orb x8, Rainbow Orb x4, Weakwyrm's Greatsphere x4, Mana x120000"]
+  elsif k.rarity==5 && trial
+    f=["Mana x5700","Bronze Orb x10, Silver Orb x1","Bronze Orb x15, Silver Orb x3, Mana x20250","Bronze Orb x20, Silver Orb x5, Gold Orb x1",
+       "Bronze Orb x50, Silver Orb x7, Gold Orb x2, Rainbow Orb x1, Samewyrm's Scale x8, Samewyrm's Superscale x3, Mana x45900",
+       "Silver Orb x10, Gold Orb x5, Rainbow Orb x1, Samewyrm's Scale x25, Samewyrm's Superscale x10",
+       "Bronze Orb x115, Silver Orb x15, Gold Orb x3, Samewyrm's Scale x20, Samewyrm's Superscale x7, Mana x72800",
+       "Gold Orb x7, Rainbow Orb x3, Samewyrm's Scale x30, Samewyrm's Superscale x12, Champion's Testament x1",
+       "Silver Orb x20, Gold Orb x10, Rainbow Orb x3, Samewyrm's Scale x35, Samewyrm's Superscale x12, Champion's Testament x2, Eldwater x73000, Mana x111000",
+       "Gold Orb x10, Rainbow Orb x20, Samewyrm's Superscale x15, Void Seed x3, Champion's Testament x1","Character's Conviction x1","Character's Conviction x1, Platinum Orb x6, Rainbow Orb x4",
+       "Character's Conviction x1","Character's Conviction x1","Character's Conviction x2, Champion's Testament x1","Character's Conviction x2, Platinum Orb x6, Rainbow Orb x4",
+       "Character's Conviction x2","Character's Conviction x2","Character's Conviction x2, Platinum Orb x6, Rainbow Orb x4","Character's Conviction x2, Character's Devotion x1, Champion's Testament x1",
+       "Character's Conviction x2, Character's Devotion x1","Character's Conviction x2, Character's Devotion x1","Character's Conviction x2, Character's Devotion x1, Platinum Orb x6, Rainbow Orb x4",
+       "Character's Conviction x2, Character's Devotion x1","Character's Conviction x3, Character's Devotion x2, Champion's Testament x1, Weakwyrm's Greatsphere x5",
+       "Character's Conviction x3, Character's Devotion x2","Character's Conviction x3, Character's Devotion x2, Platinum Orb x6, Rainbow Orb x4","Character's Conviction x3, Character's Devotion x2",
+       "Character's Conviction x3, Character's Devotion x2","Character's Conviction x5, Character's Devotion x5, Platinum Orb x12, Rainbow Orb x8"]
   elsif k.rarity==5
     f=["Mana x5700","Bronze Orb x10, Silver Orb x1","Bronze Orb x15, Silver Orb x3, Mana x20250","Bronze Orb x20, Silver Orb x5, Gold Orb x1",
        "Bronze Orb x50, Silver Orb x7, Gold Orb x2, Rainbow Orb x1, Samewyrm's Scale x8, Samewyrm's Superscale x3, Mana x45900",
        "Silver Orb x10, Gold Orb x5, Rainbow Orb x1, Samewyrm's Scale x25, Samewyrm's Superscale x10",
        "Bronze Orb x115, Silver Orb x15, Gold Orb x3, Samewyrm's Scale x20, Samewyrm's Superscale x7, Mana x72800",
        "Gold Orb x7, Rainbow Orb x3, Samewyrm's Scale x30, Samewyrm's Superscale x12, Champion's Testament x1",
-       "Silver Orb x20, Gold Orb x10, Rainbow Orb x3, Samewyrm's Scale x35, Samewyrm's Superscale x12, Champion's Testament x2, Eldwater x73000, Mana x111000","Gold Orb x10, Rainbow Orb x20, Samewyrm's Superscale x15, Void Seed x3, Champion's Testament x1","Mana x20000",
-       "Gold Orb x10, Platinum Orb x5, Rainbow Orb x5, Mana x30000","Mana x20000","Mana x20000",
-       "Platinum Orb x5, Rainbow Orb x3, Champion's Testament x1, Mana x37500","Platinum Orb x3, Samewyrm's Superscale x17, Longing Heart x6, Mana x70000",
-       "Mana x20000","Mana x20000","Gold Orb x15, Platinum Orb x5, Rainbow Orb x5, Mana x45000",
-       "Platinum Orb x5, Void Heart x5, Champion's Testament x1, Mana x75000","Mana x20000","Mana x20000",
-       "Gold Orb x20, Platinum Orb x5, Rainbow Orb x5, Mana x30000","Mana x20000",
-       "Platinum Orb x5, Weakwyrm's Greatsphere x5, Champion's Testament x1, Mana x112500","Mana x20000",
+       "Silver Orb x20, Gold Orb x10, Rainbow Orb x3, Samewyrm's Scale x35, Samewyrm's Superscale x12, Champion's Testament x2, Eldwater x73000, Mana x111000",
+       "Gold Orb x10, Rainbow Orb x20, Samewyrm's Superscale x15, Void Seed x3, Champion's Testament x1","Mana x20000","Gold Orb x10, Platinum Orb x5, Rainbow Orb x5, Mana x30000","Mana x20000",
+       "Mana x20000","Platinum Orb x5, Rainbow Orb x3, Champion's Testament x1, Mana x37500","Platinum Orb x3, Samewyrm's Superscale x17, Longing Heart x6, Mana x70000","Mana x20000","Mana x20000",
+       "Gold Orb x15, Platinum Orb x5, Rainbow Orb x5, Mana x45000","Platinum Orb x5, Void Heart x5, Champion's Testament x1, Mana x75000","Mana x20000","Mana x20000",
+       "Gold Orb x20, Platinum Orb x5, Rainbow Orb x5, Mana x30000","Mana x20000","Platinum Orb x5, Weakwyrm's Greatsphere x5, Champion's Testament x1, Mana x112500","Mana x20000",
        "Platinum Orb x5, Rainbow Orb x5, Samewyrm's Superscale x20, Mana x45000","Mana x20000","Mana x20000",
        "Platinum Orb x10, Rainbow Orb x5, High Weakwyrm's Tail x1, Mana x150000"]
-  elsif k.element==4
+  elsif k.rarity==4 && trial
     f=["Mana x4550","Bronze Orb x8, Silver Orb x1","Bronze Orb x12, Silver Orb x2, Mana x16150","Bronze Orb x15, Silver Orb x4, Gold Orb x1",
        "Bronze Orb x37, Silver Orb x5, Gold Orb x1, Samewyrm's Scale x6, Samewyrm's Superscale x2, Mana x36900",
        "Silver Orb x8, Gold Orb x4, Rainbow Orb x1, Samewyrm's Scale x20, Samewyrm's Superscale x8",
        "Bronze Orb x90, Silver Orb x12, Gold Orb x2, Samewyrm's Scale x16, Samewyrm's Superscale x5, Mana x57500",
        "Gold Orb x5, Rainbow Orb x2, Samewyrm's Scale x25, Samewyrm's Superscale x10, Knight's Testament x2",
-       "Silver Orb x15, Gold Orb x8, Rainbow Orb x2, Champion's Testament x1, Samewyrm's Scale x30, Samewyrm's Superscale x10, Knight's Testament x1, Mana x95000, Eldwater x73000","Gold Orb x8, Rainbow Orb x16, Samewyrm's Superscale x12, Void Seed x8, Knight's Testament x2","Mana x16000",
-       "Gold Orb x8, Platinum Orb x4, Rainbow Orb x4, Mana x24000","Mana x16000","Mana x16000",
-       "Platinum Orb x4, Knight's Testament x3, Longing Heart x5, Mana x30000","Platinum Orb x3, Samewyrm's Superscale x14, Void Heart x4, Mana x56000",
-       "Mana x16000","Mana x16000","Gold Orb x12, Platinum Orb x4, Rainbow Orb x4, Mana x36000",
-       "Platinum Orb x4, HighDragon Tail x5, Champion's Testament x1, Mana x60000","Mana x16000","Mana x16000",
-       "Gold Orb x16, Platinum Orb x4, Rainbow Orb x4, Mana x24000","Mana x16000",
-       "Platinum Orb x4, Weakwyrm's Greatsphere x4, Champion's Testament x1, Mana x90000","Mana x16000",
-       "Platinum Orb x4, Rainbow Orb x4, Samewyrm's Superscale x16, Mana x36000","Mana x16000","Mana x16000",
-       "Platinum Orb x8, Rainbow Orb x4, Weakwyrm's Greatsphere x4, Mana x120000"]
+       "Silver Orb x15, Gold Orb x8, Rainbow Orb x2, Champion's Testament x1, Samewyrm's Scale x30, Samewyrm's Superscale x10, Knight's Testament x1, Mana x95000, Eldwater x73000",
+       "Gold Orb x8, Rainbow Orb x16, Samewyrm's Superscale x12, Void Seed x8, Knight's Testament x2","Character's Conviction x1","Character's Conviction x1, Platinum Orb x4, Rainbow Orb x3",
+       "Character's Conviction x1","Character's Conviction x1","Character's Conviction x2, Platinum Orb x4, Knight's Testament x4","Character's Conviction x2, Platinum Orb x4",
+       "Character's Conviction x2, Platinum Orb x4, Rainbow Orb x3","Character's Conviction x2, Character's Devotion x1, Platinum Orb x4, Champion's Testament x1",
+       "Character's Conviction x2, Character's Devotion x1","Character's Conviction x2, Character's Devotion x1","Character's Conviction x2, Character's Devotion x1, Platinum Orb x4, Rainbow Orb x3",
+       "Character's Conviction x2, Character's Devotion x1","Character's Conviction x3, Character's Devotion x2, Platinum Orb x4, Champion's Testament x1, Weakwyrm's Greatsphere x4",
+       "Character's Conviction x3, Character's Devotion x2","Character's Conviction x3, Character's Devotion x2, Platinum Orb x4, Rainbow Orb x3","Character's Conviction x3, Character's Devotion x2",
+       "Character's Conviction x3, Character's Devotion x2","Character's Conviction x5, Character's Devotion x5, Platinum Orb x8, Rainbow Orb x4"]
+  elsif k.rarity==4
+    f=["Mana x4550","Bronze Orb x8, Silver Orb x1","Bronze Orb x12, Silver Orb x2, Mana x16150","Bronze Orb x15, Silver Orb x4, Gold Orb x1",
+       "Bronze Orb x37, Silver Orb x5, Gold Orb x1, Samewyrm's Scale x6, Samewyrm's Superscale x2, Mana x36900",
+       "Silver Orb x8, Gold Orb x4, Rainbow Orb x1, Samewyrm's Scale x20, Samewyrm's Superscale x8",
+       "Bronze Orb x90, Silver Orb x12, Gold Orb x2, Samewyrm's Scale x16, Samewyrm's Superscale x5, Mana x57500",
+       "Gold Orb x5, Rainbow Orb x2, Samewyrm's Scale x25, Samewyrm's Superscale x10, Knight's Testament x2",
+       "Silver Orb x15, Gold Orb x8, Rainbow Orb x2, Champion's Testament x1, Samewyrm's Scale x30, Samewyrm's Superscale x10, Knight's Testament x1, Mana x95000, Eldwater x73000",
+       "Gold Orb x8, Rainbow Orb x16, Samewyrm's Superscale x12, Void Seed x8, Knight's Testament x2","Mana x16000","Gold Orb x8, Platinum Orb x4, Rainbow Orb x4, Mana x24000","Mana x16000","Mana x16000",
+       "Platinum Orb x4, Knight's Testament x3, Longing Heart x5, Mana x30000","Platinum Orb x3, Samewyrm's Superscale x14, Void Heart x4, Mana x56000","Mana x16000","Mana x16000",
+       "Gold Orb x12, Platinum Orb x4, Rainbow Orb x4, Mana x36000","Platinum Orb x4, HighDragon Tail x5, Champion's Testament x1, Mana x60000","Mana x16000","Mana x16000",
+       "Gold Orb x16, Platinum Orb x4, Rainbow Orb x4, Mana x24000","Mana x16000","Platinum Orb x4, Weakwyrm's Greatsphere x4, Champion's Testament x1, Mana x90000","Mana x16000",
+       "Platinum Orb x4, Rainbow Orb x4, Samewyrm's Superscale x16, Mana x36000","Mana x16000","Mana x16000","Platinum Orb x8, Rainbow Orb x4, Weakwyrm's Greatsphere x4, Mana x120000"]
   else
-    f=["Mana x2650","Bronze Orb x5","Bronze Orb x8, Silver Orb x1, Mana x10050","Bronze Orb x10, Silver Orb x3",
-       "Bronze Orb x25, Silver Orb x3, Samewyrm's Scale x3, Mana x23100","Silver Orb x5, Gold Orb x1, Samewyrm's Scale x10, Samewyrm's Superscale x3",
-       "Bronze Orb x70, Silver Orb x10, Gold Orb x1, Samewyrm's Scale x10, Samewyrm's Superscale x2, Mana x36500",
+    f=["Mana x2650","Bronze Orb x5","Bronze Orb x8, Silver Orb x1, Mana x10050","Bronze Orb x10, Silver Orb x3","Bronze Orb x25, Silver Orb x3, Samewyrm's Scale x3, Mana x23100",
+       "Silver Orb x5, Gold Orb x1, Samewyrm's Scale x10, Samewyrm's Superscale x3","Bronze Orb x70, Silver Orb x10, Gold Orb x1, Samewyrm's Scale x10, Samewyrm's Superscale x2, Mana x36500",
        "Gold Orb x4, Rainbow Orb x1, Samewyrm's Scale x15, Samewyrm's Superscale x5, Knight's Testament x1",
-       "Silver Orb x12, Gold Orb x7, Rainbow Orb x2, Samewyrm's Scale x15, Samewyrm's Superscale x7, Knight's Testament x1, Champion's Testament x1, Mana x70000, Eldwater x73000","Gold Orb x6, Rainbow Orb x12, Samewyrm's Superscale x9, Void Seed x6, Knight's Testament x1","Mana x12000",
-       "Gold Orb x6, Platinum Orb x3, Rainbow Orb x3, Mana x18000","Mana x12000","Mana x12000",
-       "Platinum Orb x3, Longing Heart x4, Knight's Testament x1, Mana x22500","Platinum Orb x2, Samewyrm's Superscale x11, Void Heart x2, Mana x42000",
-       "Mana x12000","Mana x12000","Gold Orb x9, Platinum Orb x3, Rainbow Orb x3, Mana x27000",
-       "Platinum Orb x3, HighDragon Tail x3, Knight's Testament x2, Mana x45000","Mana x12000","Mana x12000",
-       "Gold Orb x12, Platinum Orb x3, Rainbow Orb x3, Mana x18000","Mana x12000",
-       "Platinum Orb x3, Weakwyrm's Greatsphere x2, Champion's Testament x1, Mana x67500","Mana x12000",
-       "Platinum Orb x3, Rainbow Orb x3, Samewyrm's Superscale x12, Mana x27000","Mana x12000","Mana x12000",
-       "Platinum Orb x6, Rainbow Orb x3, Weakwyrm's Greatsphere x2, Mana x90000"]
+       "Silver Orb x12, Gold Orb x7, Rainbow Orb x2, Samewyrm's Scale x15, Samewyrm's Superscale x7, Knight's Testament x1, Champion's Testament x1, Mana x70000, Eldwater x73000",
+       "Gold Orb x6, Rainbow Orb x12, Samewyrm's Superscale x9, Void Seed x6, Knight's Testament x1","Mana x12000","Gold Orb x6, Platinum Orb x3, Rainbow Orb x3, Mana x18000","Mana x12000","Mana x12000",
+       "Platinum Orb x3, Longing Heart x4, Knight's Testament x1, Mana x22500","Platinum Orb x2, Samewyrm's Superscale x11, Void Heart x2, Mana x42000","Mana x12000","Mana x12000",
+       "Gold Orb x9, Platinum Orb x3, Rainbow Orb x3, Mana x27000","Platinum Orb x3, HighDragon Tail x3, Knight's Testament x2, Mana x45000","Mana x12000","Mana x12000",
+       "Gold Orb x12, Platinum Orb x3, Rainbow Orb x3, Mana x18000","Mana x12000","Platinum Orb x3, Weakwyrm's Greatsphere x2, Champion's Testament x1, Mana x67500","Mana x12000",
+       "Platinum Orb x3, Rainbow Orb x3, Samewyrm's Superscale x12, Mana x27000","Mana x12000","Mana x12000","Platinum Orb x6, Rainbow Orb x3, Weakwyrm's Greatsphere x2, Mana x90000"]
   end
   for i in 0...f.length
+    f[i]=f[i].gsub("Character's","#{k.name}'s")
     if k.element=='Flame'
       f[i]=f[i].gsub("Bronze Orb","Flame Orb").gsub("Silver Orb","Blaze Orb").gsub("Gold Orb","Inferno Orb").gsub("Platinum Orb","Incandescence Orb")
       f[i]=f[i].gsub("Samewyrm's Scale","Flamewyrm's Scale").gsub("Samewyrm's Superscale","Flamewyrm's Scaldscale")
@@ -5953,7 +5988,7 @@ def upgrade_mats(event,args,bot,forcespiral=false)
       f2.push([4,"#{f[6] if nums[0]<40}#{"\n\n__*Promotion to 5<:Rarity_5:532086056737177600>*__\n25,000<:Resource_Eldwater:532104503777034270>" if k.rarity<5}\n\n__*Floor 5 unbind*__\n#{f[7]}"]) if nums[0]<50 && nums[1]>=40
       f2.push([5,"#{f[8] if nums[0]<50}#{"\n\n__*Mana Spiral unlock*__\n#{f[9]}" if mana && nums[0]<=49}"]) if nums[0]<=50 && nums[1]>=50
       xcolor=k.disp_color
-      disp="__**#{name}**'s Mana Spiral mats#{" (#{nums_mean})" if nums_mean.length>0}__"
+      disp="__**#{name}**'s #{'Trial ' if trial}Mana Spiral mats#{" (#{nums_mean})" if nums_mean.length>0}__"
       if f2.length>0 && !f2[0][1].nil? && f2[0][1].length>0 && !forcespiral
         if f2[0][1].length<=0
         elsif f2[0][1].split("\n").reject{|q| q.length<=0}[0].include?('unbind')
@@ -5964,6 +5999,7 @@ def upgrade_mats(event,args,bot,forcespiral=false)
         create_embed(event,"__**#{name}**'s mats#{" (#{nums_mean})" if nums_mean.length>0}__",'',xcolor,'Floors are given totals as nodes can be unlocked in any order',k.thumbnail,f2.map{|q| ["Floor #{q[0]}",q[1]]})
         xcolor=0xB14ABC
         disp='Mana Spiral'
+        disp='Trial Mana Spiral' if trial
         xpic=nil
       end
       if mana
@@ -6005,7 +6041,7 @@ def upgrade_mats(event,args,bot,forcespiral=false)
     end
     return nil
   end
-  event.respond "**Element:** #{element_emote(elem,bot)}\n**Rarity:** #{generate_rarity_row(rar)}#{"\n**Mana Spiral**" if mana}#{"\n**Additional Numbers:** #{nums[0,[nums.length,2].min].join(', ')}" if nums.length>0}"
+  event.respond "**Element:** #{element_emote(elem,bot)}\n**Rarity:** #{generate_rarity_row(rar)}#{"\n**#{'Trial ' if trial}Mana Spiral**" if mana}#{"\n**Additional Numbers:** #{nums[0,[nums.length,2].min].join(', ')}" if nums.length>0}"
 end
 
 def disp_sp_table(bot,event,args=nil)
